@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -173,12 +172,20 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDieLayoutProductionParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +194,10 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -207,26 +218,43 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPosition getEnum(String enumName)
             {
                 return (EnumPosition) getEnum(EnumPosition.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPosition getEnum(int enumValue)
             {
                 return (EnumPosition) getEnum(EnumPosition.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPosition.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPosition.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPosition.class);
@@ -255,7 +283,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Estimate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEstimate(boolean value)
         {
@@ -277,7 +305,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Position
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPosition(EnumPosition enumVar)
         {
@@ -342,8 +370,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
     /**
      * (30) append element ConvertingConfig
+     * @return JDFConvertingConfig the element
      */
-    public JDFConvertingConfig appendConvertingConfig() throws JDFException
+    public JDFConvertingConfig appendConvertingConfig()
     {
         return (JDFConvertingConfig) appendElement(ElementName.CONVERTINGCONFIG, null);
     }
@@ -392,8 +421,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
     /**
      * (30) append element RepeatDesc
+     * @return JDFRepeatDesc the element
      */
-    public JDFRepeatDesc appendRepeatDesc() throws JDFException
+    public JDFRepeatDesc appendRepeatDesc()
     {
         return (JDFRepeatDesc) appendElement(ElementName.REPEATDESC, null);
     }
@@ -442,8 +472,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

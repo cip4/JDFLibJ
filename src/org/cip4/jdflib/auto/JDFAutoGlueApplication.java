@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -165,12 +165,20 @@ public abstract class JDFAutoGlueApplication extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoGlueApplication[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -179,6 +187,10 @@ public abstract class JDFAutoGlueApplication extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -199,26 +211,43 @@ public abstract class JDFAutoGlueApplication extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumGluingTechnique getEnum(String enumName)
             {
                 return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumGluingTechnique getEnum(int enumValue)
             {
                 return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumGluingTechnique.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumGluingTechnique.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumGluingTechnique.class);
@@ -241,7 +270,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute GluingTechnique
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setGluingTechnique(EnumGluingTechnique enumVar)
         {
@@ -282,6 +311,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 
     /**
      * (29) append element GlueLine
+     * @return JDFGlueLine the element
+     * @throws JDFException if the element already exists
      */
     public JDFGlueLine appendGlueLine() throws JDFException
     {

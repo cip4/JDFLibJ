@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,12 +148,20 @@ public abstract class JDFAutoDBSchema extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDBSchema[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -162,6 +170,10 @@ public abstract class JDFAutoDBSchema extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -182,26 +194,43 @@ public abstract class JDFAutoDBSchema extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDBSchemaType getEnum(String enumName)
             {
                 return (EnumDBSchemaType) getEnum(EnumDBSchemaType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDBSchemaType getEnum(int enumValue)
             {
                 return (EnumDBSchemaType) getEnum(EnumDBSchemaType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDBSchemaType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDBSchemaType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDBSchemaType.class);
@@ -224,7 +253,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DBSchemaType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDBSchemaType(EnumDBSchemaType enumVar)
         {

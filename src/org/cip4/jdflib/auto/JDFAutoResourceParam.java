@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -151,6 +151,10 @@ public abstract class JDFAutoResourceParam extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoResourceParam[  --> " + super.toString() + " ]";
@@ -171,26 +175,43 @@ public abstract class JDFAutoResourceParam extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDefaultPriority getEnum(String enumName)
             {
                 return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDefaultPriority getEnum(int enumValue)
             {
                 return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDefaultPriority.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDefaultPriority.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDefaultPriority.class);
@@ -212,7 +233,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DefaultID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDefaultID(String value)
         {
@@ -225,7 +246,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
           */
         public String getDefaultID()
         {
-            return getAttribute(AttributeName.DEFAULTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEFAULTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -234,7 +255,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DefaultJDF
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDefaultJDF(String value)
         {
@@ -247,7 +268,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
           */
         public String getDefaultJDF()
         {
-            return getAttribute(AttributeName.DEFAULTJDF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEFAULTJDF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -256,7 +277,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DefaultPriority
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDefaultPriority(EnumDefaultPriority enumVar)
         {

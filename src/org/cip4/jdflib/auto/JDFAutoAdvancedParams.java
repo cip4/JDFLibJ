@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -164,6 +164,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAdvancedParams[  --> " + super.toString() + " ]";
@@ -184,26 +188,43 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTransferFunctionInfo getEnum(String enumName)
             {
                 return (EnumTransferFunctionInfo) getEnum(EnumTransferFunctionInfo.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTransferFunctionInfo getEnum(int enumValue)
             {
                 return (EnumTransferFunctionInfo) getEnum(EnumTransferFunctionInfo.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTransferFunctionInfo.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTransferFunctionInfo.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTransferFunctionInfo.class);
@@ -230,26 +251,43 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumUCRandBGInfo getEnum(String enumName)
             {
                 return (EnumUCRandBGInfo) getEnum(EnumUCRandBGInfo.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumUCRandBGInfo getEnum(int enumValue)
             {
                 return (EnumUCRandBGInfo) getEnum(EnumUCRandBGInfo.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumUCRandBGInfo.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumUCRandBGInfo.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumUCRandBGInfo.class);
@@ -271,7 +309,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AllowPSXObjects
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAllowPSXObjects(boolean value)
         {
@@ -293,7 +331,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AllowTransparency
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAllowTransparency(boolean value)
         {
@@ -315,7 +353,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AutoPositionEPSInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAutoPositionEPSInfo(boolean value)
         {
@@ -337,7 +375,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EmbedJobOptions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEmbedJobOptions(boolean value)
         {
@@ -359,7 +397,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EmitDSCWarnings
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEmitDSCWarnings(boolean value)
         {
@@ -381,7 +419,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LockDistillerParams
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLockDistillerParams(boolean value)
         {
@@ -403,7 +441,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParseDSCComments
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParseDSCComments(boolean value)
         {
@@ -425,7 +463,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParseDSCCommentsForDocInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParseDSCCommentsForDocInfo(boolean value)
         {
@@ -447,7 +485,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PassThroughJPEGImages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPassThroughJPEGImages(boolean value)
         {
@@ -469,7 +507,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreserveCopyPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreserveCopyPage(boolean value)
         {
@@ -491,7 +529,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreserveEPSInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreserveEPSInfo(boolean value)
         {
@@ -513,7 +551,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreserveHalftoneInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreserveHalftoneInfo(boolean value)
         {
@@ -535,7 +573,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreserveOverprintSettings
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreserveOverprintSettings(boolean value)
         {
@@ -557,7 +595,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreserveOPIComments
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreserveOPIComments(boolean value)
         {
@@ -579,7 +617,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TransferFunctionInfo
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
         {
@@ -601,7 +639,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute UCRandBGInfo
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
         {
@@ -623,7 +661,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UsePrologue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUsePrologue(boolean value)
         {

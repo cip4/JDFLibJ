@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JDFDate;
@@ -182,6 +180,10 @@ public abstract class JDFAutoMsgFilter extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMsgFilter[  --> " + super.toString() + " ]";
@@ -202,26 +204,43 @@ public abstract class JDFAutoMsgFilter extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFamily getEnum(String enumName)
             {
                 return (EnumFamily) getEnum(EnumFamily.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFamily getEnum(int enumValue)
             {
                 return (EnumFamily) getEnum(EnumFamily.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFamily.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFamily.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFamily.class);
@@ -245,7 +264,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute After
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setAfter(JDFDate value)
         {
@@ -260,21 +279,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public JDFDate getAfter()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.AFTER, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.AFTER, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -283,7 +290,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Before
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setBefore(JDFDate value)
         {
@@ -298,21 +305,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public JDFDate getBefore()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.BEFORE, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.BEFORE, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -321,7 +316,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Count
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCount(int value)
         {
@@ -343,7 +338,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceID(String value)
         {
@@ -356,7 +351,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getDeviceID()
         {
-            return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -365,7 +360,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Family
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFamily(EnumFamily enumVar)
         {
@@ -387,7 +382,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -400,7 +395,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -409,7 +404,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -422,7 +417,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -431,7 +426,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MessageRefID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMessageRefID(String value)
         {
@@ -444,7 +439,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getMessageRefID()
         {
-            return getAttribute(AttributeName.MESSAGEREFID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MESSAGEREFID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -453,7 +448,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MessageID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMessageID(String value)
         {
@@ -466,7 +461,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getMessageID()
         {
-            return getAttribute(AttributeName.MESSAGEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MESSAGEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -475,7 +470,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MessageType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMessageType(String value)
         {
@@ -488,7 +483,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getMessageType()
         {
-            return getAttribute(AttributeName.MESSAGETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MESSAGETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -497,7 +492,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueEntryID(String value)
         {
@@ -510,7 +505,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getQueueEntryID()
         {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -519,7 +514,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReceiverURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReceiverURL(String value)
         {
@@ -532,7 +527,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
           */
         public String getReceiverURL()
         {
-            return getAttribute(AttributeName.RECEIVERURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RECEIVERURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -584,8 +579,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

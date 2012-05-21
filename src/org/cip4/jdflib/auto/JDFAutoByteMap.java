@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -184,12 +183,20 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoByteMap[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -198,6 +205,10 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -218,26 +229,43 @@ public abstract class JDFAutoByteMap extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBandOrdering getEnum(String enumName)
             {
                 return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBandOrdering getEnum(int enumValue)
             {
                 return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBandOrdering.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBandOrdering.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBandOrdering.class);
@@ -263,26 +291,43 @@ public abstract class JDFAutoByteMap extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumElementType getEnum(String enumName)
             {
                 return (EnumElementType) getEnum(EnumElementType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumElementType getEnum(int enumValue)
             {
                 return (EnumElementType) getEnum(EnumElementType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumElementType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumElementType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumElementType.class);
@@ -317,7 +362,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BandOrdering
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBandOrdering(EnumBandOrdering enumVar)
         {
@@ -339,7 +384,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ElementType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setElementType(EnumElementType enumVar)
         {
@@ -361,7 +406,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FrameHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrameHeight(int value)
         {
@@ -383,7 +428,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FrameWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrameWidth(int value)
         {
@@ -405,7 +450,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Halftoned
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHalftoned(boolean value)
         {
@@ -427,7 +472,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Interleaved
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInterleaved(boolean value)
         {
@@ -449,7 +494,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PixelSkip
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPixelSkip(int value)
         {
@@ -471,7 +516,7 @@ public abstract class JDFAutoByteMap extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Resolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResolution(JDFXYPair value)
         {
@@ -485,17 +530,8 @@ public abstract class JDFAutoByteMap extends JDFResource
           */
         public JDFXYPair getResolution()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -548,8 +584,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 
     /**
      * (30) append element Band
+     * @return JDFBand the element
      */
-    public JDFBand appendBand() throws JDFException
+    public JDFBand appendBand()
     {
         return (JDFBand) appendElement(ElementName.BAND, null);
     }
@@ -574,6 +611,8 @@ public abstract class JDFAutoByteMap extends JDFResource
 
     /**
      * (29) append element ColorPool
+     * @return JDFColorPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
@@ -633,8 +672,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 
     /**
      * (30) append element FileSpec
+     * @return JDFFileSpec the element
      */
-    public JDFFileSpec appendFileSpec() throws JDFException
+    public JDFFileSpec appendFileSpec()
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -692,8 +732,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 
     /**
      * (30) append element PixelColorant
+     * @return JDFPixelColorant the element
      */
-    public JDFPixelColorant appendPixelColorant() throws JDFException
+    public JDFPixelColorant appendPixelColorant()
     {
         return (JDFPixelColorant) appendElement(ElementName.PIXELCOLORANT, null);
     }

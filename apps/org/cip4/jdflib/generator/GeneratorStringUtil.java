@@ -70,7 +70,7 @@ public class GeneratorStringUtil
 		strCopyrightInfo.append(" * The CIP4 Software License, Version 1.0").append(strLineEnd);
 		strCopyrightInfo.append(" *").append(strLineEnd);
 		strCopyrightInfo.append(" *").append(strLineEnd);
-		strCopyrightInfo.append(" * Copyright (c) 2001-2010 The International Cooperation for the Integration of").append(strLineEnd);
+		strCopyrightInfo.append(" * Copyright (c) 2001-2012 The International Cooperation for the Integration of").append(strLineEnd);
 		strCopyrightInfo.append(" * Processes in  Prepress, Press and Postpress (CIP4).  All rights").append(strLineEnd);
 		strCopyrightInfo.append(" * reserved.").append(strLineEnd);
 		strCopyrightInfo.append(" *").append(strLineEnd);

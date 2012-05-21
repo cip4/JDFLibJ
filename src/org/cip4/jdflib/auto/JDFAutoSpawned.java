@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,8 +81,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
@@ -175,6 +174,10 @@ public abstract class JDFAutoSpawned extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoSpawned[  --> " + super.toString() + " ]";
@@ -191,7 +194,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Independent
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIndependent(boolean value)
         {
@@ -213,7 +216,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute jRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setjRef(String value)
         {
@@ -226,7 +229,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
           */
         public String getjRef()
         {
-            return getAttribute(AttributeName.JREF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JREF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -235,7 +238,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute jRefDestination
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setjRefDestination(String value)
         {
@@ -248,7 +251,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
           */
         public String getjRefDestination()
         {
-            return getAttribute(AttributeName.JREFDESTINATION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JREFDESTINATION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -257,7 +260,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NewSpawnID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNewSpawnID(String value)
         {
@@ -270,7 +273,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
           */
         public String getNewSpawnID()
         {
-            return getAttribute(AttributeName.NEWSPAWNID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NEWSPAWNID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -279,7 +282,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute rRefsROCopied
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrRefsROCopied(VString value)
         {
@@ -293,7 +296,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         public VString getrRefsROCopied()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -304,7 +307,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute rRefsRWCopied
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrRefsRWCopied(VString value)
         {
@@ -318,7 +321,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         public VString getrRefsRWCopied()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -329,7 +332,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURL(String value)
         {
@@ -342,7 +345,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
           */
         public String getURL()
         {
-            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -394,8 +397,9 @@ public abstract class JDFAutoSpawned extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -444,8 +448,9 @@ public abstract class JDFAutoSpawned extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

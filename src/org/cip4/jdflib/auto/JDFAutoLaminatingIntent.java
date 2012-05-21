@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,6 +153,10 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLaminatingIntent[  --> " + super.toString() + " ]";
@@ -184,6 +188,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
     /**
      * (29) append element Laminated
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendLaminated() throws JDFException
     {
@@ -210,6 +216,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
     /**
      * (29) append element Temperature
+     * @return JDFSpanTemperature the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanTemperature appendTemperature() throws JDFException
     {
@@ -236,6 +244,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
     /**
      * (29) append element Surface
+     * @return JDFSpanSurface the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanSurface appendSurface() throws JDFException
     {
@@ -262,6 +272,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
     /**
      * (29) append element Texture
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendTexture() throws JDFException
     {
@@ -288,6 +300,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
     /**
      * (29) append element Thickness
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {

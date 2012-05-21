@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -188,6 +188,10 @@ public abstract class JDFAutoMessageService extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMessageService[  --> " + super.toString() + " ]";
@@ -208,26 +212,43 @@ public abstract class JDFAutoMessageService extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(String enumName)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(int enumValue)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumChannelMode.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumChannelMode.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumChannelMode.class);
@@ -253,26 +274,43 @@ public abstract class JDFAutoMessageService extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumJMFRole getEnum(String enumName)
             {
                 return (EnumJMFRole) getEnum(EnumJMFRole.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumJMFRole getEnum(int enumValue)
             {
                 return (EnumJMFRole) getEnum(EnumJMFRole.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumJMFRole.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumJMFRole.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumJMFRole.class);
@@ -294,7 +332,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Acknowledge
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAcknowledge(boolean value)
         {
@@ -316,7 +354,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ChannelMode
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setChannelMode(EnumChannelMode enumVar)
         {
@@ -338,7 +376,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Command
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCommand(boolean value)
         {
@@ -360,7 +398,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GenericAttributes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGenericAttributes(VString value)
         {
@@ -374,7 +412,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         public VString getGenericAttributes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -385,7 +423,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute JMFRole
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setJMFRole(EnumJMFRole enumVar)
         {
@@ -407,7 +445,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Persistent
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPersistent(boolean value)
         {
@@ -429,7 +467,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Query
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQuery(boolean value)
         {
@@ -451,7 +489,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Registration
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRegistration(boolean value)
         {
@@ -473,7 +511,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Signal
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSignal(boolean value)
         {
@@ -495,7 +533,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -508,7 +546,7 @@ public abstract class JDFAutoMessageService extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -517,7 +555,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URLSchemes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURLSchemes(VString value)
         {
@@ -531,7 +569,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         public VString getURLSchemes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.URLSCHEMES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -561,6 +599,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (29) append element ActionPool
+     * @return JDFActionPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFActionPool appendActionPool() throws JDFException
     {
@@ -587,6 +627,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (29) append element DevCapPool
+     * @return JDFDevCapPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevCapPool appendDevCapPool() throws JDFException
     {
@@ -637,8 +679,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (30) append element DevCaps
+     * @return JDFDevCaps the element
      */
-    public JDFDevCaps appendDevCaps() throws JDFException
+    public JDFDevCaps appendDevCaps()
     {
         return (JDFDevCaps) appendElement(ElementName.DEVCAPS, null);
     }
@@ -663,6 +706,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (29) append element ModulePool
+     * @return JDFModulePool the element
+     * @throws JDFException if the element already exists
      */
     public JDFModulePool appendModulePool() throws JDFException
     {
@@ -689,6 +734,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     /**
      * (29) append element TestPool
+     * @return JDFTestPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFTestPool appendTestPool() throws JDFException
     {

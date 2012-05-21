@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,6 +151,10 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRegistration[  --> " + super.toString() + " ]";
@@ -206,8 +210,9 @@ public abstract class JDFAutoRegistration extends JDFMessage
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -232,6 +237,8 @@ public abstract class JDFAutoRegistration extends JDFMessage
 
     /**
      * (29) append element Subscription
+     * @return JDFSubscription the element
+     * @throws JDFException if the element already exists
      */
     public JDFSubscription appendSubscription() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -151,6 +151,10 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFeatureAttribute[  --> " + super.toString() + " ]";
@@ -171,26 +175,43 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumUserDisplay getEnum(String enumName)
             {
                 return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumUserDisplay getEnum(int enumValue)
             {
                 return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumUserDisplay.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumUserDisplay.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumUserDisplay.class);
@@ -213,7 +234,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CurrentValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCurrentValue(String value)
         {
@@ -226,7 +247,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
           */
         public String getCurrentValue()
         {
-            return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -235,7 +256,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Editable
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEditable(boolean value)
         {
@@ -257,7 +278,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute UserDisplay
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setUserDisplay(EnumUserDisplay enumVar)
         {

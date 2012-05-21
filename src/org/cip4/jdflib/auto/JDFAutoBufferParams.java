@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
     /**
@@ -147,12 +145,20 @@ public abstract class JDFAutoBufferParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBufferParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -161,6 +167,10 @@ public abstract class JDFAutoBufferParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -177,7 +187,7 @@ public abstract class JDFAutoBufferParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinimumWait
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinimumWait(JDFDuration value)
         {
@@ -191,17 +201,8 @@ public abstract class JDFAutoBufferParams extends JDFResource
           */
         public JDFDuration getMinimumWait()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MINIMUMWAIT, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MINIMUMWAIT, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 

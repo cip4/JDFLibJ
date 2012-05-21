@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -165,6 +165,10 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShutDownCmdParams[  --> " + super.toString() + " ]";
@@ -185,26 +189,43 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumShutDownType getEnum(String enumName)
             {
                 return (EnumShutDownType) getEnum(EnumShutDownType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumShutDownType getEnum(int enumValue)
             {
                 return (EnumShutDownType) getEnum(EnumShutDownType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumShutDownType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumShutDownType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumShutDownType.class);
@@ -226,7 +247,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ShutDownType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setShutDownType(EnumShutDownType enumVar)
         {
@@ -267,6 +288,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 
     /**
      * (29) append element FlushQueueParams
+     * @return JDFFlushQueueParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFFlushQueueParams appendFlushQueueParams() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
     /**
@@ -150,6 +148,10 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageAssignedList[  --> " + super.toString() + " ]";
@@ -166,7 +168,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BroadsheetNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBroadsheetNumber(int value)
         {
@@ -188,7 +190,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LogicalPrinterSection
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLogicalPrinterSection(String value)
         {
@@ -201,7 +203,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
           */
         public String getLogicalPrinterSection()
         {
-            return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -210,7 +212,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageListIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageListIndex(JDFIntegerRangeList value)
         {
@@ -224,17 +226,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
           */
         public JDFIntegerRangeList getPageListIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -244,7 +237,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PagePlacementName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPagePlacementName(String value)
         {
@@ -257,7 +250,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
           */
         public String getPagePlacementName()
         {
-            return getAttribute(AttributeName.PAGEPLACEMENTNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGEPLACEMENTNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

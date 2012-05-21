@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
@@ -168,6 +168,10 @@ public abstract class JDFAutoIDInfo extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDInfo[  --> " + super.toString() + " ]";
@@ -184,7 +188,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Category
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCategory(String value)
         {
@@ -197,7 +201,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getCategory()
         {
-            return getAttribute(AttributeName.CATEGORY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CATEGORY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -206,7 +210,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -219,7 +223,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -228,7 +232,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -241,7 +245,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -250,7 +254,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParentJobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParentJobID(String value)
         {
@@ -263,7 +267,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getParentJobID()
         {
-            return getAttribute(AttributeName.PARENTJOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -272,7 +276,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParentJobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParentJobPartID(String value)
         {
@@ -285,7 +289,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getParentJobPartID()
         {
-            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -294,7 +298,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -307,7 +311,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -316,7 +320,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Types
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypes(VString value)
         {
@@ -330,7 +334,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
         public VString getTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -360,6 +364,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
 
     /**
      * (29) append element Device
+     * @return JDFDevice the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevice appendDevice() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -79,7 +77,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBindingQualityMeasurement;
@@ -167,6 +164,10 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoQualityMeasurement[  --> " + super.toString() + " ]";
@@ -183,7 +184,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute End
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setEnd(JDFDate value)
         {
@@ -198,21 +199,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
           */
         public JDFDate getEnd()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.END, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.END, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -221,7 +210,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Failed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFailed(int value)
         {
@@ -243,7 +232,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Passed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPassed(int value)
         {
@@ -265,7 +254,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Start
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setStart(JDFDate value)
         {
@@ -280,21 +269,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
           */
         public JDFDate getStart()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.START, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.START, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
 /* ***********************************************************************
@@ -322,6 +299,8 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 
     /**
      * (29) append element BindingQualityMeasurement
+     * @return JDFBindingQualityMeasurement the element
+     * @throws JDFException if the element already exists
      */
     public JDFBindingQualityMeasurement appendBindingQualityMeasurement() throws JDFException
     {

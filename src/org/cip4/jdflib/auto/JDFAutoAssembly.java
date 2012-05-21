@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -182,12 +181,20 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAssembly[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -196,6 +203,10 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -216,26 +227,43 @@ public abstract class JDFAutoAssembly extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumJogSide getEnum(String enumName)
             {
                 return (EnumJogSide) getEnum(EnumJogSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumJogSide getEnum(int enumValue)
             {
                 return (EnumJogSide) getEnum(EnumJogSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumJogSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumJogSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumJogSide.class);
@@ -264,26 +292,43 @@ public abstract class JDFAutoAssembly extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOrder getEnum(String enumName)
             {
                 return (EnumOrder) getEnum(EnumOrder.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOrder getEnum(int enumValue)
             {
                 return (EnumOrder) getEnum(EnumOrder.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOrder.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOrder.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOrder.class);
@@ -311,26 +356,43 @@ public abstract class JDFAutoAssembly extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBindingSide getEnum(String enumName)
             {
                 return (EnumBindingSide) getEnum(EnumBindingSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBindingSide getEnum(int enumValue)
             {
                 return (EnumBindingSide) getEnum(EnumBindingSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBindingSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBindingSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBindingSide.class);
@@ -354,7 +416,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute JogSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setJogSide(EnumJogSide enumVar)
         {
@@ -376,7 +438,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Order
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOrder(EnumOrder enumVar)
         {
@@ -398,7 +460,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BindingSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBindingSide(EnumBindingSide enumVar)
         {
@@ -420,7 +482,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyID(String value)
         {
@@ -433,7 +495,7 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public String getAssemblyID()
         {
-            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -442,7 +504,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyIDs(VString value)
         {
@@ -456,7 +518,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         public VString getAssemblyIDs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -467,7 +529,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -480,7 +542,7 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -489,7 +551,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PhysicalSection
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPhysicalSection(JDFIntegerList value)
         {
@@ -503,17 +565,8 @@ public abstract class JDFAutoAssembly extends JDFResource
           */
         public JDFIntegerList getPhysicalSection()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PHYSICALSECTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PHYSICALSECTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -566,8 +619,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 
     /**
      * (30) append element AssemblySection
+     * @return JDFAssemblySection the element
      */
-    public JDFAssemblySection appendAssemblySection() throws JDFException
+    public JDFAssemblySection appendAssemblySection()
     {
         return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION, null);
     }
@@ -592,6 +646,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 
     /**
      * (29) append element PageList
+     * @return JDFPageList the element
+     * @throws JDFException if the element already exists
      */
     public JDFPageList appendPageList() throws JDFException
     {
@@ -651,8 +707,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 
     /**
      * (30) append element PageAssignedList
+     * @return JDFPageAssignedList the element
      */
-    public JDFPageAssignedList appendPageAssignedList() throws JDFException
+    public JDFPageAssignedList appendPageAssignedList()
     {
         return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
     }

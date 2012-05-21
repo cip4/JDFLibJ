@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -169,6 +168,10 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFoldingIntent[  --> " + super.toString() + " ]";
@@ -185,7 +188,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Folds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFolds(JDFXYPair value)
         {
@@ -199,17 +202,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
           */
         public JDFXYPair getFolds()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FOLDS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FOLDS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -238,6 +232,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
     /**
      * (29) append element FoldingCatalog
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendFoldingCatalog() throws JDFException
     {
@@ -288,8 +284,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 
     /**
      * (30) append element Fold
+     * @return JDFFold the element
      */
-    public JDFFold appendFold() throws JDFException
+    public JDFFold appendFold()
     {
         return (JDFFold) appendElement(ElementName.FOLD, null);
     }

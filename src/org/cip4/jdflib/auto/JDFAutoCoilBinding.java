@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -149,6 +149,10 @@ public abstract class JDFAutoCoilBinding extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCoilBinding[  --> " + super.toString() + " ]";
@@ -180,6 +184,8 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 
     /**
      * (29) append element CoilBrand
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendCoilBrand() throws JDFException
     {
@@ -206,6 +212,8 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 
     /**
      * (29) append element CoilMaterial
+     * @return JDFSpanCoilMaterial the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanCoilMaterial appendCoilMaterial() throws JDFException
     {
@@ -232,6 +240,8 @@ public abstract class JDFAutoCoilBinding extends JDFElement
 
     /**
      * (29) append element HoleList
+     * @return JDFHoleList the element
+     * @throws JDFException if the element already exists
      */
     public JDFHoleList appendHoleList() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -177,6 +176,10 @@ public abstract class JDFAutoDisjointing extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDisjointing[  --> " + super.toString() + " ]";
@@ -197,26 +200,43 @@ public abstract class JDFAutoDisjointing extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOffsetDirection getEnum(String enumName)
             {
                 return (EnumOffsetDirection) getEnum(EnumOffsetDirection.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOffsetDirection getEnum(int enumValue)
             {
                 return (EnumOffsetDirection) getEnum(EnumOffsetDirection.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOffsetDirection.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOffsetDirection.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOffsetDirection.class);
@@ -242,7 +262,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Number
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumber(int value)
         {
@@ -264,7 +284,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Offset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffset(JDFXYPair value)
         {
@@ -278,17 +298,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
           */
         public JDFXYPair getOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.OFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.OFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -298,7 +309,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OffsetAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffsetAmount(int value)
         {
@@ -320,7 +331,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute OffsetDirection
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOffsetDirection(EnumOffsetDirection enumVar)
         {
@@ -342,7 +353,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Overfold
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOverfold(double value)
         {
@@ -407,8 +418,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -433,6 +445,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 
     /**
      * (29) append element InsertSheet
+     * @return JDFInsertSheet the element
+     * @throws JDFException if the element already exists
      */
     public JDFInsertSheet appendInsertSheet() throws JDFException
     {

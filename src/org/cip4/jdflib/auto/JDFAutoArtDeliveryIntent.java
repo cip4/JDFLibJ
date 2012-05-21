@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -189,6 +189,10 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoArtDeliveryIntent[  --> " + super.toString() + " ]";
@@ -209,26 +213,43 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPreflightStatus getEnum(String enumName)
             {
                 return (EnumPreflightStatus) getEnum(EnumPreflightStatus.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPreflightStatus getEnum(int enumValue)
             {
                 return (EnumPreflightStatus) getEnum(EnumPreflightStatus.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPreflightStatus.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPreflightStatus.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPreflightStatus.class);
@@ -252,7 +273,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PreflightStatus
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPreflightStatus(EnumPreflightStatus enumVar)
         {
@@ -274,7 +295,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReturnList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReturnList(VString value)
         {
@@ -318,6 +339,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ArtDeliveryDate
+     * @return JDFTimeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFTimeSpan appendArtDeliveryDate() throws JDFException
     {
@@ -344,6 +367,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ArtDeliveryDuration
+     * @return JDFDurationSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFDurationSpan appendArtDeliveryDuration() throws JDFException
     {
@@ -370,6 +395,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ArtHandling
+     * @return JDFSpanArtHandling the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanArtHandling appendArtHandling() throws JDFException
     {
@@ -396,6 +423,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element DeliveryCharge
+     * @return JDFSpanDeliveryCharge the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanDeliveryCharge appendDeliveryCharge() throws JDFException
     {
@@ -422,6 +451,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Method
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendMethod() throws JDFException
     {
@@ -448,6 +479,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ReturnMethod
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendReturnMethod() throws JDFException
     {
@@ -474,6 +507,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ServiceLevel
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendServiceLevel() throws JDFException
     {
@@ -500,6 +535,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Transfer
+     * @return JDFSpanTransfer the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanTransfer appendTransfer() throws JDFException
     {
@@ -550,8 +587,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (30) append element ArtDelivery
+     * @return JDFArtDelivery the element
      */
-    public JDFArtDelivery appendArtDelivery() throws JDFException
+    public JDFArtDelivery appendArtDelivery()
     {
         return (JDFArtDelivery) appendElement(ElementName.ARTDELIVERY, null);
     }
@@ -576,6 +614,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Company
+     * @return JDFCompany the element
+     * @throws JDFException if the element already exists
      */
     public JDFCompany appendCompany() throws JDFException
     {
@@ -635,8 +675,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -155,12 +155,20 @@ public abstract class JDFAutoFontParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFontParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -169,6 +177,10 @@ public abstract class JDFAutoFontParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -189,26 +201,43 @@ public abstract class JDFAutoFontParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCannotEmbedFontPolicy getEnum(String enumName)
             {
                 return (EnumCannotEmbedFontPolicy) getEnum(EnumCannotEmbedFontPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCannotEmbedFontPolicy getEnum(int enumValue)
             {
                 return (EnumCannotEmbedFontPolicy) getEnum(EnumCannotEmbedFontPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCannotEmbedFontPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCannotEmbedFontPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCannotEmbedFontPolicy.class);
@@ -231,7 +260,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EmbedAllFonts
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEmbedAllFonts(boolean value)
         {
@@ -253,7 +282,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CannotEmbedFontPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
         {
@@ -275,7 +304,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AlwaysEmbed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAlwaysEmbed(VString value)
         {
@@ -289,7 +318,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         public VString getAlwaysEmbed()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ALWAYSEMBED, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ALWAYSEMBED, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -300,7 +329,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxSubsetPct
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxSubsetPct(int value)
         {
@@ -322,7 +351,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NeverEmbed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNeverEmbed(VString value)
         {
@@ -336,7 +365,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         public VString getNeverEmbed()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.NEVEREMBED, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.NEVEREMBED, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -347,7 +376,7 @@ public abstract class JDFAutoFontParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SubsetFonts
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSubsetFonts(boolean value)
         {

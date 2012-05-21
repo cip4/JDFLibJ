@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFStack;
     /**
@@ -169,6 +168,10 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLogicalStackParams[  --> " + super.toString() + " ]";
@@ -189,26 +192,43 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumRestrictions getEnum(String enumName)
             {
                 return (EnumRestrictions) getEnum(EnumRestrictions.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumRestrictions getEnum(int enumValue)
             {
                 return (EnumRestrictions) getEnum(EnumRestrictions.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumRestrictions.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumRestrictions.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumRestrictions.class);
@@ -231,7 +251,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxStackDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxStackDepth(int value)
         {
@@ -253,7 +273,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Restrictions
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setRestrictions(EnumRestrictions enumVar)
         {
@@ -318,8 +338,9 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 
     /**
      * (30) append element Stack
+     * @return JDFStack the element
      */
-    public JDFStack appendStack() throws JDFException
+    public JDFStack appendStack()
     {
         return (JDFStack) appendElement(ElementName.STACK, null);
     }

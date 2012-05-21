@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,6 +153,10 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFeederQualityParams[  --> " + super.toString() + " ]";
@@ -173,26 +177,43 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncorrectComponentQuality getEnum(String enumName)
             {
                 return (EnumIncorrectComponentQuality) getEnum(EnumIncorrectComponentQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncorrectComponentQuality getEnum(int enumValue)
             {
                 return (EnumIncorrectComponentQuality) getEnum(EnumIncorrectComponentQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncorrectComponentQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncorrectComponentQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncorrectComponentQuality.class);
@@ -221,26 +242,43 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDoubleFeedQuality getEnum(String enumName)
             {
                 return (EnumDoubleFeedQuality) getEnum(EnumDoubleFeedQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDoubleFeedQuality getEnum(int enumValue)
             {
                 return (EnumDoubleFeedQuality) getEnum(EnumDoubleFeedQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDoubleFeedQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDoubleFeedQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDoubleFeedQuality.class);
@@ -269,26 +307,43 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBadFeedQuality getEnum(String enumName)
             {
                 return (EnumBadFeedQuality) getEnum(EnumBadFeedQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBadFeedQuality getEnum(int enumValue)
             {
                 return (EnumBadFeedQuality) getEnum(EnumBadFeedQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBadFeedQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBadFeedQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBadFeedQuality.class);
@@ -313,7 +368,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncorrectComponentQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncorrectComponentQuality(EnumIncorrectComponentQuality enumVar)
         {
@@ -335,7 +390,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IncorrectComponents
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIncorrectComponents(int value)
         {
@@ -357,7 +412,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DoubleFeedQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDoubleFeedQuality(EnumDoubleFeedQuality enumVar)
         {
@@ -379,7 +434,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DoubleFeeds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDoubleFeeds(int value)
         {
@@ -401,7 +456,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BadFeedQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBadFeedQuality(EnumBadFeedQuality enumVar)
         {
@@ -423,7 +478,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BadFeeds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBadFeeds(int value)
         {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -160,12 +160,20 @@ public abstract class JDFAutoHoleLine extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoHoleLine[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -174,6 +182,10 @@ public abstract class JDFAutoHoleLine extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -190,7 +202,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pitch
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPitch(double value)
         {
@@ -231,6 +243,8 @@ public abstract class JDFAutoHoleLine extends JDFResource
 
     /**
      * (29) append element Hole
+     * @return JDFHole the element
+     * @throws JDFException if the element already exists
      */
     public JDFHole appendHole() throws JDFException
     {

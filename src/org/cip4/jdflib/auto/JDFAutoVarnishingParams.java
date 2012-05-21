@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
     /**
     *****************************************************************************
@@ -152,12 +152,20 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoVarnishingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -166,6 +174,10 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -186,26 +198,43 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumVarnishArea getEnum(String enumName)
             {
                 return (EnumVarnishArea) getEnum(EnumVarnishArea.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumVarnishArea getEnum(int enumValue)
             {
                 return (EnumVarnishArea) getEnum(EnumVarnishArea.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumVarnishArea.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumVarnishArea.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumVarnishArea.class);
@@ -231,26 +260,43 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumVarnishMethod getEnum(String enumName)
             {
                 return (EnumVarnishMethod) getEnum(EnumVarnishMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumVarnishMethod getEnum(int enumValue)
             {
                 return (EnumVarnishMethod) getEnum(EnumVarnishMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumVarnishMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumVarnishMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumVarnishMethod.class);
@@ -273,7 +319,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleIndex(int value)
         {
@@ -291,24 +337,24 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute MOduleType
+        Methods for Attribute ModuleType
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute MOduleType
-          * @param value: the value to set the attribute to
+          * (36) set attribute ModuleType
+          * @param value the value to set the attribute to
           */
-        public void setMOduleType(String value)
+        public void setModuleType(String value)
         {
             setAttribute(AttributeName.MODULETYPE, value, null);
         }
 
         /**
-          * (23) get String attribute MOduleType
+          * (23) get String attribute ModuleType
           * @return the value of the attribute
           */
-        public String getMOduleType()
+        public String getModuleType()
         {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -317,7 +363,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute VarnishArea
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setVarnishArea(EnumVarnishArea enumVar)
         {
@@ -339,7 +385,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute VarnishMethod
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setVarnishMethod(EnumVarnishMethod enumVar)
         {

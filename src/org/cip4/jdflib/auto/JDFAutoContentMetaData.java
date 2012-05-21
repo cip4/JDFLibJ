@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -171,6 +171,10 @@ public abstract class JDFAutoContentMetaData extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoContentMetaData[  --> " + super.toString() + " ]";
@@ -187,7 +191,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ISBN10
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setISBN10(String value)
         {
@@ -200,7 +204,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
           */
         public String getISBN10()
         {
-            return getAttribute(AttributeName.ISBN10, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ISBN10, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -209,7 +213,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ISBN13
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setISBN13(String value)
         {
@@ -222,7 +226,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
           */
         public String getISBN13()
         {
-            return getAttribute(AttributeName.ISBN13, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ISBN13, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -231,7 +235,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Title
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTitle(String value)
         {
@@ -244,7 +248,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
           */
         public String getTitle()
         {
-            return getAttribute(AttributeName.TITLE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TITLE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -296,8 +300,9 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -355,8 +360,9 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -390,6 +396,8 @@ public abstract class JDFAutoContentMetaData extends JDFElement
 
     /**
      * (29) append element Part
+     * @return JDFPart the element
+     * @throws JDFException if the element already exists
      */
     public JDFPart appendPart() throws JDFException
     {

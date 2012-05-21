@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,12 +153,20 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPreflightParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -167,6 +175,10 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -222,8 +234,9 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
     /**
      * (30) append element ActionPool
+     * @return JDFActionPool the element
      */
-    public JDFActionPool appendActionPool() throws JDFException
+    public JDFActionPool appendActionPool()
     {
         return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
     }
@@ -248,6 +261,8 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -283,6 +298,8 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 
     /**
      * (29) append element TestPool
+     * @return JDFTestPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFTestPool appendTestPool() throws JDFException
     {

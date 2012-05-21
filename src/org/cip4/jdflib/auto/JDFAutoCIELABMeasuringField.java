@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFNumberList;
@@ -180,12 +179,20 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCIELABMeasuringField[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -194,6 +201,10 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -214,26 +225,43 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDensityStandard getEnum(String enumName)
             {
                 return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDensityStandard getEnum(int enumValue)
             {
                 return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDensityStandard.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDensityStandard.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDensityStandard.class);
@@ -259,7 +287,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Center
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCenter(JDFXYPair value)
         {
@@ -273,17 +301,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public JDFXYPair getCenter()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CENTER, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -293,7 +312,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CIELab
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCIELab(JDFLabColor value)
         {
@@ -307,17 +326,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public JDFLabColor getCIELab()
         {
-            String strAttrName = "";
-            JDFLabColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CIELAB, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFLabColor(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CIELAB, null, JDFCoreConstants.EMPTYSTRING);
+            JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
             return nPlaceHolder;
         }
 
@@ -327,7 +337,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DensityStandard
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDensityStandard(EnumDensityStandard enumVar)
         {
@@ -349,7 +359,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Diameter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDiameter(double value)
         {
@@ -371,7 +381,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Light
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLight(String value)
         {
@@ -384,7 +394,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public String getLight()
         {
-            return getAttribute(AttributeName.LIGHT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LIGHT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -393,7 +403,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Observer
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setObserver(int value)
         {
@@ -415,7 +425,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Percentages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPercentages(JDFNumberList value)
         {
@@ -429,17 +439,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public JDFNumberList getPercentages()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PERCENTAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PERCENTAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -449,7 +450,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ScreenRuling
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScreenRuling(JDFNumberList value)
         {
@@ -463,17 +464,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public JDFNumberList getScreenRuling()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SCREENRULING, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SCREENRULING, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -483,7 +475,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ScreenShape
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScreenShape(String value)
         {
@@ -496,7 +488,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public String getScreenShape()
         {
-            return getAttribute(AttributeName.SCREENSHAPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SCREENSHAPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -505,7 +497,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Setup
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetup(String value)
         {
@@ -518,7 +510,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
           */
         public String getSetup()
         {
-            return getAttribute(AttributeName.SETUP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SETUP, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -527,7 +519,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Tolerance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTolerance(double value)
         {
@@ -568,6 +560,8 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 
     /**
      * (29) append element ColorMeasurementConditions
+     * @return JDFColorMeasurementConditions the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,29 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFNumberRangeList extends JDFRangeList
 {
+	/**
+	 * factory for JDFNumberRangeList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFNumberRangeList, null if s is not compatible
+	 */
+	public static JDFNumberRangeList createNumberRangeList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFNumberRangeList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	/**
 	 * constructs an empty JDFNumberRangeList

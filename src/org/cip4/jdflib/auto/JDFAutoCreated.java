@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,8 +81,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFEmployee;
     /**
@@ -168,6 +167,10 @@ public abstract class JDFAutoCreated extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCreated[  --> " + super.toString() + " ]";
@@ -184,7 +187,7 @@ public abstract class JDFAutoCreated extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ref
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setref(String value)
         {
@@ -197,7 +200,7 @@ public abstract class JDFAutoCreated extends JDFAudit
           */
         public String getref()
         {
-            return getAttribute(AttributeName.REF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -206,7 +209,7 @@ public abstract class JDFAutoCreated extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TemplateID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplateID(String value)
         {
@@ -219,7 +222,7 @@ public abstract class JDFAutoCreated extends JDFAudit
           */
         public String getTemplateID()
         {
-            return getAttribute(AttributeName.TEMPLATEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -228,7 +231,7 @@ public abstract class JDFAutoCreated extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TemplateVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplateVersion(String value)
         {
@@ -241,7 +244,7 @@ public abstract class JDFAutoCreated extends JDFAudit
           */
         public String getTemplateVersion()
         {
-            return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -250,7 +253,7 @@ public abstract class JDFAutoCreated extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute XPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setXPath(String value)
         {
@@ -263,7 +266,7 @@ public abstract class JDFAutoCreated extends JDFAudit
           */
         public String getXPath()
         {
-            return getAttribute(AttributeName.XPATH, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.XPATH, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -315,8 +318,9 @@ public abstract class JDFAutoCreated extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

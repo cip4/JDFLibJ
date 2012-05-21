@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -169,6 +168,10 @@ public abstract class JDFAutoPipeParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPipeParams[  --> " + super.toString() + " ]";
@@ -185,7 +188,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -198,7 +201,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -207,7 +210,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -220,7 +223,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -229,7 +232,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PipeID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPipeID(String value)
         {
@@ -242,7 +245,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
           */
         public String getPipeID()
         {
-            return getAttribute(AttributeName.PIPEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PIPEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -251,7 +254,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute UpdatedStatus
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
         {
@@ -316,8 +319,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 
     /**
      * (30) append element Resource
+     * @return JDFResource the element
      */
-    public JDFResource appendResource() throws JDFException
+    public JDFResource appendResource()
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }

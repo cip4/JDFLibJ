@@ -94,6 +94,30 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFXYPairRangeList extends JDFRangeList
 {
 	/**
+	 * factory for JDFXYPairRangeList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFXYPairRangeList, null if s is not compatible
+	 */
+	public static JDFXYPairRangeList createXYPairRangeList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFXYPairRangeList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs an empty range list
 	 */
 	public JDFXYPairRangeList()
@@ -552,8 +576,7 @@ public class JDFXYPairRangeList extends JDFRangeList
 			JDFXYPair value = (v.elementAt(j));
 			JDFXYPair nextvalue = (v.elementAt(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue))
-					|| (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
+			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
 				return false;
 		}
 		return true;

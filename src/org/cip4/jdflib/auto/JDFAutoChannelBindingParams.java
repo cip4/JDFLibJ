@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -152,12 +150,20 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoChannelBindingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -166,6 +172,10 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -182,7 +192,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClampSystem
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClampSystem(boolean value)
         {
@@ -204,7 +214,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Brand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBrand(String value)
         {
@@ -217,7 +227,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           */
         public String getBrand()
         {
-            return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -226,7 +236,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (13) set attribute ClampColor
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClampColor(EnumNamedColor value)
         {
@@ -241,7 +251,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         {
             String strAttrName = "";
             EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLAMPCOLOR, null, JDFConstants.EMPTYSTRING);
+            strAttrName = getAttribute(AttributeName.CLAMPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
@@ -252,7 +262,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClampColorDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClampColorDetails(String value)
         {
@@ -265,7 +275,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           */
         public String getClampColorDetails()
         {
-            return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -274,7 +284,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClampD
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClampD(double value)
         {
@@ -296,7 +306,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClampSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClampSize(JDFShape value)
         {
@@ -310,17 +320,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           */
         public JDFShape getClampSize()
         {
-            String strAttrName = "";
-            JDFShape nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFShape(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
             return nPlaceHolder;
         }
 

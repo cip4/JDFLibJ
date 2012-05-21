@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -169,12 +167,20 @@ public abstract class JDFAutoScavengerArea extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoScavengerArea[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -183,6 +189,10 @@ public abstract class JDFAutoScavengerArea extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -199,7 +209,7 @@ public abstract class JDFAutoScavengerArea extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Center
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCenter(JDFXYPair value)
         {
@@ -213,17 +223,8 @@ public abstract class JDFAutoScavengerArea extends JDFResource
           */
         public JDFXYPair getCenter()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CENTER, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -233,7 +234,7 @@ public abstract class JDFAutoScavengerArea extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Size
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSize(JDFXYPair value)
         {
@@ -247,17 +248,8 @@ public abstract class JDFAutoScavengerArea extends JDFResource
           */
         public JDFXYPair getSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -267,7 +259,7 @@ public abstract class JDFAutoScavengerArea extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Rotation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRotation(double value)
         {
@@ -332,8 +324,9 @@ public abstract class JDFAutoScavengerArea extends JDFResource
 
     /**
      * (30) append element SeparationSpec
+     * @return JDFSeparationSpec the element
      */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    public JDFSeparationSpec appendSeparationSpec()
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

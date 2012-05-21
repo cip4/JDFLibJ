@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
@@ -199,6 +199,10 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDeliveryIntent[  --> " + super.toString() + " ]";
@@ -219,26 +223,43 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOwnership getEnum(String enumName)
             {
                 return (EnumOwnership) getEnum(EnumOwnership.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOwnership getEnum(int enumValue)
             {
                 return (EnumOwnership) getEnum(EnumOwnership.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOwnership.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOwnership.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOwnership.class);
@@ -260,7 +281,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Accepted
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAccepted(boolean value)
         {
@@ -282,7 +303,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdditionalAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdditionalAmount(int value)
         {
@@ -304,7 +325,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Ownership
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOwnership(EnumOwnership enumVar)
         {
@@ -326,7 +347,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BuyerAccount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBuyerAccount(String value)
         {
@@ -339,7 +360,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
           */
         public String getBuyerAccount()
         {
-            return getAttribute(AttributeName.BUYERACCOUNT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BUYERACCOUNT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -348,7 +369,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pickup
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPickup(boolean value)
         {
@@ -389,6 +410,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element DeliveryCharge
+     * @return JDFSpanDeliveryCharge the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanDeliveryCharge appendDeliveryCharge() throws JDFException
     {
@@ -415,6 +438,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Earliest
+     * @return JDFTimeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFTimeSpan appendEarliest() throws JDFException
     {
@@ -441,6 +466,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element EarliestDuration
+     * @return JDFDurationSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFDurationSpan appendEarliestDuration() throws JDFException
     {
@@ -467,6 +494,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Method
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendMethod() throws JDFException
     {
@@ -493,6 +522,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Overage
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendOverage() throws JDFException
     {
@@ -519,6 +550,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Required
+     * @return JDFTimeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFTimeSpan appendRequired() throws JDFException
     {
@@ -545,6 +578,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element RequiredDuration
+     * @return JDFDurationSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFDurationSpan appendRequiredDuration() throws JDFException
     {
@@ -571,6 +606,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ReturnMethod
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendReturnMethod() throws JDFException
     {
@@ -597,6 +634,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element ServiceLevel
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendServiceLevel() throws JDFException
     {
@@ -623,6 +662,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element SurplusHandling
+     * @return JDFSpanSurplusHandling the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanSurplusHandling appendSurplusHandling() throws JDFException
     {
@@ -649,6 +690,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Transfer
+     * @return JDFSpanTransfer the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanTransfer appendTransfer() throws JDFException
     {
@@ -675,6 +718,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Underage
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendUnderage() throws JDFException
     {
@@ -701,6 +746,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Company
+     * @return JDFCompany the element
+     * @throws JDFException if the element already exists
      */
     public JDFCompany appendCompany() throws JDFException
     {
@@ -760,8 +807,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -819,8 +867,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (30) append element DropIntent
+     * @return JDFDropIntent the element
      */
-    public JDFDropIntent appendDropIntent() throws JDFException
+    public JDFDropIntent appendDropIntent()
     {
         return (JDFDropIntent) appendElement(ElementName.DROPINTENT, null);
     }
@@ -845,6 +894,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 
     /**
      * (29) append element Pricing
+     * @return JDFPricing the element
+     * @throws JDFException if the element already exists
      */
     public JDFPricing appendPricing() throws JDFException
     {

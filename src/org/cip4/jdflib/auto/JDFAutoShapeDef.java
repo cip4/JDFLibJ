@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFShape;
@@ -180,12 +179,20 @@ public abstract class JDFAutoShapeDef extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShapeDef[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -194,6 +201,10 @@ public abstract class JDFAutoShapeDef extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -214,26 +225,43 @@ public abstract class JDFAutoShapeDef extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFluteDirection getEnum(String enumName)
             {
                 return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFluteDirection getEnum(int enumValue)
             {
                 return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFluteDirection.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFluteDirection.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFluteDirection.class);
@@ -259,26 +287,43 @@ public abstract class JDFAutoShapeDef extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumGrainDirection getEnum(String enumName)
             {
                 return (EnumGrainDirection) getEnum(EnumGrainDirection.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumGrainDirection getEnum(int enumValue)
             {
                 return (EnumGrainDirection) getEnum(EnumGrainDirection.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumGrainDirection.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumGrainDirection.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumGrainDirection.class);
@@ -305,26 +350,43 @@ public abstract class JDFAutoShapeDef extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMediaSide getEnum(String enumName)
             {
                 return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMediaSide getEnum(int enumValue)
             {
                 return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMediaSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMediaSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMediaSide.class);
@@ -347,7 +409,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LockOrigins
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLockOrigins(boolean value)
         {
@@ -369,7 +431,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Area
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setArea(double value)
         {
@@ -391,7 +453,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CutBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCutBox(JDFRectangle value)
         {
@@ -405,17 +467,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
           */
         public JDFRectangle getCutBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CUTBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CUTBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -425,7 +478,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Dimensions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDimensions(JDFShape value)
         {
@@ -439,17 +492,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
           */
         public JDFShape getDimensions()
         {
-            String strAttrName = "";
-            JDFShape nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DIMENSIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFShape(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DIMENSIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
             return nPlaceHolder;
         }
 
@@ -459,7 +503,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FluteDirection
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFluteDirection(EnumFluteDirection enumVar)
         {
@@ -481,7 +525,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute GrainDirection
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setGrainDirection(EnumGrainDirection enumVar)
         {
@@ -503,7 +547,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MediaSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMediaSide(EnumMediaSide enumVar)
         {
@@ -525,7 +569,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ResourceWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResourceWeight(double value)
         {
@@ -566,6 +610,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -601,6 +647,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -636,6 +684,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 
     /**
      * (29) append element Shape
+     * @return JDFShapeElement the element
+     * @throws JDFException if the element already exists
      */
     public JDFShapeElement appendShape() throws JDFException
     {

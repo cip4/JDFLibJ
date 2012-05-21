@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -151,6 +151,10 @@ public abstract class JDFAutoGeneralID extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoGeneralID[  --> " + super.toString() + " ]";
@@ -171,26 +175,43 @@ public abstract class JDFAutoGeneralID extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDataType getEnum(String enumName)
             {
                 return (EnumDataType) getEnum(EnumDataType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDataType getEnum(int enumValue)
             {
                 return (EnumDataType) getEnum(EnumDataType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDataType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDataType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDataType.class);
@@ -217,7 +238,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DataType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDataType(EnumDataType enumVar)
         {
@@ -239,7 +260,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IDUsage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIDUsage(String value)
         {
@@ -252,7 +273,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
           */
         public String getIDUsage()
         {
-            return getAttribute(AttributeName.IDUSAGE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.IDUSAGE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -261,7 +282,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IDValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIDValue(String value)
         {
@@ -274,7 +295,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
           */
         public String getIDValue()
         {
-            return getAttribute(AttributeName.IDVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.IDVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

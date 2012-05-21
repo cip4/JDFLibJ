@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.process.JDFIDPFolding;
@@ -173,6 +171,10 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPFinishing[  --> " + super.toString() + " ]";
@@ -189,7 +191,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Finishings
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFinishings(JDFIntegerList value)
         {
@@ -203,17 +205,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
           */
         public JDFIntegerList getFinishings()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FINISHINGS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FINISHINGS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -266,8 +259,9 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
     /**
      * (30) append element IDPFolding
+     * @return JDFIDPFolding the element
      */
-    public JDFIDPFolding appendIDPFolding() throws JDFException
+    public JDFIDPFolding appendIDPFolding()
     {
         return (JDFIDPFolding) appendElement(ElementName.IDPFOLDING, null);
     }
@@ -316,8 +310,9 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
     /**
      * (30) append element IDPHoleMaking
+     * @return JDFIDPHoleMaking the element
      */
-    public JDFIDPHoleMaking appendIDPHoleMaking() throws JDFException
+    public JDFIDPHoleMaking appendIDPHoleMaking()
     {
         return (JDFIDPHoleMaking) appendElement(ElementName.IDPHOLEMAKING, null);
     }
@@ -366,8 +361,9 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
     /**
      * (30) append element IDPStitching
+     * @return JDFIDPStitching the element
      */
-    public JDFIDPStitching appendIDPStitching() throws JDFException
+    public JDFIDPStitching appendIDPStitching()
     {
         return (JDFIDPStitching) appendElement(ElementName.IDPSTITCHING, null);
     }
@@ -416,8 +412,9 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 
     /**
      * (30) append element IDPTrimming
+     * @return JDFIDPTrimming the element
      */
-    public JDFIDPTrimming appendIDPTrimming() throws JDFException
+    public JDFIDPTrimming appendIDPTrimming()
     {
         return (JDFIDPTrimming) appendElement(ElementName.IDPTRIMMING, null);
     }

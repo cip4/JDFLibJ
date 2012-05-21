@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
@@ -166,12 +166,20 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoJobField[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -180,6 +188,10 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -196,7 +208,7 @@ public abstract class JDFAutoJobField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShowList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShowList(VString value)
         {
@@ -210,7 +222,7 @@ public abstract class JDFAutoJobField extends JDFResource
         public VString getShowList()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -221,7 +233,7 @@ public abstract class JDFAutoJobField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobFormat(String value)
         {
@@ -234,7 +246,7 @@ public abstract class JDFAutoJobField extends JDFResource
           */
         public String getJobFormat()
         {
-            return getAttribute(AttributeName.JOBFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -243,7 +255,7 @@ public abstract class JDFAutoJobField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobTemplate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobTemplate(String value)
         {
@@ -256,7 +268,7 @@ public abstract class JDFAutoJobField extends JDFResource
           */
         public String getJobTemplate()
         {
-            return getAttribute(AttributeName.JOBTEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -265,7 +277,7 @@ public abstract class JDFAutoJobField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OperatorText
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOperatorText(String value)
         {
@@ -278,7 +290,7 @@ public abstract class JDFAutoJobField extends JDFResource
           */
         public String getOperatorText()
         {
-            return getAttribute(AttributeName.OPERATORTEXT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OPERATORTEXT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -287,7 +299,7 @@ public abstract class JDFAutoJobField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UserText
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUserText(String value)
         {
@@ -300,7 +312,7 @@ public abstract class JDFAutoJobField extends JDFResource
           */
         public String getUserText()
         {
-            return getAttribute(AttributeName.USERTEXT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.USERTEXT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -328,6 +340,8 @@ public abstract class JDFAutoJobField extends JDFResource
 
     /**
      * (29) append element DeviceMark
+     * @return JDFDeviceMark the element
+     * @throws JDFException if the element already exists
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -157,6 +156,10 @@ public abstract class JDFAutoDisposition extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDisposition[  --> " + super.toString() + " ]";
@@ -177,26 +180,43 @@ public abstract class JDFAutoDisposition extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDispositionAction getEnum(String enumName)
             {
                 return (EnumDispositionAction) getEnum(EnumDispositionAction.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDispositionAction getEnum(int enumValue)
             {
                 return (EnumDispositionAction) getEnum(EnumDispositionAction.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDispositionAction.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDispositionAction.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDispositionAction.class);
@@ -222,26 +242,43 @@ public abstract class JDFAutoDisposition extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDispositionUsage getEnum(String enumName)
             {
                 return (EnumDispositionUsage) getEnum(EnumDispositionUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDispositionUsage getEnum(int enumValue)
             {
                 return (EnumDispositionUsage) getEnum(EnumDispositionUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDispositionUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDispositionUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDispositionUsage.class);
@@ -263,7 +300,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DispositionAction
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDispositionAction(EnumDispositionAction enumVar)
         {
@@ -285,7 +322,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Priority
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPriority(int value)
         {
@@ -307,7 +344,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DispositionUsage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDispositionUsage(EnumDispositionUsage enumVar)
         {
@@ -329,7 +366,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ExtraDuration
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setExtraDuration(JDFDuration value)
         {
@@ -343,17 +380,8 @@ public abstract class JDFAutoDisposition extends JDFElement
           */
         public JDFDuration getExtraDuration()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.EXTRADURATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.EXTRADURATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 
@@ -363,7 +391,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinDuration
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinDuration(JDFDuration value)
         {
@@ -377,17 +405,8 @@ public abstract class JDFAutoDisposition extends JDFElement
           */
         public JDFDuration getMinDuration()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MINDURATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MINDURATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 
@@ -397,7 +416,7 @@ public abstract class JDFAutoDisposition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Until
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setUntil(JDFDate value)
         {
@@ -412,21 +431,9 @@ public abstract class JDFAutoDisposition extends JDFElement
           */
         public JDFDate getUntil()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.UNTIL, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.UNTIL, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
 }// end namespace JDF

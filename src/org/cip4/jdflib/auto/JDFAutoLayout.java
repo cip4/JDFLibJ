@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,33 +70,36 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.core.ElementInfo;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.resource.JDFLayerList;
+import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFPageCondition;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFSignature;
+import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFInsertSheet;
+import org.cip4.jdflib.resource.process.JDFLogicalStackParams;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFMediaSource;
+import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
     /**
     *****************************************************************************
     class JDFAutoLayout : public JDFResource
@@ -202,12 +205,20 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLayout[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -216,6 +227,10 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -236,26 +251,43 @@ public abstract class JDFAutoLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOrdReset getEnum(String enumName)
             {
                 return (EnumOrdReset) getEnum(EnumOrdReset.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOrdReset getEnum(int enumValue)
             {
                 return (EnumOrdReset) getEnum(EnumOrdReset.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOrdReset.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOrdReset.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOrdReset.class);
@@ -282,26 +314,43 @@ public abstract class JDFAutoLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetCountReset getEnum(String enumName)
             {
                 return (EnumSheetCountReset) getEnum(EnumSheetCountReset.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetCountReset getEnum(int enumValue)
             {
                 return (EnumSheetCountReset) getEnum(EnumSheetCountReset.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetCountReset.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetCountReset.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetCountReset.class);
@@ -328,26 +377,43 @@ public abstract class JDFAutoLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBaseOrdReset getEnum(String enumName)
             {
                 return (EnumBaseOrdReset) getEnum(EnumBaseOrdReset.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBaseOrdReset getEnum(int enumValue)
             {
                 return (EnumBaseOrdReset) getEnum(EnumBaseOrdReset.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBaseOrdReset.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBaseOrdReset.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBaseOrdReset.class);
@@ -373,26 +439,43 @@ public abstract class JDFAutoLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSourceWorkStyle getEnum(String enumName)
             {
                 return (EnumSourceWorkStyle) getEnum(EnumSourceWorkStyle.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSourceWorkStyle getEnum(int enumValue)
             {
                 return (EnumSourceWorkStyle) getEnum(EnumSourceWorkStyle.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSourceWorkStyle.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSourceWorkStyle.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSourceWorkStyle.class);
@@ -422,26 +505,43 @@ public abstract class JDFAutoLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTemplateType getEnum(String enumName)
             {
                 return (EnumTemplateType) getEnum(EnumTemplateType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTemplateType getEnum(int enumValue)
             {
                 return (EnumTemplateType) getEnum(EnumTemplateType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTemplateType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTemplateType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTemplateType.class);
@@ -463,7 +563,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Automated
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAutomated(boolean value)
         {
@@ -485,7 +585,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LockOrigins
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLockOrigins(boolean value)
         {
@@ -507,7 +607,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxDocOrd
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxDocOrd(int value)
         {
@@ -529,7 +629,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxSetOrd
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxSetOrd(int value)
         {
@@ -551,7 +651,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute OrdReset
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOrdReset(EnumOrdReset enumVar)
         {
@@ -573,7 +673,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetCountReset
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetCountReset(EnumSheetCountReset enumVar)
         {
@@ -595,7 +695,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -608,7 +708,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -617,7 +717,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BaseOrdReset
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBaseOrdReset(EnumBaseOrdReset enumVar)
         {
@@ -639,7 +739,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxCollect
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxCollect(int value)
         {
@@ -661,7 +761,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxOrd
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxOrd(int value)
         {
@@ -683,7 +783,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinCollect
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinCollect(int value)
         {
@@ -705,7 +805,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OrdsConsumed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrdsConsumed(JDFIntegerRangeList value)
         {
@@ -719,17 +819,8 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public JDFIntegerRangeList getOrdsConsumed()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.ORDSCONSUMED, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.ORDSCONSUMED, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -739,7 +830,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetNameFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetNameFormat(String value)
         {
@@ -752,7 +843,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public String getSheetNameFormat()
         {
-            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -761,7 +852,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetNameTemplate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetNameTemplate(String value)
         {
@@ -774,7 +865,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public String getSheetNameTemplate()
         {
-            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -783,7 +874,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SourceWorkStyle
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
         {
@@ -805,7 +896,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SurfaceContentsBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSurfaceContentsBox(JDFRectangle value)
         {
@@ -819,17 +910,8 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public JDFRectangle getSurfaceContentsBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -839,7 +921,7 @@ public abstract class JDFAutoLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TemplateType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTemplateType(EnumTemplateType enumVar)
         {
@@ -904,8 +986,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element ContentObject
+     * @return JDFContentObject the element
      */
-    public JDFContentObject appendContentObject() throws JDFException
+    public JDFContentObject appendContentObject()
     {
         return (JDFContentObject) appendElement(ElementName.CONTENTOBJECT, null);
     }
@@ -954,8 +1037,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element InsertSheet
+     * @return JDFInsertSheet the element
      */
-    public JDFInsertSheet appendInsertSheet() throws JDFException
+    public JDFInsertSheet appendInsertSheet()
     {
         return (JDFInsertSheet) appendElement(ElementName.INSERTSHEET, null);
     }
@@ -989,6 +1073,8 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (29) append element LayerList
+     * @return JDFLayerList the element
+     * @throws JDFException if the element already exists
      */
     public JDFLayerList appendLayerList() throws JDFException
     {
@@ -1015,6 +1101,8 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (29) append element LogicalStackParams
+     * @return JDFLogicalStackParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFLogicalStackParams appendLogicalStackParams() throws JDFException
     {
@@ -1065,8 +1153,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element MarkObject
+     * @return JDFMarkObject the element
      */
-    public JDFMarkObject appendMarkObject() throws JDFException
+    public JDFMarkObject appendMarkObject()
     {
         return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
     }
@@ -1115,8 +1204,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element Media
+     * @return JDFMedia the element
      */
-    public JDFMedia appendMedia() throws JDFException
+    public JDFMedia appendMedia()
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -1150,6 +1240,8 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (29) append element MediaSource
+     * @return JDFMediaSource the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {
@@ -1209,8 +1301,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element PageCondition
+     * @return JDFPageCondition the element
      */
-    public JDFPageCondition appendPageCondition() throws JDFException
+    public JDFPageCondition appendPageCondition()
     {
         return (JDFPageCondition) appendElement(ElementName.PAGECONDITION, null);
     }
@@ -1259,8 +1352,9 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (30) append element Signature
+     * @return JDFSignature the element
      */
-    public JDFSignature appendSignature() throws JDFException
+    public JDFSignature appendSignature()
     {
         return (JDFSignature) appendElement(ElementName.SIGNATURE, null);
     }
@@ -1285,6 +1379,8 @@ public abstract class JDFAutoLayout extends JDFResource
 
     /**
      * (29) append element TransferCurvePool
+     * @return JDFTransferCurvePool the element
+     * @throws JDFException if the element already exists
      */
     public JDFTransferCurvePool appendTransferCurvePool() throws JDFException
     {

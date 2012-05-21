@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
@@ -165,12 +165,20 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStripBindingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -179,6 +187,10 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -195,7 +207,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Brand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBrand(String value)
         {
@@ -208,7 +220,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
           */
         public String getBrand()
         {
-            return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -217,7 +229,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Distance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDistance(double value)
         {
@@ -239,7 +251,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LengthJDF
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLengthJDF(double value)
         {
@@ -261,7 +273,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (13) set attribute StripColor
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStripColor(EnumNamedColor value)
         {
@@ -276,7 +288,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         {
             String strAttrName = "";
             EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STRIPCOLOR, null, JDFConstants.EMPTYSTRING);
+            strAttrName = getAttribute(AttributeName.STRIPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
@@ -287,7 +299,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StripColorDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStripColorDetails(String value)
         {
@@ -300,7 +312,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
           */
         public String getStripColorDetails()
         {
-            return getAttribute(AttributeName.STRIPCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STRIPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -328,6 +340,8 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 
     /**
      * (29) append element HoleMakingParams
+     * @return JDFHoleMakingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {

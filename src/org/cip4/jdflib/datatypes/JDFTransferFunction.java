@@ -90,6 +90,30 @@ import org.cip4.jdflib.core.JDFConstants;
 public class JDFTransferFunction extends JDFNumList
 {
 	/**
+	 * factory for JDFTransferFunction that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFTransferFunction, null if s is not compatible
+	 */
+	public static JDFTransferFunction createTransferFunction(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFTransferFunction(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

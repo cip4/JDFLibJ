@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
     /**
@@ -170,6 +169,10 @@ public abstract class JDFAutoTrackResult extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrackResult[  --> " + super.toString() + " ]";
@@ -186,7 +189,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -199,7 +202,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -208,7 +211,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -221,7 +224,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -230,7 +233,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ProjectID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setProjectID(String value)
         {
@@ -243,7 +246,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
           */
         public String getProjectID()
         {
-            return getAttribute(AttributeName.PROJECTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -252,7 +255,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueEntryID(String value)
         {
@@ -265,7 +268,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
           */
         public String getQueueEntryID()
         {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -274,7 +277,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURL(String value)
         {
@@ -287,7 +290,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
           */
         public String getURL()
         {
-            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -296,7 +299,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsDevice
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsDevice(boolean value)
         {
@@ -361,8 +364,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

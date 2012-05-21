@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +85,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -183,6 +182,10 @@ public abstract class JDFAutoNotification extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNotification[  --> " + super.toString() + " ]";
@@ -203,26 +206,43 @@ public abstract class JDFAutoNotification extends JDFAudit
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumClass getEnum(String enumName)
             {
                 return (EnumClass) getEnum(EnumClass.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumClass getEnum(int enumValue)
             {
                 return (EnumClass) getEnum(EnumClass.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumClass.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumClass.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumClass.class);
@@ -247,7 +267,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Class
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setClass(EnumClass enumVar)
         {
@@ -269,7 +289,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CombinedProcessIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCombinedProcessIndex(JDFIntegerList value)
         {
@@ -283,17 +303,8 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public JDFIntegerList getCombinedProcessIndex()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -303,7 +314,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -316,7 +327,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -325,7 +336,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -338,7 +349,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -347,7 +358,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleID(String value)
         {
@@ -360,7 +371,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public String getModuleID()
         {
-            return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -369,7 +380,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleIndex(JDFIntegerRangeList value)
         {
@@ -383,17 +394,8 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public JDFIntegerRangeList getModuleIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -403,7 +405,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleType(String value)
         {
@@ -416,7 +418,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public String getModuleType()
         {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -425,7 +427,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -438,7 +440,7 @@ public abstract class JDFAutoNotification extends JDFAudit
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -466,6 +468,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 
     /**
      * (29) append element CostCenter
+     * @return JDFCostCenter the element
+     * @throws JDFException if the element already exists
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
@@ -516,8 +520,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -566,8 +571,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

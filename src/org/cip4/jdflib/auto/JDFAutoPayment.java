@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -146,6 +146,10 @@ public abstract class JDFAutoPayment extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPayment[  --> " + super.toString() + " ]";
@@ -177,6 +181,8 @@ public abstract class JDFAutoPayment extends JDFElement
 
     /**
      * (29) append element PayTerm
+     * @return JDFElement the element
+     * @throws JDFException if the element already exists
      */
     public JDFElement appendPayTerm() throws JDFException
     {
@@ -203,6 +209,8 @@ public abstract class JDFAutoPayment extends JDFElement
 
     /**
      * (29) append element CreditCard
+     * @return JDFCreditCard the element
+     * @throws JDFException if the element already exists
      */
     public JDFCreditCard appendCreditCard() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFDeviceMark;
@@ -166,6 +166,10 @@ public abstract class JDFAutoDynamicField extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDynamicField[  --> " + super.toString() + " ]";
@@ -182,7 +186,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Format
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFormat(String value)
         {
@@ -195,7 +199,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
           */
         public String getFormat()
         {
-            return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -204,7 +208,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute InputField
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInputField(String value)
         {
@@ -217,7 +221,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
           */
         public String getInputField()
         {
-            return getAttribute(AttributeName.INPUTFIELD, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.INPUTFIELD, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -226,7 +230,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Ord
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrd(int value)
         {
@@ -248,7 +252,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OrdExpression
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrdExpression(String value)
         {
@@ -261,7 +265,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
           */
         public String getOrdExpression()
         {
-            return getAttribute(AttributeName.ORDEXPRESSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -270,7 +274,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReplaceField
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReplaceField(String value)
         {
@@ -283,7 +287,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
           */
         public String getReplaceField()
         {
-            return getAttribute(AttributeName.REPLACEFIELD, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REPLACEFIELD, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -292,7 +296,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Template
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplate(String value)
         {
@@ -305,7 +309,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
           */
         public String getTemplate()
         {
-            return getAttribute(AttributeName.TEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -333,6 +337,8 @@ public abstract class JDFAutoDynamicField extends JDFElement
 
     /**
      * (29) append element DeviceMark
+     * @return JDFDeviceMark the element
+     * @throws JDFException if the element already exists
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -190,12 +189,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoExposedMedia[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -204,6 +211,10 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Handling;
@@ -224,26 +235,43 @@ public abstract class JDFAutoExposedMedia extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumColorType getEnum(String enumName)
             {
                 return (EnumColorType) getEnum(EnumColorType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumColorType getEnum(int enumValue)
             {
                 return (EnumColorType) getEnum(EnumColorType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumColorType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumColorType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumColorType.class);
@@ -270,26 +298,43 @@ public abstract class JDFAutoExposedMedia extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPlateType getEnum(String enumName)
             {
                 return (EnumPlateType) getEnum(EnumPlateType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPlateType getEnum(int enumValue)
             {
                 return (EnumPlateType) getEnum(EnumPlateType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPlateType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPlateType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPlateType.class);
@@ -315,26 +360,43 @@ public abstract class JDFAutoExposedMedia extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumProofQuality getEnum(String enumName)
             {
                 return (EnumProofQuality) getEnum(EnumProofQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumProofQuality getEnum(int enumValue)
             {
                 return (EnumProofQuality) getEnum(EnumProofQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumProofQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumProofQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumProofQuality.class);
@@ -362,26 +424,43 @@ public abstract class JDFAutoExposedMedia extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumProofType getEnum(String enumName)
             {
                 return (EnumProofType) getEnum(EnumProofType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumProofType getEnum(int enumValue)
             {
                 return (EnumProofType) getEnum(EnumProofType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumProofType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumProofType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumProofType.class);
@@ -404,7 +483,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Polarity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPolarity(boolean value)
         {
@@ -426,7 +505,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ColorType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setColorType(EnumColorType enumVar)
         {
@@ -448,7 +527,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageListIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageListIndex(JDFIntegerRangeList value)
         {
@@ -462,17 +541,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public JDFIntegerRangeList getPageListIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -482,7 +552,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PlateType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPlateType(EnumPlateType enumVar)
         {
@@ -504,7 +574,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ProofName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setProofName(String value)
         {
@@ -517,7 +587,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public String getProofName()
         {
-            return getAttribute(AttributeName.PROOFNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PROOFNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -526,7 +596,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ProofQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setProofQuality(EnumProofQuality enumVar)
         {
@@ -548,7 +618,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ProofType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setProofType(EnumProofType enumVar)
         {
@@ -570,7 +640,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PunchType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPunchType(String value)
         {
@@ -583,7 +653,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public String getPunchType()
         {
-            return getAttribute(AttributeName.PUNCHTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PUNCHTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -592,7 +662,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Resolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResolution(JDFXYPair value)
         {
@@ -606,17 +676,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
           */
         public JDFXYPair getResolution()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -645,6 +706,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -680,6 +743,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -715,6 +780,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (29) append element PageList
+     * @return JDFPageList the element
+     * @throws JDFException if the element already exists
      */
     public JDFPageList appendPageList() throws JDFException
     {
@@ -750,6 +817,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (29) append element ScreeningParams
+     * @return JDFScreeningParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
@@ -809,8 +878,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -868,8 +938,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

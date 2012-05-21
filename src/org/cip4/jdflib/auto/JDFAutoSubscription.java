@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFObservationTarget;
 import org.cip4.jdflib.util.JDFDuration;
@@ -178,6 +176,10 @@ public abstract class JDFAutoSubscription extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoSubscription[  --> " + super.toString() + " ]";
@@ -198,26 +200,43 @@ public abstract class JDFAutoSubscription extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(String enumName)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(int enumValue)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumChannelMode.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumChannelMode.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumChannelMode.class);
@@ -243,26 +262,43 @@ public abstract class JDFAutoSubscription extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumRetryPolicy getEnum(String enumName)
             {
                 return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumRetryPolicy getEnum(int enumValue)
             {
                 return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumRetryPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumRetryPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumRetryPolicy.class);
@@ -284,7 +320,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ChannelMode
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setChannelMode(EnumChannelMode enumVar)
         {
@@ -306,7 +342,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Format
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFormat(String value)
         {
@@ -319,7 +355,7 @@ public abstract class JDFAutoSubscription extends JDFElement
           */
         public String getFormat()
         {
-            return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -328,7 +364,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinDelayTime
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinDelayTime(JDFDuration value)
         {
@@ -342,17 +378,8 @@ public abstract class JDFAutoSubscription extends JDFElement
           */
         public JDFDuration getMinDelayTime()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 
@@ -362,7 +389,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RepeatStep
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRepeatStep(int value)
         {
@@ -384,7 +411,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RepeatTime
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRepeatTime(double value)
         {
@@ -406,7 +433,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute RetryPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setRetryPolicy(EnumRetryPolicy enumVar)
         {
@@ -428,7 +455,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Template
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplate(String value)
         {
@@ -441,7 +468,7 @@ public abstract class JDFAutoSubscription extends JDFElement
           */
         public String getTemplate()
         {
-            return getAttribute(AttributeName.TEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -450,7 +477,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURL(String value)
         {
@@ -463,7 +490,7 @@ public abstract class JDFAutoSubscription extends JDFElement
           */
         public String getURL()
         {
-            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -515,8 +542,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 
     /**
      * (30) append element ObservationTarget
+     * @return JDFObservationTarget the element
      */
-    public JDFObservationTarget appendObservationTarget() throws JDFException
+    public JDFObservationTarget appendObservationTarget()
     {
         return (JDFObservationTarget) appendElement(ElementName.OBSERVATIONTARGET, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -154,6 +154,10 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoKnownMsgQuParams[  --> " + super.toString() + " ]";
@@ -174,26 +178,43 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(String enumName)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumChannelMode getEnum(int enumValue)
             {
                 return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumChannelMode.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumChannelMode.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumChannelMode.class);
@@ -215,7 +236,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ChannelMode
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setChannelMode(EnumChannelMode enumVar)
         {
@@ -237,7 +258,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Exact
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setExact(boolean value)
         {
@@ -259,7 +280,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ListCommands
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setListCommands(boolean value)
         {
@@ -281,7 +302,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ListQueries
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setListQueries(boolean value)
         {
@@ -303,7 +324,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ListRegistrations
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setListRegistrations(boolean value)
         {
@@ -325,7 +346,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ListSignals
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setListSignals(boolean value)
         {
@@ -347,7 +368,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Persistent
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPersistent(boolean value)
         {

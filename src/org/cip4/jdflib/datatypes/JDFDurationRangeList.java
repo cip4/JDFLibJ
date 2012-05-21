@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -99,6 +99,30 @@ public class JDFDurationRangeList extends JDFRangeList
 	public JDFDurationRangeList()
 	{
 		super();
+	}
+
+	/**
+	 * factory for JDFDurationRangeList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFDurationRangeList, null if s is not compatible
+	 */
+	public static JDFDurationRangeList createDurationRangeList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFDurationRangeList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -267,8 +291,7 @@ public class JDFDurationRangeList extends JDFRangeList
 			JDFDuration value = (v.elementAt(j));
 			JDFDuration nextvalue = (v.elementAt(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue))
-					|| (first.isShorter(last) && (value.isShorter(nextvalue) || value.equals(nextvalue))) || (first.isLonger(last) && (value.isLonger(nextvalue) || value.equals(nextvalue)))) == false)
+			if (((first.equals(last) && value.equals(nextvalue)) || (first.isShorter(last) && (value.isShorter(nextvalue) || value.equals(nextvalue))) || (first.isLonger(last) && (value.isLonger(nextvalue) || value.equals(nextvalue)))) == false)
 				return false;
 		}
 		return true;

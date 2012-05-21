@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
@@ -178,12 +177,20 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoImageReplacementParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -192,6 +199,10 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -212,26 +223,43 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumImageReplacementStrategy getEnum(String enumName)
             {
                 return (EnumImageReplacementStrategy) getEnum(EnumImageReplacementStrategy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumImageReplacementStrategy getEnum(int enumValue)
             {
                 return (EnumImageReplacementStrategy) getEnum(EnumImageReplacementStrategy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumImageReplacementStrategy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumImageReplacementStrategy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumImageReplacementStrategy.class);
@@ -259,26 +287,43 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumResolutionReductionStrategy getEnum(String enumName)
             {
                 return (EnumResolutionReductionStrategy) getEnum(EnumResolutionReductionStrategy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumResolutionReductionStrategy getEnum(int enumValue)
             {
                 return (EnumResolutionReductionStrategy) getEnum(EnumResolutionReductionStrategy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumResolutionReductionStrategy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumResolutionReductionStrategy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumResolutionReductionStrategy.class);
@@ -301,7 +346,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ImageReplacementStrategy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
         {
@@ -323,7 +368,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImagePreScanStrategy
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImagePreScanStrategy(String value)
         {
@@ -336,7 +381,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
           */
         public String getImagePreScanStrategy()
         {
-            return getAttribute(AttributeName.IMAGEPRESCANSTRATEGY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.IMAGEPRESCANSTRATEGY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -345,7 +390,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxResolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxResolution(double value)
         {
@@ -367,7 +412,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinResolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinResolution(double value)
         {
@@ -389,7 +434,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ResolutionReductionStrategy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
         {
@@ -411,7 +456,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreExtensions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreExtensions(VString value)
         {
@@ -425,7 +470,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         public VString getIgnoreExtensions()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -436,7 +481,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxSearchRecursion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxSearchRecursion(int value)
         {
@@ -501,8 +546,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
     /**
      * (30) append element FileSpec
+     * @return JDFFileSpec the element
      */
-    public JDFFileSpec appendFileSpec() throws JDFException
+    public JDFFileSpec appendFileSpec()
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
@@ -560,8 +606,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 
     /**
      * (30) append element SearchPath
+     * @return JDFElement the element
      */
-    public JDFElement appendSearchPath() throws JDFException
+    public JDFElement appendSearchPath()
     {
         return (JDFElement) appendElement(ElementName.SEARCHPATH, null);
     }

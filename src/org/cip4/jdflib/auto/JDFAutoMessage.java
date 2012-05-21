@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JDFDate;
@@ -155,6 +153,10 @@ public abstract class JDFAutoMessage extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMessage[  --> " + super.toString() + " ]";
@@ -171,7 +173,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AgentName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAgentName(String value)
         {
@@ -184,7 +186,7 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public String getAgentName()
         {
-            return getAttribute(AttributeName.AGENTNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -193,7 +195,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AgentVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAgentVersion(String value)
         {
@@ -206,7 +208,7 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public String getAgentVersion()
         {
-            return getAttribute(AttributeName.AGENTVERSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -215,7 +217,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ICSVersions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setICSVersions(VString value)
         {
@@ -229,7 +231,7 @@ public abstract class JDFAutoMessage extends JDFElement
         public VString getICSVersions()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -240,7 +242,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setID(String value)
         {
@@ -253,7 +255,7 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public String getID()
         {
-            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -262,7 +264,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SenderID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSenderID(String value)
         {
@@ -275,7 +277,7 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public String getSenderID()
         {
-            return getAttribute(AttributeName.SENDERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -284,7 +286,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Time
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setTime(JDFDate value)
         {
@@ -299,21 +301,9 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public JDFDate getTime()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.TIME, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.TIME, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -322,7 +312,7 @@ public abstract class JDFAutoMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -335,7 +325,7 @@ public abstract class JDFAutoMessage extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

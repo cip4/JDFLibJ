@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFCoverApplicationParams;
 import org.cip4.jdflib.resource.JDFResource;
@@ -171,12 +170,20 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAdhesiveBindingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -185,6 +192,10 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -201,7 +212,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PullOutValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPullOutValue(double value)
         {
@@ -223,7 +234,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FlexValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFlexValue(double value)
         {
@@ -288,8 +299,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
     /**
      * (30) append element SpinePreparationParams
+     * @return JDFSpinePreparationParams the element
      */
-    public JDFSpinePreparationParams appendSpinePreparationParams() throws JDFException
+    public JDFSpinePreparationParams appendSpinePreparationParams()
     {
         return (JDFSpinePreparationParams) appendElement(ElementName.SPINEPREPARATIONPARAMS, null);
     }
@@ -338,8 +350,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
     /**
      * (30) append element GlueApplication
+     * @return JDFGlueApplication the element
      */
-    public JDFGlueApplication appendGlueApplication() throws JDFException
+    public JDFGlueApplication appendGlueApplication()
     {
         return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
     }
@@ -388,8 +401,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
     /**
      * (30) append element SpineTapingParams
+     * @return JDFSpineTapingParams the element
      */
-    public JDFSpineTapingParams appendSpineTapingParams() throws JDFException
+    public JDFSpineTapingParams appendSpineTapingParams()
     {
         return (JDFSpineTapingParams) appendElement(ElementName.SPINETAPINGPARAMS, null);
     }
@@ -438,8 +452,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 
     /**
      * (30) append element CoverApplicationParams
+     * @return JDFCoverApplicationParams the element
      */
-    public JDFCoverApplicationParams appendCoverApplicationParams() throws JDFException
+    public JDFCoverApplicationParams appendCoverApplicationParams()
     {
         return (JDFCoverApplicationParams) appendElement(ElementName.COVERAPPLICATIONPARAMS, null);
     }

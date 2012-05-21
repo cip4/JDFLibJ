@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -145,6 +145,10 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFlushQueueInfo[  --> " + super.toString() + " ]";
@@ -176,6 +180,8 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
 
     /**
      * (29) append element QueueFilter
+     * @return JDFQueueFilter the element
+     * @throws JDFException if the element already exists
      */
     public JDFQueueFilter appendQueueFilter() throws JDFException
     {

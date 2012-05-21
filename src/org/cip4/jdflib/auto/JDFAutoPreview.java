@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,8 +85,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.JDFResource;
@@ -170,6 +168,9 @@ public abstract class JDFAutoPreview extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @return  the string representation
+	 */
 	@Override
 	public String toString()
 	{
@@ -190,26 +191,43 @@ public abstract class JDFAutoPreview extends JDFResource
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
 		public static EnumPreviewUsage getEnum(String enumName)
 		{
 			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumName);
 		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
 		public static EnumPreviewUsage getEnum(int enumValue)
 		{
 			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumValue);
 		}
 
+		/**
+		 * @return the map of enums
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumPreviewUsage.class);
 		}
 
+		/**
+		 * @return the list of enums
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumPreviewUsage.class);
 		}
 
+		/**
+		 * @return the iterator
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumPreviewUsage.class);
@@ -220,50 +238,6 @@ public abstract class JDFAutoPreview extends JDFResource
 		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
 		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
-	}
-
-	/**
-	* Enumeration strings for PartUsage
-	*/
-
-	public static class EnumPartUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumPartUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		public static EnumPartUsage getEnum(String enumName)
-		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumName);
-		}
-
-		public static EnumPartUsage getEnum(int enumValue)
-		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPartUsage.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPartUsage.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumPartUsage.class);
-		}
-
-		public static final EnumPartUsage Explicit = new EnumPartUsage("Explicit");
-		public static final EnumPartUsage Implicit = new EnumPartUsage("Implicit");
-		public static final EnumPartUsage Sparse = new EnumPartUsage("Sparse");
 	}
 
 	/**
@@ -280,26 +254,43 @@ public abstract class JDFAutoPreview extends JDFResource
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
 		public static EnumCompensation getEnum(String enumName)
 		{
 			return (EnumCompensation) getEnum(EnumCompensation.class, enumName);
 		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
 		public static EnumCompensation getEnum(int enumValue)
 		{
 			return (EnumCompensation) getEnum(EnumCompensation.class, enumValue);
 		}
 
+		/**
+		 * @return the map of enums
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumCompensation.class);
 		}
 
+		/**
+		 * @return the list of enums
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumCompensation.class);
 		}
 
+		/**
+		 * @return the iterator
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumCompensation.class);
@@ -322,7 +313,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute PreviewFileType
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setPreviewFileType(String value)
 	{
@@ -343,7 +334,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute PreviewUsage
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
 	{
@@ -364,7 +355,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute URL
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setURL(String value)
 	{
@@ -377,7 +368,29 @@ public abstract class JDFAutoPreview extends JDFResource
 	  */
 	public String getURL()
 	{
-		return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PartUsage
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PartUsage
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPartUsage(EnumPartUsage enumVar)
+	{
+		setAttribute(AttributeName.PARTUSAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute PartUsage
+	  * @return the value of the attribute
+	  */
+	@Override
+	public EnumPartUsage getPartUsage()
+	{
+		return EnumPartUsage.getEnum(getAttribute(AttributeName.PARTUSAGE, null, null));
 	}
 
 	/* ---------------------------------------------------------------------
@@ -385,7 +398,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute Compensation
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setCompensation(EnumCompensation enumVar)
 	{
@@ -406,7 +419,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute CTM
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setCTM(JDFMatrix value)
 	{
@@ -420,17 +433,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	  */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = "";
-		JDFMatrix nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
-		try
-		{
-			nPlaceHolder = new JDFMatrix(strAttrName);
-		}
-		catch (DataFormatException e)
-		{
-			return null;
-		}
+		String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -439,7 +443,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute Directory
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setDirectory(String value)
 	{
@@ -452,7 +456,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	  */
 	public String getDirectory()
 	{
-		return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -460,7 +464,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute MimeTypeDetails
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setMimeTypeDetails(String value)
 	{
@@ -473,7 +477,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	  */
 	public String getMimeTypeDetails()
 	{
-		return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ***********************************************************************
@@ -527,9 +531,10 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (30) append element Comment
+	 * @return JDFComment the element
 	 */
 	@Override
-	public JDFComment appendComment() throws JDFException
+	public JDFComment appendComment()
 	{
 		return (JDFComment) appendElement(ElementName.COMMENT, null);
 	}
@@ -579,9 +584,10 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (30) append element GeneralID
+	 * @return JDFGeneralID the element
 	 */
 	@Override
-	public JDFGeneralID appendGeneralID() throws JDFException
+	public JDFGeneralID appendGeneralID()
 	{
 		return (JDFGeneralID) appendElement(ElementName.GENERALID, null);
 	}

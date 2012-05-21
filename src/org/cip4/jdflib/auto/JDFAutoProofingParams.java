@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -177,12 +176,20 @@ public abstract class JDFAutoProofingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoProofingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -191,6 +198,10 @@ public abstract class JDFAutoProofingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -211,26 +222,43 @@ public abstract class JDFAutoProofingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumProofRenderingIntent getEnum(String enumName)
             {
                 return (EnumProofRenderingIntent) getEnum(EnumProofRenderingIntent.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumProofRenderingIntent getEnum(int enumValue)
             {
                 return (EnumProofRenderingIntent) getEnum(EnumProofRenderingIntent.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumProofRenderingIntent.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumProofRenderingIntent.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumProofRenderingIntent.class);
@@ -258,26 +286,43 @@ public abstract class JDFAutoProofingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumProofType getEnum(String enumName)
             {
                 return (EnumProofType) getEnum(EnumProofType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumProofType getEnum(int enumValue)
             {
                 return (EnumProofType) getEnum(EnumProofType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumProofType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumProofType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumProofType.class);
@@ -304,26 +349,43 @@ public abstract class JDFAutoProofingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumColorType getEnum(String enumName)
             {
                 return (EnumColorType) getEnum(EnumColorType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumColorType getEnum(int enumValue)
             {
                 return (EnumColorType) getEnum(EnumColorType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumColorType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumColorType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumColorType.class);
@@ -346,7 +408,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DisplayTraps
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDisplayTraps(boolean value)
         {
@@ -368,7 +430,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HalfTone
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHalfTone(boolean value)
         {
@@ -390,7 +452,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageViewingStrategy
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageViewingStrategy(String value)
         {
@@ -412,7 +474,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ManualFeed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManualFeed(boolean value)
         {
@@ -434,7 +496,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ProofRenderingIntent
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setProofRenderingIntent(EnumProofRenderingIntent enumVar)
         {
@@ -456,7 +518,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ProofType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setProofType(EnumProofType enumVar)
         {
@@ -478,7 +540,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ColorType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setColorType(EnumColorType enumVar)
         {
@@ -500,7 +562,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Resolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResolution(JDFXYPair value)
         {
@@ -514,17 +576,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
           */
         public JDFXYPair getResolution()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -553,6 +606,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -588,6 +643,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {

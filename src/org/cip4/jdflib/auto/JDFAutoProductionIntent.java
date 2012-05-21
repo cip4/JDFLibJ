@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,6 +153,10 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoProductionIntent[  --> " + super.toString() + " ]";
@@ -184,6 +188,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
     /**
      * (29) append element PrintPreference
+     * @return JDFSpanPrintPreference the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanPrintPreference appendPrintPreference() throws JDFException
     {
@@ -210,6 +216,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
     /**
      * (29) append element PrintProcess
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendPrintProcess() throws JDFException
     {
@@ -260,8 +268,9 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 
     /**
      * (30) append element Resource
+     * @return JDFResource the element
      */
-    public JDFResource appendResource() throws JDFException
+    public JDFResource appendResource()
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }

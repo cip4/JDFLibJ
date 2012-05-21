@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -189,6 +188,10 @@ public abstract class JDFAutoStripMark extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStripMark[  --> " + super.toString() + " ]";
@@ -209,26 +212,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(String enumName)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(int enumValue)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAnchor.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAnchor.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAnchor.class);
@@ -261,26 +281,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumHorizontalFitPolicy getEnum(String enumName)
             {
                 return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumHorizontalFitPolicy getEnum(int enumValue)
             {
                 return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumHorizontalFitPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumHorizontalFitPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumHorizontalFitPolicy.class);
@@ -309,26 +346,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkContext getEnum(String enumName)
             {
                 return (EnumMarkContext) getEnum(EnumMarkContext.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkContext getEnum(int enumValue)
             {
                 return (EnumMarkContext) getEnum(EnumMarkContext.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkContext.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkContext.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkContext.class);
@@ -356,26 +410,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkSide getEnum(String enumName)
             {
                 return (EnumMarkSide) getEnum(EnumMarkSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkSide getEnum(int enumValue)
             {
                 return (EnumMarkSide) getEnum(EnumMarkSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkSide.class);
@@ -403,26 +474,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOrientation getEnum(String enumName)
             {
                 return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOrientation getEnum(int enumValue)
             {
                 return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOrientation.class);
@@ -454,26 +542,43 @@ public abstract class JDFAutoStripMark extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumVerticalFitPolicy getEnum(String enumName)
             {
                 return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumVerticalFitPolicy getEnum(int enumValue)
             {
                 return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumVerticalFitPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumVerticalFitPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumVerticalFitPolicy.class);
@@ -498,7 +603,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AbsoluteHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAbsoluteHeight(double value)
         {
@@ -520,7 +625,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AbsoluteWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAbsoluteWidth(double value)
         {
@@ -542,7 +647,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Anchor
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAnchor(EnumAnchor enumVar)
         {
@@ -564,7 +669,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute HorizontalFitPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
         {
@@ -586,7 +691,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setID(String value)
         {
@@ -599,7 +704,7 @@ public abstract class JDFAutoStripMark extends JDFElement
           */
         public String getID()
         {
-            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -608,7 +713,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkContext
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkContext(EnumMarkContext enumVar)
         {
@@ -630,7 +735,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarkName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarkName(String value)
         {
@@ -643,7 +748,7 @@ public abstract class JDFAutoStripMark extends JDFElement
           */
         public String getMarkName()
         {
-            return getAttribute(AttributeName.MARKNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MARKNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -652,7 +757,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkSide(EnumMarkSide enumVar)
         {
@@ -674,7 +779,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Offset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffset(JDFXYPair value)
         {
@@ -688,17 +793,8 @@ public abstract class JDFAutoStripMark extends JDFElement
           */
         public JDFXYPair getOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.OFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.OFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -708,7 +804,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Ord
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrd(int value)
         {
@@ -730,7 +826,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Orientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOrientation(EnumOrientation enumVar)
         {
@@ -752,7 +848,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeHeight(double value)
         {
@@ -774,7 +870,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeWidth(double value)
         {
@@ -796,7 +892,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StripMarkDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStripMarkDetails(String value)
         {
@@ -809,7 +905,7 @@ public abstract class JDFAutoStripMark extends JDFElement
           */
         public String getStripMarkDetails()
         {
-            return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STRIPMARKDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -818,7 +914,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute VerticalFitPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
         {
@@ -859,6 +955,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 
     /**
      * (29) append element Position
+     * @return JDFPosition the element
+     * @throws JDFException if the element already exists
      */
     public JDFPosition appendPosition() throws JDFException
     {
@@ -885,6 +983,8 @@ public abstract class JDFAutoStripMark extends JDFElement
 
     /**
      * (29) append element JobField
+     * @return JDFJobField the element
+     * @throws JDFException if the element already exists
      */
     public JDFJobField appendJobField() throws JDFException
     {
@@ -944,8 +1044,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 
     /**
      * (30) append element RefAnchor
+     * @return JDFRefAnchor the element
      */
-    public JDFRefAnchor appendRefAnchor() throws JDFException
+    public JDFRefAnchor appendRefAnchor()
     {
         return (JDFRefAnchor) appendElement(ElementName.REFANCHOR, null);
     }

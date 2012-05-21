@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -194,12 +193,20 @@ public abstract class JDFAutoPageList extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageList[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -208,6 +215,10 @@ public abstract class JDFAutoPageList extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -224,7 +235,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Template
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplate(boolean value)
         {
@@ -246,7 +257,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyID(String value)
         {
@@ -259,7 +270,7 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public String getAssemblyID()
         {
-            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -268,7 +279,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyIDs(VString value)
         {
@@ -282,7 +293,7 @@ public abstract class JDFAutoPageList extends JDFResource
         public VString getAssemblyIDs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -293,7 +304,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HasBleeds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHasBleeds(boolean value)
         {
@@ -315,7 +326,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsBlank
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsBlank(boolean value)
         {
@@ -337,7 +348,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsPrintable
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsPrintable(boolean value)
         {
@@ -359,7 +370,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsTrapped
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsTrapped(boolean value)
         {
@@ -381,7 +392,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -394,7 +405,7 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -403,7 +414,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageLabelPrefix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageLabelPrefix(String value)
         {
@@ -416,7 +427,7 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public String getPageLabelPrefix()
         {
-            return getAttribute(AttributeName.PAGELABELPREFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGELABELPREFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -425,7 +436,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageLabelSuffix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageLabelSuffix(String value)
         {
@@ -438,7 +449,7 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public String getPageLabelSuffix()
         {
-            return getAttribute(AttributeName.PAGELABELSUFFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGELABELSUFFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -447,7 +458,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceBleedBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceBleedBox(JDFRectangle value)
         {
@@ -461,17 +472,8 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public JDFRectangle getSourceBleedBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -481,7 +483,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceClipBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceClipBox(JDFRectangle value)
         {
@@ -495,17 +497,8 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public JDFRectangle getSourceClipBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -515,7 +508,7 @@ public abstract class JDFAutoPageList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceTrimBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceTrimBox(JDFRectangle value)
         {
@@ -529,17 +522,8 @@ public abstract class JDFAutoPageList extends JDFResource
           */
         public JDFRectangle getSourceTrimBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -568,6 +552,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element Assembly
+     * @return JDFAssembly the element
+     * @throws JDFException if the element already exists
      */
     public JDFAssembly appendAssembly() throws JDFException
     {
@@ -603,6 +589,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element ColorPool
+     * @return JDFColorPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
@@ -638,6 +626,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element ContentList
+     * @return JDFContentList the element
+     * @throws JDFException if the element already exists
      */
     public JDFContentList appendContentList() throws JDFException
     {
@@ -673,6 +663,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element ImageCompressionParams
+     * @return JDFImageCompressionParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
     {
@@ -732,8 +724,9 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (30) append element PageData
+     * @return JDFPageData the element
      */
-    public JDFPageData appendPageData() throws JDFException
+    public JDFPageData appendPageData()
     {
         return (JDFPageData) appendElement(ElementName.PAGEDATA, null);
     }
@@ -758,6 +751,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element ScreeningParams
+     * @return JDFScreeningParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
@@ -817,8 +812,9 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (30) append element SeparationSpec
+     * @return JDFSeparationSpec the element
      */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    public JDFSeparationSpec appendSeparationSpec()
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }
@@ -843,6 +839,8 @@ public abstract class JDFAutoPageList extends JDFResource
 
     /**
      * (29) append element ElementColorParams
+     * @return JDFElementColorParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFElementColorParams appendElementColorParams() throws JDFException
     {

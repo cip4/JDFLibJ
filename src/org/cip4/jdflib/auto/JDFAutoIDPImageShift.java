@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -155,6 +155,10 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPImageShift[  --> " + super.toString() + " ]";
@@ -175,26 +179,43 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPositionX getEnum(String enumName)
             {
                 return (EnumPositionX) getEnum(EnumPositionX.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPositionX getEnum(int enumValue)
             {
                 return (EnumPositionX) getEnum(EnumPositionX.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPositionX.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPositionX.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPositionX.class);
@@ -222,26 +243,43 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPositionY getEnum(String enumName)
             {
                 return (EnumPositionY) getEnum(EnumPositionY.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPositionY getEnum(int enumValue)
             {
                 return (EnumPositionY) getEnum(EnumPositionY.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPositionY.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPositionY.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPositionY.class);
@@ -265,7 +303,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PositionX
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPositionX(EnumPositionX enumVar)
         {
@@ -287,7 +325,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PositionY
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPositionY(EnumPositionY enumVar)
         {
@@ -309,7 +347,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftX
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftX(int value)
         {
@@ -331,7 +369,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftY(int value)
         {
@@ -353,7 +391,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftXSide1
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftXSide1(int value)
         {
@@ -375,7 +413,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftXSide2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftXSide2(int value)
         {
@@ -397,7 +435,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftYSide1
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftYSide1(int value)
         {
@@ -419,7 +457,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShiftYSide2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShiftYSide2(int value)
         {

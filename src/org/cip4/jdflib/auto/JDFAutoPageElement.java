@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -153,6 +151,10 @@ public abstract class JDFAutoPageElement extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageElement[  --> " + super.toString() + " ]";
@@ -169,7 +171,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContentDataRefs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContentDataRefs(VString value)
         {
@@ -183,7 +185,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         public VString getContentDataRefs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -194,7 +196,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContentListIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContentListIndex(int value)
         {
@@ -216,7 +218,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ElementPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setElementPages(JDFIntegerRangeList value)
         {
@@ -230,17 +232,8 @@ public abstract class JDFAutoPageElement extends JDFElement
           */
         public JDFIntegerRangeList getElementPages()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -250,7 +243,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContentType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContentType(String value)
         {
@@ -263,7 +256,7 @@ public abstract class JDFAutoPageElement extends JDFElement
           */
         public String getContentType()
         {
-            return getAttribute(AttributeName.CONTENTTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CONTENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -272,7 +265,7 @@ public abstract class JDFAutoPageElement extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeBox(JDFRectangle value)
         {
@@ -286,17 +279,8 @@ public abstract class JDFAutoPageElement extends JDFElement
           */
         public JDFRectangle getRelativeBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 

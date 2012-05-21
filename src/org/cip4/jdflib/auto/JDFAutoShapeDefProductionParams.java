@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,12 +151,20 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShapeDefProductionParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -165,6 +173,10 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -220,8 +232,9 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 
     /**
      * (30) append element ObjectModel
+     * @return JDFObjectModel the element
      */
-    public JDFObjectModel appendObjectModel() throws JDFException
+    public JDFObjectModel appendObjectModel()
     {
         return (JDFObjectModel) appendElement(ElementName.OBJECTMODEL, null);
     }
@@ -246,6 +259,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 
     /**
      * (29) append element ShapeTemplate
+     * @return JDFShapeTemplate the element
+     * @throws JDFException if the element already exists
      */
     public JDFShapeTemplate appendShapeTemplate() throws JDFException
     {

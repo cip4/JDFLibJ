@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
@@ -165,6 +165,10 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
@@ -181,7 +185,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setID(String value)
         {
@@ -194,7 +198,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
           */
         public String getID()
         {
-            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -222,6 +226,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
     /**
      * (29) append element BarcodeProductionParams
+     * @return JDFBarcodeProductionParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
     {
@@ -248,6 +254,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
     /**
      * (29) append element LayoutElement
+     * @return JDFLayoutElement the element
+     * @throws JDFException if the element already exists
      */
     public JDFLayoutElement appendLayoutElement() throws JDFException
     {
@@ -283,6 +291,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 
     /**
      * (29) append element PositionObj
+     * @return JDFPositionObj the element
+     * @throws JDFException if the element already exists
      */
     public JDFPositionObj appendPositionObj() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -157,12 +156,20 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoSideSewingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -171,6 +178,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -191,26 +202,43 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSewingPattern getEnum(String enumName)
             {
                 return (EnumSewingPattern) getEnum(EnumSewingPattern.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSewingPattern getEnum(int enumValue)
             {
                 return (EnumSewingPattern) getEnum(EnumSewingPattern.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSewingPattern.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSewingPattern.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSewingPattern.class);
@@ -237,26 +265,43 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumThreadMaterial getEnum(String enumName)
             {
                 return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumThreadMaterial getEnum(int enumValue)
             {
                 return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumThreadMaterial.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumThreadMaterial.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumThreadMaterial.class);
@@ -279,7 +324,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberOfNeedles
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberOfNeedles(int value)
         {
@@ -301,7 +346,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Offset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffset(double value)
         {
@@ -323,7 +368,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NeedlePositions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNeedlePositions(JDFNumberList value)
         {
@@ -337,17 +382,8 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
           */
         public JDFNumberList getNeedlePositions()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -357,7 +393,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SewingPattern
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSewingPattern(EnumSewingPattern enumVar)
         {
@@ -379,7 +415,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ThreadMaterial
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setThreadMaterial(EnumThreadMaterial enumVar)
         {
@@ -401,7 +437,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ThreadThickness
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThreadThickness(double value)
         {
@@ -423,7 +459,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ThreadBrand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThreadBrand(String value)
         {
@@ -436,7 +472,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
           */
         public String getThreadBrand()
         {
-            return getAttribute(AttributeName.THREADBRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.THREADBRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

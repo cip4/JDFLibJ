@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
     /**
     *****************************************************************************
@@ -167,6 +166,10 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPreflightConstraint[  --> " + super.toString() + " ]";
@@ -183,7 +186,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AttemptFixupErrors
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAttemptFixupErrors(boolean value)
         {
@@ -205,7 +208,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AttemptFixupWarnings
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAttemptFixupWarnings(boolean value)
         {
@@ -227,7 +230,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Constraint
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setConstraint(String value)
         {
@@ -240,7 +243,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
           */
         public String getConstraint()
         {
-            return getAttribute(AttributeName.CONSTRAINT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CONSTRAINT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -292,8 +295,9 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 
     /**
      * (30) append element ConstraintValue
+     * @return JDFElement the element
      */
-    public JDFElement appendConstraintValue() throws JDFException
+    public JDFElement appendConstraintValue()
     {
         return (JDFElement) appendElement(ElementName.CONSTRAINTVALUE, null);
     }

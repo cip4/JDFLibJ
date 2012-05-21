@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -156,12 +155,20 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoThreadSealingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -170,6 +177,10 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -190,26 +201,43 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumThreadMaterial getEnum(String enumName)
             {
                 return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumThreadMaterial getEnum(int enumValue)
             {
                 return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumThreadMaterial.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumThreadMaterial.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumThreadMaterial.class);
@@ -232,7 +260,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BlindStitch
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlindStitch(boolean value)
         {
@@ -254,7 +282,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ThreadMaterial
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setThreadMaterial(EnumThreadMaterial enumVar)
         {
@@ -276,7 +304,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ThreadPositions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThreadPositions(JDFNumberList value)
         {
@@ -290,17 +318,8 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
           */
         public JDFNumberList getThreadPositions()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -310,7 +329,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ThreadLength
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThreadLength(double value)
         {
@@ -332,7 +351,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ThreadStitchWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThreadStitchWidth(double value)
         {
@@ -354,7 +373,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SealingTemperature
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSealingTemperature(int value)
         {

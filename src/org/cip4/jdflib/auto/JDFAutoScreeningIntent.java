@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -150,6 +150,10 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoScreeningIntent[  --> " + super.toString() + " ]";
@@ -181,6 +185,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
     /**
      * (29) append element DotSize
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendDotSize() throws JDFException
     {
@@ -207,6 +213,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
     /**
      * (29) append element Frequency
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendFrequency() throws JDFException
     {
@@ -233,6 +241,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
     /**
      * (29) append element FrequencySelection
+     * @return JDFSpanFrequencySelection the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanFrequencySelection appendFrequencySelection() throws JDFException
     {
@@ -259,6 +269,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 
     /**
      * (29) append element ScreeningType
+     * @return JDFSpanScreeningType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanScreeningType appendScreeningType() throws JDFException
     {

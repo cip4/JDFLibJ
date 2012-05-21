@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,7 +83,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -171,6 +170,10 @@ public abstract class JDFAutoIcon extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIcon[  --> " + super.toString() + " ]";
@@ -191,26 +194,43 @@ public abstract class JDFAutoIcon extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIconUsage getEnum(String enumName)
             {
                 return (EnumIconUsage) getEnum(EnumIconUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIconUsage getEnum(int enumValue)
             {
                 return (EnumIconUsage) getEnum(EnumIconUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIconUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIconUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIconUsage.class);
@@ -237,7 +257,7 @@ public abstract class JDFAutoIcon extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Size
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSize(JDFXYPair value)
         {
@@ -251,17 +271,8 @@ public abstract class JDFAutoIcon extends JDFElement
           */
         public JDFXYPair getSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -271,7 +282,7 @@ public abstract class JDFAutoIcon extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BitDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBitDepth(int value)
         {
@@ -334,6 +345,8 @@ public abstract class JDFAutoIcon extends JDFElement
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {

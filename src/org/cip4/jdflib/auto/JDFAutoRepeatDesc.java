@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
     /**
@@ -157,6 +157,10 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRepeatDesc[  --> " + super.toString() + " ]";
@@ -177,26 +181,43 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAllowedRotate getEnum(String enumName)
             {
                 return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAllowedRotate getEnum(int enumValue)
             {
                 return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAllowedRotate.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAllowedRotate.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAllowedRotate.class);
@@ -220,7 +241,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute AllowedRotate
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAllowedRotate(EnumAllowedRotate enumVar)
         {
@@ -242,7 +263,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GutterX
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGutterX(double value)
         {
@@ -264,7 +285,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GutterX2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGutterX2(double value)
         {
@@ -286,7 +307,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GutterY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGutterY(double value)
         {
@@ -308,7 +329,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GutterY2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGutterY2(double value)
         {
@@ -330,7 +351,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LayoutStyle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayoutStyle(VString value)
         {
@@ -344,7 +365,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         public VString getLayoutStyle()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -355,7 +376,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OrderQuantity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrderQuantity(int value)
         {
@@ -377,7 +398,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UseBleeds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUseBleeds(boolean value)
         {

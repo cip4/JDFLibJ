@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -148,6 +148,10 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoChangedAttribute[  --> " + super.toString() + " ]";
@@ -164,7 +168,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AttributeName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAttributeName(String value)
         {
@@ -177,7 +181,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
           */
         public String getAttributeName()
         {
-            return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -186,7 +190,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ElementID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setElementID(String value)
         {
@@ -199,7 +203,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
           */
         public String getElementID()
         {
-            return getAttribute(AttributeName.ELEMENTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -208,7 +212,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ElementType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setElementType(String value)
         {
@@ -221,7 +225,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
           */
         public String getElementType()
         {
-            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -230,7 +234,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OldValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOldValue(String value)
         {
@@ -243,7 +247,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
           */
         public String getOldValue()
         {
-            return getAttribute(AttributeName.OLDVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -252,7 +256,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NewValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNewValue(String value)
         {
@@ -265,7 +269,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
           */
         public String getNewValue()
         {
-            return getAttribute(AttributeName.NEWVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

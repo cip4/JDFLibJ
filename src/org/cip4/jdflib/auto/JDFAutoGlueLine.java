@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -160,12 +159,20 @@ public abstract class JDFAutoGlueLine extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoGlueLine[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -174,6 +181,10 @@ public abstract class JDFAutoGlueLine extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -194,26 +205,43 @@ public abstract class JDFAutoGlueLine extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumGlueType getEnum(String enumName)
             {
                 return (EnumGlueType) getEnum(EnumGlueType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumGlueType getEnum(int enumValue)
             {
                 return (EnumGlueType) getEnum(EnumGlueType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumGlueType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumGlueType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumGlueType.class);
@@ -236,7 +264,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AreaGlue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAreaGlue(boolean value)
         {
@@ -258,7 +286,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GlueBrand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGlueBrand(String value)
         {
@@ -271,7 +299,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public String getGlueBrand()
         {
-            return getAttribute(AttributeName.GLUEBRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.GLUEBRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -280,7 +308,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GlueLineWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGlueLineWidth(double value)
         {
@@ -302,7 +330,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GluingPattern
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGluingPattern(JDFXYPair value)
         {
@@ -316,17 +344,8 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public JDFXYPair getGluingPattern()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -336,7 +355,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute GlueType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setGlueType(EnumGlueType enumVar)
         {
@@ -358,7 +377,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MeltingTemperature
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMeltingTemperature(int value)
         {
@@ -380,7 +399,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeStartPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeStartPosition(JDFXYPair value)
         {
@@ -394,17 +413,8 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public JDFXYPair getRelativeStartPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -414,7 +424,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeWorkingPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeWorkingPath(JDFXYPair value)
         {
@@ -428,17 +438,8 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public JDFXYPair getRelativeWorkingPath()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -448,7 +449,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StartPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStartPosition(JDFXYPair value)
         {
@@ -462,17 +463,8 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public JDFXYPair getStartPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STARTPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -482,7 +474,7 @@ public abstract class JDFAutoGlueLine extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WorkingPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWorkingPath(JDFXYPair value)
         {
@@ -496,17 +488,8 @@ public abstract class JDFAutoGlueLine extends JDFResource
           */
         public JDFXYPair getWorkingPath()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WORKINGPATH, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 

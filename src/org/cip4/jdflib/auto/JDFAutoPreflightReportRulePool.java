@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -166,12 +166,20 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPreflightReportRulePool[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -180,6 +188,10 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -196,7 +208,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxOccurrences
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxOccurrences(int value)
         {
@@ -261,8 +273,9 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 
     /**
      * (30) append element PRRule
+     * @return JDFPRRule the element
      */
-    public JDFPRRule appendPRRule() throws JDFException
+    public JDFPRRule appendPRRule()
     {
         return (JDFPRRule) appendElement(ElementName.PRRULE, null);
     }
@@ -287,6 +300,8 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 
     /**
      * (29) append element PRRuleAttr
+     * @return JDFPRRuleAttr the element
+     * @throws JDFException if the element already exists
      */
     public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
     {

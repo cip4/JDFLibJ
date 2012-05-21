@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
     /**
@@ -175,6 +174,10 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStatusQuParams[  --> " + super.toString() + " ]";
@@ -195,26 +198,43 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDeviceDetails getEnum(String enumName)
             {
                 return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDeviceDetails getEnum(int enumValue)
             {
                 return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDeviceDetails.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDeviceDetails.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDeviceDetails.class);
@@ -244,26 +264,43 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumJobDetails getEnum(String enumName)
             {
                 return (EnumJobDetails) getEnum(EnumJobDetails.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumJobDetails getEnum(int enumValue)
             {
                 return (EnumJobDetails) getEnum(EnumJobDetails.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumJobDetails.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumJobDetails.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumJobDetails.class);
@@ -287,7 +324,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DeviceDetails
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDeviceDetails(EnumDeviceDetails enumVar)
         {
@@ -309,7 +346,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EmployeeInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEmployeeInfo(boolean value)
         {
@@ -331,7 +368,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute JobDetails
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setJobDetails(EnumJobDetails enumVar)
         {
@@ -353,7 +390,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -366,7 +403,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -375,7 +412,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -388,7 +425,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -397,7 +434,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueEntryID(String value)
         {
@@ -410,7 +447,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
           */
         public String getQueueEntryID()
         {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -419,7 +456,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueInfo
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueInfo(boolean value)
         {
@@ -484,8 +521,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

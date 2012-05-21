@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFBoxArgument;
 import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
@@ -151,6 +150,10 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPreflightArgument[  --> " + super.toString() + " ]";
@@ -206,8 +209,9 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 
     /**
      * (30) append element BoxArgument
+     * @return JDFBoxArgument the element
      */
-    public JDFBoxArgument appendBoxArgument() throws JDFException
+    public JDFBoxArgument appendBoxArgument()
     {
         return (JDFBoxArgument) appendElement(ElementName.BOXARGUMENT, null);
     }
@@ -256,8 +260,9 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 
     /**
      * (30) append element BoxToBoxDifference
+     * @return JDFBoxToBoxDifference the element
      */
-    public JDFBoxToBoxDifference appendBoxToBoxDifference() throws JDFException
+    public JDFBoxToBoxDifference appendBoxToBoxDifference()
     {
         return (JDFBoxToBoxDifference) appendElement(ElementName.BOXTOBOXDIFFERENCE, null);
     }

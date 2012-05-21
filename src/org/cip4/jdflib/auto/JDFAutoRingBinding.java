@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -157,6 +157,10 @@ public abstract class JDFAutoRingBinding extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRingBinding[  --> " + super.toString() + " ]";
@@ -188,6 +192,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element BinderBrand
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendBinderBrand() throws JDFException
     {
@@ -214,6 +220,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element BinderMaterial
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendBinderMaterial() throws JDFException
     {
@@ -240,6 +248,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element HoleType
+     * @return JDFSpanHoleType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanHoleType appendHoleType() throws JDFException
     {
@@ -266,6 +276,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element RingDiameter
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendRingDiameter() throws JDFException
     {
@@ -292,6 +304,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element RingMechanic
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendRingMechanic() throws JDFException
     {
@@ -318,6 +332,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element RingShape
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendRingShape() throws JDFException
     {
@@ -344,6 +360,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element RingSystem
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendRingSystem() throws JDFException
     {
@@ -370,6 +388,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element RivetsExposed
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendRivetsExposed() throws JDFException
     {
@@ -396,6 +416,8 @@ public abstract class JDFAutoRingBinding extends JDFElement
 
     /**
      * (29) append element ViewBinder
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendViewBinder() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -176,12 +176,20 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRenderingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -190,6 +198,10 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -210,26 +222,43 @@ public abstract class JDFAutoRenderingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBandOrdering getEnum(String enumName)
             {
                 return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBandOrdering getEnum(int enumValue)
             {
                 return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBandOrdering.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBandOrdering.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBandOrdering.class);
@@ -251,7 +280,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BandHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBandHeight(int value)
         {
@@ -273,7 +302,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BandOrdering
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBandOrdering(EnumBandOrdering enumVar)
         {
@@ -295,7 +324,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BandWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBandWidth(int value)
         {
@@ -317,7 +346,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ColorantDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColorantDepth(int value)
         {
@@ -339,7 +368,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Interleaved
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInterleaved(boolean value)
         {
@@ -380,6 +409,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
     /**
      * (29) append element AutomatedOverPrintParams
+     * @return JDFAutomatedOverPrintParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
@@ -439,8 +470,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
     /**
      * (30) append element ObjectResolution
+     * @return JDFObjectResolution the element
      */
-    public JDFObjectResolution appendObjectResolution() throws JDFException
+    public JDFObjectResolution appendObjectResolution()
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -474,6 +506,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {

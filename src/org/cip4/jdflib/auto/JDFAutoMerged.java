@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,8 +81,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
@@ -173,6 +172,10 @@ public abstract class JDFAutoMerged extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMerged[  --> " + super.toString() + " ]";
@@ -189,7 +192,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Independent
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIndependent(boolean value)
         {
@@ -211,7 +214,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute jRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setjRef(String value)
         {
@@ -224,7 +227,7 @@ public abstract class JDFAutoMerged extends JDFAudit
           */
         public String getjRef()
         {
-            return getAttribute(AttributeName.JREF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JREF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -233,7 +236,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute jRefSource
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setjRefSource(String value)
         {
@@ -246,7 +249,7 @@ public abstract class JDFAutoMerged extends JDFAudit
           */
         public String getjRefSource()
         {
-            return getAttribute(AttributeName.JREFSOURCE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JREFSOURCE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -255,7 +258,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MergeID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMergeID(String value)
         {
@@ -268,7 +271,7 @@ public abstract class JDFAutoMerged extends JDFAudit
           */
         public String getMergeID()
         {
-            return getAttribute(AttributeName.MERGEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MERGEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -277,7 +280,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute rRefsOverwritten
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrRefsOverwritten(VString value)
         {
@@ -291,7 +294,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         public VString getrRefsOverwritten()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -302,7 +305,7 @@ public abstract class JDFAutoMerged extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURL(String value)
         {
@@ -315,7 +318,7 @@ public abstract class JDFAutoMerged extends JDFAudit
           */
         public String getURL()
         {
-            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -367,8 +370,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -417,8 +421,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

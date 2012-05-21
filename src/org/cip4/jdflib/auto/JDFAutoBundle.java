@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFResource;
@@ -175,12 +174,20 @@ public abstract class JDFAutoBundle extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBundle[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -189,6 +196,10 @@ public abstract class JDFAutoBundle extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Quantity;
@@ -209,26 +220,43 @@ public abstract class JDFAutoBundle extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBundleType getEnum(String enumName)
             {
                 return (EnumBundleType) getEnum(EnumBundleType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBundleType getEnum(int enumValue)
             {
                 return (EnumBundleType) getEnum(EnumBundleType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBundleType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBundleType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBundleType.class);
@@ -260,7 +288,7 @@ public abstract class JDFAutoBundle extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BundleType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBundleType(EnumBundleType enumVar)
         {
@@ -282,7 +310,7 @@ public abstract class JDFAutoBundle extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FolioCount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFolioCount(int value)
         {
@@ -304,7 +332,7 @@ public abstract class JDFAutoBundle extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReaderPageCount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReaderPageCount(int value)
         {
@@ -326,7 +354,7 @@ public abstract class JDFAutoBundle extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TotalAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTotalAmount(int value)
         {
@@ -391,8 +419,9 @@ public abstract class JDFAutoBundle extends JDFResource
 
     /**
      * (30) append element BundleItem
+     * @return JDFBundleItem the element
      */
-    public JDFBundleItem appendBundleItem() throws JDFException
+    public JDFBundleItem appendBundleItem()
     {
         return (JDFBundleItem) appendElement(ElementName.BUNDLEITEM, null);
     }
@@ -441,8 +470,9 @@ public abstract class JDFAutoBundle extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -500,8 +530,9 @@ public abstract class JDFAutoBundle extends JDFResource
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
@@ -203,6 +203,10 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMediaIntent[  --> " + super.toString() + " ]";
@@ -219,7 +223,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PrePrinted
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPrePrinted(boolean value)
         {
@@ -241,7 +245,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MediaSetCount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMediaSetCount(int value)
         {
@@ -263,7 +267,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UserMediaType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUserMediaType(String value)
         {
@@ -276,7 +280,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
           */
         public String getUserMediaType()
         {
-            return getAttribute(AttributeName.USERMEDIATYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -304,6 +308,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element BackCoatings
+     * @return JDFSpanCoatings the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanCoatings appendBackCoatings() throws JDFException
     {
@@ -330,6 +336,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Brightness
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendBrightness() throws JDFException
     {
@@ -356,6 +364,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element BuyerSupplied
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendBuyerSupplied() throws JDFException
     {
@@ -382,6 +392,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Dimensions
+     * @return JDFXYPairSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFXYPairSpan appendDimensions() throws JDFException
     {
@@ -408,6 +420,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Flute
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendFlute() throws JDFException
     {
@@ -434,6 +448,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element FluteDirection
+     * @return JDFSpanFluteDirection the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanFluteDirection appendFluteDirection() throws JDFException
     {
@@ -460,6 +476,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element FrontCoatings
+     * @return JDFSpanCoatings the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanCoatings appendFrontCoatings() throws JDFException
     {
@@ -486,6 +504,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Grade
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendGrade() throws JDFException
     {
@@ -512,6 +532,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element GrainDirection
+     * @return JDFSpanGrainDirection the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanGrainDirection appendGrainDirection() throws JDFException
     {
@@ -538,6 +560,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element HoleCount
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendHoleCount() throws JDFException
     {
@@ -564,6 +588,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element HoleType
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendHoleType() throws JDFException
     {
@@ -590,6 +616,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaColor
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendMediaColor() throws JDFException
     {
@@ -616,6 +644,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaColorDetails
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendMediaColorDetails() throws JDFException
     {
@@ -642,6 +672,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaQuality
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendMediaQuality() throws JDFException
     {
@@ -668,6 +700,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaType
+     * @return JDFSpanMediaType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanMediaType appendMediaType() throws JDFException
     {
@@ -694,6 +728,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaTypeDetails
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendMediaTypeDetails() throws JDFException
     {
@@ -720,6 +756,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaUnit
+     * @return JDFSpanMediaUnit the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanMediaUnit appendMediaUnit() throws JDFException
     {
@@ -746,6 +784,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Opacity
+     * @return JDFSpanOpacity the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanOpacity appendOpacity() throws JDFException
     {
@@ -772,6 +812,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element OpacityLevel
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendOpacityLevel() throws JDFException
     {
@@ -798,6 +840,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Recycled
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendRecycled() throws JDFException
     {
@@ -824,6 +868,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element RecycledPercentage
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendRecycledPercentage() throws JDFException
     {
@@ -850,6 +896,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element StockBrand
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendStockBrand() throws JDFException
     {
@@ -876,6 +924,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element StockType
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendStockType() throws JDFException
     {
@@ -902,6 +952,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Texture
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendTexture() throws JDFException
     {
@@ -928,6 +980,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Thickness
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
@@ -954,6 +1008,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element USWeight
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendUSWeight() throws JDFException
     {
@@ -980,6 +1036,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element Weight
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendWeight() throws JDFException
     {
@@ -1006,6 +1064,8 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 
     /**
      * (29) append element MediaLayers
+     * @return JDFMediaLayers the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaLayers appendMediaLayers() throws JDFException
     {

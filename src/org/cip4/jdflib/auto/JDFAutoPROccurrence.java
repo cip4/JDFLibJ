@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
     /**
@@ -164,6 +163,10 @@ public abstract class JDFAutoPROccurrence extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPROccurrence[  --> " + super.toString() + " ]";
@@ -180,7 +183,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Occurrences
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOccurrences(int value)
         {
@@ -245,8 +248,9 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 
     /**
      * (30) append element PRGroup
+     * @return JDFPRGroup the element
      */
-    public JDFPRGroup appendPRGroup() throws JDFException
+    public JDFPRGroup appendPRGroup()
     {
         return (JDFPRGroup) appendElement(ElementName.PRGROUP, null);
     }

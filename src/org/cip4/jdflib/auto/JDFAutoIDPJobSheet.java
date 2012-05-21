@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
@@ -176,6 +175,10 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPJobSheet[  --> " + super.toString() + " ]";
@@ -196,26 +199,43 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetOccurrence getEnum(String enumName)
             {
                 return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetOccurrence getEnum(int enumValue)
             {
                 return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetOccurrence.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetOccurrence.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetOccurrence.class);
@@ -246,26 +266,43 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetType getEnum(String enumName)
             {
                 return (EnumSheetType) getEnum(EnumSheetType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetType getEnum(int enumValue)
             {
                 return (EnumSheetType) getEnum(EnumSheetType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetType.class);
@@ -289,7 +326,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetFormat(String value)
         {
@@ -311,7 +348,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetOccurrence
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetOccurrence(EnumSheetOccurrence enumVar)
         {
@@ -333,7 +370,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetType(EnumSheetType enumVar)
         {
@@ -398,8 +435,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
     /**
      * (30) append element IDPFinishing
+     * @return JDFIDPFinishing the element
      */
-    public JDFIDPFinishing appendIDPFinishing() throws JDFException
+    public JDFIDPFinishing appendIDPFinishing()
     {
         return (JDFIDPFinishing) appendElement(ElementName.IDPFINISHING, null);
     }
@@ -448,8 +486,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
     /**
      * (30) append element IDPLayout
+     * @return JDFIDPLayout the element
      */
-    public JDFIDPLayout appendIDPLayout() throws JDFException
+    public JDFIDPLayout appendIDPLayout()
     {
         return (JDFIDPLayout) appendElement(ElementName.IDPLAYOUT, null);
     }
@@ -498,8 +537,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
     /**
      * (30) append element MediaIntent
+     * @return JDFMediaIntent the element
      */
-    public JDFMediaIntent appendMediaIntent() throws JDFException
+    public JDFMediaIntent appendMediaIntent()
     {
         return (JDFMediaIntent) appendElement(ElementName.MEDIAINTENT, null);
     }
@@ -557,8 +597,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
     /**
      * (30) append element MediaSource
+     * @return JDFMediaSource the element
      */
-    public JDFMediaSource appendMediaSource() throws JDFException
+    public JDFMediaSource appendMediaSource()
     {
         return (JDFMediaSource) appendElement(ElementName.MEDIASOURCE, null);
     }

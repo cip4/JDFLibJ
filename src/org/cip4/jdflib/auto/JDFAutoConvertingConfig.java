@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -172,6 +170,10 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoConvertingConfig[  --> " + super.toString() + " ]";
@@ -188,7 +190,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarginBottom
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarginBottom(double value)
         {
@@ -210,7 +212,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarginLeft
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarginLeft(double value)
         {
@@ -232,7 +234,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarginRight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarginRight(double value)
         {
@@ -254,7 +256,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarginTop
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarginTop(double value)
         {
@@ -276,7 +278,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetHeight(JDFNumberRange value)
         {
@@ -290,17 +292,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
           */
         public JDFNumberRange getSheetHeight()
         {
-            String strAttrName = "";
-            JDFNumberRange nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberRange(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
             return nPlaceHolder;
         }
 
@@ -310,7 +303,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetWidth(JDFNumberRange value)
         {
@@ -324,17 +317,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
           */
         public JDFNumberRange getSheetWidth()
         {
-            String strAttrName = "";
-            JDFNumberRange nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberRange(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
             return nPlaceHolder;
         }
 
@@ -387,8 +371,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 
     /**
      * (30) append element Device
+     * @return JDFDevice the element
      */
-    public JDFDevice appendDevice() throws JDFException
+    public JDFDevice appendDevice()
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }

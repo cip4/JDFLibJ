@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.JDFBundle;
@@ -195,6 +193,10 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDropItem[  --> " + super.toString() + " ]";
@@ -211,7 +213,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ActualAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setActualAmount(int value)
         {
@@ -233,7 +235,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ActualTotalAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setActualTotalAmount(int value)
         {
@@ -255,7 +257,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Amount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAmount(int value)
         {
@@ -277,7 +279,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TotalAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTotalAmount(int value)
         {
@@ -299,7 +301,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TotalDimensions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTotalDimensions(JDFShape value)
         {
@@ -313,17 +315,8 @@ public abstract class JDFAutoDropItem extends JDFElement
           */
         public JDFShape getTotalDimensions()
         {
-            String strAttrName = "";
-            JDFShape nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFShape(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
             return nPlaceHolder;
         }
 
@@ -333,7 +326,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TotalVolume
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTotalVolume(double value)
         {
@@ -355,7 +348,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TotalWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTotalWeight(double value)
         {
@@ -377,7 +370,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrackingID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrackingID(String value)
         {
@@ -390,7 +383,7 @@ public abstract class JDFAutoDropItem extends JDFElement
           */
         public String getTrackingID()
         {
-            return getAttribute(AttributeName.TRACKINGID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TRACKINGID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -399,7 +392,7 @@ public abstract class JDFAutoDropItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Unit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUnit(String value)
         {
@@ -412,7 +405,7 @@ public abstract class JDFAutoDropItem extends JDFElement
           */
         public String getUnit()
         {
-            return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -464,8 +457,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Component
+     * @return JDFComponent the element
      */
-    public JDFComponent appendComponent() throws JDFException
+    public JDFComponent appendComponent()
     {
         return (JDFComponent) appendElement(ElementName.COMPONENT, null);
     }
@@ -523,8 +517,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element ExposedMedia
+     * @return JDFExposedMedia the element
      */
-    public JDFExposedMedia appendExposedMedia() throws JDFException
+    public JDFExposedMedia appendExposedMedia()
     {
         return (JDFExposedMedia) appendElement(ElementName.EXPOSEDMEDIA, null);
     }
@@ -582,8 +577,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Ink
+     * @return JDFInk the element
      */
-    public JDFInk appendInk() throws JDFException
+    public JDFInk appendInk()
     {
         return (JDFInk) appendElement(ElementName.INK, null);
     }
@@ -641,8 +637,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Media
+     * @return JDFMedia the element
      */
-    public JDFMedia appendMedia() throws JDFException
+    public JDFMedia appendMedia()
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -700,8 +697,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Pallet
+     * @return JDFPallet the element
      */
-    public JDFPallet appendPallet() throws JDFException
+    public JDFPallet appendPallet()
     {
         return (JDFPallet) appendElement(ElementName.PALLET, null);
     }
@@ -759,8 +757,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element RegisterRibbon
+     * @return JDFRegisterRibbon the element
      */
-    public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
+    public JDFRegisterRibbon appendRegisterRibbon()
     {
         return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
     }
@@ -818,8 +817,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Strap
+     * @return JDFStrap the element
      */
-    public JDFStrap appendStrap() throws JDFException
+    public JDFStrap appendStrap()
     {
         return (JDFStrap) appendElement(ElementName.STRAP, null);
     }
@@ -877,8 +877,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Bundle
+     * @return JDFBundle the element
      */
-    public JDFBundle appendBundle() throws JDFException
+    public JDFBundle appendBundle()
     {
         return (JDFBundle) appendElement(ElementName.BUNDLE, null);
     }
@@ -936,8 +937,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element DigitalMedia
+     * @return JDFDigitalMedia the element
      */
-    public JDFDigitalMedia appendDigitalMedia() throws JDFException
+    public JDFDigitalMedia appendDigitalMedia()
     {
         return (JDFDigitalMedia) appendElement(ElementName.DIGITALMEDIA, null);
     }
@@ -995,8 +997,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element RollStand
+     * @return JDFRollStand the element
      */
-    public JDFRollStand appendRollStand() throws JDFException
+    public JDFRollStand appendRollStand()
     {
         return (JDFRollStand) appendElement(ElementName.ROLLSTAND, null);
     }
@@ -1054,8 +1057,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 
     /**
      * (30) append element Tool
+     * @return JDFTool the element
      */
-    public JDFTool appendTool() throws JDFException
+    public JDFTool appendTool()
     {
         return (JDFTool) appendElement(ElementName.TOOL, null);
     }

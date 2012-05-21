@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,7 +76,7 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerMessage;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -139,12 +139,20 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCustomerInfo[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -153,6 +161,10 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -169,7 +181,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BillingCode
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBillingCode(String value)
         {
@@ -182,7 +194,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
           */
         public String getBillingCode()
         {
-            return getAttribute(AttributeName.BILLINGCODE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BILLINGCODE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -191,7 +203,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CustomerID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCustomerID(String value)
         {
@@ -204,7 +216,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
           */
         public String getCustomerID()
         {
-            return getAttribute(AttributeName.CUSTOMERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CUSTOMERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -213,7 +225,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CustomerJobName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCustomerJobName(String value)
         {
@@ -226,7 +238,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
           */
         public String getCustomerJobName()
         {
-            return getAttribute(AttributeName.CUSTOMERJOBNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CUSTOMERJOBNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -235,7 +247,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CustomerOrderID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCustomerOrderID(String value)
         {
@@ -248,7 +260,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
           */
         public String getCustomerOrderID()
         {
-            return getAttribute(AttributeName.CUSTOMERORDERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CUSTOMERORDERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -257,7 +269,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CustomerProjectID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCustomerProjectID(String value)
         {
@@ -270,7 +282,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
           */
         public String getCustomerProjectID()
         {
-            return getAttribute(AttributeName.CUSTOMERPROJECTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CUSTOMERPROJECTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -298,6 +310,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
     /**
      * (29) append element Company
+     * @return JDFCompany the element
+     * @throws JDFException if the element already exists
      */
     public JDFCompany appendCompany() throws JDFException
     {
@@ -357,8 +371,9 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -416,8 +431,9 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 
     /**
      * (30) append element CustomerMessage
+     * @return JDFCustomerMessage the element
      */
-    public JDFCustomerMessage appendCustomerMessage() throws JDFException
+    public JDFCustomerMessage appendCustomerMessage()
     {
         return (JDFCustomerMessage) appendElement(ElementName.CUSTOMERMESSAGE, null);
     }

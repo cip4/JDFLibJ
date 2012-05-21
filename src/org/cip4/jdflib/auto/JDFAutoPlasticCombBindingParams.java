@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
@@ -171,12 +171,20 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPlasticCombBindingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -185,6 +193,10 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -205,26 +217,43 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumType getEnum(String enumName)
             {
                 return (EnumType) getEnum(EnumType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumType getEnum(int enumValue)
             {
                 return (EnumType) getEnum(EnumType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumType.class);
@@ -277,7 +306,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Brand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBrand(String value)
         {
@@ -290,7 +319,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
           */
         public String getBrand()
         {
-            return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -299,7 +328,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (13) set attribute Color
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColor(EnumNamedColor value)
         {
@@ -314,7 +343,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         {
             String strAttrName = "";
             EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.COLOR, null, JDFConstants.EMPTYSTRING);
+            strAttrName = getAttribute(AttributeName.COLOR, null, JDFCoreConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
@@ -325,7 +354,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ColorDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColorDetails(String value)
         {
@@ -338,7 +367,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
           */
         public String getColorDetails()
         {
-            return getAttribute(AttributeName.COLORDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -347,7 +376,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Diameter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDiameter(double value)
         {
@@ -369,7 +398,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Thickness
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThickness(double value)
         {
@@ -391,7 +420,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Type
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setType(EnumType enumVar)
         {
@@ -432,6 +461,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 
     /**
      * (29) append element HoleMakingParams
+     * @return JDFHoleMakingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {

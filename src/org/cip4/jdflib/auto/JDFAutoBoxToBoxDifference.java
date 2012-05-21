@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -149,6 +149,10 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBoxToBoxDifference[  --> " + super.toString() + " ]";
@@ -169,26 +173,43 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFromBox getEnum(String enumName)
             {
                 return (EnumFromBox) getEnum(EnumFromBox.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFromBox getEnum(int enumValue)
             {
                 return (EnumFromBox) getEnum(EnumFromBox.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFromBox.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFromBox.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFromBox.class);
@@ -219,26 +240,43 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumToBox getEnum(String enumName)
             {
                 return (EnumToBox) getEnum(EnumToBox.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumToBox getEnum(int enumValue)
             {
                 return (EnumToBox) getEnum(EnumToBox.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumToBox.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumToBox.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumToBox.class);
@@ -265,7 +303,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FromBox
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFromBox(EnumFromBox enumVar)
         {
@@ -287,7 +325,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ToBox
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setToBox(EnumToBox enumVar)
         {

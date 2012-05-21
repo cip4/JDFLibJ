@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,7 +85,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
@@ -176,6 +175,10 @@ public abstract class JDFAutoIDPCover extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPCover[  --> " + super.toString() + " ]";
@@ -196,26 +199,43 @@ public abstract class JDFAutoIDPCover extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCoverType getEnum(String enumName)
             {
                 return (EnumCoverType) getEnum(EnumCoverType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCoverType getEnum(int enumValue)
             {
                 return (EnumCoverType) getEnum(EnumCoverType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCoverType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCoverType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCoverType.class);
@@ -237,7 +257,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BackSide
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBackSide(boolean value)
         {
@@ -259,7 +279,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CoverType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCoverType(EnumCoverType enumVar)
         {
@@ -281,7 +301,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FrontSide
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrontSide(boolean value)
         {
@@ -346,8 +366,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
     /**
      * (30) append element IDPFinishing
+     * @return JDFIDPFinishing the element
      */
-    public JDFIDPFinishing appendIDPFinishing() throws JDFException
+    public JDFIDPFinishing appendIDPFinishing()
     {
         return (JDFIDPFinishing) appendElement(ElementName.IDPFINISHING, null);
     }
@@ -396,8 +417,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
     /**
      * (30) append element IDPLayout
+     * @return JDFIDPLayout the element
      */
-    public JDFIDPLayout appendIDPLayout() throws JDFException
+    public JDFIDPLayout appendIDPLayout()
     {
         return (JDFIDPLayout) appendElement(ElementName.IDPLAYOUT, null);
     }
@@ -446,8 +468,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
     /**
      * (30) append element MediaIntent
+     * @return JDFMediaIntent the element
      */
-    public JDFMediaIntent appendMediaIntent() throws JDFException
+    public JDFMediaIntent appendMediaIntent()
     {
         return (JDFMediaIntent) appendElement(ElementName.MEDIAINTENT, null);
     }
@@ -505,8 +528,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 
     /**
      * (30) append element MediaSource
+     * @return JDFMediaSource the element
      */
-    public JDFMediaSource appendMediaSource() throws JDFException
+    public JDFMediaSource appendMediaSource()
     {
         return (JDFMediaSource) appendElement(ElementName.MEDIASOURCE, null);
     }

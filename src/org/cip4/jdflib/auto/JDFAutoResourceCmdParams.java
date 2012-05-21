@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,12 +84,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
@@ -178,6 +178,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @return  the string representation
+	 */
 	@Override
 	public String toString()
 	{
@@ -198,26 +201,43 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
 		public static EnumActivation getEnum(String enumName)
 		{
 			return (EnumActivation) getEnum(EnumActivation.class, enumName);
 		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
 		public static EnumActivation getEnum(int enumValue)
 		{
 			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
 		}
 
+		/**
+		 * @return the map of enums
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumActivation.class);
 		}
 
+		/**
+		 * @return the list of enums
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumActivation.class);
 		}
 
+		/**
+		 * @return the iterator
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumActivation.class);
@@ -243,26 +263,43 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
 		public static EnumUpdateMethod getEnum(String enumName)
 		{
 			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumName);
 		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
 		public static EnumUpdateMethod getEnum(int enumValue)
 		{
 			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumValue);
 		}
 
+		/**
+		 * @return the map of enums
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumUpdateMethod.class);
 		}
 
+		/**
+		 * @return the list of enums
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumUpdateMethod.class);
 		}
 
+		/**
+		 * @return the iterator
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumUpdateMethod.class);
@@ -283,7 +320,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute Activation
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setActivation(EnumActivation enumVar)
 	{
@@ -304,7 +341,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute Exact
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setExact(boolean value)
 	{
@@ -325,7 +362,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute JobID
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setJobID(String value)
 	{
@@ -338,7 +375,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getJobID()
 	{
-		return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -346,7 +383,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute JobPartID
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setJobPartID(String value)
 	{
@@ -359,7 +396,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getJobPartID()
 	{
-		return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -367,7 +404,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute ProcessUsage
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setProcessUsage(String value)
 	{
@@ -380,7 +417,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getProcessUsage()
 	{
-		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -388,7 +425,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute ProductID
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setProductID(String value)
 	{
@@ -401,7 +438,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getProductID()
 	{
-		return getAttribute(AttributeName.PRODUCTID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PRODUCTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -409,7 +446,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute ProductionAmount
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setProductionAmount(double value)
 	{
@@ -430,7 +467,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute QueueEntryID
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setQueueEntryID(String value)
 	{
@@ -443,7 +480,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getQueueEntryID()
 	{
-		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -451,7 +488,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute ResourceName
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setResourceName(String value)
 	{
@@ -464,7 +501,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getResourceName()
 	{
-		return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -472,7 +509,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute ResourceID
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setResourceID(String value)
 	{
@@ -485,7 +522,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public String getResourceID()
 	{
-		return getAttribute(AttributeName.RESOURCEID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RESOURCEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -493,7 +530,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute Status
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
 	{
@@ -514,7 +551,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute UpdateIDs
-	  * @param value: the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
 	public void setUpdateIDs(VString value)
 	{
@@ -528,7 +565,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	public VString getUpdateIDs()
 	{
 		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFConstants.EMPTYSTRING);
+		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -538,7 +575,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute UpdateMethod
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
 	{
@@ -559,7 +596,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	--------------------------------------------------------------------- */
 	/**
 	  * (5) set attribute Usage
-	  * @param enumVar: the enumVar to set the attribute to
+	  * @param enumVar the enumVar to set the attribute to
 	  */
 	public void setUsage(EnumUsage enumVar)
 	{
@@ -624,8 +661,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * (30) append element Part
+	 * @return JDFPart the element
 	 */
-	public JDFPart appendPart() throws JDFException
+	public JDFPart appendPart()
 	{
 		return (JDFPart) appendElement(ElementName.PART, null);
 	}
@@ -650,6 +688,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * (29) append element MISDetails
+	 * @return JDFMISDetails the element
+	 * @throws JDFException if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails() throws JDFException
 	{
@@ -700,8 +740,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 
 	/**
 	 * (30) append element Resource
+	 * @return JDFResource the element
 	 */
-	public JDFResource appendResource() throws JDFException
+	public JDFResource appendResource()
 	{
 		return (JDFResource) appendElement(ElementName.RESOURCE, null);
 	}

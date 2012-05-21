@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -79,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
@@ -170,12 +168,20 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInkZoneCalculationParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -184,6 +190,10 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -200,7 +210,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FountainPositions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFountainPositions(JDFNumberList value)
         {
@@ -214,17 +224,8 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
           */
         public JDFNumberList getFountainPositions()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FOUNTAINPOSITIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FOUNTAINPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -234,7 +235,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PrintableArea
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPrintableArea(JDFRectangle value)
         {
@@ -248,17 +249,8 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
           */
         public JDFRectangle getPrintableArea()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PRINTABLEAREA, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PRINTABLEAREA, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -268,7 +260,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneWidth(double value)
         {
@@ -290,7 +282,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Zones
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZones(int value)
         {
@@ -312,7 +304,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZonesY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZonesY(int value)
         {
@@ -334,7 +326,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneHeight(double value)
         {
@@ -375,6 +367,8 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 
     /**
      * (29) append element Device
+     * @return JDFDevice the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevice appendDevice() throws JDFException
     {

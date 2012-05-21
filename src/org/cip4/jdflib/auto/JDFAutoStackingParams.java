@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -182,12 +181,20 @@ public abstract class JDFAutoStackingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStackingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -196,6 +203,10 @@ public abstract class JDFAutoStackingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -216,26 +227,43 @@ public abstract class JDFAutoStackingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPreStackMethod getEnum(String enumName)
             {
                 return (EnumPreStackMethod) getEnum(EnumPreStackMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPreStackMethod getEnum(int enumValue)
             {
                 return (EnumPreStackMethod) getEnum(EnumPreStackMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPreStackMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPreStackMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPreStackMethod.class);
@@ -258,7 +286,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BundleDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBundleDepth(int value)
         {
@@ -280,7 +308,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Compensate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCompensate(boolean value)
         {
@@ -302,7 +330,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LayerAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayerAmount(JDFIntegerList value)
         {
@@ -316,17 +344,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
           */
         public JDFIntegerList getLayerAmount()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -336,7 +355,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LayerLift
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayerLift(boolean value)
         {
@@ -358,7 +377,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LayerCompression
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayerCompression(boolean value)
         {
@@ -380,7 +399,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxAmount(int value)
         {
@@ -402,7 +421,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxHeight(int value)
         {
@@ -424,7 +443,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinAmount(int value)
         {
@@ -446,7 +465,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxWeight(double value)
         {
@@ -468,7 +487,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Offset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffset(boolean value)
         {
@@ -490,7 +509,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreStackAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreStackAmount(int value)
         {
@@ -512,7 +531,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PreStackMethod
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPreStackMethod(EnumPreStackMethod enumVar)
         {
@@ -534,7 +553,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StackCompression
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStackCompression(boolean value)
         {
@@ -556,7 +575,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UnderLays
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUnderLays(JDFIntegerList value)
         {
@@ -570,17 +589,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
           */
         public JDFIntegerList getUnderLays()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.UNDERLAYS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -590,7 +600,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StandardAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStandardAmount(int value)
         {
@@ -631,6 +641,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
 
     /**
      * (29) append element Disjointing
+     * @return JDFDisjointing the element
+     * @throws JDFException if the element already exists
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {

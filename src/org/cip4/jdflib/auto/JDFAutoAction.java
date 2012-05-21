@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.process.JDFPreflightAction;
@@ -173,6 +172,10 @@ public abstract class JDFAutoAction extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAction[  --> " + super.toString() + " ]";
@@ -193,26 +196,43 @@ public abstract class JDFAutoAction extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSeverity getEnum(String enumName)
             {
                 return (EnumSeverity) getEnum(EnumSeverity.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSeverity getEnum(int enumValue)
             {
                 return (EnumSeverity) getEnum(EnumSeverity.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSeverity.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSeverity.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSeverity.class);
@@ -235,7 +255,7 @@ public abstract class JDFAutoAction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Severity
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSeverity(EnumSeverity enumVar)
         {
@@ -257,7 +277,7 @@ public abstract class JDFAutoAction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setID(String value)
         {
@@ -270,7 +290,7 @@ public abstract class JDFAutoAction extends JDFElement
           */
         public String getID()
         {
-            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -279,7 +299,7 @@ public abstract class JDFAutoAction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TestRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTestRef(String value)
         {
@@ -292,7 +312,7 @@ public abstract class JDFAutoAction extends JDFElement
           */
         public String getTestRef()
         {
-            return getAttribute(AttributeName.TESTREF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TESTREF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -344,8 +364,9 @@ public abstract class JDFAutoAction extends JDFElement
 
     /**
      * (30) append element Loc
+     * @return JDFLoc the element
      */
-    public JDFLoc appendLoc() throws JDFException
+    public JDFLoc appendLoc()
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }
@@ -394,8 +415,9 @@ public abstract class JDFAutoAction extends JDFElement
 
     /**
      * (30) append element PreflightAction
+     * @return JDFPreflightAction the element
      */
-    public JDFPreflightAction appendPreflightAction() throws JDFException
+    public JDFPreflightAction appendPreflightAction()
     {
         return (JDFPreflightAction) appendElement(ElementName.PREFLIGHTACTION, null);
     }

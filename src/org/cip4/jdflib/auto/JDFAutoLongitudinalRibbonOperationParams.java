@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLongFold;
@@ -155,12 +154,20 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLongitudinalRibbonOperationParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -169,6 +176,10 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -224,8 +235,9 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
     /**
      * (30) append element LongFold
+     * @return JDFLongFold the element
      */
-    public JDFLongFold appendLongFold() throws JDFException
+    public JDFLongFold appendLongFold()
     {
         return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
     }
@@ -274,8 +286,9 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
     /**
      * (30) append element LongGlue
+     * @return JDFLongGlue the element
      */
-    public JDFLongGlue appendLongGlue() throws JDFException
+    public JDFLongGlue appendLongGlue()
     {
         return (JDFLongGlue) appendElement(ElementName.LONGGLUE, null);
     }
@@ -324,8 +337,9 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
     /**
      * (30) append element LongPerforate
+     * @return JDFLongPerforate the element
      */
-    public JDFLongPerforate appendLongPerforate() throws JDFException
+    public JDFLongPerforate appendLongPerforate()
     {
         return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
     }
@@ -374,8 +388,9 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 
     /**
      * (30) append element LongSlit
+     * @return JDFLongSlit the element
      */
-    public JDFLongSlit appendLongSlit() throws JDFException
+    public JDFLongSlit appendLongSlit()
     {
         return (JDFLongSlit) appendElement(ElementName.LONGSLIT, null);
     }

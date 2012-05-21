@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
     /**
@@ -151,6 +149,10 @@ public abstract class JDFAutoNumberingParam extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNumberingParam[  --> " + super.toString() + " ]";
@@ -167,7 +169,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StartValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStartValue(String value)
         {
@@ -180,7 +182,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
           */
         public String getStartValue()
         {
-            return getAttribute(AttributeName.STARTVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STARTVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -189,7 +191,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute XPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setXPosition(double value)
         {
@@ -211,7 +213,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute YPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setYPosition(JDFNumberList value)
         {
@@ -225,17 +227,8 @@ public abstract class JDFAutoNumberingParam extends JDFElement
           */
         public JDFNumberList getYPosition()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.YPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.YPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -245,7 +238,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Orientation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrientation(double value)
         {
@@ -267,7 +260,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Step
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStep(int value)
         {

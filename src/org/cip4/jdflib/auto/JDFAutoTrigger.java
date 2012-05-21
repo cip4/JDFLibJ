@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -171,12 +171,20 @@ public abstract class JDFAutoTrigger extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrigger[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -185,6 +193,10 @@ public abstract class JDFAutoTrigger extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -201,7 +213,7 @@ public abstract class JDFAutoTrigger extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RepeatStep
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRepeatStep(int value)
         {
@@ -223,7 +235,7 @@ public abstract class JDFAutoTrigger extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RepeatTime
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRepeatTime(double value)
         {
@@ -288,8 +300,9 @@ public abstract class JDFAutoTrigger extends JDFResource
 
     /**
      * (30) append element ChangedAttribute
+     * @return JDFChangedAttribute the element
      */
-    public JDFChangedAttribute appendChangedAttribute() throws JDFException
+    public JDFChangedAttribute appendChangedAttribute()
     {
         return (JDFChangedAttribute) appendElement(ElementName.CHANGEDATTRIBUTE, null);
     }
@@ -314,6 +327,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 
     /**
      * (29) append element Added
+     * @return JDFAdded the element
+     * @throws JDFException if the element already exists
      */
     public JDFAdded appendAdded() throws JDFException
     {
@@ -364,8 +379,9 @@ public abstract class JDFAutoTrigger extends JDFResource
 
     /**
      * (30) append element ChangedPath
+     * @return JDFChangedPath the element
      */
-    public JDFChangedPath appendChangedPath() throws JDFException
+    public JDFChangedPath appendChangedPath()
     {
         return (JDFChangedPath) appendElement(ElementName.CHANGEDPATH, null);
     }
@@ -390,6 +406,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 
     /**
      * (29) append element Removed
+     * @return JDFRemoved the element
+     * @throws JDFException if the element already exists
      */
     public JDFRemoved appendRemoved() throws JDFException
     {

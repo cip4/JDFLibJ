@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFDisposition;
@@ -176,6 +176,10 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoQueueSubmissionParams[  --> " + super.toString() + " ]";
@@ -196,26 +200,43 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumGangPolicy getEnum(String enumName)
             {
                 return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumGangPolicy getEnum(int enumValue)
             {
                 return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumGangPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumGangPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumGangPolicy.class);
@@ -238,7 +259,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GangName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGangName(String value)
         {
@@ -251,7 +272,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getGangName()
         {
-            return getAttribute(AttributeName.GANGNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -260,7 +281,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute GangPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setGangPolicy(EnumGangPolicy enumVar)
         {
@@ -282,7 +303,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Hold
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHold(boolean value)
         {
@@ -304,7 +325,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NextQueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNextQueueEntryID(String value)
         {
@@ -317,7 +338,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getNextQueueEntryID()
         {
-            return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -326,7 +347,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PrevQueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPrevQueueEntryID(String value)
         {
@@ -339,7 +360,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getPrevQueueEntryID()
         {
-            return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -348,7 +369,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Priority
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPriority(int value)
         {
@@ -370,7 +391,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute refID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrefID(String value)
         {
@@ -383,7 +404,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getrefID()
         {
-            return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -392,7 +413,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReturnJMF
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReturnJMF(String value)
         {
@@ -405,7 +426,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getReturnJMF()
         {
-            return getAttribute(AttributeName.RETURNJMF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RETURNJMF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -414,7 +435,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReturnURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReturnURL(String value)
         {
@@ -427,7 +448,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getReturnURL()
         {
-            return getAttribute(AttributeName.RETURNURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RETURNURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -436,7 +457,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute URL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setURL(String value)
         {
@@ -449,7 +470,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getURL()
         {
-            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -458,7 +479,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WatchURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWatchURL(String value)
         {
@@ -471,7 +492,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
           */
         public String getWatchURL()
         {
-            return getAttribute(AttributeName.WATCHURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WATCHURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -499,6 +520,8 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 
     /**
      * (29) append element Disposition
+     * @return JDFDisposition the element
+     * @throws JDFException if the element already exists
      */
     public JDFDisposition appendDisposition() throws JDFException
     {

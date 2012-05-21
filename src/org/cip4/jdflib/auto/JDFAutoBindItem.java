@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -79,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -201,6 +199,10 @@ public abstract class JDFAutoBindItem extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBindItem[  --> " + super.toString() + " ]";
@@ -217,7 +219,7 @@ public abstract class JDFAutoBindItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ChildFolio
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setChildFolio(JDFXYPair value)
         {
@@ -231,17 +233,8 @@ public abstract class JDFAutoBindItem extends JDFElement
           */
         public JDFXYPair getChildFolio()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CHILDFOLIO, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CHILDFOLIO, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -251,7 +244,7 @@ public abstract class JDFAutoBindItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParentFolio
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParentFolio(JDFXYPair value)
         {
@@ -265,17 +258,8 @@ public abstract class JDFAutoBindItem extends JDFElement
           */
         public JDFXYPair getParentFolio()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PARENTFOLIO, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PARENTFOLIO, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -285,7 +269,7 @@ public abstract class JDFAutoBindItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Transformation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTransformation(JDFMatrix value)
         {
@@ -299,17 +283,8 @@ public abstract class JDFAutoBindItem extends JDFElement
           */
         public JDFMatrix getTransformation()
         {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
             return nPlaceHolder;
         }
 
@@ -319,7 +294,7 @@ public abstract class JDFAutoBindItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WrapPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWrapPages(JDFIntegerRangeList value)
         {
@@ -333,17 +308,8 @@ public abstract class JDFAutoBindItem extends JDFElement
           */
         public JDFIntegerRangeList getWrapPages()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WRAPPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -372,6 +338,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element BindingType
+     * @return JDFSpanBindingType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanBindingType appendBindingType() throws JDFException
     {
@@ -398,6 +366,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element ChannelBinding
+     * @return JDFChannelBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFChannelBinding appendChannelBinding() throws JDFException
     {
@@ -424,6 +394,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element CoilBinding
+     * @return JDFCoilBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFCoilBinding appendCoilBinding() throws JDFException
     {
@@ -450,6 +422,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element EdgeGluing
+     * @return JDFEdgeGluing the element
+     * @throws JDFException if the element already exists
      */
     public JDFEdgeGluing appendEdgeGluing() throws JDFException
     {
@@ -476,6 +450,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element HardCoverBinding
+     * @return JDFHardCoverBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFHardCoverBinding appendHardCoverBinding() throws JDFException
     {
@@ -502,6 +478,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element PlasticCombBinding
+     * @return JDFPlasticCombBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFPlasticCombBinding appendPlasticCombBinding() throws JDFException
     {
@@ -528,6 +506,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element RingBinding
+     * @return JDFRingBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFRingBinding appendRingBinding() throws JDFException
     {
@@ -554,6 +534,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element SaddleStitching
+     * @return JDFSaddleStitching the element
+     * @throws JDFException if the element already exists
      */
     public JDFSaddleStitching appendSaddleStitching() throws JDFException
     {
@@ -580,6 +562,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element SideSewing
+     * @return JDFSideSewing the element
+     * @throws JDFException if the element already exists
      */
     public JDFSideSewing appendSideSewing() throws JDFException
     {
@@ -606,6 +590,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element SideStitching
+     * @return JDFSideStitching the element
+     * @throws JDFException if the element already exists
      */
     public JDFSideStitching appendSideStitching() throws JDFException
     {
@@ -632,6 +618,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element SoftCoverBinding
+     * @return JDFSoftCoverBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFSoftCoverBinding appendSoftCoverBinding() throws JDFException
     {
@@ -658,6 +646,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element Tape
+     * @return JDFTape the element
+     * @throws JDFException if the element already exists
      */
     public JDFTape appendTape() throws JDFException
     {
@@ -684,6 +674,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element Tabs
+     * @return JDFTabs the element
+     * @throws JDFException if the element already exists
      */
     public JDFTabs appendTabs() throws JDFException
     {
@@ -710,6 +702,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element ThreadSealing
+     * @return JDFThreadSealing the element
+     * @throws JDFException if the element already exists
      */
     public JDFThreadSealing appendThreadSealing() throws JDFException
     {
@@ -736,6 +730,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element ThreadSewing
+     * @return JDFThreadSewing the element
+     * @throws JDFException if the element already exists
      */
     public JDFThreadSewing appendThreadSewing() throws JDFException
     {
@@ -762,6 +758,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element StripBinding
+     * @return JDFStripBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFStripBinding appendStripBinding() throws JDFException
     {
@@ -788,6 +786,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 
     /**
      * (29) append element WireCombBinding
+     * @return JDFWireCombBinding the element
+     * @throws JDFException if the element already exists
      */
     public JDFWireCombBinding appendWireCombBinding() throws JDFException
     {

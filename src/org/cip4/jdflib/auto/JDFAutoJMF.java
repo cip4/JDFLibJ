@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
@@ -188,6 +186,10 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoJMF[  --> " + super.toString() + " ]";
@@ -204,7 +206,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AgentName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAgentName(String value)
         {
@@ -217,7 +219,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public String getAgentName()
         {
-            return getAttribute(AttributeName.AGENTNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AGENTNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -226,7 +228,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AgentVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAgentVersion(String value)
         {
@@ -239,7 +241,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public String getAgentVersion()
         {
-            return getAttribute(AttributeName.AGENTVERSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AGENTVERSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -248,7 +250,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceID(String value)
         {
@@ -261,7 +263,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public String getDeviceID()
         {
-            return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -270,7 +272,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ICSVersions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setICSVersions(VString value)
         {
@@ -284,7 +286,7 @@ public abstract class JDFAutoJMF extends JDFPool
         public VString getICSVersions()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -295,7 +297,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MaxVersion
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMaxVersion(EnumVersion enumVar)
         {
@@ -317,7 +319,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ResponseURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResponseURL(String value)
         {
@@ -330,7 +332,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public String getResponseURL()
         {
-            return getAttribute(AttributeName.RESPONSEURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RESPONSEURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -339,7 +341,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SenderID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSenderID(String value)
         {
@@ -352,7 +354,7 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public String getSenderID()
         {
-            return getAttribute(AttributeName.SENDERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -361,7 +363,7 @@ public abstract class JDFAutoJMF extends JDFPool
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute TimeStamp
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setTimeStamp(JDFDate value)
         {
@@ -376,21 +378,9 @@ public abstract class JDFAutoJMF extends JDFPool
           */
         public JDFDate getTimeStamp()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.TIMESTAMP, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
 /* ***********************************************************************
@@ -442,8 +432,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -492,8 +483,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Command
+     * @return JDFCommand the element
      */
-    public JDFCommand appendCommand() throws JDFException
+    public JDFCommand appendCommand()
     {
         return (JDFCommand) appendElement(ElementName.COMMAND, null);
     }
@@ -542,8 +534,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Acknowledge
+     * @return JDFAcknowledge the element
      */
-    public JDFAcknowledge appendAcknowledge() throws JDFException
+    public JDFAcknowledge appendAcknowledge()
     {
         return (JDFAcknowledge) appendElement(ElementName.ACKNOWLEDGE, null);
     }
@@ -592,8 +585,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Response
+     * @return JDFResponse the element
      */
-    public JDFResponse appendResponse() throws JDFException
+    public JDFResponse appendResponse()
     {
         return (JDFResponse) appendElement(ElementName.RESPONSE, null);
     }
@@ -642,8 +636,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Signal
+     * @return JDFSignal the element
      */
-    public JDFSignal appendSignal() throws JDFException
+    public JDFSignal appendSignal()
     {
         return (JDFSignal) appendElement(ElementName.SIGNAL, null);
     }
@@ -692,8 +687,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Query
+     * @return JDFQuery the element
      */
-    public JDFQuery appendQuery() throws JDFException
+    public JDFQuery appendQuery()
     {
         return (JDFQuery) appendElement(ElementName.QUERY, null);
     }
@@ -742,8 +738,9 @@ public abstract class JDFAutoJMF extends JDFPool
 
     /**
      * (30) append element Registration
+     * @return JDFRegistration the element
      */
-    public JDFRegistration appendRegistration() throws JDFException
+    public JDFRegistration appendRegistration()
     {
         return (JDFRegistration) appendElement(ElementName.REGISTRATION, null);
     }

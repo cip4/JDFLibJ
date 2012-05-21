@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
@@ -175,6 +174,10 @@ public abstract class JDFAutoDevCap extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDevCap[  --> " + super.toString() + " ]";
@@ -191,7 +194,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Availability
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
         {
@@ -213,7 +216,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DevCapRefs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDevCapRefs(VString value)
         {
@@ -227,7 +230,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         public VString getDevCapRefs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.DEVCAPREFS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.DEVCAPREFS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -238,7 +241,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DevNS
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDevNS(String value)
         {
@@ -260,7 +263,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setID(String value)
         {
@@ -273,7 +276,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           */
         public String getID()
         {
-            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -282,7 +285,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxOccurs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxOccurs(int value)
         {
@@ -304,7 +307,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinOccurs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinOccurs(int value)
         {
@@ -326,7 +329,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleRefs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleRefs(VString value)
         {
@@ -340,7 +343,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         public VString getModuleRefs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MODULEREFS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.MODULEREFS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -351,7 +354,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -364,7 +367,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -373,7 +376,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ResourceUsage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResourceUsage(String value)
         {
@@ -386,7 +389,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           */
         public String getResourceUsage()
         {
-            return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RESOURCEUSAGE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -438,8 +441,9 @@ public abstract class JDFAutoDevCap extends JDFElement
 
     /**
      * (30) append element Loc
+     * @return JDFLoc the element
      */
-    public JDFLoc appendLoc() throws JDFException
+    public JDFLoc appendLoc()
     {
         return (JDFLoc) appendElement(ElementName.LOC, null);
     }

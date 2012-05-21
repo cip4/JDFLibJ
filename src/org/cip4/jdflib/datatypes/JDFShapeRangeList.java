@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,8 +86,35 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFShapeRangeList extends JDFRangeList
 {
+	/**
+	 * factory for JDFShapeRangeList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFShapeRangeList, null if s is not compatible
+	 */
+	public static JDFShapeRangeList createShapeRangeList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFShapeRangeList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	/**
 	 * empty constructor
@@ -277,8 +304,7 @@ public class JDFShapeRangeList extends JDFRangeList
 			JDFShape value = (v.elementAt(j));
 			JDFShape nextvalue = (v.elementAt(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue))
-					|| (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
+			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
 				return false;
 		}
 		return true;

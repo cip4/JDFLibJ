@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -149,6 +149,10 @@ public abstract class JDFAutoFolderProduction extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFolderProduction[  --> " + super.toString() + " ]";
@@ -169,26 +173,43 @@ public abstract class JDFAutoFolderProduction extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumProductionType getEnum(String enumName)
             {
                 return (EnumProductionType) getEnum(EnumProductionType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumProductionType getEnum(int enumValue)
             {
                 return (EnumProductionType) getEnum(EnumProductionType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumProductionType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumProductionType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumProductionType.class);
@@ -210,7 +231,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FolderModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFolderModuleIndex(int value)
         {
@@ -232,7 +253,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ProductionType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setProductionType(EnumProductionType enumVar)
         {

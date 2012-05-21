@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -154,6 +154,10 @@ public abstract class JDFAutoTabDimensions extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTabDimensions[  --> " + super.toString() + " ]";
@@ -174,26 +178,43 @@ public abstract class JDFAutoTabDimensions extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTabEdge getEnum(String enumName)
             {
                 return (EnumTabEdge) getEnum(EnumTabEdge.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTabEdge getEnum(int enumValue)
             {
                 return (EnumTabEdge) getEnum(EnumTabEdge.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTabEdge.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTabEdge.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTabEdge.class);
@@ -217,7 +238,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TabEdge
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTabEdge(EnumTabEdge enumVar)
         {
@@ -239,7 +260,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabExtensionDistance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabExtensionDistance(double value)
         {
@@ -261,7 +282,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabOffset(double value)
         {
@@ -283,7 +304,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabsPerBank
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabsPerBank(int value)
         {
@@ -305,7 +326,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabSetCollationOrder
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabSetCollationOrder(String value)
         {
@@ -318,7 +339,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
           */
         public String getTabSetCollationOrder()
         {
-            return getAttribute(AttributeName.TABSETCOLLATIONORDER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TABSETCOLLATIONORDER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -327,7 +348,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabWidth(double value)
         {

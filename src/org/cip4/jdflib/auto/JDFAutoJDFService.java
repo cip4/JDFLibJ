@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
     /**
@@ -153,6 +153,10 @@ public abstract class JDFAutoJDFService extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoJDFService[  --> " + super.toString() + " ]";
@@ -173,26 +177,43 @@ public abstract class JDFAutoJDFService extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCombinedMethod getEnum(String enumName)
             {
                 return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCombinedMethod getEnum(int enumValue)
             {
                 return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCombinedMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCombinedMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCombinedMethod.class);
@@ -221,26 +242,43 @@ public abstract class JDFAutoJDFService extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTypeOrder getEnum(String enumName)
             {
                 return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTypeOrder getEnum(int enumValue)
             {
                 return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTypeOrder.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTypeOrder.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTypeOrder.class);
@@ -263,7 +301,7 @@ public abstract class JDFAutoJDFService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CombinedMethod
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCombinedMethod(EnumCombinedMethod enumVar)
         {
@@ -285,7 +323,7 @@ public abstract class JDFAutoJDFService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -298,7 +336,7 @@ public abstract class JDFAutoJDFService extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -307,7 +345,7 @@ public abstract class JDFAutoJDFService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TypeOrder
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTypeOrder(EnumTypeOrder enumVar)
         {
@@ -329,7 +367,7 @@ public abstract class JDFAutoJDFService extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Types
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypes(VString value)
         {
@@ -343,7 +381,7 @@ public abstract class JDFAutoJDFService extends JDFElement
         public VString getTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -194,12 +194,20 @@ public abstract class JDFAutoDevice extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDevice[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -208,6 +216,10 @@ public abstract class JDFAutoDevice extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Implementation;
@@ -224,7 +236,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceFamily
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceFamily(String value)
         {
@@ -237,7 +249,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getDeviceFamily()
         {
-            return getAttribute(AttributeName.DEVICEFAMILY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEFAMILY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -246,7 +258,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceID(String value)
         {
@@ -259,7 +271,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getDeviceID()
         {
-            return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -268,7 +280,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceType(String value)
         {
@@ -281,7 +293,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getDeviceType()
         {
-            return getAttribute(AttributeName.DEVICETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -290,7 +302,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Directory
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDirectory(String value)
         {
@@ -303,7 +315,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getDirectory()
         {
-            return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -312,7 +324,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FriendlyName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFriendlyName(String value)
         {
@@ -325,7 +337,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getFriendlyName()
         {
-            return getAttribute(AttributeName.FRIENDLYNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FRIENDLYNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -334,7 +346,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ICSVersions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setICSVersions(VString value)
         {
@@ -348,7 +360,7 @@ public abstract class JDFAutoDevice extends JDFResource
         public VString getICSVersions()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -359,7 +371,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JDFErrorURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJDFErrorURL(String value)
         {
@@ -372,7 +384,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJDFErrorURL()
         {
-            return getAttribute(AttributeName.JDFERRORURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JDFERRORURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -381,7 +393,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JDFInputURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJDFInputURL(String value)
         {
@@ -394,7 +406,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJDFInputURL()
         {
-            return getAttribute(AttributeName.JDFINPUTURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JDFINPUTURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -403,7 +415,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JDFOutputURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJDFOutputURL(String value)
         {
@@ -416,7 +428,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJDFOutputURL()
         {
-            return getAttribute(AttributeName.JDFOUTPUTURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JDFOUTPUTURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -425,7 +437,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JDFVersions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJDFVersions(String value)
         {
@@ -438,7 +450,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJDFVersions()
         {
-            return getAttribute(AttributeName.JDFVERSIONS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JDFVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -447,7 +459,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JMFSenderID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJMFSenderID(String value)
         {
@@ -460,7 +472,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJMFSenderID()
         {
-            return getAttribute(AttributeName.JMFSENDERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JMFSENDERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -469,7 +481,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JMFURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJMFURL(String value)
         {
@@ -482,7 +494,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getJMFURL()
         {
-            return getAttribute(AttributeName.JMFURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JMFURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -491,7 +503,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute KnownLocalizations
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setKnownLocalizations(VString value)
         {
@@ -505,7 +517,7 @@ public abstract class JDFAutoDevice extends JDFResource
         public VString getKnownLocalizations()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.KNOWNLOCALIZATIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.KNOWNLOCALIZATIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -516,7 +528,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Manufacturer
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManufacturer(String value)
         {
@@ -529,7 +541,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getManufacturer()
         {
-            return getAttribute(AttributeName.MANUFACTURER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -538,7 +550,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ManufacturerURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManufacturerURL(String value)
         {
@@ -551,7 +563,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getManufacturerURL()
         {
-            return getAttribute(AttributeName.MANUFACTURERURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -560,7 +572,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelDescription
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelDescription(String value)
         {
@@ -573,7 +585,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getModelDescription()
         {
-            return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -582,7 +594,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelName(String value)
         {
@@ -595,7 +607,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getModelName()
         {
-            return getAttribute(AttributeName.MODELNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -604,7 +616,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelNumber(String value)
         {
@@ -617,7 +629,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getModelNumber()
         {
-            return getAttribute(AttributeName.MODELNUMBER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -626,7 +638,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelURL(String value)
         {
@@ -639,7 +651,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getModelURL()
         {
-            return getAttribute(AttributeName.MODELURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -648,7 +660,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SerialNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSerialNumber(String value)
         {
@@ -661,7 +673,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getSerialNumber()
         {
-            return getAttribute(AttributeName.SERIALNUMBER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -670,7 +682,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PresentationURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPresentationURL(String value)
         {
@@ -683,7 +695,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getPresentationURL()
         {
-            return getAttribute(AttributeName.PRESENTATIONURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PRESENTATIONURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -692,7 +704,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SecureJMFURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSecureJMFURL(String value)
         {
@@ -705,7 +717,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getSecureJMFURL()
         {
-            return getAttribute(AttributeName.SECUREJMFURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SECUREJMFURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -714,7 +726,7 @@ public abstract class JDFAutoDevice extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UPC
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUPC(String value)
         {
@@ -727,7 +739,7 @@ public abstract class JDFAutoDevice extends JDFResource
           */
         public String getUPC()
         {
-            return getAttribute(AttributeName.UPC, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.UPC, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -755,6 +767,8 @@ public abstract class JDFAutoDevice extends JDFResource
 
     /**
      * (29) append element CostCenter
+     * @return JDFCostCenter the element
+     * @throws JDFException if the element already exists
      */
     public JDFCostCenter appendCostCenter() throws JDFException
     {
@@ -805,8 +819,9 @@ public abstract class JDFAutoDevice extends JDFResource
 
     /**
      * (30) append element DeviceCap
+     * @return JDFDeviceCap the element
      */
-    public JDFDeviceCap appendDeviceCap() throws JDFException
+    public JDFDeviceCap appendDeviceCap()
     {
         return (JDFDeviceCap) appendElement(ElementName.DEVICECAP, null);
     }
@@ -831,6 +846,8 @@ public abstract class JDFAutoDevice extends JDFResource
 
     /**
      * (29) append element IconList
+     * @return JDFIconList the element
+     * @throws JDFException if the element already exists
      */
     public JDFIconList appendIconList() throws JDFException
     {
@@ -881,8 +898,9 @@ public abstract class JDFAutoDevice extends JDFResource
 
     /**
      * (30) append element Module
+     * @return JDFModule the element
      */
-    public JDFModule appendModule() throws JDFException
+    public JDFModule appendModule()
     {
         return (JDFModule) appendElement(ElementName.MODULE, null);
     }

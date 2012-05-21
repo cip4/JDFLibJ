@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
@@ -167,12 +166,20 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNameEvaluation[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -191,7 +198,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RegExp
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRegExp(String value)
         {
@@ -204,7 +211,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
           */
         public String getRegExp()
         {
-            return getAttribute(AttributeName.REGEXP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REGEXP, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -213,7 +220,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueList(VString value)
         {
@@ -227,7 +234,7 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
         public VString getValueList()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -281,8 +288,9 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 
     /**
      * (30) append element BasicPreflightTest
+     * @return JDFBasicPreflightTest the element
      */
-    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
+    public JDFBasicPreflightTest appendBasicPreflightTest()
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

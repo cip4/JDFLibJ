@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
     /**
@@ -176,6 +175,10 @@ public abstract class JDFAutoModule extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoModule[  --> " + super.toString() + " ]";
@@ -192,7 +195,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceType(String value)
         {
@@ -205,7 +208,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getDeviceType()
         {
-            return getAttribute(AttributeName.DEVICETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -214,7 +217,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Manufacturer
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManufacturer(String value)
         {
@@ -227,7 +230,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getManufacturer()
         {
-            return getAttribute(AttributeName.MANUFACTURER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -236,7 +239,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ManufacturerURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManufacturerURL(String value)
         {
@@ -249,7 +252,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getManufacturerURL()
         {
-            return getAttribute(AttributeName.MANUFACTURERURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -258,7 +261,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelDescription
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelDescription(String value)
         {
@@ -271,7 +274,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModelDescription()
         {
-            return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -280,7 +283,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelName(String value)
         {
@@ -293,7 +296,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModelName()
         {
-            return getAttribute(AttributeName.MODELNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -302,7 +305,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelNumber(String value)
         {
@@ -315,7 +318,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModelNumber()
         {
-            return getAttribute(AttributeName.MODELNUMBER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -324,7 +327,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModelURL
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModelURL(String value)
         {
@@ -337,7 +340,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModelURL()
         {
-            return getAttribute(AttributeName.MODELURL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -346,7 +349,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleID(String value)
         {
@@ -359,7 +362,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModuleID()
         {
-            return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -368,7 +371,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleIndex(int value)
         {
@@ -390,7 +393,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleType(String value)
         {
@@ -403,7 +406,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getModuleType()
         {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -412,7 +415,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SerialNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSerialNumber(String value)
         {
@@ -425,7 +428,7 @@ public abstract class JDFAutoModule extends JDFElement
           */
         public String getSerialNumber()
         {
-            return getAttribute(AttributeName.SERIALNUMBER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -434,7 +437,7 @@ public abstract class JDFAutoModule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SubModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSubModuleIndex(int value)
         {
@@ -499,8 +502,9 @@ public abstract class JDFAutoModule extends JDFElement
 
     /**
      * (30) append element Module
+     * @return JDFModule the element
      */
-    public JDFModule appendModule() throws JDFException
+    public JDFModule appendModule()
     {
         return (JDFModule) appendElement(ElementName.MODULE, null);
     }

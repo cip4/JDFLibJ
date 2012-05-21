@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
@@ -173,12 +173,20 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoColorSpaceConversionParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +195,10 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -207,26 +219,43 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumICCProfileUsage getEnum(String enumName)
             {
                 return (EnumICCProfileUsage) getEnum(EnumICCProfileUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumICCProfileUsage getEnum(int enumValue)
             {
                 return (EnumICCProfileUsage) getEnum(EnumICCProfileUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumICCProfileUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumICCProfileUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumICCProfileUsage.class);
@@ -248,7 +277,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ICCProfileUsage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setICCProfileUsage(EnumICCProfileUsage enumVar)
         {
@@ -270,7 +299,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ColorManagementSystem
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColorManagementSystem(String value)
         {
@@ -283,7 +312,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
           */
         public String getColorManagementSystem()
         {
-            return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -292,7 +321,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ConvertDevIndepColors
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setConvertDevIndepColors(boolean value)
         {
@@ -333,6 +362,8 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -392,8 +423,9 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 
     /**
      * (30) append element ColorSpaceConversionOp
+     * @return JDFColorSpaceConversionOp the element
      */
-    public JDFColorSpaceConversionOp appendColorSpaceConversionOp() throws JDFException
+    public JDFColorSpaceConversionOp appendColorSpaceConversionOp()
     {
         return (JDFColorSpaceConversionOp) appendElement(ElementName.COLORSPACECONVERSIONOP, null);
     }

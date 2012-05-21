@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
     /**
@@ -148,6 +146,10 @@ public abstract class JDFAutoLongFold extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLongFold[  --> " + super.toString() + " ]";
@@ -164,7 +166,7 @@ public abstract class JDFAutoLongFold extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WorkingList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWorkingList(JDFNumberList value)
         {
@@ -178,17 +180,8 @@ public abstract class JDFAutoLongFold extends JDFElement
           */
         public JDFNumberList getWorkingList()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WORKINGLIST, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -198,7 +191,7 @@ public abstract class JDFAutoLongFold extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute XOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setXOffset(double value)
         {

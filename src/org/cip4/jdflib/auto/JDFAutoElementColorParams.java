@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
@@ -176,12 +176,20 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoElementColorParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -190,6 +198,10 @@ public abstract class JDFAutoElementColorParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -210,26 +222,43 @@ public abstract class JDFAutoElementColorParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumICCOutputProfileUsage getEnum(String enumName)
             {
                 return (EnumICCOutputProfileUsage) getEnum(EnumICCOutputProfileUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumICCOutputProfileUsage getEnum(int enumValue)
             {
                 return (EnumICCOutputProfileUsage) getEnum(EnumICCOutputProfileUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumICCOutputProfileUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumICCOutputProfileUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumICCOutputProfileUsage.class);
@@ -252,7 +281,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ColorManagementSystem
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColorManagementSystem(String value)
         {
@@ -265,7 +294,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
           */
         public String getColorManagementSystem()
         {
-            return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -274,7 +303,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ICCOutputProfileUsage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
         {
@@ -315,6 +344,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
     /**
      * (29) append element AutomatedOverPrintParams
+     * @return JDFAutomatedOverPrintParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
     {
@@ -374,8 +405,9 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
     /**
      * (30) append element ColorantAlias
+     * @return JDFColorantAlias the element
      */
-    public JDFColorantAlias appendColorantAlias() throws JDFException
+    public JDFColorantAlias appendColorantAlias()
     {
         return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
     }
@@ -409,6 +441,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
     /**
      * (29) append element ColorSpaceConversionOp
+     * @return JDFColorSpaceConversionOp the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorSpaceConversionOp appendColorSpaceConversionOp() throws JDFException
     {
@@ -435,6 +469,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {

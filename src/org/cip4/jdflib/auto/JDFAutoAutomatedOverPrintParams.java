@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,12 +148,20 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAutomatedOverPrintParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -162,6 +170,10 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -178,7 +190,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute KnockOutCMYKWhite
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setKnockOutCMYKWhite(boolean value)
         {
@@ -200,7 +212,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OverPrintBlackText
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOverPrintBlackText(boolean value)
         {
@@ -222,7 +234,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OverPrintBlackLineArt
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOverPrintBlackLineArt(boolean value)
         {
@@ -244,7 +256,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TextBlackLevel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTextBlackLevel(double value)
         {
@@ -266,7 +278,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LineArtBlackLevel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLineArtBlackLevel(double value)
         {
@@ -288,7 +300,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TextSizeThreshold
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTextSizeThreshold(int value)
         {

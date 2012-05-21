@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPRError;
@@ -171,6 +169,10 @@ public abstract class JDFAutoPRItem extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPRItem[  --> " + super.toString() + " ]";
@@ -187,7 +189,7 @@ public abstract class JDFAutoPRItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ActionRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setActionRef(String value)
         {
@@ -200,7 +202,7 @@ public abstract class JDFAutoPRItem extends JDFElement
           */
         public String getActionRef()
         {
-            return getAttribute(AttributeName.ACTIONREF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ACTIONREF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -209,7 +211,7 @@ public abstract class JDFAutoPRItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Occurrences
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOccurrences(int value)
         {
@@ -231,7 +233,7 @@ public abstract class JDFAutoPRItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageSet
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageSet(JDFIntegerRangeList value)
         {
@@ -245,17 +247,8 @@ public abstract class JDFAutoPRItem extends JDFElement
           */
         public JDFIntegerRangeList getPageSet()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGESET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGESET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -308,8 +301,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 
     /**
      * (30) append element PRError
+     * @return JDFPRError the element
      */
-    public JDFPRError appendPRError() throws JDFException
+    public JDFPRError appendPRError()
     {
         return (JDFPRError) appendElement(ElementName.PRERROR, null);
     }
@@ -358,8 +352,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 
     /**
      * (30) append element PRGroup
+     * @return JDFPRGroup the element
      */
-    public JDFPRGroup appendPRGroup() throws JDFException
+    public JDFPRGroup appendPRGroup()
     {
         return (JDFPRGroup) appendElement(ElementName.PRGROUP, null);
     }

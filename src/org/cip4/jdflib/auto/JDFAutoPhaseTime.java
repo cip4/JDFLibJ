@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -82,7 +81,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -178,6 +177,10 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPhaseTime[  --> " + super.toString() + " ]";
@@ -194,7 +197,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute End
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setEnd(JDFDate value)
         {
@@ -209,21 +212,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
           */
         public JDFDate getEnd()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.END, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.END, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -232,7 +223,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Start
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setStart(JDFDate value)
         {
@@ -247,21 +238,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
           */
         public JDFDate getStart()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.START, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.START, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -270,7 +249,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StatusDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStatusDetails(String value)
         {
@@ -283,7 +262,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
           */
         public String getStatusDetails()
         {
-            return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -335,8 +314,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
     /**
      * (30) append element Device
+     * @return JDFDevice the element
      */
-    public JDFDevice appendDevice() throws JDFException
+    public JDFDevice appendDevice()
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -394,8 +374,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -429,6 +410,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
     /**
      * (29) append element MISDetails
+     * @return JDFMISDetails the element
+     * @throws JDFException if the element already exists
      */
     public JDFMISDetails appendMISDetails() throws JDFException
     {
@@ -479,8 +462,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
     /**
      * (30) append element ModulePhase
+     * @return JDFModulePhase the element
      */
-    public JDFModulePhase appendModulePhase() throws JDFException
+    public JDFModulePhase appendModulePhase()
     {
         return (JDFModulePhase) appendElement(ElementName.MODULEPHASE, null);
     }
@@ -529,8 +513,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

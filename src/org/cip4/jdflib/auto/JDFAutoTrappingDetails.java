@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -173,12 +173,20 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrappingDetails[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +195,10 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -203,7 +215,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DefaultTrapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDefaultTrapping(boolean value)
         {
@@ -225,7 +237,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreFileParams
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreFileParams(boolean value)
         {
@@ -247,7 +259,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Trapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapping(boolean value)
         {
@@ -269,7 +281,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrappingType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrappingType(int value)
         {
@@ -310,6 +322,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
     /**
      * (29) append element TrappingOrder
+     * @return JDFTrappingOrder the element
+     * @throws JDFException if the element already exists
      */
     public JDFTrappingOrder appendTrappingOrder() throws JDFException
     {
@@ -336,6 +350,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
     /**
      * (29) append element TrappingParams
+     * @return JDFTrappingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFTrappingParams appendTrappingParams() throws JDFException
     {
@@ -395,8 +411,9 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
     /**
      * (30) append element ObjectResolution
+     * @return JDFObjectResolution the element
      */
-    public JDFObjectResolution appendObjectResolution() throws JDFException
+    public JDFObjectResolution appendObjectResolution()
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -454,8 +471,9 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 
     /**
      * (30) append element TrapRegion
+     * @return JDFTrapRegion the element
      */
-    public JDFTrapRegion appendTrapRegion() throws JDFException
+    public JDFTrapRegion appendTrapRegion()
     {
         return (JDFTrapRegion) appendElement(ElementName.TRAPREGION, null);
     }

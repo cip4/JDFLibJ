@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -198,6 +197,10 @@ public abstract class JDFAutoPageData extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageData[  --> " + super.toString() + " ]";
@@ -214,7 +217,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyID(String value)
         {
@@ -227,7 +230,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getAssemblyID()
         {
-            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -236,7 +239,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyIDs(VString value)
         {
@@ -250,7 +253,7 @@ public abstract class JDFAutoPageData extends JDFElement
         public VString getAssemblyIDs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -261,7 +264,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CatalogID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCatalogID(String value)
         {
@@ -274,7 +277,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getCatalogID()
         {
-            return getAttribute(AttributeName.CATALOGID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CATALOGID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -283,7 +286,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CatalogDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCatalogDetails(String value)
         {
@@ -296,7 +299,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getCatalogDetails()
         {
-            return getAttribute(AttributeName.CATALOGDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CATALOGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -305,7 +308,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FoldOutPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFoldOutPages(JDFIntegerList value)
         {
@@ -319,17 +322,8 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public JDFIntegerList getFoldOutPages()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FOLDOUTPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FOLDOUTPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -339,7 +333,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HasBleeds
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHasBleeds(boolean value)
         {
@@ -361,7 +355,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsBlank
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsBlank(boolean value)
         {
@@ -383,7 +377,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsPrintable
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsPrintable(boolean value)
         {
@@ -405,7 +399,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsTrapped
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsTrapped(boolean value)
         {
@@ -427,7 +421,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -440,7 +434,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -449,7 +443,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageFormat(String value)
         {
@@ -462,7 +456,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getPageFormat()
         {
-            return getAttribute(AttributeName.PAGEFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -471,7 +465,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageIndex(JDFIntegerRangeList value)
         {
@@ -485,17 +479,8 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public JDFIntegerRangeList getPageIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGEINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -505,7 +490,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageLabel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageLabel(String value)
         {
@@ -518,7 +503,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getPageLabel()
         {
-            return getAttribute(AttributeName.PAGELABEL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGELABEL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -527,7 +512,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageLabelPrefix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageLabelPrefix(String value)
         {
@@ -540,7 +525,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getPageLabelPrefix()
         {
-            return getAttribute(AttributeName.PAGELABELPREFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGELABELPREFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -549,7 +534,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageLabelSuffix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageLabelSuffix(String value)
         {
@@ -562,7 +547,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getPageLabelSuffix()
         {
-            return getAttribute(AttributeName.PAGELABELSUFFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGELABELSUFFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -571,7 +556,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageStatus
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageStatus(String value)
         {
@@ -584,7 +569,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getPageStatus()
         {
-            return getAttribute(AttributeName.PAGESTATUS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGESTATUS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -593,7 +578,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ProductID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setProductID(String value)
         {
@@ -606,7 +591,7 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public String getProductID()
         {
-            return getAttribute(AttributeName.PRODUCTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PRODUCTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -615,7 +600,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceBleedBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceBleedBox(JDFRectangle value)
         {
@@ -629,17 +614,8 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public JDFRectangle getSourceBleedBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -649,7 +625,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceClipBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceClipBox(JDFRectangle value)
         {
@@ -663,17 +639,8 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public JDFRectangle getSourceClipBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -683,7 +650,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceTrimBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceTrimBox(JDFRectangle value)
         {
@@ -697,17 +664,8 @@ public abstract class JDFAutoPageData extends JDFElement
           */
         public JDFRectangle getSourceTrimBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -717,7 +675,7 @@ public abstract class JDFAutoPageData extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Template
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplate(boolean value)
         {
@@ -758,6 +716,8 @@ public abstract class JDFAutoPageData extends JDFElement
 
     /**
      * (29) append element ElementColorParams
+     * @return JDFElementColorParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFElementColorParams appendElementColorParams() throws JDFException
     {
@@ -793,6 +753,8 @@ public abstract class JDFAutoPageData extends JDFElement
 
     /**
      * (29) append element ImageCompressionParams
+     * @return JDFImageCompressionParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
     {
@@ -852,8 +814,9 @@ public abstract class JDFAutoPageData extends JDFElement
 
     /**
      * (30) append element PageElement
+     * @return JDFPageElement the element
      */
-    public JDFPageElement appendPageElement() throws JDFException
+    public JDFPageElement appendPageElement()
     {
         return (JDFPageElement) appendElement(ElementName.PAGEELEMENT, null);
     }
@@ -878,6 +841,8 @@ public abstract class JDFAutoPageData extends JDFElement
 
     /**
      * (29) append element ScreeningParams
+     * @return JDFScreeningParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFScreeningParams appendScreeningParams() throws JDFException
     {
@@ -937,8 +902,9 @@ public abstract class JDFAutoPageData extends JDFElement
 
     /**
      * (30) append element SeparationSpec
+     * @return JDFSeparationSpec the element
      */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    public JDFSeparationSpec appendSeparationSpec()
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

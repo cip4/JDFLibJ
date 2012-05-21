@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,8 +85,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -179,6 +177,10 @@ public abstract class JDFAutoProcessRun extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoProcessRun[  --> " + super.toString() + " ]";
@@ -199,26 +201,43 @@ public abstract class JDFAutoProcessRun extends JDFAudit
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumEndStatus getEnum(String enumName)
             {
                 return (EnumEndStatus) getEnum(EnumEndStatus.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumEndStatus getEnum(int enumValue)
             {
                 return (EnumEndStatus) getEnum(EnumEndStatus.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumEndStatus.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumEndStatus.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumEndStatus.class);
@@ -243,7 +262,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Duration
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDuration(JDFDuration value)
         {
@@ -257,17 +276,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public JDFDuration getDuration()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DURATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DURATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 
@@ -277,7 +287,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute End
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setEnd(JDFDate value)
         {
@@ -292,21 +302,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public JDFDate getEnd()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.END, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.END, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -315,7 +313,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute EndStatus
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setEndStatus(EnumNodeStatus enumVar)
         {
@@ -337,7 +335,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute ReturnTime
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setReturnTime(JDFDate value)
         {
@@ -352,21 +350,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public JDFDate getReturnTime()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.RETURNTIME, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.RETURNTIME, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -375,7 +361,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Start
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setStart(JDFDate value)
         {
@@ -390,21 +376,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public JDFDate getStart()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.START, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.START, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -413,7 +387,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute SubmissionTime
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setSubmissionTime(JDFDate value)
         {
@@ -428,21 +402,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           */
         public JDFDate getSubmissionTime()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.SUBMISSIONTIME, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
 /* ***********************************************************************
@@ -494,8 +456,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -544,8 +507,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

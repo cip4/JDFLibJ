@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
@@ -177,12 +177,20 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInsertSheet[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -191,6 +199,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -211,26 +223,43 @@ public abstract class JDFAutoInsertSheet extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetType getEnum(String enumName)
             {
                 return (EnumSheetType) getEnum(EnumSheetType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetType getEnum(int enumValue)
             {
                 return (EnumSheetType) getEnum(EnumSheetType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetType.class);
@@ -260,26 +289,43 @@ public abstract class JDFAutoInsertSheet extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetUsage getEnum(String enumName)
             {
                 return (EnumSheetUsage) getEnum(EnumSheetUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetUsage getEnum(int enumValue)
             {
                 return (EnumSheetUsage) getEnum(EnumSheetUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetUsage.class);
@@ -315,26 +361,43 @@ public abstract class JDFAutoInsertSheet extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeInBundleItem getEnum(String enumName)
             {
                 return (EnumIncludeInBundleItem) getEnum(EnumIncludeInBundleItem.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeInBundleItem getEnum(int enumValue)
             {
                 return (EnumIncludeInBundleItem) getEnum(EnumIncludeInBundleItem.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeInBundleItem.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeInBundleItem.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeInBundleItem.class);
@@ -358,7 +421,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetType(EnumSheetType enumVar)
         {
@@ -380,7 +443,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetUsage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetUsage(EnumSheetUsage enumVar)
         {
@@ -402,7 +465,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeInBundleItem
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
         {
@@ -424,7 +487,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsWaste
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsWaste(boolean value)
         {
@@ -446,7 +509,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarkList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarkList(VString value)
         {
@@ -460,7 +523,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         public VString getMarkList()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MARKLIST, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -471,7 +534,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetFormat(String value)
         {
@@ -484,7 +547,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
           */
         public String getSheetFormat()
         {
-            return getAttribute(AttributeName.SHEETFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -493,7 +556,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Usage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setUsage(EnumSheetUsage enumVar)
         {
@@ -534,6 +597,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
     /**
      * (29) append element RunList
+     * @return JDFRunList the element
+     * @throws JDFException if the element already exists
      */
     public JDFRunList appendRunList() throws JDFException
     {
@@ -569,6 +634,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
     /**
      * (29) append element Layout
+     * @return JDFLayout the element
+     * @throws JDFException if the element already exists
      */
     public JDFLayout appendLayout() throws JDFException
     {
@@ -604,6 +671,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 
     /**
      * (29) append element Sheet
+     * @return JDFSheet the element
+     * @throws JDFException if the element already exists
      */
     public JDFSheet appendSheet() throws JDFException
     {

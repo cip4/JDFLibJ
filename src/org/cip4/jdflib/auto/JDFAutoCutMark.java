@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,8 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -174,12 +172,20 @@ public abstract class JDFAutoCutMark extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCutMark[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -188,6 +194,10 @@ public abstract class JDFAutoCutMark extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -208,26 +218,43 @@ public abstract class JDFAutoCutMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkType getEnum(String enumName)
             {
                 return (EnumMarkType) getEnum(EnumMarkType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkType getEnum(int enumValue)
             {
                 return (EnumMarkType) getEnum(EnumMarkType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkType.class);
@@ -256,7 +283,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkType(EnumMarkType enumVar)
         {
@@ -278,7 +305,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Position
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPosition(JDFXYPair value)
         {
@@ -292,17 +319,8 @@ public abstract class JDFAutoCutMark extends JDFResource
           */
         public JDFXYPair getPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.POSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.POSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -312,7 +330,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Blocks
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlocks(VString value)
         {
@@ -326,7 +344,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         public VString getBlocks()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.BLOCKS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -380,8 +398,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 
     /**
      * (30) append element Assembly
+     * @return JDFAssembly the element
      */
-    public JDFAssembly appendAssembly() throws JDFException
+    public JDFAssembly appendAssembly()
     {
         return (JDFAssembly) appendElement(ElementName.ASSEMBLY, null);
     }

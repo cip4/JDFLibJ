@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
@@ -151,6 +150,10 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMediaLayers[  --> " + super.toString() + " ]";
@@ -206,8 +209,9 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 
     /**
      * (30) append element GlueLine
+     * @return JDFGlueLine the element
      */
-    public JDFGlueLine appendGlueLine() throws JDFException
+    public JDFGlueLine appendGlueLine()
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }
@@ -265,8 +269,9 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 
     /**
      * (30) append element Media
+     * @return JDFMedia the element
      */
-    public JDFMedia appendMedia() throws JDFException
+    public JDFMedia appendMedia()
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }

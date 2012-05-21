@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -173,12 +173,20 @@ public abstract class JDFAutoContact extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoContact[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +195,10 @@ public abstract class JDFAutoContact extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -203,7 +215,7 @@ public abstract class JDFAutoContact extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContactTypes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContactTypes(VString value)
         {
@@ -217,7 +229,7 @@ public abstract class JDFAutoContact extends JDFResource
         public VString getContactTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CONTACTTYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.CONTACTTYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -228,7 +240,7 @@ public abstract class JDFAutoContact extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContactTypeDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContactTypeDetails(String value)
         {
@@ -241,7 +253,7 @@ public abstract class JDFAutoContact extends JDFResource
           */
         public String getContactTypeDetails()
         {
-            return getAttribute(AttributeName.CONTACTTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CONTACTTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -269,6 +281,8 @@ public abstract class JDFAutoContact extends JDFResource
 
     /**
      * (29) append element Address
+     * @return JDFAddress the element
+     * @throws JDFException if the element already exists
      */
     public JDFAddress appendAddress() throws JDFException
     {
@@ -328,8 +342,9 @@ public abstract class JDFAutoContact extends JDFResource
 
     /**
      * (30) append element ComChannel
+     * @return JDFComChannel the element
      */
-    public JDFComChannel appendComChannel() throws JDFException
+    public JDFComChannel appendComChannel()
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }
@@ -363,6 +378,8 @@ public abstract class JDFAutoContact extends JDFResource
 
     /**
      * (29) append element Company
+     * @return JDFCompany the element
+     * @throws JDFException if the element already exists
      */
     public JDFCompany appendCompany() throws JDFException
     {
@@ -398,6 +415,8 @@ public abstract class JDFAutoContact extends JDFResource
 
     /**
      * (29) append element Person
+     * @return JDFPerson the element
+     * @throws JDFException if the element already exists
      */
     public JDFPerson appendPerson() throws JDFException
     {

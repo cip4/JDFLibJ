@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
@@ -168,6 +166,10 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPreflightInstance[  --> " + super.toString() + " ]";
@@ -184,7 +186,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Identifier
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIdentifier(String value)
         {
@@ -197,7 +199,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
           */
         public String getIdentifier()
         {
-            return getAttribute(AttributeName.IDENTIFIER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.IDENTIFIER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -206,7 +208,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageRefs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageRefs(JDFIntegerRangeList value)
         {
@@ -220,17 +222,8 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
           */
         public JDFIntegerRangeList getPageRefs()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGEREFS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGEREFS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -283,8 +276,9 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 
     /**
      * (30) append element PreflightInstanceDetail
+     * @return JDFPreflightInstanceDetail the element
      */
-    public JDFPreflightInstanceDetail appendPreflightInstanceDetail() throws JDFException
+    public JDFPreflightInstanceDetail appendPreflightInstanceDetail()
     {
         return (JDFPreflightInstanceDetail) appendElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
     }

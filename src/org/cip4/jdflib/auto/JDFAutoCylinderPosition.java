@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
     /**
@@ -154,6 +153,10 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCylinderPosition[  --> " + super.toString() + " ]";
@@ -174,26 +177,43 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPlateType getEnum(String enumName)
             {
                 return (EnumPlateType) getEnum(EnumPlateType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPlateType getEnum(int enumValue)
             {
                 return (EnumPlateType) getEnum(EnumPlateType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPlateType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPlateType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPlateType.class);
@@ -219,26 +239,43 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPlateUsage getEnum(String enumName)
             {
                 return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPlateUsage getEnum(int enumValue)
             {
                 return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPlateUsage.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPlateUsage.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPlateUsage.class);
@@ -260,7 +297,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PlatePosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPlatePosition(JDFXYPairRangeList value)
         {
@@ -274,17 +311,8 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
           */
         public JDFXYPairRangeList getPlatePosition()
         {
-            String strAttrName = "";
-            JDFXYPairRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PLATEPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPairRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PLATEPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -294,7 +322,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PlateType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPlateType(EnumPlateType enumVar)
         {
@@ -316,7 +344,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PlateUsage
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPlateUsage(EnumPlateUsage enumVar)
         {
@@ -338,7 +366,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceModuleIndex(int value)
         {

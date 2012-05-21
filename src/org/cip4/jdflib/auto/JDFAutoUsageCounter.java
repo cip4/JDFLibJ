@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -152,12 +152,20 @@ public abstract class JDFAutoUsageCounter extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoUsageCounter[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -166,6 +174,10 @@ public abstract class JDFAutoUsageCounter extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Consumable;
@@ -186,26 +198,43 @@ public abstract class JDFAutoUsageCounter extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumScope getEnum(String enumName)
             {
                 return (EnumScope) getEnum(EnumScope.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumScope getEnum(int enumValue)
             {
                 return (EnumScope) getEnum(EnumScope.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumScope.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumScope.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumScope.class);
@@ -228,7 +257,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CounterID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCounterID(String value)
         {
@@ -241,7 +270,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
           */
         public String getCounterID()
         {
-            return getAttribute(AttributeName.COUNTERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COUNTERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -250,7 +279,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Scope
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setScope(EnumScope enumVar)
         {
@@ -272,7 +301,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CounterTypes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCounterTypes(VString value)
         {
@@ -286,7 +315,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         public VString getCounterTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.COUNTERTYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.COUNTERTYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }

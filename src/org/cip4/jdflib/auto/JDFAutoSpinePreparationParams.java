@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -152,12 +152,20 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoSpinePreparationParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -166,6 +174,10 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -182,7 +194,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StartPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStartPosition(double value)
         {
@@ -204,7 +216,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FlexValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFlexValue(double value)
         {
@@ -226,7 +238,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MillingDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMillingDepth(double value)
         {
@@ -248,7 +260,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NotchingDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNotchingDepth(double value)
         {
@@ -270,7 +282,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NotchingDistance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNotchingDistance(double value)
         {
@@ -292,7 +304,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Operations
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOperations(VString value)
         {
@@ -306,7 +318,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         public VString getOperations()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OPERATIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -317,7 +329,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PullOutValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPullOutValue(double value)
         {
@@ -339,7 +351,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WorkingLength
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWorkingLength(double value)
         {

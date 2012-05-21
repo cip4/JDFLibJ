@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -169,6 +169,10 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoApprovalDetails[  --> " + super.toString() + " ]";
@@ -189,26 +193,43 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumApprovalState getEnum(String enumName)
             {
                 return (EnumApprovalState) getEnum(EnumApprovalState.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumApprovalState getEnum(int enumValue)
             {
                 return (EnumApprovalState) getEnum(EnumApprovalState.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumApprovalState.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumApprovalState.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumApprovalState.class);
@@ -231,7 +252,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ApprovalState
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setApprovalState(EnumApprovalState enumVar)
         {
@@ -253,7 +274,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ApprovalStateDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setApprovalStateDetails(String value)
         {
@@ -266,7 +287,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
           */
         public String getApprovalStateDetails()
         {
-            return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -294,6 +315,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 
     /**
      * (29) append element Contact
+     * @return JDFContact the element
+     * @throws JDFException if the element already exists
      */
     public JDFContact appendContact() throws JDFException
     {
@@ -329,6 +352,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {

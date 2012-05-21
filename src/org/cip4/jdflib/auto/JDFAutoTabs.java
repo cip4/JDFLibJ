@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -175,6 +175,10 @@ public abstract class JDFAutoTabs extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTabs[  --> " + super.toString() + " ]";
@@ -191,7 +195,7 @@ public abstract class JDFAutoTabs extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabBanks
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabBanks(int value)
         {
@@ -213,7 +217,7 @@ public abstract class JDFAutoTabs extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabCount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabCount(int value)
         {
@@ -235,7 +239,7 @@ public abstract class JDFAutoTabs extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TabsPerBank
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTabsPerBank(int value)
         {
@@ -276,6 +280,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabBrand
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendTabBrand() throws JDFException
     {
@@ -302,6 +308,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabExtensionDistance
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendTabExtensionDistance() throws JDFException
     {
@@ -328,6 +336,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabExtensionMylar
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendTabExtensionMylar() throws JDFException
     {
@@ -354,6 +364,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabBindMylar
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendTabBindMylar() throws JDFException
     {
@@ -380,6 +392,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabBodyCopy
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendTabBodyCopy() throws JDFException
     {
@@ -406,6 +420,8 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (29) append element TabMylarColor
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendTabMylarColor() throws JDFException
     {
@@ -456,8 +472,9 @@ public abstract class JDFAutoTabs extends JDFElement
 
     /**
      * (30) append element TabMylarColorDetails
+     * @return JDFStringSpan the element
      */
-    public JDFStringSpan appendTabMylarColorDetails() throws JDFException
+    public JDFStringSpan appendTabMylarColorDetails()
     {
         return (JDFStringSpan) appendElement(ElementName.TABMYLARCOLORDETAILS, null);
     }

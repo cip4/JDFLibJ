@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
@@ -177,6 +176,10 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNotificationFilter[  --> " + super.toString() + " ]";
@@ -197,26 +200,43 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumClasses getEnum(String enumName)
             {
                 return (EnumClasses) getEnum(EnumClasses.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumClasses getEnum(int enumValue)
             {
                 return (EnumClasses) getEnum(EnumClasses.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumClasses.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumClasses.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumClasses.class);
@@ -241,7 +261,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceID(String value)
         {
@@ -254,7 +274,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
           */
         public String getDeviceID()
         {
-            return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -263,7 +283,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -276,7 +296,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -285,7 +305,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -298,7 +318,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -307,7 +327,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MilestoneTypes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMilestoneTypes(VString value)
         {
@@ -321,7 +341,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         public VString getMilestoneTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MILESTONETYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.MILESTONETYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -332,7 +352,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueEntryID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueEntryID(String value)
         {
@@ -345,7 +365,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
           */
         public String getQueueEntryID()
         {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -354,7 +374,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SignalTypes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSignalTypes(VString value)
         {
@@ -379,7 +399,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Types
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypes(VString value)
         {
@@ -393,7 +413,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         public VString getTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -469,8 +489,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

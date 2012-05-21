@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
@@ -173,6 +173,10 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBasicPreflightTest[  --> " + super.toString() + " ]";
@@ -193,26 +197,43 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumListType getEnum(String enumName)
             {
                 return (EnumListType) getEnum(EnumListType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumListType getEnum(int enumValue)
             {
                 return (EnumListType) getEnum(EnumListType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumListType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumListType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumListType.class);
@@ -246,7 +267,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Classes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClasses(VString value)
         {
@@ -260,7 +281,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         public VString getClasses()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CLASSES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.CLASSES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -271,7 +292,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClassName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClassName(String value)
         {
@@ -284,7 +305,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
           */
         public String getClassName()
         {
-            return getAttribute(AttributeName.CLASSNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CLASSNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -293,7 +314,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DevNS
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDevNS(String value)
         {
@@ -315,7 +336,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ListType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setListType(EnumListType enumVar)
         {
@@ -337,7 +358,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxOccurs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxOccurs(int value)
         {
@@ -359,7 +380,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinOccurs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinOccurs(int value)
         {
@@ -381,7 +402,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -394,7 +415,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -422,6 +443,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 
     /**
      * (29) append element PreflightArgument
+     * @return JDFPreflightArgument the element
+     * @throws JDFException if the element already exists
      */
     public JDFPreflightArgument appendPreflightArgument() throws JDFException
     {

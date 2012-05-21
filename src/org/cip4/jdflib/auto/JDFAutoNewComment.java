@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
     /**
@@ -171,6 +170,10 @@ public abstract class JDFAutoNewComment extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNewComment[  --> " + super.toString() + " ]";
@@ -191,26 +194,43 @@ public abstract class JDFAutoNewComment extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAction getEnum(String enumName)
             {
                 return (EnumAction) getEnum(EnumAction.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAction getEnum(int enumValue)
             {
                 return (EnumAction) getEnum(EnumAction.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAction.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAction.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAction.class);
@@ -234,7 +254,7 @@ public abstract class JDFAutoNewComment extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Action
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAction(EnumAction enumVar)
         {
@@ -256,7 +276,7 @@ public abstract class JDFAutoNewComment extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CommentID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCommentID(String value)
         {
@@ -269,7 +289,7 @@ public abstract class JDFAutoNewComment extends JDFElement
           */
         public String getCommentID()
         {
-            return getAttribute(AttributeName.COMMENTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COMMENTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -278,7 +298,7 @@ public abstract class JDFAutoNewComment extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute refID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrefID(String value)
         {
@@ -291,7 +311,7 @@ public abstract class JDFAutoNewComment extends JDFElement
           */
         public String getrefID()
         {
-            return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -343,8 +363,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

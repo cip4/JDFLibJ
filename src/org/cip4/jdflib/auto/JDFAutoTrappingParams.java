@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,8 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
@@ -189,12 +188,20 @@ public abstract class JDFAutoTrappingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrappingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -203,6 +210,10 @@ public abstract class JDFAutoTrappingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -223,26 +234,43 @@ public abstract class JDFAutoTrappingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumImageTrapPlacement getEnum(String enumName)
             {
                 return (EnumImageTrapPlacement) getEnum(EnumImageTrapPlacement.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumImageTrapPlacement getEnum(int enumValue)
             {
                 return (EnumImageTrapPlacement) getEnum(EnumImageTrapPlacement.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumImageTrapPlacement.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumImageTrapPlacement.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumImageTrapPlacement.class);
@@ -266,7 +294,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinimumBlackWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinimumBlackWidth(double value)
         {
@@ -288,7 +316,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapEndStyle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapEndStyle(String value)
         {
@@ -310,7 +338,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapJoinStyle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapJoinStyle(String value)
         {
@@ -332,7 +360,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BlackColorLimit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlackColorLimit(double value)
         {
@@ -354,7 +382,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BlackDensityLimit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlackDensityLimit(double value)
         {
@@ -376,7 +404,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BlackWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlackWidth(double value)
         {
@@ -398,7 +426,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Enabled
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEnabled(boolean value)
         {
@@ -420,7 +448,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HalftoneName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHalftoneName(String value)
         {
@@ -433,7 +461,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
           */
         public String getHalftoneName()
         {
-            return getAttribute(AttributeName.HALFTONENAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.HALFTONENAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -442,7 +470,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageInternalTrapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageInternalTrapping(boolean value)
         {
@@ -464,7 +492,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageResolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageResolution(int value)
         {
@@ -486,7 +514,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageMaskTrapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageMaskTrapping(boolean value)
         {
@@ -508,7 +536,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageToImageTrapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageToImageTrapping(boolean value)
         {
@@ -530,7 +558,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageToObjectTrapping
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageToObjectTrapping(boolean value)
         {
@@ -552,7 +580,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ImageTrapPlacement
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
         {
@@ -574,7 +602,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageTrapWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageTrapWidth(double value)
         {
@@ -596,7 +624,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageTrapWidthY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageTrapWidthY(double value)
         {
@@ -618,7 +646,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SlidingTrapLimit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSlidingTrapLimit(double value)
         {
@@ -640,7 +668,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StepLimit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStepLimit(double value)
         {
@@ -662,7 +690,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapColorScaling
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapColorScaling(double value)
         {
@@ -684,7 +712,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapWidth(double value)
         {
@@ -706,7 +734,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapWidthY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapWidthY(double value)
         {
@@ -771,8 +799,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 
     /**
      * (30) append element ColorantZoneDetails
+     * @return JDFColorantZoneDetails the element
      */
-    public JDFColorantZoneDetails appendColorantZoneDetails() throws JDFException
+    public JDFColorantZoneDetails appendColorantZoneDetails()
     {
         return (JDFColorantZoneDetails) appendElement(ElementName.COLORANTZONEDETAILS, null);
     }

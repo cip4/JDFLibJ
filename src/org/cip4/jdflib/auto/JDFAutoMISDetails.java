@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -152,6 +152,10 @@ public abstract class JDFAutoMISDetails extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMISDetails[  --> " + super.toString() + " ]";
@@ -172,26 +176,43 @@ public abstract class JDFAutoMISDetails extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCostType getEnum(String enumName)
             {
                 return (EnumCostType) getEnum(EnumCostType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCostType getEnum(int enumValue)
             {
                 return (EnumCostType) getEnum(EnumCostType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCostType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCostType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCostType.class);
@@ -217,26 +238,43 @@ public abstract class JDFAutoMISDetails extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDeviceOperationMode getEnum(String enumName)
             {
                 return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDeviceOperationMode getEnum(int enumValue)
             {
                 return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDeviceOperationMode.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDeviceOperationMode.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDeviceOperationMode.class);
@@ -263,26 +301,43 @@ public abstract class JDFAutoMISDetails extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumWorkType getEnum(String enumName)
             {
                 return (EnumWorkType) getEnum(EnumWorkType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumWorkType getEnum(int enumValue)
             {
                 return (EnumWorkType) getEnum(EnumWorkType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumWorkType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumWorkType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumWorkType.class);
@@ -305,7 +360,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CostType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCostType(EnumCostType enumVar)
         {
@@ -327,7 +382,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DeviceOperationMode
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
         {
@@ -349,7 +404,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute WorkType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setWorkType(EnumWorkType enumVar)
         {
@@ -371,7 +426,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WorkTypeDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWorkTypeDetails(String value)
         {
@@ -384,7 +439,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
           */
         public String getWorkTypeDetails()
         {
-            return getAttribute(AttributeName.WORKTYPEDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WORKTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

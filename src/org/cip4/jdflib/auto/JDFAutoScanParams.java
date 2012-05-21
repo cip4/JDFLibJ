@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -179,12 +178,20 @@ public abstract class JDFAutoScanParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoScanParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -193,6 +200,10 @@ public abstract class JDFAutoScanParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -213,26 +224,43 @@ public abstract class JDFAutoScanParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOutputColorSpace getEnum(String enumName)
             {
                 return (EnumOutputColorSpace) getEnum(EnumOutputColorSpace.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOutputColorSpace getEnum(int enumValue)
             {
                 return (EnumOutputColorSpace) getEnum(EnumOutputColorSpace.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOutputColorSpace.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOutputColorSpace.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOutputColorSpace.class);
@@ -260,26 +288,43 @@ public abstract class JDFAutoScanParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCompressionFilter getEnum(String enumName)
             {
                 return (EnumCompressionFilter) getEnum(EnumCompressionFilter.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCompressionFilter getEnum(int enumValue)
             {
                 return (EnumCompressionFilter) getEnum(EnumCompressionFilter.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCompressionFilter.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCompressionFilter.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCompressionFilter.class);
@@ -308,26 +353,43 @@ public abstract class JDFAutoScanParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMounting getEnum(String enumName)
             {
                 return (EnumMounting) getEnum(EnumMounting.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMounting getEnum(int enumValue)
             {
                 return (EnumMounting) getEnum(EnumMounting.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMounting.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMounting.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMounting.class);
@@ -351,7 +413,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BitDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBitDepth(int value)
         {
@@ -373,7 +435,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Magnification
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMagnification(JDFXYPair value)
         {
@@ -387,17 +449,8 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public JDFXYPair getMagnification()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MAGNIFICATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MAGNIFICATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -407,7 +460,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute OutputColorSpace
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOutputColorSpace(EnumOutputColorSpace enumVar)
         {
@@ -429,7 +482,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CompressionFilter
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCompressionFilter(EnumCompressionFilter enumVar)
         {
@@ -451,7 +504,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DCTQuality
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDCTQuality(double value)
         {
@@ -473,7 +526,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute InputBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInputBox(JDFRectangle value)
         {
@@ -487,17 +540,8 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public JDFRectangle getInputBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.INPUTBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.INPUTBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -507,7 +551,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MountID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMountID(String value)
         {
@@ -520,7 +564,7 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public String getMountID()
         {
-            return getAttribute(AttributeName.MOUNTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MOUNTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -529,7 +573,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Mounting
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMounting(EnumMounting enumVar)
         {
@@ -551,7 +595,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutputResolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutputResolution(JDFXYPair value)
         {
@@ -565,17 +609,8 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public JDFXYPair getOutputResolution()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.OUTPUTRESOLUTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.OUTPUTRESOLUTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -585,7 +620,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutputSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutputSize(JDFXYPair value)
         {
@@ -599,17 +634,8 @@ public abstract class JDFAutoScanParams extends JDFResource
           */
         public JDFXYPair getOutputSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.OUTPUTSIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.OUTPUTSIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -619,7 +645,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SplitDocuments
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSplitDocuments(int value)
         {
@@ -660,6 +686,8 @@ public abstract class JDFAutoScanParams extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {

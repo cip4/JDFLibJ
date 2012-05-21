@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -149,6 +149,10 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInsertingIntent[  --> " + super.toString() + " ]";
@@ -180,6 +184,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
     /**
      * (29) append element GlueType
+     * @return JDFSpanGlueType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanGlueType appendGlueType() throws JDFException
     {
@@ -206,6 +212,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
     /**
      * (29) append element InsertList
+     * @return JDFInsertList the element
+     * @throws JDFException if the element already exists
      */
     public JDFInsertList appendInsertList() throws JDFException
     {
@@ -232,6 +240,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 
     /**
      * (29) append element Method
+     * @return JDFSpanMethod the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanMethod appendMethod() throws JDFException
     {

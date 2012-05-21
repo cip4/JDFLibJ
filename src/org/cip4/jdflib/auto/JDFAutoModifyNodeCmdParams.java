@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFNewComment;
     /**
@@ -171,6 +170,10 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoModifyNodeCmdParams[  --> " + super.toString() + " ]";
@@ -191,26 +194,43 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumActivation getEnum(String enumName)
             {
                 return (EnumActivation) getEnum(EnumActivation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumActivation getEnum(int enumValue)
             {
                 return (EnumActivation) getEnum(EnumActivation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumActivation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumActivation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumActivation.class);
@@ -236,7 +256,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Activation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setActivation(EnumActivation enumVar)
         {
@@ -258,7 +278,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -271,7 +291,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -280,7 +300,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -293,7 +313,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -345,8 +365,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 
     /**
      * (30) append element NewComment
+     * @return JDFNewComment the element
      */
-    public JDFNewComment appendNewComment() throws JDFException
+    public JDFNewComment appendNewComment()
     {
         return (JDFNewComment) appendElement(ElementName.NEWCOMMENT, null);
     }

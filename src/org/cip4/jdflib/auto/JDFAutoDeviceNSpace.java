@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
@@ -166,12 +165,20 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDeviceNSpace[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -180,6 +187,10 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -196,7 +207,7 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute N
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setN(int value)
         {
@@ -218,7 +229,7 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -231,7 +242,7 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -283,8 +294,9 @@ public abstract class JDFAutoDeviceNSpace extends JDFResource
 
     /**
      * (30) append element SeparationSpec
+     * @return JDFSeparationSpec the element
      */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    public JDFSeparationSpec appendSeparationSpec()
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

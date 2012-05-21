@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -174,12 +174,20 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPerson[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -188,6 +196,10 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -204,7 +216,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdditionalNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdditionalNames(String value)
         {
@@ -217,7 +229,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getAdditionalNames()
         {
-            return getAttribute(AttributeName.ADDITIONALNAMES, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ADDITIONALNAMES, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -226,7 +238,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FamilyName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFamilyName(String value)
         {
@@ -239,7 +251,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getFamilyName()
         {
-            return getAttribute(AttributeName.FAMILYNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FAMILYNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -248,7 +260,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FirstName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFirstName(String value)
         {
@@ -261,7 +273,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getFirstName()
         {
-            return getAttribute(AttributeName.FIRSTNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -270,7 +282,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobTitle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobTitle(String value)
         {
@@ -283,7 +295,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getJobTitle()
         {
-            return getAttribute(AttributeName.JOBTITLE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBTITLE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -292,7 +304,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Languages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLanguages(VString value)
         {
@@ -306,7 +318,7 @@ public abstract class JDFAutoPerson extends JDFResource
         public VString getLanguages()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.LANGUAGES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -317,7 +329,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NamePrefix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNamePrefix(String value)
         {
@@ -330,7 +342,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getNamePrefix()
         {
-            return getAttribute(AttributeName.NAMEPREFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAMEPREFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -339,7 +351,7 @@ public abstract class JDFAutoPerson extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NameSuffix
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNameSuffix(String value)
         {
@@ -352,7 +364,7 @@ public abstract class JDFAutoPerson extends JDFResource
           */
         public String getNameSuffix()
         {
-            return getAttribute(AttributeName.NAMESUFFIX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAMESUFFIX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -380,6 +392,8 @@ public abstract class JDFAutoPerson extends JDFResource
 
     /**
      * (29) append element Address
+     * @return JDFAddress the element
+     * @throws JDFException if the element already exists
      */
     public JDFAddress appendAddress() throws JDFException
     {
@@ -439,8 +453,9 @@ public abstract class JDFAutoPerson extends JDFResource
 
     /**
      * (30) append element ComChannel
+     * @return JDFComChannel the element
      */
-    public JDFComChannel appendComChannel() throws JDFException
+    public JDFComChannel appendComChannel()
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
     /**
@@ -153,12 +152,20 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShrinkingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -167,6 +174,10 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -187,26 +198,43 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumShrinkingMethod getEnum(String enumName)
             {
                 return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumShrinkingMethod getEnum(int enumValue)
             {
                 return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumShrinkingMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumShrinkingMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumShrinkingMethod.class);
@@ -228,7 +256,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ShrinkingMethod
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setShrinkingMethod(EnumShrinkingMethod enumVar)
         {
@@ -250,7 +278,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Duration
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDuration(JDFDuration value)
         {
@@ -264,17 +292,8 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
           */
         public JDFDuration getDuration()
         {
-            String strAttrName = "";
-            JDFDuration nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DURATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFDuration(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DURATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
             return nPlaceHolder;
         }
 
@@ -284,7 +303,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Temperature
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemperature(double value)
         {

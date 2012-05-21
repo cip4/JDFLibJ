@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFExpr;
     /**
@@ -173,6 +172,10 @@ public abstract class JDFAutoMetadataMap extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoMetadataMap[  --> " + super.toString() + " ]";
@@ -193,26 +196,43 @@ public abstract class JDFAutoMetadataMap extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumContext getEnum(String enumName)
             {
                 return (EnumContext) getEnum(EnumContext.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumContext getEnum(int enumValue)
             {
                 return (EnumContext) getEnum(EnumContext.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumContext.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumContext.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumContext.class);
@@ -251,26 +271,43 @@ public abstract class JDFAutoMetadataMap extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDataType getEnum(String enumName)
             {
                 return (EnumDataType) getEnum(EnumDataType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDataType getEnum(int enumValue)
             {
                 return (EnumDataType) getEnum(EnumDataType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDataType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDataType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDataType.class);
@@ -298,7 +335,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Context
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setContext(EnumContext enumVar)
         {
@@ -320,7 +357,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DataType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDataType(EnumDataType enumVar)
         {
@@ -342,7 +379,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -355,7 +392,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -364,7 +401,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueFormat(String value)
         {
@@ -377,7 +414,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
           */
         public String getValueFormat()
         {
-            return getAttribute(AttributeName.VALUEFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.VALUEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -386,7 +423,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueTemplate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueTemplate(String value)
         {
@@ -399,7 +436,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
           */
         public String getValueTemplate()
         {
-            return getAttribute(AttributeName.VALUETEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.VALUETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -451,8 +488,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
     /**
      * (30) append element Expr
+     * @return JDFExpr the element
      */
-    public JDFExpr appendExpr() throws JDFException
+    public JDFExpr appendExpr()
     {
         return (JDFExpr) appendElement(ElementName.EXPR, null);
     }

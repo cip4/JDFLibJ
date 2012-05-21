@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -160,6 +160,10 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoEmbossingItem[  --> " + super.toString() + " ]";
@@ -191,6 +195,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element Direction
+     * @return JDFSpanDirection the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanDirection appendDirection() throws JDFException
     {
@@ -217,6 +223,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element EdgeAngle
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendEdgeAngle() throws JDFException
     {
@@ -243,6 +251,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element EdgeShape
+     * @return JDFSpanEdgeShape the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanEdgeShape appendEdgeShape() throws JDFException
     {
@@ -269,6 +279,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element EmbossingType
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendEmbossingType() throws JDFException
     {
@@ -295,6 +307,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element FoilColor
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendFoilColor() throws JDFException
     {
@@ -321,6 +335,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element FoilColorDetails
+     * @return JDFStringSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFStringSpan appendFoilColorDetails() throws JDFException
     {
@@ -347,6 +363,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element Height
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendHeight() throws JDFException
     {
@@ -373,6 +391,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element ImageSize
+     * @return JDFXYPairSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFXYPairSpan appendImageSize() throws JDFException
     {
@@ -399,6 +419,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element Level
+     * @return JDFSpanLevel the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanLevel appendLevel() throws JDFException
     {
@@ -425,6 +447,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     /**
      * (29) append element Position
+     * @return JDFXYPairSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFXYPairSpan appendPosition() throws JDFException
     {

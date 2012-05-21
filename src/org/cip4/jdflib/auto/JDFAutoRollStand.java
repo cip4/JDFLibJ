@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -169,12 +169,20 @@ public abstract class JDFAutoRollStand extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRollStand[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -183,6 +191,10 @@ public abstract class JDFAutoRollStand extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Handling;
@@ -199,7 +211,7 @@ public abstract class JDFAutoRollStand extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxDiameter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxDiameter(double value)
         {
@@ -221,7 +233,7 @@ public abstract class JDFAutoRollStand extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxWidth(double value)
         {
@@ -262,6 +274,8 @@ public abstract class JDFAutoRollStand extends JDFResource
 
     /**
      * (29) append element Device
+     * @return JDFDevice the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevice appendDevice() throws JDFException
     {
@@ -321,8 +335,9 @@ public abstract class JDFAutoRollStand extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -380,8 +395,9 @@ public abstract class JDFAutoRollStand extends JDFResource
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

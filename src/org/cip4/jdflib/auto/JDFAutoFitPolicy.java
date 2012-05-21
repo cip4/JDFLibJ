@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -155,12 +154,20 @@ public abstract class JDFAutoFitPolicy extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFitPolicy[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -169,6 +176,10 @@ public abstract class JDFAutoFitPolicy extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -189,26 +200,43 @@ public abstract class JDFAutoFitPolicy extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumGutterPolicy getEnum(String enumName)
             {
                 return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumGutterPolicy getEnum(int enumValue)
             {
                 return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumGutterPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumGutterPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumGutterPolicy.class);
@@ -234,26 +262,43 @@ public abstract class JDFAutoFitPolicy extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumRotatePolicy getEnum(String enumName)
             {
                 return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumRotatePolicy getEnum(int enumValue)
             {
                 return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumRotatePolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumRotatePolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumRotatePolicy.class);
@@ -281,26 +326,43 @@ public abstract class JDFAutoFitPolicy extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSizePolicy getEnum(String enumName)
             {
                 return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSizePolicy getEnum(int enumValue)
             {
                 return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSizePolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSizePolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSizePolicy.class);
@@ -325,7 +387,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute GutterPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setGutterPolicy(EnumGutterPolicy enumVar)
         {
@@ -347,7 +409,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClipOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClipOffset(JDFXYPair value)
         {
@@ -361,17 +423,8 @@ public abstract class JDFAutoFitPolicy extends JDFResource
           */
         public JDFXYPair getClipOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -381,7 +434,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MinGutter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMinGutter(JDFXYPair value)
         {
@@ -395,17 +448,8 @@ public abstract class JDFAutoFitPolicy extends JDFResource
           */
         public JDFXYPair getMinGutter()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MINGUTTER, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MINGUTTER, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -415,7 +459,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute RotatePolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setRotatePolicy(EnumRotatePolicy enumVar)
         {
@@ -437,7 +481,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SizePolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSizePolicy(EnumSizePolicy enumVar)
         {

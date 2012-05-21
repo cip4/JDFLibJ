@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFComChannel;
@@ -168,6 +167,10 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCustomerMessage[  --> " + super.toString() + " ]";
@@ -184,7 +187,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Language
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLanguage(String value)
         {
@@ -197,7 +200,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
           */
         public String getLanguage()
         {
-            return getAttribute(AttributeName.LANGUAGE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -206,7 +209,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MessageEvents
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMessageEvents(VString value)
         {
@@ -220,7 +223,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         public VString getMessageEvents()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -231,7 +234,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShowList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShowList(VString value)
         {
@@ -245,7 +248,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         public VString getShowList()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -299,8 +302,9 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 
     /**
      * (30) append element ComChannel
+     * @return JDFComChannel the element
      */
-    public JDFComChannel appendComChannel() throws JDFException
+    public JDFComChannel appendComChannel()
     {
         return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
@@ -173,12 +172,20 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPrintCondition[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +194,10 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -203,7 +214,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Name
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setName(String value)
         {
@@ -216,7 +227,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
           */
         public String getName()
         {
-            return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -225,7 +236,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AimCurve
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAimCurve(JDFTransferFunction value)
         {
@@ -239,17 +250,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
           */
         public JDFTransferFunction getAimCurve()
         {
-            String strAttrName = "";
-            JDFTransferFunction nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.AIMCURVE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFTransferFunction(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.AIMCURVE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
             return nPlaceHolder;
         }
 
@@ -259,7 +261,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Density
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDensity(double value)
         {
@@ -300,6 +302,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
     /**
      * (29) append element ColorMeasurementConditions
+     * @return JDFColorMeasurementConditions the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
     {
@@ -335,6 +339,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
     /**
      * (29) append element Device
+     * @return JDFDevice the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevice appendDevice() throws JDFException
     {
@@ -394,8 +400,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 
     /**
      * (30) append element FileSpec
+     * @return JDFFileSpec the element
      */
-    public JDFFileSpec appendFileSpec() throws JDFException
+    public JDFFileSpec appendFileSpec()
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }

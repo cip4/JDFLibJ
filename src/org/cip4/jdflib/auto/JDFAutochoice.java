@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,6 +151,10 @@ public abstract class JDFAutochoice extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutochoice[  --> " + super.toString() + " ]";
@@ -206,8 +210,9 @@ public abstract class JDFAutochoice extends JDFElement
 
     /**
      * (30) append element when
+     * @return JDFwhen the element
      */
-    public JDFwhen appendwhen() throws JDFException
+    public JDFwhen appendwhen()
     {
         return (JDFwhen) appendElement(ElementName.WHEN, null);
     }
@@ -232,6 +237,8 @@ public abstract class JDFAutochoice extends JDFElement
 
     /**
      * (29) append element otherwise
+     * @return JDFotherwise the element
+     * @throws JDFException if the element already exists
      */
     public JDFotherwise appendotherwise() throws JDFException
     {

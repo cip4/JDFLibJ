@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -179,12 +179,20 @@ public abstract class JDFAutoDieLayout extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDieLayout[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -193,6 +201,10 @@ public abstract class JDFAutoDieLayout extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -213,26 +225,43 @@ public abstract class JDFAutoDieLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDieSide getEnum(String enumName)
             {
                 return (EnumDieSide) getEnum(EnumDieSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDieSide getEnum(int enumValue)
             {
                 return (EnumDieSide) getEnum(EnumDieSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDieSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDieSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDieSide.class);
@@ -258,26 +287,43 @@ public abstract class JDFAutoDieLayout extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMediaSide getEnum(String enumName)
             {
                 return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMediaSide getEnum(int enumValue)
             {
                 return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMediaSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMediaSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMediaSide.class);
@@ -300,7 +346,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute DieSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDieSide(EnumDieSide enumVar)
         {
@@ -322,7 +368,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MediaSide
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMediaSide(EnumMediaSide enumVar)
         {
@@ -344,7 +390,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Rotated
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRotated(boolean value)
         {
@@ -366,7 +412,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Waste
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWaste(double value)
         {
@@ -431,8 +477,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     /**
      * (30) append element Device
+     * @return JDFDevice the element
      */
-    public JDFDevice appendDevice() throws JDFException
+    public JDFDevice appendDevice()
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -466,6 +513,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     /**
      * (29) append element FileSpec
+     * @return JDFFileSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
@@ -501,6 +550,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -560,8 +611,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     /**
      * (30) append element RuleLength
+     * @return JDFRuleLength the element
      */
-    public JDFRuleLength appendRuleLength() throws JDFException
+    public JDFRuleLength appendRuleLength()
     {
         return (JDFRuleLength) appendElement(ElementName.RULELENGTH, null);
     }
@@ -610,8 +662,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     /**
      * (30) append element Station
+     * @return JDFStation the element
      */
-    public JDFStation appendStation() throws JDFException
+    public JDFStation appendStation()
     {
         return (JDFStation) appendElement(ElementName.STATION, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -173,6 +172,10 @@ public abstract class JDFAutoQueue extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoQueue[  --> " + super.toString() + " ]";
@@ -193,26 +196,43 @@ public abstract class JDFAutoQueue extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumQueueStatus getEnum(String enumName)
             {
                 return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumQueueStatus getEnum(int enumValue)
             {
                 return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumQueueStatus.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumQueueStatus.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumQueueStatus.class);
@@ -238,7 +258,7 @@ public abstract class JDFAutoQueue extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Status
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setQueueStatus(EnumQueueStatus enumVar)
         {
@@ -260,7 +280,7 @@ public abstract class JDFAutoQueue extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeviceID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeviceID(String value)
         {
@@ -273,7 +293,7 @@ public abstract class JDFAutoQueue extends JDFElement
           */
         public String getDeviceID()
         {
-            return getAttribute(AttributeName.DEVICEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -282,7 +302,7 @@ public abstract class JDFAutoQueue extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute QueueSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setQueueSize(int value)
         {
@@ -347,8 +367,9 @@ public abstract class JDFAutoQueue extends JDFElement
 
     /**
      * (30) append element Device
+     * @return JDFDevice the element
      */
-    public JDFDevice appendDevice() throws JDFException
+    public JDFDevice appendDevice()
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -397,8 +418,9 @@ public abstract class JDFAutoQueue extends JDFElement
 
     /**
      * (30) append element QueueEntry
+     * @return JDFQueueEntry the element
      */
-    public JDFQueueEntry appendQueueEntry() throws JDFException
+    public JDFQueueEntry appendQueueEntry()
     {
         return (JDFQueueEntry) appendElement(ElementName.QUEUEENTRY, null);
     }

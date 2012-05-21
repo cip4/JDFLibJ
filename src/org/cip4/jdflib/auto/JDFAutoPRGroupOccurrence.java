@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,7 +78,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
@@ -151,6 +150,10 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPRGroupOccurrence[  --> " + super.toString() + " ]";
@@ -206,8 +209,9 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 
     /**
      * (30) append element StringListValue
+     * @return JDFStringListValue the element
      */
-    public JDFStringListValue appendStringListValue() throws JDFException
+    public JDFStringListValue appendStringListValue()
     {
         return (JDFStringListValue) appendElement(ElementName.STRINGLISTVALUE, null);
     }
@@ -256,8 +260,9 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 
     /**
      * (30) append element ArgumentValue
+     * @return JDFArgumentValue the element
      */
-    public JDFArgumentValue appendArgumentValue() throws JDFException
+    public JDFArgumentValue appendArgumentValue()
     {
         return (JDFArgumentValue) appendElement(ElementName.ARGUMENTVALUE, null);
     }

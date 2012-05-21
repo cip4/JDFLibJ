@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -149,6 +149,10 @@ public abstract class JDFAutoStack extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStack[  --> " + super.toString() + " ]";
@@ -169,26 +173,43 @@ public abstract class JDFAutoStack extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumLogicalStackSequence getEnum(String enumName)
             {
                 return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumLogicalStackSequence getEnum(int enumValue)
             {
                 return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumLogicalStackSequence.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumLogicalStackSequence.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumLogicalStackSequence.class);
@@ -210,7 +231,7 @@ public abstract class JDFAutoStack extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LogicalStackOrd
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLogicalStackOrd(int value)
         {
@@ -232,7 +253,7 @@ public abstract class JDFAutoStack extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute LogicalStackSequence
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
         {

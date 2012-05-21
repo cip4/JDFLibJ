@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,14 +74,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
@@ -163,6 +162,10 @@ public abstract class JDFAutoScreenSelector extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoScreenSelector[  --> " + super.toString() + " ]";
@@ -183,26 +186,43 @@ public abstract class JDFAutoScreenSelector extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumScreeningType getEnum(String enumName)
             {
                 return (EnumScreeningType) getEnum(EnumScreeningType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumScreeningType getEnum(int enumValue)
             {
                 return (EnumScreeningType) getEnum(EnumScreeningType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumScreeningType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumScreeningType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumScreeningType.class);
@@ -232,26 +252,43 @@ public abstract class JDFAutoScreenSelector extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(String enumName)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(int enumValue)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSourceObjects.class);
@@ -277,7 +314,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Angle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAngle(double value)
         {
@@ -299,7 +336,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AngleMap
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAngleMap(String value)
         {
@@ -312,7 +349,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
           */
         public String getAngleMap()
         {
-            return getAttribute(AttributeName.ANGLEMAP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ANGLEMAP, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -321,7 +358,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DotSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDotSize(double value)
         {
@@ -343,7 +380,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Frequency
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrequency(double value)
         {
@@ -365,7 +402,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ObjectTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setObjectTags(VString value)
         {
@@ -379,7 +416,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         public VString getObjectTags()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -390,7 +427,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ScreeningFamily
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScreeningFamily(String value)
         {
@@ -403,7 +440,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
           */
         public String getScreeningFamily()
         {
-            return getAttribute(AttributeName.SCREENINGFAMILY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SCREENINGFAMILY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -412,7 +449,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ScreeningType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setScreeningType(EnumScreeningType enumVar)
         {
@@ -434,7 +471,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Separation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSeparation(String value)
         {
@@ -456,7 +493,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SourceFrequency
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSourceFrequency(JDFNumberRange value)
         {
@@ -470,17 +507,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
           */
         public JDFNumberRange getSourceFrequency()
         {
-            String strAttrName = "";
-            JDFNumberRange nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SOURCEFREQUENCY, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberRange(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SOURCEFREQUENCY, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
             return nPlaceHolder;
         }
 
@@ -512,7 +540,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SpotFunction
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSpotFunction(String value)
         {
@@ -525,7 +553,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
           */
         public String getSpotFunction()
         {
-            return getAttribute(AttributeName.SPOTFUNCTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SPOTFUNCTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

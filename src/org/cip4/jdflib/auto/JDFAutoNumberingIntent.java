@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -155,6 +155,10 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNumberingIntent[  --> " + super.toString() + " ]";
@@ -186,6 +190,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
     /**
      * (29) append element ColorName
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendColorName() throws JDFException
     {
@@ -236,8 +242,9 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
     /**
      * (30) append element ColorNameDetails
+     * @return JDFStringSpan the element
      */
-    public JDFStringSpan appendColorNameDetails() throws JDFException
+    public JDFStringSpan appendColorNameDetails()
     {
         return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
     }
@@ -262,6 +269,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
     /**
      * (29) append element ColorPool
+     * @return JDFColorPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
@@ -321,8 +330,9 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 
     /**
      * (30) append element NumberItem
+     * @return JDFNumberItem the element
      */
-    public JDFNumberItem appendNumberItem() throws JDFException
+    public JDFNumberItem appendNumberItem()
     {
         return (JDFNumberItem) appendElement(ElementName.NUMBERITEM, null);
     }

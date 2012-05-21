@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -178,6 +178,10 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoHardCoverBinding[  --> " + super.toString() + " ]";
@@ -209,6 +213,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element BlockThreadSewing
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendBlockThreadSewing() throws JDFException
     {
@@ -235,6 +241,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element CoverStyle
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendCoverStyle() throws JDFException
     {
@@ -261,6 +269,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element EndSheets
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendEndSheets() throws JDFException
     {
@@ -287,6 +297,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element HeadBands
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendHeadBands() throws JDFException
     {
@@ -313,6 +325,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element HeadBandColor
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendHeadBandColor() throws JDFException
     {
@@ -363,8 +377,9 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (30) append element HeadBandColorDetails
+     * @return JDFStringSpan the element
      */
-    public JDFStringSpan appendHeadBandColorDetails() throws JDFException
+    public JDFStringSpan appendHeadBandColorDetails()
     {
         return (JDFStringSpan) appendElement(ElementName.HEADBANDCOLORDETAILS, null);
     }
@@ -389,6 +404,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element Jacket
+     * @return JDFSpanJacket the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanJacket appendJacket() throws JDFException
     {
@@ -415,6 +432,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element JacketFoldingWidth
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendJacketFoldingWidth() throws JDFException
     {
@@ -441,6 +460,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element JapanBind
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendJapanBind() throws JDFException
     {
@@ -467,6 +488,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineBrushing
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineBrushing() throws JDFException
     {
@@ -493,6 +516,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineFiberRoughing
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineFiberRoughing() throws JDFException
     {
@@ -519,6 +544,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineGlue
+     * @return JDFSpanGlue the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanGlue appendSpineGlue() throws JDFException
     {
@@ -545,6 +572,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineLevelling
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineLevelling() throws JDFException
     {
@@ -571,6 +600,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineMilling
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineMilling() throws JDFException
     {
@@ -597,6 +628,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineNotching
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineNotching() throws JDFException
     {
@@ -623,6 +656,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineSanding
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineSanding() throws JDFException
     {
@@ -649,6 +684,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element SpineShredding
+     * @return JDFOptionSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFOptionSpan appendSpineShredding() throws JDFException
     {
@@ -675,6 +712,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element StripMaterial
+     * @return JDFSpanStripMaterial the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanStripMaterial appendStripMaterial() throws JDFException
     {
@@ -701,6 +740,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element TightBacking
+     * @return JDFSpanTightBacking the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanTightBacking appendTightBacking() throws JDFException
     {
@@ -727,6 +768,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (29) append element Thickness
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendThickness() throws JDFException
     {
@@ -777,8 +820,9 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 
     /**
      * (30) append element RegisterRibbon
+     * @return JDFRegisterRibbon the element
      */
-    public JDFRegisterRibbon appendRegisterRibbon() throws JDFException
+    public JDFRegisterRibbon appendRegisterRibbon()
     {
         return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
     }

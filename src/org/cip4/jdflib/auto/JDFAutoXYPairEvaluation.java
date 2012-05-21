@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,8 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
@@ -174,12 +172,20 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoXYPairEvaluation[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -202,26 +208,43 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumXYRelation getEnum(String enumName)
             {
                 return (EnumXYRelation) getEnum(EnumXYRelation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumXYRelation getEnum(int enumValue)
             {
                 return (EnumXYRelation) getEnum(EnumXYRelation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumXYRelation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumXYRelation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumXYRelation.class);
@@ -247,7 +270,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Tolerance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTolerance(JDFXYPair value)
         {
@@ -261,17 +284,8 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
           */
         public JDFXYPair getTolerance()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TOLERANCE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TOLERANCE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -281,7 +295,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueList(JDFXYPairRangeList value)
         {
@@ -295,17 +309,8 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
           */
         public JDFXYPairRangeList getValueList()
         {
-            String strAttrName = "";
-            JDFXYPairRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPairRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -315,7 +320,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute XYRelation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setXYRelation(EnumXYRelation enumVar)
         {
@@ -380,8 +385,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 
     /**
      * (30) append element BasicPreflightTest
+     * @return JDFBasicPreflightTest the element
      */
-    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
+    public JDFBasicPreflightTest appendBasicPreflightTest()
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }

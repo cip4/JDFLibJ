@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPayment;
 import org.cip4.jdflib.resource.intent.JDFPricing;
@@ -171,6 +170,10 @@ public abstract class JDFAutoPricing extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPricing[  --> " + super.toString() + " ]";
@@ -187,7 +190,7 @@ public abstract class JDFAutoPricing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdditionalPrice
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdditionalPrice(double value)
         {
@@ -209,7 +212,7 @@ public abstract class JDFAutoPricing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Currency
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCurrency(String value)
         {
@@ -222,7 +225,7 @@ public abstract class JDFAutoPricing extends JDFElement
           */
         public String getCurrency()
         {
-            return getAttribute(AttributeName.CURRENCY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CURRENCY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -231,7 +234,7 @@ public abstract class JDFAutoPricing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HasPrice
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHasPrice(boolean value)
         {
@@ -253,7 +256,7 @@ public abstract class JDFAutoPricing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Item
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setItem(String value)
         {
@@ -266,7 +269,7 @@ public abstract class JDFAutoPricing extends JDFElement
           */
         public String getItem()
         {
-            return getAttribute(AttributeName.ITEM, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ITEM, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -275,7 +278,7 @@ public abstract class JDFAutoPricing extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Price
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPrice(double value)
         {
@@ -340,8 +343,9 @@ public abstract class JDFAutoPricing extends JDFElement
 
     /**
      * (30) append element Payment
+     * @return JDFPayment the element
      */
-    public JDFPayment appendPayment() throws JDFException
+    public JDFPayment appendPayment()
     {
         return (JDFPayment) appendElement(ElementName.PAYMENT, null);
     }
@@ -390,8 +394,9 @@ public abstract class JDFAutoPricing extends JDFElement
 
     /**
      * (30) append element Pricing
+     * @return JDFPricing the element
      */
-    public JDFPricing appendPricing() throws JDFException
+    public JDFPricing appendPricing()
     {
         return (JDFPricing) appendElement(ElementName.PRICING, null);
     }

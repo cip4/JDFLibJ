@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
@@ -188,12 +187,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBinderySignature[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -202,6 +209,10 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -222,26 +233,43 @@ public abstract class JDFAutoBinderySignature extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBinderySignatureType getEnum(String enumName)
             {
                 return (EnumBinderySignatureType) getEnum(EnumBinderySignatureType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBinderySignatureType getEnum(int enumValue)
             {
                 return (EnumBinderySignatureType) getEnum(EnumBinderySignatureType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBinderySignatureType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBinderySignatureType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBinderySignatureType.class);
@@ -268,26 +296,43 @@ public abstract class JDFAutoBinderySignature extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBindingEdge getEnum(String enumName)
             {
                 return (EnumBindingEdge) getEnum(EnumBindingEdge.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBindingEdge getEnum(int enumValue)
             {
                 return (EnumBindingEdge) getEnum(EnumBindingEdge.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBindingEdge.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBindingEdge.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBindingEdge.class);
@@ -316,26 +361,43 @@ public abstract class JDFAutoBinderySignature extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumJogEdge getEnum(String enumName)
             {
                 return (EnumJogEdge) getEnum(EnumJogEdge.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumJogEdge getEnum(int enumValue)
             {
                 return (EnumJogEdge) getEnum(EnumJogEdge.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumJogEdge.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumJogEdge.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumJogEdge.class);
@@ -364,26 +426,43 @@ public abstract class JDFAutoBinderySignature extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBindingOrientation getEnum(String enumName)
             {
                 return (EnumBindingOrientation) getEnum(EnumBindingOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBindingOrientation getEnum(int enumValue)
             {
                 return (EnumBindingOrientation) getEnum(EnumBindingOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBindingOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBindingOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBindingOrientation.class);
@@ -415,26 +494,43 @@ public abstract class JDFAutoBinderySignature extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFoldLay getEnum(String enumName)
             {
                 return (EnumFoldLay) getEnum(EnumFoldLay.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFoldLay getEnum(int enumValue)
             {
                 return (EnumFoldLay) getEnum(EnumFoldLay.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFoldLay.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFoldLay.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFoldLay.class);
@@ -462,7 +558,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BinderySignatureType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBinderySignatureType(EnumBinderySignatureType enumVar)
         {
@@ -484,7 +580,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BindingEdge
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBindingEdge(EnumBindingEdge enumVar)
         {
@@ -506,7 +602,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute JogEdge
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setJogEdge(EnumJogEdge enumVar)
         {
@@ -528,7 +624,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberUp
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberUp(JDFXYPair value)
         {
@@ -542,17 +638,8 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public JDFXYPair getNumberUp()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -562,7 +649,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AlignmentReferenceWeb
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAlignmentReferenceWeb(String value)
         {
@@ -575,7 +662,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public String getAlignmentReferenceWeb()
         {
-            return getAttribute(AttributeName.ALIGNMENTREFERENCEWEB, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ALIGNMENTREFERENCEWEB, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -584,7 +671,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BindingOrientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBindingOrientation(EnumBindingOrientation enumVar)
         {
@@ -606,7 +693,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FoldCatalog
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFoldCatalog(String value)
         {
@@ -619,7 +706,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public String getFoldCatalog()
         {
-            return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FOLDCATALOG, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -628,7 +715,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FoldLay
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFoldLay(EnumFoldLay enumVar)
         {
@@ -650,7 +737,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutsideGutter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutsideGutter(boolean value)
         {
@@ -672,7 +759,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StaggerColumns
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStaggerColumns(JDFNumberList value)
         {
@@ -686,17 +773,8 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public JDFNumberList getStaggerColumns()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STAGGERCOLUMNS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.STAGGERCOLUMNS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -706,7 +784,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StaggerContinuous
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStaggerContinuous(boolean value)
         {
@@ -728,7 +806,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StaggerRows
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStaggerRows(JDFNumberList value)
         {
@@ -742,17 +820,8 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public JDFNumberList getStaggerRows()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STAGGERROWS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.STAGGERROWS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -762,7 +831,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WebCellAlignment
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWebCellAlignment(JDFXYPair value)
         {
@@ -776,17 +845,8 @@ public abstract class JDFAutoBinderySignature extends JDFResource
           */
         public JDFXYPair getWebCellAlignment()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WEBCELLALIGNMENT, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WEBCELLALIGNMENT, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -815,6 +875,8 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
     /**
      * (29) append element DieLayout
+     * @return JDFDieLayout the element
+     * @throws JDFException if the element already exists
      */
     public JDFDieLayout appendDieLayout() throws JDFException
     {
@@ -874,8 +936,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
     /**
      * (30) append element Fold
+     * @return JDFFold the element
      */
-    public JDFFold appendFold() throws JDFException
+    public JDFFold appendFold()
     {
         return (JDFFold) appendElement(ElementName.FOLD, null);
     }
@@ -924,8 +987,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
     /**
      * (30) append element SignatureCell
+     * @return JDFSignatureCell the element
      */
-    public JDFSignatureCell appendSignatureCell() throws JDFException
+    public JDFSignatureCell appendSignatureCell()
     {
         return (JDFSignatureCell) appendElement(ElementName.SIGNATURECELL, null);
     }

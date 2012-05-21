@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -152,12 +152,20 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrimmingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -166,6 +174,10 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -186,26 +198,43 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTrimCover getEnum(String enumName)
             {
                 return (EnumTrimCover) getEnum(EnumTrimCover.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTrimCover getEnum(int enumValue)
             {
                 return (EnumTrimCover) getEnum(EnumTrimCover.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTrimCover.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTrimCover.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTrimCover.class);
@@ -233,26 +262,43 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTrimmingType getEnum(String enumName)
             {
                 return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTrimmingType getEnum(int enumValue)
             {
                 return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTrimmingType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTrimmingType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTrimmingType.class);
@@ -274,7 +320,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TrimCover
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTrimCover(EnumTrimCover enumVar)
         {
@@ -296,7 +342,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Width
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWidth(double value)
         {
@@ -318,7 +364,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Height
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHeight(double value)
         {
@@ -340,7 +386,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrimmingOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrimmingOffset(double value)
         {
@@ -362,7 +408,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TrimmingType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTrimmingType(EnumTrimmingType enumVar)
         {

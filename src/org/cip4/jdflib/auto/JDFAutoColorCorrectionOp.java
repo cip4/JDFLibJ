@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -178,6 +177,10 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoColorCorrectionOp[  --> " + super.toString() + " ]";
@@ -198,26 +201,43 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(String enumName)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(int enumValue)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSourceObjects.class);
@@ -265,7 +285,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustCyanRed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustCyanRed(double value)
         {
@@ -287,7 +307,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustMagentaGreen
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustMagentaGreen(double value)
         {
@@ -309,7 +329,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustYellowBlue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustYellowBlue(double value)
         {
@@ -331,7 +351,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustContrast
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustContrast(double value)
         {
@@ -353,7 +373,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustHue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustHue(double value)
         {
@@ -375,7 +395,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustLightness
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustLightness(double value)
         {
@@ -397,7 +417,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdjustSaturation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdjustSaturation(double value)
         {
@@ -419,7 +439,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ObjectTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setObjectTags(VString value)
         {
@@ -433,7 +453,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         public VString getObjectTags()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -487,8 +507,9 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
     /**
      * (30) append element FileSpec
+     * @return JDFFileSpec the element
      */
-    public JDFFileSpec appendFileSpec() throws JDFException
+    public JDFFileSpec appendFileSpec()
     {
         return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }

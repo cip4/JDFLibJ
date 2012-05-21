@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -181,6 +180,10 @@ public abstract class JDFAutoDrop extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDrop[  --> " + super.toString() + " ]";
@@ -201,26 +204,43 @@ public abstract class JDFAutoDrop extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTransfer getEnum(String enumName)
             {
                 return (EnumTransfer) getEnum(EnumTransfer.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTransfer getEnum(int enumValue)
             {
                 return (EnumTransfer) getEnum(EnumTransfer.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTransfer.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTransfer.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTransfer.class);
@@ -244,7 +264,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Earliest
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setEarliest(JDFDate value)
         {
@@ -259,21 +279,9 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public JDFDate getEarliest()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.EARLIEST, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.EARLIEST, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -282,7 +290,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Method
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMethod(String value)
         {
@@ -295,7 +303,7 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public String getMethod()
         {
-            return getAttribute(AttributeName.METHOD, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -304,7 +312,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pickup
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPickup(boolean value)
         {
@@ -326,7 +334,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (11) set attribute Required
-          * @param value: the value to set the attribute to or null
+          * @param value the value to set the attribute to or null
           */
         public void setRequired(JDFDate value)
         {
@@ -341,21 +349,9 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public JDFDate getRequired()
         {
-            JDFDate nMyDate = null;
-            String str = JDFConstants.EMPTYSTRING;
-            str = getAttribute(AttributeName.REQUIRED, null, JDFConstants.EMPTYSTRING);
-            if (!JDFConstants.EMPTYSTRING.equals(str))
-            {
-                try
-                {
-                    nMyDate = new JDFDate(str);
-                }
-                catch(DataFormatException dfe)
-                {
-                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
-                }
-            }
-            return nMyDate;
+            String str = getAttribute(AttributeName.REQUIRED, null, null);
+                    JDFDate ret = JDFDate.createDate(str);
+            return ret;
         }
 
         
@@ -364,7 +360,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ServiceLevel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setServiceLevel(String value)
         {
@@ -377,7 +373,7 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public String getServiceLevel()
         {
-            return getAttribute(AttributeName.SERVICELEVEL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SERVICELEVEL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -386,7 +382,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrackingID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrackingID(String value)
         {
@@ -399,7 +395,7 @@ public abstract class JDFAutoDrop extends JDFElement
           */
         public String getTrackingID()
         {
-            return getAttribute(AttributeName.TRACKINGID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TRACKINGID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -408,7 +404,7 @@ public abstract class JDFAutoDrop extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Transfer
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTransfer(EnumTransfer enumVar)
         {
@@ -449,6 +445,8 @@ public abstract class JDFAutoDrop extends JDFElement
 
     /**
      * (29) append element Company
+     * @return JDFCompany the element
+     * @throws JDFException if the element already exists
      */
     public JDFCompany appendCompany() throws JDFException
     {
@@ -508,8 +506,9 @@ public abstract class JDFAutoDrop extends JDFElement
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -567,8 +566,9 @@ public abstract class JDFAutoDrop extends JDFElement
 
     /**
      * (30) append element DropItem
+     * @return JDFDropItem the element
      */
-    public JDFDropItem appendDropItem() throws JDFException
+    public JDFDropItem appendDropItem()
     {
         return (JDFDropItem) appendElement(ElementName.DROPITEM, null);
     }

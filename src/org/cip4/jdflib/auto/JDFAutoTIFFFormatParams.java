@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFTIFFEmbeddedFile;
@@ -179,6 +177,10 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTIFFFormatParams[  --> " + super.toString() + " ]";
@@ -199,26 +201,43 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumByteOrder getEnum(String enumName)
             {
                 return (EnumByteOrder) getEnum(EnumByteOrder.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumByteOrder getEnum(int enumValue)
             {
                 return (EnumByteOrder) getEnum(EnumByteOrder.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumByteOrder.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumByteOrder.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumByteOrder.class);
@@ -244,26 +263,43 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSegmentation getEnum(String enumName)
             {
                 return (EnumSegmentation) getEnum(EnumSegmentation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSegmentation getEnum(int enumValue)
             {
                 return (EnumSegmentation) getEnum(EnumSegmentation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSegmentation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSegmentation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSegmentation.class);
@@ -286,7 +322,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ByteOrder
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setByteOrder(EnumByteOrder enumVar)
         {
@@ -308,7 +344,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Interleaving
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInterleaving(int value)
         {
@@ -330,7 +366,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WhiteIsZero
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWhiteIsZero(boolean value)
         {
@@ -352,7 +388,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Segmentation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSegmentation(EnumSegmentation enumVar)
         {
@@ -374,7 +410,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RowsPerStrip
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRowsPerStrip(int value)
         {
@@ -396,7 +432,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TileSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTileSize(JDFXYPair value)
         {
@@ -410,17 +446,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
           */
         public JDFXYPair getTileSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TILESIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TILESIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -430,7 +457,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SeparationNameTag
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSeparationNameTag(int value)
         {
@@ -495,8 +522,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 
     /**
      * (30) append element TIFFtag
+     * @return JDFTIFFtag the element
      */
-    public JDFTIFFtag appendTIFFtag() throws JDFException
+    public JDFTIFFtag appendTIFFtag()
     {
         return (JDFTIFFtag) appendElement(ElementName.TIFFTAG, null);
     }
@@ -545,8 +573,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 
     /**
      * (30) append element TIFFEmbeddedFile
+     * @return JDFTIFFEmbeddedFile the element
      */
-    public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile() throws JDFException
+    public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile()
     {
         return (JDFTIFFEmbeddedFile) appendElement(ElementName.TIFFEMBEDDEDFILE, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,14 +74,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -156,12 +155,20 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoObjectResolution[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -170,6 +177,10 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -190,26 +201,43 @@ public abstract class JDFAutoObjectResolution extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(String enumName)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSourceObjects getEnum(int enumValue)
             {
                 return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSourceObjects.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSourceObjects.class);
@@ -235,7 +263,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Resolution
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setResolution(JDFXYPair value)
         {
@@ -249,17 +277,8 @@ public abstract class JDFAutoObjectResolution extends JDFResource
           */
         public JDFXYPair getResolution()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RESOLUTION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -291,7 +310,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AntiAliasing
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAntiAliasing(String value)
         {
@@ -304,7 +323,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
           */
         public String getAntiAliasing()
         {
-            return getAttribute(AttributeName.ANTIALIASING, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ANTIALIASING, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -313,7 +332,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ObjectTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setObjectTags(VString value)
         {
@@ -327,7 +346,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         public VString getObjectTags()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }

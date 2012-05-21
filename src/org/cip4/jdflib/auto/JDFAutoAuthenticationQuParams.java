@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,6 +148,10 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAuthenticationQuParams[  --> " + super.toString() + " ]";
@@ -168,26 +172,43 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAuthenticationType getEnum(String enumName)
             {
                 return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAuthenticationType getEnum(int enumValue)
             {
                 return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAuthenticationType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAuthenticationType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAuthenticationType.class);
@@ -209,7 +230,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute AuthenticationType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAuthenticationType(EnumAuthenticationType enumVar)
         {

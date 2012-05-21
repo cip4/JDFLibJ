@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -182,6 +181,10 @@ public abstract class JDFAutoEmboss extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoEmboss[  --> " + super.toString() + " ]";
@@ -202,26 +205,43 @@ public abstract class JDFAutoEmboss extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumDirection getEnum(String enumName)
             {
                 return (EnumDirection) getEnum(EnumDirection.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumDirection getEnum(int enumValue)
             {
                 return (EnumDirection) getEnum(EnumDirection.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumDirection.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumDirection.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumDirection.class);
@@ -249,26 +269,43 @@ public abstract class JDFAutoEmboss extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumEdgeShape getEnum(String enumName)
             {
                 return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumEdgeShape getEnum(int enumValue)
             {
                 return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumEdgeShape.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumEdgeShape.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumEdgeShape.class);
@@ -294,26 +331,43 @@ public abstract class JDFAutoEmboss extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumEmbossingType getEnum(String enumName)
             {
                 return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumEmbossingType getEnum(int enumValue)
             {
                 return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumEmbossingType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumEmbossingType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumEmbossingType.class);
@@ -343,26 +397,43 @@ public abstract class JDFAutoEmboss extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumLevel getEnum(String enumName)
             {
                 return (EnumLevel) getEnum(EnumLevel.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumLevel getEnum(int enumValue)
             {
                 return (EnumLevel) getEnum(EnumLevel.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumLevel.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumLevel.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumLevel.class);
@@ -385,7 +456,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Direction
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setDirection(EnumDirection enumVar)
         {
@@ -407,7 +478,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EdgeAngle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEdgeAngle(double value)
         {
@@ -429,7 +500,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute EdgeShape
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setEdgeShape(EnumEdgeShape enumVar)
         {
@@ -451,7 +522,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute EmbossingType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setEmbossingType(EnumEmbossingType enumVar)
         {
@@ -473,7 +544,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Height
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHeight(double value)
         {
@@ -495,7 +566,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ImageSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setImageSize(JDFXYPair value)
         {
@@ -509,17 +580,8 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public JDFXYPair getImageSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.IMAGESIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.IMAGESIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -529,7 +591,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Level
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setLevel(EnumLevel enumVar)
         {
@@ -551,7 +613,7 @@ public abstract class JDFAutoEmboss extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Position
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPosition(JDFXYPair value)
         {
@@ -565,17 +627,8 @@ public abstract class JDFAutoEmboss extends JDFElement
           */
         public JDFXYPair getPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.POSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.POSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -628,8 +681,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }
@@ -663,6 +717,8 @@ public abstract class JDFAutoEmboss extends JDFElement
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -698,6 +754,8 @@ public abstract class JDFAutoEmboss extends JDFElement
 
     /**
      * (29) append element Tool
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendTool() throws JDFException
     {

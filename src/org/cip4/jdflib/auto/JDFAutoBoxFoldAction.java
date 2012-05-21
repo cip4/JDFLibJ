@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
@@ -172,6 +170,10 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBoxFoldAction[  --> " + super.toString() + " ]";
@@ -192,26 +194,43 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAction getEnum(String enumName)
             {
                 return (EnumAction) getEnum(EnumAction.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAction getEnum(int enumValue)
             {
                 return (EnumAction) getEnum(EnumAction.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAction.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAction.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAction.class);
@@ -246,7 +265,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FoldIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFoldIndex(JDFXYPair value)
         {
@@ -260,17 +279,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
           */
         public JDFXYPair getFoldIndex()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FOLDINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FOLDINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -280,7 +290,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Action
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAction(EnumAction enumVar)
         {
@@ -345,8 +355,9 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 
     /**
      * (30) append element GlueLine
+     * @return JDFGlueLine the element
      */
-    public JDFGlueLine appendGlueLine() throws JDFException
+    public JDFGlueLine appendGlueLine()
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }

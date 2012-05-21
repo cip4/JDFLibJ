@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFResource;
@@ -170,12 +168,20 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStringEvaluation[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -194,7 +200,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LengthJDF
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLengthJDF(JDFIntegerRange value)
         {
@@ -208,17 +214,8 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
           */
         public JDFIntegerRange getLengthJDF()
         {
-            String strAttrName = "";
-            JDFIntegerRange nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.LENGTHJDF, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRange(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.LENGTHJDF, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
             return nPlaceHolder;
         }
 
@@ -228,7 +225,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RegExp
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRegExp(String value)
         {
@@ -241,7 +238,7 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
           */
         public String getRegExp()
         {
-            return getAttribute(AttributeName.REGEXP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REGEXP, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -293,8 +290,9 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 
     /**
      * (30) append element BasicPreflightTest
+     * @return JDFBasicPreflightTest the element
      */
-    public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
+    public JDFBasicPreflightTest appendBasicPreflightTest()
     {
         return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
     }
@@ -343,8 +341,9 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 
     /**
      * (30) append element Value
+     * @return JDFValue the element
      */
-    public JDFValue appendValue() throws JDFException
+    public JDFValue appendValue()
     {
         return (JDFValue) appendElement(ElementName.VALUE, null);
     }

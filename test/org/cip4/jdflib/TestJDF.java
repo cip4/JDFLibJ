@@ -16,10 +16,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -210,6 +210,9 @@ public class TestJDF extends JDFTestCaseBase
 
 	public void testPing() throws Exception
 	{
+
+		assertTrue(new File("c:\\data").isDirectory());
+		assertTrue(new File("\\\\kie-wf16prdy\\PTConfig\\SysConfig").isDirectory());
 		String s = "a";
 		InputStream is = new ByteArrayIOStream(s.getBytes()).getInputStream();
 		UrlPart p = UrlUtil.writeToURL("http://kie-WF22PRDY:6311/StorageService-J/Storage", is, UrlUtil.GET, UrlUtil.VND_JMF, null);

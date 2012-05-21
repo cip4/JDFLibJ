@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -223,6 +222,10 @@ public abstract class JDFAutoPart extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPart[  --> " + super.toString() + " ]";
@@ -243,26 +246,43 @@ public abstract class JDFAutoPart extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPreviewType getEnum(String enumName)
             {
                 return (EnumPreviewType) getEnum(EnumPreviewType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPreviewType getEnum(int enumValue)
             {
                 return (EnumPreviewType) getEnum(EnumPreviewType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPreviewType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPreviewType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPreviewType.class);
@@ -291,26 +311,43 @@ public abstract class JDFAutoPart extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSide getEnum(String enumName)
             {
                 return (EnumSide) getEnum(EnumSide.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSide getEnum(int enumValue)
             {
                 return (EnumSide) getEnum(EnumSide.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSide.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSide.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSide.class);
@@ -332,7 +369,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Sorting
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSorting(JDFIntegerRangeList value)
         {
@@ -346,17 +383,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSorting()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SORTING, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SORTING, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -366,7 +394,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SortAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSortAmount(String value)
         {
@@ -379,7 +407,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSortAmount()
         {
-            return getAttribute(AttributeName.SORTAMOUNT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SORTAMOUNT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -388,7 +416,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BinderySignatureName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBinderySignatureName(String value)
         {
@@ -401,7 +429,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getBinderySignatureName()
         {
-            return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -410,7 +438,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BinderySignaturePaginationIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBinderySignaturePaginationIndex(String value)
         {
@@ -423,7 +451,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getBinderySignaturePaginationIndex()
         {
-            return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -432,7 +460,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BlockName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBlockName(String value)
         {
@@ -445,7 +473,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getBlockName()
         {
-            return getAttribute(AttributeName.BLOCKNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BLOCKNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -454,7 +482,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BundleItemIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBundleItemIndex(JDFIntegerRangeList value)
         {
@@ -468,17 +496,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getBundleItemIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -488,7 +507,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CellIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCellIndex(JDFIntegerRangeList value)
         {
@@ -502,17 +521,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getCellIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CELLINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CELLINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -522,7 +532,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Condition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCondition(String value)
         {
@@ -535,7 +545,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getCondition()
         {
-            return getAttribute(AttributeName.CONDITION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CONDITION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -544,7 +554,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit0
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit0(String value)
         {
@@ -557,7 +567,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit0()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT0, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT0, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -566,7 +576,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit1
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit1(String value)
         {
@@ -579,7 +589,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit1()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT1, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT1, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -588,7 +598,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit2(String value)
         {
@@ -601,7 +611,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit2()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT2, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT2, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -610,7 +620,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit3
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit3(String value)
         {
@@ -623,7 +633,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit3()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT3, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT3, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -632,7 +642,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit4
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit4(String value)
         {
@@ -645,7 +655,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit4()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT4, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT4, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -654,7 +664,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit5
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit5(String value)
         {
@@ -667,7 +677,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit5()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT5, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT5, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -676,7 +686,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit6
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit6(String value)
         {
@@ -689,7 +699,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit6()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT6, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT6, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -698,7 +708,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit7
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit7(String value)
         {
@@ -711,7 +721,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit7()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT7, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT7, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -720,7 +730,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit8
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit8(String value)
         {
@@ -733,7 +743,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit8()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT8, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT8, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -742,7 +752,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DeliveryUnit9
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDeliveryUnit9(String value)
         {
@@ -755,7 +765,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDeliveryUnit9()
         {
-            return getAttribute(AttributeName.DELIVERYUNIT9, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DELIVERYUNIT9, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -764,7 +774,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocCopies
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocCopies(JDFIntegerRangeList value)
         {
@@ -778,17 +788,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getDocCopies()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCCOPIES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCCOPIES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -798,7 +799,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocIndex(JDFIntegerRangeList value)
         {
@@ -812,17 +813,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getDocIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -832,7 +824,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocRunIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocRunIndex(JDFIntegerRangeList value)
         {
@@ -846,17 +838,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getDocRunIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -866,7 +849,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocSheetIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocSheetIndex(JDFIntegerRangeList value)
         {
@@ -880,17 +863,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getDocSheetIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -900,7 +874,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocTags(String value)
         {
@@ -913,7 +887,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getDocTags()
         {
-            return getAttribute(AttributeName.DOCTAGS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DOCTAGS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -922,7 +896,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Edition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEdition(String value)
         {
@@ -935,7 +909,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getEdition()
         {
-            return getAttribute(AttributeName.EDITION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.EDITION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -944,7 +918,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EditionVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEditionVersion(String value)
         {
@@ -957,7 +931,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getEditionVersion()
         {
-            return getAttribute(AttributeName.EDITIONVERSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.EDITIONVERSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -966,7 +940,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FountainNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFountainNumber(int value)
         {
@@ -988,7 +962,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ItemNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setItemNames(String value)
         {
@@ -1001,7 +975,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getItemNames()
         {
-            return getAttribute(AttributeName.ITEMNAMES, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ITEMNAMES, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1010,7 +984,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LayerIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayerIDs(JDFIntegerRangeList value)
         {
@@ -1024,17 +998,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getLayerIDs()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.LAYERIDS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.LAYERIDS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1044,7 +1009,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Location
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLocation(String value)
         {
@@ -1057,7 +1022,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getLocation()
         {
-            return getAttribute(AttributeName.LOCATION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LOCATION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1066,7 +1031,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata0
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata0(JDFNameRangeList value)
         {
@@ -1080,17 +1045,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata0()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA0, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA0, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1100,7 +1056,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata1
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata1(JDFNameRangeList value)
         {
@@ -1114,17 +1070,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata1()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA1, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA1, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1134,7 +1081,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata2
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata2(JDFNameRangeList value)
         {
@@ -1148,17 +1095,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata2()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA2, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA2, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1168,7 +1106,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata3
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata3(JDFNameRangeList value)
         {
@@ -1182,17 +1120,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata3()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA3, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA3, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1202,7 +1131,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata4
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata4(JDFNameRangeList value)
         {
@@ -1216,17 +1145,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata4()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA4, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA4, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1236,7 +1156,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata5
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata5(JDFNameRangeList value)
         {
@@ -1250,17 +1170,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata5()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA5, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA5, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1270,7 +1181,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata6
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata6(JDFNameRangeList value)
         {
@@ -1284,17 +1195,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata6()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA6, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA6, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1304,7 +1206,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata7
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata7(JDFNameRangeList value)
         {
@@ -1318,17 +1220,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata7()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA7, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA7, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1338,7 +1231,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata8
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata8(JDFNameRangeList value)
         {
@@ -1352,17 +1245,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata8()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA8, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA8, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1372,7 +1256,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Metadata9
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMetadata9(JDFNameRangeList value)
         {
@@ -1386,17 +1270,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFNameRangeList getMetadata9()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.METADATA9, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.METADATA9, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1406,7 +1281,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Option
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOption(String value)
         {
@@ -1419,7 +1294,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getOption()
         {
-            return getAttribute(AttributeName.OPTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OPTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1428,7 +1303,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageNumber(JDFIntegerRangeList value)
         {
@@ -1442,17 +1317,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getPageNumber()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGENUMBER, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGENUMBER, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1462,7 +1328,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageTags(String value)
         {
@@ -1475,7 +1341,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getPageTags()
         {
-            return getAttribute(AttributeName.PAGETAGS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PAGETAGS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1484,7 +1350,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PartVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPartVersion(VString value)
         {
@@ -1498,7 +1364,7 @@ public abstract class JDFAutoPart extends JDFElement
         public VString getPartVersion()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.PARTVERSION, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -1509,7 +1375,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PlateLayout
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPlateLayout(String value)
         {
@@ -1522,7 +1388,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getPlateLayout()
         {
-            return getAttribute(AttributeName.PLATELAYOUT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PLATELAYOUT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1531,7 +1397,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PreflightRule
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPreflightRule(String value)
         {
@@ -1544,7 +1410,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getPreflightRule()
         {
-            return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1553,7 +1419,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PreviewType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPreviewType(EnumPreviewType enumVar)
         {
@@ -1575,7 +1441,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RibbonName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRibbonName(String value)
         {
@@ -1588,7 +1454,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getRibbonName()
         {
-            return getAttribute(AttributeName.RIBBONNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RIBBONNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1597,7 +1463,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Run
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRun(String value)
         {
@@ -1610,7 +1476,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getRun()
         {
-            return getAttribute(AttributeName.RUN, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RUN, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1619,7 +1485,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunIndex(JDFIntegerRangeList value)
         {
@@ -1633,17 +1499,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getRunIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RUNINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1653,7 +1510,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunPage(int value)
         {
@@ -1675,7 +1532,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunPageRange
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunPageRange(String value)
         {
@@ -1688,7 +1545,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getRunPageRange()
         {
-            return getAttribute(AttributeName.RUNPAGERANGE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RUNPAGERANGE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1697,7 +1554,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunSet
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunSet(String value)
         {
@@ -1710,7 +1567,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getRunSet()
         {
-            return getAttribute(AttributeName.RUNSET, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RUNSET, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1719,7 +1576,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunTags(String value)
         {
@@ -1732,7 +1589,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getRunTags()
         {
-            return getAttribute(AttributeName.RUNTAGS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RUNTAGS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1741,7 +1598,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SectionIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSectionIndex(JDFIntegerRangeList value)
         {
@@ -1755,17 +1612,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSectionIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1775,7 +1623,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Separation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSeparation(String value)
         {
@@ -1788,7 +1636,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSeparation()
         {
-            return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1797,7 +1645,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetDocIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetDocIndex(JDFIntegerRangeList value)
         {
@@ -1811,17 +1659,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSetDocIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1831,7 +1670,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetRunIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetRunIndex(JDFIntegerRangeList value)
         {
@@ -1845,17 +1684,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSetRunIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1865,7 +1695,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetSheetIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetSheetIndex(JDFIntegerRangeList value)
         {
@@ -1879,17 +1709,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSetSheetIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1899,7 +1720,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetTags
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetTags(String value)
         {
@@ -1912,7 +1733,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSetTags()
         {
-            return getAttribute(AttributeName.SETTAGS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SETTAGS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -1921,7 +1742,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetIndex(JDFIntegerRangeList value)
         {
@@ -1935,17 +1756,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSetIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1955,7 +1767,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetIndex(JDFIntegerRangeList value)
         {
@@ -1969,17 +1781,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFIntegerRangeList getSheetIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SHEETINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -1989,7 +1792,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetName(String value)
         {
@@ -2002,7 +1805,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSheetName()
         {
-            return getAttribute(AttributeName.SHEETNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2011,7 +1814,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Side
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSide(EnumSide enumVar)
         {
@@ -2033,7 +1836,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SignatureName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSignatureName(String value)
         {
@@ -2046,7 +1849,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSignatureName()
         {
-            return getAttribute(AttributeName.SIGNATURENAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2055,7 +1858,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StationName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStationName(String value)
         {
@@ -2068,7 +1871,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getStationName()
         {
-            return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2077,7 +1880,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SubRun
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSubRun(String value)
         {
@@ -2090,7 +1893,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getSubRun()
         {
-            return getAttribute(AttributeName.SUBRUN, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SUBRUN, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2099,7 +1902,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TileID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTileID(JDFXYPair value)
         {
@@ -2113,17 +1916,8 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public JDFXYPair getTileID()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TILEID, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TILEID, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -2133,7 +1927,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WebName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWebName(String value)
         {
@@ -2146,7 +1940,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getWebName()
         {
-            return getAttribute(AttributeName.WEBNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WEBNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2155,7 +1949,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WebProduct
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWebProduct(String value)
         {
@@ -2168,7 +1962,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getWebProduct()
         {
-            return getAttribute(AttributeName.WEBPRODUCT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WEBPRODUCT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -2177,7 +1971,7 @@ public abstract class JDFAutoPart extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WebSetup
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWebSetup(String value)
         {
@@ -2190,7 +1984,7 @@ public abstract class JDFAutoPart extends JDFElement
           */
         public String getWebSetup()
         {
-            return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WEBSETUP, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

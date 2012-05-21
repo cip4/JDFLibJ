@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -188,12 +187,20 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPrintingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -202,6 +209,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -222,26 +233,43 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPageDelivery getEnum(String enumName)
             {
                 return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPageDelivery getEnum(int enumValue)
             {
                 return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPageDelivery.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPageDelivery.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPageDelivery.class);
@@ -270,26 +298,43 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(String enumName)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(int enumValue)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPrintQuality.class);
@@ -312,7 +357,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AttributesNaturalLang
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAttributesNaturalLang(String value)
         {
@@ -334,7 +379,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IDPAttributeFidelity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIDPAttributeFidelity(boolean value)
         {
@@ -356,7 +401,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IPPJobPriority
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIPPJobPriority(int value)
         {
@@ -378,7 +423,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IPPVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIPPVersion(JDFXYPair value)
         {
@@ -392,17 +437,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
           */
         public JDFXYPair getIPPVersion()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.IPPVERSION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.IPPVERSION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -412,7 +448,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutputBin
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutputBin(String value)
         {
@@ -425,7 +461,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
           */
         public String getOutputBin()
         {
-            return getAttribute(AttributeName.OUTPUTBIN, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -434,7 +470,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PageDelivery
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPageDelivery(EnumPageDelivery enumVar)
         {
@@ -456,7 +492,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PrintQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
@@ -478,7 +514,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetCollate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetCollate(boolean value)
         {
@@ -543,8 +579,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (30) append element Cover
+     * @return JDFCover the element
      */
-    public JDFCover appendCover() throws JDFException
+    public JDFCover appendCover()
     {
         return (JDFCover) appendElement(ElementName.COVER, null);
     }
@@ -569,6 +606,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (29) append element IDPFinishing
+     * @return JDFIDPFinishing the element
+     * @throws JDFException if the element already exists
      */
     public JDFIDPFinishing appendIDPFinishing() throws JDFException
     {
@@ -595,6 +634,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (29) append element IDPLayout
+     * @return JDFIDPLayout the element
+     * @throws JDFException if the element already exists
      */
     public JDFIDPLayout appendIDPLayout() throws JDFException
     {
@@ -645,8 +686,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (30) append element JobSheet
+     * @return JDFJobSheet the element
      */
-    public JDFJobSheet appendJobSheet() throws JDFException
+    public JDFJobSheet appendJobSheet()
     {
         return (JDFJobSheet) appendElement(ElementName.JOBSHEET, null);
     }
@@ -671,6 +713,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (29) append element MediaIntent
+     * @return JDFMediaIntent the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaIntent appendMediaIntent() throws JDFException
     {
@@ -706,6 +750,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 
     /**
      * (29) append element MediaSource
+     * @return JDFMediaSource the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {

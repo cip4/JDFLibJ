@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -144,6 +144,10 @@ public abstract class JDFAutoFlateParams extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoFlateParams[  --> " + super.toString() + " ]";
@@ -160,7 +164,7 @@ public abstract class JDFAutoFlateParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Effort
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEffort(int value)
         {
@@ -182,7 +186,7 @@ public abstract class JDFAutoFlateParams extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Predictor
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPredictor(int value)
         {

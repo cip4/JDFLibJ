@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
@@ -174,12 +173,20 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBarcodeReproParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -188,6 +195,10 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -208,26 +219,43 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBearerBars getEnum(String enumName)
             {
                 return (EnumBearerBars) getEnum(EnumBearerBars.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBearerBars getEnum(int enumValue)
             {
                 return (EnumBearerBars) getEnum(EnumBearerBars.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBearerBars.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBearerBars.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBearerBars.class);
@@ -255,26 +283,43 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMasking getEnum(String enumName)
             {
                 return (EnumMasking) getEnum(EnumMasking.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMasking getEnum(int enumValue)
             {
                 return (EnumMasking) getEnum(EnumMasking.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMasking.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMasking.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMasking.class);
@@ -296,7 +341,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BearerBars
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBearerBars(EnumBearerBars enumVar)
         {
@@ -318,7 +363,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Height
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHeight(double value)
         {
@@ -340,7 +385,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Magnification
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMagnification(double value)
         {
@@ -362,7 +407,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Masking
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMasking(EnumMasking enumVar)
         {
@@ -384,7 +429,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleHeight(double value)
         {
@@ -406,7 +451,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleWidth(double value)
         {
@@ -428,7 +473,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Ratio
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRatio(double value)
         {
@@ -493,8 +538,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
 
     /**
      * (30) append element BarcodeCompParams
+     * @return JDFBarcodeCompParams the element
      */
-    public JDFBarcodeCompParams appendBarcodeCompParams() throws JDFException
+    public JDFBarcodeCompParams appendBarcodeCompParams()
     {
         return (JDFBarcodeCompParams) appendElement(ElementName.BARCODECOMPPARAMS, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
     /**
@@ -160,6 +159,10 @@ public abstract class JDFAutoSignatureCell extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoSignatureCell[  --> " + super.toString() + " ]";
@@ -180,26 +183,43 @@ public abstract class JDFAutoSignatureCell extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumBottleAxis getEnum(String enumName)
             {
                 return (EnumBottleAxis) getEnum(EnumBottleAxis.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumBottleAxis getEnum(int enumValue)
             {
                 return (EnumBottleAxis) getEnum(EnumBottleAxis.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumBottleAxis.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumBottleAxis.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumBottleAxis.class);
@@ -227,26 +247,43 @@ public abstract class JDFAutoSignatureCell extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOrientation getEnum(String enumName)
             {
                 return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOrientation getEnum(int enumValue)
             {
                 return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOrientation.class);
@@ -270,7 +307,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BackFacePages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBackFacePages(JDFIntegerList value)
         {
@@ -284,17 +321,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public JDFIntegerList getBackFacePages()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -304,7 +332,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BackPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBackPages(JDFIntegerList value)
         {
@@ -318,17 +346,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public JDFIntegerList getBackPages()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BACKPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BACKPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -338,7 +357,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BottleAngle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBottleAngle(double value)
         {
@@ -360,7 +379,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute BottleAxis
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setBottleAxis(EnumBottleAxis enumVar)
         {
@@ -382,7 +401,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FaceCells
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFaceCells(JDFIntegerList value)
         {
@@ -396,17 +415,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public JDFIntegerList getFaceCells()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FACECELLS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FACECELLS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -416,7 +426,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FrontFacePages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrontFacePages(JDFIntegerList value)
         {
@@ -430,17 +440,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public JDFIntegerList getFrontFacePages()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -450,7 +451,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FrontPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFrontPages(JDFIntegerList value)
         {
@@ -464,17 +465,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
           */
         public JDFIntegerList getFrontPages()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FRONTPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FRONTPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -484,7 +476,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Orientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOrientation(EnumOrientation enumVar)
         {
@@ -506,7 +498,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SectionIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSectionIndex(int value)
         {
@@ -528,7 +520,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StationName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStationName(String value)
         {

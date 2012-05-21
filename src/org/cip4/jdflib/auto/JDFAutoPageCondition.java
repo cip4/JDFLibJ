@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFPart;
@@ -169,6 +167,10 @@ public abstract class JDFAutoPageCondition extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageCondition[  --> " + super.toString() + " ]";
@@ -185,7 +187,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RestrictedContentObjects
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRestrictedContentObjects(JDFIntegerList value)
         {
@@ -199,17 +201,8 @@ public abstract class JDFAutoPageCondition extends JDFElement
           */
         public JDFIntegerList getRestrictedContentObjects()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RESTRICTEDCONTENTOBJECTS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RESTRICTEDCONTENTOBJECTS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -262,8 +255,9 @@ public abstract class JDFAutoPageCondition extends JDFElement
 
     /**
      * (30) append element RunList
+     * @return JDFRunList the element
      */
-    public JDFRunList appendRunList() throws JDFException
+    public JDFRunList appendRunList()
     {
         return (JDFRunList) appendElement(ElementName.RUNLIST, null);
     }
@@ -321,8 +315,9 @@ public abstract class JDFAutoPageCondition extends JDFElement
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

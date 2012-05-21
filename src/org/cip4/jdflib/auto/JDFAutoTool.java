@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -169,12 +168,20 @@ public abstract class JDFAutoTool extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTool[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -183,6 +190,10 @@ public abstract class JDFAutoTool extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Handling;
@@ -199,7 +210,7 @@ public abstract class JDFAutoTool extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ToolID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setToolID(String value)
         {
@@ -212,7 +223,7 @@ public abstract class JDFAutoTool extends JDFResource
           */
         public String getToolID()
         {
-            return getAttribute(AttributeName.TOOLID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TOOLID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -221,7 +232,7 @@ public abstract class JDFAutoTool extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ToolAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setToolAmount(int value)
         {
@@ -243,7 +254,7 @@ public abstract class JDFAutoTool extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ToolType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setToolType(String value)
         {
@@ -256,7 +267,7 @@ public abstract class JDFAutoTool extends JDFResource
           */
         public String getToolType()
         {
-            return getAttribute(AttributeName.TOOLTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TOOLTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -308,8 +319,9 @@ public abstract class JDFAutoTool extends JDFResource
 
     /**
      * (30) append element Contact
+     * @return JDFContact the element
      */
-    public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact()
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -367,8 +379,9 @@ public abstract class JDFAutoTool extends JDFResource
 
     /**
      * (30) append element IdentificationField
+     * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField()
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

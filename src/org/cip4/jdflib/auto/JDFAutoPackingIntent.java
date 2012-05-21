@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -164,6 +164,10 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPackingIntent[  --> " + super.toString() + " ]";
@@ -195,6 +199,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element BoxedQuantity
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendBoxedQuantity() throws JDFException
     {
@@ -221,6 +227,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element BoxShape
+     * @return JDFShapeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFShapeSpan appendBoxShape() throws JDFException
     {
@@ -247,6 +255,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element CartonQuantity
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendCartonQuantity() throws JDFException
     {
@@ -273,6 +283,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element CartonShape
+     * @return JDFShapeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFShapeSpan appendCartonShape() throws JDFException
     {
@@ -299,6 +311,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element CartonMaxWeight
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendCartonMaxWeight() throws JDFException
     {
@@ -325,6 +339,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element CartonStrength
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendCartonStrength() throws JDFException
     {
@@ -351,6 +367,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element FoldingCatalog
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendFoldingCatalog() throws JDFException
     {
@@ -377,6 +395,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletCornerBoards
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendPalletCornerBoards() throws JDFException
     {
@@ -403,6 +423,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletQuantity
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendPalletQuantity() throws JDFException
     {
@@ -429,6 +451,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletSize
+     * @return JDFXYPairSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFXYPairSpan appendPalletSize() throws JDFException
     {
@@ -455,6 +479,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletMaxHeight
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendPalletMaxHeight() throws JDFException
     {
@@ -481,6 +507,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletMaxWeight
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendPalletMaxWeight() throws JDFException
     {
@@ -507,6 +535,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletType
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendPalletType() throws JDFException
     {
@@ -533,6 +563,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element PalletWrapping
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendPalletWrapping() throws JDFException
     {
@@ -559,6 +591,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element WrappedQuantity
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendWrappedQuantity() throws JDFException
     {
@@ -585,6 +619,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
 
     /**
      * (29) append element WrappingMaterial
+     * @return JDFNameSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNameSpan appendWrappingMaterial() throws JDFException
     {

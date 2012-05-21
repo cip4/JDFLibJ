@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,8 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -179,12 +177,20 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDeviceMark[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -193,6 +199,10 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -213,26 +223,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(String enumName)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(int enumValue)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAnchor.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAnchor.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAnchor.class);
@@ -265,26 +292,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumHorizontalFitPolicy getEnum(String enumName)
             {
                 return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumHorizontalFitPolicy getEnum(int enumValue)
             {
                 return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumHorizontalFitPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumHorizontalFitPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumHorizontalFitPolicy.class);
@@ -313,26 +357,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkJustification getEnum(String enumName)
             {
                 return (EnumMarkJustification) getEnum(EnumMarkJustification.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkJustification getEnum(int enumValue)
             {
                 return (EnumMarkJustification) getEnum(EnumMarkJustification.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkJustification.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkJustification.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkJustification.class);
@@ -359,26 +420,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkOrientation getEnum(String enumName)
             {
                 return (EnumMarkOrientation) getEnum(EnumMarkOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkOrientation getEnum(int enumValue)
             {
                 return (EnumMarkOrientation) getEnum(EnumMarkOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkOrientation.class);
@@ -404,26 +482,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMarkPosition getEnum(String enumName)
             {
                 return (EnumMarkPosition) getEnum(EnumMarkPosition.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMarkPosition getEnum(int enumValue)
             {
                 return (EnumMarkPosition) getEnum(EnumMarkPosition.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMarkPosition.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMarkPosition.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMarkPosition.class);
@@ -451,26 +546,43 @@ public abstract class JDFAutoDeviceMark extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumVerticalFitPolicy getEnum(String enumName)
             {
                 return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumVerticalFitPolicy getEnum(int enumValue)
             {
                 return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumVerticalFitPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumVerticalFitPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumVerticalFitPolicy.class);
@@ -495,7 +607,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Anchor
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAnchor(EnumAnchor enumVar)
         {
@@ -517,7 +629,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Font
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFont(String value)
         {
@@ -530,7 +642,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
           */
         public String getFont()
         {
-            return getAttribute(AttributeName.FONT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FONT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -539,7 +651,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FontSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFontSize(double value)
         {
@@ -561,7 +673,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute HorizontalFitPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
         {
@@ -583,7 +695,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkJustification
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkJustification(EnumMarkJustification enumVar)
         {
@@ -605,7 +717,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarkOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarkOffset(JDFXYPair value)
         {
@@ -619,17 +731,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
           */
         public JDFXYPair getMarkOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.MARKOFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -639,7 +742,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkOrientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkOrientation(EnumMarkOrientation enumVar)
         {
@@ -661,7 +764,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MarkPosition
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMarkPosition(EnumMarkPosition enumVar)
         {
@@ -683,7 +786,7 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute VerticalFitPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
         {
@@ -748,8 +851,9 @@ public abstract class JDFAutoDeviceMark extends JDFResource
 
     /**
      * (30) append element BarcodeReproParams
+     * @return JDFBarcodeReproParams the element
      */
-    public JDFBarcodeReproParams appendBarcodeReproParams() throws JDFException
+    public JDFBarcodeReproParams appendBarcodeReproParams()
     {
         return (JDFBarcodeReproParams) appendElement(ElementName.BARCODEREPROPARAMS, null);
     }

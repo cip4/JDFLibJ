@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.pool.JDFPool;
@@ -151,6 +150,10 @@ public abstract class JDFAutoAncestorPool extends JDFPool
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAncestorPool[  --> " + super.toString() + " ]";
@@ -206,8 +209,9 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 
     /**
      * (30) append element Ancestor
+     * @return JDFAncestor the element
      */
-    public JDFAncestor appendAncestor() throws JDFException
+    public JDFAncestor appendAncestor()
     {
         return (JDFAncestor) appendElement(ElementName.ANCESTOR, null);
     }
@@ -256,8 +260,9 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

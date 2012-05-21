@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -173,6 +173,10 @@ public abstract class JDFAutoNumberItem extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoNumberItem[  --> " + super.toString() + " ]";
@@ -189,7 +193,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StartValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStartValue(String value)
         {
@@ -211,7 +215,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Step
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStep(int value)
         {
@@ -252,6 +256,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (29) append element ColorName
+     * @return JDFSpanNamedColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanNamedColor appendColorName() throws JDFException
     {
@@ -302,8 +308,9 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (30) append element ColorNameDetails
+     * @return JDFStringSpan the element
      */
-    public JDFStringSpan appendColorNameDetails() throws JDFException
+    public JDFStringSpan appendColorNameDetails()
     {
         return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
     }
@@ -328,6 +335,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (29) append element XPosition
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendXPosition() throws JDFException
     {
@@ -354,6 +363,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (29) append element YPosition
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendYPosition() throws JDFException
     {
@@ -380,6 +391,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (29) append element Orientation
+     * @return JDFNumberSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFNumberSpan appendOrientation() throws JDFException
     {
@@ -406,6 +419,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 
     /**
      * (29) append element SeparationSpec
+     * @return JDFSeparationSpec the element
+     * @throws JDFException if the element already exists
      */
     public JDFSeparationSpec appendSeparationSpec() throws JDFException
     {

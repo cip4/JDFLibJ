@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalParams;
@@ -188,12 +188,20 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDigitalPrintingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -202,6 +210,10 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -222,26 +234,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCollate getEnum(String enumName)
             {
                 return (EnumCollate) getEnum(EnumCollate.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCollate getEnum(int enumValue)
             {
                 return (EnumCollate) getEnum(EnumCollate.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCollate.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCollate.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCollate.class);
@@ -270,26 +299,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(String enumName)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(int enumValue)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPrintQuality.class);
@@ -317,26 +363,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPageDelivery getEnum(String enumName)
             {
                 return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPageDelivery getEnum(int enumValue)
             {
                 return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPageDelivery.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPageDelivery.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPageDelivery.class);
@@ -366,26 +429,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPrintingType getEnum(String enumName)
             {
                 return (EnumPrintingType) getEnum(EnumPrintingType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPrintingType getEnum(int enumValue)
             {
                 return (EnumPrintingType) getEnum(EnumPrintingType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPrintingType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPrintingType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPrintingType.class);
@@ -413,26 +493,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetLay getEnum(String enumName)
             {
                 return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetLay getEnum(int enumValue)
             {
                 return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetLay.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetLay.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetLay.class);
@@ -460,26 +557,43 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(String enumName)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(int enumValue)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSides.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSides.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSides.class);
@@ -504,7 +618,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DirectProofAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDirectProofAmount(int value)
         {
@@ -526,7 +640,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ManualFeed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setManualFeed(boolean value)
         {
@@ -548,7 +662,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Collate
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCollate(EnumCollate enumVar)
         {
@@ -570,7 +684,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutputBin
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutputBin(String value)
         {
@@ -583,7 +697,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
           */
         public String getOutputBin()
         {
-            return getAttribute(AttributeName.OUTPUTBIN, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -592,7 +706,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PrintQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
@@ -614,7 +728,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NonPrintableMarginBottom
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNonPrintableMarginBottom(double value)
         {
@@ -636,7 +750,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NonPrintableMarginLeft
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNonPrintableMarginLeft(double value)
         {
@@ -658,7 +772,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NonPrintableMarginRight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNonPrintableMarginRight(double value)
         {
@@ -680,7 +794,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NonPrintableMarginTop
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNonPrintableMarginTop(double value)
         {
@@ -702,7 +816,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PageDelivery
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPageDelivery(EnumPageDelivery enumVar)
         {
@@ -724,7 +838,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PrintingType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPrintingType(EnumPrintingType enumVar)
         {
@@ -746,7 +860,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetLay
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetLay(EnumSheetLay enumVar)
         {
@@ -768,7 +882,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Sides
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSides(EnumSides enumVar)
         {
@@ -809,6 +923,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element Component
+     * @return JDFComponent the element
+     * @throws JDFException if the element already exists
      */
     public JDFComponent appendComponent() throws JDFException
     {
@@ -844,6 +960,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element ApprovalParams
+     * @return JDFApprovalParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFApprovalParams appendApprovalParams() throws JDFException
     {
@@ -879,6 +997,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element Disjointing
+     * @return JDFDisjointing the element
+     * @throws JDFException if the element already exists
      */
     public JDFDisjointing appendDisjointing() throws JDFException
     {
@@ -905,6 +1025,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element Ink
+     * @return JDFInk the element
+     * @throws JDFException if the element already exists
      */
     public JDFInk appendInk() throws JDFException
     {
@@ -940,6 +1062,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -975,6 +1099,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
     /**
      * (29) append element MediaSource
+     * @return JDFMediaSource the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {

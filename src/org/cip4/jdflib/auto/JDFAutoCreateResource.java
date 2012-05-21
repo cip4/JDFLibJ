@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -166,6 +165,10 @@ public abstract class JDFAutoCreateResource extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCreateResource[  --> " + super.toString() + " ]";
@@ -182,7 +185,7 @@ public abstract class JDFAutoCreateResource extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParentJobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParentJobID(String value)
         {
@@ -195,7 +198,7 @@ public abstract class JDFAutoCreateResource extends JDFElement
           */
         public String getParentJobID()
         {
-            return getAttribute(AttributeName.PARENTJOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -204,7 +207,7 @@ public abstract class JDFAutoCreateResource extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ParentJobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setParentJobPartID(String value)
         {
@@ -217,7 +220,7 @@ public abstract class JDFAutoCreateResource extends JDFElement
           */
         public String getParentJobPartID()
         {
-            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -269,8 +272,9 @@ public abstract class JDFAutoCreateResource extends JDFElement
 
     /**
      * (30) append element Resource
+     * @return JDFResource the element
      */
-    public JDFResource appendResource() throws JDFException
+    public JDFResource appendResource()
     {
         return (JDFResource) appendElement(ElementName.RESOURCE, null);
     }

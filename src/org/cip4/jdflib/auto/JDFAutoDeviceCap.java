@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -194,6 +194,10 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoDeviceCap[  --> " + super.toString() + " ]";
@@ -214,26 +218,43 @@ public abstract class JDFAutoDeviceCap extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCombinedMethod getEnum(String enumName)
             {
                 return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCombinedMethod getEnum(int enumValue)
             {
                 return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCombinedMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCombinedMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCombinedMethod.class);
@@ -262,26 +283,43 @@ public abstract class JDFAutoDeviceCap extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumExecutionPolicy getEnum(String enumName)
             {
                 return (EnumExecutionPolicy) getEnum(EnumExecutionPolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumExecutionPolicy getEnum(int enumValue)
             {
                 return (EnumExecutionPolicy) getEnum(EnumExecutionPolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumExecutionPolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumExecutionPolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumExecutionPolicy.class);
@@ -308,26 +346,43 @@ public abstract class JDFAutoDeviceCap extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumTypeOrder getEnum(String enumName)
             {
                 return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumTypeOrder getEnum(int enumValue)
             {
                 return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumTypeOrder.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumTypeOrder.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumTypeOrder.class);
@@ -372,7 +427,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ExecutionPolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setExecutionPolicy(EnumExecutionPolicy enumVar)
         {
@@ -394,7 +449,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GenericAttributes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGenericAttributes(VString value)
         {
@@ -408,7 +463,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         public VString getGenericAttributes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -419,7 +474,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Lang
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLang(VString value)
         {
@@ -433,7 +488,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         public VString getLang()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.LANG, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -444,7 +499,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OptionalCombinedTypes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOptionalCombinedTypes(VString value)
         {
@@ -458,7 +513,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         public VString getOptionalCombinedTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -469,7 +524,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -482,7 +537,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -491,7 +546,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TypeExpression
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypeExpression(String value)
         {
@@ -504,7 +559,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
           */
         public String getTypeExpression()
         {
-            return getAttribute(AttributeName.TYPEEXPRESSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPEEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -513,7 +568,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute TypeOrder
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setTypeOrder(EnumTypeOrder enumVar)
         {
@@ -535,7 +590,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Types
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypes(VString value)
         {
@@ -549,7 +604,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
         public VString getTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -579,6 +634,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element ActionPool
+     * @return JDFActionPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFActionPool appendActionPool() throws JDFException
     {
@@ -605,6 +662,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element DevCapPool
+     * @return JDFDevCapPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFDevCapPool appendDevCapPool() throws JDFException
     {
@@ -655,8 +714,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (30) append element DevCaps
+     * @return JDFDevCaps the element
      */
-    public JDFDevCaps appendDevCaps() throws JDFException
+    public JDFDevCaps appendDevCaps()
     {
         return (JDFDevCaps) appendElement(ElementName.DEVCAPS, null);
     }
@@ -681,6 +741,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element DisplayGroupPool
+     * @return JDFDisplayGroupPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFDisplayGroupPool appendDisplayGroupPool() throws JDFException
     {
@@ -707,6 +769,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element FeaturePool
+     * @return JDFFeaturePool the element
+     * @throws JDFException if the element already exists
      */
     public JDFFeaturePool appendFeaturePool() throws JDFException
     {
@@ -733,6 +797,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element MacroPool
+     * @return JDFMacroPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFMacroPool appendMacroPool() throws JDFException
     {
@@ -759,6 +825,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element ModulePool
+     * @return JDFModulePool the element
+     * @throws JDFException if the element already exists
      */
     public JDFModulePool appendModulePool() throws JDFException
     {
@@ -809,8 +877,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (30) append element Performance
+     * @return JDFPerformance the element
      */
-    public JDFPerformance appendPerformance() throws JDFException
+    public JDFPerformance appendPerformance()
     {
         return (JDFPerformance) appendElement(ElementName.PERFORMANCE, null);
     }
@@ -835,6 +904,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 
     /**
      * (29) append element TestPool
+     * @return JDFTestPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFTestPool appendTestPool() throws JDFException
     {

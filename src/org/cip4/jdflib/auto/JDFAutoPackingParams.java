@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -165,12 +164,20 @@ public abstract class JDFAutoPackingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPackingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -179,6 +186,10 @@ public abstract class JDFAutoPackingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -199,26 +210,43 @@ public abstract class JDFAutoPackingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPalletWrapping getEnum(String enumName)
             {
                 return (EnumPalletWrapping) getEnum(EnumPalletWrapping.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPalletWrapping getEnum(int enumValue)
             {
                 return (EnumPalletWrapping) getEnum(EnumPalletWrapping.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPalletWrapping.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPalletWrapping.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPalletWrapping.class);
@@ -245,26 +273,43 @@ public abstract class JDFAutoPackingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPalletType getEnum(String enumName)
             {
                 return (EnumPalletType) getEnum(EnumPalletType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPalletType getEnum(int enumValue)
             {
                 return (EnumPalletType) getEnum(EnumPalletType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPalletType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPalletType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPalletType.class);
@@ -287,7 +332,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PalletWrapping
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPalletWrapping(EnumPalletWrapping enumVar)
         {
@@ -309,7 +354,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WrappingMaterial
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWrappingMaterial(String value)
         {
@@ -331,7 +376,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BoxedQuantity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBoxedQuantity(int value)
         {
@@ -353,7 +398,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BoxShape
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBoxShape(JDFShape value)
         {
@@ -367,17 +412,8 @@ public abstract class JDFAutoPackingParams extends JDFResource
           */
         public JDFShape getBoxShape()
         {
-            String strAttrName = "";
-            JDFShape nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BOXSHAPE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFShape(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BOXSHAPE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
             return nPlaceHolder;
         }
 
@@ -387,7 +423,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CartonQuantity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCartonQuantity(int value)
         {
@@ -409,7 +445,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CartonShape
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCartonShape(JDFShape value)
         {
@@ -423,17 +459,8 @@ public abstract class JDFAutoPackingParams extends JDFResource
           */
         public JDFShape getCartonShape()
         {
-            String strAttrName = "";
-            JDFShape nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CARTONSHAPE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFShape(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CARTONSHAPE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
             return nPlaceHolder;
         }
 
@@ -443,7 +470,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CartonMaxWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCartonMaxWeight(double value)
         {
@@ -465,7 +492,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CartonStrength
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCartonStrength(double value)
         {
@@ -487,7 +514,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PalletQuantity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPalletQuantity(int value)
         {
@@ -509,7 +536,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PalletSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPalletSize(JDFXYPair value)
         {
@@ -523,17 +550,8 @@ public abstract class JDFAutoPackingParams extends JDFResource
           */
         public JDFXYPair getPalletSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PALLETSIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PALLETSIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -543,7 +561,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PalletMaxHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPalletMaxHeight(double value)
         {
@@ -565,7 +583,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PalletMaxWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPalletMaxWeight(double value)
         {
@@ -587,7 +605,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PalletType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPalletType(EnumPalletType enumVar)
         {
@@ -609,7 +627,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WrappedQuantity
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWrappedQuantity(int value)
         {

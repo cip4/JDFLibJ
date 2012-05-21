@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -79,7 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -165,12 +163,20 @@ public abstract class JDFAutoTrapRegion extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTrapRegion[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -179,6 +185,10 @@ public abstract class JDFAutoTrapRegion extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -195,7 +205,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPages(JDFIntegerRangeList value)
         {
@@ -209,17 +219,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
           */
         public JDFIntegerRangeList getPages()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -229,7 +230,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrapZone
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrapZone(String value)
         {
@@ -242,7 +243,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
           */
         public String getTrapZone()
         {
-            return getAttribute(AttributeName.TRAPZONE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TRAPZONE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -270,6 +271,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 
     /**
      * (29) append element TrappingParams
+     * @return JDFTrappingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFTrappingParams appendTrappingParams() throws JDFException
     {

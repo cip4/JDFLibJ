@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -211,12 +210,20 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRunList[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -225,6 +232,10 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -245,26 +256,43 @@ public abstract class JDFAutoRunList extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumComponentGranularity getEnum(String enumName)
             {
                 return (EnumComponentGranularity) getEnum(EnumComponentGranularity.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumComponentGranularity getEnum(int enumValue)
             {
                 return (EnumComponentGranularity) getEnum(EnumComponentGranularity.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumComponentGranularity.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumComponentGranularity.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumComponentGranularity.class);
@@ -293,26 +321,43 @@ public abstract class JDFAutoRunList extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSheetSides getEnum(String enumName)
             {
                 return (EnumSheetSides) getEnum(EnumSheetSides.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSheetSides getEnum(int enumValue)
             {
                 return (EnumSheetSides) getEnum(EnumSheetSides.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSheetSides.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSheetSides.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSheetSides.class);
@@ -336,7 +381,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IsPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIsPage(boolean value)
         {
@@ -358,7 +403,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageCopies
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageCopies(int value)
         {
@@ -380,7 +425,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetCopies
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetCopies(int value)
         {
@@ -402,7 +447,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ComponentGranularity
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setComponentGranularity(EnumComponentGranularity enumVar)
         {
@@ -424,7 +469,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Directory
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDirectory(String value)
         {
@@ -437,7 +482,7 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public String getDirectory()
         {
-            return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DIRECTORY, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -446,7 +491,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DocNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocNames(JDFNameRangeList value)
         {
@@ -460,17 +505,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFNameRangeList getDocNames()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCNAMES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCNAMES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -480,7 +516,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Docs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDocs(JDFIntegerRangeList value)
         {
@@ -494,17 +530,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFIntegerRangeList getDocs()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.DOCS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.DOCS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -514,7 +541,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EndOfBundleItem
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEndOfBundleItem(boolean value)
         {
@@ -536,7 +563,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EndOfDocument
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEndOfDocument(boolean value)
         {
@@ -558,7 +585,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EndOfSet
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEndOfSet(boolean value)
         {
@@ -580,7 +607,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FirstPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFirstPage(int value)
         {
@@ -602,7 +629,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreContext
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreContext(VString value)
         {
@@ -616,7 +643,7 @@ public abstract class JDFAutoRunList extends JDFResource
         public VString getIgnoreContext()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.IGNORECONTEXT, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.IGNORECONTEXT, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -627,7 +654,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LogicalPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLogicalPage(int value)
         {
@@ -649,7 +676,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NDoc
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNDoc(int value)
         {
@@ -671,7 +698,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNPage(int value)
         {
@@ -693,7 +720,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NSet
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNSet(int value)
         {
@@ -715,7 +742,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageListIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageListIndex(JDFIntegerRangeList value)
         {
@@ -729,17 +756,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFIntegerRangeList getPageListIndex()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -749,7 +767,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PageNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPageNames(JDFNameRangeList value)
         {
@@ -763,17 +781,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFNameRangeList getPageNames()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGENAMES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGENAMES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -783,7 +792,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPages(JDFIntegerRangeList value)
         {
@@ -797,17 +806,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFIntegerRangeList getPages()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.PAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.PAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -817,7 +817,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RunTag
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRunTag(String value)
         {
@@ -830,7 +830,7 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public String getRunTag()
         {
-            return getAttribute(AttributeName.RUNTAG, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RUNTAG, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -839,7 +839,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetNames(JDFNameRangeList value)
         {
@@ -853,17 +853,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFNameRangeList getSetNames()
         {
-            String strAttrName = "";
-            JDFNameRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETNAMES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNameRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETNAMES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -873,7 +864,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Sets
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSets(JDFIntegerRangeList value)
         {
@@ -887,17 +878,8 @@ public abstract class JDFAutoRunList extends JDFResource
           */
         public JDFIntegerRangeList getSets()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SETS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SETS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -907,7 +889,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute SheetSides
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSheetSides(EnumSheetSides enumVar)
         {
@@ -929,7 +911,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SkipPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSkipPage(int value)
         {
@@ -951,7 +933,7 @@ public abstract class JDFAutoRunList extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Sorted
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSorted(boolean value)
         {
@@ -992,6 +974,8 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (29) append element ByteMap
+     * @return JDFByteMap the element
+     * @throws JDFException if the element already exists
      */
     public JDFByteMap appendByteMap() throws JDFException
     {
@@ -1051,8 +1035,9 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (30) append element DynamicInput
+     * @return JDFDynamicInput the element
      */
-    public JDFDynamicInput appendDynamicInput() throws JDFException
+    public JDFDynamicInput appendDynamicInput()
     {
         return (JDFDynamicInput) appendElement(ElementName.DYNAMICINPUT, null);
     }
@@ -1101,8 +1086,9 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (30) append element MetadataMap
+     * @return JDFMetadataMap the element
      */
-    public JDFMetadataMap appendMetadataMap() throws JDFException
+    public JDFMetadataMap appendMetadataMap()
     {
         return (JDFMetadataMap) appendElement(ElementName.METADATAMAP, null);
     }
@@ -1151,8 +1137,9 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (30) append element InsertSheet
+     * @return JDFInsertSheet the element
      */
-    public JDFInsertSheet appendInsertSheet() throws JDFException
+    public JDFInsertSheet appendInsertSheet()
     {
         return (JDFInsertSheet) appendElement(ElementName.INSERTSHEET, null);
     }
@@ -1186,6 +1173,8 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (29) append element LayoutElement
+     * @return JDFLayoutElement the element
+     * @throws JDFException if the element already exists
      */
     public JDFLayoutElement appendLayoutElement() throws JDFException
     {
@@ -1221,6 +1210,8 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (29) append element InterpretedPDLData
+     * @return JDFInterpretedPDLData the element
+     * @throws JDFException if the element already exists
      */
     public JDFInterpretedPDLData appendInterpretedPDLData() throws JDFException
     {
@@ -1256,6 +1247,8 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (29) append element Disposition
+     * @return JDFDisposition the element
+     * @throws JDFException if the element already exists
      */
     public JDFDisposition appendDisposition() throws JDFException
     {
@@ -1282,6 +1275,8 @@ public abstract class JDFAutoRunList extends JDFResource
 
     /**
      * (29) append element PageList
+     * @return JDFPageList the element
+     * @throws JDFException if the element already exists
      */
     public JDFPageList appendPageList() throws JDFException
     {

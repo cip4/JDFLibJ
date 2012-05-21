@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,33 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.core.ElementInfo;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFBarcodeDetails;
+import org.cip4.jdflib.resource.process.JDFExtraValues;
     /**
     *****************************************************************************
     class JDFAutoIdentificationField : public JDFResource
@@ -189,12 +181,20 @@ public abstract class JDFAutoIdentificationField extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIdentificationField[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -203,6 +203,10 @@ public abstract class JDFAutoIdentificationField extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -223,26 +227,43 @@ public abstract class JDFAutoIdentificationField extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumEncoding getEnum(String enumName)
             {
                 return (EnumEncoding) getEnum(EnumEncoding.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumEncoding getEnum(int enumValue)
             {
                 return (EnumEncoding) getEnum(EnumEncoding.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumEncoding.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumEncoding.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumEncoding.class);
@@ -272,26 +293,43 @@ public abstract class JDFAutoIdentificationField extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPosition getEnum(String enumName)
             {
                 return (EnumPosition) getEnum(EnumPosition.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPosition getEnum(int enumValue)
             {
                 return (EnumPosition) getEnum(EnumPosition.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPosition.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPosition.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPosition.class);
@@ -325,26 +363,43 @@ public abstract class JDFAutoIdentificationField extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPurpose getEnum(String enumName)
             {
                 return (EnumPurpose) getEnum(EnumPurpose.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPurpose getEnum(int enumValue)
             {
                 return (EnumPurpose) getEnum(EnumPurpose.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPurpose.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPurpose.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPurpose.class);
@@ -367,7 +422,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Encoding
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setEncoding(EnumEncoding enumVar)
         {
@@ -389,7 +444,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute EncodingDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setEncodingDetails(String value)
         {
@@ -402,7 +457,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getEncodingDetails()
         {
-            return getAttribute(AttributeName.ENCODINGDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ENCODINGDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -411,7 +466,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BoundingBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBoundingBox(JDFRectangle value)
         {
@@ -425,17 +480,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public JDFRectangle getBoundingBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -445,7 +491,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Format
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFormat(String value)
         {
@@ -458,7 +504,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getFormat()
         {
-            return getAttribute(AttributeName.FORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -467,7 +513,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Orientation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOrientation(JDFMatrix value)
         {
@@ -481,17 +527,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public JDFMatrix getOrientation()
         {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.ORIENTATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.ORIENTATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
             return nPlaceHolder;
         }
 
@@ -501,7 +538,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Page
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPage(int value)
         {
@@ -523,7 +560,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Position
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPosition(EnumPosition enumVar)
         {
@@ -545,7 +582,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Purpose
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPurpose(EnumPurpose enumVar)
         {
@@ -567,7 +604,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PurposeDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPurposeDetails(String value)
         {
@@ -580,7 +617,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getPurposeDetails()
         {
-            return getAttribute(AttributeName.PURPOSEDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PURPOSEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -589,7 +626,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Value
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValue(String value)
         {
@@ -602,7 +639,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getValue()
         {
-            return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -611,7 +648,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueFormat(String value)
         {
@@ -624,7 +661,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getValueFormat()
         {
-            return getAttribute(AttributeName.VALUEFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.VALUEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -633,7 +670,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ValueTemplate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setValueTemplate(String value)
         {
@@ -646,7 +683,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
           */
         public String getValueTemplate()
         {
-            return getAttribute(AttributeName.VALUETEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.VALUETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -674,6 +711,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
     /**
      * (29) append element BarcodeDetails
+     * @return JDFBarcodeDetails the element
+     * @throws JDFException if the element already exists
      */
     public JDFBarcodeDetails appendBarcodeDetails() throws JDFException
     {
@@ -700,6 +739,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 
     /**
      * (29) append element ExtraValues
+     * @return JDFExtraValues the element
+     * @throws JDFException if the element already exists
      */
     public JDFExtraValues appendExtraValues() throws JDFException
     {

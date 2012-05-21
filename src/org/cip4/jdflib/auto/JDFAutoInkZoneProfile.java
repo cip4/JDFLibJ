@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -150,12 +148,20 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInkZoneProfile[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -164,6 +170,10 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -180,7 +190,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneSettingsX
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneSettingsX(JDFNumberList value)
         {
@@ -194,17 +204,8 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
           */
         public JDFNumberList getZoneSettingsX()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -214,7 +215,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneWidth(double value)
         {
@@ -236,7 +237,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneHeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneHeight(double value)
         {
@@ -258,7 +259,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ZoneSettingsY
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setZoneSettingsY(JDFNumberList value)
         {
@@ -272,17 +273,8 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
           */
         public JDFNumberList getZoneSettingsY()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 

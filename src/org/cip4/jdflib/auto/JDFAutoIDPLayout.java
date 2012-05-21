@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,9 +84,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -178,6 +176,10 @@ public abstract class JDFAutoIDPLayout extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoIDPLayout[  --> " + super.toString() + " ]";
@@ -198,26 +200,43 @@ public abstract class JDFAutoIDPLayout extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFinishedPageOrientation getEnum(String enumName)
             {
                 return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFinishedPageOrientation getEnum(int enumValue)
             {
                 return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFinishedPageOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFinishedPageOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFinishedPageOrientation.class);
@@ -243,26 +262,43 @@ public abstract class JDFAutoIDPLayout extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(String enumName)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(int enumValue)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSides.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSides.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSides.class);
@@ -285,7 +321,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Border
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBorder(double value)
         {
@@ -307,7 +343,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FinishedPageOrientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
         {
@@ -329,7 +365,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ForceFrontSide
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setForceFrontSide(JDFNumberRangeList value)
         {
@@ -343,17 +379,8 @@ public abstract class JDFAutoIDPLayout extends JDFElement
           */
         public JDFNumberRangeList getForceFrontSide()
         {
-            String strAttrName = "";
-            JDFNumberRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -363,7 +390,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberUp
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberUp(JDFXYPair value)
         {
@@ -377,17 +404,8 @@ public abstract class JDFAutoIDPLayout extends JDFElement
           */
         public JDFXYPair getNumberUp()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -397,7 +415,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PresentationDirection
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPresentationDirection(String value)
         {
@@ -410,7 +428,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
           */
         public String getPresentationDirection()
         {
-            return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -419,7 +437,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Rotate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRotate(double value)
         {
@@ -441,7 +459,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Sides
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSides(EnumSides enumVar)
         {
@@ -506,8 +524,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 
     /**
      * (30) append element ImageShift
+     * @return JDFImageShift the element
      */
-    public JDFImageShift appendImageShift() throws JDFException
+    public JDFImageShift appendImageShift()
     {
         return (JDFImageShift) appendElement(ElementName.IMAGESHIFT, null);
     }

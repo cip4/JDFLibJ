@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -148,6 +148,10 @@ public abstract class JDFAutoBand extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBand[  --> " + super.toString() + " ]";
@@ -164,7 +168,7 @@ public abstract class JDFAutoBand extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Data
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setData(String value)
         {
@@ -177,7 +181,7 @@ public abstract class JDFAutoBand extends JDFElement
           */
         public String getData()
         {
-            return getAttribute(AttributeName.DATA, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.DATA, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -186,7 +190,7 @@ public abstract class JDFAutoBand extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Height
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHeight(int value)
         {
@@ -208,7 +212,7 @@ public abstract class JDFAutoBand extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Mask
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMask(String value)
         {
@@ -221,7 +225,7 @@ public abstract class JDFAutoBand extends JDFElement
           */
         public String getMask()
         {
-            return getAttribute(AttributeName.MASK, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MASK, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -230,7 +234,7 @@ public abstract class JDFAutoBand extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WasMarked
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWasMarked(boolean value)
         {
@@ -252,7 +256,7 @@ public abstract class JDFAutoBand extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Width
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWidth(int value)
         {

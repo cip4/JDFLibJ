@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
     /**
@@ -158,6 +157,10 @@ public abstract class JDFAutoCrease extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCrease[  --> " + super.toString() + " ]";
@@ -178,26 +181,43 @@ public abstract class JDFAutoCrease extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumWorkingDirection getEnum(String enumName)
             {
                 return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumWorkingDirection getEnum(int enumValue)
             {
                 return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumWorkingDirection.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumWorkingDirection.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumWorkingDirection.class);
@@ -219,7 +239,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Depth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDepth(double value)
         {
@@ -241,7 +261,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeStartPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeStartPosition(JDFXYPair value)
         {
@@ -255,17 +275,8 @@ public abstract class JDFAutoCrease extends JDFElement
           */
         public JDFXYPair getRelativeStartPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -275,7 +286,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeWorkingPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeWorkingPath(JDFXYPair value)
         {
@@ -289,17 +300,8 @@ public abstract class JDFAutoCrease extends JDFElement
           */
         public JDFXYPair getRelativeWorkingPath()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -309,7 +311,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StartPosition
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStartPosition(JDFXYPair value)
         {
@@ -323,17 +325,8 @@ public abstract class JDFAutoCrease extends JDFElement
           */
         public JDFXYPair getStartPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STARTPOSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -343,7 +336,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WorkingPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWorkingPath(JDFXYPair value)
         {
@@ -357,17 +350,8 @@ public abstract class JDFAutoCrease extends JDFElement
           */
         public JDFXYPair getWorkingPath()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WORKINGPATH, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -377,7 +361,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute WorkingDirection
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setWorkingDirection(EnumWorkingDirection enumVar)
         {
@@ -399,7 +383,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Travel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTravel(double value)
         {
@@ -421,7 +405,7 @@ public abstract class JDFAutoCrease extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelativeTravel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelativeTravel(double value)
         {

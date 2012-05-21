@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,6 +151,10 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoColorSpaceSubstitute[  --> " + super.toString() + " ]";
@@ -182,6 +186,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 
     /**
      * (29) append element PDLResourceAlias
+     * @return JDFPDLResourceAlias the element
+     * @throws JDFException if the element already exists
      */
     public JDFPDLResourceAlias appendPDLResourceAlias() throws JDFException
     {
@@ -241,8 +247,9 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 
     /**
      * (30) append element SeparationSpec
+     * @return JDFSeparationSpec the element
      */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    public JDFSeparationSpec appendSeparationSpec()
     {
         return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }

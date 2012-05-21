@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -148,6 +148,10 @@ public abstract class JDFAutoCreditCard extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCreditCard[  --> " + super.toString() + " ]";
@@ -164,7 +168,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Authorization
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAuthorization(String value)
         {
@@ -177,7 +181,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
           */
         public String getAuthorization()
         {
-            return getAttribute(AttributeName.AUTHORIZATION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AUTHORIZATION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -186,7 +190,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AuthorizationExpires
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAuthorizationExpires(String value)
         {
@@ -199,7 +203,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
           */
         public String getAuthorizationExpires()
         {
-            return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -208,7 +212,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Expires
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setExpires(String value)
         {
@@ -221,7 +225,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
           */
         public String getExpires()
         {
-            return getAttribute(AttributeName.EXPIRES, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.EXPIRES, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -230,7 +234,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Number
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumber(String value)
         {
@@ -243,7 +247,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
           */
         public String getNumber()
         {
-            return getAttribute(AttributeName.NUMBER, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NUMBER, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -252,7 +256,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -265,7 +269,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

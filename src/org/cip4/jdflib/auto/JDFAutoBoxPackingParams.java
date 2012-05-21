@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -161,12 +160,20 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoBoxPackingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -175,6 +182,10 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -195,26 +206,43 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumComponentOrientation getEnum(String enumName)
             {
                 return (EnumComponentOrientation) getEnum(EnumComponentOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumComponentOrientation getEnum(int enumValue)
             {
                 return (EnumComponentOrientation) getEnum(EnumComponentOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumComponentOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumComponentOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumComponentOrientation.class);
@@ -237,7 +265,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ComponentsPerRow
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setComponentsPerRow(int value)
         {
@@ -259,7 +287,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Columns
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColumns(int value)
         {
@@ -281,7 +309,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ComponentOrientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setComponentOrientation(EnumComponentOrientation enumVar)
         {
@@ -303,7 +331,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Copies
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCopies(int value)
         {
@@ -325,7 +353,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FillMaterial
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFillMaterial(String value)
         {
@@ -338,7 +366,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
           */
         public String getFillMaterial()
         {
-            return getAttribute(AttributeName.FILLMATERIAL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FILLMATERIAL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -347,7 +375,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Layers
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLayers(int value)
         {
@@ -369,7 +397,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MaxWeight
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaxWeight(double value)
         {
@@ -391,7 +419,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Pattern
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPattern(String value)
         {
@@ -404,7 +432,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
           */
         public String getPattern()
         {
-            return getAttribute(AttributeName.PATTERN, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PATTERN, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -413,7 +441,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Rows
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRows(int value)
         {
@@ -435,7 +463,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Ties
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTies(JDFIntegerList value)
         {
@@ -449,17 +477,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
           */
         public JDFIntegerList getTies()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TIES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TIES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -469,7 +488,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UnderLays
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUnderLays(JDFIntegerList value)
         {
@@ -483,17 +502,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
           */
         public JDFIntegerList getUnderLays()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.UNDERLAYS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 

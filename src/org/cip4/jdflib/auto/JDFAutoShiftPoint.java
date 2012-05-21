@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -149,6 +147,10 @@ public abstract class JDFAutoShiftPoint extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShiftPoint[  --> " + super.toString() + " ]";
@@ -165,7 +167,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CTM
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCTM(JDFMatrix value)
         {
@@ -179,17 +181,8 @@ public abstract class JDFAutoShiftPoint extends JDFElement
           */
         public JDFMatrix getCTM()
         {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
+            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
             return nPlaceHolder;
         }
 
@@ -199,7 +192,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Position
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPosition(JDFXYPair value)
         {
@@ -213,17 +206,8 @@ public abstract class JDFAutoShiftPoint extends JDFElement
           */
         public JDFXYPair getPosition()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.POSITION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.POSITION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 

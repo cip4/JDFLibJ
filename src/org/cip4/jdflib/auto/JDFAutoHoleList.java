@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFResource;
@@ -151,12 +150,20 @@ public abstract class JDFAutoHoleList extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoHoleList[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -165,6 +172,10 @@ public abstract class JDFAutoHoleList extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -220,8 +231,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 
     /**
      * (30) append element Hole
+     * @return JDFHole the element
      */
-    public JDFHole appendHole() throws JDFException
+    public JDFHole appendHole()
     {
         return (JDFHole) appendElement(ElementName.HOLE, null);
     }
@@ -279,8 +291,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 
     /**
      * (30) append element HoleLine
+     * @return JDFHoleLine the element
      */
-    public JDFHoleLine appendHoleLine() throws JDFException
+    public JDFHoleLine appendHoleLine()
     {
         return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -187,12 +186,20 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPDFToPSConversionParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -201,6 +208,10 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -221,26 +232,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeBaseFonts getEnum(String enumName)
             {
                 return (EnumIncludeBaseFonts) getEnum(EnumIncludeBaseFonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeBaseFonts getEnum(int enumValue)
             {
                 return (EnumIncludeBaseFonts) getEnum(EnumIncludeBaseFonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeBaseFonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeBaseFonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeBaseFonts.class);
@@ -267,26 +295,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeCIDFonts getEnum(String enumName)
             {
                 return (EnumIncludeCIDFonts) getEnum(EnumIncludeCIDFonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeCIDFonts getEnum(int enumValue)
             {
                 return (EnumIncludeCIDFonts) getEnum(EnumIncludeCIDFonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeCIDFonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeCIDFonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeCIDFonts.class);
@@ -313,26 +358,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeEmbeddedFonts getEnum(String enumName)
             {
                 return (EnumIncludeEmbeddedFonts) getEnum(EnumIncludeEmbeddedFonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeEmbeddedFonts getEnum(int enumValue)
             {
                 return (EnumIncludeEmbeddedFonts) getEnum(EnumIncludeEmbeddedFonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeEmbeddedFonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeEmbeddedFonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeEmbeddedFonts.class);
@@ -359,26 +421,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeOtherResources getEnum(String enumName)
             {
                 return (EnumIncludeOtherResources) getEnum(EnumIncludeOtherResources.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeOtherResources getEnum(int enumValue)
             {
                 return (EnumIncludeOtherResources) getEnum(EnumIncludeOtherResources.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeOtherResources.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeOtherResources.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeOtherResources.class);
@@ -405,26 +484,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeProcSets getEnum(String enumName)
             {
                 return (EnumIncludeProcSets) getEnum(EnumIncludeProcSets.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeProcSets getEnum(int enumValue)
             {
                 return (EnumIncludeProcSets) getEnum(EnumIncludeProcSets.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeProcSets.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeProcSets.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeProcSets.class);
@@ -451,26 +547,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeTrueTypeFonts getEnum(String enumName)
             {
                 return (EnumIncludeTrueTypeFonts) getEnum(EnumIncludeTrueTypeFonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeTrueTypeFonts getEnum(int enumValue)
             {
                 return (EnumIncludeTrueTypeFonts) getEnum(EnumIncludeTrueTypeFonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeTrueTypeFonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeTrueTypeFonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeTrueTypeFonts.class);
@@ -497,26 +610,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeType1Fonts getEnum(String enumName)
             {
                 return (EnumIncludeType1Fonts) getEnum(EnumIncludeType1Fonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeType1Fonts getEnum(int enumValue)
             {
                 return (EnumIncludeType1Fonts) getEnum(EnumIncludeType1Fonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeType1Fonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeType1Fonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeType1Fonts.class);
@@ -543,26 +673,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumIncludeType3Fonts getEnum(String enumName)
             {
                 return (EnumIncludeType3Fonts) getEnum(EnumIncludeType3Fonts.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumIncludeType3Fonts getEnum(int enumValue)
             {
                 return (EnumIncludeType3Fonts) getEnum(EnumIncludeType3Fonts.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumIncludeType3Fonts.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumIncludeType3Fonts.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumIncludeType3Fonts.class);
@@ -589,26 +736,43 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumOutputType getEnum(String enumName)
             {
                 return (EnumOutputType) getEnum(EnumOutputType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumOutputType getEnum(int enumValue)
             {
                 return (EnumOutputType) getEnum(EnumOutputType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumOutputType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumOutputType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumOutputType.class);
@@ -630,7 +794,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BinaryOK
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBinaryOK(boolean value)
         {
@@ -652,7 +816,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CenterCropBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCenterCropBox(boolean value)
         {
@@ -674,7 +838,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GeneratePageStreams
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGeneratePageStreams(boolean value)
         {
@@ -696,7 +860,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreAnnotForms
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreAnnotForms(boolean value)
         {
@@ -718,7 +882,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreBG
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreBG(boolean value)
         {
@@ -740,7 +904,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreColorSeps
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreColorSeps(boolean value)
         {
@@ -762,7 +926,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreDSC
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreDSC(boolean value)
         {
@@ -784,7 +948,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreExternStreamRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreExternStreamRef(boolean value)
         {
@@ -806,7 +970,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreHalftones
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreHalftones(boolean value)
         {
@@ -828,7 +992,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreOverprint
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreOverprint(boolean value)
         {
@@ -850,7 +1014,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnorePageRotation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnorePageRotation(boolean value)
         {
@@ -872,7 +1036,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreRawData
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreRawData(boolean value)
         {
@@ -894,7 +1058,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreSeparableImagesOnly
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreSeparableImagesOnly(boolean value)
         {
@@ -916,7 +1080,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreShowPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreShowPage(boolean value)
         {
@@ -938,7 +1102,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreTransfers
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreTransfers(boolean value)
         {
@@ -960,7 +1124,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreTTFontsFirst
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreTTFontsFirst(boolean value)
         {
@@ -982,7 +1146,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreUCR
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreUCR(boolean value)
         {
@@ -1004,7 +1168,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeBaseFonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeBaseFonts(EnumIncludeBaseFonts enumVar)
         {
@@ -1026,7 +1190,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeCIDFonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeCIDFonts(EnumIncludeCIDFonts enumVar)
         {
@@ -1048,7 +1212,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeEmbeddedFonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeEmbeddedFonts(EnumIncludeEmbeddedFonts enumVar)
         {
@@ -1070,7 +1234,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeOtherResources
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeOtherResources(EnumIncludeOtherResources enumVar)
         {
@@ -1092,7 +1256,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeProcSets
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeProcSets(EnumIncludeProcSets enumVar)
         {
@@ -1114,7 +1278,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeTrueTypeFonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeTrueTypeFonts(EnumIncludeTrueTypeFonts enumVar)
         {
@@ -1136,7 +1300,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeType1Fonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeType1Fonts(EnumIncludeType1Fonts enumVar)
         {
@@ -1158,7 +1322,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute IncludeType3Fonts
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setIncludeType3Fonts(EnumIncludeType3Fonts enumVar)
         {
@@ -1180,7 +1344,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute OutputType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setOutputType(EnumOutputType enumVar)
         {
@@ -1202,7 +1366,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PSLevel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPSLevel(int value)
         {
@@ -1224,7 +1388,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Scale
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScale(double value)
         {
@@ -1246,7 +1410,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetPageSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetPageSize(boolean value)
         {
@@ -1268,7 +1432,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SetupProcsets
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSetupProcsets(boolean value)
         {
@@ -1290,7 +1454,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShrinkToFit
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShrinkToFit(boolean value)
         {
@@ -1312,7 +1476,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SuppressCenter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSuppressCenter(boolean value)
         {
@@ -1334,7 +1498,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SuppressRotate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSuppressRotate(boolean value)
         {
@@ -1356,7 +1520,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TTasT42
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTTasT42(boolean value)
         {
@@ -1378,7 +1542,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute UseFontAliasNames
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setUseFontAliasNames(boolean value)
         {
@@ -1400,7 +1564,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IgnoreDeviceExtGState
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIgnoreDeviceExtGState(boolean value)
         {
@@ -1422,7 +1586,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BoundingBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBoundingBox(JDFRectangle value)
         {
@@ -1436,17 +1600,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
           */
         public JDFRectangle getBoundingBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,8 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
@@ -180,12 +178,20 @@ public abstract class JDFAutoShapeElement extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoShapeElement[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -194,6 +200,10 @@ public abstract class JDFAutoShapeElement extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -214,26 +224,43 @@ public abstract class JDFAutoShapeElement extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumCutType getEnum(String enumName)
             {
                 return (EnumCutType) getEnum(EnumCutType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumCutType getEnum(int enumValue)
             {
                 return (EnumCutType) getEnum(EnumCutType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumCutType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumCutType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumCutType.class);
@@ -259,26 +286,43 @@ public abstract class JDFAutoShapeElement extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumShapeType getEnum(String enumName)
             {
                 return (EnumShapeType) getEnum(EnumShapeType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumShapeType getEnum(int enumValue)
             {
                 return (EnumShapeType) getEnum(EnumShapeType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumShapeType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumShapeType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumShapeType.class);
@@ -302,7 +346,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LockOrigins
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLockOrigins(boolean value)
         {
@@ -324,7 +368,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CutBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCutBox(JDFRectangle value)
         {
@@ -338,17 +382,8 @@ public abstract class JDFAutoShapeElement extends JDFResource
           */
         public JDFRectangle getCutBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CUTBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CUTBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -358,7 +393,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CutOut
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCutOut(boolean value)
         {
@@ -380,7 +415,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CutPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCutPath(String value)
         {
@@ -393,7 +428,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
           */
         public String getCutPath()
         {
-            return getAttribute(AttributeName.CUTPATH, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -402,7 +437,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute CutType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setCutType(EnumCutType enumVar)
         {
@@ -424,7 +459,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute DDESCutType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDDESCutType(int value)
         {
@@ -446,7 +481,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Material
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMaterial(String value)
         {
@@ -459,7 +494,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
           */
         public String getMaterial()
         {
-            return getAttribute(AttributeName.MATERIAL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MATERIAL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -468,7 +503,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ShapeDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShapeDepth(double value)
         {
@@ -490,7 +525,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ShapeType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setShapeType(EnumShapeType enumVar)
         {
@@ -512,7 +547,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TeethPerDimension
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTeethPerDimension(double value)
         {
@@ -577,8 +612,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 
     /**
      * (30) append element Shape
+     * @return JDFShapeElement the element
      */
-    public JDFShapeElement appendShape() throws JDFException
+    public JDFShapeElement appendShape()
     {
         return (JDFShapeElement) appendElement(ElementName.SHAPE, null);
     }

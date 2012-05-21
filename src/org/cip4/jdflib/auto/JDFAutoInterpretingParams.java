@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -185,12 +184,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInterpretingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -199,6 +206,10 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -219,26 +230,43 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMirrorAround getEnum(String enumName)
             {
                 return (EnumMirrorAround) getEnum(EnumMirrorAround.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMirrorAround getEnum(int enumValue)
             {
                 return (EnumMirrorAround) getEnum(EnumMirrorAround.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMirrorAround.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMirrorAround.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMirrorAround.class);
@@ -266,26 +294,43 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPolarity getEnum(String enumName)
             {
                 return (EnumPolarity) getEnum(EnumPolarity.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPolarity getEnum(int enumValue)
             {
                 return (EnumPolarity) getEnum(EnumPolarity.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPolarity.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPolarity.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPolarity.class);
@@ -311,26 +356,43 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(String enumName)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumPrintQuality getEnum(int enumValue)
             {
                 return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumPrintQuality.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumPrintQuality.class);
@@ -353,7 +415,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Center
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCenter(boolean value)
         {
@@ -375,7 +437,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MirrorAround
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMirrorAround(EnumMirrorAround enumVar)
         {
@@ -397,7 +459,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Polarity
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPolarity(EnumPolarity enumVar)
         {
@@ -419,7 +481,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute PrintQuality
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setPrintQuality(EnumPrintQuality enumVar)
         {
@@ -441,7 +503,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FitToPage
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFitToPage(boolean value)
         {
@@ -463,7 +525,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Poster
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPoster(JDFXYPair value)
         {
@@ -477,17 +539,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public JDFXYPair getPoster()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.POSTER, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.POSTER, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -497,7 +550,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute PosterOverlap
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setPosterOverlap(JDFXYPair value)
         {
@@ -511,17 +564,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public JDFXYPair getPosterOverlap()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.POSTEROVERLAP, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.POSTEROVERLAP, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -531,7 +575,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Scaling
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScaling(JDFXYPair value)
         {
@@ -545,17 +589,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public JDFXYPair getScaling()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SCALING, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SCALING, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -565,7 +600,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ScalingOrigin
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setScalingOrigin(JDFXYPair value)
         {
@@ -579,17 +614,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
           */
         public JDFXYPair getScalingOrigin()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SCALINGORIGIN, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SCALINGORIGIN, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -642,8 +668,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
     /**
      * (30) append element ObjectResolution
+     * @return JDFObjectResolution the element
      */
-    public JDFObjectResolution appendObjectResolution() throws JDFException
+    public JDFObjectResolution appendObjectResolution()
     {
         return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
     }
@@ -677,6 +704,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
     /**
      * (29) append element FitPolicy
+     * @return JDFFitPolicy the element
+     * @throws JDFException if the element already exists
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
@@ -736,8 +765,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
     /**
      * (30) append element Media
+     * @return JDFMedia the element
      */
-    public JDFMedia appendMedia() throws JDFException
+    public JDFMedia appendMedia()
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -771,6 +801,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 
     /**
      * (29) append element PDFInterpretingParams
+     * @return JDFPDFInterpretingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFPDFInterpretingParams appendPDFInterpretingParams() throws JDFException
     {

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -176,6 +175,10 @@ public abstract class JDFAutoInsert extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoInsert[  --> " + super.toString() + " ]";
@@ -192,7 +195,7 @@ public abstract class JDFAutoInsert extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Folio
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFolio(JDFIntegerRangeList value)
         {
@@ -206,17 +209,8 @@ public abstract class JDFAutoInsert extends JDFElement
           */
         public JDFIntegerRangeList getFolio()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FOLIO, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FOLIO, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -226,7 +220,7 @@ public abstract class JDFAutoInsert extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetOffset(JDFXYPair value)
         {
@@ -240,17 +234,8 @@ public abstract class JDFAutoInsert extends JDFElement
           */
         public JDFXYPair getSheetOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -260,7 +245,7 @@ public abstract class JDFAutoInsert extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Transformation
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTransformation(JDFMatrix value)
         {
@@ -274,17 +259,8 @@ public abstract class JDFAutoInsert extends JDFElement
           */
         public JDFMatrix getTransformation()
         {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFCoreConstants.EMPTYSTRING);
+            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
             return nPlaceHolder;
         }
 
@@ -294,7 +270,7 @@ public abstract class JDFAutoInsert extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WrapPages
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWrapPages(JDFIntegerRangeList value)
         {
@@ -308,17 +284,8 @@ public abstract class JDFAutoInsert extends JDFElement
           */
         public JDFIntegerRangeList getWrapPages()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.WRAPPAGES, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -347,6 +314,8 @@ public abstract class JDFAutoInsert extends JDFElement
 
     /**
      * (29) append element GlueType
+     * @return JDFSpanGlueType the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanGlueType appendGlueType() throws JDFException
     {
@@ -373,6 +342,8 @@ public abstract class JDFAutoInsert extends JDFElement
 
     /**
      * (29) append element Method
+     * @return JDFSpanMethod the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanMethod appendMethod() throws JDFException
     {
@@ -423,8 +394,9 @@ public abstract class JDFAutoInsert extends JDFElement
 
     /**
      * (30) append element GlueLine
+     * @return JDFGlueLine the element
      */
-    public JDFGlueLine appendGlueLine() throws JDFException
+    public JDFGlueLine appendGlueLine()
     {
         return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -152,6 +152,10 @@ public abstract class JDFAutoLot extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLot[  --> " + super.toString() + " ]";
@@ -172,26 +176,43 @@ public abstract class JDFAutoLot extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumConsumption getEnum(String enumName)
             {
                 return (EnumConsumption) getEnum(EnumConsumption.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumConsumption getEnum(int enumValue)
             {
                 return (EnumConsumption) getEnum(EnumConsumption.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumConsumption.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumConsumption.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumConsumption.class);
@@ -213,7 +234,7 @@ public abstract class JDFAutoLot extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ActualAmount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setActualAmount(double value)
         {
@@ -235,7 +256,7 @@ public abstract class JDFAutoLot extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Amount
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAmount(double value)
         {
@@ -257,7 +278,7 @@ public abstract class JDFAutoLot extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LotID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLotID(String value)
         {
@@ -270,7 +291,7 @@ public abstract class JDFAutoLot extends JDFElement
           */
         public String getLotID()
         {
-            return getAttribute(AttributeName.LOTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -279,7 +300,7 @@ public abstract class JDFAutoLot extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Consumption
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setConsumption(EnumConsumption enumVar)
         {

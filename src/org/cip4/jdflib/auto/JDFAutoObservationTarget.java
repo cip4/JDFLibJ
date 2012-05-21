@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
     /**
@@ -148,6 +148,10 @@ public abstract class JDFAutoObservationTarget extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoObservationTarget[  --> " + super.toString() + " ]";
@@ -164,7 +168,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ElementType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setElementType(String value)
         {
@@ -177,7 +181,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
           */
         public String getElementType()
         {
-            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -186,7 +190,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Attributes
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAttributes(VString value)
         {
@@ -200,7 +204,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         public VString getAttributesJDF()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ATTRIBUTES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -211,7 +215,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ElementIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setElementIDs(VString value)
         {
@@ -225,7 +229,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         public VString getElementIDs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ELEMENTIDS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -236,7 +240,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ObservationPath
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setObservationPath(String value)
         {
@@ -249,7 +253,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
           */
         public String getObservationPath()
         {
-            return getAttribute(AttributeName.OBSERVATIONPATH, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.OBSERVATIONPATH, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

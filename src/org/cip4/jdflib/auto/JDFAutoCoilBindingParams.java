@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
@@ -173,12 +173,20 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCoilBindingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +195,10 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -207,26 +219,43 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumMaterial getEnum(String enumName)
             {
                 return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumMaterial getEnum(int enumValue)
             {
                 return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumMaterial.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumMaterial.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumMaterial.class);
@@ -251,7 +280,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Tucked
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTucked(boolean value)
         {
@@ -273,7 +302,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Brand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBrand(String value)
         {
@@ -286,7 +315,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
           */
         public String getBrand()
         {
-            return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -295,7 +324,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (13) set attribute Color
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColor(EnumNamedColor value)
         {
@@ -310,7 +339,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         {
             String strAttrName = "";
             EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.COLOR, null, JDFConstants.EMPTYSTRING);
+            strAttrName = getAttribute(AttributeName.COLOR, null, JDFCoreConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
         }
@@ -321,7 +350,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ColorDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setColorDetails(String value)
         {
@@ -334,7 +363,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
           */
         public String getColorDetails()
         {
-            return getAttribute(AttributeName.COLORDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -343,7 +372,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Diameter
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setDiameter(double value)
         {
@@ -365,7 +394,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Material
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMaterial(EnumMaterial enumVar)
         {
@@ -387,7 +416,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Shift
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setShift(double value)
         {
@@ -409,7 +438,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Thickness
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setThickness(double value)
         {
@@ -450,6 +479,8 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 
     /**
      * (29) append element HoleMakingParams
+     * @return JDFHoleMakingParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
     {

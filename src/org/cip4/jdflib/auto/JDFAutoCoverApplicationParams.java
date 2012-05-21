@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,8 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
@@ -169,12 +167,20 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoCoverApplicationParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -183,6 +189,10 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -199,7 +209,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CoverOffset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCoverOffset(JDFXYPair value)
         {
@@ -213,17 +223,8 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
           */
         public JDFXYPair getCoverOffset()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.COVEROFFSET, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -276,8 +277,9 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 
     /**
      * (30) append element GlueApplication
+     * @return JDFGlueApplication the element
      */
-    public JDFGlueApplication appendGlueApplication() throws JDFException
+    public JDFGlueApplication appendGlueApplication()
     {
         return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
     }
@@ -335,8 +337,9 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 
     /**
      * (30) append element Score
+     * @return JDFScore the element
      */
-    public JDFScore appendScore() throws JDFException
+    public JDFScore appendScore()
     {
         return (JDFScore) appendElement(ElementName.SCORE, null);
     }

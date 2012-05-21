@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -150,12 +148,20 @@ public abstract class JDFAutoVerificationParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoVerificationParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -164,6 +170,10 @@ public abstract class JDFAutoVerificationParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -180,7 +190,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FieldRange
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFieldRange(JDFIntegerRangeList value)
         {
@@ -194,17 +204,8 @@ public abstract class JDFAutoVerificationParams extends JDFResource
           */
         public JDFIntegerRangeList getFieldRange()
         {
-            String strAttrName = "";
-            JDFIntegerRangeList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.FIELDRANGE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -214,7 +215,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute InsertError
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInsertError(String value)
         {
@@ -227,7 +228,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
           */
         public String getInsertError()
         {
-            return getAttribute(AttributeName.INSERTERROR, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.INSERTERROR, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -236,7 +237,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute InsertOK
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInsertOK(String value)
         {
@@ -249,7 +250,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
           */
         public String getInsertOK()
         {
-            return getAttribute(AttributeName.INSERTOK, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.INSERTOK, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -258,7 +259,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Tolerance
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTolerance(double value)
         {

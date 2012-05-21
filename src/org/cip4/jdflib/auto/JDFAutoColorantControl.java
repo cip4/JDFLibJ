@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.VElement;
@@ -177,12 +177,20 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoColorantControl[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -191,6 +199,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -207,7 +219,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ForceSeparations
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setForceSeparations(boolean value)
         {
@@ -229,7 +241,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ProcessColorModel
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setProcessColorModel(String value)
         {
@@ -242,7 +254,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
           */
         public String getProcessColorModel()
         {
-            return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -294,8 +306,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (30) append element ColorantAlias
+     * @return JDFColorantAlias the element
      */
-    public JDFColorantAlias appendColorantAlias() throws JDFException
+    public JDFColorantAlias appendColorantAlias()
     {
         return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
     }
@@ -329,6 +342,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (29) append element ColorantConvertProcess
+     * @return JDFSeparationList the element
+     * @throws JDFException if the element already exists
      */
     public JDFSeparationList appendColorantConvertProcess() throws JDFException
     {
@@ -355,6 +370,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (29) append element ColorantOrder
+     * @return JDFSeparationList the element
+     * @throws JDFException if the element already exists
      */
     public JDFSeparationList appendColorantOrder() throws JDFException
     {
@@ -381,6 +398,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (29) append element ColorantParams
+     * @return JDFSeparationList the element
+     * @throws JDFException if the element already exists
      */
     public JDFSeparationList appendColorantParams() throws JDFException
     {
@@ -407,6 +426,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (29) append element ColorPool
+     * @return JDFColorPool the element
+     * @throws JDFException if the element already exists
      */
     public JDFColorPool appendColorPool() throws JDFException
     {
@@ -466,8 +487,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (30) append element ColorSpaceSubstitute
+     * @return JDFColorSpaceSubstitute the element
      */
-    public JDFColorSpaceSubstitute appendColorSpaceSubstitute() throws JDFException
+    public JDFColorSpaceSubstitute appendColorSpaceSubstitute()
     {
         return (JDFColorSpaceSubstitute) appendElement(ElementName.COLORSPACESUBSTITUTE, null);
     }
@@ -492,6 +514,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (29) append element DeviceColorantOrder
+     * @return JDFSeparationList the element
+     * @throws JDFException if the element already exists
      */
     public JDFSeparationList appendDeviceColorantOrder() throws JDFException
     {
@@ -542,8 +566,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 
     /**
      * (30) append element DeviceNSpace
+     * @return JDFDeviceNSpace the element
      */
-    public JDFDeviceNSpace appendDeviceNSpace() throws JDFException
+    public JDFDeviceNSpace appendDeviceNSpace()
     {
         return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
     }

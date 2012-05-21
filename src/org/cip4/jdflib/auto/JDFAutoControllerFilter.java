@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
     /**
     *****************************************************************************
@@ -151,6 +151,10 @@ public abstract class JDFAutoControllerFilter extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoControllerFilter[  --> " + super.toString() + " ]";
@@ -171,26 +175,43 @@ public abstract class JDFAutoControllerFilter extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumURLTypes getEnum(String enumName)
             {
                 return (EnumURLTypes) getEnum(EnumURLTypes.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumURLTypes getEnum(int enumValue)
             {
                 return (EnumURLTypes) getEnum(EnumURLTypes.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumURLTypes.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumURLTypes.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumURLTypes.class);
@@ -215,7 +236,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ControllerID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setControllerID(String value)
         {
@@ -228,7 +249,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
           */
         public String getControllerID()
         {
-            return getAttribute(AttributeName.CONTROLLERID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CONTROLLERID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,10 +83,15 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFDateTimeRangeList extends JDFRangeList
 {
 	// **************************************** Attributes
@@ -112,9 +117,33 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	 */
 	public JDFDateTimeRangeList(String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
+		}
+	}
+
+	/**
+	 * factory for JDFDateTimeRangeList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFDateTimeRangeList, null if s is not compatible
+	 */
+	public static JDFDateTimeRangeList createDateTimeRangeList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFDateTimeRangeList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
 		}
 	}
 
@@ -269,8 +298,7 @@ public class JDFDateTimeRangeList extends JDFRangeList
 			JDFDate value = (v.elementAt(j));
 			JDFDate nextvalue = (v.elementAt(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue))
-					|| (first.isEarlier(last) && (value.isEarlier(nextvalue) || value.equals(nextvalue))) || (first.isLater(last) && (value.isLater(nextvalue) || value.equals(nextvalue)))) == false)
+			if (((first.equals(last) && value.equals(nextvalue)) || (first.isEarlier(last) && (value.isEarlier(nextvalue) || value.equals(nextvalue))) || (first.isLater(last) && (value.isLater(nextvalue) || value.equals(nextvalue)))) == false)
 				return false;
 		}
 		return true;

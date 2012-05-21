@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -187,6 +187,10 @@ public abstract class JDFAutoAncestor extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoAncestor[  --> " + super.toString() + " ]";
@@ -207,26 +211,43 @@ public abstract class JDFAutoAncestor extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumActivation getEnum(String enumName)
             {
                 return (EnumActivation) getEnum(EnumActivation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumActivation getEnum(int enumValue)
             {
                 return (EnumActivation) getEnum(EnumActivation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumActivation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumActivation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumActivation.class);
@@ -252,7 +273,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Activation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setActivation(EnumActivation enumVar)
         {
@@ -274,7 +295,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute FileName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setFileName(String value)
         {
@@ -287,7 +308,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getFileName()
         {
-            return getAttribute(AttributeName.FILENAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.FILENAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -296,7 +317,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ICSVersions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setICSVersions(VString value)
         {
@@ -310,7 +331,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         public VString getICSVersions()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -321,7 +342,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -334,7 +355,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -343,7 +364,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobPartID(String value)
         {
@@ -356,7 +377,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getJobPartID()
         {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -365,7 +386,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute MaxVersion
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setMaxVersion(EnumVersion enumVar)
         {
@@ -387,7 +408,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NodeID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNodeID(String value)
         {
@@ -400,7 +421,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getNodeID()
         {
-            return getAttribute(AttributeName.NODEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.NODEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -409,7 +430,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ProjectID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setProjectID(String value)
         {
@@ -422,7 +443,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getProjectID()
         {
-            return getAttribute(AttributeName.PROJECTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -431,7 +452,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelatedJobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelatedJobID(String value)
         {
@@ -444,7 +465,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getRelatedJobID()
         {
-            return getAttribute(AttributeName.RELATEDJOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RELATEDJOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -453,7 +474,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute RelatedJobPartID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setRelatedJobPartID(String value)
         {
@@ -466,7 +487,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getRelatedJobPartID()
         {
-            return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RELATEDJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -475,7 +496,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SpawnID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSpawnID(String value)
         {
@@ -488,7 +509,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getSpawnID()
         {
-            return getAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SPAWNID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -497,7 +518,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StatusDetails
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStatusDetails(String value)
         {
@@ -510,7 +531,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getStatusDetails()
         {
-            return getAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -519,7 +540,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Template
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplate(boolean value)
         {
@@ -541,7 +562,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TemplateID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplateID(String value)
         {
@@ -554,7 +575,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getTemplateID()
         {
-            return getAttribute(AttributeName.TEMPLATEID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATEID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -563,7 +584,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TemplateVersion
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemplateVersion(String value)
         {
@@ -576,7 +597,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getTemplateVersion()
         {
-            return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TEMPLATEVERSION, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -585,7 +606,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Type
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setType(String value)
         {
@@ -598,7 +619,7 @@ public abstract class JDFAutoAncestor extends JDFElement
           */
         public String getType()
         {
-            return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -607,7 +628,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Types
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTypes(VString value)
         {
@@ -621,7 +642,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         public VString getTypes()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -651,6 +672,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 
     /**
      * (29) append element CustomerInfo
+     * @return JDFCustomerInfo the element
+     * @throws JDFException if the element already exists
      */
     public JDFCustomerInfo appendCustomerInfo() throws JDFException
     {
@@ -677,6 +700,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 
     /**
      * (29) append element NodeInfo
+     * @return JDFNodeInfo the element
+     * @throws JDFException if the element already exists
      */
     public JDFNodeInfo appendNodeInfo() throws JDFException
     {

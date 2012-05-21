@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
@@ -153,6 +151,10 @@ public abstract class JDFAutoTIFFtag extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTIFFtag[  --> " + super.toString() + " ]";
@@ -169,7 +171,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TagNumber
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTagNumber(int value)
         {
@@ -191,7 +193,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TagType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTagType(int value)
         {
@@ -213,7 +215,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute IntegerValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setIntegerValue(JDFIntegerList value)
         {
@@ -227,17 +229,8 @@ public abstract class JDFAutoTIFFtag extends JDFElement
           */
         public JDFIntegerList getIntegerValue()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -247,7 +240,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberValue(JDFNumberList value)
         {
@@ -261,17 +254,8 @@ public abstract class JDFAutoTIFFtag extends JDFElement
           */
         public JDFNumberList getNumberValue()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -281,7 +265,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StringValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStringValue(String value)
         {
@@ -294,7 +278,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
           */
         public String getStringValue()
         {
-            return getAttribute(AttributeName.STRINGVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.STRINGVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -303,7 +287,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute BinaryValue
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBinaryValue(String value)
         {
@@ -316,7 +300,7 @@ public abstract class JDFAutoTIFFtag extends JDFElement
           */
         public String getBinaryValue()
         {
-            return getAttribute(AttributeName.BINARYVALUE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.BINARYVALUE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

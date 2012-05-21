@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -194,12 +193,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStrippingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -208,6 +215,10 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -228,26 +239,43 @@ public abstract class JDFAutoStrippingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumWorkStyle getEnum(String enumName)
             {
                 return (EnumWorkStyle) getEnum(EnumWorkStyle.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumWorkStyle getEnum(int enumValue)
             {
                 return (EnumWorkStyle) getEnum(EnumWorkStyle.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumWorkStyle.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumWorkStyle.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumWorkStyle.class);
@@ -273,7 +301,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyID(String value)
         {
@@ -286,7 +314,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public String getAssemblyID()
         {
-            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -295,7 +323,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AssemblyIDs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAssemblyIDs(VString value)
         {
@@ -309,7 +337,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         public VString getAssemblyIDs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -320,7 +348,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Automated
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAutomated(boolean value)
         {
@@ -342,7 +370,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute InnermostShingling
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setInnermostShingling(double value)
         {
@@ -364,7 +392,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute JobID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setJobID(String value)
         {
@@ -377,7 +405,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public String getJobID()
         {
-            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -386,7 +414,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute OutermostShingling
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOutermostShingling(double value)
         {
@@ -408,7 +436,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SectionList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSectionList(JDFIntegerList value)
         {
@@ -422,17 +450,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public JDFIntegerList getSectionList()
         {
-            String strAttrName = "";
-            JDFIntegerList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.SECTIONLIST, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFIntegerList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.SECTIONLIST, null, JDFCoreConstants.EMPTYSTRING);
+            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -442,7 +461,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetNameFormat
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetNameFormat(String value)
         {
@@ -455,7 +474,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public String getSheetNameFormat()
         {
-            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -464,7 +483,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute SheetNameTemplate
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSheetNameTemplate(String value)
         {
@@ -477,7 +496,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
           */
         public String getSheetNameTemplate()
         {
-            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -486,7 +505,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StackDepth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStackDepth(int value)
         {
@@ -508,7 +527,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute WorkStyle
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setWorkStyle(EnumWorkStyle enumVar)
         {
@@ -549,6 +568,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (29) append element BinderySignature
+     * @return JDFBinderySignature the element
+     * @throws JDFException if the element already exists
      */
     public JDFBinderySignature appendBinderySignature() throws JDFException
     {
@@ -608,8 +629,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (30) append element Device
+     * @return JDFDevice the element
      */
-    public JDFDevice appendDevice() throws JDFException
+    public JDFDevice appendDevice()
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
     }
@@ -643,6 +665,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (29) append element ExternalImpositionTemplate
+     * @return JDFExternalImpositionTemplate the element
+     * @throws JDFException if the element already exists
      */
     public JDFExternalImpositionTemplate appendExternalImpositionTemplate() throws JDFException
     {
@@ -702,8 +726,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (30) append element Media
+     * @return JDFMedia the element
      */
-    public JDFMedia appendMedia() throws JDFException
+    public JDFMedia appendMedia()
     {
         return (JDFMedia) appendElement(ElementName.MEDIA, null);
     }
@@ -761,8 +786,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (30) append element Position
+     * @return JDFPosition the element
      */
-    public JDFPosition appendPosition() throws JDFException
+    public JDFPosition appendPosition()
     {
         return (JDFPosition) appendElement(ElementName.POSITION, null);
     }
@@ -787,6 +813,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (29) append element StripCellParams
+     * @return JDFStripCellParams the element
+     * @throws JDFException if the element already exists
      */
     public JDFStripCellParams appendStripCellParams() throws JDFException
     {
@@ -837,8 +865,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     /**
      * (30) append element StripMark
+     * @return JDFStripMark the element
      */
-    public JDFStripMark appendStripMark() throws JDFException
+    public JDFStripMark appendStripMark()
     {
         return (JDFStripMark) appendElement(ElementName.STRIPMARK, null);
     }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
@@ -183,6 +182,10 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLayoutIntent[  --> " + super.toString() + " ]";
@@ -203,26 +206,43 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFolioCount getEnum(String enumName)
             {
                 return (EnumFolioCount) getEnum(EnumFolioCount.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFolioCount getEnum(int enumValue)
             {
                 return (EnumFolioCount) getEnum(EnumFolioCount.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFolioCount.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFolioCount.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFolioCount.class);
@@ -248,26 +268,43 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumFinishedPageOrientation getEnum(String enumName)
             {
                 return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumFinishedPageOrientation getEnum(int enumValue)
             {
                 return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumFinishedPageOrientation.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumFinishedPageOrientation.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumFinishedPageOrientation.class);
@@ -293,26 +330,43 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumRotatePolicy getEnum(String enumName)
             {
                 return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumRotatePolicy getEnum(int enumValue)
             {
                 return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumRotatePolicy.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumRotatePolicy.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumRotatePolicy.class);
@@ -340,26 +394,43 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(String enumName)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumSides getEnum(int enumValue)
             {
                 return (EnumSides) getEnum(EnumSides.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumSides.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumSides.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumSides.class);
@@ -383,7 +454,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FolioCount
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFolioCount(EnumFolioCount enumVar)
         {
@@ -405,7 +476,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberUp
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberUp(JDFXYPair value)
         {
@@ -419,17 +490,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
           */
         public JDFXYPair getNumberUp()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -439,7 +501,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute FinishedPageOrientation
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
         {
@@ -461,7 +523,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute RotatePolicy
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setRotatePolicy(EnumRotatePolicy enumVar)
         {
@@ -483,7 +545,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Sides
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setSides(EnumSides enumVar)
         {
@@ -524,6 +586,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element Dimensions
+     * @return JDFXYPairSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFXYPairSpan appendDimensions() throws JDFException
     {
@@ -550,6 +614,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element FinishedDimensions
+     * @return JDFShapeSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFShapeSpan appendFinishedDimensions() throws JDFException
     {
@@ -576,6 +642,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element FinishedGrainDirection
+     * @return JDFSpanFinishedGrainDirection the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanFinishedGrainDirection appendFinishedGrainDirection() throws JDFException
     {
@@ -602,6 +670,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element Pages
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendPages() throws JDFException
     {
@@ -628,6 +698,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element PageVariance
+     * @return JDFIntegerSpan the element
+     * @throws JDFException if the element already exists
      */
     public JDFIntegerSpan appendPageVariance() throws JDFException
     {
@@ -654,6 +726,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element Layout
+     * @return JDFLayout the element
+     * @throws JDFException if the element already exists
      */
     public JDFLayout appendLayout() throws JDFException
     {
@@ -689,6 +763,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 
     /**
      * (29) append element SizePolicy
+     * @return JDFSpanSizePolicy the element
+     * @throws JDFException if the element already exists
      */
     public JDFSpanSizePolicy appendSizePolicy() throws JDFException
     {

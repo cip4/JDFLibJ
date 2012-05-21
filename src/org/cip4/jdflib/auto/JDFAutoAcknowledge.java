@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,285 +84,320 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+    /**
+    *****************************************************************************
+    class JDFAutoAcknowledge : public JDFMessage
 
-/**
-*****************************************************************************
-class JDFAutoAcknowledge : public JDFMessage
-
-*****************************************************************************
-*/
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoAcknowledge extends JDFMessage
 {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REFID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
-	}
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.REFID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
+    }
+    
+    protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
 
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-	}
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
+    }
 
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
-	}
 
-	/**
-	 * Constructor for JDFAutoAcknowledge
-	 * @param myOwnerDocument
-	 * @param qualifiedName
-	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-	{
-		super(myOwnerDocument, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoAcknowledge
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
+    /**
+     * Constructor for JDFAutoAcknowledge
+     * @param myOwnerDocument
+     * @param qualifiedName
+     */
+    protected JDFAutoAcknowledge(
+        CoreDocumentImpl myOwnerDocument,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, qualifiedName);
+    }
 
-	/**
-	 * Constructor for JDFAutoAcknowledge
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
+    /**
+     * Constructor for JDFAutoAcknowledge
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     */
+    protected JDFAutoAcknowledge(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+    }
 
-	@Override
-	public String toString()
-	{
-		return " JDFAutoAcknowledge[  --> " + super.toString() + " ]";
-	}
+    /**
+     * Constructor for JDFAutoAcknowledge
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     * @param myLocalName
+     */
+    protected JDFAutoAcknowledge(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName,
+        String myLocalName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
 
-	/**
-	* Enumeration strings for AcknowledgeType
-	*/
 
-	public static class EnumAcknowledgeType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+    /**
+     * @return  the string representation
+     */
+    @Override
+    public String toString()
+    {
+        return " JDFAutoAcknowledge[  --> " + super.toString() + " ]";
+    }
 
-		private EnumAcknowledgeType(String name)
-		{
-			super(name, m_startValue++);
-		}
 
-		public static EnumAcknowledgeType getEnum(String enumName)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumName);
-		}
+        /**
+        * Enumeration strings for AcknowledgeType
+        */
 
-		public static EnumAcknowledgeType getEnum(int enumValue)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumValue);
-		}
+        public static class EnumAcknowledgeType extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
 
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAcknowledgeType.class);
-		}
+            private EnumAcknowledgeType(String name)
+            {
+                super(name, m_startValue++);
+            }
 
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAcknowledgeType.class);
-		}
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
+            public static EnumAcknowledgeType getEnum(String enumName)
+            {
+                return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumName);
+            }
 
-		public static Iterator iterator()
-		{
-			return iterator(EnumAcknowledgeType.class);
-		}
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
+            public static EnumAcknowledgeType getEnum(int enumValue)
+            {
+                return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumValue);
+            }
 
-		public static final EnumAcknowledgeType Received = new EnumAcknowledgeType("Received");
-		public static final EnumAcknowledgeType Applied = new EnumAcknowledgeType("Applied");
-		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
-	}
+    /**
+     * @return the map of enums
+     */
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumAcknowledgeType.class);
+            }
 
-	/* ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
+    /**
+     * @return the list of enums
+     */
+            public static List getEnumList()
+            {
+                return getEnumList(EnumAcknowledgeType.class);
+            }
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute refID
-	--------------------------------------------------------------------- */
-	/**
-	  * (36) set attribute refID
-	  * @param value: the value to set the attribute to
-	  */
-	@Override
-	public void setrefID(String value)
-	{
-		setAttribute(AttributeName.REFID, value, null);
-	}
+    /**
+     * @return the iterator
+     */
+            public static Iterator iterator()
+            {
+                return iterator(EnumAcknowledgeType.class);
+            }
 
-	/**
-	  * (23) get String attribute refID
-	  * @return the value of the attribute
-	  */
-	@Override
-	public String getrefID()
-	{
-		return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
-	}
+            public static final EnumAcknowledgeType Received = new EnumAcknowledgeType("Received");
+            public static final EnumAcknowledgeType Applied = new EnumAcknowledgeType("Applied");
+            public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
+        }      
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute AcknowledgeType
-	--------------------------------------------------------------------- */
-	/**
-	  * (5.2) set attribute AcknowledgeType
-	  * @param v vector of the enumeration values
-	  */
-	public void setAcknowledgeType(Vector v)
-	{
-		setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
-	}
 
-	/**
-	  * (9.2) get AcknowledgeType attribute AcknowledgeType
-	  * @return Vector of the enumerations
-	  */
-	public Vector getAcknowledgeType()
-	{
-		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
-	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute ReturnCode
-	--------------------------------------------------------------------- */
-	/**
-	  * (36) set attribute ReturnCode
-	  * @param value: the value to set the attribute to
-	  */
-	public void setReturnCode(int value)
-	{
-		setAttribute(AttributeName.RETURNCODE, value, null);
-	}
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute refID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute refID
+          * @param value the value to set the attribute to
+          */
+        public void setrefID(String value)
+        {
+            setAttribute(AttributeName.REFID, value, null);
+        }
 
-	/**
-	  * (15) get int attribute ReturnCode
-	  * @return int the value of the attribute
-	  */
-	@Override
-	public int getReturnCode()
-	{
-		return getIntAttribute(AttributeName.RETURNCODE, null, 0);
-	}
+        /**
+          * (23) get String attribute refID
+          * @return the value of the attribute
+          */
+        public String getrefID()
+        {
+            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
+        }
 
-	/* ***********************************************************************
-	 * Element getter / setter
-	 * ***********************************************************************
-	 */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AcknowledgeType
+        --------------------------------------------------------------------- */
+        /**
+          * (5.2) set attribute AcknowledgeType
+          * @param v vector of the enumeration values
+          */
+        public void setAcknowledgeType(Vector v)
+        {
+            setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
+        }
 
-	/**
-	 * (24) const get element Notification
-	 * @return JDFNotification the element
-	 */
-	public JDFNotification getNotification()
-	{
-		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
-	}
+        /**
+          * (9.2) get AcknowledgeType attribute AcknowledgeType
+          * @return Vector of the enumerations
+          */
+        public Vector getAcknowledgeType()
+        {
+            return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
+        }
 
-	/** (25) getCreateNotification
-	 * 
-	 * @return JDFNotification the element
-	 */
-	public JDFNotification getCreateNotification()
-	{
-		return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ReturnCode
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ReturnCode
+          * @param value the value to set the attribute to
+          */
+        public void setReturnCode(int value)
+        {
+            setAttribute(AttributeName.RETURNCODE, value, null);
+        }
 
-	/**
-	 * (29) append element Notification
-	 */
-	public JDFNotification appendNotification() throws JDFException
-	{
-		return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
-	}
+        /**
+          * (15) get int attribute ReturnCode
+          * @return int the value of the attribute
+          */
+        public int getReturnCode()
+        {
+            return getIntAttribute(AttributeName.RETURNCODE, null, 0);
+        }
 
-	/** (26) getCreateEmployee
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element
-	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
-	{
-		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-	}
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
 
-	/**
-	 * (27) const get element Employee
-	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element
-	 * default is getEmployee(0)     */
-	public JDFEmployee getEmployee(int iSkip)
-	{
-		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-	}
+    /**
+     * (24) const get element Notification
+     * @return JDFNotification the element
+     */
+    public JDFNotification getNotification()
+    {
+        return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
+    }
 
-	/**
-	 * Get all Employee from the current element
-	 * 
-	 * @return Collection<JDFEmployee>, null if none are available
-	 */
-	public Collection<JDFEmployee> getAllEmployee()
-	{
-		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
+    /** (25) getCreateNotification
+     * 
+     * @return JDFNotification the element
+     */
+    public JDFNotification getCreateNotification()
+    {
+        return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
+    }
 
-		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFEmployee) vc.get(i));
-		}
+    /**
+     * (29) append element Notification
+     * @return JDFNotification the element
+     * @throws JDFException if the element already exists
+     */
+    public JDFNotification appendNotification() throws JDFException
+    {
+        return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
+    }
 
-		return v;
-	}
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
 
-	/**
-	 * (30) append element Employee
-	 */
-	public JDFEmployee appendEmployee() throws JDFException
-	{
-		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-	}
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>, null if none are available
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmployee) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee appendEmployee()
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
 }// end namespace JDF

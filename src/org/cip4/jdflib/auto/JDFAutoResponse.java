@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -170,6 +170,10 @@ public abstract class JDFAutoResponse extends JDFMessage
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoResponse[  --> " + super.toString() + " ]";
@@ -186,7 +190,7 @@ public abstract class JDFAutoResponse extends JDFMessage
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Acknowledged
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAcknowledged(boolean value)
         {
@@ -208,7 +212,7 @@ public abstract class JDFAutoResponse extends JDFMessage
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute refID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrefID(String value)
         {
@@ -221,7 +225,7 @@ public abstract class JDFAutoResponse extends JDFMessage
           */
         public String getrefID()
         {
-            return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -230,7 +234,7 @@ public abstract class JDFAutoResponse extends JDFMessage
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ReturnCode
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setReturnCode(int value)
         {
@@ -252,7 +256,7 @@ public abstract class JDFAutoResponse extends JDFMessage
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Subscribed
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setSubscribed(boolean value)
         {
@@ -293,6 +297,8 @@ public abstract class JDFAutoResponse extends JDFMessage
 
     /**
      * (29) append element Notification
+     * @return JDFNotification the element
+     * @throws JDFException if the element already exists
      */
     public JDFNotification appendNotification() throws JDFException
     {
@@ -343,8 +349,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

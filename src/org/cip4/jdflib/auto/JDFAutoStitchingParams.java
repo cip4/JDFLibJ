@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
     /**
@@ -162,12 +161,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoStitchingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -176,6 +183,10 @@ public abstract class JDFAutoStitchingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -196,26 +207,43 @@ public abstract class JDFAutoStitchingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumStitchOrigin getEnum(String enumName)
             {
                 return (EnumStitchOrigin) getEnum(EnumStitchOrigin.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumStitchOrigin getEnum(int enumValue)
             {
                 return (EnumStitchOrigin) getEnum(EnumStitchOrigin.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumStitchOrigin.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumStitchOrigin.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumStitchOrigin.class);
@@ -242,26 +270,43 @@ public abstract class JDFAutoStitchingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumReferenceEdge getEnum(String enumName)
             {
                 return (EnumReferenceEdge) getEnum(EnumReferenceEdge.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumReferenceEdge getEnum(int enumValue)
             {
                 return (EnumReferenceEdge) getEnum(EnumReferenceEdge.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumReferenceEdge.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumReferenceEdge.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumReferenceEdge.class);
@@ -289,26 +334,43 @@ public abstract class JDFAutoStitchingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumStapleShape getEnum(String enumName)
             {
                 return (EnumStapleShape) getEnum(EnumStapleShape.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumStapleShape getEnum(int enumValue)
             {
                 return (EnumStapleShape) getEnum(EnumStapleShape.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumStapleShape.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumStapleShape.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumStapleShape.class);
@@ -337,26 +399,43 @@ public abstract class JDFAutoStitchingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumStitchType getEnum(String enumName)
             {
                 return (EnumStitchType) getEnum(EnumStitchType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumStitchType getEnum(int enumValue)
             {
                 return (EnumStitchType) getEnum(EnumStitchType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumStitchType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumStitchType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumStitchType.class);
@@ -379,7 +458,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute StitchOrigin
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setStitchOrigin(EnumStitchOrigin enumVar)
         {
@@ -401,7 +480,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Angle
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAngle(double value)
         {
@@ -423,7 +502,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NumberOfStitches
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNumberOfStitches(int value)
         {
@@ -445,7 +524,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Offset
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setOffset(double value)
         {
@@ -467,7 +546,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute ReferenceEdge
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setReferenceEdge(EnumReferenceEdge enumVar)
         {
@@ -489,7 +568,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute StapleShape
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setStapleShape(EnumStapleShape enumVar)
         {
@@ -511,7 +590,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StitchFromFront
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStitchFromFront(boolean value)
         {
@@ -533,7 +612,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StitchPositions
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStitchPositions(JDFNumberList value)
         {
@@ -547,17 +626,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
           */
         public JDFNumberList getStitchPositions()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -567,7 +637,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute StitchType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setStitchType(EnumStitchType enumVar)
         {
@@ -589,7 +659,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute StitchWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setStitchWidth(double value)
         {
@@ -611,7 +681,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WireGauge
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWireGauge(double value)
         {
@@ -633,7 +703,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute WireBrand
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setWireBrand(String value)
         {
@@ -646,7 +716,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
           */
         public String getWireBrand()
         {
-            return getAttribute(AttributeName.WIREBRAND, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.WIREBRAND, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

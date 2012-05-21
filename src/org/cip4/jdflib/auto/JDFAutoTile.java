@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -173,12 +172,20 @@ public abstract class JDFAutoTile extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoTile[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -187,6 +194,10 @@ public abstract class JDFAutoTile extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -203,7 +214,7 @@ public abstract class JDFAutoTile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClipBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClipBox(JDFRectangle value)
         {
@@ -217,17 +228,8 @@ public abstract class JDFAutoTile extends JDFResource
           */
         public JDFRectangle getClipBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -237,7 +239,7 @@ public abstract class JDFAutoTile extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute CTM
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setCTM(JDFMatrix value)
         {
@@ -251,17 +253,8 @@ public abstract class JDFAutoTile extends JDFResource
           */
         public JDFMatrix getCTM()
         {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
+            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
             return nPlaceHolder;
         }
 
@@ -314,8 +307,9 @@ public abstract class JDFAutoTile extends JDFResource
 
     /**
      * (30) append element MarkObject
+     * @return JDFMarkObject the element
      */
-    public JDFMarkObject appendMarkObject() throws JDFException
+    public JDFMarkObject appendMarkObject()
     {
         return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
     }
@@ -340,6 +334,8 @@ public abstract class JDFAutoTile extends JDFResource
 
     /**
      * (29) append element Media
+     * @return JDFMedia the element
+     * @throws JDFException if the element already exists
      */
     public JDFMedia appendMedia() throws JDFException
     {
@@ -375,6 +371,8 @@ public abstract class JDFAutoTile extends JDFResource
 
     /**
      * (29) append element MediaSource
+     * @return JDFMediaSource the element
+     * @throws JDFException if the element already exists
      */
     public JDFMediaSource appendMediaSource() throws JDFException
     {

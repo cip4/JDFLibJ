@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,7 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
@@ -180,6 +179,10 @@ public abstract class JDFAutoPageCell extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPageCell[  --> " + super.toString() + " ]";
@@ -200,26 +203,43 @@ public abstract class JDFAutoPageCell extends JDFElement
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumRotate getEnum(String enumName)
             {
                 return (EnumRotate) getEnum(EnumRotate.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumRotate getEnum(int enumValue)
             {
                 return (EnumRotate) getEnum(EnumRotate.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumRotate.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumRotate.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumRotate.class);
@@ -243,7 +263,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Border
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setBorder(double value)
         {
@@ -265,7 +285,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ClipBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setClipBox(JDFRectangle value)
         {
@@ -279,17 +299,8 @@ public abstract class JDFAutoPageCell extends JDFElement
           */
         public JDFRectangle getClipBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -299,7 +310,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute MarkList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setMarkList(VString value)
         {
@@ -313,7 +324,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         public VString getMarkList()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MARKLIST, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -324,7 +335,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Rotate
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setRotate(EnumRotate enumVar)
         {
@@ -346,7 +357,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute TrimSize
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTrimSize(JDFXYPair value)
         {
@@ -360,17 +371,8 @@ public abstract class JDFAutoPageCell extends JDFElement
           */
         public JDFXYPair getTrimSize()
         {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRIMSIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, JDFCoreConstants.EMPTYSTRING);
+            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
             return nPlaceHolder;
         }
 
@@ -399,6 +401,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 
     /**
      * (29) append element Color
+     * @return JDFColor the element
+     * @throws JDFException if the element already exists
      */
     public JDFColor appendColor() throws JDFException
     {
@@ -434,6 +438,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 
     /**
      * (29) append element DeviceMark
+     * @return JDFDeviceMark the element
+     * @throws JDFException if the element already exists
      */
     public JDFDeviceMark appendDeviceMark() throws JDFException
     {
@@ -469,6 +475,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 
     /**
      * (29) append element FitPolicy
+     * @return JDFFitPolicy the element
+     * @throws JDFException if the element already exists
      */
     public JDFFitPolicy appendFitPolicy() throws JDFException
     {
@@ -504,6 +512,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 
     /**
      * (29) append element ImageShift
+     * @return JDFImageShift the element
+     * @throws JDFException if the element already exists
      */
     public JDFImageShift appendImageShift() throws JDFException
     {

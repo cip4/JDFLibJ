@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -174,6 +174,10 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
@@ -194,26 +198,43 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumReason getEnum(String enumName)
             {
                 return (EnumReason) getEnum(EnumReason.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumReason getEnum(int enumValue)
             {
                 return (EnumReason) getEnum(EnumReason.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumReason.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumReason.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumReason.class);
@@ -236,7 +257,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ContentsModified
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setContentsModified(boolean value)
         {
@@ -258,7 +279,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute NodeStatus
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setNodeStatus(EnumNodeStatus enumVar)
         {
@@ -280,7 +301,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Reason
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setReason(EnumReason enumVar)
         {
@@ -345,8 +366,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
     /**
      * (30) append element Employee
+     * @return JDFEmployee the element
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee()
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -371,6 +393,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
     /**
      * (29) append element MISDetails
+     * @return JDFMISDetails the element
+     * @throws JDFException if the element already exists
      */
     public JDFMISDetails appendMISDetails() throws JDFException
     {
@@ -421,8 +445,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 
     /**
      * (30) append element Part
+     * @return JDFPart the element
      */
-    public JDFPart appendPart() throws JDFException
+    public JDFPart appendPart()
     {
         return (JDFPart) appendElement(ElementName.PART, null);
     }

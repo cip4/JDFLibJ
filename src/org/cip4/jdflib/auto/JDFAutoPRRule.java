@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
@@ -166,6 +165,10 @@ public abstract class JDFAutoPRRule extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoPRRule[  --> " + super.toString() + " ]";
@@ -182,7 +185,7 @@ public abstract class JDFAutoPRRule extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ActionRefs
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setActionRefs(VString value)
         {
@@ -196,7 +199,7 @@ public abstract class JDFAutoPRRule extends JDFElement
         public VString getActionRefs()
         {
             VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ACTIONREFS, null, JDFConstants.EMPTYSTRING);
+            String  s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
         }
@@ -250,8 +253,9 @@ public abstract class JDFAutoPRRule extends JDFElement
 
     /**
      * (30) append element PRRuleAttr
+     * @return JDFPRRuleAttr the element
      */
-    public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
+    public JDFPRRuleAttr appendPRRuleAttr()
     {
         return (JDFPRRuleAttr) appendElement(ElementName.PRRULEATTR, null);
     }

@@ -99,6 +99,30 @@ public class JDFIntegerRange extends JDFRange
 	private static int m_defaultXDef = 0;
 
 	/**
+	 * factory for JDFIntegerRange that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFIntegerRange, null if s is not compatible
+	 */
+	public static JDFIntegerRange createIntegerRange(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFIntegerRange(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * 
 	 * create a JDFIntegerRange from a string - return null if no go
 	 * 

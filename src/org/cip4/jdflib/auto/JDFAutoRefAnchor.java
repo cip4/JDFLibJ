@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
     /**
     *****************************************************************************
@@ -151,12 +151,20 @@ public abstract class JDFAutoRefAnchor extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoRefAnchor[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -165,6 +173,10 @@ public abstract class JDFAutoRefAnchor extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -185,26 +197,43 @@ public abstract class JDFAutoRefAnchor extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(String enumName)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAnchor getEnum(int enumValue)
             {
                 return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAnchor.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAnchor.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAnchor.class);
@@ -237,26 +266,43 @@ public abstract class JDFAutoRefAnchor extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumAnchorType getEnum(String enumName)
             {
                 return (EnumAnchorType) getEnum(EnumAnchorType.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumAnchorType getEnum(int enumValue)
             {
                 return (EnumAnchorType) getEnum(EnumAnchorType.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumAnchorType.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumAnchorType.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumAnchorType.class);
@@ -278,7 +324,7 @@ public abstract class JDFAutoRefAnchor extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute Anchor
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAnchor(EnumAnchor enumVar)
         {
@@ -300,7 +346,7 @@ public abstract class JDFAutoRefAnchor extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute AnchorType
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setAnchorType(EnumAnchorType enumVar)
         {
@@ -322,7 +368,7 @@ public abstract class JDFAutoRefAnchor extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute rRef
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setrRef(String value)
         {
@@ -335,7 +381,7 @@ public abstract class JDFAutoRefAnchor extends JDFResource
           */
         public String getrRef()
         {
-            return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.RREF, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

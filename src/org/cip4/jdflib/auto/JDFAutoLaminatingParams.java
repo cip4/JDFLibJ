@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,14 +73,13 @@ package org.cip4.jdflib.auto;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
@@ -159,12 +158,20 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLaminatingParams[  --> " + super.toString() + " ]";
     }
 
 
+    /**
+     * @return  true if ok
+     */
+    @Override
     public boolean  init()
     {
         boolean bRet = super.init();
@@ -173,6 +180,10 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
     }
 
 
+    /**
+     * @return the resource Class
+     */
+    @Override
     public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
@@ -193,26 +204,43 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
                 super(name, m_startValue++);
             }
 
+    /**
+     * @param enumName the string to convert
+     * @return the enum
+     */
             public static EnumLaminatingMethod getEnum(String enumName)
             {
                 return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumName);
             }
 
+    /**
+     * @param enumValue the integer to convert
+     * @return the enum
+     */
             public static EnumLaminatingMethod getEnum(int enumValue)
             {
                 return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumValue);
             }
 
+    /**
+     * @return the map of enums
+     */
             public static Map getEnumMap()
             {
                 return getEnumMap(EnumLaminatingMethod.class);
             }
 
+    /**
+     * @return the list of enums
+     */
             public static List getEnumList()
             {
                 return getEnumList(EnumLaminatingMethod.class);
             }
 
+    /**
+     * @return the iterator
+     */
             public static Iterator iterator()
             {
                 return iterator(EnumLaminatingMethod.class);
@@ -236,7 +264,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute AdhesiveType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setAdhesiveType(String value)
         {
@@ -249,7 +277,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
           */
         public String getAdhesiveType()
         {
-            return getAttribute(AttributeName.ADHESIVETYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ADHESIVETYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -258,7 +286,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute GapList
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setGapList(JDFNumberList value)
         {
@@ -272,17 +300,8 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
           */
         public JDFNumberList getGapList()
         {
-            String strAttrName = "";
-            JDFNumberList nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.GAPLIST, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFNumberList(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.GAPLIST, null, JDFCoreConstants.EMPTYSTRING);
+            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
             return nPlaceHolder;
         }
 
@@ -292,7 +311,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute HardenerType
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setHardenerType(String value)
         {
@@ -305,7 +324,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
           */
         public String getHardenerType()
         {
-            return getAttribute(AttributeName.HARDENERTYPE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.HARDENERTYPE, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -314,7 +333,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LaminatingBox
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLaminatingBox(JDFRectangle value)
         {
@@ -328,17 +347,8 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
           */
         public JDFRectangle getLaminatingBox()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
+            String strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, JDFCoreConstants.EMPTYSTRING);
+            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
             return nPlaceHolder;
         }
 
@@ -348,7 +358,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (5) set attribute LaminatingMethod
-          * @param enumVar: the enumVar to set the attribute to
+          * @param enumVar the enumVar to set the attribute to
           */
         public void setLaminatingMethod(EnumLaminatingMethod enumVar)
         {
@@ -370,7 +380,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute NipWidth
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setNipWidth(double value)
         {
@@ -392,7 +402,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute ModuleIndex
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setModuleIndex(int value)
         {
@@ -414,7 +424,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute Temperature
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setTemperature(double value)
         {

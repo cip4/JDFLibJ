@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFAddress;
     /**
@@ -166,6 +165,10 @@ public abstract class JDFAutoLocation extends JDFElement
     }
 
 
+    /**
+     * @return  the string representation
+     */
+    @Override
     public String toString()
     {
         return " JDFAutoLocation[  --> " + super.toString() + " ]";
@@ -182,7 +185,7 @@ public abstract class JDFAutoLocation extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LocationName
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLocationName(String value)
         {
@@ -195,7 +198,7 @@ public abstract class JDFAutoLocation extends JDFElement
           */
         public String getLocationName()
         {
-            return getAttribute(AttributeName.LOCATIONNAME, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LOCATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
         }
 
         
@@ -204,7 +207,7 @@ public abstract class JDFAutoLocation extends JDFElement
         --------------------------------------------------------------------- */
         /**
           * (36) set attribute LocID
-          * @param value: the value to set the attribute to
+          * @param value the value to set the attribute to
           */
         public void setLocID(String value)
         {
@@ -217,7 +220,7 @@ public abstract class JDFAutoLocation extends JDFElement
           */
         public String getLocID()
         {
-            return getAttribute(AttributeName.LOCID, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.LOCID, null, JDFCoreConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -269,8 +272,9 @@ public abstract class JDFAutoLocation extends JDFElement
 
     /**
      * (30) append element Address
+     * @return JDFAddress the element
      */
-    public JDFAddress appendAddress() throws JDFException
+    public JDFAddress appendAddress()
     {
         return (JDFAddress) appendElement(ElementName.ADDRESS, null);
     }
