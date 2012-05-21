@@ -132,6 +132,30 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFXYPair that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFXYPair, null if s is not compatible
+	 */
+	public static JDFRGBColor createRGBColor(String s)
+	{
+		if (s != null && s.length() >= 5)
+		{
+			try
+			{
+				return new JDFRGBColor(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a RGB color with all values set via a JDFNumberList
 	 * 
 	 * @param nl the given number list

@@ -164,9 +164,26 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 * 
 	 * @param rangelist
 	 * @return
+	 * @deprecated use createIntegerRangeList
 	 */
+	@Deprecated
 	public static JDFIntegerRangeList getIntegerRangeList(String rangelist)
 	{
+		return createIntegerRangeList(rangelist);
+	}
+
+	/**
+	 * 
+	 * create a JDFIntegerRangeList from a string - return null if no go
+	 * 
+	 * @param rangelist
+	 * @return
+	 */
+	public static JDFIntegerRangeList createIntegerRangeList(String rangelist)
+	{
+		if (StringUtil.getNonEmpty(rangelist) == null)
+			return null;
+
 		try
 		{
 			return new JDFIntegerRangeList(rangelist);

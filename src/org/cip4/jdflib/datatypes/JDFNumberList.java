@@ -110,6 +110,30 @@ public class JDFNumberList extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFNumberList that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFNumberList, null if s is not compatible
+	 */
+	public static JDFNumberList createNumberList(String s)
+	{
+		if (s != null && s.length() > 0)
+		{
+			try
+			{
+				return new JDFNumberList(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a number list with the given vector
 	 * 
 	 * @param v the given vector

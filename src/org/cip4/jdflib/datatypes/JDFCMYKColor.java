@@ -130,6 +130,30 @@ public class JDFCMYKColor extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFCMYKColor that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFCMYKColor, null if s is not compatible
+	 */
+	public static JDFCMYKColor createCMYKColor(String s)
+	{
+		if (s != null && s.length() >= 7)
+		{
+			try
+			{
+				return new JDFCMYKColor(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a CMYK color with a given JDFNumberList
 	 * 
 	 * @param nl - the given number list

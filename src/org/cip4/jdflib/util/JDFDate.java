@@ -308,7 +308,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public static JDFDate createDate(final String date)
 	{
-		if (date == null)
+		if (date == null || date.length() == 0)
 		{
 			return null;
 		}

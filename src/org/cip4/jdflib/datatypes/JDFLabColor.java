@@ -129,6 +129,26 @@ public class JDFLabColor extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFShape that silently returns null in case of illegal strings
+	 * @param s the string to parse - if JDFXYPair compatible, a 0  z dimension value is assumed
+	 * @return the JDFShape, null if s is not compatible
+	 */
+	public static JDFLabColor createLabColor(String s)
+	{
+		if (s == null || s.length() < 5) // we want at least 2 values + 1 blank=3
+			return null;
+
+		try
+		{
+			return new JDFLabColor(s);
+		}
+		catch (DataFormatException x)
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a Lab color with all values set via a JDFNumberList
 	 * 
 	 * @param nl the given number list

@@ -2348,7 +2348,7 @@ public class JDFResource extends JDFElement
 		 * @param partUsage
 		 * @return
 		 */
-		private JDFResource getFastPartition(final JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+		private JDFResource getFastPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
 		{
 			if (partUsage == null)
 			{
@@ -2359,6 +2359,7 @@ public class JDFResource extends JDFElement
 			{
 				return null;
 			}
+
 			JDFResource ret = JDFResource.this;
 			final String nodeName = ret.getNodeName();
 

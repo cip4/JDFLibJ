@@ -950,11 +950,11 @@ public class JavaCoreStringUtil
 				// set2
 				strbufResult.append(strDepth2).append("/**").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  * (33) set attribute ").append(modifiedAttributeName).append(strLineEnd);
-				strbufResult.append(strDepth2).append("  * @param value: the value to set the attribute to").append(strLineEnd);
+				strbufResult.append(strDepth2).append("  * @param value the duration to set the attribute to").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public void set").append(modifiedAttributeName).append("(").append(returnTypeLocal).append(" value)").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
-				strbufResult.append(strDepth3).append("setAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", value.getDurationISO(), null);").append(strLineEnd);
+				strbufResult.append(strDepth3).append("setAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", value==null ? null : value.getDurationISO(), null);").append(strLineEnd);
 				strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 
 				// get 5
@@ -964,21 +964,9 @@ public class JavaCoreStringUtil
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public ").append(returnTypeLocal).append(" get").append(modifiedAttributeName).append("()").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
-				strbufResult.append(strDepth3).append("JDFDuration nMyDate = null;").append(strLineEnd);
-				strbufResult.append(strDepth3).append("String str = \"\";").append(strLineEnd);
-				strbufResult.append(strDepth3).append("str = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, JDFConstants.EMPTYSTRING);").append(strLineEnd);
-				strbufResult.append(strDepth3).append("if (!str.equals(\"\"))").append(strLineEnd);
-				strbufResult.append(strDepth3).append("{").append(strLineEnd);
-				strbufResult.append(strDepth4).append("try").append(strLineEnd);
-				strbufResult.append(strDepth4).append("{").append(strLineEnd);
-				strbufResult.append(strDepth5).append("nMyDate = new JDFDuration(str);").append(strLineEnd);
-				strbufResult.append(strDepth4).append("}").append(strLineEnd);
-				strbufResult.append(strDepth4).append("catch(DataFormatException dfe)").append(strLineEnd);
-				strbufResult.append(strDepth4).append("{").append(strLineEnd);
-				strbufResult.append(strDepth5).append("// throw new JDFException(\"not a valid date string. Malformed JDF - return null\");").append(strLineEnd);
-				strbufResult.append(strDepth4).append("}").append(strLineEnd);
-				strbufResult.append(strDepth3).append("}").append(strLineEnd);
-				strbufResult.append(strDepth3).append("return nMyDate;").append(strLineEnd);
+				strbufResult.append(strDepth3).append("String str = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, null);").append(strLineEnd);
+				strbufResult.append(strDepth5).append("JDFDuration ret = JDFDuration.createDuration(str);").append(strLineEnd);
+				strbufResult.append(strDepth3).append("return ret;").append(strLineEnd);
 				strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 			}
 			else
@@ -986,7 +974,7 @@ public class JavaCoreStringUtil
 				// set 11
 				strbufResult.append(strDepth2).append("/**").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  * (11) set attribute ").append(modifiedAttributeName).append(strLineEnd);
-				strbufResult.append(strDepth2).append("  * @param value: the value to set the attribute to or null").append(strLineEnd);
+				strbufResult.append(strDepth2).append("  * @param value the value to set the attribute to or null").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public void set").append(modifiedAttributeName).append("(JDFDate value)").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
@@ -1002,21 +990,9 @@ public class JavaCoreStringUtil
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public ").append(returnTypeLocal).append(" get").append(modifiedAttributeName).append("()").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
-				strbufResult.append(strDepth3).append("JDFDate nMyDate = null;").append(strLineEnd);
-				strbufResult.append(strDepth3).append("String str = JDFConstants.EMPTYSTRING;").append(strLineEnd);
-				strbufResult.append(strDepth3).append("str = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, JDFConstants.EMPTYSTRING);").append(strLineEnd);
-				strbufResult.append(strDepth3).append("if (!JDFConstants.EMPTYSTRING.equals(str))").append(strLineEnd);
-				strbufResult.append(strDepth3).append("{").append(strLineEnd);
-				strbufResult.append(strDepth4).append("try").append(strLineEnd);
-				strbufResult.append(strDepth4).append("{").append(strLineEnd);
-				strbufResult.append(strDepth5).append("nMyDate = new JDFDate(str);").append(strLineEnd);
-				strbufResult.append(strDepth4).append("}").append(strLineEnd);
-				strbufResult.append(strDepth4).append("catch(DataFormatException dfe)").append(strLineEnd);
-				strbufResult.append(strDepth4).append("{").append(strLineEnd);
-				strbufResult.append(strDepth5).append("// throw new JDFException(\"not a valid date string. Malformed JDF - return null\");").append(strLineEnd);
-				strbufResult.append(strDepth4).append("}").append(strLineEnd);
-				strbufResult.append(strDepth3).append("}").append(strLineEnd);
-				strbufResult.append(strDepth3).append("return nMyDate;").append(strLineEnd);
+				strbufResult.append(strDepth3).append("String str = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, null);").append(strLineEnd);
+				strbufResult.append(strDepth5).append("JDFDate ret = JDFDate.createDate(str);").append(strLineEnd);
+				strbufResult.append(strDepth3).append("return ret;").append(strLineEnd);
 				strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 			}
 		}
@@ -1028,7 +1004,7 @@ public class JavaCoreStringUtil
 				// set
 				strbufResult.append(strDepth2).append("/**").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  * (13) set attribute ").append(modifiedAttributeName).append(strLineEnd);
-				strbufResult.append(strDepth2).append("  * @param value: the value to set the attribute to").append(strLineEnd);
+				strbufResult.append(strDepth2).append("  * @param value the value to set the attribute to").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public void set").append(modifiedAttributeName).append("(").append(returnTypeLocal).append(" value)").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
@@ -1040,7 +1016,7 @@ public class JavaCoreStringUtil
 				// set 2 everything above in the same else statement is deprecated
 				strbufResult.append(strDepth2).append("/**").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  * (36) set attribute ").append(modifiedAttributeName).append(strLineEnd);
-				strbufResult.append(strDepth2).append("  * @param value: the value to set the attribute to").append(strLineEnd);
+				strbufResult.append(strDepth2).append("  * @param value the value to set the attribute to").append(strLineEnd);
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 
 				if ("Attribute".equals(modifiedAttributeName))
@@ -1166,17 +1142,9 @@ public class JavaCoreStringUtil
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public ").append(returnTypeLocal).append(" get").append(modifiedAttributeName).append("()").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
-				strbufResult.append(strDepth3).append("String strAttrName = \"\";").append(strLineEnd);
 				strbufResult.append(strDepth3).append(returnTypeLocal).append(" nPlaceHolder = null;").append(strLineEnd);
-				strbufResult.append(strDepth3).append("strAttrName = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, JDFConstants.EMPTYSTRING);").append(strLineEnd);
-				strbufResult.append(strDepth3).append("try").append(strLineEnd);
-				strbufResult.append(strDepth3).append("{").append(strLineEnd);
-				strbufResult.append(strDepth4).append("nPlaceHolder = new ").append(returnTypeLocal).append("(strAttrName);").append(strLineEnd);
-				strbufResult.append(strDepth3).append("}").append(strLineEnd);
-				strbufResult.append(strDepth3).append("catch(DataFormatException e)").append(strLineEnd);
-				strbufResult.append(strDepth3).append("{").append(strLineEnd);
-				strbufResult.append(strDepth4).append("return null;").append(strLineEnd);
-				strbufResult.append(strDepth3).append("}").append(strLineEnd);
+				strbufResult.append(strDepth3).append("String strAttrName = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, JDFConstants.EMPTYSTRING);").append(strLineEnd);
+				strbufResult.append(strDepth4).append(returnTypeLocal).append(" nPlaceHolder = ").append(returnTypeLocal).append(".create").append(returnTypeLocal.substring(3)).append("(strAttrName);").append(strLineEnd);
 				strbufResult.append(strDepth3).append("return nPlaceHolder;").append(strLineEnd);
 				strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 			}

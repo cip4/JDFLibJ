@@ -131,6 +131,30 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFRectangle that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFRectangle, null if s is not compatible
+	 */
+	public static JDFRectangle createRectangle(String s)
+	{
+		if (s != null && s.length() >= 7)
+		{
+			try
+			{
+				return new JDFRectangle(s);
+			}
+			catch (DataFormatException x)
+			{
+				return null;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a rectangle with all values set via a JDFRectangle
 	 * 
 	 * @param rec the given rectangle

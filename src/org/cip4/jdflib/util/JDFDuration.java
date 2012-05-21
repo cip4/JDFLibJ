@@ -136,8 +136,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	public static JDFDuration createDuration(String duration)
 	{
-		if (duration == null)
+		if (duration == null || duration.length() == 0)
 			return null;
+
 		// all characters in a valid duration are upper
 		duration = duration.toUpperCase();
 		duration = StringUtil.replaceString(duration, " ", null);

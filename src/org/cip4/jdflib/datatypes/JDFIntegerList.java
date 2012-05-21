@@ -139,12 +139,27 @@ public class JDFIntegerList extends JDFNumList
 
 	/**
 	 * 
-	 * convert a string to an integerlist, and retun null if the string is no good
+	 * convert a string to an integerlist, and return null if the string is no good
+	 * @param s the string to parse
+	 * @return the integerlist, null if snafu
+	 * @deprecated use createIntegerList
+	 */
+	@Deprecated
+	public static JDFIntegerList getIntegerList(String s)
+	{
+		return createIntegerList(s);
+	}
+
+	/**
+	 * 
+	 * convert a string to an integerlist, and return null if the string is no good
 	 * @param s the string to parse
 	 * @return the integerlist, null if snafu
 	 */
-	public static JDFIntegerList getIntegerList(String s)
+	public static JDFIntegerList createIntegerList(String s)
 	{
+		if (s == null || s.length() == 0)
+			return null;
 		try
 		{
 			return new JDFIntegerList(s);
