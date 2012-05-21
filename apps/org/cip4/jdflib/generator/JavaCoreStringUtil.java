@@ -1172,7 +1172,7 @@ public class JavaCoreStringUtil
 				strbufResult.append(strDepth2).append("  */").append(strLineEnd);
 				strbufResult.append(strDepth2).append("public ").append(returnTypeLocal).append(" get").append(modifiedAttributeName).append("()").append(strLineEnd);
 				strbufResult.append(strDepth2).append("{").append(strLineEnd);
-				strbufResult.append(strDepth3).append("String strAttrName = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, JDFCoreConstants.EMPTYSTRING);").append(strLineEnd);
+				strbufResult.append(strDepth3).append("String strAttrName = getAttribute(AttributeName.").append(modifiedAttributeName.toUpperCase()).append(", null, null);").append(strLineEnd);
 				strbufResult.append(strDepth3).append(returnTypeLocal).append(" nPlaceHolder = ").append(returnTypeLocal).append(".create").append(returnTypeLocal.substring(3)).append("(strAttrName);").append(strLineEnd);
 				strbufResult.append(strDepth3).append("return nPlaceHolder;").append(strLineEnd);
 				strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
