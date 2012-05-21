@@ -1678,6 +1678,8 @@ public class JDFRunList extends JDFAutoRunList
 	public JDFIntegerRangeList getPageListIndex()
 	{
 		JDFIntegerRangeList list = super.getPageListIndex();
+		if (list == null)
+			list = new JDFIntegerRangeList();
 		JDFPageList pl = getPageList();
 		int nPage = 0;
 

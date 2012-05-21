@@ -139,7 +139,7 @@ public class JDFXYPair extends JDFNumList
 	 */
 	public static JDFXYPair createXYPair(String s)
 	{
-		if (s != null && s.length() >= 3)
+		if (s != null && s.length() > 0)
 		{
 			try
 			{

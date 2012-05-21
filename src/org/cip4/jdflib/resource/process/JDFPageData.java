@@ -165,7 +165,7 @@ public class JDFPageData extends JDFAutoPageData
 	public JDFIntegerRangeList getPageIndex()
 	{
 		JDFIntegerRangeList pi = super.getPageIndex();
-		if (pi.size() > 0)
+		if (pi != null && pi.size() > 0)
 			return pi;
 		KElement prev = getPreviousSiblingElement(ElementName.PAGEDATA, null);
 		int n = 0;

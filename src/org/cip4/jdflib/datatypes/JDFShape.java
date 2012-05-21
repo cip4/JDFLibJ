@@ -100,7 +100,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public static JDFShape createShape(String s)
 	{
-		if (s == null || s.length() < 3) // we want at least 2 values + 1 blank=3
+		if (s == null || s.length() == 0)
 			return null;
 
 		try

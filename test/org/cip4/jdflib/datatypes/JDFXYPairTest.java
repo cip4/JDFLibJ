@@ -84,6 +84,7 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.CPUTimer;
 
 /**
  * 
@@ -244,5 +245,38 @@ public class JDFXYPairTest extends TestCase
 		assertNotNull(JDFXYPair.createXYPair("  1 2 "));
 		assertNotNull(JDFXYPair.createXYPair("  1. 2 "));
 		assertNotNull(JDFXYPair.createXYPair("  1.00 2.00 "));
+	}
+
+	/**
+	* 
+	*  
+	*/
+	public final void testcreateXYPairPerformance()
+	{
+		CPUTimer t1 = new CPUTimer(true);
+		for (int i = 0; i < 100000; i++)
+		{
+			JDFXYPair p = JDFXYPair.createXYPair("");
+			assertNull(p);
+		}
+		t1.stop();
+		System.out.println("fast: " + t1);
+
+		CPUTimer t2 = new CPUTimer(true);
+		for (int i = 0; i < 100000; i++)
+		{
+			try
+			{
+				new JDFXYPair("");
+				fail("blurb");
+			}
+			catch (DataFormatException x)
+			{
+				//
+			}
+
+		}
+		t2.stop();
+		System.out.println("slow: " + t2);
 	}
 }

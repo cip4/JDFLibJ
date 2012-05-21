@@ -372,28 +372,6 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/* ---------------------------------------------------------------------
-	Methods for Attribute PartUsage
-	--------------------------------------------------------------------- */
-	/**
-	  * (5) set attribute PartUsage
-	  * @param enumVar the enumVar to set the attribute to
-	  */
-	public void setPartUsage(EnumPartUsage enumVar)
-	{
-		setAttribute(AttributeName.PARTUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	  * (9) get attribute PartUsage
-	  * @return the value of the attribute
-	  */
-	@Override
-	public EnumPartUsage getPartUsage()
-	{
-		return EnumPartUsage.getEnum(getAttribute(AttributeName.PARTUSAGE, null, null));
-	}
-
-	/* ---------------------------------------------------------------------
 	Methods for Attribute Compensation
 	--------------------------------------------------------------------- */
 	/**

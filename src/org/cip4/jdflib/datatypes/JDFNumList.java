@@ -167,32 +167,39 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	public void setString(final String string) throws DataFormatException
 	{
 		clear();
-		final VString v = StringUtil.tokenize(string, null, false);
-		if (v != null)
+		if (string != null && string.length() > 0)
 		{
-			final int size = v.size();
-			boolean bInteger = this instanceof JDFIntegerList;
-			int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
-			for (int i = 0; i < size; i++)
+			final VString v = StringUtil.tokenize(string, null, false);
+			if (v != null)
 			{
-				final String s = v.stringAt(i);
-				if (bInteger)
+				final int size = v.size();
+				boolean bInteger = this instanceof JDFIntegerList;
+				int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
+				for (int i = 0; i < size; i++)
 				{
-					int theInt = StringUtil.parseInt(s, minValue);
-					if (theInt == minValue)
-						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-					addElement(new Integer(theInt));
-				}
-				else
-				{
-					double theDouble = StringUtil.parseDouble(s, Double.NaN);
-					if (Double.isNaN(theDouble))
-						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-					addElement(new Double(theDouble));
+					final String s = v.stringAt(i);
+					if (bInteger)
+					{
+						int theInt = StringUtil.parseInt(s, minValue);
+						if (theInt == minValue)
+							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+						addElement(new Integer(theInt));
+					}
+					else
+					{
+						double theDouble = StringUtil.parseDouble(s, Double.NaN);
+						if (Double.isNaN(theDouble))
+							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+						addElement(new Double(theDouble));
+					}
 				}
 			}
+			isValid();
 		}
-		isValid();
+		else
+		{
+			throw new DataFormatException("JDFNumList: bad string value: " + string);
+		}
 	}
 
 	/**
