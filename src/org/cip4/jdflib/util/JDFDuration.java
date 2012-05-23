@@ -127,7 +127,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	// E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal
 	// 68hours are allowed
 
-	private static final String REGEX_DURATION = "([-])?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?" + "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
+	private static final String REGEX_DURATION = "(-)?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?" + "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
 
 	/**
 	 * does some heuristics to create a duration if duration is purely numeric, we guess days
