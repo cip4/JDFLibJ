@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -227,5 +227,14 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	{
 		walkTree(e, null);
 		return e;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.ElementWalker#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + "\n " + protocols + " baseURL: " + baseURL + " currentURL: " + currentURL + " dir: " + dir;
 	}
 }

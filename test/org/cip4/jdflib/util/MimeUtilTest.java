@@ -178,7 +178,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @param doc
 	 * @return
 	 */
-	private JDFNode fillCS(final JDFDoc doc)
+	public static JDFNode fillCS(final JDFDoc doc)
 	{
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.ColorSpaceConversion);

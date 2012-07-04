@@ -156,6 +156,12 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @author rainer prosi
+	 * @date Jun 20, 2012
+	 */
 	protected class MyReadThread extends MyThread
 	{
 
@@ -177,6 +183,33 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @author rainer prosi
+	 * @date Jun 20, 2012
+	 */
+	protected class MyParseThread extends MyThread
+	{
+		/**
+		 * 
+		 * @see org.cip4.jdflib.core.XMLDocTest.MyThread#runMyThread()
+		 */
+		@Override
+		public void runMyThread()
+		{
+			System.out.println("parsing " + iLoop);
+			XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "bigwhite.jdf");
+			System.out.println("parsed " + iLoop);
+			assertNotNull(d);
+		}
+	}
+
+	/**
+	 * 
+	 * @author rainer prosi
+	 * @date Jun 20, 2012
+	 */
 	protected class MyWriteThread extends MyThread
 	{
 		/**
@@ -727,7 +760,25 @@ public class XMLDocTest extends JDFTestCaseBase
 				fail("exception: " + mrs[i].hook);
 			}
 		}
+	}
 
+	/**
+	 * see if we can concurrently parse files (locking/threading) 
+	 */
+	public void testParseFileThreadRead()
+	{
+		MyParseThread[] threads = new MyParseThread[10];
+		for (int i = 0; i < 10; i++)
+		{
+			final MyParseThread pt = new MyParseThread();
+			pt.iLoop = i;
+			threads[i] = pt;
+			new Thread(pt).start();
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			threads[i].waitComplete();
+		}
 	}
 
 	/**

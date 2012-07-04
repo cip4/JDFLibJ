@@ -483,15 +483,13 @@ public class FileUtil
 		createNewFile(fil);
 		try
 		{
-			final OutputStream fos = new BufferedOutputStream(new FileOutputStream(fil));
+			final OutputStream fos = getBufferedOutputStream(fil);
+			if (fos == null)
+				return null;
 			IOUtils.copy(fis, fos);
 			fos.flush();
 			fos.close();
 			fis.close();
-		}
-		catch (final FileNotFoundException x)
-		{
-			return null;
 		}
 		catch (final IOException x)
 		{

@@ -615,6 +615,7 @@ public class JDFDateTest extends JDFTestCaseBase
 	 */
 	public void testGetMonth() throws Exception
 	{
+
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
 		assertEquals(12, date.getMonth());
 	}

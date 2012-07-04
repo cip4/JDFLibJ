@@ -197,6 +197,6 @@ public class ElementWalker
 	@Override
 	public String toString()
 	{
-		return getClass().getCanonicalName() + " : " + theFactory;
+		return getClass().getSimpleName() + " : " + theFactory;
 	}
 }

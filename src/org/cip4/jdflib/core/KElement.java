@@ -2999,11 +2999,9 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				final KElement kElem = (KElement) n;
 				nRemove += kElem.eraseEmptyNodes(true);
-				// 040302 RP do not erase empty elements
-				// they may have a sementic meaning
+				// 040302 RP do not erase empty elements - they may have a sementic meaning
 			}
 			n = nNext;
-
 		}
 
 		return nRemove;
@@ -4381,7 +4379,7 @@ public class KElement extends ElementNSImpl implements Element
 			}
 
 			final KElement r = getDocRoot();
-			final String rootNodeName = r.getNodeName();
+			final String rootNodeName = r.getLocalName();
 			final int nextPos = path.indexOf("/", 2);
 			final String rootPath = nextPos > 0 ? path.substring(1, nextPos) : path.substring(1);
 			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : "";
@@ -4806,8 +4804,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Get children from the actual element by the tag name, nameSpaceURI or attribute map. GetTree only follows direct links, e.g. as in a JDF tree. Hidden
-	 * nodes that are children of non-matching nodes are ignored
+	 * Get children from the actual element by the tag name, nameSpaceURI or attribute map. <br/>
+	 * GetTree only follows direct links, e.g. as in a JDF tree. Hidden nodes that are children of nodes with non-matching names are ignored
 	 * @param nodeName elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @param mAttrib attributes you are looking for. Wildcards in the attribute map are supported
@@ -4830,11 +4828,11 @@ public class KElement extends ElementNSImpl implements Element
 				{
 					// this guy is the one
 					v.add(e);
-					if (!bDirect)
-					{ // if not direct, recurse
-						final VElement vv = e.getTree(nodeName, nameSpaceURI, mAttrib, bDirect, bAnd);
-						v.addAll(vv);
-					}
+				}
+				if (!bDirect)
+				{ // if not direct, recurse
+					final VElement vv = e.getTree(nodeName, nameSpaceURI, mAttrib, bDirect, bAnd);
+					v.addAll(vv);
 				}
 			}
 			e = e.getNextSiblingElement();

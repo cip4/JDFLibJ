@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.MimeReader;
+import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -114,11 +115,26 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * extract from zip stream - also test CommentURL
+	 */
+	public void testReadZip()
+	{
+		ZipReader zipReader = new ZipReader(sm_dirTestData + "testZip.zip");
+		zipReader.getEntry("dummy.jdf");
+		JDFDoc d = zipReader.getJDFDoc();
+		assertNotNull(d);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "ZipExtractor");
+		URLExtractor ex = new URLExtractor(dumpDir, null, null);
+		ex.walkTree(d.getJDFRoot(), null);
+		assertTrue("", FileUtil.getFileInDirectory(dumpDir, new File("content/boo.pdf")).canRead());
+		assertTrue("also extract commenturl", FileUtil.getFileInDirectory(dumpDir, new File("content/commentURL.pdf")).canRead());
+	}
+
+	/**
 	 * 
 	 */
 	public void testIgnoreSelf()
 	{
-
 		JDFDoc d = testWalk();
 		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtractSelf");
@@ -134,7 +150,6 @@ public class URLExtractorTest extends JDFTestCaseBase
 	 */
 	public void testRelativePath()
 	{
-
 		JDFDoc d = new JDFDoc("JDF");
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF("./content/boo.pdf", 0, -1);

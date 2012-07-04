@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,7 +114,7 @@ public class SizeWalker extends BaseElementWalker
 		{
 			final String nam = e.getNodeName();
 			final Sizes siz = getSize(nam);
-			final int locSize = e.toDisplayXML(0).length() - 38;
+			final int locSize = e.toDisplayXML(0).length();
 
 			siz.total += locSize;
 			siz.local += locSize;
@@ -123,16 +123,16 @@ public class SizeWalker extends BaseElementWalker
 			{
 				final Sizes ps = getSize(parent.getNodeName());
 				ps.local -= locSize;
+				if (siz == ps) // no double counting
+					ps.total -= locSize;
 			}
 
 			siz.n++;
 			final VString atts = e.getAttributeVector_KElement();
 			if (atts != null)
 			{
-				final int attSize = atts.size();
-				for (int i = 0; i < attSize; i++)
+				for (final String att : atts)
 				{
-					final String att = atts.get(i);
 					final Sizes as = getSize("@" + att);
 					as.n++;
 					final String val = e.getAttribute(att);

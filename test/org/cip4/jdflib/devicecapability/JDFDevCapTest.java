@@ -108,13 +108,23 @@ import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
 import org.cip4.jdflib.resource.process.JDFLayout;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date before Jun 7, 2012
+ */
 public class JDFDevCapTest extends TestCase
 {
+	/**
+	 * 
+	 *  
+	 */
 	public void testBooleanState()
 	{
 		JDFDoc d = new JDFDoc("BooleanState");
 		JDFBooleanState bs = (JDFBooleanState) d.getRoot();
-		Vector v = new Vector();
+		Vector<EnumBoolean> v = new Vector<EnumBoolean>();
 		v.add(EnumBoolean.False);
 		bs.setAllowedValueList(v);
 		assertTrue(bs.fitsValue("false", EnumFitsValue.Allowed));
@@ -125,6 +135,25 @@ public class JDFDevCapTest extends TestCase
 		assertTrue(bs.fitsValue("true", EnumFitsValue.Allowed));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
+	public void testAppendStringState()
+	{
+		JDFDoc d = new JDFDoc("DevCap");
+		JDFDevCap root = (JDFDevCap) d.getRoot();
+		JDFStringState ss1 = root.appendStringState("foo");
+		assertEquals(ss1.getName(), "foo");
+		JDFStringState ss2 = root.appendStringState(null);
+		assertFalse(ss2.hasAttribute("Name"));
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 *  
+	 */
 	public void testIntegerState() throws Exception
 	{
 		JDFDoc d = new JDFDoc("IntegerState");
@@ -140,6 +169,10 @@ public class JDFDevCapTest extends TestCase
 		assertTrue(is.fitsValue("19~33", EnumFitsValue.Allowed));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testgetMatchingElementsFromParentSingle()
 	{
 		JDFDoc ddc = new JDFDoc("DevCap");
@@ -165,6 +198,10 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(vMatch.item(1), e.getElement("Media", null, 1));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testgetMatchingElementsFromParentMulti()
 	{
 		JDFDoc ddc = new JDFDoc("DevCap");
@@ -194,6 +231,11 @@ public class JDFDevCapTest extends TestCase
 		}
 	}
 
+	/**
+	 * @throws Exception 
+	 * 
+	 *  
+	 */
 	public void testNumberState() throws Exception
 	{
 		JDFDoc d = new JDFDoc("NumberState");
@@ -211,6 +253,10 @@ public class JDFDevCapTest extends TestCase
 		assertFalse(ns.fitsValue("16.01", EnumFitsValue.Allowed));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testEnumerationState()
 	{
 		JDFDoc d = new JDFDoc("EnumerationState");
@@ -246,6 +292,10 @@ public class JDFDevCapTest extends TestCase
 		// assertFalse(es.fitsValue("foo bar fnarf", EnumFitsValue.Allowed));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testRegExp()
 	{
 		for (int i = 0; i < 2; i++)
@@ -267,6 +317,10 @@ public class JDFDevCapTest extends TestCase
 		}
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testNameState()
 	{
 		JDFDoc d = new JDFDoc("NameState");
@@ -289,9 +343,10 @@ public class JDFDevCapTest extends TestCase
 		assertFalse(ns.fitsValue("cl", EnumFitsValue.Allowed));
 	}
 
-	// test "getXxxState" /////////////////////////////////////////
-
-	/* test "getXxxState" */
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetBooleanState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -309,6 +364,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetIntegerState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -326,6 +385,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetInValidAttributes()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -344,6 +407,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetNumberState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -361,6 +428,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetEnumerationState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -378,6 +449,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetNameState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -395,6 +470,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetStringState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -412,6 +491,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetXYPairState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -429,6 +512,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetShapeState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -446,6 +533,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetAvailability()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -455,6 +546,10 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(dc.getModuleAvailability(), EnumAvailability.NotInstalled);
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testAppendModuleRef()
 	{
 		JDFDoc d = new JDFDoc("DeviceCap");
@@ -474,6 +569,10 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(mc.getAvailability(), EnumAvailability.NotInstalled);
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetModuleAvailability()
 	{
 		JDFDoc d = new JDFDoc("DeviceCap");
@@ -490,6 +589,10 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(dc.getModuleAvailability(), EnumAvailability.NotLicensed);
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetMatrixState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -507,6 +610,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetDateTimeState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -524,6 +631,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetDurationState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -541,6 +652,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetPDFPathState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -558,6 +673,10 @@ public class JDFDevCapTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testGetRectangleState()
 	{
 		JDFDoc d = new JDFDoc("DevCap");
@@ -574,6 +693,10 @@ public class JDFDevCapTest extends TestCase
 		assertEquals(rs.getName(), "bar");
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testStateReportRequired()
 	{
 		JDFDoc d = new JDFDoc("DevCap");

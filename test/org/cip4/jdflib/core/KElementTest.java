@@ -1175,6 +1175,18 @@ public class KElementTest extends JDFTestCaseBase
 		b.copyAttribute("ns:cc", a, "cc", "www.ns.com", null);
 		assertEquals(b.getAttribute("ns:cc"), "C");
 		assertEquals(b.getAttribute("cc", "www.ns.com", null), "C");
+	}
+
+	/**
+	 * 
+	 */
+	public void testCopyAttributeNS()
+	{
+
+		KElement a = new XMLDoc("a", null).getRoot();
+		a.setAttributeNS("www.foo.com", "foo:test", "bar");
+
+		KElement b = new XMLDoc("b", null).getRoot();
 
 	}
 
@@ -1651,7 +1663,19 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("d", root.getXPathElementVector("/a/c/d", 0).elementAt(0).getNodeName());
 	}
 
-	// /////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetXPathElementNS()
+	{
+		XMLDoc d = new XMLDoc("a:A", "www.a.com");
+		KElement root = d.getRoot();
+		root.setXPathAttribute("a:B/a:C/@a:Att", "val");
+		root.appendElement("b:BB", "www.b.com");
+		assertEquals(root.getXPathElement("B/C"), root.getXPathElement("a:B/a:C"));
+		assertEquals(root.getXPathElement("b:BB"), root.getXPathElement("BB"));
+		assertEquals("val", root.getXPathAttribute("B/C/@a:Att", null));
+	}
 
 	/**
 	 * 
@@ -1774,6 +1798,24 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		KElement e = new XMLParser().parseString("<foo bar=\".42\"/>").getRoot();
 		assertEquals(e.getRealAttribute("bar", null, 0.0), 0.42);
+	}
+
+	/**
+	 * make sure we also get all valid deep elements
+	 */
+	public void testGetTree()
+	{
+		KElement e = new XMLParser().parseString("<a/>").getRoot();
+		KElement a1 = e.appendElement("a");
+		KElement aa = a1.appendElement("a");
+		KElement b = a1.appendElement("b");
+		KElement ab = b.appendElement("a");
+		aa.setAttribute("b", "c");
+		ab.setAttribute("b", "c");
+		VElement tree = e.getTree("a", null, new JDFAttributeMap("b", "c"), false, false);
+		assertTrue(tree.contains(aa));
+		assertFalse(tree.contains(a1));
+		assertFalse(tree.contains(ab));
 	}
 
 	/**

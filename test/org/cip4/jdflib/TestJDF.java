@@ -9,6 +9,7 @@
 package org.cip4.jdflib;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.Inet4Address;
 
@@ -16,12 +17,13 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.SizeWalker;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
@@ -63,6 +65,28 @@ public class TestJDF extends JDFTestCaseBase
 
 	/**
 	 * 
+	 *  
+	 * @throws FileNotFoundException
+	 */
+	public void testSize() throws FileNotFoundException
+	{
+		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
+		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
+		sw.walkAll(d.getRoot());
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testDummy()
+	{
+		final JDFDoc d = new JDFParser().parseFile("/data/crm.xml");
+		assertNotNull(d);
+	}
+
+	/**
+	 * 
 	 */
 	public void testWriteJMF()
 	{
@@ -71,7 +95,6 @@ public class TestJDF extends JDFTestCaseBase
 		jmf.appendCommand().setType("getVersion");
 		//	JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
 		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
-		assertNotNull(d2);
 
 	}
 

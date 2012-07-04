@@ -130,7 +130,7 @@ public class DelayedPersist extends Thread
 	/**
 	 * 
 	 * @param persistable the thing to send off
-	 * @param deltaTime if<=null persist immediately
+	 * @param deltaTime max wait time in milliseconds - if<=null persist immediately
 	 */
 	public void queue(IPersistable persistable, long deltaTime)
 	{

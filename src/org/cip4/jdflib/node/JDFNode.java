@@ -162,6 +162,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAncestorPool;
@@ -195,7 +196,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * This is the main node for the JDF ticket. Others are around, but this is the main one to do editing.
  */
-public class JDFNode extends JDFElement implements INodeIdentifiable
+public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 {
 	/**
 	 * 0x22222222 is the HexValue used so programmers know which attribute/element is REQUIRED when "Add Required elements/attributes" is selected. The
@@ -9917,4 +9918,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		setPartMapVector(ni.getPartMapVector());
 	}
 
+	/**
+	 * sets the CommentURL this allows us to implement {@link IURLSetter} and automagically manipulate attatched commenturl files
+	 * @see org.cip4.jdflib.ifaces.IURLSetter#setURL(java.lang.String)
+	 */
+	public void setURL(String url)
+	{
+		setCommentURL(url);
+	}
+
+	/**
+	 * gets the CommentURL this allows us to implement {@link IURLSetter} and automagically manipulate attatched commenturl files
+	 * @see org.cip4.jdflib.ifaces.IURLSetter#getURL()
+	 */
+	public String getURL()
+	{
+		return getCommentURL();
+	}
 }

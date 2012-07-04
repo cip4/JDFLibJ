@@ -230,7 +230,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 			if (i < 0)
 				break;
 		}
-		assertTrue(n > 190000000);
+		assertTrue(n > 350000000);
 	}
 
 	/**

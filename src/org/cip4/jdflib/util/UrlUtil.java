@@ -106,7 +106,6 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
-import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
 /**
@@ -1339,6 +1338,15 @@ public class UrlUtil
 
 	private static class URLWriter
 	{
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "UrlWriter: " + method + " / " + contentType + " --> " + strUrl;
+		}
+
 		private final String strUrl;
 		private final InputStream stream;
 		private final String method;
@@ -1514,10 +1522,11 @@ public class UrlUtil
 		}
 		String url = parent.getURL();
 		String fileName = null;
-		if (cwd != null && UrlUtil.isRelativeURL(url))
+		if (UrlUtil.isRelativeURL(url))
 		{
 			fileName = cleanDots(url);
-			url = UrlUtil.getURLWithDirectory(cwd, url);
+			if (cwd != null)
+				url = UrlUtil.getURLWithDirectory(cwd, url);
 		}
 
 		// check for nop
@@ -1532,9 +1541,9 @@ public class UrlUtil
 		}
 
 		XMLDoc d = (parent instanceof KElement) ? ((KElement) parent).getOwnerDocument_KElement() : null;
-		Multipart mp = d == null ? null : d.getMultiPart();
 		if (fileName == null)
 		{
+			Multipart mp = d == null ? null : d.getMultiPart();
 			fileName = getFileName(url, mp);
 		}
 		final File localFile = fileName == null ? null : new File(fileName);
@@ -1547,7 +1556,7 @@ public class UrlUtil
 				return out;
 		}
 
-		InputStream inputStream = new MimeReader(mp).getURLInputStream(url);
+		InputStream inputStream = new URLReader(url, d).getURLInputStream();
 		if (inputStream != null)
 		{
 			out = FileUtil.streamToFile(inputStream, out);
@@ -1576,6 +1585,7 @@ public class UrlUtil
 	}
 
 	/**
+	 * check whether the mime type is a known xml dialect
 	 * @param contentType
 	 * @return
 	 */

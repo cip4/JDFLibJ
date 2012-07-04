@@ -173,7 +173,7 @@ public class ZipReader
 	 */
 	public ZipReader(String fileName)
 	{
-		this(new File(fileName));
+		this(UrlUtil.urlToFile(fileName));
 	}
 
 	/**

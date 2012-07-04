@@ -78,6 +78,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
+import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -594,6 +595,21 @@ public class JMFBuilder
 		final JDFResubmissionParams rp = c.appendResubmissionParams();
 		rp.setQueueEntryID(qeID);
 		rp.setURL(url);
+		return c.getJMFRoot();
+	}
+
+	/**
+	 * build a Shutdown message
+	 * @param typ hard or soft shutdown?
+	 *  
+	 * @return the jmf
+	 */
+	public JDFJMF buildShutdownCommand(EnumShutDownType typ)
+	{
+		final JDFCommand c = createCommand(EnumType.ShutDown);
+		createDefaultFilter(c);
+		final JDFShutDownCmdParams cp = c.appendShutDownCmdParams();
+		cp.setShutDownType(typ);
 		return c.getJMFRoot();
 	}
 
