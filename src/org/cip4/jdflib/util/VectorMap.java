@@ -96,7 +96,6 @@ import java.util.Vector;
  */
 public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObject>>
 {
-
 	/**
 	 * 
 	 */
@@ -224,7 +223,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 
 	/**
 	 * get all values as one big vector, multiple entries are retained (see {@link ContainerUtil}.unify())
-	 * @return a vector of all values
+	 * @return a vector of all values, null if empty
 	 */
 	public Vector<vectorObject> getAllValues()
 	{
@@ -235,7 +234,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 		{
 			v = (Vector<vectorObject>) ContainerUtil.addAll(v, it.next());
 		}
-		return v;
+		return v.size() == 0 ? null : v;
 	}
 
 	/**

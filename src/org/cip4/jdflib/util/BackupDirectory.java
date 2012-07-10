@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.cip4.jdflib.util.thread.DelayedPersist;
+import org.cip4.jdflib.util.thread.IPersistable;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -83,7 +86,7 @@ import java.util.Arrays;
  * 
  * 08.12.2008
  */
-public class BackupDirectory extends File
+public class BackupDirectory extends File implements IPersistable
 {
 	private class FileTime implements Comparable<FileTime>
 	{
@@ -157,7 +160,7 @@ public class BackupDirectory extends File
 	/**
 	 * creates a new file in this and assures than no more than nBackup files remain
 	 * @param localFile the local file to place in this directory
-	 * @return the file to write, null if an io excepton occured when creating it
+	 * @return the file to write, null if an io exception occurred when creating it
 	 */
 	public File getNewFile(File localFile)
 	{
@@ -165,7 +168,9 @@ public class BackupDirectory extends File
 		if (file.exists())
 			file.delete();
 		else
-			clean();
+			// we only cleanup once a minute
+			DelayedPersist.getDelayedPersist().queue(this, 60000);
+
 		try
 		{
 			file.createNewFile();
@@ -182,7 +187,11 @@ public class BackupDirectory extends File
 	 */
 	private void clean()
 	{
-		File[] all = listFiles();
+		File[] all;
+		synchronized (this)
+		{
+			all = listFiles();
+		}
 		if (all != null && all.length >= nBackup)
 		{
 			FileTime[] time = new FileTime[all.length];
@@ -191,7 +200,7 @@ public class BackupDirectory extends File
 				time[i] = new FileTime(all[i]);
 			}
 			Arrays.sort(time);
-			for (int i = nBackup - 1; i < all.length; i++)
+			for (int i = nBackup; i < all.length; i++)
 			{
 				time[i].f.delete();
 			}
@@ -220,6 +229,15 @@ public class BackupDirectory extends File
 	public String toString()
 	{
 		return super.toString() + " nBackup=" + nBackup;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
+	 */
+	public boolean persist()
+	{
+		clean();
+		return true;
 	}
 
 }

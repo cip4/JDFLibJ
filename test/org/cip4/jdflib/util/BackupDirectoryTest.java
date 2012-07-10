@@ -72,6 +72,7 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.thread.DelayedPersist;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -95,6 +96,7 @@ public class BackupDirectoryTest extends JDFTestCaseBase
 				assertFalse("old die first", ContainerUtil.toHashSet(dir.listFiles()).contains(new File("File" + (20 - i))));
 			}
 		}
+		DelayedPersist.shutDown();
 		assertEquals(dir.listFiles().length, 20);
 	}
 
