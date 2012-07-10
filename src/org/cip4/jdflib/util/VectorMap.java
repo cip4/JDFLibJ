@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,6 +82,8 @@ package org.cip4.jdflib.util;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -226,7 +228,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 */
 	public Vector<vectorObject> getAllValues()
 	{
-		Vector<vectorObject> v = null;
+		Vector<vectorObject> v = new Vector<vectorObject>();
 		final Collection<Vector<vectorObject>> c = values();
 		final Iterator<Vector<vectorObject>> it = c.iterator();
 		while (it.hasNext())
@@ -234,6 +236,27 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 			v = (Vector<vectorObject>) ContainerUtil.addAll(v, it.next());
 		}
 		return v;
+	}
+
+	/**
+	 * get an inverted map that uses all entries a s keys and vice versa<br/>
+	 * note that the behavior is undefined in case of multiple identical values
+	 * @return an inverted map
+	 */
+	public Map<vectorObject, key> getInvertedMap()
+	{
+		HashMap<vectorObject, key> inverted = new HashMap<vectorObject, key>();
+		Set<key> keys = keySet();
+		for (key k : keys)
+		{
+			Vector<vectorObject> v = get(k);
+			if (v != null)
+			{
+				for (vectorObject vo : v)
+					inverted.put(vo, k);
+			}
+		}
+		return inverted;
 	}
 
 	/**

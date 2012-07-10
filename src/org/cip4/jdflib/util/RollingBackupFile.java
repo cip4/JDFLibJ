@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,8 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.util.HashMap;
 
+import org.cip4.jdflib.core.VString;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -111,7 +113,7 @@ public class RollingBackupFile extends File
 	 */
 	public File getNewFile()
 	{
-		final String extension = FileUtil.getExtension(this);
+		final String extension = getExtension(this);
 		return getNewFile(extension);
 	}
 
@@ -136,13 +138,22 @@ public class RollingBackupFile extends File
 			return this;
 		if (i < 0 || i >= nBackup)
 			return null;
-		final String pathname = getPath();
-		final String extension = FileUtil.getExtension(this);
-		File f = new File(getPathFor(pathname, extension, i));
-		if (!f.canRead())
-			f = null;
+		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "." + i + ".*");
+		if (oldFiles == null || oldFiles.length == 0)
+			return null;
 
-		return f;
+		return oldFiles[0];
+	}
+
+	private String getExtension(File f)
+	{
+		VString v = StringUtil.tokenize(f.getName(), ".", false);
+		v.remove(0);
+		if (v.size() == 0)
+			return null;
+		if (StringUtil.isInteger(v.get(0)))
+			v.remove(0);
+		return StringUtil.setvString(v, ".", null, null);
 	}
 
 	/**
@@ -150,17 +161,13 @@ public class RollingBackupFile extends File
 	 */
 	public void clearAll()
 	{
-		final String pathname = getPath();
-		final String extension = FileUtil.getExtension(this);
-		for (int i = nBackup; i >= 0; i--)
+		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "*");
+		if (oldFiles != null)
 		{
-			final String sBak = getPathFor(pathname, extension, i);
-			final File lastFile = new File(sBak);
-			if (lastFile.exists())
+			for (File lastFile : oldFiles)
 			{
 				lastFile.delete();
 			}
-			delete();
 		}
 	}
 
@@ -171,50 +178,51 @@ public class RollingBackupFile extends File
 	{
 		String pathname = getPath();
 		pathname = UrlUtil.newExtension(pathname, extension);
-		HashMap<Integer, String> map = getExtensionMap();
+		HashMap<Integer, File> map = getNameMap();
 		for (int i = nBackup; i > 0; i--)
 		{
-			String ext = map.get(new Integer(i - 1));
-			String ext2 = map.get(new Integer(i));
-			if (ext != null)
+			File newFile = map.get(new Integer(i - 1));
+			if (newFile != null)
 			{
-				final String sBak = getPathFor(pathname, ext, i);
-				final String sNewBak = (i == 1) ? UrlUtil.newExtension(pathname, ext) : getPathFor(pathname, ext, i - 1);
-				final String sBak2 = UrlUtil.newExtension(sBak, ext2);
-				final File lastFile2 = new File(sBak2);
-				if (lastFile2.exists())
+				File oldFile = map.get(new Integer(i));
+				if (oldFile != null && oldFile.exists())
 				{
-					lastFile2.delete();
+					oldFile.delete();
 				}
-				final File lastFile = new File(sBak);
-				new File(sNewBak).renameTo(lastFile);
+				File newFileRenamed = new File(getPathFor(newFile.getAbsolutePath(), i));
+				newFile.renameTo(newFileRenamed);
 			}
 		}
 		return new File(pathname);
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 * @return
 	 */
-	private HashMap<Integer, String> getExtensionMap()
+	private HashMap<Integer, File> getNameMap()
 	{
 		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "*");
-		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		HashMap<Integer, File> map = new HashMap<Integer, File>();
 		if (oldFiles != null)
 		{
 			for (File file : oldFiles)
 			{
 				String name = file.getName();
-				String ext = UrlUtil.extension(name);
+				String ext = getExtension(file);
+				int nDot = StringUtil.numSubstrings(ext, ".");
 				if (ext != null)
 				{
-					String delta = StringUtil.token(name, -2, ".");
+					String delta = StringUtil.token(name, -2 - nDot, ".");
 					int i = StringUtil.parseInt(delta, -1);
 					if (i >= 0)
-						map.put(new Integer(i), ext);
-					else if (delta != null && delta.equals(UrlUtil.prefix(name)))
-						map.put(new Integer(0), ext);
+					{
+						map.put(new Integer(i), file);
+					}
+					else if (delta != null && delta.equals(UrlUtil.prefix(getName())))
+					{
+						map.put(new Integer(0), file);
+					}
 				}
 			}
 		}
@@ -227,11 +235,14 @@ public class RollingBackupFile extends File
 	 * @param i
 	 * @return
 	 */
-	private String getPathFor(final String pathname, final String extension, int i)
+	private String getPathFor(final String pathname, int i)
 	{
-		final String newExtension = i + ((extension == null) ? "" : "." + extension);
-		final String sBak = UrlUtil.newExtension(pathname, newExtension);
-		return sBak;
+		String base = i == 0 ? "" : "." + i;
+		String oldbase = i <= 1 ? "" : "." + (i - 1);
+		String extension = getExtension(new File(pathname));
+		final String oldExtension = oldbase + ((extension == null) ? "" : "." + extension);
+		final String newExtension = base + ((extension == null) ? "" : "." + extension);
+		return StringUtil.replaceString(pathname, oldExtension, newExtension);
 	}
 
 	/**

@@ -213,4 +213,13 @@ public class BackupDirectory extends File
 		return fileName == null ? null : getNewFile(new File(fileName));
 	}
 
+	/**
+	 * @see java.io.File#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + " nBackup=" + nBackup;
+	}
+
 }

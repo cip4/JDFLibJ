@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Map;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -118,6 +119,18 @@ public class VectorMapTest extends JDFTestCaseBase
 		assertEquals(m.getIndex("a", "c"), 1);
 		assertEquals(m.getIndex("a", "d"), -1);
 		assertEquals(m.getIndex("c", "c"), -2);
+	}
+
+	/**
+	* test for getInverted
+	*/
+	public void testGetInverted()
+	{
+		m.putOne("e", "f");
+		Map<String, String> inv = m.getInvertedMap();
+		assertNotNull(inv);
+		assertEquals(inv.get("b"), "a");
+		assertEquals(inv.get("f"), "e");
 	}
 
 	/**
