@@ -352,6 +352,61 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSpawnPartAmountPool()
+	{
+		final JDFDoc dRoot = new JDFDoc("JDF");
+		final JDFNode root = dRoot.getJDFRoot();
+		JDFResource comp = root.addResource("Component", EnumUsage.Output);
+		comp.addPartition(EnumPartIDKey.Run, "r1");
+		comp.addPartition(EnumPartIDKey.Run, "r2");
+		JDFResourceLink rl = root.getLink(comp, null);
+		JDFAttributeMap mPart = new JDFAttributeMap("Run", "r1");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(mPart.clone());
+		mPart.put("Condition", "Good");
+		rl.setAmount(1, mPart);
+		JDFAttributeMap mPart2 = new JDFAttributeMap("Run", "r2");
+		final VJDFAttributeMap vMap2 = new VJDFAttributeMap();
+		vMap2.add(mPart2.clone());
+
+		mPart2.put("Condition", "Good");
+		rl.setAmount(2, mPart2);
+		JDFSpawn spawn1 = new JDFSpawn(root);
+		spawn1.vSpawnParts = vMap;
+		spawn1.vRWResources_in = new VString("Output", null);
+		JDFNode s1 = spawn1.spawn();
+		JDFResource c1 = s1.getResource("Component", EnumUsage.Output, 0);
+		JDFResourceLink rl1 = s1.getLink(c1, null);
+		mPart.put("Condition", "Good");
+		rl1.setActualAmount(1, mPart);
+		mPart.put("Condition", "Waste");
+		rl1.setActualAmount(10, mPart);
+
+		JDFSpawn spawn2 = new JDFSpawn(root);
+		spawn2.vSpawnParts = vMap2;
+		spawn2.vRWResources_in = new VString("Output", null);
+		JDFNode s2 = spawn2.spawn();
+		JDFResource c2 = s2.getResource("Component", EnumUsage.Output, 0);
+		JDFResourceLink rl2 = s2.getLink(c2, null);
+		mPart2.put("Condition", "Good");
+		rl2.setActualAmount(2, mPart2);
+		mPart2.put("Condition", "Waste");
+		rl2.setActualAmount(20, mPart2);
+		assertEquals(rl.getAmountPool().numChildElements(ElementName.PARTAMOUNT, null), 2);
+
+		JDFMerge m = new JDFMerge(root);
+		m.mergeJDF(s1);
+		rl = root.getLink(comp, null);
+		assertEquals(rl.getAmountPool().numChildElements(ElementName.PARTAMOUNT, null), 3);
+		JDFMerge m2 = new JDFMerge(root);
+		m2.mergeJDF(s2);
+		rl = root.getLink(comp, null);
+		assertEquals(rl.getAmountPool().numChildElements(ElementName.PARTAMOUNT, null), 4);
+	}
+
+	/**
+	 * 
+	 */
 	public void testSpawnPartMulti()
 	{
 		final JDFDoc dRoot = new JDFDoc("JDF");
@@ -1253,7 +1308,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		assertNotNull(rl2.getAmountPool().getPartAmount(mapS1Good));
 		JDFAttributeMap mapS2Good = mapS1Good.clone();
 		mapS2Good.put(EnumPartIDKey.SheetName, "s2");
-		assertNull("we zapped non-matcing partAmounts", rl2.getAmountPool().getPartAmount(mapS2Good));
+		assertNull("we zapped non-matching partAmounts", rl2.getAmountPool().getPartAmount(mapS2Good));
 		rl2.setActualAmount(44, mapS1Good);
 		final JDFAttributeMap mapgf = new JDFAttributeMap(mapS1Good);
 		mapgf.put("Side", "Front");

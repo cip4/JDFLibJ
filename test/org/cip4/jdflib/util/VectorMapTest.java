@@ -108,6 +108,8 @@ public class VectorMapTest extends JDFTestCaseBase
 		assertEquals(allValues.size(), 3);
 		assertTrue(allValues.contains("b"));
 		assertTrue(allValues.contains("c"));
+		assertEquals("we didn't modify m by calling getAllValues", m.getAllValues().size(), 3);
+		assertEquals(m.getAllValues().size(), 3);
 	}
 
 	/**
