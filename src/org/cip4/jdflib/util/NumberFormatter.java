@@ -77,6 +77,8 @@ import org.cip4.jdflib.core.JDFConstants;
  */
 public class NumberFormatter
 {
+	static private int defaultPrecision = 8;
+
 	/**
 	 * set up the defaults
 	 */
@@ -122,7 +124,7 @@ public class NumberFormatter
 	}
 
 	/**
-	 * returns a formatted double. Truncates to 8exactly precision digits after the "." <br>
+	 * returns a formatted double. Truncates to at most precision digits after the "." <br>
 	 * If precision=0, the . is stripped
 	 * 
 	 * @param d the double to format
@@ -131,18 +133,29 @@ public class NumberFormatter
 	 */
 	public String formatDouble(final double d, int precision)
 	{
-		final Double[] ad = { new Double(d) };
-		if (precision > 0)
+		final String s;
+		if (d == Double.MAX_VALUE)
 		{
-			String s = StringUtil.sprintf("%." + precision + "f", ad);
-			s = zappTrailing(s);
-			return s;
+			s = JDFConstants.POSINF;
+		}
+		else if (d == -Double.MAX_VALUE)
+		{
+			s = JDFConstants.NEGINF;
 		}
 		else
 		{
-			return StringUtil.sprintf("%i", ad);
+			final Double[] ad = { new Double(d) };
+			if (precision > 0)
+			{
+				String ss = StringUtil.sprintf("%." + precision + "f", ad);
+				s = zappTrailing(ss);
+			}
+			else
+			{
+				s = StringUtil.sprintf("%i", ad);
+			}
 		}
-
+		return s;
 	}
 
 	private String zappTrailing(String s)
@@ -160,7 +173,13 @@ public class NumberFormatter
 					break;
 				}
 			}
+			if (s.charAt(n - 1) == '.')
+			{
+				n--;
+			}
 			s = s.substring(0, n);
+			if ("-0".equals(s))
+				s = "0";
 		}
 		return s;
 	}
@@ -174,57 +193,6 @@ public class NumberFormatter
 	 */
 	public String formatDouble(final double d)
 	{
-		String s;
-		if (d == Double.MAX_VALUE)
-		{
-			s = JDFConstants.POSINF;
-		}
-		else if (d == -Double.MAX_VALUE)
-		{
-			s = JDFConstants.NEGINF;
-		}
-		else
-		{
-			s = String.valueOf(d);
-			if (s.endsWith(".0"))
-			{
-				s = s.substring(0, s.length() - 2);
-			}
-			if (s.indexOf("E") >= 0)
-			{
-				s = formatDouble(d, 10);
-			}
-
-			if (s.length() > 10)
-			{
-				final int posDot = s.indexOf(JDFConstants.DOT);
-				if (posDot >= 0)
-				{
-					int l = s.length();
-					if (l - posDot > 8)
-					{
-						l = posDot + 9;
-						s = s.substring(0, l);
-						if (s.endsWith("999"))
-						{
-							double delta = 0.000000004;
-							if (d < 0)
-								delta = -delta;
-							return formatDouble(d + delta);
-						}
-						s = zappTrailing(s);
-					}
-				}
-			}
-			if (s.endsWith("."))
-			{
-				s = StringUtil.leftStr(s, -1);
-			}
-			if ("-0".equals(s))
-			{
-				s = "0";
-			}
-		}
-		return s;
+		return formatDouble(d, defaultPrecision);
 	}
 }

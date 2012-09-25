@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,8 +76,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Layout;
+import org.apache.log4j.Level;
 import org.apache.log4j.PatternLayout;
-import org.apache.log4j.Priority;
 import org.apache.log4j.RollingFileAppender;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -109,7 +109,7 @@ public class LogConfigurator
 		{
 			Layout layout = new PatternLayout("%d " + PatternLayout.TTCC_CONVERSION_PATTERN);
 			ConsoleAppender appender1 = new ConsoleAppender(layout);
-			appender1.setThreshold(Priority.INFO);
+			appender1.setThreshold(Level.INFO);
 			BasicConfigurator.configure(appender1);
 
 			if (logDir != null)
@@ -121,7 +121,7 @@ public class LogConfigurator
 				RollingFileAppender appender = new RollingFileAppender(layout, logFileName, true);
 				appender.setMaximumFileSize(1000000);
 				appender.setMaxBackupIndex(4);
-				appender.setThreshold(Priority.INFO);
+				appender.setThreshold(Level.INFO);
 				BasicConfigurator.configure(appender);
 				log.info("log file=" + new File(logFileName).getAbsolutePath());
 			}

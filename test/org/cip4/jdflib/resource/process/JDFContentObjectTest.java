@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,6 +77,12 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 
+/**
+ * 
+ * 
+ * @author rainer prosi
+ * @date before Sep 18, 2012
+ */
 public class JDFContentObjectTest extends JDFTestCaseBase
 {
 
@@ -98,6 +104,10 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 		lo = (JDFLayout) n.addResource(ElementName.LAYOUT, null);
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testcalcOrd()
 	{
 		for (int i = 0; i < 4; i++)
@@ -118,4 +128,36 @@ public class JDFContentObjectTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	* 
+	*  
+	*/
+	public void testSetTrimSize()
+	{
+		JDFContentObject co = lo.appendContentObject();
+		co.setTrimSize(1.12345, 2.3456, 2);
+		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+	}
+
+	/**
+	* 
+	*  
+	*/
+	public void testSetCTM()
+	{
+		JDFContentObject co = lo.appendContentObject();
+		co.setTrimSize(1.12345, 2.3456, 2);
+		assertTrue(co.toXML().indexOf("1.12 2.35\"") > 0);
+	}
+
+	/**
+	* 
+	*  
+	*/
+	public void testSetClipPath()
+	{
+		JDFContentObject co = lo.appendContentObject();
+		co.setClipPath("1.0000004 1.2345678 l 1 2 3 g ds", 2);
+		assertEquals(co.getClipPath(), ("1 1.23 l 1 2 3 g ds"));
+	}
 }

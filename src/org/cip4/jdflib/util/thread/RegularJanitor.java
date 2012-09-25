@@ -188,14 +188,18 @@ public final class RegularJanitor
 			// no reason to start right away, while the connector may be busy - run every hour
 			if (firstInterval > 0)
 			{
+				log.info("Janitor starting - initial pause: " + firstInterval + " seconds");
 				ThreadUtil.wait(theMutex, 1000 * firstInterval);
 			}
+			log.info("Janitor starting - interval: " + interval + " seconds");
 			while (theMutex != null)
 			{
 				moveModifications();
 				for (Sweeper sweeper : vSweepers)
 				{
 					sweep(sweeper);
+					if (theMutex == null)
+						break; // feierabend was called
 				}
 				ThreadUtil.wait(theMutex, 1000 * interval);
 			}
@@ -257,12 +261,12 @@ public final class RegularJanitor
 	{
 		if (theMutex != null)
 		{
-			log.warn("Janitor already running - do nothing");
+			log.warn("Janitor already running - do nothing ");
 			return;
 		}
 		else
 		{
-			log.warn("starting sweeeper");
+			log.info("starting sweeeper in seconds: " + firstInterval);
 		}
 		JanitorThread janitorThread = new JanitorThread();
 		janitorThread.setFirstInterval(firstInterval);
@@ -310,5 +314,4 @@ public final class RegularJanitor
 		zappSweepers = new Vector<Sweeper>();
 		log.info("creating new janitor");
 	}
-
 }

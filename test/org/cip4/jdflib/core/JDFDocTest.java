@@ -104,6 +104,7 @@ import org.xml.sax.SAXException;
  */
 public class JDFDocTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */

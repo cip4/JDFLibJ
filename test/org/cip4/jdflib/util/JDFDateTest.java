@@ -112,11 +112,11 @@ public class JDFDateTest extends JDFTestCaseBase
 		JDFDate d = new JDFDate();
 		assertTrue(d.getFormattedDateTime(JDFDate.DATETIMEISO_00).contains(":00:00"));
 		JDFDate d1 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_0));
-		assertTrue(d.after(d1));
+		assertFalse(d.before(d1));
 		JDFDate d2 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_00));
-		assertTrue(d1.after(d2));
+		assertFalse(d1.before(d2));
 		JDFDate d3 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_000));
-		assertTrue(d2.after(d3));
+		assertFalse(d2.before(d3));
 	}
 
 	/**
@@ -142,7 +142,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		JDFDate d = new JDFDate();
 		JDFDate d1 = d.createDateFromDuration(new JDFDuration("P1DT18H"), 18, 0);
 		assertTrue(d1.isLater(d));
-
 	}
 
 	/**
@@ -201,7 +200,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		{
 			//
 		}
-
 	}
 
 	/**
@@ -300,7 +298,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
 		date = new JDFDate(-1);
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
-
 	}
 
 	/**
@@ -317,7 +314,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		date = new JDFDate("" + ((l / 1000) - 365 * 24 * 3600 * 5));
 		date.addOffset(0, 0, 0, 365 * 5);
 		assertEquals(date.getTimeInMillis(), l, 1000);
-
 	}
 
 	/**
@@ -398,11 +394,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		date = new JDFDate("2004-11-26T11:43:10.-03:00");
 		strDate = date.getDateTimeISO();
 		assertTrue("Bug " + strDate + " is not equal to 2004-11-26T11:43:10-03:00", strDate.equals("2004-11-26T11:43:10-03:00"));
-
-		// date = new JDFDate("2004-11-26T11:43:10");
-		// assertNotNull(date);
-		// strDate = date.getDateTimeISO();
-
 	}
 
 	/**
@@ -539,7 +530,6 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals(date.getDateISO(), "2007-10-02");
 		date.addOffset(0, 0, 0, 10 * 365 + 3); // it is now 10 years later (the +3 is for leap years)
 		assertEquals("big steps are ok ", date.getDateISO(), "2017-10-02");
-
 	}
 
 	/**

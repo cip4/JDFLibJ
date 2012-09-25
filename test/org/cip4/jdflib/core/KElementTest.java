@@ -1909,6 +1909,22 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSetXPathAttributeReplace()
+	{
+		KElement e = new XMLDoc("foo", null).getRoot();
+		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "g");
+		String s1 = e.toXML();
+		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "g");
+		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "h");
+		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "g");
+		String s2 = e.toXML();
+		assertEquals(s1, s2);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testSetXPathAttribute()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);

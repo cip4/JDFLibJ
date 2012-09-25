@@ -71,6 +71,7 @@
 package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMetadataMap.EnumDataType;
@@ -166,7 +167,22 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
 		assertEquals(rl3.getNPage(), 3);
+	}
 
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 */
+	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException
+	{
+		rl.setNPage(4);
+		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rl1.setAttribute("Pages", "0 ~ 1");
+		JDFRunList rl2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
+		rl2.setAttribute("Pages", "2 ~ 3");
+		assertEquals(rl2.getNPage(), 2);
+		rl.collapse(false, true);
+		assertEquals(rl2.getNPage(), 2);
 	}
 
 	/**
@@ -252,14 +268,18 @@ public class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws DataFormatException 
 	 * 
 	 */
-	public final void testSetPages()
+	public final void testSetPages() throws DataFormatException
 	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList(new JDFIntegerRange(0, -1, 8));
 		rl.setPages(integerRangeList);
 		assertEquals(rl.getPages(), integerRangeList);
 		assertEquals(rl.getNPage(), 8);
+		JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rl1.setPages(new JDFIntegerRangeList("4~-1"));
+		assertEquals(rl1.getNPage(), 4);
 	}
 
 	/**
@@ -702,11 +722,10 @@ public class JDFRunListTest extends JDFTestCaseBase
 		}
 		final JDFRunList rl2 = rl.addSepRun(v2, v1, 0, 0, false);
 		assertTrue(rl2.isValid(EnumValidationLevel.Complete));
-
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
@@ -718,7 +737,5 @@ public class JDFRunListTest extends JDFTestCaseBase
 		doc = new JDFDoc("JDF");
 		root = doc.getJDFRoot();
 		rl = (JDFRunList) root.addResource(ElementName.RUNLIST, EnumUsage.Input);
-
 	}
-
 }

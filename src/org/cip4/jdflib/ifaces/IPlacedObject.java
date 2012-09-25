@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -130,6 +130,14 @@ public interface IPlacedObject
 	public abstract void setCTM(JDFMatrix value);
 
 	/**
+	 * (36) set attribute CTM
+	 * 
+	 * @param value : the value to set the attribute to
+	 * @param precision 
+	 */
+	public abstract void setCTM(JDFMatrix value, int precision);
+
+	/**
 	 * (20) get JDFMatrix attribute CTM
 	 * 
 	 * @return JDFMatrixthe value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
@@ -202,6 +210,14 @@ public interface IPlacedObject
 	public abstract void setTrimCTM(JDFMatrix value);
 
 	/**
+	 * (36) set attribute TrimCTM
+	 * 
+	 * @param value : the value to set the attribute to
+	 * @param precision 
+	 */
+	public abstract void setTrimCTM(JDFMatrix value, int precision);
+
+	/**
 	 * convenience method to set TrimSize
 	 * 
 	 * @param xy : the value to set TrimSize to
@@ -215,6 +231,19 @@ public interface IPlacedObject
 	 * @param y : the value to set the y Dimension to
 	 */
 	public abstract void setTrimSize(double x, double y);
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(final double x, final double y, int precision);
+
+	/**
+	 * @param jdfxyPair
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(JDFXYPair jdfxyPair, int precision);
 
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
@@ -252,6 +281,14 @@ public interface IPlacedObject
 	 * @param value : the value to set the attribute to
 	 */
 	public abstract void setClipPath(String value);
+
+	/**
+	 * (36) set attribute ClipPath
+	 * 
+	 * @param value : the value to set the attribute to
+	 * @param precision 
+	 */
+	public abstract void setClipPath(String value, int precision);
 
 	/**
 	 * (23) get String attribute ClipPath

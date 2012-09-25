@@ -134,6 +134,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
+import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
@@ -317,7 +318,7 @@ public class XJDF20 extends BaseElementWalker
 		walkingProduct = false;
 
 		postWalk();
-		newRoot.getOwnerDocument_KElement().setBodyPart(node.getOwnerDocument_KElement().getBodyPart());
+		newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
 
 		return newRoot;
 	}
@@ -2458,6 +2459,34 @@ public class XJDF20 extends BaseElementWalker
 				e.setAttribute(AttributeName.DESCRIPTIVENAME, descName);
 			}
 			return e;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkCompany extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFCompany;
+		}
+
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, KElement trackElem)
+		{
+			e.renameAttribute("ProductID", "CompanyID", null, null);
+			return super.walk(e, trackElem);
 		}
 	}
 

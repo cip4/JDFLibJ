@@ -279,6 +279,39 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	}
 
 	/**
+	 * getString - returns the JDFNumList as a String
+	 * @param precision # of digits to print
+	 * @return String - the JDFNumList as a String
+	 */
+	public String getString(int precision)
+	{
+		final StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < size(); i++)
+		{
+			if (i > 0)
+			{
+				sb.append(JDFConstants.BLANK);
+			}
+
+			final Object o = elementAt(i);
+			if (o instanceof Double)
+			{
+				sb.append(StringUtil.formatDouble(((Double) o).doubleValue(), precision));
+			}
+			else if (o instanceof Integer)
+			{
+				sb.append(StringUtil.formatInteger(((Integer) o).intValue()));
+			}
+			else
+			{
+				sb.append(o.toString());
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
 	 * equals - compares two JDFNumList elements
 	 * 
 	 * @return boolean - true if equal otherwise false

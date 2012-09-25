@@ -273,7 +273,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			final String resID = getResourceID();
 			if (resID != null && !resID.equals(""))
 			{
-				final VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false);
+				final VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false, null);
 				if (vRes.size() > 0)
 				{
 					return (JDFResource) vRes.elementAt(0);
@@ -283,7 +283,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			final String resName = getResourceName();
 			if (resName != null && !resName.equals(""))
 			{
-				final VElement vRes = rlp.getLinkedResources(resName, null, null, false);
+				final VElement vRes = rlp.getLinkedResources(resName, null, null, false, null);
 				if (vRes.size() > 0)
 				{
 					return (JDFResource) vRes.elementAt(0);

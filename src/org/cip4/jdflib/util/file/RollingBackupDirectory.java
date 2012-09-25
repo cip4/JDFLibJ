@@ -100,9 +100,9 @@ public class RollingBackupDirectory extends BackupDirectory
 	public RollingBackupDirectory(File file, int nBackupp, String base) throws IllegalArgumentException
 	{
 		super(file, nBackupp);
-		ordBackup = calcOrdBackup();
 		baseName = UrlUtil.prefix(base);
 		baseExt = UrlUtil.extension(base);
+		ordBackup = calcOrdBackup();
 	}
 
 	/**

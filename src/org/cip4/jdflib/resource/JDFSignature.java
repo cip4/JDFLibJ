@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -566,7 +567,19 @@ public class JDFSignature extends JDFAutoLayout
 		}
 
 		return null;
-
 	}
-} // class JDFSignature
-// ==========================================================================
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SurfaceContentsBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SurfaceContentsBox
+	  * @param value the value to set the attribute to
+	 * @param precision 
+	  */
+	public void setSurfaceContentsBox(JDFRectangle value, int precision)
+	{
+		setAttribute(AttributeName.SURFACECONTENTSBOX, value, null, precision);
+	}
+
+}

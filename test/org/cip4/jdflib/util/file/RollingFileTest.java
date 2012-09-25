@@ -100,6 +100,38 @@ public class RollingFileTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testGetNewFileDir()
+	{
+		r = new RollingFile(sm_dirTestDataTemp + "RollingFile", "dummyDir");
+		for (int i = 1; i < 100; i++)
+		{
+			File newFile = r.getNewFile();
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertFalse(newFile.isDirectory());
+			assertTrue(newFile.delete());
+			newFile.mkdir();
+			assertTrue(newFile.isDirectory());
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetNewDeepFile()
+	{
+		r = new RollingFile(sm_dirTestDataTemp + "RollingFile/foo/bar", "dummyDir");
+		for (int i = 1; i < 100; i++)
+		{
+			File newFile = r.getNewFile();
+			assertEquals(newFile.getName(), StringUtil.sprintf("dummyDir%06i", "" + i));
+			assertTrue(newFile.canRead());
+		}
+	}
+
+	/**
 	 * @throws IOException 
 	 * 
 	 */

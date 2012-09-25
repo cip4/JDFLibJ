@@ -449,13 +449,13 @@ public class XMLDoc
 			return false;
 		}
 
-		return write2File(UrlUtil.urlToFile(oFilePath), indent, bPreserveSpace);
+		return write2File(new File(oFilePath), indent, bPreserveSpace);
 	}
 
 	/**
-	 * write2File - write to a file; Create if it doesn't exist always assume utf-8 encoding
+	 * write2File - write to a file; Create if it doesn't exist
 	 * 
-	 * @param file fthe file to write to
+	 * @param file the file to write to
 	 * @param indent indentation
 	 * @param bPreserveSpace if true, preserve whitespace
 	 * 

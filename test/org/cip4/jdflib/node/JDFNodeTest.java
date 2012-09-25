@@ -2034,8 +2034,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(r.getNodeName(), "foo");
 	}
 
-	// ////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
@@ -2064,7 +2062,23 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals("null is valid wildcard", out, n.getResource(null, EnumUsage.Output, null, 0));
 		final JDFResource ns = n.addResource("foo:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, "www.foo.com", null);
 		assertEquals("qualified names", ns, n.getResource("foo:bar", EnumUsage.Output, null, 0));
-		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, 0));
+		assertNull("unqualified names no longer supported", n.getResource("bar", EnumUsage.Output, null, 0));
+		final JDFResource nsJDF = n.addResource("jdf:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, JDFElement.getSchemaURL(), null);
+		assertEquals("qualified names", nsJDF, n.getResource("jdf:bar", EnumUsage.Output, null, 0));
+		assertEquals("unqualified names", nsJDF, n.getResource("bar", EnumUsage.Output, null, 0));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetResourceNS()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		final JDFResource ns = n.addResource("foo:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, "www.foo.com", null);
+		assertEquals("qualified names", ns, n.getResource("foo:bar", EnumUsage.Output, null, 0, "www.foo.com"));
+		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, 0, "www.foo.com"));
 	}
 
 	/**

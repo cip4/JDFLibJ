@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.StringUtil;
@@ -273,6 +274,16 @@ public class ProductHelper extends BaseXJDFHelper
 			return list.getFirstChildElement("Product", null) == theElement;
 		else
 			return StringUtil.hasToken(ids, id, " ", 0);
+	}
+
+	/**
+	 * reference the customerinfo specified by ph
+	 * @param cuph
+	 */
+	public void setCustomerInfo(PartitionHelper cuph)
+	{
+		if (cuph != null)
+			getRoot().setAttribute(ElementName.CUSTOMERINFO + "Ref", cuph.getID());
 	}
 
 }

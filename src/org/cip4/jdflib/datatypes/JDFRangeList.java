@@ -203,6 +203,26 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	}
 
 	/**
+	* toString - serialize to string
+	* 
+	* @return String - a list of ranges in the format a ~ b
+	*/
+	public final String getString(int precision)
+	{
+		int sz = rangeList.size();
+		StringBuffer s = new StringBuffer((sz + 1) * 16);
+		for (int i = 0; i < sz; i++)
+		{
+			s.append(rangeList.elementAt(i).getString(precision));
+			if (i < (sz - 1))
+			{
+				s.append(JDFConstants.BLANK);
+			}
+		}
+		return s.toString();
+	}
+
+	/**
 	 * number of Duration range elements
 	 * 
 	 * @return int - the number of Duration ranges in the list

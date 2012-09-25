@@ -109,6 +109,8 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -837,16 +839,50 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
-	public void testFromXJDFContact()
+	public void testFromXJDFProductComment()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		e = new XMLDoc("XJDF", null).getRoot();
-		e.appendElement("ParameterSet").setAttribute("Name", "Contact");
 		e.getCreateXPathElement("ProductList/Product/Comment").setText("bar");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		assertEquals(root.getComment(0).getText(), "bar");
+	}
+
+	/**
+	 * @return 
+	 *  
+	 */
+	public JDFNode testFromXJDFCompany()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		KElement c = e.appendElement("ParameterSet");
+		c.setAttribute("Name", "Contact");
+		c.setAttribute("Usage", "Input");
+		c.appendElement("Parameter").appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
+		assertEquals(contact.getCompany().getProductID(), "company_id");
+		return root;
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	public void testToXJDFCompany()
+	{
+		JDFNode n = testFromXJDFCompany();
+		JDFContact contact = (JDFContact) n.getResource("Contact", EnumUsage.Input, 0);
+		JDFCompany company = contact.getCompany();
+		company.makeRootResource(null, null, true);
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNull(e.getXPathElement("ParameterSet/Parameter/Company"));
+		assertEquals(e.getXPathAttribute("ParameterSet/Parameter/Contact/Company/@CompanyID", null), "company_id");
 	}
 
 	/**
@@ -878,6 +914,27 @@ public class XJDFTest extends JDFTestCaseBase
 			assertEquals(cif.getColorsUsed().getSeparations().size(), 4 + i);
 			assertEquals(cif.getCoatings().getActual(), "DullVarnish");
 		}
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFColorIntent44()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setAttribute("Types", "Product");
+		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/4");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
+		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+		assertNull(cif);
+		assertNull(cib);
+		assertNull(ci.getElement("ColorsUsedBack"));
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
 	}
 
 	/**

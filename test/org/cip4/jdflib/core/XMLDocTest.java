@@ -890,6 +890,19 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testWriteToFileEscape()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		String out = sm_dirTestDataTemp + "foo %2f%20bar/fnarf.xml";
+		final File f = new File(out);
+		f.delete();
+		assertTrue(d.write2File(out, 2, true));
+		assertTrue(f.exists());
+	}
+
+	/**
 	 * @throws IOException TODO Include test case
 	 */
 	public void testWriteToHTTPURL() throws IOException
@@ -1005,7 +1018,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 		final String out2 = out + File.separator + "7ä .xml";
 
-		final File f = UrlUtil.urlToFile(out2);
+		final File f = new File(out2);
 		f.delete();
 		assertTrue(d.write2File(out2, 0, true));
 		assertTrue(f.canRead());

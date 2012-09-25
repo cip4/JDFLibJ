@@ -318,6 +318,26 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * returns the string representation of the left value of the range
+	 * @param precision
+	 * @return
+	 */
+	private String getLeftString(int precision)
+	{
+		return StringUtil.formatDouble(getLeft(), precision);
+	}
+
+	/**
+	 * returns the string representation of the left value of the range
+	 * @param precision
+	 * @return
+	 */
+	private String getRightString(int precision)
+	{
+		return StringUtil.formatDouble(getRight(), precision);
+	}
+
+	/**
+	 * returns the string representation of the left value of the range
 	 * 
 	 * @return the left value of the range
 	 */
@@ -431,6 +451,20 @@ public class JDFNumberRange extends JDFRange
 	protected boolean inObjectRange(final Object other)
 	{
 		return inRange(((Double) other).doubleValue());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.datatypes.JDFRange#getString(int)
+	 */
+	@Override
+	public String getString(int precision)
+	{
+		if (Math.abs(this.getLeft() - this.getRight()) < JDFBaseDataTypes.EPSILON)
+		{
+			return JDFConstants.EMPTYSTRING + getRightString(precision);
+		}
+		return getLeftString(precision) + " ~ " + getRightString(precision);
+
 	}
 
 }

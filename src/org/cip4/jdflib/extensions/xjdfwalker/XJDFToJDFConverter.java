@@ -134,6 +134,7 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFShapeCut;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
@@ -214,7 +215,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		if (jdfDoc == null)
 		{
 			jdfDoc = new JDFDoc("JDF");
-			jdfDoc.setBodyPart(xjdf.getOwnerDocument_KElement().getBodyPart());
+			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
 		}
 		JDFNode root = prepareRoot();
 		xjdf = reparse(xjdf);
@@ -1061,6 +1062,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	public class WalkColorIntent extends WalkIntentResource
 	{
+		/**
+		 * 
+		 */
 		public WalkColorIntent()
 		{
 			super();
@@ -1125,6 +1129,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 						cuBack.deleteNode();
 					}
 				}
+				else
+				{
+					cuBack.deleteNode();
+				}
+
 			}
 			else if (cuBack == null && cuFront != null)
 			{
@@ -1739,7 +1748,34 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 			return super.getRefName(val);
 		}
+	}
 
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkCompany extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFCompany;
+		}
+
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, KElement trackElem)
+		{
+			e.renameAttribute("CompanyID", "ProductID", null, null);
+			return super.walk(e, trackElem);
+		}
 	}
 
 	/**

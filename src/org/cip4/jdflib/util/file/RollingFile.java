@@ -111,6 +111,7 @@ public class RollingFile extends File
 		digits = 6;
 		calcPos();
 		log = LogFactory.getLog(getClass());
+		mkdirs();
 	}
 
 	/**

@@ -332,4 +332,5 @@ public class JDFDateTimeRange extends JDFRange
 	{
 		return inRange((JDFDate) other);
 	}
+
 }

@@ -175,6 +175,7 @@ public class StringUtil
 			"Er, well, um, if you're dropping by again, do pop in. Heh. And thanks a lot for the gold and frankincense, er, but don't worry too much about the myrrh next time. All right? Heh. Thank you. Good-bye.",
 			"Under the terms of the Roman occupancy, we're entitled to be crucified in a purely Jewish area.",
 			"Amongst our weaponry are such diverse elements as: fear, surprise, ruthless efficiency, an almost fanatical devotion to the Pope, and nice red uniforms - Oh damn!",
+			"*Nobody* expects the Spanish Inquisition! Our chief weapon is surprise, surprise and fear, fear and surprise. Our *two* weapons are fear and surprise, and ruthless efficiency. Our *three* weapons are fear and surprise and ruthless efficiency and an almost fanatical dedication to the pope. Our *four*... No... Amongst our weapons... Amongst our weaponry are such elements as fear, sur- I'll come in again. ",
 			"NOBODY expects the Spanish Inquisition!",
 			"Hm! She is made of harder stuff! Cardinal Fang! Fetch...THE COMFY CHAIR!",
 			"So you think you are strong because you can survive the soft cushions. Well, we shall see. Biggles! Put her in the Comfy Chair!",
@@ -210,7 +211,12 @@ public class StringUtil
 			"'I got very bored and depressed, so I went and plugged myself in to its external computer feed. I talked to the computer at great length and explained my view of the Universe to it', said Marvin. 'And what happened?' pressed Ford. 'It committed suicide.'",
 			"Wie nur dem Kopf nicht alle Hoffnung schwindet,\nDer immerfort an schalem Zeuge klebt,\nMit gier'ger Hand nach Schätzen gräbt,\nUnd froh ist, wenn er Regenwürmer findet!",
 			"Der Dadaist ist ein Künstler, bei dem das Produkt als solches nebensächlich ist. Er ist ein Geistesreisender, der immer neue Erfahrungen macht. Ein Zeichen dafür, dass Dadaismus doch produktiv im herkömmlichen Sinne der bildenden Kunst ist, zeigt der groteske Humor, der sich in den Gedichten und Bildern wieder findet. Auch die Ironie, die die Künstler in ihre Werke einfließen lassen, spricht für modale Präsenz von „Sinn im Unsinn“, der immer dort ist, wo er nicht zu sein scheint.",
-			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
+			"Half a bee, philosophically, must, ipso facto, half not be. But half the bee has got to be, vis a vis its entity - do you see? But can a bee be said to be or not to be an entire bee when half the bee is not a bee due to some ancient injury?",
+			"Mein schönes Fräulein, darf ich wagen, Meinen Arm und Geleit Ihr anzutragen? Bin weder Fräulein, weder schön, Kann ungeleitet nach Hause gehn.",
+			"And I'm thinking you weren't burdened with an overabundance of schooling. So why don't we just ignore each other 'til we go away.",
+			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet.",
+			"I'm afraid not. The guns have stopped because we are about to attack. Not even our generals are mad enough to shell their own men. They feel it's more sporting to let the Germans do it. ",
+			"Last quote" };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
@@ -2601,5 +2607,15 @@ public class StringUtil
 		return trimmed.length() > 0 ? trimmed : null;
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * returns a formatted double. Truncates to @param precision digits after the "." <br>
+	 * If the double is representable as an integer, any ".0" is stripped.
+	 * @param value
+	 * @param precision number of digits after the "."
+	 * @return
+	 */
+	public static String formatDouble(double value, int precision)
+	{
+		return new NumberFormatter().formatDouble(value, precision);
+	}
 }

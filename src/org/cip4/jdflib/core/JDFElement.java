@@ -108,19 +108,10 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
-import org.cip4.jdflib.datatypes.JDFDurationRangeList;
-import org.cip4.jdflib.datatypes.JDFIntegerRange;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNameRange;
-import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFNumList;
-import org.cip4.jdflib.datatypes.JDFNumberRange;
-import org.cip4.jdflib.datatypes.JDFNumberRangeList;
-import org.cip4.jdflib.datatypes.JDFRectangleRangeList;
-import org.cip4.jdflib.datatypes.JDFShapeRangeList;
-import org.cip4.jdflib.datatypes.JDFXYPairRange;
-import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
+import org.cip4.jdflib.datatypes.JDFRange;
+import org.cip4.jdflib.datatypes.JDFRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -1669,7 +1660,7 @@ public class JDFElement extends KElement
 		/** 
 		 * 
 		 * returns true if we are in an end phase (Completed or Aborted)
-		 * @param the status to compare
+		 * @param nodeStatus the status to compare
 		 * @return true if we are in an end phase (Completed or Aborted)
 		 */
 		public static boolean isCompleted(EnumNodeStatus nodeStatus)
@@ -2292,90 +2283,6 @@ public class JDFElement extends KElement
 	 * Sets an element attribute
 	 * 
 	 * @param key the name of the attribute to set
-	 * @param value the JDFDurationRangeList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFDurationRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFDateTimeRangeList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFDateTimeRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFRectangleList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFRectangleRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * setAttribute - Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFShapeRangeList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFShapeRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
 	 * @param value the JDFNumList to set
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * 
@@ -2394,15 +2301,16 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFNumberRange to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFNumberRange value, final String nameSpaceURI)
+	* Sets an element attribute
+	* 
+	* @param key the name of the attribute to set
+	* @param value the JDFNumList to set
+	* @param nameSpaceURI the nameSpace the attribute is in
+	* @param precision number of digits
+	* 
+	* @default setAttribute(key, value, null)
+	*/
+	public void setAttribute(final String key, final JDFNumList value, final String nameSpaceURI, int precision)
 	{
 		if (value == null)
 		{
@@ -2410,7 +2318,7 @@ public class JDFElement extends KElement
 		}
 		else
 		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
+			super.setAttribute(key, value.getString(precision), nameSpaceURI);
 		}
 	}
 
@@ -2418,54 +2326,12 @@ public class JDFElement extends KElement
 	 * Sets an element attribute
 	 * 
 	 * @param key the name of the attribute to set
-	 * @param value the JDFIntegerRange to set
+	 * @param value the JDFNumberRangeList to set
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * 
 	 * @default setAttribute(key, value, null)
 	 */
-	public void setAttribute(final String key, final JDFIntegerRange value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFNameRangeList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFNameRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFNameRange to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFNameRange value, final String nameSpaceURI)
+	public void setAttribute(final String key, final JDFRangeList value, final String nameSpaceURI)
 	{
 		if (value == null)
 		{
@@ -2483,10 +2349,32 @@ public class JDFElement extends KElement
 	 * @param key the name of the attribute to set
 	 * @param value the JDFNumberRangeList to set
 	 * @param nameSpaceURI the nameSpace the attribute is in
+	 * @param precision 
 	 * 
 	 * @default setAttribute(key, value, null)
 	 */
-	public void setAttribute(final String key, final JDFNumberRangeList value, final String nameSpaceURI)
+	public void setAttribute(final String key, final JDFRangeList value, final String nameSpaceURI, int precision)
+	{
+		if (value == null)
+		{
+			removeAttribute(key, nameSpaceURI);
+		}
+		else
+		{
+			super.setAttribute(key, value.getString(precision), nameSpaceURI);
+		}
+	}
+
+	/**
+	 * Sets an element attribute
+	 * 
+	 * @param key the name of the attribute to set
+	 * @param value the JDFXYRange to set
+	 * @param nameSpaceURI the nameSpace the attribute is in
+	 * 
+	 * @default setAttribute(key, value, null)
+	 */
+	public void setAttribute(final String key, final JDFRange value, final String nameSpaceURI)
 	{
 		if (value == null)
 		{
@@ -2502,12 +2390,13 @@ public class JDFElement extends KElement
 	 * Sets an element attribute
 	 * 
 	 * @param key the name of the attribute to set
-	 * @param value the JDFIntegerRangeList to set
+	 * @param value the JDFXYRange to set
 	 * @param nameSpaceURI the nameSpace the attribute is in
+	 * @param precision 
 	 * 
 	 * @default setAttribute(key, value, null)
 	 */
-	public void setAttribute(final String key, final JDFIntegerRangeList value, final String nameSpaceURI)
+	public void setAttribute(final String key, final JDFRange value, final String nameSpaceURI, int precision)
 	{
 		if (value == null)
 		{
@@ -2515,49 +2404,7 @@ public class JDFElement extends KElement
 		}
 		else
 		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFXYpairRange to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFXYPairRange value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
-		}
-	}
-
-	/**
-	 * Sets an element attribute
-	 * 
-	 * @param key the name of the attribute to set
-	 * @param value the JDFXYPairRangeList to set
-	 * @param nameSpaceURI the nameSpace the attribute is in
-	 * 
-	 * @default setAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final JDFXYPairRangeList value, final String nameSpaceURI)
-	{
-		if (value == null)
-		{
-			removeAttribute(key, nameSpaceURI);
-		}
-		else
-		{
-			super.setAttribute(key, value.toString(), nameSpaceURI);
+			super.setAttribute(key, value.getString(precision), nameSpaceURI);
 		}
 	}
 
@@ -6166,6 +6013,7 @@ public class JDFElement extends KElement
 	/**
 	 * this is an optimized version of GetDeepElement() which returns a complete list of elements. Here we abort, when we found the first element that fits.
 	 * (There is only one element, because the id must be unique)
+	 * @param base 
 	 * @param attName attribute name
 	 * @param id attribute ID value
 	 * @param childToExclude here can be specified, if this method should exclude a child-element when searching This is useful, when searching a tree up

@@ -667,8 +667,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 		 * InputStream is=bp.getInputStream(); byte[] b=new byte[1000]; int l=0; while (true) { int i=is.read(b); if(i<=0) break; l+=i; }
 		 */
 		final long extract = System.currentTimeMillis();
-		// System.out.println("extracted "+l+" bytes in time: "+(extract-getCID))
-		// ;
 		System.out.println("extracted  bytes in time: " + (extract - getCID));
 
 	}

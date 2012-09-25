@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,10 @@ package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -189,12 +191,54 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 		JDFResource r = n.addResource("Component", null, EnumUsage.Input, null, null, null, null);
 		JDFResourceLinkPool rlp = n.getResourceLinkPool();
 		assertNotNull(rlp);
-		assertEquals(rlp.getLinkedResources(null, null, null, false).elementAt(0), r);
-		assertEquals(rlp.getLinkedResources("Component", null, null, false).elementAt(0), r);
-		assertEquals(rlp.getLinkedResources("ComponentLink", null, null, false).elementAt(0), r);
+		assertEquals(rlp.getLinkedResources(null, null, null, false, null).elementAt(0), r);
+		assertEquals(rlp.getLinkedResources("Component", null, null, false, null).elementAt(0), r);
+		assertEquals(rlp.getLinkedResources("ComponentLink", null, null, false, null).elementAt(0), r);
 	}
-	// //////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////
 
+	/**
+	 * tests the various combinations of links and resources + namespaces
+	 */
+	public void testGetLinkedResourcesNS()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, EnumUsage.Input, null, null, null, null);
+		JDFResource r2 = n.addResource("Component", EnumResourceClass.Quantity, EnumUsage.Input, null, null, "www.foo.com", null);
+		JDFResource r3 = n.addResource("foo:Component", EnumResourceClass.Quantity, EnumUsage.Input, null, null, "www.foo.com", null);
+		JDFResource r4 = n.addResource("foo:Component", EnumResourceClass.Quantity, EnumUsage.Input, null, null, "www.bar.com", null);
+		JDFResource r5 = n.addResource("jdf:Component", EnumResourceClass.Quantity, EnumUsage.Input, null, null, JDFElement.getSchemaURL(), null);
+		JDFResourceLinkPool rlp = n.getResourceLinkPool();
+		assertNotNull(rlp);
+		VElement allLinkedResources = rlp.getLinkedResources(null, null, null, false, null);
+		assertEquals(allLinkedResources.elementAt(0), r);
+		assertEquals(allLinkedResources.elementAt(1), r2);
+		assertEquals(allLinkedResources.elementAt(2), r3);
+		assertEquals(allLinkedResources.elementAt(3), r4);
+		assertEquals(allLinkedResources.elementAt(4), r5);
+		VElement jdfLinkedResources = rlp.getLinkedResources("Component", null, null, false, null);
+		assertEquals(jdfLinkedResources.elementAt(0), r);
+		assertEquals(jdfLinkedResources.elementAt(1), r5);
+		assertNull(jdfLinkedResources.elementAt(2));
+		assertEquals(rlp.getLinkedResources("ComponentLink", null, null, false, null), jdfLinkedResources);
+
+		VElement allFooLinkedResources = rlp.getLinkedResources("Component", null, null, false, "www.foo.com");
+		assertEquals(allFooLinkedResources.elementAt(0), r2);
+		assertEquals(allFooLinkedResources.elementAt(1), r3);
+		assertEquals(rlp.getLinkedResources("ComponentLink", null, null, false, null), jdfLinkedResources);
+		VElement fooFooLinkedResources = rlp.getLinkedResources("foo:Component", null, null, false, "www.foo.com");
+		assertEquals(fooFooLinkedResources.elementAt(0), r3);
+		assertEquals(fooFooLinkedResources.size(), 1);
+		VElement fooBarLinkedResources = rlp.getLinkedResources("foo:Component", null, null, false, "www.bar.com");
+		assertEquals(fooBarLinkedResources.elementAt(0), r4);
+		assertEquals(fooBarLinkedResources.size(), 1);
+		VElement fooSnafuLinkedResources = rlp.getLinkedResources("snafu:Component", null, null, false, "www.bar.com");
+		assertEquals(fooSnafuLinkedResources.size(), 0);
+		VElement fooSnafu2LinkedResources = rlp.getLinkedResources("foo:Component", null, null, false, "www.snafu.com");
+		assertEquals(fooSnafu2LinkedResources.size(), 0);
+		VElement fooNullLinkedResources = rlp.getLinkedResources("foo:Component", null, null, false, null);
+		assertEquals(fooNullLinkedResources.elementAt(0), r3);
+		assertEquals(fooNullLinkedResources.elementAt(1), r4);
+		assertEquals(fooNullLinkedResources.size(), 2);
+	}
 }

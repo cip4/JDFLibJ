@@ -2468,7 +2468,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Enumeration for accessing typesafe nodes
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumProcessUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -3488,12 +3487,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @param strName the resource name
 	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param processUsage 
 	 * @param i the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
+	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i)
 	{
-		return getResource(strName, usage, (EnumProcessUsage) null, i);
+		return getResource(strName, usage, processUsage, i, null);
 	}
 
 	/**
@@ -3501,11 +3501,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @param strName the resource name
 	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param processUsage the processUsage of the respective resource
 	 * @param i the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, int i)
+	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
+	{
+		return getResource(strName, usage, (EnumProcessUsage) null, i, null);
+	}
+
+	/**
+	 * Get the linked resource with name=strName
+	 * 
+	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param processUsage the processUsage of the respective resource
+	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, int i, String namespaceURI)
 	{
 		VElement velem = null;
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
@@ -3528,7 +3542,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				mALink = null;
 			}
 
-			velem = rlp.getLinkedResources(strName, mALink, null, false);
+			velem = rlp.getLinkedResources(strName, mALink, null, false, namespaceURI);
 		}
 
 		final int siz = velem == null ? 0 : velem.size();
@@ -3871,7 +3885,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		VElement vLinkedResources = new VElement();
 		if (resourceLinkPool != null)
 		{
-			vLinkedResources = resourceLinkPool.getLinkedResources(null, null, mResAtt, bFollowRefs);
+			vLinkedResources = resourceLinkPool.getLinkedResources(null, null, mResAtt, bFollowRefs, null);
 		}
 
 		final JDFAuditPool auditPool = getAuditPool();
@@ -8200,7 +8214,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			// resource
 			// attributes
 
-			velem = rlp.getLinkedResources(null, mALink, mARes, false);
+			velem = rlp.getLinkedResources(null, mALink, mARes, false, null);
 		}
 		return velem; // grab em, don't worry about the resname
 	}
@@ -9479,7 +9493,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
 			if (resourceLinkPool != null)
 			{
-				final VElement linkedResources = resourceLinkPool.getLinkedResources(null, null, null, false);
+				final VElement linkedResources = resourceLinkPool.getLinkedResources(null, null, null, false, null);
 				final int linkedResourcesSize = linkedResources.size();
 				for (int i = 0; i < linkedResourcesSize; i++)
 				{

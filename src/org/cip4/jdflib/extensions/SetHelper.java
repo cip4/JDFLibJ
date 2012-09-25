@@ -228,7 +228,7 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * @param partMap
-	 * @param addRes 
+	 * @param addRes if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
 	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)

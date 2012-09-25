@@ -91,6 +91,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -118,7 +119,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		 */
 		protected void registerCustomClass(final String strElement, final String packagepath)
 		{
-			synchronized (sm_PackageNames)
+			synchronized (mutex)
 			{
 				sm_PackageNames.put(strElement, packagepath);
 				sm_ClassAlreadyInstantiated.remove(strElement);
@@ -938,10 +939,11 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		private final HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
 	}
 
-	private static DocumentData data = null;
+	private static DocumentData data = new DocumentData();
 
 	private static final long serialVersionUID = 1L;
 	private static boolean bStaticStrictNSCheck = true;
+	private static MyMutex mutex = new MyMutex();
 	/**
 	 * if true, the factory is bypassed and only KElements are created rather than the typesafe element classes
 	 */
@@ -999,7 +1001,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 */
 	public static void registerCustomClass(final String strElement, final String packagepath)
 	{
-		getData().registerCustomClass(strElement, packagepath);
+		data.registerCustomClass(strElement, packagepath);
 	}
 
 	/**
@@ -1034,21 +1036,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	public DocumentJDFImpl()
 	{
 		super();
-		getData();
-
 		bInitOnCreate = true;
 		myXMLUserDat = new XMLDocUserData(this);
-	}
-
-	/**
-	 * @return 
-	 * 
-	 */
-	private static DocumentData getData()
-	{
-		if (data == null)
-			data = new DocumentData();
-		return data;
 	}
 
 	/**
@@ -1074,7 +1063,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			bInJDFJMF = true;
 		}
 
-		DocumentData theData = getData();
+		DocumentData theData = data;
 		synchronized (theData.sm_hashCtorElementNS)
 		{
 			constructi = theData.sm_hashCtorElementNS.get(qualifiedName);

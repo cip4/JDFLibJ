@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFRectangle;
@@ -191,6 +192,55 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	/**
 	 * 
 	 */
+	public void testDescribeFinishedGang()
+	{
+		for (int k = 0; k < 2; k++)
+		{
+			JDFAttributeMap sheetMap = getSheetMap(k);
+			PartitionHelper loh = losh.appendPartition(sheetMap, true);
+			JDFLayout lo = (JDFLayout) loh.getResource();
+			SetHelper nish = theHelper.getCreateSet("Parameter", ElementName.NODEINFO, EnumUsage.Input);
+			PartitionHelper niph = nish.appendPartition(sheetMap, true);
+			niph.getRoot().setAttribute("AmountGood", 1234, null);
+			SetHelper cush = theHelper.getCreateSet("Parameter", ElementName.CUSTOMERINFO, EnumUsage.Input);
+			SetHelper cosh = theHelper.getCreateSet("Parameter", ElementName.CONTACT, EnumUsage.Input);
+			for (int i = 0; i < 4; i++)
+			{
+				int ii = k * 4 + i;
+				ProductHelper ph = theHelper.appendProduct();
+				ph.getRoot().setID("P" + ii);
+				ph.setRoot();
+				ph.setAmount(1000);
+				if (ii >= 6)
+					ph.getRoot().deleteNode();
+				JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
+				bs.setAttribute("ProductRef", "P" + (ii % 6));
+				initBS(bs, ii);
+				JDFPosition pos = (JDFPosition) bs.appendElement(ElementName.POSITION);
+				double d = i;
+				double d2 = i + 1;
+				pos.setRelativeBox(new JDFRectangle(d * 0.25, d * 0.25, d2 * 0.25, d2 * 0.25));
+
+				if (ii < 6)
+				{
+					PartitionHelper cuph = cush.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
+					PartitionHelper coph = cosh.appendPartition(new JDFAttributeMap("Product", "P" + ii), true);
+					coph.getResource().setXMLComment("Contact, Address etc go here");
+					coph.getResource().setAttribute("ContactTypes", "Customer");
+					JDFCustomerInfo ci = (JDFCustomerInfo) cuph.getResource();
+					ci.setAttribute("ContactRefs", coph.getID());
+					ci.setCustomerOrderID("CustomerJob" + ii);
+					ph.setCustomerInfo(cuph);
+				}
+			}
+		}
+
+		theHelper.writeToFile(sm_dirTestDataTemp + "loGang.xjdf");
+	}
+
+	/**
+	 * 
+	 */
 	public void testStripLayout_verbose()
 	{
 		for (int k = 0; k < 2; k++)
@@ -205,7 +255,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 				JDFContentObject co = initContentObject(lo, k * 8 + i);
 				co.appendElement("StripCellParams");
 				co.appendElement("SignatureCell");
-				co.setXMLComment("we would probably simply merge signaturecell ans stripcellparams into each co");
+				co.setXMLComment("we would probably simply merge signaturecell and stripcellparams into each co");
 
 			}
 		}

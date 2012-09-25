@@ -144,4 +144,14 @@ public abstract class JDFRange implements JDFBaseDataTypes
 		return equals(other);
 	}
 
+	/**
+	 * 
+	 * get a string with precision digits after each decimal
+	 * @param precision
+	 * @return
+	 */
+	public String getString(int precision)
+	{
+		return toString();
+	}
 }

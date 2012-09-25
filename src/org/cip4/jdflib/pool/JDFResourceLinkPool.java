@@ -103,6 +103,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -226,13 +228,34 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param bFollowRefs if true search all HRefs and add them to the list
 	 * 
 	 * @return VElement - vector with all Resources matching the conditions
+	 * @deprecated - use namespace enabled version getLinkedResources(resName, mLinkAtt, mResAtt, bFollowRefs, null);
 	 */
+	@Deprecated
 	public VElement getLinkedResources(String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs)
+	{
+		return getLinkedResources(resName, mLinkAtt, mResAtt, bFollowRefs, null);
+	}
+
+	/**
+	 * Get the linked resources matching some conditions
+	 * <p>
+	 * default: GetLinkedResources(null, null, null, false)
+	 * 
+	 * @param resName type(Name) of the resource to get
+	 * @param mLinkAtt the link attribute to search for
+	 * @param mResAtt attribute to search for
+	 * @param bFollowRefs if true search all HRefs and add them to the list
+	 * @param nameSpaceURI 
+	 * 
+	 * @return VElement - vector with all Resources matching the conditions
+	 */
+	public VElement getLinkedResources(String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs, String nameSpaceURI)
 	{
 		final VElement vL = new VElement();
 		final VElement v = getPoolChildren(null, mLinkAtt, null);
 		if (v != null)
 		{
+			resName = StringUtil.getNonEmpty(resName);
 			if (resName != null && resName.endsWith(JDFConstants.LINK))
 			{
 				resName = resName.substring(0, resName.length() - 4); // remove link
@@ -244,10 +267,16 @@ public class JDFResourceLinkPool extends JDFPool
 				final JDFResourceLink l = (JDFResourceLink) v.elementAt(i);
 
 				final JDFResource linkRoot = l.getLinkRoot();
-				if ((linkRoot != null)
-						&& ((resName == null) || resName.equals(JDFConstants.EMPTYSTRING) || (bColon ? linkRoot.getNodeName().equals(resName) : linkRoot.getLocalName().equals(resName))))
+				if (linkRoot != null)
 				{
-					if (linkRoot.includesAttributes(mResAtt, true))
+					boolean bNameMatches = (resName == null) || (bColon ? linkRoot.getNodeName().equals(resName) : linkRoot.getLocalName().equals(resName));
+					if (bNameMatches && (resName != null) && JDFElement.isInJDFNameSpaceStatic(l) ^ JDFElement.isInJDFNameSpaceStatic(nameSpaceURI)) // the name matches but not necessarily the namespace since
+					{
+						bNameMatches = bColon;
+					}
+					if (bNameMatches && !JDFElement.isInJDFNameSpaceStatic(nameSpaceURI))
+						bNameMatches = ContainerUtil.equals(nameSpaceURI, l.getNamespaceURI());
+					if (bNameMatches && linkRoot.includesAttributes(mResAtt, true))
 					{
 						vL.addElement(linkRoot);
 						if (bFollowRefs)

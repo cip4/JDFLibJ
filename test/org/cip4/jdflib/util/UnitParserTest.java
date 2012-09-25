@@ -99,7 +99,7 @@ public class UnitParserTest extends JDFTestCaseBase
 		assertEquals(unitParser.extractUnits("123"), "123");
 		assertEquals(unitParser.extractUnits("abc def"), "abc def");
 		assertEquals(unitParser.extractUnits("abc cm mm"), "abc cm mm");
-		assertEquals(unitParser.extractUnits("10cm 10mm"), "283.46456692 28.34645669");
+		assertEquals(unitParser.extractUnits("10cm 10mm"), "283.46456693 28.34645669");
 		assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.34645669");
 		assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
 	}

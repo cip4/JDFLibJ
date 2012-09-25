@@ -51,7 +51,7 @@ public class TestJDF extends JDFTestCaseBase
 {
 	private static final String SEPARATOR = File.separator; // "/"; //
 	static protected final String sm_dirTestSchema = ".." + SEPARATOR + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
-	static protected final String sm_dirTestData = "O:\\jdflibj\\test" + SEPARATOR + "data" + SEPARATOR;
+	static protected final String sm_dirTestData = "test" + File.separator + "data" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
 
 	/**
@@ -103,13 +103,15 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	public static void testCollapse()
 	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/UlfPrien/jdfportal.jdf");
+		final JDFDoc d = new JDFParser().parseFile(sm_dirTestDataTemp + "data.jdf");
 		final JDFNode n = d.getJDFRoot();
-		JDFResource r = n.getResource("ColorantControl", EnumUsage.Input, 0);
-		r.expand(true);
-		d.write2File("/share/data/JDF/UlfPrien/jdfportal_new.jdf", 2, false);
-		r.collapse(false, true);
-		d.write2File("/share/data/JDF/UlfPrien/jdfportal_new2.jdf", 2, false);
+		for (int i = 1; i < 2; i++)
+		{
+			JDFResource r = n.getResource("RunList", EnumUsage.Input, i);
+			//			r.expand(true);
+			r.collapse(true, true);
+		}
+		d.write2File(sm_dirTestDataTemp + "data_new.jdf", 2, false);
 	}
 
 	/**

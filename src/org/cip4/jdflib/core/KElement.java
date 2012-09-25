@@ -735,6 +735,20 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Sets an element attribute
+	 * @param key the name of the attribute to set
+	 * @param value the value for the attribute
+	 * @param nameSpaceURI the namespace the element is in
+	 * @param precision 
+	 * 
+	 * @default setAttribute(key, value, null)
+	 */
+	public void setAttribute(final String key, final double value, final String nameSpaceURI, int precision)
+	{
+		setAttribute(key, StringUtil.formatDouble(value, precision), nameSpaceURI);
+	}
+
+	/**
 	 * SetAttribute - Sets an element attribute
 	 * @param key the name of the attribute to set
 	 * @param b value of the boolean attribute to be set (true or false)

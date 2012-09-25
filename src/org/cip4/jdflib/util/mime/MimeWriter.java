@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,7 +70,6 @@
  */
 package org.cip4.jdflib.util.mime;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,7 +77,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Vector;
@@ -109,6 +107,7 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.StringUtil;
@@ -462,7 +461,6 @@ public class MimeWriter extends MimeHelper
 	 */
 	public UrlPart writeToURL(final String strUrl) throws IOException, MessagingException
 	{
-		HttpURLConnection httpURLconnection = null;
 		UrlPart p = null;
 		final URL url = UrlUtil.stringToURL(strUrl);
 		if ("File".equalsIgnoreCase(url.getProtocol()))
@@ -473,30 +471,10 @@ public class MimeWriter extends MimeHelper
 		else
 		// assume http
 		{
-			httpURLconnection = (HttpURLConnection) url.openConnection();
-			httpURLconnection.setRequestMethod(UrlUtil.POST);
-			httpURLconnection.setRequestProperty("Connection", "close");
-			String contentType = theMultipart.getContentType();
-			contentType = StringUtil.token(contentType, 0, "\r\n; ");
-			httpURLconnection.setRequestProperty(UrlUtil.CONTENT_TYPE, contentType);
-			httpURLconnection.setDoOutput(true);
-			if (md != null && md.httpDetails != null)
-			{
-				md.httpDetails.applyTo(httpURLconnection);
-			}
-
-			try
-			{
-				final OutputStream out = httpURLconnection.getOutputStream();
-				writeToStream(out);
-			}
-			catch (final ConnectException x)
-			{
-				httpURLconnection = null;
-				log.error("cannot write to URL; " + strUrl, x);
-			}
+			ByteArrayIOStream bos = new ByteArrayIOStream();
+			writeToStream(bos);
+			p = UrlUtil.writeToURL(strUrl, bos.getInputStream(), UrlUtil.POST, theMultipart.getContentType(), md == null ? null : md.httpDetails);
 		}
-		p = httpURLconnection == null ? null : new UrlPart(httpURLconnection);
 		return p;
 	}
 
@@ -719,14 +697,12 @@ public class MimeWriter extends MimeHelper
 		final InputStream inputStream = uc.getResponseStream();
 		if (rc == 200)
 		{
-			final BufferedInputStream bis = new BufferedInputStream(inputStream);
-			bis.mark(100000);
+			final ByteArrayIOInputStream bis = ByteArrayIOStream.getBufferedInputStream(inputStream);
 			final MimeReader mr = new MimeReader(bis);
 			final BodyPartHelper bph = mr.getBodyPartHelper(0);
 			doc = bph == null ? null : bph.getJDFDoc();
 			if (doc == null)
 			{
-
 				bis.reset();
 				doc = new JDFParser().parseStream(bis);
 				if (doc == null)

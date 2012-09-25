@@ -288,6 +288,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testIsURL()
 	{
+		assertFalse(UrlUtil.isURL(null));
 		assertTrue(UrlUtil.isURL("file://bl.txt"));
 		assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
 		assertFalse("3 ///", UrlUtil.isURL("http:///bl.txt"));
@@ -296,6 +297,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isURL("file:C:/a/b.txt"));
 		assertTrue("relative url", UrlUtil.isURL("./3.txt"));
 		assertFalse("invalid char: @", UrlUtil.isURL("http://@"));
+		assertFalse("UNC", UrlUtil.isURL("\\\\unc\\bar\\a.txt"));
 		assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
 	}
 

@@ -74,6 +74,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
@@ -87,6 +88,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFElement.EnumXYRelation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -1232,6 +1234,19 @@ public class JDFElementTest extends JDFTestCaseBase
 		v.add(EnumNodeStatus.Completed);
 		root.setEnumerationsAttribute("dummy", v, null);
 		assertEquals("round trip enumerations", root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false), v);
+	}
+
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 */
+	public void testSetAttributeNumList() throws DataFormatException
+	{
+		final JDFNumberList nl = new JDFNumberList("1.11 2.22 3.33");
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFElement root = d.getJDFRoot();
+		root.setAttribute("test", nl, null, 1);
+		assertTrue(root.toXML().indexOf("1.1 2.2 3.3") > 0);
 	}
 
 	/**

@@ -85,9 +85,18 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMarkObject;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
+import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Sep 18, 2012
+ */
 public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 {
 	private static final long serialVersionUID = 1L;
@@ -174,14 +183,67 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimSize(double, double)
 	 */
 	public void setTrimSize(double x, double y)
 	{
 		setTrimSize(new JDFXYPair(x, y));
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(final double x, final double y, int precision)
+	{
+		setTrimSize(new JDFXYPair(x, y), precision);
+	}
+
+	/**
+	 * @param jdfxyPair
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(JDFXYPair jdfxyPair, int precision)
+	{
+		setAttribute(AttributeName.TRIMSIZE, jdfxyPair, null, precision);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
+	 */
+	public void setCTM(JDFMatrix value, int precision)
+	{
+		setAttribute(AttributeName.CTM, value, null, precision);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
+	 */
+	public void setTrimCTM(JDFMatrix value, int precision)
+	{
+		setAttribute(AttributeName.TRIMCTM, value, null, precision);
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
+	 */
+	public void setClipPath(String value, int precision)
+	{
+		VString v = StringUtil.tokenize(value, " ", false);
+		if (v != null)
+		{
+			for (int i = 0; i < v.size(); i++)
+			{
+				String s = v.get(i);
+				if (StringUtil.isNumber(s))
+					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
+			}
+		}
+		super.setClipPath(StringUtil.setvString(v));
 	}
 
 }

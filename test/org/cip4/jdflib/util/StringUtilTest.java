@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -724,16 +724,16 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		double d = 0.12345678901234;
 		String s = StringUtil.formatDouble(d);
-		assertEquals("s=6", "0.12345678", s);
+		assertEquals("s=6", "0.12345679", s);
 		d = 0.12345678;
 		s = StringUtil.formatDouble(d);
 		assertEquals("s=6", "0.12345678", s);
 		d = 0.123456789;
 		s = StringUtil.formatDouble(d);
-		assertEquals("s=6", "0.12345678", s);
-		d = 0.1234567;
+		assertEquals("s=6", "0.12345679", s);
+		d = 0.12345673;
 		s = StringUtil.formatDouble(d);
-		assertEquals("s=5", "0.1234567", s);
+		assertEquals("s=5", "0.12345673", s);
 		d = 234.0;
 		s = StringUtil.formatDouble(d);
 		assertEquals("s=int", "234", s);
@@ -884,6 +884,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		final String s = "a/b/c";
 		assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
 		assertEquals(StringUtil.replaceToken(s, 0, "/", null), "b/c");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", null), "a/b");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", ""), "a/b/");
 		assertEquals(StringUtil.replaceToken(s, -1, "/", "A"), "a/b/A");
 		assertEquals(StringUtil.replaceToken(s, 1, "/", "A"), "a/A/c");
 		assertEquals(StringUtil.replaceToken(s, 1, "/", null), "a/c");

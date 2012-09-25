@@ -204,4 +204,5 @@ public class PartitionHelper extends BaseXJDFHelper
 			theElement.setID(theElement.generateDotID("ID", null));
 		}
 	}
+
 }

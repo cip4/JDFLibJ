@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,8 +82,12 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoContentObject;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -145,10 +149,64 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	/**
 	 * @param x
 	 * @param y
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(final double x, final double y, int precision)
+	{
+		setTrimSize(new JDFXYPair(x, y), precision);
+	}
+
+	/**
+	 * @param jdfxyPair
+	 * @param precision number of digits in decimal
+	 */
+	public void setTrimSize(JDFXYPair jdfxyPair, int precision)
+	{
+		setAttribute(AttributeName.TRIMSIZE, jdfxyPair, null, precision);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
+	 */
+	public void setCTM(JDFMatrix value, int precision)
+	{
+		setAttribute(AttributeName.CTM, value, null, precision);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(org.cip4.jdflib.datatypes.JDFMatrix, int)
+	 */
+	public void setTrimCTM(JDFMatrix value, int precision)
+	{
+		setAttribute(AttributeName.TRIMCTM, value, null, precision);
+	}
+
+	/**
+	 * @param x
+	 * @param y
 	 */
 	public void setTrimSize(final double x, final double y)
 	{
 		setTrimSize(new JDFXYPair(x, y));
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
+	 */
+	public void setClipPath(String value, int precision)
+	{
+		VString v = StringUtil.tokenize(value, " ", false);
+		if (v != null)
+		{
+			for (int i = 0; i < v.size(); i++)
+			{
+				String s = v.get(i);
+				if (StringUtil.isNumber(s))
+					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
+			}
+		}
+		super.setClipPath(StringUtil.setvString(v));
 	}
 
 	/**

@@ -89,7 +89,7 @@ public class DelayedPersist extends Thread
 	private final HashMap<IPersistable, MyLong> persistQueue;
 	private boolean stop;
 	private static DelayedPersist theDelayed = null;
-	private final MyMutex waitMutex;
+	private MyMutex waitMutex;
 	private final Log log;
 
 	private DelayedPersist()
@@ -116,14 +116,28 @@ public class DelayedPersist extends Thread
 	/**
 	 * 
 	 */
+	/**
+	 * 
+	 */
 	public static void shutDown()
 	{
 		if (theDelayed == null)
+		{
+			LogFactory.getLog(DelayedPersist.class).warn("Cannot shutdown null DelayedPersist, bailing out");
 			return;
+		}
 		theDelayed.log.info("shutting down delayed persist");
 		theDelayed.stop = true;
 		theDelayed.persistQueues();
 		ThreadUtil.notifyAll(theDelayed.waitMutex);
+		ThreadUtil.sleep(10); // sleep a short while to enable thread control to be passed along
+		if (theDelayed.waitMutex != null)
+		{
+			theDelayed.log.info("waiting for persist of delayed persist");
+			if (theDelayed.waitMutex != null) // just in case the log opened the time slot
+				ThreadUtil.wait(theDelayed.waitMutex, 120000); // we should never need more than 2 minutes to shut down
+			theDelayed.log.info("finished waiting for persist of delayed persist");
+		}
 		theDelayed = null;
 	}
 
@@ -150,7 +164,7 @@ public class DelayedPersist extends Thread
 		}
 		if (deltaTime <= 0)
 		{
-			ThreadUtil.notify(waitMutex);
+			ThreadUtil.notifyAll(waitMutex);
 		}
 	}
 
@@ -174,6 +188,8 @@ public class DelayedPersist extends Thread
 			if (stop)
 			{
 				log.info("end of queue persist loop");
+				ThreadUtil.notifyAll(waitMutex);
+				waitMutex = null;
 				break;
 			}
 			ThreadUtil.wait(waitMutex, 10000);

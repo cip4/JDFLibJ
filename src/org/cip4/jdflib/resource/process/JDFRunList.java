@@ -999,13 +999,20 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param value : the value to set the attribute to
 	 */
 	@Override
-	public void setPages(final JDFIntegerRangeList value)
+	public void setPages(JDFIntegerRangeList value)
 	{
 		super.setPages(value);
+
 		if (value == null)
 		{
 			return;
 		}
+		if (value.getDef() <= 0 && super.getNPage() > 0)
+		{
+			value = new JDFIntegerRangeList(value);
+			value.setDef(super.getNPage());
+		}
+
 		if (value.getElementCount() > 0)
 		{
 			setNPage(value.getElementCount());
@@ -1356,11 +1363,11 @@ public class JDFRunList extends JDFAutoRunList
 			return 0;
 		}
 
-		if (hasAttribute(AttributeName.NPAGE, null, false))
+		if (hasAttribute_KElement(AttributeName.NPAGE, null, false))
 		{
 			return super.getNPage();
 		}
-		if (hasAttribute(AttributeName.PAGES, null, false))
+		if (hasAttribute_KElement(AttributeName.PAGES, null, false))
 		{
 			final JDFIntegerRangeList pages = getPages();
 			int nPage = pages.getElementCount();

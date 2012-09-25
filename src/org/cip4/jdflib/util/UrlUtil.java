@@ -92,6 +92,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -99,6 +100,7 @@ import javax.mail.Multipart;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -176,7 +178,7 @@ public class UrlUtil
 	/**
 	 * strings that must be escaped in urls
 	 */
-	public static final String m_URIEscape = "#%?@&=+$,[]";
+	public static final String m_URIEscape = "#%?@&=+$,;[]\"\'<>^`´{}~";
 	/**
 	 * 
 	 */
@@ -1137,6 +1139,9 @@ public class UrlUtil
 	 */
 	public static boolean isURL(final String val)
 	{
+		if (val == null)
+			return false;
+
 		try
 		{
 			final URI uri = new URI(val);
@@ -1348,7 +1353,7 @@ public class UrlUtil
 		}
 
 		private final String strUrl;
-		private final InputStream stream;
+		private InputStream stream;
 		private final String method;
 		private final String contentType;
 		private final HTTPDetails details;
@@ -1397,17 +1402,30 @@ public class UrlUtil
 
 				ProxySelector selector = ProxySelector.getDefault();
 				List<Proxy> list = selector.select(uri);
+				// make sure local is first in list - this is certainly faster
 				if (!list.contains(Proxy.NO_PROXY))
-					list.add(Proxy.NO_PROXY);
+				{
+					List<Proxy> list2 = new Vector<Proxy>();
+					list2.add(Proxy.NO_PROXY);
+					list2.addAll(list);
+					list = list2;
+				}
+
 				for (Proxy proxy : list)
 				{
+					if (list.size() > 1)
+						stream = ByteArrayIOStream.getBufferedInputStream(stream);
 					p = callProxy(proxy);
 					if (p != null)
 					{
 						if (p.getResponseCode() == 200)
+						{
 							return p;
+						}
 						else
+						{
 							p0 = p;
+						}
 					}
 				}
 			}
@@ -1456,7 +1474,7 @@ public class UrlUtil
 			}
 			catch (final Exception x)
 			{
-				//	System.out.println(x);
+				LogFactory.getLog(URLWriter.class).error("Snafu writing to url: " + strUrl, x);
 			}
 			return null;
 		}
