@@ -78,6 +78,7 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.DocumentJDFImpl;
@@ -1408,8 +1409,12 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				final EnumComponentType partialFinal = new ProductHelper(xjdfProduct).isRootProduct() ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
 				c.setComponentType(partialFinal, null);
 			}
-			c.moveAttribute(AttributeName.PRODUCTTYPE, theNode);
-			c.moveAttribute(AttributeName.PRODUCTTYPEDETAILS, theNode);
+			AttributeInfo info = c.getAttributeInfo();
+			VString cKnown = info.knownAttribs();
+			AttributeInfo infoNode = theNode.getAttributeInfo();
+			cKnown.removeAll(infoNode.knownAttribs());
+			for (String known : cKnown)
+				c.moveAttribute(known, theNode);
 			final JDFResourceLink rl = theNode.getLink(c, EnumUsage.Output);
 			if (rl != null)
 			{

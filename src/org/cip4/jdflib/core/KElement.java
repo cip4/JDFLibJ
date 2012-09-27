@@ -5014,35 +5014,32 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nameSpaceURI the namespaceURI to search in
 	 * @param srcNameSpaceURI
 	 */
-	public void moveAttribute(final String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
+	public void moveAttribute(final String attrib, KElement src, final String srcAttrib, String nameSpaceURI, final String srcNameSpaceURI)
 	{
-		KElement srcLocal = src;
-		String nameSpaceURILocal = nameSpaceURI;
-
-		if (srcLocal == null)
+		if (src == null)
 		{
-			srcLocal = this;
+			src = this;
 		}
 
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
-		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURILocal : srcNameSpaceURI;
-		if (xmlnsPrefix(attrib) != null && nameSpaceURILocal == null)
+		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
+		if (xmlnsPrefix(attrib) != null && nameSpaceURI == null)
 		{
-			final boolean b = srcLocal.hasAttribute(strSrcAttrib, strNameSpace, false);
+			final boolean b = src.hasAttribute(strSrcAttrib, strNameSpace, false);
 			if (b)
 			{
-				final Attr attr = srcLocal.getDOMAttr(strSrcAttrib, strNameSpace, true);
+				final Attr attr = src.getDOMAttr(strSrcAttrib, strNameSpace, true);
 				if (attr != null)
 				{
-					nameSpaceURILocal = attr.getNamespaceURI();
+					nameSpaceURI = attr.getNamespaceURI();
 				}
 			}
 		}
 
-		final String attribute = srcLocal.getAttribute(strSrcAttrib, strNameSpace, null);
+		final String attribute = src.getAttribute(strSrcAttrib, strNameSpace, null);
 		if (attribute != null)
 		{
-			srcLocal.removeAttribute(strSrcAttrib, strNameSpace);
+			src.removeAttribute(strSrcAttrib, strNameSpace);
 		}
 
 		setAttribute(attrib, attribute);

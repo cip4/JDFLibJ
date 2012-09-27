@@ -839,6 +839,20 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
+	public void testFromXJDFProductComponentTransfer()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setXPathAttribute("ProductList/Product/@ProductID", "ID_FOO");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		assertEquals(root.getResource(ElementName.COMPONENT, null, 0).getProductID(), "ID_FOO");
+	}
+
+	/**
+	 *  
+	 */
 	public void testFromXJDFProductComment()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

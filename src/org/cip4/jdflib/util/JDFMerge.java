@@ -1287,7 +1287,7 @@ public class JDFMerge
 				oldRes = overWriteNode.getTargetResource(s);
 				if (oldRes == null) // also check in entire tree below root
 				{
-					oldRes = overWriteNode.getTargetResource(s);
+					oldRes = overWriteNode.getJDFRoot().getTargetResource(s);
 				}
 			}
 
@@ -1295,8 +1295,7 @@ public class JDFMerge
 			{
 				final JDFResource newRes = subJDFNode.getTargetResource(s);
 
-				// merge all potential new spawnIds from this to subJDFNode before
-				// merging them
+				// merge all potential new spawnIds from this to subJDFNode before merging them
 				mergeSpawnIDs(oldRes, newRes, false);
 				// do both, since some leaves may be RO
 				mergeSpawnIDs(newRes, oldRes, false);

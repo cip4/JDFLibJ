@@ -3174,36 +3174,108 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 */
 	public void testMergeRemovedResource()
 	{
+		for (int i = 1; i < 2; i++)
+		{
+			final JDFDoc d = new JDFDoc("JDF");
+			JDFNode n = d.getJDFRoot();
+			final JDFAttributeMap partMap = new JDFAttributeMap();
+			partMap.put("SheetName", "S1");
+			partMap.put("Side", "Front");
+			final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+			tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+			JDFResource r = n.addResource("NodeInfo", EnumUsage.Input);
+			r.getCreatePartition(partMap, new VString("SheetName Side", null));
+			r = n.addResource("RunList", EnumUsage.Output);
+			r.getCreatePartition(partMap, new VString("SheetName Side", null));
+			final JDFNode spawnNode;
+			if (i == 1)
+			{
+				n.setType(JDFNode.EnumType.ProcessGroup);
+				JDFNode n2 = n.addJDFNode(JDFNode.EnumType.ProcessGroup);
+				r = n2.addResource("NodeInfo", EnumUsage.Input);
+				r.getCreatePartition(partMap, new VString("SheetName Side", null));
+				n2 = n2.addJDFNode(JDFNode.EnumType.ProcessGroup);
+				n2.copyElement(n.getResourceLinkPool(), null);
+				spawnNode = n2;
+			}
+			else
+			{
+				spawnNode = n;
+			}
+			final JDFSpawn sp = new JDFSpawn(spawnNode);
+			final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+			spawnParts.add(partMap); // want more granular
+			final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnParts, false, false, false, false);
+
+			assertNotNull(spNode.getResource("RunList", null, 0));
+			JDFResourceLink rl1 = spNode.getLink(0, "RunList", null, null);
+			rl1.getLinkRoot().deleteNode();
+			rl1.deleteNode();
+			assertNull(spNode.getResource("RunList", null, 0));
+
+			final JDFMerge m = new JDFMerge(n);
+			final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+			assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
+
+			JDFResourceLink rl = merged.getLink(0, "RunList", null, null);
+			assertNotNull(rl);
+			assertNotNull(rl.getTarget());
+			assertTrue(rl.getTarget().toXML().indexOf("Spawn") < 0);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testSpawnMultiDepthRWResource()
+	{
 		final JDFDoc d = new JDFDoc("JDF");
-		final JDFNode n = d.getJDFRoot();
+		JDFNode n = d.getJDFRoot();
 		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SignatureName", "S1");
 		partMap.put("SheetName", "S1");
 		partMap.put("Side", "Front");
-		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
-		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+		final JDFAttributeMap partMapSheet = new JDFAttributeMap();
+		partMapSheet.put("SignatureName", "S1");
+		partMapSheet.put("SheetName", "S1");
+		final JDFAttributeMap partMapSig = new JDFAttributeMap();
+		partMapSig.put("SignatureName", "S1");
 
 		JDFResource r = n.addResource("RunList", EnumUsage.Output);
-		r.getCreatePartition(partMap, new VString("SheetName Side", null));
+		r.getCreatePartition(partMap, new VString("SignatureName SheetName Side", null));
+		n.setType(JDFNode.EnumType.ProcessGroup);
+		JDFNode n2 = n.addJDFNode(JDFNode.EnumType.ProcessGroup);
+		r = n2.addResource("NodeInfo", EnumUsage.Input);
+		r.getCreatePartition(partMap, new VString("SignatureName SheetName Side", null));
+		n2 = n2.addJDFNode(JDFNode.EnumType.ProcessGroup);
+		n2.copyElement(n.getResourceLinkPool(), null);
 
-		final JDFSpawn sp = new JDFSpawn(n);
+		final JDFSpawn sp = new JDFSpawn(n2);
+		final VJDFAttributeMap spawnPartsSheet = new VJDFAttributeMap();
+		spawnPartsSheet.add(partMapSheet);
 		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
-		spawnParts.add(partMap); // want more granular
-		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnParts, false, false, false, false);
-
-		assertNotNull(spNode.getResource("RunList", null, 0));
-		JDFResourceLink rl1 = spNode.getLink(0, "RunList", null, null);
-		rl1.getLinkRoot().deleteNode();
-		rl1.deleteNode();
-		assertNull(spNode.getResource("RunList", null, 0));
-
-		final JDFMerge m = new JDFMerge(n);
-		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
-		assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
-
-		JDFResourceLink rl = merged.getLink(0, "RunList", null, null);
-		assertNotNull(rl);
-		assertNotNull(rl.getTarget());
-		assertTrue(rl.getTarget().toXML().indexOf("Spawn") < 0);
+		spawnParts.add(partMap);
+		final VJDFAttributeMap spawnPartsSig = new VJDFAttributeMap();
+		spawnPartsSig.add(partMapSig);
+		final JDFNode spNodeSheet = sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnPartsSheet, false, false, false, false);
+		assertNotNull(spNodeSheet);
+		try
+		{
+			sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnParts, false, false, false, false);
+			fail("multi bad");
+		}
+		catch (JDFException x)
+		{
+		}
+		try
+		{
+			sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnPartsSig, false, false, false, false);
+			fail("multi bad");
+		}
+		catch (JDFException x)
+		{
+		}
 	}
 
 	/**

@@ -417,52 +417,78 @@ public class JDFSpawn
 		while (iter.hasNext())
 		{
 			final JDFElement liRoot = iter.next();
-			JDFResource r = null;
-			boolean bResRW = false;
-			if (liRoot instanceof JDFResourceLink)
+			checkSpawnedResource(vRWResources, vMultiRes, liRoot);
+		}
+		// empty if all is well
+		return vMultiRes.isEmpty() ? null : vMultiRes;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param vRWResources
+	 * @param vMultiRes
+	 * @param liRoot
+	 */
+	private void checkSpawnedResource(final VString vRWResources, final HashSet<JDFResource> vMultiRes, final JDFElement liRoot)
+	{
+		JDFResource r = null;
+		boolean bResRW = false;
+		if (liRoot instanceof JDFResourceLink)
+		{
+			bResRW = linkFitsRWRes((JDFResourceLink) liRoot, vRWResources);
+			if (bResRW)
 			{
-				bResRW = linkFitsRWRes((JDFResourceLink) liRoot, vRWResources);
-				if (bResRW)
-				{
-					final JDFResourceLink rl = (JDFResourceLink) liRoot;
-					r = rl.getTarget();
-				}
+				final JDFResourceLink rl = (JDFResourceLink) liRoot;
+				r = rl.getTarget();
 			}
-			else if (liRoot instanceof JDFRefElement)
+		}
+		else if (liRoot instanceof JDFRefElement)
+		{
+			final JDFRefElement re = (JDFRefElement) liRoot;
+			r = re.getTarget();
+			if (r != null)
 			{
-				final JDFRefElement re = (JDFRefElement) liRoot;
-				r = re.getTarget();
-				if (r != null)
-				{
-					bResRW = resFitsRWRes(r, vRWResources);
-				}
+				bResRW = resFitsRWRes(r, vRWResources);
 			}
-			if (bResRW && r != null)
+		}
+		if (bResRW && r != null)
+		{
+			VElement vRes = getSpawnLeaves(r);
+			for (int k = 0; k < vRes.size(); k++)
 			{
-				VElement vRes = new VElement();
-				if (vSpawnParts == null || vSpawnParts.isEmpty())
+				final JDFResource rTarget = (JDFResource) vRes.elementAt(k);
+				if (rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
 				{
-					vRes = r.getLeaves(false);
-				}
-				else
-				{
-					vRes.appendUnique(r.getPartitionVector(vSpawnParts, null));
-				}
-				for (int k = 0; k < vRes.size(); k++)
-				{
-					final JDFResource rTarget = (JDFResource) vRes.elementAt(k);
-					if (rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
+					if (!vMultiRes.contains(rTarget))
 					{
-						if (!vMultiRes.contains(rTarget))
-						{
-							vMultiRes.add(rTarget);
-						}
+						vMultiRes.add(rTarget);
 					}
 				}
 			}
 		}
-		// empty if all is well
-		return vMultiRes.isEmpty() ? null : vMultiRes;
+	}
+
+	private VElement getSpawnLeaves(JDFResource r)
+	{
+		VElement vRes = new VElement();
+		if (vSpawnParts == null || vSpawnParts.isEmpty())
+		{
+			vRes = r.getLeaves(false);
+		}
+		else
+		{
+			VElement partitionVector = r.getPartitionVector(vSpawnParts, null);
+			if (partitionVector != null)
+			{
+				for (KElement e : partitionVector)
+				{
+					JDFResource rPart = (JDFResource) e;
+					vRes.appendUnique(rPart.getLeaves(false));
+				}
+			}
+		}
+		return vRes;
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
