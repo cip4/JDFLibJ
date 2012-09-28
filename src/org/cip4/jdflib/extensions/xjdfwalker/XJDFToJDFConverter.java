@@ -1400,6 +1400,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @param theNode
 		 * @param xjdfProduct
 		 */
+		/**
+		 * @param theNode
+		 * @param xjdfProduct
+		 */
 		private void fixComponent(final JDFNode theNode, final KElement xjdfProduct)
 		{
 			JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
@@ -1413,8 +1417,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			VString cKnown = info.knownAttribs();
 			AttributeInfo infoNode = theNode.getAttributeInfo();
 			cKnown.removeAll(infoNode.knownAttribs());
+			cKnown.remove("Amount");
+			cKnown.remove("ActualAmount");
 			for (String known : cKnown)
-				c.moveAttribute(known, theNode);
+			{
+				if (theNode.hasAttribute(known))
+				{
+					c.moveAttribute(known, theNode);
+				}
+			}
 			final JDFResourceLink rl = theNode.getLink(c, EnumUsage.Output);
 			if (rl != null)
 			{
