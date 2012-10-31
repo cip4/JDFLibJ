@@ -2203,7 +2203,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the first ancestor node with name nodeName
 	 * @deprecated - loop over the single node method
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public KElement getDeepParent(final Vector vParentElement, final int depth)
 	{
@@ -2659,7 +2659,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return Vector vector with all found nodes
 	 * @deprecated
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Deprecated
 	public Vector getChildNodeVector(final int maxSize)
 	{
@@ -2988,8 +2988,7 @@ public class KElement extends ElementNSImpl implements Element
 		Node n = getFirstChild();
 		while (n != null)
 		{
-			final Node nNext = n.getNextSibling(); // must set nNew prior to
-			// potentially deleting n...
+			final Node nNext = n.getNextSibling(); // must set nNew prior to potentially deleting n...
 			final short nodeType = n.getNodeType();
 
 			if (nodeType == Node.TEXT_NODE)
@@ -3316,14 +3315,16 @@ public class KElement extends ElementNSImpl implements Element
 	 * append a DOM comment <code>&lt;!-- XMLComment --&gt;</code> The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 * @param commentText the comment to append
 	 * @param beforeChild the child of this that the Comment should be appended before. if null, append the Comment
+	 * @return the newly created xml comment
 	 */
-	public void appendXMLComment(final String commentText, final KElement beforeChild)
+	public Node appendXMLComment(final String commentText, final KElement beforeChild)
 	{
 		String commentTextLocal = commentText;
 
 		commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
 		final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
 		insertBefore(newChild, beforeChild);
+		return newChild;
 	}
 
 	/**
@@ -3792,7 +3793,6 @@ public class KElement extends ElementNSImpl implements Element
 	@SuppressWarnings("deprecation")
 	public String toXML(final int indent)
 	{
-
 		try
 		{
 			final StringWriter osw = new StringWriter();

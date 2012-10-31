@@ -1508,7 +1508,7 @@ public class GeneratorUtil
 		}
 		else if ("StepRepeat".equals(strTypeLocal))
 		{
-			strReturnType = "JDFIntegerRange";
+			strReturnType = "JDFIntegerList";
 		}
 		else if ("eEndStatusOfNode".equals(strTypeLocal))
 		{

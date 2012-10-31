@@ -85,6 +85,7 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -190,7 +191,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkStrippingParams extends WalkElement
+	protected class WalkStrippingParams extends WalkResourceElement
 	{
 		/**
 		 * 
@@ -441,7 +442,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 * 
-	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkArtDeliveryIntentSet extends WalkIntentSet
 	{
@@ -482,6 +483,54 @@ class PostXJDFWalker extends BaseElementWalker
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromArtDelivery((JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
+			}
+			return intent;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkDeliveryIntentSet extends WalkIntentSet
+	{
+		/**
+		 * 
+		 */
+		public WalkDeliveryIntentSet()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && ElementName.DELIVERYINTENT.equals(toCheck.getAttribute("Name"));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement intent = super.walk(xjdf, dummy);
+			if (intent != null)
+			{
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
+				SetHelper delResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				PartitionHelper ph = delResHelper.appendPartition(null, true);
+				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
+				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));
 			}
 			return intent;
 		}

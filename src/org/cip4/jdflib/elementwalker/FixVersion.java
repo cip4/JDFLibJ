@@ -1868,10 +1868,11 @@ public class FixVersion extends BaseElementWalker
 					vn.add(rl.getParentJDF());
 				}
 				vn.unify();
-				if (vn.size() < 0)
+				if (vn.size() <= 0)
 					return null;
 
-				final StrippingConverter sc = lpp.convertToStripping((JDFNode) vn.get(0));
+				JDFNode node = (JDFNode) vn.get(0);
+				final StrippingConverter sc = lpp.convertToStripping(node);
 				// the new elements are NOT in the original and must therefore be called individually
 				new FixVersion(FixVersion.this).walkTree(sc.getAssembly(), null);
 				new FixVersion(FixVersion.this).walkTree(sc.getStrippingParams(), null);

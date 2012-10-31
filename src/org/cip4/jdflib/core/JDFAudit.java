@@ -102,7 +102,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.4a BLD 70";
+	final private static String m_libAgentVersion = "1.4a BLD 71";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -185,7 +185,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 * 
 	 * before June 3, 2009
 	 */
-	@SuppressWarnings("unchecked")
 	public static class EnumAuditType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;

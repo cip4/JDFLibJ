@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.VString;
  */
 public class UnitParser
 {
+	private int precision;
 
 	/**
 	 * 
@@ -85,6 +86,7 @@ public class UnitParser
 	public UnitParser()
 	{
 		super();
+		setPrecision(4);
 	}
 
 	/**
@@ -94,7 +96,7 @@ public class UnitParser
 	 */
 	public String extractUnits(String val)
 	{
-		if (val == null || val.length() < 3 || (val.indexOf("m") < 0) && val.indexOf("in") < 0)
+		if (val == null)
 		{
 			return val;
 		}
@@ -127,7 +129,8 @@ public class UnitParser
 
 			if (factor != 0)
 			{
-				v.setElementAt(StringUtil.formatDouble(StringUtil.parseDouble(tmp, -1) * factor), i);
+				double dbl = StringUtil.parseDouble(tmp, -1) * factor;
+				v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
 			}
 			else
 			{
@@ -140,6 +143,24 @@ public class UnitParser
 			val = StringUtil.setvString(v, " ", null, null);
 		}
 		return val;
+	}
+
+	/**
+	 * Setter for precision attribute.
+	 * @param precision the precision to set
+	 */
+	public void setPrecision(int precision)
+	{
+		this.precision = precision;
+	}
+
+	/**
+	 * Getter for precision attribute.
+	 * @return the precision
+	 */
+	public int getPrecision()
+	{
+		return precision;
 	}
 
 }

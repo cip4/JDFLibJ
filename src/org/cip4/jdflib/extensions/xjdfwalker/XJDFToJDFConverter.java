@@ -138,6 +138,7 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDependencies;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -452,8 +453,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 
 			final String parentName = parent2.getLocalName();
-			boolean bL1 = parentName.endsWith("Set") && toCheck.getNodeName().equals(parent2.getAttribute("Name"));
-			bL1 = bL1 || parentName.equals("Product") && toCheck.getNodeName().equals(parent.getAttribute("Name"));
+			boolean bL1 = parentName.endsWith("Set") && toCheck.getLocalName().equals(parent2.getAttribute("Name"));
+			bL1 = bL1 || parentName.equals("Product") && toCheck.getLocalName().equals(parent.getAttribute("Name"));
 			bReturn = bL1;
 		}
 
@@ -1763,6 +1764,24 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				return "MediaRef";
 			}
 			return super.getRefName(val);
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements
+	 * TODO unmerge stripping and binderysignature and signaturecell see WalkRunList
+	 */
+	public class WalkLayout extends WalkStrippingParams
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFLayout;
 		}
 	}
 

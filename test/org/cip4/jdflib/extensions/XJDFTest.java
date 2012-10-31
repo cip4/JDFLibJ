@@ -79,6 +79,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -111,6 +113,7 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -232,7 +235,20 @@ public class XJDFTest extends JDFTestCaseBase
 		xm = (JDFExposedMedia) rl.getTarget();
 		assertEquals(xm.getProductID(), "P1");
 		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+	}
 
+	/**
+	 * 
+	 */
+	public void testToXJDFProcessList()
+	{
+		n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bSingleNode = false;
+		e = xjdf20.makeNewJDF(n, null);
+		KElement procList = e.getXPathElement("ProcessList");
+		assertNotNull(procList);
+		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "job4.xjdf", 2, false);
 	}
 
 	/**
@@ -300,7 +316,40 @@ public class XJDFTest extends JDFTestCaseBase
 		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
 		assertEquals(e.getXPathElementVector("//Layout", -1).size(), 1);
 		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "mergeStripping.xjdf", 2, false);
+	}
 
+	/**
+	 * 
+	 */
+	public void testMergeStrippingPartition()
+	{
+		n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Stripping);
+		JDFRunList rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		assertNotNull(rl);
+		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
+		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
+		bs.setFoldCatalog("F4-1");
+		JDFLayout lo = (JDFLayout) n.addResource("Layout", EnumUsage.Output);
+		lo = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+		lo = (JDFLayout) lo.addPartition(EnumPartIDKey.Side, "Front");
+		for (int i = 0; i < 4; i++)
+		{
+			JDFContentObject co = lo.appendContentObject();
+			co.setOrd(i);
+		}
+		assertNotNull(lo);
+		sp = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+		sp.refBinderySignature(bs);
+		sp.appendPosition();
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bMergeLayout = true;
+
+		e = xjdf20.makeNewJDF(n, null);
+		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
+		assertEquals(e.getXPathElementVector("//Layout", -1).size(), 2);
+		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "mergeStrippingParts.xjdf", 2, false);
 	}
 
 	/**
@@ -527,6 +576,19 @@ public class XJDFTest extends JDFTestCaseBase
 		KElement xPathElement = e.getXPathElement("ParameterSet[@Name=\"Color\"]/Parameter/Part[@Separation=\"Black\"]");
 		assertNotNull(xPathElement);
 		assertEquals(XJDF20.getSchemaURL(), xPathElement.getNamespaceURI());
+	}
+
+	/**
+	*
+	 */
+	public void testNamespacePrefix()
+	{
+		e = new XMLDoc("xjdf:XJDF", JDFElement.getSchemaURL(2, 0)).getRoot();
+		assertEquals(XJDF20.getSchemaURL(), e.getNamespaceURI());
+		KElement xPathElement = e.getCreateXPathElement("xjdf:ParameterSet[@Name=\"RunList\"]/xjdf:Parameter/xjdf:RunList/xjdf:LayoutElement");
+		assertNotNull(xPathElement);
+		JDFDoc d = new XJDFToJDFConverter(null).convert(e);
+		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

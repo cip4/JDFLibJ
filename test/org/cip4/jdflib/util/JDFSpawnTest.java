@@ -642,8 +642,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			}
 			for (int j = 0; j < 4; j++) // rw or ro first
 			{
-				for (int k = 0; k < 2; k++) // copy local or copy from high
-				// level
+				for (int k = 0; k < 2; k++) // copy local or copy from high level
 				{
 					for (int kk = 0; kk < 2; kk++) // reslinks have part map
 					{
@@ -2564,6 +2563,33 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testCheckSpawnedResourcesRWImplicit()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFNode nr = new JDFDoc("JDF").getJDFRoot();
+			nr.setType(EnumType.Product);
+			JDFNode n = nr.addJDFNode("Combined");
+			n.setCombined(new VString("Interpreting Rendering ImageSetting", null));
+			final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Output, null, nr, null, null);
+			rl.setPartUsage(i == 0 ? EnumPartUsage.Implicit : EnumPartUsage.Explicit);
+			rl.addPartition(EnumPartIDKey.Run, "r1");
+			final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+			final JDFAttributeMap map = new JDFAttributeMap(AttributeName.RUN, "r1");
+			vamParts.add(map);
+			JDFSpawn spawn = new JDFSpawn(n);
+			spawn.vSpawnParts = vamParts;
+			spawn.vRWResources_in = new VString("RunList", null);
+			spawn.spawn();
+			map.put(AttributeName.RUN, "r2");// doesn't exist
+			JDFNode nsp = spawn.spawn();
+			assertNotNull(nsp.getResource("RunList", EnumUsage.Output, 0).getPartition(map, null));
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public void testCheckSpawnedResources()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
@@ -3304,6 +3330,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		JDFMerge merge = new JDFMerge(n);
 		merge.setAmountPolicy(EnumAmountMerge.LinkOnly);
 		n = merge.mergeJDF(n2s);
+
+		assertEquals(((JDFComponent) n.getResource("Component", null, 0)).getAmountProduced(), 222, 0);
 		n = n.getParentJDF();
 		JDFSpawn sp3 = new JDFSpawn(n3);
 		sp3.vRWResources_in = new VString("Component", null);
@@ -3317,7 +3345,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		n = n.getParentJDF();
 		assertEquals(((JDFComponent) n.getResource("Component", null, 0)).getAmountProduced(), 777, 0);
 		System.out.print(n);
-
 	}
 
 	/**

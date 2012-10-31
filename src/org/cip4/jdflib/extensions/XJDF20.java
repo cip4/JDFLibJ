@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -149,6 +150,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
@@ -1022,7 +1024,9 @@ public class XJDF20 extends BaseElementWalker
 				}
 				setResource(rl, linkTarget, newRoot);
 				if (!bSingleNode)
+				{
 					setProcess(rl);
+				}
 			}
 			return null;
 		}
@@ -1037,7 +1041,6 @@ public class XJDF20 extends BaseElementWalker
 
 			KElement process = getProcess(rl);
 			setLink(process, rl);
-
 		}
 
 		/**
@@ -1046,7 +1049,7 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void setLink(KElement process, JDFResourceLink rl)
 		{
-			if (rl == null)
+			if (rl == null || process == null)
 				return;
 			EnumUsage usage = rl.getUsage();
 			if (usage == null)
@@ -1065,6 +1068,11 @@ public class XJDF20 extends BaseElementWalker
 		private KElement getProcess(JDFResourceLink rl)
 		{
 			JDFNode parent = rl.getParentJDF();
+			if (parent == null || JDFConstants.PRODUCT.equals(parent.getType()))
+			{
+				// products are handled by productList
+				return null;
+			}
 			String jobPartID = getJobPartID(parent);
 			if (jobPartID == null)
 				return null;
@@ -1087,8 +1095,9 @@ public class XJDF20 extends BaseElementWalker
 				}
 
 				if (grandparent != null)
+				{
 					process.setAttribute("Parent", getJobPartID(grandparent));
-
+				}
 			}
 			return process;
 		}
@@ -1561,8 +1570,22 @@ public class XJDF20 extends BaseElementWalker
 
 			eNew.setAttributes(jdf);
 			eNew.setText(jdf.getText());
-			for (int i = 10; i >= 0; i--)
-				eNew.appendXMLComment(jdf.getXMLComment(i), null);
+			Node before = null;
+			for (int i = 0; true; i++)
+			{
+				String xmlComment = jdf.getXMLComment(i);
+				if (xmlComment == null)
+					break;
+				Node comment = eNew.appendXMLComment(xmlComment, null);
+				if (before == null)
+				{
+					before = comment.getNextSibling();
+				}
+				else
+				{
+					eNew.insertBefore(comment, before);
+				}
+			}
 			removeUnused(eNew);
 			return eNew;
 		}
@@ -3041,6 +3064,13 @@ public class XJDF20 extends BaseElementWalker
 			return rootPath;
 		}
 
+		/**
+		 * 
+		 * 
+		 * @param dc
+		 * @param name
+		 * @return
+		 */
 		protected VString getXPathVector(JDFElement dc, String name)
 		{
 			VString v = null;

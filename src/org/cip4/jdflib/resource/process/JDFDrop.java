@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,11 +77,15 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDrop;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.w3c.dom.DOMException;
@@ -157,6 +161,23 @@ public class JDFDrop extends JDFAutoDrop
 
 		String date = JDFIntentResource.guessActual(ad, ElementName.ARTDELIVERYDATE);
 		setAttribute(AttributeName.REQUIRED, date);
+	}
 
+	/**
+	 * copy all data from dropintent to this
+	 * @param di
+	 */
+	public void setFromDropIntent(JDFDropIntent di)
+	{
+		Vector<JDFDropItemIntent> vdii = di.getChildrenByClass(JDFDropItemIntent.class, false, 0);
+		for (JDFDropItemIntent dii : vdii)
+		{
+			JDFDropItem dropItem = appendDropItem();
+			dropItem.setFromDropItemIntent(dii);
+		}
+		JDFIntentResource.copyActualToProcess(di, this, AttributeName.METHOD, null);
+		JDFIntentResource.copyActualToProcess(di, this, AttributeName.EARLIEST, null);
+		JDFIntentResource.copyActualToProcess(di, this, AttributeName.REQUIRED, null);
+		//TODO more
 	}
 }

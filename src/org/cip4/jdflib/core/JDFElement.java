@@ -5205,21 +5205,17 @@ public class JDFElement extends KElement
 		 * @param noWarning if true, set to nowarne, else set to standard
 		 * @return the validationlevel withot warnings
 		 */
-		public static EnumValidationLevel setNoWarning(final EnumValidationLevel level, final boolean noWarning)
+		public static EnumValidationLevel setNoWarning(EnumValidationLevel level, final boolean noWarning)
 		{
-			EnumValidationLevel levelLocal = level;
-
-			if (noWarning && !isNoWarn(levelLocal))
+			if (noWarning && !isNoWarn(level))
 			{
-				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
+				level = isRequired(level) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
 			}
-
-			if (!noWarning && isNoWarn(levelLocal))
+			if (!noWarning && isNoWarn(level))
 			{
-				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
+				level = isRequired(level) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
 			}
-
-			return levelLocal;
+			return level;
 		}
 
 		/**
@@ -5227,23 +5223,21 @@ public class JDFElement extends KElement
 		 * @param level the level to test
 		 * @return EnumValidationLevel - the modified level
 		 */
-		public static EnumValidationLevel incompleteLevel(final EnumValidationLevel level)
+		public static EnumValidationLevel incompleteLevel(EnumValidationLevel level)
 		{
-			EnumValidationLevel levelLocal = level;
-
-			if (EnumValidationLevel.Complete.equals(levelLocal))
+			if (EnumValidationLevel.Complete.equals(level))
 			{
-				levelLocal = EnumValidationLevel.Incomplete;
+				level = EnumValidationLevel.Incomplete;
 			}
-			else if (EnumValidationLevel.RecursiveComplete.equals(levelLocal))
+			else if (EnumValidationLevel.RecursiveComplete.equals(level))
 			{
-				levelLocal = EnumValidationLevel.RecursiveIncomplete;
+				level = EnumValidationLevel.RecursiveIncomplete;
 			}
-			else if (EnumValidationLevel.NoWarnComplete.equals(levelLocal))
+			else if (EnumValidationLevel.NoWarnComplete.equals(level))
 			{
-				levelLocal = EnumValidationLevel.NoWarnIncomplete;
+				level = EnumValidationLevel.NoWarnIncomplete;
 			}
-			return levelLocal;
+			return level;
 		}
 	}
 
@@ -5316,31 +5310,15 @@ public class JDFElement extends KElement
 	 * @return VString of unknown pool elements
 	 * @default getUnknownPoolElements(EnumPoolType poolType, 99999, null)
 	 */
-	public VString getUnknownPoolElements(final EnumPoolType poolType, final int nMax)
+	protected VString getUnknownPoolElements(final EnumPoolType poolType, final int nMax)
 	{
 		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 		final VString vElem = new VString();
 		int n = 0;
-		final int siz = v.size();
 		final VString knownElements = knownElements();
-		// final VString badVersions = getTheElementInfo().prereleaseElements();
-		// badVersions.appendUnique(getTheElementInfo().deprecatedElements());
 
-		for (int i = 0; i < siz; i++)
+		for (KElement e : v)
 		{
-			final KElement e = v.elementAt(i);
-
-			// check for known prerelease or deprecated elements
-			// if (badVersions.contains(e.getLocalName()))
-			// {
-			// vElem.add(e.getLocalName());
-			// if (++n > nMax)
-			// {
-			// return vElem;
-			// }
-			// continue;
-			// }
-
 			if (e instanceof JDFComment)
 			{
 				continue;
@@ -5392,7 +5370,6 @@ public class JDFElement extends KElement
 				return vElem;
 			}
 		}
-
 		return vElem;
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.util.VectorMap;
  */
 public class UnLinkFinder extends BaseElementWalker
 {
-	protected LinkData ld;
+	protected LinkData linkData;
 
 	/**
 	 * 
@@ -101,7 +101,7 @@ public class UnLinkFinder extends BaseElementWalker
 	public UnLinkFinder()
 	{
 		super(new BaseWalkerFactory());
-		ld = this.new LinkData();
+		linkData = this.new LinkData();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -113,9 +113,9 @@ public class UnLinkFinder extends BaseElementWalker
 	 */
 	public VElement getUnlinkedResources(final JDFNode n)
 	{
-		ld.clear();
+		linkData.clear();
 		walkTree(n, null);
-		final Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
+		final Vector<KElement> toValueVector = ContainerUtil.toValueVector(linkData.resMap, false);
 		return toValueVector == null ? null : new VElement(toValueVector);
 	}
 
@@ -127,9 +127,9 @@ public class UnLinkFinder extends BaseElementWalker
 	 */
 	public VElement getUnlinkedRefs(final JDFNode n)
 	{
-		ld.clear();
+		linkData.clear();
 		walkTree(n, null);
-		final Vector<KElement> toValueVector = ld.refMap.getAllValues();
+		final Vector<KElement> toValueVector = linkData.refMap.getAllValues();
 		return toValueVector == null ? null : new VElement(toValueVector);
 	}
 
@@ -141,10 +141,10 @@ public class UnLinkFinder extends BaseElementWalker
 	 */
 	public VElement getAllUnlinked(final JDFNode n)
 	{
-		ld.clear();
+		linkData.clear();
 		walkTree(n, null);
-		Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
-		final Vector<KElement> toValueVectorRef = ld.refMap.getAllValues();
+		Vector<KElement> toValueVector = ContainerUtil.toValueVector(linkData.resMap, false);
+		final Vector<KElement> toValueVectorRef = linkData.refMap.getAllValues();
 		toValueVector = (Vector<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
 		return toValueVector == null ? null : new VElement(toValueVector);
 	}
@@ -278,17 +278,17 @@ public class UnLinkFinder extends BaseElementWalker
 		{
 			final JDFResource r = (JDFResource) e;
 			final String id = r.getID();
-			if (ld.doneSet.contains(id))
+			if (linkData.doneSet.contains(id))
 			{
 				return e;
 			}
-			if (ld.refMap.containsKey(id))
+			if (linkData.refMap.containsKey(id))
 			{
-				ld.doneSet.add(id);
-				ld.refMap.remove(id);
+				linkData.doneSet.add(id);
+				linkData.refMap.remove(id);
 				return e;
 			}
-			ld.resMap.put(id, r);
+			linkData.resMap.put(id, r);
 			return e;
 		}
 
@@ -339,18 +339,18 @@ public class UnLinkFinder extends BaseElementWalker
 			{
 				return e;
 			}
-			if (ld.doneSet.contains(id))
+			if (linkData.doneSet.contains(id))
 			{
 				return e;
 			}
 
-			if (ld.resMap.containsKey(id))
+			if (linkData.resMap.containsKey(id))
 			{
-				ld.doneSet.add(id);
-				ld.resMap.remove(id);
+				linkData.doneSet.add(id);
+				linkData.resMap.remove(id);
 				return e;
 			}
-			ld.refMap.putOne(id, e);
+			linkData.refMap.putOne(id, e);
 			return e;
 		}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,8 @@ import org.cip4.jdflib.auto.JDFAutoDeliveryParams;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.w3c.dom.DOMException;
 
 /**
@@ -158,7 +160,21 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 			JDFDrop drop = appendDrop();
 			drop.setFromArtDelivery(ad);
 		}
-
 	}
 
+	/**
+	 * TODO Please insert comment!
+	 * @param delIntent
+	 */
+	public void setFromDeliveryIntent(JDFDeliveryIntent delIntent)
+	{
+		if (delIntent == null)
+			return;
+		Vector<JDFDropIntent> v = delIntent.getChildrenByClass(JDFDropIntent.class, false, 0);
+		for (JDFDropIntent di : v)
+		{
+			JDFDrop drop = appendDrop();
+			drop.setFromDropIntent(di);
+		}
+	}
 }

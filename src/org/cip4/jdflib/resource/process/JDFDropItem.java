@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,9 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropItem;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.w3c.dom.DOMException;
 
 /**
@@ -148,5 +150,16 @@ public class JDFDropItem extends JDFAutoDropItem
 		// TODO Auto-generated method stub
 
 	}
-} // class JDFIDPLayout
-// ==========================================================================
+
+	/**
+	 * TODO Please insert comment!
+	 * @param dii
+	 */
+	public void setFromDropItemIntent(JDFDropItemIntent dii)
+	{
+		if (dii == null)
+			return;
+		copyAttribute(AttributeName.AMOUNT, dii);
+		// TODO continue
+	}
+}

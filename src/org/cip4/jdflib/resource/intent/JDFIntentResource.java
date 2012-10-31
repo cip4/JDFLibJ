@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,6 +93,7 @@ import org.cip4.jdflib.span.JDFSpanBase.EnumDataType;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -168,6 +169,27 @@ public class JDFIntentResource extends JDFResource
 			return ((JDFSpanBase) span).guessActual();
 		}
 		return null;
+	}
+
+	/**
+	 * get the best match actual value from any element that may contain spans
+	 * @param intentRoot the parent intent element
+	 * @param processRoot the parent process element
+	 * @param spanName the span element name
+	 * @param attName the target attribute element name, if null identical to spanName
+	 * 
+	 */
+	public static void copyActualToProcess(JDFElement intentRoot, JDFElement processRoot, String spanName, String attName)
+	{
+		if (intentRoot == null || processRoot == null)
+			return;
+		String val = guessActual(intentRoot, spanName);
+		if (val == null)
+			return;
+		if (StringUtil.getNonEmpty(attName) == null)
+			attName = spanName;
+		processRoot.setAttribute(attName, val);
+
 	}
 
 	/**

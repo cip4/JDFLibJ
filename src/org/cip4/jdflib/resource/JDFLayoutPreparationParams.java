@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
@@ -340,9 +341,83 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		 */
 		private void setPosition()
 		{
-			final JDFPosition position = strippingParams.appendPosition();
-			position.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
+			JDFIntegerList sr = getStepRepeat();
+			if (sr == null)
+			{
+				addSinglePosition(1, 1, 0, null);
+			}
+			else
+			{
+				int iX = sr.getInt(0);
+				int iY = sr.getInt(1);
+				JDFXYPair numberUp = getNumberUp();
+				int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+				for (int i = 0; i < total; i++)
+				{
+					addSinglePosition(iX, iY, i, numberUp);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 * add a single position to the respective strippingparams
+		 * @param x
+		 * @param y
+		 * @param n
+		 * @param numberUp
+		 */
+		private void addSinglePosition(int x, int y, int n, JDFXYPair numberUp)
+		{
+			String bsName = getBSName(x, y, n, numberUp);
+			JDFStrippingParams sp = (JDFStrippingParams) (bsName == null ? strippingParams : strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
+			final JDFPosition position = sp.appendPosition();
+			position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
 			position.copyAttribute(AttributeName.ORIENTATION, JDFLayoutPreparationParams.this, AttributeName.ROTATE, null, null);
+		}
+
+		/**
+		 * 
+		 * 
+		 * @param srx
+		 * @param sry
+		 * @param n
+		 * @param numberUp
+		 * @return
+		 */
+		private JDFRectangle getRelativeBox(int srx, int sry, int n, JDFXYPair numberUp)
+		{
+			int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+
+			if (total == 1)
+				return new JDFRectangle(0, 0, 1, 1);
+			double dx = 1.0 / numberUp.getX();
+			double dy = 1.0 / numberUp.getY();
+			double x = n % (int) numberUp.getX();
+			x /= numberUp.getX();
+			double y = n / (int) numberUp.getX();
+			y /= numberUp.getY();
+			return new JDFRectangle(x, y, x + dx, y + dy);
+		}
+
+		/**
+		 * get binderysignaturename partition key based on steprepeat
+		 * @param srx
+		 * @param sry
+		 * @param n
+		 * @param numberUp
+		 * @return
+		 */
+		private String getBSName(int srx, int sry, int n, JDFXYPair numberUp)
+		{
+			int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
+			if (total == 1)
+				return null;
+			int x = n % (int) numberUp.getX();
+			x /= srx;
+			int y = n / (int) numberUp.getX();
+			y /= sry;
+			return "BS_" + (1 + x) + "_" + (1 + y);
 		}
 
 		/**
@@ -367,7 +442,12 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 			binderySignature = strippingParams.appendBinderySignature();
 			binderySignature.makeRootResource(null, null, true);
 			binderySignature.copyAttribute(AttributeName.BINDINGEDGE, JDFLayoutPreparationParams.this);
-			binderySignature.copyAttribute(AttributeName.NUMBERUP, JDFLayoutPreparationParams.this);
+			// steprepeat requires n binderysignatures
+			if (hasAttribute(AttributeName.STEPREPEAT))
+				binderySignature.setNumberUp(1, 1);
+			else
+				binderySignature.copyAttribute(AttributeName.NUMBERUP, JDFLayoutPreparationParams.this);
+
 			binderySignature.copyAttribute(AttributeName.FOLDCATALOG, JDFLayoutPreparationParams.this);
 
 			String pageDistribution = getPageDistributionScheme();

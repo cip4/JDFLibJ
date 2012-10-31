@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -101,12 +101,12 @@ public class NumberFormatter
 	private boolean zapp0;
 
 	/**
-	 * returns a formatted double. Truncates to 8exactly precision digits after the "." <br>
+	 * returns a formatted double. Truncates to exactly precision digits after the "." <br>
 	 * If precision=0, the . is stripped
 	 * 
 	 * @param i the integer to format
-	 * @param length maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
-	 * @return the formatted string that represents d TBD handle exp format
+	 * @param length maximum precision, depending on value of zapp0, leading 0s are discarded or kept
+	 * @return the formatted string that represents the integer
 	 */
 	public String formatInt(final int i, int length)
 	{
@@ -144,15 +144,19 @@ public class NumberFormatter
 		}
 		else
 		{
-			final Double[] ad = { new Double(d) };
 			if (precision > 0)
 			{
+				final Double[] ad = { new Double(d) };
 				String ss = StringUtil.sprintf("%." + precision + "f", ad);
 				s = zappTrailing(ss);
 			}
+			else if (d > 0)
+			{
+				s = Integer.toString((int) (d + 0.5));
+			}
 			else
 			{
-				s = StringUtil.sprintf("%i", ad);
+				s = Integer.toString((int) (d - 0.5));
 			}
 		}
 		return s;

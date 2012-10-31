@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,12 +70,16 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
@@ -113,6 +117,19 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
 		assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 		assertEquals(EnumType.Stripping, n.getEnumType());
+	}
+
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 */
+	public void testConvertStripStepRepeat() throws DataFormatException
+	{
+		lpp.setNumberUp(new JDFXYPair(4, 9));
+		lpp.setStepRepeat(new JDFIntegerList("2 3 1"));
+		lpp.convertToStripping(null);
+		assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		assertEquals(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaves(false).size(), 6);
 	}
 
 	/**
@@ -156,7 +173,6 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.LayoutPreparation);
 		lpp = (JDFLayoutPreparationParams) n.addResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input);
-
 	}
 
 	/**

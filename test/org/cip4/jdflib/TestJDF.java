@@ -14,7 +14,6 @@ import java.io.InputStream;
 import java.net.Inet4Address;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -121,30 +120,26 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	public void testSpawnRW() throws Throwable
 	{
-		JDFDoc jdfDoc = new JDFParser().parseFile("/data/JDF/aquafitmain.jdf");
+		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
 
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("1003.I", null);
+		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
 
 		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
 
 		final JDFAttributeMap amParts0 = new JDFAttributeMap();
 
-		amParts0.put("RunPage", "0");
-		amParts0.put("SheetName", "Faltschachtel");
-		amParts0.put("Side", "Front");
-		amParts0.put("SignatureName", "SIG001");
-		amParts0.put("Separation", "Magenta");
+		amParts0.put("Run", "Run_121015_072229975_000405");
 
 		vamParts.add(amParts0);
 
-		final VString vsRWResourceIDs = new VString("r_110412_072923347_007064 r_110412_072919155_016691 Link_110412_072920686_018184 r_110412_072923300_007044 Link_110412_072921327_018304 r_110412_073508639_001995 r_110412_072923300_007043 r_110412_073508655_002008");
+		final VString vsRWResourceIDs = new VString("RunList", null);
 
 		final JDFSpawn spawn = new JDFSpawn(nodeProc);
 
-		JDFNode nodeSubJDF = spawn.spawn("aquafit(11-0078)", JDFConstants.EMPTYSTRING, vsRWResourceIDs, vamParts, true, true, true, false);
-		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2);
+		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
 		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
-		jdfDoc.write2File(strOutJDFPath, 2);
+		jdfDoc.write2File(strOutJDFPath, 2, false);
 
 		// Link_110412_072920686_018182
 	}
@@ -198,8 +193,8 @@ public class TestJDF extends JDFTestCaseBase
 	{
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(true);
-		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/ver.jdf");
-		JDFNode n = d.getJDFRoot().getJobPart("PG__200DV000004.I", null);
+		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
+		JDFNode n = d.getJDFRoot().getJobPart("QUA0.P", null);
 		ct.stop();
 		System.out.println(ct);
 		JDFSpawn spawn = new JDFSpawn(n);

@@ -458,9 +458,9 @@ public class JDFSpawn
 			for (int k = 0; k < vRes.size(); k++)
 			{
 				final JDFResource rTarget = (JDFResource) vRes.elementAt(k);
-				if (rTarget.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
+				if (JDFResource.EnumSpawnStatus.SpawnedRW.equals(rTarget.getSpawnStatus()))
 				{
-					if (!vMultiRes.contains(rTarget))
+					if (!vMultiRes.contains(rTarget) && (vSpawnParts == null || vSpawnParts.overlapsMap(rTarget.getPartMap())))
 					{
 						vMultiRes.add(rTarget);
 					}
