@@ -577,7 +577,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				return false;
 			}
 
-			if (jobID != null && !StringUtil.matches(qe.getJobID(), jobID))
+			if (jobID != null && !StringUtil.matchesSimple(qe.getJobID(), jobID))
 			{
 				return false;
 			}

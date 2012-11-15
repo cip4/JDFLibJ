@@ -365,7 +365,7 @@ public class FileUtil
 		 */
 		public boolean accept(final File checkFile)
 		{
-			return checkFile != null && StringUtil.matches(checkFile.getName(), regExp);
+			return checkFile != null && StringUtil.matchesSimple(checkFile.getName(), regExp);
 		}
 	}
 

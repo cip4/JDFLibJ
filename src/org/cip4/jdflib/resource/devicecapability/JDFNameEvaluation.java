@@ -97,10 +97,8 @@ public class JDFNameEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.REGEXP, 0x33333333,
-				AttributeInfo.EnumAttributeType.RegExp, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REGEXP, 0x33333333, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
 	@Override
@@ -115,8 +113,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,8 +125,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,8 +138,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNameEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -172,8 +167,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 */
 	public VString getValueList()
 	{
-		return StringUtil.tokenize(AttributeName.VALUELIST, JDFConstants.BLANK,
-				false);
+		return StringUtil.tokenize(AttributeName.VALUELIST, JDFConstants.BLANK, false);
 	}
 
 	/**
@@ -184,8 +178,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 */
 	public void setValueList(VString vs)
 	{
-		setAttribute(AttributeName.VALUELIST, StringUtil.setvString(vs, " ",
-				null, null), null);
+		setAttribute(AttributeName.VALUELIST, StringUtil.setvString(vs, " ", null, null), null);
 	}
 
 	/**
@@ -206,8 +199,7 @@ public class JDFNameEvaluation extends JDFEvaluation
 	 */
 	public String getRegExp()
 	{
-		return getAttribute(AttributeName.REGEXP, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.REGEXP, null, JDFConstants.EMPTYSTRING);
 	}
 
 	/*
@@ -254,10 +246,12 @@ public class JDFNameEvaluation extends JDFEvaluation
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(vs, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(vs, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(vs, list);
 		}
@@ -319,16 +313,14 @@ public class JDFNameEvaluation extends JDFEvaluation
 		if (listType == null)
 			return true;
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return StringUtil.isNMTOKEN(value);
-		} else if (listType.equals(EnumListType.List)
-				|| listType.equals(EnumListType.Span)
-				|| listType.equals(EnumListType.CompleteList) || // complete or
-																	// not -
-																	// tested in
-																	// fitsValueList
+		}
+		else if (listType.equals(EnumListType.List) || listType.equals(EnumListType.Span) || listType.equals(EnumListType.CompleteList) || // complete or
+																																			// not -
+																																			// tested in
+																																			// fitsValueList
 				listType.equals(EnumListType.CompleteOrderedList) || // tested
 																		// in
 																		// fitsValueList
@@ -337,14 +329,15 @@ public class JDFNameEvaluation extends JDFEvaluation
 																// )
 		{
 			return true;
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			VString v = new VString(value, null);
 			return (isUnique(v));
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFNameEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFNameEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 

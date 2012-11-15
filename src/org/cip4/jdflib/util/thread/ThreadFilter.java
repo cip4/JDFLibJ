@@ -104,7 +104,7 @@ public class ThreadFilter
 		Vector<Thread> returnSet = new Vector<Thread>();
 		for (Thread thread : threadSet)
 		{
-			if (StringUtil.matches(thread.getName(), regexp))
+			if (StringUtil.matchesSimple(thread.getName(), regexp))
 			{
 				returnSet.add(thread);
 			}

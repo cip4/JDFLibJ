@@ -218,7 +218,11 @@ public class StringUtil
 			"I'm afraid not. The guns have stopped because we are about to attack. Not even our generals are mad enough to shell their own men. They feel it's more sporting to let the Germans do it. ",
 			"If they take the ship they will rape us to death, eat our flesh, and sew our skins in to their clothing, and if we're very, very lucky, they’ll do it in that order.",
 			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
-			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.", "Last quote" };
+			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
+			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.",
+			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.",
+			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
+			"Biology is the only science in which multiplication means the same thing as division.", "Last quote" };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
@@ -2339,6 +2343,21 @@ public class StringUtil
 	 * @param regExp the expression to match against
 	 * @return true, if str matches regExp or regexp is empty
 	 */
+	public static boolean matchesSimple(final String str, String regExp)
+	{
+		regExp = simpleRegExptoRegExp(regExp);
+		return matches(str, regExp);
+	}
+
+	/**
+	 * match a regular expression using String.matches(), but also catch exceptions </br>
+	 * does NOT handle simplified regexp. The <code>null</code> expression is assumed to
+	 * match anything.
+	 * 
+	 * @param str the string to match
+	 * @param regExp the expression to match against
+	 * @return true, if str matches regExp or regexp is empty
+	 */
 	public static boolean matches(final String str, String regExp)
 	{
 		if (str == null)
@@ -2347,13 +2366,10 @@ public class StringUtil
 		}
 
 		// the null expression is assumed to match anything
-		if ((regExp == null) || (regExp.length() == 0))
+		if ((regExp == null) || (regExp.length() == 0) || "*".equals(regExp))
 		{
 			return true;
 		}
-
-		regExp = simpleRegExptoRegExp(regExp);
-
 		boolean b;
 		try
 		{
@@ -2377,7 +2393,7 @@ public class StringUtil
 	 */
 	public static boolean matchesIgnoreCase(final String str, final String regExp)
 	{
-		return matches(str == null ? null : str.toLowerCase(), regExp == null ? null : regExp.toLowerCase());
+		return matchesSimple(str == null ? null : str.toLowerCase(), regExp == null ? null : regExp.toLowerCase());
 	}
 
 	/**

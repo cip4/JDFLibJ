@@ -104,10 +104,8 @@ public class JDFStringEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTH, 0x33333333,
-				AttributeInfo.EnumAttributeType.IntegerRange, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.REGEXP, 0x33333333,
-				AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTH, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REGEXP, 0x33333333, AttributeInfo.EnumAttributeType.RegExp, null, null);
 	}
 
 	@Override
@@ -135,8 +133,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,8 +146,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,9 +158,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFStringEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -197,10 +191,10 @@ public class JDFStringEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFIntegerRange(getAttribute(AttributeName.LENGTH));
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFStringEvaluation.getLengthRange: Attribute LENGTH is not capable to create JDFIntegerRange");
+			throw new JDFException("JDFStringEvaluation.getLengthRange: Attribute LENGTH is not capable to create JDFIntegerRange");
 		}
 
 	}
@@ -221,8 +215,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 	public JDFValue getValue(int iSkip)
 	{
-		return (JDFValue) getElement(ElementName.VALUE,
-				JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
@@ -352,8 +345,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 */
 	private final boolean fitsValueElem(String str)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		if (siz == 0)
 			return true; // Evaluation has no Value elements

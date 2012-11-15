@@ -332,7 +332,7 @@ public class ZipReader
 		while (ze != null)
 		{
 			String name = ze.getName();
-			boolean matches = caseSensitive ? StringUtil.matches(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+			boolean matches = caseSensitive ? StringUtil.matchesSimple(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
 			if (!matches && rootEntry != null && name.startsWith(rootEntry))
 			{
 				name = StringUtil.rightStr(name, -rootEntry.length());

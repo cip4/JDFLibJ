@@ -422,6 +422,79 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testMatches()
 	{
+		assertFalse(StringUtil.matchesSimple(null, "(.+ )*(BB)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("a bb c", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("b bb c", "(.* )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("a bb", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple(" bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("bb ", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a b c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("123456", "\\d{5,5}"));
+		assertFalse(StringUtil.matchesSimple("1234", "\\d{5,5}"));
+		assertTrue(StringUtil.matchesSimple("12345", "\\d{5,5}"));
+		assertTrue(StringUtil.matchesSimple("abc", "*"));
+		assertTrue(StringUtil.matchesSimple("abc", "?*"));
+		assertTrue(StringUtil.matchesSimple("abc", "?+"));
+		assertTrue(StringUtil.matchesSimple("abc", ""));
+		assertTrue(StringUtil.matchesSimple("äbc", "???"));
+		assertFalse(StringUtil.matchesSimple("abc", "????"));
+		assertFalse(StringUtil.matchesSimple("abc", "??"));
+		assertTrue(StringUtil.matchesSimple("€bc", null));
+		assertTrue(StringUtil.matchesSimple("€", "(€)?"));
+		assertTrue(StringUtil.matchesSimple("€€", "€{0,2}"));
+		assertFalse(StringUtil.matchesSimple("€€€", "€{0,2}"));
+		assertTrue(StringUtil.matchesSimple("", "(€)?"));
+		assertTrue(StringUtil.matchesSimple("12de", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matchesSimple("12d", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matchesSimple("12dk", JDFConstants.REGEXP_HEXBINARY));
+
+		assertTrue(StringUtil.matchesSimple("€", "(€)?"));
+
+		assertFalse(StringUtil.matchesSimple("abc", "??"));
+		assertFalse(StringUtil.matchesSimple(null, null));
+		assertFalse(StringUtil.matchesSimple("abc", "?"));
+		assertTrue(StringUtil.matchesSimple("a b", "(a)?( b)?( c)?"));
+		assertTrue(StringUtil.matchesSimple("a b", "(a)? (b)?"));
+		assertTrue(StringUtil.matchesSimple("a b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("a", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*){1,1}"));
+		assertFalse(StringUtil.matchesSimple("d e c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertFalse(StringUtil.matchesSimple("b b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("MIS_L2-1.3", "((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
+
+		assertTrue(StringUtil.matchesSimple("a-aB.3@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("mailto:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matchesSimple("mailt:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("aa@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matchesSimple("a@b", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("+(1).2/344", JDFConstants.REGEXP_PHONE));
+		assertFalse(StringUtil.matchesSimple("+(1).2 344", JDFConstants.REGEXP_PHONE));
+
+		assertTrue(StringUtil.matchesSimple("ab", "a*"));
+		assertTrue(StringUtil.matchesSimple("ab", "a(.*)"));
+		assertTrue(StringUtil.matchesSimple("a", "a*"));
+		assertFalse(StringUtil.matchesSimple("a", "a(.(.*))"));
+		assertTrue(StringUtil.matchesSimple("a", "a(b)?"));
+		assertTrue(StringUtil.matchesSimple("ab", "a(b)?"));
+		assertFalse(StringUtil.matchesSimple("ac", "a(b)?"));
+
+		assertTrue(StringUtil.matchesSimple("a b", "a b"));
+		assertTrue(StringUtil.matchesSimple("abc123ä", "abc123ä"));
+		assertTrue(StringUtil.matchesSimple("GangBrochureA4", "(Gang)?Bro(.)*"));
+	}
+
+	/**
+	 * test regexp matching utility
+	 * 
+	 */
+	public void testMatchesRegExp()
+	{
 		assertFalse(StringUtil.matches(null, "(.+ )*(BB)( .+)*"));
 		assertTrue(StringUtil.matches("a bb c", "(.+ )*(bb)( .+)*"));
 		assertTrue(StringUtil.matches("b bb c", "(.* )*(bb)( .+)*"));
@@ -435,13 +508,10 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("123456", "\\d{5,5}"));
 		assertFalse(StringUtil.matches("1234", "\\d{5,5}"));
 		assertTrue(StringUtil.matches("12345", "\\d{5,5}"));
-		assertTrue(StringUtil.matches("abc", "*"));
-		assertTrue(StringUtil.matches("abc", "?*"));
-		assertTrue(StringUtil.matches("abc", "?+"));
+		assertTrue(StringUtil.matches("abc", ".*"));
+		assertTrue(StringUtil.matches("abc", ".?.*"));
+		assertTrue(StringUtil.matches("abc", ".+"));
 		assertTrue(StringUtil.matches("abc", ""));
-		assertTrue(StringUtil.matches("äbc", "???"));
-		assertFalse(StringUtil.matches("abc", "????"));
-		assertFalse(StringUtil.matches("abc", "??"));
 		assertTrue(StringUtil.matches("€bc", null));
 		assertTrue(StringUtil.matches("€", "(€)?"));
 		assertTrue(StringUtil.matches("€€", "€{0,2}"));
@@ -453,7 +523,6 @@ public class StringUtilTest extends JDFTestCaseBase
 
 		assertTrue(StringUtil.matches("€", "(€)?"));
 
-		assertFalse(StringUtil.matches("abc", "??"));
 		assertFalse(StringUtil.matches(null, null));
 		assertFalse(StringUtil.matches("abc", "?"));
 		assertTrue(StringUtil.matches("a b", "(a)?( b)?( c)?"));
@@ -476,9 +545,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("+(1).2/344", JDFConstants.REGEXP_PHONE));
 		assertFalse(StringUtil.matches("+(1).2 344", JDFConstants.REGEXP_PHONE));
 
-		assertTrue(StringUtil.matches("ab", "a*"));
+		assertTrue(StringUtil.matches("ab", "a.*"));
 		assertTrue(StringUtil.matches("ab", "a(.*)"));
-		assertTrue(StringUtil.matches("a", "a(.*)"));
+		assertTrue(StringUtil.matches("a", "a*"));
 		assertFalse(StringUtil.matches("a", "a(.(.*))"));
 		assertTrue(StringUtil.matches("a", "a(b)?"));
 		assertTrue(StringUtil.matches("ab", "a(b)?"));

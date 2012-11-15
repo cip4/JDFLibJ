@@ -153,7 +153,7 @@ public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 		}
 		if (subset instanceof String)
 		{
-			return StringUtil.matches(getIDValue(), (String) subset);
+			return StringUtil.matchesSimple(getIDValue(), (String) subset);
 		}
 		if (subset instanceof JDFGeneralID)
 		{

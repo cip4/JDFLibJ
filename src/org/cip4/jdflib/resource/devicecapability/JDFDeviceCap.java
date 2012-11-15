@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -424,10 +424,12 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * Composes a BugReport in XML form for the given JMF message 'jmfRoot'. Gives a list of error messages for 'jmfRoot' and every child rejected element.<br>
 	 * Returns <code>null</code> if there are no errors.
 	 * 
-	 * @param jdfRoot the node to test
+	 * @param jmfRoot the node to test
+	 * @param knownMessagesResp 
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
 	 * Will be used in fitsValue method of the State class.
 	 * @param level validation level
+	 * @param ignoreExtensions 
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
 	static public XMLDoc getJMFInfo(final JDFJMF jmfRoot, final JDFResponse knownMessagesResp, final EnumFitsValue testlists, final EnumValidationLevel level, final boolean ignoreExtensions)

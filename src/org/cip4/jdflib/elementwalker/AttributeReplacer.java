@@ -169,7 +169,7 @@ public class AttributeReplacer extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement e)
 		{
-			return StringUtil.matches(e.getLocalName(), elemRegExp);
+			return StringUtil.matchesSimple(e.getLocalName(), elemRegExp);
 		}
 
 	}
