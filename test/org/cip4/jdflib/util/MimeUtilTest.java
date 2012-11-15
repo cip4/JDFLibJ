@@ -104,6 +104,8 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -114,6 +116,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
+import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
 
@@ -558,6 +561,30 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		assertEquals(aBp[0].getFileName(), "JMF.jmf");
 		assertEquals(aBp[1].getFileName(), "JDF.jdf");
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testMeanCharsXML() throws Exception
+	{
+		XMLParser p = new XMLParser();
+		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
+		d.setOriginalFileName("foo.xml");
+		final Vector<XMLDoc> vXMLDocs = new Vector<XMLDoc>();
+		vXMLDocs.add(d);
+
+		final Multipart m = MimeUtil.buildMimePackage(vXMLDocs);
+		final File file = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "nasty.mjm", new MIMEDetails());
+
+		final FileInputStream fis = new FileInputStream(file);
+		final BodyPart[] aBp = MimeUtil.extractMultipartMime(fis);
+		assertEquals(aBp.length, 1);
+
+		assertEquals(aBp[0].getFileName(), "foo.xml");
+		BodyPartHelper bh = new BodyPartHelper(aBp[0]);
+		XMLDoc xmlDoc = bh.getXMLDoc();
+		assertNotNull(xmlDoc);
 	}
 
 	// /////////////////////////////////////////////////////

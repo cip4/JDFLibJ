@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,12 +71,16 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Sep 30, 2010
  */
 public class XMLParserTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 *  
+	 */
 	public void testStar()
 	{
 		XMLDoc d = new XMLDoc("a*", null);
@@ -84,5 +88,19 @@ public class XMLParserTest extends JDFTestCaseBase
 		System.out.print(xml);
 		XMLParser p = new XMLParser();
 		assertNull(p.parseString(xml));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testMeanChars()
+	{
+		XMLParser p = new XMLParser();
+		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
+		assertNotNull(d);
+		String s = d.write2String(2);
+		XMLDoc d2 = p.parseString(s);
+		assertNotNull(d2);
 	}
 }

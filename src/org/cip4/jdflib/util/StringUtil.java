@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -796,23 +796,21 @@ public class StringUtil
 	 * 
 	 * @param strWork String to work on
 	 * @param charSet characters to replace
-	 * @param replaceString String to insert for c
+	 * @param replaceString String to insert for any character in charSet, if null simply remove all occurrences of any char in charSet
 	 * @param offset where to start replacing
 	 * @return the String with replaced characters
 	 */
-	public static String replaceCharSet(final String strWork, final String charSet, final String replaceString, final int offset)
+	public static String replaceCharSet(String strWork, final String charSet, final String replaceString, final int offset)
 	{
-		String strWorkLocal = strWork;
-
 		if (charSet == null)
 		{
-			return strWorkLocal;
+			return strWork;
 		}
 		for (int i = 0; i < charSet.length(); i++)
 		{
-			strWorkLocal = replaceChar(strWorkLocal, charSet.charAt(i), replaceString, offset);
+			strWork = replaceChar(strWork, charSet.charAt(i), replaceString, offset);
 		}
-		return strWorkLocal;
+		return strWork;
 	}
 
 	/**
@@ -822,7 +820,7 @@ public class StringUtil
 	 * 
 	 * @param strWork String to work on
 	 * @param c character to replace
-	 * @param replaceString String to insert for c
+	 * @param replaceString String to insert for c, if null simply remove c
 	 * @param offset
 	 * @return the String with replaced characters
 	 */
@@ -1799,18 +1797,16 @@ public class StringUtil
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 * 
 	 * @param strToEscape the String to escape
-	 * @param strCharSet the set of characters that should be escaped eg "������"
+	 * @param strCharSet the set of characters that should be escaped eg "äöüß$€"
 	 * @param strEscapeChar the character sequence that marks an escape sequence. If <code>null</code>, "\\" is used
 	 * 
 	 * @param iRadix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex<br>
-	 * if radix == 0 the escape char is merely inserted<br>
+	 * if radix == 0 the escape char is merely inserted in front of the char to escape<br>
 	 * if radix <0 the escape char is replaced by the prefix<br>
 	 * valid radix: -1,0,2,8,10,16
 	 * 
 	 * @param iEscapeLen the number of digits per escaped char, not including escapeChar
-	 * 
 	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped
-	 * 
 	 * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped
 	 * 
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
@@ -1919,9 +1915,7 @@ public class StringUtil
 				posE++;
 			}
 		}
-
 		final String escapedString = new String(escaped, 0, posE);
-
 		return escapedString;
 	}
 
@@ -2111,7 +2105,21 @@ public class StringUtil
 			// nop
 		}
 		int i = def;
-		s = s.trim();
+		s = s.trim().toLowerCase();
+		int pos0x = s.indexOf("0x");
+		if (pos0x >= 0)
+		{
+			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
+			try
+			{
+				return Integer.parseInt(s, 16);
+			}
+			catch (final NumberFormatException nfe)
+			{
+				return i;
+			}
+		}
+
 		if (s.equalsIgnoreCase(JDFConstants.POSINF))
 		{
 			return Integer.MAX_VALUE;
@@ -2173,7 +2181,20 @@ public class StringUtil
 			//nop
 		}
 		long i = def;
-		s = s.trim();
+		s = s.trim().toLowerCase();
+		int pos0x = s.indexOf("0x");
+		if (pos0x >= 0)
+		{
+			s = (pos0x > 0 ? StringUtil.leftStr(s, pos0x) : "") + s.substring(pos0x + 2);
+			try
+			{
+				return Long.parseLong(s, 16);
+			}
+			catch (final NumberFormatException nfe)
+			{
+				return i;
+			}
+		}
 		if (s.equalsIgnoreCase(JDFConstants.POSINF))
 		{
 			return Long.MAX_VALUE;
@@ -2331,11 +2352,7 @@ public class StringUtil
 			return true;
 		}
 
-		// this is a really common mistake
-		if (regExp.equals("*"))
-		{
-			regExp = ".*";
-		}
+		regExp = simpleRegExptoRegExp(regExp);
 
 		boolean b;
 		try

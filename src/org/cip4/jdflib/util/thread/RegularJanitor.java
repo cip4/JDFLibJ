@@ -73,7 +73,6 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 
 /**
  *asynchronous janitor class
@@ -191,7 +190,10 @@ public final class RegularJanitor
 				log.info("Janitor starting - initial pause: " + firstInterval + " seconds");
 				ThreadUtil.wait(theMutex, 1000 * firstInterval);
 			}
-			log.info("Janitor starting - interval: " + interval + " seconds");
+			if (theMutex != null)
+			{
+				log.info("Janitor starting - interval: " + interval + " seconds");
+			}
 			while (theMutex != null)
 			{
 				moveModifications();

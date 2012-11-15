@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -122,11 +122,23 @@ public class JDFComChannel extends JDFAutoComChannel
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * 
+		 * 
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumChannelTypeDetails getEnum(final String enumName)
 		{
 			return (EnumChannelTypeDetails) getEnum(EnumChannelTypeDetails.class, enumName);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumChannelTypeDetails getEnum(final int enumValue)
 		{
 			return (EnumChannelTypeDetails) getEnum(EnumChannelTypeDetails.class, enumValue);
@@ -137,11 +149,21 @@ public class JDFComChannel extends JDFAutoComChannel
 			return getEnumMap(EnumChannelTypeDetails.class);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumChannelTypeDetails.class);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumChannelTypeDetails.class);
@@ -151,18 +173,24 @@ public class JDFComChannel extends JDFAutoComChannel
 		 * @deprectated - use null
 		 */
 		public static final EnumChannelTypeDetails Unknown = new EnumChannelTypeDetails("Unknown");
+		/** */
 		public static final EnumChannelTypeDetails LandLine = new EnumChannelTypeDetails("LandLine");
+		/** */
 		public static final EnumChannelTypeDetails Mobile = new EnumChannelTypeDetails("Mobile");
+		/** */
 		public static final EnumChannelTypeDetails Secure = new EnumChannelTypeDetails("Secure");
+		/** */
 		public static final EnumChannelTypeDetails ISDN = new EnumChannelTypeDetails("ISDN");
+		/** */
 		public static final EnumChannelTypeDetails Form = new EnumChannelTypeDetails("Form");
+		/** */
 		public static final EnumChannelTypeDetails Target = new EnumChannelTypeDetails("Target");
 	}
 
 	/**
 	 * Constructor for JDFComChannel
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFComChannel(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
@@ -173,8 +201,8 @@ public class JDFComChannel extends JDFAutoComChannel
 	/**
 	 * Constructor for JDFComChannel
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFComChannel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -183,12 +211,12 @@ public class JDFComChannel extends JDFAutoComChannel
 	}
 
 	/**
-	 * Constructor for JDFComChannel
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * Constructor for JDFComChannel
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFComChannel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,22 +70,21 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
 public class ThreadUtil
 {
-
 	/**
-	 * placeholder for future use
-	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
-	 * 11.12.2008
+	 *
+	 * @author rainer prosi
+	 * @date Nov 14, 2012
+	 * @deprecated use org.cip4.jdflib.util.thread.MyMutex
 	 */
-	public static class MyMutex
+	@Deprecated
+	public static class MyMutex extends org.cip4.jdflib.util.thread.MyMutex
 	{
 
 		/**
@@ -94,23 +93,8 @@ public class ThreadUtil
 		public MyMutex()
 		{
 			super();
-			iMutex = nMutex.incrementAndGet();
-			ownerThread = Thread.currentThread().getName();
 		}
 
-		final private int iMutex;
-		private static AtomicInteger nMutex = new AtomicInteger(0);
-		private final String ownerThread;
-
-		/**
-		 * 
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString()
-		{
-			return "MyMutex: " + iMutex + " [" + ownerThread + "]";
-		}
 	}
 
 	/**
@@ -205,7 +189,30 @@ public class ThreadUtil
 		}
 		catch (final InterruptedException x)
 		{
-			// System.out.print(".");
+			// nop
+		}
+	}
+
+	/**
+	 * simple join wrapper that catches its exception
+	 * @param thread the thread to join
+	 * 
+	 * @param millis
+	 */
+	public static void join(final Thread thread, int millis)
+	{
+		if (thread == null)
+			return;
+		try
+		{
+			if (millis <= 0)
+				thread.join();
+			else
+				thread.join(millis);
+		}
+		catch (final InterruptedException x)
+		{
+			//nop
 		}
 	}
 

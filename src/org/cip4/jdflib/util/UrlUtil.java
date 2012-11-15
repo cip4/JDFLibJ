@@ -178,7 +178,11 @@ public class UrlUtil
 	/**
 	 * strings that must be escaped in urls
 	 */
-	public static final String m_URIEscape = "#%?@&=+$,;[]\"\'<>^`´{}~";
+	public static final String m_URIEscape = "|#%?@&=+$,;[]\\\"\'<>^`´{}~";
+	/**
+	 * strings that must be escaped in uncs
+	 */
+	public static final String m_UNCEscape = "/\\*?<>|";
 	/**
 	 * 
 	 */
@@ -661,10 +665,10 @@ public class UrlUtil
 	}
 
 	/**
-	 * Retrieve a file for a relative or absolute file url
+	 * Retrieve a UNC path for a relative or absolute file url, any of '/'or "\\" is assumed a path separator
 	 * 
-	 * @param urlString the file url to retrieve a file for
-	 * @return the file located at url
+	 * @param urlString the file url to retrieve a UNC path  for
+	 * @return the UNC
 	 */
 	public static String urlToUNC(String urlString)
 	{
@@ -687,8 +691,11 @@ public class UrlUtil
 		{
 			return null;
 		}
+		urlString = StringUtil.replaceCharSet(urlString, "/\\", "" + (char) 0, 0);
 		urlString = unEscape(urlString);
-		return StringUtil.replaceChar(urlString, '/', "\\", 0);
+		urlString = StringUtil.escape(urlString, m_UNCEscape, "%", 16, 2, -1, -1);
+		urlString = StringUtil.replaceChar(urlString, (char) 0, "\\", 0);
+		return urlString;
 	}
 
 	/**

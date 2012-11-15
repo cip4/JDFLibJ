@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -112,6 +113,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
@@ -275,6 +277,40 @@ public class XJDFTest extends JDFTestCaseBase
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		JDFDoc d = xc.convert(e);
 		n = d.getJDFRoot();
+
+	}
+
+	/**
+	 */
+	public void testXJDFRangeList()
+	{
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bMergeRunList = true;
+		xjdf20.bConvertTilde = true;
+		n = new JDFDoc("JDF").getJDFRoot();
+		JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		JDFRunList rlr1 = rl.addPDF("test.pdf", 0, 2);
+		JDFIntegerRangeList pages = rlr1.getPages();
+		pages.append(33, 44);
+		pages.append(55);
+		pages.append(66, 77);
+		rlr1.setPages(pages);
+		rlr1.getLayoutElement().setElementType(JDFLayoutElement.EnumElementType.Page);
+
+		e = xjdf20.makeNewJDF(n, null);
+		KElement rlSet = e.getXPathElement("ParameterSet[@Name=\"RunList\"]");
+		assertNotNull(rlSet);
+		KElement rl2 = rlSet.getXPathElement("Parameter/RunList");
+		assertNotNull(rl2);
+		assertEquals("0 2 33 44 55 55 66 77", rl2.getAttribute(AttributeName.PAGES));
+		assertNull(rl2.getElement("LayoutElement"));
+
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		xc.setConvertTilde(true);
+		JDFDoc d = xc.convert(e);
+		n = d.getJDFRoot();
+		JDFRunList leaf = (JDFRunList) n.getResource(ElementName.RUNLIST, null, 0).getLeaves(false).get(0);
+		assertEquals("0 ~ 2 33 ~ 44 55 66 ~ 77", leaf.getAttribute(AttributeName.PAGES));
 
 	}
 
@@ -906,10 +942,13 @@ public class XJDFTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		e = new XMLDoc("XJDF", null).getRoot();
 		e.setXPathAttribute("ProductList/Product/@ProductID", "ID_FOO");
+		e.setXPathAttribute("ProductList/Product/@AssemblyIDs", "Ass_ID");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
-		assertEquals(root.getResource(ElementName.COMPONENT, null, 0).getProductID(), "ID_FOO");
+		JDFComponent component = (JDFComponent) root.getResource(ElementName.COMPONENT, null, 0);
+		assertEquals(component.getProductID(), "ID_FOO");
+		assertEquals(component.getAssemblyIDs().get(0), "Ass_ID");
 	}
 
 	/**

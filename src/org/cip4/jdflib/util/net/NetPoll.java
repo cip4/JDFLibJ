@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,14 +70,17 @@
  */
 package org.cip4.jdflib.util.net;
 
+import java.util.HashMap;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.MyInteger;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.net.IPollHandler.PollResult;
+import org.cip4.jdflib.util.thread.MyMutex;
 
 /**
  * class to poll a network address
@@ -172,7 +175,6 @@ public class NetPoll
 		{
 			super("NetPoll_" + threadCount++);
 			running = true;
-
 		}
 
 		protected boolean running;
@@ -194,6 +196,8 @@ public class NetPoll
 		public void run()
 		{
 			int n = 0;
+			int nSinceBad = 0;
+			HashMap<String, MyInteger> badMap = new HashMap<String, MyInteger>();
 			if (vUrl == null || vUrl.size() == 0)
 			{
 				log.warn("polling 0 urls - bailing out");
@@ -202,26 +206,50 @@ public class NetPoll
 			while (running)
 			{
 				String url = vUrl.get(n);
-				IPollDetails details = poll(url);
-				PollResult result;
-				try
+				nSinceBad++;
+				MyInteger bad = badMap.get(url);
+				if (bad == null || nSinceBad > bad.i)
 				{
-					result = poller.handlePoll(details, url);
-				}
-				catch (Exception x)
-				{
-					result = null;
-				}
-				if (result == null || !PollResult.success.equals(result))
-				{
-					ThreadUtil.wait(mutex, getIdleWait());
-					// we only move on to the next in case nothing is waiting
-					int size = getUrlSize();
-					n = ++n % size;
+					IPollDetails details = poll(url);
+					PollResult result;
+					try
+					{
+						result = poller.handlePoll(details, url);
+					}
+					catch (Exception x)
+					{
+						result = null;
+					}
+					if (result == null || !PollResult.success.equals(result))
+					{
+						if (PollResult.error.equals(result))
+						{
+							if (bad == null)
+							{
+								bad = new MyInteger(1);
+								badMap.put(url, bad);
+							}
+							bad.i++;
+							nSinceBad = 0;
+						}
+						else
+						{
+							badMap.remove(url);
+						}
+						ThreadUtil.wait(mutex, getIdleWait());
+						// we only move on to the next in case nothing is waiting
+						int size = getUrlSize();
+						n = ++n % size;
+					}
+					else
+					{
+						ThreadUtil.wait(mutex, busyWait);
+					}
 				}
 				else
+				// skip errors more often
 				{
-					ThreadUtil.wait(mutex, busyWait);
+					ThreadUtil.wait(mutex, getIdleWait());
 				}
 			}
 			// clean up when we leave

@@ -79,6 +79,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -98,6 +99,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNameRange;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -255,6 +258,10 @@ public class XJDF20 extends BaseElementWalker
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
 	public boolean bHTMLColor = false;
+	/**
+	 * if true tildes are retained as range delimitors
+	 */
+	public boolean bConvertTilde = false;
 
 	/**
 	 * @param root the jdf or jmf to transform
@@ -1568,7 +1575,7 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), jdf.getNamespaceURI());
 
-			eNew.setAttributes(jdf);
+			setAttributes(jdf, eNew);
 			eNew.setText(jdf.getText());
 			Node before = null;
 			for (int i = 0; true; i++)
@@ -1588,6 +1595,48 @@ public class XJDF20 extends BaseElementWalker
 			}
 			removeUnused(eNew);
 			return eNew;
+		}
+
+		protected void setAttributes(final KElement jdf, final KElement eNew)
+		{
+			JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap();
+			eNew.setAttributes(map);
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @param jdf
+		 * @return 
+		 */
+		private JDFAttributeMap convertRanges(JDFElement jdf)
+		{
+			JDFAttributeMap map = jdf.getAttributeMap();
+			if (bConvertTilde)
+			{
+				VString keys = map.getKeys();
+				for (String key : keys)
+				{
+					if (EnumAttributeType.isRange(jdf.getAtrType(key)))
+					{
+						JDFNameRangeList rl = JDFNameRangeList.createNameRangeList(map.get(key));
+						if (rl != null)
+						{
+							StringBuffer buf = new StringBuffer();
+							for (int i = 0; i < rl.size(); i++)
+							{
+								JDFNameRange r = (JDFNameRange) rl.at(i);
+								if (i > 0)
+									buf.append(" ");
+								buf.append(r.getLeft());
+								buf.append(" ");
+								buf.append(r.getRight());
+							}
+							map.put(key, buf.toString());
+						}
+					}
+				}
+			}
+			return map;
 		}
 
 		protected void removeUnused(final KElement newRootP)

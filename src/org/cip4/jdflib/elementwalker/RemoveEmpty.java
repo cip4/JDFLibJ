@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -105,7 +106,7 @@ public class RemoveEmpty extends BaseElementWalker
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * remove all unlinked crap and empty string attributes
 	 * @param n
 	 */
 	public void removEmpty(JDFNode n)
@@ -113,6 +114,19 @@ public class RemoveEmpty extends BaseElementWalker
 		new UnLinkFinder().eraseUnlinked(n);
 		walkTreeKidsFirst(n);
 		new UnLinkFinder().eraseUnlinked(n);
+	}
+
+	/**
+	 * 
+	 * remove all empty string attributes
+	 * @param e
+	 */
+	public void removEmptyAttributes(KElement e)
+	{
+		boolean keep = zappElements;
+		zappElements = false;
+		walkTreeKidsFirst(e);
+		zappElements = keep;
 	}
 
 	@Override
@@ -148,16 +162,16 @@ public class RemoveEmpty extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			JDFAttributeMap map = e1.getAttributeMap();
-			VString ok = new VString();
-			VString dummy = getDummyAttributes();
 			VString allKeys = map.getKeys();
+			VString ok = new VString();
+			VString dummy = zappElements ? getDummyAttributes() : null;
 			for (String key : allKeys)
 			{
 				if (StringUtil.getNonEmpty(map.get(key)) == null)
 				{
 					e1.removeAttribute(key);
 				}
-				else if (!dummy.contains(key))
+				else if (zappElements && !dummy.contains(key))
 				{
 					ok.add(key);
 				}
@@ -272,6 +286,38 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFResource;
+		}
+	}
+
+	/**
+	* zapp me
+	* 
+	* @author prosirai
+	* 
+	*/
+	public class WalkComChannel extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
+		 */
+		@Override
+		VString getDummyAttributes()
+		{
+			VString v = super.getDummyAttributes();
+			// if only channeltype is specified, we have an empty dummy
+			v.add(AttributeName.CHANNELTYPE);
+			return v;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFComChannel;
 		}
 	}
 

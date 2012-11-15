@@ -72,8 +72,8 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.ThreadUtil.WaitTimeout;
+import org.cip4.jdflib.util.thread.MyMutex;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -301,12 +301,22 @@ public class VStringTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testConstructEmpty()
+	{
+		VString v = new VString("a,b,c, ,", ",");
+		assertEquals(v.get(-1), " ");
+		v = new VString("a,b,c,,", ",");
+		assertEquals("double tokens are ignored", v.get(-1), "c");
+	}
+
+	/**
+	 * 
+	 */
 	public void testadd()
 	{
 		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
 		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
-
 	}
 
 	/**

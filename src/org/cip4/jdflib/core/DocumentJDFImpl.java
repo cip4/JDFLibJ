@@ -91,7 +91,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
+import org.cip4.jdflib.util.thread.MyMutex;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

@@ -436,28 +436,28 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("1234", "\\d{5,5}"));
 		assertTrue(StringUtil.matches("12345", "\\d{5,5}"));
 		assertTrue(StringUtil.matches("abc", "*"));
-		assertTrue(StringUtil.matches("abc", ".*"));
-		assertTrue(StringUtil.matches("abc", ".+"));
+		assertTrue(StringUtil.matches("abc", "?*"));
+		assertTrue(StringUtil.matches("abc", "?+"));
 		assertTrue(StringUtil.matches("abc", ""));
-		assertTrue(StringUtil.matches("äbc", "..."));
-		assertFalse(StringUtil.matches("abc", "...."));
-		assertFalse(StringUtil.matches("abc", ".."));
+		assertTrue(StringUtil.matches("äbc", "???"));
+		assertFalse(StringUtil.matches("abc", "????"));
+		assertFalse(StringUtil.matches("abc", "??"));
 		assertTrue(StringUtil.matches("€bc", null));
-		assertTrue(StringUtil.matches("€", "€?"));
+		assertTrue(StringUtil.matches("€", "(€)?"));
 		assertTrue(StringUtil.matches("€€", "€{0,2}"));
 		assertFalse(StringUtil.matches("€€€", "€{0,2}"));
-		assertTrue(StringUtil.matches("", "€?"));
+		assertTrue(StringUtil.matches("", "(€)?"));
 		assertTrue(StringUtil.matches("12de", JDFConstants.REGEXP_HEXBINARY));
 		assertFalse(StringUtil.matches("12d", JDFConstants.REGEXP_HEXBINARY));
 		assertFalse(StringUtil.matches("12dk", JDFConstants.REGEXP_HEXBINARY));
 
-		assertTrue(StringUtil.matches("€", "€?"));
+		assertTrue(StringUtil.matches("€", "(€)?"));
 
-		assertFalse(StringUtil.matches("abc", ".."));
+		assertFalse(StringUtil.matches("abc", "??"));
 		assertFalse(StringUtil.matches(null, null));
 		assertFalse(StringUtil.matches("abc", "?"));
 		assertTrue(StringUtil.matches("a b", "(a)?( b)?( c)?"));
-		assertTrue(StringUtil.matches("a b", "a? b?"));
+		assertTrue(StringUtil.matches("a b", "(a)? (b)?"));
 		assertTrue(StringUtil.matches("a b", "a?(( )*b)?"));
 		assertTrue(StringUtil.matches("a", "a?(( )*b)?"));
 		assertTrue(StringUtil.matches("b", "a?(( )*b)?"));
@@ -476,13 +476,13 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("+(1).2/344", JDFConstants.REGEXP_PHONE));
 		assertFalse(StringUtil.matches("+(1).2 344", JDFConstants.REGEXP_PHONE));
 
-		assertFalse(StringUtil.matches("ab", "a*"));
+		assertTrue(StringUtil.matches("ab", "a*"));
 		assertTrue(StringUtil.matches("ab", "a(.*)"));
 		assertTrue(StringUtil.matches("a", "a(.*)"));
 		assertFalse(StringUtil.matches("a", "a(.(.*))"));
-		assertTrue(StringUtil.matches("a", "ab?"));
-		assertTrue(StringUtil.matches("ab", "ab?"));
-		assertFalse(StringUtil.matches("ac", "ab?"));
+		assertTrue(StringUtil.matches("a", "a(b)?"));
+		assertTrue(StringUtil.matches("ab", "a(b)?"));
+		assertFalse(StringUtil.matches("ac", "a(b)?"));
 
 		assertTrue(StringUtil.matches("a b", "a b"));
 		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
@@ -623,6 +623,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseLong("12341234561234567834556", 0), Long.MAX_VALUE);
 		assertEquals(StringUtil.parseLong("-12341234561234567834556", 0), Long.MIN_VALUE);
 		assertEquals(StringUtil.parseLong("-1.0e44", 0), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("-0xa", 0), -10);
+		assertEquals(StringUtil.parseLong("0xff", 0), 255);
 	}
 
 	/**
@@ -637,6 +639,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
 		assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
 		assertEquals(StringUtil.parseInt("-inf", 0), Integer.MIN_VALUE);
+		assertEquals(StringUtil.parseInt("0xf", 0), 15);
+		assertEquals(StringUtil.parseInt("-0xf", 0), -15);
 	}
 
 	/**

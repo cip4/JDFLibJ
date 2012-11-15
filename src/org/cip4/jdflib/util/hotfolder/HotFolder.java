@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.util.file.FileSorter;
 /**
  * a very simple hotfolder watcher subdirectories are ignored
  * 
- * @author prosirai
+ * @author rainer prosi
  * 
  */
 public class HotFolder implements Runnable
@@ -226,6 +226,7 @@ public class HotFolder implements Runnable
 
 		String threadName = "HotFolder_" + nThread++ + "_" + dir.getAbsolutePath();
 		runThread = new Thread(this, threadName);
+		runThread.setDaemon(true);
 		interrupt = false;
 		log.info("Starting hotfolder: " + threadName);
 		lastModified = -1;
@@ -244,7 +245,8 @@ public class HotFolder implements Runnable
 			synchronized (runThread)
 			{
 				runThread.notifyAll();
-				log.info("Stopping hot folder: " + runThread.getName());
+				String name = runThread.getName();
+				log.info("Stopping hot folder: " + name);
 				try
 				{
 					// kill the old thread with extreme prejudice -otherwise we may have multiple concurring hf watcher threads
@@ -254,8 +256,13 @@ public class HotFolder implements Runnable
 				{
 					log.info("interupted while dying... ", x);
 				}
+				log.info("Finished stopping hot folder: " + name);
 			}
 			runThread = null;
+		}
+		else
+		{
+			log.warn("Stopping stopped hot folder: ");
 		}
 	}
 
@@ -315,6 +322,7 @@ public class HotFolder implements Runnable
 		}
 
 		runThread.interrupt();
+		log.info("completed hot folder at: " + dir.getAbsolutePath());
 	}
 
 	private File[] getHotFiles()

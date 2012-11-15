@@ -455,9 +455,9 @@ public class JDFSpawn
 		if (bResRW && r != null)
 		{
 			VElement vRes = getSpawnLeaves(r);
-			for (int k = 0; k < vRes.size(); k++)
+			for (KElement e : vRes)
 			{
-				final JDFResource rTarget = (JDFResource) vRes.elementAt(k);
+				final JDFResource rTarget = (JDFResource) e;
 				if (JDFResource.EnumSpawnStatus.SpawnedRW.equals(rTarget.getSpawnStatus()))
 				{
 					if (!vMultiRes.contains(rTarget) && (vSpawnParts == null || vSpawnParts.overlapsMap(rTarget.getPartMap())))
@@ -484,8 +484,9 @@ public class JDFSpawn
 				for (KElement e : partitionVector)
 				{
 					JDFResource rPart = (JDFResource) e;
-					vRes.appendUnique(rPart.getLeaves(false));
+					vRes.addAll(rPart.getLeaves(false));
 				}
+				vRes.unify();
 			}
 		}
 		return vRes;

@@ -78,7 +78,6 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.MyLong;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 
 /**
  * class to persist stuff later

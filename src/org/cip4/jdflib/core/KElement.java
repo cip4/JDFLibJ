@@ -3317,12 +3317,10 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param beforeChild the child of this that the Comment should be appended before. if null, append the Comment
 	 * @return the newly created xml comment
 	 */
-	public Node appendXMLComment(final String commentText, final KElement beforeChild)
+	public Node appendXMLComment(String commentText, final KElement beforeChild)
 	{
-		String commentTextLocal = commentText;
-
-		commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
-		final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
+		commentText = StringUtil.replaceString(commentText, "--", "__");
+		final Comment newChild = getOwnerDocument().createComment(commentText);
 		insertBefore(newChild, beforeChild);
 		return newChild;
 	}

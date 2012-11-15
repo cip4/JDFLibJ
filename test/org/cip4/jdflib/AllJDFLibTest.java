@@ -289,6 +289,7 @@ import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
+import org.cip4.jdflib.util.thread.ThreadFilterTest;
 import org.cip4.jdflib.util.zip.ZipReaderTest;
 import org.cip4.jdflib.validate.JDFValidatorTest;
 import org.cip4.jdflib.validate.VersionTranslatorTest;
@@ -575,6 +576,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.thread
 		suite.addTestSuite(DelayedPersistTest.class);
+		suite.addTestSuite(ThreadFilterTest.class);
 
 		// util.zip
 		suite.addTestSuite(ZipReaderTest.class);

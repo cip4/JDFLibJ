@@ -66,66 +66,67 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker;
+package org.cip4.jdflib.util.thread;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFComChannel;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
+ * class to retrieve threads 
  * @author rainer prosi
- * @date Oct 11, 2012
+ * @date Nov 14, 2012
  */
-public class RemoveEmptyTest extends JDFTestCaseBase
+public class ThreadFilter
 {
+
 	/**
 	 * 
-	 * 
 	 */
-	public void testRemove()
+	public ThreadFilter()
 	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
+		super();
 	}
 
 	/**
 	 * 
+	 * get a Vector of matching threads by name
 	 * 
+	 * @param regexp the expression to match against
+	 * @return
 	 */
-	public void testRemoveAttributes()
+	public Vector<Thread> getThreads(String regexp)
 	{
-		XMLDoc d = new XMLDoc("doc", null);
-		KElement root = d.getRoot();
-		root.setXPathAttribute("foo/@bar", "");
-		RemoveEmpty emp = new RemoveEmpty();
-		assertNotNull(root.getXPathAttribute("foo/@bar", null));
-		emp.removEmptyAttributes(root);
-		assertNull(root.getXPathAttribute("foo/@bar", null));
-		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
+		Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+		Set<Thread> threadSet = allStackTraces.keySet();
+		Vector<Thread> returnSet = new Vector<Thread>();
+		for (Thread thread : threadSet)
+		{
+			if (StringUtil.matches(thread.getName(), regexp))
+			{
+				returnSet.add(thread);
+			}
+		}
+		return returnSet;
 	}
 
 	/**
 	 * 
+	 * get a Vector of matching threads by name
 	 * 
+	 * @param regexp the expression to match against
+	 * @param nSkip which one?
+	 * @return
 	 */
-	public void testRemoveComChannel()
+	public Thread getThread(String regexp, int nSkip)
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFComChannel c = (JDFComChannel) n.addResource(ElementName.COMCHANNEL, EnumUsage.Input);
-		c.setChannelType(EnumChannelType.Email);
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
-
+		Vector<Thread> threads = getThreads(regexp);
+		if (nSkip < 0)
+			nSkip += threads.size();
+		if (nSkip < 0 || nSkip >= threads.size())
+			return null;
+		return threads.get(nSkip);
 	}
 }

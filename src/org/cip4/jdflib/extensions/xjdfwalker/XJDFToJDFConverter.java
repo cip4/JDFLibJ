@@ -96,6 +96,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNameRange;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
@@ -180,6 +182,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * 
 	 */
 	private EnumVersion version = EnumVersion.Version_1_4;
+	private boolean bConvertTilde = false;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -553,6 +556,38 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * @param e2
+	 */
+	protected void convertTilde(final KElement e2)
+	{
+		if (bConvertTilde)
+		{
+			final JDFAttributeMap map = e2.getAttributeMap();
+			final Iterator<String> keyIt = map.getKeyIterator();
+			while (keyIt.hasNext())
+			{
+				final String key = keyIt.next();
+				final String val = map.get(key);
+				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)))
+				{
+					VString v = new VString(val, null);
+					if (v.size() % 2 == 0)
+					{
+						JDFNameRangeList nrl = new JDFNameRangeList();
+						for (int i = 0; i < v.size(); i += 2)
+						{
+							nrl.append(new JDFNameRange(v.get(i), v.get(i + 1)));
+						}
+						String newVal = nrl.getString(0);
+						if (!val.equals(newVal))
+							e2.setAttribute(key, newVal);
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * @param theNode
 	 * @param parent
 	 */
@@ -642,6 +677,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		subElem.init();
 		subElem.setAttribute("Actual", e.getAttribute(name));
 		convertUnits(subElem);
+		convertTilde(subElem);
 		e.removeAttribute(name);
 		return subElem;
 	}
@@ -730,11 +766,13 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				final KElement e2 = trackElem.copyElement(e, null);
 				convertUnits(e2);
+				convertTilde(e2);
 				fixNamespace(e2);
 				e2.removeChildren(null, null, null); // will be copied later
 				trackElem = e2;
 			}
 			convertUnits(trackElem);
+			convertTilde(trackElem);
 			return trackElem;
 		}
 
@@ -1552,7 +1590,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			boolean m1 = (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
 			boolean m2 = "ChildProduct".equals(toCheck.getLocalName());
 			boolean m3 = "ProcessList".equals(toCheck.getLocalName());
-			return matches && (m1 || m2 || m3);
+			boolean m4 = "Dependent".equals(toCheck.getLocalName());
+			return matches && (m1 || m2 || m3 || m4);
 		}
 
 	}
@@ -2099,5 +2138,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final boolean bL1 = parent != null && parent.getLocalName().equals("Product");
 			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent");
 		}
+	}
+
+	/**
+	 * if true tildes are  converted to pairs in xjdf 2.0
+	 * @param b
+	 */
+	public void setConvertTilde(boolean b)
+	{
+		bConvertTilde = b;
 	}
 }
