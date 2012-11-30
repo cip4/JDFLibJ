@@ -72,8 +72,12 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
@@ -111,6 +115,58 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testIDPHoldPipeRIP()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
+		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		rll0.setCombinedProcessIndex(0);
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		rl.setResStatus(EnumResStatus.Unavailable, true);
+		rl.setPipeProtocol("Internal");
+		JDFResourceLink rll = n.getLink(rl, EnumUsage.Output);
+		int pos = n.getTypes().index("Rendering");
+		rll.setCombinedProcessIndex(pos);
+		JDFResourceLink rll2 = n.ensureLink(rl, EnumUsage.Input, null);
+		rll2.setCombinedProcessIndex(pos + 1);
+		rll2.setMinStatus(EnumResStatus.Available);
+		jdfDoc.write2File(sm_dirTestDataTemp + "HoldRIP.jdf", 2, false);
+		rll2.setMinStatus(EnumResStatus.Unavailable);
+		rll2.setPipeResume(5);
+		jdfDoc.write2File(sm_dirTestDataTemp + "PipeRIP.jdf", 2, false);
+	}
+
+	/**
+	 * TODO
+	 */
+	public void testIDPHoldQueueRIP()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
+		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		rll0.setCombinedProcessIndex(0);
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		rl.setResStatus(EnumResStatus.Unavailable, true);
+		rl.setPipeProtocol("Internal");
+		JDFResourceLink rll = n.getLink(rl, EnumUsage.Output);
+		int pos = n.getTypes().index("Rendering");
+		rll.setCombinedProcessIndex(pos);
+		JDFResourceLink rll2 = n.ensureLink(rl, EnumUsage.Input, null);
+		rll2.setCombinedProcessIndex(pos + 1);
+		rll2.setMinStatus(EnumResStatus.Available);
+		jdfDoc.write2File(sm_dirTestDataTemp + "HoldRIP.jdf", 2, false);
+		rll2.setMinStatus(EnumResStatus.Unavailable);
+		rll2.setPipeResume(5);
+		jdfDoc.write2File(sm_dirTestDataTemp + "PipeRIP.jdf", 2, false);
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
@@ -131,10 +187,10 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 
 		idpGoldenTicket.assign(null);
 		final JDFNode node = idpGoldenTicket.getNode();
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
-		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.4"));
+		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.4"));
 
 		idpGoldenTicket.good = 10;
 		idpGoldenTicket.waste = 0;

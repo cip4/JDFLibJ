@@ -529,13 +529,14 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * 
 	 * 
 	 * @param keySet the collection of given keys
+	 * @return this after removal
 	 */
-	public void reduceMap(final Collection<String> keySet)
+	public JDFAttributeMap reduceMap(final Collection<String> keySet)
 	{
 		if (keySet == null)
 		{
 			clear();
-			return;
+			return this;
 		}
 		final Iterator<String> it = getKeys().iterator();
 		while (it.hasNext())
@@ -546,6 +547,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 				remove(key);
 			}
 		}
+		return this;
 	}
 
 	/**
@@ -651,19 +653,20 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * remove all keys defined by set from this
 	 * 
 	 * @param set the set of keys ot remove
+	 * @return this map 
 	 */
-	public void removeKeys(final Collection<String> set)
+	public JDFAttributeMap removeKeys(final Collection<String> set)
 	{
-		if (set == null)
+		if (set != null)
 		{
-			return;
+			final Iterator<String> it = set.iterator();
+			while (it.hasNext())
+			{
+				final String key = it.next();
+				remove(key);
+			}
 		}
-		final Iterator<String> it = set.iterator();
-		while (it.hasNext())
-		{
-			final String key = it.next();
-			remove(key);
-		}
+		return this;
 	}
 
 	/**

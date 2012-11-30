@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -589,6 +589,17 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	public int getSortPriority()
 	{
 		return getSortPriority(getQueueEntryStatus(), getPriority());
+	}
+
+	/**
+	* (24) const get element JobPhase
+	* @return JDFJobPhase the element
+	* @deprecated use getJobPhase(n) this is a legacy version 
+	*/
+	@Deprecated
+	public JDFJobPhase getJobPhase()
+	{
+		return getJobPhase(0);
 	}
 
 	/**

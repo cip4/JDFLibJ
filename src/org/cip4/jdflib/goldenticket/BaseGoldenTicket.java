@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -258,7 +258,7 @@ public class BaseGoldenTicket
 	{
 		paperProductID = "paperID";
 		baseICSLevel = pIcsLevel;
-		theVersion = jdfVersion == null ? EnumVersion.Version_1_3 : jdfVersion;
+		theVersion = jdfVersion == null ? EnumVersion.Version_1_4 : jdfVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
 		KElement.setLongID(false);
 	}

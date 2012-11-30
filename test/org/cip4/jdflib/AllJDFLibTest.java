@@ -271,6 +271,7 @@ import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StreamUtilTest;
 import org.cip4.jdflib.util.StringUtilTest;
+import org.cip4.jdflib.util.ThreadUtilTest;
 import org.cip4.jdflib.util.URLReaderTest;
 import org.cip4.jdflib.util.UnitParserTest;
 import org.cip4.jdflib.util.UrlPartTest;
@@ -288,6 +289,7 @@ import org.cip4.jdflib.util.mime.MimeWriterTest;
 import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
+import org.cip4.jdflib.util.net.UrlCheckTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
 import org.cip4.jdflib.util.thread.ThreadFilterTest;
 import org.cip4.jdflib.util.zip.ZipReaderTest;
@@ -573,10 +575,12 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(NetPollTest.class);
 		suite.addTestSuite(ProxyUtilTest.class);
 		suite.addTestSuite(URLProxySelectorTest.class);
+		suite.addTestSuite(UrlCheckTest.class);
 
 		// util.thread
 		suite.addTestSuite(DelayedPersistTest.class);
 		suite.addTestSuite(ThreadFilterTest.class);
+		suite.addTestSuite(ThreadUtilTest.class);
 
 		// util.zip
 		suite.addTestSuite(ZipReaderTest.class);

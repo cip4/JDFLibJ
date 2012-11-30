@@ -204,6 +204,10 @@ public class UrlUtil
 	 */
 	public static final String APPLICATION_ZIP = "application/zip";
 	/**
+	 * zip, maybe?
+	 */
+	public static final String APPLICATION_XZIP = "application/x-zip-compressed";
+	/**
 	 * pdf, duh...
 	 */
 	public static final String APPLICATION_PDF = JDFCoreConstants.MIME_PDF;
@@ -1087,6 +1091,49 @@ public class UrlUtil
 	}
 
 	/**
+	 * get the ip address as a string with the left byte at pos 0
+	 * @param ip
+	 * @return
+	 */
+	public static String getIPFromBytes(byte[] ip)
+	{
+		if ((ip == null) || (ip.length != 4 && ip.length != 6))
+		{
+			return null;
+		}
+		StringBuffer b = new StringBuffer(32);
+		for (int i = 0; i < ip.length; i++)
+		{
+			b.append(ip[i]);
+			if (i > 0)
+				b.append('.');
+		}
+		return b.toString();
+	}
+
+	/**
+	 * get the ip address as a set of bytes with the left byte at pos 0
+	 * @param ip
+	 * @return
+	 */
+	public static byte[] getBytesFromIP(String ip)
+	{
+		VString v = StringUtil.tokenize(ip, ".", false);
+		if (v == null || v.size() < 4)
+			return null;
+		byte[] b = new byte[v.size()];
+		int n = 0;
+		for (String s : v)
+		{
+			int i = StringUtil.parseInt(s, -1);
+			if (i > 255 || i < 0)
+				return null;
+			b[n++] = (byte) i;
+		}
+		return b;
+	}
+
+	/**
 	 * check whether a file is a mime file
 	 * 
 	 * @param lower
@@ -1628,6 +1675,25 @@ public class UrlUtil
 		if ((lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml"))
 			return true;
 
+		return false;
+	}
+
+	/**
+	 * check whether the mime type is a known zip dialect
+	 * @param contentType
+	 * @return
+	 */
+	public static boolean isZIPType(String contentType)
+	{
+		if (contentType == null)
+			return false;
+
+		String lower = contentType.toLowerCase().trim();
+		while (lower.endsWith(";"))
+			lower = StringUtil.leftStr(lower, -1);
+
+		if (APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower))
+			return true;
 		return false;
 	}
 

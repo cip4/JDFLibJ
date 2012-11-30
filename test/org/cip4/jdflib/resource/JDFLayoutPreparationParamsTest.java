@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -161,6 +162,17 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		assertTrue(types.contains(EnumType.Stripping.getName()));
 		assertTrue(types.contains(EnumType.Imposition.getName()));
 		assertFalse(types.contains(EnumType.LayoutPreparation.getName()));
+	}
+
+	/**
+	 * 
+	 */
+	public void testBorderless()
+	{
+		JDFPageCell pc = lpp.appendPageCell();
+		pc.setTrimSize(new JDFXYPair(500, 700));
+		pc.setClipBox(new JDFRectangle(-5, -4, 505, 705));
+		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "borderless.jdf", 2, false);
 	}
 
 	/**

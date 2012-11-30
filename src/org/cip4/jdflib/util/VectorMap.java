@@ -115,10 +115,8 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
 	 * @return the matching vectorObject; null if the key does not exist or i is out of range
 	 */
-	public vectorObject getOne(final Object key, final int i)
+	public vectorObject getOne(final Object key, int i)
 	{
-		int iLocal = i;
-
 		final Vector<vectorObject> c = get(key);
 		if (c == null)
 		{
@@ -126,17 +124,17 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 		}
 
 		final int n = c.size();
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal = n + iLocal;
+			i += n;
 		}
 
-		if (iLocal < 0 || iLocal >= n)
+		if (i < 0 || i >= n)
 		{
 			return null;
 		}
 
-		return c.get(iLocal);
+		return c.get(i);
 	}
 
 	/**
@@ -304,5 +302,32 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 		{
 			putOne(key, newObj);
 		}
+	}
+
+	/**
+	 * insert the value for keyat position pos
+	 * 
+	 * @param key the key of the vector
+	 * @param newObj the new object to set
+	 * @param pos the index in the vector, may be <0 to count from the end
+	 * @throws IllegalArgumentException if pos is negative and abs(pos)>size()
+	 */
+	public void setOne(final key key, final vectorObject newObj, int pos)
+	{
+		Vector<vectorObject> v = get(key);
+		if (v == null)
+		{
+			v = new Vector<vectorObject>();
+			put(key, v);
+		}
+		if (pos < 0)
+			pos += v.size();
+
+		if (pos < 0)
+		{
+			throw new IllegalArgumentException("index <0 after adding size: " + pos);
+		}
+		ContainerUtil.ensureSize(pos + 1, v);
+		v.set(pos, newObj);
 	}
 }

@@ -70,542 +70,516 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.core.ElementInfo;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
-    /**
-    *****************************************************************************
-    class JDFAutoQueueEntry : public JDFElement
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JDFDate;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueueEntry : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueueEntry extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueueEntry
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntry
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntry(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntry
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntry
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntry(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntry
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntry
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueueEntry(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueueEntry[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for QueueEntryStatus
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueueEntry[  --> " + super.toString() + " ]";
-    }
+	public static class EnumQueueEntryStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumQueueEntryStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for QueueEntryStatus
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumQueueEntryStatus getEnum(String enumName)
+		{
+			return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumName);
+		}
 
-        public static class EnumQueueEntryStatus extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumQueueEntryStatus getEnum(int enumValue)
+		{
+			return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumValue);
+		}
 
-            private EnumQueueEntryStatus(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumQueueEntryStatus.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumQueueEntryStatus getEnum(String enumName)
-            {
-                return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumQueueEntryStatus.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumQueueEntryStatus getEnum(int enumValue)
-            {
-                return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumQueueEntryStatus.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumQueueEntryStatus.class);
-            }
+		public static final EnumQueueEntryStatus Running = new EnumQueueEntryStatus("Running");
+		public static final EnumQueueEntryStatus Waiting = new EnumQueueEntryStatus("Waiting");
+		public static final EnumQueueEntryStatus Held = new EnumQueueEntryStatus("Held");
+		public static final EnumQueueEntryStatus Removed = new EnumQueueEntryStatus("Removed");
+		public static final EnumQueueEntryStatus Suspended = new EnumQueueEntryStatus("Suspended");
+		public static final EnumQueueEntryStatus PendingReturn = new EnumQueueEntryStatus("PendingReturn");
+		public static final EnumQueueEntryStatus Completed = new EnumQueueEntryStatus("Completed");
+		public static final EnumQueueEntryStatus Aborted = new EnumQueueEntryStatus("Aborted");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumQueueEntryStatus.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumQueueEntryStatus.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DeviceID
+	  * @param value the value to set the attribute to
+	  */
+	public void setDeviceID(String value)
+	{
+		setAttribute(AttributeName.DEVICEID, value, null);
+	}
 
-            public static final EnumQueueEntryStatus Running = new EnumQueueEntryStatus("Running");
-            public static final EnumQueueEntryStatus Waiting = new EnumQueueEntryStatus("Waiting");
-            public static final EnumQueueEntryStatus Held = new EnumQueueEntryStatus("Held");
-            public static final EnumQueueEntryStatus Removed = new EnumQueueEntryStatus("Removed");
-            public static final EnumQueueEntryStatus Suspended = new EnumQueueEntryStatus("Suspended");
-            public static final EnumQueueEntryStatus PendingReturn = new EnumQueueEntryStatus("PendingReturn");
-            public static final EnumQueueEntryStatus Completed = new EnumQueueEntryStatus("Completed");
-            public static final EnumQueueEntryStatus Aborted = new EnumQueueEntryStatus("Aborted");
-        }      
+	/**
+	  * (23) get String attribute DeviceID
+	  * @return the value of the attribute
+	  */
+	public String getDeviceID()
+	{
+		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EndTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute EndTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setEndTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+			date = new JDFDate();
+		setAttribute(AttributeName.ENDTIME, date.getDateTimeISO(), null);
+	}
 
+	/**
+	  * (12) get JDFDate attribute EndTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getEndTime()
+	{
+		String str = getAttribute(AttributeName.ENDTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DeviceID
-          * @param value the value to set the attribute to
-          */
-        public void setDeviceID(String value)
-        {
-            setAttribute(AttributeName.DEVICEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GangName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GangName
+	  * @param value the value to set the attribute to
+	  */
+	public void setGangName(String value)
+	{
+		setAttribute(AttributeName.GANGNAME, value, null);
+	}
 
-        /**
-          * (23) get String attribute DeviceID
-          * @return the value of the attribute
-          */
-        public String getDeviceID()
-        {
-            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute GangName
+	  * @return the value of the attribute
+	  */
+	public String getGangName()
+	{
+		return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EndTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute EndTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setEndTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.ENDTIME, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-        /**
-          * (12) get JDFDate attribute EndTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getEndTime()
-        {
-            String str = getAttribute(AttributeName.ENDTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GangName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GangName
-          * @param value the value to set the attribute to
-          */
-        public void setGangName(String value)
-        {
-            setAttribute(AttributeName.GANGNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute GangName
-          * @return the value of the attribute
-          */
-        public String getGangName()
-        {
-            return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Priority
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Priority
+	  * @param value the value to set the attribute to
+	  */
+	public void setPriority(int value)
+	{
+		setAttribute(AttributeName.PRIORITY, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute Priority
+	  * @return int the value of the attribute
+	  */
+	public int getPriority()
+	{
+		return getIntAttribute(AttributeName.PRIORITY, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Priority
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Priority
-          * @param value the value to set the attribute to
-          */
-        public void setPriority(int value)
-        {
-            setAttribute(AttributeName.PRIORITY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Status
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Status
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setQueueEntryStatus(EnumQueueEntryStatus enumVar)
+	{
+		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (15) get int attribute Priority
-          * @return int the value of the attribute
-          */
-        public int getPriority()
-        {
-            return getIntAttribute(AttributeName.PRIORITY, null, 1);
-        }
+	/**
+	  * (9) get attribute Status
+	  * @return the value of the attribute
+	  */
+	public EnumQueueEntryStatus getQueueEntryStatus()
+	{
+		return EnumQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StartTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute StartTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setStartTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+			date = new JDFDate();
+		setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (12) get JDFDate attribute StartTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getStartTime()
+	{
+		String str = getAttribute(AttributeName.STARTTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Status
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Status
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setQueueEntryStatus(EnumQueueEntryStatus enumVar)
-        {
-            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SubmissionTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute SubmissionTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setSubmissionTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+			date = new JDFDate();
+		setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (9) get attribute Status
-          * @return the value of the attribute
-          */
-        public EnumQueueEntryStatus getQueueEntryStatus()
-        {
-            return EnumQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
-        }
+	/**
+	  * (12) get JDFDate attribute SubmissionTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getSubmissionTime()
+	{
+		String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StartTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute StartTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setStartTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (12) get JDFDate attribute StartTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getStartTime()
-        {
-            String str = getAttribute(AttributeName.STARTTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/** (26) getCreateJobPhase
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase getCreateJobPhase(int iSkip)
+	{
+		return (JDFJobPhase) getCreateElement_KElement(ElementName.JOBPHASE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SubmissionTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute SubmissionTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setSubmissionTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
-        }
+	/**
+	 * (27) const get element JobPhase
+	 * @param iSkip number of elements to skip
+	 * @return JDFJobPhase the element
+	 * default is getJobPhase(0)     */
+	public JDFJobPhase getJobPhase(int iSkip)
+	{
+		return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
+	}
 
-        /**
-          * (12) get JDFDate attribute SubmissionTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getSubmissionTime()
-        {
-            String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	 * Get all JobPhase from the current element
+	 * 
+	 * @return Collection<JDFJobPhase>, null if none are available
+	 */
+	public Collection<JDFJobPhase> getAllJobPhase()
+	{
+		final VElement vc = getChildElementVector(ElementName.JOBPHASE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFJobPhase> v = new Vector<JDFJobPhase>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFJobPhase) vc.get(i));
+		}
 
-    /** (26) getCreateJobPhase
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFJobPhase the element
-     */
-    public JDFJobPhase getCreateJobPhase(int iSkip)
-    {
-        return (JDFJobPhase)getCreateElement_KElement(ElementName.JOBPHASE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element JobPhase
-     * @param iSkip number of elements to skip
-     * @return JDFJobPhase the element
-     * default is getJobPhase(0)     */
-    public JDFJobPhase getJobPhase(int iSkip)
-    {
-        return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
-    }
+	/**
+	 * (30) append element JobPhase
+	 * @return JDFJobPhase the element
+	 */
+	public JDFJobPhase appendJobPhase()
+	{
+		return (JDFJobPhase) appendElement(ElementName.JOBPHASE, null);
+	}
 
-    /**
-     * Get all JobPhase from the current element
-     * 
-     * @return Collection<JDFJobPhase>, null if none are available
-     */
-    public Collection<JDFJobPhase> getAllJobPhase()
-    {
-        final VElement vc = getChildElementVector(ElementName.JOBPHASE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-        final Vector<JDFJobPhase> v = new Vector<JDFJobPhase>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFJobPhase) vc.get(i));
-        }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element JobPhase
-     * @return JDFJobPhase the element
-     */
-    public JDFJobPhase appendJobPhase()
-    {
-        return (JDFJobPhase) appendElement(ElementName.JOBPHASE, null);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

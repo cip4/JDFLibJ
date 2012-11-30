@@ -115,6 +115,8 @@ public abstract class JDFTestCaseBase extends TestCase
 		super();
 		LogConfigurator.configureLog(null, null);
 		setTestNetwork(false);
+
+		//		setTestNetwork(new UrlCheck("http://www.example.com").pingRC(1000) == 200);
 	}
 
 	/**

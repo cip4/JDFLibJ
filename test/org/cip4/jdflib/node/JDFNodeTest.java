@@ -2361,6 +2361,14 @@ public class JDFNodeTest extends JDFTestCaseBase
 		n2.setActivation(EnumActivation.Active);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(false), EnumActivation.Active);
+
+		n2.setActivation(EnumActivation.Held);
+		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
+		assertEquals(n2.getActivation(false), EnumActivation.Held);
+
+		n2.setActivation(null);
+		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
+		assertEquals(n2.getActivation(false), null);
 	}
 
 	// ////////////////////////////////////////////////////////////

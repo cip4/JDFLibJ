@@ -180,39 +180,44 @@ public class ThreadUtil
 	 * simple sleep wrapper that catches its exception
 	 * 
 	 * @param millis
+	 * @return true if normal exit, false if interupted
 	 */
-	public static void sleep(final int millis)
+	public static boolean sleep(final int millis)
 	{
+		if (millis <= 0)
+			return true;
 		try
 		{
 			Thread.sleep(millis);
+			return true;
 		}
 		catch (final InterruptedException x)
 		{
-			// nop
+			return false;
 		}
 	}
 
 	/**
 	 * simple join wrapper that catches its exception
 	 * @param thread the thread to join
-	 * 
 	 * @param millis
+	 * @return true if normal exit, false if interupted
 	 */
-	public static void join(final Thread thread, int millis)
+	public static boolean join(final Thread thread, int millis)
 	{
 		if (thread == null)
-			return;
+			return true;
 		try
 		{
 			if (millis <= 0)
 				thread.join();
 			else
 				thread.join(millis);
+			return true;
 		}
 		catch (final InterruptedException x)
 		{
-			//nop
+			return false;
 		}
 	}
 
@@ -221,12 +226,13 @@ public class ThreadUtil
 	 * 
 	 * @param mutex the object that will wait, if null we assume we need not wait
 	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
+	 * @return true if normal exit, false if interupted or mutex is null
 	 */
-	public static void wait(final Object mutex, int millis)
+	public static boolean wait(final Object mutex, int millis)
 	{
 		if (mutex == null)
 		{
-			return;
+			return false;
 		}
 		if (millis < 0)
 		{
@@ -238,10 +244,11 @@ public class ThreadUtil
 			{
 				mutex.wait(millis);
 			}
+			return true;
 		}
 		catch (final InterruptedException x)
 		{
-			// nop
+			return false;
 		}
 	}
 

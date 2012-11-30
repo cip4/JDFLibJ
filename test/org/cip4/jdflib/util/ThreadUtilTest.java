@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,8 +72,8 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ThreadUtil.WaitTimeout;
 import org.cip4.jdflib.util.thread.MyMutex;
+import org.cip4.jdflib.util.thread.WaitTimeout;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -99,7 +99,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 * @see org.cip4.jdflib.util.ThreadUtil.WaitTimeout#handle()
+		 * @see org.cip4.jdflib.util.thread.WaitTimeout#handle()
 		 */
 		@Override
 		protected Integer handle()
@@ -111,13 +111,43 @@ public class ThreadUtilTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 *  
 	 */
 	public void testWaitTimeout()
 	{
 		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
+		assertNull(new TestWait(400, 1000).getWaitedObject());
+	}
+
+	/**
+	 *  
+	 */
+	public void testPeekWaitTimeout()
+	{
+		TestWait testWait = new TestWait(1400, 1000);
+		assertNull(testWait.peekWaitedObject());
+		assertEquals(testWait.getWaitedObject().intValue(), 42);
+		assertEquals(testWait.peekWaitedObject().intValue(), 42);
+	}
+
+	/**
+	 *  
+	 */
+	public void testWaitTimeoutDelay()
+	{
+		TestWait testWait = new TestWait(2000, 1000);
+		ThreadUtil.sleep(1200);
+		long t0 = System.currentTimeMillis();
+		assertNotNull(testWait.getWaitedObject());
+		assertTrue(System.currentTimeMillis() - t0 < 1000);
+	}
+
+	/**
+	 *  
+	 */
+	public void testWaitTimeoutFail()
+	{
 		assertNull(new TestWait(400, 1000).getWaitedObject());
 	}
 
@@ -135,8 +165,13 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 */
 	public void testMyMutex()
 	{
+		int nLast = -1;
 		for (int i = 0; i < 10000; i++)
-			assertEquals("MyMutex: " + i + " [main]", new MyMutex().toString());
+		{
+			int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
+			assertTrue(n > nLast);
+			nLast = n;
+		}
 	}
 
 }

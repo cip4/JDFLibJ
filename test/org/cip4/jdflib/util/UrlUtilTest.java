@@ -77,8 +77,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.mail.BodyPart;
@@ -95,8 +93,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
-import org.cip4.jdflib.util.mime.BodyPartHelper;
-import org.cip4.jdflib.util.mime.MimeWriter;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
 /**
@@ -367,32 +363,29 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws IOException
+	 *  
 	 * 
 	 */
-	public void testGetFileName() throws IOException
+	public void testGetBytesFromIP()
 	{
-		final File newCID = new File(sm_dirTestDataTemp + "GetFileNameTest.txt");
-		newCID.createNewFile();
-		newCID.delete();
-		FileUtil.copyBytes("abcde".getBytes(), newCID);
-		final MimeWriter mimeWriter = new MimeWriter();
-		final BodyPartHelper bph = mimeWriter.updateMultipart(new FileInputStream(newCID), "newCID.CID", UrlUtil.TEXT_PLAIN);
-		bph.setFileName("GetFileNameTest.txt");
+		assertNull(UrlUtil.getBytesFromIP("foo"));
+		assertNull(UrlUtil.getBytesFromIP("3.141"));
+		assertNull(UrlUtil.getBytesFromIP("3.141.2.2222"));
+		assertNotNull(UrlUtil.getBytesFromIP("127.0.0.1"));
+	}
 
-		assertEquals("GetFileNameTest.txt", UrlUtil.getFileName("newCID.CID", mimeWriter.getMultiPart()));
-
-		if (File.separator.equals("\\"))
-		{ // on windows
-			final File f = new File("C:\\IO.SYS");
-			String s = UrlUtil.fileToUrl(f, false);
-			assertEquals(s, "file:///C:/IO.SYS");
-
-			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), true);
-			assertEquals(s, "file://fooBar/4%e2%82%ac.txt");
-			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), false);
-			assertEquals(s, "file://fooBar/4€.txt");
-		}
+	/**
+	 *  
+	 * 
+	 */
+	public void testGetIPFromBytes()
+	{
+		assertNull(UrlUtil.getIPFromBytes(null));
+		assertNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2 }));
+		assertNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2 }));
+		assertNotNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2, 4, 5 }));
+		assertNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2, 4, 5, 6 }));
+		assertNotNull(UrlUtil.getIPFromBytes(new byte[] { 1, 2, 4, 5, 6, 7 }));
 	}
 
 	/**

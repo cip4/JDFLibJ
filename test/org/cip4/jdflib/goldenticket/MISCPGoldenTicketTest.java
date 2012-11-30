@@ -115,10 +115,10 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.4"));
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.good = 1000;
@@ -127,10 +127,10 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.makeReadyAll();
 		node = cpGoldenTicket.getNode();
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.4"));
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.assign(null);
@@ -262,7 +262,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
-		VString vICS = new VString("Base_L2-1.3,MIS_L1-1.3,MISCPS_L1-1.3", ",");
+		VString vICS = new VString("Base_L2-1.4,MIS_L1-1.4,MISCPS_L1-1.4", ",");
 		assertEquals(cpGoldenTicket.getICSVersions(), vICS);
 	}
 

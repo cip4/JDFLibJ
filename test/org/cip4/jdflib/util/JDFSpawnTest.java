@@ -102,6 +102,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -514,6 +515,47 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		nRoot.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "multiSpawn.jdf", 2, false);
 		assertTrue(nRoot.isValid(EnumValidationLevel.Incomplete));
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testSpawnRWGap()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		VString v = new VString("SignatureName SheetName Side Separation PartVersion", null);
+		JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFNodeInfo ni = n2.getCreateNodeInfo();
+		Vector<JDFResource> vr = new Vector<JDFResource>();
+		vr.add(ni);
+		vr.add(cpp);
+		vr.add(comp);
+		JDFAttributeMap partmap = new JDFAttributeMap();
+		partmap.put("SignatureName", "Sig1");
+		partmap.put("SheetName", "S1");
+		partmap.put("Side", "Front");
+		partmap.put("Separation", "Black");
+		for (JDFResource r : vr)
+		{
+			JDFResource r2 = r.getCreatePartition(partmap, v);
+		}
+		partmap.put("PartVersion", "EN");
+		ni.getCreatePartition(partmap, v);
+		JDFAttributeMap subMap = partmap.clone();
+		subMap.removeKeys(new VString("Side Separation ", null));
+		subMap.put("PartVersion", "EN");
+		JDFSpawn sp = new JDFSpawn(n2);
+		VJDFAttributeMap vmap = new VJDFAttributeMap();
+		vmap.add(subMap);
+		JDFNode nsp = sp.spawn(null, null, new VString("NodeInfo Output", null), vmap, false, true, true, true);
+		JDFComponent co = (JDFComponent) nsp.getResource(ElementName.COMPONENT, null, 0);
+		co.getCreatePartition(partmap, v);
+		co.expand(true);
+		JDFMerge m = new JDFMerge(n);
+		JDFNode out = m.mergeJDF(nsp);
 	}
 
 	/**
@@ -2171,6 +2213,38 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			}
 		}
+	}
+
+	/**
+	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
+	 * 
+	 */
+	public void testSpawnNIStatus()
+	{
+
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
+		n.setType("ProcessGroup", false);
+
+		final VString v = new VString();
+		v.add("Interpreting");
+		v.add("Rendering");
+
+		final JDFNode n2 = n.addCombined(v);
+		n2.setJobPartID("J1");
+		n2.appendNodeInfo();
+		n2.setPartStatus((JDFAttributeMap) null, EnumNodeStatus.Setup, null);
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		final JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, null, true, true, true, true);
+		spawnedNode.setPartStatus((JDFAttributeMap) null, EnumNodeStatus.Cleanup, null);
+		spawnedNode.setActivation(EnumActivation.Inactive);
+		JDFMerge m = new JDFMerge(n);
+		m.mergeJDF(spawnedNode);
+		JDFNode n3 = n.getJobPart("J1", null);
+		assertEquals(n3.getPartStatus(null, 0), EnumNodeStatus.Cleanup);
+		assertEquals(n3.getActivation(true), EnumActivation.Inactive);
 	}
 
 	/**

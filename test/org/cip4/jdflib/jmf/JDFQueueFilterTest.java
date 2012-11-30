@@ -466,7 +466,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
 		JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
 
-		queueEntryLast.getJobPhase().setStatusDetails("other");
+		queueEntryLast.getJobPhase(0).setStatusDetails("other");
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		assertEquals("we modified statusdetails, and are not ignoring job phase", qCopy.numEntries(null), 1);
@@ -494,16 +494,16 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JDF);
 		JDFQueue q2 = filter.copy(theQueue, null, null);
 		JDFQueueEntry qe2 = q2.getQueueEntry(0);
-		assertNotNull(qe2.getJobPhase().getNode());
+		assertNotNull(qe2.getJobPhase(0).getNode());
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		q2 = filter.copy(theQueue, null, null);
 		qe2 = q2.getQueueEntry(0);
-		assertNotNull(qe2.getJobPhase());
-		assertNull(qe2.getJobPhase().getNode());
+		assertNotNull(qe2.getJobPhase(0));
+		assertNull(qe2.getJobPhase(0).getNode());
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
 		q2 = filter.copy(theQueue, null, null);
 		qe2 = q2.getQueueEntry(0);
-		assertNull(qe2.getJobPhase());
+		assertNull(qe2.getJobPhase(0));
 
 	}
 }

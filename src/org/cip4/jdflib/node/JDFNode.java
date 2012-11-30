@@ -3427,8 +3427,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			JDFNode p = this;
 			while (p != null)
 			{
-				// walk through through all anchestors, to parent to grandparent
-				// to grandgrandparent
+				// walk through through all anchestors, to parent to grandparent to grandgrandparent
 				// and so on until root and compare the Activation state
 				final EnumActivation a = EnumActivation.getEnum(p.getAttribute(AttributeName.ACTIVATION, null, null));
 				if (a != null)
@@ -3467,7 +3466,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void setActivation(final EnumActivation bActive)
 	{
-		setAttribute(AttributeName.ACTIVATION, bActive.getName(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTIVATION, bActive == null ? null : bActive.getName(), null);
 	}
 
 	/**
@@ -9413,7 +9412,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @return JDFNode [] - All child process nodes.
 	 */
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Deprecated
 	public JDFNode[] getProcessNodes()
 	{

@@ -208,8 +208,35 @@ public class VectorMapTest extends JDFTestCaseBase
 		assertEquals(m.size("aaa"), 1);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
+	 */
+	public void testSetOneInt()
+	{
+		m = new VectorMap<String, String>();
+		m.setOne("a", "b1", 3);
+		assertEquals(m.getOne("a", 3), "b1");
+		assertNull(m.getOne("a", 2));
+		assertEquals(m.size("a"), 4);
+		m.setOne("a", "b2", -2);
+		assertEquals(m.size("a"), 4);
+		assertNull(m.getOne("a", 1));
+		assertEquals(m.getOne("a", 3), "b1");
+		assertEquals(m.getOne("a", 2), "b2");
+		assertEquals(m.getOne("a", -2), "b2");
+		try
+		{
+			m.setOne("a", "v", -20);
+			fail("bad negative");
+		}
+		catch (IllegalArgumentException x)
+		{
+			// nop
+		}
+	}
+
+	/**
+	 * 
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */

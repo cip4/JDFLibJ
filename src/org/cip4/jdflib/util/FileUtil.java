@@ -757,9 +757,9 @@ public class FileUtil
 		int i = 1;
 		while (!bOK)
 		{
-			ThreadUtil.sleep(i * i * 100);
+			boolean bInterupt = !ThreadUtil.sleep(i * i * 100);
 			bOK = file.delete();
-			if (i++ > 6)
+			if (bInterupt || i++ > 6)
 			{
 				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath());
 				break;

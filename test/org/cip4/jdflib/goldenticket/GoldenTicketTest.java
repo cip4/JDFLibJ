@@ -94,7 +94,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_Base_1.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L1-1.4"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
@@ -107,8 +107,8 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_JMF_1.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L1-1.4"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
@@ -121,9 +121,9 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		bgt.assign(null);
 		final JDFNode node = bgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "GoldenTicket_MIS_2.jdf", 2, false);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.4"));
 		node.setType(JDFNode.EnumType.ProcessGroup);
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "MISGT.jdf", 2, false);
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
