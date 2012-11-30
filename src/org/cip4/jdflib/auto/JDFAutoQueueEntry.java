@@ -70,27 +70,33 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.jmf.JDFJobPhase;
-import org.cip4.jdflib.resource.JDFPart;
-import org.cip4.jdflib.util.JDFDate;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
     /**
     *****************************************************************************
     class JDFAutoQueueEntry : public JDFElement
@@ -127,7 +133,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x66666611);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x33333311);
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
@@ -500,32 +506,55 @@ public abstract class JDFAutoQueueEntry extends JDFElement
  * ***********************************************************************
  */
 
-    /**
-     * (24) const get element JobPhase
-     * @return JDFJobPhase the element
-     */
-    public JDFJobPhase getJobPhase()
-    {
-        return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, 0);
-    }
-
-    /** (25) getCreateJobPhase
+    /** (26) getCreateJobPhase
      * 
+     * @param iSkip number of elements to skip
      * @return JDFJobPhase the element
      */
-    public JDFJobPhase getCreateJobPhase()
+    public JDFJobPhase getCreateJobPhase(int iSkip)
     {
-        return (JDFJobPhase) getCreateElement_KElement(ElementName.JOBPHASE, null, 0);
+        return (JDFJobPhase)getCreateElement_KElement(ElementName.JOBPHASE, null, iSkip);
     }
 
     /**
-     * (29) append element JobPhase
+     * (27) const get element JobPhase
+     * @param iSkip number of elements to skip
      * @return JDFJobPhase the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFJobPhase appendJobPhase() throws JDFException
+     * default is getJobPhase(0)     */
+    public JDFJobPhase getJobPhase(int iSkip)
     {
-        return (JDFJobPhase) appendElementN(ElementName.JOBPHASE, 1, null);
+        return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
+    }
+
+    /**
+     * Get all JobPhase from the current element
+     * 
+     * @return Collection<JDFJobPhase>, null if none are available
+     */
+    public Collection<JDFJobPhase> getAllJobPhase()
+    {
+        final VElement vc = getChildElementVector(ElementName.JOBPHASE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFJobPhase> v = new Vector<JDFJobPhase>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFJobPhase) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element JobPhase
+     * @return JDFJobPhase the element
+     */
+    public JDFJobPhase appendJobPhase()
+    {
+        return (JDFJobPhase) appendElement(ElementName.JOBPHASE, null);
     }
 
     /** (26) getCreatePart
