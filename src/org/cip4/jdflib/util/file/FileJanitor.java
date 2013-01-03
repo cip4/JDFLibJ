@@ -109,6 +109,10 @@ public class FileJanitor
 	{
 		private final FileFilter baseFilter;
 
+		/**
+		 * 
+		 * @param f
+		 */
 		KillFilter(FileFilter f)
 		{
 			this.baseFilter = f;
@@ -120,6 +124,11 @@ public class FileJanitor
 		public boolean accept(File file)
 		{
 			boolean accept = baseFilter.accept(file);
+			if (delEmpty && !accept && file.isDirectory() && file.list().length == 0)
+			{
+				accept = true;
+			}
+
 			if (accept)
 			{
 				if (file.isDirectory() && file.list().length > 0)
@@ -149,6 +158,7 @@ public class FileJanitor
 	private KillFilter filter;
 	boolean logSingle;
 	private final Log log;
+	private boolean delEmpty;
 
 	/**
 	 * 
@@ -158,6 +168,16 @@ public class FileJanitor
 	public void setLogSingle(boolean logSingle)
 	{
 		this.logSingle = logSingle;
+	}
+
+	/**
+	 * 
+	 * if true, we delete empty directories
+	 * @param delEmpty
+	 */
+	public void setDeleteEmptyDir(boolean delEmpty)
+	{
+		this.delEmpty = logSingle;
 	}
 
 	/**
@@ -172,6 +192,7 @@ public class FileJanitor
 		this.baseDir = baseDir;
 		this.log = LogFactory.getLog(getClass());
 		logSingle = false;
+		delEmpty = false;
 	}
 
 	/**
@@ -196,5 +217,15 @@ public class FileJanitor
 	public Vector<File> cleanup()
 	{
 		return FileUtil.listFilesInTree(baseDir, filter);
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return "FileJanitor " + baseDir + " delEmpty=" + delEmpty;
 	}
 }

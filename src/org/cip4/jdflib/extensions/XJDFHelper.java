@@ -189,7 +189,6 @@ public class XJDFHelper extends BaseXJDFHelper
 			e = e.getNextSiblingElement();
 		}
 		return v.size() == 0 ? null : v;
-
 	}
 
 	/**
@@ -355,6 +354,28 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 *  
+	 * @param name 
+	 * @param usage 
+	 * @return a new set element
+	 */
+	public SetHelper getCreateResourceSet(String name, EnumUsage usage)
+	{
+		return getCreateSet("Resource", name, usage);
+	}
+
+	/**
+	 *  
+	 * @param name 
+	 * @param usage 
+	 * @return a new set element
+	 */
+	public SetHelper getCreateParameterSet(String name, EnumUsage usage)
+	{
+		return getCreateSet("Parameter", name, usage);
+	}
+
+	/**
 	 * @param name 
 	 */
 	public void removeSet(String name)
@@ -424,4 +445,31 @@ public class XJDFHelper extends BaseXJDFHelper
 		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
 	}
 
+	/**
+	 * 
+	 * @param types
+	 */
+	public void setTypes(String types)
+	{
+		VString vtypes = VString.getVString(types, null);
+		setTypes(vtypes);
+	}
+
+	/**
+	 * 
+	 * @param vtypes
+	 */
+	public void setTypes(VString vtypes)
+	{
+		setXPathValue("@Types", StringUtil.setvString(vtypes));
+	}
+
+	/**
+	 * 
+	 * @return types the vector of types
+	 */
+	public VString getTypes()
+	{
+		return VString.getVString(getXPathValue("@Types"), null);
+	}
 }

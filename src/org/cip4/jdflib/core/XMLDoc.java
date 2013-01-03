@@ -234,7 +234,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * reparse an element in the context of the current document implemetation
 	 * @param dst
 	 * @param src
 	 */
@@ -772,7 +772,7 @@ public class XMLDoc
 	/**
 	 * createAttribute in namespace JDFCoreConstants.NONAMESPACE (DOM Level 2)
 	 * 
-	 * @param name attribute name TODO fix handling of namespaces
+	 * @param name attribute name  
 	 * @return Attr
 	 */
 	public Attr createAttribute(final String name)
@@ -1293,8 +1293,7 @@ public class XMLDoc
 	 * 
 	 * @return Enumeration of registered identifiers
 	 */
-	@SuppressWarnings("unchecked")
-	public Enumeration getIdentifiers()
+	public Enumeration<?> getIdentifiers()
 	{
 		return (m_doc == null) ? null : m_doc.getIdentifiers();
 	}

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -458,6 +458,18 @@ public class CPUTimer
 			label += getName();
 		return label + " totalCPU=" + getTotalCPUTime() / 1000000000. + " currentCPU=" + getCurrentCPUTime() / 1000000000. + " totalT=" + getTotalRealTime() / 1000. + " currentT="
 				+ getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (realT0 > 0);
+	}
+
+	/**
+	 * get a summary for a single run
+	 * @return
+	*/
+	public String getSingleSummary()
+	{
+		String label = "CPUTimer: ";
+		if (name != null)
+			label += getName();
+		return label + " CPU=" + getTotalCPUTime() / 1000000000. + " RealTime=" + getTotalRealTime() / 1000.;
 	}
 
 	/**

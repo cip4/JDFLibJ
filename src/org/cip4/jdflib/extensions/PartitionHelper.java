@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,13 +74,18 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.IAmountPoolContainer;
+import org.cip4.jdflib.pool.JDFAmountPool;
+import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelper extends BaseXJDFHelper
+public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContainer
 {
 	/**
 	 * @param partition
@@ -151,6 +156,17 @@ public class PartitionHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * 
+	 * @param amount
+	 * @param moreMap
+	 * @param bGood
+	 */
+	public void setAmount(double amount, JDFAttributeMap moreMap, boolean bGood)
+	{
+		AmountPoolHelper.setAmountPoolAttribute(this, "Amount" + (bGood ? "Good" : "Waste"), StringUtil.formatDouble(amount), null, new VJDFAttributeMap(moreMap));
+	}
+
+	/**
 	 * @return the actual detailed resource
 	 */
 	public KElement getResource()
@@ -158,7 +174,9 @@ public class PartitionHelper extends BaseXJDFHelper
 		KElement set = theElement.getParentNode_KElement();
 		String name = set != null ? set.getAttribute("Name", null, null) : null;
 		if (name != null)
+		{
 			return theElement.getElement(name);
+		}
 		else
 		{
 			KElement e = theElement.getFirstChildElement();
@@ -203,6 +221,71 @@ public class PartitionHelper extends BaseXJDFHelper
 		{
 			theElement.setID(theElement.generateDotID("ID", null));
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAmountPool()
+	 */
+	public JDFAmountPool getAmountPool()
+	{
+		return (JDFAmountPool) getRoot().getElement(ElementName.AMOUNTPOOL);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAttribute(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public String getAttribute(String attrib, String nameSpaceURI, String def)
+	{
+		return getRoot().getAttribute(attrib, nameSpaceURI, def);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getRealAttribute(java.lang.String, java.lang.String, double)
+	 */
+	public double getRealAttribute(String attName, String namespace, double def)
+	{
+		return def;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#hasAttribute(java.lang.String)
+	 */
+	public boolean hasAttribute(String attName)
+	{
+		return false;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getLinkRoot()
+	 */
+	public JDFResource getLinkRoot()
+	{
+		return (JDFResource) getResource();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#setAttribute(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public void setAttribute(String attrib, String value, String nameSpaceURI)
+	{
+		throw new IllegalArgumentException();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#removeAttribute(java.lang.String, java.lang.String)
+	 */
+	public void removeAttribute(String attrib, String nameSpaceURI)
+	{
+		// nop
+
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getCreateAmountPool()
+	 */
+	public JDFAmountPool getCreateAmountPool()
+	{
+		return (JDFAmountPool) getRoot().getCreateElement(ElementName.AMOUNTPOOL);
 	}
 
 }

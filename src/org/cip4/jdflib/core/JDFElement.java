@@ -773,7 +773,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * remove all default attributes from this i.e. all attributes whose value matches the schema default
-	 * @param bRecurse if true, alse recurse subelements, else only local
+	 * @param bRecurse if true, also recurse subelements, else only local
 	 */
 	public void eraseDefaultAttributes(final boolean bRecurse)
 	{

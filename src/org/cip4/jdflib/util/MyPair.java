@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,5 +105,28 @@ public class MyPair<aData, bData>
 	public String toString()
 	{
 		return "Pair: " + a + "," + b;
+	}
+
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object arg0)
+	{
+		if (!(arg0 instanceof MyPair<?, ?>))
+		{
+			return false;
+		}
+		MyPair<?, ?> mp = (MyPair<?, ?>) arg0;
+		return ContainerUtil.equals(a, mp.a) && ContainerUtil.equals(b, mp.b);
+	}
+
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return HashUtil.hashCode(a == null ? null : a.hashCode(), b);
 	}
 }

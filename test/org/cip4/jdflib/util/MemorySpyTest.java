@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.util.MemorySpy.MemScope;
@@ -90,6 +92,26 @@ public class MemorySpyTest extends TestCase
 	{
 		MemorySpy ms = new MemorySpy();
 		assertNotNull(ms.toString());
+	}
+
+	/**
+	 * 
+	 */
+	public void testSummary()
+	{
+		MemorySpy ms = new MemorySpy();
+		String summary = ms.getSummary();
+		assertNotNull(summary);
+	}
+
+	/**
+	 * 
+	 */
+	public void testSizeMap()
+	{
+		MemorySpy ms = new MemorySpy();
+		Map<String, Long> summary = ms.getSizeMap();
+		assertNotNull(summary);
 	}
 
 	/**

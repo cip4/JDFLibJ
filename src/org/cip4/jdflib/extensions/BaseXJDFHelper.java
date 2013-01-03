@@ -89,12 +89,26 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *  
-	 * @param string
+	 * @param xpath
 	 * @return
 	 */
-	public String getXPathValue(String string)
+	public String getXPathValue(String xpath)
 	{
-		return theElement == null ? null : theElement.getXPathAttribute(string, null);
+		return theElement == null ? null : theElement.getXPathAttribute(xpath, null);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param xpath
+	 * @param value
+	 */
+	public void setXPathValue(String xpath, String value)
+	{
+		if (theElement != null)
+		{
+			theElement.setXPathAttribute(xpath, value);
+		}
 	}
 
 	protected KElement theElement;

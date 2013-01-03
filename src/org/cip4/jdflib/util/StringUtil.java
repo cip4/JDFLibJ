@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -198,6 +198,7 @@ public class StringUtil
 			"I feel that if a person can't communicate the very least he can do is to shut up",
 			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
 			"Anyone who hates children and animals can't be all bad.",
+			"Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.",
 			"Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
 			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
 			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
@@ -605,8 +606,10 @@ public class StringUtil
 	 * @param iSkip the number of matching tokens to skip before returning true
 	 * @return boolean - true if <code>strWork</code> contains <code>token</code>
 	 */
-	public static boolean hasToken(final String strWork, final String token, final String delim, final int iSkip)
+	public static boolean hasToken(final String strWork, final String token, String delim, final int iSkip)
 	{
+		if (delim == null)
+			delim = " ";
 		if (iSkip <= 0)
 			return indexOfToken(strWork, token, delim, 0) >= 0;
 		if (strWork != null)
@@ -618,10 +621,10 @@ public class StringUtil
 			}
 			if (posToken1 > 0)
 			{
-				posToken1--; // go back one in case the char before the first
+				posToken1--; // go back one in case the char before the first token was not the deliminator
 			}
-			// token was not the deliminator
-			final StringTokenizer st = new StringTokenizer(strWork.substring(posToken1), delim, false);
+			String substring = strWork.substring(posToken1);
+			final StringTokenizer st = new StringTokenizer(substring, delim, false);
 			int n = 0;
 			while (st.hasMoreTokens())
 			{
@@ -1388,8 +1391,10 @@ public class StringUtil
 	 * @param start position to search in the string
 	 * @return
 	 */
-	public static int indexOfToken(final String strWork, final String token, final String delim, int start)
+	public static int indexOfToken(final String strWork, final String token, String delim, int start)
 	{
+		if (delim == null)
+			delim = " ";
 		if (strWork != null)
 		{
 			int tl = token.length();

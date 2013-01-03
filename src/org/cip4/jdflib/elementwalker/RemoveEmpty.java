@@ -72,6 +72,7 @@
 package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -251,6 +252,47 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFGeneralID;
+		}
+	}
+
+	/**
+	* zapp me
+	* 
+	* @author prosirai
+	* 
+	*/
+	public class WalkComment extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			String text = StringUtil.getNonEmpty(e.getText());
+			if (text == null)
+			{
+				e.deleteNode();
+				return null;
+			}
+			else
+			{
+				return super.walk(e, trackElem);
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFComment;
 		}
 	}
 

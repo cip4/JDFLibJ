@@ -111,7 +111,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 *  
 	 */
 	public void testXJDFXPath()
 	{

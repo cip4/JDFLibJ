@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -107,5 +107,33 @@ public class FileJanitorTest extends JDFTestCaseBase
 		fileJanitor.setLogSingle(true);
 		cleanupList = fileJanitor.cleanup();
 		assertEquals(cleanupList.size(), 3);
+	}
+
+	/**
+	* @throws Exception 
+	* 
+	*  
+	*/
+	public void testDelEmpty() throws Exception
+	{
+		File f = new File(sm_dirTestDataTemp + "testJanitor");
+		FileUtil.deleteAll(f);
+		f.mkdir();
+		FileUtil.getFileInDirectory(f, new File("dir1")).mkdir();
+		FileUtil.getFileInDirectory(f, new File("dir2")).mkdir();
+		FileUtil.getFileInDirectory(f, new File("dir2/foo1")).createNewFile();
+		ThreadUtil.sleep(3000);
+		FileUtil.getFileInDirectory(f, new File("dir1/foo1")).createNewFile();
+		FileUtil.getFileInDirectory(f, new File("dir3")).mkdir();
+		FileJanitor fileJanitor = new FileJanitor(f, 2);
+		fileJanitor.setLogSingle(true);
+		fileJanitor.setDeleteEmptyDir(true);
+		Vector<File> cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 2);
+		ThreadUtil.sleep(2000);
+		fileJanitor = new FileJanitor(f, 1);
+		fileJanitor.setLogSingle(true);
+		cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 2);
 	}
 }

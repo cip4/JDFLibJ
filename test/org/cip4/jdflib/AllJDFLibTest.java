@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.VStringTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.core.XMLDocUserDataTest;
 import org.cip4.jdflib.core.XMLParserTest;
+import org.cip4.jdflib.core.XPathHelperTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFCMYKColorTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
@@ -148,25 +149,34 @@ import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.elementwalker.XPathWalkerTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.AutomatedLayoutTest;
+import org.cip4.jdflib.examples.CADTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
 import org.cip4.jdflib.examples.DigiPrintTest;
 import org.cip4.jdflib.examples.IterationTest;
 import org.cip4.jdflib.examples.JDFExampleDocTest;
+import org.cip4.jdflib.examples.JMFExampleTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
+import org.cip4.jdflib.examples.PreflightTest;
 import org.cip4.jdflib.examples.RIPTest;
 import org.cip4.jdflib.examples.SheetOptimizeTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
+import org.cip4.jdflib.extensions.BaseXJDFHelperTest;
 import org.cip4.jdflib.extensions.PartitionHelperTest;
 import org.cip4.jdflib.extensions.ProductHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
+import org.cip4.jdflib.extensions.XJDFCreatorTest;
 import org.cip4.jdflib.extensions.XJDFGeneratorTest;
 import org.cip4.jdflib.extensions.XJDFHelperTest;
 import org.cip4.jdflib.extensions.XJDFLayoutStripTest;
+import org.cip4.jdflib.extensions.XJDFSchemaCreatorTest;
 import org.cip4.jdflib.extensions.XJDFTest;
+import org.cip4.jdflib.extensions.examples.XJDFSheetOptimizeTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
+import org.cip4.jdflib.extensions.xjdfwalker.JDFCapsConverterTest;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverterTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
 import org.cip4.jdflib.goldenticket.IDPGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicketTest;
@@ -261,6 +271,7 @@ import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MemorySpyTest;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.MyArgsTest;
+import org.cip4.jdflib.util.MyPairTest;
 import org.cip4.jdflib.util.NumberFormatterTest;
 import org.cip4.jdflib.util.PlatformUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
@@ -291,6 +302,7 @@ import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.net.UrlCheckTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
+import org.cip4.jdflib.util.thread.OrderedTaskQueueTest;
 import org.cip4.jdflib.util.thread.ThreadFilterTest;
 import org.cip4.jdflib.util.zip.ZipReaderTest;
 import org.cip4.jdflib.validate.JDFValidatorTest;
@@ -343,6 +355,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(XMLDocTest.class);
 		suite.addTestSuite(XMLDocUserDataTest.class);
 		suite.addTestSuite(XMLParserTest.class);
+		suite.addTestSuite(XPathHelperTest.class);
 
 		// cformat
 		suite.addTestSuite(PrintfFormatTest.class);
@@ -403,27 +416,40 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// examples
 		suite.addTestSuite(AmountTest.class);
 		suite.addTestSuite(AutomatedLayoutTest.class);
+		suite.addTestSuite(CADTest.class);
 		suite.addTestSuite(ContentCreationTest.class);
 		suite.addTestSuite(DigiPrintTest.class);
 		suite.addTestSuite(IterationTest.class);
 		suite.addTestSuite(JDFExampleDocTest.class);
+		suite.addTestSuite(JMFExampleTest.class);
 		suite.addTestSuite(MISFinTest.class);
 		suite.addTestSuite(NColorTest.class);
+		suite.addTestSuite(PreflightTest.class);
 		suite.addTestSuite(RIPTest.class);
 		suite.addTestSuite(SheetOptimizeTest.class);
 		suite.addTestSuite(StrippingTest.class);
 		suite.addTestSuite(VarnishTest.class);
 		suite.addTestSuite(WebTest.class);
 
-		//extension
-		suite.addTestSuite(IDFinderTest.class);
+		//extensions
+		suite.addTestSuite(BaseXJDFHelperTest.class);
 		suite.addTestSuite(PartitionHelperTest.class);
 		suite.addTestSuite(ProductHelperTest.class);
 		suite.addTestSuite(SetHelperTest.class);
+		suite.addTestSuite(XJDFCreatorTest.class);
+		suite.addTestSuite(XJDFGeneratorTest.class);
 		suite.addTestSuite(XJDFHelperTest.class);
 		suite.addTestSuite(XJDFLayoutStripTest.class);
-		suite.addTestSuite(XJDFGeneratorTest.class);
+		suite.addTestSuite(XJDFSchemaCreatorTest.class);
 		suite.addTestSuite(XJDFTest.class);
+
+		//extensions.examples
+		suite.addTestSuite(XJDFSheetOptimizeTest.class);
+
+		//extensions.xjdfwalker
+		suite.addTestSuite(IDFinderTest.class);
+		suite.addTestSuite(JDFCapsConverterTest.class);
+		suite.addTestSuite(XJDFToJDFConverterTest.class);
 
 		// Golden tickets
 		suite.addTestSuite(GoldenTicketTest.class);
@@ -540,6 +566,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(MemorySpyTest.class);
 		suite.addTestSuite(MimeUtilTest.class);
 		suite.addTestSuite(MyArgsTest.class);
+		suite.addTestSuite(MyPairTest.class);
 		suite.addTestSuite(NumberFormatterTest.class);
 		suite.addTestSuite(PlatformUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
@@ -579,6 +606,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.thread
 		suite.addTestSuite(DelayedPersistTest.class);
+		suite.addTestSuite(OrderedTaskQueueTest.class);
 		suite.addTestSuite(ThreadFilterTest.class);
 		suite.addTestSuite(ThreadUtilTest.class);
 

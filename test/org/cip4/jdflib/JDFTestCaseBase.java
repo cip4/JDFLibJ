@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -261,6 +261,17 @@ public abstract class JDFTestCaseBase extends TestCase
 		JDFAudit.setStaticAuthor(author);
 		JDFNodeInfo.setDefaultWorkStepID(false);
 		DocumentJDFImpl.setStaticStrictNSCheck(true);
+	}
+
+	/**
+	 * 
+	 * write an element to the standard test directory sm_dirTestDataTemp
+	 * @param e
+	 * @param filename
+	 */
+	protected void writeTest(KElement e, String filename)
+	{
+		e.write2File(sm_dirTestDataTemp + filename);
 	}
 
 	/**

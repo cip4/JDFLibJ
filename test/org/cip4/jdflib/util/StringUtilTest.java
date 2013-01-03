@@ -858,9 +858,12 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testHasToken()
 	{
+		assertFalse(StringUtil.hasToken("1", "1", null, 1));
 		final String s = "1 2 3 3 \n15\n4";
 		assertFalse(StringUtil.hasToken(s, "0", " \n", 0));
 		assertTrue(StringUtil.hasToken(s, "1", " ", 0));
+		assertFalse(StringUtil.hasToken("", "1", null, 0));
+		assertTrue(StringUtil.hasToken(s, "1", null, 0));
 		assertFalse(StringUtil.hasToken(s, "5", " ", 0));
 		assertFalse(StringUtil.hasToken(s, "15", " ", 0));
 		assertTrue(StringUtil.hasToken(s, "2", " ", 0));

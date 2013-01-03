@@ -249,6 +249,7 @@ public class JDFDurationTest extends TestCase
 		assertEquals(JDFDuration.createDuration("1").getDuration(), 60 * 60 * 24);
 		assertEquals(JDFDuration.createDuration("1d").getDuration(), 60 * 60 * 24);
 		assertEquals(JDFDuration.createDuration("1D").getDuration(), 60 * 60 * 24);
+		assertEquals(JDFDuration.createDuration("1h").getDuration(), 60 * 60);
 		assertEquals(JDFDuration.createDuration("1D 1h 3m").getDuration(), 60 * 60 * 25 + 180);
 		assertEquals(JDFDuration.createDuration("25h").getDuration(), 60 * 60 * 25);
 		assertEquals(JDFDuration.createDuration("p25h").getDuration(), 60 * 60 * 25);

@@ -138,6 +138,18 @@ public class VString extends Vector<String>
 	}
 
 	/**
+	 * simple static factory
+	 * 
+	 * @param strIn
+	 * @param strSep
+	 * @return
+	 */
+	public static VString getVString(final String strIn, String strSep)
+	{
+		return StringUtil.getNonEmpty(strIn) == null ? null : new VString(strIn, strSep);
+	}
+
+	/**
 	 * 
 	 * constructs a VString by tokenizing a string
 	 * @param strIn the string to tokenize
@@ -444,7 +456,7 @@ public class VString extends Vector<String>
 	 * @param back string after the last entry
 	 * 
 	 * @return a tokenized string
-	 * @deprecated use StringUtil setVString default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
+	 * @deprecated use StringUtil setVString default: getString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
 	 */
 	@Deprecated
 	public String getString(final String sep, final String front, final String back)

@@ -117,6 +117,20 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	public void testRemoveComment()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.appendComment();
+		RemoveEmpty emp = new RemoveEmpty();
+		emp.removEmpty(n);
+		assertFalse(n.toXML().contains(ElementName.COMMENT));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
 	public void testRemoveComChannel()
 	{
 		JDFDoc d = new JDFDoc("JDF");
@@ -126,6 +140,5 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
-
 	}
 }

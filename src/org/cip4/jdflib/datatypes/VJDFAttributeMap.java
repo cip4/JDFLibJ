@@ -134,6 +134,15 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
+	 * @param moreMap the single attribute map to add
+	 */
+	public VJDFAttributeMap(JDFAttributeMap moreMap)
+	{
+		this();
+		add(moreMap);
+	}
+
+	/**
 	 * toString
 	 * 
 	 * @return String

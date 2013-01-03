@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -422,14 +422,20 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 					}
 					queue.cleanup();
 				}
-				if (EnumQueueEntryStatus.Running.equals(value))
+				else if (EnumQueueEntryStatus.Running.equals(value))
 				{
 					if (!hasAttribute(AttributeName.STARTTIME))
 					{
 						super.setStartTime(new JDFDate());
 					}
 					removeAttribute(AttributeName.ENDTIME);
-
+				}
+				else if (EnumQueueEntryStatus.Suspended.equals(value))
+				{
+					if (!hasAttribute(AttributeName.ENDTIME))
+					{
+						super.setEndTime(new JDFDate());
+					}
 				}
 				// in case cleanup removed this from queue, we don't want to reintroduce it through sorting
 				if (!EnumQueueEntryStatus.Removed.equals(value) && queue.equals(getParentNode_KElement()))
@@ -459,6 +465,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * gets the NodeIdentifier that matches this
+	 * @param ni 
 	 * 
 	 *  
 	 */
@@ -494,7 +501,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	}
 
 	/**
-	 * get the vector of valid next @Status values for this queue entry based on the current staus based on the table of valid queue entry transitions
+	 * get the vector of valid next @Status values for this queue entry based on the current status based on the table of valid queue entry transitions
 	 * 
 	 * @return Vector<EnumQueueEntryStatus> the vector of valid new stati
 	 */
@@ -514,6 +521,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		else if (EnumQueueEntryStatus.Running.equals(qesThis))
 		{
 			v.add(EnumQueueEntryStatus.Running);
+			v.add(EnumQueueEntryStatus.Suspended);
 			v.add(EnumQueueEntryStatus.PendingReturn);
 			v.add(EnumQueueEntryStatus.Completed);
 			v.add(EnumQueueEntryStatus.Aborted);
@@ -541,8 +549,10 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		}
 		else if (EnumQueueEntryStatus.Suspended.equals(qesThis))
 		{
+			v.add(EnumQueueEntryStatus.Waiting);
 			v.add(EnumQueueEntryStatus.Running);
 			v.add(EnumQueueEntryStatus.Suspended);
+			v.add(EnumQueueEntryStatus.Completed);
 			v.add(EnumQueueEntryStatus.Aborted);
 		}
 		else if (EnumQueueEntryStatus.PendingReturn.equals(qesThis))
@@ -600,6 +610,17 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	public JDFJobPhase getJobPhase()
 	{
 		return getJobPhase(0);
+	}
+
+	/**
+	* (24) const get element JobPhase
+	* @return JDFJobPhase the element
+	* @deprecated use getCreateJobPhase(n) this is a legacy version 
+	*/
+	@Deprecated
+	public JDFJobPhase getCreateJobPhase()
+	{
+		return getCreateJobPhase(0);
 	}
 
 	/**

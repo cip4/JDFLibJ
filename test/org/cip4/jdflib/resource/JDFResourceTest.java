@@ -1282,6 +1282,30 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test whether getpartition works for when inconsistently called
+	 */
+	public void testGetPartition_PartVersion()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+		m.put("SheetName", "Sheet1");
+		m.put("PartVersion", "A");
+		JDFResource r = fp.getCreatePartition(m, new VString("SignatureName SheetName PartVersion", null));
+		final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
+		m2.put("SheetName", "Sheet1");
+		m2.put("PartVersion", "*");
+		JDFResource r2 = fp.getPartition(m2, EnumPartUsage.Implicit);
+		assertEquals(r.getParentNode_KElement(), r2);
+		r2 = fp.getPartition(m2, EnumPartUsage.Sparse);
+		assertNull(r2);
+		r2 = fp.getPartition(m2, EnumPartUsage.Explicit);
+		assertNull(r2);
+	}
+
+	/**
 	 * test whether getpartition works for when map has too many keys
 	 */
 	public void testGetPartitionExplicitOver()

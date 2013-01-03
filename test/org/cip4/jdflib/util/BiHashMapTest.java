@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,11 +90,61 @@ public class BiHashMapTest extends JDFTestCaseBase
 		hm.put("a", "b");
 		assertEquals(hm.getValue("a"), "b");
 		assertEquals(hm.getKey("b"), "a");
+		assertEquals(hm.getKeyMap().size(), 1);
+		assertEquals(hm.getValMap().size(), 1);
 		hm.put("a", "c");
 		assertEquals(hm.getValue("a"), "c");
 		assertEquals(hm.getKey("c"), "a");
+		assertEquals(hm.getKeyMap().size(), 1);
+		assertEquals(hm.getValMap().size(), 1);
 		assertNull(hm.getKey("b"));
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testClear()
+	{
+		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		hm.put("a", "b");
+		assertEquals(hm.getValue("a"), "b");
+		assertEquals(hm.getKey("b"), "a");
 		hm.clear();
+		assertEquals(hm.getKeyMap().size(), 0);
+		assertEquals(hm.getValMap().size(), 0);
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testRemove()
+	{
+		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		hm.put("a", "b");
+		assertEquals(hm.getValue("a"), "b");
+		assertEquals(hm.getKey("b"), "a");
+		assertEquals(hm.getKeyMap().size(), 1);
+		assertEquals(hm.getValMap().size(), 1);
+		hm.remove("a");
+		assertEquals(hm.getKeyMap().size(), 0);
+		assertEquals(hm.getValMap().size(), 0);
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testRemoveVal()
+	{
+		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		hm.put("a", "b");
+		assertEquals(hm.getValue("a"), "b");
+		assertEquals(hm.getKey("b"), "a");
+		assertEquals(hm.getKeyMap().size(), 1);
+		assertEquals(hm.getValMap().size(), 1);
+		hm.removeVal("b");
 		assertEquals(hm.getKeyMap().size(), 0);
 		assertEquals(hm.getValMap().size(), 0);
 	}

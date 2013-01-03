@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -220,6 +220,34 @@ public class MemorySpy
 		boolean peak = MemScope.peak.equals(scope) || MemScope.peakCommit.equals(scope);
 		MemoryUsage usage = peak ? bean.getPeakUsage() : bean.getUsage();
 		return getMem(usage, scope);
+	}
+
+	/**
+	 * 
+	 * get a fast summary for debugging
+	 * @return
+	 */
+	public String getSummary()
+	{
+		StringBuffer b = new StringBuffer();
+		Map<String, Long> map = getSummaryMap();
+		for (String s : map.keySet())
+			b.append("Mem ").append(s).append(": ").append(map.get(s) / 1000 / 1000.).append("\n");
+		return b.toString();
+	}
+
+	/**
+	 * 
+	 * get a fast summary for debugging
+	 * @return
+	 */
+	public Map<String, Long> getSummaryMap()
+	{
+		HashMap<String, Long> map = new HashMap<String, Long>();
+		map.put("Free", Runtime.getRuntime().freeMemory());
+		map.put("Total", Runtime.getRuntime().totalMemory());
+		map.put("Current", getHeapUsed(MemScope.current));
+		return map;
 	}
 
 	/**

@@ -312,6 +312,16 @@ public class VStringTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testFactory()
+	{
+		assertNull(VString.getVString(null, null));
+		assertNull(VString.getVString("", null));
+		assertEquals(VString.getVString("a", null).get(0), "a");
+	}
+
+	/**
+	 * 
+	 */
 	public void testadd()
 	{
 		final VString v = new VString();
