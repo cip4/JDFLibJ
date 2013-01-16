@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -541,6 +541,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		for (JDFResource r : vr)
 		{
 			JDFResource r2 = r.getCreatePartition(partmap, v);
+			JDFAttributeMap clone = partmap.clone();
+			clone.put("Separation", "Cyan");
+			r.getCreatePartition(clone, v);
 		}
 		partmap.put("PartVersion", "EN");
 		ni.getCreatePartition(partmap, v);
@@ -1001,7 +1004,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
 
 			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
-			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
+			JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
 			// final JDFComponent csEn = (JDFComponent)
 			cs.addPartition(EnumPartIDKey.PartVersion, "EN");
 			// final JDFComponent csFr = (JDFComponent)
@@ -1012,6 +1015,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			map.put(EnumPartIDKey.PartVersion, loop == 0 ? "DE" : "EN");
 			final VJDFAttributeMap vMap = new VJDFAttributeMap();
 			vMap.add(map);
+			JDFNodeInfo ni = n2.getCreateNodeInfo();
+			ni.clonePartitions(comp, null);
 
 			final JDFSpawn spawn = new JDFSpawn(n2);
 			spawn.bFixResources = false;
@@ -1037,51 +1042,112 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	* 
+	*/
+	public void testSpawnSeparationMissing()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		// final JDFMedia m = (JDFMedia)
+		n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
+
+		final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
+		JDFComponent cs0 = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFComponent cs = (JDFComponent) cs0.addPartition(EnumPartIDKey.Separation, "Black");
+		// final JDFComponent csEn = (JDFComponent)
+		cs.addPartition(EnumPartIDKey.PartVersion, "EN");
+		// final JDFComponent csFr = (JDFComponent)
+		cs.addPartition(EnumPartIDKey.PartVersion, "FR");
+		JDFComponent cs1 = (JDFComponent) cs0.addPartition(EnumPartIDKey.Separation, "Cyan");
+		// final JDFComponent csEn = (JDFComponent)
+		cs1.addPartition(EnumPartIDKey.PartVersion, "EN");
+		// final JDFComponent csFr = (JDFComponent)
+		cs1.addPartition(EnumPartIDKey.PartVersion, "FR");
+
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SheetName, "S1");
+		map.put(EnumPartIDKey.PartVersion, "EN");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(map);
+		JDFNodeInfo ni = n2.getCreateNodeInfo();
+		ni.clonePartitions(comp, null);
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		spawn.bFixResources = false;
+		spawn.vRWResources_in = new VString("Output", null);
+		spawn.vSpawnParts = vMap;
+		spawn.bSpawnRWPartsMultiple = true;
+
+		final JDFNode nS1 = spawn.spawn();
+		assertNotNull(nS1);
+		final JDFComponent c = (JDFComponent) nS1.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		assertNotNull(c);
+		final JDFResourceLink rl = nS1.getLink(0, ElementName.COMPONENT, null, null);
+		assertNotNull(rl);
+		assertEquals("EN", ((JDFResource) rl.getTargetVector(-1).get(0)).getPartMap().get("PartVersion"));
+		assertEquals("EN", ((JDFResource) rl.getTargetVector(-1).get(1)).getPartMap().get("PartVersion"));
+	}
+
+	/**
 	 * 
 	 */
 	public void testSpawnPartPVVariation()
 	{
-		for (int loop = 0; loop < 2; loop++)
+		for (int loop1 = 0; loop1 < 2; loop1++)
 		{
-			final JDFDoc d = new JDFDoc("JDF");
-			final JDFNode n = d.getJDFRoot();
-			n.setType(EnumType.ProcessGroup);
-			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-			// final JDFMedia m = (JDFMedia)
-			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
-
-			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
-			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-			// final JDFComponent csEn = (JDFComponent)
-			cs.addPartition(EnumPartIDKey.PartVersion, "EN EN");
-			// final JDFComponent csFr = (JDFComponent)
-			cs.addPartition(EnumPartIDKey.PartVersion, "FR FR");
-
-			final JDFAttributeMap map = new JDFAttributeMap();
-			map.put(EnumPartIDKey.SheetName, "S1");
-			map.put(EnumPartIDKey.PartVersion, loop == 0 ? "DE" : "EN");
-			final VJDFAttributeMap vMap = new VJDFAttributeMap();
-			vMap.add(map);
-
-			final JDFSpawn spawn = new JDFSpawn(n2);
-			spawn.bFixResources = false;
-			spawn.vRWResources_in = new VString("Output", null);
-			spawn.vSpawnParts = vMap;
-			spawn.bSpawnRWPartsMultiple = true;
-
-			final JDFNode nS1 = spawn.spawn();
-			assertNotNull(nS1);
-			final JDFComponent c = (JDFComponent) nS1.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-			assertNotNull(c);
-			final JDFResourceLink rl = nS1.getLink(0, ElementName.COMPONENT, null, null);
-			assertNotNull(rl);
-			if (loop == 0)
+			for (int loop = 0; loop < 2; loop++)
 			{
-				assertNull(rl.getTarget());
-			}
-			else
-			{
-				assertEquals("EN EN", rl.getTarget().getPartMap().get("PartVersion"));
+				final JDFDoc d = new JDFDoc("JDF");
+				final JDFNode n = d.getJDFRoot();
+				n.setType(EnumType.ProcessGroup);
+				final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+				// final JDFMedia m = (JDFMedia)
+				n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
+
+				final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
+				final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
+				final JDFAttributeMap map = new JDFAttributeMap();
+				map.put(EnumPartIDKey.SheetName, "S1");
+				if (loop1 == 0)
+				{
+					cs.addPartition(EnumPartIDKey.PartVersion, "EN EN");
+					cs.addPartition(EnumPartIDKey.PartVersion, "FR FR");
+					map.put(EnumPartIDKey.PartVersion, loop == 0 ? "DE " : "EN");
+				}
+				else
+				{
+					cs.addPartition(EnumPartIDKey.PartVersion, "EN EN DE DE");
+					cs.addPartition(EnumPartIDKey.PartVersion, "FR FR DE DE");
+					map.put(EnumPartIDKey.PartVersion, loop == 0 ? "DE DE" : "EN EN DE DE");
+				}
+
+				final VJDFAttributeMap vMap = new VJDFAttributeMap();
+				vMap.add(map);
+
+				final JDFSpawn spawn = new JDFSpawn(n2);
+				spawn.bSpawnROPartsOnly = false;
+				spawn.bFixResources = false;
+				spawn.vRWResources_in = new VString("Output", null);
+				spawn.vSpawnParts = vMap;
+				spawn.bSpawnRWPartsMultiple = true;
+
+				final JDFNode nS1 = spawn.spawn();
+				assertNotNull(nS1);
+				final JDFComponent c = (JDFComponent) nS1.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+				assertNotNull(c);
+				final JDFResourceLink rl = nS1.getLink(0, ElementName.COMPONENT, null, null);
+				assertNotNull(rl);
+				if (loop == 0)
+				{
+					assertNull(rl.getTarget());
+				}
+				else
+				{
+					assertEquals((loop1 == 0) ? "EN EN" : "EN EN DE DE", rl.getTarget().getPartMap().get("PartVersion"));
+					assertEquals(-1, rl.getLinkRoot().toXML().indexOf("FR FR"));
+				}
 			}
 		}
 	}

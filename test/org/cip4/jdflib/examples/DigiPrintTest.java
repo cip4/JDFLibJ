@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,6 +112,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
+import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContentData;
 import org.cip4.jdflib.resource.process.JDFContentList;
@@ -239,6 +240,57 @@ public class DigiPrintTest extends JDFTestCaseBase
 			}
 			doc.write2File(sm_dirTestDataTemp + "PDFVTStream.jdf" + strm + ".jdf", 2, false);
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testHoldPipeRIP()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
+		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		rll0.setCombinedProcessIndex(0);
+		JDFRunList ruLi = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
+		ruLi.setResStatus(EnumResStatus.Unavailable, true);
+		ruLi.setPipeProtocol("Internal");
+		ruLi.setDescriptiveName("Internal RunList for Hold");
+		JDFResourceLink rll = n.getLink(ruLi, EnumUsage.Output);
+		int pos = n.getTypes().index("Rendering");
+		rll.setCombinedProcessIndex(pos);
+		JDFResourceLink rll2 = n.ensureLink(ruLi, EnumUsage.Input, null);
+		rll2.setCombinedProcessIndex(pos + 1);
+		rll2.setMinStatus(EnumResStatus.Available);
+		jdfDoc.write2File(sm_dirTestDataTemp + "HoldRIP.jdf", 2, false);
+		rll2.setMinStatus(EnumResStatus.Unavailable);
+		rll2.setPipeResume(5);
+		jdfDoc.write2File(sm_dirTestDataTemp + "PipeRIP.jdf", 2, false);
+	}
+
+	/**
+	 *  
+	 */
+	public void testHoldQueueRIP()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
+		JDFRunList rl0 = (JDFRunList) n.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		JDFResourceLink rll0 = n.getLink(rl0, EnumUsage.Input);
+		rll0.setCombinedProcessIndex(0);
+		JDFApprovalSuccess apSuc = (JDFApprovalSuccess) n.addResource(ElementName.APPROVALSUCCESS, EnumUsage.Input);
+		apSuc.setResStatus(EnumResStatus.Unavailable, true);
+		apSuc.setDescriptiveName("This can be set Available either by a JMF Resource Command or from the printer UI");
+		JDFResourceLink rll = n.getLink(apSuc, EnumUsage.Input);
+		rll.setCombinedProcessIndex(0);
+		rll.setMinStatus(EnumResStatus.Unavailable);
+		int pos = n.getTypes().index("DigitalPrinting");
+		JDFResourceLink rll2 = n.ensureLink(apSuc, EnumUsage.Input, null);
+		rll2.setCombinedProcessIndex(pos);
+		rll2.setMinStatus(EnumResStatus.Available);
+		jdfDoc.write2File(sm_dirTestDataTemp + "HoldQRIP.jdf", 2, false);
 	}
 
 	/**

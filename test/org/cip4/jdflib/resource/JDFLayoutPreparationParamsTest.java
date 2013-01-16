@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -172,6 +172,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		JDFPageCell pc = lpp.appendPageCell();
 		pc.setTrimSize(new JDFXYPair(500, 700));
 		pc.setClipBox(new JDFRectangle(-5, -4, 505, 705));
+		lpp.setSurfaceContentsBox(new JDFRectangle(0, 0, 500, 700));
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "borderless.jdf", 2, false);
 	}
 

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2321,7 +2321,18 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
-	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetAncestorElementRef()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
+		root.appendAncestorPool().appendAncestor().refElement(ni2);
+		assertEquals(ni2, root.getAncestorElement(ElementName.NODEINFO, null));
+	}
+
 	/**
 	 * 
 	 */
@@ -2333,7 +2344,22 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(ni, root.getAncestorElement(ElementName.NODEINFO, null));
 	}
 
-	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetAncestorElementAttribute()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		JDFNodeInfo ni2 = (JDFNodeInfo) root.addResource(ElementName.NODEINFO, null);
+		root.appendAncestorPool().appendAncestor().refElement(ni2);
+		ni2.setJobPriority(42);
+		assertEquals("42", root.getAncestorElementAttribute(ElementName.NODEINFO, AttributeName.JOBPRIORITY, null, null));
+		JDFNodeInfo ni3 = root.getCreateNodeInfo();
+		ni3.setJobPriority(43);
+		assertEquals("43", root.getAncestorElementAttribute(ElementName.NODEINFO, AttributeName.JOBPRIORITY, null, null));
+	}
+
 	/**
 	 * 
 	 */

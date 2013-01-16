@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -5348,7 +5348,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * searches for the first element occurence in the ancestor elements
+	 * searches for the first element occurence in this and the ancestor elements
 	 * 
 	 * @param element the attribute name
 	 * @param nameSpaceURI the XML-namespace
@@ -5357,6 +5357,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public KElement getAncestorElement(final String element, final String nameSpaceURI)
 	{
+		if (ElementName.NODEINFO.equals(element) || ElementName.CUSTOMERINFO.equals(element))
+		{
+			return getNiCi(element, true, null);
+		}
 		final JDFElement e = (JDFElement) getInheritedElement(element, nameSpaceURI, 0);
 		if (e != null)
 		{
@@ -8148,31 +8152,41 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public String getAncestorElementAttribute(final String element, final String attrib, final String nameSpaceURI, final String def)
 	{
-		JDFNode n = this;
-		while (n != null)
-		{
-			final KElement e = getElement(element, nameSpaceURI, 0);
+		if (StringUtil.getNonEmpty(attrib) == null)
+			return null;
 
-			if ((e != null) && (e.hasAttribute(attrib, nameSpaceURI, false)))
+		if (ElementName.NODEINFO.equals(element) || ElementName.CUSTOMERINFO.equals(element))
+		{
+			String xpath = "@" + attrib;
+			KElement e = getNiCi(element, true, xpath);
+			return e == null ? null : e.getAttribute(attrib, nameSpaceURI, "");
+		}
+		else
+		{
+			JDFNode n = this;
+			while (n != null)
 			{
-				return e.getAttribute(attrib, nameSpaceURI, null);
+				final KElement e = getElement(element, nameSpaceURI, 0);
+
+				if ((e != null) && (e.hasAttribute(attrib, nameSpaceURI, false)))
+				{
+					return e.getAttribute(attrib, nameSpaceURI, null);
+				}
+				n = getParentJDF();
 			}
 
-			n = getParentJDF();
+			final JDFNode root = getJDFRoot();
+			if (root == null)
+			{
+				return def;
+			}
+			final JDFAncestorPool ancestorPool = root.getAncestorPool();
+			if (ancestorPool == null)
+			{
+				return def;
+			}
+			return ancestorPool.getAncestorElementAttribute(element, attrib, nameSpaceURI, def);
 		}
-
-		final JDFNode root = getJDFRoot();
-		if (root == null)
-		{
-			return def;
-		}
-		final JDFAncestorPool ancestorPool = root.getAncestorPool();
-		if (ancestorPool == null)
-		{
-			return def;
-		}
-		return ancestorPool.getAncestorElementAttribute(element, attrib, nameSpaceURI, def);
-
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -528,8 +528,15 @@ class XPathHelper
 		final KElement kEle = getXPathElement(elemPath);
 		if (kEle == null)
 			return def;
-
-		return pos >= 0 ? kEle.getAttribute_KElement(path.substring(pos + 1), null, def) : kEle.getText();
+		if (pos >= 0)
+		{
+			return kEle.getAttribute_KElement(path.substring(pos + 1), null, def);
+		}
+		else
+		{
+			String s = kEle.getText();
+			return s == null ? def : s;
+		}
 	}
 
 	/**

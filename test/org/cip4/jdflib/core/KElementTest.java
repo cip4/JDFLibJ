@@ -1900,7 +1900,20 @@ public class KElementTest extends JDFTestCaseBase
 		{
 			// nop
 		}
+	}
 
+	/**
+	 * 
+	 */
+	public void testGetXPathAttributeText()
+	{
+		JDFAudit.setStaticAgentName("foo Agent");
+		KElement e = KElement.createRoot("foo", null);
+		e.appendElement("a");
+		assertNull(e.getXPathAttribute("a", null));
+		assertNull(e.getXPathAttribute("b", null));
+		assertEquals("", e.getXPathAttribute("a", ""));
+		assertEquals("", e.getXPathAttribute("b", ""));
 	}
 
 	/**

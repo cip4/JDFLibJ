@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,9 +78,11 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFPosition;
 
 /**
  * 
@@ -134,6 +136,36 @@ public class XJDFSheetOptimizeTest extends JDFTestCaseBase
 			addGangLayout();
 		}
 		writeTest(xjdfHelper.getRoot(), "SimpleGang.xjdf");
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testOutputLayout()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				addOutLayout(i, j);
+			}
+		}
+		writeTest(xjdfHelper.getRoot(), "GangLayout.xjdf");
+	}
+
+	/**
+	 *  
+	 * @param i
+	 * @param j
+	 */
+	private void addOutLayout(int i, int j)
+	{
+		JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "Sheet1");
+		partMap.put(EnumPartIDKey.BinderySignatureName, "BS_" + i + "_" + j);
+		JDFLayout lo = (JDFLayout) layout.getCreatePartition(partMap, true).getResource();
+		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
+		JDFPosition p = JDFPosition.createPosition(bs, i, j, 2, 2);
 	}
 
 	/**
