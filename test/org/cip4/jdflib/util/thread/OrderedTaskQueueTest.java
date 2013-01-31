@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,7 +72,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Dec 19, 2012
  */
@@ -105,12 +105,12 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 */
 	public void test3Entry()
 	{
-		OrderedTaskQueue q = new OrderedTaskQueue("test");
-		q.queue(new WaitRunner(1));
-		q.queue(new WaitRunner(2));
-		q.queue(new WaitRunner(3));
+		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
+		assertTrue(q.queue(new WaitRunner(1)));
+		assertTrue(q.queue(new WaitRunner(2)));
+		assertTrue(q.queue(new WaitRunner(3)));
 		ThreadUtil.sleep(500);
-		q.queue(new WaitRunner(4));
+		assertTrue(q.queue(new WaitRunner(4)));
 		ThreadUtil.sleep(500);
 	}
 
@@ -120,9 +120,21 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 	 */
 	public void testStop()
 	{
-		OrderedTaskQueue q = new OrderedTaskQueue("test");
-		q.queue(new WaitRunner(1));
+		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
+		assertTrue(q.queue(new WaitRunner(1)));
 		q.shutDown();
-		q.queue(new WaitRunner(2));
+		assertFalse(q.queue(new WaitRunner(2)));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testStopAll()
+	{
+		OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test");
+		assertTrue(q.queue(new WaitRunner(1)));
+		OrderedTaskQueue.shutDownAll();
+		assertFalse(q.queue(new WaitRunner(2)));
 	}
 }

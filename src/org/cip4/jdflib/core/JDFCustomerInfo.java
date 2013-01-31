@@ -271,6 +271,19 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		return (JDFContact) getChildWithMatchingAttribute(ElementName.CONTACT, AttributeName.CONTACTTYPES, null, contactType, iSkip, true, EnumAttributeType.NMTOKENS);
 	}
 
+	/**
+	 * get a Contact with at least one contactType set; create on if non existent
+	 * 
+	 * @param contactType the contactType string
+	 * @param iSkip number of occurrences to skip - if 0 take the first
+	 * @return a matching JDFContact, null if none are found
+	 */
+	public JDFContact getCreateContactWithContactType(final String contactType, final int iSkip)
+	{
+		JDFContact c = getContactWithContactType(contactType, iSkip);
+		return c == null ? appendContact(contactType) : c;
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * get a list of contacts with at least one matching contactType set
@@ -299,13 +312,6 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		return v2.size() > 0 ? v2 : null;
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////
-
 	/**
 	 * add a contact with a given contacttype
 	 * 
@@ -317,7 +323,19 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		final JDFContact c = appendContact();
 		c.setContactTypes(typ);
 		return c;
+	}
 
+	/**
+	 * add a contact with a given contacttype
+	 * 
+	 * @param typ
+	 * @return
+	 */
+	public JDFContact appendContact(final String typ)
+	{
+		final JDFContact c = appendContact();
+		c.setContactTypes(typ);
+		return c;
 	}
 
 }

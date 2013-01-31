@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -350,6 +350,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		for (int i = 0; i < 3; i++)
 		{
 			InputStream fis = FileUtil.getBufferedInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + i + ".mjm"));
+			fis.mark(9999999);
 			final MimeReader mr = new MimeReader();
 			mr.setMarkSize(9999999);
 			assertNotNull(mr.getJDFDoc(fis, 0));

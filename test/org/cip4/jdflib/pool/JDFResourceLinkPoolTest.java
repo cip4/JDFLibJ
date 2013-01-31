@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,6 +113,27 @@ public class JDFResourceLinkPoolTest extends JDFTestCaseBase
 		rl = rlp.linkResource(r2, EnumUsage.Input, null);
 		assertEquals(rl, rlp.getLink(r2, null, null));
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetInOutLink()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		JDFResource r = n.addResource("Component", null, null, null, null, null, null);
+		assertTrue(r instanceof JDFComponent);
+		assertFalse(n.hasChildElement("ResourceLinkPool", null));
+		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
+
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
+		assertEquals(rlp.getInOutLinks(EnumUsage.Input, true, "Component", null).get(0), rl);
+		assertEquals(rlp.getInOutLinksExtended(EnumUsage.Input, true, "Component", "BookBlock").get(0), rl);
+		assertEquals(rlp.getInOutLinks(null, true, "Component", null).get(0), rl);
+		assertEquals(rlp.getInOutLinksExtended(null, true, "Component", "BookBlock").get(0), rl);
+		assertEquals(rlp.getInOutLinksExtended(null, false, "Component", "BookBlock").get(0), r);
+		assertEquals(rlp.getInOutLinksExtended(null, false, "Component", "BookBlock2").size(), 0);
 	}
 
 	/**

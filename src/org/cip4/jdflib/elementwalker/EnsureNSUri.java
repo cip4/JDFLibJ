@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -208,6 +208,11 @@ public class EnsureNSUri extends BaseElementWalker
 			return e1;
 		}
 
+		/**
+		 * 
+		 * @param e1
+		 * @param att
+		 */
 		private void processAttribute(final KElement e1, String att)
 		{
 			String origPrefix = KElement.xmlnsPrefix(att);
@@ -246,7 +251,6 @@ public class EnsureNSUri extends BaseElementWalker
 
 		private void processXmlns(final KElement e1, String att)
 		{
-			String uri;
 			String locName = KElement.xmlnsLocalName(att);
 			String alias = getAlias(locName, null);
 			if (alias != null && !alias.equals(locName))
@@ -257,7 +261,7 @@ public class EnsureNSUri extends BaseElementWalker
 			{
 				if (locName == null)
 					locName = ":";
-				uri = nsMap.get(locName);
+				String uri = nsMap.get(locName);
 				if (uri != null)
 				{
 					Attr attr = e1.getDOMAttr(att, null, false);
@@ -269,6 +273,14 @@ public class EnsureNSUri extends BaseElementWalker
 			}
 		}
 
+		/**
+		 * 
+		 *   
+		 * @param prefix
+		 * @param localName
+		 * @param uri 
+		 * @return
+		 */
 		private String getAlias(String prefix, String uri)
 		{
 			if (prefix == null)

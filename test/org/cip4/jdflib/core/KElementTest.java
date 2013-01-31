@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
+import org.cip4.jdflib.core.KElement.SingleXPathComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -557,6 +558,32 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(b.getNextSiblingElement(), c);
 		// now invert
 		e.sortChildren(new KElement.SingleAttributeComparator("at", true));
+		assertEquals(e.getFirstChildElement(), c);
+		assertEquals(c.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), a);
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testSortChildrenXPath()
+	{
+		final XMLDoc d = new JDFDoc("parent");
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
+		final KElement a = e.appendElement("a");
+		a.setXPathAttribute("x/@at", "a1");
+		b.setXPathAttribute("x/@at", "a2");
+		final KElement c = e.appendElement("c");
+		c.setXPathAttribute("x/@at", "a3");
+		// sort forward
+		e.sortChildren(new SingleXPathComparator("x/@at", false));
+		assertEquals(e.getFirstChildElement(), a);
+		assertEquals(a.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), c);
+		// now invert
+		e.sortChildren(new SingleXPathComparator("x/@at", true));
 		assertEquals(e.getFirstChildElement(), c);
 		assertEquals(c.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), a);
@@ -2077,6 +2104,27 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getXPathElement("foo[@ID=\"1\"]/bar").getText(), "snafu");
 		assertEquals(root.getXPathElement("foo[@ID=\"2\"]/bar").getText(), "snafu2");
 		assertEquals(root.getXPathAttribute("foo[@ID=\"2\"]/@bar", null), "bb");
+	}
+
+	/**
+	 * Method testGetDeepParentChild.
+	 * 
+	 */
+	public void testGetDeepParent()
+	{
+		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
+		final KElement e = jdfDoc.getRoot();
+		final KElement foo = e.appendElement("foo");
+		final KElement bar = foo.appendElement("bar");
+		assertNull(bar.getDeepParent("fnarf", 2));
+		assertNull(bar.getDeepParent("fnarf", 0));
+		assertEquals(bar.getDeepParent((String) null, 0), bar);
+		assertEquals(bar.getDeepParent((String) null, 1), foo);
+		assertEquals(bar.getDeepParent((String) null, 2), e);
+		assertEquals(bar.getDeepParent((String) null, 46), e);
+		assertEquals(bar.getDeepParent("foo", 0), foo);
+		assertEquals(bar.getDeepParent("foo", 33), foo);
+		assertEquals(bar.getDeepParent("Test", 33), e);
 	}
 
 	/**

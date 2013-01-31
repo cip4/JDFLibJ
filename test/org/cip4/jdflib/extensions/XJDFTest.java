@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,6 +96,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -402,6 +403,13 @@ public class XJDFTest extends JDFTestCaseBase
 			assertEquals(e.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
 	}
 
+	XJDF20 getJMFConverter()
+	{
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bTypeSafeMessage = true;
+		return xjdf20;
+	}
+
 	/**
 	 * 
 	 */
@@ -419,9 +427,21 @@ public class XJDFTest extends JDFTestCaseBase
 		ri.appendAmountPool().appendPartAmount(partMap).setActualAmount(1, null);
 		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(partMap, new VString("SignatureName SheetName Side Separation", null));
 		xmPart.appendMedia();
-		e = new XJDF20().makeNewJMF(jmf);
+		e = getJMFConverter().makeNewJMF(jmf);
 		final JDFPart pNew = (JDFPart) e.getXPathElement("SignalResource/ResourceInfo/ResourceSet/Resource/Part");
 		assertEquals(pNew.getPartMap(), partMap);
+	}
+
+	/**
+	 * 
+	 */
+	public void testJMFHoldQEToXJDF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueueEntry);
+		final JDFQueueEntryDef qed = jmf.getCreateCommand(0).appendQueueEntryDef();
+		qed.setQueueEntryID("QEID");
+		e = getJMFConverter().makeNewJMF(jmf);
+		assertEquals(e.getXPathAttribute("QueryModifyQueueEntry/ModifyQueueEntryParams/@Operation", null), "Hold");
 	}
 
 	/**
@@ -624,7 +644,9 @@ public class XJDFTest extends JDFTestCaseBase
 		KElement xPathElement = e.getCreateXPathElement("xjdf:ParameterSet[@Name=\"RunList\"]/xjdf:Parameter/xjdf:RunList/xjdf:LayoutElement");
 		assertNotNull(xPathElement);
 		JDFDoc d = new XJDFToJDFConverter(null).convert(e);
-		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+		JDFNode jdfRoot = d.getJDFRoot();
+		assertNull(jdfRoot.getXPathElement("//RunList/RunList"));
+		assertTrue(jdfRoot.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

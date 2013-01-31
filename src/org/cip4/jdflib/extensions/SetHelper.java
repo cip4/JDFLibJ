@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -147,6 +147,8 @@ public class SetHelper extends BaseXJDFHelper
 		{
 			e = insertPartitionBefore(e, map, addRes);
 		}
+		if (addRes)
+			e.getCreateResource();
 		return e;
 	}
 
@@ -180,9 +182,8 @@ public class SetHelper extends BaseXJDFHelper
 			vmap.add(null);
 		}
 		Vector<PartitionHelper> vp = new Vector<PartitionHelper>();
-		for (int i = 0; i < vmap.size(); i++)
+		for (JDFAttributeMap m : vmap)
 		{
-			JDFAttributeMap m = vmap.get(i);
 			vp.add(getCreatePartition(m, addRes));
 		}
 		return vp;
@@ -211,7 +212,10 @@ public class SetHelper extends BaseXJDFHelper
 		}
 		if (size != v.size())
 			v = getPartitions();
-		return v.get(index);
+		PartitionHelper ph = v.get(index);
+		if (addRes)
+			ph.getCreateResource();
+		return ph;
 	}
 
 	/**

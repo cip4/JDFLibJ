@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@
 
 package org.cip4.jdflib.jmf;
 
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -91,7 +92,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -148,6 +148,27 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	public JDFResourceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * 
+	 * create a resourceInfo in parent based on resourceLink
+	 * 
+	 * @param parent
+	 * @param resourceLink
+	 * @param copyResource if true, also copy the referenced resource
+	 * @return
+	 */
+	public static JDFResourceInfo createResourceInfo(JDFMessage parent, JDFResourceLink resourceLink, boolean copyResource)
+	{
+		if (parent == null)
+		{
+			LogFactory.getLog(JDFResourceInfo.class).error("cannot create ResourceInfo in null parent");
+			return null;
+		}
+		JDFResourceInfo ri = parent.appendResourceInfo();
+		ri.setLink(resourceLink, copyResource);
+		return ri;
 	}
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
@@ -374,17 +395,18 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * sets all relevant parameters of this to the values specified in resourceLink or its linked resource or JDF node
-	 * 
-	 * @param resourceLink the resourceLink to extract the information from
-	 * @param rqp parameters
+	 * fill a ResourceInfo from resourceLink
+	 * @param resourceLink
+	 * @param copyResource if true, also copy the referenced resource
 	 */
-	public void setLink(final JDFResourceLink resourceLink, final JDFResourceQuParams rqp)
+	public void setLink(JDFResourceLink resourceLink, boolean copyResource)
 	{
 		if (resourceLink == null)
 		{
 			return;
 		}
+
+		setPartMapVector(resourceLink.getPartMapVector());
 		final JDFAmountPool ap = resourceLink.getAmountPool();
 		if (ap != null)
 		{
@@ -401,8 +423,39 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 				setAmount(resourceLink.getAmount(null));
 			}
 		}
-		setProcessUsage(resourceLink.getEnumProcessUsage());
+		setProcessUsage(StringUtil.getNonEmpty(resourceLink.getProcessUsage()));
+		setUsage(resourceLink.getUsage());
+		setResourceName(resourceLink.getLinkedResourceName());
+		setResourceID(resourceLink.getrRef());
 
+		final JDFResource r = resourceLink.getTarget();
+		if (r != null)
+		{
+			setProductID(StringUtil.getNonEmpty(r.getProductID()));
+			setResStatus(r.getResStatus(false));
+			if (copyResource)
+			{
+				// create a copy of the resource in the original jdf
+				final JDFResource rr = (JDFResource) r.getParentNode_KElement().copyElement(r, null);
+				rr.inlineRefElements(null, null, true);
+				// move resource copy from the original node into this document
+				moveElement(rr, null);
+			}
+		}
+	}
+
+	/**
+	 * sets all relevant parameters of this to the values specified in resourceLink or its linked resource or JDF node
+	 * 
+	 * @param resourceLink the resourceLink to extract the information from
+	 * @param rqp parameters
+	 */
+	public void setLink(final JDFResourceLink resourceLink, final JDFResourceQuParams rqp)
+	{
+		if (resourceLink == null)
+		{
+			return;
+		}
 		final JDFResource r = resourceLink.getTarget();
 		if (r == null && rqp != null)
 		{
@@ -410,29 +463,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		}
 
 		final boolean bExact = rqp == null ? false : rqp.getExact();
-		if (!bExact || r == null) // if we do not have a resource let's limp
-		// along and provide as much as we have
-		{
-			setResourceName(resourceLink.getLinkedResourceName());
-			setAttribute(AttributeName.RESOURCEID, resourceLink.getrRef());
-			final EnumUsage usage = resourceLink.getUsage();
-			if (usage != null)
-			{
-				setAttribute(AttributeName.USAGE, usage.getName());
-			}
-			if (r != null && r.hasAttribute(AttributeName.PRODUCTID))
-			{
-				setProductID(r.getProductID());
-			}
-		}
-		else
-		{
-			// create a copy of the resource in the original jdf
-			final JDFResource rr = (JDFResource) r.getParentNode_KElement().copyElement(r, null);
-			rr.inlineRefElements(null, null, true);
-			// move resource copy from the original node into this document
-			moveElement(rr, null);
-		}
+		setLink(resourceLink, bExact);
 	}
 
 	/**

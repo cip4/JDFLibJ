@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,12 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFResource;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Jan 22, 2013
+ */
 public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
@@ -263,21 +269,19 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	}
 
 	/**
-	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
-	 * @param ni
+	 * 
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 */
-	public void setIdentifier(final NodeIdentifier ni)
+	public void setIdentifier(NodeIdentifier ni)
 	{
-		NodeIdentifier niLocal = ni;
-
-		if (niLocal == null)
+		if (ni == null)
 		{
-			niLocal = new NodeIdentifier();
+			ni = new NodeIdentifier();
 		}
 
-		setJobID(niLocal.getJobID());
-		setJobPartID(niLocal.getJobPartID());
-		setPartMapVector(niLocal.getPartMapVector());
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
 	}
 
 	/**
@@ -287,6 +291,15 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	public void setResourceName(final String value)
 	{
 		setAttribute(AttributeName.RESOURCENAME, value, null);
+	}
+
+	/**
+	 * add token to ResourceName
+	 * @param value the value to add to the attribute 
+	 */
+	public void appendResourceName(final String value)
+	{
+		appendAttribute(AttributeName.RESOURCENAME, value, null, " ", true);
 	}
 
 }

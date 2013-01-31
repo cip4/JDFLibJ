@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -394,6 +394,18 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("TEST", null);
 		final KElement e = (KElement) d.createElement("bar");
 		assertNull(e.getNamespaceURI());
+	}
+
+	/**
+	 * 
+	 */
+	public void testNewDocNS()
+	{
+		final XMLDoc d = new XMLDoc("src:test", "www.test.de");
+		final KElement e = d.getRoot();
+		assertEquals("www.test.de", e.getNamespaceURI());
+		assertEquals(e.toXML().indexOf("xmlns="), -1);
+		assertNotSame(e.toXML().indexOf("xmlns:src="), -1);
 	}
 
 	/**

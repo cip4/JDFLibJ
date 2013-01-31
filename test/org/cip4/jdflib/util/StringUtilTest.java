@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -188,7 +188,7 @@ public class StringUtilTest extends JDFTestCaseBase
 			v.appendUnique(s);
 			assertTrue(s.length() > 1);
 		}
-		assertTrue("should be many different", v.size() < 100);
+		assertTrue("should be many different", v.size() < 900);
 		assertTrue(v.size() > 5);
 	}
 

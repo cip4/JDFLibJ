@@ -2549,6 +2549,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/** * */
 		public static final EnumProcessUsage Waste = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_WASTE);
 		/** * */
+		public static final EnumProcessUsage ThumbNail = new EnumProcessUsage("ThumbNail");
+		/** * */
 		public static final EnumProcessUsage Proof = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_PROOF);
 		/** * */
 		public static final EnumProcessUsage Input = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_INPUT);

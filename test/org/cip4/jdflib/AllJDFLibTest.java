@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -138,6 +138,7 @@ import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
+import org.cip4.jdflib.elementwalker.EnsureElementUriTest;
 import org.cip4.jdflib.elementwalker.EnsureNSUriTest;
 import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.RemoveEmptyTest;
@@ -192,6 +193,7 @@ import org.cip4.jdflib.jmf.JDFPipeParamsTest;
 import org.cip4.jdflib.jmf.JDFQueueEntryTest;
 import org.cip4.jdflib.jmf.JDFQueueFilterTest;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParamsTest;
+import org.cip4.jdflib.jmf.JDFResourceInfoTest;
 import org.cip4.jdflib.jmf.JDFSubscriptionInfoTest;
 import org.cip4.jdflib.jmf.JMFBuilderFactoryTest;
 import org.cip4.jdflib.jmf.JMFBuilderTest;
@@ -304,6 +306,7 @@ import org.cip4.jdflib.util.net.UrlCheckTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
 import org.cip4.jdflib.util.thread.OrderedTaskQueueTest;
 import org.cip4.jdflib.util.thread.ThreadFilterTest;
+import org.cip4.jdflib.util.xml.XSLTransformHelperTest;
 import org.cip4.jdflib.util.zip.ZipReaderTest;
 import org.cip4.jdflib.validate.JDFValidatorTest;
 import org.cip4.jdflib.validate.VersionTranslatorTest;
@@ -403,6 +406,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// elementWalker
 		suite.addTestSuite(AttributeReplacerTest.class);
 		suite.addTestSuite(BaseWalkerTest.class);
+		suite.addTestSuite(EnsureElementUriTest.class);
 		suite.addTestSuite(EnsureNSUriTest.class);
 		suite.addTestSuite(LinkRefFinderTest.class);
 		suite.addTestSuite(RemoveEmptyTest.class);
@@ -468,11 +472,12 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFPipeParamsTest.class);
 		suite.addTestSuite(JDFQueueEntryTest.class);
 		suite.addTestSuite(JDFQueueFilterTest.class);
-		suite.addTestSuite(JMFKnownMessagesTest.class);
 		suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
+		suite.addTestSuite(JDFResourceInfoTest.class);
 		suite.addTestSuite(JDFSubscriptionInfoTest.class);
 		suite.addTestSuite(JMFBuilderTest.class);
 		suite.addTestSuite(JMFBuilderFactoryTest.class);
+		suite.addTestSuite(JMFKnownMessagesTest.class);
 		suite.addTestSuite(JMFResourceTest.class);
 		suite.addTestSuite(JMFResourceInfoTest.class);
 		suite.addTestSuite(JMFStatusTest.class);
@@ -609,6 +614,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(OrderedTaskQueueTest.class);
 		suite.addTestSuite(ThreadFilterTest.class);
 		suite.addTestSuite(ThreadUtilTest.class);
+
+		// util.xml
+		suite.addTestSuite(XSLTransformHelperTest.class);
 
 		// util.zip
 		suite.addTestSuite(ZipReaderTest.class);

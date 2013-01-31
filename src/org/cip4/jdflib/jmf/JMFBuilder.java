@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
@@ -268,6 +269,39 @@ public class JMFBuilder
 
 	/**
 	 * build a JMF Status query
+	 * @param bExact if true 
+	 * @return the message
+	 */
+	public JDFJMF buildResourceQuery(boolean bExact)
+	{
+		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Resource);
+		JDFResourceQuParams resParams = jmf.getCreateQuery(0).getCreateResourceQuParams(0);
+		resParams.setExact(bExact);
+		return finalize(jmf);
+	}
+
+	/**
+	 * build a JMF Status query
+	 * @param bExact if true 
+	 * @param resLink 
+	 * @return the message
+	 */
+	public JDFJMF buildResourceSignal(boolean bExact, JDFResourceLink resLink)
+	{
+		final JDFJMF jmf = buildResourceQuery(bExact);
+		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFSignal signal = jmfSignal.getSignal(0);
+		if (resLink != null)
+		{
+			JDFResourceInfo.createResourceInfo(signal, resLink, bExact);
+		}
+		signal.setQuery(jmf.getQuery(0));
+		signal.copyElement(jmf.getQuery(0).getResourceQuParams(), null);
+		return finalize(jmfSignal);
+	}
+
+	/**
+	 * build a JMF Status query
 	 * @param deviceDetails the device details
 	 * @param jobDetails the status details
 	 * @return the message
@@ -281,8 +315,8 @@ public class JMFBuilder
 		signal.copyElement(jmf.getQuery(0).getStatusQuParams(), null);
 		final JDFDeviceInfo di = signal.appendDeviceInfo();
 		di.setDeviceStatus(EnumDeviceStatus.Unknown);
-		JDFJobPhase jp = di.appendJobPhase();
-		return jmfSignal;
+		di.appendJobPhase();
+		return finalize(jmfSignal);
 	}
 
 	/**

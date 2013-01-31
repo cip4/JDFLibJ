@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,20 +79,24 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Jan 18, 2013
+ */
 public class JDFContactTest extends JDFTestCaseBase
 {
 
 	JDFContact co;
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -104,7 +108,7 @@ public class JDFContactTest extends JDFTestCaseBase
 	 * 
 	 *  
 	 */
-	public void testsetContactType()
+	public void testSetContactTypeEnum()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
@@ -123,6 +127,16 @@ public class JDFContactTest extends JDFTestCaseBase
 		co.addContactTypes(EnumContactType.Delivery);
 		assertTrue(co.getContactTypes().contains("Accounting"));
 		assertTrue(co.getContactTypes().contains("Delivery"));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testSetContactType()
+	{
+		co.setContactTypes("Customer");
+		assertEquals(co.getContactTypes().get(0), "Customer");
 	}
 
 	/**

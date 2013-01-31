@@ -1,7 +1,5 @@
-/*
- *
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
@@ -68,191 +66,58 @@
  *  
  * 
  */
-package org.cip4.jdflib.util.thread;
+package org.cip4.jdflib.jmf;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFLayout;
 
 /**
- * class to run heavy tasks one at a time
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *  
+ * @author rainer prosi
+ * @date Jan 22, 2013
  */
-public class OrderedTaskQueue extends Thread
+public class JDFResourceInfoTest extends JDFTestCaseBase
 {
-	private final Vector<Runnable> queue;
-	private boolean stop;
-	private final Log log;
-	private MyMutex mutex;
-	private static Map<String, OrderedTaskQueue> theMap = new HashMap<String, OrderedTaskQueue>();
-
 	/**
 	 * 
-	 * grab the queue
-	 * @param name - must not be null
-	 * @return the queue to fill with tasks
+	 *  
 	 */
-	public static OrderedTaskQueue getCreateQueue(String name)
+	public void testCreateCopy()
 	{
-		name = getThreadName(name);
-		synchronized (theMap)
-		{
-			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
-			if (orderedTaskQueue == null || orderedTaskQueue.stop)
-			{
-				orderedTaskQueue = new OrderedTaskQueue(name);
-				theMap.put(name, orderedTaskQueue);
-			}
-			return orderedTaskQueue;
-		}
-	}
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFLayout l = (JDFLayout) n.addResource("Layout", EnumUsage.Input);
+		l.appendMedia().makeRootResource(null, null, true);
+		JDFResourceLink rlLO = n.getLink(l, null);
 
-	/**
-	 * @param name 
-	 * 
-	 */
-	private OrderedTaskQueue(String name)
-	{
-		super(name);
-		setDaemon(true);
-		log = LogFactory.getLog(getClass());
-		queue = new Vector<Runnable>();
-		mutex = new MyMutex();
-		start();
-	}
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		JDFSignal s = jmf.appendSignal(EnumType.Resource);
 
-	private static String getThreadName(String name)
-	{
-		return name == null ? "OrderedTaskQueue" : "OrderedTaskQueue_" + name;
+		JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, rlLO, true);
+		assertEquals(ri.getResourceName(), "Layout");
+		assertNotNull(ri.getResource(null).getElement("Media"));
 	}
 
 	/**
 	 * 
+	 *  
 	 */
-	public static void shutDownAll()
+	public void testCreateNoCopy()
 	{
-		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down all ordered queues");
-		Vector<String> v = ContainerUtil.getKeyVector(theMap);
-		if (v != null)
-		{
-			for (String key : v)
-			{
-				theMap.get(key).shutDown();
-			}
-		}
-	}
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFLayout l = (JDFLayout) n.addResource("Layout", EnumUsage.Input);
+		l.appendMedia().makeRootResource(null, null, true);
+		JDFResourceLink rlLO = n.getLink(l, null);
 
-	/**
-	 * 
-	 */
-	public void shutDown()
-	{
-		log.info("shutting down ordered queue");
-		stop = true;
-		theMap.remove(getName());
-	}
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		JDFSignal s = jmf.appendSignal(EnumType.Resource);
 
-	/**
-	 * size of the waiting queue
-	 * @return 
-	 */
-	public int size()
-	{
-		return queue.size();
-	}
-
-	/**
-	 * 
-	 * @param task the thing to send off
-	 * @return true if successfully queued
-	 */
-	public boolean queue(Runnable task)
-	{
-		if (stop)
-		{
-			log.error("cannot queue task in stopped queue");
-			return false;
-		}
-		synchronized (queue)
-		{
-			queue.add(task);
-			ThreadUtil.notifyAll(mutex);
-			return true;
-		}
-	}
-
-	/**
-	 * @see java.lang.Thread#run()
-	*/
-	@Override
-	public void run()
-	{
-		log.info("starting queue persist loop");
-		while (true)
-		{
-			try
-			{
-				runTasks();
-			}
-			catch (Exception e)
-			{
-				log.error("whazzup queueing ordered task ", e);
-			}
-			if (stop)
-			{
-				log.info("end of ordered task loop");
-				ThreadUtil.notifyAll(mutex);
-				mutex = null;
-				break;
-			}
-			if (!ThreadUtil.wait(mutex, 1000000))
-			{
-				break;
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	private void runTasks()
-	{
-		while (!stop)
-		{
-			Runnable r = null;
-			synchronized (queue)
-			{
-				if (queue.size() > 0)
-				{
-					r = queue.remove(0);
-				}
-			}
-
-			// now the unsynchronized stuff
-			if (r != null)
-			{
-				r.run();
-				System.gc();
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-
-	/**
-	 * @see java.lang.Thread#toString()
-	 * @return
-	*/
-	@Override
-	public String toString()
-	{
-		return "OrderedTaskQueue " + getName() + " " + stop + " queue: " + queue;
+		JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, rlLO, false);
+		assertEquals(ri.getResourceName(), "Layout");
+		assertNull(ri.getResource(null));
 	}
 }

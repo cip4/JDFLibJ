@@ -131,6 +131,7 @@ public class StringUtil
 			"Randomly inserted error",
 			"fooBar",
 			"Snafu",
+			"Nichtsnutz geht über Eigennutz!",
 			"Bad Karma",
 			"What do you expect from a simulator",
 			"Paper Jam",
@@ -221,7 +222,7 @@ public class StringUtil
 			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
 			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
 			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.",
-			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.",
+			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
 			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
 			"Biology is the only science in which multiplication means the same thing as division.", "Last quote" };
 

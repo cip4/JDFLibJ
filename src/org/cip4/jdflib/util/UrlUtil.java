@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1392,7 +1392,8 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
-		return new URLWriter(strUrl, stream, method, contentType, details).writeToURL();
+		URLWriter urlWriter = new URLWriter(strUrl, stream, method, contentType, details);
+		return urlWriter.writeToURL();
 	}
 
 	private static class URLWriter

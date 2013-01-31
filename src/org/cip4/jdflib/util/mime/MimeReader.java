@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,6 +88,7 @@ import javax.mail.internet.MimeMultipart;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -206,36 +207,8 @@ public class MimeReader extends MimeHelper
 	 */
 	public JDFDoc getJDFDoc(final InputStream stream, final int index)
 	{
-		final InputStream bis = StreamUtil.getBufferedInputStream(stream);
-		bis.mark(markSize);
-		final Multipart mp = getMultiPart(bis);
-		if (mp != null)
-		{
-			theMultipart = mp;
-			final BodyPartHelper bph = getBodyPartHelper(index);
-			if (bph != null)
-			{
-				return bph.getJDFDoc();
-			}
-		}
-		// not a mime - try direct xml
-		if (index == 0)
-		{
-
-			try
-			{
-				bis.reset();
-			}
-			catch (final IOException e)
-			{
-				return null;
-			}
-			return JDFDoc.parseStream(bis);
-		}
-		else
-		{
-			return null;
-		}
+		XMLDoc xmlDoc = getXMLDoc(stream, index);
+		return xmlDoc == null ? null : new JDFDoc(xmlDoc);
 	}
 
 	/**
@@ -246,8 +219,8 @@ public class MimeReader extends MimeHelper
 	*/
 	public XMLDoc getXMLDoc(final InputStream stream, final int index)
 	{
-		final InputStream bis = StreamUtil.getBufferedInputStream(stream);
-		bis.mark(markSize);
+		ByteArrayIOStream bios = new ByteArrayIOStream(stream);
+		ByteArrayIOInputStream bis = bios.getInputStream();
 		final Multipart mp = getMultiPart(bis);
 		if (mp != null)
 		{
@@ -262,14 +235,7 @@ public class MimeReader extends MimeHelper
 		if (index == 0)
 		{
 
-			try
-			{
-				bis.reset();
-			}
-			catch (final IOException e)
-			{
-				return null;
-			}
+			bis = bios.getInputStream();
 			return XMLDoc.parseStream(bis);
 		}
 		else

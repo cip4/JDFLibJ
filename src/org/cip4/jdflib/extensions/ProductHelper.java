@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -88,7 +87,7 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * root products attribute name
 	 */
-	public final static String rootProducts = "RootProducts";
+	public final static String rootProduct = "IsRoot";
 
 	/**
 	 * @param product
@@ -104,8 +103,7 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public void setRoot()
 	{
-		KElement list = theElement.getParentNode_KElement();
-		list.appendAttribute(rootProducts, theElement.getID(), null, " ", true);
+		theElement.setAttribute(rootProduct, true, null);
 	}
 
 	/**
@@ -265,15 +263,13 @@ public class ProductHelper extends BaseXJDFHelper
 	 */
 	public boolean isRootProduct()
 	{
-		String id = theElement.getID();
-		KElement list = theElement.getParentNode_KElement();
-		if (list == null)
-			return false; // snafu
-		String ids = list.getAttribute(rootProducts, null, null);
-		if (ids == null)
-			return list.getFirstChildElement("Product", null) == theElement;
-		else
-			return StringUtil.hasToken(ids, id, " ", 0);
+		boolean b = theElement.getBoolAttribute(rootProduct, null, false);
+		if (!b)
+		{
+			KElement list = theElement.getParentNode_KElement();
+			b = (list != null && list.getElement("Product", null, 0) == theElement && list.getChildWithAttribute("Product", rootProduct, null, "true", 0, true) == null);
+		}
+		return b;
 	}
 
 	/**

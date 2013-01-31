@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -100,6 +101,19 @@ public class SetHelperTest extends TestCase
 		assertNotNull(sh.getCreatePartition(1, true));
 		assertNotNull(sh.getPartition(-1));
 		assertNull(sh.getPartition(-3));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetCreatePartition()
+	{
+		SetHelper sh = new XJDFHelper(root).getCreateParameterSet("FoldingParams", EnumUsage.Input);
+		assertEquals(sh.getName(), "FoldingParams");
+		assertNotNull(sh.getCreatePartition(0, false));
+		assertNotNull(sh.getPartition(-1));
+		assertNull(sh.getCreatePartition(0, false).getResource());
+		assertNotNull(sh.getCreatePartition(0, true).getResource());
 	}
 
 	/**

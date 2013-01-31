@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,8 @@
 package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 
 /**
@@ -102,6 +104,28 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "milestone.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test milestone
+	 */
+	public void testBuildResourceSignal()
+	{
+		JDFJMF jmf = b.buildResourceSignal(true, null);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "resourceSignal.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test milestone
+	 */
+	public void testBuildStatusSignal()
+	{
+		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "statusSignal.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**

@@ -1,7 +1,5 @@
-/*
- *
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
@@ -68,191 +66,97 @@
  *  
  * 
  */
-package org.cip4.jdflib.util.thread;
+package org.cip4.jdflib.util.xml;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.io.OutputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.ThreadUtil;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
- * class to run heavy tasks one at a time
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * class that adds some trivial xsl transform routines for KElements
+ * 
+ * @author rainer prosi
+ * @date Jan 22, 2013
  */
-public class OrderedTaskQueue extends Thread
+public class XSLTransformHelper
 {
-	private final Vector<Runnable> queue;
-	private boolean stop;
-	private final Log log;
-	private MyMutex mutex;
-	private static Map<String, OrderedTaskQueue> theMap = new HashMap<String, OrderedTaskQueue>();
+	private final KElement elem;
+	private final XMLDoc xsl;
 
 	/**
-	 * 
-	 * grab the queue
-	 * @param name - must not be null
-	 * @return the queue to fill with tasks
+	 * @param e
+	 * @param xsl 
 	 */
-	public static OrderedTaskQueue getCreateQueue(String name)
+	public XSLTransformHelper(KElement e, XMLDoc xsl)
 	{
-		name = getThreadName(name);
-		synchronized (theMap)
-		{
-			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
-			if (orderedTaskQueue == null || orderedTaskQueue.stop)
-			{
-				orderedTaskQueue = new OrderedTaskQueue(name);
-				theMap.put(name, orderedTaskQueue);
-			}
-			return orderedTaskQueue;
-		}
+		elem = e;
+		this.xsl = xsl;
 	}
 
 	/**
-	 * @param name 
-	 * 
+	 * @param d - the document to transform - must not be null
+	 * @param xsl 
 	 */
-	private OrderedTaskQueue(String name)
+	public XSLTransformHelper(XMLDoc d, XMLDoc xsl)
 	{
-		super(name);
-		setDaemon(true);
-		log = LogFactory.getLog(getClass());
-		queue = new Vector<Runnable>();
-		mutex = new MyMutex();
-		start();
-	}
-
-	private static String getThreadName(String name)
-	{
-		return name == null ? "OrderedTaskQueue" : "OrderedTaskQueue_" + name;
+		elem = d.getRoot();
+		this.xsl = xsl;
 	}
 
 	/**
 	 * 
-	 */
-	public static void shutDownAll()
-	{
-		LogFactory.getLog(OrderedTaskQueue.class).info("shutting down all ordered queues");
-		Vector<String> v = ContainerUtil.getKeyVector(theMap);
-		if (v != null)
-		{
-			for (String key : v)
-			{
-				theMap.get(key).shutDown();
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public void shutDown()
-	{
-		log.info("shutting down ordered queue");
-		stop = true;
-		theMap.remove(getName());
-	}
-
-	/**
-	 * size of the waiting queue
-	 * @return 
-	 */
-	public int size()
-	{
-		return queue.size();
-	}
-
-	/**
-	 * 
-	 * @param task the thing to send off
-	 * @return true if successfully queued
-	 */
-	public boolean queue(Runnable task)
-	{
-		if (stop)
-		{
-			log.error("cannot queue task in stopped queue");
-			return false;
-		}
-		synchronized (queue)
-		{
-			queue.add(task);
-			ThreadUtil.notifyAll(mutex);
-			return true;
-		}
-	}
-
-	/**
-	 * @see java.lang.Thread#run()
-	*/
-	@Override
-	public void run()
-	{
-		log.info("starting queue persist loop");
-		while (true)
-		{
-			try
-			{
-				runTasks();
-			}
-			catch (Exception e)
-			{
-				log.error("whazzup queueing ordered task ", e);
-			}
-			if (stop)
-			{
-				log.info("end of ordered task loop");
-				ThreadUtil.notifyAll(mutex);
-				mutex = null;
-				break;
-			}
-			if (!ThreadUtil.wait(mutex, 1000000))
-			{
-				break;
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	private void runTasks()
-	{
-		while (!stop)
-		{
-			Runnable r = null;
-			synchronized (queue)
-			{
-				if (queue.size() > 0)
-				{
-					r = queue.remove(0);
-				}
-			}
-
-			// now the unsynchronized stuff
-			if (r != null)
-			{
-				r.run();
-				System.gc();
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-
-	/**
-	 * @see java.lang.Thread#toString()
 	 * @return
-	*/
-	@Override
-	public String toString()
+	 */
+	public XMLDoc getTransformElement()
 	{
-		return "OrderedTaskQueue " + getName() + " " + stop + " queue: " + queue;
+		if (xsl == null)
+		{
+			return null;
+		}
+		DOMResult transformedResult = new DOMResult();
+		getTransformedResult(transformedResult);
+		Node transformedDoc = transformedResult.getNode();
+		return transformedDoc == null ? null : new XMLDoc((Document) transformedDoc);
+	}
+
+	private void getTransformedResult(Result transformedResult)
+	{
+		Source mySrc = new DOMSource(elem);
+		Source xslSrc = new DOMSource(xsl.getMemberDocument());
+		try
+		{
+			Transformer theTransformer = TransformerFactory.newInstance().newTransformer(xslSrc);
+			theTransformer.transform(mySrc, transformedResult);
+		}
+		catch (TransformerException x)
+		{
+			// NOP
+		}
+	}
+
+	/**
+	* 
+	* @param stream the stream to fill
+	*  
+	*/
+	public void fillTransformStream(OutputStream stream)
+	{
+		if (xsl != null && stream != null)
+		{
+			StreamResult transformedResult = new StreamResult(stream);
+			getTransformedResult(transformedResult);
+		}
 	}
 }

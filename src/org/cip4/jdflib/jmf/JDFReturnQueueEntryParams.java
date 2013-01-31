@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,7 @@ package org.cip4.jdflib.jmf;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoReturnQueueEntryParams;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IURLSetter;
 
 /**
@@ -149,5 +150,25 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams imp
 	public String toString()
 	{
 		return "JDFReturnQueueEntryParams[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * 
+	 * convenience for single node
+	 * @param value
+	 */
+	public void setAborted(String value)
+	{
+		super.setAborted(VString.getVString(value, null));
+	}
+
+	/**
+	 * 
+	 * convenience for single node
+	 * @param value
+	 */
+	public void setCompleted(String value)
+	{
+		super.setCompleted(VString.getVString(value, null));
 	}
 }

@@ -2178,19 +2178,21 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the n'th ancestor node with name nodeName
 	 * @default getDeepParent(parentNode, 0)
 	 */
-	public KElement getDeepParent(final String parentNode, final int depth)
+	public KElement getDeepParent(final String parentNode, int depth)
 	{
-		if (!getLocalName().equals(parentNode))
+		final KElement parentElement = getParentNode_KElement();
+		if (!getLocalName().equals(parentNode) && !isWildCard(parentNode))
 		{
-			final KElement parentElement = getParentNode_KElement();
 			return (parentElement == null) ? null : parentElement.getDeepParent(parentNode, depth);
 		}
 		else if (depth > 0)
 		{
-			final KElement parentElement = getParentNode_KElement();
-			// last in chain or
-			// leaving structure
-			if ((parentElement != null) && (parentNode.equals(parentElement.getLocalName())))
+			if (parentElement == null)
+			{
+				return getDeepParent(parentNode, 0);
+			}
+			// last in chain or leaving structure
+			if (isWildCard(parentNode) || parentNode.equals(parentElement.getLocalName()))
 			{
 				return parentElement.getDeepParent(parentNode, depth - 1);
 			}
@@ -3601,23 +3603,23 @@ public class KElement extends ElementNSImpl implements Element
 	 * if the attribute is numeric, compare numerically, else lexical comparison is done
 	 * @author prosirai
 	 */
-	public static class SingleAttributeComparator implements Comparator<KElement>
+	public static class SingleXPathComparator implements Comparator<KElement>
 	{
 		/**
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 * 
-		 * @param pAttName the attribute to use for comparing<br/>
+		 * @param xPath the xpath in the context of this element to use for comparing<br/>
 		 * @param pInvert if true, sort backwards
 		 */
-		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
+		public SingleXPathComparator(final String xPath, final boolean pInvert)
 		{
 			super();
-			this.attName = pAttName;
+			this.xPath = xPath;
 			this.invert = pInvert ? -1 : 1;
 		}
 
-		private final String attName;
-		private final int invert;
+		final String xPath;
+		final int invert;
 
 		/**
 		 * @param o1
@@ -3627,30 +3629,45 @@ public class KElement extends ElementNSImpl implements Element
 		 */
 		public int compare(final KElement o1, final KElement o2)
 		{
-
-			final String attribute1 = o1.getAttribute(attName, null, null);
-			final String attribute2 = o2.getAttribute(attName, null, null);
-			if (StringUtil.isNumber(attribute1))
+			final String attribute1 = o1.getXPathAttribute(xPath, null);
+			final String attribute2 = o2.getXPathAttribute(xPath, null);
+			if (StringUtil.isNumber(attribute1) && StringUtil.isNumber(attribute2))
 			{
-				if (StringUtil.isNumber(attribute2))
+				final double d1 = StringUtil.parseDouble(attribute1, 0);
+				final double d2 = StringUtil.parseDouble(attribute2, 0);
+				if (d1 < d2)
 				{
-					final double d1 = StringUtil.parseDouble(attribute1, 0);
-					final double d2 = StringUtil.parseDouble(attribute2, 0);
-					if (d1 < d2)
-					{
-						return -invert;
-					}
-					else if (d1 == d2)
-					{
-						return 0;
-					}
-					else
-					{
-						return invert;
-					}
+					return -invert;
+				}
+				else if (d1 == d2)
+				{
+					return 0;
+				}
+				else
+				{
+					return invert;
 				}
 			}
 			return invert * ContainerUtil.compare(attribute1, attribute2);
+		}
+	}
+
+	/**
+	 * sorts according to the value of one attribute<br/>
+	 * if the attribute is numeric, compare numerically, else lexical comparison is done
+	 * @author prosirai
+	 */
+	public static class SingleAttributeComparator extends SingleXPathComparator
+	{
+		/**
+		 * if the attribute is numeric, compare numerically, else lexical comparison is done
+		 * 
+		 * @param pAttName the attribute to use for comparing<br/>
+		 * @param pInvert if true, sort backwards
+		 */
+		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
+		{
+			super("@" + pAttName, pInvert);
 		}
 	}
 

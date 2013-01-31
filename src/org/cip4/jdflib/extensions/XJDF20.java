@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -109,6 +108,8 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -242,7 +243,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public boolean bTypeSafeMessage = true;
 	/**
-	 * set to define type safe messages
+	 * set to define one type for query, command and registration
 	 */
 	public boolean bAbstractMessage = true;
 	/**
@@ -1533,8 +1534,7 @@ public class XJDF20 extends BaseElementWalker
 			}
 			else
 			{
-				final KElement list = prod.getParentNode_KElement();
-				list.appendAttribute("RootProducts", node.getID(), null, null, true);
+				node.setAttribute("RootProduct", true, null);
 			}
 		}
 
@@ -2876,6 +2876,55 @@ public class XJDF20 extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
 	 * walker for JMF mesaages
 	 */
+	public class WalkModifyQueueEntry extends WalkMessage
+	{
+		@Override
+		void makeTypesafe(JDFMessage m)
+		{
+			String originalType = super.getMessageType(m);
+			JDFQueueEntryDef queueEntryDef = m.getQueueEntryDef(0);
+			String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
+			super.makeTypesafe(m);
+			KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
+			modifyParams.setAttribute(AttributeName.OPERATION, StringUtil.leftStr(originalType, -10)); //-10 = queueentry.size()
+			modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#getMessageType(org.cip4.jdflib.jmf.JDFMessage)
+		 */
+		@Override
+		String getMessageType(JDFMessage m)
+		{
+			return "ModifyQueueEntry";
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement toCheck)
+		{
+			return super.matches(toCheck) && isModifyQE(toCheck.getAttribute(AttributeName.TYPE));
+		}
+
+		/**
+		 * 
+		 * @param type
+		 * @return
+		 */
+		boolean isModifyQE(String type)
+		{
+			return StringUtil.hasToken("AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+	 * walker for JMF mesaages
+	 */
 	public class WalkMessage extends WalkJDFElement
 	{
 		/**
@@ -2893,38 +2942,53 @@ public class XJDF20 extends BaseElementWalker
 			return super.walk(jdf, xjdf);
 		}
 
-		protected void makeTypesafe(JDFMessage m)
+		void makeTypesafe(JDFMessage m)
 		{
-			String type = m.getType();
-			if (ElementName.COMMAND.equals(type) || ElementName.REGISTRATION.equals(type))
-				type = ElementName.QUERY;
-			if (ElementName.ACKNOWLEDGE.equals(type))
-				type = ElementName.RESPONSE;
-
-			if (bAbstractMessage)
+			String type = getMessageType(m);
+			EnumFamily family = getNewFamily(m);
+			if (family == null)
 			{
-				m.renameElement(m.getNodeName() + type, null);
+				log.error("cannot convert message with null family");
 			}
 			else
 			{
-				VElement v = m.getChildElementVector(null, null);
-				KElement newElem = m.appendElement(type + m.getNodeName(), null);
-				for (KElement e : v)
-				{
-					if (e instanceof JDFComment)
-						continue;
-					if (e instanceof JDFGeneralID)
-						continue;
-					newElem.moveElement(e, null);
-				}
+				m.renameElement(family.getName() + type, null);
 			}
+		}
+
+		String getMessageType(JDFMessage m)
+		{
+			String type = m.getType();
+			return type;
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param m
+		 * @return
+		 */
+		private EnumFamily getNewFamily(JDFMessage m)
+		{
+			EnumFamily family = m.getFamily();
+			if (bAbstractMessage)
+			{
+				if (EnumFamily.Command.equals(family) || EnumFamily.Registration.equals(family))
+					family = EnumFamily.Query;
+				if (EnumFamily.Acknowledge.equals(family))
+					family = EnumFamily.Response;
+			}
+			return family;
 		}
 
 		@Override
 		protected void removeUnused(final KElement newRootP)
 		{
 			super.removeUnused(newRootP);
-			newRootP.removeAttribute(AttributeName.TYPE);
+			if (bTypeSafeMessage)
+			{
+				newRootP.removeAttribute(AttributeName.TYPE);
+			}
 		}
 
 		/**

@@ -116,7 +116,8 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 {
 	/**
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)

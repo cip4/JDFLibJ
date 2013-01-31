@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.Inet4Address;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -95,6 +96,33 @@ public class TestJDF extends JDFTestCaseBase
 		//	JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
 		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
 
+	}
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 * @throws Throwable
+	 */
+	public void testSpawn3() throws Throwable
+	{
+		final JDFDoc d = new JDFParser().parseFile("/data/07050637.jdf");
+
+		VJDFAttributeMap vamParts = new VJDFAttributeMap();
+
+		JDFAttributeMap amPart = new JDFAttributeMap();
+
+		amPart.put("SignatureName", "Signature1");
+		amPart.put("SheetName", "Bogen1");
+
+		vamParts.add(amPart);
+
+		JDFNode nodeProc = d.getJDFRoot().getJobPart("PPIPressRoot.C", JDFConstants.EMPTYSTRING);
+
+		final JDFSpawn spawn = new JDFSpawn(nodeProc);
+
+		JDFNode nodeSubJDF = spawn.spawn("07050637.jdf", JDFConstants.EMPTYSTRING, null, vamParts, true, true, true, false);
+
+		assertTrue(nodeSubJDF != null);
 	}
 
 	/**

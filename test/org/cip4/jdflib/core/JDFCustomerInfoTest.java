@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -134,8 +134,6 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		}
 	}
 
-	// ///////////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
@@ -159,7 +157,20 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		assertNull("cc", cc);
 	}
 
-	// ///////////////////////////////////////////////////////////////////////
+	/**
+	* 
+	*/
+	public void testGetCreateContactWithContactType()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFCustomerInfo info = doc.getJDFRoot().getCreateCustomerInfo();
+		JDFContact cc = info.getContactWithContactType("Customer", 0);
+		assertNull("cc", cc);
+		cc = info.getCreateContactWithContactType("Customer", 0);
+		assertNotNull("cc", cc);
+		cc = info.getContactWithContactType("Customer", 0);
+		assertNotNull("cc", cc);
+	}
 
 	/**
 	 * 
