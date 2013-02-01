@@ -1816,8 +1816,8 @@ public class StringUtil
 	 * valid radix: -1,0,2,8,10,16
 	 * 
 	 * @param iEscapeLen the number of digits per escaped char, not including escapeChar
-	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped
-	 * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped
+	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped, if negative, no lower limit applies
+	 * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped, if negative, no upper limit applies
 	 * 
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
 	 */

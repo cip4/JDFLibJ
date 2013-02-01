@@ -730,6 +730,7 @@ public class UrlUtil
 		StringBuffer buf = new StringBuffer(baseUrl);
 		key = escape(key, true);
 		val = escape(val, true);
+		val = StringUtil.escape(val, ":/", "%", 16, 2, -1, -1);
 		buf.append(flag).append(key).append("=").append(val);
 		return buf.toString();
 	}

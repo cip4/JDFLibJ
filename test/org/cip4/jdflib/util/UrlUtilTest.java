@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
 
@@ -178,6 +179,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a?b=c", UrlUtil.addParameter("a", "b", "c"));
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
+		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.addParameter("a", "b", "http://www.example.com"));
 	}
 
 	/**
@@ -200,8 +202,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 			log.info("skipping network test");
 			return;
 		}
-		ProxyUtil.setProxy("proxy", 8080, null, null);
+		ProxyUtil.setProxy("proxy", 8082, null, null);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testWriteToURLPost()
+	{
+		setTestNetwork(true);
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
+		ProxyUtil.setProxy("proxy", 8082, null, null);
+		assertNotNull(UrlUtil.writeToURL("http://localhost:4021/foo/bar", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null));
 	}
 
 	/**
@@ -295,6 +312,31 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse("invalid char: @", UrlUtil.isURL("http://@"));
 		assertFalse("UNC", UrlUtil.isURL("\\\\unc\\bar\\a.txt"));
 		assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
+	}
+
+	/**
+	* 
+	*/
+	public void testIsURLPerformance()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		for (int i = 0; i < 1234; i++)
+		{
+			ct.start();
+			assertFalse(UrlUtil.isURL(null));
+			assertTrue(UrlUtil.isURL("file://bl.txt"));
+			assertTrue(UrlUtil.isURL("http://foo.com/bl.txt"));
+			assertFalse("3 ///", UrlUtil.isURL("http:///bl.txt"));
+			assertFalse("blank is bad", UrlUtil.isURL("file://a b.txt"));
+			assertTrue("blank %20 is good", UrlUtil.isURL("file://a%20bl.txt"));
+			assertTrue(UrlUtil.isURL("file:C:/a/b.txt"));
+			assertTrue("relative url", UrlUtil.isURL("./3.txt"));
+			assertFalse("invalid char: @", UrlUtil.isURL("http://@"));
+			assertFalse("UNC", UrlUtil.isURL("\\\\unc\\bar\\a.txt"));
+			assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
+			ct.stop();
+		}
+		System.out.println(ct.toString());
 	}
 
 	/**
