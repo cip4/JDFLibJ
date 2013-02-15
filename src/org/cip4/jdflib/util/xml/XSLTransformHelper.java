@@ -79,8 +79,11 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -90,10 +93,11 @@ import org.w3c.dom.Node;
  * @author rainer prosi
  * @date Jan 22, 2013
  */
-public class XSLTransformHelper
+public class XSLTransformHelper implements IStreamWriter
 {
 	private final KElement elem;
 	private final XMLDoc xsl;
+	private final Log log;
 
 	/**
 	 * @param e
@@ -103,6 +107,7 @@ public class XSLTransformHelper
 	{
 		elem = e;
 		this.xsl = xsl;
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -111,8 +116,7 @@ public class XSLTransformHelper
 	 */
 	public XSLTransformHelper(XMLDoc d, XMLDoc xsl)
 	{
-		elem = d.getRoot();
-		this.xsl = xsl;
+		this(d.getRoot(), xsl);
 	}
 
 	/**
@@ -142,7 +146,7 @@ public class XSLTransformHelper
 		}
 		catch (TransformerException x)
 		{
-			// NOP
+			log.error("error applying xsl transform ", x);
 		}
 	}
 
@@ -151,7 +155,7 @@ public class XSLTransformHelper
 	* @param stream the stream to fill
 	*  
 	*/
-	public void fillTransformStream(OutputStream stream)
+	public void writeStream(OutputStream stream)
 	{
 		if (xsl != null && stream != null)
 		{

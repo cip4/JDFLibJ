@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,18 +148,18 @@ public class RemovePrivateTest extends TestCase
 		assertNull(n.getGeneralID(0));
 		n.appendGeneralID("key", "bar");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("key"), "bar");
+		assertEquals(n.getGeneralID("key", 0), "bar");
 		n.appendGeneralID("foo:key", "bar");
 		rp.addPrefix("blub");
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key"), "bar");
+		assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.addPrefix("foo");
 		rp.setZappGeneralID(false);
 		rp.walkTree(n, null);
-		assertEquals(n.getGeneralID("foo:key"), "bar");
+		assertEquals(n.getGeneralID("foo:key", 0), "bar");
 		rp.setZappGeneralID(true);
 		rp.walkTree(n, null);
-		assertNull(n.getGeneralID("foo:key"));
+		assertNull(n.getGeneralID("foo:key", 0));
 	}
 
 	/**

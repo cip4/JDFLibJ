@@ -132,6 +132,8 @@ public class StringUtil
 			"fooBar",
 			"Snafu",
 			"Nichtsnutz geht über Eigennutz!",
+			"Dumb people are always blissfully unaware of how dumb they really are…",
+			"Well, it’s no secret that the best thing about a secret is secretly telling someone your secret, thereby adding another secret to their secret collection of secrets, secretly.",
 			"Bad Karma",
 			"What do you expect from a simulator",
 			"Paper Jam",
@@ -566,7 +568,7 @@ public class StringUtil
 
 	/**
 	 * return a vector of individual tokens<br>
-	 * Multiple consequtive delimitors are treated as one (similar to whitespace handling).
+	 * Multiple consecutive delimitors are treated as one (similar to whitespace handling).
 	 * <p>
 	 * default: tokenize(strWork, delim, false)
 	 * 
@@ -592,7 +594,6 @@ public class StringUtil
 				v.add(st.nextToken());
 			}
 		}
-
 		return v;
 	}
 

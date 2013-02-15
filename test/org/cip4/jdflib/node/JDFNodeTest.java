@@ -610,6 +610,16 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testActivation()
+	{
+		assertTrue(EnumActivation.isActive(null));
+		assertFalse(EnumActivation.isActive(EnumActivation.TestRun));
+		assertTrue(EnumActivation.isActive(EnumActivation.TestRunAndGo));
+	}
+
+	/**
+	 * 
+	 */
 	public void testAddInternalPipe()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");

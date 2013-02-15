@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2331,9 +2331,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		xm.expand(false);
 		assertEquals("expanded sub", xmPart.getBrand(), "PartBrand");
-		assertEquals("expanded sub", xmPart.getGeneralID("testID"), "partValue");
+		assertEquals("expanded sub", xmPart.getGeneralID("testID", 0), "partValue");
 		assertEquals("expanded sub2", xmPart2.getBrand(), "rootBrand");
-		assertEquals("expanded sub2", xmPart2.getGeneralID("testID"), "rootValue");
+		assertEquals("expanded sub2", xmPart2.getGeneralID("testID", 0), "rootValue");
 		assertTrue("hasBrand", xmPart2.hasAttribute_KElement("Brand", null, false));
 		assertTrue("hasID", xmPart2.getElement_KElement("GeneralID", null, 0) != null);
 		assertFalse("has part Key", xmPart.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
@@ -2341,9 +2341,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		xm.collapse(false, true);
 		assertEquals("expanded sub after collapse", xmPart.getBrand(), "PartBrand");
-		assertEquals("expanded sub after collapse", xmPart.getGeneralID("testID"), "partValue");
+		assertEquals("expanded sub after collapse", xmPart.getGeneralID("testID", 0), "partValue");
 		assertEquals("expanded sub2 after collapse", xmPart2.getBrand(), "rootBrand");
-		assertEquals("expanded sub2 after collapse", xmPart2.getGeneralID("testID"), "rootValue");
+		assertEquals("expanded sub2 after collapse", xmPart2.getGeneralID("testID", 0), "rootValue");
 		assertFalse("hasBrand", xmPart2.hasAttribute_KElement("Brand", null, false));
 		assertTrue("hasID", xmPart2.getElement_KElement("GeneralID", null, 0) == null);
 		assertFalse("has part Key", xmPart.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
@@ -2397,22 +2397,22 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		final JDFExposedMedia xm2 = (JDFExposedMedia) xm.getPartition(new JDFAttributeMap("SignatureName", "Sig1"), EnumPartUsage.Explicit);
 		xm.setGeneralID("foo", "bar");
-		assertEquals("", xm.getGeneralID("foo"), "bar");
-		assertEquals("", xm2.getGeneralID("foo"), "bar");
+		assertEquals("", xm.getGeneralID("foo", 0), "bar");
+		assertEquals("", xm2.getGeneralID("foo", 0), "bar");
 		assertEquals("", xm.numChildElements(ElementName.GENERALID, null), 1);
 		xm.setGeneralID("foo", "bar2");
-		assertEquals("", xm.getGeneralID("foo"), "bar2");
+		assertEquals("", xm.getGeneralID("foo", 0), "bar2");
 		assertEquals("", xm.numChildElements(ElementName.GENERALID, null), 1);
 		assertEquals("", xm2.numChildElements(ElementName.GENERALID, null), 1);
 		xm2.setGeneralID("foo", "bar4");
 		xm.setGeneralID("foo2", "bar3");
-		assertEquals("", xm.getGeneralID("foo"), "bar2");
-		assertEquals("", xm2.getGeneralID("foo"), "bar4");
-		assertEquals("", xm.getGeneralID("foo2"), "bar3");
+		assertEquals("", xm.getGeneralID("foo", 0), "bar2");
+		assertEquals("", xm2.getGeneralID("foo", 0), "bar4");
+		assertEquals("", xm.getGeneralID("foo2", 0), "bar3");
 		assertEquals("", xm.numChildElements(ElementName.GENERALID, null), 2);
 		xm.removeGeneralID("foo");
-		assertNull("", xm.getGeneralID("foo"));
-		assertEquals("", xm.getGeneralID("foo2"), "bar3");
+		assertNull("", xm.getGeneralID("foo", 0));
+		assertEquals("", xm.getGeneralID("foo2", 0), "bar3");
 		assertEquals("", xm.numChildElements(ElementName.GENERALID, null), 1);
 		xm.setGeneralID("foo3", "bar33");
 		final JDFGeneralID gi = xm.getGeneralID(0);

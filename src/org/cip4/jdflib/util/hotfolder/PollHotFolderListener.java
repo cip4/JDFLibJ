@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -117,7 +117,20 @@ public class PollHotFolderListener implements HotFolderListener
 			log.error("Exception processing hotfile", e);
 			result = null;
 		}
-		PollResult det = theHandler.handlePoll(result, hotFile.getParent());
+		PollResult det = theHandler.handlePoll(result, getUrl(hotFile));
 		return PollResult.idle.equals(det) || PollResult.success.equals(det);
 	}
+
+	/**
+	 * get a URL for the HotFile default: use the hotfolder Name
+	 * @param hotFile
+	 * @return
+	 */
+	protected String getUrl(final File hotFile)
+	{
+		File parentFile = hotFile == null ? null : hotFile.getParentFile();
+		parentFile = parentFile == null ? null : parentFile.getParentFile();
+		return parentFile == null ? "HotFolderSnafu" : parentFile.getName();
+	}
+
 }

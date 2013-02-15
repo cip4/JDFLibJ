@@ -702,6 +702,23 @@ public class UrlUtil
 		return urlString;
 	}
 
+	/** 
+	 * @param unc
+	 * @param escape128 if true escape chars>128
+	 * @return
+	 */
+	public static String uncToUrl(String unc, boolean escape128)
+	{
+		if (!isUNC(unc))
+		{
+			URL url = stringToURL(unc);
+			return url == null ? null : url.toExternalForm();
+		}
+		String url = StringUtil.replaceCharSet(unc, "\\", "/", 0);
+		url = escape(url, escape128);
+		return "file:" + url;
+	}
+
 	/**
 	 * null safe url to string converter
 	 * @param url
@@ -802,7 +819,17 @@ public class UrlUtil
 		{
 			return null;
 		}
-
+		if (isUNC(urlString))
+		{
+			try
+			{
+				return new URL(uncToUrl(urlString, true));
+			}
+			catch (MalformedURLException e)
+			{
+				return null;
+			}
+		}
 		if (isEscaped(urlString))
 		{
 			urlString = unEscape(urlString);

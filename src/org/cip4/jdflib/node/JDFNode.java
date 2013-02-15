@@ -469,6 +469,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		private static int m_startValue = 0;
 
+		/**
+		 * 
+		 * return true if a allows us to actively process now
+		 * @param a
+		 * @return
+		 */
+		public static boolean isActive(EnumActivation a)
+		{
+			return a == null || EnumActivation.Active.equals(a) || EnumActivation.TestRunAndGo.equals(a);
+		}
+
 		protected EnumActivation(final String name)
 		{
 			super(name, m_startValue++);

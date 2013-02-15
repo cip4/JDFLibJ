@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -194,12 +194,12 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 			return resp;
 		}
 
-		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY };
-		for (int i = 0; i < copyAtts.length; i++)
+		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY, AttributeName.ACTIVATION };
+		for (String copyAtt : copyAtts)
 		{
-			if (hasAttribute(copyAtts[i]))
+			if (hasAttribute(copyAtt))
 			{
-				qe.copyAttribute(copyAtts[i], this, null, null, null);
+				qe.copyAttribute(copyAtt, this, null, null, null);
 			}
 		}
 

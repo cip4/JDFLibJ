@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,8 +73,8 @@ import java.io.File;
 import org.cip4.jdflib.util.net.IPollHandler;
 
 /**
- * TODO Please insert comment!
- * @author rainerprosi
+ * 
+ * @author rainer prosi
  * @date Feb 11, 2011
  */
 public class PollHotFolder extends StorageHotFolder
@@ -85,7 +85,7 @@ public class PollHotFolder extends StorageHotFolder
 	 * 
 	 * @param _hotFolderDir the hot folder directory to watch
 	 * @param _storageDir the storage directory where hot files are moved to
-	 * @param ext the file extensions that are moved - if null no filtering
+	 * @param ext the comma separated list of file extensions that are moved - if null no filtering
 	 * @param handler callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
 	 */
 	public PollHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final IPollHandler handler)

@@ -106,7 +106,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		template.appendElement("html", "http://www.w3.org/1999/xhtml");
 		KElement a = new XMLDoc("a", null).getRoot();
 		ByteArrayIOStream s = new ByteArrayIOStream();
-		new XSLTransformHelper(a, xsl).fillTransformStream(s);
+		new XSLTransformHelper(a, xsl).writeStream(s);
 		assertTrue(new String(s.getInputStream().getBuf()).indexOf("<html") >= 0);
 	}
 }

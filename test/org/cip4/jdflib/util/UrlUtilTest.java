@@ -211,7 +211,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testWriteToURLPost()
 	{
-		setTestNetwork(true);
 		if (!isTestNetwork())
 		{
 			log.info("skipping network test");
@@ -384,6 +383,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals(UrlUtil.stringToURL("file:/foo/ .txt"), new URL("file:/foo/%20.txt"));
 			assertEquals(UrlUtil.stringToURL("file:/foo/%.txt"), new URL("file:/foo/%25.txt"));
 		}
+		assertEquals(UrlUtil.stringToURL("\\\\a\\b c\\d.txt"), new URL("file://a/b%20c/d.txt"));
 		assertEquals(UrlUtil.stringToURL("http://foo/%20.txt"), new URL("http://foo/%20.txt"));
 		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
 		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
@@ -492,6 +492,22 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertEquals("b.c", UrlUtil.urlToFileName("a:b.c"));
 		assertEquals("b.c", UrlUtil.urlToFileName("http:/b.c?gg"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testUNCToUrl()
+	{
+		assertEquals("file://a/b/c.txt", UrlUtil.uncToUrl("\\\\a\\b\\c.txt", true));
+		String unc = "\\\\a\\b\\c ä.txt";
+		assertEquals("file://a/b/c%20%c3%a4.txt", UrlUtil.uncToUrl(unc, true));
+		String unc2 = unc;
+		for (int i = 0; i < 10; i++)
+		{
+			unc = UrlUtil.urlToUNC(UrlUtil.uncToUrl(unc, true));
+		}
+		assertEquals(unc, unc2);
 	}
 
 	/**

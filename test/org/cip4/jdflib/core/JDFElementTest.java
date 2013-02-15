@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -324,7 +324,13 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setGeneralID("Foo", "Bar1");
-		assertEquals(n.getGeneralID("Foo"), "Bar1");
+		n.appendGeneralID("Foo", "Bar2");
+		assertEquals(n.getGeneralID("Foo", 0), "Bar1");
+		assertEquals(n.getGeneralID("Foo", 1), "Bar2");
+		assertEquals(n.getGeneralID("Foo", -2), "Bar1");
+		assertEquals(n.getGeneralID("Foo", -1), "Bar2");
+		assertNull(n.getGeneralID("Foo", 3));
+		assertNull(n.getGeneralID("Foo", -3));
 	}
 
 	/**
