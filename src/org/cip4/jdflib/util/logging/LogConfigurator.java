@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -89,22 +89,14 @@ import org.cip4.jdflib.util.UrlUtil;
 public class LogConfigurator
 {
 
-	static private boolean configured = false;
-
 	/**
 	 * @param logDir the log directory, null console only
 	 * @param logName the name of the log file
 	 */
-	@SuppressWarnings("deprecation")
 	public static void configureLog(String logDir, final String logName)
 	{
+		BasicConfigurator.resetConfiguration();
 		Log log = LogFactory.getLog(LogConfigurator.class);
-		if (configured)
-		{
-			log.debug("ignoring redundant configuration");
-			return;
-		}
-		configured = true;
 		try
 		{
 			Layout layout = new PatternLayout("%d " + PatternLayout.TTCC_CONVERSION_PATTERN);
@@ -125,6 +117,7 @@ public class LogConfigurator
 				BasicConfigurator.configure(appender);
 				log.info("log file=" + new File(logFileName).getAbsolutePath());
 			}
+			log = LogFactory.getLog(LogConfigurator.class);
 			log.info("Configured logging ");
 		}
 		catch (IOException e)

@@ -131,6 +131,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.jdf"));
 		assertEquals(UrlUtil.VND_JMF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.JMF"));
 		assertEquals(UrlUtil.TEXT_XML, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xml"));
+		assertEquals(UrlUtil.APPLICATION_ZIP, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.zip"));
 		assertEquals(UrlUtil.getMimeTypeFromURL(null), JDFConstants.MIME_TEXTUNKNOWN);
 		assertEquals(UrlUtil.getMimeTypeFromURL("foo.PDF"), JDFConstants.MIME_PDF);
 	}

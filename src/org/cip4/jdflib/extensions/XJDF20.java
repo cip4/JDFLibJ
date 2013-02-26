@@ -79,6 +79,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -770,17 +771,17 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final String localName = xjdf.getLocalName();
 			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
-			for (int i = 0; i < resAttribs.size(); i++)
+			for (String attrib : resAttribs)
 			{
-				if (newResLeaf.hasAttribute(resAttribs.stringAt(i)))
+				if (newResLeaf.hasAttribute(attrib))
 				{
 					if (bRoot)
 					{
-						xjdf.moveAttribute(resAttribs.stringAt(i), newResLeaf, null, null, null);
+						xjdf.moveAttribute(attrib, newResLeaf, null, null, null);
 					}
 					else
 					{
-						newResLeaf.removeAttribute(resAttribs.stringAt(i));
+						newResLeaf.removeAttribute(attrib);
 					}
 				}
 			}
@@ -799,6 +800,7 @@ public class XJDF20 extends BaseElementWalker
 			newResLeaf.removeAttribute(AttributeName.NOOP);
 			newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
 			newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
+			newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
 		}
 
 		/**
@@ -994,6 +996,114 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	 * 
+	 *  
+	 * @author rainer prosi
+	 * @date Feb 26, 2013
+	 */
+	public class WalkColorIntentResLink extends WalkResLink
+	{
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		VElement setResource(JDFResourceLink rl, JDFResource linkTarget, KElement xjdf)
+		{
+			VElement v = super.setResource(rl, linkTarget, xjdf);
+			KElement e0 = null;
+			VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);
+			for (KElement e : v)
+			{
+				JDFPart part = (JDFPart) e.getElement(ElementName.PART);
+				e = e.getElement(ElementName.COLORINTENT);
+
+				if (e0 == null)
+					e0 = e;
+				if (e == null)
+				{
+					if (part != null)
+						part.deleteNode();
+				}
+				else
+				{
+					if (part != null)
+					{
+						EnumSide side = part.getSide();
+						if (EnumSide.Front.equals(side) && e0 != e)
+						{
+							for (String att : frontBack)
+							{
+								String attVal = e.getAttribute(att, null, null);
+								if (attVal != null)
+								{
+									e0.setAttribute(att, attVal);
+								}
+							}
+						}
+						else if (EnumSide.Back.equals(side))
+						{
+							for (String att : frontBack)
+							{
+								String attVal = e.getAttribute(att, null, null);
+								if (attVal != null)
+								{
+									e0.setAttribute(att + "Back", attVal);
+								}
+							}
+						}
+						part.deleteNode();
+					}
+					else
+					{
+						for (String att : frontBack)
+						{
+							String attVal = e.getAttribute(att, null, null);
+							if (attVal != null)
+							{
+								if (e0 != e)
+								{
+									String attValBase = e0.getAttribute(att, null, null);
+									if (attValBase == null)
+									{
+										e0.setAttribute(att, attVal);
+									}
+								}
+								String attValBack = e0.getAttribute(att + "Back", null, null);
+								if (attValBack == null)
+								{
+									e0.setAttribute(att + "Back", attVal);
+								}
+							}
+						}
+					}
+				}
+			}
+			return v;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement jdf, KElement xjdf)
+		{
+			KElement e = super.walk(jdf, xjdf);
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(KElement toCheck)
+		{
+			return super.matches(toCheck) && "ColorIntentLink".equals(toCheck.getLocalName());
+		}
+
+	}
+
+	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkResLink extends WalkJDFElement
@@ -1037,6 +1147,19 @@ public class XJDF20 extends BaseElementWalker
 				}
 			}
 			return null;
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param rl
+		 * @param linkTarget
+		 * @param xjdf
+		 * @return 
+		 */
+		VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xjdf)
+		{
+			return XJDF20.this.setResource(rl, linkTarget, xjdf);
 		}
 
 		/**

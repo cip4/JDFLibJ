@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,8 +98,12 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
+import org.cip4.jdflib.jmf.JDFAcknowledge;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -121,9 +125,9 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPageData;
-import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.span.JDFSpanBase.EnumPriority;
 import org.cip4.jdflib.util.EnumUtil;
@@ -430,11 +434,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFElement);
 		}
 	}
@@ -454,11 +453,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFResourceLink);
 		}
 
@@ -473,31 +467,41 @@ public class FixVersion extends BaseElementWalker
 			final JDFResourceLink rl = (JDFResourceLink) e1;
 			if (version != null)
 			{
-				if (version.getValue() >= EnumVersion.Version_1_3.getValue())
-				{
-					if (rl.hasAttribute(AttributeName.DRAFTOK))
-					{
-						if (!rl.hasAttribute(AttributeName.MINSTATUS))
-						{
-							rl.setMinStatus(EnumResStatus.Draft);
-						}
-						rl.removeAttribute(AttributeName.DRAFTOK);
-					}
-				}
-				else
-				{
-					if (rl.hasAttribute(AttributeName.MINSTATUS))
-					{
-						if (!rl.hasAttribute(AttributeName.DRAFTOK))
-						{
-							rl.setDraftOK(true);
-						}
-						rl.removeAttribute(AttributeName.MINSTATUS);
-					}
-					rl.removeAttribute(AttributeName.MINLATESTATUS);
-				}
+				updateDraftOK(rl);
 			}
 			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param rl
+		 */
+		private void updateDraftOK(final JDFResourceLink rl)
+		{
+			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
+			{
+				if (rl.hasAttribute(AttributeName.DRAFTOK))
+				{
+					if (!rl.hasAttribute(AttributeName.MINSTATUS))
+					{
+						rl.setMinStatus(EnumResStatus.Draft);
+					}
+					rl.removeAttribute(AttributeName.DRAFTOK);
+				}
+			}
+			else
+			{
+				if (rl.hasAttribute(AttributeName.MINSTATUS))
+				{
+					if (!rl.hasAttribute(AttributeName.DRAFTOK))
+					{
+						rl.setDraftOK(true);
+					}
+					rl.removeAttribute(AttributeName.MINSTATUS);
+				}
+				rl.removeAttribute(AttributeName.MINLATESTATUS);
+			}
 		}
 	}
 
@@ -516,11 +520,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFComment);
 		}
 
@@ -567,11 +566,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFAudit);
 		}
 
@@ -695,7 +689,7 @@ public class FixVersion extends BaseElementWalker
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
-	 * June 7, 2009
+	 *  
 	 */
 	public class WalkJMF extends WalkElement
 	{
@@ -707,11 +701,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFJMF);
 		}
 
@@ -748,7 +737,188 @@ public class FixVersion extends BaseElementWalker
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
-	 * June 7, 2009
+	 *  
+	 */
+	public class WalkJMFQuery extends WalkJMFMessage
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFQuery);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFResponseAcknowledge extends WalkJMFMessage
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFResponse) || (toCheck instanceof JDFAcknowledge);
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param resp the response or acknowledge
+		 */
+		void fixQueue(JDFMessage resp)
+		{
+			if (!EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
+			{
+				resp.removeChild(ElementName.QUEUE, null, 0);
+			}
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommand extends WalkJMFMessage
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFCommand);
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param c
+		 */
+		void fixQueueFilter(JDFCommand c)
+		{
+			if (!EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
+			{
+				c.removeChild(ElementName.QUEUEFILTER, null, 0);
+			}
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandQueueFilter extends WalkJMFCommand
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFMessage#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			fixQueueFilter((JDFCommand) e1);
+			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return isQueueFilterRemove(toCheck);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandAbortQueueEntry extends WalkJMFCommandQueueFilter
+	{
+
+		/**
+		* 
+		* @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		*/
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			if (!EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
+			{
+				e1.getCreateElement("AbortQueueEntryParams").moveElement(((JDFMessage) e1).getQueueEntryDef(0), null);
+			}
+			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return JDFMessage.EnumType.AbortQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFResponseQueue extends WalkJMFResponseAcknowledge
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFMessage#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			fixQueue((JDFMessage) e1);
+			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return isQueueFilterRemove(toCheck);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
 	 */
 	public class WalkJMFMessage extends WalkElement
 	{
@@ -760,11 +930,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFMessage);
 		}
 
@@ -800,11 +965,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFAncestor);
 		}
 
@@ -845,11 +1005,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFNode);
 		}
 
@@ -867,7 +1022,9 @@ public class FixVersion extends BaseElementWalker
 				n.setVersion(version);
 				n.setMaxVersion(version);
 				n.fixNiCi(version);
+				fixNamedFeatures(n, trackElem);
 			}
+
 			if (!n.hasAttribute(AttributeName.JOBPARTID))
 			{
 				n.setJobPartID(n.generateDotID(AttributeName.JOBPARTID, null));
@@ -883,6 +1040,30 @@ public class FixVersion extends BaseElementWalker
 				n.setType(enumType); // fixes xsi:type stuff
 			}
 			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * move namedfeatures to generalID
+		 * @param trackElem 
+		 * @param n 
+		 */
+		private void fixNamedFeatures(JDFNode n, KElement trackElem)
+		{
+			if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, version))
+			{
+				VString v = n.getNamedFeatures();
+				if (v != null)
+				{
+					for (int i = 0; i < v.size() / 2; i++)
+					{
+						String key = v.get(i * 2);
+						String val = v.get(i * 2 + 1);
+						//TODO use typesafe when we have schema
+						n.appendGeneralID(key, val).setAttribute("DataType", "NamedFeature");
+					}
+				}
+				n.removeAttribute(AttributeName.NAMEDFEATURES);
+			}
 		}
 	}
 
@@ -901,11 +1082,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFPool);
 		}
 
@@ -941,11 +1117,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFResource);
 		}
 
@@ -1014,11 +1185,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFAbstractState);
 		}
 
@@ -1054,11 +1220,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFDevice);
 		}
 
@@ -1098,11 +1259,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFTool);
 		}
 
@@ -1149,11 +1305,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFComponent);
 		}
 
@@ -1245,11 +1396,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFApprovalSuccess);
 		}
 
@@ -1323,11 +1469,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFColor);
 		}
 
@@ -1367,11 +1508,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFEmployee);
 		}
 
@@ -1397,7 +1533,7 @@ public class FixVersion extends BaseElementWalker
 	 * 
 	 * June 7, 2009
 	 */
-	public class WalkPerson extends WalkResource
+	public class WalkGeneralID extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
@@ -1407,35 +1543,56 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
-			return (toCheck instanceof JDFPerson);
-		}
-
-		/**
-		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-		 * high versions but potentially fail when attempting to move from higher to lower versions
-		 */
-		@Override
-		public KElement walk(final KElement e1, final KElement trackElem)
-		{
-			final JDFPerson e = (JDFPerson) e1;
-			if (!e.hasAttribute(AttributeName.DESCRIPTIVENAME))
-			{
-				e.setDescriptiveName(StringUtil.getNonEmpty(e.getDescriptiveName()));
-			}
-			return super.walk(e1, trackElem);
+			return (toCheck instanceof JDFGeneralID);
 		}
 	}
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
-	 * June 7, 2009
+	 * 
+	 */
+	public class WalkGeneralIDNamedFeature extends WalkGeneralID
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			boolean b = super.matches(toCheck);
+			b = b && (toCheck.getParentNode() instanceof JDFNode);
+			return b && "NamedFeature".endsWith(toCheck.getAttribute(AttributeName.DATATYPE));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			if (EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
+			{
+				JDFNode n = (JDFNode) e1.getParentNode();
+				JDFGeneralID gid = (JDFGeneralID) e1;
+				n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDUsage(), null, " ", false);
+				n.appendAttribute(AttributeName.NAMEDFEATURES, gid.getIDValue(), null, " ", false);
+				gid.deleteNode();
+				return null;
+			}
+			else
+			{
+				return super.walk(e1, trackElem);
+			}
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * 
 	 */
 	public class WalkAssembly extends WalkResource
 	{
@@ -1447,11 +1604,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFAssembly);
 		}
 
@@ -1485,11 +1637,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFAssemblySection);
 		}
 
@@ -1523,11 +1670,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFPageList);
 		}
 
@@ -1560,11 +1702,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFStrippingParams);
 		}
 
@@ -1597,11 +1734,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFPageData);
 		}
 
@@ -1634,11 +1766,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFLayout);
 		}
 
@@ -1691,11 +1818,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFSpanBase);
 		}
 
@@ -1756,11 +1878,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFNodeInfo);
 		}
 
@@ -1796,11 +1913,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFCustomerInfo);
 		}
 
@@ -1836,11 +1948,6 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
 			return (toCheck instanceof JDFLayoutPreparationParams);
 		}
 
@@ -1959,5 +2066,32 @@ public class FixVersion extends BaseElementWalker
 	public void setBZappInvalid(boolean zappInvalid)
 	{
 		bZappInvalid = zappInvalid;
+	}
+
+	/**
+	 * 
+	 * this is one of the message types where queue or queueufilter should be zapped in JDF1.5 and above
+	 * @param toCheck
+	 * @return
+	 */
+	boolean isQueueFilterRemove(final KElement toCheck)
+	{
+		JDFMessage.EnumType type = ((JDFMessage) toCheck).getEnumType();
+		if (type == null)
+			return false;
+		boolean b = true;
+		b = b || JDFMessage.EnumType.AbortQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.HoldQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.ResubmitQueueEntry.equals(type);
+		b = b || JDFMessage.EnumType.SetQueueEntryPosition.equals(type);
+		b = b || JDFMessage.EnumType.SetQueueEntryPriority.equals(type);
+		b = b || JDFMessage.EnumType.CloseQueue.equals(type);
+		b = b || JDFMessage.EnumType.OpenQueue.equals(type);
+		b = b || JDFMessage.EnumType.HoldQueue.equals(type);
+		b = b || JDFMessage.EnumType.ResumeQueue.equals(type);
+		b = b || JDFMessage.EnumType.FlushQueue.equals(type);
+		return b;
 	}
 }

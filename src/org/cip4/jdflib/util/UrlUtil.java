@@ -929,6 +929,7 @@ public class UrlUtil
 			mimeMap.put("mjd", MimeUtil.MULTIPART_RELATED);
 			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
 
+			mimeMap.put("zip", APPLICATION_ZIP);
 		}
 		final String extension = UrlUtil.extension(url);
 		String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());

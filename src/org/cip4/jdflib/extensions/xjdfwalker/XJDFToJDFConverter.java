@@ -104,6 +104,7 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
+import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -112,7 +113,6 @@ import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFBindItem;
 import org.cip4.jdflib.resource.JDFEdgeGluing;
@@ -173,16 +173,72 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * if true, create the product, else ignore it
 	 */
-	public boolean createProduct = true;
+	boolean createProduct = true;
+
+	/**
+	 * Getter for createProduct attribute.
+	 * @return the createProduct
+	 */
+	public boolean isCreateProduct()
+	{
+		return createProduct;
+	}
+
+	/**
+	 * Setter for createProduct attribute.
+	 * @param createProduct the createProduct to set
+	 */
+	public void setCreateProduct(boolean createProduct)
+	{
+		this.createProduct = createProduct;
+	}
+
+	/**
+	 * Getter for convertUnits attribute.
+	 * @return the convertUnits
+	 */
+	public boolean isConvertUnits()
+	{
+		return convertUnits;
+	}
+
+	/**
+	 * Setter for convertUnits attribute.
+	 * @param convertUnits the convertUnits to set
+	 */
+	public void setConvertUnits(boolean convertUnits)
+	{
+		this.convertUnits = convertUnits;
+	}
+
+	/**
+	 * Getter for bConvertTilde attribute.
+	 * @return the bConvertTilde
+	 */
+	public boolean isbConvertTilde()
+	{
+		return bConvertTilde;
+	}
+
+	/**
+	 * Setter for bConvertTilde attribute.
+	 * @param bConvertTilde the bConvertTilde to set
+	 */
+	public void setbConvertTilde(boolean bConvertTilde)
+	{
+		this.bConvertTilde = bConvertTilde;
+	}
+
 	/**
 	 * 
 	 */
-	public boolean convertUnits = false;
+	boolean convertUnits = false;
 	/**
 	 * 
 	 */
 	private EnumVersion version = EnumVersion.Version_1_4;
-	private boolean bConvertTilde = false;
+	private boolean bConvertTilde;
+	private boolean heuristicLink;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -196,6 +252,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		// theNode = null;
 		idMap = null;
 		foundProduct = false;
+		bConvertTilde = false;
+		setHeuristicLink(true);
 		log = LogFactory.getLog(getClass());
 	}
 
@@ -234,78 +292,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		idMap = new IDFinder().getMap(xjdf);
 		walkTree(xjdf, theNode);
 
-		root = theNode.getJDFRoot();
-		if ("Product".equals(root.getType()))
-		{
-			mergeProductLinks(theNode, root);
-		}
-		cleanResources(theNode);
-		fixDependencies(root);
-		firstConvert = false;
-		EnsureNSUri fixNS = new EnsureNSUri();
-		fixNS.addNS(null, JDFElement.getSchemaURL());
-		fixNS.walk(root);
+		new PostConverter(theNode).postConvert();
 
 		return jdfDoc;
-	}
-
-	/**
-	 * TODO Please insert comment!
-	 * @param root 
-	 */
-	private void fixDependencies(JDFNode root)
-	{
-		Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
-		if (vDep == null)
-			return;
-		for (JDFDependencies dep : vDep)
-		{
-			fixOneDependencies(dep);
-		}
-
-	}
-
-	/**
-	 * TODO Please insert comment!
-	 * @param dep
-	 */
-	private void fixOneDependencies(JDFDependencies dep)
-	{
-		if (dep == null)
-			return;
-		VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
-		if (v == null)
-			return;
-		for (KElement e : v)
-		{
-			JDFRefElement rl = (JDFRefElement) e;
-			rl.renameElement("LayoutElementRef", null);
-			JDFResource root = rl.getTargetRoot();
-			if (root != null)
-			{
-				VElement vR = root.getLeaves(true);
-				VElement v2 = root.getLinksAndRefs(true, false);
-				if (v2 != null)
-					for (KElement rl2 : v2)
-						rl2.renameElement("LayoutElementLink", null);
-				v2 = root.getLinksAndRefs(false, true);
-				if (v2 != null)
-					for (KElement rl2 : v2)
-						rl2.renameElement("LayoutElementRef", null);
-				for (KElement r : vR)
-				{
-					JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
-					if (loe != null)
-					{
-						r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
-						r.setAttributes(loe);
-						loe.deleteNode();
-					}
-					r.renameElement(ElementName.LAYOUTELEMENT, null);
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -361,27 +350,191 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
-	 * @param theNode
+	 * 
+	 *  
+	 * @author rainerprosi
+	 * @date Feb 26, 2013
 	 */
-	private void cleanResources(final JDFNode theNode)
+	private class PostConverter
 	{
-		final JDFResourceLinkPool rlp = theNode.getResourceLinkPool();
-		final VElement vRes = rlp == null ? null : rlp.getPoolChildren(null, null, null);
-		if (vRes != null)
+		private final JDFNode theNode;
+
+		/**
+		 * @param theNode
+		 */
+		public PostConverter(JDFNode theNode)
 		{
-			for (int i = 0; i < vRes.size(); i++)
+			super();
+			this.theNode = theNode;
+		}
+
+		/**
+		 * 
+		 * 
+		 */
+		void postConvert()
+		{
+			JDFNode root;
+			root = theNode.getJDFRoot();
+			if ("Product".equals(root.getType()))
 			{
-				final JDFResourceLink rl = (JDFResourceLink) vRes.get(i);
-				final JDFResource r = rl.getLinkRoot();
-				if (r != null)
+				mergeProductLinks(theNode, root);
+			}
+			cleanResources();
+			fixDependencies(root);
+			new UnLinkFinder().eraseUnlinked(root);
+			firstConvert = false;
+			EnsureNSUri fixNS = new EnsureNSUri();
+			fixNS.addNS(null, JDFElement.getSchemaURL());
+			fixNS.walk(root);
+		}
+
+		/**
+		 * @param theNode
+		 */
+		private void cleanResources()
+		{
+			VElement vRes = collectResources();
+			if (vRes != null)
+			{
+				for (KElement rr : vRes)
 				{
-					final EnumResStatus s = r.getStatusFromLeaves(false);
-					if (s != null)
+					cleanResource(rr);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param theNode
+		 * @return
+		 */
+		private VElement collectResources()
+		{
+			JDFNode n = theNode;
+			VElement vRes = new VElement();
+			while (n != null)
+			{
+				JDFResourcePool rp = n.getResourcePool();
+				final VElement v = rp == null ? null : rp.getPoolChildren(null, null, null);
+				vRes.addAll(v);
+				n = n.getParentJDF();
+			}
+			return vRes;
+		}
+
+		/**
+		 *  
+		 * @param theNode
+		 * @param rr
+		 */
+		private void cleanResource(KElement rr)
+		{
+			final JDFResource r = (JDFResource) rr;
+			if (r != null)
+			{
+				final EnumResStatus s = r.getStatusFromLeaves(false);
+				if (s != null)
+				{
+					r.setResStatus(s, false);
+				}
+				if (ElementName.COLORPOOL.equals(r.getLocalName()))
+				{
+					cleanColorPool(r);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param theNode
+		 * @param r
+		 */
+		private void cleanColorPool(final JDFResource r)
+		{
+			String id = r.getID();
+			if (StringUtil.getNonEmpty(id) != null)
+			{
+				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
+				if (v != null)
+				{
+					for (KElement e : v)
 					{
-						r.setResStatus(s, false);
+						String name = e.getLocalName();
+						if ("ColorRef".equals(name))
+						{
+							name = StringUtil.leftStr(e.getNodeName(), -3) + "PoolRef";
+							e.renameElement(name, null);
+						}
+						else if ("ColorLink".equals(name))
+						{
+							name = StringUtil.leftStr(e.getNodeName(), -4) + "PoolLink";
+							e.renameElement(name, null);
+						}
 					}
 				}
 			}
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @param root 
+		 */
+		private void fixDependencies(JDFNode root)
+		{
+			Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
+			if (vDep == null)
+				return;
+			for (JDFDependencies dep : vDep)
+			{
+				fixOneDependencies(dep);
+			}
+
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @param dep
+		 */
+		private void fixOneDependencies(JDFDependencies dep)
+		{
+			if (dep == null)
+				return;
+			VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
+			if (v == null)
+				return;
+			for (KElement e : v)
+			{
+				JDFRefElement rl = (JDFRefElement) e;
+				rl.renameElement("LayoutElementRef", null);
+				JDFResource root = rl.getTargetRoot();
+				if (root != null)
+				{
+					VElement vR = root.getLeaves(true);
+					VElement v2 = root.getLinksAndRefs(true, false);
+					if (v2 != null)
+						for (KElement rl2 : v2)
+							rl2.renameElement("LayoutElementLink", null);
+					v2 = root.getLinksAndRefs(false, true);
+					if (v2 != null)
+						for (KElement rl2 : v2)
+							rl2.renameElement("LayoutElementRef", null);
+					for (KElement r : vR)
+					{
+						JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
+						if (loe != null)
+						{
+							r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
+							r.setAttributes(loe);
+							loe.deleteNode();
+						}
+						r.renameElement(ElementName.LAYOUTELEMENT, null);
+					}
+				}
+			}
+
 		}
 	}
 
@@ -476,8 +629,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			return false;
 		}
 
-		final boolean bL1 = parent.getLocalName().endsWith("Set");
-		return bL1 && parent.hasAttribute(AttributeName.NAME);
+		String localName = parent.getLocalName();
+		boolean b = localName.endsWith("Set");
+		b = b && toCheck.getLocalName().equals(StringUtil.leftStr(localName, -3));
+		return b && parent.hasAttribute(AttributeName.NAME);
 	}
 
 	/**
@@ -888,14 +1043,20 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 */
 		private void setTypes()
 		{
-			String t = currentJDFNode.getAttribute("Types");
+			String t = currentJDFNode.getAttribute("Types", null, null);
 			if ("Product".equals(t))
 			{
 				currentJDFNode.setType(EnumType.Product);
 				currentJDFNode.removeAttribute("Types");
 			}
+			else if (StringUtil.tokenize(t, null, false).size() == 1)
+			{
+				currentJDFNode.setType(t.trim(), false);
+			}
 			else
+			{
 				currentJDFNode.setType(EnumType.ProcessGroup);
+			}
 		}
 
 		/**
@@ -977,7 +1138,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFNode root = parent.getJDFRoot();
 			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 			final String id = e.getAttribute(AttributeName.ID, null, null);
-			if (inOut == null && "ParameterSet".equals(e.getLocalName()))
+			if (inOut == null && isHeuristicLink() && "ParameterSet".equals(e.getLocalName()))
 			{
 				final SetHelper h = new SetHelper(e);
 				final String name = h.getName();
@@ -1533,7 +1694,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
-	 * continue walking on these withot copying e
+	 * continue walking on these without copying e
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkContinue extends WalkXElement
@@ -1701,6 +1862,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 			final JDFAttributeMap map = e.getAttributeMap();
 			map.remove(AttributeName.ID);
+			map.remove(AttributeName.PARTIDKEYS);
 			final JDFResourceLink rl = theNode.getLink(newPartition, null);
 			moveAmountsToLink(partmap, map, rl);
 			newPartition.setAttributes(map);
@@ -1767,11 +1929,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final KElement k2 = super.walk(e, trackElem);
 			final JDFResource r = (JDFResource) k2;
 			final JDFResourceLink rl = theNode.getLink(r, null);
-			r.renameElement(ElementName.COLORPOOL, null);
 			if (rl != null)
-			{
 				rl.renameElement("ColorPoolLink", null);
-			}
+			r.renameElement(ElementName.COLORPOOL, null);
+			r.removeAttribute(AttributeName.PARTIDKEYS);
 			return k2;
 		}
 	}
@@ -2147,5 +2308,23 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public void setConvertTilde(boolean b)
 	{
 		bConvertTilde = b;
+	}
+
+	/**
+	 * Setter for heuristicLink attribute.
+	 * @param heuristicLink the heuristicLink to set
+	 */
+	public void setHeuristicLink(boolean heuristicLink)
+	{
+		this.heuristicLink = heuristicLink;
+	}
+
+	/**
+	 * Getter for heuristicLink attribute.
+	 * @return the heuristicLink
+	 */
+	public boolean isHeuristicLink()
+	{
+		return heuristicLink;
 	}
 }

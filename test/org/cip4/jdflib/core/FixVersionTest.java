@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,10 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -285,6 +288,20 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
 	}
 
+	/**
+	 * 
+	 */
+	public void testNamedFeature()
+	{
+		n.setNamedFeatures(new VString("a b", null));
+		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
+		assertEquals(n.getGeneralID("a", 0), "b");
+		assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
+		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
+		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
+		assertNull(n.getGeneralID(null, 0));
+	}
+
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
@@ -318,6 +335,54 @@ public class FixVersionTest extends JDFTestCaseBase
 		FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
 		assertNotNull(StringUtil.getNonEmpty(jmf.getAgentName()));
+	}
+
+	/**
+	 * 
+	 */
+	public void testJMFQueueFilter()
+	{
+		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		command.appendQueueFilter();
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueFilter(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueFilter(0));
+	}
+
+	/**
+	 * 
+	 */
+	public void testJMFQueueAbortQueueEntry()
+	{
+		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueEntryDef(0));
+	}
+
+	/**
+	 * 
+	 */
+	public void testJMFQueue()
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		JDFResponse r = jmf.appendResponse();
+		r.setType(EnumType.RemoveQueueEntry);
+		r.appendQueue();
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(r.getQueue(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(r.getQueue(0));
 	}
 
 	// //////////////////////////////////////////////////////////////////////

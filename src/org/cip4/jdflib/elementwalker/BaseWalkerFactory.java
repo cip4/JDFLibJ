@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,10 +95,8 @@ public class BaseWalkerFactory implements IWalkerFactory
 	 */
 	public IWalker getWalker(final KElement toCheck)
 	{
-		final int vs = vBaseWalker.size();
-		for (int j = 0; j < vs; j++)
+		for (BaseWalker w : vBaseWalker)
 		{
-			final BaseWalker w = vBaseWalker.get(j);
 			w.prepareWalk(toCheck, null);
 			if (w.matches(toCheck))
 			{

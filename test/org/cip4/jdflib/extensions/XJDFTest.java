@@ -1024,6 +1024,55 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 *  
+	 *  
+	 */
+	public void testToXJDFPartition()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Output);
+		JDFResource r = xm.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFResource m = n.addResource("Media", EnumUsage.Input);
+		xm.refElement(m);
+		r = r.addPartition(EnumPartIDKey.Side, "Front");
+		r.addPartitions(EnumPartIDKey.Separation, new VString("C M Y K", null));
+		e = new XJDF20().makeNewJDF(n, null);
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	public void testToXJDFSubPartition()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", EnumUsage.Output);
+		JDFResource r = xm.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		r = r.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFResourceLink rl = n.getLink(xm, null);
+		JDFAttributeMap mPart = new JDFAttributeMap(EnumPartIDKey.SheetName, "S1");
+		mPart.put(EnumPartIDKey.SignatureName, "Sig1");
+		rl.setPartMap(mPart);
+		JDFResource m = n.addResource("Media", EnumUsage.Input);
+		xm.refElement(m);
+		r = r.addPartition(EnumPartIDKey.Side, "Front");
+		r.addPartitions(EnumPartIDKey.Separation, new VString("C M Y K", null));
+		e = new XJDF20().makeNewJDF(n, null);
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	public void testFromXJDFPartition()
+	{
+		testToXJDFPartition();
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		JDFDoc d = conv.convert(e);
+		assertNotNull(d);
+	}
+
+	/**
+	 *  
 	 */
 	public void testFromXJDFColorIntent()
 	{

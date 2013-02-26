@@ -191,6 +191,7 @@ public class JMFBuilder
 	 */
 	private JDFJMF buildQueueEntryCommand(final String queueEntryId, final EnumType typ)
 	{
+		//TODO enhance for JDF 1.5 params
 		if (queueEntryId == null)
 		{
 			return null;

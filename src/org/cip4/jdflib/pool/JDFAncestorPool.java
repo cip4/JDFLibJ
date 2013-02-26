@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -267,7 +267,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 * @param parentNode the closest parent Node that contains the information to be copied
 	 * @param bCopyNodeInfo if true, also copy the NodeInfo into the ancestor
 	 * @param bCopyCustomerInfo if true, also copy the CustomerInfo into the ancestor
-	 * @param bCopyComments if true, also copy the comments into the ancestor
+	 * @param bCopyComments if true, also copy the comments and generalID elements into the ancestor
 	 * @default copyNodeData(parentNode, false, false, false);
 	 */
 	public void copyNodeData(JDFNode parentNode, boolean bCopyNodeInfo, boolean bCopyCustomerInfo, boolean bCopyComments)
@@ -320,8 +320,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 					{
 						if (customerInfo.getParentNode_KElement() instanceof JDFResourcePool)
 						{
-							// add a low level refelement, the copying takes
-							// place inaddspawnedresources
+							// add a low level refelement, the copying takes place inaddspawnedresources
 							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
 							re.setrRef(customerInfo.getID());
 							re.setPartMap(customerInfo.getPartMap());
@@ -336,9 +335,14 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 				if (bCopyComments)
 				{
 					VElement v = node.getChildElementVector(ElementName.COMMENT, null, null, true, 0, false);
-					for (int j = 0; j < v.size(); j++)
+					for (KElement comment : v)
 					{
-						ancestor.copyElement(v.elementAt(j), null);
+						ancestor.copyElement(comment, null);
+					}
+					v = node.getChildElementVector(ElementName.GENERALID, null, null, true, 0, false);
+					for (KElement generalid : v)
+					{
+						ancestor.copyElement(generalid, null);
 					}
 				}
 

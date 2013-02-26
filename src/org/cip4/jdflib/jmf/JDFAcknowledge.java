@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -138,7 +138,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	}
 
 	/**
-	 * converts a response to a signal that can be sent individually
+	 * converts a response to an Acknowledge that can be sent asynchronously
 	 * 
 	 * @param response the response to convert - should not be null
 	 * @param q the query that should be merged into the signal - may be null
