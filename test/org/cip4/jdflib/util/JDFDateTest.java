@@ -183,7 +183,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 		try
 		{
-			date = new JDFDate("2004-11-26T11:43:10.33-03");
+			date = new JDFDate("2004-11-26T11:43:10.33-3A");
 			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
@@ -193,7 +193,7 @@ public class JDFDateTest extends JDFTestCaseBase
 
 		try
 		{
-			date = new JDFDate("2004-11-26T11:43:10.-0300");
+			date = new JDFDate("2004-11-26T11:43:10.+0A00");
 			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)

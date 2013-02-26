@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -517,10 +517,21 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		private void cleanTime() throws DataFormatException
 		{
 			String time = StringUtil.token(strDateTime, 1, "T");
-			String timeZone = StringUtil.token(time, 1, "+");
+			String[] pms = new String[] { "+", "-" };
+			String timeZone = null;
+			for (String pm : pms)
+			{
+				timeZone = StringUtil.token(time, 1, pm);
+				if (timeZone != null)
+				{
+					time = StringUtil.token(time, 0, pm);
+					timeZone = pm + timeZone;
+					break;
+				}
+			}
 			if (timeZone == null)
 				throw new DataFormatException("bad time zone ");
-			time = StringUtil.token(time, 0, "+");
+
 			VString times = StringUtil.tokenize(time, ":", false);
 			if (times != null && times.size() >= 3)
 			{
@@ -536,7 +547,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					throw new DataFormatException("JDFDate.init: invalid time seconds " + times.get(2));
 				NumberFormatter nf = new NumberFormatter();
 
-				String newDate = nf.formatInt(hours, 2) + "-" + nf.formatInt(minutes, 2) + "-" + nf.formatInt(seconds, 2) + "+" + timeZone;
+				String newDate = nf.formatInt(hours, 2) + "-" + nf.formatInt(minutes, 2) + "-" + nf.formatInt(seconds, 2) + timeZone;
 				strDateTime = StringUtil.replaceToken(strDateTime, 1, "T", newDate);
 			}
 			else
