@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JMF SenderID="MessageSender" TimeStamp="2006-11-15T11:14:46+01:00"
+  Version="1.3" xmlns="http://www.CIP4.org/JDFSchema_1_1">
+  <Response ID="m061115_111446125_000000" Type="KnownDevices"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ResponseKnownDevices">
+    <DeviceList>
+      <DeviceInfo DeviceStatus="Idle">
+        
+        <Device
+          xmlns="http://www.CIP4.org/JDFSchema_1_1"   
+          Class="Implementation"
+          DeviceID="Elk ConventionalPrinting" JMFSenderID="Elk ConventionalPrinting"
+          Manufacturer="CIP4"
+          ManufacturerURL="http://www.cip4.org"
+          DeviceType="Elk ConventionalPrinting (build @build.number@, @build.timestamp@)" 
+          ModelName="Elk ConventionalPrinting"
+          ModelNumber="build @build.number@, @build.timestamp@"
+          ModelDescription="Elk ConventionPrinting Reference Device"
+          ModelURL="http://elk.itn.liu.se"
+          JMFURL="http://127.0.0.1:8080/elk-printing/jmf" FriendlyName="Elk ConventionalPrinting">
+          <DeviceCap
+            GenericAttributes="ID Type JobID JobPartID ProductID CustomerID SpawnIDs Class Status PartIDKeys xmlns xmlns:xsi xsi:Type SettingsPolicy BestEffortExceptions OperatorInterventionExceptions MustHonorExceptions DocIndex Locked DescriptiveName Brand PartUsage" CombinedMethod="None" Types="ConventionalPrinting">
+            <DevCapPool>
+              <DevCap DevCapRefs="DC_OptID00016" ID="DC_OptID00023"
+                MaxOccurs="unbounded" MinOccurs="0" Name="ExposedMedia">
+                <StringState AllowedRegExp="*" DefaultValue="Sig#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3012" Name="SignatureName" Required="false">
+                  <Value AllowedValue="Sig#1" ValueUsage="Present"/>
+                </StringState>
+                <StringState AllowedRegExp="*"
+                  DefaultValue="Sig#1Sheet#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3013" Name="SheetName" Required="false">
+                  <Value AllowedValue="Sig#1Sheet#1" ValueUsage="Present"/>
+                </StringState>
+                <StringState AllowedRegExp="*" DefaultValue="Yellow"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3014" Name="Separation" Required="false">
+                  <Value AllowedValue="Black" ValueUsage="Present"/>
+                  <Value AllowedValue="Cyan" ValueUsage="Present"/>
+                  <Value AllowedValue="Magenta" ValueUsage="Present"/>
+                  <Value AllowedValue="Yellow" ValueUsage="Present"/>
+                </StringState>
+                <EnumerationState AllowedValueList="Front Back"
+                  DefaultValue="Back"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3015" Name="Side" PresentValueList="Front Back" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00028" MaxOccurs="unbounded"
+                MinOccurs="0" Name="Preview">
+                <StringState AllowedRegExp="*" DefaultValue="Sig#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3016" Name="SignatureName" Required="false">
+                  <Value AllowedValue="Sig#1" ValueUsage="Present"/>
+                </StringState>
+                <StringState AllowedRegExp="*"
+                  DefaultValue="Sig#1Sheet#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3017" Name="SheetName" Required="false">
+                  <Value AllowedValue="Sig#1Sheet#1" ValueUsage="Present"/>
+                </StringState>
+                <StringState DefaultValue="url"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3018" Name="URL" Required="false"/>
+                <StringState AllowedRegExp="*" DefaultValue="Yellow"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3019" Name="Separation" Required="false">
+                  <Value AllowedValue="Black" ValueUsage="Present"/>
+                  <Value AllowedValue="Cyan" ValueUsage="Present"/>
+                  <Value AllowedValue="Magenta" ValueUsage="Present"/>
+                  <Value AllowedValue="Yellow" ValueUsage="Present"/>
+                </StringState>
+                <EnumerationState AllowedValueList="Front Back"
+                  DefaultValue="Back"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3020" Name="Side" PresentValueList="Front Back" Required="false"/>
+                <EnumerationState AllowedValueList="Separation"
+                  DefaultValue="Separation"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3020a" Name="PreviewUsage" PresentValueList="Separation" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00017" MaxOccurs="unbounded"
+                MinOccurs="0" Name="Media">
+                <EnumerationState AllowedValueList="Paper"
+                  DefaultValue="Paper"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3021" Name="MediaType" Required="false"/>
+                <EnumerationState DefaultValue="Sheet"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3021_a" Name="MediaUnit" Required="false"/>
+                <XYPairState AllowedValueList="-INF -INF ~ INF INF"
+                  DefaultValue="2551.181102 1814.173228"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3022" ListType="List" Name="Dimension"
+                  PresentValueList="2551.181102 1814.173228" Required="false"/>
+                <NumberState AllowedValueList="-INF ~ INF"
+                  DefaultValue="200.0"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3023" Name="Weight" PresentValueList="200.0" Required="false"/>
+                <NumberState AllowedValueList="-INF ~ INF"
+                  DefaultValue="240"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3024" Name="Thickness" PresentValueList="240" Required="false"/>
+                <IntegerState AllowedValueList="-INF ~ INF"
+                  DefaultValue="1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3025" Name="Grade" PresentValueList="1" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00030" MaxOccurs="unbounded"
+                MinOccurs="0" Name="Ink"/>
+              <DevCap ID="DC_OptID00031" MaxOccurs="unbounded"
+                MinOccurs="0" Name="ConventionalPrintingParams">
+                <EnumerationState AllowedValueList="SheetFed"
+                  DefaultValue="SheetFed"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3008" Name="PrintingType" Required="false"/>
+                <EnumerationState AllowedValueList="Perfecting"
+                  DefaultValue="Perfecting"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3009" Name="WorkStyle" Required="false"/>
+              </DevCap>
+              <DevCap DevCapRefs="DC_1003" ID="DC_OptID00018"
+                MaxOccurs="unbounded" MinOccurs="0" Name="Device">
+                <StringState AllowedRegExp="*" DefaultValue="4098"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3027" Name="DeviceID" Required="false">
+                  <Value AllowedValue="4098" ValueUsage="Present"/>
+                </StringState>
+              </DevCap>
+              <DevCap DevCapRefs="DC_OptID00025 DC_1005 DC_1007"
+                ID="DC_OptID00024" MaxOccurs="unbounded" MinOccurs="0" Name="ColorantControl">
+                <EnumerationState AllowedValueList="Front Back"
+                  DefaultValue="Back"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3031" Name="Side" PresentValueList="Back Front" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00032" MaxOccurs="unbounded"
+                MinOccurs="0" Name="Component">
+                <IntegerState AllowedValueList="-INF ~ INF"
+                  DefaultValue="4"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3032" Name="ReaderPageCount"
+                  PresentValueList="4" Required="false"/>
+                <StringState AllowedRegExp="*" DefaultValue="Sig#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3033" Name="SignatureName" Required="false">
+                  <Value AllowedValue="Sig#1" ValueUsage="Present"/>
+                </StringState>
+                <EnumerationState AllowedValueList="Sheet"
+                  DefaultValue="Sheet"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3034" ListType="List" Name="ComponentType"
+                  PresentValueList="Sheet" Required="true"/>
+                <StringState AllowedRegExp="*"
+                  DefaultValue="Sig#1Sheet#1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3035" Name="SheetName" Required="false">
+                  <Value AllowedValue="Sig#1Sheet#1" ValueUsage="Present"/>
+                </StringState>
+                <NameState AllowedRegExp=".*" DefaultValue="Waste"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3036" Name="Condition"
+                  PresentValueList="Good Waste" Required="false"/>
+                <NameState AllowedRegExp=".*"
+                  DefaultValue="PrintedSheet"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3037" Name="ProductType"
+                  PresentValueList="PrintedSheet" Required="false"/>
+                <ShapeState AllowedX="0 ~ INF" AllowedY="0 ~ INF"
+                  AllowedZ="0 ~ INF"
+                  DefaultValue="2551.181102 1814.173228 0.680315"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3038" ListType="List" Name="Dimensions"
+                  PresentValueList="2551.181102 1814.173228 0.680315 2551.181102 1814.173228 0.680315 2551.181102 1814.173228 0.680315 2551.181102 1814.173228 0.680315 2551.181102 1814.173228 0.680315" Required="false"/>
+                <BooleanState AllowedValueList="true false"
+                  DefaultValue="true"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3039" Name="IsWaste" PresentValueList="true" Required="false"/>
+              </DevCap>
+              <DevCap DevCapRefs="DC_1001" ID="DC_1000" MinOccurs="0" Name="AuditPool"/>
+              <DevCap ID="DC_1001" MaxOccurs="unbounded" MinOccurs="0" Name="Created">
+                <DateTimeState
+                  AllowedValueList="1970-01-01T01:00:00+01:00 ~ 2096-10-02T09:06:40+02:00"
+                  DefaultValue="2005-01-24T09:02:05Z"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3000" Name="TimeStamp"
+                  PresentValueList="2005-01-24T09:02:05Z" Required="true"/>
+                <StringState AllowedRegExp="*"
+                  DefaultValue="Optimus 2020 UDMI"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3001" Name="Author" Required="false">
+                  <Value AllowedValue="Optimus 2020 UDMI" ValueUsage="Present"/>
+                </StringState>
+                <StringState AllowedRegExp="*" DefaultValue="v18"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3002" Name="AgentVersion" Required="false">
+                  <Value AllowedValue="v18" ValueUsage="Present"/>
+                </StringState>
+                <StringState AllowedRegExp="*"
+                  DefaultValue="Optimus 2020"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3003" Name="AgentName" Required="false">
+                  <Value AllowedValue="Optimus 2020" ValueUsage="Present"/>
+                </StringState>
+              </DevCap>
+              <DevCap ID="DC_1002" MinOccurs="0" Name="NodeInfo">
+                <DurationState
+                  AllowedValueList="PT00M ~ P68Y1M5DT3H12M4S"
+                  DefaultValue="PT50M"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3004" Name="SetupDuration"
+                  PresentValueList="PT50M" Required="false"/>
+                <DurationState
+                  AllowedValueList="PT00M ~ P68Y1M5DT3H12M4S"
+                  DefaultValue="PT57M"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3005" Name="TotalDuration"
+                  PresentValueList="PT57M" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00029" Name="JDF">
+                <EnumerationState AllowedValueList="1.2"
+                  DefaultValue="1.2"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3006" Name="Version" Required="true"/>
+                <EnumerationState AllowedValueList="Active"
+                  DefaultValue="Active"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3007" Name="Activation" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_OptID00016" MaxOccurs="unbounded"
+                MinOccurs="0" Name="Media">
+                <EnumerationState AllowedValueList="Plate"
+                  DefaultValue="Plate"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3010" Name="MediaType" PresentValueList="Plate" Required="false"/>
+                <XYPairState AllowedValueList="-INF -INF ~ INF INF"
+                  DefaultValue="1000 1000"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3011" ListType="List" Name="Dimension"
+                  PresentValueList="1000 1000 1000 1000" Required="false"/>
+              </DevCap>
+              <DevCap ID="DC_1003" MinOccurs="0" Name="CostCenter">
+                <StringState AllowedRegExp="*" DefaultValue="4098"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3026" Name="CostCenterID" Required="true">
+                  <Value AllowedValue="4098" ValueUsage="Present"/>
+                </StringState>
+              </DevCap>
+              <DevCap DevCapRefs="DC_1004" ID="DC_OptID00025"
+                MaxOccurs="unbounded" MinOccurs="0" Name="ColorPool"/>
+              <DevCap ID="DC_1004" MaxOccurs="unbounded" MinOccurs="0" Name="Color">
+                <StringState AllowedRegExp="*" DefaultValue="Yellow"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3028" Name="Name" Required="true">
+                  <Value AllowedValue="Black" ValueUsage="Present"/>
+                  <Value AllowedValue="Cyan" ValueUsage="Present"/>
+                  <Value AllowedValue="Magenta" ValueUsage="Present"/>
+                  <Value AllowedValue="Yellow" ValueUsage="Present"/>
+                </StringState>
+                <IntegerState AllowedValueList="0 ~ 1"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3029" ListType="List" MaxOccurs="4"
+                  MinOccurs="4" Name="CMYK"
+                  PresentValueList="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 0" Required="false"/>
+              </DevCap>
+              <DevCap DevCapRefs="DC_1006" ID="DC_1005" MinOccurs="0" Name="ColorantParams"/>
+              <DevCap ID="DC_1006" MaxOccurs="unbounded" MinOccurs="0" Name="SeparationSpec">
+                <StringState AllowedRegExp="*" DefaultValue="Yellow"
+                  DescriptiveName="ToDo: Edit the various XXXValueList Attributes etc. to reflect the actual capabilities"
+                  ID="S_3030" Name="Name" Required="true">
+                  <Value AllowedValue="Black" ValueUsage="Present"/>
+                  <Value AllowedValue="Cyan" ValueUsage="Present"/>
+                  <Value AllowedValue="Magenta" ValueUsage="Present"/>
+                  <Value AllowedValue="Yellow" ValueUsage="Present"/>
+                </StringState>
+              </DevCap>
+              <DevCap DevCapRefs="DC_1006" ID="DC_1007" MinOccurs="0" Name="ColorantOrder"/>
+            </DevCapPool>
+            <DevCaps DevCapRef="DC_OptID00023" ID="DCs_OptID00023"
+              LinkUsage="Input" Name="ExposedMedia" ProcessUsage="Plate"/>
+            <DevCaps DevCapRef="DC_OptID00028" ID="DCs_OptID00028"
+              LinkUsage="Input" Name="Preview"/>
+            <DevCaps DevCapRef="DC_OptID00017" ID="DCs_OptID00017"
+              LinkUsage="Input" Name="Media"/>
+            <DevCaps DevCapRef="DC_OptID00030" ID="DCs_OptID00030"
+              LinkUsage="Input" Name="Ink"/>
+            <DevCaps DevCapRef="DC_OptID00031" ID="DCs_OptID00031"
+              LinkUsage="Input" Name="ConventionalPrintingParams"/>
+            <DevCaps DevCapRef="DC_OptID00018" ID="DCs_OptID00018"
+              LinkUsage="Input" Name="Device"/>
+            <DevCaps DevCapRef="DC_OptID00024" ID="DCs_OptID00024"
+              LinkUsage="Input" Name="ColorantControl"/>
+            <DevCaps DevCapRef="DC_OptID00032" ID="DCs_OptID00032"
+              LinkUsage="Output" Name="Component"/>
+            <DevCaps Context="Element" DevCapRef="DC_1000" ID="DCs_1000" Name="AuditPool"/>
+            <DevCaps Context="Element" DevCapRef="DC_1002" ID="DCs_1002" Name="NodeInfo"/>
+            <DevCaps Context="Element" DevCapRef="DC_OptID00029"
+              ID="DCs_OptID00029" Name="JDF"/>
+          </DeviceCap>
+        </Device>
+
+      </DeviceInfo>
+    </DeviceList>
+  </Response>
+</JMF>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Koen Van de Poel (Agfa-Gevaert NV) -->
+<JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="JDF.xsd" ID="ID_040050" Type="Product" Version="1.2" ICSVersions="Base_L1-1.0 MISBC_L1-1.0 MISPRE_L1-1.0" Status="Ready" JobID="040050" JobPartID="ID_040052" DescriptiveName="MISPrepress Minimal Platemaking Gray box v4" >
+	<!-- Description: this is the simplest job that conforms to the spec, all optional stuff left out;  imposition selected by operator -->
+	<!-- all attributes that did not have a W status in MIS or Prepress ICS were removed -->
+	<!-- History: 
+		v0: derived from Platemaking job v0; 
+		v1: empty URLs added for Preview, JobPartID adapted
+		v2: removed empty URLs again, added output Component and link to SUB000
+		2004-04-27 v3: removed empty URLs again, used "Incomplete" for incomplete resources delivered by MIS, added partitioning for ExposedMediaLink
+		2004-06-24 v4: correct name of Base ICSVersion
+	-->
+	<CustomerInfo CustomerID="100002">
+		<Contact ContactTypes="Customer Administrator">
+			<Company OrganizationName="DIOXINUS BV"/>
+			<Person FamilyName="MESTDAGH">
+			</Person>
+		</Contact>
+	</CustomerInfo>
+	<Comment Name="JobDescription">6 page brochure</Comment>
+	<AuditPool>
+		<Created Author="Miss Prepress" TimeStamp="2004-02-18T22:24:09+01:00" AgentName="MIS" AgentVersion="v1.0"/>
+	</AuditPool>
+	<ResourcePool>
+		<ColorPool Class="Parameter" ID="ColorPool" DescriptiveName="Colors for the job" Status="Available" Locked="false">
+			<Color Name="Cyan"/>
+			<Color Name="Magenta"/>
+			<Color Name="Yellow"/>
+			<Color Name="Black"/>
+		</ColorPool>
+		<ColorantControl Class="Parameter" ID="ColorantControl" DescriptiveName="Colors of the job" Locked="false" Status="Available">
+			<ColorantParams>
+				<SeparationSpec Name="Cyan"/>
+				<SeparationSpec Name="Magenta"/>
+				<SeparationSpec Name="Yellow"/>
+				<SeparationSpec Name="Black"/>
+			</ColorantParams>
+			<ColorPoolRef rRef="ColorPool"/>
+		</ColorantControl>
+		<Component Class="Quantity" ID="CompID_040050_G" ComponentType="FinalProduct Sheet" ProductType="Body" IsWaste="false" Status="Unavailable"/>
+		<Media Class="Consumable" ID="Plate000001" Brand="SuperPlates" DescriptiveName="Plate" MediaType="Plate" Status="Available"/>
+		<!-- we should fill in Layout structure -->
+		<Layout Class="Parameter" ID="LAY000" Status="Incomplete" Name="CoverLayout"/>
+		<ExposedMedia Class="Handling" PartIDKeys="Separation" PartUsage="Implicit" ID="ExposedMedia" DescriptiveName="Plates" Status="Unavailable" Locked="false">
+			<MediaRef rRef="Plate000001"/>
+			<ExposedMedia Separation="Cyan" ProductID="0001"/>
+			<ExposedMedia Separation="Magenta" ProductID="0002"/>
+			<ExposedMedia Separation="Yellow" ProductID="0003"/>
+			<ExposedMedia Separation="Black" ProductID="0004"/>
+		</ExposedMedia>
+		<Preview Class="Parameter" PartIDKeys="Separation" ID="Preview01" DescriptiveName="Preview" Status="Incomplete" PreviewUsage="Separation" Locked="false">
+			<Preview Separation="Cyan"/>
+			<Preview Separation="Magenta"/>
+			<Preview Separation="Yellow"/>
+			<Preview Separation="Black"/>
+		</Preview>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<ComponentLink rRef="CompID_040050_G" Usage="Output"/>
+	</ResourceLinkPool>
+	<JDF ID="SUB000" JobPartID="SUB000" Type="Product" Status="Waiting" DescriptiveName="Folder">
+		<ResourcePool>
+			<Component Class="Quantity" ID="COMPCS_01" DescriptiveName="Sheet" Status="Unavailable" ComponentType="PartialProduct Sheet"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="COMPCS_01" Usage="Output" Amount="50000"/>
+		</ResourceLinkPool>
+		<JDF ID="PRE000" JobPartID="PRE000" Type="ProcessGroup" Category="PrePress" Status="Waiting" DescriptiveName="PrePress Folder">
+			<ResourcePool>
+				<RunList Class="Parameter" ID="RNL000_D" Status="Unavailable"/>
+				<RunList Class="Parameter" ID="RNL000_M" Status="Unavailable"/>
+				<RunList Class="Parameter" ID="RNL000" Status="Available" NPage="6"/>
+			</ResourcePool>
+			<JDF ID="PPP000" JobPartID="PPP000" Type="ProcessGroup" Types="PrePressPreparation" Category="PrePressPreparation" DescriptiveName="GB PrePressPreparation" Status="Waiting">
+				<NodeInfo/>
+				<ResourceLinkPool>
+					<RunListLink rRef="RNL000" ProcessUsage="Document" Usage="Input"/>
+					<RunListLink rRef="RNL000_D" ProcessUsage="Document" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+			<!-- no input resources so operator must select a template (+associated marks) -->
+			<JDF ID="STR000" JobPartID="STR000" Type="ProcessGroup" Types="ImpositionPreparation" Category="ImpositionPreparation" DescriptiveName="GB ImpositionPreparation" Status="Waiting">
+				<NodeInfo/>
+				<ResourceLinkPool>
+					<LayoutLink rRef="LAY000" Usage="Output"/>
+					<RunListLink rRef="RNL000_M" ProcessUsage="Marks" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+			<!-- this creates the plates and previews -->
+			<JDF ID="IMS000" JobPartID="IMS000" Type="ProcessGroup" Types="Imposition RIPing PreviewGeneration ImageSetting" Category="FinalImaging" Status="Waiting" DescriptiveName="GB PlateMaking">
+				<NodeInfo/>
+				<ResourceLinkPool>
+					<RunListLink rRef="RNL000_D" ProcessUsage="Document" Usage="Input"/>
+					<RunListLink rRef="RNL000_M" ProcessUsage="Marks" Usage="Input"/>
+					<LayoutLink rRef="LAY000" Usage="Input"/>
+					<ColorantControlLink rRef="ColorantControl" Usage="Input"/>
+					<MediaLink rRef="Plate000001" Usage="Input"/>
+					<ExposedMediaLink rRef="ExposedMedia" Usage="Output"/>
+					<PreviewLink rRef="Preview01" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+</JDF>

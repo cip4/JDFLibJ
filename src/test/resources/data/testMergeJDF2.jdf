@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- edited with XML Spy v4.0 NT beta 2 build Jul 24 2001 (http://www.xmlspy.com) by Raik Langer (Heidelberger Druckmaschinen AG) -->
+<JDF ID="Axxx" Type="Product" Status="Waiting" Version="1.1" Activation="Active" JobID="00-0004" DescriptiveName="WinKAAR32 / DC" CommentURL="file:M:/cip/Job2JdfConverter/bin/test.obg" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.CIP4.org/JDFSchema_1
+file://///heifs00003/data/TCip/JDF/Schema/2.17/JDFb_2_17.xsd">
+	<CustomerInfo CustomerID="333" CustomerOrderID="00-0004" CustomerJobName="WinKAAR32 / DC">
+		<Company OrganizationName="alphagraph">
+			<Contact ContactTypes="Administrator">
+				<Person FamilyName="Dieterich">
+					<ComChannel ChannelType="Phone" Locator="02054-105-"/>
+					<ComChannel ChannelType="Fax" Locator="02054-105-"/>
+				</Person>
+			</Contact>
+		</Company>
+	</CustomerInfo>
+	<NodeInfo>
+		<Employee>
+			<Person FamilyName="Administrator"/>
+		</Employee>
+	</NodeInfo>
+	<ResourcePool>
+		<Component ID="Res_FinalProd" Status="Unavailable" Class="Quantity" AmountRequired="50000" ComponentType="FinalProduct"/>
+		<Component ID="Res_PartProd_1" Status="Unavailable" Class="Quantity" AmountRequired="13115" ComponentType="PartialProduct"/>
+		<Component ID="Res_PartProd_2" Status="Unavailable" Class="Quantity" AmountRequired="51870" ComponentType="PartialProduct"/>
+		<Component ID="Res_PartProd_3" Status="Unavailable" Class="Quantity" AmountRequired="51870" ComponentType="PartialProduct"/>
+		<Component ID="Res_PartProd_4" Status="Unavailable" Class="Quantity" AmountRequired="51870" ComponentType="PartialProduct"/>
+		<Component ID="Res_PartProd_5" Status="Unavailable" Class="Quantity" AmountRequired="51870" ComponentType="PartialProduct"/>
+		<Component ID="Res_PartProd_6" Status="Unavailable" Class="Quantity" AmountRequired="26135" ComponentType="PartialProduct"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_1_4100_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<SaddleStitchingParams ID="Res_Stitch_In_StitchPar_7_5032" Status="Unavailable" Class="Parameter" NumberOfStitches="0"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_2_5022_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_3_5022_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_4_5022_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_5_5022_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<PlaceHolderResource ID="Res_PlaceHolder_6_5022_7_5032" Status="Unavailable" Class="PlaceHolder"/>
+		<Device ID="Res_Device_3100" Status="Available" Class="Implementation" DeviceID="3100">
+			<CostCenter CostCenterID="3100"/>
+		</Device>
+		<Device ID="Res_Device_3200" Status="Available" Class="Implementation" DeviceID="3200">
+			<CostCenter CostCenterID="3200"/>
+		</Device>
+		<Device ID="Res_Device_5100" Status="Available" Class="Implementation" DeviceID="5100">
+			<CostCenter CostCenterID="5100"/>
+		</Device>
+		<Device ID="Res_Device_4500" Status="Available" Class="Implementation" DeviceID="4500">
+			<CostCenter CostCenterID="4500"/>
+		</Device>
+		<Device ID="Res_Device_3400" Status="Available" Class="Implementation" DeviceID="3400">
+			<CostCenter CostCenterID="3400"/>
+		</Device>
+		<Device ID="Res_Device_4800" Status="Available" Class="Implementation" DeviceID="4800">
+			<CostCenter CostCenterID="4800"/>
+		</Device>
+		<Device ID="Res_Device_5210" Status="Available" Class="Implementation" DeviceID="5210">
+			<CostCenter CostCenterID="5210"/>
+		</Device>
+		<Device ID="Res_Device_5300" Status="Available" Class="Implementation" DeviceID="5300">
+			<CostCenter CostCenterID="5300"/>
+		</Device>
+	</ResourcePool>
+	<JDF ID="A1" Type="Product" Status="Waiting" JobPartID="1" DescriptiveName="Umschlag">
+		<ResourcePool>
+			<Media ID="Res_Med_1" Class="Consumable" Status="Unavailable" MediaType="Paper" Dimension="1247.4 893.025" AmountRequired="13115" Brand="Chromolux 700" ProductID="(1)" Weight="250" Thickness="250"/>
+			<Layout ID="Res_Impos_In_Lay_1_3011" Status="Available" Class="Parameter"/>
+			<RunList ID="Res_Impos_In_Run_1_3011" Status="Available" Class="Parameter"/>
+			<RunList ID="Res_Impos_Out_Run_1_3011" Status="Unavailable" Class="Parameter"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_1_3011_1_3021" Status="Unavailable" Class="PlaceHolder"/>
+			<ExposedMedia ID="Res_Copy_In_ExpMed_1_3021" Status="Unavailable" Class="Handling">
+				<Media MediaType="Film" Dimension="0 0"/>
+			</ExposedMedia>
+			<Media ID="Res_Copy_In_Med_1_3021" Status="Unavailable" Class="Consumable" MediaType="Plate" Dimension="0 0"/>
+			<PlateCopyParams ID="Res_Copy_In_PlatePar_1_3021" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_Copy_Out_ExpMed_1_3021" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_1_3021_1_5011" Status="Unavailable" Class="PlaceHolder"/>
+			<Component ID="Res_Cut_Out_Comp_1_5011" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_1_5011_1_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_1_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<ExposedMedia ID="Res_Print_In_ExpMed_1_4100" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<Ink ID="Res_Print_In_Ink_1_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_1" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A1_3011_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_1_3011_1_3021"/>
+			</ResourceLinkPool>
+			<JDF ID="A1_3011" Type="Imposition" Status="Waiting" DescriptiveName="Montage">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H56M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3100" Usage="Input"/>
+					<LayoutLink rRef="Res_Impos_In_Lay_1_3011" Usage="Input"/>
+					<RunListLink rRef="Res_Impos_In_Run_1_3011" Usage="Input" ProcessUsage="Document"/>
+					<RunListLink rRef="Res_Impos_Out_Run_1_3011" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A1_3021_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_1_3011_1_3021"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_1_3021_1_5011"/>
+			</ResourceLinkPool>
+			<JDF ID="A1_3021" Type="FilmToPlateCopying" Status="Waiting" DescriptiveName="Kopie">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT1H47M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3200" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_Copy_In_ExpMed_1_3021" Usage="Input"/>
+					<MediaLink rRef="Res_Copy_In_Med_1_3021" Usage="Input"/>
+					<PlateCopyParamsLink rRef="Res_Copy_In_PlatePar_1_3021" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_Copy_Out_ExpMed_1_3021" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A1_5011_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_1_3021_1_5011"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_1_5011_1_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A1_5011" Type="Cutting" Status="Waiting" DescriptiveName="Vorschneiden (Rohbogen)">
+				<NodeInfo TotalDuration="P0Y0M0DT2H57M" SetupDuration="P0Y0M0DT0H3M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5100" Usage="Input"/>
+					<MediaLink rRef="Res_Med_1" Usage="Input"/>
+					<ComponentLink rRef="Res_Cut_Out_Comp_1_5011" Usage="Output" Amount="13115"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A1_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_1_5011_1_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_1_4100_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A1_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT14H20M" SetupDuration="P0Y0M0DT1H11M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4500" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_1_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_1_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_Print_In_ExpMed_1_4100" Usage="Input" ProcessUsage="Plate"/>
+					<ComponentLink rRef="Res_Cut_Out_Comp_1_5011" Usage="Input" ProcessUsage="Input"/>
+					<ComponentLink rRef="Res_PartProd_1" Usage="Output" ProcessUsage="Good" Amount="104920"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A2" Type="Product" Status="Waiting" JobPartID="2" DescriptiveName="Bogen_1">
+		<ResourcePool>
+			<Media ID="Res_Med_2" Class="Consumable" Status="Unavailable" MediaType="Paper" Dimension="2494.8 1786.05" AmountRequired="51870" Brand="Bilderdruck" ProductID="1001" Weight="135" Thickness="135"/>
+			<ImageSetterParams ID="Res_ImgSet_In_ImgSetPar_2_3041" Status="Unavailable" Class="Parameter"/>
+			<Media ID="Res_ImgSet_In_Med_2_3041" Status="Unavailable" Class="Consumable" Dimension="0 0" MediaType="Plate"/>
+			<RunList ID="Res_ImgSet_In_Run_2_3041" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_ImgSet_Out_ExpMed_2_3041" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_2_3041_2_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_2_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<Ink ID="Res_Print_In_Ink_2_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+			<Component ID="Res_Print_Out_Comp_2_4100" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_2_4100_2_5022" Status="Unavailable" Class="PlaceHolder"/>
+			<FoldingParams ID="Res_Fold_In_FoldPar_2_5022" Status="Unavailable" Class="Parameter" DescriptionType="FoldCatalog"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_2" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A2_3041_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_2_3041_2_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A2_3041" Type="ImageSetting" Status="Waiting" DescriptiveName="Computer to Plate">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H4M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3400" Usage="Input"/>
+					<ImageSetterParamsLink rRef="Res_ImgSet_In_ImgSetPar_2_3041" Usage="Input"/>
+					<MediaLink rRef="Res_ImgSet_In_Med_2_3041" Usage="Input"/>
+					<RunListLink rRef="Res_ImgSet_In_Run_2_3041" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_2_3041" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A2_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_2_3041_2_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_2_4100_2_5022"/>
+			</ResourceLinkPool>
+			<JDF ID="A2_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT6H3M" SetupDuration="P0Y0M0DT1H22M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4800" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_2_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_2_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_2_3041" Usage="Input" ProcessUsage="Plate"/>
+					<MediaLink rRef="Res_Med_2" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_2_4100" Usage="Output" ProcessUsage="Good" Amount="51870"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A2_5022_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_2_4100_2_5022"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_2_5022_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A2_5022" Type="Folding" Status="Waiting" DescriptiveName="Falzen">
+				<NodeInfo TotalDuration="P0Y0M0DT11H9M" SetupDuration="P0Y0M0DT0H13M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5210" Usage="Input"/>
+					<FoldingParamsLink rRef="Res_Fold_In_FoldPar_2_5022" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_2_4100" Usage="Input"/>
+					<ComponentLink rRef="Res_PartProd_2" Usage="Output" Amount="50000"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A3" Type="Product" Status="Waiting" JobPartID="3" DescriptiveName="Bogen_2">
+		<ResourcePool>
+			<Media ID="Res_Med_3" Class="Consumable" Status="Unavailable" MediaType="Paper" Dimension="2494.8 1786.05" AmountRequired="51870" Brand="Bilderdruck" ProductID="1001" Weight="135" Thickness="135"/>
+			<ImageSetterParams ID="Res_ImgSet_In_ImgSetPar_3_3041" Status="Unavailable" Class="Parameter"/>
+			<Media ID="Res_ImgSet_In_Med_3_3041" Status="Unavailable" Class="Consumable" Dimension="0 0" MediaType="Plate"/>
+			<RunList ID="Res_ImgSet_In_Run_3_3041" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_ImgSet_Out_ExpMed_3_3041" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_3_3041_3_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_3_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<Ink ID="Res_Print_In_Ink_3_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+			<Component ID="Res_Print_Out_Comp_3_4100" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_3_4100_3_5022" Status="Unavailable" Class="PlaceHolder"/>
+			<FoldingParams ID="Res_Fold_In_FoldPar_3_5022" Status="Unavailable" Class="Parameter" DescriptionType="FoldCatalog"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_3" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A3_3041_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_3_3041_3_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A3_3041" Type="ImageSetting" Status="Waiting" DescriptiveName="Computer to Plate">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H4M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3400" Usage="Input"/>
+					<ImageSetterParamsLink rRef="Res_ImgSet_In_ImgSetPar_3_3041" Usage="Input"/>
+					<MediaLink rRef="Res_ImgSet_In_Med_3_3041" Usage="Input"/>
+					<RunListLink rRef="Res_ImgSet_In_Run_3_3041" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_3_3041" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A3_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_3_3041_3_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_3_4100_3_5022"/>
+			</ResourceLinkPool>
+			<JDF ID="A3_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT6H3M" SetupDuration="P0Y0M0DT1H22M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4800" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_3_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_3_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_3_3041" Usage="Input" ProcessUsage="Plate"/>
+					<MediaLink rRef="Res_Med_3" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_3_4100" Usage="Output" ProcessUsage="Good" Amount="51870"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A3_5022_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_3_4100_3_5022"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_3_5022_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A3_5022" Type="Folding" Status="Waiting" DescriptiveName="Falzen">
+				<NodeInfo TotalDuration="P0Y0M0DT11H9M" SetupDuration="P0Y0M0DT0H13M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5210" Usage="Input"/>
+					<FoldingParamsLink rRef="Res_Fold_In_FoldPar_3_5022" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_3_4100" Usage="Input"/>
+					<ComponentLink rRef="Res_PartProd_3" Usage="Output" Amount="50000"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A4" Type="Product" Status="Waiting" JobPartID="4" DescriptiveName="Bogen_3">
+		<ResourcePool>
+			<Media ID="Res_Med_4" Class="Consumable" Status="Unavailable" MediaType="Paper" Dimension="2494.8 1786.05" AmountRequired="51870" Brand="Bilderdruck" ProductID="1001" Weight="135" Thickness="135"/>
+			<ImageSetterParams ID="Res_ImgSet_In_ImgSetPar_4_3041" Status="Unavailable" Class="Parameter"/>
+			<Media ID="Res_ImgSet_In_Med_4_3041" Status="Unavailable" Class="Consumable" Dimension="0 0" MediaType="Plate"/>
+			<RunList ID="Res_ImgSet_In_Run_4_3041" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_ImgSet_Out_ExpMed_4_3041" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_4_3041_4_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_4_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<Ink ID="Res_Print_In_Ink_4_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+			<Component ID="Res_Print_Out_Comp_4_4100" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_4_4100_4_5022" Status="Unavailable" Class="PlaceHolder"/>
+			<FoldingParams ID="Res_Fold_In_FoldPar_4_5022" Status="Unavailable" Class="Parameter" DescriptionType="FoldCatalog"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_4" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A4_3041_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_4_3041_4_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A4_3041" Type="ImageSetting" Status="Waiting" DescriptiveName="Computer to Plate">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H4M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3400" Usage="Input"/>
+					<ImageSetterParamsLink rRef="Res_ImgSet_In_ImgSetPar_4_3041" Usage="Input"/>
+					<MediaLink rRef="Res_ImgSet_In_Med_4_3041" Usage="Input"/>
+					<RunListLink rRef="Res_ImgSet_In_Run_4_3041" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_4_3041" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A4_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_4_3041_4_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_4_4100_4_5022"/>
+			</ResourceLinkPool>
+			<JDF ID="A4_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT6H3M" SetupDuration="P0Y0M0DT1H22M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4800" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_4_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_4_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_4_3041" Usage="Input" ProcessUsage="Plate"/>
+					<MediaLink rRef="Res_Med_4" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_4_4100" Usage="Output" ProcessUsage="Good" Amount="51870"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A4_5022_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_4_4100_4_5022"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_4_5022_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A4_5022" Type="Folding" Status="Waiting" DescriptiveName="Falzen">
+				<NodeInfo TotalDuration="P0Y0M0DT11H9M" SetupDuration="P0Y0M0DT0H13M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5210" Usage="Input"/>
+					<FoldingParamsLink rRef="Res_Fold_In_FoldPar_4_5022" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_4_4100" Usage="Input"/>
+					<ComponentLink rRef="Res_PartProd_4" Usage="Output" Amount="50000"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A5" Type="Product" Status="Waiting" JobPartID="5" DescriptiveName="Bogen_4">
+		<ResourcePool>
+			<Media ID="Res_Med_5" Class="Consumable" Status="Unavailable" MediaType="Paper" Dimension="2494.8 1786.05" AmountRequired="51870" Brand="Bilderdruck" ProductID="1001" Weight="135" Thickness="135"/>
+			<ImageSetterParams ID="Res_ImgSet_In_ImgSetPar_5_3041" Status="Unavailable" Class="Parameter"/>
+			<Media ID="Res_ImgSet_In_Med_5_3041" Status="Unavailable" Class="Consumable" Dimension="0 0" MediaType="Plate"/>
+			<RunList ID="Res_ImgSet_In_Run_5_3041" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_ImgSet_Out_ExpMed_5_3041" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_5_3041_5_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_5_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<Ink ID="Res_Print_In_Ink_5_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+			<Component ID="Res_Print_Out_Comp_5_4100" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_5_4100_5_5022" Status="Unavailable" Class="PlaceHolder"/>
+			<FoldingParams ID="Res_Fold_In_FoldPar_5_5022" Status="Unavailable" Class="Parameter" DescriptionType="FoldCatalog"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_5" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A5_3041_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_5_3041_5_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A5_3041" Type="ImageSetting" Status="Waiting" DescriptiveName="Computer to Plate">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H4M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3400" Usage="Input"/>
+					<ImageSetterParamsLink rRef="Res_ImgSet_In_ImgSetPar_5_3041" Usage="Input"/>
+					<MediaLink rRef="Res_ImgSet_In_Med_5_3041" Usage="Input"/>
+					<RunListLink rRef="Res_ImgSet_In_Run_5_3041" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_5_3041" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A5_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_5_3041_5_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_5_4100_5_5022"/>
+			</ResourceLinkPool>
+			<JDF ID="A5_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT6H3M" SetupDuration="P0Y0M0DT1H22M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4800" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_5_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_5_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_5_3041" Usage="Input" ProcessUsage="Plate"/>
+					<MediaLink rRef="Res_Med_5" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_5_4100" Usage="Output" ProcessUsage="Good" Amount="51870"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A5_5022_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_5_4100_5_5022"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_5_5022_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A5_5022" Type="Folding" Status="Waiting" DescriptiveName="Falzen">
+				<NodeInfo TotalDuration="P0Y0M0DT11H9M" SetupDuration="P0Y0M0DT0H13M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5210" Usage="Input"/>
+					<FoldingParamsLink rRef="Res_Fold_In_FoldPar_5_5022" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_5_4100" Usage="Input"/>
+					<ComponentLink rRef="Res_PartProd_5" Usage="Output" Amount="50000"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A6" Type="Product" Status="Waiting" JobPartID="6" DescriptiveName="Bogen_5">
+		<ResourcePool>
+			<Media ID="Res_Med_6" Class="Consumable" Status="Available" MediaType="Paper" Dimension="2494.8 1786.05" AmountRequired="26135" Brand="Bilderdruck" ProductID="1001" Weight="135" Thickness="135"/>
+			<ImageSetterParams ID="Res_ImgSet_In_ImgSetPar_6_3041" Status="Unavailable" Class="Parameter"/>
+			<Media ID="Res_ImgSet_In_Med_6_3041" Status="Unavailable" Class="Consumable" Dimension="0 0" MediaType="Plate"/>
+			<RunList ID="Res_ImgSet_In_Run_6_3041" Status="Unavailable" Class="Parameter"/>
+			<ExposedMedia ID="Res_ImgSet_Out_ExpMed_6_3041" Status="Unavailable" Class="Handling">
+				<Media MediaType="Plate" Dimension="0 0"/>
+			</ExposedMedia>
+			<PlaceHolderResource ID="Res_PlaceHolder_6_3041_6_4100" Status="Unavailable" Class="PlaceHolder"/>
+			<ConventionalPrintingParams ID="Res_Print_In_PrintPar_6_4100" Status="Unavailable" Class="Parameter" PrintingType="SheetFed"/>
+			<Ink ID="Res_Print_In_Ink_6_4100" Status="Unavailable" Class="Consumable" InkName="unknown"/>
+			<Component ID="Res_Print_Out_Comp_6_4100" Status="Unavailable" Class="Quantity" ComponentType="Sheet"/>
+			<PlaceHolderResource ID="Res_PlaceHolder_6_4100_6_5022" Status="Unavailable" Class="PlaceHolder"/>
+			<FoldingParams ID="Res_Fold_In_FoldPar_6_5022" Status="Unavailable" Class="Parameter" DescriptionType="FoldCatalog"/>
+		</ResourcePool>
+		<ResourceLinkPool>
+			<ComponentLink rRef="Res_PartProd_6" Usage="Output"/>
+		</ResourceLinkPool>
+		<JDF ID="A6_3041_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_6_3041_6_4100"/>
+			</ResourceLinkPool>
+			<JDF ID="A6_3041" Type="ImageSetting" Status="Waiting" DescriptiveName="Computer to Plate">
+				<NodeInfo TotalDuration="P0Y0M0DT0H0M" SetupDuration="P0Y0M0DT0H15M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_3400" Usage="Input"/>
+					<ImageSetterParamsLink rRef="Res_ImgSet_In_ImgSetPar_6_3041" Usage="Input"/>
+					<MediaLink rRef="Res_ImgSet_In_Med_6_3041" Usage="Input"/>
+					<RunListLink rRef="Res_ImgSet_In_Run_6_3041" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_6_3041" Usage="Output"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A6_4100_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_6_3041_6_4100"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_6_4100_6_5022"/>
+			</ResourceLinkPool>
+			<JDF ID="A6_4100" Type="ConventionalPrinting" Status="Waiting" DescriptiveName="Fortdruck">
+				<NodeInfo TotalDuration="P0Y0M0DT3H2M" SetupDuration="P0Y0M0DT1H27M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_4800" Usage="Input"/>
+					<ConventionalPrintingParamsLink rRef="Res_Print_In_PrintPar_6_4100" Usage="Input"/>
+					<InkLink rRef="Res_Print_In_Ink_6_4100" Usage="Input"/>
+					<ExposedMediaLink rRef="Res_ImgSet_Out_ExpMed_6_3041" Usage="Input" ProcessUsage="Plate"/>
+					<MediaLink rRef="Res_Med_6" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_6_4100" Usage="Output" ProcessUsage="Good" Amount="26135"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+		<JDF ID="A6_5022_GROUP" Type="ProcessGroup" Status="Waiting">
+			<ResourceLinkPool>
+				<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_6_4100_6_5022"/>
+				<PlaceHolderResourceLink Usage="Output" rRef="Res_PlaceHolder_6_5022_7_5032"/>
+			</ResourceLinkPool>
+			<JDF ID="A6_5022" Type="Folding" Status="Waiting" DescriptiveName="Falzen">
+				<NodeInfo TotalDuration="P0Y0M0DT9H36M" SetupDuration="P0Y0M0DT0H33M"/>
+				<ResourceLinkPool>
+					<DeviceLink rRef="Res_Device_5210" Usage="Input"/>
+					<FoldingParamsLink rRef="Res_Fold_In_FoldPar_6_5022" Usage="Input"/>
+					<ComponentLink rRef="Res_Print_Out_Comp_6_4100" Usage="Input"/>
+					<ComponentLink rRef="Res_PartProd_6" Usage="Output" Amount="50000"/>
+				</ResourceLinkPool>
+			</JDF>
+		</JDF>
+	</JDF>
+	<JDF ID="A7_5032_GROUP" Type="ProcessGroup" Status="Waiting">
+		<ResourceLinkPool>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_1_4100_7_5032"/>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_2_5022_7_5032"/>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_3_5022_7_5032"/>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_4_5022_7_5032"/>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_5_5022_7_5032"/>
+			<PlaceHolderResourceLink Usage="Input" rRef="Res_PlaceHolder_6_5022_7_5032"/>
+		</ResourceLinkPool>
+		<JDF ID="A7_5032" Type="Combined" Status="Waiting" Types="Collecting SaddleStitching" DescriptiveName="Sammelheften">
+			<NodeInfo TotalDuration="P0Y0M0DT11H15M" SetupDuration="P0Y0M0DT0H50M"/>
+			<ResourceLinkPool>
+				<DeviceLink rRef="Res_Device_5300" Usage="Input"/>
+				<ComponentLink rRef="Res_PartProd_1" Usage="Input" CombinedProcessType="Collecting"/>
+				<ComponentLink rRef="Res_PartProd_2" Usage="Input" CombinedProcessType="Collecting"/>
+				<ComponentLink rRef="Res_PartProd_3" Usage="Input" CombinedProcessType="Collecting"/>
+				<ComponentLink rRef="Res_PartProd_4" Usage="Input" CombinedProcessType="Collecting"/>
+				<ComponentLink rRef="Res_PartProd_5" Usage="Input" CombinedProcessType="Collecting"/>
+				<ComponentLink rRef="Res_PartProd_6" Usage="Input" CombinedProcessType="Collecting"/>
+				<SaddleStitchingParamsLink rRef="Res_Stitch_In_StitchPar_7_5032" Usage="Input" CombinedProcessType="SaddleStitching"/>
+				<ComponentLink rRef="Res_FinalProd" Usage="Output" CombinedProcessType="SaddleStitching" Amount="50000"/>
+			</ResourceLinkPool>
+		</JDF>
+	</JDF>
+</JDF>

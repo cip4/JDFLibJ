@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF Activation="Active" DescriptiveName="Zonen Test for CPC 32" HDM:FormatVersion="1.1" HDM:SourceJobIDs="" HDM:TargetJobIDs="" ID="ProductRoot" JobID="ZoneTest_005" JobPartID="PPIProductRoot" Status="Setup" Type="Product" Version="1.2" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:HDM="www.heidelberg.com/schema/HDM" xmlns:pt="PT:Config1.0"><!--Product--><NodeInfo/>
+	<AuditPool><Created AgentName="CIP4 JDF Writer Java" AgentVersion="1.2.42 alpha" Author="Georg Lucas" TimeStamp="2005-05-12T09:51:18+00:00"/></AuditPool>
+	<CustomerInfo CustomerID="" CustomerJobName="Zonen Test for CPC 32" CustomerOrderID=""><Comment></Comment></CustomerInfo>
+	<!--ResourcePool of the ProductRoot-->
+	<ResourcePool>
+		<Layout Class="Parameter" DescriptiveName="Zonen Test for CPC 32" ID="Layout" Name="Zonen Test for CPC 32" Status="Available">
+			<TransferCurvePoolRef rRef="TransferCurvePool"/>
+			<Signature Class="Parameter" Name="Signature1"><Sheet Class="Parameter" ID="Link91479815_000969" Name="SM 102 52x28" Status="Available" SurfaceContentsBox="0.0 0.0 2948.031494 2012.598511"><MediaRef rRef="MediaPaper"/><Surface Class="Parameter" HDM:FormModDate="2005-05-12T09:51:20+00:00" ID="Link91479815_000970" Side="Front" Status="Available" SurfaceContentsBox="0.0 0.0 2948.031494 2012.598511"/></Sheet></Signature>
+		</Layout>
+		<Component Class="Quantity" ComponentType="Sheet" ID="PrintedPaper" Locked="false" PartIDKeys="SignatureName SheetName Condition" Status="Unavailable">
+			<Component SignatureName="Signature1">
+				<Component SheetName="SM 102 52x28">
+					<Component Condition="Good"/>
+					<Component Condition="Waste"/>
+				</Component>
+			</Component>
+		</Component>
+		<Media Class="Consumable" ID="MediaPlate" Locked="false" MediaType="Plate" PartIDKeys="SignatureName SheetName" PartUsage="Explicit" Status="Available">
+			<Media Class="Consumable" SignatureName="Signature1" Status="Available">
+				<Media Class="Consumable" SheetName="SM 102 52x28" Status="Available"/>
+			</Media>
+		</Media>
+		<Media Class="Consumable" ID="MediaPaper" MediaType="Paper" PartIDKeys="SignatureName SheetName" Status="Available"><Media Class="Consumable" SignatureName="Signature1" Status="Available"><Media Class="Consumable" SheetName="SM 102 52x28" Status="Available"/></Media></Media>
+		<ExposedMedia Class="Handling" ID="ExposedMediaPlate" PartIDKeys="SignatureName SheetName Side Separation" Status="Available">
+			<ExposedMedia SignatureName="Signature1">
+				<ExposedMedia SheetName="SM 102 52x28">
+					<MediaRef rRef="MediaPlate"/>
+				<ExposedMedia Side="Front"><ExposedMedia Separation="Black" Status="Available"/></ExposedMedia></ExposedMedia>
+			</ExposedMedia>
+		</ExposedMedia>
+		<Preview Class="Parameter" HDM:Disposition="Delete" ID="PreviewSeparation" PartIDKeys="SignatureName SheetName Side Separation" PreviewType="Separation" PreviewUsage="Separation" Status="Available">
+			<Preview SignatureName="Signature1">
+				<Preview SheetName="SM 102 52x28"><Preview Side="Front"><Preview Separation="Black" URL="file://HEIPC81592/PTJobs/Jobs/2005-05-12/Zonen-Test-for-CPC-32(ZoneTest_005)/System/PPIPreview/ZoneTest.0.png"/></Preview></Preview>
+			</Preview>
+		</Preview>
+		<Preview Class="Parameter" Directory="file://HEIPC81592/PTJobs/Jobs/2005-05-12/Zonen-Test-for-CPC-32(ZoneTest_005)/System/PrepressInterface/ThumbNails/Press102" HDM:Disposition="Retain" ID="PreviewOverview" PartIDKeys="SignatureName SheetName Side" PreviewType="Viewable" PreviewUsage="Viewable" Status="Unavailable">
+			<Preview SignatureName="Signature1">
+				<Preview SheetName="SM 102 52x28"><Preview Side="Front"/></Preview>
+			</Preview>
+		</Preview>
+		<Preview Class="Parameter" Directory="file://HEIPC81592/PTJobs/Jobs/2005-05-12/Zonen-Test-for-CPC-32(ZoneTest_005)/System/PrepressInterface/ThumbNails/Press102" HDM:Disposition="Retain" HDM:Persistence="true" ID="PreviewThumbnail" PartIDKeys="SignatureName SheetName Side" PreviewType="ThumbNail" PreviewUsage="ThumbNail" Status="Unavailable">
+			<Preview SignatureName="Signature1">
+				<Preview SheetName="SM 102 52x28"><Preview Side="Front"/></Preview>
+			</Preview>
+		</Preview>
+		<Ink Class="Consumable" ID="Ink" PartIDKeys="SignatureName SheetName Side" Status="Available">
+			<Ink SignatureName="Signature1">
+				<Ink SheetName="SM 102 52x28"/>
+			</Ink>
+		</Ink>
+		<TransferCurvePool Class="Parameter" ID="TransferCurvePool" PartIDKeys="SignatureName SheetName Side" Status="Available"><TransferCurvePool SignatureName="Signature1"><TransferCurvePool SheetName="SM 102 52x28"><TransferCurveSet Name="Film"><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All"/></TransferCurveSet><TransferCurveSet Name="Plate"><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All"/></TransferCurveSet><TransferCurvePool Side="Front"><TransferCurveSet Name="Film"><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All"/><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="Black"/></TransferCurveSet><TransferCurveSet Name="Plate"><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All"/><TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="Black"/></TransferCurveSet></TransferCurvePool></TransferCurvePool></TransferCurvePool></TransferCurvePool>
+		<ColorPool Class="Parameter" HDM:ColorDefinition="PDF" ID="ColorPool" Status="Available"><Color CMYK="0.0 0.0 0.0 1.0" ColorType="Normal" Lab="16.0 0.0 0.0" Name="Black" NeutralDensity="1.7" UsePDLAlternateCS="false"/></ColorPool>
+		<ColorantControl Class="Parameter" ID="ColorantControl" PartIDKeys="SignatureName SheetName Side" PartUsage="Implicit" Status="Available">
+			<ColorPoolRef rRef="ColorPool"/>
+			
+		<ColorantOrder><SeparationSpec Name="Black"/></ColorantOrder><ColorantParams><SeparationSpec Name="Black"/></ColorantParams></ColorantControl>
+	<InkZoneProfile Class="Parameter" ID="Link91480306_001000" PartIDKeys="SignatureName SheetName Side Separation" Status="Unavailable"><InkZoneProfile SignatureName="Signature1"><InkZoneProfile SheetName="SM 102 52x28"><InkZoneProfile Side="Front"/></InkZoneProfile></InkZoneProfile></InkZoneProfile><HDM:InkConsumption Class="Parameter" HDM:Disposition="Delete" ID="Link91480306_001001" PartIDKeys="SignatureName SheetName Side Separation" Status="Unavailable"><HDM:InkConsumption SignatureName="Signature1"><HDM:InkConsumption SheetName="SM 102 52x28"><HDM:InkConsumption Side="Front"/></HDM:InkConsumption></HDM:InkConsumption></HDM:InkConsumption><PreviewGenerationParams Class="Parameter" ID="Link91480306_001003" PartIDKeys="PreviewType" Status="Available"><PreviewGenerationParams AspectRatio="Ignore" PreviewType="ThumbNail" PreviewUsage="ThumbNail" Size="300 212"/><PreviewGenerationParams PreviewType="Viewable" PreviewUsage="Viewable" Resolution="50.8 50.8"/></PreviewGenerationParams><HDM:PressDevice Class="Parameter" HDM:AdjustHorizontal="Center" HDM:AdjustVertical="Bottom" HDM:HorizontalOffset="0.0" HDM:InkTrackWidth="1984.251969" HDM:InkZoneTransformation="1.0 0.0 0.0 1.0 14.173228 -121.889764" HDM:InkZoneWidth="92.125984" HDM:NumberOfInkTracks="1" HDM:NumberOfInkZones="32" HDM:PlateExtent="2919.685039 2182.677165" HDM:PlateTransformation="1.0 0.0 0.0 1.0 0.0 0.0" HDM:PressExtent="2891.338583 1984.251969" HDM:PressId="" HDM:PressName="CD 102-4+LYL" HDM:PressTransformation="1.0 0.0 0.0 1.0 -14.173228 -121.889764" HDM:ProcessName="CD 102-4+LYL" HDM:VerticalOffset="0.0" ID="Link91480306_001004" Status="Available"/><InkZoneCalculationParams Class="Parameter" ID="Link91480306_001005" Status="Available" ZoneHeight="1984.251969" ZoneWidth="92.125984" Zones="32" ZonesY="1"/><HDM:InkConsumptionCalculationParams Class="Parameter" Dummy="1.0" ID="Link91480306_001007" Status="Available"/><Component Class="Quantity" ComponentType="Sheet" ID="Link91480306_001011" Status="Unavailable"/><Device Class="Implementation" DeviceID="Press@HEIPC81592" DeviceType="CD 102-4+LYL" FriendlyName="CD 102-4+LYL" ID="Link91480316_001015" Status="Available"/><ColorantControl Class="Parameter" ID="r91480366_001018" PartIDKeys="SignatureName SheetName Side" PartUsage="Implicit" Status="Available">
+			
+			
+		<ColorPoolRef rRef="ColorPool"/><ColorantOrder><SeparationSpec Name="Black"/></ColorantOrder><ColorantParams><SeparationSpec Name="Black"/></ColorantParams></ColorantControl><ColorantControl Class="Parameter" ID="Link91480366_001019" PartUsage="Implicit" Status="Available" rRefs="ColorPool"><ColorPoolRef rRef="ColorPool"/><ColorantOrder><SeparationSpec Name="Black"/></ColorantOrder><ColorantParams/><HDM:DisplayColors><SeparationSpec Name="Black"/></HDM:DisplayColors></ColorantControl><PrintCondition Class="Parameter" ID="PrintCondition" Status="Available"/><ConventionalPrintingParams Class="Parameter" HDM:PressRun="Face" ID="ConventionalPrintingParams" Locked="false" PrintingType="SheetFed" SheetLay="Left" Speed="15000" Status="Available" WorkStyle="Perfecting"/></ResourcePool>
+	<!--ResourceLinkPool of the ProductRoot-->
+	<ResourceLinkPool>
+		
+	<ColorantControlLink Usage="Input" rRef="Link91480366_001019"/><ColorPoolLink Usage="Input" rRef="ColorPool"/></ResourceLinkPool>
+	<!-- Press -->
+	<JDF DescriptiveName="Press102" HDM:SequenceID="SFP1" HDM:SequenceType="SheetfedPrinting" ID="PressRoot" JobPartID="PPIPressRoot" NamedFeatures="SheetfedPrintingTemplate Press102" Status="Waiting" Type="ProcessGroup">
+		<AuditPool/>
+		
+		<ResourcePool>
+			
+			
+		</ResourcePool>
+		<!--ResourceLinkPool of the Printing Process-->
+		<ResourceLinkPool>
+			<ComponentLink HDM:ResultType="Connection" ProcessUsage="Component" Usage="Output" rRef="PrintedPaper">
+				<Part Condition="Good" SheetName="SM 102 52x28" SignatureName="Signature1"/>
+				<Part Condition="Waste" SheetName="SM 102 52x28" SignatureName="Signature1"/>
+				<AmountPool>
+					<PartAmount Amount="0">
+						<Part Condition="Good" SheetName="SM 102 52x28" SignatureName="Signature1"/>
+					</PartAmount>
+					<PartAmount Amount="0">
+						<Part Condition="Waste" SheetName="SM 102 52x28" SignatureName="Signature1"/>
+					</PartAmount>
+				</AmountPool>
+			</ComponentLink>
+			
+			
+			
+			<ExposedMediaLink ProcessUsage="Plate" Usage="Input" rRef="ExposedMediaPlate">
+				<Part SheetName="SM 102 52x28" SignatureName="Signature1"/>
+			</ExposedMediaLink>
+			
+			
+			
+			
+			<LayoutLink Usage="Input" rRef="Layout"/>
+			
+			<PreviewLink ProcessUsage="Separation" Usage="Input" rRef="PreviewSeparation">
+				
+			<Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink>
+			
+			
+		<PreviewLink HDM:ResultType="Tail" ProcessUsage="Viewable" Usage="Output" rRef="PreviewOverview"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink><PreviewLink HDM:ResultType="Tail" ProcessUsage="ThumbNail" Usage="Output" rRef="PreviewThumbnail"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink><InkZoneProfileLink HDM:ResultType="Tail" Usage="Output" rRef="Link91480306_001000"/></ResourceLinkPool>
+	<pt:Sequence Status="Layout Sheet" SubmissionTargets="Layout Sheet" Track="Main"><Comment Language=""/><pt:UI_Info/><pt:UI_Info/></pt:Sequence><JDF HDM:Cluster="PrepressInterface on HEIPC81592" HDM:GuessedTime="0.0 0.0 0.0 0.0" HDM:StepIDs="PGV PGT IZC ICC" HDM:ToolID="P" HDM:ToolType="InkZoneCalculator" ID="Link91481257_001021" JobPartID="PPIPressRoot.P" Status="Waiting" Type="Combined" Types="PreviewGeneration PreviewGeneration InkZoneCalculation HDM:InkConsumptionCalculation"><ResourcePool/><ResourceLinkPool><PreviewLink CombinedProcessIndex="0 1 2" DraftOK="true" HDM:ElementKind="Preview" Usage="Input" rRef="PreviewSeparation"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/><HDM:MinSubmit N="1" PartIDKeys="Side"/><HDM:MaxSubmit PartIDKeys="SheetName"/></PreviewLink><PreviewLink CombinedProcessIndex="0" HDM:ElementKind="Preview" ProcessUsage="Viewable" Usage="Output" rRef="PreviewOverview"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink><PreviewLink CombinedProcessIndex="1" HDM:ElementKind="Preview" ProcessUsage="ThumbNail" Usage="Output" rRef="PreviewThumbnail"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink><InkZoneProfileLink CombinedProcessIndex="2" HDM:ElementKind="InkZoneProfile" Usage="Output" rRef="Link91480306_001000"/><HDM:InkConsumptionLink CombinedProcessIndex="3" HDM:ElementKind="Unknown" Usage="Output" rRef="Link91480306_001001"/><ColorantControlLink CombinedProcessIndex="0 1 2" Usage="Input" rRef="ColorantControl"/><PreviewGenerationParamsLink CombinedProcessIndex="0 1" Usage="Input" rRef="Link91480306_001003"/><HDM:PressDeviceLink CombinedProcessIndex="2" Usage="Input" rRef="Link91480306_001004"/><InkZoneCalculationParamsLink CombinedProcessIndex="2" Usage="Input" rRef="Link91480306_001005"/><TransferCurvePoolLink CombinedProcessIndex="2" HDM:Modify="true" Usage="Input" rRef="TransferCurvePool"/><HDM:InkConsumptionCalculationParamsLink CombinedProcessIndex="3" Usage="Input" rRef="Link91480306_001007"/><LayoutLink Usage="Input" rRef="Layout"/></ResourceLinkPool><AuditPool/><NodeInfo/></JDF><JDF HDM:Cluster="Press on HEIPC81593" HDM:ToolID="C" HDM:ToolType="SheetfedPress" ID="Link91481257_001027" JobPartID="PPIPressRoot.C" Status="Waiting" Type="ConventionalPrinting"><ResourcePool/><ResourceLinkPool><ExposedMediaLink DraftOK="true" HDM:ElementKind="ImpositionOutput" ProcessUsage="Plate" Usage="Input" rRef="ExposedMediaPlate"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/><HDM:MinSubmit N="1" PartIDKeys="Side"/><HDM:MaxSubmit PartIDKeys="SheetName"/></ExposedMediaLink><InkZoneProfileLink DraftOK="true" HDM:ElementKind="InkZoneProfile" Usage="Input" rRef="Link91480306_001000"/><HDM:InkConsumptionLink DraftOK="true" HDM:ElementKind="Unknown" Usage="Input" rRef="Link91480306_001001"/><PreviewLink DraftOK="true" HDM:ElementKind="Preview" ProcessUsage="ThumbNail" Usage="Input" rRef="PreviewThumbnail"><Part SheetName="SM 102 52x28" SignatureName="Signature1"/></PreviewLink><MediaLink DraftOK="true" HDM:ElementKind="Unknown" Usage="Input" rRef="MediaPaper"/><ComponentLink HDM:ElementKind="PrintedSheet" Usage="Output" rRef="PrintedPaper"><Part Condition="Good" SheetName="SM 102 52x28" SignatureName="Signature1"/><Part Condition="Waste" SheetName="SM 102 52x28" SignatureName="Signature1"/><AmountPool>
+					
+					
+				<PartAmount Amount="0">
+						
+					<Part Condition="Good" SheetName="SM 102 52x28" SignatureName="Signature1"/></PartAmount><PartAmount Amount="0">
+						
+					<Part Condition="Waste" SheetName="SM 102 52x28" SignatureName="Signature1"/></PartAmount></AmountPool></ComponentLink><InkLink Usage="Input" rRef="Ink"/><HDM:PressDeviceLink Usage="Input" rRef="Link91480306_001004"/><PrintConditionLink HDM:Modify="true" Usage="Input" rRef="PrintCondition"/><TransferCurvePoolLink HDM:Modify="true" Usage="Input" rRef="TransferCurvePool"/><DeviceLink Usage="Input" rRef="Link91480316_001015"/><ColorantControlLink Usage="Input" rRef="ColorantControl"/><ConventionalPrintingParamsLink Usage="Input" rRef="ConventionalPrintingParams"/><LayoutLink Usage="Input" rRef="Layout"/></ResourceLinkPool><AuditPool/><NodeInfo/></JDF></JDF>
+<pt:Job><pt:JobHome Host="HEIPC81592" Path="Jobs/2005-05-12/Zonen-Test-for-CPC-32(ZoneTest_005)" Share="PTJobs" Type="UNC" xmlns:pt="http://www.CIP4.org/JDFSchema_1_1"/></pt:Job><JDF DescriptiveName="layout group" ID="Link91478834_000118" Status="Waiting" Type="ProcessGroup"><ResourceLinkPool><LayoutLink Usage="Output" rRef="Layout"/><ColorPoolLink Usage="Input" rRef="ColorPool"/><PreviewLink ProcessUsage="Viewable" Usage="Input" rRef="PreviewOverview"/><PreviewLink ProcessUsage="ThumbNail" Usage="Input" rRef="PreviewThumbnail"/><ColorantControlLink ProcessUsage="Print" Usage="Input" rRef="ColorantControl"/><ColorantControlLink ProcessUsage="Layout" Usage="Input" rRef="r91480366_001018"/></ResourceLinkPool></JDF></JDF>

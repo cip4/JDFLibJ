@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JDF Activation="Active" DescriptiveName="33995_KD_Raff_PCM SIG001" ID="Test1" Status="Waiting" Type="ProcessGroup" Version="1.1" a="" xmlns:HDM="http://www.heidelberg.com">
+
+  <NodeInfo a="b"/>
+
+  <!-- Resource Pool -->
+  <ResourcePool>
+
+  <!-- the PrepressInterface Device -->
+    <Device Class="Implementation" DeviceID="3100" ID="Res_Device_3100" Locked="false" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO" Status="Available">
+      <CostCenter CostCenterID="3100"/>
+    </Device>
+
+    <!-- Separated preview for InkZoneCalculation -->
+    <Preview Class="Parameter" Compensation="None" ID="Preview" PartIDKeys="SheetName Side PreviewType Separation" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO" Status="Incomplete">
+      <Preview SheetName="Sheet 1">
+        <Preview Side="Front">
+          <Preview PreviewType="Viewable" Status="Incomplete" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.ovr0.png"/>
+          <Preview Locked="true" PreviewType="ThumbNail" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRW" Status="Incomplete" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.prv0.png"/>
+          <Preview Locked="false" PreviewType="Separation" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO">
+            <Preview Separation="Cyan" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0000.png"/>
+            <Preview Separation="Magenta" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0001.png"/>
+            <Preview Separation="Yellow" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0002.png"/>
+            <Preview Separation="Black" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0003.png"/>
+          </Preview>
+        </Preview>
+      </Preview>
+      <Preview SheetName="Sheet 2">
+        <Preview Side="Front">
+          <Preview PreviewType="Viewable" Status="Incomplete" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.ovr0.png"/>
+          <Preview Locked="true" PreviewType="ThumbNail" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRW" Status="Incomplete" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.prv0.png"/>
+          <Preview Locked="false" PreviewType="Separation" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO">
+            <Preview Separation="Cyan" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0000.png"/>
+            <Preview Separation="Magenta" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0001.png"/>
+            <Preview Separation="Yellow" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0002.png"/>
+            <Preview Separation="Black" Status="Available" URL="S:/CIP-Productsuite/PrepressInterface/main/TestPPISrvConverter/test/out/preview/717000019ac0eff675867a000a30e494.0003.png"/>
+          </Preview>
+        </Preview>
+      </Preview>
+    </Preview>
+
+    <Preview Class="Parameter" Compensation="None" ID="PreviewCQMSeparation" PartIDKeys="SheetName Side PreviewType Separation" Status="Incomplete"/>
+
+    <!-- TransferCurvePool -->
+    <TransferCurvePool Class="Parameter" ID="TransferCurvePool" Status="Available" rRefs="FilmCurve PlateCurve">
+      <TransferCurveSet Class="Parameter" Name="Film">
+        <TransferCurveRef rRef="FilmCurve"/>
+      </TransferCurveSet>
+      <TransferCurveSet Class="Parameter" Name="Plate">
+        <TransferCurveRef rRef="PlateCurve"/>
+      </TransferCurveSet>
+    </TransferCurvePool>
+
+    <TransferCurve Class="Parameter" ID="FilmCurve" Locked="false" PartIDKeys="SheetName" Status="Available">
+      <TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All" SheetName="Sheet 1"/>
+    </TransferCurve>
+    <TransferCurve Class="Parameter" ID="PlateCurve" Locked="false" PartIDKeys="SheetName" Status="Available">
+      <TransferCurve Curve="0.0 0.0 1.0 1.0" Separation="All" SheetName="Sheet 1"/>
+    </TransferCurve>
+
+    <!-- InkZoneProfile -->
+    <InkZoneProfile Class="Parameter" ID="InkZoneProfile" PartIDKeys="SheetName Side Separation" Status="Incomplete">
+      <InkZoneProfile SheetName="Sheet 1">
+        <InkZoneProfile Side="Front">
+          <InkZoneProfile Separation="Cyan"/>
+          <InkZoneProfile Separation="Magenta"/>
+          <InkZoneProfile Separation="Yellow"/>
+          <InkZoneProfile Separation="Black"/>
+        </InkZoneProfile>
+      </InkZoneProfile>
+    </InkZoneProfile>
+
+    <!-- Color and ColorPool -->
+    <ColorPool Class="Parameter" ID="ColorPool" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO" Status="Available"/>
+    <ColorantControl Class="Parameter" ID="ColorantControl" Locked="false" PartIDKeys="SheetName Side" ProcessColorModel="DeviceN" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO" Status="Available" rRefs="ColorPool">
+      <ColorPoolRef rRef="ColorPool"/>
+      <ColorantControl SheetName="Sheet 1">
+        <ColorantControl Side="Front">
+          <ColorantOrder>
+            <SeparationSpec Class="Parameter" Name="Cyan"/>
+            <SeparationSpec Class="Parameter" Name="Magenta"/>
+            <SeparationSpec Class="Parameter" Name="Yellow"/>
+            <SeparationSpec Class="Parameter" Name="Black"/>
+          </ColorantOrder>
+          <ColorantParams>
+            <SeparationSpec Class="Parameter" Name="Cyan"/>
+            <SeparationSpec Class="Parameter" Name="Magenta"/>
+            <SeparationSpec Class="Parameter" Name="Yellow"/>
+            <SeparationSpec Class="Parameter" Name="Black"/>
+          </ColorantParams>
+        </ColorantControl>
+      </ColorantControl>
+    </ColorantControl>
+
+    <!-- InkConsumption -->
+    <HDM:InkConsumption Class="Parameter" ID="InkConsumption" PartIDKeys="SheetName Side Separation" Status="Incomplete">
+      <HDM:InkConsumption SheetName="Sheet 1">
+        <HDM:InkConsumption Side="Front">
+          <HDM:InkConsumption Separation="Cyan"/>
+          <HDM:InkConsumption Separation="Magenta"/>
+          <HDM:InkConsumption Separation="Yellow"/>
+          <HDM:InkConsumption Separation="Black"/>
+        </HDM:InkConsumption>
+      </HDM:InkConsumption>
+    </HDM:InkConsumption>
+
+    <!-- Ink -->
+    <Ink Class="Consumable" ID="Ink" SpecificYield="0.1005" Status="Available"/>
+
+    <!-- Layout -->
+    <Layout Class="Parameter" ID="Layout" Status="Available" rRefs="Linkfa0:-8000">
+      <Signature Class="Parameter">
+        <Sheet Class="Parameter" HDM:CIP3AdmJobName="33995_KD_Raff_PCM SIG001" HDM:CIP3AdmMake="Creo" HDM:CIP3AdmModel="Prinergy" HDM:SheetCode="001F" Name="Sheet 1">
+          <Surface Class="Parameter" Side="Front" SurfaceContentsBox="0.0 0.0 2919.66 2171.31"/>
+          <MediaRef rRef="Linkfa0:-8000"/>
+        </Sheet>
+      </Signature>
+    </Layout>
+
+    <HDM:PressDevice Class="Parameter" HDM:InkZoneWidth="32.5" HDM:NumberOfInkZones="32" HDM:PressId="8" HDM:PressName="SM 102 52*38" HDM:TransferFilmCurveData="0 0 1 1" HDM:TransferPlateCurveData="0 0 1 1" ID="Press" Status="Available"/>
+    <Media Class="Consumable" Dimension="2171.34 2919.69" ID="Linkfa0:-8000" Locked="false" MediaType="Paper" Status="Unavailable"/>
+
+  </ResourcePool>
+
+  <JDF ID="InkZoneCalculation" Status="Waiting" Type="InkZoneCalculation">
+
+    <!-- Resource Pool -->
+    <ResourcePool>
+
+      <!-- InkZoneCaclulationParams -->
+      <InkZoneCalculationParams Class="Parameter" ID="InkZoneCalculationParams" PrintableArea="14.160708661417214 147.4015748031496 2905.4992913385827 2131.6535433070867" Status="Available" ZoneWidth="92.125984251968503937007874015748" Zones="32"/>
+
+    </ResourcePool>
+
+    <!-- Resource Link Pool -->
+    <ResourceLinkPool>
+
+      <DeviceLink Usage="Input" rRef="Res_Device_3100"/>
+      <LayoutLink Usage="Input" rRef="Layout"/>
+      <InkZoneCalculationParamsLink Usage="Input" rRef="InkZoneCalculationParams"/>
+      <PreviewLink Usage="Input" rRef="Preview">
+        <Part PreviewType="Separation"/>
+      </PreviewLink>
+      <TransferCurvePoolLink Usage="Input" rRef="TransferCurvePool"/>
+
+      <!-- Output Link(s) -->
+      <InkZoneProfileLink Usage="Output" rRef="InkZoneProfile"/>
+
+    </ResourceLinkPool>
+
+  </JDF>
+
+  <JDF ID="PreviewGenerationOverview" Status="Waiting" Type="PreviewGeneration" Version="1.1">
+
+    <!-- Resource Pool -->
+    <ResourcePool>
+
+      <!-- PreviewGenerationParams -->
+      <PreviewGenerationParams Class="Parameter" ID="PreviewGenerationParamsOverview" PartIDKeys="PreviewType" Status="Available">
+        <PreviewGenerationParams PreviewType="Viewable" Resolution="50.8 50.8"/>
+      </PreviewGenerationParams>
+
+    </ResourcePool>
+
+    <!-- Resource Link Pool -->
+    <ResourceLinkPool>
+
+      <DeviceLink Usage="Input" rRef="Res_Device_3100"/>
+      <!-- Links for the PreviewGeneration process (seperation to overview) -->
+      <PreviewLink Usage="Input" rRef="Preview">
+        <Part PreviewType="Separation"/>
+      </PreviewLink>
+      <PreviewGenerationParamsLink Usage="Input" rRef="PreviewGenerationParamsOverview">
+        <Part PreviewType="Viewable"/>
+      </PreviewGenerationParamsLink>
+      <ColorantControlLink Usage="Input" rRef="ColorantControl"/>
+
+      <!-- Output Link(s) -->
+      <PreviewLink Usage="Output" rRef="Preview">
+        <Part PreviewType="Viewable"/>
+      </PreviewLink>
+
+    </ResourceLinkPool>
+
+  </JDF>
+
+  <JDF ID="PreviewGenerationThumbnail" JobPartID="p1" Status="Spawned" Type="PreviewGeneration" Version="1.1">
+
+    <!-- Resource Pool -->
+    <ResourcePool>
+
+      <!-- PreviewGenerationParams -->
+      <PreviewGenerationParams Class="Parameter" ID="PreviewGenerationParamsThumbnail" PartIDKeys="PreviewType" Status="Available">
+        <PreviewGenerationParams AspectRatio="CenterMax" Locked="false" PreviewType="ThumbNail" Size="300 212" SpawnIDs="Sp144643_8004" SpawnStatus="SpawnedRO"/>
+      </PreviewGenerationParams>
+
+    </ResourcePool>
+
+    <!-- Resource Link Pool -->
+    <ResourceLinkPool>
+
+      <DeviceLink Usage="Input" rRef="Res_Device_3100"/>
+      <!-- Links for the PreviewGeneration process (seperation to Thumbnail) -->
+      <PreviewLink Usage="Input" rRef="Preview">
+        <Part PreviewType="Separation"/>
+      </PreviewLink>
+      <PreviewGenerationParamsLink Usage="Input" rRef="PreviewGenerationParamsThumbnail">
+        <Part PreviewType="ThumbNail"/>
+      </PreviewGenerationParamsLink>
+      <ColorantControlLink Usage="Input" rRef="ColorantControl"/>
+
+      <!-- Output Link(s) -->
+      <PreviewLink Usage="Output" rRef="Preview">
+        <Part PreviewType="ThumbNail"/>
+      </PreviewLink>
+
+    </ResourceLinkPool>
+
+  </JDF>
+
+  <!-- HDM's private InkConsumption calculation process -->
+  <JDF ID="InkConsumptionCalculation" Status="Waiting" Type="HDM:InkConsumptionCalculation" Version="1.0">
+
+    <!-- Resource Pool -->
+    <ResourcePool>
+
+      <!-- InkZoneCaclulationParams -->
+      <HDM:InkConsumptionCalculationParams Class="Parameter" ID="InkConsumptionCalculationParams" Locked="true" Status="Available"/>
+
+    </ResourcePool>
+
+    <!-- Resource Link Pool -->
+    <ResourceLinkPool>
+
+      <InkLink Usage="Input" rRef="Ink"/>
+      <DeviceLink Usage="Input" rRef="Res_Device_3100"/>
+      <HDM:InkConsumptionCalculationParamsLink Usage="Input" rRef="InkConsumptionCalculationParams"/>
+      <InkZoneProfileLink Usage="Input" rRef="InkZoneProfile"/>
+
+      <!-- Output Link(s) -->
+      <HDM:InkConsumptionLink Usage="Output" rRef="InkConsumption"/>
+
+    </ResourceLinkPool>
+
+  </JDF>
+
+  <!-- HDM's private EndDevice generation process -->
+  <JDF ID="EndDeviceGeneration" Status="Waiting" Type="HDM:EndDeviceGeneration" Version="1.1">
+
+    <!-- Resource Pool -->
+    <ResourcePool>
+
+      <!-- InkZoneCaclulationParams -->
+      <FileSpec Class="Parameter" ID="PPFFile" Status="Incomplete" URL="transfer/ppi/ppfout\ic.ppf"/>
+
+    </ResourcePool>
+
+    <!-- Resource Link Pool -->
+    <ResourceLinkPool>
+
+      <!-- take the separation images -->
+      <PreviewLink Usage="Input" rRef="Preview">
+        <Part PreviewType="Separation"/>
+      </PreviewLink>
+      <!-- take the thumbnail images -->
+      <PreviewLink Usage="Input" rRef="Preview">
+        <Part PreviewType="ThumbNail"/>
+      </PreviewLink>
+      <!-- take the Layout -->
+      <LayoutLink Usage="Input" rRef="Layout"/>
+      <!-- take the ColorantControl -->
+      <ColorantControlLink Usage="Input" rRef="ColorantControl"/>
+      <!-- take the InkZoneProfile -->
+      <InkZoneProfileLink Usage="Input" rRef="InkZoneProfile"/>
+      <!-- take the TransferCurvePool -->
+      <TransferCurvePoolLink Usage="Input" rRef="TransferCurvePool"/>
+      <!-- Link to Press device -->
+      <HDM:PressDeviceLink Usage="Input" rRef="Press"/>
+      <!-- Device link -->
+      <DeviceLink Usage="Input" rRef="Res_Device_3100"/>
+      <!-- Output Link(s) -->
+      <FileSpecLink Usage="Output" rRef="PPFFile"/>
+
+    </ResourceLinkPool>
+
+  </JDF>
+
+  <AuditPool>
+
+    <Created Author="PrepressInterface V4.0" TimeStamp="2002-08-29T16:41:56+02:00"/>
+    <Spawned NewSpawnID="Sp144643_8004" Status="Waiting" TimeStamp="2002-11-20T14:46:43+01:00" URL="File://spawnic.jdf" jRef="PreviewGenerationThumbnail" rRefsROCopied="Res_Device_3100 ColorantControl ColorPool" rRefsRWCopied="Preview"/>
+
+  </AuditPool>
+
+</JDF>

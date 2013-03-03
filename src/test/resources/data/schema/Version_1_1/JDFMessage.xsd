@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	The CIP4 Software License, Version 1.0
+	
+	
+	Copyright (c) 2001 The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification, 
+	are permitted provided that the following conditions are met:
+	
+	1. Redistributions of source code must retain the above copyright notice, this 
+	list of conditions and the following disclaimer.
+	
+	2. Redistributions in binary form must reproduce the above copyright notice, 
+	this list of conditions and the following disclaimer in the documentation and/or 
+	other materials provided with the distribution.
+	
+	3. The end-user documentation included with the redistribution, if any, must 
+	include the following acknowledgment: &quot;This product includes software developed 
+	by the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress (www.cip4.org)&quot; Alternately, this acknowledgment 
+	may appear in the software itself, if and wherever such third-party 
+	acknowledgments normally appear.
+	
+	4. The names &quot;CIP4&quot; and &quot;The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress&quot; must not be used to endorse or 
+	promote products derived from this software without prior written permission. 
+	For written permission, please contact info@cip4.org
+	
+	5. Products derived from this software may not be called &quot;CIP4&quot;, nor may &quot;CIP4&quot; 
+	appear in their name, without prior written permission of the CIP4 organization
+	
+	&quot;CIP4&quot; and &quot;The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress&quot; are trademarks of The International Cooperation 
+	for the Integration of Processes in Prepress, Press and Postpress (CIP4).  All 
+	other names and brands are the property of their respective owners.
+	
+	THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, 
+	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+	FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. CIP4 AND ITS CONTRIBUTORS MAKE 
+	NO REPRESENTATION THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT INFRINGE ANY 
+	PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS. IN NO EVENT SHALL CIP4 OR ITS 
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
+	OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+	INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+	CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+	IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+	OF SUCH DAMAGE. 
+	====================================================================
+	
+	This software consists of voluntary contributions made by many individuals on 
+	behalf of the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress and was originally based on software some of which 
+	contributed by and copyrighted by Adobe Systems and Man Roland. copyright (c) 
+	2000-2001, Adobe Systems copyright (c) 2001-2001, Man Roland
+	
+	For more information on The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress , please see &lt;http://www.cip4.org/&gt;.
+	
+-->
+<!--JDF specification V 1.1-->
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_1_1" xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_1_Types" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.a.004">
+	<!--===== Controller Registration and Communication Messages =====-->
+	<!--===Events-->
+	<xs:import namespace="http://www.CIP4.org/JDFSchema_1_1_Types" schemaLocation="JDFTypes.xsd"/>
+	<xs:element name="NotificationFilter" type="jdf:NotificationFilter_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Events</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NotificationDef" type="jdf:NotificationDef_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Events</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="NotificationFilter_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="DeviceID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="Types" type="xs:NMTOKENS" use="optional"/>
+				<xs:attribute name="Classes" default="Event Information Warning Error Fatal">
+					<xs:simpleType>
+						<xs:restriction base="jdftyp:eNotificationClasses_"/>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NotificationDef_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Classes" type="jdftyp:eNotificationClasses_" use="required"/>
+				<xs:attribute name="Type" type="xs:NMTOKEN" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===KnownControllers-->
+	<xs:element name="JDFController" type="jdf:JDFController_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownControllers</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="JDFController_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="URL" type="jdftyp:URL" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===KnownDevices-->
+	<xs:element name="DeviceFilter" type="jdf:DeviceFilter_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownDevices</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeviceList" type="jdf:DeviceList_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownDevices</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DeviceFilter_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Device" type="jdf:Device_r" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="DeviceDetails" type="jdftyp:eDeviceDetails_" default="None"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceList_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="DeviceInfo" type="jdf:DeviceInfo_me" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===KnownJDFServices-->
+	<xs:element name="JDFService" type="jdf:JDFService_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownJDFServices</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="JDFService_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="CombinedMethod" type="jdftyp:eCombinedMethod_" default="None"/>
+				<xs:attribute name="Type" type="xs:NMTOKEN" use="required"/>
+				<xs:attribute name="TypeOrder" type="jdftyp:eTypeOrder_" default="Fixed"/>
+				<xs:attribute name="Types" type="xs:NMTOKENS" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===KnownMessages-->
+	<xs:element name="KnownMsgQuParams" type="jdf:KnownMsgQuParams_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownMessages</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MessageService" type="jdf:MessageService_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>KnownMessages</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="KnownMsgQuParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Exact" type="xs:boolean" default="false"/>
+				<xs:attribute name="ListCommands" type="xs:boolean" default="true"/>
+				<xs:attribute name="ListQueries" type="xs:boolean" default="true"/>
+				<xs:attribute name="ListSignals" type="xs:boolean" default="true"/>
+				<xs:attribute name="Persistent" type="xs:boolean" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MessageService_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="DevCaps" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:any namespace="##any" processContents="lax" minOccurs="0"/>
+							</xs:sequence>
+							<xs:anyAttribute namespace="##any"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Acknowledge" type="xs:boolean" default="false"/>
+				<xs:attribute name="Command" type="xs:boolean" default="false"/>
+				<xs:attribute name="Persistent" type="xs:boolean" default="false"/>
+				<xs:attribute name="Query" type="xs:boolean" default="false"/>
+				<xs:attribute name="Signal" type="xs:boolean" default="false"/>
+				<xs:attribute name="Type" type="xs:NMTOKEN" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===RepeatMessages-->
+	<xs:element name="MsgFilter" type="jdf:MsgFilter_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>RepeatMessages</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MsgFilter_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="After" type="xs:dateTime" use="optional"/>
+				<xs:attribute name="Before" type="xs:dateTime" use="optional"/>
+				<xs:attribute name="Count" type="xs:integer" use="optional"/>
+				<xs:attribute name="DeviceID" type="xs:string" use="optional"/>
+				<xs:attribute name="Family" type="jdftyp:eMessageFamily_" default="All"/>
+				<xs:attribute name="MessageRefID" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="MessageID" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="MessageType" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="ReceiverURL" type="jdftyp:URL" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===StopPersistentChannel-->
+	<xs:element name="StopPersChParams" type="jdf:StopPersChParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>StopPersistentChannel</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="StopPersChParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="ChannelID" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="MessageType" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="DeviceID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="URL" type="jdftyp:URL" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Controller Registration and Communication Messages =====-->
+	<!--=====Device/Operator Status and Job Progress Messages =====-->
+	<!--===Occupation-->
+	<xs:element name="EmployeeDef" type="jdf:EmployeeDef_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Occupation</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Occupation" type="jdf:Occupation_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Occupation</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="EmployeeDef_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="PersonalID" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Occupation_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Device" type="jdf:Device_r" minOccurs="0"/>
+					<xs:element name="Employee" type="jdf:Employee_r" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Busy" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===Resource-->
+	<xs:element name="ResourceQuParams" type="jdf:ResourceQuParams_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Resource</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ResourceInfo" type="jdf:ResourceInfo_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Resource</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ResourceCmdParams" type="jdf:ResourceCmdParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Resource</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ResourceQuParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Classes" type="xs:NMTOKENS" use="optional"/>
+				<xs:attribute name="Exact" type="xs:boolean" default="false"/>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="Location" type="xs:string" use="optional"/>
+				<xs:attribute name="ProcessUsage" type="xs:string" use="optional"/>
+				<xs:attribute name="ResourceName" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="Usage" type="jdftyp:eUsage_" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResourceInfo_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="CostCenter" type="jdf:CostCenter_r" minOccurs="0"/>
+					<xs:element ref="jdf:Resource" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Amount" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="AvailableAmount" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="Level" default="OK">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="Empty"/>
+							<xs:enumeration value="Low"/>
+							<xs:enumeration value="OK"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="Location" type="xs:string" use="optional"/>
+				<xs:attribute name="ResourceName" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="ProcessUsage" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="Unit" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResourceCmdParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:Resource" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Activation" type="jdftyp:eActivation_" default="Active"/>
+				<xs:attribute name="Exact" type="xs:boolean" default="false"/>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="ResourceName" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="ProcessUsage" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="ProductionAmount" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="UpdateIDs" type="xs:NMTOKENS" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===Status-->
+	<xs:element name="StatusQuParams" type="jdf:StatusQuParams_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Status</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeviceInfo" type="jdf:DeviceInfo_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Status</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="StatusQuParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="DeviceDetails" default="None">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="None"/>
+							<xs:enumeration value="Brief"/>
+							<xs:enumeration value="Modules"/>
+							<xs:enumeration value="Details"/>
+							<xs:enumeration value="Capability"/>
+							<xs:enumeration value="Full"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="EmployeeInfo" type="xs:boolean" default="false"/>
+				<xs:attribute name="JobDetails" default="None">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="None"/>
+							<xs:enumeration value="MIS"/>
+							<xs:enumeration value="Brief"/>
+							<xs:enumeration value="Full"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="QueueInfo" type="xs:boolean" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:attributeGroup name="DeviceInfoAttribs">
+		<xs:attribute name="CounterUnit" type="xs:string" use="optional"/>
+		<xs:attribute name="DeviceStatus" type="jdftyp:eDeviceStatus_" use="required"/>
+		<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
+		<xs:attribute name="PowerOnTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="ProductionCounter" type="jdftyp:number" use="optional"/>
+		<xs:attribute name="Speed" type="jdftyp:number" use="optional"/>
+		<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+		<xs:attribute name="TotalProductionCounter" type="jdftyp:number" use="optional"/>
+	</xs:attributeGroup>
+	<xs:complexType name="DeviceInfo_m">
+		<xs:annotation>
+			<xs:documentation>DeviceInfo for use as a message in its own right</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Device" type="jdf:Device_r" minOccurs="0"/>
+					<xs:element name="Employee" type="jdf:Employee_r" minOccurs="0"/>
+					<xs:element name="JobPhase" type="jdf:JobPhase_m" minOccurs="0"/>
+					<xs:element name="ModuleStatus" minOccurs="0">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="jdf:BaseElement_">
+									<xs:sequence minOccurs="0" maxOccurs="unbounded">
+										<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+										<xs:element name="Employee" type="jdf:Employee_r" minOccurs="0"/>
+									</xs:sequence>
+									<xs:attribute name="DeviceStatus" type="jdftyp:eDeviceStatus_" use="required"/>
+									<xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="required"/>
+									<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="required"/>
+									<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attributeGroup ref="jdf:DeviceInfoAttribs"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceInfo_me">
+		<xs:annotation>
+			<xs:documentation>DeviceInfo for use as a component of messages</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:BaseElement_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Device" type="jdf:Device_r" minOccurs="0"/>
+					<xs:element name="Employee" type="jdf:Employee_r" minOccurs="0"/>
+					<xs:element name="JobPhase" type="jdf:JobPhase_m" minOccurs="0"/>
+					<xs:element name="ModuleStatus" minOccurs="0">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="jdf:BaseElement_">
+									<xs:sequence minOccurs="0" maxOccurs="unbounded">
+										<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+										<xs:element name="Employee" type="jdf:Employee_r" minOccurs="0"/>
+									</xs:sequence>
+									<xs:attribute name="DeviceStatus" type="jdftyp:eDeviceStatus_" use="required"/>
+									<xs:attribute name="ModuleIndex" type="jdftyp:IntegerRangeList" use="required"/>
+									<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="required"/>
+									<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attributeGroup ref="jdf:DeviceInfoAttribs"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===Track-->
+	<xs:element name="TrackFilter" type="jdf:TrackFilter_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Track</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TrackResult" type="jdf:TrackResult_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Track</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TrackFilter_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="Status" type="xs:NMTOKENS" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TrackResult_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="URL" type="jdftyp:URL" use="required"/>
+				<xs:attribute name="IsDevice" type="xs:boolean" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Device/Operator Status and Job Progress Messages =====-->
+	<!--===== Pipe Control =====-->
+	<!--===PipeClose/PipePull/PipePush/PipePause-->
+	<xs:element name="PipeParams" type="jdf:PipeParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>PipeClose</MessageType>
+				<MessageType>PipePull</MessageType>
+				<MessageType>PipePush</MessageType>
+				<MessageType>PipePause</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="JobPhase" type="jdf:JobPhase_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>PipeClose</MessageType>
+				<MessageType>PipePull</MessageType>
+				<MessageType>PipePush</MessageType>
+				<MessageType>PipePause</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="PipeParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:Resource" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="PipeID" type="xs:string" use="required"/>
+				<xs:attribute name="Status" type="jdftyp:eNodeStatus_" default="InProgress"/>
+				<xs:attribute name="UpdatedStatus" type="jdftyp:eResourceStatus_" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="JobPhase_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="CostCenter" type="jdf:CostCenter_r" minOccurs="0"/>
+					<xs:element ref="jdf:JDF" minOccurs="0"/>
+					<xs:element name="Part" type="jdf:Part" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional"/>
+				<xs:attribute name="Amount" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="DeadLine" default="InTime">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="InTime"/>
+							<xs:enumeration value="Warning"/>
+							<xs:enumeration value="Late"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="PercentCompleted" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="optional"/>
+				<xs:attribute name="RestTime" type="xs:duration" use="optional"/>
+				<xs:attribute name="Speed" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
+				<xs:attribute name="Status" type="jdftyp:eNodeStatus_" use="required"/>
+				<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+				<xs:attribute name="TotalAmount" type="jdftyp:number" use="optional"/>
+				<xs:attribute name="Waste" type="jdftyp:number" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Pipe Control =====-->
+	<!--===== Queue Support =====-->
+	<!--===Abort/Hold/Remove/Resubmit/Resume QueueEntry-->
+	<xs:element name="QueueEntryDef" type="jdf:QueueEntryDef_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>AbortQueueEntry</MessageType>
+				<MessageType>HoldQueueEntry</MessageType>
+				<MessageType>RemoveQueueEntry</MessageType>
+				<MessageType>ResumeQueueEntry</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ResubmissionParams" type="jdf:ResubmissionParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>ResubmitQueueEntry</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="QueueEntryDef_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResubmissionParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="required"/>
+				<xs:attribute name="URL" type="jdftyp:URL" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===SetQueueEntryPosition-->
+	<xs:element name="QueueEntryPosParams" type="jdf:QueueEntryPosParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>SetQueueEntryPosition</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="QueueEntryPosParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="NextQueueEntryID" type="xs:string" use="optional"/>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="required"/>
+				<xs:attribute name="PrevQueueEntryID" type="xs:string" use="optional"/>
+				<xs:attribute name="Position" use="optional">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===SetQueueEntryPriority-->
+	<xs:element name="QueueEntryPriParams" type="jdf:QueueEntryPriParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>SetQueueEntryPriority</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="QueueEntryPriParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Priority" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0"/>
+							<xs:maxInclusive value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===SubmitQueueEntry-->
+	<xs:element name="QueueSubmissionParams" type="jdf:QueueSubmissionParams_m" substitutionGroup="jdf:CommandTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>SubmitQueueEntry</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="QueueEntry" type="jdf:QueueEntry_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>SubmitQueueEntry</MessageType>
+				<MessageType>QueueEntryStatus</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="QueueSubmissionParams_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:CommandTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Hold" type="xs:boolean" default="false"/>
+				<xs:attribute name="NextQueueEntryID" type="xs:string" use="optional"/>
+				<xs:attribute name="PrevQueueEntryID" type="xs:string" use="optional"/>
+				<xs:attribute name="Priority" default="1">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0"/>
+							<xs:maxInclusive value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="ReturnURL" type="jdftyp:URL" use="optional"/>
+				<xs:attribute name="URL" type="jdftyp:URL" use="required"/>
+				<xs:attribute name="WatchURL" type="jdftyp:URL" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Queue Support =====-->
+	<!--===== Global Queue Handling =====-->
+	<!--===CloseQueue===-->
+	<!--===FlushQueue===-->
+	<!--===HoldQueue===-->
+	<!--===OpenQueue===-->
+	<!--===QueueEntryStatus===-->
+	<xs:element name="QueueEntryDefList" type="jdf:QueueEntryDefList_m" substitutionGroup="jdf:QueryTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>QueueEntryStatus</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="QueueEntryDefList_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:QueryTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="QueueEntryDef" type="jdf:QueueEntryDef_m" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===QueueStatus===-->
+	<!--===ResumeQueue===-->
+	<!--===SubmissionMethods===-->
+	<xs:element name="SubmissionMethods" type="jdf:SubmissionMethods_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>SubmissionMethods</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SubmissionMethods_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="File" type="xs:boolean" default="false"/>
+				<xs:attribute name="HotFolder" type="jdftyp:URL" use="optional"/>
+				<xs:attribute name="HttpGet" type="xs:boolean" default="false"/>
+				<xs:attribute name="MIME" type="xs:boolean" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Global Queue Handling =====-->
+	<!--===== Queue-Handling Elements =====-->
+	<xs:element name="Queue" type="jdf:Queue_m" substitutionGroup="jdf:ResponseTypeObj">
+		<xs:annotation>
+			<xs:appinfo>
+				<MessageType>Status</MessageType>
+				<MessageType>AbortQueueEntry</MessageType>
+				<MessageType>HoldQueueEntry</MessageType>
+				<MessageType>RemoveQueueEntry</MessageType>
+				<MessageType>ResubmitQueueEntry</MessageType>
+				<MessageType>ResumeQueueEntry</MessageType>
+				<MessageType>SetQueueEntryPosition</MessageType>
+				<MessageType>SetQueueEntryPriority</MessageType>
+				<MessageType>SubmitQueueEntry</MessageType>
+				<MessageType>CloseQueue</MessageType>
+				<MessageType>FlushQueue</MessageType>
+				<MessageType>HoldQueue</MessageType>
+				<MessageType>OpenQueue</MessageType>
+				<MessageType>QueueStatus</MessageType>
+				<MessageType>ResumeQueue</MessageType>
+				<MessageType>SubmissionMethods</MessageType>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Queue_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Device" type="jdf:Device_r" minOccurs="0"/>
+					<xs:element name="QueueEntry" type="jdf:QueueEntry_m" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="Status" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="Blocked"/>
+							<xs:enumeration value="Closed"/>
+							<xs:enumeration value="Full"/>
+							<xs:enumeration value="Running"/>
+							<xs:enumeration value="Waiting"/>
+							<xs:enumeration value="Held"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="DeviceID" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QueueEntry_m">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResponseTypeObj_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="JobID" type="xs:string" use="optional"/>
+				<xs:attribute name="JobPartID" type="xs:string" use="optional"/>
+				<xs:attribute name="Priority" default="1">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+							<xs:minInclusive value="0"/>
+							<xs:maxInclusive value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="QueueEntryID" type="xs:string" use="required"/>
+				<xs:attribute name="Status" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:enumeration value="Running"/>
+							<xs:enumeration value="Waiting"/>
+							<xs:enumeration value="Held"/>
+							<xs:enumeration value="Removed"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
+				<xs:attribute name="SubmissionTime" type="xs:dateTime" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===== End Queue-Handling Elements =====-->
+</xs:schema>

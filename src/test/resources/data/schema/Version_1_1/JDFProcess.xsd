@@ -1,0 +1,3137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	The CIP4 Software License, Version 1.0
+	
+	
+	Copyright (c) 2001 The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification, 
+	are permitted provided that the following conditions are met:
+	
+	1. Redistributions of source code must retain the above copyright notice, this 
+	list of conditions and the following disclaimer.
+	
+	2. Redistributions in binary form must reproduce the above copyright notice, 
+	this list of conditions and the following disclaimer in the documentation and/or 
+	other materials provided with the distribution.
+	
+	3. The end-user documentation included with the redistribution, if any, must 
+	include the following acknowledgment: &quot;This product includes software developed 
+	by the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress (www.cip4.org)&quot; Alternately, this acknowledgment 
+	may appear in the software itself, if and wherever such third-party 
+	acknowledgments normally appear.
+	
+	4. The names &quot;CIP4&quot; and &quot;The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress&quot; must not be used to endorse or 
+	promote products derived from this software without prior written permission. 
+	For written permission, please contact info@cip4.org
+	
+	5. Products derived from this software may not be called &quot;CIP4&quot;, nor may &quot;CIP4&quot; 
+	appear in their name, without prior written permission of the CIP4 organization
+	
+	&quot;CIP4&quot; and &quot;The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress&quot; are trademarks of The International Cooperation 
+	for the Integration of Processes in Prepress, Press and Postpress (CIP4).  All 
+	other names and brands are the property of their respective owners.
+	
+	THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, 
+	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+	FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. CIP4 AND ITS CONTRIBUTORS MAKE 
+	NO REPRESENTATION THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT INFRINGE ANY 
+	PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS. IN NO EVENT SHALL CIP4 OR ITS 
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
+	OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+	INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+	CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+	IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+	OF SUCH DAMAGE. 
+	====================================================================
+	
+	This software consists of voluntary contributions made by many individuals on 
+	behalf of the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress and was originally based on software some of which 
+	contributed by and copyrighted by Adobe Systems and Man Roland. copyright (c) 
+	2000-2001, Adobe Systems copyright (c) 2001-2001, Man Roland
+	
+	For more information on The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress , please see &lt;http://www.cip4.org/&gt;.
+	
+-->
+<!--JDF specification V 1.1-->
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_1_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_1_Types" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.a.004">
+	<!--Group containing the common Links for input resources-->
+	<xs:import namespace="http://www.CIP4.org/JDFSchema_1_1_Types" schemaLocation="JDFTypes.xsd"/>
+	<xs:group name="ProcessInputResources_">
+		<xs:sequence>
+			<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+			<xs:element ref="jdf:ApprovalSuccessLink" minOccurs="0"/>
+			<xs:element ref="jdf:DeviceLink" minOccurs="0"/>
+			<xs:element ref="jdf:EmployeeLink" minOccurs="0"/>
+			<xs:element ref="jdf:ToolLink" minOccurs="0"/>
+			<xs:element ref="jdf:PreviewLink" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<!-- Here are the sample process definition and supporting types in pairs of process type and resource link pool type-->
+	<!--6.1 Process Templates-->
+	<xs:complexType name="Product">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ProductResLinkPool_" minOccurs="0"/>
+					<xs:element ref="jdf:JDF" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProductResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ArtDeliveryIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:BindingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ColorIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DeliveryIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:FoldingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:HoleMakingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:InsertingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:LaminatingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:PackingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ProofingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ShapeCuttingIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:SizeIntentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:ToolLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:PalletLink" minOccurs="0"/>
+					<xs:element ref="jdf:RegisterRibbonLink" minOccurs="0"/>
+					<xs:element ref="jdf:StrapLink" minOccurs="0"/>
+					<xs:element ref="jdf:PreviewLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProcessGroup">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ProcessGroupResLinkPool_" minOccurs="0"/>
+					<xs:element ref="jdf:JDF" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProcessGroupResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Combined">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CombinedResLinkPool_" minOccurs="0"/>
+					<xs:element ref="jdf:JDF" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CombinedResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--6.2 General Processes-->
+	<xs:complexType name="Approval">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ApprovalParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" ProcessUsage="Accepted" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" ProcessUsage="Rejected" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ApprovalResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ApprovalResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Buffer">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/BufferParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:BufferResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BufferResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Combine">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CombineResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CombineResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Delivery">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeliveryParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:DeliveryResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeliveryResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ManualLabor">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ManualLaborParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ManualLaborResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ManualLaborResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Ordering">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/OrderingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:OrderingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Packing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PackingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PackingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PackingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:PackingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResourceDefinition">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ResourceDefinitionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ResourceDefinitionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResourceDefinitionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Split">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/*" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SplitResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SplitResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element ref="jdf:ResourceLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Verification">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBSchemaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/IdentificationFieldLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/VerificationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:VerificationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VerificationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:DBSchemaLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSelectionLink" minOccurs="0"/>
+					<xs:element ref="jdf:IdentificationFieldLink" minOccurs="0"/>
+					<xs:element ref="jdf:VerificationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--6.3 Prepress Processes-->
+	<xs:complexType name="ColorCorrection">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/ColorCorrectionParamsLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ColorCorrectionParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ColorCorrectionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ColorCorrectionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ColorCorrectionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ColorSpaceConversion">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ColorSpaceConversionParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ColorSpaceConversionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ColorSpaceConversionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ColorSpaceConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContactCopying">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ContactCopyParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DevelopingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ContactCopyingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContactCopyingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ContactCopyParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:DevelopingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContoneCalibration">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ScreeningParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferFunctionControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ContoneCalibrationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContoneCalibrationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:ScreeningParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferFunctionControlLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DBDocTemplateLayout">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/LayoutElementLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBRulesLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBSchemaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutElementLink" Usage="Output" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:DBDocTemplateLayoutResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DBDocTemplateLayoutResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:DBRulesLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSchemaLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutElementLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DBTemplateMerging">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBMergeParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutElementLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:DBTemplateMergingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DBTemplateMergingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:DBMergeParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSelectionLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutElementLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FilmToPlateCopying">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DevelopingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PlateCopyParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:FilmToPlateCopyingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FilmToPlateCopyingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:PlateCopyParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:DevelopingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FormatConversion">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/FormatConversionParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:FormatConversionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FormatConversionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:FormatConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageReplacement">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/ImageCompressionParamsLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ImageCompressionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ImageReplacementParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ImageReplacementResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageReplacementResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ImageCompressionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ImageReplacementParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageSetting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/DevelopingParamsLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/TransferCurvePoolLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DevelopingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ImageSetterParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ImageSettingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImageSettingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:DevelopingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ImageSetterParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Imposition">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Document" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ImpositionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImpositionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InkZoneCalculation">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/LayoutLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/SheetLink" Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>			
+				<Constraint Path="ResourceLinkPool/InkZoneCalculationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SheetLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InkZoneProfileLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:InkZoneCalculationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InkZoneCalculationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:InkZoneCalculationParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkZoneProfileLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+					<xs:element ref="jdf:SheetLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Interpreting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/FontPolicyLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InterpretingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PDLResourceAliasLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InterpretedPDLDataLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:InterpretingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InterpretingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:FontPolicyLink" minOccurs="0"/>
+					<xs:element ref="jdf:InterpretedPDLDataLink" minOccurs="0"/>
+					<xs:element ref="jdf:InterpretingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:PDLResourceAliasLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LayoutElementProduction">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/LayoutElementLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/LayoutElementLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:LayoutElementProductionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LayoutElementProductionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutElementLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LayoutPreparation">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/LayoutPreparationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Document" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:LayoutPreparationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LayoutPreparationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutPreparationParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PDFToPSConversion">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PDFToPSConversionParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PDFToPSConversionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PDFToPSConversionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:PDFToPSConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Preflight">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreflightInventoryLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreflightProfileLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreflightAnalysisLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreflightInventoryLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PreflightResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PreflightResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:PreflightAnalysisLink" minOccurs="0"/>
+					<xs:element ref="jdf:PreflightInventoryLink" minOccurs="0"/>
+					<xs:element ref="jdf:PreflightProfileLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PreviewGeneration">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/ColorantControlLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/PreviewlLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/TransferCurvePoolLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreviewGenerationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PreviewGenerationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PreviewGenerationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:PreviewGenerationParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Proofing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ColorSpaceConversionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ProofingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Document" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ProofingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProofingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ColorSpaceConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:ProofingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PSToPDFConversion">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/FontParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ImageCompressionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PSToPDFConversionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PSToPDFConversionResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PSToPDFConversionResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:FontParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ImageCompressionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:PSToPDFConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Rendering">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/MediaLink" Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InterpretedPDLDataLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RenderingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:RenderingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RenderingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:InterpretedPDLDataLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:RenderingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Scanning">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ScanParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ScanningResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ScanningResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:ScanParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Screening">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ScreeningParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ScreeningResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ScreeningResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:ScreeningParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Separation">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SeparationControlParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SeparationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SeparationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:SeparationControlParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SoftProofing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ColorSpaceConversionParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ProofingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Document" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SoftProofingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SoftProofingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ColorSpaceConversionParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:ProofingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Tiling">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Surface" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" ProcessUsage="Marks" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TileLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:TilingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TilingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:TileLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Trapping">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/FontPolicyLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/FontPolicyLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TrappingDetailsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:TrappingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TrappingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:TrappingDetailsLink" minOccurs="0"/>
+					<xs:element ref="jdf:FontPolicyLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--6.4 Press Processes-->
+	<xs:complexType name="ConventionalPrinting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/SheetLink" Last="1.0"/>
+				<Version Path="ResourceLinkPool/LayoutLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/TransferCurvePoolLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Proof" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ConventionalPrintingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" ProcessUsage="Proof" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" ProcessUsage="Plate" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InkLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InkZoneProfileLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SheetLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Good" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Waste" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ConventionalPrintingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConventionalPrintingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ConventionalPrintingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkZoneProfileLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:SheetLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DigitalPrinting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/LayoutLink" First="1.1"/>
+				<Version Path="ResourceLinkPool/TransferCurvePoolLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Proof" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DigitalPrintingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InkLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LayoutLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SheetLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferCurvePoolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Good" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Waste" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:DigitalPrintingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DigitalPrintingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DigitalPrintingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:LayoutLink" minOccurs="0"/>
+					<xs:element ref="jdf:SheetLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferCurvePoolLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IDPrinting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ColorantControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Cover" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Proof" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ExposedMediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/FontPolicyLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InkLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InterpretingParamsLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/IDPrintingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RenderingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RunListLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ScreeningParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TransferFunctionControlLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Good" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" ProcessUsage="Waste" minOccurs="0" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:IDPrintingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IDPrintingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ColorantControlLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ExposedMediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:FontPolicyLink" minOccurs="0"/>
+					<xs:element ref="jdf:InkLink" minOccurs="0"/>
+					<xs:element ref="jdf:InterpretingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:IDPrintingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:RenderingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:RunListLink" minOccurs="0"/>
+					<xs:element ref="jdf:ScreeningParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:TransferFunctionControlLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--6.5 Postpress Processes-->
+	<xs:complexType name="AdhesiveBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/AdhesiveBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="BookBlock" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Cover" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:AdhesiveBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AdhesiveBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:AdhesiveBindingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BlockPreparation">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/BlockPreparationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:BlockPreparationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BlockPreparationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:BlockPreparationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BoxPacking">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/BoxPackingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Box" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:BoxPackingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BoxPackingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:BoxPackingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CaseMaking">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="CoverMaterial" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/CaseMakingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" ProcessUsage="CoverMaterial" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" ProcessUsage="CoverBoard" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" ProcessUsage="SpineBoard" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CaseMakingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CaseMakingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:CaseMakingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CasingIn">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/CasingInParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Case" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CasingInResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CasingInResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:CasingInParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChannelBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="BookBlock" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Cover" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ChannelBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ChannelBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChannelBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ChannelBindingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CoilBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/CoilBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CoilBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CoilBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:CoilBindingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Collecting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/CollectingParamsLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBRulesLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/IdentificationFieldLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CollectingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CollectingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:CollectingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBRulesLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSelectionLink" minOccurs="0"/>
+					<xs:element ref="jdf:IdentificationFieldLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CoverApplication">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/CoverApplicationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Cover" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CoverApplicationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CoverApplicationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:CoverApplicationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Creasing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/CreasingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CreasingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreasingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:CreasingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Cutting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="ResourceLinkPool/CutBlockLink" Last="1.0"/>
+				<Version Path="ResourceLinkPool/CutMarkLink" Last="1.0"/>
+				<Version Path="CuttingParamsLink" First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/CutBlockLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/CutMarkLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/CuttingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:CuttingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CuttingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:CuttingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+					<xs:element ref="jdf:CutBlockLink" minOccurs="0"/>
+					<xs:element ref="jdf:CutMarkLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Dividing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DividingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:DividingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DividingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DividingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Embossing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/EmbossingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ToolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:EmbossingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EmbossingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:EmbossingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EndSheetGluing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="BackEndSheet" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="BookBlock" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="FrontEndSheet" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/EndSheetGluingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:EndSheetGluingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EndSheetGluingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:EndSheetGluingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Folding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/FoldingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:FoldingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FoldingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:FoldingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Gathering">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/GatheringParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBRulesLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/IdentificationFieldLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:GatheringResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GatheringResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBRulesLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSelectionLink" minOccurs="0"/>
+					<xs:element ref="jdf:GatheringParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:IdentificationFieldLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Gluing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/GluingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:GluingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GluingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:GluingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HeadBandApplication">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/HeadBandApplicationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:HeadBandApplicationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HeadBandApplicationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:HeadBandApplicationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HoleMaking">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/HoleMakingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:HoleMakingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HoleMakingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:HoleMakingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Inserting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Mother" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Child" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/InsertingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBRulesLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/DBSelectionLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/IdentificationFieldLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:InsertingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InsertingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBRulesLink" minOccurs="0"/>
+					<xs:element ref="jdf:DBSelectionLink" minOccurs="0"/>
+					<xs:element ref="jdf:IdentificationFieldLink" minOccurs="0"/>
+					<xs:element ref="jdf:InsertingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Jacketing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/JacketingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Book" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Jacket" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:JacketingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="JacketingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:JacketingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Labeling">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="Label" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LabelingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:LabelingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LabelingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:LabelingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Laminating">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LaminatingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:LaminatingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LaminatingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:LaminatingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LongitudinalRibbonOperations">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/LongitudinalRibbonOperationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:LongitudinalRibbonOperationsResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LongitudinalRibbonOperationsResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:LongitudinalRibbonOperationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Numbering">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/NumberingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:NumberingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NumberingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:NumberingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Palletizing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PalletizingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PalletLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PalletizingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PalletizingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:PalletizingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:PalletLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Perforating">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PerforatingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PerforatingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PerforatingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:PerforatingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PlasticCombBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/PlasticCombBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:PlasticCombBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PlasticCombBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:PlasticCombBindingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RingBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="BookBlock" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" ProcessUsage="RingBinder" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/RingBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:RingBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RingBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:RingBindingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SaddleStitching">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SaddleStitchingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SaddleStitchingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SaddleStitchingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:SaddleStitchingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ShapeCutting">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ShapeCuttingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ToolLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ShapeCuttingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ShapeCuttingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ShapeCuttingParamsLink" minOccurs="0"/>					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Shrinking">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ShrinkingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ShrinkingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ShrinkingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ShrinkingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SideSewing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." Last="1.0"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SideSewingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SideSewingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SideSewingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:SideSewingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpinePreparation">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SpinePreparationParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SpinePreparationResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpinePreparationResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:SpinePreparationParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpineTaping">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/SpineTapingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:SpineTapingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpineTapingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:SpineTapingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Stacking">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/StackingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:StackingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StackingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:StackingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Stitching">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/StitchingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:StitchingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StitchingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:StitchingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Strapping">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/StrappingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/StrapLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:StrappingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StrappingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:StrappingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:StrapLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StripBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/StripBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:StripBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StripBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:StripBindingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ThreadSealing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ThreadSealingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ThreadSealingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ThreadSealingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ThreadSealingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ThreadSewing">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ThreadSewingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:ThreadSewingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ThreadSewingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:ThreadSewingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Trimming">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/TrimmingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:TrimmingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TrimmingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:TrimmingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WireCombBinding">
+		<xs:annotation>
+			<xs:appinfo>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="1" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/WireCombBindingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:WireCombBindingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WireCombBindingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:WireCombBindingParamsLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Wrapping">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="." First="1.1"/>
+				<Constraint Path="ResourceLinkPool/ApprovalSuccessLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/EmployeeLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/DeviceLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/PreviewLink" Usage="Input" minOccurs="0" maxOccurs="unbounded"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/WrappingParamsLink" Usage="Input" minOccurs="1" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/MediaLink" Usage="Input" minOccurs="0" maxOccurs="1"/>
+				<Constraint Path="ResourceLinkPool/ComponentLink" Usage="Output" minOccurs="1" maxOccurs="1"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="jdf:JDFAbstractNode">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:JDFChildElements_" minOccurs="0"/>
+					<xs:element name="ResourceLinkPool" type="jdf:WrappingResLinkPool_" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WrappingResLinkPool_">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceLinkPool_">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:ProcessInputResources_" minOccurs="0"/>
+					<xs:element ref="jdf:ComponentLink" minOccurs="0"/>
+					<xs:element ref="jdf:WrappingParamsLink" minOccurs="0"/>
+					<xs:element ref="jdf:MediaLink" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
