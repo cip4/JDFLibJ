@@ -8,9 +8,9 @@
 	<name>JDFLibJ</name>
 	<description>CIP4 JDF Libary for JDF 1.x</description>
 	<parent>
-		<groupId>org.cip4.tools</groupId>
-		<artifactId>xCIP4Master</artifactId>
-		<version>1.0</version>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
 	</parent>
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>

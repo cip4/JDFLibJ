@@ -123,12 +123,12 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws FileNotFoundException
 	 */
 	// @Test
-	public void testSize() throws FileNotFoundException
-	{
-		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
-		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
-		sw.walkAll(d.getRoot());
-	}
+//	public void testSize() throws FileNotFoundException
+//	{
+//		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
+//		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
+//		sw.walkAll(d.getRoot());
+//	}
 
 	/**
 	 * 
@@ -150,74 +150,74 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	// @Test
-	public void testSpawnRW() throws Throwable
-	{
-		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
-
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
-
-		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-
-		final JDFAttributeMap amParts0 = new JDFAttributeMap();
-
-		amParts0.put("Run", "Run_121015_072229975_000405");
-
-		vamParts.add(amParts0);
-
-		final VString vsRWResourceIDs = new VString("RunList", null);
-
-		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-
-		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
-		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
-		jdfDoc.write2File(strOutJDFPath, 2, false);
-
-		// Link_110412_072920686_018182
-	}
-
-	/**
-	 * 
-	 */
-	// @Test
-	public void testgetPartition()
-	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
-		final JDFNode n = d.getJDFRoot();
-		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
-		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
-		Assert.assertNull(rp);
-	}
+//	public void testSpawnRW() throws Throwable
+//	{
+//		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
+//
+//		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
+//
+//		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+//
+//		final JDFAttributeMap amParts0 = new JDFAttributeMap();
+//
+//		amParts0.put("Run", "Run_121015_072229975_000405");
+//
+//		vamParts.add(amParts0);
+//
+//		final VString vsRWResourceIDs = new VString("RunList", null);
+//
+//		final JDFSpawn spawn = new JDFSpawn(nodeProc);
+//
+//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+//		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
+//		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
+//		jdfDoc.write2File(strOutJDFPath, 2, false);
+//
+//		// Link_110412_072920686_018182
+//	}
 
 	/**
 	 * 
 	 */
 	// @Test
-	public void testMergeAmount()
-	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
-		final JDFNode n = d.getJDFRoot();
-		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
-		final VElement vr = rr.getLeaves(true);
-		for (KElement r : vr)
-			((JDFResource) r).updateAmounts(false);
-		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
-	}
+//	public void testgetPartition()
+//	{
+//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
+//		final JDFNode n = d.getJDFRoot();
+//		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
+//		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
+//		Assert.assertNull(rp);
+//	}
 
 	/**
 	 * 
 	 */
 	// @Test
-	public void testelementsbytag()
-	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Bodo/media.jdf");
-		final JDFNode n = d.getJDFRoot();
-		NodeList mediaList = n.getElementsByTagName("Media");
-		for (int i = 0; i < mediaList.getLength(); i++)
-		{
-			Node node = mediaList.item(i);
-			JDFMedia media = (JDFMedia) node;
-		}
-		d.write2File("test.jdf", 2, false);
-	}
+//	public void testMergeAmount()
+//	{
+//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
+//		final JDFNode n = d.getJDFRoot();
+//		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
+//		final VElement vr = rr.getLeaves(true);
+//		for (KElement r : vr)
+//			((JDFResource) r).updateAmounts(false);
+//		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
+//	}
+
+	/**
+	 * 
+	 */
+	// @Test
+//	public void testelementsbytag()
+//	{
+//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Bodo/media.jdf");
+//		final JDFNode n = d.getJDFRoot();
+//		NodeList mediaList = n.getElementsByTagName("Media");
+//		for (int i = 0; i < mediaList.getLength(); i++)
+//		{
+//			Node node = mediaList.item(i);
+//			JDFMedia media = (JDFMedia) node;
+//		}
+//		d.write2File("test.jdf", 2, false);
+//	}
 }
