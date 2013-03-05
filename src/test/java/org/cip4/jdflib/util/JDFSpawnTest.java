@@ -133,6 +133,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
@@ -3723,6 +3724,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
+	@Before
 	public void setUp() throws Exception
 	{
 		super.setUp();

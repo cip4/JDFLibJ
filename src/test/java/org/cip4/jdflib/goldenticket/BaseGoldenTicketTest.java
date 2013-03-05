@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,30 +80,29 @@ import org.junit.Assert;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class BaseGoldenTicketTest extends JDFTestCaseBase {
+public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
+{
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		agentName = JDFAudit.getStaticAgentName();
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName("JDF Base golden ticket generator");
 		super.setUp();
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 		JDFAudit.setStaticAgentName(agentName);
 		KElement.setLongID(true);
 		super.tearDown();
@@ -115,7 +114,8 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase {
 	 * @param goldenTicket the ticket to write
 	 * @param templateName the file name root of the 3 files
 	 */
-	public static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName) {
+	public static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
+	{
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
 		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 

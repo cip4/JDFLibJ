@@ -1,21 +1,81 @@
-//Titel:        JDF TestApplication
-//Version:
-//Copyright:    Copyright (c) 2002
-//Autor:        Sabine Jonas, sjonas@topmail.de, Dietrich Mucha
-//Firma:        BU/GH Wuppertal
-//Beschreibung: first Applications using the JDFLibrary
-//package testNew;
+/*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 
 package org.cip4.jdflib;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.Inet4Address;
 
 import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -26,20 +86,10 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.SizeWalker;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.ByteArrayIOStream;
-import org.cip4.jdflib.util.CPUTimer;
-import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
-import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.UrlPart;
-import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -49,14 +99,16 @@ import org.w3c.dom.NodeList;
  * 
  * < July 9, 2009
  */
-public class TestJDF extends JDFTestCaseBase {
+public class TestJDF extends JDFTestCaseBase
+{
 	private static final String SEPARATOR = File.separator; // "/"; //
 
 	static protected final String sm_dirTestData = getTestDataDir();
 	static protected final String sm_dirTestSchema = sm_dirTestData + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
 
-	private static String getTestDataDir() {
+	private static String getTestDataDir()
+	{
 
 		String path = JDFTestCaseBase.class.getResource("/data").getPath();
 		path = FilenameUtils.normalize(path) + File.separator;
@@ -66,20 +118,13 @@ public class TestJDF extends JDFTestCaseBase {
 	}
 
 	/**
-	 * @param argv
-	 */
-	public static void main(final String[] argv) {
-		testCollapse();
-		// testSpawn2();
-	}
-
-	/**
 	 * 
 	 * 
 	 * @throws FileNotFoundException
 	 */
 	// @Test
-	public void testSize() throws FileNotFoundException {
+	public void testSize() throws FileNotFoundException
+	{
 		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
 		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
 		sw.walkAll(d.getRoot());
@@ -87,19 +132,10 @@ public class TestJDF extends JDFTestCaseBase {
 
 	/**
 	 * 
-	 *  
 	 */
 	// @Test
-	public void testDummy() {
-		final JDFDoc d = new JDFParser().parseFile("/data/crm.xml");
-		Assert.assertNotNull(d);
-	}
-
-	/**
-	 * 
-	 */
-	// @Test
-	public void testWriteJMF() {
+	public void testWriteJMF()
+	{
 		final JDFDoc d = new JDFDoc("JMF");
 		JDFJMF jmf = d.getJMFRoot();
 		jmf.appendCommand().setType("getVersion");
@@ -114,48 +150,8 @@ public class TestJDF extends JDFTestCaseBase {
 	 * @throws Throwable
 	 */
 	// @Test
-	public void testSpawn3() throws Throwable {
-		final JDFDoc d = new JDFParser().parseFile("/data/07050637.jdf");
-
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
-
-		JDFAttributeMap amPart = new JDFAttributeMap();
-
-		amPart.put("SignatureName", "Signature1");
-		amPart.put("SheetName", "Bogen1");
-
-		vamParts.add(amPart);
-
-		JDFNode nodeProc = d.getJDFRoot().getJobPart("PPIPressRoot.C", JDFConstants.EMPTYSTRING);
-
-		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-
-		JDFNode nodeSubJDF = spawn.spawn("07050637.jdf", JDFConstants.EMPTYSTRING, null, vamParts, true, true, true, false);
-
-		Assert.assertTrue(nodeSubJDF != null);
-	}
-
-	/**
-	 * 
-	 */
-	public static void testCollapse() {
-		final JDFDoc d = new JDFParser().parseFile(sm_dirTestDataTemp + "data.jdf");
-		final JDFNode n = d.getJDFRoot();
-		for (int i = 1; i < 2; i++) {
-			JDFResource r = n.getResource("RunList", EnumUsage.Input, i);
-			// r.expand(true);
-			r.collapse(true, true);
-		}
-		d.write2File(sm_dirTestDataTemp + "data_new.jdf", 2, false);
-	}
-
-	/**
-	 * 
-	 * TODO Please insert comment!
-	 * @throws Throwable
-	 */
-	// @Test
-	public void testSpawnRW() throws Throwable {
+	public void testSpawnRW() throws Throwable
+	{
 		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
 
 		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
@@ -184,7 +180,8 @@ public class TestJDF extends JDFTestCaseBase {
 	 * 
 	 */
 	// @Test
-	public void testgetPartition() {
+	public void testgetPartition()
+	{
 		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
 		final JDFNode n = d.getJDFRoot();
 		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
@@ -196,7 +193,8 @@ public class TestJDF extends JDFTestCaseBase {
 	 * 
 	 */
 	// @Test
-	public void testMergeAmount() {
+	public void testMergeAmount()
+	{
 		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
 		final JDFNode n = d.getJDFRoot();
 		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
@@ -210,185 +208,16 @@ public class TestJDF extends JDFTestCaseBase {
 	 * 
 	 */
 	// @Test
-	public void testelementsbytag() {
+	public void testelementsbytag()
+	{
 		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Bodo/media.jdf");
 		final JDFNode n = d.getJDFRoot();
 		NodeList mediaList = n.getElementsByTagName("Media");
-		for (int i = 0; i < mediaList.getLength(); i++) {
+		for (int i = 0; i < mediaList.getLength(); i++)
+		{
 			Node node = mediaList.item(i);
 			JDFMedia media = (JDFMedia) node;
 		}
 		d.write2File("test.jdf", 2, false);
-	}
-
-	/**
-	 * 
-	 */
-	public static void testSpawn2() {
-		JDFResource.setUnpartitiondImplicit(true);
-		CPUTimer ct = new CPUTimer(true);
-		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
-		JDFNode n = d.getJDFRoot().getJobPart("QUA0.P", null);
-		ct.stop();
-		System.out.println(ct);
-		JDFSpawn spawn = new JDFSpawn(n);
-		ct = new CPUTimer(false);
-		ct.setName("spawn");
-		CPUTimer ct1 = new CPUTimer(false);
-		ct1.setName("write");
-		CPUTimer ct2 = new CPUTimer(false);
-		ct2.setName("merge");
-		spawn.vRWResources_in = new VString("Output NodeInfo", null);
-		spawn.vSpawnParts = new VJDFAttributeMap();
-		ct.start();
-		JDFAttributeMap map = new JDFAttributeMap();
-		map.put("SignatureName", "SN106739");
-		map.put("SheetName", "ST106739");
-		map.put("Side", "Front");
-		map.put("PartVersion", "EN_001 GE_002 EN_001 GE_002");
-		spawn.vSpawnParts.add(map);
-		JDFAttributeMap map2 = new JDFAttributeMap();
-		map2.put("SignatureName", "SN106739");
-		map2.put("SheetName", "ST106739");
-		map2.put("Side", "Back");
-		map2.put("PartVersion", "EN_001 GE_002 EN_001 GE_002");
-		spawn.vSpawnParts.add(map2);
-		// spawn.bSpawnIdentical = false;
-		// spawn.bFixResources = false;
-		spawn.bSpawnROPartsOnly = true;
-
-		JDFNode n2 = spawn.spawn();
-		n2.getOwnerDocument_JDFElement().write2File("/share/data/fehler/spawn.jdf", 2, false);
-
-	}
-
-	// @Test
-	public void testPing() throws Exception {
-
-		Assert.assertTrue(new File("c:\\data").isDirectory());
-		Assert.assertTrue(new File("\\\\kie-wf16prdy\\PTConfig\\SysConfig").isDirectory());
-		String s = "a";
-		InputStream is = new ByteArrayIOStream(s.getBytes()).getInputStream();
-		UrlPart p = UrlUtil.writeToURL("http://kie-WF22PRDY:6311/StorageService-J/Storage", is, UrlUtil.GET, UrlUtil.VND_JMF, null);
-		Inet4Address.getByName("kie-WF22PRDY").getHostAddress();
-		// UrlPart p = UrlUtil.writeToURL("http://10.51.206.254:8010/jmf", is, UrlUtil.POST, UrlUtil.VND_JMF, null);
-		p.buffer();
-	}
-
-	// @Test
-	public void testResourceCommand3() throws Exception {
-		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/RainerSchielke/rescmd/main.jdf");
-
-		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
-
-		final JDFDoc jmf = JDFDoc.parseFile("/data/JDF/RainerSchielke/rescmd/cmd.jdf");
-
-		final JDFJMF inJMF = jmf.getJMFRoot();
-
-		final VElement veMessages = inJMF.getMessageVector(null, null);
-
-		for (int i = 0; i < veMessages.size(); i++) {
-			final JDFMessage msg = (JDFMessage) veMessages.elementAt(i);
-
-			if (msg.getType().equals(JDFMessage.EnumType.Resource.getName())) {
-				final JDFResourceCmdParams resCmdParams = msg.getResourceCmdParams(0);
-
-				resCmdParams.applyResourceCommand(nodeRoot);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	// @Test
-	public void testSpawnMerge24536() {
-		JDFResource.setUnpartitiondImplicit(true);
-		JDFDoc d = JDFDoc.parseFile("main2.jdf");
-		JDFNode root = d.getJDFRoot();
-		JDFNode nodeToSpawn = root.getJobPart("SFP1.C", null);
-		JDFSpawn spawn = new JDFSpawn(nodeToSpawn);
-		spawn.vRWResources_in = new VString("Output NodeInfo", null);
-		spawn.vSpawnParts = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
-		map.put("SignatureName", "Sig001");
-		map.put("SheetName", "FB 001");
-		map.put("Side", "Back");
-		spawn.vSpawnParts.add(map);
-		spawn.bSpawnRWPartsMultiple = true;
-		JDFNode spawned = spawn.spawn();
-		spawned.getOwnerDocument_JDFElement().write2File("newspawn.jdf", 2, false);
-		root.getOwnerDocument_JDFElement().write2File("afterspawn.jdf", 2, false);
-		JDFMerge merge = new JDFMerge(root);
-		merge.mergeJDF(spawned);
-		root.getOwnerDocument_JDFElement().write2File("aftermerge.jdf", 2, false);
-
-	}
-
-	/**
-	 * 
-	 */
-	public static void testSpawn() {
-		JDFResource.setUnpartitiondImplicit(true);
-		for (int ii = 0; ii < 2; ii++) {
-			CPUTimer ct = new CPUTimer(true);
-			final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/Arne/export.jdf");
-			JDFNode n = d.getJDFRoot().getJobPart("1001.0", null);
-			ct.stop();
-			System.out.println(ct);
-			JDFSpawn spawn = new JDFSpawn(n);
-			ct = new CPUTimer(false);
-			ct.setName("spawn");
-			CPUTimer ct1 = new CPUTimer(false);
-			ct1.setName("write");
-			CPUTimer ct2 = new CPUTimer(false);
-			ct2.setName("merge");
-			spawn.vRWResources_in = new VString("Output NodeInfo", null);
-			spawn.vSpawnParts = new VJDFAttributeMap();
-			JDFMerge m = new JDFMerge(d.getJDFRoot());
-			for (int i = 1; i < 250; i++) {
-				ct.start();
-				String s = StringUtil.sprintf("%03i", "" + i);
-				// spawn.vSpawnParts = null;
-				JDFAttributeMap map = new JDFAttributeMap();
-				map.put("SignatureName", "Sig" + s);
-				map.put("SheetName", "FB " + s);
-				map.put("Side", "Front");
-				if (ii == 0)
-					spawn.vSpawnParts = new VJDFAttributeMap();
-				spawn.vSpawnParts.add(map);
-				map = new JDFAttributeMap(map);
-				map.put("Side", "Back");
-				spawn.vSpawnParts.add(map);
-				spawn.bSpawnIdentical = false;
-				spawn.bFixResources = false;
-				if (ii == 0) {
-					JDFNode n2 = spawn.spawn();
-					System.out.println(ct);
-					ct.stop();
-					ct1.start();
-					n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawn" + s + ".jdf", 2, false);
-					System.out.println(ct1);
-					ct1.stop();
-
-					ct2.start();
-					n = m.mergeJDF(n2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-					spawn.setNode(n);
-					System.out.println(ct2);
-					ct2.stop();
-				}
-
-			}
-			if (ii == 1) {
-				JDFNode n2 = spawn.spawn();
-				System.out.println(ct);
-				ct.stop();
-				ct1.start();
-				n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawnall.jdf", 2, false);
-				System.out.println(ct1);
-				ct1.stop();
-			}
-			d.write2File("C:\\temp\\main.jdf", 2, false);
-		}
 	}
 }
