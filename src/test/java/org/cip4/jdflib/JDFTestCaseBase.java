@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@ package org.cip4.jdflib;
 
 import java.io.File;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -107,11 +109,13 @@ import org.junit.Before;
  * @author prosirai
  * 
  */
-public abstract class JDFTestCaseBase {
+public abstract class JDFTestCaseBase extends TestCase
+{
 	/**
 	 * 
 	 */
-	public JDFTestCaseBase() {
+	public JDFTestCaseBase()
+	{
 		super();
 		LogConfigurator.configureLog(null, null);
 		setTestNetwork(false);
@@ -123,7 +127,9 @@ public abstract class JDFTestCaseBase {
 	 * 
 	 * @param name
 	 */
-	public JDFTestCaseBase(String name) {
+	public JDFTestCaseBase(String name)
+	{
+		super(name);
 		LogConfigurator.configureLog(null, null);
 		setTestNetwork(false);
 	}
@@ -135,7 +141,8 @@ public abstract class JDFTestCaseBase {
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
 	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_4;
 
-	private static String getTestDataDir() {
+	private static String getTestDataDir()
+	{
 
 		String path = JDFTestCaseBase.class.getResource("/data").getPath();
 		path = FilenameUtils.normalize(path) + File.separator;
@@ -144,7 +151,8 @@ public abstract class JDFTestCaseBase {
 
 	}
 
-	protected static JDFDoc creatXMDoc() {
+	protected static JDFDoc creatXMDoc()
+	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
 		n.setJobPartID("P1");
@@ -224,10 +232,14 @@ public abstract class JDFTestCaseBase {
 	private boolean bTestNetwork;
 
 	// //////////////////////////////////////////////////////////////////////////
-	// /
-
+	/**
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
 	@Before
-	public void setUp() throws Exception {
+	protected void setUp() throws Exception
+	{
 		JDFElement.setDefaultJDFVersion(defaultVersion);
 		senderID = "TestSender";
 		JDFJMF.setTheSenderID(senderID);
@@ -244,18 +256,21 @@ public abstract class JDFTestCaseBase {
 	 * get the currently used memory
 	 * @return the used memory
 	 */
-	protected long getCurrentMem() {
+	protected long getCurrentMem()
+	{
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		return rt.totalMemory() - rt.freeMemory();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
 		JDFAudit.setStaticAgentName(agentName);
@@ -271,7 +286,8 @@ public abstract class JDFTestCaseBase {
 	 * @param e
 	 * @param filename
 	 */
-	protected void writeTest(KElement e, String filename) {
+	protected void writeTest(KElement e, String filename)
+	{
 		e.write2File(sm_dirTestDataTemp + filename);
 	}
 
@@ -280,7 +296,8 @@ public abstract class JDFTestCaseBase {
 	 * @param doc the doc to preparein
 	 * @return the new customerInfo
 	 */
-	protected JDFCustomerInfo prepareCustomerInfo(final JDFDoc doc) {
+	protected JDFCustomerInfo prepareCustomerInfo(final JDFDoc doc)
+	{
 		final JDFNode n = doc.getJDFRoot();
 		final JDFCustomerInfo info = n.appendCustomerInfo();
 		info.setCustomerID("MISCustomerID");
@@ -298,7 +315,8 @@ public abstract class JDFTestCaseBase {
 		return info;
 	}
 
-	protected JDFNodeInfo prepareNodeInfo(final JDFDoc doc) {
+	protected JDFNodeInfo prepareNodeInfo(final JDFDoc doc)
+	{
 		final JDFNode n = doc.getJDFRoot();
 		final JDFNodeInfo ni = n.getCreateNodeInfo();
 		final JDFDate date = new JDFDate();
@@ -314,7 +332,8 @@ public abstract class JDFTestCaseBase {
 	 * @return
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "[" + StringUtil.token(this.getClass().getName(), -1, ".") + " Version:  " + defaultVersion + " " + new File(sm_dirTestData).getAbsolutePath() + " ]\n";
 	}
 
@@ -322,7 +341,8 @@ public abstract class JDFTestCaseBase {
 	 * Setter for bTestNetwork attribute.
 	 * @param bTestNetwork the bTestNetwork to set
 	 */
-	public void setTestNetwork(boolean bTestNetwork) {
+	public void setTestNetwork(boolean bTestNetwork)
+	{
 		this.bTestNetwork = bTestNetwork;
 	}
 
@@ -330,7 +350,8 @@ public abstract class JDFTestCaseBase {
 	 * Getter for bTestNetwork attribute.
 	 * @return the bTestNetwork
 	 */
-	public boolean isTestNetwork() {
+	public boolean isTestNetwork()
+	{
 		return bTestNetwork;
 	}
 

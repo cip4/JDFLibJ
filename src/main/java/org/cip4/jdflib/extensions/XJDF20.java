@@ -238,7 +238,7 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * set to update version stamps
 	 */
-	public boolean bUpdateVersion = true;
+	private boolean bUpdateVersion = true;
 	/**
 	 * set to define type safe messages
 	 */
@@ -1474,7 +1474,7 @@ public class XJDF20 extends BaseElementWalker
 
 			removeUnused(newRootP);
 
-			if (bUpdateVersion)
+			if (isUpdateVersion())
 			{
 				newRootP.setAttribute("Version", "2.0");
 				newRootP.setAttribute("MaxVersion", "2.0");
@@ -2985,12 +2985,12 @@ public class XJDF20 extends BaseElementWalker
 		private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
 		{
 			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
-			if (bUpdateVersion)
+			newRootP.setAttributes(jmf);
+			if (isUpdateVersion())
 			{
 				newRootP.setAttribute("Version", "2.0");
 				newRootP.setAttribute("MaxVersion", "2.0");
 			}
-			newRootP.setAttributes(jmf);
 			removeUnused(newRootP);
 		}
 	}
@@ -3529,6 +3529,24 @@ public class XJDF20 extends BaseElementWalker
 		bMergeRunList = false;
 		bTypeSafeMessage = false;
 		bRetainSpawnInfo = true;
+	}
+
+	/**
+	 * Setter for bUpdateVersion attribute.
+	 * @param bUpdateVersion the bUpdateVersion to set
+	 */
+	public void setUpdateVersion(boolean bUpdateVersion)
+	{
+		this.bUpdateVersion = bUpdateVersion;
+	}
+
+	/**
+	 * Getter for bUpdateVersion attribute.
+	 * @return the bUpdateVersion
+	 */
+	public boolean isUpdateVersion()
+	{
+		return bUpdateVersion;
 	}
 
 }

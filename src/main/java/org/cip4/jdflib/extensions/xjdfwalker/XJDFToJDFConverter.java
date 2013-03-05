@@ -168,6 +168,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	boolean firstConvert;
 	boolean firstproductInList;
 	boolean foundProduct;
+	boolean foundProductList;
 	protected JDFNode currentJDFNode = null;
 	final Log log;
 	/**
@@ -248,6 +249,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		firstConvert = firstproductInList = true;
+		foundProductList = false;
 		jdfDoc = template == null ? null : template.clone();
 		// theNode = null;
 		idMap = null;
@@ -1048,6 +1050,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				currentJDFNode.setType(EnumType.Product);
 				currentJDFNode.removeAttribute("Types");
+				foundProduct = createProduct = true;
 			}
 			else if (StringUtil.tokenize(t, null, false).size() == 1)
 			{
@@ -1578,17 +1581,28 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @return the created resource
 		 */
 		@Override
-		public KElement walk(final KElement e, final KElement trackElem)
+		public KElement walk(final KElement e, KElement trackElem)
 		{
 			JDFNode theNode = (JDFNode) trackElem;
 			if ("Product".equals(theNode.getType()))
 			{
 				if (theNode != currentJDFNode && !firstproductInList)
+				{
 					theNode = theNode.addProduct();
+				}
+				else
+				{
+					JDFNode tmp = theNode.getRoot().getChildJDFNode(e.getAttribute(AttributeName.ID), false);
+					if (tmp != null)
+					{
+						theNode = tmp;
+					}
+				}
 			}
 			else
 			{
 				theNode = createProductRoot(theNode);
+				trackElem = theNode;
 			}
 			firstproductInList = false;
 			theNode.setAttributes(e);
@@ -1649,6 +1663,43 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
+	public class WalkChildProduct extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, KElement trackElem)
+		{
+			JDFNode theNode = (JDFNode) trackElem;
+			KElement parent = e.getParentNode_KElement();
+			String parentID = parent.getAttribute(AttributeName.ID);
+			JDFNode nodeParent = theNode.getRoot().getChildJDFNode(parentID, false);
+			if (nodeParent != null)
+			{
+				JDFNode tmp2 = nodeParent.addProduct();
+				tmp2.copyAttribute("ID", e, "ChildRef", null, null);
+			}
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && (toCheck.getLocalName().equals("ChildProduct"));
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
 	public class WalkProductList extends WalkXElement
 	{
 		/**
@@ -1667,11 +1718,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			e.deleteNode();
-			final boolean bFirst = foundProduct;
-			foundProduct = true;
+			final boolean bFirst = foundProductList;
+			foundProductList = true;
 			// only convert products in the first pass
 			// TODO rethink product conversion switch
-			if (createProduct && !bFirst && e.numChildElements("Product", null) > 1)
+			if (createProduct && !foundProduct && e.numChildElements("Product", null) > 1)
 			{
 				createProductRoot(currentJDFNode);
 			}

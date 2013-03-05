@@ -69,8 +69,7 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+
 /**
  * test for {@link JDFSeparationList}
  * 
@@ -83,12 +82,11 @@ public class JDFSeparationListTest extends JDFTestCaseBase
 	 * 
 	 * TODO Please insert comment!
 	 */
-	@Test
 	public void testUnify()
 	{
 		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b b c", null));
-		Assert.assertEquals(sl.unify(), new VString("a b c", null));
-		Assert.assertEquals(sl.getSeparations(), new VString("a b c", null));
+		assertEquals(sl.unify(), new VString("a b c", null));
+		assertEquals(sl.getSeparations(), new VString("a b c", null));
 	}
 }

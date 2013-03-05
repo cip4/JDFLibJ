@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,14 +91,16 @@ import org.junit.Test;
 /**
  * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
-public class JDFAuditTest extends JDFTestCaseBase {
+public class JDFAuditTest extends JDFTestCaseBase
+{
 	private boolean bAutoAgent;
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testInit() {
+	public void testInit()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -124,7 +126,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testFixVersion() {
+	public void testFixVersion()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -140,7 +143,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testFixVersion14() {
+	public void testFixVersion14()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setVersion(EnumVersion.Version_1_3);
@@ -161,7 +165,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSetRef() {
+	public void testSetRef()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -179,7 +184,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testCreateUpdate() {
+	public void testCreateUpdate()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -201,7 +207,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testGetUpdatedPreviousAudit() {
+	public void testGetUpdatedPreviousAudit()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -221,7 +228,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testCreated() {
+	public void testCreated()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
@@ -244,7 +252,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testProcessRun() {
+	public void testProcessRun()
+	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 		final JDFAuditPool ap = n.getAuditPool();
@@ -259,7 +268,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSpawnID() {
+	public void testSpawnID()
+	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFNode n = d.getJDFRoot();
 		n.setSpawnID("spawn");
@@ -280,7 +290,8 @@ public class JDFAuditTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSetStaticAgentVersion() {
+	public void testSetStaticAgentVersion()
+	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
@@ -312,12 +323,12 @@ public class JDFAuditTest extends JDFTestCaseBase {
 
 	// ///////////////////////////////////////////////////////////////////
 
-	/*
-	 * (non-Javadoc)
+	/**  
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 		// TODO Auto-generated method stub
 		super.tearDown();
 		JDFResource.setAutoAgent(bAutoAgent);
@@ -326,12 +337,12 @@ public class JDFAuditTest extends JDFTestCaseBase {
 
 	// ///////////////////////////////////////////////////////////////////
 
-	/*
-	 * (non-Javadoc)
+	/**  
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		// TODO Auto-generated method stub
 		super.setUp();
 		bAutoAgent = JDFResource.getAutoAgent();

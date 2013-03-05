@@ -261,7 +261,7 @@ public class JDFSpawn
 		// merge this node into it
 		rootOut.copyInto(node, true); // "copy" this node into the new created document
 		docOut.setNSMap(node.getOwnerDocument_KElement());
-		final String spawnID = "Sp" + KElement.uniqueID(-666); // create a spawn id for this transaction
+		final String spawnID = "Sp" + KElement.uniqueID(0); // create a spawn id for this transaction
 		rootOut.setSpawnID(spawnID);
 		rootOut.setVersion(node.getVersion(true));
 

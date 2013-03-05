@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -99,6 +99,12 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Mar 4, 2013
+ */
 public class JDFNumberState extends JDFAbstractState
 {
 	private static final long serialVersionUID = 1L;
@@ -106,32 +112,17 @@ public class JDFNumberState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.NumberRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.NumberList, null,
-				null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.NumberList, null,
-				null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.NumberRangeList,
-				null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311,
-				AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.NumberList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.NumberList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -170,8 +161,7 @@ public class JDFNumberState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNumberState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFNumberState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -184,8 +174,7 @@ public class JDFNumberState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNumberState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNumberState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -320,10 +309,10 @@ public class JDFNumberState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMOD));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFNumberState.setAllowedValueMod: Attribute allowvaluemod is not applicable to create JDFXYPair");
+			throw new JDFException("JDFNumberState.setAllowedValueMod: Attribute allowvaluemod is not applicable to create JDFXYPair");
 		}
 
 	}
@@ -339,14 +328,13 @@ public class JDFNumberState extends JDFAbstractState
 		{
 			if (hasAttribute(AttributeName.PRESENTVALUEMOD))
 			{
-				return new JDFXYPair(
-						getAttribute(AttributeName.PRESENTVALUEMOD));
+				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMOD));
 			}
 			return getAllowedValueMod();
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFNumberState.setAllowedValueMod: The XYPair value is invalid!");
+			throw new JDFException("JDFNumberState.setAllowedValueMod: The XYPair value is invalid!");
 		}
 
 	}
@@ -423,13 +411,13 @@ public class JDFNumberState extends JDFAbstractState
 			try
 			{
 				rangelist = new JDFNumberRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
 
-			return (fitsValueList(rangelist, testlists) && fitsValueMod(
-					rangelist, testlists));
+			return (fitsValueList(rangelist, testlists) && fitsValueMod(rangelist, testlists));
 		}
 		return false; // the value doesn't fit ListType attribute of this State
 	}
@@ -446,14 +434,14 @@ public class JDFNumberState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFNumberRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFNumberRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFNumberRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -464,10 +452,12 @@ public class JDFNumberState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -495,17 +485,16 @@ public class JDFNumberState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuemod or
 	 *         if AllowedValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFNumberRangeList rangelist,
-			EnumFitsValue valuemod)
+	private final boolean fitsValueMod(JDFNumberRangeList rangelist, EnumFitsValue valuemod)
 	{
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD))
 				return true;
-		} else
+		}
+		else
 		{
-			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD)
-					&& !hasAttribute(AttributeName.PRESENTVALUEMOD))
+			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD) && !hasAttribute(AttributeName.PRESENTVALUEMOD))
 				return true;
 		}
 
@@ -513,7 +502,8 @@ public class JDFNumberState extends JDFAbstractState
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			mod = getAllowedValueMod();
-		} else
+		}
+		else
 		{
 			mod = getPresentValueMod();
 		}
@@ -538,19 +528,13 @@ public class JDFNumberState extends JDFAbstractState
 				return false;
 
 			// if ValueMod is not "0 x"
-			double n = ((elem - divi * (int) (elem / divi)) - shift); // n =
-																		// elem
-																		// %
-																		// divi
-																		// -
-																		// shift
+			double n = ((elem - divi * (int) (elem / divi)) - shift); // n =  elem  % divi  - shift
 			if (java.lang.Math.abs(n) < EPSILON * java.lang.Math.abs(divi))
 			{
 				return true;
 			}
 
-			double m = (n - divi * (int) (n / divi)); // m = ( elem % divi -
-														// shift ) % divi
+			double m = (n - divi * (int) (n / divi)); // m = ( elem % divi - shift ) % divi
 			if (java.lang.Math.abs(m) < EPSILON * java.lang.Math.abs(divi))
 			{
 				return true;
@@ -572,8 +556,7 @@ public class JDFNumberState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -618,8 +601,7 @@ public class JDFNumberState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -651,8 +633,7 @@ public class JDFNumberState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -682,11 +663,10 @@ public class JDFNumberState extends JDFAbstractState
 			if (attribute == null)
 				return null;
 			return new JDFNumberList(attribute);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFNumberState.getNumberList, Unable to create JDFIntegerRangeList from Attribute value: "
-							+ listName);
+			throw new JDFException("JDFNumberState.getNumberList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
@@ -702,17 +682,15 @@ public class JDFNumberState extends JDFAbstractState
 			if (attribute == null)
 				return null;
 			return new JDFNumberRangeList(attribute);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: "
-							+ listName);
+			throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
 	{
 		return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
 	}

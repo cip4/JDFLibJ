@@ -69,8 +69,7 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
-import org.junit.Test;
+
 /**
  * 
  * @author rainer prosi
@@ -84,18 +83,17 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
-	@Test
 	public void testSetNull()
 	{
 		theElement.setXPathAttribute("@bar", null);
-		Assert.assertFalse(theElement.hasXPathNode("@bar"));
+		assertFalse(theElement.hasXPathNode("@bar"));
 	}
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception
+	protected void setUp() throws Exception
 	{
 		super.setUp();
 		this.theElement = new XPathHelper(KElement.createRoot("foo", null));

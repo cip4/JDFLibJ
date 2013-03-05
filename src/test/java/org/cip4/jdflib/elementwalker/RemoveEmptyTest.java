@@ -77,8 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFComChannel;
-import org.junit.Assert;
-import org.junit.Test;
+
 /**
  * 
  * @author rainer prosi
@@ -90,7 +89,6 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
-	@Test
 	public void testRemove()
 	{
 		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
@@ -103,16 +101,15 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
-	@Test
 	public void testRemoveAttributes()
 	{
 		XMLDoc d = new XMLDoc("doc", null);
 		KElement root = d.getRoot();
 		root.setXPathAttribute("foo/@bar", "");
 		RemoveEmpty emp = new RemoveEmpty();
-		Assert.assertNotNull(root.getXPathAttribute("foo/@bar", null));
+		assertNotNull(root.getXPathAttribute("foo/@bar", null));
 		emp.removEmptyAttributes(root);
-		Assert.assertNull(root.getXPathAttribute("foo/@bar", null));
+		assertNull(root.getXPathAttribute("foo/@bar", null));
 		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
 	}
 
@@ -120,7 +117,6 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
-	@Test
 	public void testRemoveComment()
 	{
 		JDFDoc d = new JDFDoc("JDF");
@@ -128,14 +124,13 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		n.appendComment();
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assert.assertFalse(n.toXML().contains(ElementName.COMMENT));
+		assertFalse(n.toXML().contains(ElementName.COMMENT));
 	}
 
 	/**
 	 * 
 	 * 
 	 */
-	@Test
 	public void testRemoveComChannel()
 	{
 		JDFDoc d = new JDFDoc("JDF");
@@ -144,6 +139,6 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 		c.setChannelType(EnumChannelType.Email);
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
-		Assert.assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
+		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
 	}
 }

@@ -691,7 +691,7 @@ public class FixVersion extends BaseElementWalker
 	 * 
 	 *  
 	 */
-	public class WalkJMF extends WalkElement
+	public class WalkJMF extends WalkPool
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)

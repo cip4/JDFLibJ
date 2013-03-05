@@ -218,6 +218,10 @@ public class UrlUtil
 	/**
 	 * 
 	 */
+	public static final String TEXT_CSV = "text/csv";
+	/**
+	 * 
+	 */
 	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
 	/**
 	 * 
@@ -918,6 +922,8 @@ public class UrlUtil
 			mimeMap.put("xml", JDFCoreConstants.MIME_TEXTXML);
 			mimeMap.put("xsl", TEXT_XML);
 			mimeMap.put("xsd", TEXT_XML);
+
+			mimeMap.put("csv", TEXT_CSV);
 
 			mimeMap.put("jpg", JDFCoreConstants.MIME_JPG);
 			mimeMap.put("jpeg", JDFCoreConstants.MIME_JPG);

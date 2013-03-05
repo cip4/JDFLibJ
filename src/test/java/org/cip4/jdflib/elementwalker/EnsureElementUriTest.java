@@ -71,8 +71,7 @@ package org.cip4.jdflib.elementwalker;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
-import org.junit.Test;
+
 /**
  *  
  * @author rainerprosi
@@ -84,7 +83,6 @@ public class EnsureElementUriTest extends TestCase
 	 * 
 	 * 
 	 */
-	@Test
 	public void testOne()
 	{
 		KElement e = KElement.createRoot("a", null);
@@ -92,15 +90,14 @@ public class EnsureElementUriTest extends TestCase
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("a", "www.a.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
+		assertEquals(e.getNamespaceURI(), "www.a.com");
+		assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
 	}
 
 	/**
 	 * 
 	 * 
 	 */
-	@Test
 	public void testNS()
 	{
 		KElement e = KElement.createRoot("a:a", "a.com");
@@ -108,15 +105,14 @@ public class EnsureElementUriTest extends TestCase
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("a", "www.a.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
+		assertEquals(e.getNamespaceURI(), "www.a.com");
+		assertEquals(e.getElement("b").getNamespaceURI(), "www.a.com");
 	}
 
 	/**
 	 * 
 	 * 
 	 */
-	@Test
 	public void testKid()
 	{
 		KElement e = KElement.createRoot("a", null);
@@ -124,16 +120,15 @@ public class EnsureElementUriTest extends TestCase
 		EnsureElementUri ens = new EnsureElementUri();
 		ens.addNS("b", "www.b.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), null);
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
-		Assert.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
+		assertEquals(e.getNamespaceURI(), null);
+		assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
+		assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
 	}
 
 	/**
 	 * 
 	 * 
 	 */
-	@Test
 	public void testTwo()
 	{
 		KElement e = KElement.createRoot("a", null);
@@ -142,8 +137,8 @@ public class EnsureElementUriTest extends TestCase
 		ens.addNS("a", "www.a.com");
 		ens.addNS("b", "www.b.com");
 		ens.walk(e);
-		Assert.assertEquals(e.getNamespaceURI(), "www.a.com");
-		Assert.assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
-		Assert.assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
+		assertEquals(e.getNamespaceURI(), "www.a.com");
+		assertEquals(e.getElement("b").getNamespaceURI(), "www.b.com");
+		assertEquals(e.getElement("b").getElement("c").getNamespaceURI(), "www.b.com");
 	}
 }
