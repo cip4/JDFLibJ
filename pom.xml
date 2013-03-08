@@ -22,6 +22,18 @@
 		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</developerConnection>
 		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</connection>
 	</scm>
+	<ciManagement>
+		<system>continuum</system>
+		<notifiers>
+			<notifier>
+				<configuration>
+					<address>stefanmeissner@hotmail.com</address>
+					<committers>true</committers>
+					<developers>true</developers>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
 	<developers>
 		<developer>
 			<id>r.prosi</id>
