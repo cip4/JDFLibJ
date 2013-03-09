@@ -96,6 +96,7 @@ import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -111,6 +112,7 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		mDoc = new JDFDoc("JDF");

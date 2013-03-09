@@ -120,13 +120,15 @@ public class CPUTimerTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * 
 	 */
 	@Test
-	public void testGetSummary()
+	public void testGetSummary() throws InterruptedException
 	{
 		t.start();
 		Assert.assertNotNull(t.getSingleSummary());
+		// t.wait(20);
 		t.stop();
 		System.out.print(t.getSingleSummary());
 		Assert.assertTrue(t.getTotalCPUTime() > 0);

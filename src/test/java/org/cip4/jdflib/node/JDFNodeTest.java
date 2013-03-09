@@ -161,7 +161,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	public void testGetPartIDKeys()
 	{
 		final JDFParser p = new JDFParser();
-		final JDFDoc d = p.parseFile(sm_dirTestData + "evilParts.jdf");
+		final JDFDoc d = p.parseFile(sm_dirTestData + "evilparts.jdf");
 		final JDFNode n = d.getJDFRoot();
 		CPUTimer ct = new CPUTimer(true);
 		VString v = n.getPartIDKeys(null);
