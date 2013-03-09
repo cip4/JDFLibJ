@@ -128,7 +128,6 @@ public class CPUTimerTest extends JDFTestCaseBase
 	{
 		t.start();
 		Assert.assertNotNull(t.getSingleSummary());
-		// t.wait(20);
 		t.stop();
 		System.out.print(t.getSingleSummary());
 		Assert.assertTrue(t.getTotalCPUTime() > 0);
