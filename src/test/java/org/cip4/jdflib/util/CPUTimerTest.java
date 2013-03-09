@@ -77,6 +77,7 @@ package org.cip4.jdflib.util;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -233,6 +234,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 * @throws Exception
 	*/
 	@Override
+	@Before
 	public void setUp() throws Exception
 	{
 		super.setUp();
