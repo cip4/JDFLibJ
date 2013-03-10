@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -204,6 +206,9 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testBigEnsureNS()
 	{
+		File f = new File(sm_dirTestData + "evilParts.jdf");
+		Assert.assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilParts.jdf"), f.exists());
+		
 		CPUTimer ct = new CPUTimer(true);
 		XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilParts.jdf");
 		KElement root = d.getRoot();
