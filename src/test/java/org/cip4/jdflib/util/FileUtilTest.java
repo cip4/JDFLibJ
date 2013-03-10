@@ -290,7 +290,9 @@ public class FileUtilTest extends JDFTestCaseBase
 			for (int i = 0; i < 3; i++)
 			{
 				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
+				System.out.println("Create new File: " + f2.getAbsolutePath());
 				Assert.assertTrue(f2.createNewFile());
+				System.out.println("Is Created: " + f2.exists());
 			}
 		}
 		Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
