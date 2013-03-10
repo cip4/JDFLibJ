@@ -131,6 +131,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		Assert.assertNotNull(t.getSingleSummary());
 		t.stop();
 		System.out.print(t.getSingleSummary());
+		System.out.println("TotalCPUTime: " + t.getTotalCPUTime());
 		Assert.assertTrue(t.getTotalCPUTime() > 0);
 	}
 
