@@ -206,11 +206,11 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	@Test
 	public void testBigEnsureNS()
 	{
-		File f = new File(sm_dirTestData + "evilParts.jdf");
+		File f = new File(sm_dirTestData + "evilparts.jdf");
 		Assert.assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"), f.exists());
 		
 		CPUTimer ct = new CPUTimer(true);
-		XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilParts.jdf");
+		XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilparts.jdf");
 		KElement root = d.getRoot();
 		Assert.assertNotNull(root);
 		EnsureNSUri ensure = new EnsureNSUri();
