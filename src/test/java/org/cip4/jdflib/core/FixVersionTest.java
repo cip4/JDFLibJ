@@ -336,6 +336,8 @@ public class FixVersionTest extends JDFTestCaseBase {
 		Assert.assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 		FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
+		
+		System.out.println("JMF Agent: " + jmf.getAgentName());
 		Assert.assertNotNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 	}
 
