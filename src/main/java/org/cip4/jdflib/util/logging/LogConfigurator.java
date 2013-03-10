@@ -118,7 +118,7 @@ public class LogConfigurator
 				log.info("log file=" + new File(logFileName).getAbsolutePath());
 			}
 			log = LogFactory.getLog(LogConfigurator.class);
-			log.info("Configured logging ");
+			// log.info("Configured logging ");
 		}
 		catch (IOException e)
 		{
