@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
@@ -3035,7 +3036,11 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeRootList()
 	{
+		File f = new File(sm_dirTestDataTemp + "rootSubNest.jdf");
+		Assert.assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
 		JDFNode sub = JDFDoc.parseFile(sm_dirTestDataTemp + "rootSubNest.jdf").getJDFRoot();
+		
+		
 		JDFNode main = JDFDoc.parseFile(sm_dirTestDataTemp + "rootMainNest.jdf").getJDFRoot();
 		CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 10; i++)
