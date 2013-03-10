@@ -119,7 +119,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	public void testWaitTimeout()
 	{
 		Assert.assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
-		Assert.assertNull(new TestWait(400, 1000).getWaitedObject());
+		Assert.assertNull(new TestWait(20, 1000).getWaitedObject());
 	}
 
 	/**
