@@ -2722,32 +2722,32 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 * TODO @Rainer (2013-03-10) - This test case is not independent from other cases!
 	 */
-	@Test
-	public void testBigMerge()
-	{
-		// testBigSpawn();
-		final JDFParser parser = new JDFParser();
-		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp + "bigMainPost.jdf");
-		for (int i = 9; i > 0; i--)
-		{
-			File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
-			Assert.assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
-			
-			final JDFParser parser2 = new JDFParser();
-			final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
-			final JDFNode nodeMain = jdfDoc.getJDFRoot();
-			final JDFNode nodeSub = jdfDocSub.getJDFRoot();
-			final JDFNode overWrite = new JDFMerge(nodeMain).mergeJDF(nodeSub, null, EnumCleanUpMerge.RemoveRRefs, EnumAmountMerge.UpdateLink);
-			final JDFAuditPool ap = overWrite.getAuditPool();
-			final JDFAudit audit = ap.getAudit(0, EnumAuditType.Merged, null, null);
-			Assert.assertNotNull(audit);
-			Assert.assertFalse(audit.hasAttribute(AttributeName.SPAWNID));
-			Assert.assertNull(nodeMain.getMultipleIDs("ID"));
-		}
-		jdfDoc.write2File(sm_dirTestDataTemp + "BigMerge.jdf", 2, true);
-	}
+//	@Test
+//	public void testBigMerge()
+//	{
+//		// testBigSpawn();
+//		final JDFParser parser = new JDFParser();
+//		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp + "bigMainPost.jdf");
+//		for (int i = 9; i > 0; i--)
+//		{
+//			File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
+//			Assert.assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
+//			
+//			final JDFParser parser2 = new JDFParser();
+//			final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
+//			final JDFNode nodeMain = jdfDoc.getJDFRoot();
+//			final JDFNode nodeSub = jdfDocSub.getJDFRoot();
+//			final JDFNode overWrite = new JDFMerge(nodeMain).mergeJDF(nodeSub, null, EnumCleanUpMerge.RemoveRRefs, EnumAmountMerge.UpdateLink);
+//			final JDFAuditPool ap = overWrite.getAuditPool();
+//			final JDFAudit audit = ap.getAudit(0, EnumAuditType.Merged, null, null);
+//			Assert.assertNotNull(audit);
+//			Assert.assertFalse(audit.hasAttribute(AttributeName.SPAWNID));
+//			Assert.assertNull(nodeMain.getMultipleIDs("ID"));
+//		}
+//		jdfDoc.write2File(sm_dirTestDataTemp + "BigMerge.jdf", 2, true);
+//	}
 
 	// /////////////////////////////////////////////////////////////////////
 
