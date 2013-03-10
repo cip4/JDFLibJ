@@ -662,8 +662,13 @@ public class JDFDateTest extends JDFTestCaseBase {
 		for (long i = 0; i < 4; i++) {
 			d = new JDFDate(System.currentTimeMillis() + i * 100 * 24 * 60 * 60 * 1000);
 			Assert.assertEquals(t.getOffset(System.currentTimeMillis() + i * 100 * 24 * 60 * 60 * 1000), d.getTimeZoneOffsetInMillis());
-			if (!dNow.getTimeZoneISO().equals(d.getTimeZoneISO()))
+			
+			System.out.println("dNow.getTimeZoneISO: " + dNow.getTimeZoneISO() + "; d.TimeZoneISO: " + d.getTimeZoneISO());
+			
+			if (!dNow.getTimeZoneISO().equals(d.getTimeZoneISO())) {
 				bSummer = true;
+			}
+			
 			JDFDate d4 = new JDFDate(d.getDateTimeISO());
 			Assert.assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
