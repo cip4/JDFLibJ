@@ -2732,6 +2732,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestDataTemp + "bigMainPost.jdf");
 		for (int i = 9; i > 0; i--)
 		{
+			File f = new File(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
+			Assert.assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
+			
 			final JDFParser parser2 = new JDFParser();
 			final JDFDoc jdfDocSub = parser2.parseFile(sm_dirTestDataTemp + "bigSub" + i + ".jdf");
 			final JDFNode nodeMain = jdfDoc.getJDFRoot();
@@ -3036,12 +3039,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testMergeRootList()
 	{
-		File f = new File(sm_dirTestDataTemp + "rootSubNest.jdf");
+		File f = new File(sm_dirTestData + "rootSubNest.jdf");
 		Assert.assertTrue(String.format("File %s does not exist.", f.getAbsolutePath()), f.exists());
-		JDFNode sub = JDFDoc.parseFile(sm_dirTestDataTemp + "rootSubNest.jdf").getJDFRoot();
+		JDFNode sub = JDFDoc.parseFile(sm_dirTestData + "rootSubNest.jdf").getJDFRoot();
 		
 		
-		JDFNode main = JDFDoc.parseFile(sm_dirTestDataTemp + "rootMainNest.jdf").getJDFRoot();
+		JDFNode main = JDFDoc.parseFile(sm_dirTestData + "rootMainNest.jdf").getJDFRoot();
 		CPUTimer ct = new CPUTimer(false);
 		for (int i = 0; i < 10; i++)
 		{
