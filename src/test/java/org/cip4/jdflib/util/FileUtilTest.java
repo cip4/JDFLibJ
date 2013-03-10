@@ -296,7 +296,8 @@ public class FileUtilTest extends JDFTestCaseBase
 			}
 		}
 		Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
+		// file order depends from target system
+		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
 		Assert.assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
 		Assert.assertNull(FileUtil.listFilesWithExtension(f, "CC"));
 		Assert.assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
