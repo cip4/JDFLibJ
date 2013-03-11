@@ -76,6 +76,7 @@ import org.cip4.jdflib.util.thread.MyMutex;
 import org.cip4.jdflib.util.thread.WaitTimeout;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -163,7 +164,9 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	public void testWaitTimeoutMany()
 	{
 		for (int i = 1; i < 10000; i++)
-			Assert.assertEquals("Loop " + i, new TestWait(33, 0).getWaitedObject().intValue(), 42);
+		{
+			Assert.assertEquals("Loop " + i, new TestWait(42, 0).getWaitedObject().intValue(), 42);
+		}
 	}
 
 	/**

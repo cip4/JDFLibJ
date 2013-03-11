@@ -82,7 +82,7 @@ import org.apache.log4j.RollingFileAppender;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date May 18, 2011
  */
