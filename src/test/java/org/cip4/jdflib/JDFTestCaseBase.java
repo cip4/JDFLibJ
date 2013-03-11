@@ -269,7 +269,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	@Override
 	@After
-	public void tearDown() throws Exception
+	protected void tearDown() throws Exception
 	{
 		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);

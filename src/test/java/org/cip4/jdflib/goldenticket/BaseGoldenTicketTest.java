@@ -88,7 +88,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception
+	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
 		KElement.setLongID(false);
@@ -101,7 +101,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public void tearDown() throws Exception
+	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
 		KElement.setLongID(true);

@@ -131,6 +131,7 @@ import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -792,8 +793,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			run.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount, pageCount + page - 1)));
 			co.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount, pageCount + page - 1)));
 			co.setSurfaceCount(2 * ((page + 1 + 1) / 2)); // the 2nd +1 is for
-			// the blank inside
-			// cover
+			// the blank inside cover
 			run.setPages(new JDFIntegerRangeList("0~" + (page - 1)));
 			run.setXMLComment("Brochure - record " + i);
 			run.setEndOfDocument(true);
