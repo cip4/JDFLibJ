@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,16 +81,25 @@ import org.junit.Test;
 
 /**
  * 
- * @author rainerprosi
+ * @author rainer prosi
  * @date Feb 14, 2011
  */
-public class StorageHotFolderTest extends JDFTestCaseBase {
+public class StorageHotFolderTest extends JDFTestCaseBase
+{
 
-	public class CountListener implements HotFolderListener {
+	/**
+	 * 
+	 * 
+	 * @author rainerprosi
+	 * @date Mar 11, 2013
+	 */
+	public class CountListener implements HotFolderListener
+	{
 		/**
 		 * 
 		 */
-		public CountListener() {
+		public CountListener()
+		{
 			super();
 			iCount = 0;
 		}
@@ -101,7 +110,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 		 * dummy that alternates ok and false
 		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 		 */
-		public boolean hotFile(File hotFile) {
+		@Override
+		public boolean hotFile(File hotFile)
+		{
 			return iCount++ % 2 == 0;
 		}
 
@@ -115,8 +126,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "HFTest");
 		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
@@ -130,8 +143,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 		hf.stop();
 	}
 
@@ -141,7 +156,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 	 * @throws IOException
 	 */
 	@Test
-	public void testSimple() throws IOException {
+	public void testSimple() throws IOException
+	{
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
@@ -157,7 +173,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 	 * @throws IOException
 	 */
 	@Test
-	public void testAddListener() throws IOException {
+	public void testAddListener() throws IOException
+	{
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
@@ -175,7 +192,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testOKError() throws Exception {
+	public void testOKError() throws Exception
+	{
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		File error = new File("error");
 		hf.setErrorStorage(error);
@@ -184,7 +202,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 		hf.setMaxStore(42);
 		ThreadUtil.sleep(1000);
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++)
+		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
@@ -194,14 +213,16 @@ public class StorageHotFolderTest extends JDFTestCaseBase {
 		Assert.assertEquals(ok.listFiles().length, 2, 1);
 		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		Assert.assertEquals(error.listFiles().length, 2, 1);
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++)
+		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
 		ThreadUtil.sleep(1000);
 		Assert.assertEquals(ok.listFiles().length, 4, 1);
 		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 1);
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 100; i++)
+		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}

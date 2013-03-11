@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -86,6 +87,8 @@ public class XJDFSchemaCreatorTest extends JDFTestCaseBase
 	public void testCreate()
 	{
 		File baseDir = new File("./src/main/java/org/cip4/jdflib");
+		if (!baseDir.isDirectory())
+			baseDir = new File("./src/org/cip4/jdflib");
 		System.out.println(baseDir.getAbsolutePath());
 		XJDFSchemaCreator sc = new XJDFSchemaCreator(baseDir, FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("xjdf.xsd")));
 
