@@ -13,8 +13,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCylinderLayoutPreparationParams;
 import org.w3c.dom.DOMException;
 
-public class JDFCylinderLayoutPreparationParams extends
-		JDFAutoCylinderLayoutPreparationParams
+public class JDFCylinderLayoutPreparationParams extends JDFAutoCylinderLayoutPreparationParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +24,7 @@ public class JDFCylinderLayoutPreparationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +37,7 @@ public class JDFCylinderLayoutPreparationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +51,7 @@ public class JDFCylinderLayoutPreparationParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -71,7 +66,6 @@ public class JDFCylinderLayoutPreparationParams extends
 	@Override
 	public String toString()
 	{
-		return "JDFCylinderLayoutPreparationParams[  --> " + super.toString()
-				+ " ]";
+		return "JDFCylinderLayoutPreparationParams[  --> " + super.toString() + " ]";
 	}
 }

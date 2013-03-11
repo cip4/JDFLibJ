@@ -33,8 +33,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFDropIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -47,8 +46,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDropIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -62,9 +60,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDropIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFDropIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

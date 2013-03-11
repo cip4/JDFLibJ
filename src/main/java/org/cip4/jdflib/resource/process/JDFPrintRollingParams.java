@@ -20,8 +20,7 @@ public class JDFPrintRollingParams extends JDFAutoPrintRollingParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFPrintRollingParams extends JDFAutoPrintRollingParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFPrintRollingParams extends JDFAutoPrintRollingParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPrintRollingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

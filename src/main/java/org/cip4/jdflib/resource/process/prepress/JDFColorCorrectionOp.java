@@ -27,8 +27,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -40,8 +39,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,8 +52,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -81,8 +78,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 */
 	public JDFFileSpec getAbstractProfile()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null,
-				new JDFAttributeMap(), true, 0, false);
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, new JDFAttributeMap(), true, 0, false);
 
 		int siz = v.size();
 		for (int i = 0; i < siz; i++)
@@ -138,8 +134,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 */
 	public JDFFileSpec getDeviceLinkProfile()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null,
-				new JDFAttributeMap(), true, 0, false);
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, new JDFAttributeMap(), true, 0, false);
 
 		int siz = v.size();
 		for (int i = 0; i < siz; i++)

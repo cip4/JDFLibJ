@@ -114,8 +114,7 @@ public class JDFModulePool extends JDFAutoModulePool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFModulePool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,8 +127,7 @@ public class JDFModulePool extends JDFAutoModulePool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFModulePool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,7 +183,7 @@ public class JDFModulePool extends JDFAutoModulePool
 	public Map getModuleMap()
 	{
 		HashMap hashMap = null;
-		
+
 		VElement v = getChildElementVector(ElementName.MODULECAP, null, null, true, 0, true);
 		if (v != null)
 		{
@@ -200,10 +198,10 @@ public class JDFModulePool extends JDFAutoModulePool
 					hashMap.put(id, mc);
 				}
 			}
-			
+
 			hashMap = hashMap.size() == 0 ? null : hashMap;
 		}
-		
+
 		return hashMap;
 	}
 
@@ -231,13 +229,11 @@ public class JDFModulePool extends JDFAutoModulePool
 	 * 
 	 * @return {@link JDFModuleCap} the Modulecap that id refers tp
 	 */
-	public static JDFModuleCap appendModuleRef(ICapabilityElement caps,
-			String id)
+	public static JDFModuleCap appendModuleRef(ICapabilityElement caps, String id)
 	{
 		caps.setAvailability(EnumAvailability.Module);
 		JDFModulePool mp = caps.getCreateModulePool();
-		((KElement) caps).appendAttribute(AttributeName.MODULEREFS, id, null,
-				null, true);
+		((KElement) caps).appendAttribute(AttributeName.MODULEREFS, id, null, null, true);
 		return mp.getCreateModuleCap(id);
 	}
 
@@ -250,8 +246,7 @@ public class JDFModulePool extends JDFAutoModulePool
 	 */
 	public JDFModuleCap getModuleCap(String id)
 	{
-		return (JDFModuleCap) getChildWithAttribute(ElementName.MODULECAP,
-				AttributeName.ID, null, id, 0, true);
+		return (JDFModuleCap) getChildWithAttribute(ElementName.MODULECAP, AttributeName.ID, null, id, 0, true);
 	}
 
 	/**

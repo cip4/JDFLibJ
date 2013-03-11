@@ -104,32 +104,17 @@ public class JDFXYPairState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.XYPairRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDXYRELATION,
-				0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null,
-				null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.XYPairRangeList,
-				null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTXYRELATION,
-				0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null,
-				null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311,
-				AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDXYRELATION, 0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTXYRELATION, 0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -168,8 +153,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFXYPairState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -182,8 +166,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFXYPairState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -214,10 +197,10 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.CURRENTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFXYPairState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFXYPair");
+			throw new JDFException("JDFXYPairState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFXYPair");
 		}
 	}
 
@@ -231,10 +214,10 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.DEFAULTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFXYPairState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFXYPair");
+			throw new JDFException("JDFXYPairState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFXYPair");
 		}
 	}
 
@@ -251,13 +234,12 @@ public class JDFXYPairState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.ALLOWEDVALUELIST, null, null);
+			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			return attribute == null ? null : new JDFXYPairRangeList(attribute);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFXYPairState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not applicable to create JDFXYPairRangeList");
+			throw new JDFException("JDFXYPairState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not applicable to create JDFXYPairRangeList");
 		}
 	}
 
@@ -272,12 +254,11 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFXYPairRangeList(
-						getAttribute(AttributeName.PRESENTVALUELIST));
-			} catch (DataFormatException dfe)
+				return new JDFXYPairRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
+			}
+			catch (DataFormatException dfe)
 			{
-				throw new JDFException(
-						"JDFXYPairState.getPresentValueList: Attribute PRESENTVALUELIST is not applicable to create JDFXYPairRangeList");
+				throw new JDFException("JDFXYPairState.getPresentValueList: Attribute PRESENTVALUELIST is not applicable to create JDFXYPairRangeList");
 			}
 		}
 		return getAllowedValueList();
@@ -293,10 +274,10 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMAX));
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFXYPairState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not applicable to create JDFXYPair");
+			throw new JDFException("JDFXYPairState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not applicable to create JDFXYPair");
 		}
 	}
 
@@ -311,12 +292,11 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFXYPair(
-						getAttribute(AttributeName.PRESENTVALUEMAX));
-			} catch (DataFormatException dfe)
+				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMAX));
+			}
+			catch (DataFormatException dfe)
 			{
-				throw new JDFException(
-						"JDFXYPairState.setAllowedValueMin: Attribute PRESENTVALUEMAX is not applicable to create JDFXYPair");
+				throw new JDFException("JDFXYPairState.setAllowedValueMin: Attribute PRESENTVALUEMAX is not applicable to create JDFXYPair");
 			}
 		}
 		return getAllowedValueMax();
@@ -332,10 +312,10 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMIN));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFXYPairState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not applicable to create JDFXYPair");
+			throw new JDFException("JDFXYPairState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not applicable to create JDFXYPair");
 		}
 	}
 
@@ -351,12 +331,11 @@ public class JDFXYPairState extends JDFAbstractState
 
 			try
 			{
-				return new JDFXYPair(
-						getAttribute(AttributeName.PRESENTVALUEMIN));
-			} catch (DataFormatException e)
+				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMIN));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFXYPairState.getPresentValueMin: Attribute PRESENTVALUEMIN is not applicable to create JDFXYPair");
+				throw new JDFException("JDFXYPairState.getPresentValueMin: Attribute PRESENTVALUEMIN is not applicable to create JDFXYPair");
 			}
 		}
 		return getAllowedValueMin();
@@ -369,8 +348,7 @@ public class JDFXYPairState extends JDFAbstractState
 
 	public JDFElement.EnumXYRelation getAllowedXYRelation()
 	{
-		return EnumXYRelation.getEnum(getAttribute(
-				AttributeName.ALLOWEDXYRELATION, null, null));
+		return EnumXYRelation.getEnum(getAttribute(AttributeName.ALLOWEDXYRELATION, null, null));
 	}
 
 	public void setPresentXYRelation(EnumXYRelation value)
@@ -383,9 +361,7 @@ public class JDFXYPairState extends JDFAbstractState
 		// return EnumXYRelation.getEnum(getAttribute(
 		// AttributeName.ALLOWEDXYRELATION, null,
 		// EnumXYRelation.Unknown.getName()));
-		JDFElement.EnumXYRelation avail = JDFElement.EnumXYRelation
-				.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null,
-						null));
+		JDFElement.EnumXYRelation avail = JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null, null));
 
 		if (avail == null)
 		{
@@ -428,7 +404,8 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			rect = new JDFXYPair(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -475,7 +452,8 @@ public class JDFXYPairState extends JDFAbstractState
 		try
 		{
 			rangelist = new JDFXYPairRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -496,10 +474,10 @@ public class JDFXYPairState extends JDFAbstractState
 			if (left.equals(right))
 			{
 				bFitsXY = fitsXYRelation(left, testlists);
-			} else
+			}
+			else
 			{
-				bFitsXY = fitsXYRelation(left, testlists)
-						&& fitsXYRelation(right, testlists);
+				bFitsXY = fitsXYRelation(left, testlists) && fitsXYRelation(right, testlists);
 			}
 			if (!bFitsXY)
 				return false;
@@ -521,14 +499,14 @@ public class JDFXYPairState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFXYPairRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFXYPairRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFXYPairRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -539,10 +517,12 @@ public class JDFXYPairState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -569,15 +549,15 @@ public class JDFXYPairState extends JDFAbstractState
 	 * @return boolean - true, if the <code>xypair</code> matches xyrelation or
 	 *         if AllowedXYRelation is not specified
 	 */
-	private final boolean fitsXYRelation(JDFXYPair xypair,
-			EnumFitsValue xyrelation)
+	private final boolean fitsXYRelation(JDFXYPair xypair, EnumFitsValue xyrelation)
 	{
 		EnumXYRelation relation;
 
 		if (xyrelation.equals(EnumFitsValue.Allowed))
 		{
 			relation = getAllowedXYRelation();
-		} else
+		}
+		else
 		{
 			relation = getPresentXYRelation();
 		}
@@ -602,8 +582,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFXYPairRangeList value,
-			JDFXYPairRangeList list)
+	private final boolean fitsCompleteList(JDFXYPairRangeList value, JDFXYPairRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -648,8 +627,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFXYPairRangeList value,
-			JDFXYPairRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -680,8 +658,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 *            ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsContainedList(JDFXYPairRangeList value,
-			JDFXYPairRangeList list)
+	private final boolean fitsContainedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

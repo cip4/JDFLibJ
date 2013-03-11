@@ -92,8 +92,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -105,8 +104,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -119,8 +117,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -141,10 +138,9 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	public JDFFileSpec getSearchPath(int iSkip)
 	{
 		int iSkipLocal = iSkip;
-		
+
 		JDFFileSpec res = null;
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
-				true, 0, false);
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
 		int siz = v.size();
 
 		for (int i = 0; i < siz; i++)
@@ -157,7 +153,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 					if (iSkipLocal >= 0)
 					{
 						iSkipLocal--;
-					} 
+					}
 					else
 					{
 						break;
@@ -191,8 +187,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	}
 
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
 	{
 
 		VString vElem = new VString();
@@ -211,9 +206,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 				break;
 			}
 		}
-		vElem
-				.appendUnique(getInvalidElements(level, bIgnorePrivate,
-						(nMax - n)));
+		vElem.appendUnique(getInvalidElements(level, bIgnorePrivate, (nMax - n)));
 
 		return vElem;
 	}

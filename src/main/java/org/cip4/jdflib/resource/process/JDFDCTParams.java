@@ -32,8 +32,7 @@ public class JDFDCTParams extends JDFAutoDCTParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDCTParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDCTParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -46,8 +45,7 @@ public class JDFDCTParams extends JDFAutoDCTParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFDCTParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDCTParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

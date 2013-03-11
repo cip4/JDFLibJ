@@ -101,13 +101,9 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.HWRELATION,
-				0x33333333, AttributeInfo.EnumAttributeType.XYRelation, null,
-				null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HWRELATION, 0x33333333, AttributeInfo.EnumAttributeType.XYRelation, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
 	}
 
 	@Override
@@ -122,8 +118,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,8 +130,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,8 +143,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -201,10 +194,10 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFRectangleRangeList(vl);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFRectangleEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFRectangleRangeList");
+			throw new JDFException("JDFRectangleEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFRectangleRangeList");
 		}
 	}
 
@@ -215,8 +208,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 	public JDFElement.EnumXYRelation getHWRelation()
 	{
-		return JDFElement.EnumXYRelation.getEnum(getAttribute(
-				AttributeName.HWRELATION, null, null));
+		return JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));
 	}
 
 	public void setTolerance(JDFXYPair value)
@@ -253,7 +245,8 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 		try
 		{
 			rrl = new JDFRectangleRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -275,7 +268,8 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 				JDFRectangle rectangle = left;
 				if ((fitsValueList(new JDFRectangleRange(rectangle)) && fitsHWRelation(rectangle)) == false)
 					return false;
-			} else
+			}
+			else
 			{
 				if ((fitsValueList(range) && fitsHWRelation(left) && fitsHWRelation(right)) == false)
 					return false;
@@ -302,56 +296,67 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFRectangleRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			try
 			{
 				new JDFRectangle(value);
-			} catch (JDFException e)
+			}
+			catch (JDFException e)
 			{
 				return false;
-			} catch (DataFormatException e)
+			}
+			catch (DataFormatException e)
 			{
 				return false;
 			}
 			return true;
-		} else if (listType.equals(EnumListType.RangeList))
+		}
+		else if (listType.equals(EnumListType.RangeList))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFRectangleEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFRectangleEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -387,8 +392,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * @return NumberRangeList - expanded rangelist, returns original range if
 	 *         Tolerance=="0 0"
 	 */
-	private JDFRectangleRangeList fitsTolerance(
-			JDFRectangleRangeList origRangeList)
+	private JDFRectangleRangeList fitsTolerance(JDFRectangleRangeList origRangeList)
 	{
 		double nt = getTolerance().getX(); // negative tolerance
 		double pt = getTolerance().getY(); // positive tolerance
@@ -400,8 +404,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 		// expand our original range into the range +/- Tolerance
 
-		JDFRectangleRangeList rangeList = new JDFRectangleRangeList(
-				origRangeList);
+		JDFRectangleRangeList rangeList = new JDFRectangleRangeList(origRangeList);
 
 		JDFRectangleRangeList tolRangeList = new JDFRectangleRangeList();
 

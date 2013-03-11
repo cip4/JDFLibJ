@@ -22,8 +22,7 @@ public class JDFDependencies extends JDFAutoDependencies
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDependencies(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDependencies(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -35,8 +34,7 @@ public class JDFDependencies extends JDFAutoDependencies
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDependencies(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -49,8 +47,7 @@ public class JDFDependencies extends JDFAutoDependencies
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFDependencies(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

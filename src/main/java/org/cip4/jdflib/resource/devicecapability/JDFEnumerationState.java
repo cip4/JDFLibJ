@@ -100,22 +100,12 @@ public class JDFEnumerationState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.enumerations, null,
-				null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.enumeration, null,
-				null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.enumeration, null,
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.enumerations, null,
-				null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,
-				0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTREGEXP,
-				0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP, 0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTREGEXP, 0x33331111, AttributeInfo.EnumAttributeType.RegExp, null, null);
 	}
 
 	@Override
@@ -142,8 +132,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -155,8 +144,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -169,8 +157,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFEnumerationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -200,8 +187,7 @@ public class JDFEnumerationState extends JDFAbstractState
 
 	public String getCurrentValue()
 	{
-		return getAttribute(AttributeName.CURRENTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public void setDefaultValue(String value)
@@ -211,29 +197,25 @@ public class JDFEnumerationState extends JDFAbstractState
 
 	public String getDefaultValue()
 	{
-		return getAttribute(AttributeName.DEFAULTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public VString getAllowedValueList()
 	{
-		final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST,
-				null, null);
+		final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 		return attribute == null ? null : new VString(attribute, null);
 	}
 
 	public void setAllowedValueList(VString vs)
 	{
-		setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs,
-				" ", null, null), null);
+		setAttribute(AttributeName.ALLOWEDVALUELIST, StringUtil.setvString(vs, " ", null, null), null);
 	}
 
 	public VString getPresentValueList()
 	{
 		if (hasAttribute(AttributeName.PRESENTVALUELIST))
 		{
-			return new VString(getAttribute(AttributeName.PRESENTVALUELIST,
-					null, JDFConstants.EMPTYSTRING), null);
+			return new VString(getAttribute(AttributeName.PRESENTVALUELIST, null, JDFConstants.EMPTYSTRING), null);
 		}
 		return getAllowedValueList();
 	}
@@ -302,8 +284,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	public boolean fitsValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
-			return (fitsValueList(value, testlists) && fitsRegExp(value,
-					testlists));
+			return (fitsValueList(value, testlists) && fitsRegExp(value, testlists));
 		return false;
 	}
 
@@ -326,7 +307,8 @@ public class JDFEnumerationState extends JDFAbstractState
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -337,10 +319,12 @@ public class JDFEnumerationState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(vs, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(vs, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(vs, list);
 		}
@@ -503,8 +487,7 @@ public class JDFEnumerationState extends JDFAbstractState
 	@Override
 	public String getAllowedRegExp()
 	{
-		return getAttribute(AttributeName.ALLOWEDREGEXP, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
 	}
 
 	@Override

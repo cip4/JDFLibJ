@@ -109,8 +109,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,8 +122,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,9 +136,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,8 +144,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(JDFConstants.STAR, 0x33333333,
-				AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[0] = new AtrInfoTable(JDFConstants.STAR, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override

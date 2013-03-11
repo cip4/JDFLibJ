@@ -68,14 +68,14 @@
  *  
  * 
  *//**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFPreflightReport.java
- *
- * Last changes
- *
- */
+*
+* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFPreflightReport.java
+*
+* Last changes
+*
+*/
 package org.cip4.jdflib.resource.process;
 
 import java.util.Set;
@@ -101,8 +101,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,8 +114,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,9 +128,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,8 +146,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 		return "JDFPreflightReport[  --> " + super.toString() + " ]";
 	}
 
-	public JDFPRItem setPR(JDFAction action, int pageSet,
-			JDFAttributeMap prMap, VString groupBy)
+	public JDFPRItem setPR(JDFAction action, int pageSet, JDFAttributeMap prMap, VString groupBy)
 	{
 
 		JDFAttributeMap groupMap = null;
@@ -238,10 +233,8 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	private JDFPRItem getPRItem(JDFAction action, JDFAttributeMap groupMap)
 	{
 		String id = action == null ? null : action.getID();
-		JDFAttributeMap map = (id == null) ? null : new JDFAttributeMap(
-				"ActionRef", id);
-		JDFPRItem pi = (JDFPRItem) getChildByTagName(ElementName.PRITEM, null,
-				0, map, true, true);
+		JDFAttributeMap map = (id == null) ? null : new JDFAttributeMap("ActionRef", id);
+		JDFPRItem pi = (JDFPRItem) getChildByTagName(ElementName.PRITEM, null, 0, map, true, true);
 		if (groupMap != null && pi != null)
 		{
 			JDFPRGroup pg = pi.getPRGroup(groupMap);

@@ -206,7 +206,7 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @deprecated use specialized routines
 	 */
 	@Deprecated
-	public void setRange(JDFRangeList rl) 
+	public void setRange(JDFRangeList rl)
 	{
 		setAttribute("Range", rl.toString(), JDFConstants.EMPTYSTRING);
 	}

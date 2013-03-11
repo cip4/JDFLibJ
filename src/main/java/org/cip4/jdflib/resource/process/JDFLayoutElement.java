@@ -85,8 +85,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -99,8 +98,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -114,9 +112,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +161,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 	 * @deprecated 060907
 	 */
 	@Deprecated
-	public JDFPageData getPageListPageData() 
+	public JDFPageData getPageListPageData()
 	{
 		// TODO lena - make vector
 		return getPageList().getPageData(0);

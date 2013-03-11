@@ -106,8 +106,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -120,8 +119,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -147,8 +145,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	@Override
 	public JDFDevCap getCreateDevCap(int iSkip)
 	{
-		return (JDFDevCap) getCreateElement_KElement(ElementName.DEVCAP, null,
-				iSkip);
+		return (JDFDevCap) getCreateElement_KElement(ElementName.DEVCAP, null, iSkip);
 	}
 
 	/**
@@ -175,8 +172,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	 */
 	public JDFDevCap getDevCap(String id)
 	{
-		return (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP,
-				AttributeName.ID, null, id, 0, false);
+		return (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP, AttributeName.ID, null, id, 0, false);
 	}
 
 	/**
@@ -191,8 +187,7 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	 */
 	public JDFDevCap getCreateDevCapByName(String dcName, String newID)
 	{
-		JDFDevCap dc = (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP,
-				AttributeName.NAME, null, name, 0, false);
+		JDFDevCap dc = (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP, AttributeName.NAME, null, name, 0, false);
 		if (dc == null)
 		{
 			dc = appendDevCap();

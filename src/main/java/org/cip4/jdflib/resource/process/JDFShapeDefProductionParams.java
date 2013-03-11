@@ -22,8 +22,7 @@ public class JDFShapeDefProductionParams extends JDFAutoShapeDefProductionParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -35,8 +34,7 @@ public class JDFShapeDefProductionParams extends JDFAutoShapeDefProductionParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -49,8 +47,7 @@ public class JDFShapeDefProductionParams extends JDFAutoShapeDefProductionParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

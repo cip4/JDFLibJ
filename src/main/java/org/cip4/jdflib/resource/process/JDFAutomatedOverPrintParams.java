@@ -13,8 +13,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAutomatedOverPrintParams;
 import org.w3c.dom.DOMException;
 
-public class JDFAutomatedOverPrintParams extends
-		JDFAutoAutomatedOverPrintParams
+public class JDFAutomatedOverPrintParams extends JDFAutoAutomatedOverPrintParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +24,7 @@ public class JDFAutomatedOverPrintParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +37,7 @@ public class JDFAutomatedOverPrintParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +51,7 @@ public class JDFAutomatedOverPrintParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

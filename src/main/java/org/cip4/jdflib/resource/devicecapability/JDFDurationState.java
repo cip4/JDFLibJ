@@ -101,18 +101,10 @@ public class JDFDurationState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.duration, null,
-				null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.duration, null,
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList,
-				null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
 	}
 
 	@Override
@@ -139,8 +131,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -152,8 +143,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,8 +156,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -204,7 +193,8 @@ public class JDFDurationState extends JDFAbstractState
 		try
 		{
 			return new JDFDuration(str);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return null;
 		}
@@ -224,7 +214,8 @@ public class JDFDurationState extends JDFAbstractState
 		try
 		{
 			return new JDFDuration(str);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return null;
 		}
@@ -239,11 +230,11 @@ public class JDFDurationState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.ALLOWEDVALUELIST, null, null);
+			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			if (attribute != null)
 				return new JDFDurationRangeList(attribute);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			// nop
 		}
@@ -259,11 +250,11 @@ public class JDFDurationState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.PRESENTVALUELIST, null, null);
+			final String attribute = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
 			if (attribute != null)
 				return new JDFDurationRangeList(attribute);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return null; // malformed so don't default
 		}
@@ -295,7 +286,8 @@ public class JDFDurationState extends JDFAbstractState
 		try
 		{
 			duration = new JDFDuration(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -341,7 +333,8 @@ public class JDFDurationState extends JDFAbstractState
 			try
 			{
 				rangelist = new JDFDurationRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
@@ -363,14 +356,14 @@ public class JDFDurationState extends JDFAbstractState
 	 * @return boolean - true, if 'rangelist' matches the valuelist or if
 	 *         AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFDurationRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFDurationRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFDurationRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -381,10 +374,12 @@ public class JDFDurationState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -405,8 +400,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFDurationRangeList value,
-			JDFDurationRangeList list)
+	private final boolean fitsCompleteList(JDFDurationRangeList value, JDFDurationRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -452,8 +446,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFDurationRangeList value,
-			JDFDurationRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFDurationRangeList value, JDFDurationRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -486,8 +479,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsContainedList(JDFDurationRangeList value,
-			JDFDurationRangeList list)
+	private final boolean fitsContainedList(JDFDurationRangeList value, JDFDurationRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

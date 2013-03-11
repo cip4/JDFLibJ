@@ -21,7 +21,7 @@ import org.w3c.dom.DOMException;
  * 
  */
 @Deprecated
-public class JDFSizeIntent extends JDFAutoSizeIntent 
+public class JDFSizeIntent extends JDFAutoSizeIntent
 {
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +32,7 @@ public class JDFSizeIntent extends JDFAutoSizeIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -46,8 +45,7 @@ public class JDFSizeIntent extends JDFAutoSizeIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -61,9 +59,7 @@ public class JDFSizeIntent extends JDFAutoSizeIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

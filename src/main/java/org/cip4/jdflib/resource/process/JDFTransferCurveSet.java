@@ -25,8 +25,7 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

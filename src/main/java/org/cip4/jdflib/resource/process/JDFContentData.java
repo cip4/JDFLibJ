@@ -105,8 +105,7 @@ public class JDFContentData extends JDFAutoContentData
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFContentData(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -119,8 +118,7 @@ public class JDFContentData extends JDFAutoContentData
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFContentData(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,8 +153,7 @@ public class JDFContentData extends JDFAutoContentData
 			if (cd == this)
 				return n;
 			n++;
-			cd = (JDFContentData) cd.getNextSiblingElement(
-					ElementName.CONTENTDATA, null);
+			cd = (JDFContentData) cd.getNextSiblingElement(ElementName.CONTENTDATA, null);
 		}
 		return -1;
 

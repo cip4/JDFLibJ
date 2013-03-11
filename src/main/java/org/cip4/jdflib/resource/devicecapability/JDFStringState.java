@@ -101,20 +101,12 @@ public class JDFStringState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH,
-				0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null,
-				null);
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP,
-				0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTLENGTH,
-				0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null,
-				null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTREGEXP,
-				0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDREGEXP, 0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTREGEXP, 0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
 	}
 
 	@Override
@@ -153,8 +145,7 @@ public class JDFStringState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFStringState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFStringState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,8 +158,7 @@ public class JDFStringState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFStringState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFStringState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -198,8 +188,7 @@ public class JDFStringState extends JDFAbstractState
 
 	public String getCurrentValue()
 	{
-		return getAttribute(AttributeName.CURRENTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public void setDefaultValue(String value)
@@ -209,8 +198,7 @@ public class JDFStringState extends JDFAbstractState
 
 	public String getDefaultValue()
 	{
-		return getAttribute(AttributeName.DEFAULTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public void setAllowedRegExp(String value)
@@ -404,8 +392,7 @@ public class JDFStringState extends JDFAbstractState
 	@Override
 	public final boolean fitsValue(String value, EnumFitsValue testlists)
 	{
-		return (fitsLength(value, testlists) && fitsRegExp(value, testlists) && fitsValueElem(
-				value, testlists));
+		return (fitsLength(value, testlists) && fitsRegExp(value, testlists) && fitsValueElem(value, testlists));
 	}
 
 	/**
@@ -423,8 +410,7 @@ public class JDFStringState extends JDFAbstractState
 	 */
 	private final boolean fitsValueElem(String str, EnumFitsValue valuelist)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
@@ -440,7 +426,8 @@ public class JDFStringState extends JDFAbstractState
 					if (value.compareTo(str) == 0)
 						return true; // we have found it
 				}
-			} else
+			}
+			else
 			{
 				hasValue = true;
 				String value = getValueAllowedValue(i);

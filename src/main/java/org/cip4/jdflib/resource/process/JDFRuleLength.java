@@ -21,8 +21,7 @@ public class JDFRuleLength extends JDFAutoStation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -35,8 +34,7 @@ public class JDFRuleLength extends JDFAutoStation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -50,8 +48,7 @@ public class JDFRuleLength extends JDFAutoStation
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -104,8 +104,7 @@ public class JDFTile extends JDFAutoTile
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,8 +117,7 @@ public class JDFTile extends JDFAutoTile
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,8 +131,7 @@ public class JDFTile extends JDFAutoTile
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,8 +165,7 @@ public class JDFTile extends JDFAutoTile
 	@Override
 	public JDFMarkObject getCreateMarkObject(int iSkip)
 	{
-		return (JDFMarkObject) getCreateElement_KElement(
-				ElementName.MARKOBJECT, null, iSkip);
+		return (JDFMarkObject) getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
 	}
 
 	/**

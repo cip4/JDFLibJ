@@ -38,8 +38,7 @@ public class JDFByteMap extends JDFAutoByteMap
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFByteMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFByteMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -52,8 +51,7 @@ public class JDFByteMap extends JDFAutoByteMap
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFByteMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFByteMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -79,8 +77,7 @@ public class JDFByteMap extends JDFAutoByteMap
 	 */
 	public JDFFileSpec getRasterFileLocation()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
-				true, 0, false);
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
 		final int siz = v.size();
 
 		for (int i = 0; i < siz; i++)

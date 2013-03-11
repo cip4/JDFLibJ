@@ -68,14 +68,14 @@
  *  
  * 
  *//**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFPreflightReport.java
- *
- * Last changes
- *
- */
+*
+* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFPreflightReport.java
+*
+* Last changes
+*
+*/
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -101,8 +101,7 @@ public class JDFPRItem extends JDFAutoPRItem
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,8 +114,7 @@ public class JDFPRItem extends JDFAutoPRItem
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,8 +128,7 @@ public class JDFPRItem extends JDFAutoPRItem
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFPRItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,8 +152,7 @@ public class JDFPRItem extends JDFAutoPRItem
 	 */
 	public JDFPRGroup getPRGroup(JDFAttributeMap groupMap)
 	{
-		VElement v = getChildElementVector(ElementName.PRGROUP, null, null,
-				true, -1, false);
+		VElement v = getChildElementVector(ElementName.PRGROUP, null, null, true, -1, false);
 		for (int i = 0; i < v.size(); i++)
 		{
 			JDFPRGroup pg = (JDFPRGroup) v.elementAt(i);
@@ -213,7 +209,8 @@ public class JDFPRItem extends JDFAutoPRItem
 		if (irl == null)
 		{
 			setPageSet(new JDFIntegerRangeList(new JDFIntegerRange(pageSet)));
-		} else if (!irl.inRange(pageSet))
+		}
+		else if (!irl.inRange(pageSet))
 		{
 			irl.append(pageSet);
 			irl.normalize(true);

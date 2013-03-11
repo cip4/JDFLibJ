@@ -160,12 +160,12 @@ public class ScanfReader extends Reader
 	public int getLookAheadChar()
 	{
 		int i = 0;
-		
+
 		if (curCharValid)
 		{
 			i = curChar;
 		}
-		
+
 		return i;
 	}
 
@@ -194,7 +194,7 @@ public class ScanfReader extends Reader
 	{
 		int offLocal = off;
 		int lenLocal = len;
-		
+
 		int n;
 		int c;
 		int n0 = 0;
@@ -228,8 +228,7 @@ public class ScanfReader extends Reader
 		{
 			return -1;
 		}
-		
-		
+
 		for (int i = 0; i < n; i++)
 		{
 			c = cbuf[offLocal + i];
@@ -576,7 +575,7 @@ public class ScanfReader extends Reader
 			{
 				throw new EOFException("EOF");
 			}
-			
+
 			throw new ScanfMatchException("Malformed floating point number: no digits");
 		}
 
@@ -590,7 +589,7 @@ public class ScanfReader extends Reader
 				{
 					throw new EOFException("EOF");
 				}
-				
+
 				throw new ScanfMatchException("Malformed floating point number: no digits in exponent");
 			}
 
@@ -926,7 +925,7 @@ public class ScanfReader extends Reader
 						{
 							throw new ScanfMatchException("Malformed hex integer");
 						}
-						
+
 						consumeAndReplaceChar();
 						ccnt++;
 
@@ -934,7 +933,7 @@ public class ScanfReader extends Reader
 						{
 							throw new ScanfMatchException("Malformed hex integer");
 						}
-						
+
 						val = scanHex(defaultHexFmt, width - ccnt);
 					}
 					else
@@ -1186,7 +1185,7 @@ public class ScanfReader extends Reader
 	private final boolean acceptChar(char c, int width) throws IOException
 	{
 		boolean accept = false;
-		
+
 		if ((curChar == c) && (bcnt < width))
 		{
 			buffer[bcnt++] = (char) curChar;
@@ -1202,7 +1201,7 @@ public class ScanfReader extends Reader
 
 			accept = true;
 		}
-		
+
 		return accept;
 	}
 
@@ -1314,8 +1313,7 @@ public class ScanfReader extends Reader
 			{
 				if (curChar != c)
 				{
-					throw new ScanfMatchException("Char '" + (char) curChar + "' does not match char '" + c
-							+ "' in format");
+					throw new ScanfMatchException("Char '" + (char) curChar + "' does not match char '" + c + "' in format");
 				}
 
 				consumeAndReplaceChar();
@@ -1331,7 +1329,7 @@ public class ScanfReader extends Reader
 	private char[] scanChars(ScanfFormat fmt, int w) throws IOException, IllegalArgumentException
 	{
 		int wLocal = w;
-		
+
 		if (wLocal == -1)
 		{
 			wLocal = 1;
@@ -1371,7 +1369,7 @@ public class ScanfReader extends Reader
 	private long scanDec(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
-		
+
 		if (widthLocal == -1)
 		{
 			widthLocal = 1000000000;
@@ -1438,7 +1436,7 @@ public class ScanfReader extends Reader
 	private long scanHex(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
-		
+
 		if (widthLocal == -1)
 		{
 			widthLocal = 1000000000;
@@ -1498,7 +1496,7 @@ public class ScanfReader extends Reader
 	private long scanOct(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
 		int widthLocal = width;
-		
+
 		if (widthLocal == -1)
 		{
 			widthLocal = 1000000000;

@@ -24,8 +24,7 @@ public class JDFchoice extends JDFAutochoice
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFchoice(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFchoice(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -38,8 +37,7 @@ public class JDFchoice extends JDFAutochoice
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFchoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFchoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -53,8 +51,7 @@ public class JDFchoice extends JDFAutochoice
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFchoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFchoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -27,8 +27,7 @@ public class JDFModuleCap extends JDFAutoModuleCap
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFModuleCap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFModuleCap(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -41,8 +40,7 @@ public class JDFModuleCap extends JDFAutoModuleCap
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFModuleCap(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -56,9 +54,7 @@ public class JDFModuleCap extends JDFAutoModuleCap
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFModuleCap(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -22,8 +22,7 @@ public class JDFDBRules extends JDFAutoDBRules
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -36,8 +35,7 @@ public class JDFDBRules extends JDFAutoDBRules
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -51,8 +49,7 @@ public class JDFDBRules extends JDFAutoDBRules
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFDBRules(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

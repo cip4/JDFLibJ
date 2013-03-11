@@ -29,8 +29,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -43,8 +42,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -58,8 +56,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -67,9 +64,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x22222222,
-				AttributeInfo.EnumAttributeType.enumeration, EnumSide
-						.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
 	}
 
 	@Override

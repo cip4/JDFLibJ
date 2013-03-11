@@ -105,36 +105,20 @@ public class JDFShapeState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.ShapeRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDX, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDY, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDZ, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.ShapeRangeList,
-				null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESENTX, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESENTY, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESENTZ, 0x33333311,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDX, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDY, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDZ, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESENTX, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESENTY, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESENTZ, 0x33333311, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
 	}
 
 	@Override
@@ -173,8 +157,7 @@ public class JDFShapeState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -187,8 +170,7 @@ public class JDFShapeState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFShapeState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -221,10 +203,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFShape(getAttribute(AttributeName.CURRENTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFShape");
+			throw new JDFException("JDFShapeState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFShape");
 		}
 	}
 
@@ -238,10 +220,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFShape(getAttribute(AttributeName.DEFAULTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFShape");
+			throw new JDFException("JDFShapeState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFShape");
 		}
 	}
 
@@ -254,13 +236,12 @@ public class JDFShapeState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.ALLOWEDVALUELIST, null, null);
+			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			return attribute == null ? null : new JDFShapeRangeList(attribute);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not capable to create JDFShapeRangeList");
+			throw new JDFException("JDFShapeState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not capable to create JDFShapeRangeList");
 		}
 	}
 
@@ -275,12 +256,11 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFShapeRangeList(
-						getAttribute(AttributeName.PRESENTVALUELIST));
-			} catch (DataFormatException e)
+				return new JDFShapeRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentValueList: Attribute PRESENTVALUELIST is not capable to create JDFShapeRangeList");
+				throw new JDFException("JDFShapeState.getPresentValueList: Attribute PRESENTVALUELIST is not capable to create JDFShapeRangeList");
 			}
 		}
 		return getAllowedValueList();
@@ -296,10 +276,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDX));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getAllowedX: Attribute ALLOWEDX is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeState.getAllowedX: Attribute ALLOWEDX is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -314,12 +294,11 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFNumberRangeList(
-						getAttribute(AttributeName.PRESENTX));
-			} catch (DataFormatException e)
+				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTX));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentX: Attribute PRESENTX is not capable to create JDFNumberRangeList");
+				throw new JDFException("JDFShapeState.getPresentX: Attribute PRESENTX is not capable to create JDFNumberRangeList");
 			}
 		}
 		return getAllowedX();
@@ -335,10 +314,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDY));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getAllowedY: Attribute ALLOWEDY is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeState.getAllowedY: Attribute ALLOWEDY is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -353,12 +332,11 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFNumberRangeList(
-						getAttribute(AttributeName.PRESENTY));
-			} catch (DataFormatException e)
+				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTY));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentY: Attribute PRESENTY is not capable to create JDFNumberRangeList");
+				throw new JDFException("JDFShapeState.getPresentY: Attribute PRESENTY is not capable to create JDFNumberRangeList");
 			}
 		}
 		return getAllowedY();
@@ -374,10 +352,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDZ));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getAllowedZ: Attribute ALLOWEDZ is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeState.getAllowedZ: Attribute ALLOWEDZ is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -392,12 +370,11 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFNumberRangeList(
-						getAttribute(AttributeName.PRESENTZ));
-			} catch (DataFormatException e)
+				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTZ));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentZ: Attribute PRESENTZ is not capable to create JDFNumberRangeList");
+				throw new JDFException("JDFShapeState.getPresentZ: Attribute PRESENTZ is not capable to create JDFNumberRangeList");
 			}
 		}
 		return getAllowedZ();
@@ -413,10 +390,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFShape(getAttribute(AttributeName.ALLOWEDVALUEMAX));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not capable to create JDFShape");
+			throw new JDFException("JDFShapeState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not capable to create JDFShape");
 		}
 	}
 
@@ -432,10 +409,10 @@ public class JDFShapeState extends JDFAbstractState
 			try
 			{
 				return new JDFShape(getAttribute(AttributeName.PRESENTVALUEMAX));
-			} catch (DataFormatException e)
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentValueMax: Attribute PRESENTVALUEMAX is not capable to create JDFShape");
+				throw new JDFException("JDFShapeState.getPresentValueMax: Attribute PRESENTVALUEMAX is not capable to create JDFShape");
 			}
 
 		}
@@ -452,10 +429,10 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			return new JDFShape(getAttribute(AttributeName.ALLOWEDVALUEMIN));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not capable to create JDFShape");
+			throw new JDFException("JDFShapeState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not capable to create JDFShape");
 		}
 	}
 
@@ -471,10 +448,10 @@ public class JDFShapeState extends JDFAbstractState
 			try
 			{
 				return new JDFShape(getAttribute(AttributeName.PRESENTVALUEMIN));
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
-				throw new JDFException(
-						"JDFShapeState.getPresentValueMin: Attribute PRESENTVALUEMIN is not capable to create JDFShape");
+				throw new JDFException("JDFShapeState.getPresentValueMin: Attribute PRESENTVALUEMIN is not capable to create JDFShape");
 			}
 
 		}
@@ -501,7 +478,8 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			rect = new JDFShape(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -548,13 +526,13 @@ public class JDFShapeState extends JDFAbstractState
 		try
 		{
 			rangelist = new JDFShapeRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
 
-		return (fitsValueList(rangelist, testlists) && fitsXYZ(rangelist,
-				testlists));
+		return (fitsValueList(rangelist, testlists) && fitsXYZ(rangelist, testlists));
 
 	}
 
@@ -570,14 +548,14 @@ public class JDFShapeState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFShapeRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFShapeRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFShapeRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -588,10 +566,12 @@ public class JDFShapeState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -649,7 +629,8 @@ public class JDFShapeState extends JDFAbstractState
 				x = getAllowedX();
 				y = getAllowedY();
 				z = getAllowedZ();
-			} else
+			}
+			else
 			{
 				x = getPresentX();
 				y = getPresentY();
@@ -692,8 +673,7 @@ public class JDFShapeState extends JDFAbstractState
 	 *            testlist, either AllowedValueList or PresentValueList.
 	 * 
 	 */
-	private final boolean fitsCompleteList(JDFShapeRangeList value,
-			JDFShapeRangeList list)
+	private final boolean fitsCompleteList(JDFShapeRangeList value, JDFShapeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -738,8 +718,7 @@ public class JDFShapeState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFShapeRangeList value,
-			JDFShapeRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFShapeRangeList value, JDFShapeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -771,8 +750,7 @@ public class JDFShapeState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFShapeRangeList value,
-			JDFShapeRangeList list)
+	private final boolean fitsContainedList(JDFShapeRangeList value, JDFShapeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

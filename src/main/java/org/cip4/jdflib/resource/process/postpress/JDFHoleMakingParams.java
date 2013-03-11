@@ -23,8 +23,7 @@ public class JDFHoleMakingParams extends JDFAutoHoleMakingParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -36,8 +35,7 @@ public class JDFHoleMakingParams extends JDFAutoHoleMakingParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -50,8 +48,7 @@ public class JDFHoleMakingParams extends JDFAutoHoleMakingParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFHoleMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

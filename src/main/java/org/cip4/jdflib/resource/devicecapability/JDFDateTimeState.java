@@ -106,24 +106,12 @@ public class JDFDateTimeState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(
-				AttributeName.ALLOWEDVALUEDURATIONLIST, 0x33333311,
-				AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.DateTimeRangeList,
-				null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.dateTime, null,
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.dateTime, null,
-				null);
-		atrInfoTable[4] = new AtrInfoTable(
-				AttributeName.PRESENTVALUEDURATIONLIST, 0x33333311,
-				AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.DateTimeRangeList,
-				null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUEDURATIONLIST, 0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTVALUEDURATIONLIST, 0x33333311, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
 	}
 
 	@Override
@@ -150,8 +138,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -163,8 +150,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -177,8 +163,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -206,8 +191,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 */
 	public void setCurrentValue(JDFDate value)
 	{
-		setAttribute(AttributeName.CURRENTVALUE, value.getDateTimeISO(),
-				JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.CURRENTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -218,14 +202,14 @@ public class JDFDateTimeState extends JDFAbstractState
 	public JDFDate getCurrentValue()
 	{
 		JDFDate currentValue = null;
-		String str = getAttribute(AttributeName.CURRENTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		String str = getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
 		if (!JDFConstants.EMPTYSTRING.equals(str))
 		{
 			try
 			{
 				currentValue = new JDFDate(str);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				throw new JDFException("not a valid date string. Malformed JDF");
 			}
@@ -241,8 +225,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 */
 	public void setDefaultValue(JDFDate value)
 	{
-		setAttribute(AttributeName.DEFAULTVALUE, value.getDateTimeISO(),
-				JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.DEFAULTVALUE, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -253,14 +236,14 @@ public class JDFDateTimeState extends JDFAbstractState
 	public JDFDate getDefaultValue()
 	{
 		JDFDate defaultValue = null;
-		String str = getAttribute(AttributeName.DEFAULTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		String str = getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
 		if (!JDFConstants.EMPTYSTRING.equals(str))
 		{
 			try
 			{
 				defaultValue = new JDFDate(str);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				throw new JDFException("not a valid date string. Malformed JDF");
 			}
@@ -288,11 +271,11 @@ public class JDFDateTimeState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.ALLOWEDVALUELIST, null, null);
+			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			if (attribute != null)
 				return new JDFDateTimeRangeList(attribute);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			// nop
 		}
@@ -322,9 +305,9 @@ public class JDFDateTimeState extends JDFAbstractState
 			JDFDateTimeRangeList r = null;
 			try
 			{
-				r = new JDFDateTimeRangeList(
-						getAttribute(AttributeName.PRESENTVALUELIST));
-			} catch (DataFormatException dfe)
+				r = new JDFDateTimeRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
+			}
+			catch (DataFormatException dfe)
 			{
 				return null;
 			}
@@ -353,14 +336,14 @@ public class JDFDateTimeState extends JDFAbstractState
 	{
 		JDFDurationRangeList r = null;
 
-		final String allowedValueDurList = getAttribute(
-				AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
+		final String allowedValueDurList = getAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
 		if (allowedValueDurList != null)
 		{
 			try
 			{
 				r = new JDFDurationRangeList(allowedValueDurList);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return null;
 			}
@@ -391,9 +374,9 @@ public class JDFDateTimeState extends JDFAbstractState
 			JDFDurationRangeList r = null;
 			try
 			{
-				r = new JDFDurationRangeList(
-						getAttribute(AttributeName.PRESENTVALUEDURATIONLIST));
-			} catch (DataFormatException dfe)
+				r = new JDFDurationRangeList(getAttribute(AttributeName.PRESENTVALUEDURATIONLIST));
+			}
+			catch (DataFormatException dfe)
 			{
 				return null;
 			}
@@ -422,7 +405,8 @@ public class JDFDateTimeState extends JDFAbstractState
 		try
 		{
 			date = new JDFDate(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -469,13 +453,13 @@ public class JDFDateTimeState extends JDFAbstractState
 			try
 			{
 				rangelist = new JDFDateTimeRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
 
-			return (fitsValueList(rangelist, testlists) && fitsValueDurationList(
-					rangelist, testlists));
+			return (fitsValueList(rangelist, testlists) && fitsValueDurationList(rangelist, testlists));
 		}
 		return false; // the value doesn't fit ListType attribute of this State
 	}
@@ -492,14 +476,14 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFDateTimeRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFDateTimeRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -510,10 +494,12 @@ public class JDFDateTimeState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -533,15 +519,15 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * @return boolean - true, if the duration of the defined rangelist is in
 	 *         <code>valueList</code> or if ValueDurationList is not specified
 	 */
-	private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFDurationRangeList list;
 
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueDurationList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueDurationList();
 		}
@@ -553,8 +539,7 @@ public class JDFDateTimeState extends JDFAbstractState
 		{
 			JDFDateTimeRange range = (JDFDateTimeRange) rangelist.at(i);
 
-			int duration = (int) ((range.getRight().getTimeInMillis() - range
-					.getLeft().getTimeInMillis()) / 1000);
+			int duration = (int) ((range.getRight().getTimeInMillis() - range.getLeft().getTimeInMillis()) / 1000);
 			JDFDuration d = new JDFDuration();
 			d.setDuration(duration);
 			if (!list.inRange(d))
@@ -575,8 +560,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFDateTimeRangeList value,
-			JDFDateTimeRangeList list)
+	private final boolean fitsCompleteList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -622,8 +606,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFDateTimeRangeList value,
-			JDFDateTimeRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -656,8 +639,7 @@ public class JDFDateTimeState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFDateTimeRangeList value,
-			JDFDateTimeRangeList list)
+	private final boolean fitsContainedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

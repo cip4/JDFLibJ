@@ -115,8 +115,7 @@ public class JDFSurface extends JDFSheet
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,8 +128,7 @@ public class JDFSurface extends JDFSheet
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -138,12 +136,8 @@ public class JDFSurface extends JDFSheet
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333,
-				AttributeInfo.EnumAttributeType.enumeration, EnumSide
-						.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX,
-				0x44444333, AttributeInfo.EnumAttributeType.rectangle, null,
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
@@ -176,17 +170,17 @@ public class JDFSurface extends JDFSheet
 	public IPlacedObject getPlacedObject(int nSkip)
 	{
 		int nSkipLocal = nSkip;
-		
+
 		if (nSkipLocal < 0)
 		{
 			VElement v = getPlacedObjectVector();
 			if (v == null)
 				return null;
-			
+
 			nSkipLocal = nSkipLocal + v.size();
 			if (nSkipLocal < 0)
 				return null;
-			
+
 			return (IPlacedObject) v.elementAt(nSkipLocal);
 		}
 
@@ -198,13 +192,13 @@ public class JDFSurface extends JDFSheet
 			{
 				if (nFound >= nSkipLocal)
 					return (IPlacedObject) n;
-				
+
 				nFound++;
 			}
-			
+
 			n = n.getNextSibling();
 		}
-		
+
 		return null;
 	}
 

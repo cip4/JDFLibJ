@@ -101,12 +101,9 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEMOD, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEMOD, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -121,8 +118,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,8 +130,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,8 +143,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,13 +175,12 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			return new JDFNumberRangeList(getAttribute(AttributeName.VALUELIST,
-					JDFConstants.EMPTYSTRING, null));
+			return new JDFNumberRangeList(getAttribute(AttributeName.VALUELIST, JDFConstants.EMPTYSTRING, null));
 
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFNumberEvaluation.setValueList: Attribute VALUELIST not applicable to create a JDFNumberRangeList");
+			throw new JDFException("JDFNumberEvaluation.setValueList: Attribute VALUELIST not applicable to create a JDFNumberRangeList");
 		}
 
 	}
@@ -213,10 +206,10 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.VALUEMOD));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFNumberEvaluation.setValueMod: Attribute AllowedValueMod is not applicable to create JDFXYPair");
+			throw new JDFException("JDFNumberEvaluation.setValueMod: Attribute AllowedValueMod is not applicable to create JDFXYPair");
 		}
 	}
 
@@ -243,7 +236,8 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFNumberRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -275,27 +269,28 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFNumberRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return (StringUtil.isNumber(value));
-		} else if (listType.equals(EnumListType.RangeList)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.RangeList) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List)
-				|| listType.equals(EnumListType.CompleteList) || // complete or
-																	// not -
-																	// tested in
-																	// fitsValueList
+		}
+		else if (listType.equals(EnumListType.List) || listType.equals(EnumListType.CompleteList) || // complete or
+																										// not -
+																										// tested in
+																										// fitsValueList
 				listType.equals(EnumListType.CompleteOrderedList) || // tested
 																		// in
 																		// fitsValueList
@@ -303,28 +298,34 @@ public class JDFNumberEvaluation extends JDFEvaluation
 																// fitsValueList
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFNumberEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFNumberEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -349,10 +350,12 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, valuelist);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, valuelist);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, valuelist);
 		}
@@ -403,7 +406,8 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		{
 			nt = getTolerance().getX();
 			pt = getTolerance().getY();
-		} else
+		}
+		else
 		{
 			nt = pt = EPSILON;
 		}
@@ -435,8 +439,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * @return NumberRangeList - expanded rangelist, returns original range if
 	 *         Tolerance=="0 0"
 	 */
-	public final JDFNumberRangeList fitsTolerance(
-			JDFNumberRangeList origRangeList)
+	public final JDFNumberRangeList fitsTolerance(JDFNumberRangeList origRangeList)
 	{
 		double nt = getTolerance().getX(); // negative tolerance
 		double pt = getTolerance().getY(); // positive tolerance
@@ -472,8 +475,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 *            ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsCompleteList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -517,8 +519,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 *            ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -549,8 +550,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 *            ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsContainedList(JDFNumberRangeList value,
-			JDFNumberRangeList list)
+	private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

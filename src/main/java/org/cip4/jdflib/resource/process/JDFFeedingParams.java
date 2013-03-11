@@ -20,8 +20,7 @@ public class JDFFeedingParams extends JDFAutoFeedingParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFFeedingParams extends JDFAutoFeedingParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFFeedingParams extends JDFAutoFeedingParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

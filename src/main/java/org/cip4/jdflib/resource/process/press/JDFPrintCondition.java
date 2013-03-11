@@ -94,8 +94,7 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,8 +107,7 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,9 +121,7 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

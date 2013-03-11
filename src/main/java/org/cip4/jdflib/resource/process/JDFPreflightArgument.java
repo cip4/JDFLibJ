@@ -94,8 +94,7 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,8 +107,7 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,9 +121,7 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,8 +147,7 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 	 */
 	public JDFBoxArgument appendBoxArgument(EnumBox type)
 	{
-		JDFBoxArgument ba = (JDFBoxArgument) appendElementN(
-				ElementName.BOXARGUMENT, 1, null);
+		JDFBoxArgument ba = (JDFBoxArgument) appendElementN(ElementName.BOXARGUMENT, 1, null);
 		ba.setBox(type);
 		return ba;
 	}

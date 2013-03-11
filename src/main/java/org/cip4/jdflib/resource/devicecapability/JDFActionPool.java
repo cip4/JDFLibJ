@@ -98,8 +98,7 @@ public class JDFActionPool extends JDFAutoActionPool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFActionPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -112,8 +111,7 @@ public class JDFActionPool extends JDFAutoActionPool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFActionPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -127,9 +125,7 @@ public class JDFActionPool extends JDFAutoActionPool
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFActionPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFActionPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,17 +160,16 @@ public class JDFActionPool extends JDFAutoActionPool
 	 *            if true the term is linked directly, if false a the term is
 	 *            inverted by enclosing it in a <not> term
 	 */
-	public JDFAction appendActionTest(EnumTerm term,
-			boolean bActionFailsOnTestTrue)
+	public JDFAction appendActionTest(EnumTerm term, boolean bActionFailsOnTestTrue)
 	{
 		JDFAction action = appendAction();
-		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement()
-				.getCreateElement(ElementName.TESTPOOL);
+		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
 		JDFTest test = null;
 		if (bActionFailsOnTestTrue)
 		{
 			test = testPool.appendTestTerm(term);
-		} else
+		}
+		else
 		{
 			test = testPool.appendTest();
 			((JDFnot) test.appendTerm(EnumTerm.not)).appendTerm(term);
@@ -198,12 +193,10 @@ public class JDFActionPool extends JDFAutoActionPool
 	 * 
 	 * @return the newly created action
 	 */
-	public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm,
-			boolean bActionFailsOnTestTrue)
+	public JDFAction appendActionSetTest(EnumTerm term, EnumTerm setTerm, boolean bActionFailsOnTestTrue)
 	{
 		JDFAction action = appendActionTest(term, bActionFailsOnTestTrue);
-		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement()
-				.getCreateElement(ElementName.TESTPOOL);
+		JDFTestPool testPool = (JDFTestPool) getParentNode_KElement().getCreateElement(ElementName.TESTPOOL);
 		JDFTest setTest = testPool.appendTestTerm(setTerm);
 		action.setPreflightActionSetRef(setTest);
 		return action;
@@ -220,8 +213,7 @@ public class JDFActionPool extends JDFAutoActionPool
 	 * 
 	 * @return the newly created action
 	 */
-	public JDFAction appendExcludeTest(ICapabilityElement t1,
-			ICapabilityElement t2)
+	public JDFAction appendExcludeTest(ICapabilityElement t1, ICapabilityElement t2)
 	{
 		if (t1 == null || t2 == null)
 			return null; // snafu - cant find elements to match
@@ -233,11 +225,9 @@ public class JDFActionPool extends JDFAutoActionPool
 																	// b
 		JDFand and = (JDFand) action.getTestTerm();
 
-		JDFEvaluation ev1 = (JDFEvaluation) and.appendTerm(t1
-				.getEvaluationType());
+		JDFEvaluation ev1 = (JDFEvaluation) and.appendTerm(t1.getEvaluationType());
 		ev1.setrRef(id1);
-		JDFEvaluation ev2 = (JDFEvaluation) and.appendTerm(t2
-				.getEvaluationType());
+		JDFEvaluation ev2 = (JDFEvaluation) and.appendTerm(t2.getEvaluationType());
 		ev2.setrRef(id2);
 
 		return action;

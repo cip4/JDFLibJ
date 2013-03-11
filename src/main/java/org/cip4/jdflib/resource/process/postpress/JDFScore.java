@@ -104,8 +104,7 @@ public class JDFScore extends JDFAutoScore
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFScore(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,8 +117,7 @@ public class JDFScore extends JDFAutoScore
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,8 +131,7 @@ public class JDFScore extends JDFAutoScore
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,9 +139,7 @@ public class JDFScore extends JDFAutoScore
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x33333333,
-				AttributeInfo.EnumAttributeType.enumeration, EnumScoreSide
-						.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumScoreSide.getEnum(0), null);
 	}
 
 	@Override
@@ -189,10 +184,8 @@ public class JDFScore extends JDFAutoScore
 			return iterator(EnumScoreSide.class);
 		}
 
-		public static final EnumScoreSide FromInside = new EnumScoreSide(
-				"FromInside");
-		public static final EnumScoreSide FromOutside = new EnumScoreSide(
-				"FromOutside");
+		public static final EnumScoreSide FromInside = new EnumScoreSide("FromInside");
+		public static final EnumScoreSide FromOutside = new EnumScoreSide("FromOutside");
 	}
 
 	/**
@@ -213,8 +206,7 @@ public class JDFScore extends JDFAutoScore
 	 */
 	public EnumScoreSide getSide()
 	{
-		return EnumScoreSide.getEnum(getAttribute(AttributeName.SIDE, null,
-				null));
+		return EnumScoreSide.getEnum(getAttribute(AttributeName.SIDE, null, null));
 	}
 
 	@Override

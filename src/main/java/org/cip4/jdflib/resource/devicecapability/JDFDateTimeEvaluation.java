@@ -101,11 +101,8 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUEDURATIONLIST,
-				0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUEDURATIONLIST, 0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
 	}
 
 	@Override
@@ -120,8 +117,7 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,8 +129,7 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,8 +142,7 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDateTimeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -191,11 +185,10 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			final String attribute = getAttribute(AttributeName.VALUELIST,
-					null, null);
-			return attribute == null ? null : new JDFDateTimeRangeList(
-					attribute);
-		} catch (DataFormatException dfe)
+			final String attribute = getAttribute(AttributeName.VALUELIST, null, null);
+			return attribute == null ? null : new JDFDateTimeRangeList(attribute);
+		}
+		catch (DataFormatException dfe)
 		{
 			return null;
 		}
@@ -222,9 +215,9 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			return new JDFDurationRangeList(
-					getAttribute(AttributeName.VALUEDURATIONLIST));
-		} catch (DataFormatException dfe)
+			return new JDFDurationRangeList(getAttribute(AttributeName.VALUEDURATIONLIST));
+		}
+		catch (DataFormatException dfe)
 		{
 			return null;
 		}
@@ -254,7 +247,8 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFDateTimeRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -277,16 +271,17 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFDateTimeRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			if (value.indexOf("P") != 0)
 				return false;
@@ -294,44 +289,53 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 			try
 			{
 				new JDFDate(value);
-			} catch (JDFException e)
+			}
+			catch (JDFException e)
 			{
 				return false;
-			} catch (DataFormatException e)
+			}
+			catch (DataFormatException e)
 			{
 				return false;
 			}
 
 			return true;
-		} else if (listType.equals(EnumListType.RangeList)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.RangeList) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFDateTimeEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFDateTimeEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -373,8 +377,7 @@ public class JDFDateTimeEvaluation extends JDFEvaluation
 			{
 				JDFDateTimeRange range = (JDFDateTimeRange) rangelist.at(i);
 
-				int duration = (int) ((range.getRight().getTimeInMillis() - range
-						.getLeft().getTimeInMillis()) / 1000);
+				int duration = (int) ((range.getRight().getTimeInMillis() - range.getLeft().getTimeInMillis()) / 1000);
 				JDFDuration d = new JDFDuration();
 				d.setDuration(duration);
 				if (!list.inRange(d))

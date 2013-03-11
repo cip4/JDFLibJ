@@ -62,8 +62,8 @@ public class JDFPath
 			segNum++;
 		}
 
-		return "Path= [\n" + "\tbox=     " + m_GPI.getBounds() + "\n" + "\twinding= " + m_GPI.getWindingRule() + "\n"
-				+ "\tcurrent= " + m_GPI.getCurrentPoint() + "\n" + "segments:\n" + path + "]";
+		return "Path= [\n" + "\tbox=     " + m_GPI.getBounds() + "\n" + "\twinding= " + m_GPI.getWindingRule() + "\n" + "\tcurrent= " + m_GPI.getCurrentPoint() + "\n"
+				+ "segments:\n" + path + "]";
 	}
 
 	/**

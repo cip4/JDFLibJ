@@ -23,8 +23,7 @@ public class JDFDensityMeasuringField extends JDFAutoDensityMeasuringField
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -37,8 +36,7 @@ public class JDFDensityMeasuringField extends JDFAutoDensityMeasuringField
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -52,9 +50,7 @@ public class JDFDensityMeasuringField extends JDFAutoDensityMeasuringField
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

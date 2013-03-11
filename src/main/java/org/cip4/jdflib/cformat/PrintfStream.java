@@ -16,7 +16,6 @@ package org.cip4.jdflib.cformat;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-
 /**
   * PrintStream which outputs primitive types using C <tt>printf</tt>
   * style formatting. For each primitive type (float, double, char, int, long,
@@ -38,184 +37,184 @@ import java.io.PrintStream;
   */
 public class PrintfStream extends PrintStream
 {
-    //~ Constructors ///////////////////////////////////////////////////////////
+	//~ Constructors ///////////////////////////////////////////////////////////
 
-    /**
-      * Creates a PrintfStream, without automatic line flushing,
-      * from an existing OutputStream.
-      *
-      * @param out An output stream
-      */
-    public PrintfStream(OutputStream pout)
-    {
-        super(pout);
-    }
+	/**
+	  * Creates a PrintfStream, without automatic line flushing,
+	  * from an existing OutputStream.
+	  *
+	  * @param out An output stream
+	  */
+	public PrintfStream(OutputStream pout)
+	{
+		super(pout);
+	}
 
-    /**
-      * Creates a PrintfStream from an existing OutputStream.
-      *
-      * @param out An output stream
-      * @param autoFlush If true, specifies that output flushing will
-      * automatically occur when the println() methods are called,
-      * a byte array is written, or a new line character or byte is
-      * encountered in the output.
-      */
-    public PrintfStream(OutputStream pout, boolean autoFlush)
-    {
-        super(pout, autoFlush);
-    }
+	/**
+	  * Creates a PrintfStream from an existing OutputStream.
+	  *
+	  * @param out An output stream
+	  * @param autoFlush If true, specifies that output flushing will
+	  * automatically occur when the println() methods are called,
+	  * a byte array is written, or a new line character or byte is
+	  * encountered in the output.
+	  */
+	public PrintfStream(OutputStream pout, boolean autoFlush)
+	{
+		super(pout, autoFlush);
+	}
 
-    //~ Methods ////////////////////////////////////////////////////////////////
+	//~ Methods ////////////////////////////////////////////////////////////////
 
-    /**
-      * Prints a double in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x Double to output
-      * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, double x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints a double in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x Double to output
+	  * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, double x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints a float in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x Float to output
-       * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, float x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints a float in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x Float to output
+	   * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, float x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints a long in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x Long to output
-      * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, long x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints a long in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x Long to output
+	  * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, long x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints an int in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x Int to output
-      * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, int x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints an int in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x Int to output
+	  * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, int x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints a String in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x String to output
-      * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, String x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints a String in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x String to output
+	  * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, String x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints a char in accordance with the supplied format string.
-      *
-      * @param fs Format string
-      * @param x Char to output
-      * @throws IllegalArgumentException Malformed format string
-      */
-    public void printf(String fs, char x)
-    {
-        print(new PrintfFormat(fs).tostr(x));
-    }
+	/**
+	  * Prints a char in accordance with the supplied format string.
+	  *
+	  * @param fs Format string
+	  * @param x Char to output
+	  * @throws IllegalArgumentException Malformed format string
+	  */
+	public void printf(String fs, char x)
+	{
+		print(new PrintfFormat(fs).tostr(x));
+	}
 
-    /**
-      * Prints a double in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x Double to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, double x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints a double in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x Double to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, double x)
+	{
+		print(fmt.tostr(x));
+	}
 
-    /**
-      * Prints a float in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x Float to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, float x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints a float in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x Float to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, float x)
+	{
+		print(fmt.tostr(x));
+	}
 
-    /**
-      * Prints a long in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x Long to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, long x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints a long in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x Long to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, long x)
+	{
+		print(fmt.tostr(x));
+	}
 
-    /**
-      * Prints an int in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x Int to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, int x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints an int in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x Int to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, int x)
+	{
+		print(fmt.tostr(x));
+	}
 
-    /**
-      * Prints a String in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x String to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, String x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints a String in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x String to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, String x)
+	{
+		print(fmt.tostr(x));
+	}
 
-    /**
-      * Prints a char in accordance with the supplied
-      * PrintfFormat object.
-      *
-      * @param fmt Formatting object
-      * @param x Char to output
-      * @see PrintfFormat
-      */
-    public void printf(PrintfFormat fmt, char x)
-    {
-        print(fmt.tostr(x));
-    }
+	/**
+	  * Prints a char in accordance with the supplied
+	  * PrintfFormat object.
+	  *
+	  * @param fmt Formatting object
+	  * @param x Char to output
+	  * @see PrintfFormat
+	  */
+	public void printf(PrintfFormat fmt, char x)
+	{
+		print(fmt.tostr(x));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

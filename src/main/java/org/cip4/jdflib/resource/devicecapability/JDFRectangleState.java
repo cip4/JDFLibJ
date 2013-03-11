@@ -104,24 +104,12 @@ public class JDFRectangleState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDHWRELATION,
-				0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null,
-				null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.RectangleRangeList,
-				null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.rectangle, null,
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.rectangle, null,
-				null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTHWRELATION,
-				0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null,
-				null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333311, AttributeInfo.EnumAttributeType.RectangleRangeList,
-				null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDHWRELATION, 0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTHWRELATION, 0x33333311, AttributeInfo.EnumAttributeType.XYRelation, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333311, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
 	}
 
 	@Override
@@ -148,8 +136,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRectangleState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFRectangleState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -161,8 +148,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRectangleState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFRectangleState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -175,8 +161,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRectangleState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFRectangleState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -208,13 +193,12 @@ public class JDFRectangleState extends JDFAbstractState
 	{
 		try
 		{
-			JDFRectangle r = new JDFRectangle(
-					getAttribute(AttributeName.CURRENTVALUE));
+			JDFRectangle r = new JDFRectangle(getAttribute(AttributeName.CURRENTVALUE));
 			return r;
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFRectangleState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFRectangle");
+			throw new JDFException("JDFRectangleState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFRectangle");
 		}
 	}
 
@@ -228,10 +212,10 @@ public class JDFRectangleState extends JDFAbstractState
 		try
 		{
 			return new JDFRectangle(getAttribute(AttributeName.DEFAULTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFRectangleState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFRectangle");
+			throw new JDFException("JDFRectangleState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFRectangle");
 		}
 	}
 
@@ -244,14 +228,12 @@ public class JDFRectangleState extends JDFAbstractState
 	{
 		try
 		{
-			final String attribute = getAttribute(
-					AttributeName.ALLOWEDVALUELIST, null, null);
-			return attribute == null ? null : new JDFRectangleRangeList(
-					attribute);
-		} catch (DataFormatException e)
+			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+			return attribute == null ? null : new JDFRectangleRangeList(attribute);
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFRectangleState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not capable to create JDFRectangleRangeList");
+			throw new JDFException("JDFRectangleState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not capable to create JDFRectangleRangeList");
 		}
 	}
 
@@ -266,12 +248,11 @@ public class JDFRectangleState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFRectangleRangeList(
-						getAttribute(AttributeName.PRESENTVALUELIST));
-			} catch (DataFormatException e)
+				return new JDFRectangleRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFRectangleState.getPresentValueList: Attribute PRESENTVALUELIST is not capable to create JDFRectangleRangeList");
+				throw new JDFException("JDFRectangleState.getPresentValueList: Attribute PRESENTVALUELIST is not capable to create JDFRectangleRangeList");
 			}
 		}
 		return getAllowedValueList();
@@ -284,8 +265,7 @@ public class JDFRectangleState extends JDFAbstractState
 
 	public JDFElement.EnumXYRelation getAllowedHWRelation()
 	{
-		return JDFElement.EnumXYRelation.getEnum(getAttribute(
-				AttributeName.ALLOWEDHWRELATION, null, null));
+		return JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.ALLOWEDHWRELATION, null, null));
 	}
 
 	public void setPresentHWRelation(EnumXYRelation value)
@@ -295,9 +275,7 @@ public class JDFRectangleState extends JDFAbstractState
 
 	public JDFElement.EnumXYRelation getPresentHWRelation()
 	{
-		JDFElement.EnumXYRelation rel = JDFElement.EnumXYRelation
-				.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null,
-						null));
+		JDFElement.EnumXYRelation rel = JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null, null));
 
 		if (rel == null)
 		{
@@ -327,7 +305,8 @@ public class JDFRectangleState extends JDFAbstractState
 		try
 		{
 			rect = new JDFRectangle(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -373,7 +352,8 @@ public class JDFRectangleState extends JDFAbstractState
 			try
 			{
 				rrl = new JDFRectangleRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
@@ -394,10 +374,10 @@ public class JDFRectangleState extends JDFAbstractState
 				if (left.equals(right))
 				{
 					bFitsHW = fitsHWRelation(left, testlists);
-				} else
+				}
+				else
 				{
-					bFitsHW = fitsHWRelation(left, testlists)
-							&& fitsHWRelation(right, testlists);
+					bFitsHW = fitsHWRelation(left, testlists) && fitsHWRelation(right, testlists);
 				}
 				if (!bFitsHW)
 					return false;
@@ -420,14 +400,14 @@ public class JDFRectangleState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFRectangleRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFRectangleRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFRectangleRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -438,10 +418,12 @@ public class JDFRectangleState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -468,15 +450,15 @@ public class JDFRectangleState extends JDFAbstractState
 	 * @return boolean - true, if <code>rect</code> matches hwrelation or if
 	 *         AllowedHWRelation is not specified
 	 */
-	private final boolean fitsHWRelation(JDFRectangle rect,
-			EnumFitsValue hwrelation)
+	private final boolean fitsHWRelation(JDFRectangle rect, EnumFitsValue hwrelation)
 	{
 		EnumXYRelation relation;
 
 		if (hwrelation.equals(EnumFitsValue.Allowed))
 		{
 			relation = getAllowedHWRelation();
-		} else
+		}
+		else
 		{
 			relation = getPresentHWRelation();
 		}
@@ -501,8 +483,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFRectangleRangeList value,
-			JDFRectangleRangeList list)
+	private final boolean fitsCompleteList(JDFRectangleRangeList value, JDFRectangleRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -547,8 +528,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFRectangleRangeList value,
-			JDFRectangleRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFRectangleRangeList value, JDFRectangleRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -579,8 +559,7 @@ public class JDFRectangleState extends JDFAbstractState
 	 *            ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsContainedList(JDFRectangleRangeList value,
-			JDFRectangleRangeList list)
+	private final boolean fitsContainedList(JDFRectangleRangeList value, JDFRectangleRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

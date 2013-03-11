@@ -24,8 +24,7 @@ public class JDFGlueApplication extends JDFAutoGlueApplication
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -38,8 +37,7 @@ public class JDFGlueApplication extends JDFAutoGlueApplication
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -53,9 +51,7 @@ public class JDFGlueApplication extends JDFAutoGlueApplication
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -20,8 +20,7 @@ public class JDFDigitalDeliveryParams extends JDFAutoDigitalDeliveryParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFDigitalDeliveryParams extends JDFAutoDigitalDeliveryParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFDigitalDeliveryParams extends JDFAutoDigitalDeliveryParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

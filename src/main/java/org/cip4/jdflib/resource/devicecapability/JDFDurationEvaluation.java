@@ -98,8 +98,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
 	}
 
 	@Override
@@ -114,8 +113,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,8 +125,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,8 +138,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDurationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,9 +181,9 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			return new JDFDurationRangeList(
-					getAttribute(AttributeName.VALUELIST));
-		} catch (DataFormatException dfe)
+			return new JDFDurationRangeList(getAttribute(AttributeName.VALUELIST));
+		}
+		catch (DataFormatException dfe)
 		{
 			return null;
 		}
@@ -217,7 +213,8 @@ public class JDFDurationEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFDurationRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -240,16 +237,17 @@ public class JDFDurationEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFDurationRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 
 			if (value.indexOf("P") != 0)
@@ -258,44 +256,53 @@ public class JDFDurationEvaluation extends JDFEvaluation
 			try
 			{
 				new JDFDuration(value);
-			} catch (JDFException e)
+			}
+			catch (JDFException e)
 			{
 				return false;
-			} catch (DataFormatException e)
+			}
+			catch (DataFormatException e)
 			{
 				return false;
 			}
 
 			return true;
-		} else if (listType.equals(EnumListType.RangeList)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.RangeList) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFDurationEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFDurationEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 

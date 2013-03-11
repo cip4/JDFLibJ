@@ -25,8 +25,7 @@ public class JDFIDPStitching extends JDFAutoIDPStitching
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFIDPStitching extends JDFAutoIDPStitching
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFIDPStitching extends JDFAutoIDPStitching
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFIDPStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

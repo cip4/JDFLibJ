@@ -20,8 +20,7 @@ public class JDFManualLaborParams extends JDFAutoManualLaborParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFManualLaborParams extends JDFAutoManualLaborParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFManualLaborParams extends JDFAutoManualLaborParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFManualLaborParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

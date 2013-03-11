@@ -20,8 +20,7 @@ public class JDFCCITTFaxParams extends JDFAutoCCITTFaxParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFCCITTFaxParams extends JDFAutoCCITTFaxParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFCCITTFaxParams extends JDFAutoCCITTFaxParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

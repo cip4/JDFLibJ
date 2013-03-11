@@ -74,7 +74,8 @@ package org.cip4.jdflib.util;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class ThreadUtil {
+public class ThreadUtil
+{
 	/**
 	 * 
 	 * 
@@ -83,12 +84,14 @@ public class ThreadUtil {
 	 * @deprecated use org.cip4.jdflib.util.thread.MyMutex
 	 */
 	@Deprecated
-	public static class MyMutex extends org.cip4.jdflib.util.thread.MyMutex {
+	public static class MyMutex extends org.cip4.jdflib.util.thread.MyMutex
+	{
 
 		/**
 		 * 
 		 */
-		public MyMutex() {
+		public MyMutex()
+		{
 			super();
 		}
 
@@ -101,7 +104,8 @@ public class ThreadUtil {
 	 * 11.12.2008
 	 * @param <a> the returned object data type
 	 */
-	public static abstract class WaitTimeout<a> implements Runnable {
+	public static abstract class WaitTimeout<a> implements Runnable
+	{
 		/**
 		 * this is the handle routine that may take longer <br/>
 		 * it should return the expected object when completed
@@ -113,7 +117,8 @@ public class ThreadUtil {
 		/**
 		 * called prior to starting thread, overwrite to initialize in the constructor
 		 */
-		private void setup() {
+		private void setup()
+		{
 			baseName = "WaitThread";
 		}
 
@@ -127,7 +132,8 @@ public class ThreadUtil {
 		/**
 		 * @param millis wait timeout in milliseconds
 		 */
-		public WaitTimeout(final int millis) {
+		public WaitTimeout(final int millis)
+		{
 
 			waitMillis = millis;
 			theObject = null;
@@ -140,14 +146,16 @@ public class ThreadUtil {
 		 * 
 		 * start the thread
 		 */
-		public final void start() {
+		public final void start()
+		{
 			myThread.start();
 		}
 
 		/**
 		 * @see java.lang.Runnable#run()
 		 */
-		public final void run() {
+		public final void run()
+		{
 			theObject = handle();
 			ThreadUtil.notifyAll(mutex);
 			mutex = null;
@@ -156,8 +164,10 @@ public class ThreadUtil {
 		/**
 		 * @return the object that you waited for, null if the timeout is reached
 		 */
-		public final a getWaitedObject() {
-			if (mutex != null) {
+		public final a getWaitedObject()
+		{
+			if (mutex != null)
+			{
 				ThreadUtil.wait(mutex, waitMillis);
 				mutex = null;
 			}
@@ -172,13 +182,17 @@ public class ThreadUtil {
 	 * @param millis
 	 * @return true if normal exit, false if interupted
 	 */
-	public static boolean sleep(final int millis) {
+	public static boolean sleep(final int millis)
+	{
 		if (millis <= 0)
 			return true;
-		try {
+		try
+		{
 			Thread.sleep(millis);
 			return true;
-		} catch (final InterruptedException x) {
+		}
+		catch (final InterruptedException x)
+		{
 			return false;
 		}
 	}
@@ -189,16 +203,20 @@ public class ThreadUtil {
 	 * @param millis
 	 * @return true if normal exit, false if interupted
 	 */
-	public static boolean join(final Thread thread, int millis) {
+	public static boolean join(final Thread thread, int millis)
+	{
 		if (thread == null)
 			return true;
-		try {
+		try
+		{
 			if (millis <= 0)
 				thread.join();
 			else
 				thread.join(millis);
 			return true;
-		} catch (final InterruptedException x) {
+		}
+		catch (final InterruptedException x)
+		{
 			return false;
 		}
 	}
@@ -210,19 +228,26 @@ public class ThreadUtil {
 	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
 	 * @return true if normal exit, false if interupted or mutex is null
 	 */
-	public static boolean wait(final Object mutex, int millis) {
-		if (mutex == null) {
+	public static boolean wait(final Object mutex, int millis)
+	{
+		if (mutex == null)
+		{
 			return false;
 		}
-		if (millis < 0) {
+		if (millis < 0)
+		{
 			millis = 0;
 		}
-		try {
-			synchronized (mutex) {
+		try
+		{
+			synchronized (mutex)
+			{
 				mutex.wait(millis);
 			}
 			return true;
-		} catch (final InterruptedException x) {
+		}
+		catch (final InterruptedException x)
+		{
 			return false;
 		}
 	}
@@ -231,9 +256,12 @@ public class ThreadUtil {
 	 * simple notify that catches any and all exceptions
 	 * @param mutex the mutex to notify
 	 */
-	public static void notifyAll(final Object mutex) {
-		if (mutex != null) {
-			synchronized (mutex) {
+	public static void notifyAll(final Object mutex)
+	{
+		if (mutex != null)
+		{
+			synchronized (mutex)
+			{
 				mutex.notifyAll();
 			}
 		}
@@ -243,9 +271,12 @@ public class ThreadUtil {
 	 * simple notify that catches any and all exceptions
 	 * @param mutex the mutex to notify
 	 */
-	public static void notify(final Object mutex) {
-		if (mutex != null) {
-			synchronized (mutex) {
+	public static void notify(final Object mutex)
+	{
+		if (mutex != null)
+		{
+			synchronized (mutex)
+			{
 				mutex.notify();
 			}
 		}

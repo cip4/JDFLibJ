@@ -25,8 +25,7 @@ public class JDFPreflightDetail extends JDFAutoPreflightDetail
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFPreflightDetail extends JDFAutoPreflightDetail
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFPreflightDetail extends JDFAutoPreflightDetail
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

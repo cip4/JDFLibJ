@@ -29,8 +29,7 @@ public class JDFFontsResultsPool extends JDFResource
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -43,8 +42,7 @@ public class JDFFontsResultsPool extends JDFResource
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -58,9 +56,7 @@ public class JDFFontsResultsPool extends JDFResource
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFFontsResultsPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

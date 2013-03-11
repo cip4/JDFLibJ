@@ -13,8 +13,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoExternalImpositionTemplate;
 import org.w3c.dom.DOMException;
 
-public class JDFExternalImpositionTemplate extends
-		JDFAutoExternalImpositionTemplate
+public class JDFExternalImpositionTemplate extends JDFAutoExternalImpositionTemplate
 {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +24,7 @@ public class JDFExternalImpositionTemplate extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +37,7 @@ public class JDFExternalImpositionTemplate extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +51,7 @@ public class JDFExternalImpositionTemplate extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFExternalImpositionTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

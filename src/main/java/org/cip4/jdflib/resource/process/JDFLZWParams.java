@@ -32,8 +32,7 @@ public class JDFLZWParams extends JDFAutoLZWParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLZWParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFLZWParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -46,8 +45,7 @@ public class JDFLZWParams extends JDFAutoLZWParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFLZWParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFLZWParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

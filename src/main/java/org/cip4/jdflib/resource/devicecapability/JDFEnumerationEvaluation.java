@@ -94,8 +94,7 @@ public class JDFEnumerationEvaluation extends JDFNameEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,8 +107,7 @@ public class JDFEnumerationEvaluation extends JDFNameEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,9 +121,7 @@ public class JDFEnumerationEvaluation extends JDFNameEvaluation
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFEnumerationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

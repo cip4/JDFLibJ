@@ -106,32 +106,17 @@ public class JDFIntegerState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList,
-				null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null,
-				null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null,
-				null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList,
-				null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX,
-				0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN,
-				0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311,
-				AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTVALUEMOD, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
 	@Override
@@ -158,8 +143,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -171,8 +155,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -185,8 +168,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -277,11 +259,10 @@ public class JDFIntegerState extends JDFAbstractState
 			if (attribute == null)
 				return null;
 			return new JDFIntegerRangeList(attribute);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: "
-							+ listName);
+			throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
@@ -297,11 +278,10 @@ public class JDFIntegerState extends JDFAbstractState
 			if (attribute == null)
 				return null;
 			return new JDFIntegerList(attribute);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerState.getIntegerList, Unable to create JDFIntegerRangeList from Attribute value: "
-							+ listName);
+			throw new JDFException("JDFIntegerState.getIntegerList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
@@ -363,10 +343,10 @@ public class JDFIntegerState extends JDFAbstractState
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMOD));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerState.getAllowedValueMod: The XYPair value is invalid!");
+			throw new JDFException("JDFIntegerState.getAllowedValueMod: The XYPair value is invalid!");
 		}
 	}
 
@@ -381,11 +361,11 @@ public class JDFIntegerState extends JDFAbstractState
 		{
 			if (hasAttribute(AttributeName.PRESENTVALUEMOD))
 			{
-				return new JDFXYPair(
-						getAttribute(AttributeName.PRESENTVALUEMOD));
+				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMOD));
 			}
 			return getAllowedValueMod();
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			throw new JDFException("The XYPair value is invalid!");
 		}
@@ -472,13 +452,13 @@ public class JDFIntegerState extends JDFAbstractState
 			try
 			{
 				rangelist = new JDFIntegerRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				testResult = false;
 			}
 			if (testResult)
-				testResult = (fitsValueList(rangelist, testlists) && fitsValueMod(
-						rangelist, testlists));
+				testResult = (fitsValueList(rangelist, testlists) && fitsValueMod(rangelist, testlists));
 		}
 		return testResult;
 	}
@@ -495,14 +475,14 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFIntegerRangeList rangelist,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueList(JDFIntegerRangeList rangelist, EnumFitsValue valuelist)
 	{
 		JDFIntegerRangeList list = null;
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			list = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			list = getPresentValueList();
 		}
@@ -513,10 +493,12 @@ public class JDFIntegerState extends JDFAbstractState
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, list);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, list);
 		}
@@ -528,13 +510,10 @@ public class JDFIntegerState extends JDFAbstractState
 
 			// if range looks like"0~-1" but no xdef, then we assume that
 			// xdef=lastIntegerInList
-			int lastInList = ((JDFIntegerRange) list.at(list.size() - 1))
-					.getRight();
+			int lastInList = ((JDFIntegerRange) list.at(list.size() - 1)).getRight();
 			int leftInRange = range.getLeft();
 			int rightInRange = range.getRight();
-			if (lastInList > 0
-					&& ((rightInRange < 0 && java.lang.Math.abs(rightInRange) < lastInList) || (leftInRange < 0 && java.lang.Math
-							.abs(leftInRange) < lastInList)))
+			if (lastInList > 0 && ((rightInRange < 0 && java.lang.Math.abs(rightInRange) < lastInList) || (leftInRange < 0 && java.lang.Math.abs(leftInRange) < lastInList)))
 			{
 				range.setDef(lastInList);
 			}
@@ -556,17 +535,16 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @return boolean - true, if <code>rangelist</code> matches the
 	 *         <code>valuemod</code> or if AllowedValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFIntegerRangeList rangelist,
-			EnumFitsValue valuemod)
+	private final boolean fitsValueMod(JDFIntegerRangeList rangelist, EnumFitsValue valuemod)
 	{
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD))
 				return true;
-		} else
+		}
+		else
 		{
-			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD)
-					&& !hasAttribute(AttributeName.PRESENTVALUEMOD))
+			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD) && !hasAttribute(AttributeName.PRESENTVALUEMOD))
 				return true;
 		}
 
@@ -574,7 +552,8 @@ public class JDFIntegerState extends JDFAbstractState
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			mod = getAllowedValueMod();
-		} else
+		}
+		else
 		{
 			mod = getPresentValueMod();
 		}
@@ -608,8 +587,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -654,8 +632,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -687,8 +664,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsContainedList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -707,8 +683,7 @@ public class JDFIntegerState extends JDFAbstractState
 	}
 
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
 	{
 		return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
 	}

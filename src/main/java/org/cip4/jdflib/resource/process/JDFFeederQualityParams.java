@@ -20,8 +20,7 @@ public class JDFFeederQualityParams extends JDFAutoFeederQualityParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFFeederQualityParams extends JDFAutoFeederQualityParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFFeederQualityParams extends JDFAutoFeederQualityParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFeederQualityParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

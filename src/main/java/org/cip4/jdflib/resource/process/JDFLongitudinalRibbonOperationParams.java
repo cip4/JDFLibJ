@@ -14,8 +14,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLongitudinalRibbonOperationParams;
 import org.w3c.dom.DOMException;
 
-public class JDFLongitudinalRibbonOperationParams extends
-		JDFAutoLongitudinalRibbonOperationParams
+public class JDFLongitudinalRibbonOperationParams extends JDFAutoLongitudinalRibbonOperationParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -26,9 +25,7 @@ public class JDFLongitudinalRibbonOperationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLongitudinalRibbonOperationParams(
-			CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -41,9 +38,7 @@ public class JDFLongitudinalRibbonOperationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLongitudinalRibbonOperationParams(
-			CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -57,9 +52,7 @@ public class JDFLongitudinalRibbonOperationParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLongitudinalRibbonOperationParams(
-			CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -67,8 +60,7 @@ public class JDFLongitudinalRibbonOperationParams extends
 	@Override
 	public String toString()
 	{
-		return "JDFLongitudinalRibbonOperationParams[  --> " + super.toString()
-				+ " ]";
+		return "JDFLongitudinalRibbonOperationParams[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
 // ==========================================================================

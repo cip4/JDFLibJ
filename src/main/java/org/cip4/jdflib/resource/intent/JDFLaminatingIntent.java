@@ -26,8 +26,7 @@ public class JDFLaminatingIntent extends JDFAutoLaminatingIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -40,8 +39,7 @@ public class JDFLaminatingIntent extends JDFAutoLaminatingIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -55,9 +53,7 @@ public class JDFLaminatingIntent extends JDFAutoLaminatingIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

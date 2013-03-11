@@ -77,7 +77,8 @@ import org.cip4.jdflib.util.ThreadUtil;
  * 11.12.2008
  * @param <a> the returned object data type
  */
-public abstract class WaitTimeout<a> implements Runnable {
+public abstract class WaitTimeout<a> implements Runnable
+{
 	/**
 	 * this is the handle routine that may take longer <br/>
 	 * it should return the expected object when completed
@@ -89,7 +90,8 @@ public abstract class WaitTimeout<a> implements Runnable {
 	/**
 	 * called prior to starting thread, overwrite to initialize in the constructor
 	 */
-	protected void setup() {
+	protected void setup()
+	{
 		baseName = "WaitThread";
 	}
 
@@ -104,7 +106,8 @@ public abstract class WaitTimeout<a> implements Runnable {
 	/**
 	 * @param millis wait timeout in milliseconds
 	 */
-	public WaitTimeout(final int millis) {
+	public WaitTimeout(final int millis)
+	{
 		waitMillis = millis;
 		theObject = null;
 		setup();
@@ -118,14 +121,16 @@ public abstract class WaitTimeout<a> implements Runnable {
 	 * 
 	 * start the thread
 	 */
-	public final void start() {
+	public final void start()
+	{
 		myThread.start();
 	}
 
 	/**
 	 * @see java.lang.Runnable#run()
 	 */
-	public final void run() {
+	public final void run()
+	{
 		t0 = System.currentTimeMillis();
 		theObject = handle();
 		myThread = null;
@@ -137,12 +142,15 @@ public abstract class WaitTimeout<a> implements Runnable {
 	/**
 	 * @return the object that you waited for, null if the timeout is reached
 	 */
-	public final a getWaitedObject() {
+	public final a getWaitedObject()
+	{
 		long t1 = System.currentTimeMillis();
-		if ((t1 - t0 < waitMillis) && (mutex != null)) {
+		if ((t1 - t0 < waitMillis) && (mutex != null))
+		{
 			long dt = waitMillis - (t1 - t0);
 			ThreadUtil.wait(mutex, (int) dt);
-			if (mutex != null && myThread != null) {
+			if (mutex != null && myThread != null)
+			{
 				myThread.interrupt();
 			}
 			mutex = null;
@@ -153,7 +161,8 @@ public abstract class WaitTimeout<a> implements Runnable {
 	/**
 	 * @return the object that you waited for, if it has been calculated
 	 */
-	public final a peekWaitedObject() {
+	public final a peekWaitedObject()
+	{
 		return theObject;
 	}
 

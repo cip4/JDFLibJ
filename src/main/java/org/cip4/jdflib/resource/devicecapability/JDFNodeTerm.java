@@ -99,34 +99,20 @@ abstract public class JDFNodeTerm extends JDFTerm
 		elemInfoTable[1] = new ElemInfoTable(ElementName.NOT, 0x33333311);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.OR, 0x33333311);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.XOR, 0x33333311);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.BOOLEANEVALUATION,
-				0x33333311);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.DATETIMEEVALUATION,
-				0x33333311);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.DURATIONEVALUATION,
-				0x33333311);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.ENUMERATIONEVALUATION,
-				0x33333311);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.INTEGEREVALUATION,
-				0x33333311);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.ISPRESENTEVALUATION,
-				0x33333311);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.MATRIXEVALUATION,
-				0x33333311);
-		elemInfoTable[11] = new ElemInfoTable(ElementName.NAMEEVALUATION,
-				0x33333311);
-		elemInfoTable[12] = new ElemInfoTable(ElementName.NUMBEREVALUATION,
-				0x33333311);
-		elemInfoTable[13] = new ElemInfoTable(ElementName.PDFPATHEVALUATION,
-				0x33333311);
-		elemInfoTable[14] = new ElemInfoTable(ElementName.RECTANGLEEVALUATION,
-				0x33333311);
-		elemInfoTable[15] = new ElemInfoTable(ElementName.SHAPEEVALUATION,
-				0x33333311);
-		elemInfoTable[16] = new ElemInfoTable(ElementName.STRINGEVALUATION,
-				0x33333311);
-		elemInfoTable[17] = new ElemInfoTable(ElementName.XYPAIREVALUATION,
-				0x33333311);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.BOOLEANEVALUATION, 0x33333311);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.DATETIMEEVALUATION, 0x33333311);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.DURATIONEVALUATION, 0x33333311);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.ENUMERATIONEVALUATION, 0x33333311);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.INTEGEREVALUATION, 0x33333311);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.ISPRESENTEVALUATION, 0x33333311);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.MATRIXEVALUATION, 0x33333311);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.NAMEEVALUATION, 0x33333311);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.NUMBEREVALUATION, 0x33333311);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.PDFPATHEVALUATION, 0x33333311);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.RECTANGLEEVALUATION, 0x33333311);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.SHAPEEVALUATION, 0x33333311);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.STRINGEVALUATION, 0x33333311);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.XYPAIREVALUATION, 0x33333311);
 		elemInfoTable[18] = new ElemInfoTable(ElementName.TESTREF, 0x33333311);
 	}
 
@@ -136,20 +122,17 @@ abstract public class JDFNodeTerm extends JDFTerm
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -261,8 +244,7 @@ abstract public class JDFNodeTerm extends JDFTerm
 	{
 		if (term != null)
 		{
-			return getChildElementVector(term.getName(), null, null, true, 0,
-					false);
+			return getChildElementVector(term.getName(), null, null, true, 0, false);
 		}
 
 		VElement v = new VElement();

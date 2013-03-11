@@ -20,8 +20,7 @@ public class JDFTIFFEmbeddedFile extends JDFAutoTIFFEmbeddedFile
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -33,8 +32,7 @@ public class JDFTIFFEmbeddedFile extends JDFAutoTIFFEmbeddedFile
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -47,8 +45,7 @@ public class JDFTIFFEmbeddedFile extends JDFAutoTIFFEmbeddedFile
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

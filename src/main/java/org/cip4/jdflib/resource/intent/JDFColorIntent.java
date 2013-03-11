@@ -97,8 +97,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -111,8 +110,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -126,9 +124,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

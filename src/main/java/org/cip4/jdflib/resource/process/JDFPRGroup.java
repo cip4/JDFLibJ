@@ -68,14 +68,14 @@
  *  
  * 
  *//**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFPreflightReport.java
- *
- * Last changes
- *
- */
+*
+* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFPreflightReport.java
+*
+* Last changes
+*
+*/
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -107,8 +107,7 @@ public class JDFPRGroup extends JDFAutoPRGroup
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,8 +120,7 @@ public class JDFPRGroup extends JDFAutoPRGroup
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,8 +134,7 @@ public class JDFPRGroup extends JDFAutoPRGroup
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,8 +182,7 @@ public class JDFPRGroup extends JDFAutoPRGroup
 	 */
 	public JDFPROccurrence getPROccurrence(JDFAttributeMap groupMap)
 	{
-		return (JDFPROccurrence) getChildByTagName(ElementName.PROCCURRENCE,
-				null, 0, groupMap, true, true);
+		return (JDFPROccurrence) getChildByTagName(ElementName.PROCCURRENCE, null, 0, groupMap, true, true);
 	}
 
 	/**

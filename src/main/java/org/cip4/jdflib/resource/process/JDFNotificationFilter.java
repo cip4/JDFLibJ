@@ -24,8 +24,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -37,8 +36,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -51,8 +49,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNotificationFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

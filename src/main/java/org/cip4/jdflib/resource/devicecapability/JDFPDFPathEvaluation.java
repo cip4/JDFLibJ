@@ -102,8 +102,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTH, 0x33333333,
-				AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTH, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
 	}
 
 	@Override
@@ -130,8 +129,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,8 +141,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,8 +154,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -191,10 +187,10 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFIntegerRange(getAttribute(AttributeName.LENGTH));
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFPDFPathEvaluation.getLengthRange: Attribute LENGTH is not applicable to create JDFIntegerRange");
+			throw new JDFException("JDFPDFPathEvaluation.getLengthRange: Attribute LENGTH is not applicable to create JDFIntegerRange");
 		}
 	}
 
@@ -204,8 +200,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
 	public JDFValue getValue(int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE,
-				JDFConstants.EMPTYSTRING, iSkip);
+		JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -296,8 +291,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 */
 	private final boolean fitsValueElem(String pdfPath)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		if (siz == 0)
 			return true; // Evaluation has no Value elements

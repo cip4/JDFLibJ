@@ -103,16 +103,11 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x33333333,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x33333333,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x33333333,
-				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x33333333, AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
 	}
 
 	@Override
@@ -128,8 +123,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,8 +136,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,9 +150,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -191,13 +182,12 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFShapeRangeList srl = new JDFShapeRangeList(
-					getAttribute(AttributeName.VALUELIST));
+			JDFShapeRangeList srl = new JDFShapeRangeList(getAttribute(AttributeName.VALUELIST));
 			return srl;
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFShapeRangeList");
+			throw new JDFException("JDFShapeEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFShapeRangeList");
 		}
 	}
 
@@ -210,13 +200,12 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(
-					getAttribute(AttributeName.X));
+			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.X));
 			return nrl;
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeEvaluation.getX: Attribute X is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeEvaluation.getX: Attribute X is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -229,13 +218,12 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(
-					getAttribute(AttributeName.Y));
+			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Y));
 			return nrl;
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeEvaluation.getY: Attribute Y is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeEvaluation.getY: Attribute Y is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -248,13 +236,12 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(
-					getAttribute(AttributeName.Z));
+			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Z));
 			return nrl;
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFShapeEvaluation.getZ: Attribute Z is not capable to create JDFNumberRangeList");
+			throw new JDFException("JDFShapeEvaluation.getZ: Attribute Z is not capable to create JDFNumberRangeList");
 		}
 	}
 
@@ -294,7 +281,8 @@ public class JDFShapeEvaluation extends JDFEvaluation
 		try
 		{
 			rrl = new JDFShapeRangeList(value);
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
 			return false;
 		}
@@ -328,57 +316,67 @@ public class JDFShapeEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFShapeRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			try
 			{
 				new JDFShape(value);
-			} catch (JDFException e)
+			}
+			catch (JDFException e)
 			{
 				return false;
-			} catch (DataFormatException e)
+			}
+			catch (DataFormatException e)
 			{
 				return false;
 			}
 			return true;
-		} else if (listType.equals(EnumListType.RangeList)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.RangeList) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFShapeEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFShapeEvaluation.fitsListType illegal ListType attribute");
 		}
 
 	}

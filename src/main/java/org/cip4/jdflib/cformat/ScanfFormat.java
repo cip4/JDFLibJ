@@ -58,76 +58,76 @@ public class ScanfFormat
 	// ~ Methods
 	// ////////////////////////////////////////////////////////////////
 
-/**
-      * Sets the contents of the object according to
-      * the information provided in the format string.
-      *
-      *
-      * <p>
-      * The format string describes what input to expect for a
-      * ScanfReader, and its form closely matches that for the C
-      * <tt>scanf</tt> methodName, expect that multiple conversions
-      * cannot be specified.
-      *
-      * <p>
-      * A conversion sequence is introduced by the '%' character; valid
-      * conversion sequences are described below. Other characters may
-      * appear in the format string. A white space character requests
-      * a match of any amount of white space, including none. Other
-      * characters request an exact match of themselves. The character
-      * sequence "%%" requests a match of the '%' character.
-      *
-      * <p>
-      * The '%' character introducing a conversion sequence
-      * may be followed by an unsigned decimal integer
-      * indicating the field width, which is the maximum number of
-      * characters used for a particular conversion. Field widths must
-      * be greater than 0.
-      *
-      * <p>
-      * The optional field width is followed by one of the following
-      * <em>conversion characters</em>, which specifies the primitive
-      * type to be scanned:
-      *
-      * <dl>
-      * <dt> f
-      * <dd> floating point (double).
-      * <dt> d
-      * <dd> signed decimal integer (long or int).
-      * <dt> o
-      * <dd> unsigned octal integer (long or int), formed from the digits
-      * [0-7].
-      * <dt> x
-      * <dd> unsigned hex integer (long or int), formed from the
-      * characters [0-9a-fA-F].
-      * <dt> i
-      * <dd> signed integer (long or int). If the digit sequence
-      * begins with "<tt>0x</tt>", then a hex value is scanned; if
-      * the digit sequence begins with "<tt>0</tt>", then an octal
-      * value is scanned; and otherwise a decimal value is scanned.
-      * <dt> c
-      * <dd> character (char).
-      * <dt> [
-      * <dd> matches any character in the sequence specified between
-      * the '[' and a closing ']', unless the first character in the
-      * sequence is a '^', in which case any character is matched which
-      * does <em>not</em> appear in the following sequence. To include
-      * ']' in the sequence, it should be placed immediately after the
-      * initial '[' or '[^'. The character '-' is also special; if it
-      * appears between any two characters in the sequence, then all
-      * characters within the numeric range specified by the two
-      * characters are implicitly incorported into the sequence.
-      * Consecutive '-' characters are not permitted in the sequence.
-      * A lone '-' character may be specified by placing it at the
-      * end of the sequence, before the closing ']'.
-      * <dt> s
-      * <dd> matches a string delimited by white space.
-      * </dl>
-      *
-      * @param fmt        Format string
-      * @throws IllegalArgumentException Malformed format string
-      * @see ScanfReader
-      */
+	/**
+	      * Sets the contents of the object according to
+	      * the information provided in the format string.
+	      *
+	      *
+	      * <p>
+	      * The format string describes what input to expect for a
+	      * ScanfReader, and its form closely matches that for the C
+	      * <tt>scanf</tt> methodName, expect that multiple conversions
+	      * cannot be specified.
+	      *
+	      * <p>
+	      * A conversion sequence is introduced by the '%' character; valid
+	      * conversion sequences are described below. Other characters may
+	      * appear in the format string. A white space character requests
+	      * a match of any amount of white space, including none. Other
+	      * characters request an exact match of themselves. The character
+	      * sequence "%%" requests a match of the '%' character.
+	      *
+	      * <p>
+	      * The '%' character introducing a conversion sequence
+	      * may be followed by an unsigned decimal integer
+	      * indicating the field width, which is the maximum number of
+	      * characters used for a particular conversion. Field widths must
+	      * be greater than 0.
+	      *
+	      * <p>
+	      * The optional field width is followed by one of the following
+	      * <em>conversion characters</em>, which specifies the primitive
+	      * type to be scanned:
+	      *
+	      * <dl>
+	      * <dt> f
+	      * <dd> floating point (double).
+	      * <dt> d
+	      * <dd> signed decimal integer (long or int).
+	      * <dt> o
+	      * <dd> unsigned octal integer (long or int), formed from the digits
+	      * [0-7].
+	      * <dt> x
+	      * <dd> unsigned hex integer (long or int), formed from the
+	      * characters [0-9a-fA-F].
+	      * <dt> i
+	      * <dd> signed integer (long or int). If the digit sequence
+	      * begins with "<tt>0x</tt>", then a hex value is scanned; if
+	      * the digit sequence begins with "<tt>0</tt>", then an octal
+	      * value is scanned; and otherwise a decimal value is scanned.
+	      * <dt> c
+	      * <dd> character (char).
+	      * <dt> [
+	      * <dd> matches any character in the sequence specified between
+	      * the '[' and a closing ']', unless the first character in the
+	      * sequence is a '^', in which case any character is matched which
+	      * does <em>not</em> appear in the following sequence. To include
+	      * ']' in the sequence, it should be placed immediately after the
+	      * initial '[' or '[^'. The character '-' is also special; if it
+	      * appears between any two characters in the sequence, then all
+	      * characters within the numeric range specified by the two
+	      * characters are implicitly incorported into the sequence.
+	      * Consecutive '-' characters are not permitted in the sequence.
+	      * A lone '-' character may be specified by placing it at the
+	      * end of the sequence, before the closing ']'.
+	      * <dt> s
+	      * <dd> matches a string delimited by white space.
+	      * </dl>
+	      *
+	      * @param fmt        Format string
+	      * @throws IllegalArgumentException Malformed format string
+	      * @see ScanfReader
+	      */
 	public void set(String fmt)
 	{
 		type = -1;
@@ -241,8 +241,7 @@ public class ScanfFormat
 				{
 					if ((k < (n - 1)) && (buf[k + 1] == '-'))
 					{
-						throw new IllegalArgumentException("Misplaced '-' in character match spec '["
-								+ new String(buf, 0, n) + "]'");
+						throw new IllegalArgumentException("Misplaced '-' in character match spec '[" + new String(buf, 0, n) + "]'");
 					}
 				}
 			}

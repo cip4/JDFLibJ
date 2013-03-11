@@ -24,8 +24,7 @@ public class JDFPRError extends JDFAutoPRError
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRError(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFPRError(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -38,8 +37,7 @@ public class JDFPRError extends JDFAutoPRError
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -53,8 +51,7 @@ public class JDFPRError extends JDFAutoPRError
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

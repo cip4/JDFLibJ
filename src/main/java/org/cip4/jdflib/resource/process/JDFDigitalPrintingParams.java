@@ -25,8 +25,7 @@ public class JDFDigitalPrintingParams extends JDFAutoDigitalPrintingParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFDigitalPrintingParams extends JDFAutoDigitalPrintingParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFDigitalPrintingParams extends JDFAutoDigitalPrintingParams
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -96,8 +96,7 @@ public class JDFTestPool extends JDFAutoTestPool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,8 +109,7 @@ public class JDFTestPool extends JDFAutoTestPool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -125,8 +123,7 @@ public class JDFTestPool extends JDFAutoTestPool
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,8 +149,7 @@ public class JDFTestPool extends JDFAutoTestPool
 	 */
 	public JDFTest getTest(String idTest)
 	{
-		return (JDFTest) getChildWithAttribute(ElementName.TEST,
-				AttributeName.ID, null, idTest, 0, true);
+		return (JDFTest) getChildWithAttribute(ElementName.TEST, AttributeName.ID, null, idTest, 0, true);
 	}
 
 	/**

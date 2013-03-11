@@ -101,10 +101,8 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUEMOD, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUEMOD, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -119,8 +117,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,8 +129,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,8 +142,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -203,12 +198,11 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			return new JDFIntegerRangeList(getAttribute(
-					AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING));
-		} catch (DataFormatException e)
+			return new JDFIntegerRangeList(getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerEvaluation.getValueList: Unable to create JDFIntegerRangeList from Attribute value \"ValueList\"");
+			throw new JDFException("JDFIntegerEvaluation.getValueList: Unable to create JDFIntegerRangeList from Attribute value \"ValueList\"");
 		}
 	}
 
@@ -233,10 +227,10 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFXYPair(getAttribute(AttributeName.VALUEMOD));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFIntegerEvaluation.getValueMod: The XYPair value is invalid!");
+			throw new JDFException("JDFIntegerEvaluation.getValueMod: The XYPair value is invalid!");
 		}
 	}
 
@@ -262,7 +256,8 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 			try
 			{
 				rangelist = new JDFIntegerRangeList(value);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
@@ -289,27 +284,28 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 		try
 		{
 			rangelist = new JDFIntegerRangeList(value);
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			return false;
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return (StringUtil.isInteger(value));
-		} else if (listType.equals(EnumListType.RangeList)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.RangeList) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.List)
-				|| listType.equals(EnumListType.CompleteList) || // complete or
-																	// not -
-																	// tested in
-																	// fitsValueList
+		}
+		else if (listType.equals(EnumListType.List) || listType.equals(EnumListType.CompleteList) || // complete or
+																										// not -
+																										// tested in
+																										// fitsValueList
 				listType.equals(EnumListType.CompleteOrderedList) || // tested
 																		// in
 																		// fitsValueList
@@ -317,28 +313,34 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 																// fitsValueList
 		{
 			return rangelist.isList();
-		} else if (listType.equals(EnumListType.OrderedList))
+		}
+		else if (listType.equals(EnumListType.OrderedList))
 		{
 			return (rangelist.isList() && rangelist.isOrdered());
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			return (rangelist.isList() && rangelist.isUnique());
-		} else if (listType.equals(EnumListType.UniqueOrderedList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedList))
 		{
 			return (rangelist.isList() && rangelist.isUniqueOrdered());
-		} else if (listType.equals(EnumListType.OrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.OrderedRangeList))
 		{
 			return rangelist.isOrdered();
-		} else if (listType.equals(EnumListType.UniqueRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueRangeList))
 		{
 			return rangelist.isUnique();
-		} else if (listType.equals(EnumListType.UniqueOrderedRangeList))
+		}
+		else if (listType.equals(EnumListType.UniqueOrderedRangeList))
 		{
 			return (rangelist.isUniqueOrdered());
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFIntegerEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFIntegerEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -363,10 +365,12 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, valuelist);
-		} else if (listType.equals(EnumListType.CompleteOrderedList))
+		}
+		else if (listType.equals(EnumListType.CompleteOrderedList))
 		{
 			return fitsCompleteOrderedList(rangelist, valuelist);
-		} else if (listType.equals(EnumListType.ContainedList))
+		}
+		else if (listType.equals(EnumListType.ContainedList))
 		{
 			return fitsContainedList(rangelist, valuelist);
 		}
@@ -424,8 +428,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 *            specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -469,8 +472,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 *            specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();
@@ -501,8 +503,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 *            specified ValueList
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFIntegerRangeList value,
-			JDFIntegerRangeList list)
+	private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
 	{
 		int v_size = value.size();
 		int l_size = list.size();

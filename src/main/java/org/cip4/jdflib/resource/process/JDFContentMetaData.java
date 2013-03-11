@@ -99,8 +99,7 @@ public class JDFContentMetaData extends JDFAutoContentMetaData
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -113,8 +112,7 @@ public class JDFContentMetaData extends JDFAutoContentMetaData
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

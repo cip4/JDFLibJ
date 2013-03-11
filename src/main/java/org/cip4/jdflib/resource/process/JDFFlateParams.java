@@ -32,8 +32,7 @@ public class JDFFlateParams extends JDFAutoFlateParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFlateParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFFlateParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -46,8 +45,7 @@ public class JDFFlateParams extends JDFAutoFlateParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFFlateParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFlateParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

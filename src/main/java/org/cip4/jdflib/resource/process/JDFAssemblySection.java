@@ -83,8 +83,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION,
-				0x33333311);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLYSECTION, 0x33333311);
 	}
 
 	@Override
@@ -100,8 +99,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,8 +112,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,9 +126,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,8 +153,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 */
 	public JDFAssemblySection getCreateAssemblySection(int iSkip)
 	{
-		return (JDFAssemblySection) getCreateElement_KElement(
-				ElementName.ASSEMBLYSECTION, null, iSkip);
+		return (JDFAssemblySection) getCreateElement_KElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
 
 	/**
@@ -171,8 +165,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 */
 	public JDFAssemblySection getAssemblySection(int iSkip)
 	{
-		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION,
-				null, iSkip);
+		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
 
 	/**
@@ -182,8 +175,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 */
 	public JDFAssemblySection appendAssemblySection()
 	{
-		return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION,
-				null);
+		return (JDFAssemblySection) appendElement(ElementName.ASSEMBLYSECTION, null);
 	}
 
 }

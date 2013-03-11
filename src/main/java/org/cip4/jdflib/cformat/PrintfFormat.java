@@ -115,121 +115,121 @@ public class PrintfFormat
 		return suffix;
 	}
 
-/**
-     * Sets the format characteristics according to the supplied
-     * String.
-     *
-     * <p>
-     * The format string has the same form as the one used by the C
-     * <tt>printf</tt> methodName, except that only one conversion
-     * sequence may be specified (because routines which
-     * use PrintfFormat each convert only one object).
-     *
-     * <p>
-     * The format string consists of an optional <em>prefix</em>
-     * of regular characters, followed by a conversion sequence,
-     * followed by an optional <em>suffix</em> of regular characters.
-     *
-     * <p>
-     * The conversion sequence is introduced by a '%' character, and
-     * is followed by any number of optional <em>flag</em> characters,
-     * an optional unsigned decimal integer specifying a <em>field
-     * width</em>, another optional unsigned decimal integer (preceded
-     * by a '.' character) specifying a <em>precision</em>, and
-     * finally a <tt>conversion character</tt>. To incorporate
-     * a '%' character into either the prefix or suffix, one should
-     * specify the sequence "%%".
-     *
-     * The allowed flag characters are:
-     *
-     * <dl>
-     * <dt> #
-     * <dd> The value is converted into an "alternate" form.
-     *      For 'o' conversions, the output is always prefixed with a
-     *      '0'. For 'x' and 'X' conversions, the output is prefixed
-     *      with "0x" or "0X", respectively. For 'a', 'A', 'e', 'E',
-     *      'f', 'g', and 'G' conversions, the result will always
-     *      contain a decimal point. For 'g' and 'G' conversions,
-     *      trailing zeros are not removed. There is no effect for
-     *      other conversions.
-     * <dt> 0
-     * <dd> Use '0' to pad the field on the left, instead of blanks.
-     *      If the conversion is 'd', 'i', 'o', 'u', 'x', or 'X',
-     *      and a precision is given, then this flag is ignored.
-     * <dt> -
-     * <dd> The output is aligned with the left of the field
-     *      boundary, and padded on the right with blanks.
-     *      This flag overrides the '0' flag.
-     * <dt> ' '
-     * <dd> Leave a blank before a positive number produced by a
-     *      signed conversion.
-     * <dt> +
-     * <dd> A '+' sign is placed before non-negative numbers produced
-     *      by a signed conversion. This flag overrides the ' ' flag.
-     * </dl>
-     * <p>
-     * The conversion character is one of:
-     *
-     * <dt> d,i
-     * <dd> The integer argument is output as a signed decimal number.
-     *      If a precision is given, it describes the minimum number
-     *      of digits that must appear (default 1). If the precision
-     *      exceeds the number of digits that would normally appear,
-     *      the output is padded on the left with zeros. When 0 is
-     *      printed with precision 0, the result is empty.
-     * <dt> o,u,x,X
-     * <dd> The integer argument is output as an unsigned number in
-     *      either octal ('o'), decimal ('u'), or hexadecimal ('x' or
-     *      'X'). The digits "abcdef" are used for 'x', and "ABCDEF"
-     *      are used for 'X'. If a precision is given, it describes
-     *      the minimum number of digits that must appear (default 1).
-     *      If the precision exceeds the number of digits that would
-     *      normally appear, the output is padded on the left with
-     *      zeros. When 0 is printed with precision 0, the result is
-     *      empty.
-     * <dt> e,E
-     * <dd> The floating point argument is output in the exponential
-     *      form <tt>[-]d.ddde+dd</tt>, with the number of digits
-     *      after the decimal point given by the precision. The
-     *      default precision value is 6. No decimal point is output
-     *      if the precision is 0. Conversion 'E' causes 'E' to be
-     *      used as an exponent instead of 'e'. The exponent is
-     *      always at least two characters.
-     * <dt> f
-     * <dd> The floating point argument is output in the form
-     *      <tt>[-]ddd.ddd</tt>, with the number of digits
-     *      after the decimal point given by the precision. The
-     *      default precision value is 6. No decimal point is output
-     *      if the precision is 0. If a decimal point appears, at
-     *      least one digit appears before it.
-     * <dt> g,G
-     * <dd> The floating point argument is output in either the 'f'
-     *      or 'e' style (or 'E' style of 'G' conversions). The
-     *      precision gives the number of significant digits, with a
-     *      default value of 6. Style 'e' is used if the resulting
-     *      exponent is less than -4 or greater than or equal to the
-     *      precision. Trailing zeros are removed from the fractional
-     *      part of the result, and a decimal point appears if it is
-     *      followed by at least one digit.
-     * <dt> a,A
-     * <dd> The floating point argument is output in the hexadecimal
-     *      floating point form <tt>[-]0xh.hhhp+dd</tt>. The
-     *      exponent is a decimal number and describes a power of 2.
-     *      The 'A' style uses the prefix "0X", the hex digits
-     *      "ABCDEF", and the exponent character 'P'. The number of
-     *      digits after the decimal point is given by the precision.
-     *      The default precision is enough for an exact
-     *      representation of the value.
-     * <dt> c
-     * <dd> The single character argument is output as a character.
-     * <dt> s
-     * <dd> The string argument is output. If a precision is given,
-     *      then the number of characters output is limited to this.
-     * </dl>
-     *
-     * @param fmt Format string
-     * @throws IllegalArgumentException Malformed format string
-     */
+	/**
+	     * Sets the format characteristics according to the supplied
+	     * String.
+	     *
+	     * <p>
+	     * The format string has the same form as the one used by the C
+	     * <tt>printf</tt> methodName, except that only one conversion
+	     * sequence may be specified (because routines which
+	     * use PrintfFormat each convert only one object).
+	     *
+	     * <p>
+	     * The format string consists of an optional <em>prefix</em>
+	     * of regular characters, followed by a conversion sequence,
+	     * followed by an optional <em>suffix</em> of regular characters.
+	     *
+	     * <p>
+	     * The conversion sequence is introduced by a '%' character, and
+	     * is followed by any number of optional <em>flag</em> characters,
+	     * an optional unsigned decimal integer specifying a <em>field
+	     * width</em>, another optional unsigned decimal integer (preceded
+	     * by a '.' character) specifying a <em>precision</em>, and
+	     * finally a <tt>conversion character</tt>. To incorporate
+	     * a '%' character into either the prefix or suffix, one should
+	     * specify the sequence "%%".
+	     *
+	     * The allowed flag characters are:
+	     *
+	     * <dl>
+	     * <dt> #
+	     * <dd> The value is converted into an "alternate" form.
+	     *      For 'o' conversions, the output is always prefixed with a
+	     *      '0'. For 'x' and 'X' conversions, the output is prefixed
+	     *      with "0x" or "0X", respectively. For 'a', 'A', 'e', 'E',
+	     *      'f', 'g', and 'G' conversions, the result will always
+	     *      contain a decimal point. For 'g' and 'G' conversions,
+	     *      trailing zeros are not removed. There is no effect for
+	     *      other conversions.
+	     * <dt> 0
+	     * <dd> Use '0' to pad the field on the left, instead of blanks.
+	     *      If the conversion is 'd', 'i', 'o', 'u', 'x', or 'X',
+	     *      and a precision is given, then this flag is ignored.
+	     * <dt> -
+	     * <dd> The output is aligned with the left of the field
+	     *      boundary, and padded on the right with blanks.
+	     *      This flag overrides the '0' flag.
+	     * <dt> ' '
+	     * <dd> Leave a blank before a positive number produced by a
+	     *      signed conversion.
+	     * <dt> +
+	     * <dd> A '+' sign is placed before non-negative numbers produced
+	     *      by a signed conversion. This flag overrides the ' ' flag.
+	     * </dl>
+	     * <p>
+	     * The conversion character is one of:
+	     *
+	     * <dt> d,i
+	     * <dd> The integer argument is output as a signed decimal number.
+	     *      If a precision is given, it describes the minimum number
+	     *      of digits that must appear (default 1). If the precision
+	     *      exceeds the number of digits that would normally appear,
+	     *      the output is padded on the left with zeros. When 0 is
+	     *      printed with precision 0, the result is empty.
+	     * <dt> o,u,x,X
+	     * <dd> The integer argument is output as an unsigned number in
+	     *      either octal ('o'), decimal ('u'), or hexadecimal ('x' or
+	     *      'X'). The digits "abcdef" are used for 'x', and "ABCDEF"
+	     *      are used for 'X'. If a precision is given, it describes
+	     *      the minimum number of digits that must appear (default 1).
+	     *      If the precision exceeds the number of digits that would
+	     *      normally appear, the output is padded on the left with
+	     *      zeros. When 0 is printed with precision 0, the result is
+	     *      empty.
+	     * <dt> e,E
+	     * <dd> The floating point argument is output in the exponential
+	     *      form <tt>[-]d.ddde+dd</tt>, with the number of digits
+	     *      after the decimal point given by the precision. The
+	     *      default precision value is 6. No decimal point is output
+	     *      if the precision is 0. Conversion 'E' causes 'E' to be
+	     *      used as an exponent instead of 'e'. The exponent is
+	     *      always at least two characters.
+	     * <dt> f
+	     * <dd> The floating point argument is output in the form
+	     *      <tt>[-]ddd.ddd</tt>, with the number of digits
+	     *      after the decimal point given by the precision. The
+	     *      default precision value is 6. No decimal point is output
+	     *      if the precision is 0. If a decimal point appears, at
+	     *      least one digit appears before it.
+	     * <dt> g,G
+	     * <dd> The floating point argument is output in either the 'f'
+	     *      or 'e' style (or 'E' style of 'G' conversions). The
+	     *      precision gives the number of significant digits, with a
+	     *      default value of 6. Style 'e' is used if the resulting
+	     *      exponent is less than -4 or greater than or equal to the
+	     *      precision. Trailing zeros are removed from the fractional
+	     *      part of the result, and a decimal point appears if it is
+	     *      followed by at least one digit.
+	     * <dt> a,A
+	     * <dd> The floating point argument is output in the hexadecimal
+	     *      floating point form <tt>[-]0xh.hhhp+dd</tt>. The
+	     *      exponent is a decimal number and describes a power of 2.
+	     *      The 'A' style uses the prefix "0X", the hex digits
+	     *      "ABCDEF", and the exponent character 'P'. The number of
+	     *      digits after the decimal point is given by the precision.
+	     *      The default precision is enough for an exact
+	     *      representation of the value.
+	     * <dt> c
+	     * <dd> The single character argument is output as a character.
+	     * <dt> s
+	     * <dd> The string argument is output. If a precision is given,
+	     *      then the number of characters output is limited to this.
+	     * </dl>
+	     *
+	     * @param fmt Format string
+	     * @throws IllegalArgumentException Malformed format string
+	     */
 	public void set(String fmt) throws IllegalArgumentException
 	{
 		char[] buf = new char[fmt.length()];
@@ -373,8 +373,7 @@ public class PrintfFormat
 		{
 			if (validTypes.indexOf(type) == -1)
 			{
-				throw new IllegalArgumentException("Conversion character '" + type + "' not one of '" + validTypes
-						+ "'");
+				throw new IllegalArgumentException("Conversion character '" + type + "' not one of '" + validTypes + "'");
 			}
 
 			break;
@@ -562,7 +561,7 @@ public class PrintfFormat
 	public String tostr(int x)
 	{
 		String intStr;
-		
+
 		long lx = x;
 
 		if ((type == 'd') || (type == 'i'))
@@ -573,7 +572,7 @@ public class PrintfFormat
 		{ // unsigned; clear high bits
 			intStr = tostr(lx & 0xffffffffL);
 		}
-		
+
 		return intStr;
 	}
 
@@ -586,7 +585,7 @@ public class PrintfFormat
 	public String tostr(long x)
 	{
 		long xLocal = x;
-		
+
 		String p = null;
 
 		output.init(Math.max(width, 32));
@@ -803,7 +802,7 @@ public class PrintfFormat
 	private void expHexFormat(double d, int p)
 	{
 		int pLocal = p;
-		
+
 		char[] digits = null;
 		long bits;
 		int e;
@@ -1045,7 +1044,7 @@ public class PrintfFormat
 	private void uconv(long val, int radix, char[] digits)
 	{
 		long valLocal = val;
-		
+
 		if (valLocal == 0)
 		{
 			if (prec != 0)
@@ -1113,7 +1112,7 @@ public class PrintfFormat
 		void set(double d)
 		{
 			double dLocal = d;
-			
+
 			numd = 0;
 			exp = 0;
 
@@ -1275,7 +1274,7 @@ public class PrintfFormat
 		final int append(char c, int n)
 		{
 			int nLocal = n;
-			
+
 			while (nLocal-- > 0)
 			{
 				buf[kn++] = c;
@@ -1312,7 +1311,7 @@ public class PrintfFormat
 		final int prepend(char c, int n)
 		{
 			int nLocal = n;
-			
+
 			while (nLocal-- > 0)
 			{
 				buf[--k0] = c;

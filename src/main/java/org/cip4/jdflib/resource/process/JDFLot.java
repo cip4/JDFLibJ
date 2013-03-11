@@ -34,8 +34,7 @@ public class JDFLot extends JDFAutoLot
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -48,8 +47,7 @@ public class JDFLot extends JDFAutoLot
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

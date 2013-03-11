@@ -92,8 +92,7 @@ public class JDFBoxArgument extends JDFAutoBoxArgument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -106,8 +105,7 @@ public class JDFBoxArgument extends JDFAutoBoxArgument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -121,9 +119,7 @@ public class JDFBoxArgument extends JDFAutoBoxArgument
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFBoxArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -24,8 +24,7 @@ public class JDFEmbossingIntent extends JDFAutoEmbossingIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -38,8 +37,7 @@ public class JDFEmbossingIntent extends JDFAutoEmbossingIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -53,9 +51,7 @@ public class JDFEmbossingIntent extends JDFAutoEmbossingIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -22,8 +22,7 @@ public class JDFSideSewingParams extends JDFAutoSideSewingParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -36,8 +35,7 @@ public class JDFSideSewingParams extends JDFAutoSideSewingParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -51,9 +49,7 @@ public class JDFSideSewingParams extends JDFAutoSideSewingParams
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFSideSewingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

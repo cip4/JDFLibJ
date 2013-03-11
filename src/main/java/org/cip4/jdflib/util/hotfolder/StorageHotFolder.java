@@ -92,7 +92,8 @@ import org.cip4.jdflib.util.FileUtil;
  * @author prosirai
  * 
  */
-public class StorageHotFolder {
+public class StorageHotFolder
+{
 	protected final HotFolder hf; // the active hot folder
 	private final File storageDir;
 	protected final Log log;
@@ -100,7 +101,8 @@ public class StorageHotFolder {
 	/**
 	 * @return the hotfolder directory
 	 */
-	public File getHfDirectory() {
+	public File getHfDirectory()
+	{
 		return hf.getDir();
 	}
 
@@ -115,15 +117,19 @@ public class StorageHotFolder {
 	 * @param ext the comma separated list of file extensions that are moved - if null no filtering
 	 * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
 	 */
-	public StorageHotFolder(final File _hotFolderDir, final File storageDir, final String ext, final HotFolderListener hfListener) {
+	public StorageHotFolder(final File _hotFolderDir, final File storageDir, final String ext, final HotFolderListener hfListener)
+	{
 		super();
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
 		storageDir.mkdirs(); // just in case
 		storageDir.setWritable(true);
-		if (!storageDir.isDirectory()) {
+		if (!storageDir.isDirectory())
+		{
 			log.error("Storage Directory is not a directory: " + storageDir.getAbsolutePath());
-		} else {
+		}
+		else
+		{
 			moveFromTemp(_hotFolderDir);
 		}
 		listenerImpl = new Vector<StorageHotFolderListener>();
@@ -135,15 +141,21 @@ public class StorageHotFolder {
 	 * TODO Please insert comment!
 	 * @param _hotFolderDir
 	 */
-	private void moveFromTemp(File _hotFolderDir) {
+	private void moveFromTemp(File _hotFolderDir)
+	{
 		File[] junk = storageDir.listFiles();
-		if (junk != null && junk.length > 0) {
+		if (junk != null && junk.length > 0)
+		{
 			log.warn("moving " + junk.length + " legacy temp files from: " + storageDir.getPath());
-			for (File f : junk) {
+			for (File f : junk)
+			{
 				File fMoved = FileUtil.moveFileToDir(f, _hotFolderDir);
-				if (fMoved == null) {
+				if (fMoved == null)
+				{
 					log.warn("cannot move " + f.getName() + " from temp dir");
-				} else {
+				}
+				else
+				{
 					log.info("moving " + f.getName() + " from temp dir to main hot folder");
 				}
 			}
@@ -154,7 +166,8 @@ public class StorageHotFolder {
 	 * stop this hot folder
 	 * 
 	 */
-	public void stop() {
+	public void stop()
+	{
 		hf.stop();
 	}
 
@@ -162,7 +175,8 @@ public class StorageHotFolder {
 	 * restart this hot folder, create s a new listner thread and stops the old one
 	 * 
 	 */
-	public void restart() {
+	public void restart()
+	{
 		hf.restart();
 	}
 
@@ -173,7 +187,8 @@ public class StorageHotFolder {
 	 * @param ext
 	 * @return the newly added listener
 	 */
-	public StorageHotFolderListener addListener(HotFolderListener _hfl, String ext) {
+	public StorageHotFolderListener addListener(HotFolderListener _hfl, String ext)
+	{
 		StorageHotFolderListener storageListener = new StorageHotFolderListener(storageDir, _hfl, this);
 		hf.addListener(storageListener, ext);
 		listenerImpl.add(storageListener);
@@ -185,7 +200,8 @@ public class StorageHotFolder {
 	 * set the directory for successful done
 	 * @param ok the local directory for ok files in the input hot folder
 	 */
-	public void setOKStorage(File ok) {
+	public void setOKStorage(File ok)
+	{
 		for (StorageHotFolderListener shfl : listenerImpl)
 			shfl.setOKStorage(FileUtil.getFileInDirectory(getHfDirectory(), ok));
 	}
@@ -196,7 +212,8 @@ public class StorageHotFolder {
 	 * @param storedFile
 	 * @param ok
 	 */
-	public void copyCompleted(final File storedFile, boolean ok) {
+	public void copyCompleted(final File storedFile, boolean ok)
+	{
 		listenerImpl.get(0).copyCompleted(storedFile, ok);
 	}
 
@@ -205,7 +222,8 @@ public class StorageHotFolder {
 	 * set the directory for error done
 	 * @param error the local directory for error files in the input hot folder
 	 */
-	public void setErrorStorage(File error) {
+	public void setErrorStorage(File error)
+	{
 		for (StorageHotFolderListener shfl : listenerImpl)
 			shfl.setErrorStorage(FileUtil.getFileInDirectory(getHfDirectory(), error));
 	}
@@ -214,7 +232,8 @@ public class StorageHotFolder {
 	 * Setter for maxStore attribute.
 	 * @param maxStore the maxStore to set
 	 */
-	public void setMaxStore(int maxStore) {
+	public void setMaxStore(int maxStore)
+	{
 		for (StorageHotFolderListener shfl : listenerImpl)
 			shfl.setMaxStore(maxStore);
 	}

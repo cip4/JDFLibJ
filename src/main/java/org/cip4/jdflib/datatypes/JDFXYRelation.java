@@ -18,15 +18,15 @@ import org.cip4.jdflib.core.JDFConstants;
 public class JDFXYRelation
 {
 	String m_Relation = JDFConstants.EMPTYSTRING;
-	
+
 	public JDFXYRelation(String s)
 	{
-	    m_Relation = s;
+		m_Relation = s;
 	}
-    
-    @Override
+
+	@Override
 	public String toString()
-    {
-        return m_Relation;
-    }
+	{
+		return m_Relation;
+	}
 }

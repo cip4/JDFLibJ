@@ -95,8 +95,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,8 +107,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -122,8 +120,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFColorSpaceConversionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,8 +145,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 */
 	public JDFFileSpec getAbstractProfile()
 	{
-		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC,
-				AttributeName.RESOURCEUSAGE, null, "AbstractProfile", 0, true);
+		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC, AttributeName.RESOURCEUSAGE, null, "AbstractProfile", 0, true);
 	}
 
 	/**
@@ -188,8 +184,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 */
 	public JDFFileSpec getSourceProfile()
 	{
-		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC,
-				AttributeName.RESOURCEUSAGE, null, "SourceProfile", 0, true);
+		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC, AttributeName.RESOURCEUSAGE, null, "SourceProfile", 0, true);
 	}
 
 	/**

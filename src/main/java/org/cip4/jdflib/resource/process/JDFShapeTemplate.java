@@ -22,8 +22,7 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -35,8 +34,7 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -49,8 +47,7 @@ public class JDFShapeTemplate extends JDFAutoShapeTemplate
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

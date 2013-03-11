@@ -14,8 +14,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoInkZoneCalculationParams;
 import org.w3c.dom.DOMException;
 
-public class JDFInkZoneCalculationParams extends
-		JDFAutoInkZoneCalculationParams
+public class JDFInkZoneCalculationParams extends JDFAutoInkZoneCalculationParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -26,8 +25,7 @@ public class JDFInkZoneCalculationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -40,8 +38,7 @@ public class JDFInkZoneCalculationParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -55,9 +52,7 @@ public class JDFInkZoneCalculationParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFInkZoneCalculationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

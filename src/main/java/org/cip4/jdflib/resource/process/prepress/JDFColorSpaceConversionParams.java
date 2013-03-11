@@ -17,8 +17,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.w3c.dom.DOMException;
 
-public class JDFColorSpaceConversionParams extends
-		JDFAutoColorSpaceConversionParams
+public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -29,8 +28,7 @@ public class JDFColorSpaceConversionParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -43,8 +41,7 @@ public class JDFColorSpaceConversionParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -58,9 +55,7 @@ public class JDFColorSpaceConversionParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFColorSpaceConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -91,8 +86,7 @@ public class JDFColorSpaceConversionParams extends
 	 */
 	public JDFFileSpec getFinalTargetDevice()
 	{
-		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC,
-				AttributeName.RESOURCEUSAGE, null, "FinalTargetDevice", 0, true);
+		return (JDFFileSpec) getChildWithAttribute(ElementName.FILESPEC, AttributeName.RESOURCEUSAGE, null, "FinalTargetDevice", 0, true);
 	}
 
 	/**

@@ -34,8 +34,7 @@ public class JDFLoc extends JDFAutoLoc
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -48,8 +47,7 @@ public class JDFLoc extends JDFAutoLoc
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

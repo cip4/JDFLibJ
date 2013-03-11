@@ -11,8 +11,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceDefinitionParams;
 import org.w3c.dom.DOMException;
 
-public class JDFResourceDefinitionParams extends
-		JDFAutoResourceDefinitionParams
+public class JDFResourceDefinitionParams extends JDFAutoResourceDefinitionParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -23,8 +22,7 @@ public class JDFResourceDefinitionParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -37,8 +35,7 @@ public class JDFResourceDefinitionParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -52,9 +49,7 @@ public class JDFResourceDefinitionParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

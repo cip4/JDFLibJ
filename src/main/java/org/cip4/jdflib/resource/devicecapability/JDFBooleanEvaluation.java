@@ -99,9 +99,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333,
-				AttributeInfo.EnumAttributeType.enumerations, EnumBoolean
-						.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0), null);
 	}
 
 	@Override
@@ -116,8 +114,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,8 +126,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -143,8 +139,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -182,7 +177,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 			if (s2.equalsIgnoreCase(JDFConstants.TRUE))
 			{
 				vRet.add(Boolean.valueOf(true));
-			} else if (s2.equalsIgnoreCase(JDFConstants.FALSE))
+			}
+			else if (s2.equalsIgnoreCase(JDFConstants.FALSE))
 			{
 				vRet.add(Boolean.valueOf(false));
 			}
@@ -207,7 +203,8 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 			if (b.booleanValue())
 			{
 				s += JDFConstants.TRUE;
-			} else
+			}
+			else
 			{
 				s += JDFConstants.FALSE;
 			}
@@ -306,15 +303,15 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 		EnumListType listType = getListType();
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return (size == 1);
-		} else if (listType.equals(EnumListType.List)
-				|| listType.equals(EnumListType.Span))
+		}
+		else if (listType.equals(EnumListType.List) || listType.equals(EnumListType.Span))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			for (int i = 0; i < size; i++)
 			{
@@ -330,10 +327,10 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 				}
 			}
 			return true;
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFBooleanEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFBooleanEvaluation.fitsListType illegal ListType attribute");
 		}
 
 	}

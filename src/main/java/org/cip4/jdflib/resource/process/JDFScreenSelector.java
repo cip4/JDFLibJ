@@ -97,8 +97,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -111,8 +110,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -126,9 +124,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFScreenSelector(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,8 +138,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEPARATION,
-				0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override

@@ -331,7 +331,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated
-	public VElement getLocVector() 
+	public VElement getLocVector()
 	{
 		return getLocVector(new JDFAttributeMap(), true);
 	}

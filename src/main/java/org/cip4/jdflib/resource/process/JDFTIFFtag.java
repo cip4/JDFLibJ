@@ -32,8 +32,7 @@ public class JDFTIFFtag extends JDFAutoTIFFtag
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -46,8 +45,7 @@ public class JDFTIFFtag extends JDFAutoTIFFtag
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

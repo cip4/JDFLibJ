@@ -25,8 +25,7 @@ public class JDFPlasticCombBinding extends JDFAutoPlasticCombBinding
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFPlasticCombBinding extends JDFAutoPlasticCombBinding
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFPlasticCombBinding extends JDFAutoPlasticCombBinding
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

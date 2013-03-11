@@ -272,9 +272,8 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		}
 
 		final EnumNodeStatus status = pt.getStatus();
-		if (status == null || status.equals(EnumNodeStatus.Ready) || status.equals(EnumNodeStatus.Completed)
-				|| status.equals(EnumNodeStatus.FailedTestRun) || status.equals(EnumNodeStatus.Spawned)
-				|| status.equals(EnumNodeStatus.Stopped) || status.equals(EnumNodeStatus.Suspended)
+		if (status == null || status.equals(EnumNodeStatus.Ready) || status.equals(EnumNodeStatus.Completed) || status.equals(EnumNodeStatus.FailedTestRun)
+				|| status.equals(EnumNodeStatus.Spawned) || status.equals(EnumNodeStatus.Stopped) || status.equals(EnumNodeStatus.Suspended)
 				|| status.equals(EnumNodeStatus.Waiting))
 		{
 			return;

@@ -24,8 +24,7 @@ public class JDFColorControlStrip extends JDFAutoColorControlStrip
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -38,8 +37,7 @@ public class JDFColorControlStrip extends JDFAutoColorControlStrip
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -53,9 +51,7 @@ public class JDFColorControlStrip extends JDFAutoColorControlStrip
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

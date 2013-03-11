@@ -96,8 +96,7 @@ public class JDFValueLoc extends JDFAutoValueLoc
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFValueLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFValueLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -110,8 +109,7 @@ public class JDFValueLoc extends JDFAutoValueLoc
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFValueLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFValueLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

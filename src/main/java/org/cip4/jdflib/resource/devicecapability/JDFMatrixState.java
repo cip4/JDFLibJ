@@ -110,26 +110,14 @@ public class JDFMatrixState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDSHIFT,
-				0x33333311, AttributeInfo.EnumAttributeType.NumberList, null,
-				null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS,
-				0x33333311, AttributeInfo.EnumAttributeType.enumerations,
-				EnumOrientation.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTROTATEMOD,
-				0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTSHIFT,
-				0x33333311, AttributeInfo.EnumAttributeType.NumberList, null,
-				null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS,
-				0x44444431, AttributeInfo.EnumAttributeType.enumerations,
-				EnumOrientation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATEMOD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.NumberList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTROTATEMOD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.NumberList, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x44444431, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
 	}
 
 	@Override
@@ -168,8 +156,7 @@ public class JDFMatrixState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMatrixState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -180,8 +167,7 @@ public class JDFMatrixState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFMatrixState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -210,10 +196,10 @@ public class JDFMatrixState extends JDFAbstractState
 		try
 		{
 			return new JDFMatrix(getAttribute(AttributeName.CURRENTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFMatrixState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFMatrix");
+			throw new JDFException("JDFMatrixState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFMatrix");
 		}
 	}
 
@@ -227,10 +213,10 @@ public class JDFMatrixState extends JDFAbstractState
 		try
 		{
 			return new JDFMatrix(getAttribute(AttributeName.DEFAULTVALUE));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFMatrixState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFMatrix");
+			throw new JDFException("JDFMatrixState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFMatrix");
 		}
 	}
 
@@ -268,12 +254,11 @@ public class JDFMatrixState extends JDFAbstractState
 
 		try
 		{
-			return new JDFRectangle(getAttribute(AttributeName.ALLOWEDSHIFT,
-					null, JDFConstants.EMPTYSTRING));
-		} catch (DataFormatException e)
+			return new JDFRectangle(getAttribute(AttributeName.ALLOWEDSHIFT, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFMatrixState.getAllowedShift: AttributeValue not capable to create JDFRectangle");
+			throw new JDFException("JDFMatrixState.getAllowedShift: AttributeValue not capable to create JDFRectangle");
 		}
 	}
 
@@ -288,13 +273,11 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFRectangle(getAttribute(
-						AttributeName.PRESENTSHIFT, null,
-						JDFConstants.EMPTYSTRING));
-			} catch (DataFormatException e)
+				return new JDFRectangle(getAttribute(AttributeName.PRESENTSHIFT, null, JDFConstants.EMPTYSTRING));
+			}
+			catch (DataFormatException e)
 			{
-				throw new JDFException(
-						"JDFMatrixState.getPresentShift: AttributeValue not capable to create JDFRectangle");
+				throw new JDFException("JDFMatrixState.getPresentShift: AttributeValue not capable to create JDFRectangle");
 			}
 		}
 		return getAllowedShift();
@@ -302,8 +285,7 @@ public class JDFMatrixState extends JDFAbstractState
 
 	public Vector getAllowedTransforms()
 	{
-		return getEnumerationsAttribute(AttributeName.ALLOWEDTRANSFORMS, null,
-				EnumOrientation.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.ALLOWEDTRANSFORMS, null, EnumOrientation.getEnum(0), false);
 	}
 
 	public void setAllowedTransforms(Vector value)
@@ -315,8 +297,7 @@ public class JDFMatrixState extends JDFAbstractState
 	{
 		if (hasAttribute(AttributeName.PRESENTTRANSFORMS))
 		{
-			return getEnumerationsAttribute(AttributeName.PRESENTTRANSFORMS,
-					null, EnumOrientation.getEnum(0), false);
+			return getEnumerationsAttribute(AttributeName.PRESENTTRANSFORMS, null, EnumOrientation.getEnum(0), false);
 		}
 		return getAllowedTransforms();
 	}
@@ -332,8 +313,7 @@ public class JDFMatrixState extends JDFAbstractState
 
 	public JDFValue getValue(int iSkip)
 	{
-		return (JDFValue) getElement(ElementName.VALUE,
-				JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 	}
 
 	public JDFValue appendValue()
@@ -390,10 +370,10 @@ public class JDFMatrixState extends JDFAbstractState
 		try
 		{
 			return new JDFMatrix(e.getAllowedValue());
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFMatrixState.getValueAllowedValue: AttributeValue not capable to create JDFMatrix");
+			throw new JDFException("JDFMatrixState.getValueAllowedValue: AttributeValue not capable to create JDFMatrix");
 		}
 
 	}
@@ -441,7 +421,8 @@ public class JDFMatrixState extends JDFAbstractState
 		try
 		{
 			new JDFMatrix(value);
-		} catch (DataFormatException x)
+		}
+		catch (DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -518,10 +499,10 @@ public class JDFMatrixState extends JDFAbstractState
 
 			try
 			{
-				JDFMatrix m = new JDFMatrix(StringUtil.setvString(vs, " ",
-						null, null));
+				JDFMatrix m = new JDFMatrix(StringUtil.setvString(vs, " ", null, null));
 				matrixList.add(m);
-			} catch (DataFormatException x)
+			}
+			catch (DataFormatException x)
 			{
 				return false;
 			}
@@ -532,10 +513,7 @@ public class JDFMatrixState extends JDFAbstractState
 			for (int k = 0; k < matrixList.size(); k++)
 			{
 				JDFMatrix matrix = matrixList.elementAt(k);
-				if (!fitsRotateMod(matrix, testlists)
-						|| !fitsShift(matrix, testlists)
-						|| !fitsTransforms(matrix, testlists)
-						|| !fitsValueElem(matrix, testlists))
+				if (!fitsRotateMod(matrix, testlists) || !fitsShift(matrix, testlists) || !fitsTransforms(matrix, testlists) || !fitsValueElem(matrix, testlists))
 					return false;
 			}
 			return true;
@@ -558,14 +536,15 @@ public class JDFMatrixState extends JDFAbstractState
 
 		int size = matrixList.size();
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return (size == 1);
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			for (int i = 0; i < size; i++)
 			{
@@ -578,10 +557,10 @@ public class JDFMatrixState extends JDFAbstractState
 				}
 			}
 			return true;
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFMatrixState.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFMatrixState.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -597,12 +576,10 @@ public class JDFMatrixState extends JDFAbstractState
 	 * 
 	 * @return boolean - true, if <code>matrix</code> matches subelement Value
 	 */
-	private final boolean fitsValueElem(JDFMatrix matrix,
-			EnumFitsValue valuelist)
+	private final boolean fitsValueElem(JDFMatrix matrix, EnumFitsValue valuelist)
 	{
 
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
@@ -618,7 +595,8 @@ public class JDFMatrixState extends JDFAbstractState
 					if (value.equals(matrix))
 						return true; // we have found it
 				}
-			} else
+			}
+			else
 			{
 				hasValue = true;
 				JDFMatrix value = getValueAllowedValue(i);
@@ -640,17 +618,16 @@ public class JDFMatrixState extends JDFAbstractState
 	 * @return boolean - true, if <code>matrix</code> matches the RotateMod or
 	 *         if AllowedRotateMod is not specified
 	 */
-	private final boolean fitsRotateMod(JDFMatrix matrix,
-			EnumFitsValue rotatemod)
+	private final boolean fitsRotateMod(JDFMatrix matrix, EnumFitsValue rotatemod)
 	{
 		if (rotatemod == null || rotatemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDROTATEMOD))
 				return true;
-		} else
+		}
+		else
 		{
-			if (!hasAttribute(AttributeName.ALLOWEDROTATEMOD)
-					&& !hasAttribute(AttributeName.PRESENTROTATEMOD))
+			if (!hasAttribute(AttributeName.ALLOWEDROTATEMOD) && !hasAttribute(AttributeName.PRESENTROTATEMOD))
 				return true;
 		}
 
@@ -658,7 +635,8 @@ public class JDFMatrixState extends JDFAbstractState
 		if (rotatemod == null || rotatemod.equals(EnumFitsValue.Allowed))
 		{
 			rm = getAllowedRotateMod();
-		} else
+		}
+		else
 		{
 			rm = getPresentRotateMod();
 		}
@@ -671,8 +649,7 @@ public class JDFMatrixState extends JDFAbstractState
 		if ((a * d - b * c) == 0)
 			return false;
 
-		double param = a
-				/ java.lang.Math.sqrt(java.lang.Math.abs(a * d - b * c));
+		double param = a / java.lang.Math.sqrt(java.lang.Math.abs(a * d - b * c));
 
 		if (((param - EPSILON) > 1) || ((param + EPSILON) < -1))
 		{
@@ -690,11 +667,9 @@ public class JDFMatrixState extends JDFAbstractState
 		double fi = java.lang.Math.acos(param) * 180 / java.lang.Math.PI; //0~180
 
 		double result = (fi + EPSILON) - (rm * (int) ((fi + EPSILON) / rm));
-		double result180 = (fi + 180 + EPSILON)
-				- (rm * (int) ((fi + 180 + EPSILON) / rm));
+		double result180 = (fi + 180 + EPSILON) - (rm * (int) ((fi + 180 + EPSILON) / rm));
 
-		return ((java.lang.Math.abs(result) <= 2 * EPSILON) || (java.lang.Math
-				.abs(result180) <= 2 * EPSILON));
+		return ((java.lang.Math.abs(result) <= 2 * EPSILON) || (java.lang.Math.abs(result180) <= 2 * EPSILON));
 
 	}
 
@@ -716,10 +691,10 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDSHIFT))
 				return true;
-		} else
+		}
+		else
 		{
-			if (!hasAttribute(AttributeName.ALLOWEDSHIFT)
-					&& !hasAttribute(AttributeName.PRESENTSHIFT))
+			if (!hasAttribute(AttributeName.ALLOWEDSHIFT) && !hasAttribute(AttributeName.PRESENTSHIFT))
 				return true;
 		}
 
@@ -727,7 +702,8 @@ public class JDFMatrixState extends JDFAbstractState
 		if (shift == null || shift.equals(EnumFitsValue.Allowed))
 		{
 			shiftValue = new JDFRectangle(getAllowedShift());
-		} else
+		}
+		else
 		{
 			shiftValue = new JDFRectangle(getPresentShift());
 		}
@@ -756,17 +732,16 @@ public class JDFMatrixState extends JDFAbstractState
 	 * @return boolean - true, if <code>matrix</code> matches the Transforms or
 	 *         if AllowedTransforms is not specified
 	 */
-	private final boolean fitsTransforms(JDFMatrix matrix,
-			EnumFitsValue transforms)
+	private final boolean fitsTransforms(JDFMatrix matrix, EnumFitsValue transforms)
 	{
 		if (transforms == null || transforms.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDTRANSFORMS))
 				return true;
-		} else
+		}
+		else
 		{
-			if (!hasAttribute(AttributeName.ALLOWEDTRANSFORMS)
-					&& !hasAttribute(AttributeName.PRESENTTRANSFORMS))
+			if (!hasAttribute(AttributeName.ALLOWEDTRANSFORMS) && !hasAttribute(AttributeName.PRESENTTRANSFORMS))
 				return true;
 		}
 
@@ -792,85 +767,77 @@ public class JDFMatrixState extends JDFAbstractState
 		if (transforms == null || transforms.equals(EnumFitsValue.Allowed))
 		{
 			vTransf = getAllowedTransforms();
-		} else
+		}
+		else
 		{
 			vTransf = getPresentTransforms();
 		}
 		int siz = vTransf.size();
 		for (int i = 0; i < siz; i++)
 		{
-			EnumOrientation orientation = (EnumOrientation) vTransf
-					.elementAt(i);
+			EnumOrientation orientation = (EnumOrientation) vTransf.elementAt(i);
 
 			if (orientation.equals(EnumOrientation.Flip0)) // a=1 b=0 c=0 d=-1
 			{
-				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d + 1 < pT)
-						&& (d + 1 > -nT))
+				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Flip90)) // a=0 b=-1
+			}
+			else if (orientation.equals(EnumOrientation.Flip90)) // a=0 b=-1
 																	// c=-1 d=0
 			{
-				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT)
-						&& (c + 1 < pT) && (c + 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Flip180)) // a=-1 b=0
+			}
+			else if (orientation.equals(EnumOrientation.Flip180)) // a=-1 b=0
 																	// c=0 d=1
 			{
-				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d - 1 < pT)
-						&& (d - 1 > -nT))
+				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Flip270)) // a=0 b=1
+			}
+			else if (orientation.equals(EnumOrientation.Flip270)) // a=0 b=1
 																	// c=1 d=0
 			{
-				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT)
-						&& (c - 1 < pT) && (c - 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate0)) // a=1 b=0
+			}
+			else if (orientation.equals(EnumOrientation.Rotate0)) // a=1 b=0
 																	// c=0 d=1
 			{
-				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d - 1 < pT)
-						&& (d - 1 > -nT))
+				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate90)) // a=0 b=1
-																		// c=-1
-																		// d=0
+			}
+			else if (orientation.equals(EnumOrientation.Rotate90)) // a=0 b=1
+																	// c=-1
+																	// d=0
 			{
-				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT)
-						&& (c + 1 < pT) && (c + 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate180)) // a=-1
-																		// b=0
-																		// c=0
-																		// d=-1
+			}
+			else if (orientation.equals(EnumOrientation.Rotate180)) // a=-1
+																	// b=0
+																	// c=0
+																	// d=-1
 			{
-				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d + 1 < pT)
-						&& (d + 1 > -nT))
+				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
 					return true;
 				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate270)) // a=0
-																		// b=-1
-																		// c=1
-																		// d=0
+			}
+			else if (orientation.equals(EnumOrientation.Rotate270)) // a=0
+																	// b=-1
+																	// c=1
+																	// d=0
 			{
-				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT)
-						&& (c - 1 < pT) && (c - 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
 				continue;
-			} else
+			}
+			else
 			{
 				return true;
 			}

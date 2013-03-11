@@ -11,8 +11,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPlasticCombBindingParams;
 import org.w3c.dom.DOMException;
 
-public class JDFPlasticCombBindingParams extends
-		JDFAutoPlasticCombBindingParams
+public class JDFPlasticCombBindingParams extends JDFAutoPlasticCombBindingParams
 {
 	private static final long serialVersionUID = 1L;
 
@@ -23,8 +22,7 @@ public class JDFPlasticCombBindingParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -37,8 +35,7 @@ public class JDFPlasticCombBindingParams extends
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -52,9 +49,7 @@ public class JDFPlasticCombBindingParams extends
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

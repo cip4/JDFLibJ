@@ -67,14 +67,14 @@
  *
  *
  *//**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFDieLayout.java
- *
- * Last changes
- *
- */
+*
+* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFDieLayout.java
+*
+* Last changes
+*
+*/
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;

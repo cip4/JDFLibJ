@@ -89,8 +89,7 @@ public class JDFScreeningIntent extends JDFAutoScreeningIntent
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -102,8 +101,7 @@ public class JDFScreeningIntent extends JDFAutoScreeningIntent
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -116,8 +114,7 @@ public class JDFScreeningIntent extends JDFAutoScreeningIntent
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFScreeningIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

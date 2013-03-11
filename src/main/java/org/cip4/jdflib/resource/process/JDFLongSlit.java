@@ -25,8 +25,7 @@ public class JDFLongSlit extends JDFAutoLongSlit
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFLongSlit extends JDFAutoLongSlit
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,8 +52,7 @@ public class JDFLongSlit extends JDFAutoLongSlit
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

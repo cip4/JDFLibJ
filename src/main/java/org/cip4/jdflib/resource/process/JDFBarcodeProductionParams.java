@@ -13,8 +13,7 @@ public class JDFBarcodeProductionParams extends JDFAutoBarcodeProductionParams
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -26,8 +25,7 @@ public class JDFBarcodeProductionParams extends JDFAutoBarcodeProductionParams
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -40,8 +38,7 @@ public class JDFBarcodeProductionParams extends JDFAutoBarcodeProductionParams
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

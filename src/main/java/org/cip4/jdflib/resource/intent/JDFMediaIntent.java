@@ -93,8 +93,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x33333333,
-				AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -110,8 +109,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,8 +122,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -139,9 +136,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -22,8 +22,7 @@ public class JDFProductionPath extends JDFAutoProductionPath
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFProductionPath(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFProductionPath(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -35,8 +34,7 @@ public class JDFProductionPath extends JDFAutoProductionPath
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFProductionPath(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -49,8 +47,7 @@ public class JDFProductionPath extends JDFAutoProductionPath
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFProductionPath(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

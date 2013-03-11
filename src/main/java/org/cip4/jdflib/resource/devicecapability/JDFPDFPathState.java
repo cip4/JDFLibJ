@@ -101,16 +101,10 @@ public class JDFPDFPathState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH,
-				0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null,
-				null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333311, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTLENGTH,
-				0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null,
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTLENGTH, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
 	}
 
 	@Override
@@ -137,8 +131,7 @@ public class JDFPDFPathState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -150,8 +143,7 @@ public class JDFPDFPathState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,8 +156,7 @@ public class JDFPDFPathState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -195,8 +186,7 @@ public class JDFPDFPathState extends JDFAbstractState
 
 	public String getCurrentValue()
 	{
-		return getAttribute(AttributeName.CURRENTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public void setDefaultValue(String value)
@@ -206,14 +196,12 @@ public class JDFPDFPathState extends JDFAbstractState
 
 	public String getDefaultValue()
 	{
-		return getAttribute(AttributeName.DEFAULTVALUE, null,
-				JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
 	}
 
 	public JDFValue getValue(int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE,
-				JDFConstants.EMPTYSTRING, iSkip);
+		JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -390,8 +378,7 @@ public class JDFPDFPathState extends JDFAbstractState
 	 */
 	private final boolean fitsValueElem(String pdfPath, EnumFitsValue valuelist)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
@@ -407,7 +394,8 @@ public class JDFPDFPathState extends JDFAbstractState
 					if (value.compareTo(pdfPath) == 0)
 						return true; // we have found it
 				}
-			} else
+			}
+			else
 			{
 				hasValue = true;
 				String value = getValueAllowedValue(i);
