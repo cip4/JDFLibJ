@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,8 @@ package org.cip4.jdflib.elementwalker;
 
 import java.lang.reflect.Constructor;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -78,17 +80,20 @@ import org.cip4.jdflib.util.StringUtil;
  * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make
  * sure that your walker subclasses match the naming convention <name>$Walk, e.g. if your class is called FixVersion, the subclasses must be called FooWalk, BarWalk etc.
  * 
- * @author prosirai
+ * @author rainer prosi
  * 
  */
 public class BaseElementWalker extends ElementWalker
 {
+	final protected Log log;
+
 	/**
 	 * @param _theFactory
 	 */
 	public BaseElementWalker(final BaseWalkerFactory _theFactory)
 	{
 		super(_theFactory);
+		log = LogFactory.getLog(getClass());
 		final String name = this.getClass().getSimpleName();
 		constructWalkers(name + "$Walk");
 	}
@@ -111,11 +116,10 @@ public class BaseElementWalker extends ElementWalker
 				{
 					final Constructor<?> con = cs[i].getDeclaredConstructor(new Class[] { this.getClass() });
 					con.newInstance(new Object[] { this });
-
 				}
 				catch (final Exception x)
 				{
-					System.out.print("" + x);
+					log.error("Snafu instantiating walker", x);
 				}
 			}
 		}

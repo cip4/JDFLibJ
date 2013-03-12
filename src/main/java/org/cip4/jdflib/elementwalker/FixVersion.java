@@ -1564,7 +1564,7 @@ public class FixVersion extends BaseElementWalker
 		{
 			boolean b = super.matches(toCheck);
 			b = b && (toCheck.getParentNode() instanceof JDFNode);
-			return b && "NamedFeature".endsWith(toCheck.getAttribute(AttributeName.DATATYPE));
+			return b && "NamedFeature".equals(toCheck.getAttribute(AttributeName.DATATYPE));
 		}
 
 		/**

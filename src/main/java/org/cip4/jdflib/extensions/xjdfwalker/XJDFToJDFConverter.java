@@ -75,8 +75,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -163,18 +161,16 @@ import org.cip4.jdflib.util.UnitParser;
 public class XJDFToJDFConverter extends BaseElementWalker
 {
 	JDFDoc jdfDoc;
-	// JDFNode theNode;
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
 	boolean firstproductInList;
 	boolean foundProduct;
 	boolean foundProductList;
-	protected JDFNode currentJDFNode = null;
-	final Log log;
+	JDFNode currentJDFNode;
 	/**
 	 * if true, create the product, else ignore it
 	 */
-	boolean createProduct = true;
+	boolean createProduct;
 
 	/**
 	 * Getter for createProduct attribute.
@@ -233,7 +229,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * 
 	 */
-	boolean convertUnits = false;
+	boolean convertUnits;
 	/**
 	 * 
 	 */
@@ -248,15 +244,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
 		super(new BaseWalkerFactory());
-		firstConvert = firstproductInList = true;
+		firstConvert = firstproductInList = createProduct = true;
+		currentJDFNode = null;
 		foundProductList = false;
 		jdfDoc = template == null ? null : template.clone();
-		// theNode = null;
 		idMap = null;
 		foundProduct = false;
 		bConvertTilde = false;
-		setHeuristicLink(true);
-		log = LogFactory.getLog(getClass());
+		convertUnits = false;
+		heuristicLink = true;
 	}
 
 	/**
@@ -1586,23 +1582,23 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			JDFNode theNode = (JDFNode) trackElem;
 			if ("Product".equals(theNode.getType()))
 			{
-				if (theNode != currentJDFNode && !firstproductInList)
+				JDFNode tmp = theNode.getRoot().getChildJDFNode(e.getAttribute(AttributeName.ID), false);
+				if (tmp != null)
+				{
+					theNode = tmp;
+				}
+				else if (theNode != currentJDFNode && !firstproductInList)
 				{
 					theNode = theNode.addProduct();
 				}
 				else
 				{
-					JDFNode tmp = theNode.getRoot().getChildJDFNode(e.getAttribute(AttributeName.ID), false);
-					if (tmp != null)
-					{
-						theNode = tmp;
-					}
+					//nop
 				}
 			}
 			else
 			{
 				theNode = createProductRoot(theNode);
-				trackElem = theNode;
 			}
 			firstproductInList = false;
 			theNode.setAttributes(e);
