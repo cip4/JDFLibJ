@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.jdf</groupId>
 	<artifactId>JDFLibJ</artifactId>
@@ -17,16 +18,21 @@
 
 	</properties>
 	<scm>
-		<url>http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.4a.74</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.4a.74</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.4a.74</connection>
+		<url>http://svn.cip4.org/svnroot/trunk/JDFLibJ</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</connection>
 	</scm>
 	<ciManagement>
 		<system>continuum</system>
+		<url>http://community.cip4.org:8080/continuum</url>
 		<notifiers>
 			<notifier>
+				<type>mail</type>
+				<sendOnError>true</sendOnError>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnSuccess>true</sendOnSuccess>
+				<sendOnWarning>true</sendOnWarning>
 				<configuration>
-					<address>stefanmeissner@hotmail.com</address>
 					<committers>true</committers>
 					<developers>true</developers>
 				</configuration>
