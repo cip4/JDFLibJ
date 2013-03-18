@@ -78,7 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * 
  * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make
- * sure that your walker subclasses match the naming convention <name>$Walk, e.g. if your class is called FixVersion, the subclasses must be called FooWalk, BarWalk etc.
+ * sure that your walker subclasses match the naming convention $Walk<name>, e.g. if your class is called FixVersion, the subclasses must be called WalkFoo, WalkBar etc.
  * 
  * @author rainer prosi
  * 
@@ -94,8 +94,7 @@ public class BaseElementWalker extends ElementWalker
 	{
 		super(_theFactory);
 		log = LogFactory.getLog(getClass());
-		final String name = this.getClass().getSimpleName();
-		constructWalkers(name + "$Walk");
+		constructWalkers("$Walk");
 	}
 
 	/**
@@ -105,23 +104,30 @@ public class BaseElementWalker extends ElementWalker
 	 */
 	protected void constructWalkers(final String classPrefix)
 	{
-		final Class<?>[] cs = this.getClass().getDeclaredClasses();
-		for (int i = 0; i < cs.length; i++)
+		Class<?> parent = getClass();
+
+		while (parent != null)
 		{
-			String s = cs[i].getName();
-			s = StringUtil.token(s, -1, ".");
-			if (s.startsWith(classPrefix))
+			final String name = parent.getSimpleName();
+			final Class<?>[] cs = parent.getDeclaredClasses();
+			for (Class<?> ci : cs)
 			{
-				try
+				String s = ci.getName();
+				s = StringUtil.token(s, -1, ".");
+				if (s.startsWith(name + classPrefix))
 				{
-					final Constructor<?> con = cs[i].getDeclaredConstructor(new Class[] { this.getClass() });
-					con.newInstance(new Object[] { this });
-				}
-				catch (final Exception x)
-				{
-					log.error("Snafu instantiating walker", x);
+					try
+					{
+						final Constructor<?> con = ci.getDeclaredConstructor(new Class[] { parent });
+						con.newInstance(new Object[] { this });
+					}
+					catch (final Throwable x)
+					{
+						log.error("Snafu instantiating walker", x);
+					}
 				}
 			}
+			parent = parent.getSuperclass();
 		}
 	}
 

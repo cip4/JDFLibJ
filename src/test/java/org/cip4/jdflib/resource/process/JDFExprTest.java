@@ -66,94 +66,45 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker;
+package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFComChannel;
+import org.cip4.jdflib.resource.devicecapability.JDFNameEvaluation;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.resource.devicecapability.JDFand;
+import org.junit.Test;
 
 /**
- * 
+ *  
  * @author rainer prosi
- * @date Oct 11, 2012
+ * @date Mar 17, 2013
  */
-public class RemoveEmptyTest extends JDFTestCaseBase
+public class JDFExprTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
-	 * 
+	 *  
 	 */
-	public void testRemove()
+	@Test
+	public void testgetTerm()
 	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
+		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
+		JDFand a = (JDFand) expr.appendTerm(EnumTerm.and);
+		assertEquals(a, expr.getTerm(null, 0));
 	}
 
 	/**
 	 * 
-	 * 
+	 *  
 	 */
-	public void testRemoveAttributes()
+	@Test
+	public void testgetCreateTerm()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
-		KElement root = d.getRoot();
-		root.setXPathAttribute("foo/@bar", "");
-		RemoveEmpty emp = new RemoveEmpty();
-		assertNotNull(root.getXPathAttribute("foo/@bar", null));
-		emp.removEmptyAttributes(root);
-		assertNull(root.getXPathAttribute("foo/@bar", null));
-		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
+		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
+		JDFNameEvaluation a = (JDFNameEvaluation) expr.getCreateTerm(EnumTerm.NameEvaluation, 0);
+		assertEquals(a, expr.getTerm(null, 0));
 	}
 
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveComment()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMMENT));
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveExtend()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		n.appendElement("foo");
-		ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains("<foo"));
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveComChannel()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFComChannel c = (JDFComChannel) n.addResource(ElementName.COMCHANNEL, EnumUsage.Input);
-		c.setChannelType(EnumChannelType.Email);
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
-	}
 }

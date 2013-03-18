@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -100,6 +100,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * 
 	 */
 	private static final long serialVersionUID = -2180413692846276265L;
+	private boolean bUnique;
 
 	/**
 	 * null constructor
@@ -107,6 +108,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	public VectorMap()
 	{
 		super();
+		setUnique(true);
 	}
 
 	/**
@@ -181,7 +183,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 			v = new Vector<vectorObject>();
 			put(key, v);
 		}
-		if (!v.contains(val))
+		if (!bUnique || !v.contains(val))
 		{
 			v.add(val);
 		}
@@ -193,12 +195,17 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param key the key of the vector
 	 * @param vVal the vector of elements
 	 */
-	public void appendUnique(final key key, final Vector<vectorObject> vVal)
+	public synchronized void appendUnique(final key key, final Vector<vectorObject> vVal)
 	{
 		if (vVal == null)
 			return;
+		boolean keepUnique = bUnique;
+		bUnique = true;
 		for (vectorObject val : vVal)
+		{
 			putOne(key, val);
+		}
+		bUnique = keepUnique;
 	}
 
 	/**
@@ -329,5 +336,23 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 		}
 		ContainerUtil.ensureSize(pos + 1, v);
 		v.set(pos, newObj);
+	}
+
+	/**
+	 * Getter for bUnique attribute.
+	 * @return the bUnique
+	 */
+	public boolean isUnique()
+	{
+		return bUnique;
+	}
+
+	/**
+	 * Setter for bUnique attribute.
+	 * @param bUnique the bUnique to set
+	 */
+	public void setUnique(boolean bUnique)
+	{
+		this.bUnique = bUnique;
 	}
 }

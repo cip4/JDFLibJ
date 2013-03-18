@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -103,6 +103,7 @@ public abstract class TimeSweeper implements Sweeper
 	 * if true we want to sweep
 	 * @see org.cip4.jdflib.util.thread.Sweeper#needSweep()
 	 */
+	@Override
 	public boolean needSweep()
 	{
 		long t = System.currentTimeMillis();
@@ -112,9 +113,13 @@ public abstract class TimeSweeper implements Sweeper
 		return needsweep;
 	}
 
+	/**
+	 * default is nop
+	 * @see org.cip4.jdflib.util.thread.Sweeper#sweep()
+	 */
+	@Override
 	public boolean sweep()
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 

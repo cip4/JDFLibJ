@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -104,6 +104,12 @@ import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Mar 17, 2013
+ */
 public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 {
 	private static final long serialVersionUID = -1231679460732331896L;
@@ -242,6 +248,10 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		return b;
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFTerm#fitsContext(org.cip4.jdflib.core.KElement)
+	 */
 	@Override
 	public boolean fitsContext(KElement jdf)
 	{
@@ -538,8 +548,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * setRefTarget() set the target referencened in @rRef
+	 * @param e 
 	 * 
-	 * @return JDFElement() the referenced element, either state or a devcap
 	 */
 	public void setRefTarget(JDFElement e)
 	{
@@ -591,8 +601,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * Since rRef is independent of the data type of the State element, the
 	 * setter is defined here
 	 * 
-	 * @param String
-	 *            value: the value to set the attribute to
+	 * @param  value the value to set the attribute to
 	 */
 	public void setrRef(String value)
 	{
@@ -609,6 +618,28 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	public String getrRef()
 	{
 		return getAttribute(AttributeName.RREF, null, "");
+	}
+
+	/**
+	 * Sets String attribute <code>rRef</code><br>
+	 * Since rRef is independent of the data type of the State element, the
+	 * setter is defined here
+	 * 
+	 * @param  value the value to set the attribute to
+	 */
+	public void setPath(String value)
+	{
+		setAttribute(AttributeName.PATH, value);
+	}
+
+	/**
+	 * Gets String attribute <code>Path</code><br>
+	 * 
+	 * @return String: the attribute value
+	 */
+	public String getPath()
+	{
+		return getAttribute(AttributeName.PATH, null, "");
 	}
 
 	/*

@@ -66,94 +66,39 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker;
+package org.cip4.jdflib.util.thread;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFComChannel;
+import java.util.Vector;
 
 /**
- * 
+ * some simple utilities for reflection etc
  * @author rainer prosi
- * @date Oct 11, 2012
+ * @date Mar 15, 2013
  */
-public class RemoveEmptyTest extends JDFTestCaseBase
+public class ClassUtil
 {
 	/**
 	 * 
+	 * recursive class getter
 	 * 
+	 * @param o
+	 * @return
 	 */
-	public void testRemove()
+	public static Vector<Class<?>> getDeclaredClasses(Class<?> o)
 	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveAttributes()
-	{
-		XMLDoc d = new XMLDoc("doc", null);
-		KElement root = d.getRoot();
-		root.setXPathAttribute("foo/@bar", "");
-		RemoveEmpty emp = new RemoveEmpty();
-		assertNotNull(root.getXPathAttribute("foo/@bar", null));
-		emp.removEmptyAttributes(root);
-		assertNull(root.getXPathAttribute("foo/@bar", null));
-		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveComment()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMMENT));
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveExtend()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		n.appendElement("foo");
-		ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains("<foo"));
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveComChannel()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFComChannel c = (JDFComChannel) n.addResource(ElementName.COMCHANNEL, EnumUsage.Input);
-		c.setChannelType(EnumChannelType.Email);
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
+		Vector<Class<?>> v = new Vector<Class<?>>();
+		while (o != null)
+		{
+			final Class<?>[] cs = o.getDeclaredClasses();
+			if (cs != null)
+			{
+				for (Class<?> c : cs)
+				{
+					v.add(c);
+				}
+			}
+			o = o.getSuperclass();
+		}
+		return v;
 	}
 }

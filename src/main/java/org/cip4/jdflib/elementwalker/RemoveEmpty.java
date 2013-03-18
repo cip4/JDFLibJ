@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -113,8 +113,18 @@ public class RemoveEmpty extends BaseElementWalker
 	public void removEmpty(JDFNode n)
 	{
 		new UnLinkFinder().eraseUnlinked(n);
-		walkTreeKidsFirst(n);
+		removEmptyElement(n);
 		new UnLinkFinder().eraseUnlinked(n);
+	}
+
+	/**
+	 * 
+	 *
+	 * @param e
+	 */
+	public void removEmptyElement(KElement e)
+	{
+		walkTreeKidsFirst(e);
 	}
 
 	/**
@@ -192,7 +202,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 *  
 		 * @return
 		 */
-		VString getDummyAttributes()
+		protected VString getDummyAttributes()
 		{
 			VString dummy = new VString("ID", null);
 			dummy.add(AttributeName.AGENTNAME);
@@ -308,7 +318,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
-		VString getDummyAttributes()
+		protected VString getDummyAttributes()
 		{
 			VString v = super.getDummyAttributes();
 			v.add(AttributeName.CLASS);
@@ -343,7 +353,7 @@ public class RemoveEmpty extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
-		VString getDummyAttributes()
+		protected VString getDummyAttributes()
 		{
 			VString v = super.getDummyAttributes();
 			// if only channeltype is specified, we have an empty dummy

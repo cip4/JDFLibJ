@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen tests for the VectorMap class
  */
@@ -147,9 +148,14 @@ public class VectorMapTest extends JDFTestCaseBase
 	@Test
 	public void testPutOne()
 	{
-		Assert.assertEquals(m.size("a"), 2);
+		assertEquals(m.size("a"), 2);
 		m.putOne("a", "b");
-		Assert.assertEquals(m.getOne("a", 0), "b");
+		assertEquals(m.getOne("a", 0), "b");
+		m.setUnique(false);
+		for (int i = 0; i < 7; i++)
+			m.putOne("cc", "d");
+		for (int i = 0; i < 7; i++)
+			assertEquals(m.getOne("cc", i), "d");
 	}
 
 	/**
@@ -163,9 +169,9 @@ public class VectorMapTest extends JDFTestCaseBase
 		v2.add("v1");
 		v2.add("v2");
 		m.appendUnique("a", v2);
-		Assert.assertEquals(m.size("a"), 4);
+		assertEquals(m.size("a"), 4);
 		m.appendUnique("a", v2);
-		Assert.assertEquals(m.size("a"), 4);
+		assertEquals(m.size("a"), 4);
 	}
 
 	/**

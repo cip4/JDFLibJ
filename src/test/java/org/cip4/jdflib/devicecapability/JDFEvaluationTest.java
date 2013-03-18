@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -108,6 +108,13 @@ import org.cip4.jdflib.resource.devicecapability.JDFor;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.junit.Assert;
 import org.junit.Test;
+
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Mar 17, 2013
+ */
 public class JDFEvaluationTest extends JDFTestCaseBase
 {
 
@@ -117,7 +124,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	private JDFNameState ptState;
 	private JDFEnumerationState compState;
 
-	// TODO add some more fitsvalue tests
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
@@ -144,6 +154,11 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testIntegerEvaluation() throws Exception
 	{
@@ -162,7 +177,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		Assert.assertEquals(ie.getValueList(), new JDFIntegerRangeList("1 3 ~ 5 INF"));
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 *  
+	 */
 	@Test
 	public void testEnumerationEvaluation()
 	{
@@ -175,7 +193,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		Assert.assertFalse(ee.fitsValue("c"));
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 *  
+	 */
 	@Test
 	public void testSetTolerance()
 	{
@@ -188,7 +209,23 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		Assert.assertTrue(ie.fitsMap(new JDFAttributeMap("foo", "1.2 1.6")));
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testSetPath()
+	{
+		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
+		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
+		ie.setPath("abc");
+		assertEquals(ie.getPath(), "abc");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
 	@Test
 	public void testIsPresentPartition()
 	{
@@ -215,7 +252,10 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 
 	}
 
-	// ////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 *  
+	 */
 	@Test
 	public void testAction()
 	{
@@ -245,7 +285,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		fitsJDF = tst.fitsJDF(comp, eRep);
 		Assert.assertFalse("have pt", fitsJDF);
 
-		Vector v = new Vector();
+		Vector<EnumComponentType> v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.FinalProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
@@ -255,13 +295,17 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		fitsJDF = tst.fitsJDF(comp, eRep);
 		Assert.assertFalse("have final", fitsJDF);
 
-		v = new Vector();
+		v = new Vector<EnumComponentType>();
 		v.add(EnumComponentType.PartialProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
 		Assert.assertTrue("have no final", fitsJDF);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 */
 	@Override
 	public String toString()
 	{

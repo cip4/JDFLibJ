@@ -93,6 +93,7 @@ public class BaseWalkerFactory implements IWalkerFactory
 	 * get the appropriate walker for a given element
 	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 	 */
+	@Override
 	public IWalker getWalker(final KElement toCheck)
 	{
 		for (BaseWalker w : vBaseWalker)
@@ -103,7 +104,6 @@ public class BaseWalkerFactory implements IWalkerFactory
 				return w;
 			}
 		}
-
 		return null;
 	}
 

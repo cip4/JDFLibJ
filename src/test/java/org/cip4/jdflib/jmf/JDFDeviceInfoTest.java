@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-20109 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,17 +71,21 @@
 package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceOperationMode;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi
  * 
@@ -183,6 +187,33 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsSamePhaseIdle()
+	{
+
+		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		final JDFDeviceInfo di2 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+
+		assertTrue(di1.isSamePhase(di2, false));
+		JDFDate date = new JDFDate();
+		di1.setIdleStartTime(date);
+		di2.setIdleStartTime(date);
+		assertTrue(di1.isSamePhase(di2, false));
+		di1.setDeviceStatus(EnumDeviceStatus.Idle);
+		di2.setDeviceStatus(EnumDeviceStatus.Idle);
+		assertTrue(di1.isSamePhase(di2, false));
+		di1.setDeviceOperationMode(EnumDeviceOperationMode.Productive);
+		di2.setDeviceOperationMode(EnumDeviceOperationMode.Productive);
+		assertTrue(di1.isSamePhase(di2, false));
+		JDFDevice dev = di1.appendDevice();
+		dev.setDeviceID("d1");
+		dev.setDeviceType("foo");
+		di2.copyElement(dev, null);
+		assertTrue(di1.isSamePhase(di2, false));
+	}
 
 	/**
 	 * 

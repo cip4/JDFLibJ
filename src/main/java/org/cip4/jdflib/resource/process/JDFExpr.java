@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,8 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoExpr;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.w3c.dom.DOMException;
 
 /**
@@ -124,8 +126,48 @@ public class JDFExpr extends JDFAutoExpr
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
+	/**
+	 * 
+	 *  
+	 * @param term
+	 * @return
+	 */
+	public JDFTerm appendTerm(EnumTerm term)
+	{
+		return (JDFTerm) appendElement(term.getName());
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param term
+	 * @param i 
+	 * @return
+	 */
+	public JDFTerm getTerm(EnumTerm term, int i)
+	{
+		if (term != null)
+		{
+			return (JDFTerm) getElement(term.getName(), null, i);
+		}
+		else
+		{
+			return getElementByClass(JDFTerm.class, i, false);
+		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param term
+	 * @param i 
+	 * @return
+	 */
+	public JDFTerm getCreateTerm(EnumTerm term, int i)
+	{
+		return (JDFTerm) getCreateElement(term.getName(), null, i);
+	}
+
 	/**
 	 * toString
 	 * 

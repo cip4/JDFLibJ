@@ -68,92 +68,55 @@
  */
 package org.cip4.jdflib.elementwalker;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFComChannel;
 
 /**
- * 
+ *  
  * @author rainer prosi
- * @date Oct 11, 2012
+ * @date Mar 15, 2013
  */
-public class RemoveEmptyTest extends JDFTestCaseBase
+public class ExtendedRemoveEmpty extends RemoveEmpty
 {
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemove()
-	{
-		JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
-	}
 
 	/**
 	 * 
-	 * 
 	 */
-	public void testRemoveAttributes()
+	public ExtendedRemoveEmpty()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
-		KElement root = d.getRoot();
-		root.setXPathAttribute("foo/@bar", "");
-		RemoveEmpty emp = new RemoveEmpty();
-		assertNotNull(root.getXPathAttribute("foo/@bar", null));
-		emp.removEmptyAttributes(root);
-		assertNull(root.getXPathAttribute("foo/@bar", null));
-		d.write2File(sm_dirTestDataTemp + "expty.xml", 2, false);
+		super();
 	}
 
 	/**
+	 * zapp me
 	 * 
+	 * @author prosirai
 	 * 
 	 */
-	public void testRemoveComment()
+	public class WalkFoo extends WalkElement
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMMENT));
-	}
 
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveExtend()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		n.appendComment();
-		n.appendElement("foo");
-		ExtendedRemoveEmpty emp = new ExtendedRemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains("<foo"));
-	}
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			e.deleteNode();
+			return null;
+		}
 
-	/**
-	 * 
-	 * 
-	 */
-	public void testRemoveComChannel()
-	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFComChannel c = (JDFComChannel) n.addResource(ElementName.COMCHANNEL, EnumUsage.Input);
-		c.setChannelType(EnumChannelType.Email);
-		RemoveEmpty emp = new RemoveEmpty();
-		emp.removEmpty(n);
-		assertFalse(n.toXML().contains(ElementName.COMCHANNEL));
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "foo".equals(toCheck.getLocalName());
+		}
 	}
 }
