@@ -74,23 +74,18 @@ import java.util.Iterator;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoMetadataMap.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -576,19 +571,19 @@ public class JDFRunListTest extends JDFTestCaseBase {
 	 * 
 	 */
 	// TODO @Stefan @Test
-	public void testMetadataMapSchema() {
-		JDFMetadataMap map = rl.appendMetadataMap();
-		map.getCreateXPathElement("Expr/and/StringEvaluation");
-		map.setDataType(EnumDataType.integer);
-		map.setName("foo");
-		root.setType(EnumType.PDLCreation);
-		String s = rl.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser p = new JDFParser();
-		p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
-		JDFDoc dNew = p.parseString(s);
-		XMLDoc dVal = dNew.getValidationResult();
-		Assert.assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-	}
+	// public void testMetadataMapSchema() {
+	// JDFMetadataMap map = rl.appendMetadataMap();
+	// map.getCreateXPathElement("Expr/and/StringEvaluation");
+	// map.setDataType(EnumDataType.integer);
+	// map.setName("foo");
+	// root.setType(EnumType.PDLCreation);
+	// String s = rl.getOwnerDocument_JDFElement().write2String(2);
+	// JDFParser p = new JDFParser();
+	// p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
+	// JDFDoc dNew = p.parseString(s);
+	// XMLDoc dVal = dNew.getValidationResult();
+	// Assert.assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+	// }
 
 	/**
 	 * experimental mapping of tags to partition keys

@@ -80,7 +80,6 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -91,7 +90,6 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -263,16 +261,16 @@ public class JDFLayoutTest extends JDFTestCaseBase {
 	 * 
 	 */
 	// TODO @Stefan @Test
-	public void testLogicalStackSchema() {
-		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
-		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
-		String s = lo.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser p = new JDFParser();
-		p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
-		JDFDoc dNew = p.parseString(s);
-		XMLDoc dVal = dNew.getValidationResult();
-		Assert.assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
-	}
+	// public void testLogicalStackSchema() {
+	// final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+	// lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
+	// String s = lo.getOwnerDocument_JDFElement().write2String(2);
+	// JDFParser p = new JDFParser();
+	// p.setSchemaLocation(JDFConstants.JDFNAMESPACE, sm_dirTestSchema + "JDF.xsd");
+	// JDFDoc dNew = p.parseString(s);
+	// XMLDoc dVal = dNew.getValidationResult();
+	// Assert.assertEquals(dVal.getRoot().getAttribute("ValidationResult"), "Valid");
+	// }
 
 	// ////////////////////////////////////////////////////////////////////////
 

@@ -76,7 +76,6 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.File;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -140,18 +139,18 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	// TODO @Stefan @Test
-	public void testGetRelativePath() {
-		File f = new File("./a");
-		Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
-		f = new File("../a.b");
-		Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
-		f = new File("./../a b/b");
-		Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
-		f = new File("a/b/c");
-		Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
-		f = new File("a/b/c");
-		Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
-	}
+	// public void testGetRelativePath() {
+	// File f = new File("./a");
+	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
+	// f = new File("../a.b");
+	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
+	// f = new File("./../a b/b");
+	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
+	// f = new File("a/b/c");
+	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
+	// f = new File("a/b/c");
+	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
+	// }
 
 	/**
 	 * test for getDefaultNull
