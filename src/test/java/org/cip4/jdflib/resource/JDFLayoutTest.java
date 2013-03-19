@@ -109,12 +109,12 @@ import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
  * 
  */
-public class JDFLayoutTest extends JDFTestCaseBase
-{
+public class JDFLayoutTest extends JDFTestCaseBase {
 
 	private JDFDoc doc = null;
 	private JDFNode n = null;
@@ -125,8 +125,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Override
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		super.setUp();
 		KElement.setLongID(false);
 		reset();
@@ -135,8 +134,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	private void reset()
-	{
+	private void reset() {
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -149,8 +147,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testIsNewLayout()
-	{
+	public void testIsNewLayout() {
 		Assert.assertEquals("version ok", n.getVersion(false), defaultVersion);
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		Assert.assertTrue("lo 1.3", JDFLayout.isNewLayout(lo));
@@ -167,8 +164,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testAutoRegister()
-	{
+	public void testAutoRegister() {
 
 		Assert.assertEquals("version ok", n.getVersion(false), defaultVersion);
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -200,8 +196,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetAllOrds()
-	{
+	public void testGetAllOrds() {
 		final JDFLayout lo = prepare44();
 		Vector<Integer> v = lo.getAllOrds();
 		Assert.assertEquals(v.size(), 32);
@@ -213,8 +208,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testCalcMaxOrd()
-	{
+	public void testCalcMaxOrd() {
 		final JDFLayout lo = prepare44();
 		Assert.assertEquals(lo.calcMaxOrd(), 16);
 		((JDFAutoLayout) lo.getLeaves(false).elementAt(0)).appendContentObject().setOrd(20);
@@ -225,8 +219,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testCalcNumSame()
-	{
+	public void testCalcNumSame() {
 		final JDFLayout lo = prepare44();
 		Assert.assertEquals(lo.calcNumSame(), 2);
 		((JDFAutoLayout) lo.getLeaves(false).elementAt(0)).appendContentObject().setOrd(20);
@@ -236,19 +229,15 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
-	private JDFLayout prepare44()
-	{
+	private JDFLayout prepare44() {
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendMedia();
-		for (int i = 0; i < 4; i++)
-		{
+		for (int i = 0; i < 4; i++) {
 			JDFResource sheet = lo.addPartition(EnumPartIDKey.SheetName, "Sheet" + i);
 			VString fb = new VString("Front Back", null);
-			for (String side : fb)
-			{
+			for (String side : fb) {
 				JDFLayout surf = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, side);
-				for (int j = 0; j < 4; j++)
-				{
+				for (int j = 0; j < 4; j++) {
 					JDFContentObject co = surf.appendContentObject();
 					co.setOrd(4 * i + j);
 				}
@@ -261,8 +250,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testMedia()
-	{
+	public void testMedia() {
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendMedia();
 		final JDFMedia m2 = lo.appendMedia();
@@ -274,9 +262,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	@Test
-	public void testLogicalStackSchema()
-	{
+	// TODO @Stefan @Test
+	public void testLogicalStackSchema() {
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.appendLogicalStackParams().appendStack().setLogicalStackOrd(1);
 		String s = lo.getOwnerDocument_JDFElement().write2String(2);
@@ -293,8 +280,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
-	public void testDynamicMarks() throws Exception
-	{
+	public void testDynamicMarks() throws Exception {
 		JDFElement.setLongID(false);
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		lo.setXMLComment("Layout that illustrates dynamic mark placement - all margins are 25 points (gutter=2*25)");
@@ -347,15 +333,13 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			appendRefAnchor(mark0, "BottomCenter", "Parent", null);
 		}
 
-		for (int i = 0; i < 2; i++)
-		{
+		for (int i = 0; i < 2; i++) {
 			final JDFMarkObject mark0 = su.appendMarkObject();
 			mark0.setXMLComment("Horizonzal Slug Line, centered 5 points over the top of page " + i + "\nnote that page is not yet a predefined token\n");
 			final JDFMatrix m0 = new JDFMatrix(1, 0, 0, 1, 0, 0);
 			m0.rotate(90);
 			m0.shift(25 + 100, 300 + 25 + 5);
-			if (i == 1)
-			{
+			if (i == 1) {
 				m0.shift(250, 0);
 			}
 			mark0.setCTM(m0);
@@ -379,8 +363,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * @param rRef
 	 * @return
 	 */
-	public static KElement appendRefAnchor(final JDFMarkObject mark0, final String anchor, final String anchorType, final String rRef)
-	{
+	public static KElement appendRefAnchor(final JDFMarkObject mark0, final String anchor, final String anchorType, final String rRef) {
 		final KElement refAnchor = mark0.getCreateElement("RefAnchor", null, 0);
 		refAnchor.setAttribute("Anchor", anchor);
 		refAnchor.setAttribute("AnchorType", anchorType);
@@ -393,8 +376,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testBuildOldLayout()
-	{
+	public void testBuildOldLayout() {
 		reset();
 
 		n.setVersion(EnumVersion.Version_1_2);
@@ -444,13 +426,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		Assert.assertEquals("sheet name", su.getLocalName(), ElementName.SURFACE);
 		Assert.assertTrue("hasBackSurface", sh.hasBackSurface());
 
-		try
-		{
+		try {
 			sh.appendBackSurface();
 			Assert.fail("append second surface");
-		}
-		catch (final JDFException e)
-		{/* nop */
+		} catch (final JDFException e) {/* nop */
 		}
 
 		si = lo.getCreateSignature(4);
@@ -470,8 +449,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testBuildNewLayout()
-	{
+	public void testBuildNewLayout() {
 		reset();
 
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
@@ -502,13 +480,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		Assert.assertEquals("num surfaces", 2, sh.numSurfaces());
 		Assert.assertEquals("sheet name", su.getLocalName(), ElementName.LAYOUT);
 
-		try
-		{
+		try {
 			sh.appendBackSurface();
 			Assert.fail("no two back surfaces");
-		}
-		catch (final JDFException e)
-		{/* nop */
+		} catch (final JDFException e) {/* nop */
 		}
 
 		si = lo.getCreateSignature(4);
@@ -529,8 +504,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixToNewLayout()
-	{
+	public void testFixToNewLayout() {
 		testBuildOldLayout();
 		n.fixVersion(EnumVersion.Version_1_3);
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -544,8 +518,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixToNewLayoutWithPartIDKeys()
-	{
+	public void testFixToNewLayoutWithPartIDKeys() {
 		testBuildOldLayout();
 		final JDFLayout loOld = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		loOld.setPartIDKeys(new VString("SignatureName SheetName Side", null));
@@ -564,8 +537,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixFromNewLayout()
-	{
+	public void testFixFromNewLayout() {
 		testBuildNewLayout();
 		n.fixVersion(EnumVersion.Version_1_2);
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -579,8 +551,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixFromFlatNewLayout()
-	{
+	public void testFixFromFlatNewLayout() {
 		n.setVersion(EnumVersion.Version_1_3);
 		final JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		final JDFContentObject co1 = loNew.appendContentObject();
@@ -600,8 +571,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixFromSheetNewLayout()
-	{
+	public void testFixFromSheetNewLayout() {
 		n.setVersion(EnumVersion.Version_1_3);
 		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		loNew = (JDFLayout) loNew.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -622,8 +592,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixFromSurfaceNewLayout()
-	{
+	public void testFixFromSurfaceNewLayout() {
 		n.setVersion(EnumVersion.Version_1_3);
 		JDFLayout loNew = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		loNew = (JDFLayout) loNew.addPartition(EnumPartIDKey.Side, "Back");
@@ -647,8 +616,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * test getPlacedObjectVector
 	 */
 	@Test
-	public void testGetPlacedObjectVector()
-	{
+	public void testGetPlacedObjectVector() {
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		final JDFSurface su = lo.getSignature(1).getSheet(2).getSurface(EnumSide.Front);
@@ -665,8 +633,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * tests the typed media getter
 	 */
 	@Test
-	public void testGetMedia()
-	{
+	public void testGetMedia() {
 		final JDFLayout lo = (JDFLayout) new JDFDoc("JDF").getRoot().appendElement(ElementName.RESOURCEPOOL).appendElement(ElementName.LAYOUT);
 		final JDFLayout s1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
 		final JDFMedia media = lo.appendMedia();
@@ -694,8 +661,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 */
 	// ///////////////////////////////////////////////////
 	@Test
-	public void testGetLayoutLeavesOld()
-	{
+	public void testGetLayoutLeavesOld() {
 		testBuildOldLayout();
 
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -715,8 +681,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetLayoutLeavesNew()
-	{
+	public void testGetLayoutLeavesNew() {
 		testBuildNewLayout();
 
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
@@ -736,8 +701,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetSignatureVector_Old()
-	{
+	public void testGetSignatureVector_Old() {
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		final VElement v = lo.getSignatureVector();
@@ -765,8 +729,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetSignatureName_Old()
-	{
+	public void testGetSignatureName_Old() {
 		testBuildOldLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		final JDFSignature sig = lo.getSignature(0);
@@ -796,16 +759,11 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetSignatureByName()
-	{
-		for (int i = 0; i < 2; i++)
-		{
-			if (i == 0)
-			{
+	public void testGetSignatureByName() {
+		for (int i = 0; i < 2; i++) {
+			if (i == 0) {
 				testBuildNewLayout();
-			}
-			else
-			{
+			} else {
 				testBuildOldLayout();
 				final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 				lo.getSignature(0).setName("SignatureName1");
@@ -828,8 +786,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetSignatureName_New()
-	{
+	public void testGetSignatureName_New() {
 		testBuildNewLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		final JDFSignature sig = lo.getSignature(0);
@@ -850,8 +807,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGetSignatureVector_New()
-	{
+	public void testGetSignatureVector_New() {
 		testBuildNewLayout();
 		final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 		final VElement v = lo.getSignatureVector();
@@ -877,8 +833,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testFixVersionProblem()
-	{
+	public void testFixVersionProblem() {
 		final JDFParser p = new JDFParser();
 		final JDFDoc d = p.parseFile(sm_dirTestData + File.separator + "FixVersionProblem.jdf");
 		Assert.assertNotNull("FixVersionProblem exists", d);
@@ -897,23 +852,26 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 * 
 	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, �) Contents Format/Template JobField
 	 * (Replace, DynamicField?) SeparationList Mark References (FoldMark, CIE, �)
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@Test
-	public void testGeneratedObject() throws Exception
-	{
+	public void testGeneratedObject() throws Exception {
 		n = doc.getJDFRoot();
 		final JDFLayout lo = (JDFLayout) n.addResource("Layout", null, EnumUsage.Input, null, null, null, null);
 		final JDFRunList rlo = (JDFRunList) n.addResource("RunList", null, EnumUsage.Output, null, null, null, null);
 		rlo.setFileURL("output.pdf");
 
-		lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb", null);
+		lo.appendXMLComment(
+				"This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb",
+				null);
 		JDFMarkObject mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
 		JDFJobField jf = mark.appendJobField();
 		jf.setShowList(new VString("Error EndTime", " "));
 
-		lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
+		lo.appendXMLComment(
+				"This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
 		jf = mark.appendJobField();
@@ -923,7 +881,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
+		lo.appendXMLComment(
+				"This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
 		jf = mark.appendJobField();
@@ -934,7 +894,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested", null);
+		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
+				null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
 		jf = mark.appendJobField();
