@@ -21,6 +21,7 @@
 		<url>http://svn.cip4.org/svnroot/trunk/JDFLibJ</url>
 		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</developerConnection>
 		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</connection>
+		
 	</scm>
 	<ciManagement>
 		<system>continuum</system>
@@ -75,6 +76,13 @@
 					<inputEncoding>UTF-8</inputEncoding>
 					<outputEncoding>UTF-8</outputEncoding>
 					<argLine>-Xmx2096m -Dfile.encoding=UTF-8</argLine> 
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagBase>scm:svn:http://svn.cip4.org/svnroot/tags/JDFLibJ</tagBase>
 				</configuration>
 			</plugin>
 		</plugins>
