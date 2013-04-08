@@ -142,7 +142,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFIdentificationField barcode = c.appendIdentificationField();
 		barcode.setBoundingBox(new JDFRectangle(6, 6, 66, 66));
 		barcode.setPosition(EnumPosition.Front);
-		barcode.setValueFormat("Set%i/%i_Page%i/%i%s.1");
+		barcode.setValueFormat("Set%i/%i_Page%i/%i%.1s");
 		barcode.setValueTemplate("SetIndex,TotalSets,PoolSheetIndex,TotalSheetsInPool,MetaFoo");
 
 		JDFMetadataMap meta1 = (JDFMetadataMap) barcode.appendElement(ElementName.METADATAMAP);
@@ -297,6 +297,12 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushSheet.jmf", 2, false);
 	}
 
+	/**
+	 * 
+	 *  
+	 * @param command
+	 * @return
+	 */
 	JDFPipeParams createPipeParams(JDFCommand command)
 	{
 		JDFPipeParams pp = command.appendPipeParams();

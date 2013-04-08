@@ -84,22 +84,27 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
@@ -702,6 +707,94 @@ public class DigiPrintTest extends JDFTestCaseBase
 		}
 		Assert.assertTrue(cover.hasAttribute("ID"));
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "ContentDataRunList.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testVariableRipBookletPipe()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setJobID("J1");
+		n.setType(JDFNode.EnumType.ProcessGroup);
+		JDFNode idp = n.addCombined(new VString("Imposition Interpreting Rendering", null));
+		JDFRunList rl = (JDFRunList) idp.addResource(ElementName.RUNLIST, null);
+		rl.setAttribute("Automation", "Dynamic");
+		rl.setPipeID("PipeByteMap");
+		rl.setID("ByteMap");
+		rl.setPartIDKeys(new VString("SetIndex DocTags SheetIndex Side Separation", null));
+		rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SetIndex, "0~-1");
+		idp.ensureLink(rl, EnumUsage.Output, null);
+		JDFRunList cover = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Cover");
+		cover.setNPage(2);
+		JDFRunList body = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, "Body");
+		JDFNode print = n.addCombined(new VString("DigitalPrinting", null));
+		print.ensureLink(rl, EnumUsage.Input, null);
+		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipeRunList.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param command
+	 * @return
+	 */
+	JDFPipeParams createPipeParams(JDFCommand command)
+	{
+		JDFPipeParams pp = command.appendPipeParams();
+		pp.setPipeID("PipeByteMap");
+		pp.setJobID("J1");
+		return pp;
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testPipePushSheet()
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setSenderID("DFE");
+		VString frontback = new VString("Front Back", null);
+		VString coverBody = new VString("Cover Body", null);
+		for (int j = 0; j < 2; j++)
+		{
+			for (String cb : coverBody)
+			{
+				for (int i = 0; i < 3 + j; i++)
+				{
+					if (i > 0 && cb.equals("Cover"))
+						break;
+					for (String fb : frontback)
+					{
+						JDFCommand command = jmf.appendCommand();
+						command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+						command.setType(JDFMessage.EnumType.PipePush);
+						command.setSenderID("RIP");
+						JDFPipeParams pp = createPipeParams(command);
+						JDFRunList rl = (JDFRunList) pp.appendResource(ElementName.RUNLIST);
+						rl.setID("ByteMap");
+						rl.setAttribute("Automation", "Dynamic");
+						JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+						JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + j);
+						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SetIndex, "" + j);
+						m.put(EnumPartIDKey.DocTags, cb);
+						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, cb);
+						m.put(EnumPartIDKey.SheetIndex, "" + i);
+						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetIndex, "" + i);
+						m.put(EnumPartIDKey.Side, fb);
+						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.Side, fb);
+						JDFPartAmount pa = ap.getCreatePartAmount(m);
+						pa.setActualAmount(1, null);
+
+						rl.setFileURL("http://Set_" + j + "_" + cb + "_sheet" + i + "_" + fb + ".pdf");
+					}
+				}
+			}
+		}
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushRunListSheet.jmf", 2, false);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -267,7 +267,8 @@ public class JDFAuditPool extends JDFPool
 		final JDFAudit l = (JDFAudit) appendElement(typ.getName(), null);
 		if (by != null)
 		{
-			if (EnumUtil.aLessThanB(getVersion(true), EnumVersion.Version_1_4))
+			EnumVersion version = getVersion(true);
+			if (version != null && EnumUtil.aLessThanB(version, EnumVersion.Version_1_4))
 			{
 				l.setAuthor(by);
 			}

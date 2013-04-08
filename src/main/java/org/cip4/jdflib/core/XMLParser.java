@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -177,7 +177,7 @@ public class XMLParser extends DOMParser
 	 * if true, empty pools and whitespace are removed when parsing
 	 */
 	public boolean m_eraseEmpty = true;
-	protected Log log;
+	protected final Log log;
 
 	/**
 	 * default constructor
@@ -396,6 +396,7 @@ public class XMLParser extends DOMParser
 	public void setErrorHandler(final ErrorHandler handler)
 	{
 		m_ErrorHandler = handler != null && (handler instanceof XMLErrorHandler) ? (XMLErrorHandler) handler : new XMLErrorHandler();
+		m_ErrorHandler.setParser(this);
 		super.setErrorHandler(m_ErrorHandler);
 	}
 
@@ -492,6 +493,15 @@ public class XMLParser extends DOMParser
 		m_eraseEmpty = true;
 		m_ErrorHandler = null;
 		m_SchemaLocation = null;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "XMLParser: " + m_SchemaLocation + " " + m_ErrorHandler;
 	}
 
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,10 +77,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -134,19 +136,62 @@ public class StreamUtil
 	}
 
 	/**
-	 * read and tokenize a stream
+	 * read and tokenize a stream by cr/lf
 	 * @param in the input stream to read
 	 * @return a vector of strings, one for each line
 	 */
 	public static VString getLines(InputStream in)
 	{
-		if (in == null)
+		ByteArrayIOInputStream ios = ByteArrayIOStream.getBufferedInputStream(in);
+		if (ios == null)
+		{
 			return null;
-
-		ByteArrayIOStream ios = new ByteArrayIOStream(in);
-		byte[] bytes = ios.getBuf();
-		final String s = bytes == null ? null : new String(bytes, 0, bytes.length);
-		return StringUtil.tokenize(s, "\n\r", false);
+		}
+		else
+		{
+			byte[] bytes = ios.getBuf();
+			final String s = bytes == null ? null : new String(bytes, 0, bytes.length);
+			return StringUtil.tokenize(s, "\n\r", false);
+		}
 	}
 
+	/**
+	 * 
+	 * exception catching null safe close
+	 * @param ios
+	 */
+	static public void close(OutputStream ios)
+	{
+		if (ios != null)
+		{
+			try
+			{
+				ios.close();
+			}
+			catch (IOException e)
+			{
+				// NOP
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * exception catching null safe close
+	 * @param ios
+	 */
+	static public void close(InputStream ios)
+	{
+		if (ios != null)
+		{
+			try
+			{
+				ios.close();
+			}
+			catch (IOException e)
+			{
+				// NOP
+			}
+		}
+	}
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,7 @@ package org.cip4.jdflib.core;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -94,7 +95,8 @@ import org.junit.Test;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class JDFSchemaTest extends JDFTestCaseBase {
+public class JDFSchemaTest extends JDFTestCaseBase
+{
 	JDFParser p = null;
 
 	/**
@@ -102,7 +104,8 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSchema() {
+	public void testSchema()
+	{
 		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
 		Assert.assertNotNull(d);
 	}
@@ -112,7 +115,8 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testDieMaking() {
+	public void testDieMaking()
+	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.DieMaking);
@@ -128,7 +132,8 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testPreviewResource() {
+	public void testPreviewResource()
+	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.PreviewGeneration);
@@ -145,10 +150,12 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSchemafolder() {
+	public void testSchemafolder()
+	{
 		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
 
-		for (File jdf : jdfs) {
+		for (File jdf : jdfs)
+		{
 			final JDFDoc d = p.parseFile(jdf);
 			Assert.assertNotNull(d);
 			log.info("Parsing: " + jdf.getName());
@@ -161,12 +168,33 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testIdentificationField() {
+	public void testIdentificationField()
+	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.Verification);
 		final JDFIdentificationField idf = (JDFIdentificationField) n.addResource(ElementName.IDENTIFICATIONFIELD, EnumUsage.Input);
+		idf.setEncoding(EnumEncoding.Barcode);
+		idf.setEncodingDetails("D1");
 		idf.setPartUsage(EnumPartUsage.Explicit);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		Assert.assertNotNull(d);
+		Assert.assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
+	public void testTemplate()
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		n.setTemplateID("T1");
+		n.setTemplateVersion("1.0");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		Assert.assertNotNull(d);
@@ -178,7 +206,8 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		super.setUp();
 		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
@@ -189,8 +218,13 @@ public class JDFSchemaTest extends JDFTestCaseBase {
 		p.setJDFSchemaLocation(jdfxsd);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
 	@Override
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 		super.tearDown();
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -3244,9 +3244,9 @@ public final class AttributeName
 	/** */
 	public static final String TEMPLATEID = "TemplateID";
 	/** */
-	public static final String TEMPLATETYPE = "TemplateVersion";
+	public static final String TEMPLATETYPE = "TemplateType";
 	/** */
-	public static final String TEMPLATEVERSION = "TemplateType";
+	public static final String TEMPLATEVERSION = "TemplateVersion";
 	/** */
 	public static final String TESTREF = "TestRef";
 	/** */

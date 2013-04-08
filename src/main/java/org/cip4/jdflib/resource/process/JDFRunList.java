@@ -976,6 +976,20 @@ public class JDFRunList extends JDFAutoRunList
 	}
 
 	/**
+	 * set RunList/ByteMap/FileSpec/@URL
+	 * 
+	 * @param url the url to set
+	 * @return true if ok
+	 */
+	public boolean setByteMapURL(final String url)
+	{
+		final JDFFileSpec fspec = getCreateByteMap().getCreateFileSpec(0);
+		fspec.setResourceUsage("RasterFileLocation");
+		fspec.setMimeURL(url);
+		return true;
+	}
+
+	/**
 	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory and concatinate Directory + URL in case URL is a relative URL
 	 * 
 	 * @Directory is ignored if URL contains a scheme or is an absolute URL
@@ -1096,6 +1110,9 @@ public class JDFRunList extends JDFAutoRunList
 	public Vector<EnumPartIDKey> getImplicitPartitions()
 	{
 		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
+		if ("Dynamic".equals(getAttribute("Automation")))
+			return v;
+
 		if (v == null)
 		{
 			v = new Vector<EnumPartIDKey>();
@@ -1484,6 +1501,7 @@ public class JDFRunList extends JDFAutoRunList
 		 * 
 		 * @see java.util.Iterator#hasNext()
 		 */
+		@Override
 		public boolean hasNext()
 		{
 			return index <= maxIndex;
@@ -1493,6 +1511,7 @@ public class JDFRunList extends JDFAutoRunList
 		 * 
 		 * @see java.util.Iterator#next() returns a JDFRunIndex object that refers to the RunList entry and the index within it
 		 */
+		@Override
 		public JDFRunData next()
 		{
 			for (int i = lastIndex; i < vRunIndex.length; i++)
@@ -1514,6 +1533,7 @@ public class JDFRunList extends JDFAutoRunList
 		 * not implemented
 		 * @throws JDFException (always...)
 		 */
+		@Override
 		public void remove() throws JDFException
 		{
 			throw new JDFException("remove not implented");

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,8 +88,8 @@ import org.xml.sax.SAXParseException;
 public class XMLErrorHandler implements ErrorHandler
 {
 
-	private final XMLDoc xmlOutput;
 	private final KElement root;
+	XMLParser parser;
 	private final Log log;
 
 	/**
@@ -98,7 +98,7 @@ public class XMLErrorHandler implements ErrorHandler
 	public XMLErrorHandler()
 	{
 		super();
-		xmlOutput = new XMLDoc("SchemaValidationOutput", null);
+		XMLDoc xmlOutput = new XMLDoc("SchemaValidationOutput", null);
 		root = xmlOutput.getRoot();
 		log = LogFactory.getLog(getClass());
 	}
@@ -107,11 +107,13 @@ public class XMLErrorHandler implements ErrorHandler
 	 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
 	 * @param exception
 	*/
+	@Override
 	public void warning(final SAXParseException exception)
 	{
 		String warn = exception.getMessage();
 		KElement kEl = root.appendElement("Warning");
 		kEl.setAttribute("Message", warn);
+		parser.m_lastExcept = exception;
 		log.warn(warn);
 	}
 
@@ -119,11 +121,12 @@ public class XMLErrorHandler implements ErrorHandler
 	 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
 	 * @param exception
 	*/
+	@Override
 	public void error(final SAXParseException exception)
 	{
 		// print out all parser errors except undefined variables for non-JDF stuff
 		String er = exception.getMessage();
-
+		parser.m_lastExcept = exception;
 		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
 		{
 			KElement kEl = root.appendElement("Error");
@@ -136,11 +139,13 @@ public class XMLErrorHandler implements ErrorHandler
 	 * @param exception SAXParseException
 	 * @throws JDFException - if fatal error occurs
 	 */
+	@Override
 	public void fatalError(final SAXParseException exception)
 	{
 		String er = exception.getMessage();
 		KElement kEl = root.appendElement("FatalError");
 		kEl.setAttribute("Message", er);
+		parser.m_lastExcept = exception;
 		log.fatal(er);
 		throw new JDFException("Fatal error in the Parser:" + er);
 	}
@@ -150,7 +155,7 @@ public class XMLErrorHandler implements ErrorHandler
 	 */
 	public XMLDoc getXMLOutput()
 	{
-		return xmlOutput;
+		return root.getOwnerDocument_KElement();
 	}
 
 	/**
@@ -161,11 +166,17 @@ public class XMLErrorHandler implements ErrorHandler
 	public void cleanXML(String schemaLocation)
 	{
 		VElement v = root.getChildElementVector(null, null, null, true, 0, false);
+		int vSize = v.size();
 		v.unifyElement();
-		root.removeChildren(null, null, null);
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
-			root.appendChild(v.item(i));
+		int vSizeAfter = v.size();
+		if (vSizeAfter < vSize)
+		{
+			root.removeChildren(null, null, null);
+			for (KElement e : v)
+			{
+				root.appendChild(e);
+			}
+		}
 		if (schemaLocation == null)
 		{
 			root.setAttribute("ValidationResult", "NotPerformed");
@@ -183,6 +194,25 @@ public class XMLErrorHandler implements ErrorHandler
 				root.setAttribute("ValidationResult", "Valid");
 		}
 	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// //////////
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "XMLErrorHandler: " + root;
+	}
+
+	/**
+	 * Setter for parser attribute.
+	 * @param parser the parser to set
+	 */
+	public void setParser(XMLParser parser)
+	{
+		this.parser = parser;
+	}
 }

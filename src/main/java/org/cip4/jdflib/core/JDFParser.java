@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -289,16 +289,6 @@ public class JDFParser extends XMLParser
 		}
 
 		return doc;
-	}
-
-	/**
-	 * @see org.apache.xerces.parsers.DOMParser#setErrorHandler(org.xml.sax.ErrorHandler)
-	 */
-	@Override
-	public void setErrorHandler(final ErrorHandler handler)
-	{
-		m_ErrorHandler = handler != null && (handler instanceof XMLErrorHandler) ? (XMLErrorHandler) handler : new XMLErrorHandler();
-		super.setErrorHandler(m_ErrorHandler);
 	}
 
 	/**

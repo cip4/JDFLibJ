@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -109,7 +109,10 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 			return null;
 		if (is instanceof ByteArrayIOInputStream)
 			return ((ByteArrayIOInputStream) is).getNewStream();
-		return new ByteArrayIOStream(is).getInputStream();
+		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(is);
+		ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
+		byteArrayIOStream.close();
+		return inputStream;
 	}
 
 	private final Log log;
@@ -297,6 +300,22 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public synchronized String toString()
 	{
 		return "ByteArrayIOStream:\n" + new String(buf, 0, count);
+	}
+
+	/**
+	 * @see java.io.ByteArrayOutputStream#close()
+	 */
+	@Override
+	public void close()
+	{
+		try
+		{
+			super.close();
+		}
+		catch (IOException e)
+		{
+			// NOP -  super.close() is a nop anyhow
+		}
 	}
 
 }

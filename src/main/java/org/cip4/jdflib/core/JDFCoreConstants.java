@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -165,6 +165,10 @@ public abstract class JDFCoreConstants
 	public static final String MIME_PS = "application/postscript";
 	/** * */
 	public static final String MIME_EPS = "application/postscript";
+	/** * */
+	public static final String MIME_PTK = "application/vnd.cip4-ptk+xml";
+	/** * */
+	public static final String MIME_XJDF = "application/vnd.cip4-xjdf+xml";
 	/** * */
 	public static final String MIME_JDF = "application/vnd.cip4-jdf+xml";
 	/** * */

@@ -916,6 +916,8 @@ public class UrlUtil
 
 			mimeMap.put("ppf", JDFCoreConstants.MIME_CIP3);
 			mimeMap.put("ppml", JDFCoreConstants.MIME_PPML);
+			mimeMap.put("ptk", JDFCoreConstants.MIME_PTK);
+			mimeMap.put("xjdf", JDFCoreConstants.MIME_XJDF);
 			mimeMap.put("jdf", JDFCoreConstants.MIME_JDF);
 			mimeMap.put("jmf", JDFCoreConstants.MIME_JMF);
 

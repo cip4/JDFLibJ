@@ -278,7 +278,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			jdfDoc = new JDFDoc("JDF");
 			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
 		}
-		JDFNode root = prepareRoot();
+		prepareRoot();
 		xjdf = reparse(xjdf);
 		xjdf.setAttribute(AttributeName.VERSION, version.getName());
 		final JDFNode theNode = findNode(xjdf, true);
@@ -1445,7 +1445,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 					{
 						newElem.renameElement(ElementName.COLORSUSED + "Back", null);
 						if (cuf != null)
+						{
 							cuf.renameElement(ElementName.COLORSUSED, null);
+						}
 					}
 				}
 			}
@@ -1601,15 +1603,23 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				theNode = createProductRoot(theNode);
 			}
 			firstproductInList = false;
-			theNode.setAttributes(e);
+			copyToNode(e, theNode);
 			fixComponent(theNode, e);
 			return theNode;
 		}
 
 		/**
+		 * 
+		 *  
+		 * @param e
 		 * @param theNode
-		 * @param xjdfProduct
 		 */
+		private void copyToNode(final KElement e, JDFNode theNode)
+		{
+			VString ignore = new VString("IsRoot", null);
+			theNode.setAttributes(e, ignore);
+		}
+
 		/**
 		 * @param theNode
 		 * @param xjdfProduct
