@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	The CIP4 Software License, Version 1.0
+	
+	
+	Copyright (c) 2001 The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification, 
+	are permitted provided that the following conditions are met:
+	
+	1. Redistributions of source code must retain the above copyright notice, this 
+	list of conditions and the following disclaimer.
+	
+	2. Redistributions in binary form must reproduce the above copyright notice, 
+	this list of conditions and the following disclaimer in the documentation and/or 
+	other materials provided with the distribution.
+	
+	3. The end-user documentation included with the redistribution, if any, must 
+	include the following acknowledgment: &quot;This product includes software developed 
+	by the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress (www.cip4.org)&quot; Alternately, this acknowledgment 
+	may appear in the software itself, if and wherever such third-party 
+	acknowledgments normally appear.
+	
+	4. The names &quot;CIP4&quot; and &quot;The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress&quot; must not be used to endorse or 
+	promote products derived from this software without prior written permission. 
+	For written permission, please contact info@cip4.org
+	
+	5. Products derived from this software may not be called &quot;CIP4&quot;, nor may &quot;CIP4&quot; 
+	appear in their name, without prior written permission of the CIP4 organization
+	
+	&quot;CIP4&quot; and &quot;The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress&quot; are trademarks of The International Cooperation 
+	for the Integration of Processes in Prepress, Press and Postpress (CIP4).  All 
+	other names and brands are the property of their respective owners.
+	
+	THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, 
+	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+	FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. CIP4 AND ITS CONTRIBUTORS MAKE 
+	NO REPRESENTATION THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT INFRINGE ANY 
+	PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS. IN NO EVENT SHALL CIP4 OR ITS 
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
+	OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+	INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+	CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+	IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+	OF SUCH DAMAGE. 
+	====================================================================
+	
+	This software consists of voluntary contributions made by many individuals on 
+	behalf of the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress and was originally based on software some of which 
+	contributed by and copyrighted by Adobe Systems and Man Roland. copyright (c) 
+	2000-2001, Adobe Systems copyright (c) 2001-2001, Man Roland
+	
+	For more information on The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress , please see &lt;http://www.cip4.org/&gt;.
+	
+-->
+<!--JDF specification V 1.1-->
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_1_1_Types" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_1_Types" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.a.004">
+	<!--simple enumerations-->
+	<xs:simpleType name="eAcknowledgeType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Received"/>
+			<xs:enumeration value="Applied"/>
+			<xs:enumeration value="Completed"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eActivation_">
+		<xs:annotation>
+			<xs:documentation>
+        JDF::Activation, T3.3
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Inactive"/>
+			<xs:enumeration value="Informative"/>
+			<xs:enumeration value="Held"/>
+			<xs:enumeration value="Active"/>
+			<xs:enumeration value="TestRun"/>
+			<xs:enumeration value="TestRunAndGo"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eAppOS_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="Mac"/>
+			<xs:enumeration value="Windows"/>
+			<xs:enumeration value="Linux"/>
+			<xs:enumeration value="Solaris"/>
+			<xs:enumeration value="IRIX"/>
+			<xs:enumeration value="DG_UX"/>
+			<xs:enumeration value="HP_UX"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eAutoRotatePages_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="All"/>
+			<xs:enumeration value="PageByPage"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eBindingOrder_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Collecting"/>
+			<xs:enumeration value="Gathering"/>
+			<xs:enumeration value="List"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eBinding_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Left"/>
+			<xs:enumeration value="Right"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eBooleanStateList_">
+		<xs:list itemType="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="eCoatings_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Glossy"/>
+			<xs:enumeration value="HighGloss"/>
+			<xs:enumeration value="Matte"/>
+			<xs:enumeration value="Satin"/>
+			<xs:enumeration value="Semigloss"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eCombinedMethod_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Combined"/>
+			<xs:enumeration value="ProcessGroup"/>
+			<xs:enumeration value="CombinedProcessGroup"/>
+			<xs:enumeration value="None"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eCompensation_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Film"/>
+			<xs:enumeration value="Plate"/>
+			<xs:enumeration value="Press"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eComponentType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Ribbon"/>
+			<xs:enumeration value="Sheet"/>
+			<xs:enumeration value="Block"/>
+			<xs:enumeration value="PartialProduct"/>
+			<xs:enumeration value="FinalProduct"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eCompression_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Deflate"/>
+			<xs:enumeration value="Gzip"/>
+			<xs:enumeration value="Compress"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eCutMarkType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="CrossCutMark"/>
+			<xs:enumeration value="TopVerticalCutMark"/>
+			<xs:enumeration value="BottomVerticalCutMark"/>
+			<xs:enumeration value="LeftHorizontalCutMark"/>
+			<xs:enumeration value="RightHorizontalCutMark"/>
+			<xs:enumeration value="LowerLeftCutMark"/>
+			<xs:enumeration value="UpperLeftCutMark"/>
+			<xs:enumeration value="LowerRightCutMark"/>
+			<xs:enumeration value="UpperRightCutMark"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDensityStandard_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="ANSIA"/>
+			<xs:enumeration value="ANSIE"/>
+			<xs:enumeration value="ANSII"/>
+			<xs:enumeration value="ANSIT"/>
+			<xs:enumeration value="DIN16536"/>
+			<xs:enumeration value="DIN16536NB"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDeviceDetails_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Brief"/>
+			<xs:enumeration value="Modules"/>
+			<xs:enumeration value="Details"/>
+			<xs:enumeration value="Capability"/>
+			<xs:enumeration value="Full"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDeviceStatus_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="Idle"/>
+			<xs:enumeration value="Down"/>
+			<xs:enumeration value="Setup"/>
+			<xs:enumeration value="Running"/>
+			<xs:enumeration value="Cleanup"/>
+			<xs:enumeration value="Stopped"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDigitalPrintingCollate_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Sheet"/>
+			<xs:enumeration value="SheetAndSet"/>
+			<xs:enumeration value="SheetSetAndJob"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDigitalPrintingPageDelivery_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="FanFold"/>
+			<xs:enumeration value="SameOrderFaceUp"/>
+			<xs:enumeration value="SameOrderFaceDown"/>
+			<xs:enumeration value="ReverseOrderFaceUp"/>
+			<xs:enumeration value="ReverseOrderFaceDown"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDigitalPrintingPrintingType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="SheetFed"/>
+			<xs:enumeration value="WebFed"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDigitalPrintingPrintingQuality_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="High"/>
+			<xs:enumeration value="Normal"/>
+			<xs:enumeration value="Draft"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eImageShiftPosition_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Left"/>
+			<xs:enumeration value="Right"/>
+			<xs:enumeration value="Center"/>
+			<xs:enumeration value="None"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDigitalPrintingSheetLay_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Left"/>
+			<xs:enumeration value="Right"/>
+			<xs:enumeration value="Center"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDisjointingOffsetDirection_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Alternate"/>
+			<xs:enumeration value="Left"/>
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Right"/>
+			<xs:enumeration value="Straight"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDisposition_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unlink"/>
+			<xs:enumeration value="Delete"/>
+			<xs:enumeration value="Retain"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDrying_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="UV"/>
+			<xs:enumeration value="Heatset"/>
+			<xs:enumeration value="IR"/>
+			<xs:enumeration value="On"/>
+			<xs:enumeration value="Off"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eDueLevel">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="Trivial"/>
+			<xs:enumeration value="Penalty"/>
+			<xs:enumeration value="JobCancelled"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eElementType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Text"/>
+			<xs:enumeration value="Image"/>
+			<xs:enumeration value="Graphic"/>
+			<xs:enumeration value="Reservation"/>
+			<xs:enumeration value="Composed"/>
+			<xs:enumeration value="Page"/>
+			<xs:enumeration value="Document"/>
+			<xs:enumeration value="MultiDocument"/>
+			<xs:enumeration value="Surface"/>
+			<xs:enumeration value="Tile"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eEmbossingDirection">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Both"/>
+			<xs:enumeration value="Raised"/>
+			<xs:enumeration value="Depressed"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eEmbossingEdgeShare">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Beveled"/>
+			<xs:enumeration value="Rounded"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eEmbossingType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="BlinedEmbossing"/>
+			<xs:enumeration value="EmbossedFinish"/>
+			<xs:enumeration value="FoilEmbossing"/>
+			<xs:enumeration value="FoilStamping"/>
+			<xs:enumeration value="RegisteredEmbossing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eEmbossingLevel">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="SingleLevel"/>
+			<xs:enumeration value="MultiLevel"/>
+			<xs:enumeration value="Sculpted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eEndStatusOfNode_">
+		<xs:annotation>
+			<xs:documentation>
+        AuditPool::ProcessRun::EndStatus, T3.25
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Aborted"/>
+			<xs:enumeration value="Completed"/>
+			<xs:enumeration value="FailedTestRun"/>
+			<xs:enumeration value="Ready"/>
+			<xs:enumeration value="Stopped"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eExposedMediaColorType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Color"/>
+			<xs:enumeration value="GrayScale"/>
+			<xs:enumeration value="Monochrome"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eExposedMediaProofQuality">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Halftone"/>
+			<xs:enumeration value="Contone"/>
+			<xs:enumeration value="Conceptual"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eExposedMediaProofType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Imposition"/>
+			<xs:enumeration value="Page"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFinishedPageOrientation_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Portrait"/>
+			<xs:enumeration value="Landscape"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFirstSurface_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Either"/>
+			<xs:enumeration value="Front"/>
+			<xs:enumeration value="Back"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFitPolicyGutterPolicy_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Distribute"/>
+			<xs:enumeration value="Fixed"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFitPolicyResourceUsage_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Any"/>
+			<xs:enumeration value="FitInCell"/>
+			<xs:enumeration value="FitInMedia"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFitPolicyRotatePolicy_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="NoRotate"/>
+			<xs:enumeration value="RotateOrthogonal"/>
+			<xs:enumeration value="RotateClockwise"/>
+			<xs:enumeration value="RotateCounterClockwise"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eFitPolicySizePolicy_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="ClipToMaxPage"/>
+			<xs:enumeration value="Abort"/>
+			<xs:enumeration value="FitToPage"/>
+			<xs:enumeration value="ReduceToFit"/>
+			<xs:enumeration value="Tile"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eHoleShape_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Eliptical"/>
+			<xs:enumeration value="Round"/>
+			<xs:enumeration value="Rectangular"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eHoleType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="R2m-DINr"/>
+			<xs:enumeration value="R2m-ISO"/>
+			<xs:enumeration value="R2i-US-a"/>
+			<xs:enumeration value="R2i-US-b"/>
+			<xs:enumeration value="R3i-US"/>
+			<xs:enumeration value="R4m-DIN-A4"/>
+			<xs:enumeration value="R4m-DIN-A5"/>
+			<xs:enumeration value="R4m-swedish"/>
+			<xs:enumeration value="R4i-US"/>
+			<xs:enumeration value="R5i-US-a"/>
+			<xs:enumeration value="R5i-US-b"/>
+			<xs:enumeration value="R5i-US-c"/>
+			<xs:enumeration value="R6m-4h2s"/>
+			<xs:enumeration value="R6m-DIN-A5"/>
+			<xs:enumeration value="R7i-US-a"/>
+			<xs:enumeration value="R7i-US-b"/>
+			<xs:enumeration value="R7i-US-c"/>
+			<xs:enumeration value="R11m-7h4s"/>
+			<xs:enumeration value="P16_9i-rect-0t"/>
+			<xs:enumeration value="W2_1i-round-0t"/>
+			<xs:enumeration value="W2_1i-square-0t"/>
+			<xs:enumeration value="W3_1i-square-0t"/>
+			<xs:enumeration value="C9.5m-round-0t"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIconType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="Idle"/>
+			<xs:enumeration value="Down"/>
+			<xs:enumeration value="Setup"/>
+			<xs:enumeration value="Running"/>
+			<xs:enumeration value="Cleanup"/>
+			<xs:enumeration value="Stopped"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIconTypes_">
+		<xs:list itemType="jdftyp:eIconType_"/>
+	</xs:simpleType>
+	<xs:simpleType name="eIDPParamsJobSheetOccurence">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Always"/>
+			<xs:enumeration value="End"/>
+			<xs:enumeration value="OnError"/>
+			<xs:enumeration value="Slip"/>
+			<xs:enumeration value="Start"/>
+			<xs:enumeration value="Both"/>
+			<xs:enumeration value="None"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIDPParamsJobSheetType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="AccountingSheet"/>
+			<xs:enumeration value="ErrorSheet"/>
+			<xs:enumeration value="JobSheet"/>
+			<xs:enumeration value="SeparatorSheet"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIDPParamsStitchingPosition">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="TopLeft"/>
+			<xs:enumeration value="BottomLeft"/>
+			<xs:enumeration value="TopRight"/>
+			<xs:enumeration value="BottomRight"/>
+			<xs:enumeration value="LeftEdge"/>
+			<xs:enumeration value="TopEdge"/>
+			<xs:enumeration value="RightEdge"/>
+			<xs:enumeration value="BottomEdge"/>
+			<xs:enumeration value="DualLeftEdge"/>
+			<xs:enumeration value="DualTopEdge"/>
+			<xs:enumeration value="DualRightEdge"/>
+			<xs:enumeration value="DualBottomEdge"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIDPParamsStitchingRefEdge">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Bottom"/>
+			<xs:enumeration value="Top"/>
+			<xs:enumeration value="Left"/>
+			<xs:enumeration value="Right"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eImagableSide_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Front"/>
+			<xs:enumeration value="Back"/>
+			<xs:enumeration value="Both"/>
+			<xs:enumeration value="Neither"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIncludePerPage_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="IncludeNever"/>
+			<xs:enumeration value="IncludeOncePerDoc"/>
+			<xs:enumeration value="IncludeOncePerPage"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eMediaType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="EmbossingFoil"/>
+			<xs:enumeration value="Film"/>
+			<xs:enumeration value="Foil"/>
+			<xs:enumeration value="LaminatingFoil"/>
+			<xs:enumeration value="Paper"/>
+			<xs:enumeration value="Plate"/>
+			<xs:enumeration value="ShrinkFoil"/>
+			<xs:enumeration value="Transparency"/>
+			<xs:enumeration value="Unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eMessageFamily_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Acknowledge"/>
+			<xs:enumeration value="Response"/>
+			<xs:enumeration value="Signal"/>
+			<xs:enumeration value="All"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eNodePhaseTimeStatus_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="TestRunInProgress"/>
+			<xs:enumeration value="Setup"/>
+			<xs:enumeration value="InProgress"/>
+			<xs:enumeration value="Cleanup"/>
+			<xs:enumeration value="Spawned"/>
+			<xs:enumeration value="Stopped"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eNodeStatus_">
+		<xs:annotation>
+			<xs:documentation>
+        JDF::Status, T3.3
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Waiting"/>
+			<xs:enumeration value="TestRunInProgress"/>
+			<xs:enumeration value="Ready"/>
+			<xs:enumeration value="FailedTestRun"/>
+			<xs:enumeration value="Setup"/>
+			<xs:enumeration value="InProgress"/>
+			<xs:enumeration value="Cleanup"/>
+			<xs:enumeration value="Spawned"/>
+			<xs:enumeration value="Stopped"/>
+			<xs:enumeration value="Completed"/>
+			<xs:enumeration value="Aborted"/>
+			<xs:enumeration value="Pool"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eNotificationClass_">
+		<xs:annotation>
+			<xs:documentation>
+        AuditPool::Notification, T3.24
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Event"/>
+			<xs:enumeration value="Information"/>
+			<xs:enumeration value="Warning"/>
+			<xs:enumeration value="Error"/>
+			<xs:enumeration value="Fatal"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eNotificationClasses_">
+		<xs:annotation>
+			<xs:documentation>
+        list of notification classes
+      </xs:documentation>
+		</xs:annotation>
+		<xs:list itemType="jdftyp:eNotificationClass_"/>
+	</xs:simpleType>
+	<xs:simpleType name="eOrientation_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Rotate0"/>
+			<xs:enumeration value="Rotate90"/>
+			<xs:enumeration value="Rotate180"/>
+			<xs:enumeration value="Rotate270"/>
+			<xs:enumeration value="Flip0"/>
+			<xs:enumeration value="Flip90"/>
+			<xs:enumeration value="Flip180"/>
+			<xs:enumeration value="Flip270"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eOutputType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="PostScript"/>
+			<xs:enumeration value="EPS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eOwnership_">
+		<xs:annotation>
+			<xs:documentation>
+        JDF::Ownership - DeliveryIntent
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Origin"/>
+			<xs:enumeration value="Destination"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePageDelivery_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="SameOrderFaceUp"/>
+			<xs:enumeration value="SameOrderFaceDown"/>
+			<xs:enumeration value="ReverseOrderFaceUp"/>
+			<xs:enumeration value="ReverseOrderFaceDown"/>
+			<xs:enumeration value="SystemSpecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePartitionKeys_">
+		<xs:annotation>
+			<xs:documentation>
+        Part key, T3.19
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="BlockName"/>
+			<xs:enumeration value="DocIndex"/>
+			<xs:enumeration value="DocCopies"/>
+			<xs:enumeration value="DocRunIndex"/>
+			<xs:enumeration value="DocSheetIndex"/>
+			<xs:enumeration value="FountainNumber"/>
+			<xs:enumeration value="LayerIDs"/>
+			<xs:enumeration value="Location"/>
+			<xs:enumeration value="Option"/>
+			<xs:enumeration value="PageNumber"/>
+			<xs:enumeration value="PartVersion"/>
+			<xs:enumeration value="PreviewType"/>
+			<xs:enumeration value="RibbonName"/>
+			<xs:enumeration value="Run"/>
+			<xs:enumeration value="RunIndex"/>
+			<xs:enumeration value="RunTag"/>
+			<xs:enumeration value="RunPage"/>
+			<xs:enumeration value="Separation"/>
+			<xs:enumeration value="SetIndex"/>
+			<xs:enumeration value="SheetIndex"/>
+			<xs:enumeration value="SheetName"/>
+			<xs:enumeration value="Side"/>
+			<xs:enumeration value="SignatureName"/>
+			<xs:enumeration value="Sorting"/>
+			<xs:enumeration value="SortAmount"/>
+			<xs:enumeration value="TileID"/>
+			<xs:enumeration value="WebName"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePartitionKeysList_">
+		<xs:list itemType="jdftyp:ePartitionKeys_"/>
+	</xs:simpleType>
+	<xs:simpleType name="ePartUsage_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Explicit"/>
+			<xs:enumeration value="Implicit"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePoolStatus_">
+		<xs:annotation>
+			<xs:documentation>
+        JDF::Status, T3.3
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Waiting"/>
+			<xs:enumeration value="Ready"/>
+			<xs:enumeration value="FailedTestRun"/>
+			<xs:enumeration value="Setup"/>
+			<xs:enumeration value="InProgress"/>
+			<xs:enumeration value="Cleanup"/>
+			<xs:enumeration value="Spawned"/>
+			<xs:enumeration value="Stopped"/>
+			<xs:enumeration value="Completed"/>
+			<xs:enumeration value="Aborted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePreflightStatus_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="NotPerformed"/>
+			<xs:enumeration value="WithErrors"/>
+			<xs:enumeration value="WithoutErrors"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePreviewType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Separation"/>
+			<xs:enumeration value="SeparatedThumbNail"/>
+			<xs:enumeration value="ThumbNail"/>
+			<xs:enumeration value="Viewable"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePrintingType_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="SheetFed"/>
+			<xs:enumeration value="WebFed"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ePrintQuality_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="High"/>
+			<xs:enumeration value="Normal"/>
+			<xs:enumeration value="Draft"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eIntentPriority_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="None"/>
+			<xs:enumeration value="Suggested"/>
+			<xs:enumeration value="Required"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eRenderingIntent_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Default"/>
+			<xs:enumeration value="Perceptual"/>
+			<xs:enumeration value="Saturation"/>
+			<xs:enumeration value="RelativeColorimetric"/>
+			<xs:enumeration value="AbsoluteColorimetric"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eResourceClass_">
+		<xs:annotation>
+			<xs:documentation>
+        Resource::Class, T3.9
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Consumable"/>
+			<xs:enumeration value="Handling"/>
+			<xs:enumeration value="Implementation"/>
+			<xs:enumeration value="Intent"/>
+			<xs:enumeration value="Parameter"/>
+			<xs:enumeration value="PlaceHolder"/>
+			<xs:enumeration value="Quantity"/>
+			<xs:enumeration value="Selector"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eResourceStatus_">
+		<xs:annotation>
+			<xs:documentation>
+        Resource::Status, T3.9
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Incomplete"/>
+			<xs:enumeration value="Unavailable"/>
+			<xs:enumeration value="InUse"/>
+			<xs:enumeration value="Draft"/>
+			<xs:enumeration value="Complete"/>
+			<xs:enumeration value="Available"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSettingsPolicy_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="BestEffort"/>
+			<xs:enumeration value="MustHonor"/>
+			<xs:enumeration value="OperatorIntervention"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSheetType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="AccountingSheet"/>
+			<xs:enumeration value="ErrorSheet"/>
+			<xs:enumeration value="FillSheet"/>
+			<xs:enumeration value="InsertSheet"/>
+			<xs:enumeration value="JobSheet"/>
+			<xs:enumeration value="SeparatorSheet"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSheetUsage">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="FillForceBack"/>
+			<xs:enumeration value="FillForceFront"/>
+			<xs:enumeration value="FillSheet"/>
+			<xs:enumeration value="FillSignature"/>
+			<xs:enumeration value="FillSurface"/>
+			<xs:enumeration value="Header"/>
+			<xs:enumeration value="Interleaved"/>
+			<xs:enumeration value="OnError"/>
+			<xs:enumeration value="Slip"/>
+			<xs:enumeration value="Trailer"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSide_">
+		<xs:annotation>
+			<xs:documentation>
+        Part, T3.19
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Front"/>
+			<xs:enumeration value="Back"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSourceObject_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="All"/>
+			<xs:enumeration value="ImagePhotographic"/>
+			<xs:enumeration value="ImageScreenShot"/>
+			<xs:enumeration value="Text"/>
+			<xs:enumeration value="LineArt"/>
+			<xs:enumeration value="SmoothShades"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSourceObjects_">
+		<xs:list itemType="jdftyp:eSourceObject_"/>
+	</xs:simpleType>
+	<xs:simpleType name="eSpanDataType_">
+		<xs:annotation>
+			<xs:documentation>
+        JDF::Activation, T3.3
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="DurationSpan"/>
+			<xs:enumeration value="EnumerationSpan"/>
+			<xs:enumeration value="IntegerSpan"/>
+			<xs:enumeration value="NameSpan"/>
+			<xs:enumeration value="NumberSpan"/>
+			<xs:enumeration value="OptionSpan"/>
+			<xs:enumeration value="ShapeSpan"/>
+			<xs:enumeration value="StringSpan"/>
+			<xs:enumeration value="TimeSpan"/>
+			<xs:enumeration value="XYPairSpan"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eSpawnStatus_">
+		<xs:annotation>
+			<xs:documentation>
+        Resource::SpawnStatus, T3.9
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="NotSpawned"/>
+			<xs:enumeration value="SpawnedRO"/>
+			<xs:enumeration value="SpawnedRW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eTrapEndStyle_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Miter"/>
+			<xs:enumeration value="Overlap"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eTrapJoinStyle_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Bevel"/>
+			<xs:enumeration value="Miter"/>
+			<xs:enumeration value="Round"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eTypeOrder_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Fixed"/>
+			<xs:enumeration value="Unordered"/>
+			<xs:enumeration value="Unrestricted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eUsage_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Input"/>
+			<xs:enumeration value="Output"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eVersion_">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="1.1"/>
+			<xs:enumeration value="1.2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Simple Type Declarations-->
+	<xs:simpleType name="ColorValue">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0" fixed="true"/>
+			<xs:maxInclusive value="1" fixed="true"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ColorValueList">
+		<xs:list itemType="jdftyp:ColorValue"/>
+	</xs:simpleType>
+	<xs:simpleType name="CMYKColor">
+		<xs:restriction base="jdftyp:ColorValueList">
+			<xs:length value="4" fixed="true"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DurationRange">
+		<xs:restriction>
+			<xs:simpleType>
+				<xs:list itemType="xs:duration"/>
+			</xs:simpleType>
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IDPFinishings">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IDPFinishingsList">
+		<xs:list itemType="jdftyp:IDPFinishings"/>
+	</xs:simpleType>
+	<xs:simpleType name="IntegerList">
+		<xs:list itemType="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="IntegerRange">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[+\-]?\d+~[+\-]?\d+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IntegerAndIntegerRange">
+		<xs:union memberTypes="xs:integer jdftyp:IntegerRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="IntegerRangeList">
+		<xs:list itemType="jdftyp:IntegerAndIntegerRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="LabColor">
+		<xs:restriction base="jdftyp:NumberList">
+			<xs:length value="3" fixed="true"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="matrix">
+		<xs:restriction base="jdftyp:NumberList">
+			<xs:length value="6" fixed="true"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NamedColor">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="((Clear)?(Dark|Light)?(White|Black|Gray|Red|Yellow|Green|Blue|Turquoise|Violet|Orange|Brown|Gold|Silver|Pink|Buff|Ivory|Goldenrod|Mustard))|MultiColor|NoColor"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="name">
+		<xs:restriction base="xs:NMTOKEN"/>
+	</xs:simpleType>
+	<xs:simpleType name="NameRange">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\c+~\c+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NameAndNameRange">
+		<xs:union memberTypes="jdftyp:name jdftyp:NameRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="NameRangeList">
+		<xs:list itemType="jdftyp:NameAndNameRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="number">
+		<xs:restriction base="xs:double">
+			<xs:pattern value="[^N].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberList">
+		<xs:list itemType="jdftyp:number"/>
+	</xs:simpleType>
+	<xs:simpleType name="NumberRange">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([+\-]?(\d+(\.\d*)?([eE][+\-]?\d+)?)|([+\-]?INF))~([+\-]?(\d+(\.\d*)?([eE][+\-]?\d+)?)|([+\-]?INF))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberAndNumberRange">
+		<xs:union memberTypes="jdftyp:number jdftyp:NumberRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="NumberRangeList">
+		<xs:list itemType="jdftyp:NumberAndNumberRange"/>
+	</xs:simpleType>
+	<xs:simpleType name="path">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(([+\-]?\d+(\.\d+)?\s){2}[ml]|([+\-]?\d+(\.\d+)?\s){6}c|([+\-]?\d+(\.\d+)?\s){4}([vy]|re)|h)(\s(([+\-]?\d+(\.\d+)?\s){2}[ml]|([+\-]?\d+(\.\d+)?\s){6}c|([+\-]?\d+(\.\d+)?\s){4}([vy]|re)|h))*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rectangle">
+		<xs:restriction base="jdftyp:NumberList">
+			<xs:length value="4" fixed="true"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="shape">
+		<xs:restriction base="jdftyp:NumberList">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="shapeRange">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)\s[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)\s[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)\s?~\s?[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)\s[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)\s[+\-]?((0|[1-9]+)(\.\d+)?([eE][+\-]?\d+)?|INF)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="shapeRangeList">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="((([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))\s){2}([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))(\s?~\s?)?)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sRGBColor">
+		<xs:restriction base="jdftyp:ColorValueList">
+			<xs:length value="3" fixed="true"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="timeDuration">
+		<xs:restriction base="xs:duration"/>
+	</xs:simpleType>
+	<xs:simpleType name="TimeRange">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(\-\d[2]:\d{2})?~\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(\-\d[2]:\d{2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransferFunction">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))\s([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))(\s([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))\s([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF))))*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="URI">
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+	<xs:simpleType name="URL">
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+	<xs:simpleType name="XYPair">
+		<xs:restriction base="jdftyp:NumberList">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="XYPairRange">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\-?\d+(\.\d+)?\s\-?\d+(\.\d+)?\s?~\s?\-?\d+(\.\d+)?\s\-?\d+(\.\d+)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="XYPairRangeList">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="((([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF)))\s([+\-]?((\d*(\.\d+)?([eE][+\-]?\d*)?)|(INF))))(\s?~\s?)?)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Definitions of the types to be used for partition key attributes/-->
+	<xs:simpleType name="pBlockName">
+		<xs:restriction base="xs:NMTOKEN"/>
+	</xs:simpleType>
+	<xs:simpleType name="pDocIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pDocCopies">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pDocRunIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pDocSheetIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pFountainNumber">
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="pLayerIDs">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pLocation">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pOption">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pPageNumber">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pPartVersion">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pPreviewType">
+		<xs:restriction base="jdftyp:ePreviewType_"/>
+	</xs:simpleType>
+	<xs:simpleType name="pRibbonName">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pRun">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pRunIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pRunTags">
+		<xs:restriction base="xs:NMTOKEN"/>
+	</xs:simpleType>
+	<xs:simpleType name="pRunPage">
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSeparation">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSetIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSheetName">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSheetIndex">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSide">
+		<xs:restriction base="jdftyp:eSide_"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSignatureName">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSorting">
+		<xs:restriction base="jdftyp:IntegerRangeList"/>
+	</xs:simpleType>
+	<xs:simpleType name="pSortAmount">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="pTileID">
+		<xs:restriction base="jdftyp:XYPair"/>
+	</xs:simpleType>
+	<xs:simpleType name="pWebName">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

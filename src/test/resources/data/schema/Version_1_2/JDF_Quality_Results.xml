@@ -1,0 +1,6 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8"/><TITLE>Schema Quality Checker version 2.2</TITLE><STYLE type="text/css">
+					body { font-family: courier;
+						     font-size: 8pt; }
+					table { font-family: courier;
+						     font-size: 8pt; }
+				</STYLE></HEAD><BODY bgcolor="#ffffff"><H1>IBM XML Schema Quality Checker Results</H1><I>Schema Quality Checker Version 2.2 Cost 10</I><BR/><P><FONT size="-1">For more information, see the XML_Schema_Quality_Checker_Readme.html file.</FONT></P><H2> Error report summary</H2><TABLE border="2"><TBODY><TR><TH>file location</TH><TH>number of errors</TH></TR><TR><TD>JDF.xsd</TD><TD><CENTER>0</CENTER></TD></TR></TBODY></TABLE><BR/><I>No errors found</I></BODY></HTML>

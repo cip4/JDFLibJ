@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" DescriptiveName="ttt2"  ICSVersions="Base_L0-1.0 LayCrImp_L1-1.0" ID="n060621091823_4822" JobID="Imposition" JobPartID="Imposition-ttt2" MaxVersion="1.3" Status="Waiting" Type="Imposition" Version="1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Imposition">
+
+  <AuditPool>
+    <Created AgentName="BackStage" AgentVersion="4.0 Build 103 Jun 16 2006" Author="trapcd081" ID="a060621091830_4842" TimeStamp="2006-06-21T09:18:23+02:00"/>
+  </AuditPool>
+
+  <ResourcePool>
+    <RunList Class="Parameter" ID="r060621091823_4823" PartIDKeys="Run" Status="Available">
+      <RunList Pages="0" Run="Run060621091824_4825">
+        <LayoutElement>
+          <FileSpec MimeType="application/pdf" URL="ttt2_Trimboxes-French-English_sheet1_W1_F.pdf"/>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="0" Run="Run060621091829_4826">
+        <LayoutElement>
+          <FileSpec MimeType="application/pdf" URL="ttt2_Trimboxes-French-English_sheet1_W1_B.pdf"/>
+        </LayoutElement>
+      </RunList>
+    </RunList>
+    <Layout Class="Parameter"  ID="r060621091823_4824" PartIDKeys="SignatureName SheetName Side" Status="Available">
+      <Media Dimension="2551.181102 2551.181102" MediaType="Paper"/>
+      <Layout SignatureName="sheet1">
+        <Layout  SheetName="sheet1">
+          <Layout Side="Front" SurfaceContentsBox="0 0 2834.645669 2834.645669">
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="0" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606" Ord="3" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="4" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606"  Ord="7" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="8" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606"  Ord="11" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <MarkObject CTM="1 0 0 1 0 0" Ord="0"/>
+          </Layout>
+          <Layout Side="Back" SurfaceContentsBox="0 0 2834.645669 2834.645669">
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606"  Ord="1" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="2" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606"  Ord="5" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="6" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 836.220642 996.377930" ClipBox="844.724693 1000.630063 1417.322835 1834.015606"  Ord="9" TrimCTM="1 0 0 1 850.394043 1006.299377" TrimSize="566.928900 822.047"/>
+            <ContentObject CTM="1 0 0 1 1403.149414 996.377930" ClipBox="1417.322835 1000.630063 1989.920976 1834.015606"  Ord="10" TrimCTM="1 0 0 1 1417.322876 1006.299377" TrimSize="566.928900 822.047"/>
+            <MarkObject CTM="1 0 0 1 0 0" Ord="1"/>
+          </Layout>
+        </Layout>
+      </Layout>
+    </Layout>
+    <RunList Class="Parameter" ID="r060621091830_4827" PartIDKeys="Run" Status="Available">
+      <RunList Pages="0" Run="Run060621091830_4829">
+        <LayoutElement PageListIndex="0">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_FR.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="French"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="1" Run="Run060621091830_4830">
+        <LayoutElement PageListIndex="1">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_FR.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="French"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="2" Run="Run060621091830_4831">
+        <LayoutElement PageListIndex="2">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_FR.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="French"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="3" Run="Run060621091830_4832">
+        <LayoutElement PageListIndex="3">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_FR.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="French"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="0" Run="Run060621091830_4833">
+        <LayoutElement PageListIndex="0">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_EN.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="English"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="1" Run="Run060621091830_4834">
+        <LayoutElement PageListIndex="1">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_EN.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="English"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="2" Run="Run060621091830_4835">
+        <LayoutElement PageListIndex="2">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_EN.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="English"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="3" Run="Run060621091830_4836">
+        <LayoutElement PageListIndex="3">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/TEXT_EN.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="English"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="0" Run="Run060621091830_4837">
+        <LayoutElement PageListIndex="0">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/images.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="Pages"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="1" Run="Run060621091830_4838">
+        <LayoutElement PageListIndex="1">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/images.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="Pages"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="2" Run="Run060621091830_4839">
+        <LayoutElement PageListIndex="2">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/images.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="Pages"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+      <RunList Pages="3" Run="Run060621091830_4840">
+        <LayoutElement PageListIndex="3">
+          <FileSpec MimeType="application/pdf" URL="file://praclt33/ExampleJobContainer/prob1/sample2/Scope/images.pdf"/>
+          <PageListRef rRef="r060621091830_4828">
+            <Part PartVersion="Pages"/>
+          </PageListRef>
+        </LayoutElement>
+      </RunList>
+    </RunList>
+    <PageList Class="Parameter" DescriptiveName="Book 1"  ID="r060621091830_4828" PartIDKeys="PartVersion" Status="Available">
+      <PageList PartVersion="French">
+        <PageData PageLabel="1"/>
+        <PageData PageLabel="2"/>
+        <PageData PageLabel="3"/>
+        <PageData PageLabel="4"/>
+      </PageList>
+      <PageList PartVersion="English">
+        <PageData PageLabel="1"/>
+        <PageData PageLabel="2"/>
+        <PageData PageLabel="3"/>
+        <PageData PageLabel="4"/>
+      </PageList>
+      <PageList PartVersion="Pages">
+        <PageData PageLabel="1"/>
+        <PageData PageLabel="2"/>
+        <PageData PageLabel="3"/>
+        <PageData PageLabel="4"/>
+      </PageList>
+    </PageList>
+    <RunList Class="Parameter" ID="r060621091830_4841" Status="Unavailable"/>
+  </ResourcePool>
+
+  <ResourceLinkPool>
+    <RunListLink ProcessUsage="Marks" Usage="Input" rRef="r060621091823_4823"/>
+    <LayoutLink Usage="Input" rRef="r060621091823_4824"/>
+    <RunListLink ProcessUsage="Document" Usage="Input" rRef="r060621091830_4827"/>
+    <RunListLink Usage="Output" rRef="r060621091830_4841"/>
+  </ResourceLinkPool>
+
+</JDF>

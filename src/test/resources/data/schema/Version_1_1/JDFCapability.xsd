@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	The CIP4 Software License, Version 1.0
+	
+	
+	Copyright (c) 2001 The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification, 
+	are permitted provided that the following conditions are met:
+	
+	1. Redistributions of source code must retain the above copyright notice, this 
+	list of conditions and the following disclaimer.
+	
+	2. Redistributions in binary form must reproduce the above copyright notice, 
+	this list of conditions and the following disclaimer in the documentation and/or 
+	other materials provided with the distribution.
+	
+	3. The end-user documentation included with the redistribution, if any, must 
+	include the following acknowledgment: &quot;This product includes software developed 
+	by the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress (www.cip4.org)&quot; Alternately, this acknowledgment 
+	may appear in the software itself, if and wherever such third-party 
+	acknowledgments normally appear.
+	
+	4. The names &quot;CIP4&quot; and &quot;The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress&quot; must not be used to endorse or 
+	promote products derived from this software without prior written permission. 
+	For written permission, please contact info@cip4.org
+	
+	5. Products derived from this software may not be called &quot;CIP4&quot;, nor may &quot;CIP4&quot; 
+	appear in their name, without prior written permission of the CIP4 organization
+	
+	&quot;CIP4&quot; and &quot;The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress&quot; are trademarks of The International Cooperation 
+	for the Integration of Processes in Prepress, Press and Postpress (CIP4).  All 
+	other names and brands are the property of their respective owners.
+	
+	THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, 
+	INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND 
+	FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. CIP4 AND ITS CONTRIBUTORS MAKE 
+	NO REPRESENTATION THAT THE USE OF THIS SOFTWARE OR DATA WILL NOT INFRINGE ANY 
+	PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER RIGHTS. IN NO EVENT SHALL CIP4 OR ITS 
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 
+	OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+	SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+	INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+	CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+	IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+	OF SUCH DAMAGE. 
+	====================================================================
+	
+	This software consists of voluntary contributions made by many individuals on 
+	behalf of the The International Cooperation for the Integration of Processes in 
+	Prepress, Press and Postpress and was originally based on software some of which 
+	contributed by and copyrighted by Adobe Systems and Man Roland. copyright (c) 
+	2000-2001, Adobe Systems copyright (c) 2001-2001, Man Roland
+	
+	For more information on The International Cooperation for the Integration of 
+	Processes in Prepress, Press and Postpress , please see &lt;http://www.cip4.org/&gt;.
+	
+-->
+<!--JDF specification V 1.1-->
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_1_1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jdf="http://www.CIP4.org/JDFSchema_1_1" xmlns:jdftyp="http://www.CIP4.org/JDFSchema_1_1_Types" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1.a.004">
+	<xs:import namespace="http://www.CIP4.org/JDFSchema_1_1_Types" schemaLocation="JDFTypes.xsd"/>
+	<!--Device Capability-->
+	<xs:complexType name="DeviceCap_re">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="Performance" type="jdf:DeviceCap_Performance_lr" minOccurs="0"/>
+					<xs:element name="DevCaps" type="jdf:DeviceCap_DevCaps_lr" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attributeGroup ref="jdf:DeviceCapAttribs_r"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:attributeGroup name="DeviceCapAttribs_c">
+		<xs:attribute name="Types" type="xs:NMTOKENS" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DeviceCapAttribs_u">
+		<xs:attributeGroup ref="jdf:DeviceCapAttribs_c"/>
+		<xs:attribute name="CombinedMethod" type="jdftyp:eCombinedMethod_" use="optional"/>
+		<xs:attribute name="GenericAttributes" type="xs:NMTOKENS" use="optional"/>
+		<xs:attribute name="OptionalCombinedTypes" type="xs:NMTOKENS" use="optional"/>
+		<xs:attribute name="TypeOrder" type="jdftyp:eTypeOrder_" use="optional"/>
+		<xs:attribute name="Type" type="xs:NMTOKEN" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DeviceCapAttribs_r">
+		<xs:attributeGroup ref="jdf:DeviceCapAttribs_c"/>
+		<xs:attribute name="CombinedMethod" type="jdftyp:eCombinedMethod_" default="None"/>
+		<xs:attribute name="GenericAttributes" type="xs:NMTOKENS" use="required"/>
+		<xs:attribute name="OptionalCombinedTypes" type="xs:NMTOKENS" default="none"/>
+		<xs:attribute name="TypeOrder" type="jdftyp:eTypeOrder_" default="Fixed"/>
+		<xs:attribute name="Type" type="xs:NMTOKEN" use="required"/>
+	</xs:attributeGroup>
+	<xs:complexType name="DeviceCap_Performance_lr">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="AverageAmount" type="jdftyp:number" use="required"/>
+				<xs:attribute name="AverageCleanup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="AverageSetup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="MaxAmount" type="jdftyp:number" default="0"/>
+				<xs:attribute name="MaxCleanup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="MaxSetup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="MinAmount" type="jdftyp:number" default="0"/>
+				<xs:attribute name="MinCleanup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="MinSetup" type="xs:duration" default="P0M"/>
+				<xs:attribute name="Name" type="xs:NMTOKEN" use="required"/>
+				<xs:attribute name="Unit" type="xs:NMTOKEN" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceCap_DevCaps_lr">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="DevCap" type="jdf:DeviceCap_DevCaps_DevCap_lr" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="DevNS" type="jdftyp:URI" default="http://www.CIP4.org/JDFSchema_1_1"/>
+				<xs:attribute name="Name" type="xs:NMTOKEN" use="required"/>
+				<xs:attribute name="ResourceUpdate" type="xs:NMTOKENS" default="None"/>
+				<xs:attribute name="Types" type="xs:NMTOKENS" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeviceCap_DevCaps_DevCap_lr">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					<xs:element name="DevCap" type="jdf:DeviceCap_DevCaps_DevCap_lr" minOccurs="0"/>
+					<xs:element ref="jdf:DevCap_State" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="DevNS" type="jdftyp:URI" default="http://www.CIP4.org/JDFSchema_1_1"/>
+				<xs:attribute name="HasDefault" type="xs:boolean" default="true"/>
+				<xs:attribute name="MaxOccurs" type="xs:integer" default="1"/>
+				<xs:attribute name="MinOccurs" type="xs:integer" default="1"/>
+				<xs:attribute name="Name" type="xs:NMTOKEN" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DevCapState">
+		<xs:complexContent>
+			<xs:extension base="jdf:ResourceElement">
+				<xs:attribute name="DevNS" type="jdftyp:URI" default="http://www.CIP4.org/JDFSchema_1_1"/>
+				<xs:attribute name="HasDefault" type="xs:boolean" default="true"/>
+				<xs:attribute name="Name" type="xs:NMTOKEN" use="optional"/>
+				<xs:attribute name="Span" type="xs:boolean" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DevCap_State" type="jdf:DevCapState" abstract="true"/>
+	<!--	
+BooleanState
+EnumerationState
+IntegerState
+MatrixState
+NameState
+NumberState
+ShapeState
+StringState
+XYPairState
+	-->
+	<xs:element name="BooleanState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="AllowedValueList" type="jdftyp:eBooleanStateList_"/>
+					<xs:attribute name="CurrentValue" type="xs:boolean" use="optional"/>
+					<xs:attribute name="DefaultValue" type="xs:boolean" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EnumerationState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="xs:NMTOKEN" use="optional"/>
+					<xs:attribute name="CurrentValue" type="xs:NMTOKEN" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="xs:NMTOKENS" use="optional"/>
+					<xs:attribute name="PresentValueList" type="xs:NMTOKENS" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IntegerState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="xs:integer" use="optional"/>
+					<xs:attribute name="CurrentValue" type="xs:integer" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="jdftyp:IntegerList" use="optional"/>
+					<xs:attribute name="AllowedValueMax" type="xs:integer" use="optional"/>
+					<xs:attribute name="AllowedValueMin" type="xs:integer" use="optional"/>
+					<xs:attribute name="PresentValueList" type="jdftyp:IntegerList" use="optional"/>
+					<xs:attribute name="PresentValueMax" type="xs:integer" use="optional"/>
+					<xs:attribute name="PresentValueMin" type="xs:integer" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MatrixState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+						<xs:element name="Value" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="jdf:ResourceElement">
+										<xs:sequence minOccurs="0" maxOccurs="unbounded">
+											<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+										</xs:sequence>
+										<xs:attribute name="AllowedValue" type="jdftyp:matrix" use="required"/>
+										<xs:attribute name="PresentValue" type="jdftyp:matrix" use="optional"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="jdftyp:matrix" use="optional"/>
+					<xs:attribute name="CurrentValue" type="jdftyp:matrix" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="xs:NMTOKEN" use="optional"/>
+					<xs:attribute name="CurrentValue" type="xs:NMTOKEN" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="xs:NMTOKENS" use="optional"/>
+					<xs:attribute name="PresentValueList" type="xs:NMTOKENS" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NumberState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="jdftyp:number" use="optional"/>
+					<xs:attribute name="CurrentValue" type="jdftyp:number" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="AllowedValueMax" type="jdftyp:number" use="optional"/>
+					<xs:attribute name="AllowedValueMin" type="jdftyp:number" use="optional"/>
+					<xs:attribute name="PresentValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="PresentValueMax" type="jdftyp:number" use="optional"/>
+					<xs:attribute name="PresentValueMin" type="jdftyp:number" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ShapeState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="jdftyp:shape" use="optional"/>
+					<xs:attribute name="CurrentValue" type="jdftyp:shape" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="AllowedValueMax" type="jdftyp:shape" use="optional"/>
+					<xs:attribute name="AllowedValueMin" type="jdftyp:shape" use="optional"/>
+					<xs:attribute name="PresentValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="PresentValueMax" type="jdftyp:shape" use="optional"/>
+					<xs:attribute name="PresentValueMin" type="jdftyp:shape" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="StringState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+						<xs:element name="Value" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="jdf:ResourceElement">
+										<xs:sequence minOccurs="0" maxOccurs="unbounded">
+											<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+										</xs:sequence>
+										<xs:attribute name="AllowedValue" type="xs:string" use="required"/>
+										<xs:attribute name="PresentValue" type="xs:string" use="optional"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="xs:string" use="optional"/>
+					<xs:attribute name="CurrentValue" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="XYPairState" substitutionGroup="jdf:DevCap_State">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="jdf:DevCapState">
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:group ref="jdf:GenericElements" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DefaultValue" type="jdftyp:XYPair" use="optional"/>
+					<xs:attribute name="CurrentValue" type="jdftyp:XYPair" use="optional"/>
+					<xs:attribute name="AllowedValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="AllowedValueMax" type="jdftyp:XYPair" use="optional"/>
+					<xs:attribute name="AllowedValueMin" type="jdftyp:XYPair" use="optional"/>
+					<xs:attribute name="PresentValueList" type="jdftyp:NumberList" use="optional"/>
+					<xs:attribute name="PresentValueMax" type="jdftyp:XYPair" use="optional"/>
+					<xs:attribute name="PresentValueMin" type="jdftyp:XYPair" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
