@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,8 +77,6 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,8 +94,8 @@ public class JDFTimeSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFTimeSpan
+	 * @param myOwnerDocument 
 	 * 
-	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
 	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -107,9 +105,9 @@ public class JDFTimeSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFTimeSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
@@ -119,11 +117,11 @@ public class JDFTimeSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFTimeSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 */
 	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
@@ -158,6 +156,11 @@ public class JDFTimeSpan extends JDFSpanBase
 		return "JDFTimeSpan[ --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param value
+	 */
 	public void setActual(JDFDate value)
 	{
 		setAttribute(AttributeName.ACTUAL, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
@@ -168,16 +171,14 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public JDFDate getActual()
 	{
-		try
-		{
-			return new JDFDate(getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING));
-		}
-		catch (DataFormatException dfe)
-		{
-			return null;
-		}
+		return JDFDate.createDate(getAttribute(AttributeName.ACTUAL, null, null));
 	}
 
+	/**
+	 * 
+	 *  
+	 * @param value
+	 */
 	public void setPreferred(JDFDate value)
 	{
 		setAttribute(AttributeName.PREFERRED, value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
@@ -188,16 +189,14 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public JDFDate getPreferred()
 	{
-		try
-		{
-			return new JDFDate(getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING));
-		}
-		catch (DataFormatException dfe)
-		{
-			return null;
-		}
+		return JDFDate.createDate(getAttribute(AttributeName.PREFERRED, null, null));
 	}
 
+	/**
+	 * 
+	 *  
+	 * @param value
+	 */
 	public void setRange(JDFDateTimeRange value)
 	{
 		setAttribute(AttributeName.RANGE, value.toString());
@@ -208,16 +207,13 @@ public class JDFTimeSpan extends JDFSpanBase
 	 */
 	public JDFDateTimeRange getRange()
 	{
-		try
-		{
-			return new JDFDateTimeRange(getAttribute(AttributeName.RANGE));
-		}
-		catch (DataFormatException dfe)
-		{
-			return null;
-		}
+		return JDFDateTimeRange.createDateTimeRange(getAttribute(AttributeName.RANGE));
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 */
 	@Override
 	public boolean init()
 	{

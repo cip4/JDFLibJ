@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,6 +84,12 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.JDFDate;
 
+/**
+ * 
+ * TODO Please insert comment!
+ * @author rainerprosi
+ * @date Apr 12, 2013
+ */
 public class JDFDateTimeRange extends JDFRange
 {
 	// **************************************** Attributes
@@ -131,6 +137,7 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * copy constructor
+	 * @param r 
 	 */
 	public JDFDateTimeRange(JDFDateTimeRange r)
 	{
@@ -139,6 +146,8 @@ public class JDFDateTimeRange extends JDFRange
 
 	/**
 	 * Initialization
+	 * @param xmin 
+	 * @param xmax 
 	 */
 	protected void init(JDFDate xmin, JDFDate xmax)
 	{
@@ -147,7 +156,29 @@ public class JDFDateTimeRange extends JDFRange
 	}
 
 	/**
+	 * factory style constructor that catches all exceptions and returns null if date is invalid
+	 * @param date the formatted date string
+	 * @return the JDFDate , null if date is not a valid string
+	 */
+	public static JDFDateTimeRange createDateTimeRange(final String date)
+	{
+		if (date == null || date.length() == 0)
+		{
+			return null;
+		}
+		try
+		{
+			return new JDFDateTimeRange(date);
+		}
+		catch (final DataFormatException e)
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * Construct a JDFDateTimeRange from a string
+	 * @param s 
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
@@ -240,7 +271,7 @@ public class JDFDateTimeRange extends JDFRange
 	/**
 	 * isPartOfRange - is range 'r' within this range?
 	 * 
-	 * @param r the range to test
+	 * @param ra the range to test
 	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */

@@ -103,7 +103,6 @@ import org.cip4.jdflib.core.VString;
  */
 public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDate>
 {
-	private static final long serialVersionUID = 1L;
 	private long lTimeInMillis = 0;
 	private int m_TimeZoneOffsetInMillis = 0; // in milliseconds from GMT-time
 	static int defaultHour = 12;
@@ -992,6 +991,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a
 	 * Date after this Date; and a value greater than 0 if the argument is a Date before this Date.
 	 */
+	@Override
 	public int compareTo(final Object arg0)
 	{
 		if (arg0 instanceof String)
@@ -1047,6 +1047,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @return
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
+	@Override
 	public int compare(final JDFDate d0, final JDFDate d1)
 	{
 		return ContainerUtil.compare(d0, d1);

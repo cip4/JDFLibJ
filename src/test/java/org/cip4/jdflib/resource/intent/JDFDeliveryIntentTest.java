@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,8 +74,11 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.span.JDFNumberSpan;
+import org.cip4.jdflib.span.JDFTimeSpan;
+import org.cip4.jdflib.util.JDFDate;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -86,10 +89,25 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testAppendNumberSpan()
+	public void testAppendOverage()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		JDFNumberSpan ns = di.appendOverage();
 		Assert.assertNotNull(ns);
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testAppendRequired()
+	{
+		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		JDFTimeSpan req = di.appendRequired();
+		assertNull(req.getActual());
+		assertNull(req.getRange());
+		JDFDate date = new JDFDate();
+		req.setActual(date);
+		assertEquals(req.getActual(), date);
 	}
 }
