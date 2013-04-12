@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.4a BLD 73";
+	final private static String m_libAgentVersion = "1.4a BLD 74";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -280,7 +280,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 * 
 	 * July 20, 2009
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumSeverity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -375,6 +374,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
+	@Override
 	public int compare(final JDFAudit a1, final JDFAudit a2)
 	{
 		final JDFDate d1 = a1.getTimeStampDate();

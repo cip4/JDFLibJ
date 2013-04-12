@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -411,6 +411,7 @@ public class JDFRefElement extends JDFElement
 	 * inline this refElement by replacing it with a copy of its target
 	 * 
 	 * @return JDFElement - the newly created element
+	 * @throws JDFException if no target exists
 	 */
 	public JDFElement inlineRef()
 	{

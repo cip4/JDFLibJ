@@ -1281,8 +1281,15 @@ public class XJDF20 extends BaseElementWalker
 			final JDFRefElement refElem = (JDFRefElement) jdf;
 			if (mustInline(refElem))
 			{
-				final JDFElement e = refElem.inlineRef();
-				walkTree(e, xjdf);
+				try
+				{
+					final JDFElement e = refElem.inlineRef();
+					walkTree(e, xjdf);
+				}
+				catch (JDFException x)
+				{
+					//nop
+				}
 				return null;
 			}
 			else
@@ -1290,7 +1297,6 @@ public class XJDF20 extends BaseElementWalker
 				makeRefAttribute(refElem, xjdf);
 				return null;
 			}
-
 		}
 
 		/**
