@@ -24,8 +24,8 @@
 		<property name="major.filename" value="JDFLibJ-${major.version}" />		
 		<property name="jdflib.src.dir" value="./src" />
 		<property name="apps.src.dir" value="./apps" />
-		<property name="test.src.dir" value="./test" />
-		<property name="test.tmp.dir" value="${test.src.dir}/data/temp" />
+		<property name="test.src.dir" value="./src/test/java" />
+		<property name="test.tmp.dir" value="./src/test/resources/data/temp" />
 		<property name="dist.dir" value="./dist" />
 		<property name="doc.dir" value="${dist.dir}/doc" />
 		<property name="bin.dir" value="${dist.dir}/bin" />
