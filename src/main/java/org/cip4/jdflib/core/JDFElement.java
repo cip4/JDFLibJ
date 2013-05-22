@@ -3336,23 +3336,11 @@ public class JDFElement extends KElement
 	public void removeChildren(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib)
 	{
 		// the loop allows jdf resources to recursively remove all children
-		while (true)
+		final VElement v = getChildElementVector_JDFElement(nodeName, nameSpaceURI, mAttrib, true, 0, false);
+		for (KElement e : v)
 		{
-			final VElement v = getChildElementVector_JDFElement(nodeName, nameSpaceURI, mAttrib, true, 0, false);
-			if (v.size() > 0)
-			{
-				for (int i = 0; i < v.size(); i++)
-				{
-					// may NOT call removeChild since JDFResource calls to this
-					// routine may actually change the parent
-					final KElement kelem = v.elementAt(i);
-					kelem.deleteNode();
-				}
-			}
-			else
-			{
-				return;
-			}
+			// may NOT call removeChild since JDFResource calls to this routine may actually change the parent
+			e.deleteNode();
 		}
 	}
 

@@ -90,6 +90,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
@@ -419,6 +420,8 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static JDFDoc parseFile(final String fileName)
 	{
+		if (StringUtil.getNonEmpty(fileName) == null)
+			return null;
 		final File f = new File(fileName);
 		final InputStream is = FileUtil.getBufferedInputStream(f);
 		final JDFDoc d = parseStream(is);

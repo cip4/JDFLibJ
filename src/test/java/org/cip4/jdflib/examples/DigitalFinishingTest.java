@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.examples;
 
+import java.util.Vector;
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.ElementName;
@@ -88,11 +91,13 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.devicecapability.JDFNameEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExpr;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 
 /**
@@ -190,6 +195,47 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
 		booklet.linkResource(body, EnumUsage.Input, null);
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testNearLineJDFBookletPipeMetaData()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setJobID("J1");
+		n.setType(JDFNode.EnumType.ProcessGroup);
+		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
+		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
+		c.setAttribute("Automation", "Dynamic");
+		c.setPipeID("PipeSheet");
+		c.setPartUsage(EnumPartUsage.Sparse);
+
+		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
+		idp.ensureLink(c, EnumUsage.Output, null);
+
+		JDFMedia media = (JDFMedia) n.addResource("Media", EnumUsage.Input);
+		JDFMedia m1 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "BodyMedia");
+		JDFMedia m2 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "RichCoverMedia");
+		JDFMedia m3 = (JDFMedia) media.addPartition(EnumPartIDKey.Option, "PoorCoverMedia");
+
+		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
+		cover.setSurfaceCount(2);
+		JDFComponent coverRich = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Rich");
+		coverRich.refMedia(m2);
+		JDFComponent coverPoor = (JDFComponent) cover.addPartition(EnumPartIDKey.Metadata0, "Poor");
+		coverPoor.refMedia(m3);
+
+		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
+		body.setSurfaceCount(-1);
+		body.refMedia(m1);
+
+		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
+		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
+		booklet.linkResource(body, EnumUsage.Input, null);
+		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipeMeta.jdf", 2, false);
 	}
 
 	/**
@@ -298,6 +344,41 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws DataFormatException 
+	 * 
+	 * 
+	 */
+	public void testPipePushSheetMeta() throws DataFormatException
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setSenderID("Guru");
+		for (int j = 0; j < 2; j++)
+		{
+			JDFCommand command = jmf.appendCommand();
+			command.setXMLComment("The initial push: cover page");
+			command.setType(EnumType.PipePush);
+			command.setSenderID("Printer");
+			JDFPipeParams pp = createPipeParams(command);
+			Vector<JDFPartAmount> vpa = createPartAmount(pp, j, 0, 1, true);
+			for (JDFPartAmount pa : vpa)
+				pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
+
+			for (int i = 0; i < 1 + j; i++)
+			{
+				command = jmf.appendCommand();
+				command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+				command.setType(EnumType.PipePush);
+				command.setSenderID("Printer");
+				pp = createPipeParams(command);
+				vpa = createPartAmount(pp, j, i, 3 + j, false);
+				for (JDFPartAmount pa : vpa)
+					pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
+			}
+		}
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushSheetMeta.jmf", 2, false);
+	}
+
+	/**
 	 * 
 	 *  
 	 * @param command
@@ -317,7 +398,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * @param set
 	 * @param sheets
 	 */
-	JDFPartAmount createPartAmount(JDFPipeParams pp, int set, int sheets, int plannedSheets, boolean bCover)
+	Vector<JDFPartAmount> createPartAmount(JDFPipeParams pp, int set, int sheets, int plannedSheets, boolean bCover)
 	{
 		JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
 		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
@@ -334,7 +415,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		{
 			pa.setActualAmount(sheets, null);
 		}
-		return pa;
+		return (Vector<JDFPartAmount>) ap.getAllPartAmount();
 	}
 
 	/**

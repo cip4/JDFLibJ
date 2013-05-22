@@ -68,129 +68,148 @@
  *  
  * 
  */
-/**
- * JDFIntegerRangeListTest.java
- *
- * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
- * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
- */
-package org.cip4.jdflib.datatypes;
+package org.cip4.jdflib.util.thread;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Test;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 23.01.2009
+ * class to run heavy tasks one at a time
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFRGBColorTest extends JDFTestCaseBase
+public class MultiTaskQueue extends OrderedTaskQueue
 {
+	private int maxParallel;
+	private int currentParallel;
+	private int totalParallel;
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testgetHTMLcolor()
+	private class NextRunner extends Thread
 	{
-		JDFRGBColor c = new JDFRGBColor(0, 0, 0);
-		assertEquals(c.getHTMLColor(), "#000000");
-		c = new JDFRGBColor(1, 1, 1);
-		assertEquals(c.getHTMLColor(), "#ffffff");
-	}
+		Runnable worker;
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testgetCMYKcolor()
-	{
-		JDFRGBColor co = new JDFRGBColor(0, 0, 0);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 1));
-		co = new JDFRGBColor(1, 1, 1);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(0, 0, 0, 0));
-		co = new JDFRGBColor(0, 1, 1);
-		assertEquals(co.getCMYK(), new JDFCMYKColor(1, 0, 0, 0));
-		for (double r = 0; r <= 1; r += 0.1)
+		/**
+		 * 
+		 * @param worker
+		 */
+		NextRunner(Runnable worker)
 		{
-			for (double g = 0; g <= 1; g += 0.1)
+			super(MultiTaskQueue.this.getName() + "_" + (++totalParallel) + "_" + currentParallel);
+			this.worker = worker;
+		}
+
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override
+		public void run()
+		{
+			try
 			{
-				for (double b = 0; b <= 1; b += 0.1)
-				{
-					co = new JDFRGBColor(r, g, b);
-					assertEquals(co.getCMYK().getRGB(), co);
-				}
+				worker.run();
+			}
+			finally
+			{
+				--currentParallel;
+				ThreadUtil.notifyAll(MultiTaskQueue.this.mutex);
 			}
 		}
 	}
 
 	/**
-	* 
+	 * 
+	 * grab the queue
+	 * @param name - must not be null
+	 * @param maxParallel 
+	 * @return the queue to fill with tasks
+	 */
+	public static MultiTaskQueue getCreateQueue(String name, int maxParallel)
+	{
+		name = getThreadName(name);
+		synchronized (theMap)
+		{
+			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
+			if (!(orderedTaskQueue instanceof MultiTaskQueue) || orderedTaskQueue.stop)
+			{
+				orderedTaskQueue = new MultiTaskQueue(name);
+				theMap.put(name, orderedTaskQueue);
+			}
+			MultiTaskQueue multiTaskQueue = (MultiTaskQueue) orderedTaskQueue;
+			multiTaskQueue.setMaxParallel(maxParallel);
+			return multiTaskQueue;
+		}
+	}
+
+	/**
+	 *  
+	 * @param maxParallel
+	 */
+	public void setMaxParallel(int maxParallel)
+	{
+		if (maxParallel > 0)
+			this.maxParallel = maxParallel;
+	}
+
+	/**
+	 * 
+	 * get the number of currently running tasks
+	 * @return
+	 */
+	public int getCurrentRunning()
+	{
+		return currentParallel;
+	}
+
+	/**
+	 * number of already completed tasks
+	 * @return 
+	 */
+	@Override
+	public int getDone()
+	{
+		return super.getDone() - getCurrentRunning();
+	}
+
+	/**
+	 * @param name 
+	 * 
+	 */
+	private MultiTaskQueue(String name)
+	{
+		super(name);
+		currentParallel = 0;
+		totalParallel = 0;
+		maxParallel = 2;
+	}
+
+	/**
+	 * @see java.lang.Thread#toString()
+	 * @return
 	*/
-	@Test
-	public void testgetCMYKcolorInt()
+	@Override
+	public String toString()
 	{
-		CPUTimer ct2 = new CPUTimer(false);
-		for (int r = 0; r <= 255; r++)
-		{
-			ct2.start();
-			for (int g = 0; g <= 255; g++)
-			{
-				for (int b = 0; b <= 255; b++)
-				{
-					double[] cmykArray = JDFRGBColor.getCMYKArray(r, g, b);
-					double[] rgbArray = JDFCMYKColor.getRGBArray(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
-					assertEquals(rgbArray[0], r / 255., 0.0000001);
-					assertEquals(rgbArray[1], g / 255., 0.0000001);
-					assertEquals(rgbArray[2], b / 255., 0.0000001);
-				}
-			}
-			ct2.stop();
-		}
-		log.info(ct2.toString());
+		return "MultiTaskQueue " + getName() + " " + stop + " queue: " + queue;
 	}
 
 	/**
-	 * 
+	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#getFirstTask()
 	 */
-	@Test
-	public void testgetCMYKcolorPerformance()
+	@Override
+	Runnable getFirstTask()
 	{
-		CPUTimer ct = new CPUTimer(false);
-		for (double r = 0; r <= 1; r += 0.01)
-		{
-			ct.start();
-			for (double g = 0; g <= 1; g += 0.01)
-			{
-				for (double b = 0; b <= 1; b += 0.01)
-				{
-					JDFRGBColor co = new JDFRGBColor(r, g, b);
-					assertEquals(co.getCMYK().getRGB(), co);
-				}
-			}
-			ct.stop();
-		}
-		log.info(ct.toString());
-		CPUTimer ct2 = new CPUTimer(false);
-		for (double r = 0; r <= 1; r += 0.01)
-		{
-			ct2.start();
-			for (double g = 0; g <= 1; g += 0.01)
-			{
-				for (double b = 0; b <= 1; b += 0.01)
-				{
-					double[] cmykArray = JDFRGBColor.getCMYKArray(r, g, b);
-					double[] rgbArray = JDFCMYKColor.getRGBArray(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
-					assertEquals(rgbArray[0], r, 0.0000001);
-					assertEquals(rgbArray[1], g, 0.0000001);
-					assertEquals(rgbArray[2], b, 0.0000001);
-				}
-			}
-			ct2.stop();
-		}
-		log.info(ct2.toString());
+		if (currentParallel >= maxParallel)
+			return null;
+		Runnable r = super.getFirstTask();
+		if (r != null)
+			currentParallel++;
+		return r;
 	}
+
+	/**
+	 */
+	@Override
+	void runTask(Runnable r)
+	{
+		new NextRunner(r).start();
+	}
+
 }

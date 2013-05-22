@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -182,6 +182,14 @@ public class JDFRGBColor extends JDFNumList
 		set(2, b);
 	}
 
+	/**
+	 * @param rgbArray 0-1 r,g,b
+	 */
+	public JDFRGBColor(double[] rgbArray)
+	{
+		this(rgbArray[0], rgbArray[1], rgbArray[2]);
+	}
+
 	// **************************************** Methods
 	// *********************************************
 	/**
@@ -278,4 +286,55 @@ public class JDFRGBColor extends JDFNumList
 		final int b = (int) (255.0 * getB());
 		return StringUtil.sprintf("#%02x%02x%02x", r + "," + g + "," + b);
 	}
+
+	/**
+	 * @return the cmyk color that roughly represents this
+	 * @See {@link JDFCMYKColor#getRGB()} for the inverse
+	 */
+	public JDFCMYKColor getCMYK()
+	{
+		return new JDFCMYKColor(getCMYKArray(getR(), getG(), getB()));
+	}
+
+	/**
+	 * @param r 
+	 * @param g 
+	 * @param b 
+	 * @return the cmyk color that roughly represents this
+	 * @See {@link JDFCMYKColor#getRGB()} for the inverse
+	 */
+	public static double[] getCMYKArray(double r, double g, double b)
+	{
+		double k0 = r;
+		if (b > k0)
+			k0 = b;
+		if (g > k0)
+			k0 = g;
+		double[] ret = new double[4];
+		ret[3] = 1.0 - k0;
+		if (k0 > 0)
+		{
+			ret[0] = (k0 - r) / k0;
+			ret[1] = (k0 - g) / k0;
+			ret[2] = (k0 - b) / k0;
+		}
+		else
+		{
+			ret[0] = ret[1] = ret[2] = 0;
+		}
+		return ret;
+	}
+
+	/**
+	 * @param r 
+	 * @param g 
+	 * @param b 
+	 * @return the cmyk color that roughly represents this
+	 * @See {@link JDFCMYKColor#getRGB()} for the inverse
+	 */
+	public static double[] getCMYKArray(int r, int g, int b)
+	{
+		return getCMYKArray(r / 255., g / 255., b / 255.);
+	}
+
 }

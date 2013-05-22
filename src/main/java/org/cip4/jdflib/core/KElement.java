@@ -2686,7 +2686,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Removes all attributes spezified in attribs. If attribs is empty, all attributes are removed
-	 * @param attribs list of attributes to remove, if empty, remove all
+	 * @param attribs list of attributes to remove, if null, remove all
 	 */
 	public void removeAttributes(final VString attribs)
 	{
@@ -3576,6 +3576,7 @@ public class KElement extends ElementNSImpl implements Element
 		 * @return
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
+		@Override
 		public int compare(final KElement o1, final KElement o2)
 		{
 			String nodeName = o1.getNodeName();
@@ -3627,6 +3628,7 @@ public class KElement extends ElementNSImpl implements Element
 		 * @return
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
+		@Override
 		public int compare(final KElement o1, final KElement o2)
 		{
 			final String attribute1 = o1.getXPathAttribute(xPath, null);

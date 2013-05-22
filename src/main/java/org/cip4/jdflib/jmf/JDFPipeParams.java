@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -223,11 +223,11 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 	public JDFResource getCreateResource(final String resName)
 	{
-		final JDFResource r = null;
+		JDFResource r = null;
 		final KElement e = getCreateElement(resName, null, 0);
 		if (e instanceof JDFResource)
 		{
-			/**/
+			r = (JDFResource) e;
 		}
 		else
 		{

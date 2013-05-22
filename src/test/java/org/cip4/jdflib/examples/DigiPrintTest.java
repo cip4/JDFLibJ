@@ -305,6 +305,49 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 * 
+	 */
+	public void testPipePushSheet()
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setSenderID("DFE");
+		VString frontback = new VString("Front Back", null);
+		VString coverBody = new VString("Cover Body", null);
+		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
+		for (int j = 0; j < 2; j++)
+		{
+			for (String cb : coverBody)
+			{
+				for (int i = 0; i < 3 + j; i++)
+				{
+					if (i > 0 && cb.equals("Cover"))
+						break;
+					for (String fb : frontback)
+					{
+						for (String sep : cmyk)
+						{
+							JDFCommand command = jmf.appendCommand();
+							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+							command.setType(JDFMessage.EnumType.PipePush);
+							command.setSenderID("RIP");
+							JDFPipeParams pp = createPipeParams(command);
+							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
+							JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+							JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
+							pa2.setActualAmount(2 * 4 * (4 + j), null);
+							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							pa.setActualAmount(1, null);
+						}
+					}
+				}
+			}
+		}
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "RIPPipePushSheetMeta.jmf", 2, false);
+	}
+
+	/**
 	 * @throws Exception
 	 */
 	@Test
@@ -753,48 +796,106 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
-	public void testPipePushSheet()
+	public void testPipePushSheetMeta()
 	{
 		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		jmf.setSenderID("DFE");
 		VString frontback = new VString("Front Back", null);
 		VString coverBody = new VString("Cover Body", null);
+		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
 		for (int j = 0; j < 2; j++)
 		{
 			for (String cb : coverBody)
 			{
-				for (int i = 0; i < 3 + j; i++)
+				for (int i = 0; i < 2 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
 						break;
 					for (String fb : frontback)
 					{
-						JDFCommand command = jmf.appendCommand();
-						command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
-						command.setType(JDFMessage.EnumType.PipePush);
-						command.setSenderID("RIP");
-						JDFPipeParams pp = createPipeParams(command);
-						JDFRunList rl = (JDFRunList) pp.appendResource(ElementName.RUNLIST);
-						rl.setID("ByteMap");
-						rl.setAttribute("Automation", "Dynamic");
-						JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
-						JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + j);
-						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SetIndex, "" + j);
-						m.put(EnumPartIDKey.DocTags, cb);
-						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.DocTags, cb);
-						m.put(EnumPartIDKey.SheetIndex, "" + i);
-						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetIndex, "" + i);
-						m.put(EnumPartIDKey.Side, fb);
-						rl = (JDFRunList) rl.addPartition(EnumPartIDKey.Side, fb);
-						JDFPartAmount pa = ap.getCreatePartAmount(m);
-						pa.setActualAmount(1, null);
-
-						rl.setFileURL("http://Set_" + j + "_" + cb + "_sheet" + i + "_" + fb + ".pdf");
+						for (String sep : cmyk)
+						{
+							JDFCommand command = jmf.appendCommand();
+							command.setXMLComment("The " + (i + 1) + " push: " + (3 + j) + " body sheets");
+							command.setType(JDFMessage.EnumType.PipePush);
+							command.setSenderID("RIP");
+							JDFPipeParams pp = createPipeParams(command);
+							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							JDFAttributeMap m2 = m.clone().removeKeys(new VString("DocTags SheetIndex Side Separation", null));
+							JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+							JDFPartAmount pa2 = ap.getCreatePartAmount(m2);
+							pa2.setActualAmount(2 * 4 * (4 + j), null);
+							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							pa.setActualAmount(1, null);
+							pa2.getPart(0).setAttribute(EnumPartIDKey.Metadata0.getName(), ((j == 0) ? "Fuzzy" : "Crisp"));
+						}
 					}
 				}
 			}
 		}
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushRunListSheet.jmf", 2, false);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "RIPPipePushRunListSheet.jmf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testPipePushSetMeta()
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setSenderID("DFE");
+		VString frontback = new VString("Front Back", null);
+		VString coverBody = new VString("Cover Body", null);
+		VString cmyk = new VString("Cyan Magenta Yellow Black ", null);
+		for (int j = 0; j < 2; j++)
+		{
+			JDFCommand command = jmf.appendCommand();
+			command.setXMLComment("The " + j + " set: ");
+			command.setType(JDFMessage.EnumType.PipePush);
+			command.setSenderID("RIP");
+			JDFPipeParams pp = createPipeParams(command);
+			JDFAmountPool ap = (JDFAmountPool) pp.getCreateElement(ElementName.AMOUNTPOOL);
+			JDFPartAmount pa0 = ap.getCreatePartAmount(new JDFAttributeMap("SetIndex", "" + j));
+			pa0.getPart(0).setAttribute(EnumPartIDKey.Metadata0.getName(), ((j == 0) ? "Nice" : "Nasty"));
+			pa0.getPart(0).setAttribute(EnumPartIDKey.Metadata1.getName(), ((j == 0) ? "Hot" : "Cold"));
+			pa0.setActualAmount(2 * (j + 3), null);
+			pa0.setAmount((j + 1) * 200, null);
+			pa0.setXMLComment("is this the right place for requested number of copies?");
+			for (String cb : coverBody)
+			{
+				for (int i = 0; i < 2 + j; i++)
+				{
+					if (i > 0 && cb.equals("Cover"))
+						break;
+					for (String fb : frontback)
+					{
+						for (String sep : cmyk)
+						{
+							JDFAttributeMap m = createRunListPartition(j, cb, i, fb, sep, pp);
+							JDFPartAmount pa = ap.getCreatePartAmount(m);
+							pa.setActualAmount(1, null);
+						}
+					}
+				}
+			}
+		}
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "RIPPipePushRunListSet.jmf", 2, false);
+	}
+
+	JDFAttributeMap createRunListPartition(int set, String cb, int sheet, String fb, String sep, JDFPipeParams pp)
+	{
+		JDFRunList rl = (JDFRunList) pp.getCreateResource(ElementName.RUNLIST);
+		rl.setID("ByteMap");
+		rl.setAttribute("Automation", "Dynamic");
+		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "" + set);
+		m.put(EnumPartIDKey.DocTags, cb);
+		m.put(EnumPartIDKey.SheetIndex, "" + sheet);
+		m.put(EnumPartIDKey.Side, fb);
+		m.put(EnumPartIDKey.Separation, sep);
+		rl = (JDFRunList) rl.getCreatePartition(m, new VString("SetIndex DocTags SheetIndex Side Separation", null));
+
+		rl.setFileURL("http://Set_" + set + "_" + cb + "_sheet" + sheet + "_" + fb + "_" + sep + ".tif");
+		return m;
 	}
 
 	/**

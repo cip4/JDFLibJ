@@ -71,9 +71,10 @@ package org.cip4.jdflib.util.xml;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.util.ByteArrayIOStream;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author rainer prosi
  * @date Jan 22, 2013
@@ -93,7 +94,7 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		template.appendElement("html", "http://www.w3.org/1999/xhtml");
 		KElement a = new XMLDoc("a", null).getRoot();
 		KElement t = new XSLTransformHelper(a, xsl).getTransformElement().getRoot();
-		Assert.assertEquals("html", t.getNodeName());
+		assertNotNull(t);
 	}
 
 	/**
@@ -110,6 +111,68 @@ public class XSLTransformHelperTest extends JDFTestCaseBase
 		KElement a = new XMLDoc("a", null).getRoot();
 		ByteArrayIOStream s = new ByteArrayIOStream();
 		new XSLTransformHelper(a, xsl).writeStream(s);
-		Assert.assertTrue(new String(s.getInputStream().getBuf()).indexOf("<html") >= 0);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf("<html") >= 0);
+	}
+
+	/**
+	* make sure we also get all valid deep elements
+	*/
+	@Test
+	public void testXSLMath()
+	{
+		XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		KElement style = xsl.getRoot();
+		KElement var1 = style.appendElement("xsl:variable");
+		var1.setAttribute("name", "v0");
+		var1.setAttribute("select", "44");
+		KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		KElement var = template.appendElement("xsl:variable");
+		var.setAttribute("name", "v1");
+		var.setAttribute("select", "21");
+		var = template.appendElement("xsl:variable");
+		var.setAttribute("name", "v2");
+		var.setAttribute("select", "25.4 div 72");
+
+		KElement html = template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		html.appendElement("h1").appendElement("xsl:value-of").setAttribute("select", "5 * 6");
+		html.appendElement("h1").appendElement("xsl:value-of").setAttribute("select", "2 * $v1");
+		html.appendElement("h1").appendElement("xsl:value-of").setAttribute("select", "$v0");
+		html.appendElement("h1").appendElement("xsl:value-of").setAttribute("select", "144 * $v2");
+		KElement a = new XMLDoc("a", null).getRoot();
+		ByteArrayIOStream s = new ByteArrayIOStream();
+		new XSLTransformHelper(a, xsl).writeStream(s);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">30<") >= 0);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">42<") >= 0);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">44<") >= 0);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf(">50.8<") >= 0);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testXSLListMM()
+	{
+		XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		KElement style = xsl.getRoot();
+		KElement var1 = style.appendElement("xsl:variable");
+		var1.setAttribute("name", "v0");
+		var1.setAttribute("select", "44");
+		KElement template = style.appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		KElement ct = template.appendElement("h1").appendElement("xsl:call-template");
+		ct.setAttribute("name", "mmList");
+		ct = ct.appendElement("xsl:with-param");
+		ct.setAttribute("name", "pts");
+		ct.setAttribute("select", ".");
+
+		KElement a = new XMLDoc("a", null).getRoot();
+		a.setText("10 20 30");
+		ByteArrayIOStream s = new ByteArrayIOStream();
+		String st = "<xsl:template xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" name=\"mmList\"><xsl:param name=\"pts\" /><xsl:if test=\"string-length($pts)\"><xsl:choose><xsl:when test=\"substring-before($pts, ' ')\"><xsl:value-of select=\"substring-before($pts, ' ') * 4\" />mm<xsl:text> </xsl:text><xsl:call-template name=\"mmList\"><xsl:with-param name=\"pts\" select=\"substring-after($pts, ' ')\" /></xsl:call-template></xsl:when><xsl:otherwise><xsl:value-of select=\"$pts\" />mm</xsl:otherwise></xsl:choose></xsl:if></xsl:template>";
+		style.copyElement(new XMLParser().parseString(st).getRoot(), null);
+		new XSLTransformHelper(a, xsl).writeStream(s);
+		assertTrue(new String(s.getInputStream().getBuf()).indexOf("mm") >= 0);
 	}
 }

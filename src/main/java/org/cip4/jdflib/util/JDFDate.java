@@ -121,6 +121,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * 
 	 */
+	public static final String DATEISO = "yyyy'-'MM'-'dd'";
+	/**
+	 * 
+	 */
+	final static String TIMEISO = "HH:mm:ss";
+	/**
+	 * 
+	 */
 	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
 	/**
 	 * iso - seconds are 0
@@ -698,9 +706,13 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	{
 		JDFDate d = new JDFDate(this);
 		if (duration != null)
-			d.setTimeInMillis(d.getTimeInMillis() + duration.getDuration() * 1000);
+		{
+			d.setTimeInMillis(d.getTimeInMillis() + duration.getDurationMillis());
+		}
 		if (hour >= 0 && minute >= 0)
+		{
 			d.setTime(hour, minute, 0);
+		}
 		return d;
 	}
 
@@ -712,7 +724,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getDateTimeISO()
 	{
-		return getDateFormat(DATETIMEISO).format(lTimeInMillis);
+		return getFormattedDateTime(DATETIMEISO);
 	}
 
 	/**
@@ -743,8 +755,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getDateISO()
 	{
-		final String timePattern = "yyyy'-'MM'-'dd";
-		return getDateFormat(timePattern).format(lTimeInMillis);
+		return getFormattedDateTime(DATEISO);
 	}
 
 	/**
@@ -755,8 +766,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getTimeISO()
 	{
-		final String timePattern = "HH:mm:ss";
-		return getDateFormat(timePattern).format(lTimeInMillis);
+		return getFormattedDateTime(TIMEISO);
 	}
 
 	/**

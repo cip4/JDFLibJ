@@ -87,7 +87,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.StringUtil.StringReplacer;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -95,44 +94,47 @@ import org.junit.Test;
  * 
  * To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class StringUtilTest extends JDFTestCaseBase {
+public class StringUtilTest extends JDFTestCaseBase
+{
 	/**
 	 * 
 	 */
 	@Test
-	public void testSimpleRegexp() {
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("??"), "(.)(.)");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("(a?)"), "(a?)");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("*b??"), "(.*)b(.)(.)");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("ab"), "ab");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("a.b"), "a\\.b");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("a(.+)b"), "a(.+)b");
-		Assert.assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
-		Assert.assertEquals("don't reconvert real regexp", StringUtil.simpleRegExptoRegExp("(.*)\\.b"), "(.*)\\.b");
-		Assert.assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
-		Assert.assertTrue(StringUtil.matches(".tx", StringUtil.simpleRegExptoRegExp("*.tx*")));
-		Assert.assertTrue(StringUtil.matches("55", StringUtil.simpleRegExptoRegExp("55|56")));
-		Assert.assertTrue(StringUtil.matches("56", StringUtil.simpleRegExptoRegExp("55|56")));
-		Assert.assertFalse(StringUtil.matches("57", StringUtil.simpleRegExptoRegExp("55|56")));
-		Assert.assertFalse(StringUtil.matches("foo_txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
-		Assert.assertTrue(StringUtil.matches("aa", StringUtil.simpleRegExptoRegExp("??")));
-		Assert.assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b?")));
-		Assert.assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("ab(.)")));
-		Assert.assertFalse(StringUtil.matches("ab", StringUtil.simpleRegExptoRegExp("ab(.)")));
-		Assert.assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("ab(.)")));
-		Assert.assertFalse(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b??")));
-		Assert.assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("*b?")));
+	public void testSimpleRegexp()
+	{
+		assertEquals(StringUtil.simpleRegExptoRegExp("??"), "(.)(.)");
+		assertEquals(StringUtil.simpleRegExptoRegExp("(a?)"), "(a?)");
+		assertEquals(StringUtil.simpleRegExptoRegExp("*b??"), "(.*)b(.)(.)");
+		assertEquals(StringUtil.simpleRegExptoRegExp("ab"), "ab");
+		assertEquals(StringUtil.simpleRegExptoRegExp("a.b"), "a\\.b");
+		assertEquals(StringUtil.simpleRegExptoRegExp("a(.+)b"), "a(.+)b");
+		assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
+		assertEquals("don't reconvert real regexp", StringUtil.simpleRegExptoRegExp("(.*)\\.b"), "(.*)\\.b");
+		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
+		assertTrue(StringUtil.matches(".tx", StringUtil.simpleRegExptoRegExp("*.tx*")));
+		assertTrue(StringUtil.matches("55", StringUtil.simpleRegExptoRegExp("55|56")));
+		assertTrue(StringUtil.matches("56", StringUtil.simpleRegExptoRegExp("55|56")));
+		assertFalse(StringUtil.matches("57", StringUtil.simpleRegExptoRegExp("55|56")));
+		assertFalse(StringUtil.matches("foo_txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
+		assertTrue(StringUtil.matches("aa", StringUtil.simpleRegExptoRegExp("??")));
+		assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b?")));
+		assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("ab", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b??")));
+		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("*b?")));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testWipeInvalidXML10Chars() {
+	public void testWipeInvalidXML10Chars()
+	{
 		final char[] cs = new char[] { 'a', 0x7, 0x3, 'b', 0x5 };
-		Assert.assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), null), "ab");
-		Assert.assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), "_"), "a__b_");
-		Assert.assertEquals(StringUtil.wipeInvalidXML10Chars("abc", null), "abc");
+		assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), null), "ab");
+		assertEquals(StringUtil.wipeInvalidXML10Chars(new String(cs), "_"), "a__b_");
+		assertEquals(StringUtil.wipeInvalidXML10Chars("abc", null), "abc");
 	}
 
 	/**
@@ -141,70 +143,76 @@ public class StringUtilTest extends JDFTestCaseBase {
 	// TODO @Stefan @Test
 	// public void testGetRelativePath() {
 	// File f = new File("./a");
-	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
+	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
 	// f = new File("../a.b");
-	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
+	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
 	// f = new File("./../a b/b");
-	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
+	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
 	// f = new File("a/b/c");
-	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
+	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
 	// f = new File("a/b/c");
-	// Assert.assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
+	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
 	// }
 
 	/**
 	 * test for getDefaultNull
 	 */
 	@Test
-	public void testGetDefaultNull() {
-		Assert.assertNull(StringUtil.getDefaultNull("", ""));
-		Assert.assertNull(StringUtil.getDefaultNull(null, ""));
-		Assert.assertEquals("a", StringUtil.getDefaultNull("a", ""));
+	public void testGetDefaultNull()
+	{
+		assertNull(StringUtil.getDefaultNull("", ""));
+		assertNull(StringUtil.getDefaultNull(null, ""));
+		assertEquals("a", StringUtil.getDefaultNull("a", ""));
 	}
 
 	/**
 	 * test for getNonEmpty
 	 */
 	@Test
-	public void testGetNonEmpty() {
-		Assert.assertNull(StringUtil.getNonEmpty(""));
-		Assert.assertNull(StringUtil.getNonEmpty(null));
-		Assert.assertEquals("a", StringUtil.getNonEmpty("a"));
+	public void testGetNonEmpty()
+	{
+		assertNull(StringUtil.getNonEmpty(""));
+		assertNull(StringUtil.getNonEmpty(null));
+		assertEquals("a", StringUtil.getNonEmpty("a"));
 	}
 
 	/**
 	 * test for gerRandomString
 	 */
 	@Test
-	public void testGetRandomString() {
+	public void testGetRandomString()
+	{
 		final VString v = new VString();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1000; i++)
+		{
 			final String s = StringUtil.getRandomString();
-			if (i % 100 == 0) {
+			if (i % 100 == 0)
+			{
 				System.out.println(s);
 			}
 			v.appendUnique(s);
-			Assert.assertTrue(s.length() > 1);
+			assertTrue(s.length() > 1);
 		}
-		Assert.assertTrue("should be many different", v.size() < 900);
-		Assert.assertTrue(v.size() > 5);
+		assertTrue("should be many different", v.size() < 900);
+		assertTrue(v.size() > 5);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSprintfString() {
-		Assert.assertEquals(StringUtil.sprintf("part_%04i.txt", "" + 6), "part_0006.txt");
-		Assert.assertEquals(StringUtil.sprintf("abc%03idef", "5"), "abc005def");
-		Assert.assertEquals(StringUtil.sprintf("abc%03idef", "5.0"), "abc005def");
-		Assert.assertEquals(StringUtil.sprintf("abc%03i%02idef", "5.0,5"), "abc00505def");
-		Assert.assertEquals(StringUtil.sprintf("abc%03i%02idef%%%s", "5.0,5,abcdefghi"), "abc00505def%abcdefghi");
-		Assert.assertEquals(StringUtil.sprintf("%2x", "12"), " c");
-		Assert.assertEquals(StringUtil.sprintf("%2x", "18"), "12");
-		Assert.assertEquals(StringUtil.sprintf("%s", "\\,"), ",");
-		Assert.assertEquals(StringUtil.sprintf("%s", "\\\\,"), "\\,");
-		Assert.assertEquals(StringUtil.sprintf("%s_%s", "\\\\,,a"), "\\,_a");
+	public void testSprintfString()
+	{
+		assertEquals(StringUtil.sprintf("part_%04i.txt", "" + 6), "part_0006.txt");
+		assertEquals(StringUtil.sprintf("abc%03idef", "5"), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03idef", "5.0"), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03i%02idef", "5.0,5"), "abc00505def");
+		assertEquals(StringUtil.sprintf("abc%03i%02idef%%%s", "5.0,5,abcdefghi"), "abc00505def%abcdefghi");
+		assertEquals(StringUtil.sprintf("%2x", "12"), " c");
+		assertEquals(StringUtil.sprintf("%2x", "18"), "12");
+		assertEquals(StringUtil.sprintf("%s", "\\,"), ",");
+		assertEquals(StringUtil.sprintf("%s", "\\\\,"), "\\,");
+		assertEquals(StringUtil.sprintf("%s_%s", "\\\\,,a"), "\\,_a");
 
 	}
 
@@ -212,96 +220,105 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testSprintf() {
+	public void testSprintf()
+	{
 		Object[] o = new Object[1];
 		o[0] = new Integer(5);
-		Assert.assertEquals(StringUtil.sprintf("abc%03idef", o), "abc005def");
+		assertEquals(StringUtil.sprintf("abc%03idef", o), "abc005def");
 		o[0] = "foobar";
-		Assert.assertEquals(StringUtil.sprintf("abc%7sdef", o), "abc foobardef");
-		Assert.assertEquals(StringUtil.sprintf("abc%7s7def", o), "abc foobar7def");
-		Assert.assertEquals(StringUtil.sprintf("%7sdef", o), " foobardef");
-		Assert.assertEquals(StringUtil.sprintf("%7s", o), " foobar");
-		Assert.assertEquals(StringUtil.sprintf("%%_%7s", o), "%_ foobar");
-		Assert.assertEquals(StringUtil.sprintf("%%", o), "%");
-		Assert.assertEquals(StringUtil.sprintf("765", o), "765");
-		try {
+		assertEquals(StringUtil.sprintf("abc%7sdef", o), "abc foobardef");
+		assertEquals(StringUtil.sprintf("abc%7s7def", o), "abc foobar7def");
+		assertEquals(StringUtil.sprintf("%7sdef", o), " foobardef");
+		assertEquals(StringUtil.sprintf("%7s", o), " foobar");
+		assertEquals(StringUtil.sprintf("%%_%7s", o), "%_ foobar");
+		assertEquals(StringUtil.sprintf("%%", o), "%");
+		assertEquals(StringUtil.sprintf("765", o), "765");
+		try
+		{
 			StringUtil.sprintf("abc%7idef", o);
-			Assert.fail("foobar is an int?");
-		} catch (final Exception x) {
+			fail("foobar is an int?");
+		}
+		catch (final Exception x)
+		{
 			//
 		}
 
 		o = new Object[] { new Integer(5), "foobar" };
-		Assert.assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
-		Assert.assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
+		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
 		o = new Object[] { "5", "foobar" };
-		Assert.assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
-		Assert.assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
+		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSetHexBinaryBytes() {
+	public void testSetHexBinaryBytes()
+	{
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		final byte[] buffer = strTestString.getBytes();
 		final String strTemp = StringUtil.setHexBinaryBytes(buffer, -1);
 		final byte[] tempBuffer = StringUtil.getHexBinaryBytes(strTemp.getBytes());
 		final String strResultString = new String(tempBuffer);
-		Assert.assertEquals("Input and Outputstring are not equal", strTestString, strResultString);
+		assertEquals("Input and Outputstring are not equal", strTestString, strResultString);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testGetUTF8Bytes() {
+	public void testGetUTF8Bytes()
+	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789aöü€";
 		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
 		final byte[] charBuf = strTestString.getBytes();
 		final String newString2 = StringUtil.getUTF8String(charBuf);
-		Assert.assertEquals(newString, newString2);
+		assertEquals(newString, newString2);
 		final byte[] green = new byte[] { 'g', 'r', (byte) 0xfc, 'n' };
 		final String greenString = StringUtil.getUTF8String(green);
 
-		Assert.assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
+		assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSetUTF8Bytes() {
+	public void testSetUTF8Bytes()
+	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
 		final byte[] utf8Buf2 = StringUtil.setUTF8String(newString);
 		final String strResultString = StringUtil.getUTF8String(utf8Buf2);
-		Assert.assertEquals("Input and Output bytes are not equal", utf8Buf.length, utf8Buf2.length);
-		Assert.assertEquals("Input and Output string are not equal", strTestString, newString);
-		Assert.assertEquals("Input and Output string are not equal", strTestString, strResultString);
+		assertEquals("Input and Output bytes are not equal", utf8Buf.length, utf8Buf2.length);
+		assertEquals("Input and Output string are not equal", strTestString, newString);
+		assertEquals("Input and Output string are not equal", strTestString, strResultString);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSetVStringEnum() {
+	public void testSetVStringEnum()
+	{
 		final Vector<Object> v = new Vector<Object>();
 		v.add(EnumUsage.Input);
 		v.add(EnumUsage.Output);
-		Assert.assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
+		assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSetVString() {
+	public void testSetVString()
+	{
 		final VString v = new VString();
 		v.add("1");
 		v.add("22");
@@ -309,44 +326,46 @@ public class StringUtilTest extends JDFTestCaseBase {
 		v.add("4444");
 		String s = StringUtil.setvString(v);
 
-		Assert.assertEquals("s", "1 22 333 4444", s);
+		assertEquals("s", "1 22 333 4444", s);
 		s = StringUtil.setvString(v, "", "", "");
-		Assert.assertEquals("s", "1223334444", s);
+		assertEquals("s", "1223334444", s);
 		s = StringUtil.setvString(v, null, null, null);
-		Assert.assertEquals("s", "1223334444", s);
+		assertEquals("s", "1223334444", s);
 
 		String[] a = new String[v.size()];
 		a = v.toArray(a);
 		s = StringUtil.setvString(a, " ", null, null);
-		Assert.assertEquals("s", "1 22 333 4444", s);
+		assertEquals("s", "1 22 333 4444", s);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testEscape() {
+	public void testEscape()
+	{
 		final String iri = "file://myHost/a/c%20aöü%25&?.txtß€";
-		Assert.assertEquals("escape round trip", iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2));
-		Assert.assertEquals("escape ", "%25_%c3%bc", StringUtil.escape("%_ü", ":&?%", "%", 16, 2, 0x21, 127));
-		Assert.assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.setUTF8String("€")), ":&?%", "%", 16, 2, 0x21, 127));
-		Assert.assertEquals("€", StringUtil.escape("€", null, "%", 16, 2, 0x21, -1));
-		Assert.assertEquals("ä", StringUtil.escape("ä", null, "%", 16, 2, 0x21, -1));
-		Assert.assertEquals("ä is 2 bytes --> __", "a__a", StringUtil.escape("aäa", null, "_", -1, 0, 0x21, 127));
-		Assert.assertEquals("a____a", StringUtil.escape("a€_a", null, "_", -1, 0, 0x21, 127));
-		Assert.assertEquals("a%20b", StringUtil.escape("a b", " \t", "%", 16, 2, 0, -19));
+		assertEquals("escape round trip", iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2));
+		assertEquals("escape ", "%25_%c3%bc", StringUtil.escape("%_ü", ":&?%", "%", 16, 2, 0x21, 127));
+		assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.setUTF8String("€")), ":&?%", "%", 16, 2, 0x21, 127));
+		assertEquals("€", StringUtil.escape("€", null, "%", 16, 2, 0x21, -1));
+		assertEquals("ä", StringUtil.escape("ä", null, "%", 16, 2, 0x21, -1));
+		assertEquals("ä is 2 bytes --> __", "a__a", StringUtil.escape("aäa", null, "_", -1, 0, 0x21, 127));
+		assertEquals("a____a", StringUtil.escape("a€_a", null, "_", -1, 0, 0x21, 127));
+		assertEquals("a%20b", StringUtil.escape("a b", " \t", "%", 16, 2, 0, -19));
 
-		// Assert.assertEquals("a_€a", StringUtil.escape("a€a", null, "_", 0, 0, 0x21, 127));
+		// assertEquals("a_€a", StringUtil.escape("a€a", null, "_", 0, 0, 0x21, 127));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testExtension() {
+	public void testExtension()
+	{
 		final String iri = "file://my.Host/a.n/c%20ï¿½ï¿½ï¿½%25&?.txtï¿½";
-		Assert.assertEquals(UrlUtil.extension(iri), "txtï¿½");
-		Assert.assertNull(UrlUtil.extension("abc"));
+		assertEquals(UrlUtil.extension(iri), "txtï¿½");
+		assertNull(UrlUtil.extension("abc"));
 	}
 
 	/**
@@ -354,11 +373,13 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testMatchesIgnoreCase() {
-		Assert.assertFalse(StringUtil.matchesIgnoreCase(null, "(.+ )*(BB)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesIgnoreCase("a bb c", "(.+ )*(BB)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesIgnoreCase("mailTo:a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertFalse(StringUtil.matchesIgnoreCase("mailT:a@b.c", JDFConstants.REGEXP_EMAIL));
+	public void testMatchesIgnoreCase()
+	{
+		assertFalse(StringUtil.matchesIgnoreCase(null, "(.+ )*(BB)( .+)*"));
+		assertTrue(StringUtil.matchesIgnoreCase("a bb c", "(.+ )*(BB)( .+)*"));
+		assertTrue(StringUtil.matchesIgnoreCase("ff a bb c", "*B*"));
+		assertTrue(StringUtil.matchesIgnoreCase("mailTo:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matchesIgnoreCase("mailT:a@b.c", JDFConstants.REGEXP_EMAIL));
 	}
 
 	/**
@@ -366,122 +387,53 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testStripPrefix() {
-		Assert.assertEquals(StringUtil.stripPrefix("a:b", "a:", true), "b");
-		Assert.assertEquals(StringUtil.stripPrefix("a:b", "A:", true), "b");
-		Assert.assertEquals(StringUtil.stripPrefix("a:B", "A:", true), "B");
-		Assert.assertEquals(StringUtil.stripPrefix("a:b", "A:", false), "a:b");
-		Assert.assertEquals(StringUtil.stripPrefix("abcdef", "ABC", true), "def");
-		Assert.assertNull(StringUtil.stripPrefix(null, "A:", false));
-		Assert.assertEquals(StringUtil.stripPrefix("a:b", null, false), "a:b");
+	public void testStripPrefix()
+	{
+		assertEquals(StringUtil.stripPrefix("a:b", "a:", true), "b");
+		assertEquals(StringUtil.stripPrefix("a:b", "A:", true), "b");
+		assertEquals(StringUtil.stripPrefix("a:B", "A:", true), "B");
+		assertEquals(StringUtil.stripPrefix("a:b", "A:", false), "a:b");
+		assertEquals(StringUtil.stripPrefix("abcdef", "ABC", true), "def");
+		assertNull(StringUtil.stripPrefix(null, "A:", false));
+		assertEquals(StringUtil.stripPrefix("a:b", null, false), "a:b");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testStripNot() {
-		Assert.assertEquals(StringUtil.stripNot("a1b321", "12"), "121");
-		Assert.assertNull(StringUtil.stripNot("a1b321", null));
-		Assert.assertNull(StringUtil.stripNot("a1b321", "7"));
+	public void testStripNot()
+	{
+		assertEquals(StringUtil.stripNot("a1b321", "12"), "121");
+		assertNull(StringUtil.stripNot("a1b321", null));
+		assertNull(StringUtil.stripNot("a1b321", "7"));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testStripQuote() {
-		Assert.assertEquals(StringUtil.stripQuote(",123,", ",", true), "123");
-		Assert.assertEquals(StringUtil.stripQuote(",123,", ",", false), "123");
-		Assert.assertEquals(StringUtil.stripQuote(",123, ", ",", false), ",123, ");
-		Assert.assertEquals(StringUtil.stripQuote(" 	,123, ", ",", true), "123");
-		Assert.assertEquals(StringUtil.stripQuote(",", ",", true), ",");
+	public void testStripQuote()
+	{
+		assertEquals(StringUtil.stripQuote(",123,", ",", true), "123");
+		assertEquals(StringUtil.stripQuote(",123,", ",", false), "123");
+		assertEquals(StringUtil.stripQuote(",123, ", ",", false), ",123, ");
+		assertEquals(StringUtil.stripQuote(" 	,123, ", ",", true), "123");
+		assertEquals(StringUtil.stripQuote(",", ",", true), ",");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testTrim() {
-		Assert.assertEquals(StringUtil.trim(",123,", ","), "123");
-		Assert.assertEquals(StringUtil.trim(", ,123,", ", &"), "123");
-		Assert.assertEquals(StringUtil.trim("123", ", &"), "123");
-		Assert.assertEquals(StringUtil.trim("123&", ", &"), "123");
-		Assert.assertEquals(StringUtil.trim(" 123", ", &"), "123");
-		Assert.assertEquals(StringUtil.trim("", ", &"), null);
-	}
-
-	/**
-	 * test regexp matching utility
-	 * 
-	 */
-	@Test
-	public void testMatches() {
-		Assert.assertFalse(StringUtil.matchesSimple(null, "(.+ )*(BB)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesSimple("a bb c", "(.+ )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesSimple("b bb c", "(.* )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesSimple("a bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matchesSimple("bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple(" bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple("bb ", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple("a", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple("a c", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple("a b c", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matchesSimple("123456", "\\d{5,5}"));
-		Assert.assertFalse(StringUtil.matchesSimple("1234", "\\d{5,5}"));
-		Assert.assertTrue(StringUtil.matchesSimple("12345", "\\d{5,5}"));
-		Assert.assertTrue(StringUtil.matchesSimple("abc", "*"));
-		Assert.assertTrue(StringUtil.matchesSimple("abc", "?*"));
-		Assert.assertTrue(StringUtil.matchesSimple("abc", "?+"));
-		Assert.assertTrue(StringUtil.matchesSimple("abc", ""));
-		Assert.assertTrue(StringUtil.matchesSimple("äbc", "???"));
-		Assert.assertFalse(StringUtil.matchesSimple("abc", "????"));
-		Assert.assertFalse(StringUtil.matchesSimple("abc", "??"));
-		Assert.assertTrue(StringUtil.matchesSimple("€bc", null));
-		Assert.assertTrue(StringUtil.matchesSimple("€", "(€)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("€€", "€{0,2}"));
-		Assert.assertFalse(StringUtil.matchesSimple("€€€", "€{0,2}"));
-		Assert.assertTrue(StringUtil.matchesSimple("", "(€)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("12de", JDFConstants.REGEXP_HEXBINARY));
-		Assert.assertFalse(StringUtil.matchesSimple("12d", JDFConstants.REGEXP_HEXBINARY));
-		Assert.assertFalse(StringUtil.matchesSimple("12dk", JDFConstants.REGEXP_HEXBINARY));
-
-		Assert.assertTrue(StringUtil.matchesSimple("€", "(€)?"));
-
-		Assert.assertFalse(StringUtil.matchesSimple("abc", "??"));
-		Assert.assertFalse(StringUtil.matchesSimple(null, null));
-		Assert.assertFalse(StringUtil.matchesSimple("abc", "?"));
-		Assert.assertTrue(StringUtil.matchesSimple("a b", "(a)?( b)?( c)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("a b", "(a)? (b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("a b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("a", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*)+"));
-		Assert.assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*){1,1}"));
-		Assert.assertFalse(StringUtil.matchesSimple("d e c", "((.+ )*((a)|(b))( .+)*)+"));
-		Assert.assertFalse(StringUtil.matchesSimple("b b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("MIS_L2-1.3", "((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
-
-		Assert.assertTrue(StringUtil.matchesSimple("a-aB.3@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matchesSimple("a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matchesSimple("mailto:a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertFalse(StringUtil.matchesSimple("mailt:a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matchesSimple("aa@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertFalse(StringUtil.matchesSimple("a@b", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matchesSimple("+(1).2/344", JDFConstants.REGEXP_PHONE));
-		Assert.assertFalse(StringUtil.matchesSimple("+(1).2 344", JDFConstants.REGEXP_PHONE));
-
-		Assert.assertTrue(StringUtil.matchesSimple("ab", "a*"));
-		Assert.assertTrue(StringUtil.matchesSimple("ab", "a(.*)"));
-		Assert.assertTrue(StringUtil.matchesSimple("a", "a*"));
-		Assert.assertFalse(StringUtil.matchesSimple("a", "a(.(.*))"));
-		Assert.assertTrue(StringUtil.matchesSimple("a", "a(b)?"));
-		Assert.assertTrue(StringUtil.matchesSimple("ab", "a(b)?"));
-		Assert.assertFalse(StringUtil.matchesSimple("ac", "a(b)?"));
-
-		Assert.assertTrue(StringUtil.matchesSimple("a b", "a b"));
-		Assert.assertTrue(StringUtil.matchesSimple("abc123ä", "abc123ä"));
-		Assert.assertTrue(StringUtil.matchesSimple("GangBrochureA4", "(Gang)?Bro(.)*"));
+	public void testTrim()
+	{
+		assertEquals(StringUtil.trim(",123,", ","), "123");
+		assertEquals(StringUtil.trim(", ,123,", ", &"), "123");
+		assertEquals(StringUtil.trim("123", ", &"), "123");
+		assertEquals(StringUtil.trim("123&", ", &"), "123");
+		assertEquals(StringUtil.trim(" 123", ", &"), "123");
+		assertEquals(StringUtil.trim("", ", &"), null);
 	}
 
 	/**
@@ -489,298 +441,390 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testMatchesRegExp() {
-		Assert.assertFalse(StringUtil.matches(null, "(.+ )*(BB)( .+)*"));
-		Assert.assertTrue(StringUtil.matches("a bb c", "(.+ )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matches("b bb c", "(.* )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matches("a bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertTrue(StringUtil.matches("bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches(" bb", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches("bb ", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches("a", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches("a c", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches("a b c", "(.+ )*(bb)( .+)*"));
-		Assert.assertFalse(StringUtil.matches("123456", "\\d{5,5}"));
-		Assert.assertFalse(StringUtil.matches("1234", "\\d{5,5}"));
-		Assert.assertTrue(StringUtil.matches("12345", "\\d{5,5}"));
-		Assert.assertTrue(StringUtil.matches("abc", ".*"));
-		Assert.assertTrue(StringUtil.matches("abc", ".?.*"));
-		Assert.assertTrue(StringUtil.matches("abc", ".+"));
-		Assert.assertTrue(StringUtil.matches("abc", ""));
-		Assert.assertTrue(StringUtil.matches("€bc", null));
-		Assert.assertTrue(StringUtil.matches("€", "(€)?"));
-		Assert.assertTrue(StringUtil.matches("€€", "€{0,2}"));
-		Assert.assertFalse(StringUtil.matches("€€€", "€{0,2}"));
-		Assert.assertTrue(StringUtil.matches("", "(€)?"));
-		Assert.assertTrue(StringUtil.matches("12de", JDFConstants.REGEXP_HEXBINARY));
-		Assert.assertFalse(StringUtil.matches("12d", JDFConstants.REGEXP_HEXBINARY));
-		Assert.assertFalse(StringUtil.matches("12dk", JDFConstants.REGEXP_HEXBINARY));
+	public void testMatches()
+	{
+		assertFalse(StringUtil.matchesSimple(null, "(.+ )*(BB)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("a bb c", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("b bb c", "(.* )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("a bb", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matchesSimple("bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple(" bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("bb ", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("a b c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matchesSimple("123456", "\\d{5,5}"));
+		assertFalse(StringUtil.matchesSimple("1234", "\\d{5,5}"));
+		assertTrue(StringUtil.matchesSimple("12345", "\\d{5,5}"));
+		assertTrue(StringUtil.matchesSimple("abc", "*"));
+		assertTrue(StringUtil.matchesSimple("abc", "?*"));
+		assertTrue(StringUtil.matchesSimple("abc", "?+"));
+		assertTrue(StringUtil.matchesSimple("abc", ""));
+		assertTrue(StringUtil.matchesSimple("äbc", "???"));
+		assertFalse(StringUtil.matchesSimple("abc", "????"));
+		assertFalse(StringUtil.matchesSimple("abc", "??"));
+		assertTrue(StringUtil.matchesSimple("€bc", null));
+		assertTrue(StringUtil.matchesSimple("€", "(€)?"));
+		assertTrue(StringUtil.matchesSimple("€€", "€{0,2}"));
+		assertFalse(StringUtil.matchesSimple("€€€", "€{0,2}"));
+		assertTrue(StringUtil.matchesSimple("", "(€)?"));
+		assertTrue(StringUtil.matchesSimple("12de", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matchesSimple("12d", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matchesSimple("12dk", JDFConstants.REGEXP_HEXBINARY));
 
-		Assert.assertTrue(StringUtil.matches("€", "(€)?"));
+		assertTrue(StringUtil.matchesSimple("€", "(€)?"));
 
-		Assert.assertFalse(StringUtil.matches(null, null));
-		Assert.assertFalse(StringUtil.matches("abc", "?"));
-		Assert.assertTrue(StringUtil.matches("a b", "(a)?( b)?( c)?"));
-		Assert.assertTrue(StringUtil.matches("a b", "(a)? (b)?"));
-		Assert.assertTrue(StringUtil.matches("a b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matches("a", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matches("b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matches("b a c", "((.+ )*((a)|(b))( .+)*)+"));
-		Assert.assertTrue(StringUtil.matches("b a c", "((.+ )*((a)|(b))( .+)*){1,1}"));
-		Assert.assertFalse(StringUtil.matches("d e c", "((.+ )*((a)|(b))( .+)*)+"));
-		Assert.assertFalse(StringUtil.matches("b b", "a?(( )*b)?"));
-		Assert.assertTrue(StringUtil.matches("MIS_L2-1.3", "((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
+		assertFalse(StringUtil.matchesSimple("abc", "??"));
+		assertFalse(StringUtil.matchesSimple(null, null));
+		assertFalse(StringUtil.matchesSimple("abc", "?"));
+		assertTrue(StringUtil.matchesSimple("a b", "(a)?( b)?( c)?"));
+		assertTrue(StringUtil.matchesSimple("a b", "(a)? (b)?"));
+		assertTrue(StringUtil.matchesSimple("a b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("a", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertTrue(StringUtil.matchesSimple("b a c", "((.+ )*((a)|(b))( .+)*){1,1}"));
+		assertFalse(StringUtil.matchesSimple("d e c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertFalse(StringUtil.matchesSimple("b b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matchesSimple("MIS_L2-1.3", "((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
 
-		Assert.assertTrue(StringUtil.matches("a-aB.3@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matches("a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matches("mailto:a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertFalse(StringUtil.matches("mailt:a@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matches("aa@b.c", JDFConstants.REGEXP_EMAIL));
-		Assert.assertFalse(StringUtil.matches("a@b", JDFConstants.REGEXP_EMAIL));
-		Assert.assertTrue(StringUtil.matches("+(1).2/344", JDFConstants.REGEXP_PHONE));
-		Assert.assertFalse(StringUtil.matches("+(1).2 344", JDFConstants.REGEXP_PHONE));
+		assertTrue(StringUtil.matchesSimple("a-aB.3@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("mailto:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matchesSimple("mailt:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("aa@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matchesSimple("a@b", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matchesSimple("+(1).2/344", JDFConstants.REGEXP_PHONE));
+		assertFalse(StringUtil.matchesSimple("+(1).2 344", JDFConstants.REGEXP_PHONE));
 
-		Assert.assertTrue(StringUtil.matches("ab", "a.*"));
-		Assert.assertTrue(StringUtil.matches("ab", "a(.*)"));
-		Assert.assertTrue(StringUtil.matches("a", "a*"));
-		Assert.assertFalse(StringUtil.matches("a", "a(.(.*))"));
-		Assert.assertTrue(StringUtil.matches("a", "a(b)?"));
-		Assert.assertTrue(StringUtil.matches("ab", "a(b)?"));
-		Assert.assertFalse(StringUtil.matches("ac", "a(b)?"));
+		assertTrue(StringUtil.matchesSimple("ab", "a*"));
+		assertTrue(StringUtil.matchesSimple("ab", "a(.*)"));
+		assertTrue(StringUtil.matchesSimple("a", "a*"));
+		assertFalse(StringUtil.matchesSimple("a", "a(.(.*))"));
+		assertTrue(StringUtil.matchesSimple("a", "a(b)?"));
+		assertTrue(StringUtil.matchesSimple("ab", "a(b)?"));
+		assertFalse(StringUtil.matchesSimple("ac", "a(b)?"));
 
-		Assert.assertTrue(StringUtil.matches("a b", "a b"));
-		Assert.assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
-		Assert.assertTrue(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*"));
+		assertTrue(StringUtil.matchesSimple("a b", "a b"));
+		assertTrue(StringUtil.matchesSimple("abc123ä", "abc123ä"));
+		assertTrue(StringUtil.matchesSimple("GangBrochureA4", "(Gang)?Bro(.)*"));
+	}
+
+	/**
+	 * test regexp matching utility
+	 * 
+	 */
+	@Test
+	public void testMatchesRegExp()
+	{
+		assertFalse(StringUtil.matches(null, "(.+ )*(BB)( .+)*"));
+		assertTrue(StringUtil.matches("a bb c", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matches("b bb c", "(.* )*(bb)( .+)*"));
+		assertTrue(StringUtil.matches("a bb", "(.+ )*(bb)( .+)*"));
+		assertTrue(StringUtil.matches("bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches(" bb", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("bb ", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("a", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("a c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("a b c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("123456", "\\d{5,5}"));
+		assertFalse(StringUtil.matches("1234", "\\d{5,5}"));
+		assertTrue(StringUtil.matches("12345", "\\d{5,5}"));
+		assertTrue(StringUtil.matches("abc", ".*"));
+		assertTrue(StringUtil.matches("abc", ".?.*"));
+		assertTrue(StringUtil.matches("abc", ".+"));
+		assertTrue(StringUtil.matches("abc", ""));
+		assertTrue(StringUtil.matches("€bc", null));
+		assertTrue(StringUtil.matches("€", "(€)?"));
+		assertTrue(StringUtil.matches("€€", "€{0,2}"));
+		assertFalse(StringUtil.matches("€€€", "€{0,2}"));
+		assertTrue(StringUtil.matches("", "(€)?"));
+		assertTrue(StringUtil.matches("12de", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matches("12d", JDFConstants.REGEXP_HEXBINARY));
+		assertFalse(StringUtil.matches("12dk", JDFConstants.REGEXP_HEXBINARY));
+
+		assertTrue(StringUtil.matches("€", "(€)?"));
+
+		assertFalse(StringUtil.matches(null, null));
+		assertFalse(StringUtil.matches("abc", "?"));
+		assertTrue(StringUtil.matches("a b", "(a)?( b)?( c)?"));
+		assertTrue(StringUtil.matches("a b", "(a)? (b)?"));
+		assertTrue(StringUtil.matches("a b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matches("a", "a?(( )*b)?"));
+		assertTrue(StringUtil.matches("b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matches("b a c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertTrue(StringUtil.matches("b a c", "((.+ )*((a)|(b))( .+)*){1,1}"));
+		assertFalse(StringUtil.matches("d e c", "((.+ )*((a)|(b))( .+)*)+"));
+		assertFalse(StringUtil.matches("b b", "a?(( )*b)?"));
+		assertTrue(StringUtil.matches("MIS_L2-1.3", "((.+ )*((MIS_L2-1.3)|(MISCPS_L1-1.3))( .+)*)+"));
+
+		assertTrue(StringUtil.matches("a-aB.3@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matches("a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matches("mailto:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matches("mailt:a@b.c", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matches("aa@b.c", JDFConstants.REGEXP_EMAIL));
+		assertFalse(StringUtil.matches("a@b", JDFConstants.REGEXP_EMAIL));
+		assertTrue(StringUtil.matches("+(1).2/344", JDFConstants.REGEXP_PHONE));
+		assertFalse(StringUtil.matches("+(1).2 344", JDFConstants.REGEXP_PHONE));
+
+		assertTrue(StringUtil.matches("ab", "a.*"));
+		assertTrue(StringUtil.matches("ab", "a(.*)"));
+		assertTrue(StringUtil.matches("a", "a*"));
+		assertFalse(StringUtil.matches("a", "a(.(.*))"));
+		assertTrue(StringUtil.matches("a", "a(b)?"));
+		assertTrue(StringUtil.matches("ab", "a(b)?"));
+		assertFalse(StringUtil.matches("ac", "a(b)?"));
+
+		assertTrue(StringUtil.matches("a b", "a b"));
+		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
+		assertTrue(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*"));
+		assertFalse(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*5"));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testNumOccurrences() {
-		Assert.assertEquals(StringUtil.numSubstrings("a", "aa"), 0);
-		Assert.assertEquals(StringUtil.numSubstrings("aa", "aa"), 1);
-		Assert.assertEquals(StringUtil.numSubstrings("aaa", "aa"), 2);
-		Assert.assertEquals(StringUtil.numSubstrings("aa a", "aa"), 1);
-		Assert.assertEquals(StringUtil.numSubstrings("ab/>", "/>"), 1);
-		Assert.assertEquals(StringUtil.numSubstrings("aa a", ""), 0);
-		Assert.assertEquals(StringUtil.numSubstrings("aa a", null), 0);
-		Assert.assertEquals(StringUtil.numSubstrings(null, "a"), 0);
-		Assert.assertEquals(StringUtil.numSubstrings(null, null), 0);
+	public void testNumOccurrences()
+	{
+		assertEquals(StringUtil.numSubstrings("a", "aa"), 0);
+		assertEquals(StringUtil.numSubstrings("aa", "aa"), 1);
+		assertEquals(StringUtil.numSubstrings("aaa", "aa"), 2);
+		assertEquals(StringUtil.numSubstrings("aa a", "aa"), 1);
+		assertEquals(StringUtil.numSubstrings("ab/>", "/>"), 1);
+		assertEquals(StringUtil.numSubstrings("aa a", ""), 0);
+		assertEquals(StringUtil.numSubstrings("aa a", null), 0);
+		assertEquals(StringUtil.numSubstrings(null, "a"), 0);
+		assertEquals(StringUtil.numSubstrings(null, null), 0);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testRegExpPerformance() {
+	public void testRegExpPerformance()
+	{
 		CPUTimer ct = new CPUTimer(false);
 		int b = 0;
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 100000; i++)
+		{
 			ct.start();
 			if (StringUtil.matches("abc" + i, "(.)?bc(1|2)?00(1)?"))
 				b++;
 			ct.stop();
 		}
 		System.out.print(ct.toString());
-		Assert.assertTrue(b > 2);
+		assertTrue(b > 2);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplaceString() {
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "aa", "_"), "abbcc");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "b", "_"), "a__cc");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "bb", "_"), "a_cc");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "c", "_"), "abb__");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "cc", "_"), "abb_");
-		Assert.assertEquals(StringUtil.replaceString("abbcc", "bb", null), "acc");
-		Assert.assertEquals(StringUtil.replaceString("000000", "00", "0"), "0");
-		Assert.assertEquals(StringUtil.replaceString("000", "0", "00"), "000000");
+	public void testReplaceString()
+	{
+		assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
+		assertEquals(StringUtil.replaceString("abbcc", "aa", "_"), "abbcc");
+		assertEquals(StringUtil.replaceString("abbcc", "b", "_"), "a__cc");
+		assertEquals(StringUtil.replaceString("abbcc", "bb", "_"), "a_cc");
+		assertEquals(StringUtil.replaceString("abbcc", "c", "_"), "abb__");
+		assertEquals(StringUtil.replaceString("abbcc", "cc", "_"), "abb_");
+		assertEquals(StringUtil.replaceString("abbcc", "bb", null), "acc");
+		assertEquals(StringUtil.replaceString("000000", "00", "0"), "0");
+		assertEquals(StringUtil.replaceString("000", "0", "00"), "000000");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testStringReplacer() {
+	public void testStringReplacer()
+	{
 		StringReplacer sr = new StringReplacer("000000");
-		Assert.assertEquals(sr.replaceString("00", "0"), "0");
+		assertEquals(sr.replaceString("00", "0"), "0");
 		sr = new StringReplacer("000000");
 		sr.setReRead(false);
-		Assert.assertEquals(sr.replaceString("00", "0"), "000");
+		assertEquals(sr.replaceString("00", "0"), "000");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplaceChar() {
-		Assert.assertEquals(StringUtil.replaceChar("abbcc", 'a', null, 0), "bbcc");
-		Assert.assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 0), "acc");
-		Assert.assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 2), "abcc");
-		Assert.assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 2), "ab_2cc");
+	public void testReplaceChar()
+	{
+		assertEquals(StringUtil.replaceChar("abbcc", 'a', null, 0), "bbcc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 0), "acc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 2), "abcc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 2), "ab_2cc");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplaceCharSet() {
-		Assert.assertEquals(StringUtil.replaceCharSet("abbcc", "ab", null, 0), "cc");
-		Assert.assertEquals(StringUtil.replaceCharSet("abbcc", "ab", "_", 0), "___cc");
-		Assert.assertEquals(StringUtil.replaceCharSet("abbcc", "ab", "_", 2), "ab_cc");
+	public void testReplaceCharSet()
+	{
+		assertEquals(StringUtil.replaceCharSet("abbcc", "ab", null, 0), "cc");
+		assertEquals(StringUtil.replaceCharSet("abbcc", "ab", "_", 0), "___cc");
+		assertEquals(StringUtil.replaceCharSet("abbcc", "ab", "_", 2), "ab_cc");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testRightString() {
-		Assert.assertEquals(StringUtil.rightStr("abbcc", 2), "cc");
-		Assert.assertEquals(StringUtil.rightStr("abbcc", -3), "cc");
-		Assert.assertNull(StringUtil.rightStr("abbcc", -5));
-		Assert.assertNull(StringUtil.rightStr(null, -5));
-		Assert.assertNull(StringUtil.rightStr("abc", -55));
+	public void testRightString()
+	{
+		assertEquals(StringUtil.rightStr("abbcc", 2), "cc");
+		assertEquals(StringUtil.rightStr("abbcc", -3), "cc");
+		assertNull(StringUtil.rightStr("abbcc", -5));
+		assertNull(StringUtil.rightStr(null, -5));
+		assertNull(StringUtil.rightStr("abc", -55));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testLeftString() {
-		Assert.assertEquals(StringUtil.leftStr("abbcc", 2), "ab");
-		Assert.assertEquals(StringUtil.leftStr("abbcc", -2), "abb");
-		Assert.assertNull(StringUtil.leftStr("abbcc", -5));
-		Assert.assertNull(StringUtil.leftStr(null, -5));
-		Assert.assertNull(StringUtil.leftStr("abc", -55));
+	public void testLeftString()
+	{
+		assertEquals(StringUtil.leftStr("abbcc", 2), "ab");
+		assertEquals(StringUtil.leftStr("abbcc", -2), "abb");
+		assertNull(StringUtil.leftStr("abbcc", -5));
+		assertNull(StringUtil.leftStr(null, -5));
+		assertNull(StringUtil.leftStr("abc", -55));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testSubstring() {
+	public void testSubstring()
+	{
 		// final String s = "a".substring(0, 0);
-		Assert.assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
-		Assert.assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
-		Assert.assertEquals(StringUtil.substring("abbcc", -2, -2), "");
-		Assert.assertEquals(StringUtil.substring("abbcc", -3, 0), "bcc");
-		Assert.assertNull(StringUtil.substring("abbcc", 0, -6));
-		Assert.assertNull(StringUtil.substring(null, 0, -5));
-		Assert.assertNull(StringUtil.substring("abc", 0, -55));
+		assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
+		assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
+		assertEquals(StringUtil.substring("abbcc", -2, -2), "");
+		assertEquals(StringUtil.substring("abbcc", -3, 0), "bcc");
+		assertNull(StringUtil.substring("abbcc", 0, -6));
+		assertNull(StringUtil.substring(null, 0, -5));
+		assertNull(StringUtil.substring("abc", 0, -55));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testParseLong() {
-		Assert.assertEquals(StringUtil.parseLong("", 0L), 0L);
-		Assert.assertEquals(StringUtil.parseLong("1234567890123456", 0L), 1234567890123456L);
-		Assert.assertEquals(StringUtil.parseLong("INF", 0L), Long.MAX_VALUE);
-		Assert.assertEquals(StringUtil.parseLong("-inf", 0L), Long.MIN_VALUE);
-		Assert.assertEquals(StringUtil.parseLong("12341234561234567834556", 0), Long.MAX_VALUE);
-		Assert.assertEquals(StringUtil.parseLong("-12341234561234567834556", 0), Long.MIN_VALUE);
-		Assert.assertEquals(StringUtil.parseLong("-1.0e44", 0), Long.MIN_VALUE);
-		Assert.assertEquals(StringUtil.parseLong("-0xa", 0), -10);
-		Assert.assertEquals(StringUtil.parseLong("0xff", 0), 255);
+	public void testParseLong()
+	{
+		assertEquals(StringUtil.parseLong("", 0L), 0L);
+		assertEquals(StringUtil.parseLong("1234567890123456", 0L), 1234567890123456L);
+		assertEquals(StringUtil.parseLong("INF", 0L), Long.MAX_VALUE);
+		assertEquals(StringUtil.parseLong("-inf", 0L), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("12341234561234567834556", 0), Long.MAX_VALUE);
+		assertEquals(StringUtil.parseLong("-12341234561234567834556", 0), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("-1.0e44", 0), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("-0xa", 0), -10);
+		assertEquals(StringUtil.parseLong("0xff", 0), 255);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testParseInt() {
-		Assert.assertEquals(StringUtil.parseInt("", 0), 0);
-		Assert.assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
-		Assert.assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
-		Assert.assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
-		Assert.assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
-		Assert.assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
-		Assert.assertEquals(StringUtil.parseInt("-inf", 0), Integer.MIN_VALUE);
-		Assert.assertEquals(StringUtil.parseInt("0xf", 0), 15);
-		Assert.assertEquals(StringUtil.parseInt("-0xf", 0), -15);
+	public void testParseInt()
+	{
+		assertEquals(StringUtil.parseInt("", 0), 0);
+		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
+		assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("-inf", 0), Integer.MIN_VALUE);
+		assertEquals(StringUtil.parseInt("0xf", 0), 15);
+		assertEquals(StringUtil.parseInt("-0xf", 0), -15);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testParseBoolean() {
-		Assert.assertEquals(StringUtil.parseBoolean("", false), false);
-		Assert.assertEquals(StringUtil.parseBoolean("", true), true);
-		Assert.assertEquals(StringUtil.parseBoolean("TRUE ", false), true);
-		Assert.assertEquals(StringUtil.parseBoolean(" FalSe ", true), false);
+	public void testParseBoolean()
+	{
+		assertEquals(StringUtil.parseBoolean("", false), false);
+		assertEquals(StringUtil.parseBoolean("", true), true);
+		assertEquals(StringUtil.parseBoolean("TRUE ", false), true);
+		assertEquals(StringUtil.parseBoolean(" FalSe ", true), false);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testParseDouble() {
+	public void testParseDouble()
+	{
 		String s = "INF";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), Double.MAX_VALUE, 0.0);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), Double.MAX_VALUE, 0.0);
+		assertTrue(StringUtil.isNumber(s));
 		s = "-INF";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), -Double.MAX_VALUE, 0.0);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), -Double.MAX_VALUE, 0.0);
+		assertTrue(StringUtil.isNumber(s));
 		s = "123.45e3 ";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
+		assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = "123.45E3";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = "123.45";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), 123.450, 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), 123.450, 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = "-123.45";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0), -123.450, 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0), -123.450, 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = ".45";
-		Assert.assertEquals("missing leading zero ok", StringUtil.parseDouble(s, 0), 0.450, 0.);
-		Assert.assertTrue(StringUtil.isNumber(s));
+		assertEquals("missing leading zero ok", StringUtil.parseDouble(s, 0), 0.450, 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = "-123.45a";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
-		Assert.assertFalse(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
+		assertFalse(StringUtil.isNumber(s));
 		s = "";
-		Assert.assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
-		Assert.assertFalse(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
+		assertFalse(StringUtil.isNumber(s));
 		s = "1,2";
-		Assert.assertEquals("gracefully handle ',' as a separator char", StringUtil.parseDouble(s, 0.), 1.2, 0.);
-		Assert.assertTrue("gracefully handle ',' as a separator char", StringUtil.isNumber(s));
+		assertEquals("gracefully handle ',' as a separator char", StringUtil.parseDouble(s, 0.), 1.2, 0.);
+		assertTrue("gracefully handle ',' as a separator char", StringUtil.isNumber(s));
 		s = null;
-		Assert.assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
-		Assert.assertFalse(StringUtil.isNumber(s));
+		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
+		assertFalse(StringUtil.isNumber(s));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testFind_last_not_of() {
-		Assert.assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);
-		Assert.assertEquals(StringUtil.find_last_not_of("abc", "abc"), -1);
-		Assert.assertEquals(StringUtil.find_last_not_of("abc", "ac"), 1);
-		Assert.assertEquals(StringUtil.find_last_not_of("grün", "ï¿½ï¿½ï¿½"), 3);
-		Assert.assertEquals(StringUtil.find_last_not_of("abc", "_"), 2);
+	public void testFind_last_not_of()
+	{
+		assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);
+		assertEquals(StringUtil.find_last_not_of("abc", "abc"), -1);
+		assertEquals(StringUtil.find_last_not_of("abc", "ac"), 1);
+		assertEquals(StringUtil.find_last_not_of("grün", "ï¿½ï¿½ï¿½"), 3);
+		assertEquals(StringUtil.find_last_not_of("abc", "_"), 2);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testFormatLong() {
+	public void testFormatLong()
+	{
 		long l = 13;
 		while (l > 0) // breaks over top
 		{
 			l *= 7;
-			Assert.assertEquals(StringUtil.parseLong(StringUtil.formatLong(l), -1), l);
+			assertEquals(StringUtil.parseLong(StringUtil.formatLong(l), -1), l);
 		}
 	}
 
@@ -788,30 +832,31 @@ public class StringUtilTest extends JDFTestCaseBase {
 	* 
 	*/
 	@Test
-	public void testFormatDouble() {
+	public void testFormatDouble()
+	{
 		double d = 0.12345678901234;
 		String s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=6", "0.12345679", s);
+		assertEquals("s=6", "0.12345679", s);
 		d = 0.12345678;
 		s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=6", "0.12345678", s);
+		assertEquals("s=6", "0.12345678", s);
 		d = 0.123456789;
 		s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=6", "0.12345679", s);
+		assertEquals("s=6", "0.12345679", s);
 		d = 0.12345673;
 		s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=5", "0.12345673", s);
+		assertEquals("s=5", "0.12345673", s);
 		d = 234.0;
 		s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=int", "234", s);
+		assertEquals("s=int", "234", s);
 		d = 123.456e4;
 		s = StringUtil.formatDouble(d);
-		Assert.assertEquals("s=int", "1234560", s);
-		Assert.assertEquals("s=real small", "0", StringUtil.formatDouble(0.1e-20));
-		Assert.assertEquals("s=real small -", "0", StringUtil.formatDouble(-0.1e-20));
-		Assert.assertEquals("s=1+epsilon", "1", StringUtil.formatDouble(1.000000001));
-		Assert.assertEquals("s=1-epsilon", "1", StringUtil.formatDouble(0.99999999987));
-		Assert.assertNotSame("s=1-epsilon", "1", StringUtil.formatDouble(0.99949999987));
+		assertEquals("s=int", "1234560", s);
+		assertEquals("s=real small", "0", StringUtil.formatDouble(0.1e-20));
+		assertEquals("s=real small -", "0", StringUtil.formatDouble(-0.1e-20));
+		assertEquals("s=1+epsilon", "1", StringUtil.formatDouble(1.000000001));
+		assertEquals("s=1-epsilon", "1", StringUtil.formatDouble(0.99999999987));
+		assertNotSame("s=1-epsilon", "1", StringUtil.formatDouble(0.99949999987));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -820,14 +865,16 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testuncToUrl() {
-		if (FileUtil.isWindows()) {
+	public void testuncToUrl()
+	{
+		if (FileUtil.isWindows())
+		{
 			final String unc = "\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
 			final String iri = "file://myHost/a/c%20äöü%25.txt";
 			final String uri = "file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
-			Assert.assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
-			Assert.assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
+			assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
+			assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
 		}
 	}
 
@@ -837,11 +884,12 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testZappTokenWS() {
-		Assert.assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFConstants.TILDE));
-		Assert.assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFConstants.TILDE));
-		Assert.assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4~", JDFConstants.TILDE));
-		Assert.assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
+	public void testZappTokenWS()
+	{
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFConstants.TILDE));
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFConstants.TILDE));
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4~", JDFConstants.TILDE));
+		assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -850,31 +898,32 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testHasToken() {
-		Assert.assertFalse(StringUtil.hasToken("1", "1", null, 1));
+	public void testHasToken()
+	{
+		assertFalse(StringUtil.hasToken("1", "1", null, 1));
 		final String s = "1 2 3 3 \n15\n4";
-		Assert.assertFalse(StringUtil.hasToken(s, "0", " \n", 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "1", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken("", "1", null, 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "1", null, 0));
-		Assert.assertFalse(StringUtil.hasToken(s, "5", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken(s, "15", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "2", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "4", "\n ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "3", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s, "3", " ", 1));
-		Assert.assertFalse(StringUtil.hasToken(s, "3", " ", 2));
-		Assert.assertFalse(StringUtil.hasToken(s, "3", " ", 99));
-		Assert.assertFalse(StringUtil.hasToken(null, "0", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken("ab", "a", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken("ab", "b", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken("abab", "ab", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken("ababa", "ab", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken("abc ab", "ab", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken("abc ab ", "ab", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken("abc ab abd", "ab", " ", 0));
-		Assert.assertTrue("string matches are always true for 0", StringUtil.hasToken("a", "a", " ", 0));
-		Assert.assertTrue("string matches are always true for -1", StringUtil.hasToken("a", "a", ", ", -1));
+		assertFalse(StringUtil.hasToken(s, "0", " \n", 0));
+		assertTrue(StringUtil.hasToken(s, "1", " ", 0));
+		assertFalse(StringUtil.hasToken("", "1", null, 0));
+		assertTrue(StringUtil.hasToken(s, "1", null, 0));
+		assertFalse(StringUtil.hasToken(s, "5", " ", 0));
+		assertFalse(StringUtil.hasToken(s, "15", " ", 0));
+		assertTrue(StringUtil.hasToken(s, "2", " ", 0));
+		assertTrue(StringUtil.hasToken(s, "4", "\n ", 0));
+		assertTrue(StringUtil.hasToken(s, "3", " ", 0));
+		assertTrue(StringUtil.hasToken(s, "3", " ", 1));
+		assertFalse(StringUtil.hasToken(s, "3", " ", 2));
+		assertFalse(StringUtil.hasToken(s, "3", " ", 99));
+		assertFalse(StringUtil.hasToken(null, "0", " ", 0));
+		assertFalse(StringUtil.hasToken("ab", "a", " ", 0));
+		assertFalse(StringUtil.hasToken("ab", "b", " ", 0));
+		assertFalse(StringUtil.hasToken("abab", "ab", " ", 0));
+		assertFalse(StringUtil.hasToken("ababa", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab ", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab abd", "ab", " ", 0));
+		assertTrue("string matches are always true for 0", StringUtil.hasToken("a", "a", " ", 0));
+		assertTrue("string matches are always true for -1", StringUtil.hasToken("a", "a", ", ", -1));
 
 	}
 
@@ -882,16 +931,18 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testHasTokenPerformance() {
+	public void testHasTokenPerformance()
+	{
 		final String s = "1 2 33 3 \n15\n4";
 		final String s2 = "ab123456 ab1234567 ab 1234568";
 		long t0 = System.currentTimeMillis();
-		Assert.assertTrue(StringUtil.hasToken(s, "33", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken(s, "34", " ", 0));
-		Assert.assertFalse(StringUtil.hasToken(s2, "ab12345679", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s2, "ab1234567", " ", 0));
-		Assert.assertTrue(StringUtil.hasToken(s2, "ab", " ", 0));
-		for (int i = 0; i < 1000000; i++) {
+		assertTrue(StringUtil.hasToken(s, "33", " ", 0));
+		assertFalse(StringUtil.hasToken(s, "34", " ", 0));
+		assertFalse(StringUtil.hasToken(s2, "ab12345679", " ", 0));
+		assertTrue(StringUtil.hasToken(s2, "ab1234567", " ", 0));
+		assertTrue(StringUtil.hasToken(s2, "ab", " ", 0));
+		for (int i = 0; i < 1000000; i++)
+		{
 			StringUtil.hasToken(s, "33", " ", 0);
 			StringUtil.hasToken(s, "34", " ", 0);
 			StringUtil.hasToken(s2, "ab12345679", " ", 0);
@@ -908,19 +959,20 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testToken() {
+	public void testToken()
+	{
 		String s = "1 2 3 4";
-		Assert.assertEquals(StringUtil.token(s, 0, " "), "1");
-		Assert.assertEquals(StringUtil.token(s, 1, " "), "2");
-		Assert.assertEquals(StringUtil.token(s, -3, " "), "2");
-		Assert.assertEquals(StringUtil.token(s, -1, " "), "4");
-		Assert.assertNull(StringUtil.token(s, 4, " "));
-		Assert.assertNull(StringUtil.token(s, -5, " "));
-		Assert.assertNull(StringUtil.token(null, 2, " "));
+		assertEquals(StringUtil.token(s, 0, " "), "1");
+		assertEquals(StringUtil.token(s, 1, " "), "2");
+		assertEquals(StringUtil.token(s, -3, " "), "2");
+		assertEquals(StringUtil.token(s, -1, " "), "4");
+		assertNull(StringUtil.token(s, 4, " "));
+		assertNull(StringUtil.token(s, -5, " "));
+		assertNull(StringUtil.token(null, 2, " "));
 		s = "a/b?c";
-		Assert.assertEquals(StringUtil.token(s, 0, "?/"), "a");
-		Assert.assertEquals(StringUtil.token(s, 1, "?/"), "b");
-		Assert.assertEquals(StringUtil.token(s, 2, "?/"), "c");
+		assertEquals(StringUtil.token(s, 0, "?/"), "a");
+		assertEquals(StringUtil.token(s, 1, "?/"), "b");
+		assertEquals(StringUtil.token(s, 2, "?/"), "c");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -929,7 +981,8 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testTokenize() {
+	public void testTokenize()
+	{
 		final String s = " 1 2\n3 \n4   5";
 		final VString v = new VString();
 		v.add("1");
@@ -937,57 +990,60 @@ public class StringUtilTest extends JDFTestCaseBase {
 		v.add("3");
 		v.add("4");
 		v.add("5");
-		Assert.assertEquals(StringUtil.tokenize(s, " \n", false), v);
+		assertEquals(StringUtil.tokenize(s, " \n", false), v);
 		final String descName = "foobar( 1,2,3  ,4,5 )";
 		final int pos2 = descName.lastIndexOf(')');
 		final int pos1 = descName.lastIndexOf('(') + 1;
-		Assert.assertEquals(v, StringUtil.tokenize(descName.substring(pos1, pos2), ", ", false));
+		assertEquals(v, StringUtil.tokenize(descName.substring(pos1, pos2), ", ", false));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplaceToken() {
+	public void testReplaceToken()
+	{
 		final String s = "a/b/c";
-		Assert.assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
-		Assert.assertEquals(StringUtil.replaceToken(s, 0, "/", null), "b/c");
-		Assert.assertEquals(StringUtil.replaceToken(s, -1, "/", null), "a/b");
-		Assert.assertEquals(StringUtil.replaceToken(s, -1, "/", ""), "a/b/");
-		Assert.assertEquals(StringUtil.replaceToken(s, -1, "/", "A"), "a/b/A");
-		Assert.assertEquals(StringUtil.replaceToken(s, 1, "/", "A"), "a/A/c");
-		Assert.assertEquals(StringUtil.replaceToken(s, 1, "/", null), "a/c");
-		Assert.assertEquals(StringUtil.replaceToken(s, -5, "/", "A"), "a/b/c");
+		assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
+		assertEquals(StringUtil.replaceToken(s, 0, "/", null), "b/c");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", null), "a/b");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", ""), "a/b/");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", "A"), "a/b/A");
+		assertEquals(StringUtil.replaceToken(s, 1, "/", "A"), "a/A/c");
+		assertEquals(StringUtil.replaceToken(s, 1, "/", null), "a/c");
+		assertEquals(StringUtil.replaceToken(s, -5, "/", "A"), "a/b/c");
 		final String s2 = "//a/b/c";
-		Assert.assertEquals(StringUtil.replaceToken(s2, 0, "/", "A"), "//A/b/c");
-		Assert.assertEquals(StringUtil.replaceToken(s2, 2, "/", null), "//a/b");
+		assertEquals(StringUtil.replaceToken(s2, 0, "/", "A"), "//A/b/c");
+		assertEquals(StringUtil.replaceToken(s2, 2, "/", null), "//a/b");
 		final String s3 = "a";
-		Assert.assertEquals(StringUtil.replaceToken(s3, 0, "/", "A"), "A");
-		Assert.assertEquals(StringUtil.replaceToken(s3, 0, "/", null), "");
+		assertEquals(StringUtil.replaceToken(s3, 0, "/", "A"), "A");
+		assertEquals(StringUtil.replaceToken(s3, 0, "/", null), "");
 		final String s4 = "a_b";
-		Assert.assertEquals(StringUtil.replaceToken(s4, 0, "_", "c"), "c_b");
-		Assert.assertEquals(StringUtil.replaceToken(s4, 0, "_", null), "b");
+		assertEquals(StringUtil.replaceToken(s4, 0, "_", "c"), "c_b");
+		assertEquals(StringUtil.replaceToken(s4, 0, "_", null), "b");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testAddToken() {
-		Assert.assertNull(StringUtil.addToken(null, "/", null));
-		Assert.assertEquals(StringUtil.addToken("a", "/", "b"), "a/b");
-		Assert.assertEquals(StringUtil.addToken("a/", "/", "b"), "a/b");
-		Assert.assertEquals(StringUtil.addToken("a", "/", "/b"), "a/b");
-		Assert.assertEquals(StringUtil.addToken("a/", "/", "/b"), "a/b");
-		Assert.assertEquals(StringUtil.addToken("a/", "/", "//b"), "a/b");
-		Assert.assertEquals(StringUtil.addToken("//a/", "/", "//b"), "//a/b");
+	public void testAddToken()
+	{
+		assertNull(StringUtil.addToken(null, "/", null));
+		assertEquals(StringUtil.addToken("a", "/", "b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "b"), "a/b");
+		assertEquals(StringUtil.addToken("a", "/", "/b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "/b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "//b"), "a/b");
+		assertEquals(StringUtil.addToken("//a/", "/", "//b"), "//a/b");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testTokenizeDelim() {
+	public void testTokenizeDelim()
+	{
 		final String s = "http://aa/b?c";
 		final VString v = new VString();
 		v.add("http:");
@@ -998,7 +1054,7 @@ public class StringUtilTest extends JDFTestCaseBase {
 		v.add("b");
 		v.add("?");
 		v.add("c");
-		Assert.assertEquals(StringUtil.tokenize(s, "/?", true), v);
+		assertEquals(StringUtil.tokenize(s, "/?", true), v);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1007,10 +1063,11 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testConcatStrings() {
+	public void testConcatStrings()
+	{
 		final VString v = StringUtil.tokenize("a b c", " ", false);
 		StringUtil.concatStrings(v, "_foo");
-		Assert.assertEquals("a_foo b_foo c_foo", StringUtil.setvString(v, " ", null, null));
+		assertEquals("a_foo b_foo c_foo", StringUtil.setvString(v, " ", null, null));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1019,9 +1076,10 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testCreateString() {
+	public void testCreateString()
+	{
 		ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
-		Assert.assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
+		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1030,10 +1088,11 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testEndsWithIgnoreCase() {
+	public void testEndsWithIgnoreCase()
+	{
 		final String s = "a.ZIP";
-		Assert.assertTrue(s.toLowerCase().endsWith(".zip"));
-		Assert.assertEquals(s, "a.ZIP");
+		assertTrue(s.toLowerCase().endsWith(".zip"));
+		assertEquals(s, "a.ZIP");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1042,21 +1101,23 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testisEqual() {
+	public void testisEqual()
+	{
 		final double d = 1.3141516171819;
 		double d2 = 0.00000000000001;
 		double d3 = -0.000000000000011;
 
-		while (d2 < 9999999999.9999) {
+		while (d2 < 9999999999.9999)
+		{
 			d2 *= d;
 			d3 *= d;
-			Assert.assertTrue("" + d2, StringUtil.isEqual(d2, StringUtil.parseDouble(StringUtil.formatDouble(d2), 0.)));
-			Assert.assertTrue("" + d3, StringUtil.isEqual(d3, StringUtil.parseDouble(StringUtil.formatDouble(d3), 0.)));
-			Assert.assertFalse("" + d2, StringUtil.isEqual(d2, d2 * (1 + 1.1 * JDFBaseDataTypes.EPSILON) + JDFBaseDataTypes.EPSILON));
-			Assert.assertFalse("" + d3, StringUtil.isEqual(d3, d3 * (1 + 1.1 * JDFBaseDataTypes.EPSILON) - JDFBaseDataTypes.EPSILON));
+			assertTrue("" + d2, StringUtil.isEqual(d2, StringUtil.parseDouble(StringUtil.formatDouble(d2), 0.)));
+			assertTrue("" + d3, StringUtil.isEqual(d3, StringUtil.parseDouble(StringUtil.formatDouble(d3), 0.)));
+			assertFalse("" + d2, StringUtil.isEqual(d2, d2 * (1 + 1.1 * JDFBaseDataTypes.EPSILON) + JDFBaseDataTypes.EPSILON));
+			assertFalse("" + d3, StringUtil.isEqual(d3, d3 * (1 + 1.1 * JDFBaseDataTypes.EPSILON) - JDFBaseDataTypes.EPSILON));
 		}
-		Assert.assertTrue("0.000001", StringUtil.isEqual(0.000000001, -0.000000001));
-		Assert.assertTrue("int", StringUtil.isEqual(4, 4));
+		assertTrue("0.000001", StringUtil.isEqual(0.000000001, -0.000000001));
+		assertTrue("int", StringUtil.isEqual(4, 4));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1065,12 +1126,13 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testCompareTo() {
-		Assert.assertEquals(-1, StringUtil.compareTo(-3, -2));
-		Assert.assertEquals(1, StringUtil.compareTo(3, 2));
-		Assert.assertEquals(1, StringUtil.compareTo(3, 2));
-		Assert.assertEquals(1, StringUtil.compareTo(3, 2));
-		Assert.assertEquals(0, StringUtil.compareTo(2 + 0.5 * JDFBaseDataTypes.EPSILON, 2));
+	public void testCompareTo()
+	{
+		assertEquals(-1, StringUtil.compareTo(-3, -2));
+		assertEquals(1, StringUtil.compareTo(3, 2));
+		assertEquals(1, StringUtil.compareTo(3, 2));
+		assertEquals(1, StringUtil.compareTo(3, 2));
+		assertEquals(0, StringUtil.compareTo(2 + 0.5 * JDFBaseDataTypes.EPSILON, 2));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1079,17 +1141,18 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testIsNMTOKEN() {
-		Assert.assertTrue(StringUtil.isNMTOKEN("abc"));
-		Assert.assertTrue(StringUtil.isNMTOKEN("ä"));
-		Assert.assertFalse(StringUtil.isNMTOKEN("$"));
-		Assert.assertTrue(StringUtil.isNMTOKEN("öpü"));
-		Assert.assertTrue(StringUtil.isNMTOKEN("1öpü2.:-_"));
-		Assert.assertFalse(StringUtil.isNMTOKEN(" abc"));
-		Assert.assertFalse(StringUtil.isNMTOKEN("a bc"));
-		Assert.assertFalse(StringUtil.isNMTOKEN("a\nbc"));
-		Assert.assertFalse(StringUtil.isNMTOKEN("\tabc"));
-		Assert.assertFalse(StringUtil.isNMTOKEN("abc "));
+	public void testIsNMTOKEN()
+	{
+		assertTrue(StringUtil.isNMTOKEN("abc"));
+		assertTrue(StringUtil.isNMTOKEN("ä"));
+		assertFalse(StringUtil.isNMTOKEN("$"));
+		assertTrue(StringUtil.isNMTOKEN("öpü"));
+		assertTrue(StringUtil.isNMTOKEN("1öpü2.:-_"));
+		assertFalse(StringUtil.isNMTOKEN(" abc"));
+		assertFalse(StringUtil.isNMTOKEN("a bc"));
+		assertFalse(StringUtil.isNMTOKEN("a\nbc"));
+		assertFalse(StringUtil.isNMTOKEN("\tabc"));
+		assertFalse(StringUtil.isNMTOKEN("abc "));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1097,24 +1160,10 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testIsID() {
-		Assert.assertTrue(StringUtil.isID("abc"));
-		Assert.assertFalse(StringUtil.isID("1abc"));
-	}
-
-	// /////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testisWindowsLocalPath() {
-		Assert.assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));
-		Assert.assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo\\bar.abc"));
-		Assert.assertTrue(UrlUtil.isWindowsLocalPath("d:foo"));
-		Assert.assertFalse(UrlUtil.isWindowsLocalPath("\\\\foo\\bar"));
-		Assert.assertFalse(UrlUtil.isWindowsLocalPath("c/d/e.f"));
-		Assert.assertFalse(UrlUtil.isWindowsLocalPath("/c/d/e.f"));
+	public void testIsID()
+	{
+		assertTrue(StringUtil.isID("abc"));
+		assertFalse(StringUtil.isID("1abc"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1123,11 +1172,14 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testPathToName() {
-		Assert.assertEquals(StringUtil.pathToName("\\\\foo\\bar"), "bar");
-		Assert.assertEquals(StringUtil.pathToName("c:\\foo\\bar.txt"), "bar.txt");
-		Assert.assertEquals(StringUtil.pathToName("c/foo/bar.txt"), "bar.txt");
-		Assert.assertEquals(StringUtil.pathToName("bar.txt"), "bar.txt");
+	public void testisWindowsLocalPath()
+	{
+		assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));
+		assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo\\bar.abc"));
+		assertTrue(UrlUtil.isWindowsLocalPath("d:foo"));
+		assertFalse(UrlUtil.isWindowsLocalPath("\\\\foo\\bar"));
+		assertFalse(UrlUtil.isWindowsLocalPath("c/d/e.f"));
+		assertFalse(UrlUtil.isWindowsLocalPath("/c/d/e.f"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1136,11 +1188,26 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testGetNamesVector() {
+	public void testPathToName()
+	{
+		assertEquals(StringUtil.pathToName("\\\\foo\\bar"), "bar");
+		assertEquals(StringUtil.pathToName("c:\\foo\\bar.txt"), "bar.txt");
+		assertEquals(StringUtil.pathToName("c/foo/bar.txt"), "bar.txt");
+		assertEquals(StringUtil.pathToName("bar.txt"), "bar.txt");
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNamesVector()
+	{
 		VString v = EnumUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());
-		Assert.assertTrue(v.contains("Resource"));
+		assertTrue(v.contains("Resource"));
 		v = EnumUtil.getNamesVector(EnumOrientation.Flip0.getClass());
-		Assert.assertTrue(v.contains("Rotate90"));
+		assertTrue(v.contains("Rotate90"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1149,9 +1216,10 @@ public class StringUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testGetEnumsVector() {
+	public void testGetEnumsVector()
+	{
 		final Vector<ValuedEnum> v = EnumUtil.getEnumsVector(EnumOrientation.Flip180.getClass());
-		Assert.assertTrue(v.contains(EnumOrientation.Rotate180));
+		assertTrue(v.contains(EnumOrientation.Rotate180));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

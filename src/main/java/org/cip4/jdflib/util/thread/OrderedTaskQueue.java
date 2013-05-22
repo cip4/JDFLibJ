@@ -85,11 +85,83 @@ import org.cip4.jdflib.util.ThreadUtil;
  */
 public class OrderedTaskQueue extends Thread
 {
-	private final Vector<Runnable> queue;
-	private boolean stop;
-	private final Log log;
-	private MyMutex mutex;
-	private static Map<String, OrderedTaskQueue> theMap = new HashMap<String, OrderedTaskQueue>();
+	class TaskRunner implements Runnable
+	{
+		long tQueue;
+		long tStart;
+		long tEnd;
+		Runnable theTask;
+
+		/**
+		 * 
+		 * @param r
+		 */
+		TaskRunner(Runnable r)
+		{
+			theTask = r;
+			tQueue = System.currentTimeMillis();
+			tStart = 0;
+			tEnd = 0;
+		}
+
+		/**
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+			tStart = System.currentTimeMillis();
+			sumQueue += getWaitTime();
+			try
+			{
+				theTask.run();
+			}
+			finally
+			{
+				tEnd = System.currentTimeMillis();
+				sumRun += getRunTime();
+				done++;
+			}
+		}
+
+		/**
+		 * get the time that this has been waiting
+		 * 
+		 * @return
+		 */
+		public long getWaitTime()
+		{
+			return tStart == 0 ? System.currentTimeMillis() - tQueue : tStart - tQueue;
+		}
+
+		/**
+		 * get the time that this has been waiting
+		 * 
+		 * @return
+		 */
+		public long getRunTime()
+		{
+			return tStart == 0 ? 0 : tEnd == 0 ? System.currentTimeMillis() - tStart : tEnd - tStart;
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "TaskRunner :" + getWaitTime() + " / " + getRunTime() + "\n" + theTask;
+		}
+	}
+
+	final Vector<Runnable> queue;
+	boolean stop;
+	final Log log;
+	MyMutex mutex;
+	int done;
+	long sumQueue;
+	long sumRun;
+	static Map<String, OrderedTaskQueue> theMap = new HashMap<String, OrderedTaskQueue>();
 
 	/**
 	 * 
@@ -116,17 +188,20 @@ public class OrderedTaskQueue extends Thread
 	 * @param name 
 	 * 
 	 */
-	private OrderedTaskQueue(String name)
+	OrderedTaskQueue(String name)
 	{
 		super(name);
 		setDaemon(true);
 		log = LogFactory.getLog(getClass());
 		queue = new Vector<Runnable>();
 		mutex = new MyMutex();
+		done = 0;
+		sumQueue = 0;
+		sumRun = 0;
 		start();
 	}
 
-	private static String getThreadName(String name)
+	static String getThreadName(String name)
 	{
 		return name == null ? "OrderedTaskQueue" : "OrderedTaskQueue_" + name;
 	}
@@ -167,6 +242,15 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
+	 * number of already completed tasks
+	 * @return 
+	 */
+	public int getDone()
+	{
+		return done;
+	}
+
+	/**
 	 * 
 	 * @param task the thing to send off
 	 * @return true if successfully queued
@@ -180,7 +264,7 @@ public class OrderedTaskQueue extends Thread
 		}
 		synchronized (queue)
 		{
-			queue.add(task);
+			queue.add(new TaskRunner(task));
 			ThreadUtil.notifyAll(mutex);
 			return true;
 		}
@@ -199,7 +283,7 @@ public class OrderedTaskQueue extends Thread
 			{
 				runTasks();
 			}
-			catch (Exception e)
+			catch (Throwable e)
 			{
 				log.error("whazzup queueing ordered task ", e);
 			}
@@ -224,26 +308,45 @@ public class OrderedTaskQueue extends Thread
 	{
 		while (!stop)
 		{
-			Runnable r = null;
-			synchronized (queue)
-			{
-				if (queue.size() > 0)
-				{
-					r = queue.remove(0);
-				}
-			}
+			Runnable r = getFirstTask();
 
 			// now the unsynchronized stuff
 			if (r != null)
 			{
-				r.run();
-				System.gc();
+				runTask(r);
 			}
 			else
 			{
 				break;
 			}
 		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param r
+	 */
+	void runTask(Runnable r)
+	{
+		r.run();
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	Runnable getFirstTask()
+	{
+		synchronized (queue)
+		{
+			if (queue.size() > 0)
+			{
+				return queue.remove(0);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -254,5 +357,41 @@ public class OrderedTaskQueue extends Thread
 	public String toString()
 	{
 		return "OrderedTaskQueue " + getName() + " " + stop + " queue: " + queue;
+	}
+
+	/**
+	 * Getter for average time waiting
+	 * @return the average sumQueue
+	 */
+	public long getAvQueue()
+	{
+		return done == 0 ? 0 : sumQueue / done;
+	}
+
+	/**
+	 * Getter for sumQueue attribute. total time waiting
+	 * @return the sumQueue
+	 */
+	public long getSumQueue()
+	{
+		return sumQueue;
+	}
+
+	/**
+	 * Getter for average time running
+	 * @return the average sumRun
+	 */
+	public long getAvRun()
+	{
+		return done == 0 ? 0 : sumRun / done;
+	}
+
+	/**
+	 * Getter for sumRun attribute.  total time running
+	 * @return the sumRun
+	 */
+	public long getSumRun()
+	{
+		return sumRun;
 	}
 }

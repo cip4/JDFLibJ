@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,8 +71,8 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -98,12 +98,17 @@ public class UnitParserTest extends JDFTestCaseBase
 	@Test
 	public void testUnits()
 	{
-		Assert.assertEquals(unitParser.extractUnits("123"), "123");
-		Assert.assertEquals(unitParser.extractUnits("abc def"), "abc def");
-		Assert.assertEquals(unitParser.extractUnits("abc cm mm"), "abc cm mm");
-		Assert.assertEquals(unitParser.extractUnits("10cm 10mm"), "283.4646 28.3465");
-		Assert.assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.3465");
-		Assert.assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
+		assertEquals(unitParser.extractUnits("123"), "123");
+		assertEquals(unitParser.extractUnits("0.4"), "0.4");
+		assertEquals(unitParser.extractUnits("0.1cm"), "2.8346");
+		assertEquals(unitParser.extractUnits("0.cm"), "0");
+		assertEquals(unitParser.extractUnits("-00"), "-00");
+		assertEquals(unitParser.extractUnits("abc def"), "abc def");
+		assertEquals(unitParser.extractUnits("abc cm mm"), "abc cm mm");
+		assertEquals(unitParser.extractUnits("10cm 10mm"), "283.4646 28.3465");
+		assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.3465");
+		assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
+		assertEquals(unitParser.extractUnits("007 11in"), "007 792");
 	}
 
 	/**
@@ -113,12 +118,15 @@ public class UnitParserTest extends JDFTestCaseBase
 	public void testPrecision()
 	{
 		unitParser.setPrecision(0);
-		Assert.assertEquals(unitParser.extractUnits("10cm 10mm"), "283 28");
-		Assert.assertEquals(unitParser.extractUnits("10in 10mm"), "720 28");
-		Assert.assertEquals(unitParser.extractUnits("10.4 10.6"), "10 11");
+		assertEquals(unitParser.extractUnits("10cm 10mm"), "283 28");
+		assertEquals(unitParser.extractUnits("10in 10mm"), "720 28");
+		assertEquals(unitParser.extractUnits("10.4 10.6"), "10 11");
+		assertEquals(unitParser.extractUnits("0.44"), "0");
+		assertEquals(unitParser.extractUnits("-0.44"), "0");
+		assertEquals(unitParser.extractUnits("-044"), "-044");
 		unitParser.setPrecision(4);
-		Assert.assertEquals(unitParser.extractUnits("10cm 10mm"), "283.4646 28.3465");
-		Assert.assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.3465");
-		Assert.assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
+		assertEquals(unitParser.extractUnits("10cm 10mm"), "283.4646 28.3465");
+		assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.3465");
+		assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
 	}
 }

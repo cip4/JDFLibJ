@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,8 +91,6 @@ import java.util.zip.DataFormatException;
  */
 public class JDFDuration implements Comparable<JDFDuration>
 {
-	private static final long serialVersionUID = 1L;
-
 	private double m_lDuration = 0; // in seconds
 
 	// private static final String REGEX_DURATION_RESTRICTED is a
@@ -268,7 +266,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	@Override
 	public String toString()
 	{
-		return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + super.toString() + " ]";
+		return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + getDurationISO() + " ]";
 	}
 
 	/**
@@ -525,7 +523,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * 
 	 * @param seconds the duration in seconds.
 	 */
-	public void setDuration(final int seconds)
+	public void setDuration(final long seconds)
 	{
 		m_lDuration = seconds;
 	}
@@ -544,11 +542,23 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * the duration in seconds
 	 * 
-	 * @return int - the duration in seconds; '0' default
+	 * @return duration in seconds; '0' default
+	 *
 	 */
 	public int getDuration()
 	{
 		return (int) m_lDuration;
+	}
+
+	/**
+	 * the duration in milliseconds
+	 * 
+	 * @return duration in seconds; '0' default
+	 *
+	 */
+	public long getDurationMillis()
+	{
+		return (long) (m_lDuration * 1000l);
 	}
 
 	/**
@@ -615,6 +625,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * @return
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(final JDFDuration arg0)
 	{
 		double l = (arg0 == null) ? 0 : arg0.m_lDuration;

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -106,7 +106,7 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * constructs a CMYK color with the given vector
 	 * 
-	 * @param Vector v - the given vector
+	 * @param v - the given vector
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
@@ -180,6 +180,14 @@ public class JDFCMYKColor extends JDFNumList
 		set(1, new Double(m));
 		set(2, new Double(y));
 		set(3, new Double(k));
+	}
+
+	/**
+	 * @param cmykArray 4 doubles from 0 to 1 c,m,y,k
+	 */
+	public JDFCMYKColor(double[] cmykArray)
+	{
+		this(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
 	}
 
 	// **************************************** Methods
@@ -289,14 +297,29 @@ public class JDFCMYKColor extends JDFNumList
 
 	/**
 	 * @return the rgb color that roughly represents this
+	 * @See {@link JDFRGBColor#getCMYK()} for the inverse
 	 */
 	public JDFRGBColor getRGB()
 	{
-		final JDFRGBColor rgb = new JDFRGBColor();
-		final double colors = 1.0 - getK();
-		rgb.setR(colors * (1.0 - getC()));
-		rgb.setG(colors * (1.0 - getM()));
-		rgb.setB(colors * (1.0 - getY()));
+		final JDFRGBColor rgb = new JDFRGBColor(getRGBArray(getC(), getM(), getY(), getK()));
+		return rgb;
+	}
+
+	/**
+	 * @param c 
+	 * @param m 
+	 * @param y 
+	 * @param k 
+	 * @return the rgb color that roughly represents this
+	 * @See {@link JDFRGBColor#getCMYK()} for the inverse
+	 */
+	public static double[] getRGBArray(double c, double m, double y, double k)
+	{
+		final double[] rgb = new double[3];
+		final double colors = 1.0 - k;
+		rgb[0] = colors * (1.0 - c);
+		rgb[1] = colors * (1.0 - m);
+		rgb[2] = colors * (1.0 - y);
 		return rgb;
 	}
 

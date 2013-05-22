@@ -522,8 +522,7 @@ public class JDFSpawn
 
 		if (!(parent.equals(node))) // only do this if we are not spawning parallel
 		{
-			rootOut.removeChild(ElementName.ANCESTORPOOL, null, 0); // just in
-			// case
+			rootOut.removeChild(ElementName.ANCESTORPOOL, null, 0); // just in case
 			if (parent.getJDFRoot().hasChildElement(ElementName.ANCESTORPOOL, null))
 			{
 				ancestorPool = (JDFAncestorPool) rootOut.copyElement(ancestorPool, null);

@@ -1897,6 +1897,8 @@ public final class AttributeName
 	/** */
 	public static final String MESSAGETYPES = "MessageTypes";
 	/** */
+	public static final String METADATA = "Metadata";
+	/** */
 	public static final String METADATA0 = "Metadata0";
 	/** */
 	public static final String METADATA1 = "Metadata1";

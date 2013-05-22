@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -129,8 +129,15 @@ public class UnitParser
 
 			if (factor != 0)
 			{
-				double dbl = StringUtil.parseDouble(tmp, -1) * factor;
-				v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
+				if (factor == 1.0 && (tmp.startsWith("0") || tmp.startsWith("-0")) && StringUtil.isInteger(tmp)) // we want to retain explicit starts with 0
+				{
+					v.setElementAt(tmp, i);
+				}
+				else
+				{
+					double dbl = StringUtil.parseDouble(tmp, -1) * factor;
+					v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
+				}
 			}
 			else
 			{

@@ -1097,8 +1097,7 @@ public class JDFMerge
 		final int partSize = subLinkParts.size();
 		for (int i = 0; i < partSize; i++)
 		{
-			// final boolean hasAP =
-			// mainLink.hasChildElement(ElementName.AMOUNTPOOL, null);
+			// final boolean hasAP = mainLink.hasChildElement(ElementName.AMOUNTPOOL, null);
 			VElement vSubPartAmounts = null;
 			if (subAmountPool != null)
 			{

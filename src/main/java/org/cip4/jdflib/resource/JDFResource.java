@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -5437,8 +5437,7 @@ public class JDFResource extends JDFElement
 						boolean hasConditionAmount = false;
 						boolean hasConditionActualAmount = false;
 
-						if (partMapGood != null) // first get good only, in case it
-						// exists
+						if (partMapGood != null) // first get good only, in case it exists
 						{
 							rlActualAmount = rl.getActualAmount(partMapCond);
 							rlAmount = rl.getAmount(partMapCond);

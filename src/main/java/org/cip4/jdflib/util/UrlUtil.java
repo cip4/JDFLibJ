@@ -1561,12 +1561,11 @@ public class UrlUtil
 				}
 
 				output(httpURLconnection);
-
 				return new UrlPart(httpURLconnection);
 			}
 			catch (final Exception x)
 			{
-				LogFactory.getLog(URLWriter.class).error("Snafu writing to url: " + strUrl, x);
+				LogFactory.getLog(URLWriter.class).error(x.getClass().getCanonicalName() + " snafu writing to url: " + strUrl + " " + x.getMessage());
 			}
 			return null;
 		}

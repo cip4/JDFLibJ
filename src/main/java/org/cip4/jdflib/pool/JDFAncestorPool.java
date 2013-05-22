@@ -85,10 +85,13 @@
  */
 package org.cip4.jdflib.pool;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAncestorPool;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFException;
@@ -100,6 +103,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
  * 
@@ -289,8 +293,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			ancestor.setAttributes(node);
 			ancestor.removeAttribute(AttributeName.XSITYPE);
 			ancestor.renameAttribute(AttributeName.ID, AttributeName.NODEID, null, null);
-			// only copy nodeinfo and customerinfo in real parent nodes, not in
-			// this of partitioned spawns
+			// only copy nodeinfo and customerinfo in real parent nodes, not in this of partitioned spawns
 			if (!thisParentNode.getID().equals(node.getID()))
 			{
 				if (bCopyNodeInfo)
@@ -300,8 +303,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 					{
 						if (nodeInfo.getParentNode_KElement() instanceof JDFResourcePool)
 						{
-							// add a low level refelement, the copying takes
-							// place inaddspawnedresources
+							// add a low level refelement, the copying takes place in addspawnedresources
 							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
 							re.setrRef(nodeInfo.getID());
 							re.setPartMap(nodeInfo.getPartMap());
@@ -334,18 +336,17 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 				if (bCopyComments)
 				{
-					VElement v = node.getChildElementVector(ElementName.COMMENT, null, null, true, 0, false);
-					for (KElement comment : v)
+					Vector<JDFComment> vc = node.getChildrenByClass(JDFComment.class, false, 0);
+					for (KElement comment : vc)
 					{
 						ancestor.copyElement(comment, null);
 					}
-					v = node.getChildElementVector(ElementName.GENERALID, null, null, true, 0, false);
-					for (KElement generalid : v)
+					Vector<JDFGeneralID> vgid = node.getChildrenByClass(JDFGeneralID.class, false, 0);
+					for (KElement generalid : vgid)
 					{
 						ancestor.copyElement(generalid, null);
 					}
 				}
-
 			}
 
 			JDFNode node2 = node.getParentJDF();
@@ -359,8 +360,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			node = node2;
 		}
 
-		// the original node was already spawned --> also copy the elements of
-		// the original nodes Ancestorpool
+		// the original node was already spawned --> also copy the elements of the original nodes Ancestorpool
 		if (i >= 0)
 		{
 			final VElement parentAncestors = node.getAncestorPool().getPoolChildren(null);
@@ -370,8 +370,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 				throw new JDFException("JDFAncestorPool.CopyNodeData: Invalid AncestorPool pairing");
 			}
 
-			// now copy the ancestorpool elements that have not yet been added
-			// from the original nodes
+			// now copy the ancestorpool elements that have not yet been added from the original nodes
 			for (; i >= 0; i--)
 			{
 				final JDFAncestor ancestor = (JDFAncestor) vAncestors.elementAt(i);

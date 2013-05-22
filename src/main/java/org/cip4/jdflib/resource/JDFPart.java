@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -381,6 +381,18 @@ public class JDFPart extends JDFAutoPart
 		ai = super.getTheElementInfo();
 		ElementInfo.fixedMap.put("JDFPart", ai);
 		return ai;
+	}
+
+	/**
+	 * (36) set attribute Metadata0-9 convenience method
+	 * @param value the value to set MetaData(i) to - 
+	 * @param iMetaData int from 0 to 10 that defines which metadata partition key is wanted
+	 */
+	public void setMetadata(int iMetaData, String value)
+	{
+		if (iMetaData < 0 || iMetaData > 9)
+			throw new IllegalArgumentException("iMetaData mut be between 0 and 9");
+		setAttribute(AttributeName.METADATA + iMetaData, value, null);
 	}
 
 } // class JDFPart
