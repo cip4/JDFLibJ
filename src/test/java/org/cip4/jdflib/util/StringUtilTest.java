@@ -434,6 +434,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.trim("123&", ", &"), "123");
 		assertEquals(StringUtil.trim(" 123", ", &"), "123");
 		assertEquals(StringUtil.trim("", ", &"), null);
+		assertEquals(StringUtil.trim("   ", " "), null);
+		assertEquals(StringUtil.trim("   ", null), null);
 	}
 
 	/**

@@ -2660,10 +2660,10 @@ public class StringUtil
 	}
 
 	/**
-	 * returns a new string that has all characters trimmed from the front and backofwork that are not in trimChars
+	 * returns a new string that has all characters trimmed from the front and back of work that are not in trimChars
 	 * 
 	 * @param work
-	 * @param trimChars
+	 * @param trimChars if null - use standard whitespace
 	 * @return
 	 */
 	public static String trim(final String work, final String trimChars)
@@ -2673,7 +2673,9 @@ public class StringUtil
 			return null;
 		}
 		if (trimChars == null)
-			return work;
+		{
+			return getNonEmpty(work.trim());
+		}
 
 		int nStart = 0;
 		int nEnd = work.length();
@@ -2684,16 +2686,20 @@ public class StringUtil
 				nStart = i + 1;
 			}
 			else
+			{
 				break;
+			}
 		}
-		for (int i = work.length() - 1; i >= 0; i--)
+		for (int i = work.length() - 1; i >= nStart; i--)
 		{
 			if (trimChars.indexOf(work.charAt(i)) >= 0)
 			{
 				nEnd = i;
 			}
 			else
+			{
 				break;
+			}
 		}
 		String trimmed = work.substring(nStart, nEnd);
 		return trimmed.length() > 0 ? trimmed : null;
