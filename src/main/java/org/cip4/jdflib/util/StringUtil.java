@@ -1823,9 +1823,36 @@ public class StringUtil
 	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped, if negative, no lower limit applies
 	 * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped, if negative, no upper limit applies
 	 * 
-	 * @return the string where all illegal sequences have been replaced by their escaped representation
+	 * @return the string where all required sequences have been replaced by their escaped representation
 	 */
 	public static String escape(final String strToEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
+	{
+		final byte[] a_toEscape = setUTF8String(strToEscape);
+		return getUTF8String(escape(a_toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
+	}
+
+	/**
+	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
+	 * escapeAbove
+	 * <p>
+	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
+	 * 
+	 * @param a_toEscape the bytes to escape
+	 * @param strCharSet the set of characters that should be escaped eg "äöüß$€"
+	 * @param strEscapeChar the character sequence that marks an escape sequence. If <code>null</code>, "\\" is used
+	 * 
+	 * @param iRadix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex<br>
+	 * if radix == 0 the escape char is merely inserted in front of the char to escape<br>
+	 * if radix <0 the escape char is replaced by the prefix<br>
+	 * valid radix: -1,0,2,8,10,16
+	 * 
+	 * @param iEscapeLen the number of digits per escaped char, not including escapeChar
+	 * @param iEscapeBelow all characters with an encoding below escapeBelow should also be escaped, if negative, no lower limit applies
+	 * @param iEscapeAbove all characters with an encoding above escapeAbove should also be escaped, if negative, no upper limit applies
+	 * 
+	 * @return the string where all illegal sequences have been replaced by their escaped representation
+	 */
+	public static byte[] escape(final byte[] a_toEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
 	{
 
 		if (strEscapeChar == null)
@@ -1838,8 +1865,6 @@ public class StringUtil
 			iEscapeAbove = 0x7fffffff;
 		}
 
-		// String escapedString = JDFConstants.EMPTYSTRING;
-		final byte[] a_toEscape = strToEscape.getBytes();
 		final int l = a_toEscape.length;
 		int cToEscape;
 		final byte[] escaped = new byte[a_toEscape.length * 4];
@@ -1929,8 +1954,12 @@ public class StringUtil
 				posE++;
 			}
 		}
-		final String escapedString = new String(escaped, 0, posE);
-		return escapedString;
+		byte[] stringByte = new byte[posE];
+		for (int i = 0; i < posE; i++)
+		{
+			stringByte[i] = escaped[i];
+		}
+		return stringByte;
 	}
 
 	/**
@@ -1941,13 +1970,31 @@ public class StringUtil
 	 * @param iRadix the radix of the escape sequenze. 16 in this example.
 	 * @param escapeLen the number of digits per escaped char, not including strEscapeChar
 	 * 
-	 * @return the unescaped String. <code>zz�zzz��z�$?zz�z</code> in this example
+	 * @return the unescaped String.
 	 */
 	public static String unEscape(final String strToUnescape, final String strEscapeChar, final int iRadix, final int escapeLen)
 	{
 		if (strToUnescape == null)
 			return null;
-		final byte[] byteUnEscape = strToUnescape.getBytes();
+		byte[] byteUnEscape = setUTF8String(strToUnescape);
+		byteUnEscape = unEscape(byteUnEscape, strEscapeChar, iRadix, escapeLen);
+		return getUTF8String(byteUnEscape);
+	}
+
+	/**
+	 * unescape a String which was escaped with the Java StringUtil.escape method
+	 * 
+	 * @param byteUnEscape the bytes to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz�z</code>
+	 * @param strEscapeChar the char which indicates a escape sequence "\\" in this case (thats also the default)
+	 * @param iRadix the radix of the escape sequenze. 16 in this example.
+	 * @param escapeLen the number of digits per escaped char, not including strEscapeChar
+	 * 
+	 * @return the unescaped byte array. <code>zz�zzz��z�$?zz�z</code> in this example
+	 */
+	public static byte[] unEscape(final byte[] byteUnEscape, final String strEscapeChar, final int iRadix, final int escapeLen)
+	{
+		if (byteUnEscape == null)
+			return null;
 		final byte[] byteEscape = new byte[byteUnEscape.length];
 		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of using � as an escape  char
 		int n = 0;
@@ -1997,7 +2044,7 @@ public class StringUtil
 				stringByte[i] = byteEscape[i];
 			}
 		}
-		return new String(stringByte);
+		return stringByte;
 	}
 
 	/**

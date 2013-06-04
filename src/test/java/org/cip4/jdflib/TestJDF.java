@@ -72,27 +72,14 @@
 package org.cip4.jdflib;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.elementwalker.SizeWalker;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.JDFSpawn;
-import org.junit.Assert;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.cip4.jdflib.resource.process.JDFIdentical;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -123,12 +110,12 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws FileNotFoundException
 	 */
 	// @Test
-//	public void testSize() throws FileNotFoundException
-//	{
-//		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
-//		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
-//		sw.walkAll(d.getRoot());
-//	}
+	//	public void testSize() throws FileNotFoundException
+	//	{
+	//		SizeWalker sw = new SizeWalker(new File("/share/data/size.xml"));
+	//		final JDFDoc d = new JDFParser().parseFile("/share/data/big.jdf");
+	//		sw.walkAll(d.getRoot());
+	//	}
 
 	/**
 	 * 
@@ -150,74 +137,75 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	// @Test
-//	public void testSpawnRW() throws Throwable
-//	{
-//		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
-//
-//		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
-//
-//		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-//
-//		final JDFAttributeMap amParts0 = new JDFAttributeMap();
-//
-//		amParts0.put("Run", "Run_121015_072229975_000405");
-//
-//		vamParts.add(amParts0);
-//
-//		final VString vsRWResourceIDs = new VString("RunList", null);
-//
-//		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-//
-//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-//		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
-//		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
-//		jdfDoc.write2File(strOutJDFPath, 2, false);
-//
-//		// Link_110412_072920686_018182
-//	}
+	//	public void testSpawnRW() throws Throwable
+	//	{
+	//		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
+	//
+	//		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
+	//
+	//		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+	//
+	//		final JDFAttributeMap amParts0 = new JDFAttributeMap();
+	//
+	//		amParts0.put("Run", "Run_121015_072229975_000405");
+	//
+	//		vamParts.add(amParts0);
+	//
+	//		final VString vsRWResourceIDs = new VString("RunList", null);
+	//
+	//		final JDFSpawn spawn = new JDFSpawn(nodeProc);
+	//
+	//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+	//		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
+	//		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
+	//		jdfDoc.write2File(strOutJDFPath, 2, false);
+	//
+	//		// Link_110412_072920686_018182
+	//	}
 
 	/**
 	 * 
 	 */
 	// @Test
-//	public void testgetPartition()
-//	{
-//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
-//		final JDFNode n = d.getJDFRoot();
-//		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
-//		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
-//		Assert.assertNull(rp);
-//	}
+	//	public void testgetPartition()
+	//	{
+	//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
+	//		final JDFNode n = d.getJDFRoot();
+	//		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
+	//		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
+	//		Assert.assertNull(rp);
+	//	}
 
 	/**
 	 * 
 	 */
 	// @Test
-//	public void testMergeAmount()
-//	{
-//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
-//		final JDFNode n = d.getJDFRoot();
-//		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
-//		final VElement vr = rr.getLeaves(true);
-//		for (KElement r : vr)
-//			((JDFResource) r).updateAmounts(false);
-//		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
-//	}
+	//	public void testMergeAmount()
+	//	{
+	//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
+	//		final JDFNode n = d.getJDFRoot();
+	//		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
+	//		final VElement vr = rr.getLeaves(true);
+	//		for (KElement r : vr)
+	//			((JDFResource) r).updateAmounts(false);
+	//		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
+	//	}
 
 	/**
 	 * 
 	 */
-	// @Test
-//	public void testelementsbytag()
-//	{
-//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Bodo/media.jdf");
-//		final JDFNode n = d.getJDFRoot();
-//		NodeList mediaList = n.getElementsByTagName("Media");
-//		for (int i = 0; i < mediaList.getLength(); i++)
-//		{
-//			Node node = mediaList.item(i);
-//			JDFMedia media = (JDFMedia) node;
-//		}
-//		d.write2File("test.jdf", 2, false);
-//	}
+	public void testelementsbytag()
+	{
+		final JDFDoc d = new JDFParser().parseFile("/share/data/badident.jdf");
+		final JDFNode n = d.getJDFRoot();
+		Vector<JDFIdentical> mediaList = n.getChildrenByClass(JDFIdentical.class, true, 0);
+		for (JDFIdentical id : mediaList)
+		{
+			if (id.getTarget() == null)
+			{
+				System.out.println("ID: " + id.getParentResource().getID());
+				System.out.print(id.getParentResource());
+			}
+		}
+	}
 }

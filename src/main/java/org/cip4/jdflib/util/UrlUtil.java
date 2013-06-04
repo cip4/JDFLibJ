@@ -665,9 +665,9 @@ public class UrlUtil
 			}
 		}
 
-		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
+		//		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
 		urlString = UrlUtil.unEscape(urlString);
-		urlString = StringUtil.getUTF8String(urlString.getBytes());
+		//urlString = StringUtil.getUTF8String(urlString.getBytes());
 
 		return new File(urlString);
 	}
