@@ -3627,7 +3627,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Get the Attribute Map of the actual element also following inheritence
+	 * Get the Attribute Map of the actual element also following inheritance
 	 * 
 	 * @return JDFAttributeMap the attribute map of the actual element
 	 */
@@ -5061,7 +5061,7 @@ public class JDFResource extends JDFElement
 	public VJDFAttributeMap reducePartVector(final VJDFAttributeMap vParts)
 	{
 		final VJDFAttributeMap vTest = new VJDFAttributeMap();
-		vTest.setVector(vParts.getVector());
+		vTest.setVector(vParts);
 		VString partIDKeys = getPartIDKeys();
 		// reduce vParts internally
 		for (int i = 0; i < vTest.size(); i++)
@@ -5873,8 +5873,18 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIdentical getIdentical()
 	{
-
 		return (JDFIdentical) getElement_KElement(ElementName.IDENTICAL, null, 0);
+	}
+
+	/**
+	 * get the target of the identical element, this if no identical exists
+	 * 
+	 * @return JDFResource - the resource referenced by the identical element, this resource if no identical exists
+	 */
+	public JDFResource getIdenticalTarget()
+	{
+		JDFIdentical id = getIdentical();
+		return id == null ? this : id.getTarget();
 	}
 
 	/**

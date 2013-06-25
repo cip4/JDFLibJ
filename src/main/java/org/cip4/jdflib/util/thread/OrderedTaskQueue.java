@@ -127,7 +127,7 @@ public class OrderedTaskQueue extends Thread
 		/**
 		 * get the time that this has been waiting
 		 * 
-		 * @return
+		 * @return wait time in milliseconds
 		 */
 		public long getWaitTime()
 		{
@@ -135,9 +135,19 @@ public class OrderedTaskQueue extends Thread
 		}
 
 		/**
+		 * get the time that this has started, 0 if waiting
+		 * 
+		 * @return start time in milliseconds
+		 */
+		public long getStartTime()
+		{
+			return tStart;
+		}
+
+		/**
 		 * get the time that this has been waiting
 		 * 
-		 * @return
+		 * @return run time in milliseconds
 		 */
 		public long getRunTime()
 		{
@@ -154,13 +164,14 @@ public class OrderedTaskQueue extends Thread
 		}
 	}
 
-	final Vector<Runnable> queue;
+	final Vector<TaskRunner> queue;
 	boolean stop;
 	final Log log;
 	MyMutex mutex;
 	int done;
 	long sumQueue;
 	long sumRun;
+	TaskRunner currentRunning;
 	static Map<String, OrderedTaskQueue> theMap = new HashMap<String, OrderedTaskQueue>();
 
 	/**
@@ -193,7 +204,7 @@ public class OrderedTaskQueue extends Thread
 		super(name);
 		setDaemon(true);
 		log = LogFactory.getLog(getClass());
-		queue = new Vector<Runnable>();
+		queue = new Vector<TaskRunner>();
 		mutex = new MyMutex();
 		done = 0;
 		sumQueue = 0;
@@ -230,6 +241,27 @@ public class OrderedTaskQueue extends Thread
 		log.info("shutting down ordered queue");
 		stop = true;
 		theMap.remove(getName());
+	}
+
+	/**
+	 * @param minAge minimum age to interrupt
+	 * @return true if we successfully interrupted or no entry was running; false if unsuccessful or current is younger than minAge
+	 * 
+	 */
+	public boolean interruptCurrent(int minAge)
+	{
+		TaskRunner cr = currentRunning;
+		if (cr != null && cr.getRunTime() < minAge)
+			return false;
+
+		int n = 0;
+		while (cr != null && cr == currentRunning)
+		{
+			interrupt();
+			if (!ThreadUtil.sleep(++n) || n > 10)
+				break;
+		}
+		return cr == null || cr != currentRunning;
 	}
 
 	/**
@@ -308,12 +340,13 @@ public class OrderedTaskQueue extends Thread
 	{
 		while (!stop)
 		{
-			Runnable r = getFirstTask();
+			currentRunning = getFirstTask();
 
 			// now the unsynchronized stuff
-			if (r != null)
+			if (currentRunning != null)
 			{
-				runTask(r);
+				runTask(currentRunning);
+				currentRunning = null;
 			}
 			else
 			{
@@ -327,7 +360,7 @@ public class OrderedTaskQueue extends Thread
 	 *  
 	 * @param r
 	 */
-	void runTask(Runnable r)
+	void runTask(TaskRunner r)
 	{
 		r.run();
 	}
@@ -337,7 +370,7 @@ public class OrderedTaskQueue extends Thread
 	 *  
 	 * @return
 	 */
-	Runnable getFirstTask()
+	TaskRunner getFirstTask()
 	{
 		synchronized (queue)
 		{

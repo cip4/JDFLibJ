@@ -341,7 +341,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			if (!"Product".equals(root.getType()))
 			{
-				root = createProductRoot(root);
+				root = createProductRoot();
 			}
 		}
 		return root;
@@ -654,26 +654,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 	/**
 	 * make sure we have a product in case we have multiple nodes
-	 * @param theNode
+	 *  
 	 * @return
 	 */
-	protected JDFNode createProductRoot(JDFNode theNode)
+	protected JDFNode createProductRoot()
 	{
 		final JDFNode parent = (JDFNode) jdfDoc.createElement("JDF");
 		parent.setType(EnumType.Product);
-		theNode = (JDFNode) parent.moveElement(theNode, null);
+		JDFNode oldParent = jdfDoc.getJDFRoot();
+		oldParent = (JDFNode) parent.moveElement(oldParent, null);
 		jdfDoc.appendChild(parent);
 
-		parent.moveAttribute(AttributeName.JOBID, theNode);
-		parent.moveAttribute(AttributeName.VERSION, theNode);
+		parent.moveAttribute(AttributeName.JOBID, oldParent);
+		parent.moveAttribute(AttributeName.VERSION, oldParent);
 		parent.setJobPartID("rootPart");
-		parent.moveElement(theNode.getResourcePool(), null);
+		parent.moveElement(oldParent.getResourcePool(), null);
 
 		final JDFComponent c = (JDFComponent) parent.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("dummy output");
 		c.setComponentType(EnumComponentType.FinalProduct, null);
 
-		mergeProductLinks(theNode, parent);
+		mergeProductLinks(oldParent, parent);
 		firstConvert = true;
 		return parent;
 	}
@@ -1600,7 +1601,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 			else
 			{
-				theNode = createProductRoot(theNode);
+				theNode = createProductRoot();
 			}
 			firstproductInList = false;
 			copyToNode(e, theNode);
@@ -1730,7 +1731,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			// TODO rethink product conversion switch
 			if (createProduct && !foundProduct && e.numChildElements("Product", null) > 1)
 			{
-				createProductRoot(currentJDFNode);
+				createProductRoot();
 			}
 			KElement theReturn = currentJDFNode;
 			if (!"Product".equals(currentJDFNode.getType()))

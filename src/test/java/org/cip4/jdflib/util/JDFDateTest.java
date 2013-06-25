@@ -717,7 +717,7 @@ public class JDFDateTest extends JDFTestCaseBase
 			d = new JDFDate(System.currentTimeMillis() + i * 100l * 24l * 60l * 60l * 1000l);
 			assertEquals(t.getOffset(System.currentTimeMillis() + i * 100l * 24l * 60l * 60l * 1000l), d.getTimeZoneOffsetInMillis());
 
-			System.out.println("dNow.getTimeZoneISO: " + dNow.getTimeZoneISO() + "; d.TimeZoneISO: " + d.getTimeZoneISO());
+			log.info("dNow.getTimeZoneISO: " + dNow.getTimeZoneISO() + "; d.TimeZoneISO: " + d.getTimeZoneISO());
 
 			if (!dNow.getTimeZoneISO().equals(d.getTimeZoneISO()))
 			{
@@ -728,8 +728,8 @@ public class JDFDateTest extends JDFTestCaseBase
 			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 
-		// TODO @Rainer (2013-03-10) - Not compatible to Linux Systems
-		assertTrue(bSummer);
+		if (PlatformUtil.isWindows())
+			assertTrue(bSummer);
 	}
 
 	/**

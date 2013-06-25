@@ -533,6 +533,25 @@ public class XJDFTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testFromXJDFWithSubProductProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Product");
+		ProductHelper rootP = h.appendProduct();
+		ProductHelper subP = h.appendProduct();
+		rootP.setRoot();
+		rootP.setChild(subP, 0);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		KElement xRoot = h.getRoot();
+		final JDFDoc d = xCon.convert(xRoot);
+		final JDFNode root = d.getJDFRoot();
+		assertEquals(root.getType(), "Product");
+	}
+
+	/**
+	 *  
+	 */
+	@Test
 	public void testFromXJDFMedia()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);

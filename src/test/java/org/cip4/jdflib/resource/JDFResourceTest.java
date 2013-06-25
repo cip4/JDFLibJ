@@ -1153,6 +1153,35 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testIdenticalStatus()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType("Product", true);
+
+		final JDFComponent c = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
+		final JDFResourceLink l = n.getMatchingLink("Component", JDFNode.EnumProcessUsage.AnyOutput, 0);
+		assertTrue("link exists", l != null);
+		final JDFAttributeMap mPart1 = new JDFAttributeMap("SheetName", "S1");
+		mPart1.put("Separation", "Yellow");
+		final JDFAttributeMap mPart3 = new JDFAttributeMap("SheetName", "S3");
+		mPart3.put("Separation", "Yellow");
+
+		final JDFComponent c1 = (JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName, "S1");
+		final JDFComponent c1y = (JDFComponent) c1.addPartition(JDFResource.EnumPartIDKey.Separation, "Yellow");
+		c1y.setResStatus(EnumResStatus.Available, true);
+
+		final JDFComponent c3 = (JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName, "S3");
+		c3.setResStatus(EnumResStatus.Unavailable, true);
+		final JDFComponent c3y = (JDFComponent) c3.addPartition(JDFResource.EnumPartIDKey.Separation, "Yellow");
+		c3y.setIdentical(c1y);
+		assertEquals(EnumResStatus.Available, c3y.getIdenticalTarget().getResStatus(true));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testIdentical()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1275,7 +1304,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFComponent c3 = (JDFComponent) c.addPartition(JDFResource.EnumPartIDKey.SheetName, "S3");
 		c3.setIdentical(c1);
 		assertTrue(c3.isValid(EnumValidationLevel.Incomplete));
-
 	}
 
 	// ////////////////////////////////////////////////////////////

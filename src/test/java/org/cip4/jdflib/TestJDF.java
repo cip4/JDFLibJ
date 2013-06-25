@@ -72,14 +72,10 @@
 package org.cip4.jdflib;
 
 import java.io.File;
-import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFIdentical;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -193,7 +189,6 @@ public class TestJDF extends JDFTestCaseBase
 
 	/**
 	 * 
-	 */
 	public void testelementsbytag()
 	{
 		final JDFDoc d = new JDFParser().parseFile("/share/data/badident.jdf");
@@ -208,4 +203,5 @@ public class TestJDF extends JDFTestCaseBase
 			}
 		}
 	}
+	*/
 }

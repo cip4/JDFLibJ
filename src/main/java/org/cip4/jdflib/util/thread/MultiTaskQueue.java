@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
@@ -79,20 +81,20 @@ import org.cip4.jdflib.util.ThreadUtil;
 public class MultiTaskQueue extends OrderedTaskQueue
 {
 	private int maxParallel;
-	private int currentParallel;
+	private final Vector<NextRunner> current;
 	private int totalParallel;
 
 	private class NextRunner extends Thread
 	{
-		Runnable worker;
+		TaskRunner worker;
 
 		/**
 		 * 
 		 * @param worker
 		 */
-		NextRunner(Runnable worker)
+		NextRunner(TaskRunner worker)
 		{
-			super(MultiTaskQueue.this.getName() + "_" + (++totalParallel) + "_" + currentParallel);
+			super(MultiTaskQueue.this.getName() + "_" + (++totalParallel) + "_" + current.size());
 			this.worker = worker;
 		}
 
@@ -108,8 +110,8 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			}
 			finally
 			{
-				--currentParallel;
-				ThreadUtil.notifyAll(MultiTaskQueue.this.mutex);
+				current.remove(this);
+				ThreadUtil.notifyAll(mutex);
 			}
 		}
 	}
@@ -155,17 +157,83 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 */
 	public int getCurrentRunning()
 	{
-		return currentParallel;
+		return current.size();
 	}
 
 	/**
-	 * number of already completed tasks
-	 * @return 
+	 * @param minAge minimum age to interrupt
+	 * @return true if we successfully interrupted or no entries were running
+	 * 
 	 */
 	@Override
-	public int getDone()
+	public boolean interruptCurrent(int minAge)
 	{
-		return super.getDone() - getCurrentRunning();
+		Vector<NextRunner> currentCopy = new Vector<NextRunner>();
+		currentCopy.addAll(current);
+		boolean bRet = false;
+		for (NextRunner next : currentCopy)
+		{
+			if (next.worker.getRunTime() >= minAge)
+			{
+				interruptRunner(next);
+				bRet = bRet || !current.contains(next);
+			}
+		}
+		return bRet;
+	}
+
+	/**
+	* @param theRunner runner to zapp
+	* @return true if we successfully interrupted or no entries were running
+	* 
+	*/
+	public boolean interruptTask(Runnable theRunner)
+	{
+		Vector<NextRunner> currentCopy = new Vector<NextRunner>();
+		currentCopy.addAll(current);
+		boolean bRet = false;
+		for (NextRunner next : currentCopy)
+		{
+			if (next.worker.theTask == theRunner)
+			{
+				interruptRunner(next);
+				bRet = !current.contains(next);
+				break;
+			}
+		}
+		return bRet;
+	}
+
+	private void interruptRunner(NextRunner next)
+	{
+		int n = 0;
+		while (current.contains(next))
+		{
+			next.interrupt();
+			if (!ThreadUtil.sleep(++n) || n > 10)
+				break;
+		}
+	}
+
+	/**
+	* @param minAge minimum age to interrupt
+	* @return true if we successfully interrupted or no entries were running
+	* 
+	*/
+	Vector<Runnable> getCurrent(int minAge)
+	{
+		Vector<NextRunner> currentCopy = new Vector<NextRunner>();
+		currentCopy.addAll(current);
+
+		Vector<Runnable> vReturn = new Vector<Runnable>();
+		for (NextRunner next : currentCopy)
+		{
+			if (next.worker.getRunTime() >= minAge)
+			{
+				vReturn.add(next.worker.theTask);
+			}
+		}
+		return vReturn;
 	}
 
 	/**
@@ -175,7 +243,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	private MultiTaskQueue(String name)
 	{
 		super(name);
-		currentParallel = 0;
+		current = new Vector<NextRunner>();
 		totalParallel = 0;
 		maxParallel = 2;
 	}
@@ -194,22 +262,22 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#getFirstTask()
 	 */
 	@Override
-	Runnable getFirstTask()
+	synchronized TaskRunner getFirstTask()
 	{
-		if (currentParallel >= maxParallel)
+		if (getCurrentRunning() >= maxParallel)
 			return null;
-		Runnable r = super.getFirstTask();
-		if (r != null)
-			currentParallel++;
+		TaskRunner r = super.getFirstTask();
 		return r;
 	}
 
 	/**
 	 */
 	@Override
-	void runTask(Runnable r)
+	void runTask(TaskRunner r)
 	{
-		new NextRunner(r).start();
+		NextRunner nextRunner = new NextRunner(r);
+		current.add(nextRunner);
+		nextRunner.start();
 	}
 
 }

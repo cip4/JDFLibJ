@@ -170,9 +170,12 @@ public class ProductHelper extends BaseXJDFHelper
 		{
 			e = theElement.appendElement("ChildProduct");
 			e.copyAttribute("ChildRef", phCover.theElement, "ID", null, null);
+			phCover.theElement.removeAttribute(rootProduct);
 		}
 		if (amount > 0)
+		{
 			e.setAttribute("Amount", amount, null);
+		}
 	}
 
 	/**
