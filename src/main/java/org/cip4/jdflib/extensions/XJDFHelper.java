@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -228,45 +229,38 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	public Vector<ProductHelper> getRootProductHelpers()
 	{
-		VString v = getRootProducts();
-		Vector<ProductHelper> vp = new Vector<ProductHelper>();
-		KElement productList = theElement.getElement("ProductList");
-		if (productList == null)
+		Vector<ProductHelper> vp = getProductHelpers();
+		if (vp == null)
 			return null;
-		if (v == null)
+		Vector<ProductHelper> vp2 = new Vector<ProductHelper>();
+
+		for (ProductHelper ph : vp)
 		{
-			KElement product = productList.getElement(PRODUCT);
-			if (product != null)
+			if (ph.isRootProduct())
 			{
-				vp.add(new ProductHelper(product));
+				vp2.add(ph);
 			}
 		}
-		else
-		{
-			for (String id : v)
-			{
-				KElement product = productList.getChildWithAttribute(PRODUCT, AttributeName.ID, null, id, 0, true);
-				if (product != null)
-				{
-					vp.add(new ProductHelper(product));
-				}
-			}
-		}
-		return vp.size() == 0 ? null : vp;
+		return vp2.size() == 0 ? null : vp2;
 	}
 
 	/**
 	 * @return
 	 */
-	private VString getRootProducts()
+	public Vector<ProductHelper> getProductHelpers()
 	{
 		if (theElement == null)
 			return null;
 		KElement productList = theElement.getElement("ProductList");
-		if (productList == null)
+		VElement products = productList == null ? null : productList.getChildElementVector("Product", null);
+		if (products == null || products.size() == 0)
 			return null;
-		VString v = StringUtil.tokenize(productList.getAttribute("RootProducts", null, null), null, false);
-		return v.size() == 0 ? null : v;
+		Vector<ProductHelper> vph = new Vector<ProductHelper>();
+		for (KElement e : products)
+		{
+			vph.add(new ProductHelper(e));
+		}
+		return vph;
 	}
 
 	/**
@@ -398,7 +392,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return a new set element
+	 * @return a new producthelper 
 	 */
 	public ProductHelper appendProduct()
 	{

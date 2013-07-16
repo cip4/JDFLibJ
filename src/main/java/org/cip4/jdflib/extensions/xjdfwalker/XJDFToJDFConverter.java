@@ -261,6 +261,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public void resetProduct()
 	{
 		foundProduct = false;
+		foundProductList = false;
 	}
 
 	/**

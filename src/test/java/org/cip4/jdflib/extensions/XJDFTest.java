@@ -101,6 +101,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -581,6 +582,29 @@ public class XJDFTest extends JDFTestCaseBase
 		JDFColorantControl cc = (JDFColorantControl) rl.getTarget();
 		assertNull(cc.getAttribute(ElementName.COLORANTORDER, null, null));
 
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public void testResetProduct()
+	{
+		XJDFHelper h = new XJDFHelper("J1", "root", null);
+		h.setTypes("Product");
+		h.appendProduct().setRoot();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(h.getRoot());
+		for (int i = 1; i < 5; i++)
+		{
+			XJDFHelper h2 = new XJDFHelper("J1", "sub" + i, null);
+			h2.setTypes("Product");
+			h2.appendProduct().setRoot();
+			xCon.resetProduct();
+			d = xCon.convert(h2.getRoot());
+			assertNotNull(d.getJDFRoot().getJobPart(new NodeIdentifier("J1", "sub" + i, null)));
+		}
+		assertNotNull(d);
 	}
 
 	/**
