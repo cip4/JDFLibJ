@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,49 +75,69 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author prosirai
  * 
  */
-public class AttributeReplacerTest extends JDFTestCaseBase {
+public class AttributeReplacerTest extends JDFTestCaseBase
+{
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplace() {
+	public void testReplace()
+	{
 		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", null);
 		final KElement e = new XMLDoc("r", null).getRoot();
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
-		Assert.assertEquals("foo", e.getAttribute("ID"));
-		Assert.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		Assert.assertNull(e.getXPathAttribute("a/@ID", null));
+		assertEquals("foo", e.getAttribute("ID"));
+		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testRegeExp() {
+	public void testReplaceNull()
+	{
+		final AttributeReplacer rep = new AttributeReplacer("ID", null, null);
+		final KElement e = new XMLDoc("r", null).getRoot();
+		e.setAttribute("ID", "a1");
+		e.setXPathAttribute("a/b/@ID", "aa");
+		rep.replace(e);
+		assertNull(e.getAttribute("ID", null, null));
+		assertNull(e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testRegeExp()
+	{
 		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", "b");
 		final KElement e = new XMLDoc("r", null).getRoot();
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
-		Assert.assertEquals("a1", e.getAttribute("ID"));
-		Assert.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		Assert.assertNull(e.getXPathAttribute("a/@ID", null));
+		assertEquals("a1", e.getAttribute("ID"));
+		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testReplaceMap() {
+	public void testReplaceMap()
+	{
 		final JDFAttributeMap m = new JDFAttributeMap("ID", "foo");
 		m.put("c", (String) null);
 		final AttributeReplacer rep = new AttributeReplacer(m, null);
@@ -126,10 +146,10 @@ public class AttributeReplacerTest extends JDFTestCaseBase {
 		e.setXPathAttribute("a/b/@ID", "aa");
 		e.setXPathAttribute("a/b/@c", "aa");
 		rep.replace(e);
-		Assert.assertEquals("foo", e.getAttribute("ID"));
-		Assert.assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
-		Assert.assertNull(e.getXPathAttribute("a/@ID", null));
-		Assert.assertNull(e.getXPathAttribute("a/b/@c", null));
+		assertEquals("foo", e.getAttribute("ID"));
+		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
+		assertNull(e.getXPathAttribute("a/b/@c", null));
 	}
 
 }

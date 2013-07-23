@@ -415,6 +415,23 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * parse a JDF file
 	 * 
+	 * @param file
+	 * @return the parsed JDFDoc
+	 */
+	public static JDFDoc parseFile(final File file)
+	{
+		final InputStream is = FileUtil.getBufferedInputStream(file);
+		final JDFDoc d = parseStream(is);
+		if (file.canRead() && d != null)
+		{
+			d.setOriginalFileName(file.getAbsolutePath());
+		}
+		return d;
+	}
+
+	/**
+	 * parse a JDF file
+	 * 
 	 * @param fileName
 	 * @return the parsed JDFDoc
 	 */
@@ -423,13 +440,7 @@ public class JDFDoc extends XMLDoc
 		if (StringUtil.getNonEmpty(fileName) == null)
 			return null;
 		final File f = new File(fileName);
-		final InputStream is = FileUtil.getBufferedInputStream(f);
-		final JDFDoc d = parseStream(is);
-		if (f.canRead() && d != null)
-		{
-			d.setOriginalFileName(f.getAbsolutePath());
-		}
-		return d;
+		return parseFile(f);
 	}
 
 	/**

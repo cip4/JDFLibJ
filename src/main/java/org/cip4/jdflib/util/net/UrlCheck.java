@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,8 @@ import org.cip4.jdflib.util.thread.WaitTimeout;
  */
 public class UrlCheck
 {
+	public final String method;
+
 	/**
 	 * 
 	 * internal wait thread
@@ -104,7 +106,7 @@ public class UrlCheck
 		@Override
 		protected UrlPart handle()
 		{
-			UrlPart p = UrlUtil.writeToURL(url, null, UrlUtil.HEAD, null, null);
+			UrlPart p = UrlUtil.writeToURL(url, null, method, null, null);
 			return p;
 		}
 
@@ -119,8 +121,19 @@ public class UrlCheck
 	 */
 	public UrlCheck(String url)
 	{
+		this(url, UrlUtil.HEAD);
+	}
+
+	/**
+	 * 
+	 * @param url
+	 * @param method 
+	 */
+	public UrlCheck(String url, String method)
+	{
 		this.url = url;
 		wait = null;
+		this.method = method;
 	}
 
 	/**

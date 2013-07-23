@@ -1310,7 +1310,7 @@ public class UrlUtil
 	public static String getURLWithDirectory(String directory, String url)
 	{
 
-		if (directory == null || JDFCoreConstants.EMPTYSTRING.equals(directory))
+		if (StringUtil.getNonEmpty(directory) == null)
 		{
 			return url;
 		}
@@ -1353,6 +1353,26 @@ public class UrlUtil
 		}
 
 		return cleanDots(directory + url);
+	}
+
+	/**
+	 * get the parent directory of a file or url
+	 * @param url 
+	 * @return 
+	 */
+	public static String getParentDirectory(String url)
+	{
+
+		if (url == null)
+		{
+			return null;
+		}
+		int pos = url.lastIndexOf('/');
+		int pos2 = url.lastIndexOf('\\');
+		if (pos2 >= 0 && pos2 > pos)
+			pos = pos2;
+
+		return pos > 0 ? StringUtil.leftStr(url, pos) : ".";
 	}
 
 	/**

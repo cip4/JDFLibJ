@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,10 +70,12 @@ package org.cip4.jdflib.util.net;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Nov 16, 2012
  */
@@ -107,6 +109,21 @@ public class UrlCheckTest extends JDFTestCaseBase
 			return;
 		}
 		Assert.assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
+	}
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 */
+	@Test
+	public void testPingRCGet()
+	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
+		Assert.assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
 	}
 
 	/**

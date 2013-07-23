@@ -648,8 +648,20 @@ public class UrlUtilTest extends JDFTestCaseBase
 			f = new File("../a.ß");
 			assertEquals("escaped utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f");
 			assertEquals("unescaped but utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.setUTF8String("../a.ß")));
-
 		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetParentDirectory()
+	{
+		assertEquals(null, UrlUtil.getParentDirectory(null));
+		assertEquals(".", UrlUtil.getParentDirectory("foo.bar"));
+		assertEquals("foo", UrlUtil.getParentDirectory("foo/bar"));
+		assertEquals("foo", UrlUtil.getParentDirectory("foo\\bar"));
+		assertEquals("\\\\foo", UrlUtil.getParentDirectory("\\\\foo\\bar"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

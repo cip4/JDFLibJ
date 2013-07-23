@@ -102,6 +102,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.AttributeReplacer;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
@@ -2034,6 +2035,22 @@ public class JDFSpawn
 	{
 		String jpID = node == null ? " - " : node.getJobPartID(false);
 		return "[JDFSpawn JobPartID=" + jpID + "\nParts: " + vSpawnParts + "\nRW: " + vRWResources_in;
+	}
+
+	/**
+	 * remove all spawn related stuff from the spawned childNode 
+	 * @param childNode 
+	 */
+	public void unSpawnChild(JDFNode childNode)
+	{
+		childNode.removeChild(ElementName.ANCESTORPOOL, null, 0);
+
+		JDFAttributeMap spawnStuff = new JDFAttributeMap();
+		spawnStuff.put(AttributeName.SPAWNID, (String) null);
+		spawnStuff.put(AttributeName.SPAWNIDS, (String) null);
+		spawnStuff.put(AttributeName.SPAWNSTATUS, (String) null);
+		spawnStuff.put(AttributeName.LOCKED, (String) null);
+		new AttributeReplacer(spawnStuff, null).replace(childNode);
 	}
 
 }

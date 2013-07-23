@@ -2194,15 +2194,39 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testUnSpawnChild()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
+		n.setType("ProcessGroup", false);
+		final VString v = new VString("Interpreting Rendering", null);
+
+		final JDFNode n2 = n.addCombined(v);
+		final JDFSpawn spawn = new JDFSpawn(n2);
+
+		final JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, null, true, true, true, true);
+		final String spawnID = spawnedNode.getSpawnID(false);
+		assertNotSame(spawnID, "");
+		new JDFSpawn(spawnedNode).unSpawnChild(spawnedNode);
+		final String toString = spawnedNode.toString();
+		assertTrue(toString.indexOf(spawnID) < 0);
+		assertTrue(toString.indexOf("Spawn") < 0);
+		assertTrue(toString.indexOf("Merge") < 0);
+	}
+
+	/**
+	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
+	 * 
+	 */
+	@Test
 	public void testUnSpawn()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
 		n.setType("ProcessGroup", false);
-		final VString v = new VString();
-		v.add("Interpreting");
-		v.add("Rendering");
+		final VString v = new VString("Interpreting Rendering", null);
 
 		for (int i = 0; i < 2; i++) // 0 = now part, 1==part
 		{
@@ -2221,7 +2245,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			assertTrue(toString.indexOf("Spawn") < 0);
 			assertTrue(toString.indexOf("Merge") < 0);
 		}
-
 	}
 
 	/**
