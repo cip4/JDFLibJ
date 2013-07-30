@@ -74,7 +74,6 @@ package org.cip4.jdflib.util;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.MyMutex;
 import org.cip4.jdflib.util.thread.WaitTimeout;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -119,8 +118,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWaitTimeout()
 	{
-		Assert.assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
-		Assert.assertNull(new TestWait(20, 1000).getWaitedObject());
+		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
+		assertNull(new TestWait(20, 1000).getWaitedObject());
 	}
 
 	/**
@@ -130,9 +129,9 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	public void testPeekWaitTimeout()
 	{
 		TestWait testWait = new TestWait(1400, 1000);
-		Assert.assertNull(testWait.peekWaitedObject());
-		Assert.assertEquals(testWait.getWaitedObject().intValue(), 42);
-		Assert.assertEquals(testWait.peekWaitedObject().intValue(), 42);
+		assertNull(testWait.peekWaitedObject());
+		assertEquals(testWait.getWaitedObject().intValue(), 42);
+		assertEquals(testWait.peekWaitedObject().intValue(), 42);
 	}
 
 	/**
@@ -144,8 +143,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		TestWait testWait = new TestWait(2000, 1000);
 		ThreadUtil.sleep(1200);
 		long t0 = System.currentTimeMillis();
-		Assert.assertNotNull(testWait.getWaitedObject());
-		Assert.assertTrue(System.currentTimeMillis() - t0 < 1000);
+		assertNotNull(testWait.getWaitedObject());
+		assertTrue(System.currentTimeMillis() - t0 < 1000);
 	}
 
 	/**
@@ -154,7 +153,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWaitTimeoutFail()
 	{
-		Assert.assertNull(new TestWait(20, 1000).getWaitedObject());
+		assertNull(new TestWait(20, 1000).getWaitedObject());
 	}
 
 	/**
@@ -163,9 +162,11 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWaitTimeoutMany()
 	{
-		for (int i = 1; i < 10000; i++)
+		for (int i = 1; i < 1000; i++)
 		{
-			Assert.assertEquals("Loop " + i, new TestWait(42, 0).getWaitedObject().intValue(), 42);
+			TestWait testWait = new TestWait(42, 0);
+			ThreadUtil.sleep(1);
+			assertEquals("Loop " + i, testWait.getWaitedObject().intValue(), 42);
 		}
 	}
 
@@ -179,7 +180,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		for (int i = 0; i < 10000; i++)
 		{
 			int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
-			Assert.assertTrue(n > nLast);
+			assertTrue(n > nLast);
 			nLast = n;
 		}
 	}

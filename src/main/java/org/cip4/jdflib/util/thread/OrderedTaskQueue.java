@@ -297,9 +297,9 @@ public class OrderedTaskQueue extends Thread
 		synchronized (queue)
 		{
 			queue.add(new TaskRunner(task));
-			ThreadUtil.notifyAll(mutex);
-			return true;
 		}
+		ThreadUtil.notifyAll(mutex);
+		return true;
 	}
 
 	/**
