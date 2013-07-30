@@ -759,6 +759,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.cleanDots(".././../c.pdf"), "../../c.pdf");
 		assertEquals(UrlUtil.cleanDots("File://a/../b"), "File://b");
 		assertEquals(UrlUtil.cleanDots("File://a/.././c/../b.pdf"), "File://b.pdf");
+		assertEquals(UrlUtil.cleanDots("File:///c:/a/.././c/../b.pdf"), "File:///c:/b.pdf");
 		assertEquals(UrlUtil.cleanDots("/."), "/.");
 	}
 

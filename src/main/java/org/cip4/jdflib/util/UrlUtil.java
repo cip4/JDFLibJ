@@ -1390,11 +1390,13 @@ public class UrlUtil
 		while (url.length() > 2 && url.startsWith("./"))
 			url = url.substring(2);
 		final int posDouble = url.indexOf("//");
+		final int posTriple = url.indexOf("///");
+		final int prefixLen = posDouble == posTriple ? 3 : 2;
 		String prefix = url.startsWith("/") ? "/" : "";
 		if (posDouble >= 0)
 		{
-			prefix = url.substring(0, posDouble + 2);
-			url = url.substring(posDouble + 2);
+			prefix = url.substring(0, posDouble + prefixLen);
+			url = url.substring(posDouble + prefixLen);
 		}
 		final VString vs = StringUtil.tokenize(url, "/", false);
 		for (int i = vs.size() - 1; i > 0; i--)

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -585,6 +585,45 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
+	 *  
+	 * convenience int getter
+	 * @param key 
+	 * @param def 
+	 * @return 
+	 * 
+	 */
+	public int getInt(Object key, int def)
+	{
+		return StringUtil.parseInt(get(key), def);
+	}
+
+	/**
+	 *  
+	 * convenience boolean getter
+	 * @param key 
+	 * @param def 
+	 * @return 
+	 * 
+	 */
+	public boolean getBool(Object key, boolean def)
+	{
+		return StringUtil.parseBoolean(get(key), def);
+	}
+
+	/**
+	 *  
+	 * convenience double getter
+	 * @param key 
+	 * @param def 
+	 * @return 
+	 * 
+	 */
+	public double getDouble(Object key, double def)
+	{
+		return StringUtil.parseDouble(get(key), def);
+	}
+
+	/**
 	 * 
 	 * @param key
 	 * @param value
@@ -594,6 +633,78 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public String put(ValuedEnum key, String value)
 	{
 		return super.put(key.getName(), value);
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(String key, int value)
+	{
+		return put(key, StringUtil.formatInteger(value));
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(ValuedEnum key, int value)
+	{
+		return put(key.getName(), StringUtil.formatInteger(value));
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(String key, double value)
+	{
+		return put(key, StringUtil.formatDouble(value));
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(ValuedEnum key, double value)
+	{
+		return super.put(key.getName(), StringUtil.formatDouble(value));
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(String key, boolean value)
+	{
+		return put(key, value ? "true" : "false");
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(ValuedEnum key, boolean value)
+	{
+		return super.put(key.getName(), value ? "true" : "false");
 	}
 
 	/**
