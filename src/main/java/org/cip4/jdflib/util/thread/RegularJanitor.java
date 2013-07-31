@@ -245,7 +245,7 @@ public final class RegularJanitor
 
 		/**
 		 *  
-		 * @param firstInterval
+		 * @param firstInterval the first interval prior to commencing in seconds
 		 */
 		void setFirstInterval(int firstInterval)
 		{
