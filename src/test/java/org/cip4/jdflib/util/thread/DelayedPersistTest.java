@@ -71,64 +71,66 @@
 package org.cip4.jdflib.util.thread;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class DelayedPersistTest extends JDFTestCaseBase {
+public class DelayedPersistTest extends JDFTestCaseBase
+{
 	File file;
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testPersist() {
+	public void testPersist()
+	{
 		file.delete();
-		Assert.assertFalse(file.exists());
+		assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 1555);
-		Assert.assertFalse(file.exists());
-		ThreadUtil.sleep(15000);
-		Assert.assertTrue(file.exists());
+		assertFalse(file.exists());
+		ThreadUtil.sleep(2000);
+		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 1555);
+		ThreadUtil.sleep(2000);
+		assertTrue(file.exists());
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testShutdown() {
+	public void testShutdown()
+	{
 		file.delete();
-		Assert.assertFalse(file.exists());
+		assertFalse(file.exists());
 		DelayedPersist.getDelayedPersist().queue(new TestPersist(), 15555);
-		Assert.assertFalse(file.exists());
+		assertFalse(file.exists());
 		long t0 = System.currentTimeMillis();
 		DelayedPersist.shutDown();
-		Assert.assertTrue(System.currentTimeMillis() - t0 < 3000);
-		Assert.assertTrue(file.exists());
+		assertTrue(System.currentTimeMillis() - t0 < 3000);
+		assertTrue(file.exists());
 	}
 
 	/**
 	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public class TestPersist implements IPersistable {
+	public class TestPersist implements IPersistable
+	{
 
 		/**
 		 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
 		 * @return
 		 */
-		public boolean persist() {
-			try {
-				ThreadUtil.sleep(555);
-				return file.createNewFile();
-			} catch (IOException x) {
-				return false;
-			}
+		@Override
+		public boolean persist()
+		{
+			return FileUtil.createNewFile(file);
 		}
 
 	}
@@ -138,18 +140,9 @@ public class DelayedPersistTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		super.setUp();
 		file = new File(sm_dirTestDataTemp + "TestPersist.txt");
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
-	 * @return
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
 	}
 }

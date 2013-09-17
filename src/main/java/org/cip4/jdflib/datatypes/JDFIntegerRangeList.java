@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,9 +153,26 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 */
 	public JDFIntegerRangeList(JDFIntegerRange ir)
 	{
-		rangeList = new Vector();
+		rangeList = new Vector<JDFRange>();
 		rangeList.addElement(ir);
 		setDef(ir.getDef());
+	}
+
+	/**
+	 * constructs a JDFIntegerRangeList with the given array of ints
+	 * 
+	 * @param array the given JDFIntegerRange
+	 */
+	public JDFIntegerRangeList(int[] array)
+	{
+		rangeList = new Vector<JDFRange>();
+		if (array != null)
+		{
+			for (int i : array)
+			{
+				append(i);
+			}
+		}
 	}
 
 	/**

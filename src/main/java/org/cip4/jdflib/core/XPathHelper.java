@@ -590,31 +590,28 @@ class XPathHelper
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * if null, assume .//@*, i.e. all of this
+	 * @param bWantText if true, also add text
 	 * 
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
-	JDFAttributeMap getXPathAttributeMap(String path)
+	JDFAttributeMap getXPathAttributeMap(String path, boolean bWantText)
 	{
-		if (StringUtil.getNonEmpty(path) == null)
-			path = ".//@*";
-		final int pos = path.lastIndexOf(JDFCoreConstants.AET);
-		if (pos == -1)
-		{
-			throw new JDFException("GetXPathAttribute - bad attribute path: " + path);
-		}
-		final String attName = path.substring(pos + 1);
-		final VElement vEle = theElement.getXPathElementVector(path.substring(0, pos), 0);
+		final int pos = path == null ? -1 : path.lastIndexOf(JDFCoreConstants.AET);
+		final String attName = path == null ? null : path.substring(pos + 1);
+		String subele = path == null ? ".//*" : path.substring(0, pos);
+		final VElement vEle = theElement.getXPathElementVector(subele, 0);
 		if (vEle == null)
 		{
 			return null;
 		}
-		String base = buildXPath(null, 1);
+		String base = path == null ? null : buildXPath(null, 1);
 		final JDFAttributeMap map = new JDFAttributeMap();
 		for (KElement e : vEle)
 		{
 			JDFAttributeMap localMap = e.getAttributeMap();
 			VString vKeys = localMap == null ? null : localMap.getKeys();
+			String baseXPath = e.buildXPath(base, 1);
 			if (vKeys != null)
 			{
 				for (String key : vKeys)
@@ -622,9 +619,15 @@ class XPathHelper
 					if (StringUtil.matches(key, attName))
 					{
 						String s = localMap.get(key);
-						map.put(e.buildXPath(base, 1) + "/@" + key, s);
+						map.put(baseXPath + "/@" + key, s);
 					}
 				}
+			}
+			if (bWantText)
+			{
+				String text = e.getText();
+				if (text != null)
+					map.put(baseXPath, text);
 			}
 		}
 		return map.size() > 0 ? map : null;

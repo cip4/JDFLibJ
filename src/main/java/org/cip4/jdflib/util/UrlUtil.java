@@ -1433,9 +1433,25 @@ public class UrlUtil
 	 */
 	public static String cleanHttpURL(String url)
 	{
-		if (!url.toLowerCase().startsWith("http://"))
-			url = "http://" + url;
-		return url;
+		VString v = StringUtil.tokenize(url, "/", false);
+		if (v == null)
+			return null;
+		String protocol = v.get(0);
+		if (!protocol.startsWith("http"))
+		{
+			protocol = "http://";
+		}
+		else if (protocol.startsWith("https"))
+		{
+			protocol = "https://";
+			v.remove(0);
+		}
+		else
+		{
+			protocol = "http://";
+			v.remove(0);
+		}
+		return StringUtil.setvString(v, "/", protocol, null);
 	}
 
 	/**

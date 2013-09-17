@@ -94,6 +94,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
 /**
  * @author MuchaD
  */
@@ -133,6 +134,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */
+		@Override
 		public void run()
 		{
 			try
@@ -289,15 +291,28 @@ public class XMLDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.write2File(sm_dirTestDataTemp + "schematest.xml", 0, false); // create
-		// a
-		// readable
-		// dummy
+		// a readable dummy
 		final File schema = new File(sm_dirTestDataTemp + "schematest.xml");
 
 		final String nsURI = "www.foo.com";
 		doc.setSchemaLocation(nsURI, schema);
 		Assert.assertNotNull(doc.getSchemaLocation(nsURI));
 		Assert.assertEquals(doc.getSchemaLocationFile(nsURI).getCanonicalFile(), schema.getCanonicalFile());
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public void testSetValues()
+	{
+		final XMLDoc doc = new XMLDoc();
+		final XMLDoc docOld = new XMLDoc("test", null);
+		docOld.getRoot().setXPathValue("a/b/c", "text");
+		docOld.getRoot().setXPathAttribute("a/b/d/@a1", "a1");
+		docOld.getRoot().setXPathAttribute("a/b/d[4]/@a1", "a1");
+		doc.setXPathValues(docOld.getRoot().getXPathValueMap());
+		assertEquals(doc.getRoot().getXPathValueMap(), docOld.getRoot().getXPathValueMap());
 	}
 
 	/**

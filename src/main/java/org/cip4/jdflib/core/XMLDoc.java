@@ -95,6 +95,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
@@ -754,6 +755,25 @@ public class XMLDoc
 		final String data = "type=\"text/xsl\" href=\"" + url + "\"";
 		final ProcessingInstruction pi = createProcessingInstruction("xml-stylesheet", data);
 		insertBefore(pi, getRoot());
+	}
+
+	/**
+	 * set the xpath values of thei to the values in the node
+	 * 
+	 * @param valueMap the map of values, if this is still null, MUST be fully qualifie
+	 */
+	public void setXPathValues(final JDFAttributeMap valueMap)
+	{
+		if (valueMap != null && valueMap.size() > 0)
+		{
+			if (getRoot() == null)
+			{
+				String root = valueMap.keySet().iterator().next();
+				root = StringUtil.token(root, 0, "/");
+				setRoot(root, null);
+			}
+			getRoot().setXPathValues(valueMap);
+		}
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,8 +81,8 @@ package org.cip4.jdflib.datatypes;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  *  
@@ -99,12 +99,12 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	@Test
 	public void testCreateIntegerRangeList()
 	{
-		Assert.assertEquals(JDFIntegerRangeList.createIntegerRangeList("8").getElement(0), 8);
-		Assert.assertEquals(JDFIntegerRangeList.createIntegerRangeList("8~22").getElement(-1), 22);
-		Assert.assertEquals(JDFIntegerRangeList.createIntegerRangeList("8~6 7 22").getElement(-1), 22);
-		Assert.assertNull(JDFIntegerRange.getIntegerRange("8~22a"));
-		Assert.assertNull(JDFIntegerRange.getIntegerRange(""));
-		Assert.assertNull(JDFIntegerRange.getIntegerRange(null));
+		assertEquals(JDFIntegerRangeList.createIntegerRangeList("8").getElement(0), 8);
+		assertEquals(JDFIntegerRangeList.createIntegerRangeList("8~22").getElement(-1), 22);
+		assertEquals(JDFIntegerRangeList.createIntegerRangeList("8~6 7 22").getElement(-1), 22);
+		assertNull(JDFIntegerRange.getIntegerRange("8~22a"));
+		assertNull(JDFIntegerRange.getIntegerRange(""));
+		assertNull(JDFIntegerRange.getIntegerRange(null));
 	}
 
 	/**
@@ -118,11 +118,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 		JDFIntegerRangeList rangeList = new JDFIntegerRangeList();
 		rangeList = new JDFIntegerRangeList(" 0 1 ~ 2 3 ~ 6 INF ");
-		Assert.assertEquals(new JDFIntegerRangeList("   1   "), new JDFIntegerRangeList("1~1"));
+		assertEquals(new JDFIntegerRangeList("   1   "), new JDFIntegerRangeList("1~1"));
 		// rangeList is not empty
-		Assert.assertEquals("Bad Constructor from a given String", rangeList.size(), 4);
+		assertEquals("Bad Constructor from a given String", rangeList.size(), 4);
 		// must be transformed into the string "0 1~2 3~6"
-		Assert.assertEquals("Bad Constructor from a given String", rangeList.toString(), "0 1 ~ 2 3 ~ 6 INF");
+		assertEquals("Bad Constructor from a given String", rangeList.toString(), "0 1 ~ 2 3 ~ 6 INF");
 
 	}
 
@@ -140,11 +140,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 																// 15, range =
 																// 3~15
 
-		Assert.assertTrue("Bad construction of ranges: Range:" + r.toString(), r.getElementCount() == 2);
-		Assert.assertTrue("Bad construction of ranges with setDef: Range:" + r.toString(), r2.getElementCount() == 13);
+		assertTrue("Bad construction of ranges: Range:" + r.toString(), r.getElementCount() == 2);
+		assertTrue("Bad construction of ranges with setDef: Range:" + r.toString(), r2.getElementCount() == 13);
 
 		JDFIntegerRangeList r3 = new JDFIntegerRangeList(" 1 ~ 2 3 ~ -1 ", 16);
-		Assert.assertTrue("Bad construction of ranges with setDef: Range:" + r.toString(), r3.getElementCount() == 15);
+		assertTrue("Bad construction of ranges with setDef: Range:" + r.toString(), r3.getElementCount() == 15);
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -160,14 +160,26 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		try
 		{
 			rangeList = new JDFIntegerRangeList((String) null);
-			Assert.assertEquals(rangeList.getElementCount(), 0);
+			assertEquals(rangeList.getElementCount(), 0);
 			rangeList = new JDFIntegerRangeList("");
-			Assert.assertEquals(rangeList.getElementCount(), 0);
+			assertEquals(rangeList.getElementCount(), 0);
 		}
 		catch (DataFormatException e)
 		{
-			Assert.fail("snafu");
+			fail("snafu");
 		}
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public final void testConstructArray()
+	{
+		int[] ai = new int[] { 0, 1, 2, 4, 5, 6, 99, 100, 101 };
+		JDFIntegerRangeList rangeList = new JDFIntegerRangeList(ai);
+		assertEquals(rangeList.toString(), "0 ~ 2 4 ~ 6 99 ~ 101");
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -182,10 +194,10 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	{
 		JDFIntegerRangeList rangeList = new JDFIntegerRangeList("1 3 5 2 4 6 ~ 22");
 		rangeList.normalize(true);
-		Assert.assertEquals(rangeList.toString(), "1 ~ 22");
+		assertEquals(rangeList.toString(), "1 ~ 22");
 		rangeList = new JDFIntegerRangeList("1 3 2 1 4 5 6 ~ 22");
 		rangeList.normalize(false);
-		Assert.assertEquals(rangeList.toString(), "1 3 ~ 1 4 ~ 22");
+		assertEquals(rangeList.toString(), "1 3 ~ 1 4 ~ 22");
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -202,11 +214,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		{
 			rangeList = new JDFIntegerRangeList("0 ~-1");
 			rangeList.setDef(20);
-			Assert.assertEquals(rangeList.getElementCount(), 20);
+			assertEquals(rangeList.getElementCount(), 20);
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 
 		try
@@ -214,16 +226,16 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			rangeList = new JDFIntegerRangeList("2 ~ -6 -3 -2 -1 ");
 			rangeList.setDef(10);
 
-			Assert.assertEquals(rangeList.toString(), "2 ~ 4 7 8 9");
+			assertEquals(rangeList.toString(), "2 ~ 4 7 8 9");
 			rangeList.normalize(false);
-			Assert.assertEquals(rangeList.toString(), "2 ~ 4 7 ~ 9");
+			assertEquals(rangeList.toString(), "2 ~ 4 7 ~ 9");
 			rangeList = new JDFIntegerRangeList("1 3 5 2 4 6 ~ 22");
 			rangeList.normalize(true);
-			Assert.assertEquals(rangeList.toString(), "1 ~ 22");
+			assertEquals(rangeList.toString(), "1 ~ 22");
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 	}
 
@@ -242,7 +254,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			JDFIntegerRangeList rangeList = new JDFIntegerRangeList("0 1~2 3~6 8 ~ 7");
 			JDFIntegerList list = rangeList.getIntegerList();
 			// list must be equal the string "0 1 2 3 4 5 6"
-			Assert.assertEquals("Bad getIntegerList: " + list, list.toString(), "0 1 2 3 4 5 6 8 7");
+			assertEquals("Bad getIntegerList: " + list, list.toString(), "0 1 2 3 4 5 6 8 7");
 
 			// now some performance
 			for (int i = 0; i < 1000; i++)
@@ -263,11 +275,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 				m += j;
 			}
 
-			Assert.assertEquals(n, m);
+			assertEquals(n, m);
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 	}
 
@@ -288,12 +300,12 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			copyRangeList = new JDFIntegerRangeList(rangeList);
 			copyRangeList.append(new JDFIntegerRange("8~9"));
 
-			Assert.assertEquals("original rangeList wrong:", rangeList.toString(), "0 4");
-			Assert.assertEquals("changed copy of rangeList wrong:", copyRangeList.toString(), "0 4 8 ~ 9");
+			assertEquals("original rangeList wrong:", rangeList.toString(), "0 4");
+			assertEquals("changed copy of rangeList wrong:", copyRangeList.toString(), "0 4 8 ~ 9");
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 	}
 
@@ -317,11 +329,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 
 		if (rangeList != null)
-			Assert.assertEquals(rangeList, copyRangeList);
+			assertEquals(rangeList, copyRangeList);
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -341,16 +353,16 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			goodRangeList.append(6, 6);
 			goodRangeList.append(7, 7);
 
-			Assert.assertTrue("Bad isList " + goodRangeList.toString(), goodRangeList.isList());
+			assertTrue("Bad isList " + goodRangeList.toString(), goodRangeList.isList());
 
 			badRangeList = new JDFIntegerRangeList(goodRangeList);
 			badRangeList.append(new JDFIntegerRange("8~9"));
 
-			Assert.assertFalse("Bad isList" + badRangeList.toString(), badRangeList.isList());
+			assertFalse("Bad isList" + badRangeList.toString(), badRangeList.isList());
 		}
 		catch (DataFormatException dfe)
 		{
-			Assert.fail("DataFormatException");
+			fail("DataFormatException");
 		}
 
 	}
@@ -366,10 +378,10 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	public final void testIsOverlapping() throws Exception
 	{
 		JDFIntegerRangeList rangelist = new JDFIntegerRangeList("0 3~5");
-		Assert.assertFalse(rangelist.isOverlapping(new JDFIntegerRange("99"), null));
-		Assert.assertTrue(rangelist.isOverlapping(new JDFIntegerRange("-1 ~ 1"), null));
-		Assert.assertTrue(rangelist.isOverlapping(new JDFIntegerRange("4"), null));
-		Assert.assertFalse(rangelist.isOverlapping(new JDFIntegerRange("5"), new JDFIntegerRange("3 ~ 5")));
+		assertFalse(rangelist.isOverlapping(new JDFIntegerRange("99"), null));
+		assertTrue(rangelist.isOverlapping(new JDFIntegerRange("-1 ~ 1"), null));
+		assertTrue(rangelist.isOverlapping(new JDFIntegerRange("4"), null));
+		assertFalse(rangelist.isOverlapping(new JDFIntegerRange("5"), new JDFIntegerRange("3 ~ 5")));
 	}
 
 	/**
@@ -382,7 +394,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	{
 		JDFIntegerRangeList rangelist = new JDFIntegerRangeList("0 3~5");
 		rangelist.append(4);
-		Assert.assertFalse("Bad isUnique", rangelist.isUnique());
+		assertFalse("Bad isUnique", rangelist.isUnique());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -399,7 +411,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		rangelist.append(new JDFIntegerRange("6~7"));
 		rangelist.append(9);
 
-		Assert.assertFalse("Bad isOrdered", rangelist.isOrdered());
+		assertFalse("Bad isOrdered", rangelist.isOrdered());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -416,7 +428,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		rangelist.append(5);
 		rangelist.append(4, 3);
 
-		Assert.assertTrue("Bad isOrdered", rangelist.isOrdered());
+		assertTrue("Bad isOrdered", rangelist.isOrdered());
 	}
 
 	/**
@@ -431,7 +443,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		rangelist.append(10);
 		rangelist.append(3, 1);
 
-		Assert.assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+		assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
 	}
 
 	/**
@@ -447,7 +459,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		rangelist.append(new JDFIntegerRange("6~8"));
 		rangelist.append(10);
 
-		Assert.assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
+		assertFalse("Bad isUniqueOrdered", rangelist.isUniqueOrdered());
 	}
 
 	/**
@@ -462,7 +474,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		rangelist.append(6, 8);
 		rangelist.append(10);
 
-		Assert.assertTrue("Bad isUniqueOrdered" + rangelist.toString(), rangelist.isUniqueOrdered());
+		assertTrue("Bad isUniqueOrdered" + rangelist.toString(), rangelist.isUniqueOrdered());
 	}
 
 	/**
@@ -478,7 +490,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			integerRangeList.append(i);
 		}
 
-		Assert.assertEquals("0 ~ 10", integerRangeList.toString());
+		assertEquals("0 ~ 10", integerRangeList.toString());
 	}
 
 	/**
@@ -497,7 +509,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 			}
 		}
 
-		Assert.assertEquals("0 ~ 3 5 ~ 7 9 ~ 10", integerRangeList.toString());
+		assertEquals("0 ~ 3 5 ~ 7 9 ~ 10", integerRangeList.toString());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -512,16 +524,16 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	{
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("-INF ~ 0 5 ~ -1");
 
-		Assert.assertTrue("inRange", irl.inRange(-99));
-		Assert.assertFalse("inRange", irl.inRange(99));
-		Assert.assertTrue("inRange", irl.inRange(2));
+		assertTrue("inRange", irl.inRange(-99));
+		assertFalse("inRange", irl.inRange(99));
+		assertTrue("inRange", irl.inRange(2));
 
 		JDFIntegerRange.setDefaultDef(Integer.MAX_VALUE);
 		irl = new JDFIntegerRangeList("-INF ~ 0 5 ~ -1");
 
-		Assert.assertFalse("inRange", irl.inRange(-99));
-		Assert.assertTrue("inRange", irl.inRange(99));
-		Assert.assertFalse("inRange", irl.inRange(2));
+		assertFalse("inRange", irl.inRange(-99));
+		assertTrue("inRange", irl.inRange(99));
+		assertFalse("inRange", irl.inRange(2));
 	}
 
 	/**
@@ -534,9 +546,9 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	{
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("-INF ~ 0 5 ~ INF");
 
-		Assert.assertTrue("inRange", irl.inRange(-99));
-		Assert.assertTrue("inRange", irl.inRange(99));
-		Assert.assertFalse("inRange", irl.inRange(2));
+		assertTrue("inRange", irl.inRange(-99));
+		assertTrue("inRange", irl.inRange(99));
+		assertFalse("inRange", irl.inRange(2));
 	}
 
 	/**
@@ -550,7 +562,7 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList("0~-1", Integer.MAX_VALUE);
 		for (int i = 0; i <= 10; i++)
 		{
-			Assert.assertTrue("RangeList 0~-1 should contain " + i, integerRangeList.inRange(i));
+			assertTrue("RangeList 0~-1 should contain " + i, integerRangeList.inRange(i));
 		}
 	}
 
@@ -565,21 +577,21 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	public void testgetElementCount() throws Exception
 	{
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("0 ~ 5");
-		Assert.assertEquals(6, irl.getElementCount());
+		assertEquals(6, irl.getElementCount());
 		irl = new JDFIntegerRangeList("0 ~ -1");
-		Assert.assertEquals(irl.getElementCount(), -1);
+		assertEquals(irl.getElementCount(), -1);
 		irl = new JDFIntegerRangeList("0 ~ INF");
-		Assert.assertTrue(irl.getElementCount() < 0);
+		assertTrue(irl.getElementCount() < 0);
 		irl = new JDFIntegerRangeList("1 ~ 2 0 ~ INF");
-		Assert.assertTrue(irl.getElementCount() < 0);
+		assertTrue(irl.getElementCount() < 0);
 		irl = new JDFIntegerRangeList("1 ~ 2 5");
-		Assert.assertEquals(irl.getElementCount(), 3);
+		assertEquals(irl.getElementCount(), 3);
 
 		irl = new JDFIntegerRangeList("1 ~ 2 -2");
 		irl.setDef(4);
-		Assert.assertEquals(irl.getElementCount(), 3);
+		assertEquals(irl.getElementCount(), 3);
 		irl.setDef(1);
-		Assert.assertEquals(irl.getElementCount(), -1);
+		assertEquals(irl.getElementCount(), -1);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -593,11 +605,11 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	public void testgetElement() throws Exception
 	{
 		JDFIntegerRangeList irl = new JDFIntegerRangeList("5 ~ 8");
-		Assert.assertEquals(6, irl.getElement(1));
+		assertEquals(6, irl.getElement(1));
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
@@ -609,8 +621,8 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 		defaultDef = JDFIntegerRange.getDefaultDef();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */

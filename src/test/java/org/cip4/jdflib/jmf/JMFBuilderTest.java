@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  * lets generate some jmf messages
@@ -141,6 +142,54 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		JDFJMF jmf = b.buildNewJDFCommand();
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "newJDF.jmf", 2, false);
+		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test status subscription
+	 */
+	@Test
+	public void testBuildStatusSubscription()
+	{
+		JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionStatus.jmf", 2, false);
+		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test resource subscription
+	 */
+	@Test
+	public void testBuildResourceSubscription()
+	{
+		JDFJMF jmf = b.buildResourceSubscription("signalurl", 30, -1, null);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionResource.jmf", 2, false);
+		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test notification subscription
+	 */
+	@Test
+	public void testBuildNotificationSubscription()
+	{
+		JDFJMF jmf = b.buildNotificationSubscription("signalurl");
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionNotification.jmf", 2, false);
+		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test queue status subscription
+	 */
+	@Test
+	public void testBuildQueueStatusSubscription()
+	{
+		JDFJMF jmf = b.buildQueueStatusSubscription("signalurl");
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionQueueStatus.jmf", 2, false);
 		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 

@@ -765,6 +765,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 */
+	@Test
+	public void testCleanHttpUrl()
+	{
+		assertEquals(UrlUtil.cleanHttpURL("localhost"), "http://localhost");
+		assertEquals(UrlUtil.cleanHttpURL("/http/localhost"), "http://localhost");
+		assertEquals(UrlUtil.cleanHttpURL("http:/localhost"), "http://localhost");
+		assertEquals(UrlUtil.cleanHttpURL("http:/localhost:8080//ggg"), "http://localhost:8080/ggg");
+	}
+
+	/**
+	 * 
 	 * 
 	 */
 	@Test

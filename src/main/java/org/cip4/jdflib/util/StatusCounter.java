@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -160,6 +160,8 @@ public class StatusCounter
 	private double totalCounter = -1;
 	private VString icsVersions = null;
 	private boolean addPhaseTimeAmounts;
+	private int idleCount;
+	private int idleSkip;
 
 	/**
 	 * @return the total counter value
@@ -284,7 +286,19 @@ public class StatusCounter
 	public StatusCounter(final JDFNode node, final VJDFAttributeMap vPartMap, final VElement vResLinks)
 	{
 		addPhaseTimeAmounts = true;
+		idleCount = 0;
+		idleSkip = 1;
 		setActiveNode(node, vPartMap, vResLinks);
+	}
+
+	/**
+	 * Setter for idleSkip attribute. 
+	 * @param idleSkip the idleSkip to set
+	 */
+	public void setIdleSkip(int idleSkip)
+	{
+		if (idleSkip >= 1)
+			this.idleSkip = idleSkip;
 	}
 
 	/**
@@ -356,18 +370,6 @@ public class StatusCounter
 		}
 
 		setUpResLinks(vResLinksLocal);
-	}
-
-	/**
-	 * simple sleep wrapper that catches its exception
-	 * 
-	 * @param millis
-	 * @deprecated use {@link ThreadUtil}.sleep()
-	 */
-	@Deprecated
-	public static void sleep(final int millis)
-	{
-		ThreadUtil.sleep(millis);
 	}
 
 	/**
@@ -1210,7 +1212,10 @@ public class StatusCounter
 	{
 		if (docJMFPhaseTime == null)
 		{
-			setIdlePhase(EnumDeviceStatus.Idle, null);
+			if (idleCount++ % idleSkip == 0)
+			{
+				setIdlePhase(EnumDeviceStatus.Idle, null);
+			}
 		}
 		return docJMFPhaseTime.clone();
 	}

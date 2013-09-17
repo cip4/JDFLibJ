@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -167,10 +167,7 @@ public class DelayedPersist extends Thread
 				l.i = t + deltaTime;
 			}
 		}
-		if (deltaTime <= 0)
-		{
-			ThreadUtil.notifyAll(waitMutex);
-		}
+		ThreadUtil.notifyAll(waitMutex);
 	}
 
 	/**
@@ -182,13 +179,14 @@ public class DelayedPersist extends Thread
 		log.info("starting queue persist loop");
 		while (true)
 		{
+			int tWait = 10000;
 			try
 			{
-				persistQueues();
+				tWait = persistQueues();
 			}
 			catch (Exception e)
 			{
-				log.error("whazzup queuing delayedPersist ", e);
+				log.error("whazzup queueing delayedPersist ", e);
 			}
 			if (stop)
 			{
@@ -197,7 +195,7 @@ public class DelayedPersist extends Thread
 				waitMutex = null;
 				break;
 			}
-			if (!ThreadUtil.wait(waitMutex, 10000))
+			if (tWait > 0 && !ThreadUtil.wait(waitMutex, tWait))
 			{
 				_shutDown();
 				break;
@@ -206,10 +204,14 @@ public class DelayedPersist extends Thread
 	}
 
 	/**
-	 * 
+	 * @return the recommended next wait time
 	 */
-	private void persistQueues()
+	private int persistQueues()
 	{
+		long t0 = 424242;
+		if (persistQueue.size() == 0)
+			return (int) t0;
+
 		long t = System.currentTimeMillis();
 		Vector<IPersistable> theList = new Vector<IPersistable>();
 
@@ -217,7 +219,7 @@ public class DelayedPersist extends Thread
 		{
 			Vector<IPersistable> v = ContainerUtil.getKeyVector(persistQueue);
 			if (v == null)
-				return;
+				return (int) t0;
 
 			for (IPersistable qp : v)
 			{
@@ -227,15 +229,26 @@ public class DelayedPersist extends Thread
 					theList.add(qp);
 					persistQueue.remove(qp);
 				}
+				else if (l.i - t < t0)
+				{
+					t0 = l.i - t;
+				}
 			}
 		}
 
+		boolean gotOne = false;
 		// now the unsynchronized stuff
 		for (IPersistable qp : theList)
 		{
 			qp.persist();
+			gotOne = true;
 		}
-		System.gc();
+		if (gotOne)
+		{
+			System.gc();
+			t0 -= System.currentTimeMillis() - t;
+		}
+		return (int) t0;
 	}
 
 	/**
