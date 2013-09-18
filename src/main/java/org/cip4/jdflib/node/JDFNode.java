@@ -6749,6 +6749,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @return
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(true), getJobPartID(false), getNodeInfoPartMapVector());
@@ -9946,6 +9947,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	 */
+	@Override
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)
@@ -9962,6 +9964,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * sets the CommentURL this allows us to implement {@link IURLSetter} and automagically manipulate attatched commenturl files
 	 * @see org.cip4.jdflib.ifaces.IURLSetter#setURL(java.lang.String)
 	 */
+	@Override
 	public void setURL(String url)
 	{
 		setCommentURL(url);
@@ -9971,8 +9974,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * gets the CommentURL this allows us to implement {@link IURLSetter} and automagically manipulate attatched commenturl files
 	 * @see org.cip4.jdflib.ifaces.IURLSetter#getURL()
 	 */
+	@Override
 	public String getURL()
 	{
 		return getCommentURL();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#setVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
+	@Override
+	public void setVersion(EnumVersion enumVer)
+	{
+		super.setVersion(enumVer);
+		EnumVersion maxVersion = getMaxVersion(true);
+		if (EnumUtil.aLessEqualsThanB(maxVersion, enumVer))
+		{
+			setMaxVersion(enumVer);
+		}
 	}
 }

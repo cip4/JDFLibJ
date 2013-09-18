@@ -102,6 +102,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.EnumUtil;
 
 /**
  * The wrapper for JMF messages, i.e. the root of a JMF document
@@ -203,6 +204,20 @@ public class JDFJMF extends JDFAutoJMF
 		}
 
 		return EnumVersion.getEnum(version);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#setVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
+	@Override
+	public void setVersion(EnumVersion enumVer)
+	{
+		super.setVersion(enumVer);
+		EnumVersion maxVersion = getMaxVersion(true);
+		if (EnumUtil.aLessEqualsThanB(maxVersion, enumVer))
+		{
+			setMaxVersion(enumVer);
+		}
 	}
 
 	/**

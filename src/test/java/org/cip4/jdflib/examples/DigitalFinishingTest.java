@@ -72,9 +72,11 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -99,6 +101,8 @@ import org.cip4.jdflib.resource.process.JDFExpr;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
+import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.JDFSpawn;
 
 /**
  * jmf pipe example file test
@@ -137,6 +141,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFNode n = jdfDoc.getJDFRoot();
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
+
 		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
 		c.setAttribute("Automation", "Dynamic");
@@ -165,10 +170,20 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
 		body.setSurfaceCount(-1);
+
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
 		booklet.linkResource(body, EnumUsage.Input, null);
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletBarcode.jdf", 2, false);
+
+		idp = new JDFSpawn(idp).spawn();
+		new JDFSpawn(idp).unSpawnChild(idp);
+		idp.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "BookletBarcodeIDP.jdf", 2, false);
+
+		booklet = new JDFSpawn(booklet).spawn();
+		new JDFSpawn(booklet).unSpawnChild(booklet);
+		booklet.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "BookletBarcodeFinishing.jdf", 2, false);
+
 	}
 
 	/**
@@ -179,22 +194,44 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	{
 		JDFDoc jdfDoc = new JDFDoc("JDF");
 		JDFNode n = jdfDoc.getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_5);
 		n.setJobID("J1");
 		n.setType(JDFNode.EnumType.ProcessGroup);
+
 		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
+
+		JDFRunList rl = (JDFRunList) idp.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.setAttribute("Automation", "Dynamic");
+
+		idp.addResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
 		c.setAttribute("Automation", "Dynamic");
 		c.setPipeID("PipeSheet");
+		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(c, EnumUsage.Output, null);
 		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setSurfaceCount(2);
 		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
 		body.setSurfaceCount(-1);
+
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
 		booklet.linkResource(body, EnumUsage.Input, null);
+		booklet.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
+		JDFComponent outComponent = (JDFComponent) booklet.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		outComponent.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Block);
+
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
+		idp = new JDFSpawn(idp).spawn();
+		new JDFSpawn(idp).unSpawnChild(idp);
+		idp.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "BookletPipeIDP.jdf", 2, false);
+
+		booklet = new JDFSpawn(booklet).spawn();
+		new JDFSpawn(booklet).unSpawnChild(booklet);
+		booklet.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "BookletPipeFinishing.jdf", 2, false);
 	}
 
 	/**
@@ -341,6 +378,92 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 			}
 		}
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushSheet.jmf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	void createPipePushSheetExample(int set, int sheet, int sheets, boolean bCover)
+	{
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setSenderID("Printer");
+		jmf.setVersion(EnumVersion.Version_1_5);
+		JDFCommand command = jmf.appendCommand();
+		command.setType(EnumType.PipePush);
+		JDFPipeParams pp = createPipeParams(command);
+		createPartAmount(pp, set, sheet, sheets, bCover);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushSheetExample" + set + "." + sheet + (bCover ? "c" : "b") + ".jmf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testPipePushSheetExample()
+	{
+		createPipePushSheetExample(0, 0, 1, true);
+		createPipePushSheetExample(0, 0, 5, false);
+		createPipePushSheetExample(0, 1, 5, false);
+		createPipePushSheetExample(0, 4, 5, false);
+		createPipePushSheetExample(1, 0, 1, true);
+		createPipePushSheetExample(1, 0, 1, false);
+		createPipePushSheetExample(35, 4, 7, false);
+
+		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		jmf.setSenderID("Finisher");
+		JDFCommand command = jmf.appendCommand();
+		command.setType(EnumType.PipePause);
+		JDFPipeParams pp = createPipeParams(command);
+		JDFAmountPool ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		JDFAttributeMap m = new JDFAttributeMap("SetIndex", "34 35");
+		m.put("Condition", "Waste");
+		JDFPartAmount pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePauseFinisherExample.jmf", 2, false);
+
+		jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		command = jmf.appendCommand();
+		command.setType(EnumType.PipePull);
+		command.setSenderID("Finisher");
+		pp = createPipeParams(command);
+		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		m = new JDFAttributeMap("SetIndex", "34~-1");
+		pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePullFinisherExample.jmf", 2, false);
+
+		createPipePushSheetExample(34, 0, 1, true);
+		createPipePushSheetExample(34, 0, 5, false);
+
+		createPipePushSheetExample(122, 4, 7, false);
+
+		jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		jmf.setSenderID("Printer");
+		command = jmf.appendCommand();
+		command.setType(EnumType.PipePause);
+		pp = createPipeParams(command);
+		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		m = new JDFAttributeMap("SetIndex", "122");
+		m.put("Condition", "Waste");
+		pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePausePrinterExample.jmf", 2, false);
+
+		createPipePushSheetExample(122, 0, 1, true);
+
+		createPipePushSheetExample(221, 5, 6, false);
+
+		jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		jmf.setSenderID("Printer");
+		command = jmf.appendCommand();
+		command.setType(EnumType.PipeClose);
+		pp = createPipeParams(command);
+		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		m = new JDFAttributeMap("SetIndex", "0~221");
+		pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipeCloseExample.jmf", 2, false);
 	}
 
 	/**
