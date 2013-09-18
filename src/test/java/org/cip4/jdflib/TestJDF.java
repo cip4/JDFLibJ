@@ -74,17 +74,8 @@ package org.cip4.jdflib;
 import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.JDFSpawn;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -136,39 +127,6 @@ public class TestJDF extends JDFTestCaseBase
 
 	}
 
-	public void testSpawnROPartsOnly() throws Throwable
-	{
-		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/000080_ArtikelNummer(ArtikelNummer)_JDFRouter.jdf");
-
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.P", JDFConstants.EMPTYSTRING);
-
-		VString vsRWResourceIDs = new VString("r_130916_093633605_000365 r_130916_093633604_000363 Link_130916_093647006_000650 Link_130916_093647006_000651 r_130916_093633599_000349", null);
-
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
-
-		JDFAttributeMap amPart = new JDFAttributeMap();
-
-		amPart.put("Separation", "Black");
-		amPart.put("SheetName", "Faltschachtel");
-		amPart.put("Side", "Front");
-		amPart.put("SignatureName", "SIG001");
-
-		vamParts.add(amPart);
-
-		JDFSpawn spawn = new JDFSpawn(nodeProc);
-
-		spawn.setNode(nodeProc);
-		spawn.bFixResources = false;
-		spawn.bSpawnRWPartsMultiple = true;
-		spawn.bSpawnIdentical = true;
-		spawn.bSpawnROPartsOnly = false;
-
-		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, false, true, true, false);
-
-		JDFResource resPreview = nodeSubJDF.getResource("Preview", EnumUsage.Input, 0);
-
-		// resPreview enthält nur "Black" !!!
-	}
 	/**
 	 * 
 	 * TODO Please insert comment!
