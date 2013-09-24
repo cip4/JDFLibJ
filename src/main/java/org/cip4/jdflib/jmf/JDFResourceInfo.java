@@ -88,7 +88,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -196,19 +195,17 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * get the resource defined by <code>resName</code>
+	 * get the resource defined by <code>resName</code> if null get the resource specified in @ResourceName
 	 * 
 	 * @param resName name of the resource to get/create
 	 * @return JDFCostCenter The element
 	 */
 	public JDFResource getCreateResource(final String resName)
 	{
-		final KElement e = getCreateElement(resName, JDFConstants.EMPTYSTRING, 0);
-		if (e instanceof JDFResource)
-		{
-			return (JDFResource) e;
-		}
-		throw new JDFException("JDFResouceInfo.getCreateResource tried to create a JDFElement instead of a JDFResource");
+		JDFResource e = getResource(resName);
+		if (e == null)
+			e = appendResource(resName);
+		return e;
 	}
 
 	/**
@@ -259,15 +256,20 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * append resource
 	 * 
-	 * @param resName name of the resource to append
-	 * @return
+	 * @param resName name of the resource to append, if null get the resource specified in @ResourceName
+	 * @return 
 	 */
-	public JDFResource appendResource(final String resName)
+	public JDFResource appendResource(String resName)
 	{
-		final KElement e = appendElement(resName, null);
-		if (e instanceof JDFResource)
+		if (StringUtil.getNonEmpty(resName) == null)
+			resName = getResourceName();
+		if (StringUtil.getNonEmpty(resName) != null)
 		{
-			return (JDFResource) e;
+			final KElement e = appendElement(resName, null);
+			if (e instanceof JDFResource)
+			{
+				return (JDFResource) e;
+			}
 		}
 		throw new JDFException("JDFResouceInfo.appendResource tried to append a JDFElement instead of a JDFResource");
 	}
@@ -568,6 +570,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * 
 	 * @return JDFResource
 	 */
+	@Override
 	public JDFResource getLinkRoot()
 	{
 		return getResource(getResourceName());
@@ -704,6 +707,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * 
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
+	@Override
 	public boolean matches(Object subset)
 	{
 		if (subset == null)

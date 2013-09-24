@@ -208,6 +208,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
 		c.setAttribute("Automation", "Dynamic");
 		c.setPipeID("PipeSheet");
+		c.setPipeProtocol("JMFPush");
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");

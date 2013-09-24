@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -98,9 +99,12 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFShapeDefProductionParams;
+import org.cip4.jdflib.resource.process.JDFShapeTemplate;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi
  * 
@@ -108,6 +112,17 @@ import org.junit.Test;
  */
 public class JMFResourceTest extends JDFTestCaseBase
 {
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	@Before
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		KElement.setLongID(false);
+	}
+
 	/**
 	 * 
 	 */
@@ -125,7 +140,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		vClasses.add(EnumResourceClass.Consumable);
 		vClasses.add(EnumResourceClass.Handling);
 		rqp.setClasses(vClasses);
-		Assert.assertEquals(rqp.getClasses().toString(), vClasses.toString());
+		assertEquals(rqp.getClasses().toString(), vClasses.toString());
 	}
 
 	// //////////////////////////////////////////
@@ -144,7 +159,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		final JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
 		rqp.setJobID("J1");
 		rqp.setJobPartID("p2");
-		Assert.assertEquals(rqp.getIdentifier(), new NodeIdentifier("J1", "p2", null));
+		assertEquals(rqp.getIdentifier(), new NodeIdentifier("J1", "p2", null));
 
 	}
 
@@ -177,7 +192,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		uc.setResStatus(EnumResStatus.Available, true);
 		uc.setCounterTypes(new VString("NormalSize", " "));
 		doc.write2File(sm_dirTestDataTemp + File.separator + "JMFResourceSignal.jmf", 2, false);
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -238,11 +253,93 @@ public class JMFResourceTest extends JDFTestCaseBase
 			m.setBrand("Brand #" + i);
 			m.setProductID("ProductID_" + i);
 			m.setMediaType(EnumMediaType.Paper);
+			m.setMediaQuality("Qual_" + (1 + i % 3));
 			m.setResStatus((i < 2 ? EnumResStatus.Available : EnumResStatus.Unavailable), false);
 			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
 		}
 		doc.write2File(sm_dirTestDataTemp + "MediaCatalog.jmf", 2, false);
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMediaCatalogSignal()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		jmf.setSenderID("DeviceSenderID");
+
+		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
+		q.setXMLComment("This is the query for a catalog");
+
+		final JDFResourceQuParams rqp = q.appendResourceQuParams();
+		rqp.setExact(true);
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
+		rqp.setResourceName(new VString(ElementName.MEDIA, null));
+		// rqp.setAttribute("Scope", "Allowed");
+
+		JDFSignal signal = q.createSignal().getSignal(0);
+		doc = signal.getOwnerDocument_JDFElement();
+		signal.setXMLComment("This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+
+		for (int i = 1; i < 5; i++)
+		{
+			final JDFResourceInfo ri = signal.appendResourceInfo();
+			ri.setResourceName("Media");
+			final JDFMedia m = (JDFMedia) ri.appendResource("Media");
+			m.setDescriptiveName("Description of Media #" + i);
+			m.setDimensionCM(new JDFXYPair(i * 10, 13 + i % 2 * 20));
+			m.setBrand("Brand #" + i);
+			m.setProductID("ProductID_" + i);
+			m.setMediaType(EnumMediaType.Paper);
+			m.setMediaQuality("Qual_" + (1 + i % 3));
+			m.setResStatus((i < 2 ? EnumResStatus.Available : EnumResStatus.Unavailable), false);
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
+		}
+		doc.write2File(sm_dirTestDataTemp + "MediaCatalogSignal.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEcmaList()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		jmf.setSenderID("DeviceSenderID");
+
+		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
+		q.setXMLComment("This is the query for a catalog");
+
+		final JDFResourceQuParams rqp = q.appendResourceQuParams();
+		rqp.setExact(true);
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complete list of all known resources");
+		rqp.setResourceName(new VString(ElementName.MEDIA, null));
+		rqp.setAttribute("Scope", "Allowed");
+
+		JDFResponse r = q.createResponse().getResponse(0);
+		r = (JDFResponse) jmf.moveElement(r, null);
+		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+
+		for (int i = 1; i < 5; i++)
+		{
+			final JDFResourceInfo ri = r.appendResourceInfo();
+			ri.setResourceName(ElementName.SHAPEDEFPRODUCTIONPARAMS);
+			final JDFShapeDefProductionParams m = (JDFShapeDefProductionParams) ri.appendResource(null);
+			m.setDescriptiveName("Description of ShapeTemplate #" + i);
+			JDFShapeTemplate shapeTemp = m.appendShapeTemplate();
+			String standard = i < 3 ? "FEFCO" : "ECMA";
+			shapeTemp.setStandard(standard);
+			shapeTemp.setName(standard + "_" + i);
+
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
+		}
+		doc.write2File(sm_dirTestDataTemp + "EcmaCatalog.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -274,8 +371,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 		final JDFMedia m = (JDFMedia) ri2.appendElement("Media");
 		final JDFRefElement rm = xm.refElement(m);
 
-		Assert.assertEquals("works initially ", m, rm.getTarget());
-		Assert.assertEquals("also works with cache", m, rm.getTarget());
+		assertEquals("works initially ", m, rm.getTarget());
+		assertEquals("also works with cache", m, rm.getTarget());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -311,12 +408,12 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jdf.setJobID("JobID");
 		jdf.setJobPartID("JobPartID");
 
-		Assert.assertEquals(jdf.getPartStatus(null, 0), EnumNodeStatus.Waiting);
-		Assert.assertEquals(jdf.getStatus(), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(null, 0), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Waiting);
 		rqp.applyResourceCommand(jdf);
-		Assert.assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
-		Assert.assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
-		Assert.assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Aborted);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
+		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Aborted);
 
 		sheetMap = new JDFAttributeMap("SheetName", "S2");
 		rqp.setPartMap(sheetMap);
@@ -324,9 +421,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 		niRQPS1.setNodeStatus(EnumNodeStatus.Completed);
 
 		rqp.applyResourceCommand(jdf);
-		Assert.assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
-		Assert.assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
-		Assert.assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Completed);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
+		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Completed);
 	}
 
 	/**
@@ -359,7 +456,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		rqp.applyResourceCommand(jdf);
 		final JDFMedia m2 = (JDFMedia) jdf.getMatchingResource("Media", EnumProcessUsage.AnyInput, null, 0);
-		Assert.assertEquals(m2.getDimension(), new JDFXYPair(20, 30));
+		assertEquals(m2.getDimension(), new JDFXYPair(20, 30));
 
 		final JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
 		rqp.setPartMap(sheetMap);
@@ -367,8 +464,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		final JDFMedia m2Sheet = (JDFMedia) m2.addPartition(EnumPartIDKey.SheetName, "S1");
 		rqp.applyResourceCommand(jdf);
-		Assert.assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
-		Assert.assertEquals("overwrote leaf root dimension", m2Sheet.getDimension(), new JDFXYPair(200, 300));
+		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
+		assertEquals("overwrote leaf root dimension", m2Sheet.getDimension(), new JDFXYPair(200, 300));
 
 		sheetMap.put(EnumPartIDKey.SheetName, "S2");
 		rqp.setPartMap(sheetMap);
@@ -376,9 +473,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		rqp.applyResourceCommand(jdf);
 		final JDFMedia m2Sheet2 = (JDFMedia) m2.getPartition(sheetMap, null);
-		Assert.assertNotNull(m2Sheet2);
-		Assert.assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
-		Assert.assertEquals("overwrote leaf root dimension", m2Sheet2.getDimension(), new JDFXYPair(300, 400));
+		assertNotNull(m2Sheet2);
+		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
+		assertEquals("overwrote leaf root dimension", m2Sheet2.getDimension(), new JDFXYPair(300, 400));
 
 		final JDFMedia mPartRQP = (JDFMedia) mediaRQP.addPartition(EnumPartIDKey.SheetName, "S3");
 		sheetMap.put(EnumPartIDKey.SheetName, "S3");
@@ -387,17 +484,17 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		rqp.applyResourceCommand(jdf);
 		final JDFMedia m2Sheet3 = (JDFMedia) m2.getPartition(sheetMap, null);
-		Assert.assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
-		Assert.assertEquals("overwrote leaf root dimension", m2Sheet3.getDimension(), new JDFXYPair(400, 600));
-		Assert.assertFalse(m2Sheet3.hasAttribute_KElement("ID", null, false));
+		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
+		assertEquals("overwrote leaf root dimension", m2Sheet3.getDimension(), new JDFXYPair(400, 600));
+		assertFalse(m2Sheet3.hasAttribute_KElement("ID", null, false));
 
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
 		//		final JDFMedia m2Sheet4 = (JDFMedia) 
 		m2.getPartition(sheetMap, null);
-		Assert.assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
-		// Assert.assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
+		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
+		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
 	}
 
 	/**
@@ -439,13 +536,13 @@ public class JMFResourceTest extends JDFTestCaseBase
 			params = createResourceParams(partID, resID, amParts, amAttr);
 			final JDFNode n = root.getJobPart(partID, null);
 			params.applyResourceCommand(n);
-			Assert.assertNotNull(n);
+			assertNotNull(n);
 			final JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
-			Assert.assertNotNull(ni);
+			assertNotNull(ni);
 			final JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);
-			Assert.assertNotNull(nip);
-			Assert.assertFalse(nip.hasAttribute_KElement("ID", null, false));
-			Assert.assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
+			assertNotNull(nip);
+			assertFalse(nip.hasAttribute_KElement("ID", null, false));
+			assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
 		}
 	}
 
@@ -495,23 +592,23 @@ public class JMFResourceTest extends JDFTestCaseBase
 		resID = "Link49087948_000508";
 		final JDFNode n = root.getJobPart(partID, null);
 		final JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
-		Assert.assertNotNull(ni);
+		assertNotNull(ni);
 		JDFResource niPart = ni.getPartition(amParts, null);
 		JDFAttributeMap map2 = amParts.clone();
 		map2.put("Side", "Back");
-		Assert.assertNotNull(niPart);
+		assertNotNull(niPart);
 		JDFResource niBack = ni.getCreatePartition(map2, null);
 		niBack.setIdentical(niPart);
 
 		JDFResourceCmdParams params = createResourceParams(partID, resID, map2, amAttr);
 		params.applyResourceCommand(n);
-		Assert.assertNotNull(n);
+		assertNotNull(n);
 		final JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);
-		Assert.assertNotNull(nip);
-		Assert.assertFalse(nip.hasAttribute_KElement("ID", null, false));
-		Assert.assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
-		Assert.assertEquals(EnumSide.Back, niBack.getSide());
-		Assert.assertEquals(EnumSide.Front, niPart.getSide());
+		assertNotNull(nip);
+		assertFalse(nip.hasAttribute_KElement("ID", null, false));
+		assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
+		assertEquals(EnumSide.Back, niBack.getSide());
+		assertEquals(EnumSide.Front, niPart.getSide());
 	}
 
 	private JDFResourceCmdParams createResourceParams(final String strJobPartID, final String strResourceID, final JDFAttributeMap amParts, final JDFAttributeMap amAttr)

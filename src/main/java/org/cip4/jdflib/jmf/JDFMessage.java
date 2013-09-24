@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -699,6 +699,28 @@ public class JDFMessage extends JDFAutoMessage
 
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, null);
 		jmf.getResponse(0).setQuery(this);
+		return jmf;
+	}
+
+	/**
+	 * create a new signal for this if this is any message except response correctly fills refId, type etc.
+	 * 
+	 * @return the newly created message
+	 */
+	public JDFJMF createSignal()
+	{
+		final JDFMessage.EnumFamily family = getFamily();
+
+		if (family == null)
+		{
+			throw new JDFException("createResponse: creating resp from undefined message family");
+		}
+
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, null);
+		JDFSignal signal = jmf.getSignal(0);
+		signal.setQuery(this);
+		signal.copyElements(getChildElementVector(null, null), null);
+		signal.removeChild(ElementName.SUBSCRIPTION, null, 0);
 		return jmf;
 	}
 

@@ -1508,6 +1508,8 @@ public class XMLDoc
 				// nop
 			}
 			docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
+			if (docResponse != null && docResponse.getRoot() == null)
+				docResponse = null;
 		}
 
 		return docResponse;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author prosirai
  * 
@@ -185,10 +186,13 @@ public class JDFPersonTest extends JDFTestCaseBase
 		Assert.assertEquals("create correct descname", person.getDescriptiveName(), "Prof. Joe Cool IV");
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		final JDFDoc d = new JDFDoc("Person");
 		person = (JDFPerson) d.getRoot();
