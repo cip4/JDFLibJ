@@ -141,6 +141,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		 * @param o2
 		 * @return
 		*/
+		@Override
 		public int compare(final KElement o1, final KElement o2)
 		{
 			if (o1 == null)
@@ -174,9 +175,10 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 				{
 					final String d1 = q1.getAttribute(AttributeName.ENDTIME, null, null);
 					final String d2 = q2.getAttribute(AttributeName.ENDTIME, null, null);
-					if (d1 != null && d2 != null)
+					int d = ContainerUtil.compare(d2, d1);
+					if (d != 0)
 					{
-						return d2.compareTo(d1);
+						return d;
 					}
 				}
 				else
@@ -189,8 +191,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 					}
 				}
 
-				String d1 = q1.getAttribute(AttributeName.STARTTIME, null, null);
-				String d2 = q2.getAttribute(AttributeName.STARTTIME, null, null);
+				String d1 = q1.getAttribute(AttributeName.STARTTIME, null, "999999");
+				String d2 = q2.getAttribute(AttributeName.STARTTIME, null, "999999");
 				int d = ContainerUtil.compare(d1, d2);
 				if (d != 0)
 				{
@@ -204,6 +206,14 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 				{
 					return d;
 				}
+				d1 = q1.getAttribute(AttributeName.QUEUEENTRYID, null, null);
+				d2 = q2.getAttribute(AttributeName.QUEUEENTRYID, null, null);
+				d = ContainerUtil.compare(d1, d2);
+				if (d != 0)
+				{
+					return d;
+				}
+				return new SimpleNodeComparator().compare(q1, q2);
 			}
 			return 0;
 		}
@@ -456,6 +466,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * 
 	 * @return
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier();
@@ -469,6 +480,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * 
 	 *  
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier ni)
 	{
 		if (ni == null)
@@ -673,6 +685,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * @return 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(final KElement arg0)
 	{
 		return new QueueEntryComparator().compare(this, arg0);
