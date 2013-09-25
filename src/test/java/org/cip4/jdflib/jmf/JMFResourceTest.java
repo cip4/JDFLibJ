@@ -319,7 +319,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		rqp.setExact(true);
 		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complete list of all known resources");
 		rqp.setResourceName(new VString(ElementName.MEDIA, null));
-		rqp.setAttribute("Scope", "Allowed");
+		//		rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
