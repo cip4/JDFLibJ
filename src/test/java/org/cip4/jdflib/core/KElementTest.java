@@ -97,6 +97,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 import org.w3c.dom.Element;
@@ -624,24 +625,37 @@ public class KElementTest extends JDFTestCaseBase
 		XMLDoc d = new JDFDoc("parent");
 		KElement e = d.getRoot();
 
+		CPUTimer t = new CPUTimer(false);
 		for (int i = 0; i < 10000; i++)
 		{
-			e.appendElement("b" + (int) (Math.random() * 100));
+			KElement ee = e.appendElement("b" + (int) (Math.random() * 100));
+			for (int j = 0; j < 7; j++)
+			{
+				ee.setAttribute("J" + j, (i + j) % 17, null);
+			}
 		}
-		System.out.println(System.currentTimeMillis());
+		t.start();
 		e.sortChildren(new SimpleNodeComparator());
-		System.out.println(System.currentTimeMillis());
+		log.info(t);
+		t.stop();
 		d = new JDFDoc("parent");
 		e = d.getRoot();
 		for (int i = 0; i < 10000; i++)
 		{
-			e.appendElement("b" + (int) (Math.random() * 100));
+			KElement ee = e.appendElement("b" + (int) (Math.random() * 100));
+			for (int j = 0; j < 7; j++)
+			{
+				ee.setAttribute("J" + j, (i + j) % 17, null);
+			}
 		}
-		System.out.println(System.currentTimeMillis());
+		t.start();
 		e.sortChildren();
-		System.out.println(System.currentTimeMillis());
+		log.info(t);
+		t.stop();
+		t.start();
 		e.sortChildren();
-		System.out.println(System.currentTimeMillis());
+		log.info(t);
+		t.stop();
 
 	}
 
