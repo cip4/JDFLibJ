@@ -445,10 +445,21 @@ class XPathHelper
 		if (map == null)
 			return;
 		Iterator<String> it = map.getKeyIterator();
+
+		// we need this double loop to ensure that all namespaces are correctly set
 		while (it.hasNext())
 		{
 			String xpath = it.next();
-			setXPathValue(xpath, map.get(xpath));
+			if (xpath.indexOf(AttributeName.XMLNS) >= 0)
+				setXPathValue(xpath, map.get(xpath));
+		}
+
+		it = map.getKeyIterator();
+		while (it.hasNext())
+		{
+			String xpath = it.next();
+			if (xpath.indexOf(AttributeName.XMLNS) < 0)
+				setXPathValue(xpath, map.get(xpath));
 		}
 	}
 

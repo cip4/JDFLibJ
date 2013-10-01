@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,19 @@ public class XPathHelperTest extends JDFTestCaseBase
 	{
 		theElement.setXPathAttribute("@bar", null);
 		assertFalse(theElement.hasXPathNode("@bar"));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testSetNamespaces()
+	{
+		theElement.setXPathAttribute("@foo:bar", "b1");
+		theElement.setXPathAttribute("@xmlns:foo", "www.foo.com");
+		theElement.setXPathAttribute("@foo:bar2", "b2");
+		assertFalse(theElement.hasXPathNode("@bar"));
+		assertFalse(theElement.hasXPathNode("@bar2"));
 	}
 
 	/**
