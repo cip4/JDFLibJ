@@ -191,13 +191,13 @@ public class JMFBuilder
 	 */
 	private JDFJMF buildQueueEntryCommand(final String queueEntryId, final EnumType typ)
 	{
-		//TODO enhance for JDF 1.5 params
 		if (queueEntryId == null)
 		{
 			return null;
 		}
 		final JDFJMF jmf = createJMF(EnumFamily.Command, typ);
 		final JDFCommand command = jmf.getCommand(0);
+
 		command.appendQueueEntryDef().setQueueEntryID(queueEntryId);
 		return finalize(jmf);
 	}

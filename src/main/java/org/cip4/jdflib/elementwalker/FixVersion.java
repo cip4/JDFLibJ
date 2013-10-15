@@ -853,22 +853,8 @@ public class FixVersion extends BaseElementWalker
 	 * 
 	 *  
 	 */
-	public class WalkJMFCommandAbortQueueEntry extends WalkJMFCommandQueueFilter
+	public class WalkJMFCommandAbortQueueEntry extends WalkJMFCommandNewParams
 	{
-
-		/**
-		* 
-		* @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		*/
-		@Override
-		public KElement walk(KElement e1, KElement trackElem)
-		{
-			if (!EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
-			{
-				e1.getCreateElement("AbortQueueEntryParams").moveElement(((JDFMessage) e1).getQueueEntryDef(0), null);
-			}
-			return super.walk(e1, trackElem);
-		}
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
@@ -882,6 +868,151 @@ public class FixVersion extends BaseElementWalker
 				return false;
 			return JDFMessage.EnumType.AbortQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
 		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandNewParams#getNewParamsName()
+		 */
+		@Override
+		protected String getNewParamsName()
+		{
+			return "AbortQueueEntryParams";
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandHoldQueueEntry extends WalkJMFCommandNewParams
+	{
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return JDFMessage.EnumType.HoldQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandNewParams#getNewParamsName()
+		 */
+		@Override
+		protected String getNewParamsName()
+		{
+			return "HoldQueueEntryParams";
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandRemoveQueueEntry extends WalkJMFCommandNewParams
+	{
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return JDFMessage.EnumType.RemoveQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandNewParams#getNewParamsName()
+		 */
+		@Override
+		protected String getNewParamsName()
+		{
+			return "RemoveQueueEntryParams";
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandResumeQueueEntry extends WalkJMFCommandNewParams
+	{
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return JDFMessage.EnumType.ResumeQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandNewParams#getNewParamsName()
+		 */
+		@Override
+		protected String getNewParamsName()
+		{
+			return "ResumeQueueEntryParams";
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandNewParams extends WalkJMFCommandQueueFilter
+	{
+
+		/**
+		* 
+		* @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		*/
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			if (!EnumUtil.aLessThanB(version, EnumVersion.Version_1_5))
+			{
+				e1.getCreateElement(getNewParamsName()).moveElement(((JDFMessage) e1).getQueueEntryDef(0), null);
+			}
+			else
+			{
+				KElement newParams = e1.getElement(getNewParamsName());
+				if (newParams != null)
+				{
+					e1.moveElement(newParams.getElement(ElementName.QUEUEENTRYDEF), null);
+					newParams.deleteNode();
+				}
+			}
+			return super.walk(e1, trackElem);
+		}
+
+		/**
+		 * 
+		 * 
+		 * @return
+		 */
+		protected String getNewParamsName()
+		{
+			return null;
+		}
+
 	}
 
 	/**

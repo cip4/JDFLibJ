@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -137,12 +137,12 @@ public class RollingBackupDirectory extends BackupDirectory
 		if (file == null)
 			return 0;
 		String name = file.getName();
-		VString v = StringUtil.tokenize(name, ".", false);
-		for (int i = v.size() - 1; i > 0; i--)
+		VString v = StringUtil.tokenize(name.substring(baseName.length()), ".", false);
+		for (String s : v)
 		{
-			if (StringUtil.isInteger(v.get(i)))
+			if (StringUtil.isInteger(s))
 			{
-				return StringUtil.parseInt(v.get(i), -1);
+				return StringUtil.parseInt(s, -1);
 			}
 		}
 		return 0;

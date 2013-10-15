@@ -92,6 +92,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -215,6 +216,39 @@ public class XJDFTest extends JDFTestCaseBase
 		e = new XJDF20().makeNewJDF(n, null);
 		String s = e.getAttribute(AttributeName.TYPES);
 		assertFalse(s.startsWith(" "));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFromXJDFTypes()
+	{
+		e = new XJDF20().makeNewJDF(n, null);
+		e.setXPathValue("ProductList/Product/@IsRoot", "true");
+		e.setXPathValue("@Types", "ConventionalPrinting");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d2 = xCon.convert(e);
+		assertNotNull(d2.getJDFRoot().getElement("JDF"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFromXJDFTypesNS()
+	{
+		e = new XJDF20().makeNewJDF(n, null);
+		e.setXPathValue("ProductList/Product/@IsRoot", "true");
+		e.setXPathValue("@Types", "ConventionalPrinting");
+		EnsureNSUri ns = new EnsureNSUri();
+		ns.addNS("xjdf", JDFElement.getSchemaURL(2, 0));
+		ns.addAlias("", "xjdf");
+		ns.walkTree(e, null);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d2 = xCon.convert(e);
+		assertNotNull(d2.getJDFRoot().getElement("JDF"));
 	}
 
 	/**

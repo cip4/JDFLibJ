@@ -95,7 +95,6 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -103,7 +102,8 @@ import org.junit.Test;
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class FixVersionTest extends JDFTestCaseBase {
+public class FixVersionTest extends JDFTestCaseBase
+{
 	private JDFDoc mDoc;
 	private JDFNode n;
 
@@ -113,7 +113,8 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 */
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		super.setUp();
 		mDoc = new JDFDoc("JDF");
 		n = mDoc.getJDFRoot();
@@ -126,25 +127,26 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testApprovalSuccess() {
+	public void testApprovalSuccess()
+	{
 		n.setType("Approval", true);
 		JDFApprovalSuccess as = (JDFApprovalSuccess) n.appendMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null);
 		n.setVersion(EnumVersion.Version_1_2);
 		as.appendContact();
 		as.appendFileSpec();
 		boolean bRet = n.fixVersion(EnumVersion.Version_1_3);
-		Assert.assertTrue("fix ok", bRet);
-		Assert.assertNotNull("approvaldetails", as.getApprovalDetails(0));
+		assertTrue("fix ok", bRet);
+		assertNotNull("approvaldetails", as.getApprovalDetails(0));
 		bRet = n.fixVersion(EnumVersion.Version_1_2);
-		Assert.assertTrue("fix ok", bRet);
-		Assert.assertNull("approvaldetails", as.getApprovalDetails(0));
+		assertTrue("fix ok", bRet);
+		assertNull("approvaldetails", as.getApprovalDetails(0));
 		bRet = n.fixVersion(EnumVersion.Version_1_3);
-		Assert.assertTrue("fix ok", bRet);
+		assertTrue("fix ok", bRet);
 		as = (JDFApprovalSuccess) n.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null, 0);
 		final JDFApprovalDetails ad = as.getApprovalDetails(0);
 		ad.setApprovalState(EnumApprovalState.Rejected);
 		bRet = n.fixVersion(EnumVersion.Version_1_2);
-		Assert.assertFalse("fix not ok", bRet);
+		assertFalse("fix not ok", bRet);
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -153,75 +155,80 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testRRefs() {
+	public void testRRefs()
+	{
 		final JDFResourcePool rp = n.appendResourcePool();
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
-		Assert.assertFalse(rp.hasAttribute(AttributeName.RREFS));
+		assertFalse(rp.hasAttribute(AttributeName.RREFS));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testNamespace() {
+	public void testNamespace()
+	{
 		KElement ns = n.appendElement("foo:abc", "www.foobar.com");
 		n.fixVersion(null);
 		KElement ns2 = n.getElement("foo:abc");
-		Assert.assertEquals(ns, ns2);
-		Assert.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getElement("foo:abc");
-		Assert.assertEquals(ns, ns2);
-		Assert.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testNamespaceRes() {
+	public void testNamespaceRes()
+	{
 		KElement ns = n.addResource("foo:abc", EnumResourceClass.Parameter, null, null, null, "www.foobar.com", null);
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:abc");
-		Assert.assertEquals(ns, ns2);
-		Assert.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getResourcePool().getElement("foo:abc");
-		Assert.assertEquals(ns, ns2);
-		Assert.assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testNamespaceParse() {
+	public void testNamespaceParse()
+	{
 		n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
 		n.fixVersion(null);
 		KElement ns2 = n.getResourcePool().getElement("foo:myresource");
-		Assert.assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
 		n.fixVersion(EnumVersion.Version_1_3);
 		ns2 = n.getResourcePool().getElement("foo:myresource");
-		Assert.assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testICSVersions() {
+	public void testICSVersions()
+	{
 		final JDFDevice r = (JDFDevice) n.addResource("Device", EnumUsage.Input);
 		final VString ics0 = new VString("Base_L2-1.2 MIS_L3-1.2 PerCP_L2_1.2", null);
 		final VString ics1 = new VString("Base_L2-1.4 MIS_L3-1.4 PerCP_L2_1.4", null);
 		r.setICSVersions(ics0);
 		final FixVersion f0 = new FixVersion(EnumVersion.Version_1_4);
 		f0.walkTree(n, null);
-		Assert.assertEquals(r.getICSVersions(), ics0);
+		assertEquals(r.getICSVersions(), ics0);
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
 		f1.setFixICSVersions(true);
 		f1.walkTree(n, null);
-		Assert.assertEquals(r.getICSVersions(), ics1);
+		assertEquals(r.getICSVersions(), ics1);
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -230,35 +237,36 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testAudit() {
+	public void testAudit()
+	{
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		final String agent = crea.getAgentName();
 		crea.setAuthor(agent);
-		Assert.assertNotNull(agent);
+		assertNotNull(agent);
 		String author = crea.getAuthor();
-		Assert.assertNotNull(author);
+		assertNotNull(author);
 
 		// TODO @Rainer (2013-03-10) - not compatible to Linux
-//		n.fixVersion(EnumVersion.Version_1_1);
-//		author = crea.getAuthor();
-//		Assert.assertEquals(StringUtil.token(author, 1, "_|_"), agent);
-//		Assert.assertTrue(author.startsWith(agent));
-//		String agent2 = crea.getAgentName();
-//		Assert.assertEquals(agent2, "");
-//
-//		n.fixVersion(EnumVersion.Version_1_3);
-//		author = crea.getAuthor();
-//		Assert.assertEquals(author.indexOf("_|_"), -1);
-//		agent2 = crea.getAgentName();
-//		Assert.assertEquals(agent, agent2);
-//
-//		n.fixVersion(EnumVersion.Version_1_2);
-//		author = crea.getAuthor();
-//		Assert.assertEquals(author.indexOf("_|_"), -1);
-//		agent2 = crea.getAgentName();
-//		Assert.assertEquals(agent, agent2);
+		//		n.fixVersion(EnumVersion.Version_1_1);
+		//		author = crea.getAuthor();
+		//		assertEquals(StringUtil.token(author, 1, "_|_"), agent);
+		//		assertTrue(author.startsWith(agent));
+		//		String agent2 = crea.getAgentName();
+		//		assertEquals(agent2, "");
+		//
+		//		n.fixVersion(EnumVersion.Version_1_3);
+		//		author = crea.getAuthor();
+		//		assertEquals(author.indexOf("_|_"), -1);
+		//		agent2 = crea.getAgentName();
+		//		assertEquals(agent, agent2);
+		//
+		//		n.fixVersion(EnumVersion.Version_1_2);
+		//		author = crea.getAuthor();
+		//		assertEquals(author.indexOf("_|_"), -1);
+		//		agent2 = crea.getAgentName();
+		//		assertEquals(agent, agent2);
 
 	}
 
@@ -269,40 +277,43 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testResourceStatus() {
+	public void testResourceStatus()
+	{
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		m.setResStatus(EnumResStatus.Available, true);
-		Assert.assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		Assert.assertTrue(m.fixVersion(EnumVersion.Version_1_1));
-		Assert.assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		Assert.assertTrue(m.fixVersion(EnumVersion.Version_1_3));
-		Assert.assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(m.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(m.fixVersion(EnumVersion.Version_1_3));
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testConvert() {
+	public void testConvert()
+	{
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		m.setResStatus(EnumResStatus.Available, true);
-		Assert.assertEquals(m.getResStatus(true), EnumResStatus.Available);
-		Assert.assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
-		Assert.assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
+		assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testNamedFeature() {
+	public void testNamedFeature()
+	{
 		n.setNamedFeatures(new VString("a b", null));
-		Assert.assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
-		Assert.assertEquals(n.getGeneralID("a", 0), "b");
-		Assert.assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
-		Assert.assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
-		Assert.assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
-		Assert.assertNull(n.getGeneralID(null, 0));
+		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(n));
+		assertEquals(n.getGeneralID("a", 0), "b");
+		assertNull(n.getAttribute(AttributeName.NAMEDFEATURES, null, null));
+		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
+		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
+		assertNull(n.getGeneralID(null, 0));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -311,84 +322,154 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testTool() {
+	public void testTool()
+	{
 		final JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input, null, null, null, null);
 		t.setResStatus(EnumResStatus.Available, true);
 		t.setProductID("toolID");
-		Assert.assertTrue(t.fixVersion(EnumVersion.Version_1_1));
-		Assert.assertEquals(t.getToolID(), "toolID");
-		Assert.assertEquals(t.getProductID(), "toolID");
-		Assert.assertTrue(t.fixVersion(EnumVersion.Version_1_3));
-		Assert.assertEquals(t.getToolID(), "");
-		Assert.assertEquals(t.getProductID(), "toolID");
+		assertTrue(t.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(t.getToolID(), "toolID");
+		assertEquals(t.getProductID(), "toolID");
+		assertTrue(t.fixVersion(EnumVersion.Version_1_3));
+		assertEquals(t.getToolID(), "");
+		assertEquals(t.getProductID(), "toolID");
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testJMF() {
+	public void testJMF()
+	{
 		JDFJMF jmf = new JMFBuilder().buildNewJDFCommand();
 		jmf.setAgentName("AName");
 		jmf.setAgentVersion("AVersion");
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_3);
 		fix.setBZappInvalid(true);
 		fix.walkTree(jmf, null);
-		Assert.assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
+		assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 		FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
-		
+
 		// TODO @Rainer (2013-03-10) - Not compatible to Linux
 		System.out.println("JMF Agent: " + jmf.getAgentName());
-//		Assert.assertNotNull(StringUtil.getNonEmpty(jmf.getAgentName()));
+		//		assertNotNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testJMFQueueFilter() {
+	public void testJMFQueueFilter()
+	{
 		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
 		JDFCommand command = jmf.getCommand(0);
 		command.appendQueueFilter();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		Assert.assertNotNull(command.getQueueFilter(0));
+		assertNotNull(command.getQueueFilter(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		Assert.assertNull(command.getQueueFilter(0));
+		assertNull(command.getQueueFilter(0));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testJMFQueueAbortQueueEntry() {
+	public void testJMFQueueAbortQueueEntry()
+	{
 		JDFJMF jmf = new JMFBuilder().buildAbortQueueEntry("42");
 		JDFCommand command = jmf.getCommand(0);
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		Assert.assertNotNull(command.getQueueEntryDef(0));
+		assertNotNull(command.getQueueEntryDef(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		Assert.assertNull(command.getQueueEntryDef(0));
+		assertNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testJMFQueue() {
+	public void testJMFQueueHoldQueueEntry()
+	{
+		JDFJMF jmf = new JMFBuilder().buildHoldQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJMFQueueRemoveQueueEntry()
+	{
+		JDFJMF jmf = new JMFBuilder().buildRemoveQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJMFQueueResumeQueueEntry()
+	{
+		JDFJMF jmf = new JMFBuilder().buildResumeQueueEntry("42");
+		JDFCommand command = jmf.getCommand(0);
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
+		assertNull(command.getQueueEntryDef(0));
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		assertNull(command.getQueueEntryDef(0));
+		assertEquals(1, command.numChildElements("ResumeQueueEntryParams", null));
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command.getQueueEntryDef(0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJMFQueue()
+	{
 		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		JDFResponse r = jmf.appendResponse();
 		r.setType(EnumType.RemoveQueueEntry);
 		r.appendQueue();
 		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
 		fix.walkTree(jmf, null);
-		Assert.assertNotNull(r.getQueue(0));
+		assertNotNull(r.getQueue(0));
 		fix = new FixVersion(EnumVersion.Version_1_5);
 		fix.walkTree(jmf, null);
-		Assert.assertNull(r.getQueue(0));
+		assertNull(r.getQueue(0));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -396,7 +477,8 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testAssembly() {
+	public void testAssembly()
+	{
 		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		a.setResStatus(EnumResStatus.Available, true);
 		VString ai = new VString("a1", null);
@@ -404,23 +486,24 @@ public class FixVersionTest extends JDFTestCaseBase {
 		JDFAssemblySection as = a.appendAssemblySection();
 		VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
-		Assert.assertTrue(a.fixVersion(EnumVersion.Version_1_1));
-		Assert.assertEquals(a.getAssemblyID(), "a1");
-		Assert.assertNull(a.getAttribute("AssemblyIDs", null, null));
-		Assert.assertEquals(as.getAssemblyID(), "a1.1");
-		Assert.assertNull(as.getAttribute("AssemblyIDs", null, null));
-		Assert.assertTrue(a.fixVersion(EnumVersion.Version_1_4));
-		Assert.assertEquals(a.getAssemblyIDs(), ai);
-		Assert.assertEquals(a.getAssemblyID(), "");
-		Assert.assertEquals(as.getAssemblyIDs(), asi);
-		Assert.assertEquals(as.getAssemblyID(), "");
+		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(a.getAssemblyID(), "a1");
+		assertNull(a.getAttribute("AssemblyIDs", null, null));
+		assertEquals(as.getAssemblyID(), "a1.1");
+		assertNull(as.getAttribute("AssemblyIDs", null, null));
+		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		assertEquals(a.getAssemblyIDs(), ai);
+		assertEquals(a.getAssemblyID(), "");
+		assertEquals(as.getAssemblyIDs(), asi);
+		assertEquals(as.getAssemblyID(), "");
 	}
 
 	/**
 	 * tests updating multiple versions at once
 	 */
 	@Test
-	public void testMultiskip() {
+	public void testMultiskip()
+	{
 		n.setVersion(EnumVersion.Version_1_4);
 		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		a.setResStatus(EnumResStatus.Available, true);
@@ -429,16 +512,16 @@ public class FixVersionTest extends JDFTestCaseBase {
 		JDFAssemblySection as = a.appendAssemblySection();
 		VString asi = new VString("a1.1", null);
 		as.setAssemblyIDs(asi);
-		Assert.assertTrue(a.fixVersion(EnumVersion.Version_1_1));
-		Assert.assertEquals(a.getAssemblyID(), "a1");
-		Assert.assertNull(a.getAttribute("AssemblyIDs", null, null));
-		Assert.assertEquals(as.getAssemblyID(), "a1.1");
-		Assert.assertNull(as.getAttribute("AssemblyIDs", null, null));
-		Assert.assertTrue(a.fixVersion(EnumVersion.Version_1_4));
-		Assert.assertEquals(a.getAssemblyIDs(), ai);
-		Assert.assertEquals(a.getAssemblyID(), "");
-		Assert.assertEquals(as.getAssemblyIDs(), asi);
-		Assert.assertEquals(as.getAssemblyID(), "");
+		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(a.getAssemblyID(), "a1");
+		assertNull(a.getAttribute("AssemblyIDs", null, null));
+		assertEquals(as.getAssemblyID(), "a1.1");
+		assertNull(as.getAttribute("AssemblyIDs", null, null));
+		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		assertEquals(a.getAssemblyIDs(), ai);
+		assertEquals(a.getAssemblyID(), "");
+		assertEquals(as.getAssemblyIDs(), asi);
+		assertEquals(as.getAssemblyID(), "");
 	}
 
 	/**
@@ -446,7 +529,8 @@ public class FixVersionTest extends JDFTestCaseBase {
 	 * @see junit.framework.TestCase#toString()
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return super.toString() + "\n" + n;
 	}
 

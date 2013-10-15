@@ -284,7 +284,7 @@ public class EnsureNSUri extends BaseElementWalker
 		private String getAlias(String prefix, String uri)
 		{
 			if (prefix == null)
-				return "";
+				prefix = "";
 			String s2 = aliasMap.get(prefix);
 			if ("<".equals(s2))
 				return "";

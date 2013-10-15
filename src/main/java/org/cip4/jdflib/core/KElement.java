@@ -1884,7 +1884,7 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		if (bDirect)
 		{
-			return getChildElementVector(elementName, nameSpaceURI, mAttrib, bAnd, maxSize, true);
+			return getChildElementVector_KElement(elementName, nameSpaceURI, mAttrib, bAnd, maxSize);
 		}
 
 		// maxSize is ignored in the tree walk!
@@ -1924,23 +1924,21 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return VElement a new NodeList object containing all the matched Elements
 	 * @default getElementsByTagName_KElement(s, null)
 	 */
-	public VElement getElementsByTagName_KElement(final String s, final String nameSpaceURI)
+	public VElement getElementsByTagName_KElement(String s, final String nameSpaceURI)
 	{
-		String sLocal = s;
-
 		VElement vEle = null;
-		if (sLocal == null)
+		if (s == null)
 		{
-			sLocal = JDFCoreConstants.STAR;
+			s = JDFCoreConstants.STAR;
 		}
 
 		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING))
 		{
-			vEle = new VElement(getElementsByTagName(sLocal));
+			vEle = new VElement(getElementsByTagName(s));
 		}
 		else
 		{
-			vEle = new VElement(getElementsByTagNameNS(nameSpaceURI, sLocal));
+			vEle = new VElement(getElementsByTagNameNS(nameSpaceURI, s));
 		}
 
 		return vEle;
