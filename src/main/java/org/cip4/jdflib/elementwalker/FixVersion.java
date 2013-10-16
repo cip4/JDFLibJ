@@ -948,7 +948,6 @@ public class FixVersion extends BaseElementWalker
 	 */
 	public class WalkJMFCommandResumeQueueEntry extends WalkJMFCommandNewParams
 	{
-
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
@@ -969,6 +968,36 @@ public class FixVersion extends BaseElementWalker
 		protected String getNewParamsName()
 		{
 			return "ResumeQueueEntryParams";
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 *  
+	 */
+	public class WalkJMFCommandSuspendQueueEntry extends WalkJMFCommandNewParams
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			if (!super.matches(toCheck))
+				return false;
+			return JDFMessage.EnumType.SuspendQueueEntry.equals(((JDFMessage) toCheck).getEnumType());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkJMFCommandNewParams#getNewParamsName()
+		 */
+		@Override
+		protected String getNewParamsName()
+		{
+			return "SuspendQueueEntryParams";
 		}
 	}
 

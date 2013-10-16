@@ -317,5 +317,4 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 			// NOP -  super.close() is a nop anyhow
 		}
 	}
-
 }
