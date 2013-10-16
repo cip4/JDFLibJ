@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author MuchaD
  * 
@@ -103,6 +104,7 @@ public class QueueTest extends TestCase
 
 	protected class QueueTestThread implements Runnable
 	{
+		@Override
 		public void run()
 		{
 			final int t = 1000 * iThread++;
@@ -348,7 +350,7 @@ public class QueueTest extends TestCase
 		final long l1 = System.currentTimeMillis();
 		q.sortChildren();
 		final long l2 = System.currentTimeMillis();
-		Assert.assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
+		Assert.assertEquals("Sort time <4 seconds", 3000, (l2 - l1), 3000);
 	}
 
 	/**
