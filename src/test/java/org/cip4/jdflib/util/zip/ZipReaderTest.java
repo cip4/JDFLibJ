@@ -80,6 +80,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MemorySpy;
 import org.cip4.jdflib.util.MemorySpy.MemScope;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.Test;
 
 /**
@@ -215,6 +216,9 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetBigEntryMemLeak()
 	{
 		MemorySpy ms = new MemorySpy();
+		System.gc();
+		ThreadUtil.sleep(10);
+		long heap0 = ms.getHeapUsed(MemScope.current);
 		log.info(ms.getSummary());
 		ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
@@ -223,8 +227,10 @@ public class ZipReaderTest extends JDFTestCaseBase
 		e = null;
 		r = null;
 		System.gc();
+		ThreadUtil.sleep(10);
 		log.info(ms.getSummary());
-		assertEquals(ms.getHeapUsed(MemScope.current), 0, 10000000);
+		long heapUsed = ms.getHeapUsed(MemScope.current) - heap0;
+		assertTrue(heapUsed < 10000000);
 	}
 
 	/**
