@@ -224,7 +224,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		r = null;
 		System.gc();
 		log.info(ms.getSummary());
-		assertEquals(ms.getHeapUsed(MemScope.current), 0, 5000000);
+		assertEquals(ms.getHeapUsed(MemScope.current), 0, 10000000);
 	}
 
 	/**

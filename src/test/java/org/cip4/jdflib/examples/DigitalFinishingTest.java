@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -212,7 +213,9 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
-		idp.ensureLink(c, EnumUsage.Output, null);
+		JDFResourceLink rlIDP = idp.ensureLink(c, EnumUsage.Output, null);
+		rlIDP.setAmount(1, null);
+
 		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");
 		cover.setSurfaceCount(2);
 		JDFComponent body = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Body");
@@ -220,10 +223,11 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
 		booklet.ensureLink(cover, EnumUsage.Input, EnumProcessUsage.Cover);
-		booklet.linkResource(body, EnumUsage.Input, null);
 		booklet.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
 		JDFComponent outComponent = (JDFComponent) booklet.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		outComponent.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Block);
+		JDFResourceLink rlOutComp = booklet.ensureLink(c, EnumUsage.Output, null);
+		rlOutComp.setAmount(1, null);
 
 		jdfDoc.write2File(sm_dirTestDataTemp + "BookletPipe.jdf", 2, false);
 		idp = new JDFSpawn(idp).spawn();
@@ -450,6 +454,29 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 		m.put("Condition", "Waste");
 		pa = ap.getCreatePartAmount(m);
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePausePrinterExample.jmf", 2, false);
+
+		jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		jmf.setSenderID("Finisher");
+		command = jmf.appendCommand();
+		command.setType(EnumType.PipePause);
+		pp = createPipeParams(command);
+		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		m = new JDFAttributeMap("SetIndex", "122");
+		m.put("Condition", "Waste");
+		pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePauseFinisher2Example.jmf", 2, false);
+
+		jmf = new JDFDoc("JMF").getJMFRoot();
+		jmf.setVersion(EnumVersion.Version_1_5);
+		command = jmf.appendCommand();
+		command.setType(EnumType.PipePull);
+		command.setSenderID("Finisher");
+		pp = createPipeParams(command);
+		ap = (JDFAmountPool) pp.appendElement(ElementName.AMOUNTPOOL);
+		m = new JDFAttributeMap("SetIndex", "122~-1");
+		pa = ap.getCreatePartAmount(m);
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePullFinisher2Example.jmf", 2, false);
 
 		createPipePushSheetExample(122, 0, 1, true);
 

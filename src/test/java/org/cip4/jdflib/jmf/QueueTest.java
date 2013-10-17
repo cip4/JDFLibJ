@@ -391,7 +391,7 @@ public class QueueTest extends TestCase
 		}
 		// now also zapp some...
 		int k = 0;
-		for (int j = 0; k < 100; j++)
+		while (k < 100)
 		{
 			final JDFQueueEntry qex = q.getNextExecutableQueueEntry();
 			if (qex != null)
