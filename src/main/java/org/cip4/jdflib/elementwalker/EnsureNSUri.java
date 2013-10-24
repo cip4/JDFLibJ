@@ -292,7 +292,7 @@ public class EnsureNSUri extends BaseElementWalker
 			{
 				String newPrefix = nsMap.getKey(uri);
 				String newURI = nsMap.get(prefix);
-				if (newURI == null && newPrefix != null && !ContainerUtil.equals(prefix, newPrefix))
+				if (newURI == null && StringUtil.getNonEmpty(newPrefix) != null && !ContainerUtil.equals(prefix, newPrefix))
 				{
 					addAlias(prefix, newPrefix);
 					s2 = newPrefix;
@@ -311,6 +311,15 @@ public class EnsureNSUri extends BaseElementWalker
 		{
 			return true;
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.ElementWalker#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + " nsMap=" + nsMap + " aliasMap=" + aliasMap;
 	}
 
 }
