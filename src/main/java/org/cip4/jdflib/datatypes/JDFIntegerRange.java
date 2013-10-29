@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -665,13 +665,13 @@ public class JDFIntegerRange extends JDFRange
 	@Override
 	protected Object getRightObject()
 	{
-		return new Integer(m_right);
+		return Integer.valueOf(m_right);
 	}
 
 	@Override
 	protected Object getLeftObject()
 	{
-		return new Integer(m_left);
+		return Integer.valueOf(m_left);
 	}
 
 	@Override

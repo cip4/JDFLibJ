@@ -6099,8 +6099,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		if (isValid && ((card == '_') || (card == '?')))
 		{
-			doneNameList.addElement(new Integer(namIndex));
-			doneIndexList.addElement(new Integer(iIndex));
+			doneNameList.addElement(Integer.valueOf(namIndex));
+			doneIndexList.addElement(Integer.valueOf(iIndex));
 		}
 
 		return isValid;
@@ -7890,7 +7890,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						continue;
 					}
 
-					int iS = new Integer(strID).intValue();
+					int iS = Integer.valueOf(strID).intValue();
 					if (iS > 1000000) // not in the simple ordering
 					{
 						iS = iS % 1000000;
@@ -7939,14 +7939,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			// 300402 RP added
 			if (pos > 0)
 			{
-				s = s.substring(s.length() - pos, s.length()); // .rightStr(-pos)
-				// ;
+				s = s.substring(s.length() - pos, s.length());
 			}
 			if (s.equals(JDFConstants.EMPTYSTRING))
 			{
 				continue;
 			}
-			iMax = (new Integer(s).intValue() > iMax) ? new Integer(s).intValue() : iMax;
+			iMax = (Integer.valueOf(s).intValue() > iMax) ? new Integer(s).intValue() : iMax;
 		}
 		return iMax;
 	}

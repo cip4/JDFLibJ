@@ -176,10 +176,10 @@ public class JDFCMYKColor extends JDFNumList
 	public JDFCMYKColor(final double c, final double m, final double y, final double k)
 	{
 		super(MAX_CMYK_COLOR);
-		set(0, new Double(c));
-		set(1, new Double(m));
-		set(2, new Double(y));
-		set(3, new Double(k));
+		set(0, Double.valueOf(c));
+		set(1, Double.valueOf(m));
+		set(2, Double.valueOf(y));
+		set(3, Double.valueOf(k));
 	}
 
 	/**

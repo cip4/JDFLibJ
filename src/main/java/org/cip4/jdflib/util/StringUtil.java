@@ -301,7 +301,7 @@ public class StringUtil
 			}
 			else if (isNumber(s))
 			{
-				vObj[i] = new Double(parseDouble(s, 0));
+				vObj[i] = Double.valueOf(parseDouble(s, 0));
 			}
 			else
 			{

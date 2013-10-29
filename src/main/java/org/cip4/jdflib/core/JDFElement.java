@@ -3955,7 +3955,6 @@ public class JDFElement extends KElement
 	 * @deprecated use getEnumerationsAttribute(key, nameSpaceURI, EnumXYZ.getEnum(0), bInherit)
 	 * @default getEnumerationsAttribute(key, allowedValues, null, -1, false)
 	 */
-	@SuppressWarnings("unchecked")
 	@Deprecated
 	public Vector getEnumerationsAttribute(final String key, final Vector v, final String nameSpaceURI, final int def, final boolean bInherit)
 	{
@@ -3986,7 +3985,7 @@ public class JDFElement extends KElement
 		{
 			if (def >= 0)
 			{
-				ret.addElement(new Integer(def));
+				ret.addElement(Integer.valueOf(def));
 			}
 			return ret;
 		}
@@ -3997,12 +3996,12 @@ public class JDFElement extends KElement
 			final int enumIndex = vAllowed.index(vs.stringAt(i));
 			if (enumIndex >= 0)
 			{
-				ret.addElement(new Integer(enumIndex));
+				ret.addElement(Integer.valueOf(enumIndex));
 			}
 			else
 			{
 				// illegal value
-				ret.addElement(new Integer(-1));
+				ret.addElement(Integer.valueOf(-1));
 			}
 		}
 

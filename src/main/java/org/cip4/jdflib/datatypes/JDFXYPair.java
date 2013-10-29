@@ -203,8 +203,8 @@ public class JDFXYPair extends JDFNumList
 	public JDFXYPair(final double x, final double y)
 	{
 		super(MAX_XY_DIMENSION);
-		set(0, new Double(x));
-		set(1, new Double(y));
+		set(0, Double.valueOf(x));
+		set(1, Double.valueOf(y));
 	}
 
 	// **************************************** Methods
@@ -281,32 +281,6 @@ public class JDFXYPair extends JDFNumList
 	public void setY(final double y)
 	{
 		set(1, y);
-	}
-
-	/**
-	 * equals - returns true if both JDFShapes are equal, otherwise false
-	 * 
-	 * @return boolean - true if equal otherwise false
-	 */
-	@Override
-	public boolean equals(final Object other)
-	{
-		if (this == other)
-		{
-			return true;
-		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
-		{
-			return false;
-		}
-
-		final JDFXYPair xyPair = (JDFXYPair) other;
-
-		return (Math.abs(this.getX() - xyPair.getX()) <= EPSILON) && (Math.abs(this.getY() - xyPair.getY()) <= EPSILON);
 	}
 
 	/**

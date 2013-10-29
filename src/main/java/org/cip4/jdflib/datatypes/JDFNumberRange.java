@@ -438,13 +438,13 @@ public class JDFNumberRange extends JDFRange
 	@Override
 	protected Object getRightObject()
 	{
-		return new Double(m_right);
+		return Double.valueOf(m_right);
 	}
 
 	@Override
 	protected Object getLeftObject()
 	{
-		return new Double(m_left);
+		return Double.valueOf(m_left);
 	}
 
 	@Override

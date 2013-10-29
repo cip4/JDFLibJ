@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -226,11 +226,11 @@ public class JDFIntegerList extends JDFNumList
 	/**
 	 * return true if at least one value in the list is d
 	 * @param d the value to search
-	 * @return true if this contais d
+	 * @return true if this contains d
 	 */
 	public boolean contains(final int d)
 	{
-		return contains(new Integer(d));
+		return contains(Integer.valueOf(d));
 	}
 
 	/**
@@ -285,7 +285,7 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void add(final int x)
 	{
-		add(new Integer(x));
+		add(Integer.valueOf(x));
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class JDFIntegerList extends JDFNumList
 			if (StringUtil.isInteger(s))
 			{
 				final int i = StringUtil.parseInt(sToken.nextToken(), 0);
-				add(new Integer(i));
+				add(Integer.valueOf(i));
 			}
 			else
 			{
@@ -375,7 +375,7 @@ public class JDFIntegerList extends JDFNumList
 		}
 		else
 		{
-			set(pos, new Integer(val));
+			set(pos, Integer.valueOf(val));
 		}
 
 	}
@@ -427,7 +427,7 @@ public class JDFIntegerList extends JDFNumList
 		clear();
 		for (int i = 0; i < iArray.length; i++)
 		{
-			add(new Integer(iArray[i]));
+			add(Integer.valueOf(iArray[i]));
 		}
 	}
 
@@ -440,7 +440,7 @@ public class JDFIntegerList extends JDFNumList
 	public void setInt(final int i)
 	{
 		clear();
-		add(new Integer(i));
+		add(Integer.valueOf(i));
 	}
 
 	/**
@@ -474,7 +474,7 @@ public class JDFIntegerList extends JDFNumList
 		for (int i = 0; i < me.length; i++)
 		{
 			me[i] -= them[i];
-			setElementAt(new Integer(me[i]), i);
+			setElementAt(Integer.valueOf(me[i]), i);
 		}
 	}
 

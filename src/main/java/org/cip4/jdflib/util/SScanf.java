@@ -174,6 +174,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	 * 
 	 * @see java.util.Iterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext()
 	{
 		return pos < vFmt.size();
@@ -183,6 +184,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	 * returns the next Object (@see the constructor), null if the string has been completely parsed or an invalid
 	 * format is scanned
 	 */
+	@Override
 	public Object next()
 	{
 		if (!hasNext())
@@ -194,7 +196,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 			if ("dxoi".indexOf(fmt.type) >= 0)
 				return new Integer(scanInt(fmt));
 			if ("f".indexOf(fmt.type) >= 0)
-				return new Double(scanDouble(fmt));
+				return Double.valueOf(scanDouble(fmt));
 			return scanString(fmt);
 		}
 		catch (IllegalArgumentException x)
@@ -215,6 +217,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	 * 
 	 * @see java.util.Iterator#remove()
 	 */
+	@Override
 	public void remove()
 	{
 		throw new IllegalArgumentException("remove not implemented!");

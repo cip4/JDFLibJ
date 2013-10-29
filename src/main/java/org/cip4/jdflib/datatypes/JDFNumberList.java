@@ -174,7 +174,7 @@ public class JDFNumberList extends JDFNumList
 	 */
 	public void add(final double x)
 	{
-		add(new Double(x));
+		add(Double.valueOf(x));
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class JDFNumberList extends JDFNumList
 	 */
 	public boolean contains(final double d)
 	{
-		return contains(new Double(d));
+		return contains(Double.valueOf(d));
 	}
 
 }

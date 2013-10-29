@@ -146,7 +146,7 @@ public class NumberFormatter
 		{
 			if (precision > 0)
 			{
-				final Double[] ad = { new Double(d) };
+				final Double[] ad = { Double.valueOf(d) };
 				String ss = StringUtil.sprintf("%." + precision + "f", ad);
 				s = zappTrailing(ss);
 			}

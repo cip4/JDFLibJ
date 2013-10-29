@@ -214,8 +214,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final JDFXYPair xy)
 	{
-		add(new Double(xy.getX()));
-		add(new Double(xy.getY()));
+		add(Double.valueOf(xy.getX()));
+		add(Double.valueOf(xy.getY()));
 	}
 
 	/**
@@ -238,8 +238,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final double x, final double y)
 	{
-		add(new Double(x));
-		add(new Double(y));
+		add(Double.valueOf(x));
+		add(Double.valueOf(y));
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class JDFTransferFunction extends JDFNumList
 
 			try
 			{
-				addElement(new Double(t));
+				addElement(Double.valueOf(t));
 			}
 			catch (final NumberFormatException e)
 			{

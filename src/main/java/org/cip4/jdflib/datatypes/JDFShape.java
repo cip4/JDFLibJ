@@ -237,11 +237,11 @@ public class JDFShape extends JDFNumList
 		}
 		if (size() == 1)
 		{
-			addElement(new Double(0.0));
+			addElement(Double.valueOf(0.0));
 		}
 		if (size() == 2)
 		{
-			addElement(new Double(0.0));
+			addElement(Double.valueOf(0.0));
 		}
 		return true;
 	}

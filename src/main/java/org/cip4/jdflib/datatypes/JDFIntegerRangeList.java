@@ -480,10 +480,10 @@ public class JDFIntegerRangeList extends JDFRangeList
 		for (int i = 0; i < siz; i++)
 		{
 			JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
-			v.addElement(new Integer(r.getLeft()));
+			v.addElement(Integer.valueOf(r.getLeft()));
 			if (r.getLeft() != r.getRight())
 			{
-				v.addElement(new Integer(r.getRight()));
+				v.addElement(Integer.valueOf(r.getRight()));
 			}
 		}
 
@@ -524,10 +524,10 @@ public class JDFIntegerRangeList extends JDFRangeList
 		for (int i = 0; i < siz; i++)
 		{
 			JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(i);
-			v.addElement(new Integer(r.getLeft()));
-			if (!new Integer(r.getLeft()).equals(new Integer(r.getRight())))
+			v.addElement(Integer.valueOf(r.getLeft()));
+			if (!Integer.valueOf(r.getLeft()).equals(Integer.valueOf(r.getRight())))
 			{
-				v.addElement(new Integer(r.getRight()));
+				v.addElement(Integer.valueOf(r.getRight()));
 			}
 		}
 

@@ -281,10 +281,10 @@ public class JDFNumberRangeList extends JDFRangeList
 		for (int i = 0; i < siz; i++)
 		{
 			JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
-			v.addElement(new Double(r.getLeft()));
+			v.addElement(Double.valueOf(r.getLeft()));
 			if (r.getLeft() != r.getRight())
 			{
-				v.addElement(new Double(r.getRight()));
+				v.addElement(Double.valueOf(r.getRight()));
 			}
 		}
 
@@ -325,10 +325,10 @@ public class JDFNumberRangeList extends JDFRangeList
 		for (int i = 0; i < siz; i++)
 		{
 			JDFNumberRange r = (JDFNumberRange) rangeList.elementAt(i);
-			v.addElement(new Double(r.getLeft()));
+			v.addElement(Double.valueOf(r.getLeft()));
 			if (r.getLeft() != r.getRight())
 			{
-				v.addElement(new Double(r.getRight()));
+				v.addElement(Double.valueOf(r.getRight()));
 			}
 		}
 

@@ -102,7 +102,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.4a BLD 74";
+	final private static String m_libAgentVersion = "1.4a BLD 75";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;

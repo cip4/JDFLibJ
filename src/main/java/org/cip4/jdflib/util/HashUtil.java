@@ -165,7 +165,7 @@ public class HashUtil extends Object
 	 */
 	public static final int hashCode(final int source, final double x)
 	{
-		return hashCode(source, ((new Double(x).equals(new Double(0.0))) ? 0L : Double.doubleToLongBits(x)));
+		return hashCode(source, ((Double.valueOf(x).equals(Double.valueOf(0.0))) ? 0L : Double.doubleToLongBits(x)));
 	}
 
 	/**

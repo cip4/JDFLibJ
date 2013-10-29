@@ -117,7 +117,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		super(size);
 		for (int i = 0; i < size; i++)
 		{
-			addElement(new Double(0.0));
+			addElement(Double.valueOf(0.0));
 		}
 	}
 
@@ -160,7 +160,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	public void set(int pos, double d)
 	{
-		super.set(pos, new Double(d));
+		super.set(pos, Double.valueOf(d));
 	}
 
 	/**
@@ -188,14 +188,14 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 						int theInt = StringUtil.parseInt(s, minValue);
 						if (theInt == minValue)
 							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-						addElement(new Integer(theInt));
+						addElement(Integer.valueOf(theInt));
 					}
 					else
 					{
 						double theDouble = StringUtil.parseDouble(s, Double.NaN);
 						if (Double.isNaN(theDouble))
 							throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-						addElement(new Double(theDouble));
+						addElement(Double.valueOf(theDouble));
 					}
 				}
 			}
@@ -544,7 +544,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		for (int i = 0; i < size; i++)
 		{
 			final double number = doubleAt(i) * factor;
-			setElementAt(new Double(number), i);
+			setElementAt(Double.valueOf(number), i);
 		}
 		return this;
 	}
@@ -560,7 +560,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		for (int i = 0; i < size; i++)
 		{
 			final double number = Math.abs(doubleAt(i));
-			setElementAt(new Double(number), i);
+			setElementAt(Double.valueOf(number), i);
 		}
 		return this;
 	}
@@ -615,7 +615,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		for (int i = 0; i < me.length; i++)
 		{
 			me[i] -= them[i];
-			setElementAt(new Double(me[i]), i);
+			setElementAt(Double.valueOf(me[i]), i);
 		}
 	}
 

@@ -105,7 +105,7 @@ public class JDFPath
 
 		while (st.hasMoreTokens())
 		{
-			while (!(new Double(d)).equals(new Double(-1)))
+			while (!(Double.valueOf(d)).equals(Double.valueOf(-1)))
 			{
 				if (st.hasMoreTokens())
 				{

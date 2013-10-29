@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -126,15 +126,15 @@ public class MemorySpy
 	public Map<String, Long> getSizeMap()
 	{
 		HashMap<String, Long> map = new HashMap<String, Long>();
-		map.put("heap", new Long(mainBean.getHeapMemoryUsage().getUsed()));
-		map.put("non-heap", new Long(mainBean.getNonHeapMemoryUsage().getUsed()));
+		map.put("heap", Long.valueOf(mainBean.getHeapMemoryUsage().getUsed()));
+		map.put("non-heap", Long.valueOf(mainBean.getNonHeapMemoryUsage().getUsed()));
 		Iterator<MemoryPoolMXBean> it = memList.iterator();
 		while (it.hasNext())
 		{
 			MemoryPoolMXBean poolBean = it.next();
-			map.put(poolBean.getName(), new Long(poolBean.getUsage().getUsed()));
-			map.put("comitted " + poolBean.getName(), new Long(poolBean.getUsage().getCommitted()));
-			map.put("peak " + poolBean.getName(), new Long(poolBean.getPeakUsage().getUsed()));
+			map.put(poolBean.getName(), Long.valueOf(poolBean.getUsage().getUsed()));
+			map.put("comitted " + poolBean.getName(), Long.valueOf(poolBean.getUsage().getCommitted()));
+			map.put("peak " + poolBean.getName(), Long.valueOf(poolBean.getPeakUsage().getUsed()));
 		}
 		return map;
 	}

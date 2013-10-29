@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -220,11 +220,13 @@ public class AtrInfo
 		{
 			try
 			{
-				final JDFIntegerList rBig = new JDFIntegerList(bigAtt);
-				final Integer i = new Integer(smallAtt);
-				if (rBig.contains(i))
+				if (StringUtil.isInteger(smallAtt))
 				{
-					return true;
+					final JDFIntegerList rBig = new JDFIntegerList(bigAtt);
+					if (rBig.contains(StringUtil.parseInt(smallAtt, 0)))
+					{
+						return true;
+					}
 				}
 			}
 			catch (final DataFormatException nfe)
