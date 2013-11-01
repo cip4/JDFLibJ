@@ -302,6 +302,7 @@ public class FileUtil
 		 * (non-Javadoc)
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
+		@Override
 		public boolean accept(final File checkFile)
 		{
 			if ((checkFile == null) || !checkFile.isFile())
@@ -337,6 +338,7 @@ public class FileUtil
 		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
+		@Override
 		public boolean accept(final File checkFile)
 		{
 			return checkFile != null && checkFile.isDirectory();
@@ -363,6 +365,7 @@ public class FileUtil
 		 * true if a file matches a regular expression
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
+		@Override
 		public boolean accept(final File checkFile)
 		{
 			return checkFile != null && StringUtil.matchesSimple(checkFile.getName(), regExp);
@@ -537,7 +540,7 @@ public class FileUtil
 			return b;
 
 		}
-		catch (final Exception e)
+		catch (final Throwable e)
 		{
 			return null;
 		}

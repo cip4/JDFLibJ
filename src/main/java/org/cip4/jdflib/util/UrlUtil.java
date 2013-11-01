@@ -1601,7 +1601,7 @@ public class UrlUtil
 				output(httpURLconnection);
 				return new UrlPart(httpURLconnection);
 			}
-			catch (final Exception x)
+			catch (final Throwable x)
 			{
 				LogFactory.getLog(URLWriter.class).error(x.getClass().getCanonicalName() + " snafu writing to url: " + strUrl + " " + x.getMessage());
 			}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,13 +100,14 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class StatusCounterTest extends JDFTestCaseBase {
+public class StatusCounterTest extends JDFTestCaseBase
+{
 	protected JDFDoc d;
 	private JDFNode n;
 	private StatusCounter sc;
@@ -120,7 +121,8 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception
+	{
 		d = creatXMDoc();
 		n = d.getJDFRoot();
 		xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
@@ -141,20 +143,22 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testDeviceID() {
+	public void testDeviceID()
+	{
 		final boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 		final JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
-		Assert.assertEquals(deviceInfo.getDeviceID(), deviceID);
+		assertEquals(deviceInfo.getDeviceID(), deviceID);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testWasteAmount() {
+	public void testWasteAmount()
+	{
 		final VJDFAttributeMap singleMap = new VJDFAttributeMap();
 		singleMap.add(xpMedia.getPartMapVector(false).elementAt(0));
 
@@ -174,51 +178,53 @@ public class StatusCounterTest extends JDFTestCaseBase {
 		sc.setTrackWaste(rl.getrRef(), true);
 		sc.setTrackWaste(rlMedia.getrRef(), true);
 		sc.setActiveNode(n, c.getPartMapVector(false), vRL);
-		Assert.assertEquals(100, sc.getPlannedWaste(rlMedia.getrRef()), 0);
-		Assert.assertEquals(1000, sc.getPlannedAmount(rl.getrRef()), 0);
+		assertEquals(100, sc.getPlannedWaste(rlMedia.getrRef()), 0);
+		assertEquals(1000, sc.getPlannedAmount(rl.getrRef()), 0);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testAddPhase() {
+	public void testAddPhase()
+	{
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 		JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		JDFJobPhase jp = sig.getDeviceInfo(0).getJobPhase(0);
-		Assert.assertEquals(jp.getAmount(), 200, 0);
+		assertEquals(jp.getAmount(), 200, 0);
 		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(resID, true);
 		final JDFResourceLink rlXM = n.getLink(xpMedia, null);
-		for (int loop = 1; loop < 4; loop++) {
+		for (int loop = 1; loop < 4; loop++)
+		{
 			bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-			Assert.assertFalse(bChanged);
+			assertFalse(bChanged);
 			docJMF = sc.getDocJMFPhaseTime();
 			sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 			jp = sig.getDeviceInfo(0).getJobPhase(0);
-			Assert.assertEquals("multiple setPhase calls do not modify", jp.getAmount(), 200, 0);
-			Assert.assertEquals("multiple setPhase calls do not modify: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Good")), 200, 0);
-			Assert.assertEquals("% " + loop, jp.getPercentCompleted(), 200.0, 0);
+			assertEquals("multiple setPhase calls do not modify", jp.getAmount(), 200, 0);
+			assertEquals("multiple setPhase calls do not modify: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Good")), 200, 0);
+			assertEquals("% " + loop, jp.getPercentCompleted(), 200.0, 0);
 			sc.addPhase(resID, 0, 100, true);
-			Assert.assertEquals("" + loop, jp.getWaste(), loop * 100, 0);
-			Assert.assertEquals("multiple setPhase calls do Stack: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Waste")), 100 * loop, 0);
+			assertEquals("" + loop, jp.getWaste(), loop * 100, 0);
+			assertEquals("multiple setPhase calls do Stack: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Waste")), 100 * loop, 0);
 		}
 		sc.setWorkType(EnumWorkType.Alteration);
 		bChanged = sc.setPhase(EnumNodeStatus.InProgress, "ii", EnumDeviceStatus.Running, "r");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		jp = sig.getDeviceInfo(0).getJobPhase(0);
-		Assert.assertEquals(jp.getAmount(), 200, 0);
-		Assert.assertEquals(jp.getWaste(), 400, 0);
-		Assert.assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
+		assertEquals(jp.getAmount(), 200, 0);
+		assertEquals(jp.getWaste(), 400, 0);
+		assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
 		// get the second Signal (the new phase)
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 1);
 		jp = sig.getDeviceInfo(0).getJobPhase(0);
-		Assert.assertEquals(jp.getPhaseAmount(), 0.0, 0.0);
-		Assert.assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
+		assertEquals(jp.getPhaseAmount(), 0.0, 0.0);
+		assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
 
 		sc.setFirstRefID("dummy");
 		sc.addPhase(resID, 0, 100, true);
@@ -227,86 +233,90 @@ public class StatusCounterTest extends JDFTestCaseBase {
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		jp = sig.getDeviceInfo(0).getJobPhase(0);
-		Assert.assertFalse(jp.hasAttribute(AttributeName.AMOUNT));
-		Assert.assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
+		assertFalse(jp.hasAttribute(AttributeName.AMOUNT));
+		assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testEvent() {
-		Assert.assertNull(sc.getDocJMFNotification(false));
+	public void testEvent()
+	{
+		assertNull(sc.getDocJMFNotification(false));
 		sc.setEvent("id", "value", "blah blah");
 		d = sc.getDocJMFNotification(false);
 		JDFDoc d2 = sc.getDocJMFNotification(false);
-		Assert.assertTrue(d.getRoot().isEqual(d2.getRoot()));
+		assertTrue(d.getRoot().isEqual(d2.getRoot()));
 		d = sc.getDocJMFNotification(true);
 		d2 = sc.getDocJMFNotification(false);
-		Assert.assertNull(d2);
+		assertNull(d2);
 		JDFJMF jmf = d.getJMFRoot();
 		final JDFNotification noti = jmf.getSignal(0).getNotification();
-		Assert.assertEquals(noti.getJobID(), n.getJobID(true));
-		Assert.assertNotNull(noti.getEvent());
+		assertEquals(noti.getJobID(), n.getJobID(true));
+		assertNotNull(noti.getEvent());
 		d.write2File(sm_dirTestDataTemp + "jmfNotification.jmf", 2, false);
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 		sc.setEvent("id1", "value", "blah blah");
 		sc.setEvent("id2", "value", "blah blah blah");
 		d = sc.getDocJMFNotification(false);
 		jmf = d.getJMFRoot();
-		Assert.assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 2);
+		assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 2);
 		sc.setEvent("id2", "value", "blah blah blah");
 		d = sc.getDocJMFNotification(true);
 		jmf = d.getJMFRoot();
-		Assert.assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 3);
+		assertEquals(jmf.numChildElements(ElementName.SIGNAL, null), 3);
 		d = sc.getDocJMFNotification(true);
-		Assert.assertNull(d);
+		assertNull(d);
 	}
 
 	/**
 	 * test for memory leaks in clone
 	 */
 	@Test
-	public void testMemLeak() {
-		for (int i = 0; i < 100000; i++) {
+	public void testMemLeak()
+	{
+		for (int i = 0; i < 100000; i++)
+		{
 			sc.getDocJMFPhaseTime();
 			sc.getDocJMFNotification(true);
 			sc.getDocJMFResource();
 		}
-		Assert.assertEquals(mem, getCurrentMem(), 100000);
+		assertEquals(mem, getCurrentMem(), 100000);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testEmployee() {
-		Assert.assertFalse(sc.removeEmployee(employee));
-		Assert.assertEquals(sc.addEmployee(employee), 1);
-		Assert.assertTrue(sc.removeEmployee(employee));
-		Assert.assertEquals(sc.addEmployee(employee), 1);
+	public void testEmployee()
+	{
+		assertFalse(sc.removeEmployee(employee));
+		assertEquals(sc.addEmployee(employee), 1);
+		assertTrue(sc.removeEmployee(employee));
+		assertEquals(sc.addEmployee(employee), 1);
 
 		final JDFAuditPool ap = n.getAuditPool();
 		JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, -1);
 		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
-		Assert.assertTrue(deviceInfo.getEmployee(0).isEqual(employee));
+		assertTrue(deviceInfo.getEmployee(0).isEqual(employee));
 		int nPT = ap.numChildElements("PhaseTime", null);
 		sc.removeEmployee(employee);
-		Assert.assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
+		assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
 		docJMF = sc.getDocJMFPhaseTime();
 
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
-		Assert.assertNull(deviceInfo.getEmployee(0));
+		assertNull(deviceInfo.getEmployee(0));
 		final Vector<JDFEmployee> ve = new Vector<JDFEmployee>();
 		ve.add(employee);
 		sc.replaceEmployees(ve);
-		Assert.assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
+		assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
-		Assert.assertNotNull(deviceInfo.getEmployee(0));
+		assertNotNull(deviceInfo.getEmployee(0));
 
 	}
 
@@ -314,35 +324,51 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testIdle() {
+	public void testIdle()
+	{
 		final JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 		JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		JDFJobPhase jp = deviceInfo.getJobPhase(0);
-		Assert.assertEquals(jp.getAmount(), 200, 0);
+		assertEquals(jp.getAmount(), 200, 0);
 		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(m.getID(), true);
 		bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertFalse(bChanged);
+		assertFalse(bChanged);
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		bChanged = sc.setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 
 		sc.setActiveNode(null, null, null);
 		bChanged = sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
-		Assert.assertFalse(bChanged);
+		assertFalse(bChanged);
 		bChanged = sc.setPhase(null, null, EnumDeviceStatus.Idle, "very idle");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 
 		docJMF = sc.getDocJMFPhaseTime();
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
 		jp = deviceInfo.getJobPhase(0);
-		Assert.assertNull(jp);
+		assertNull(jp);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIdleSkip()
+	{
+
+		sc.setActiveNode(null, null, null);
+		assertNotNull(sc.getDocJMFPhaseTime());
+		sc.setIdleSkip(5);
+		for (int i = 0; i < 4; i++)
+			assertNull(sc.getDocJMFPhaseTime());
+		assertNotNull(sc.getDocJMFPhaseTime());
 	}
 
 	// @Test
@@ -352,7 +378,7 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	// MultiType.JOB);
 	// JDFResponse idlePhase = msc.getStatusResponse().getJMFRoot()
 	// .getResponse(0);
-	// Assert.assertEquals(idlePhase.numChildElements(ElementName.DEVICEINFO, null),
+	// assertEquals(idlePhase.numChildElements(ElementName.DEVICEINFO, null),
 	// 1);
 	// StatusCounter scRIP = new StatusCounter(n, null, null);
 	// scRIP.setDeviceID("d1");
@@ -369,7 +395,7 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	// msc.addModule(scRIP2);
 	// JDFResponse idlePhase2 = msc.getStatusResponse().getJMFRoot()
 	// .getResponse(0);
-	// Assert.assertEquals(idlePhase2.numChildElements(ElementName.DEVICEINFO, null),
+	// assertEquals(idlePhase2.numChildElements(ElementName.DEVICEINFO, null),
 	// 2);
 	//
 	// }
@@ -378,7 +404,8 @@ public class StatusCounterTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testMultiModule() {
+	public void testMultiModule()
+	{
 		final StatusCounter scRIP = new StatusCounter(n, null, null);
 		scRIP.addModule("ID_RIP", "RIP");
 		final StatusCounter scSetter = new StatusCounter(n, null, null);
@@ -393,32 +420,32 @@ public class StatusCounterTest extends JDFTestCaseBase {
 		scRIP.setFirstRefID(resID);
 		scRIP.addPhase(resID, 200, 0, true);
 		boolean bChanged = scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertTrue(bChanged);
+		assertTrue(bChanged);
 		final JDFDoc docJMF = scRIP.getDocJMFPhaseTime();
 		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		final JDFJobPhase jp = deviceInfo.getJobPhase(0);
-		Assert.assertEquals(jp.getAmount(), 200, 0);
+		assertEquals(jp.getAmount(), 200, 0);
 		scRIP.addPhase(resID, 0, 100, true);
 		scRIP.setTrackWaste(m.getID(), true);
 		bChanged = scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
-		Assert.assertFalse(bChanged);
+		assertFalse(bChanged);
 		JDFDoc dJMFAll = msc.getStatusResponse();
-		Assert.assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
+		assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
 		scSetter.setPhase(EnumNodeStatus.InProgress, "seti", EnumDeviceStatus.Running, "run");
 		scSetter.setFirstRefID(resID);
 		scSetter.addPhase(resID, 400, 0, true);
 		dJMFAll = msc.getStatusResponse();
-		Assert.assertEquals("1 RIP, 1 setter", dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 2);
+		assertEquals("1 RIP, 1 setter", dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 2);
 
 		scRIP.setActiveNode(null, null, null);
 		bChanged = scRIP.setPhase(null, null, EnumDeviceStatus.Idle, null);
 		dJMFAll = msc.getStatusResponse();
-		Assert.assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
+		assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
 
 		scSetter.setActiveNode(null, null, null);
 		bChanged = scSetter.setPhase(null, null, EnumDeviceStatus.Idle, null);
 		dJMFAll = msc.getStatusResponse();
-		Assert.assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 0);
+		assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 0);
 	}
 }

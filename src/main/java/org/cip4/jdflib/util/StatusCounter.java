@@ -1210,14 +1210,18 @@ public class StatusCounter
 	 */
 	public synchronized JDFDoc getDocJMFPhaseTime()
 	{
-		if (docJMFPhaseTime == null)
+		if (m_Node == null)
 		{
 			if (idleCount++ % idleSkip == 0)
 			{
-				setIdlePhase(EnumDeviceStatus.Idle, null);
+				setIdlePhase(status, statusDetails);
+			}
+			else
+			{
+				return null;
 			}
 		}
-		return docJMFPhaseTime.clone();
+		return docJMFPhaseTime == null ? null : docJMFPhaseTime.clone();
 	}
 
 	/**

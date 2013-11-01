@@ -270,6 +270,7 @@ public class HotFolder implements Runnable
 	 * run the listener thread...
 	 * @see java.lang.Runnable#run()
 	 */
+	@Override
 	public void run()
 	{
 		log.info("starting hot folder at: " + dir.getAbsolutePath());
@@ -375,7 +376,7 @@ public class HotFolder implements Runnable
 			{
 				xl.hotFile(fileJ); // exists and stabilized - call callbacks
 			}
-			catch (final Exception x)
+			catch (final Throwable x)
 			{
 				log.error("exception processing hot files", x);
 			}
