@@ -74,8 +74,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.CPUTimer;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -98,7 +98,7 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
-		Assert.assertTrue(root.toXML().indexOf("n6") < 0);
+		assertTrue(root.toXML().indexOf("n6") < 0);
 	}
 
 	/**
@@ -119,8 +119,8 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		EnsureNSUri ensure = new EnsureNSUri();
 		ensure.walk(root);
 
-		Assert.assertEquals(e.getPrefix(), "n1");
-		Assert.assertEquals(e2.getPrefix(), "n1");
+		assertEquals(e.getPrefix(), "n1");
+		assertEquals(e2.getPrefix(), "n1");
 	}
 
 	/**
@@ -140,9 +140,27 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addAlias("blub", null);
 		ensure.walk(root);
 
-		Assert.assertTrue(root.toXML().indexOf("n6") < 0);
-		Assert.assertTrue(root.toXML().indexOf("n7") < 0);
-		Assert.assertTrue(root.toXML().indexOf("blub") < 0);
+		assertTrue(root.toXML().indexOf("n6") < 0);
+		assertTrue(root.toXML().indexOf("n7") < 0);
+		assertTrue(root.toXML().indexOf("blub") < 0);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEnsureNSDefault()
+	{
+		XMLDoc d = new XMLDoc("foo", "foo.com");
+		KElement root = d.getRoot();
+		KElement e = root.appendElement("xxx:bar", "n66");
+		e.appendElement("gg", "blah.com");
+		root.appendElement("ccc");
+
+		EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS("xxx", "blah.com");
+		ensure.walk(root);
+		assertEquals(root.toXML().indexOf("xxx:ccc"), -1);
 	}
 
 	/**
@@ -168,10 +186,10 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addAlias("n2", "n1");
 		ensure.walk(root);
 
-		Assert.assertTrue(root.toXML().indexOf("n2") < 0);
-		Assert.assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
-		Assert.assertTrue(root.toXML().indexOf("<n3:next") > 0);
-		Assert.assertTrue(root.toXML().indexOf("<n3:foofoo") > 0);
+		assertTrue(root.toXML().indexOf("n2") < 0);
+		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
+		assertTrue(root.toXML().indexOf("<n3:next") > 0);
+		assertTrue(root.toXML().indexOf("<n3:foofoo") > 0);
 	}
 
 	/**
@@ -195,9 +213,9 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addNS("n1", "www.n1.com");
 		ensure.walk(root);
 
-		Assert.assertTrue(root.toXML().indexOf("n2:") < 0);
-		Assert.assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
-		Assert.assertTrue(root.toXML().indexOf("<n3:next") > 0);
+		assertTrue(root.toXML().indexOf("n2:") < 0);
+		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
+		assertTrue(root.toXML().indexOf("<n3:next") > 0);
 	}
 
 	/**
@@ -207,19 +225,19 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	public void testBigEnsureNS()
 	{
 		File f = new File(sm_dirTestData + "evilparts.jdf");
-		Assert.assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"), f.exists());
-		
+		assertTrue(String.format("File %s not exists.", sm_dirTestData + "evilparts.jdf"), f.exists());
+
 		CPUTimer ct = new CPUTimer(true);
 		XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "evilparts.jdf");
 		KElement root = d.getRoot();
-		Assert.assertNotNull(root);
+		assertNotNull(root);
 		EnsureNSUri ensure = new EnsureNSUri();
 		ensure.addNS("HDM", "www.hdm.com");
 		ensure.walk(root);
 		ct.stop();
 		System.out.println(ct);
 
-		Assert.assertTrue(root.toXML().indexOf("schema/HDM") < 0);
+		assertTrue(root.toXML().indexOf("schema/HDM") < 0);
 
 	}
 }

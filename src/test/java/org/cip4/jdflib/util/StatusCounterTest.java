@@ -356,21 +356,6 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertNull(jp);
 	}
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testIdleSkip()
-	{
-
-		sc.setActiveNode(null, null, null);
-		assertNotNull(sc.getDocJMFPhaseTime());
-		sc.setIdleSkip(5);
-		for (int i = 0; i < 4; i++)
-			assertNull(sc.getDocJMFPhaseTime());
-		assertNotNull(sc.getDocJMFPhaseTime());
-	}
-
 	// @Test
 	// public void testMultiModuleJob()
 	// {

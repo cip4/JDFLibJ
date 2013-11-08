@@ -149,6 +149,7 @@ public class EnsureNSUri extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		nsMap = new BiHashMap<String, String>();
 		aliasMap = new HashMap<String, String>();
+		addAlias("", null); // we always want to retain the default ns
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -251,17 +252,19 @@ public class EnsureNSUri extends BaseElementWalker
 
 		private void processXmlns(final KElement e1, String att)
 		{
-			String locName = KElement.xmlnsLocalName(att);
-			String alias = getAlias(locName, null);
-			if (alias != null && !alias.equals(locName))
+			String prefix = KElement.xmlnsLocalName(att);
+			if ("xmlns".equals(prefix))
+				prefix = "";
+			String alias = getAlias(prefix, null);
+			if (alias != null && !alias.equals(prefix))
 			{
 				e1.removeAttribute(att);
 			}
 			else
 			{
-				if (locName == null)
-					locName = ":";
-				String uri = nsMap.get(locName);
+				if (prefix == null)
+					prefix = ":";
+				String uri = nsMap.get(prefix);
 				if (uri != null)
 				{
 					Attr attr = e1.getDOMAttr(att, null, false);

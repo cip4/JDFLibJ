@@ -160,8 +160,6 @@ public class StatusCounter
 	private double totalCounter = -1;
 	private VString icsVersions = null;
 	private boolean addPhaseTimeAmounts;
-	private int idleCount;
-	private int idleSkip;
 
 	/**
 	 * @return the total counter value
@@ -286,19 +284,7 @@ public class StatusCounter
 	public StatusCounter(final JDFNode node, final VJDFAttributeMap vPartMap, final VElement vResLinks)
 	{
 		addPhaseTimeAmounts = true;
-		idleCount = 0;
-		idleSkip = 1;
 		setActiveNode(node, vPartMap, vResLinks);
-	}
-
-	/**
-	 * Setter for idleSkip attribute. 
-	 * @param idleSkip the idleSkip to set
-	 */
-	public void setIdleSkip(int idleSkip)
-	{
-		if (idleSkip >= 1)
-			this.idleSkip = idleSkip;
 	}
 
 	/**
@@ -1212,14 +1198,7 @@ public class StatusCounter
 	{
 		if (m_Node == null)
 		{
-			if (idleCount++ % idleSkip == 0)
-			{
-				setIdlePhase(status, statusDetails);
-			}
-			else
-			{
-				return null;
-			}
+			setIdlePhase(status, statusDetails);
 		}
 		return docJMFPhaseTime == null ? null : docJMFPhaseTime.clone();
 	}

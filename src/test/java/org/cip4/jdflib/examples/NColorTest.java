@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.Assert;
 import org.junit.Test;
+
 public class NColorTest extends JDFTestCaseBase
 {
 	private JDFNode node;
