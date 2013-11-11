@@ -15,7 +15,7 @@
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-
+		<buildDirectory>${project.basedir}/target</buildDirectory>
 	</properties>
 	<scm>
 		<url>http://svn.cip4.org/svnroot/trunk/JDFLibJ</url>
@@ -66,6 +66,7 @@
 		</plugins>
 	</reporting>
 	<build>
+		<directory>${buildDirectory}</directory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
