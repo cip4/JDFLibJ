@@ -453,6 +453,23 @@ public class FixVersionTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testJMFQueueSusbmitQueueEntry()
+	{
+		JDFJMF jmf = new JMFBuilder().buildSubmitQueueEntry("http://www.example.com");
+		JDFCommand command = jmf.getCommand(0);
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.walkTree(jmf, null);
+		fix = new FixVersion(EnumVersion.Version_1_4);
+		fix.walkTree(jmf, null);
+		assertNotNull(command);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testJMFQueueResumeQueueEntry()
 	{
 		JDFJMF jmf = new JMFBuilder().buildResumeQueueEntry("42");

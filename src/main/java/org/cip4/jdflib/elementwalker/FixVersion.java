@@ -1042,6 +1042,17 @@ public class FixVersion extends BaseElementWalker
 			return null;
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && getNewParamsName() != null;
+		}
+
 	}
 
 	/**
