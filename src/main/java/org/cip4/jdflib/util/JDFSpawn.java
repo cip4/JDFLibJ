@@ -1854,7 +1854,7 @@ public class JDFSpawn
 				log.info("calculating spawnID from parent: SpawnID=" + spawnID);
 			}
 		}
-		return unSpawnNode(nodeParent, spawnID);
+		return new Unspawn(nodeParent, spawnID).unSpawnNode();
 	}
 
 	/**
@@ -1899,131 +1899,175 @@ public class JDFSpawn
 		return parent == null ? null : findUnSpawnNode(parent, spawnID);
 	}
 
-	/**
-	 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler
-	 * das undo aufrufen kann. die Methode hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
-	 * @param parent 
-	 * @param strSpawnID 
-	 * 
-	 * 
-	 * @return the fixed unspawned node
-	 */
-	private JDFNode unSpawnNode(final JDFNode parent, final String strSpawnID)
+	private class Unspawn
 	{
-		if (parent == null)
-		{
-			log.warn("No parent to unspawn, bailing out");
-			return null;
-		}
-		JDFSpawned spawnAudit = null;
+		private final String strSpawnID;
+		private final JDFNode parent;
 
-		JDFNode localNode = null;
-		if (strSpawnID != null && !strSpawnID.equals(JDFConstants.EMPTYSTRING))
+		public Unspawn(final JDFNode parent, final String strSpawnID)
+		{
+			this.parent = parent;
+			this.strSpawnID = strSpawnID;
+		}
+
+		/**
+		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler
+		 * das undo aufrufen kann. die Methode hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
+		 * @param parent 
+		 * @param strSpawnID 
+		 * 
+		 * 
+		 * @return the fixed unspawned node
+		 */
+		JDFNode unSpawnNode()
+		{
+			if (parent == null)
+			{
+				log.warn("No parent to unspawn, bailing out");
+				return null;
+			}
+			JDFSpawned spawnAudit = null;
+
+			JDFNode localNode = null;
+			if (StringUtil.getNonEmpty(strSpawnID) != null)
+			{
+				spawnAudit = findSpawnAudit();
+
+			}
+
+			if (spawnAudit != null)
+			{
+				final VJDFAttributeMap parts = unspawnRO(spawnAudit);
+				unspawnRW(spawnAudit);
+				localNode = (JDFNode) parent.getTarget(spawnAudit.getjRef(), AttributeName.ID);
+				unspawnLocal(localNode);
+				updateStatus(spawnAudit, localNode, parts);
+				spawnAudit.deleteNode();
+			}
+
+			return localNode;
+		}
+
+		private JDFSpawned findSpawnAudit()
 		{
 			final JDFAuditPool auditPool = parent.getAuditPool();
 			if (auditPool != null)
 			{
 				// look into the audit pool and search something, which was spawned
+
 				final JDFAttributeMap mapSpawn = new JDFAttributeMap(JDFConstants.NEWSPAWNID, strSpawnID);
+				JDFSpawned spawnAudit;
 				spawnAudit = (JDFSpawned) auditPool.getAudit(0, JDFAudit.EnumAuditType.Spawned, mapSpawn, null);
 				if (spawnAudit == null)
 				{
 					log.warn("No parent audit to unspawn, bailing out");
-					return null; // nothing was spawned so we can undo nothing
 				}
+				return spawnAudit;
+			}
+			return null;
+		}
 
-				// get parts from audit
-				final VJDFAttributeMap parts = spawnAudit.getPartMapVector();
-				final VString vs = spawnAudit.getrRefsROCopied();
-
-				for (int i = 0; i < vs.size(); i++)
+		private void unspawnRW(JDFSpawned spawnAudit)
+		{
+			// merge rw resources
+			final VString vRWCopied = spawnAudit.getrRefsRWCopied();
+			if (vRWCopied != null)
+			{
+				for (String rwCopied : vRWCopied)
 				{
-					final JDFResource oldRes = (JDFResource) parent.getTarget(vs.elementAt(i), AttributeName.ID);
-					if (oldRes != null)
-					{
-						oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRO);
-					}
-				}
-
-				// merge rw resources
-				final VString vRWCopied = spawnAudit.getrRefsRWCopied();
-
-				for (int i = 0; i < vRWCopied.size(); i++)
-				{
-					final JDFResource oldRes = (JDFResource) parent.getTarget(vRWCopied.elementAt(i), AttributeName.ID);
+					final JDFResource oldRes = (JDFResource) parent.getTarget(rwCopied, AttributeName.ID);
 					if (oldRes != null)
 					{
 						oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
 					}
 				}
-
-				localNode = (JDFNode) parent.getTarget(spawnAudit.getjRef(), AttributeName.ID);
-				final VElement vn = localNode == null ? null : localNode.getvJDFNode(null, null, false);
-				// in C++ Vector is VJDFNode, which is typesafe
-
-				// loop over all child nodes of the spawned node to be unspawned
-				if (vn != null)
-				{
-					for (int nod = 0; nod < vn.size(); nod++)
-					{
-						final JDFNode deepNode = (JDFNode) vn.elementAt(nod);
-						final JDFResourcePool resPool = deepNode.getResourcePool();
-
-						if (resPool != null)
-						{
-							final VElement vRes = resPool.getPoolChildren(null, null, null);
-
-							for (int i = 0; i < vRes.size(); i++)
-							{
-								final JDFResource res1 = (JDFResource) vRes.elementAt(i);
-								res1.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
-							}
-						}
-					}
-				}
-				EnumNodeStatus status = JDFElement.EnumNodeStatus.Waiting;
-				final boolean fHasAuditStatus = spawnAudit.hasAttribute(AttributeName.STATUS);
-				if (fHasAuditStatus)
-				{
-					status = spawnAudit.getStatus();
-				}
-
-				if (parts != null)
-				{
-					final EnumNodeStatus parentStatus = parent.getStatus();
-					if (JDFElement.EnumNodeStatus.Pool.equals(parentStatus) || JDFElement.EnumNodeStatus.Part.equals(parentStatus))
-					{
-						for (int i = 0; i < parts.size(); i++)
-						{
-							if ((parent.getPartStatus(parts.elementAt(i), 0).equals(JDFElement.EnumNodeStatus.Spawned)) || fHasAuditStatus)
-							{
-								parent.setPartStatus(parts.elementAt(i), status, null);
-							}
-						}
-					}
-					else if (JDFElement.EnumNodeStatus.Spawned.equals(parentStatus) || spawnAudit.hasAttribute(AttributeName.STATUS))
-					{
-						parent.setStatus(status);
-					}
-				}
-				else if (localNode != null)
-				{
-					// we either must overwrite because it is now definitely not spawned
-					// or had an explicit correct status in the spawned audit
-					if (JDFElement.EnumNodeStatus.Spawned.equals(localNode.getStatus()) || spawnAudit.hasAttribute(AttributeName.STATUS))
-					{
-						localNode.setStatus(status);
-					}
-				}
-			}
-
-			if (spawnAudit != null)
-			{
-				spawnAudit.deleteNode();
 			}
 		}
 
-		return localNode;
+		private void updateStatus(JDFSpawned spawnAudit, JDFNode localNode, final VJDFAttributeMap parts)
+		{
+			EnumNodeStatus status = JDFElement.EnumNodeStatus.Waiting;
+			final boolean fHasAuditStatus = spawnAudit.hasAttribute(AttributeName.STATUS);
+			if (fHasAuditStatus)
+			{
+				status = spawnAudit.getStatus();
+			}
+
+			if (parts != null)
+			{
+				final EnumNodeStatus parentStatus = parent.getStatus();
+				if (JDFElement.EnumNodeStatus.Pool.equals(parentStatus) || JDFElement.EnumNodeStatus.Part.equals(parentStatus))
+				{
+					for (JDFAttributeMap part : parts)
+					{
+						if (fHasAuditStatus || JDFElement.EnumNodeStatus.Spawned.equals(parent.getPartStatus(part, 0)))
+						{
+							parent.setPartStatus(part, status, null);
+						}
+					}
+				}
+				else if (JDFElement.EnumNodeStatus.Spawned.equals(parentStatus) || spawnAudit.hasAttribute(AttributeName.STATUS))
+				{
+					parent.setStatus(status);
+				}
+			}
+			else if (localNode != null)
+			{
+				// we either must overwrite because it is now definitely not spawned
+				// or had an explicit correct status in the spawned audit
+				if (JDFElement.EnumNodeStatus.Spawned.equals(localNode.getStatus()) || spawnAudit.hasAttribute(AttributeName.STATUS))
+				{
+					localNode.setStatus(status);
+				}
+			}
+		}
+
+		private void unspawnLocal(JDFNode localNode)
+		{
+			final VElement vn = localNode == null ? null : localNode.getvJDFNode(null, null, false);
+			// in C++ Vector is VJDFNode, which is typesafe
+
+			// loop over all child nodes of the spawned node to be unspawned
+			if (vn != null)
+			{
+				for (int nod = 0; nod < vn.size(); nod++)
+				{
+					final JDFNode deepNode = (JDFNode) vn.elementAt(nod);
+					final JDFResourcePool resPool = deepNode.getResourcePool();
+
+					if (resPool != null)
+					{
+						final VElement vRes = resPool.getPoolChildren(null, null, null);
+
+						for (int i = 0; i < vRes.size(); i++)
+						{
+							final JDFResource res1 = (JDFResource) vRes.elementAt(i);
+							res1.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
+						}
+					}
+				}
+			}
+		}
+
+		private VJDFAttributeMap unspawnRO(JDFSpawned spawnAudit)
+		{
+			// get parts from audit
+			final VJDFAttributeMap parts = spawnAudit.getPartMapVector();
+			final VString vROCopied = spawnAudit.getrRefsROCopied();
+
+			if (vROCopied != null)
+			{
+				for (String ro : vROCopied)
+				{
+					final JDFResource oldRes = (JDFResource) parent.getTarget(ro, AttributeName.ID);
+					if (oldRes != null)
+					{
+						oldRes.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRO);
+					}
+				}
+			}
+			return parts;
+		}
 	}
 
 	/**
