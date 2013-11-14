@@ -76,11 +76,12 @@ import org.apache.commons.logging.LogFactory;
  * @author rainer prosi
  * @date Dec 10, 2011
  */
-public abstract class TimeSweeper implements Sweeper
+public class TimeSweeper implements Sweeper
 {
 	protected Log log;
 	protected long t0;
 	private long interval;
+	private Runnable runner;
 
 	/**
 	 * @param interval the time interval in seconds
@@ -92,11 +93,38 @@ public abstract class TimeSweeper implements Sweeper
 		log = LogFactory.getLog(getClass());
 		t0 = -1;
 		setInterval(interval);
+		runner = null;
 	}
 
+	/**
+	 * @param interval the time interval in seconds
+	 * @param runner the runnable to run
+	 * 
+	 */
+	public TimeSweeper(int interval, Runnable runner)
+	{
+		this(interval);
+		this.runner = runner;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param interval in seconds
+	 */
 	protected void setInterval(int interval)
 	{
 		this.interval = 1000 * interval;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param interval in seconds
+	 */
+	protected void setFirstInterval(int interval)
+	{
+		this.t0 = System.currentTimeMillis() + 1000 * interval;
 	}
 
 	/**
@@ -107,20 +135,24 @@ public abstract class TimeSweeper implements Sweeper
 	public boolean needSweep()
 	{
 		long t = System.currentTimeMillis();
-		boolean needsweep = t - t0 > interval;
+		boolean needsweep = t > t0;
 		if (needsweep)
-			t0 = t;
+			t0 = t + interval;
 		return needsweep;
 	}
 
 	/**
-	 * default is nop
+	 * default is nop or runner.run
 	 * @see org.cip4.jdflib.util.thread.Sweeper#sweep()
 	 */
 	@Override
 	public boolean sweep()
 	{
-		return false;
+		if (runner != null)
+		{
+			runner.run();
+		}
+		return runner != null;
 	}
 
 	/**

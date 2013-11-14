@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -134,7 +134,7 @@ public class XMLDocUserData
 	 * 
 	 * @param bCache if true, the ids will be cached
 	 */
-	public void setIDCache(boolean bCache)
+	public static void setIDCache(boolean bCache)
 	{
 		useIDCache = bCache;
 	}
@@ -144,7 +144,7 @@ public class XMLDocUserData
 	 * 
 	 * @return if true, the ids will be cached
 	 */
-	public boolean getIDCache()
+	public static boolean getIDCache()
 	{
 		return useIDCache;
 	}
@@ -162,7 +162,6 @@ public class XMLDocUserData
 	/**
 	 * Enumeration of various policies
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumDirtyPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;

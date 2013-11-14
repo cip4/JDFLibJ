@@ -203,7 +203,10 @@ public final class RegularJanitor
 					if (theMutex == null)
 						break; // feierabend was called
 				}
-				ThreadUtil.wait(theMutex, 1000 * interval);
+				if (!ThreadUtil.wait(theMutex, 1000 * interval))
+				{
+					break;
+				}
 			}
 			log.info("Janitor over and out");
 		}
@@ -237,7 +240,7 @@ public final class RegularJanitor
 					sweeper.sweep();
 				}
 			}
-			catch (Exception x)
+			catch (Throwable x)
 			{
 				log.error("problems sweeping", x);
 			}
@@ -278,7 +281,20 @@ public final class RegularJanitor
 	/**
 	 * 
 	 */
-	public void feierabend()
+	public static void feierabend()
+	{
+		if (theJanitor != null)
+		{
+			RegularJanitor tmp = theJanitor;
+			theJanitor = null;
+			tmp.shutdown();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void shutdown()
 	{
 		if (theMutex == null)
 		{

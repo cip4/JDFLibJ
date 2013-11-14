@@ -236,20 +236,24 @@ public class NetPoll
 						{
 							badMap.remove(url);
 						}
-						ThreadUtil.wait(mutex, getIdleWait());
+						if (!ThreadUtil.wait(mutex, getIdleWait()))
+							break;
+
 						// we only move on to the next in case nothing is waiting
 						int size = getUrlSize();
 						n = ++n % size;
 					}
 					else
 					{
-						ThreadUtil.wait(mutex, busyWait);
+						if (!ThreadUtil.wait(mutex, getIdleWait()))
+							break;
 					}
 				}
 				else
 				// skip errors more often
 				{
-					ThreadUtil.wait(mutex, getIdleWait());
+					if (!ThreadUtil.wait(mutex, getIdleWait()))
+						break;
 				}
 			}
 			// clean up when we leave

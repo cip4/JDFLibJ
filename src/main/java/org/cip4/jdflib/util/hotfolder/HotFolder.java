@@ -319,7 +319,8 @@ public class HotFolder implements Runnable
 				}
 			}
 
-			ThreadUtil.wait(runThread, stabilizeTime);
+			if (!ThreadUtil.wait(runThread, stabilizeTime))
+				break;
 		}
 
 		runThread.interrupt();
