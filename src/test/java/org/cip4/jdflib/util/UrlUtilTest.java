@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.junit.Test;
@@ -231,6 +232,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 		}
 		ProxyUtil.setProxy("proxy", 8082, null, null);
 		assertNotNull(UrlUtil.writeToURL("http://localhost:4021/foo/bar", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testWriteToURLClose()
+	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
+		ProxyUtil.setProxy("proxy", 8082, null, null);
+		HTTPDetails det = new HTTPDetails();
+		det.setbKeepAlive(false);
+		assertNotNull(UrlUtil.writeToURL("http://localhost:4021/foo/bar", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
 	}
 
 	/**

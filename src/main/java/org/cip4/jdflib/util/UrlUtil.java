@@ -135,6 +135,10 @@ public class UrlUtil
 	 * 
 	 */
 	public static final String KEEPALIVE = "keep-alive";
+	/**
+	 * 
+	 */
+	public static final String CLOSE = "close";
 
 	/**
 	 * 
@@ -152,7 +156,45 @@ public class UrlUtil
 		/**
 		 * size of http chunks to be written, if <=0 no chunks
 		 */
-		public int chunkSize = defaultChunkSize;
+		private int chunkSize = defaultChunkSize;
+		private boolean bKeepAlive = true;
+
+		/**
+		 * Getter for chunkSize attribute.
+		 * @return the chunkSize
+		 */
+		public int getChunkSize()
+		{
+			return chunkSize;
+		}
+
+		/**
+		 * Setter for chunkSize attribute.
+		 * @param chunkSize the chunkSize to set
+		 */
+		public void setChunkSize(int chunkSize)
+		{
+			this.chunkSize = chunkSize;
+		}
+
+		/**
+		 * Getter for bKeepAlive attribute.
+		 * @return the bKeepAlive
+		 */
+		public boolean isbKeepAlive()
+		{
+			return bKeepAlive;
+		}
+
+		/**
+		 * Setter for bKeepAlive attribute.
+		 * @param bKeepAlive the bKeepAlive to set
+		 */
+		public void setbKeepAlive(boolean bKeepAlive)
+		{
+			this.bKeepAlive = bKeepAlive;
+		}
+
 		/**
 		 * the default chnk size; -1= don't chunk
 		 */
@@ -171,7 +213,17 @@ public class UrlUtil
 				{
 					urlCon.setChunkedStreamingMode(chunkSize);
 				}
+				urlCon.setRequestProperty("Connection", bKeepAlive ? KEEPALIVE : CLOSE);
 			}
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + "]";
 		}
 	}
 
