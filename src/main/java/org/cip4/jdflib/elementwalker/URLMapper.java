@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -185,9 +185,19 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	/**
 	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
 	 */
+	@Override
 	public KElement convert(KElement e)
 	{
 		walkTree(e, null);
 		return e;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + " baseIn=" + baseIn + ", baseOut=" + baseOut + "]";
 	}
 }

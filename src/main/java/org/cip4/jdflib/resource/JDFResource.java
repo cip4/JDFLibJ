@@ -1371,46 +1371,57 @@ public class JDFResource extends JDFElement
 				return v;
 			}
 
-			VElement vAllLeaves = getLeaves(true);
-			if (followIdentical)
-				findIdentical(vAllLeaves);
-			if (vm == null)
-			{
-				if (hasIdentical)
-				{
-					removeIdenticalRefs(vAllLeaves);
-				}
-				return vAllLeaves;
-			}
-			final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(vAllLeaves, pk);
-			boolean bAll = true;
 			boolean bNoDeep = true; // we have mixed data or partversion
-			for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
+			boolean bAll = true;
+			if (vm != null && vm.size() > 0)
 			{
-				final JDFAttributeMap map = vm.elementAt(i);
-				final JDFResource element = leafMap.get(map);
-				if (bNoDeep)
+				VString keys = vm.getKeys();
+				if (keys != null && keys.contains(AttributeName.PARTVERSION))
 				{
-					VString keys = map.getKeys();
-					if (keys.contains(AttributeName.PARTVERSION))
+					bNoDeep = false;
+				}
+			}
+			VElement vAllLeaves = null;
+			if (bNoDeep)
+			{
+				vAllLeaves = getLeaves(true);
+				if (followIdentical)
+					findIdentical(vAllLeaves);
+				if (vm == null)
+				{
+					if (hasIdentical)
 					{
-						bNoDeep = false; // need special handling for multiple versions
+						removeIdenticalRefs(vAllLeaves);
+					}
+					return vAllLeaves;
+				}
+				final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(vAllLeaves, pk);
+				for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
+				{
+					final JDFAttributeMap map = vm.elementAt(i);
+					final JDFResource element = leafMap.get(map);
+					if (bNoDeep)
+					{
+						VString keys = map.getKeys();
+						if (keys.contains(AttributeName.PARTVERSION))
+						{
+							bNoDeep = false; // need special handling for multiple versions
+						}
+						else
+						{
+							bNoDeep = findPartitionGaps(pk, keys);
+						}
+					}
+					if (element != null)
+					{
+						addSingleResource(vAllLeaves, element);
 					}
 					else
 					{
-						bNoDeep = findPartitionGaps(pk, keys);
+						bAll = false;
 					}
 				}
-				if (element != null)
-				{
-					addSingleResource(vAllLeaves, element);
-				}
-				else
-				{
-					bAll = false;
-				}
 			}
-
 			if (!bAll || !bNoDeep)
 			{
 				vAllLeaves = specialSearch(vm, partUsage, bNoDeep);

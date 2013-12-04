@@ -420,7 +420,7 @@ public class XMLParser extends DOMParser
 		catch (final Exception e)
 		{
 			m_lastExcept = e;
-			log.error("error parsing", e);
+			log.error("error parsing " + e.getMessage());
 			doc = null;
 		}
 		catch (final StackOverflowError e)

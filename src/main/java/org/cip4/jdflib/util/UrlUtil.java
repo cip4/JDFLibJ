@@ -155,8 +155,9 @@ public class UrlUtil
 	{
 		/**
 		 * size of http chunks to be written, if <=0 no chunks
+		 * TODO make private in a while
 		 */
-		private int chunkSize = defaultChunkSize;
+		public int chunkSize = defaultChunkSize;
 		private boolean bKeepAlive = true;
 
 		/**
