@@ -84,7 +84,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -141,8 +140,8 @@ public class TestJDF extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 * @throws Throwable
 	 */
-	@Test
-	public void testSpawnRW() throws Throwable
+
+	public void _testSpawnRW() throws Throwable
 	{
 		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
 		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPr0.PP", null);
