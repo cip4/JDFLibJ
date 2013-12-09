@@ -149,7 +149,7 @@ public class JDFSpawn
 	public boolean bCopyNodeInfo = true;
 
 	/**
-	 * if true, copy node info
+	 * if true, copy identical elements
 	 */
 	public boolean bSpawnIdentical = true;
 
@@ -456,12 +456,13 @@ public class JDFSpawn
 		if (bResRW && r != null)
 		{
 			VElement vRes = getSpawnLeaves(r);
+			VString partIDKeys = r.getPartIDKeys();
 			for (KElement e : vRes)
 			{
 				final JDFResource rTarget = (JDFResource) e;
 				if (JDFResource.EnumSpawnStatus.SpawnedRW.equals(rTarget.getSpawnStatus()))
 				{
-					if (!vMultiRes.contains(rTarget) && (vSpawnParts == null || vSpawnParts.overlapsMap(rTarget.getPartMap())))
+					if (!vMultiRes.contains(rTarget) && (vSpawnParts == null || vSpawnParts.overlapsMap(rTarget.getPartMap(partIDKeys))))
 					{
 						vMultiRes.add(rTarget);
 					}
@@ -698,7 +699,7 @@ public class JDFSpawn
 
 					vRes = dummy.getTargetVector(-1);
 					dummy.deleteNode();
-					reduceLinkPartition(liRootLink, vLinkMap);
+					reduceLinkPartAmounts(liRootLink, vLinkMap);
 				}
 				else if (liRoot instanceof JDFRefElement)
 				{
@@ -960,7 +961,7 @@ public class JDFSpawn
 			{
 				final VJDFAttributeMap vPartMap = getSpawnLinkMap(vSpawnParts, r);
 				final VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);
-				reduceLinkPartition(link, vNewMap);
+				reduceLinkPartAmounts(link, vNewMap);
 				updateSpawnIDs(spawnID, link);
 				final String id = link.getrRef();
 				link = (JDFResourceLink) mainLinks.elementAt(i);
@@ -993,20 +994,19 @@ public class JDFSpawn
 	 * @param link
 	 * @param vNewMap
 	 */
-	private void reduceLinkPartition(JDFResourceLink link, final VJDFAttributeMap vNewMap)
+	private void reduceLinkPartAmounts(JDFResourceLink link, final VJDFAttributeMap vNewMap)
 	{
 		link.setPartMapVector(vNewMap);
 		JDFAmountPool ap = link.getAmountPool();
-		if (ap != null)
+		VElement partAmounts = ap == null ? null : ap.getChildElementVector(ElementName.PARTAMOUNT, null);
+		if (partAmounts != null)
 		{
-			VElement partAmounts = ap.getChildElementVector(ElementName.PARTAMOUNT, null);
-			if (partAmounts != null)
+			for (KElement e : partAmounts)
 			{
-				for (KElement e : partAmounts)
+				JDFPartAmount pa = (JDFPartAmount) e;
+				if (!pa.getPartMapVector().overlapsMap(vNewMap))
 				{
-					JDFPartAmount pa = (JDFPartAmount) e;
-					if (!pa.getPartMapVector().overlapsMap(vNewMap))
-						pa.deleteNode();
+					pa.deleteNode();
 				}
 			}
 		}
@@ -1027,6 +1027,7 @@ public class JDFSpawn
 			rMain = getNodeResource(link.getrRef());
 			if (rMain == null)
 			{
+				log.error("cannot find main resource for: " + link.getNodeName() + " " + link.getrRef());
 				return; // snafu return exit for corrupt links
 			}
 			else
@@ -1262,9 +1263,9 @@ public class JDFSpawn
 	 * @param identical
 	 * @return the reduced partitions
 	 */
-	private VElement reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap, final VElement identical)
+	private Set<KElement> reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap, final VElement identical)
 	{
-		final VElement bad = new VElement();
+		final Set<KElement> bad = new HashSet<KElement>();
 		final VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
 		if (children != null)
 		{
@@ -1296,7 +1297,7 @@ public class JDFSpawn
 							}
 							if (partIDPos + 1 < partIDKeys.size())
 							{
-								bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
+								bad.addAll(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
 							}
 							else
 							{
@@ -1309,7 +1310,9 @@ public class JDFSpawn
 									{
 										KElement parentNode_KElement = v.get(iii).getParentNode_KElement();
 										if (parentNode_KElement != child)
+										{
 											v2.add(parentNode_KElement);
+										}
 									}
 									v2.unify();
 									for (int iii = 0; iii < v2.size(); iii++)
@@ -1427,44 +1430,56 @@ public class JDFSpawn
 			return;
 		}
 
-		// in case we spawn lower than, only remove partitions that are parallel to our spawning
-		int nMax = 999;
-
-		final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
-		for (int j = 0; j < vSubParts.size(); j++)
+		boolean needCheckIdentical = true;
+		//		if (bSpawnIdentical)
 		{
-			final JDFResource rr = (JDFResource) vSubParts.get(j);
-			final JDFAttributeMap partMap = rr.getPartMap(partIDKeys);
-			final int mapSize = partMap == null ? 0 : partMap.size();
-			if (mapSize < nMax)
+			//		Vector<JDFIdentical> v = r.getChildrenByClass(JDFIdentical.class, true, 1);
+			//	needCheckIdentical = v != null && v.size() > 0;
+		}
+		if (needCheckIdentical)
+		{
+			// in case we spawn lower than, only remove partitions that are parallel to our spawning
+			int nMax = 999;
+
+			final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+			for (int j = 0; j < vSubParts.size(); j++)
 			{
-				nMax = mapSize;
-				if (nMax == 0)
+				final JDFResource rr = (JDFResource) vSubParts.get(j);
+				final JDFAttributeMap partMap = rr.getPartMap(partIDKeys);
+				final int mapSize = partMap == null ? 0 : partMap.size();
+				if (mapSize < nMax)
 				{
-					return; // nothing left to do
+					nMax = mapSize;
+					if (nMax == 0)
+					{
+						return; // nothing left to do
+					}
 				}
 			}
-		}
-		for (int i = partIDKeys.size() - 1; i >= nMax; i--)
-		{
-			partIDKeys.remove(i);
-		}
+			for (int i = partIDKeys.size() - 1; i >= nMax; i--)
+			{
+				partIDKeys.remove(i);
+			}
 
-		final String nodeName = r.getLocalName();
-		final String nsURI = r.getNamespaceURI();
-		final VElement identical = new VElement();
-		final VElement vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
-		vBad.unify();
-		if (identical.size() > 0)
-		{
-			identical.unify();
-			vBad.removeAll(identical);
-		}
-		for (int i = 0; i < vBad.size(); i++)
-		{
-			vBad.get(i).deleteNode();
-		}
+			final String nodeName = r.getLocalName();
+			final String nsURI = r.getNamespaceURI();
+			final VElement identical = new VElement();
+			final Set<KElement> vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
+			if (identical.size() > 0)
+			{
+				identical.unify();
+				vBad.removeAll(identical);
+			}
+			for (KElement bad : vBad)
+			{
+				bad.deleteNode();
+			}
 
+		}
+		else
+		{
+
+		}
 	}
 
 	/**

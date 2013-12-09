@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,6 +105,13 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 {
 
 	/**
+	 * 
+	 */
+	private static final String CORE_KELEMENT = "org.cip4.jdflib.core.KElement";
+	private static final String CORE_JDFELEMENT = "org.cip4.jdflib.core.JDFElement";
+	private static final String CORE_JDFRESOURCE = "org.cip4.jdflib.resource.JDFResource";
+
+	/**
 	 * this is a singlton data container for the parser
 	 * 
 	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -134,16 +141,16 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			contextSensitive.add(ElementName.SHAPE);
 			contextSensitive.add(ElementName.POSITION);
 			contextSensitive.add(ElementName.SURFACE);
-			contextSensitive.add("org.cip4.jdflib.resource.JDFResource");
-			contextSensitive.add("org.cip4.jdflib.core.JDFElement");
-			contextSensitive.add("org.cip4.jdflib.core.KElement");
+			//			contextSensitive.add(CORE_JDFRESOURCE);
+			contextSensitive.add(CORE_JDFELEMENT);
+			contextSensitive.add(CORE_KELEMENT);
 		}
 
 		private void fillPackages()
 		{
-			sm_PackageNames.put("ResDefault", "org.cip4.jdflib.resource.JDFResource");
-			sm_PackageNames.put("EleDefault", "org.cip4.jdflib.core.JDFElement");
-			sm_PackageNames.put("OtherNSDefault", "org.cip4.jdflib.core.KElement");
+			sm_PackageNames.put("ResDefault", CORE_JDFRESOURCE);
+			sm_PackageNames.put("EleDefault", CORE_JDFELEMENT);
+			sm_PackageNames.put("OtherNSDefault", CORE_KELEMENT);
 			// sm_PackageNames.put("AttributeName",
 			// "org.cip4.jdflib.core.AttributeName");
 
@@ -177,8 +184,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.ARTHANDLING, "org.cip4.jdflib.span.JDFSpanArtHandling");
 			sm_PackageNames.put(ElementName.ASSEMBLY, "org.cip4.jdflib.resource.process.JDFAssembly");
 			sm_PackageNames.put(ElementName.ASSEMBLYSECTION, "org.cip4.jdflib.resource.process.JDFAssemblySection");
-			// sm_PackageNames.put(ElementName.ASSETLISTCREATION,
-			// "org.cip4.jdflib.resource.process.prepress.JDFAssetListCreation");
 			sm_PackageNames.put(ElementName.ASSETLISTCREATIONPARAMS, "org.cip4.jdflib.resource.process.prepress.JDFAssetListCreationParams");
 			sm_PackageNames.put(ElementName.AUDIT, "org.cip4.jdflib.core.JDFAudit");
 			sm_PackageNames.put(ElementName.AUDITPOOL, "org.cip4.jdflib.pool.JDFAuditPool");
@@ -730,7 +735,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.REQUESTQUEUEENTRYPARAMS, "org.cip4.jdflib.jmf.JDFRequestQueueEntryParams");
 			sm_PackageNames.put(ElementName.REQUIRED, "org.cip4.jdflib.span.JDFTimeSpan");
 			sm_PackageNames.put(ElementName.REQUIREDDURATION, "org.cip4.jdflib.span.JDFDurationSpan");
-			sm_PackageNames.put(ElementName.RESOURCE, "org.cip4.jdflib.resource.JDFResource");
+			sm_PackageNames.put(ElementName.RESOURCE, CORE_JDFRESOURCE);
 			sm_PackageNames.put(ElementName.RESOURCEAUDIT, "org.cip4.jdflib.resource.JDFResourceAudit");
 			sm_PackageNames.put(ElementName.RESOURCECMDPARAMS, "org.cip4.jdflib.jmf.JDFResourceCmdParams");
 			sm_PackageNames.put(ElementName.RESOURCEDEFINITIONPARAMS, "org.cip4.jdflib.resource.process.JDFResourceDefinitionParams");
@@ -937,6 +942,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 		/** Caches JDF element constructors (namespace variant) */
 		private final HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
+		/** Caches JDF element classes based on class paths to avoid heavy use of forName */
+		private final HashMap<String, Class<?>> sm_hashPathToClass = new HashMap<String, Class<?>>();
 	}
 
 	private static DocumentData data = new DocumentData();
@@ -1012,8 +1019,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	KElement factoryCreate(final ParentNode parent, final String qualifiedName)
 	{
-		setParentNode(parent); // set the parent in the factory for
-		// private Elements
+		// set the parent in the factory for private Elements
+		setParentNode(parent);
 		return (KElement) createElement(qualifiedName);
 	}
 
@@ -1026,7 +1033,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	KElement factoryCreate(final ParentNode parent, final String namespaceURI, final String qualifiedName)
 	{
-		setParentNode(parent); // set the parent in the factory for private Elements
+		// set the parent in the factory for private Elements
+		setParentNode(parent);
 		return (KElement) createElementNS(namespaceURI, qualifiedName);
 	}
 
@@ -1068,19 +1076,31 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		{
 			constructi = theData.sm_hashCtorElementNS.get(qualifiedName);
 
+			String path = null;
 			// otherwhise don't use hashtableentry
+			if (constructi == null)// AS 17.09.02
+			{
+				path = getFactoryClassPath(namespaceURI, qualifiedName, localPart);
+				if (path == null)
+					path = getSpecialClassPath(namespaceURI, qualifiedName);
+
+				if (path != null)
+					constructi = theData.sm_hashCtorElementNS.get(path);
+				if (localPart.equals("ReportList") && path.equals(CORE_KELEMENT))
+					System.out.println(path + " " + qualifiedName);
+			}
 			if (constructi == null)// AS 17.09.02
 			{
 				try
 				{
-					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart);
+					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart, path);
 					if (classOfConstructor != null)
 					{
 						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
 								java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
-						putConstructorToHashMap(qualifiedName, constructi);
+						putConstructorToHashMap(qualifiedName, constructi, path);
 					}
 				}
 				catch (final ClassNotFoundException e)
@@ -1114,16 +1134,20 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * @param qualifiedName
 	 * @param constructi
 	 */
-	private void putConstructorToHashMap(final String qualifiedName, final Constructor<?> constructi)
+	private void putConstructorToHashMap(final String qualifiedName, final Constructor<?> constructi, String path)
 	{
 		// only put the constructor into the map if its not a Resource or an element
 		// there are a couple of nodes which can be both resource and element depending on the occurrence
 		final String className = constructi.getDeclaringClass().getName();
 		final boolean bSpecialClass = isSpecialClass(qualifiedName, className);
-		// it has to be 1 coreDocImpl plus 3 String Parameters
-		if (bSpecialClass && constructi.getParameterTypes().length == 4)
+
+		if (bSpecialClass)
 		{
 			data.sm_hashCtorElementNS.put(qualifiedName, constructi);
+		}
+		else if (path != null)
+		{
+			data.sm_hashCtorElementNS.put(path, constructi);
 		}
 	}
 
@@ -1199,7 +1223,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 		try
 		{
-			packageNameClass = getFactoryClass(null, qualifiedName, qualifiedName);
+			packageNameClass = getFactoryClass(null, qualifiedName, qualifiedName, null);
 		}
 		catch (final ClassNotFoundException e)
 		{ /**/
@@ -1208,7 +1232,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		return packageNameClass;
 	}
 
-	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart) throws ClassNotFoundException
+	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart, String strClassPath) throws ClassNotFoundException
 	{
 		Class<?> packageNameClass = data.sm_ClassAlreadyInstantiated.get(qualifiedName);
 
@@ -1216,7 +1240,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		{ // class not found in the buffer! Instantiate it and add it to the buffer
 			synchronized (data.sm_PackageNames)
 			{
-				String strClassPath = getFactoryClassPath(strNameSpaceURI, qualifiedName, localPart);
+				if (strClassPath == null)
+					strClassPath = getFactoryClassPath(strNameSpaceURI, qualifiedName, localPart);
 
 				boolean normalElement = true;
 				if (strClassPath == null)
@@ -1228,16 +1253,18 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 				{
 					normalElement = isSpecialClass(qualifiedName, strClassPath);
 				}
-
-				// assert strClassPath != null
-				try
+				packageNameClass = data.sm_hashPathToClass.get(strClassPath);
+				if (packageNameClass == null)
 				{
-					packageNameClass = Class.forName(strClassPath);
-				}
-				catch (final ClassNotFoundException e)
-				{
-					// TODO Auto-generated catch block
-					throw new ClassNotFoundException(e.getMessage(), e);
+					try
+					{
+						packageNameClass = Class.forName(strClassPath);
+					}
+					catch (final ClassNotFoundException e)
+					{
+						throw new ClassNotFoundException(e.getMessage(), e);
+					}
+					data.sm_hashPathToClass.put(strClassPath, packageNameClass);
 				}
 
 				if (normalElement || strClassPath.equals(data.sm_PackageNames.get("ResDefault")))
@@ -1260,7 +1287,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		// we are not yet in a JDF or JMF - it must be a KElement
 		if (!bInJDFJMF)
 		{
-			return "org.cip4.jdflib.core.KElement";
+			return CORE_KELEMENT;
 		}
 
 		String strClassPath = null;

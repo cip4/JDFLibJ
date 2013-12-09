@@ -1005,6 +1005,26 @@ public class StringUtil
 	}
 
 	/**
+	 * 
+	 * normalize a string by stripping and converting whitespace to a single blank
+	 * @param strWork the input
+	 * @param ignorecase if true return all lower case
+	 * @return the output
+	 */
+	public static String normalize(String strWork, boolean ignorecase)
+	{
+		if (strWork == null)
+			return null;
+		strWork = strWork.trim();
+		if (getNonEmpty(strWork) == null)
+			return null;
+		strWork = strWork.replaceAll("\\s+", " ");
+		if (ignorecase)
+			strWork = strWork.toLowerCase();
+		return strWork;
+	}
+
+	/**
 	 * return null if s==null or s==def, else s<br/>
 	 * used e.g. to zapp "" strings
 	 * 

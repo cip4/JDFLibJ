@@ -75,7 +75,16 @@ import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.StringUtil;
+import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -84,7 +93,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
  */
 public class TestJDF extends JDFTestCaseBase
 {
-	private static final String SEPARATOR = File.separator; // "/"; //
+	private static final String SEPARATOR = File.separator;
 
 	static protected final String sm_dirTestData = getTestDataDir();
 	static protected final String sm_dirTestSchema = sm_dirTestData + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
@@ -132,32 +141,51 @@ public class TestJDF extends JDFTestCaseBase
 	 * TODO Please insert comment!
 	 * @throws Throwable
 	 */
-	// @Test
-	//	public void testSpawnRW() throws Throwable
-	//	{
-	//		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-42464/page.jdf");
-	//
-	//		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", null);
-	//
-	//		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-	//
-	//		final JDFAttributeMap amParts0 = new JDFAttributeMap();
-	//
-	//		amParts0.put("Run", "Run_121015_072229975_000405");
-	//
-	//		vamParts.add(amParts0);
-	//
-	//		final VString vsRWResourceIDs = new VString("RunList", null);
-	//
-	//		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-	//
-	//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-	//		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2, false);
-	//		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
-	//		jdfDoc.write2File(strOutJDFPath, 2, false);
-	//
-	//		// Link_110412_072920686_018182
-	//	}
+	@Test
+	public void testSpawnRW() throws Throwable
+	{
+		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
+		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPr0.PP", null);
+		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+		for (int i = 1; i <= 40; i++)
+		{
+			JDFAttributeMap amParts0 = new JDFAttributeMap();
+			amParts0.put("BinderySignatureName", "Booklet_1");
+			amParts0.put("PartVersion", "Tsc");
+			amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
+			amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i));
+			amParts0.put("Side", "Front");
+			vamParts.add(amParts0);
+			amParts0 = amParts0.clone();
+			amParts0.put("Side", "Back");
+			vamParts.add(amParts0);
+		}
+		final VString vsRWResourceIDs = new VString("Output", null);
+
+		CPUTimer ct = new CPUTimer(false);
+		JDFSpawn spawn;
+
+		//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+		for (int i = 0; i < 1; i++)
+		{
+			ct.start();
+			spawn = new JDFSpawn(nodeProc);
+			spawn.bSpawnIdentical = false;
+			JDFNode nodeSubJDF = spawn.spawnInformative(null, null, vamParts, true, true, true, false);
+			log.info(i + " " + ct.getSingleSummary());
+			ct.stop();
+		}
+		ct.start();
+		spawn = new JDFSpawn(nodeProc);
+		spawn.bSpawnIdentical = false;
+		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+		log.info(ct.getSingleSummary());
+		ct.stop();
+		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false);
+		String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
+		jdfDoc.write2File(strOutJDFPath, 2, false);
+
+	}
 
 	/**
 	 * 

@@ -3218,7 +3218,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		rlS.getCreatePartition(map, pik);
 
 		assertTrue(rl.toString().indexOf("SpawnedRW") > 0);
-		assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
+		//		assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
 		// assertEquals(rl.getPartition(ms,
 		// null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");
 

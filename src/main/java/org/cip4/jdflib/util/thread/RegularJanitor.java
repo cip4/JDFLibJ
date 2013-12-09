@@ -112,7 +112,17 @@ public final class RegularJanitor
 	@Override
 	public String toString()
 	{
-		return "RegularJanitor: interval=" + interval;
+		return "RegularJanitor: interval=" + interval + " size=" + numSweepers();
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	int numSweepers()
+	{
+		return vSweepers.size() + tmpSweepers.size() - zappSweepers.size();
 	}
 
 	/**
@@ -142,22 +152,30 @@ public final class RegularJanitor
 
 	private void checkDuplicates(Sweeper sweeper)
 	{
-		for (Sweeper oldSweeper : tmpSweepers)
+		Vector<Sweeper> v = new Vector<Sweeper>();
+		v.addAll(tmpSweepers);
+		v.addAll(vSweepers);
+		for (Sweeper oldSweeper : v)
 		{
-			if (oldSweeper.getClass().equals(sweeper.getClass()))
+			Class<?> oldClass = getRunnerClass(oldSweeper);
+			Class<?> newClass = getRunnerClass(sweeper);
+			if (oldClass.equals(newClass))
 			{
 				log.info("removing duplicate tmp sweeper");
 				zappSweepers.add(oldSweeper);
 			}
 		}
-		for (Sweeper oldSweeper : vSweepers)
-		{
-			if (oldSweeper.getClass().equals(sweeper.getClass()))
-			{
-				log.info("removing duplicate sweeper");
-				zappSweepers.add(oldSweeper);
-			}
-		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param oldSweeper
+	 * @return
+	 */
+	private Class<? extends Object> getRunnerClass(Sweeper oldSweeper)
+	{
+		return (oldSweeper instanceof TimeSweeper) ? ((TimeSweeper) oldSweeper).getRunnerClass() : oldSweeper.getClass();
 	}
 
 	/**

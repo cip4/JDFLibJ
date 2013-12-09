@@ -4330,7 +4330,7 @@ public class JDFElement extends KElement
 			else
 			// only need to remove this element
 			{
-				final String id = super.getAttribute(JDFCoreConstants.ID);
+				final String id = getAttributeRaw(JDFCoreConstants.ID);
 				if (id != null)
 				{
 					ud.removeTarget(id);

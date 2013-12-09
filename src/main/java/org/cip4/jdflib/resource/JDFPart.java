@@ -87,7 +87,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -280,23 +279,19 @@ public class JDFPart extends JDFAutoPart
 		}
 		else if (!strictPartVersion && AttributeName.PARTVERSION.equals(key))
 		{
-			final VString resTokens = StringUtil.tokenize(resourceValue, null, false);
-			final VString linkTokens = StringUtil.tokenize(linkValue, null, false);
-			if (resTokens.size() == linkTokens.size())
+			b = resourceValue.equals(linkValue);
+			if (!b)
 			{
-				b = resourceValue.equals(linkValue);
-			}
-			else if (resTokens.size() == 1)
-			{
-				b = AtrInfo.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
-			}
-			else if (linkTokens.size() == 1)
-			{
-				b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
-			}
-			else
-			{
-				b = false;
+				int iResPos = resourceValue.indexOf(' ');
+				int iLinkPos = linkValue.indexOf(' ');
+				if (iResPos < 0 && iLinkPos >= 0)
+				{
+					b = AtrInfo.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				}
+				else if (iLinkPos < 0 && iResPos >= 0)
+				{
+					b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				}
 			}
 		}
 		else

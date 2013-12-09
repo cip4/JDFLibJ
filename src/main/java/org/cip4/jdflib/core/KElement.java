@@ -290,6 +290,18 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * getAttribute with no pardon for namespaces or anything
+	 * 
+	 * @param qualifiedName the name of the attribute you want to have
+	 * @return String the value of the Attribute or emptystring
+	 */
+	public String getAttributeRaw(final String qualifiedName)
+	{
+		Attr a = getAttributeNode(qualifiedName);
+		return a == null ? null : a.getValue();
+	}
+
+	/**
 	 * Mother of all attribute getters <br>
 	 * Gets an attribute value out of an element
 	 * @param strLocalName the name of the attribute you want to have
@@ -2937,6 +2949,7 @@ public class KElement extends ElementNSImpl implements Element
 			if (src.getOwnerDocument() != getOwnerDocument())
 			{
 				src.clearTargets();
+
 				final KElement dest = (KElement) getOwnerDocument().importNode(srcElement, true);
 				dest.fixParent(this, dest);
 				srcElement = dest;
@@ -3054,20 +3067,23 @@ public class KElement extends ElementNSImpl implements Element
 	private Node copyNode(final Node src, final KElement beforeChild)
 	{
 		Node childNode = null;
-		if (src.getOwnerDocument() == this.getOwnerDocument())
+		Document od = getOwnerDocument();
+		if (src.getOwnerDocument() == od)
 		{
 			childNode = src.cloneNode(true);
 		}
 		else
 		{
-			childNode = this.getOwnerDocument().importNode(src, true);
+			if (od instanceof DocumentJDFImpl)
+				((DocumentJDFImpl) od).setParentNode(this);
+			childNode = od.importNode(src, true);
 		}
 
 		if (beforeChild != null && beforeChild.getParentNode() != this)
 		{
 			throw new JDFException("KElement.copyElement: beforeChild " + beforeChild + " is not child of this: " + toString());
 		}
-		return this.insertBefore(childNode, beforeChild);
+		return insertBefore(childNode, beforeChild);
 	}
 
 	/** 

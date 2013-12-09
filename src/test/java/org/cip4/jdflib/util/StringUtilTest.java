@@ -584,6 +584,20 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test normalize utility
+	 * 
+	 */
+	@Test
+	public void testNormalize()
+	{
+		assertEquals("a b", StringUtil.normalize("\n  a   \t  b ", false));
+		assertEquals("a bbb", StringUtil.normalize("\n  a   \t  BBb ", true));
+		assertEquals("a BBb", StringUtil.normalize("\n  a   \t  BBb ", false));
+		assertNull(StringUtil.normalize("\n      \t   ", true));
+		assertNull(StringUtil.normalize(null, true));
+	}
+
+	/**
 	 * 
 	 */
 	@Test
@@ -1082,6 +1096,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
 		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
+		ios.close();
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

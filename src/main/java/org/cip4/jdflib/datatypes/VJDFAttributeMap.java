@@ -189,7 +189,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * @param strKey the attribute to get values from
-	 * @param bUnique if true, ensure unique vector, else the vector coressponds to the voctor of maps
+	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of maps
 	 * @return the Vector of all values
 	 */
 	public VString getPartValues(final String strKey, final boolean bUnique)

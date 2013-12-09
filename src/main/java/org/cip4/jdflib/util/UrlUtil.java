@@ -1598,7 +1598,7 @@ public class UrlUtil
 				{
 					if (list.size() > 1)
 						stream = ByteArrayIOStream.getBufferedInputStream(stream);
-					p = callProxy(proxy);
+					p = callProxy(proxy, list.size() == 1 || !proxy.equals(Proxy.NO_PROXY));
 					if (p != null)
 					{
 						if (p.getResponseCode() == 200)
@@ -1634,9 +1634,10 @@ public class UrlUtil
 
 		/**
 		 * @param proxy
+		 * @param bWantLog 
 		 * @return
 		 */
-		private UrlPart callProxy(Proxy proxy)
+		private UrlPart callProxy(Proxy proxy, boolean bWantLog)
 		{
 			URL url = UrlUtil.stringToURL(strUrl);
 			try
@@ -1656,7 +1657,10 @@ public class UrlUtil
 			}
 			catch (final Throwable x)
 			{
-				LogFactory.getLog(URLWriter.class).error(x.getClass().getCanonicalName() + " snafu writing to url: " + strUrl + " " + x.getMessage());
+				if (bWantLog)
+				{
+					LogFactory.getLog(URLWriter.class).error(x.getClass().getCanonicalName() + " snafu writing to url: " + strUrl + " " + x.getMessage());
+				}
 			}
 			return null;
 		}

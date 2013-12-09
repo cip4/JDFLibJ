@@ -128,6 +128,16 @@ public class TimeSweeper implements Sweeper
 	}
 
 	/**
+	 * 
+	 * get the subclass or class of the runner 
+	 * @return
+	 */
+	public Class<?> getRunnerClass()
+	{
+		return runner == null ? getClass() : runner.getClass();
+	}
+
+	/**
 	 * if true we want to sweep
 	 * @see org.cip4.jdflib.util.thread.Sweeper#needSweep()
 	 */
