@@ -145,6 +145,8 @@ public class TestJDF extends JDFTestCaseBase
 	public void testSpawnRW() throws Throwable
 	{
 		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
+		if (jdfDoc == null)
+			return;
 		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPr0.PP", null);
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(false);
