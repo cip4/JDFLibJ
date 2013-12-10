@@ -1561,10 +1561,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	public void testSpawnIdentical()
 	{
-		for (int i = 1; i < 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
 
-			for (int ii = 1; ii < 2; ii++) // spawnidentical = true / false
+			for (int ii = 0; ii < 2; ii++) // spawnidentical = true / false
 			{
 				JDFNode n = new JDFDoc("JDF").getJDFRoot();
 				final JDFNode root = n;
