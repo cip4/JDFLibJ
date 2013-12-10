@@ -81,6 +81,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
@@ -141,46 +142,42 @@ public class TestJDF extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 
-	public void _testSpawnRW() throws Throwable
+	public void testSpawnRW() throws Throwable
 	{
 		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
 		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPr0.PP", null);
-		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-		for (int i = 1; i <= 40; i++)
-		{
-			JDFAttributeMap amParts0 = new JDFAttributeMap();
-			amParts0.put("BinderySignatureName", "Booklet_1");
-			amParts0.put("PartVersion", "Tsc");
-			amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
-			amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i));
-			amParts0.put("Side", "Front");
-			vamParts.add(amParts0);
-			amParts0 = amParts0.clone();
-			amParts0.put("Side", "Back");
-			vamParts.add(amParts0);
-		}
-		final VString vsRWResourceIDs = new VString("Output", null);
-
+		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(false);
 		JDFSpawn spawn;
 
-		//		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-		for (int i = 0; i < 1; i++)
+		for (int ii = 0; ii < 21; ii++)
 		{
+			final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+			for (int i = 1; i <= 40; i++)
+			{
+				JDFAttributeMap amParts0 = new JDFAttributeMap();
+				amParts0.put("BinderySignatureName", "Booklet_" + ii);
+				amParts0.put("PartVersion", "Pol");
+				amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
+				amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i));
+				amParts0.put("Side", "Front");
+				vamParts.add(amParts0);
+				amParts0 = amParts0.clone();
+				amParts0.put("Side", "Back");
+				vamParts.add(amParts0);
+			}
+			final VString vsRWResourceIDs = new VString("Output", null);
+
 			ct.start();
 			spawn = new JDFSpawn(nodeProc);
-			spawn.bSpawnIdentical = false;
-			JDFNode nodeSubJDF = spawn.spawnInformative(null, null, vamParts, true, true, true, false);
-			log.info(i + " " + ct.getSingleSummary());
+			spawn.bSpawnIdentical = true;
+			spawn.bSpawnRWPartsMultiple = true;
+			JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+			log.info(ii + " " + ct.getSingleSummary());
 			ct.stop();
+			if (ii == 1)
+				nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false);
 		}
-		ct.start();
-		spawn = new JDFSpawn(nodeProc);
-		spawn.bSpawnIdentical = false;
-		JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-		log.info(ct.getSingleSummary());
-		ct.stop();
-		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false);
 		String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
 		jdfDoc.write2File(strOutJDFPath, 2, false);
 

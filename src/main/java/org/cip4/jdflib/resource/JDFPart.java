@@ -75,8 +75,8 @@
 
 package org.cip4.jdflib.resource;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart;
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
@@ -96,8 +97,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 public class JDFPart extends JDFAutoPart
 {
 	private static final long serialVersionUID = 1L;
-	private static HashSet<String> tokensSet = null;
-	private static HashSet<String> irlSet = null;
 
 	/**
 	 * Constructor for JDFPart
@@ -233,6 +232,28 @@ public class JDFPart extends JDFAutoPart
 	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
 	 * @param key the partition key
 	 * @param resourceValue the value of key in the resource
+	 * @param linkValues the value of key in the part element or ref
+	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
+	 * @return boolean: true if linkValue matches the value or list in resourceValue
+	 */
+	public static boolean matchesPart(final String key, final String resourceValue, final VString linkValues, boolean strictPartVersion)
+	{
+		if (linkValues == null || linkValues.size() == 0)
+			return true;
+		for (String linkValue : linkValues)
+		{
+			if (matchesPart(key, resourceValue, linkValue, strictPartVersion))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
+	 * @param key the partition key
+	 * @param resourceValue the value of key in the resource
 	 * @param linkValue the value of key in the part element or ref
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
@@ -243,37 +264,17 @@ public class JDFPart extends JDFAutoPart
 		{
 			return true;
 		}
+		// speed up typical keys
+		else if (AttributeName.SIGNATURENAME.equals(key) || AttributeName.SHEETNAME.equals(key) || AttributeName.SIDE.equals(key))
+		{
+			return false;
+		}
 		boolean b;
-		if (tokensSet == null)
-		{
-			tokensSet = new HashSet<String>();
-			tokensSet.add(EnumPartIDKey.DocTags.getName());
-			tokensSet.add(EnumPartIDKey.ItemNames.getName());
-			tokensSet.add(EnumPartIDKey.PageTags.getName());
-			tokensSet.add(EnumPartIDKey.RunTags.getName());
-			tokensSet.add(EnumPartIDKey.SetTags.getName());
-		}
-		if (irlSet == null)
-		{
-			irlSet = new HashSet<String>();
-			irlSet.add(EnumPartIDKey.DocCopies.getName());
-			irlSet.add(EnumPartIDKey.DocIndex.getName());
-			irlSet.add(EnumPartIDKey.DocRunIndex.getName());
-			irlSet.add(EnumPartIDKey.DocSheetIndex.getName());
-			irlSet.add(EnumPartIDKey.LayerIDs.getName());
-			irlSet.add(EnumPartIDKey.PageNumber.getName());
-			irlSet.add(EnumPartIDKey.RunIndex.getName());
-			irlSet.add(EnumPartIDKey.SectionIndex.getName());
-			irlSet.add(EnumPartIDKey.SetIndex.getName());
-			irlSet.add(EnumPartIDKey.SetRunIndex.getName());
-			irlSet.add(EnumPartIDKey.SetSheetIndex.getName());
-			irlSet.add(EnumPartIDKey.SheetIndex.getName());
-		}
-		if (tokensSet.contains(key))
+		if (AttributeName.ITEMNAMES.equals(key) || key.endsWith("Tags"))
 		{
 			b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 		}
-		else if (irlSet.contains(key))
+		if (AttributeName.PAGENUMBER.equals(key) || key.endsWith("Index") || AttributeName.LAYERIDS.equals(key) || AttributeName.DOCCOPIES.equals(key))
 		{
 			b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
 		}
@@ -330,12 +331,10 @@ public class JDFPart extends JDFAutoPart
 			return true; // null always overlaps with anything
 		}
 
-		final Iterator<String> subMapEnum = linkMap.keySet().iterator();
-		while (subMapEnum.hasNext())
+		final Set<String> subMapKeys = linkMap.keySet();
+		for (String key : subMapKeys)
 		{
-			final String key = subMapEnum.next();
 			final String resVal = resourceMap.get(key);
-
 			if (resVal != null)
 			{
 				final String linkVal = linkMap.get(key);
@@ -346,6 +345,30 @@ public class JDFPart extends JDFAutoPart
 			}
 		}
 		return true;
+	}
+
+	/**
+	* overlapMap - identical keys must have the same values in both maps<br>
+	* similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
+	* @param resourceMap the map to compare
+	* @param vLinkMap the vector of maps to compare
+	* @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
+	* @return boolean: true if identical keys have the same values in both maps
+	*/
+	public static boolean overlapPartMap(final JDFAttributeMap resourceMap, final VJDFAttributeMap vLinkMap, boolean strictPartVersion)
+	{
+		if ((resourceMap == null) || (vLinkMap == null))
+		{
+			return true; // null always overlaps with anything
+		}
+		for (JDFAttributeMap linkMap : vLinkMap)
+		{
+			if (overlapPartMap(resourceMap, linkMap, strictPartVersion))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

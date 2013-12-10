@@ -2022,14 +2022,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	private class PartStatusHelper
 	{
 
-		private HashMap<JDFAttributeMap, JDFResource> partResMap;
-
 		/**
 		 */
 		protected PartStatusHelper()
 		{
 			super();
-			partResMap = null;
 		}
 
 		/**
@@ -2110,10 +2107,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			final JDFResource niRoot = ni.getResourceRoot();
 			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
 			JDFNodeInfo niLeaf;
-			if (partResMap != null)
-				niLeaf = (JDFNodeInfo) partResMap.get(mattr);
-			else
-				niLeaf = (JDFNodeInfo) ni.getPartition(mattr, EnumPartUsage.Explicit);
+			niLeaf = (JDFNodeInfo) ni.getPartition(mattr, EnumPartUsage.Explicit);
 			if (niLeaf == null) // no preexisting matching partition - attempt to create it
 			{
 				niLeaf = (JDFNodeInfo) ni.getCreatePartition(mattr, null);
@@ -2195,28 +2189,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status, final String statusDetails)
 		{
 			boolean bRet = true;
-			int siz = 0;
-
-			if (vmattr != null)
+			if (vmattr != null && vmattr.size() > 0)
 			{
-				siz = vmattr.size();
-				if (siz > 2)
-					partResMap = getCreateNodeInfo().getPartitionMap();
-
-				for (int i = 0; i < siz; i++)
+				for (JDFAttributeMap map : vmattr)
 				{
-					bRet = setPartStatus(vmattr.elementAt(i), status, statusDetails) && bRet;
+					bRet = setPartStatus(map, status, statusDetails) && bRet;
 				}
 			}
-
-			if (vmattr == null || siz == 0)
+			else
 			{
 				bRet = setPartStatus((JDFAttributeMap) null, status, statusDetails);
 			}
 
 			return bRet;
 		}
-
 	}
 
 	/**
@@ -9606,31 +9592,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					this.setStatus(EnumNodeStatus.Part);
 				}
 
-				Map<JDFAttributeMap, JDFResource> mapLeaves = ni.getPartitionMap();
-
 				for (int i = 0; i < vSpawnParts.size(); i++)
 				{
 					// in case we spawn a subset, try to get the superset list
 					// first no preexisting leaves - create them
 					JDFAttributeMap partMap = vSpawnParts.elementAt(i);
-					JDFResource niLeaf = mapLeaves.get(partMap);
-					if (niLeaf == null)
+					VElement v = ni.getPartitionVector(partMap, EnumPartUsage.Explicit);
+					if (v != null && v.size() > 0)
 					{
-						VElement v = ni.getPartitionVector(partMap, EnumPartUsage.Explicit);
-						if (v != null && v.size() > 0)
-						{
-							vni.addAll(v);
-						}
-						else
-						{
-							niLeaf = ni.getCreatePartition(partMap, partVector);
-							niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
-							vni.add(niLeaf);
-						}
+						vni.addAll(v);
 					}
 					else
-					// we have existing leaves, use them
 					{
+						JDFNodeInfo niLeaf = (JDFNodeInfo) ni.getCreatePartition(partMap, partVector);
+						niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
 						vni.add(niLeaf);
 					}
 				}

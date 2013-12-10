@@ -1351,8 +1351,7 @@ public class JDFResource extends JDFElement
 			{
 				partUsage = getPartUsage();
 			}
-			final VString pk = getPartIDKeys();
-			int partSize = pk == null ? 0 : pk.size();
+			int partSize = partIDKeys == null ? 0 : partIDKeys.size();
 			if (EnumPartUsage.Explicit.equals(partUsage))
 			{
 				int partMapSize = vm == null ? 0 : vm.minSize();
@@ -1364,7 +1363,7 @@ public class JDFResource extends JDFElement
 			}
 			else
 			{
-				vm = updateVM(vm, pk, partSize);
+				vm = updateVM(vm, partSize);
 			}
 			if (partSize == 0)
 			{
@@ -1399,7 +1398,7 @@ public class JDFResource extends JDFElement
 					}
 					return vAllLeaves;
 				}
-				final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(vAllLeaves, pk);
+				final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(vAllLeaves, partIDKeys);
 				for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
 				{
 					final JDFAttributeMap map = vm.elementAt(i);
@@ -1413,7 +1412,7 @@ public class JDFResource extends JDFElement
 						}
 						else
 						{
-							bNoDeep = findPartitionGaps(pk, keys);
+							bNoDeep = findPartitionGaps(partIDKeys, keys);
 						}
 					}
 					if (element != null)
@@ -1481,24 +1480,23 @@ public class JDFResource extends JDFElement
 
 		/**
 		 * @param vm
-		 * @param pk
 		 * @param partSize
 		 * @return
 		 */
-		private VJDFAttributeMap updateVM(VJDFAttributeMap vm, final VString pk, int partSize)
+		private VJDFAttributeMap updateVM(VJDFAttributeMap vm, int partSize)
 		{
 			int partMapSize = vm == null ? 0 : vm.maxSize();
 			boolean checkKeys = partSize < partMapSize;
-			if (!checkKeys && partMapSize > 0 && vm != null && pk != null)
+			if (!checkKeys && partMapSize > 0 && vm != null && partIDKeys != null)
 			{
 				JDFAttributeMap map = vm.get(0);
 				Set<String> vm0Keys = map.keySet();
-				checkKeys = !pk.containsAll(vm0Keys);
+				checkKeys = !partIDKeys.containsAll(vm0Keys);
 			}
 			if (vm != null && checkKeys)
 			{
 				vm = vm.clone();
-				vm.reduceMap(pk);
+				vm.reduceMap(ContainerUtil.toHashSet(partIDKeys));
 			}
 			return vm;
 		}
@@ -1670,7 +1668,6 @@ public class JDFResource extends JDFElement
 		private VElement detailedSearch(final VJDFAttributeMap vm, EnumPartUsage partUsage)
 		{
 			VElement v = new VElement();
-			VString partIDKeys = getPartIDKeys();
 
 			if (partUsage == null)
 				partUsage = getPartUsage();
@@ -1679,7 +1676,6 @@ public class JDFResource extends JDFElement
 
 			for (JDFAttributeMap map : vm)
 			{
-				map = removeImplicitPartions(map.clone());
 				if (resPos >= 0)
 				{
 					if (!pm.overlapMap(map))
@@ -1688,12 +1684,11 @@ public class JDFResource extends JDFElement
 					}
 					if (map != null)
 					{
+						map = map.clone();
 						map.removeKeys(pm.getKeys());
 					}
 				}
-				if (!EnumPartUsage.Explicit.equals(partUsage))
-					map.reduceMap(partIDKeys);
-				getDeepPartVector(JDFResource.this, map, partUsage, -1, 0, partIDKeys, v);
+				getDeepPartVector(JDFResource.this, map, partUsage, -1, 0, v);
 			}
 			return v;
 		}
@@ -1715,7 +1710,6 @@ public class JDFResource extends JDFElement
 			if (m != null)
 				m = removeImplicitPartions(m.clone());
 			VElement v = new VElement();
-			VString partIDKeys = getPartIDKeys();
 			JDFAttributeMap pm = getPartMap(partIDKeys);
 			int resPos = pm == null ? -1 : pm.size() - 1;
 			if (resPos >= 0)
@@ -1731,13 +1725,13 @@ public class JDFResource extends JDFElement
 			}
 			if (!EnumPartUsage.Explicit.equals(partUsage))
 				m.reduceMap(partIDKeys);
-			getDeepPartVector(JDFResource.this, m, partUsage, resPos, 0, partIDKeys, v);
+			getDeepPartVector(JDFResource.this, m, partUsage, resPos, 0, v);
 			return v;
 		}
 
 		// //////////////////////////////////////////////////////////////////////////
 
-		protected void getDeepPartVector(JDFResource r, final JDFAttributeMap m, EnumPartUsage partUsage, int resourceDepth, int mapDepth, final VString partIDKeys, VElement fillReturn)
+		protected void getDeepPartVector(JDFResource r, final JDFAttributeMap m, EnumPartUsage partUsage, int resourceDepth, int mapDepth, VElement fillReturn)
 		{
 			int mSize = m == null ? 0 : m.size();
 			int partSize = partIDKeys == null ? 0 : partIDKeys.size();
@@ -1798,7 +1792,7 @@ public class JDFResource extends JDFElement
 			}
 			for (KElement e : v)
 			{
-				getDeepPartVector((JDFResource) e, m, partUsage, resourceDepth + 1, mapDepth, partIDKeys, fillReturn);
+				getDeepPartVector((JDFResource) e, m, partUsage, resourceDepth + 1, mapDepth, fillReturn);
 			}
 			// we found something implicit only 
 			if (fillReturn.size() == preFill && (EnumPartUsage.Implicit.equals(partUsage) || v.size() == 0 && EnumPartUsage.Sparse.equals(partUsage)))
@@ -7749,6 +7743,16 @@ public class JDFResource extends JDFElement
 	public void setSpawnIDs(final VString vStr)
 	{
 		setAttribute(AttributeName.SPAWNIDS, StringUtil.setvString(vStr, JDFConstants.BLANK, null, null), null);
+	}
+
+	/**
+	 * Sets attribute SpawnIDs
+	 * 
+	 * @param spawndID the value to set the attribute to
+	 */
+	public void setSpawnIDs(final String spawndID)
+	{
+		setAttribute(AttributeName.SPAWNIDS, spawndID);
 	}
 
 	/**

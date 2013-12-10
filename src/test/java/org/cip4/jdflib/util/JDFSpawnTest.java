@@ -189,7 +189,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc doc = p.parseFile(sm_dirTestDataTemp + strXMLFileModified);
-
 		// parse the original file, which is already spawned
 		assertNotNull("Parse of file " + sm_dirTestDataTemp + strXMLFileModified + " failed", doc); // _bookintent.jdf
 
@@ -1567,15 +1566,20 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			for (int ii = 1; ii < 2; ii++) // spawnidentical = true / false
 			{
-				final JDFNode n = new JDFDoc("JDF").getJDFRoot();
-				n.setType(EnumType.ImageSetting);
+				JDFNode n = new JDFDoc("JDF").getJDFRoot();
+				final JDFNode root = n;
+				if (i == 0)
+				{
+					n.setType(EnumType.ImageSetting);
+				}
+				else
+				{
+					n.setType(EnumType.ProcessGroup);
+				}
 				for (int j = 0; j < 2; j++) // in or out
 				{
 					JDFResource r = j == 0 ? n.addResource("ExposedMedia", EnumUsage.Output) : n.addResource("Media", EnumUsage.Input);
-					if (i == 1)
-					{
-						r = r.addPartition(EnumPartIDKey.SheetName, "s1");
-					}
+					r = r.addPartition(EnumPartIDKey.SheetName, "s1");
 					final JDFResource rEN = r.addPartition(EnumPartIDKey.PartVersion, "EN");
 					final JDFResource rDE = r.addPartition(EnumPartIDKey.PartVersion, "DE");
 					r.addPartition(EnumPartIDKey.PartVersion, "FR");
@@ -1590,12 +1594,16 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				vPartMap.add(map);
 				final JDFAttributeMap map2 = new JDFAttributeMap("SheetName", "s1");
 				map2.put("PartVersion", "DE");
+				if (i == 1)
+				{
+					n = root.addJDFNode(EnumType.ImageSetting);
+					n.copyElement(root.getResourceLinkPool(), null);
+				}
 				final JDFSpawn spawn = new JDFSpawn(n); // fudge to test output
-				//
+				spawn.bFixResources = false;
 				if (ii == 1)
 				{
 					spawn.bSpawnIdentical = false;
-					// counting
 				}
 
 				final JDFNode spawnedNode = spawn.spawn("thisUrl", "newURL", vRWRes, vPartMap, true, true, true, true);
@@ -1606,12 +1614,12 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					final JDFResource rs2 = rS.getPartition(map, null);
 					if (ii == 0)
 					{
-						assertNotNull(resName + " loop " + j + " " + i, rs2);
+						assertNotNull(resName + " has no identical loop " + j + " " + i, rs2);
 						assertTrue(rS.toXML().indexOf(ElementName.IDENTICAL) > 0);
 					}
 					else if (ii == 1)
 					{
-						assertNull(resName + " loop " + j + " " + i, rs2);
+						assertNull(resName + " has identical loop " + j + " " + i, rs2);
 						assertFalse(rS.toXML().indexOf(ElementName.IDENTICAL) > 0);
 					}
 					assertNull(rS.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion, "FR"), null));

@@ -130,6 +130,8 @@ public class JDFSpawn
 	private final Map<JDFNode, HashSet<String>> mapAllRefs;
 	private final Map<JDFResource, VString> mapRefs;
 	private final Set<String> noIdentical;
+	private final Set<String> hasIdentical;
+	private final Set<String> isReduced;
 	private final Map<String, KElement> mapResources;
 	private boolean idCacheFilled;
 	private final Log log;
@@ -208,6 +210,8 @@ public class JDFSpawn
 		mapAllRefs = new HashMap<JDFNode, HashSet<String>>();
 		mapResources = new HashMap<String, KElement>();
 		noIdentical = new HashSet<String>();
+		isReduced = new HashSet<String>();
+		hasIdentical = new HashSet<String>();
 		idCacheFilled = false;
 	}
 
@@ -698,6 +702,14 @@ public class JDFSpawn
 					vResRoot = ((JDFResourceLink) liRoot).getTargetVector(-1);
 
 					vRes = dummy.getTargetVector(-1);
+					if (vRes.size() == 0)
+					{
+						JDFResource r0 = dummy.getLinkRoot();
+						if (r0 != null)
+						{
+							vRes.add(r0);
+						}
+					}
 					dummy.deleteNode();
 					reduceLinkPartAmounts(liRootLink, vLinkMap);
 				}
@@ -722,22 +734,29 @@ public class JDFSpawn
 				// fixed not to crash with corrupt jdfs.
 				// Now just continue and ignore the corrupt resource
 				final int siz = vRes.size() < vResRoot.size() ? vRes.size() : vResRoot.size();
-
 				// loop over all partitions
 				boolean bRealyRW = vSpawnParts == null || vSpawnParts.size() == 0;
 				if (!bRealyRW && siz > 0 && (bResRW || bSpawnROPartsOnly))
 				{
-					final JDFResource r = (JDFResource) vRes.elementAt(0);
 					// reduce partitions of all RW resources and of RO resources if requested
-					reducePartitions(r.getResourceRoot());
+					final JDFResource copyRoot = ((JDFResource) vRes.elementAt(0)).getResourceRoot();
+					reducePartitions(copyRoot);
 				}
+				else
+				{
+					isReduced.add(rRoot.getID());
+				}
+
 				for (int resParts = 0; resParts < siz; resParts++)
 				{
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
+					if (resParts == 0 && spawnID.equals(r.getAttribute(AttributeName.SPAWNID)))
+						break;
 					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
-
-					new PartSpawn().spawnPart(rRoot1, spawnID, copyStatus, true);
+					if (!bInformative)
+						new PartSpawn().spawnPart(rRoot1, spawnID, copyStatus, true);
 					new PartSpawn().spawnPart(r, spawnID, copyStatus, false);
+
 					if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
 						if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
@@ -746,6 +765,7 @@ public class JDFSpawn
 						}
 					}
 				}
+
 				if (!bRealyRW && EnumSpawnStatus.SpawnedRO.equals(copyStatus))
 				{
 					bResRW = false;
@@ -854,20 +874,24 @@ public class JDFSpawn
 		{
 			return;
 		}
-		final JDFResource root = ((JDFResource) vRes.get(0)).getResourceRoot();
-		String id = root.getID();
+		final JDFResource resRoot = ((JDFResource) vRes.get(0)).getResourceRoot();
+		String id = resRoot.getID();
 		if (noIdentical.contains(id))
 			return;
-		final VElement identicals = root.getChildrenByTagName(ElementName.IDENTICAL, null, null, false, true, -1, false);
+
+		final Vector<JDFIdentical> identicals = resRoot.getChildrenByClass(JDFIdentical.class, true, -1);
 		if (identicals == null || identicals.size() == 0)
 		{
 			noIdentical.add(id);
 			return;
 		}
-
-		for (int i = 0; i < identicals.size(); i++)
+		else
 		{
-			final JDFIdentical ident = (JDFIdentical) identicals.get(i);
+			hasIdentical.add(id);
+		}
+
+		for (JDFIdentical ident : identicals)
+		{
 			final JDFResource identParent = (JDFResource) ident.getParentNode_KElement();
 			final JDFAttributeMap identMap = identParent.getPartMap();
 			for (int j = 0; j < vSpawnParts.size(); j++)
@@ -1049,8 +1073,7 @@ public class JDFSpawn
 			final VElement leaves = rMainPart.getLeaves(true);
 			boolean bSpawnID = false;
 
-			// if any child node or leaf has this spawnID we need not do
-			// anything
+			// if any child node or leaf has this spawnID we need not do anything
 			for (int kkk = 0; kkk < leaves.size(); kkk++)
 			{
 				final JDFResource rMainLeaf = (JDFResource) leaves.elementAt(kkk);
@@ -1419,7 +1442,7 @@ public class JDFSpawn
 	 */
 	private void reducePartitions(final JDFResource r)
 	{
-		if (r == null || vSpawnParts == null || vSpawnParts.size() == 0)
+		if (r == null || vSpawnParts == null || vSpawnParts.size() == 0 || isReduced.contains(r.getID()))
 		{
 			return;
 		}
@@ -1429,56 +1452,103 @@ public class JDFSpawn
 		{
 			return;
 		}
-
-		boolean needCheckIdentical = true;
-		//		if (bSpawnIdentical)
-		{
-			//		Vector<JDFIdentical> v = r.getChildrenByClass(JDFIdentical.class, true, 1);
-			//	needCheckIdentical = v != null && v.size() > 0;
-		}
+		String id = r.getID();
+		boolean needCheckIdentical = bSpawnIdentical;
 		if (needCheckIdentical)
+			needCheckIdentical = !noIdentical.contains(id);
+		if (needCheckIdentical && !hasIdentical.contains(id))
 		{
-			// in case we spawn lower than, only remove partitions that are parallel to our spawning
-			int nMax = 999;
-
-			final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
-			for (int j = 0; j < vSubParts.size(); j++)
+			Vector<JDFIdentical> v = r.getChildrenByClass(JDFIdentical.class, true, 1);
+			if (v != null && v.size() > 0)
 			{
-				final JDFResource rr = (JDFResource) vSubParts.get(j);
-				final JDFAttributeMap partMap = rr.getPartMap(partIDKeys);
-				final int mapSize = partMap == null ? 0 : partMap.size();
-				if (mapSize < nMax)
+				hasIdentical.add(id);
+			}
+			else
+			{
+				noIdentical.add(id);
+				needCheckIdentical = false;
+			}
+		}
+
+		if (!needCheckIdentical)
+		{
+			reduceFast(r, partIDKeys, 0, new JDFAttributeMap());
+		}
+		// in case we spawn lower than, only remove partitions that are parallel to our spawning
+		int nMax = 999;
+
+		final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+		for (int j = 0; j < vSubParts.size(); j++)
+		{
+			final JDFResource rr = (JDFResource) vSubParts.get(j);
+			final JDFAttributeMap partMap = rr.getPartMap(partIDKeys);
+			final int mapSize = partMap == null ? 0 : partMap.size();
+			if (mapSize < nMax)
+			{
+				nMax = mapSize;
+				if (nMax == 0)
 				{
-					nMax = mapSize;
-					if (nMax == 0)
+					return; // nothing left to do
+				}
+			}
+		}
+		for (int i = partIDKeys.size() - 1; i >= nMax; i--)
+		{
+			partIDKeys.remove(i);
+		}
+
+		final String nodeName = r.getLocalName();
+		final String nsURI = r.getNamespaceURI();
+		final VElement identical = new VElement();
+		final Set<KElement> vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
+		if (identical.size() > 0)
+		{
+			identical.unify();
+			vBad.removeAll(identical);
+		}
+		for (KElement bad : vBad)
+		{
+			bad.deleteNode();
+		}
+		isReduced.add(id);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param r
+	 * @param partIDKeys
+	 * @param depth
+	 * @param currentMap
+	 */
+	private void reduceFast(final JDFResource r, final VString partIDKeys, int depth, JDFAttributeMap currentMap)
+	{
+		String key0 = partIDKeys.get(depth);
+		int size = partIDKeys.size();
+		//		Set<String> keys = EnumPartIDKey.PartVersion.getName().equals(key0) ? null : ContainerUtil.toHashSet(vSpawnParts.getPartValues(key0, true));
+		Vector<? extends KElement> firstLevel = r.getDirectPartitionVector();
+		if (firstLevel != null)
+		{
+			for (KElement e : firstLevel)
+			{
+				JDFResource rFirstLevel = (JDFResource) e;
+				//				String partVal = keys == null ? null : rFirstLevel.getAttribute_KElement(key0, null, null);
+				//				if (partVal != null && !keys.contains(partVal))
+				String partValue = rFirstLevel.getAttribute_KElement(key0, null, null);
+				currentMap.put(key0, partValue);
+				if (!JDFPart.overlapPartMap(currentMap, vSpawnParts, false))
+				{
+					e.deleteNode();
+				}
+				else
+				{
+					if (depth + 1 < size)
 					{
-						return; // nothing left to do
+						reduceFast(rFirstLevel, partIDKeys, depth + 1, currentMap);
 					}
 				}
 			}
-			for (int i = partIDKeys.size() - 1; i >= nMax; i--)
-			{
-				partIDKeys.remove(i);
-			}
-
-			final String nodeName = r.getLocalName();
-			final String nsURI = r.getNamespaceURI();
-			final VElement identical = new VElement();
-			final Set<KElement> vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
-			if (identical.size() > 0)
-			{
-				identical.unify();
-				vBad.removeAll(identical);
-			}
-			for (KElement bad : vBad)
-			{
-				bad.deleteNode();
-			}
-
-		}
-		else
-		{
-
+			currentMap.remove(key0);
 		}
 	}
 
@@ -1514,7 +1584,7 @@ public class JDFSpawn
 	/**
 	 * copies a resource recursively and optionally fixes status flags and locks in the source resource
 	 * 
-	 * @param p the pool to copy r into
+	 * @param targetResPool the pool to copy r into
 	 * @param r the resource to copy
 	 * @param copyStatus rw or ro
 	 * @param spawnID the spawnID of the spawning that initiated the copy
@@ -1524,7 +1594,7 @@ public class JDFSpawn
 	 * @param allIDsCopied 
 	 * 
 	 */
-	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources, final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
+	private void copySpawnedResource(final JDFResourcePool targetResPool, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources, final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
 	{
 		if (r == null)
 		{
@@ -1537,14 +1607,9 @@ public class JDFSpawn
 		final String rID = r.getID();
 		if (!allIDsCopied.contains(rID))
 		{
-			final JDFResource rNew = (JDFResource) p.copyElement(r, null);
+			final JDFResource rNew = copyPart(targetResPool, r, bRW);
+
 			// if spawning, fix stati and locks
-
-			if (bRW || bSpawnROPartsOnly)
-			{
-				reducePartitions(rNew);
-			}
-
 			if (!bInformative) // in case of informative, we kill main anyhow - no use modifying it
 			{
 				new PartSpawn().spawnPart(r, spawnID, copyStatus, true);
@@ -1595,7 +1660,7 @@ public class JDFSpawn
 						copyStatus = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 					}
 					// recurse into refelements
-					copySpawnedResource(p, next, copyStatus, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
+					copySpawnedResource(targetResPool, next, copyStatus, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
 				}
 			}
 		}
@@ -1603,8 +1668,128 @@ public class JDFSpawn
 		return;
 	}
 
+	private JDFResource copyPart(final JDFResourcePool targetResPool, final JDFResource r, final boolean bRW)
+	{
+		final JDFResource rNew;
+		VString partIDKeys = r.getPartIDKeys();
+		if ((bRW || bSpawnROPartsOnly) && partIDKeys != null && partIDKeys.size() != 0)
+		{
+			String resName = r.getNodeName();
+			rNew = (JDFResource) targetResPool.appendElement(resName);
+			rNew.setAttributesRaw(r);
+			VJDFAttributeMap linkedIdentical = bSpawnIdentical ? new VJDFAttributeMap() : null;
+			copyPartImpl(r, rNew, partIDKeys, 0, new JDFAttributeMap(), linkedIdentical, resName);
+			if (linkedIdentical != null && linkedIdentical.size() > 0)
+			{
+				linkedIdentical.unify();
+				for (JDFAttributeMap idMap : linkedIdentical)
+				{
+					copySingle(rNew, r, idMap, partIDKeys, 0);
+				}
+			}
+		}
+		else
+		{
+			rNew = (JDFResource) targetResPool.copyElement(r, null);
+		}
+		isReduced.add(r.getID());
+		return rNew;
+	}
+
+	/**
+	 *  
+	 * @param rNew
+	 * @param r
+	 * @param idMap
+	 * @param partIDKeys
+	 * @param depth
+	 */
+	private void copySingle(JDFResource rNew, JDFResource r, JDFAttributeMap idMap, VString partIDKeys, int depth)
+	{
+		int size = partIDKeys == null ? 0 : partIDKeys.size();
+		if (depth < size)
+		{
+			String key0 = partIDKeys.get(depth);
+			String val = idMap.get(key0);
+			String nodeName = r.getNodeName();
+			JDFResource rChild = (JDFResource) r.getChildWithAttribute(nodeName, key0, null, val, 0, true);
+			if (rChild != null)
+			{
+				JDFResource rNewChild = (JDFResource) rNew.getChildWithAttribute(nodeName, key0, null, val, 0, true);
+				if (rNewChild == null)
+				{
+					rNewChild = (JDFResource) rNew.appendElement(nodeName);
+					rNewChild.setAttributesRaw(rChild);
+					KElement child = rChild.getFirstChildElement();
+					while (child != null)
+					{
+						if (!nodeName.equals(child.getNodeName()))
+						{
+							rNewChild.copyElement(rChild, null);
+						}
+					}
+				}
+				copySingle(rNewChild, rChild, idMap, partIDKeys, depth + 1);
+			}
+		}
+	}
+
+	private void copyPartImpl(final JDFResource r, final JDFResource target, VString partIDKeys, int depth, JDFAttributeMap currentMap, VJDFAttributeMap linkedIdentical, String resName)
+	{
+		String key0 = partIDKeys.get(depth);
+		int size = partIDKeys.size();
+		KElement child = r.getFirstChildElement();
+		while (child != null)
+		{
+			if (resName.equals(child.getNodeName()))
+			{
+				String partValue = child.getAttribute_KElement(key0, null, null);
+				currentMap.put(key0, partValue);
+				if (JDFPart.overlapPartMap(currentMap, vSpawnParts, false))
+				{
+					if (depth + 1 < size)
+					{
+						KElement newTarget = target.appendElement(resName);
+						newTarget.setAttributesRaw(child);
+						copyPartImpl((JDFResource) child, (JDFResource) newTarget, partIDKeys, depth + 1, currentMap, linkedIdentical, resName);
+					}
+					else
+					{
+						JDFAttributeMap idMap = ((JDFResource) child).getIdenticalMap();
+						if (linkedIdentical != null)
+						{
+							target.copyElement(child, null);
+							if (idMap != null)
+							{
+								linkedIdentical.add(idMap);
+							}
+						}
+						else if (idMap == null) // we don't want identicals but have one - don't copy
+						{
+							target.copyElement(child, null);
+						}
+					}
+				}
+			}
+			else
+			{
+				target.copyElement(child, null);
+			}
+			child = child.getNextSiblingElement();
+		}
+		currentMap.remove(key0);
+	}
+
 	private class PartSpawn
 	{
+		/**
+		 * 
+		 */
+		private PartSpawn()
+		{
+			super();
+		}
+
 		/**
 		 * @param r
 		 * @param spawnID
@@ -1613,7 +1798,6 @@ public class JDFSpawn
 		 */
 		private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 		{
-
 			if (vSpawnParts != null && vSpawnParts.size() > 0)
 			{
 				final JDFAttributeMap partMap = r.getPartMap();
@@ -1636,7 +1820,7 @@ public class JDFSpawn
 						else
 						{
 							pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-							pLeaf.setSpawnIDs(new VString(spawnID, null));
+							pLeaf.setSpawnIDs(spawnID);
 						}
 					}
 				}
@@ -1668,6 +1852,13 @@ public class JDFSpawn
 			}
 		}
 
+		/**
+		 * 
+		 *  
+		 * @param r
+		 * @param partMap
+		 * @return
+		 */
 		private VElement getSubParts(final JDFResource r, final JDFAttributeMap partMap)
 		{
 			VElement vSubParts;
@@ -1683,7 +1874,7 @@ public class JDFSpawn
 
 				//100208 spawn only as requested - NOT explicit, don't automatically create anything
 				vSubParts = r.getPartitionVector(vSpawnParts, null);
-				if (vSubParts == null || vSubParts.size() == 0)
+				if (vSubParts == null || vSubParts.size() == 0 && !EnumPartUsage.Implicit.equals(r.getPartUsage()))
 					vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
 			}
 			return vSubParts;
