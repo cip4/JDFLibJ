@@ -1562,6 +1562,26 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * 
+	 * @param clazz the class of the children to zapp
+	 */
+	public void removeChildrenByClass(Class<? extends Node> clazz)
+	{
+		Node n = getFirstChild();
+		Node parent = n == null ? null : n.getParentNode();
+		while (n != null)
+		{
+			Node nTmp = n.getNextSibling();
+			if (clazz.isInstance(n))
+			{
+				parent.removeChild(n);
+			}
+			n = nTmp;
+		}
+
+	}
+
+	/**
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 * @param clazz 

@@ -72,6 +72,7 @@
 package org.cip4.jdflib;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.core.JDFDoc;
@@ -83,8 +84,10 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
+import org.junit.After;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -147,15 +150,22 @@ public class TestJDF extends JDFTestCaseBase
 		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
 		if (jdfDoc == null)
 			return;
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPr0.PP", null);
+		JDFNode jdfRoot = jdfDoc.getJDFRoot();
+		JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null);
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(false);
+		CPUTimer ctm = new CPUTimer(false);
 		JDFSpawn spawn;
+		spawn = new JDFSpawn(nodeProc);
+		spawn.bSpawnIdentical = true;
+		spawn.bSpawnRWPartsMultiple = true;
+		JDFMerge m = new JDFMerge(jdfRoot);
 
+		Vector<JDFNode> vSpawned = new Vector<JDFNode>();
 		for (int ii = 0; ii < 21; ii++)
 		{
 			final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-			for (int i = 1; i <= 40; i++)
+			for (int i = 1; i <= 20; i++)
 			{
 				JDFAttributeMap amParts0 = new JDFAttributeMap();
 				amParts0.put("BinderySignatureName", "Booklet_" + ii);
@@ -171,10 +181,8 @@ public class TestJDF extends JDFTestCaseBase
 			final VString vsRWResourceIDs = new VString("Output", null);
 
 			ct.start();
-			spawn = new JDFSpawn(nodeProc);
-			spawn.bSpawnIdentical = true;
-			spawn.bSpawnRWPartsMultiple = true;
 			JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+			vSpawned.add(nodeSubJDF);
 			log.info(ii + " " + ct.getSingleSummary());
 			ct.stop();
 			if (ii == 1)
@@ -182,7 +190,28 @@ public class TestJDF extends JDFTestCaseBase
 		}
 		String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
 		jdfDoc.write2File(strOutJDFPath, 2, false);
+		int ii = 0;
+		for (JDFNode nodeSubJDF : vSpawned)
+		{
+			ctm.start();
+			m.mergeJDF(nodeSubJDF);
+			log.info(ii++ + " " + ctm.getSingleSummary());
+			ctm.stop();
+		}
+		strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
+		jdfDoc.write2File(strOutJDFPath, 2, false);
 
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	@After
+	protected void tearDown() throws Exception
+	{
+		JDFResource.setUnpartitiondImplicit(false);
+		super.tearDown();
 	}
 
 	/**

@@ -348,7 +348,7 @@ public class QueueTest extends JDFTestCaseBase
 		final long l1 = System.currentTimeMillis();
 		q.sortChildren();
 		final long l2 = System.currentTimeMillis();
-		assertEquals("Sort time <4 seconds", 3000, (l2 - l1), 3000);
+		assertEquals("Sort time <6 seconds", 3000, (l2 - l1), 3000);
 	}
 
 	/**

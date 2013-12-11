@@ -4489,7 +4489,7 @@ public class JDFElement extends KElement
 	 */
 	protected void setPartMapVector(final VJDFAttributeMap vPart)
 	{
-		removeChildren(ElementName.PART, null, null);
+		removeChildrenByClass(JDFPart.class);
 		if (vPart == null)
 		{
 			return;

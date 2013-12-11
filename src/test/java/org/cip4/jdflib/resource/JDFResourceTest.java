@@ -1520,10 +1520,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 			s21.setIdentical(s11);
 		}
 
-		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
-		assertEquals("explicit identicals are excluded", v.size(), 8 + 2 + 1 - 4);
-		v = r.getPartitionVector(vm, null);
-		assertEquals(v.size(), 4);
+		VElement v = r.getPartitionVector(r.getPartMapVector(false), null);
+		assertEquals("explicit identicals are excluded", v.size(), 8 - 4);
 	}
 
 	/**
@@ -1557,9 +1555,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		PartitionGetter pg = r.new PartitionGetter();
 		pg.setFollowIdentical(false);
 		VElement v = pg.getPartitionVector((VJDFAttributeMap) null, null);
-		assertEquals("explicit identicals are not excluded", v.size(), 8 + 2 + 1);
+		assertEquals("explicit identicals are not excluded", v.size(), 1);
 		v = pg.getPartitionVector(vm, null);
-		assertEquals(v.size(), 8);
+		assertEquals(v.size(), 4);
 		for (JDFAttributeMap map : vm)
 		{
 			JDFResource rr = pg.getPartition(map, null);

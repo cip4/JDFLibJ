@@ -282,6 +282,23 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(s.indexOf("www.bar.com") > 0);
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testRemoveChildren()
+	{
+		final XMLDoc d = new XMLDoc("root", null);
+		final KElement root = d.getRoot();
+		for (int i = 0; i < 5; i++)
+		{
+			root.appendElement("a");
+		}
+		assertNotNull(root.getElement("a"));
+		root.removeChildren("a", null, null);
+		assertNull(root.getElement("a"));
+	}
+
 	// /////////////////////////////////////////////////////////
 
 	/**

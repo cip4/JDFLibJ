@@ -116,6 +116,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
+import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 
 /**
@@ -250,23 +251,19 @@ public class JDFSpawn
 	{
 		// need copy in order to fix up 1.3 NodeInfo spawn
 		final VString vRWResources = vRWResources_in == null ? new VString() : vRWResources_in;
-
+		isReduced.clear();
 		if (!bSpawnRWPartsMultiple)
 		{
 			checkMultipleRWRes();
 		}
 
-		// create a new jdf document that contains the node to be spawned
-		final JDFDoc docOut = new JDFDoc(ElementName.JDF);
-		rootOut = (JDFNode) docOut.getRoot();
-
 		// prepare the nodeinfos in main prior to spawning
 		prepareNodeInfos();
-
 		// merge this node into it
-		rootOut.copyInto(node, true); // "copy" this node into the new created document
-		docOut.setNSMap(node.getOwnerDocument_KElement());
+		rootOut = (JDFNode) node.cloneNewDoc();
+
 		final String spawnID = "Sp" + KElement.uniqueID(0); // create a spawn id for this transaction
+
 		rootOut.setSpawnID(spawnID);
 		rootOut.setVersion(node.getVersion(true));
 
@@ -291,7 +288,7 @@ public class JDFSpawn
 			}
 
 			// The AncestorPool of the original JDF contains the appropriate Part elements
-			final JDFAncestorPool ancpool = docOut.getJDFRoot().getAncestorPool();
+			final JDFAncestorPool ancpool = rootOut.getAncestorPool();
 			VJDFAttributeMap preSpawnedParts = new VJDFAttributeMap();
 
 			if (ancpool != null)
@@ -1453,24 +1450,7 @@ public class JDFSpawn
 			return;
 		}
 		String id = r.getID();
-		boolean needCheckIdentical = bSpawnIdentical;
-		if (needCheckIdentical)
-			needCheckIdentical = !noIdentical.contains(id);
-		if (needCheckIdentical && !hasIdentical.contains(id))
-		{
-			Vector<JDFIdentical> v = r.getChildrenByClass(JDFIdentical.class, true, 1);
-			if (v != null && v.size() > 0)
-			{
-				hasIdentical.add(id);
-			}
-			else
-			{
-				noIdentical.add(id);
-				needCheckIdentical = false;
-			}
-		}
-
-		if (!needCheckIdentical)
+		if (!bSpawnIdentical)
 		{
 			reduceFast(r, partIDKeys, 0, new JDFAttributeMap());
 		}
@@ -1603,7 +1583,7 @@ public class JDFSpawn
 		}
 
 		// r is not yet here copy r
-		final boolean bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
+		boolean bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
 		final String rID = r.getID();
 		if (!allIDsCopied.contains(rID))
 		{
@@ -1612,10 +1592,10 @@ public class JDFSpawn
 			// if spawning, fix stati and locks
 			if (!bInformative) // in case of informative, we kill main anyhow - no use modifying it
 			{
-				new PartSpawn().spawnPart(r, spawnID, copyStatus, true);
+				copyStatus = new PartSpawn().spawnPart(r, spawnID, copyStatus, true);
 			}
-			new PartSpawn().spawnPart(rNew, spawnID, copyStatus, false);
-
+			copyStatus = new PartSpawn().spawnPart(rNew, spawnID, copyStatus, false);
+			bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
 			if (bRW)
 			{
 				vRWIDs.add(rID);
@@ -1795,13 +1775,19 @@ public class JDFSpawn
 		 * @param spawnID
 		 * @param copyStatus
 		 * @param bStayinMain
+		 * @return 
 		 */
-		private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
+		private EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 		{
-			if (vSpawnParts != null && vSpawnParts.size() > 0)
+			if (vSpawnParts != null && vSpawnParts.size() > 0 && JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus))
 			{
 				final JDFAttributeMap partMap = r.getPartMap();
 				VElement vSubParts = getSubParts(r, partMap);
+				int n = vSubParts.size();
+				if (n == 0)
+				{
+					return spawnPart(r, spawnID, JDFResource.EnumSpawnStatus.SpawnedRO, bStayinMain);
+				}
 				for (int k = 0; k < vSubParts.size(); k++)
 				{
 					final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
@@ -1830,7 +1816,7 @@ public class JDFSpawn
 			{
 				if (bStayinMain)
 				{
-					if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (r.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
+					if ((EnumSpawnStatus.SpawnedRW.equals(copyStatus)) || (!EnumSpawnStatus.SpawnedRW.equals(r.getSpawnStatus())))
 					{
 						r.setSpawnStatus(copyStatus);
 						r.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
@@ -1850,6 +1836,7 @@ public class JDFSpawn
 					r.setSpawnIDs(new VString(spawnID, null));
 				}
 			}
+			return copyStatus;
 		}
 
 		/**
@@ -1873,9 +1860,11 @@ public class JDFSpawn
 				//				vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
 
 				//100208 spawn only as requested - NOT explicit, don't automatically create anything
-				vSubParts = r.getPartitionVector(vSpawnParts, null);
-				if (vSubParts == null || vSubParts.size() == 0 && !EnumPartUsage.Implicit.equals(r.getPartUsage()))
-					vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+				PartitionGetter partitionGetter = r.new PartitionGetter();
+				partitionGetter.setFollowIdentical(bSpawnIdentical);
+				vSubParts = partitionGetter.getPartitionVector(vSpawnParts, null);
+				if (bSpawnIdentical && (vSubParts == null || vSubParts.size() == 0) && !EnumPartUsage.Implicit.equals(r.getPartUsage()))
+					vSubParts = partitionGetter.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
 			}
 			return vSubParts;
 		}

@@ -663,7 +663,6 @@ public class JDFMerge
 		}
 
 		boolean bTargetGone = false;
-		HashMap<JDFAttributeMap, JDFResource> cacheMap = allChildren.size() > 2 ? targetRes.getPartitionMap() : null;
 		for (int i = 0; i < allChildren.size(); i++)
 		{
 			final JDFResource src = (JDFResource) allChildren.elementAt(i);
@@ -672,7 +671,7 @@ public class JDFMerge
 				continue; // no need to merge identical elements
 			}
 			final JDFAttributeMap srcMap = src.getPartMap(mergeIDKeys);
-			JDFResource trg = cacheMap == null ? targetRes.getPartition(srcMap, EnumPartUsage.Implicit) : cacheMap.get(srcMap);
+			JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
 
 			if (trg == null)
 			{
@@ -695,7 +694,6 @@ public class JDFMerge
 
 			if (bLocalResource || trg.getSpawnStatus() == JDFResource.EnumSpawnStatus.SpawnedRW)
 			{
-
 				if (srcMap.equals(trgMap))
 				{
 					if (trgMap.isEmpty())
@@ -1223,12 +1221,11 @@ public class JDFMerge
 		}
 
 		final VString partIDKeys = mainRes.getPartIDKeys();
-		HashMap<JDFAttributeMap, JDFResource> cacheMap = allLeaves.size() > 2 ? resToMerge.getPartitionMap() : null;
 		for (int i = 0; i < allLeaves.size(); i++)
 		{
 			final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
 			JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
-			final JDFResource mergeResNode = cacheMap != null ? cacheMap.get(partMap) : resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
+			final JDFResource mergeResNode = resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
 
 			if (mergeResNode != null)
 			{
@@ -1257,8 +1254,7 @@ public class JDFMerge
 				else if (siz < vSpawnIDs.size())
 				{
 					thisResNode.setSpawnIDs(vSpawnIDs);
-					// one of the spawnstatus elements was rw, must also be
-					// valid here
+					// one of the spawnstatus elements was rw, must also be valid here
 					if (mergeResNode.getSpawnStatus() == EnumSpawnStatus.SpawnedRW)
 					{
 						thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);

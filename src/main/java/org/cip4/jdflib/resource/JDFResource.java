@@ -1300,7 +1300,6 @@ public class JDFResource extends JDFElement
 			return "PartitionGetter strict=" + strictPartVersion + "\n" + JDFResource.this.toString();
 		}
 
-		private boolean hasIdentical;
 		private boolean strictPartVersion;
 		private boolean followIdentical;
 		private VString partIDKeys;
@@ -1329,7 +1328,6 @@ public class JDFResource extends JDFElement
 		public PartitionGetter()
 		{
 			super();
-			hasIdentical = false;
 			strictPartVersion = false;
 			followIdentical = true;
 			partIDKeys = getPartIDKeys();
@@ -1345,7 +1343,7 @@ public class JDFResource extends JDFElement
 		 * 
 		 * @default getPartitionVector(m, null)
 		 */
-		protected VElement getPartitionVector(VJDFAttributeMap vm, EnumPartUsage partUsage)
+		public VElement getPartitionVector(VJDFAttributeMap vm, EnumPartUsage partUsage)
 		{
 			if (partUsage == null)
 			{
@@ -1372,82 +1370,14 @@ public class JDFResource extends JDFElement
 				return v;
 			}
 
-			boolean bNoDeep = true; // we have mixed data or partversion
-			boolean bAll = true;
-			if (vm != null && vm.size() > 0)
+			if (vm == null)
 			{
-				VString keys = vm.getKeys();
-				if (keys != null && keys.contains(AttributeName.PARTVERSION))
-				{
-					bNoDeep = false;
-				}
+				vm = new VJDFAttributeMap();
+				vm.add(getPartMap());
 			}
-			VElement vAllLeaves = null;
-			if (bNoDeep)
-			{
-				vAllLeaves = getLeaves(true);
-				if (followIdentical)
-				{
-					findIdentical(vAllLeaves);
-				}
-				if (vm == null)
-				{
-					if (hasIdentical)
-					{
-						removeIdenticalRefs(vAllLeaves);
-					}
-					return vAllLeaves;
-				}
-				final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(vAllLeaves, partIDKeys);
-				for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
-				{
-					final JDFAttributeMap map = vm.elementAt(i);
-					final JDFResource element = leafMap.get(map);
-					if (bNoDeep)
-					{
-						VString keys = map.getKeys();
-						if (keys.contains(AttributeName.PARTVERSION))
-						{
-							bNoDeep = false; // need special handling for multiple versions
-						}
-						else
-						{
-							bNoDeep = findPartitionGaps(partIDKeys, keys);
-						}
-					}
-					if (element != null)
-					{
-						addSingleResource(vAllLeaves, element);
-					}
-					else
-					{
-						bAll = false;
-					}
-				}
-			}
-			if (!bAll || !bNoDeep)
-			{
-				vAllLeaves = specialSearch(vm, partUsage, bNoDeep);
-			}
-			vAllLeaves.unify();
-			return vAllLeaves;
-		}
-
-		/**
-		 * @param v
-		 */
-		private void findIdentical(VElement v)
-		{
-			hasIdentical = false;
-			for (KElement r : v)
-			{
-				KElement id = ((JDFResource) r).isLeaf() ? r.getElementByClass(JDFIdentical.class, 0, false) : null;
-				if (id != null)
-				{
-					hasIdentical = true;
-					break;
-				}
-			}
+			final VElement v = detailedSearch(vm, partUsage);
+			v.unify();
+			return v;
 		}
 
 		/**
@@ -1503,161 +1433,24 @@ public class JDFResource extends JDFElement
 
 		/**
 		 * @param v
-		 */
-		private void removeIdenticalRefs(final VElement v)
-		{
-			for (int i = v.size() - 1; i >= 0; i--)
-			{
-				JDFResource r = (JDFResource) v.get(i);
-				if (r.getIdentical() != null)
-				{
-					v.remove(i);
-				}
-			}
-		}
-
-		/**
-		 * @param v
 		 * @param element
 		 */
 		private void addSingleResource(final VElement v, final JDFResource element)
 		{
-			final JDFIdentical identical = hasIdentical ? element.getIdentical() : null;
+			final JDFIdentical identical = element.getIdentical();
 			if (identical != null)
-				v.add(identical.getTarget());
+			{
+				if (followIdentical)
+				{
+					JDFResource target = identical.getTarget();
+					if (target != null)
+						v.add(target);
+				}
+			}
 			else
+			{
 				v.add(element);
-		}
-
-		/**
-		 * @param v
-		 * @param pk
-		 * @return
-		 */
-		private HashMap<JDFAttributeMap, JDFResource> fillLeafMap(final VElement v, final VString pk)
-		{
-			final HashMap<JDFAttributeMap, JDFResource> leafMap = new HashMap<JDFAttributeMap, JDFResource>();
-			for (int i = v.size() - 1; i >= 0; i--)
-			{
-				final JDFResource r = (JDFResource) v.get(i);
-				leafMap.put(r.getPartMap(pk), r);
 			}
-			v.clear();
-			return leafMap;
-		}
-
-		/**
-		 * @param pk
-		 * @param keys
-		 * @return
-		 */
-		private boolean findPartitionGaps(final VString pk, VString keys)
-		{
-			boolean bNoDeep;
-			int min = 999;
-			int max = -1;
-			for (int ii = 0; ii < pk.size(); ii++)
-			{
-				boolean b = keys.contains(pk.get(ii));
-				if (b)
-					max = ii;
-				else
-					min = ii;
-			}
-			bNoDeep = min > max;
-			return bNoDeep;
-		}
-
-		/**
-		 * @param vm
-		 * @param partUsage
-		 * @param bNoDeep
-		 * @return 
-		 */
-		private VElement specialSearch(VJDFAttributeMap vm, EnumPartUsage partUsage, boolean bNoDeep)
-		{
-			vm = vm.clone();
-			int minSize = vm.minSize();
-			final VElement v;
-			if (EnumPartUsage.Sparse.equals(partUsage) || !bNoDeep)
-			{
-				v = detailedSearch(vm, partUsage);
-			}
-			else
-			{
-				v = reducedSearch(vm, partUsage, minSize);
-			}
-			return v;
-		}
-
-		/**
-		 * @param vm
-		 * @param partUsage
-		 * @param minSize
-		 * @return 
-		 */
-		private VElement reducedSearch(VJDFAttributeMap vm, EnumPartUsage partUsage, int minSize)
-		{
-			boolean bImplicit = EnumPartUsage.Implicit.equals(partUsage);
-			VElement v = new VElement();
-			VString partIDKeys = getPartIDKeys();
-			for (int parent = 0; true; parent++)
-			{
-				Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm);
-				VElement leaves = getLeaves(false);
-				boolean canFindExplicit = bImplicit; // if implicit, we can always find
-				if (parent > 0)
-				{
-					leaves = getParentLeaves(parent, leaves);
-				}
-				for (int i = 0; i < leaves.size(); i++)
-				{
-					JDFResource leaf = (JDFResource) leaves.elementAt(i);
-					JDFAttributeMap map = leaf.getPartMap(partIDKeys);
-					if (!bImplicit && (map.size() < minSize))
-					{
-						continue;
-					}
-					canFindExplicit = true;
-					if (allMaps.contains(map) || (bImplicit && vm.subMap(map)))
-					{
-						addSingleResource(v, leaf);
-						vm.removeMaps(leaf.getPartMap(partIDKeys));
-						if (vm.size() == 0)
-							break;
-					}
-				}
-				if (leaves.size() == 0 || vm.size() == 0 || !canFindExplicit)
-					break;
-			}
-			return v;
-		}
-
-		/**
-		 * @param parent
-		 * @param leaves
-		 * @return
-		 */
-		private VElement getParentLeaves(int parent, VElement leaves)
-		{
-			VElement parents = new VElement();
-			for (KElement leaf : leaves)
-			{
-				KElement next = leaf;
-				for (int i = 0; i < parent; i++)
-				{
-					if (next == JDFResource.this)
-					{
-						next = null;
-						break;
-					}
-					next = next.getParentNode_KElement();
-				}
-				if (next != null)
-					parents.add(next);
-			}
-			leaves = parents;
-			return leaves;
 		}
 
 		/**
@@ -2164,7 +1957,6 @@ public class JDFResource extends JDFElement
 			{
 				partUsage = getPartUsage();
 			}
-			final VString partIDKeys = getPartIDKeys();
 			if (m.size() > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
 			{
 				return null;
