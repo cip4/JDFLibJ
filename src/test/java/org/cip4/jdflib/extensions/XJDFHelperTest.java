@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,8 +73,8 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -90,7 +90,7 @@ public class XJDFHelperTest extends TestCase
 	public void testGetSet()
 	{
 		KElement rlSet = theHelper.appendSet("Parameter", "RunList", null).getSet();
-		Assert.assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
 	}
 
 	/**
@@ -101,10 +101,10 @@ public class XJDFHelperTest extends TestCase
 	public void testGetPartition()
 	{
 		KElement rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true).getResource();
-		Assert.assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
-		Assert.assertNull(theHelper.getResource("RunList", 0, 1));
-		Assert.assertNull(theHelper.getResource("RunList", 1, 1));
-		Assert.assertNull(theHelper.getResource("RunList", 1, 0));
+		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
+		assertNull(theHelper.getResource("RunList", 0, 1));
+		assertNull(theHelper.getResource("RunList", 1, 1));
+		assertNull(theHelper.getResource("RunList", 1, 0));
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class XJDFHelperTest extends TestCase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		KElement root = theHelper.getRoot();
-		Assert.assertNotNull(theHelper.getSet("NodeInfo", 0));
-		Assert.assertNotNull(root);
+		assertNotNull(theHelper.getSet("NodeInfo", 0));
+		assertNotNull(root);
 	}
 
 	/**
@@ -128,9 +128,22 @@ public class XJDFHelperTest extends TestCase
 	public void testFactory()
 	{
 		XMLDoc d = new XMLDoc(XJDF20.rootName, null);
-		Assert.assertNotNull(XJDFHelper.getHelper(d));
+		assertNotNull(XJDFHelper.getHelper(d));
 		d = new XMLDoc("abc", null);
-		Assert.assertNull(XJDFHelper.getHelper(d));
+		assertNull(XJDFHelper.getHelper(d));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testFactoryElem()
+	{
+		XMLDoc d = new XMLDoc(XJDF20.rootName, null);
+		assertNotNull(XJDFHelper.getHelper(d.getRoot()));
+		d = new XMLDoc("abc", null);
+		assertNull(XJDFHelper.getHelper(d.getRoot()));
 	}
 
 	/**
@@ -142,10 +155,10 @@ public class XJDFHelperTest extends TestCase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		KElement root = theHelper.getRoot();
-		Assert.assertNull(theHelper.getRootProductHelpers());
+		assertNull(theHelper.getRootProductHelpers());
 		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
 		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
-		Assert.assertNotNull(theHelper.getRootProductHelpers().get(0));
+		assertNotNull(theHelper.getRootProductHelpers().get(0));
 	}
 
 	/**
@@ -158,12 +171,12 @@ public class XJDFHelperTest extends TestCase
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		KElement root = theHelper.getRoot();
 		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
-		Assert.assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(0));
 		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
-		Assert.assertNotNull(theHelper.getRootProduct(0));
-		Assert.assertNotNull(theHelper.getRootProduct(-1));
-		Assert.assertNull(theHelper.getRootProduct(1));
-		Assert.assertNull(theHelper.getRootProduct(-2));
+		assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(-1));
+		assertNull(theHelper.getRootProduct(1));
+		assertNull(theHelper.getRootProduct(-2));
 	}
 
 	/**

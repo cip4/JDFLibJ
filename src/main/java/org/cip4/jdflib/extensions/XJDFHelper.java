@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,7 +106,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	public static final String PARAMETER = "Parameter";
 
 	/**
-	 * factoy to create a helper from a doc
+	 * factory to create a helper from a doc
 	 *  
 	 * @param doc the xmldoc to parse
 	 * @return the helper
@@ -116,6 +116,19 @@ public class XJDFHelper extends BaseXJDFHelper
 		if (doc == null)
 			return null;
 		KElement root = doc.getRoot();
+		return root.getLocalName().equals(XJDF20.rootName) ? new XJDFHelper(root) : null;
+	}
+
+	/**
+	 * factory to create a helper from a doc
+	 *  
+	 * @param root the xmldoc to parse
+	 * @return the helper
+	 */
+	public static XJDFHelper getHelper(KElement root)
+	{
+		if (root == null)
+			return null;
 		return root.getLocalName().equals(XJDF20.rootName) ? new XJDFHelper(root) : null;
 	}
 
