@@ -81,7 +81,7 @@ import org.cip4.jdflib.util.thread.WaitTimeout;
  */
 public class UrlCheck
 {
-	private final String method;
+	private String method;
 
 	/**
 	 * 
@@ -207,6 +207,8 @@ public class UrlCheck
 	public void setStream(InputStream stream)
 	{
 		this.stream = stream;
+		if (stream != null)
+			method = UrlUtil.POST;
 	}
 
 	/**

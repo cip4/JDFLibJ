@@ -89,6 +89,7 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
 import org.cip4.jdflib.util.SkipInputStream;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -269,7 +270,7 @@ public class XMLParser extends DOMParser
 		ByteArrayInputStream is;
 		try
 		{
-			is = new ByteArrayInputStream(stringInput.getBytes("UTF-8"));
+			is = new ByteArrayInputStream(stringInput.getBytes(StringUtil.UTF8));
 		}
 		catch (final UnsupportedEncodingException x)
 		{

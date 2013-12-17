@@ -82,7 +82,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
@@ -386,7 +385,7 @@ public class XMLDoc
 		{
 			outStream = new ByteArrayOutputStream(4096);
 			write2Stream(outStream, indent, indent == 0);
-			strResult = outStream.toString("UTF-8");
+			strResult = outStream.toString(StringUtil.UTF8);
 		}
 		catch (final IOException e)
 		{
@@ -1425,9 +1424,6 @@ public class XMLDoc
 		return write2String(2);
 	}
 
-	/** Encoding. */
-	protected static final String sm_strENCODING = "UTF-8";
-
 	/**
 	 * toXML
 	 * 
@@ -1435,32 +1431,7 @@ public class XMLDoc
 	 */
 	public String toXML()
 	{
-		String strXML = JDFCoreConstants.EMPTYSTRING;
-		try
-		{
-			final StringWriter osw = new StringWriter();
-			final KElement thisRoot = this.getRoot();
-
-			final OutputFormat format = new OutputFormat(thisRoot.getOwnerDocument());
-			format.setPreserveSpace(true);
-			format.setIndenting(true);
-			format.setIndent(2);
-			format.setEncoding(sm_strENCODING);
-
-			final XMLSerializer serial = new XMLSerializer(osw, format);
-			serial.setNamespaces(true);
-			serial.asDOMSerializer();
-
-			serial.serialize(this.getDocumentElement());
-
-			strXML = osw.toString();
-		}
-		catch (final IOException e)
-		{
-			strXML = "XMLDoc.toXML: ### ERROR while serializing " + getClass().getName() + " element.";
-		}
-
-		return strXML;
+		return write2String(2);
 	}
 
 	protected void setMemberDoc(final DocumentXMLImpl myDoc)

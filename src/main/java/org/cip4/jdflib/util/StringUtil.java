@@ -103,9 +103,15 @@ import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
  */
 public class StringUtil
 {
+	/**
+	 * 
+	 */
+	public static final String UTF8 = "UTF-8";
+
 	// **************************************** Constants
 	// *******************************************
 	private static final String m_sep = JDFConstants.BLANK;
+
 	/**
 	 * @deprecated use {@link UrlUtil}.m_URIEscape
 	 */
@@ -1481,13 +1487,11 @@ public class StringUtil
 	 * @param len
 	 * @return the raw string
 	 */
-	public static String setRawBytes(final byte[] buffer, final int len)
+	public static String setRawBytes(final byte[] buffer, int len)
 	{
-		int lenLocal = len;
-
-		if (lenLocal < 0)
+		if (len < 0)
 		{
-			lenLocal = buffer.length;
+			len = buffer.length;
 		}
 
 		char[] target = null;
@@ -1495,11 +1499,11 @@ public class StringUtil
 		if (!(buffer.length < 0))
 		{
 
-			if (lenLocal > 0)
+			if (len > 0)
 			{
-				target = new char[lenLocal];
+				target = new char[len];
 
-				for (int i = 0; i < lenLocal; i++)
+				for (int i = 0; i < len; i++)
 				{
 					target[i] = (char) buffer[i];
 				}
@@ -1548,23 +1552,21 @@ public class StringUtil
 	 * @return the hexbinary representation
 	 */
 
-	public static String setHexBinaryBytes(final byte[] buffer, final int len)
+	public static String setHexBinaryBytes(final byte[] buffer, int len)
 	{
-		int lenLocal = len;
-
 		char[] target = null;
 
 		if (buffer.length >= 0)
 		{
-			if (lenLocal < 0)
+			if (len < 0)
 			{
-				lenLocal = buffer.length;
-				target = new char[lenLocal * 2];
+				len = buffer.length;
+				target = new char[len * 2];
 			}
-			if (lenLocal > 0)
+			if (len > 0)
 			{
-				target = new char[lenLocal * 2];
-				for (int i = 0; i < lenLocal; i++)
+				target = new char[len * 2];
+				for (int i = 0; i < len; i++)
 				{
 					char c = (char) ((buffer[i] & 0x00f0) >> 4);
 					target[2 * i] = (c >= 10) ? (char) ('A' - 10 + c) : (char) ('0' + c);
@@ -1672,13 +1674,13 @@ public class StringUtil
 	 * @param strUnicode the unicode string to transcode to utf8
 	 * @return a byte array[] representing the utf-8 code of the input string, <code>null</code> if an error occurred
 	 */
-	public static byte[] setUTF8String(final String strUnicode)
+	public static byte[] getUTF8Bytes(final String strUnicode)
 	{
-		if (strUnicode != null && !strUnicode.equals(JDFConstants.EMPTYSTRING))
+		if (StringUtil.getNonEmpty(strUnicode) != null)
 		{
 			try
 			{
-				return strUnicode.getBytes("UTF-8");
+				return strUnicode.getBytes(UTF8);
 			}
 			catch (final UnsupportedEncodingException e)
 			{
@@ -1686,6 +1688,18 @@ public class StringUtil
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @deprecated use getUTF8Bytes instead
+	 * @param strUnicode
+	 * @return
+	 */
+	@Deprecated
+	public static byte[] setUTF8String(String strUnicode)
+	{
+		return getUTF8Bytes(strUnicode);
 	}
 
 	/**
@@ -1702,7 +1716,7 @@ public class StringUtil
 		{
 			try
 			{
-				String s = new String(utf8, "UTF-8");
+				String s = new String(utf8, UTF8);
 				if (s.indexOf(0xfffd) >= 0)
 				{
 					s = new String(utf8, "Cp1252");
@@ -1847,7 +1861,7 @@ public class StringUtil
 	 */
 	public static String escape(final String strToEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
 	{
-		final byte[] a_toEscape = setUTF8String(strToEscape);
+		final byte[] a_toEscape = getUTF8Bytes(strToEscape);
 		return getUTF8String(escape(a_toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
 	}
 
@@ -1996,7 +2010,7 @@ public class StringUtil
 	{
 		if (strToUnescape == null)
 			return null;
-		byte[] byteUnEscape = setUTF8String(strToUnescape);
+		byte[] byteUnEscape = getUTF8Bytes(strToUnescape);
 		byteUnEscape = unEscape(byteUnEscape, strEscapeChar, iRadix, escapeLen);
 		return getUTF8String(byteUnEscape);
 	}

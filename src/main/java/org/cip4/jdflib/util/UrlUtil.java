@@ -333,7 +333,7 @@ public class UrlUtil
 		}
 
 		relPath = StringUtil.replaceChar(relPath, '\\', "/", 0);
-		final byte[] utf8 = StringUtil.setUTF8String(relPath);
+		final byte[] utf8 = StringUtil.getUTF8Bytes(relPath);
 		relPath = new String(utf8);
 		relPath = StringUtil.escape(relPath, m_URIEscape, "%", 16, 2, 0x21, bEscape128 ? 128 : -1);
 		return relPath;
@@ -841,7 +841,7 @@ public class UrlUtil
 			return null;
 		if (bEscape128)
 		{
-			toEscape = new String(StringUtil.setUTF8String(toEscape));
+			toEscape = new String(StringUtil.getUTF8Bytes(toEscape));
 			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 127);
 		}
 		else

@@ -167,12 +167,6 @@ public class KElement extends ElementNSImpl implements Element
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/** Encoding. */
-	private static final String sm_strENCODING = "UTF-8"; // faster: "US-ASCII"
-
-	// ************************** start of directly dependend methods
-	// ***********
-
 	/**
 	 * Get the dirty status of this element
 	 * @return boolean true if dirty
@@ -3802,29 +3796,7 @@ public class KElement extends ElementNSImpl implements Element
 	@Override
 	public String toString()
 	{
-		String strJdf = JDFCoreConstants.EMPTYSTRING;
-		try
-		{
-			final StringWriter osw = new StringWriter();
-			final OutputFormat format = new OutputFormat(getOwnerDocument());
-
-			format.setIndenting(true);
-			format.setIndent(2);
-			format.setEncoding(sm_strENCODING);
-
-			final XMLSerializer serial = new XMLSerializer(osw, format);
-			serial.setNamespaces(true);
-			serial.asDOMSerializer();
-			serial.serialize(this);
-
-			strJdf = osw.toString();
-		}
-		catch (final IOException e)
-		{
-			strJdf = "### ERROR while serializing " + getClass().getName() + "(" + e.toString() + ": " + e.getMessage() + ")";
-		}
-
-		return strJdf;
+		return toXML();
 	}
 
 	/**
@@ -3853,7 +3825,7 @@ public class KElement extends ElementNSImpl implements Element
 
 			format.setIndenting(indent != 0);
 			format.setIndent(indent);
-			format.setEncoding(sm_strENCODING);
+			format.setEncoding(StringUtil.UTF8);
 
 			final XMLSerializer serial = new XMLSerializer(osw, format);
 			serial.setNamespaces(true);
@@ -3878,40 +3850,14 @@ public class KElement extends ElementNSImpl implements Element
 	@SuppressWarnings("deprecation")
 	public String toDisplayXML(final int indent)
 	{
-		try
+		final String s = toXML(indent);
+		int pos = s.indexOf("?>");
+		if (pos > 0)
 		{
-			final StringWriter osw = new StringWriter();
-			final OutputFormat format = new OutputFormat(getOwnerDocument());
-
-			format.setIndenting(indent != 0);
-			format.setIndent(indent);
-			format.setEncoding(sm_strENCODING);
-
-			final XMLSerializer serial = new XMLSerializer(osw, format);
-			serial.setNamespaces(false);
-			serial.asDOMSerializer();
-			serial.serialize(this);
-
-			final String s = osw.toString();
-			int pos = s.indexOf("?>");
-			if (pos > 0)
-			{
-				pos = s.indexOf("<", pos);
-			}
-			return (pos > 0) ? s.substring(pos) : s;
-
+			pos = s.indexOf("<", pos);
 		}
-		catch (final IOException e)
-		{
-			throw new JDFException("ERROR while serializing " + getClass().getName() + " element");
-		}
+		return (pos > 0) ? s.substring(pos) : s;
 	}
-
-	// ************************** end of methods needed in JDFRoot
-	// **************
-	// //////////////////////////////////////////////////////////////////////////
-	// ************************** start of methods needed in JDFAncestorPool
-	// ****
 
 	/**
 	 * Rename an attribute in this namespace<br/>
@@ -5591,7 +5537,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		try
 		{
-			stream.write(toXML().getBytes());
+			stream.write(toXML().getBytes(StringUtil.UTF8));
 			stream.close();
 			return true;
 		}

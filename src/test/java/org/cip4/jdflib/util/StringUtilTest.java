@@ -273,7 +273,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789aöü€";
-		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
+		final byte[] utf8Buf = StringUtil.getUTF8Bytes(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
 		final byte[] charBuf = strTestString.getBytes();
 		final String newString2 = StringUtil.getUTF8String(charBuf);
@@ -292,9 +292,9 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		// String strTestString = "ï¿½";
 		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
-		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
+		final byte[] utf8Buf = StringUtil.getUTF8Bytes(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
-		final byte[] utf8Buf2 = StringUtil.setUTF8String(newString);
+		final byte[] utf8Buf2 = StringUtil.getUTF8Bytes(newString);
 		final String strResultString = StringUtil.getUTF8String(utf8Buf2);
 		assertEquals("Input and Output bytes are not equal", utf8Buf.length, utf8Buf2.length);
 		assertEquals("Input and Output string are not equal", strTestString, newString);
@@ -347,7 +347,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		final String iri = "file://myHost/a/c%20aöü%25&?.txtß€";
 		assertEquals("escape round trip", iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2));
 		assertEquals("escape ", "%25_%c3%bc", StringUtil.escape("%_ü", ":&?%", "%", 16, 2, 0x21, 127));
-		assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.setUTF8String("€")), ":&?%", "%", 16, 2, 0x21, 127));
+		assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.getUTF8Bytes("€")), ":&?%", "%", 16, 2, 0x21, 127));
 		assertEquals("€", StringUtil.escape("€", null, "%", 16, 2, 0x21, -1));
 		assertEquals("ä", StringUtil.escape("ä", null, "%", 16, 2, 0x21, -1));
 		assertEquals("ä is 2 bytes --> __", "a__a", StringUtil.escape("aäa", null, "_", -1, 0, 0x21, 127));

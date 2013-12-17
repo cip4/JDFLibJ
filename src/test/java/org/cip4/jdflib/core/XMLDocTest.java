@@ -739,7 +739,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		final KElement e = d.getRoot();
 		e.setAttribute("URL", "file://myHost/a/c%20€%25.pdf");
 		String s = d.write2String(2);
-		final byte[] b = StringUtil.setUTF8String(s);
+		final byte[] b = StringUtil.getUTF8Bytes(s);
 		s = new String(b);
 		Assert.assertTrue(s.indexOf("€") >= 0);
 	}

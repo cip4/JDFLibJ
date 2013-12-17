@@ -75,8 +75,11 @@ import java.io.File;
 import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -162,7 +165,7 @@ public class TestJDF extends JDFTestCaseBase
 		JDFMerge m = new JDFMerge(jdfRoot);
 
 		Vector<JDFNode> vSpawned = new Vector<JDFNode>();
-		for (int ii = 0; ii < 21; ii++)
+		for (int ii = 1; ii < 21; ii++)
 		{
 			final VJDFAttributeMap vamParts = new VJDFAttributeMap();
 			for (int i = 1; i <= 20; i++)
@@ -216,16 +219,38 @@ public class TestJDF extends JDFTestCaseBase
 
 	/**
 	 * 
+	 *  
+	 * @throws Throwable
 	 */
-	// @Test
-	//	public void testgetPartition()
-	//	{
-	//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
-	//		final JDFNode n = d.getJDFRoot();
-	//		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
-	//		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
-	//		Assert.assertNull(rp);
-	//	}
+	public void testAddNodeInfoParts() throws Throwable
+	{
+		final JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/InkZoneCalculator2.jdf");
+
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.P", JDFConstants.EMPTYSTRING);
+
+		final JDFNodeInfo nodeInfo = nodeProc.getNodeInfo();
+
+		final VJDFAttributeMap vamDeepest = new VJDFAttributeMap();
+
+		JDFAttributeMap amPart0 = new JDFAttributeMap();
+
+		amPart0.put("PartVersion", "chn");
+		amPart0.put("SheetName", "IN_FB 001");
+		amPart0.put("Side", "Back");
+		amPart0.put("SignatureName", "Sig001");
+
+		vamDeepest.add(amPart0);
+
+		final VElement veParts = nodeInfo.getPartitionVector(vamDeepest, null);
+
+		assertEquals("Number of spawnInfos", 1, veParts.size());
+
+		final JDFNodeInfo niFound = (JDFNodeInfo) veParts.get(0);
+
+		JDFAttributeMap amFound = niFound.getPartMap();
+
+		assertEquals("Found partmap must equal input partmap", amPart0, amFound);
+	}
 
 	/**
 	 * 

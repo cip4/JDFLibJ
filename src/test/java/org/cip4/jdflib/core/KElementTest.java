@@ -3696,4 +3696,21 @@ public class KElementTest extends JDFTestCaseBase
 		KElement e4 = XMLDoc.parseFile(sm_dirTestDataTemp + "dummy2.xml").getRoot();
 		assertTrue(e2.isEqual(e4));
 	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testWrite2Stream()
+	{
+		KElement e = KElement.createRoot("foo", null);
+		KElement e2 = e.appendElement("bar");
+		e2.setAttribute("utf8", "äöü€");
+		ByteArrayIOStream stream = new ByteArrayIOStream();
+		e.write2Stream(stream);
+
+		KElement e3 = XMLDoc.parseStream(stream.getInputStream()).getRoot();
+		assertTrue(e.isEqual(e3));
+	}
 }
