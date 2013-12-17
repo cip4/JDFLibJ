@@ -69,11 +69,10 @@
 package org.cip4.jdflib.util.net;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
-
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 /**
  *  
@@ -131,6 +130,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@SuppressWarnings("resource")
 	@Test
 	public void testPingRCPost()
 	{
@@ -141,7 +141,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		}
 		ProxyUtil.setProxy("Proxy:8082");
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com", UrlUtil.POST);
-		urlCheck.setStream(new ByteInputStream("test".getBytes(), 4));
+		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
 		assertEquals(200, urlCheck.pingRC(5555));
 	}
 
