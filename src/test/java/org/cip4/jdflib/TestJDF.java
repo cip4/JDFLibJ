@@ -225,13 +225,11 @@ public class TestJDF extends JDFTestCaseBase
 	public void testAddNodeInfoParts() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/InkZoneCalculator2.jdf");
-
+		if (jdfDoc == null)
+			return;
 		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.P", JDFConstants.EMPTYSTRING);
-
 		final JDFNodeInfo nodeInfo = nodeProc.getNodeInfo();
-
 		final VJDFAttributeMap vamDeepest = new VJDFAttributeMap();
-
 		JDFAttributeMap amPart0 = new JDFAttributeMap();
 
 		amPart0.put("PartVersion", "chn");
