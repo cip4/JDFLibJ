@@ -71,8 +71,9 @@ package org.cip4.jdflib.util.net;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 /**
  *  
@@ -83,7 +84,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 {
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 *  
 	 */
 	@Test
 	public void testPing()
@@ -93,12 +94,12 @@ public class UrlCheckTest extends JDFTestCaseBase
 			log.info("skipping network test");
 			return;
 		}
-		Assert.assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
+		assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
 	}
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 *  
 	 */
 	@Test
 	public void testPingRC()
@@ -108,12 +109,12 @@ public class UrlCheckTest extends JDFTestCaseBase
 			log.info("skipping network test");
 			return;
 		}
-		Assert.assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
+		assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
 	}
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * 
 	 */
 	@Test
 	public void testPingRCGet()
@@ -123,7 +124,25 @@ public class UrlCheckTest extends JDFTestCaseBase
 			log.info("skipping network test");
 			return;
 		}
-		Assert.assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
+		assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testPingRCPost()
+	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
+		ProxyUtil.setProxy("Proxy:8082");
+		UrlCheck urlCheck = new UrlCheck("http://www.google.com", UrlUtil.POST);
+		urlCheck.setStream(new ByteInputStream("test".getBytes(), 4));
+		assertEquals(200, urlCheck.pingRC(5555));
 	}
 
 	/**
@@ -140,7 +159,7 @@ public class UrlCheckTest extends JDFTestCaseBase
 		}
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
 		urlCheck.startPing(5555);
-		ThreadUtil.sleep(2000);
-		Assert.assertEquals(200, urlCheck.getPingRC());
+		ThreadUtil.sleep(1000);
+		assertEquals(200, urlCheck.getPingRC());
 	}
 }

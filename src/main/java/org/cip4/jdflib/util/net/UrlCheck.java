@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.util.net;
 
+import java.io.InputStream;
+
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.thread.WaitTimeout;
@@ -79,7 +81,7 @@ import org.cip4.jdflib.util.thread.WaitTimeout;
  */
 public class UrlCheck
 {
-	public final String method;
+	private final String method;
 
 	/**
 	 * 
@@ -106,7 +108,8 @@ public class UrlCheck
 		@Override
 		protected UrlPart handle()
 		{
-			UrlPart p = UrlUtil.writeToURL(url, null, method, null, null);
+			UrlPart p = UrlUtil.writeToURL(url, stream, method, null, null);
+			p.buffer();
 			return p;
 		}
 
@@ -114,6 +117,7 @@ public class UrlCheck
 
 	private final String url;
 	private UrlWait wait;
+	private InputStream stream;
 
 	/**
 	 * 
@@ -134,6 +138,7 @@ public class UrlCheck
 		this.url = url;
 		wait = null;
 		this.method = method;
+		stream = null;
 	}
 
 	/**
@@ -193,5 +198,23 @@ public class UrlCheck
 	{
 		UrlPart p = getPing();
 		return p == null ? -1 : p.getResponseCode();
+	}
+
+	/**
+	 * Setter for stream attribute. This Stream will be sent to the request url
+	 * @param stream the stream to set
+	 */
+	public void setStream(InputStream stream)
+	{
+		this.stream = stream;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "UrlCheck [method=" + method + ", url=" + url + ", wait=" + wait + "]";
 	}
 }
