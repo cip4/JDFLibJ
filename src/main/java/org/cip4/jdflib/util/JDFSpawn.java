@@ -1705,8 +1705,9 @@ public class JDFSpawn
 					{
 						if (!nodeName.equals(child.getNodeName()))
 						{
-							rNewChild.copyElement(rChild, null);
+							rNewChild.copyElement(child, null);
 						}
+						child = child.getNextSiblingElement();
 					}
 				}
 				copySingle(rNewChild, rChild, idMap, partIDKeys, depth + 1);

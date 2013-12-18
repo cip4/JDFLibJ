@@ -1643,6 +1643,37 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSpawnPartSubElemIdent()
+	{
+		JDFNode nn = new JDFDoc("JDF").getJDFRoot();
+		nn.setType("Product", false);
+		JDFNode n = nn.addJDFNode(EnumType.ImageSetting);
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s1");
+
+		JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s2");
+		JDFResource xm2f = xm2.addPartition(EnumPartIDKey.Side, "Front");
+		xm2.appendMedia();
+
+		JDFResource xm1f = xm1.addPartition(EnumPartIDKey.Side, "Front");
+		xm1f.setIdentical(xm2f);
+
+		nn.getCreateResourcePool().moveElement(xm, null);
+
+		JDFSpawn s = new JDFSpawn(n);
+		s.vRWResources_in = new VString("ExposedMedia", null);
+		s.vSpawnParts = new VJDFAttributeMap();
+		JDFAttributeMap e = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		e.put("Side", "Front");
+		s.vSpawnParts.add(e);
+		JDFNode n2 = s.spawn();
+		assertNotNull(n2.getXPathElement("ResourcePool/ExposedMedia/ExposedMedia/Media"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testSpawnPart()
 	{
 		for (int i = 0; i < 3; i++)
