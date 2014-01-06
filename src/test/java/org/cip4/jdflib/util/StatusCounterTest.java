@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -117,6 +117,25 @@ public class StatusCounterTest extends JDFTestCaseBase
 	private JDFEmployee employee;
 
 	/**
+	 * @return the doc
+	 * 
+	 *
+	 */
+	public static JDFDoc getJMF()
+	{
+		StatusCounterTest statusCounterTest = new StatusCounterTest();
+		try
+		{
+			statusCounterTest.setUp();
+		}
+		catch (Exception e)
+		{
+			// NOP
+		}
+		return statusCounterTest.testAddPhase();
+	}
+
+	/**
 	 * @throws Exception
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
@@ -183,10 +202,11 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	@Test
-	public void testAddPhase()
+	public JDFDoc testAddPhase()
 	{
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertTrue(bChanged);
@@ -235,6 +255,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		jp = sig.getDeviceInfo(0).getJobPhase(0);
 		assertFalse(jp.hasAttribute(AttributeName.AMOUNT));
 		assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
+		return docJMF;
 	}
 
 	/**

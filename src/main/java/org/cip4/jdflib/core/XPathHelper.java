@@ -472,7 +472,6 @@ class XPathHelper
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
-	 * @param bRaw 
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
 	void setXPathAttribute(final String path, final String value)
@@ -778,7 +777,15 @@ class XPathHelper
 				// TODO fix escape attribute values
 
 				final String n = path.substring(posB0 + 1, posB1);
-				iSkip = StringUtil.parseInt(n, 0);
+				if (posB1 - posB0 == 2) // most of the time, so special handling is faster...
+				{
+					iSkip = 1 + n.charAt(0) - '1';
+				}
+				if (iSkip <= 0 || iSkip > 9)
+				{
+					iSkip = StringUtil.parseInt(n, 0);
+				}
+
 				if (iSkip <= 0)
 				{
 					throw new IllegalArgumentException("getXPathVector: bad index:" + iSkip);

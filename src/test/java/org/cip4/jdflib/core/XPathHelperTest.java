@@ -71,6 +71,7 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.StatusCounterTest;
 import org.junit.Test;
 
 /**
@@ -133,6 +134,28 @@ public class XPathHelperTest extends JDFTestCaseBase
 			log.info(i + " " + ct.getSingleSummary());
 			ct.stop();
 		}
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testSetXPathValuesJMFPerformance()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		JDFDoc d = StatusCounterTest.getJMF();
+
+		for (int i = 0; i < 30000; i++)
+		{
+			ct.start();
+			JDFAttributeMap map = d.getRoot().getXPathValueMap();
+			JDFDoc dNew = new JDFDoc();
+			dNew.setXPathValues(map);
+			if (i % 100 == 0)
+				log.info(i + " " + ct.getSingleSummary());
+			ct.stop();
+		}
+		assertEquals(ct.getTotalCPUTime(), 20.0E9, 20.0E9);
 	}
 
 	/**
