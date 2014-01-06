@@ -85,6 +85,7 @@ import java.net.URL;
 
 import javax.mail.BodyPart;
 
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -712,6 +713,18 @@ public class JDFDoc extends XMLDoc
 	public DocumentJDFImpl getMemberDocument()
 	{
 		return (DocumentJDFImpl) this.m_doc;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.XMLDoc#setXPathValues(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	public void setXPathValues(JDFAttributeMap valueMap)
+	{
+		boolean bOld = getInitOnCreate();
+		setInitOnCreate(false);
+		super.setXPathValues(valueMap);
+		setInitOnCreate(bOld);
 	}
 
 }

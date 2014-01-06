@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,14 +85,17 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XPathWalkerTest extends JDFTestCaseBase {
+public class XPathWalkerTest extends JDFTestCaseBase
+{
 
 	private final String testFile = "matsch.jdf";
 
@@ -100,7 +103,8 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testFile() throws Exception {
+	public void testFile() throws Exception
+	{
 		String s = sm_dirTestData + File.separator + testFile;
 		JDFDoc d = new JDFParser().parseFile(s);
 		XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + UrlUtil.newExtension(testFile, "txt")));
@@ -113,7 +117,28 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testDataType() throws Exception {
+	public void testPerformanceFile() throws Exception
+	{
+		CPUTimer ct = new CPUTimer(false);
+		JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
+		for (int i = 0; i < 100; i++)
+		{
+			XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + "bigWhite.txt"));
+			w.setAttribute(true);
+			w.setAttributeValue(true);
+			ct.start();
+			w.walkAll(d.getRoot());
+			log.info(i + " " + ct.getSingleSummary());
+			ct.stop();
+		}
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testDataType() throws Exception
+	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFResource intent = d.getJDFRoot().addResource(ElementName.LAYOUTINTENT, null);
 		intent.setAttribute("SizePolicy", "Tile");
@@ -133,7 +158,8 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testCSV() throws Exception {
+	public void testCSV() throws Exception
+	{
 		JDFDoc d = new JDFDoc("JDF");
 		ByteArrayIOStream ios = new ByteArrayIOStream();
 		PrintWriter writer = new PrintWriter(ios);
@@ -151,7 +177,8 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testCSVUnique() throws Exception {
+	public void testCSVUnique() throws Exception
+	{
 		JDFDoc d = new JDFDoc("JDF");
 		for (int i = 0; i < 100; i++)
 			d.getJDFRoot().getCreateAuditPool().addModified(null, null);
@@ -173,12 +200,14 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testRead() throws Exception {
+	public void testRead() throws Exception
+	{
 		long n0 = System.currentTimeMillis();
 		testFile();
 		long n1 = System.currentTimeMillis();
 		System.out.println("create time: " + (n1 - n0));
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			n1 = System.currentTimeMillis();
 			XMLDoc d = (i % 2 == 0) ? new XMLDoc("JDF", null) : new JDFDoc("JDF");
 
@@ -186,14 +215,18 @@ public class XPathWalkerTest extends JDFTestCaseBase {
 			File f = new File(sm_dirTestDataTemp + UrlUtil.newExtension(testFile, "txt"));
 			BufferedReader r = new BufferedReader(new FileReader(f));
 			String s = r.readLine();
-			while (s != null) {
+			while (s != null)
+			{
 				int neq = s.indexOf("=");
 				VString v = StringUtil.tokenize(s, "= ", false);
 				if (neq > 0 && v.size() == 1)
 					v.add("");
-				if (v.size() == 1) {
+				if (v.size() == 1)
+				{
 					n.getCreateXPathElement(v.get(0));
-				} else {
+				}
+				else
+				{
 					n.setXPathValue(v.get(0), v.get(1));
 				}
 				s = r.readLine();

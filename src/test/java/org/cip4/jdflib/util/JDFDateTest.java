@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -147,7 +147,7 @@ public class JDFDateTest extends JDFTestCaseBase
 		JDFDate d = new JDFDate();
 		JDFDate d1 = d.createDateFromDuration(new JDFDuration("P1DT18H"), 18, 0);
 		assertTrue(d1.isLater(d));
-		d1 = d.createDateFromDuration(new JDFDuration("P1000DT18H"), 18, 0);
+		d1 = d.createDateFromDuration(new JDFDuration("P1200DT18H"), 18, 0);
 		assertTrue(d1.isLater(d));
 		assertTrue(d1.getYear() - d.getYear() > 2);
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -126,14 +126,15 @@ public class XPathWalker extends BaseElementWalker
 		public String buildXPath(String relativeTo)
 		{
 			String path = elem.getNodeName();
-			KElement p = elem.getParentNode_KElement();
+			KElement parent = elem.getParentNode_KElement();
 
 			boolean bAtt = false;
 			if (methCountSiblings > 0 && attributeNames != null)
 			{
-				for (int i = 0; i < attributeNames.size(); i++)
+				int size = attributeNames.size();
+				for (int i = 0; i < size; i++)
 				{
-					if (methCountSiblings == 3 && elem.hasAttribute(attributeNames.get(i), null, false))
+					if (methCountSiblings == 3 && elem.hasAttribute_KElement(attributeNames.get(i), null, false))
 					{
 						path += "[@" + attributeNames.get(i) + "=\"" + elem.getAttribute(attributeNames.get(i)) + "\"]";
 						bAtt = true;
@@ -143,14 +144,16 @@ public class XPathWalker extends BaseElementWalker
 			}
 			if (!bAtt)
 			{
-				KElement e = (p != null) ? p.getElement(path, null, 0) : null;
+				KElement e = (parent != null) ? parent.getElement(path, null, 0) : null;
 				int i = 1;
 				while (e != null)
 				{
 					if (e.equals(elem))
 					{
 						if (methCountSiblings > 0)
+						{
 							path += "[" + Integer.toString(i) + "]";
+						}
 						break;
 					}
 					do
@@ -163,9 +166,9 @@ public class XPathWalker extends BaseElementWalker
 			}
 
 			path = "/" + path;
-			if (p != null)
+			if (parent != null)
 			{
-				path = new XPathBuilder(p, methCountSiblings, attributeNames).buildXPath(relativeTo) + path;
+				path = new XPathBuilder(parent, methCountSiblings, attributeNames).buildXPath(relativeTo) + path;
 			}
 
 			if (relativeTo != null)

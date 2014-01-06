@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,6 +69,9 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.util.CPUTimer;
+import org.junit.Test;
 
 /**
  * 
@@ -77,7 +80,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
  */
 public class XPathHelperTest extends JDFTestCaseBase
 {
-	private XPathHelper theElement;
+	private XPathHelper theHelper;
 
 	/**
 	 * 
@@ -85,8 +88,8 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 */
 	public void testSetNull()
 	{
-		theElement.setXPathAttribute("@bar", null);
-		assertFalse(theElement.hasXPathNode("@bar"));
+		theHelper.setXPathAttribute("@bar", null);
+		assertFalse(theHelper.hasXPathNode("@bar"));
 	}
 
 	/**
@@ -95,11 +98,11 @@ public class XPathHelperTest extends JDFTestCaseBase
 	 */
 	public void testSetNamespaces()
 	{
-		theElement.setXPathAttribute("@foo:bar", "b1");
-		theElement.setXPathAttribute("@xmlns:foo", "www.foo.com");
-		theElement.setXPathAttribute("@foo:bar2", "b2");
-		assertFalse(theElement.hasXPathNode("@bar"));
-		assertFalse(theElement.hasXPathNode("@bar2"));
+		theHelper.setXPathAttribute("@foo:bar", "b1");
+		theHelper.setXPathAttribute("@xmlns:foo", "www.foo.com");
+		theHelper.setXPathAttribute("@foo:bar2", "b2");
+		assertFalse(theHelper.hasXPathNode("@bar"));
+		assertFalse(theHelper.hasXPathNode("@bar2"));
 	}
 
 	/**
@@ -109,6 +112,74 @@ public class XPathHelperTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		this.theElement = new XPathHelper(KElement.createRoot("foo", null));
+		this.theHelper = new XPathHelper(KElement.createRoot("foo", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetXPathValuesPerformance()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
+		JDFAttributeMap map = d.getRoot().getXPathValueMap();
+
+		for (int i = 0; i < 3; i++)
+		{
+			ct.start();
+			JDFDoc dNew = new JDFDoc("JDF");
+			dNew.setXPathValues(map);
+			log.info(i + " " + ct.getSingleSummary());
+			ct.stop();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetXPathValues()
+	{
+		JDFDoc d = creatXMDoc();
+		KElement root = d.getRoot();
+		JDFAttributeMap map = root.getXPathValueMap();
+
+		JDFDoc dNew = new JDFDoc("JDF");
+		dNew.setXPathValues(map);
+		assertTrue(dNew.getRoot().getLocalName().equals("JDF"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetXPathValuesEmptyElem()
+	{
+		XMLDoc d = new XMLDoc("x", null);
+		d.getRoot().appendElement("y");
+		KElement root = d.getRoot();
+		JDFAttributeMap map = root.getXPathValueMap();
+
+		XMLDoc dNew = new XMLDoc();
+		dNew.setXPathValues(map);
+		assertTrue(dNew.getRoot().isEqual(root));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetXPathValuesNSElem()
+	{
+		XMLDoc d = new XMLDoc("x", null);
+		KElement nsElem = d.getRoot().appendElement("ns:y", "foo");
+		nsElem.setAttribute("ns:bar", "barbar", "foo");
+		KElement root = d.getRoot();
+		JDFAttributeMap map = root.getXPathValueMap();
+
+		XMLDoc dNew = new XMLDoc();
+		dNew.setXPathValues(map);
+		assertTrue(dNew.getRoot().isEqual(root));
 	}
 }

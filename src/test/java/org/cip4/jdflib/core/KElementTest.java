@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1811,7 +1811,24 @@ public class KElementTest extends JDFTestCaseBase
 		root.setText("foo");
 		Map<String, String> m = root.getXPathValueMap();
 		assertEquals(m.get("/a"), "foo");
+	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetXPathValueMapPerformance()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
+
+		for (int i = 0; i < 10; i++)
+		{
+			ct.start();
+			d.getRoot().getXPathValueMap();
+			log.info(i + " " + ct.getSingleSummary());
+			ct.stop();
+		}
 	}
 
 	// /////////////////////////////////////////////////////////////////

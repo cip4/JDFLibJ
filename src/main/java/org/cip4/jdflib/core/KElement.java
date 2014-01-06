@@ -3419,7 +3419,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void appendText(final String textName)
 	{
-		if (textName == null)
+		if (StringUtil.getNonEmpty(textName) == null)
 			return;
 		final Text newChild = getOwnerDocument().createTextNode(textName);
 		appendChild(newChild);
@@ -4042,57 +4042,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String buildXPath(final String relativeTo, final int methCountSiblings)
 	{
-		String path = getNodeName();
-		final KElement p = getParentNode_KElement();
-
-		if (methCountSiblings > 0)
-		{
-			if (methCountSiblings == 3 && hasAttribute_KElement(JDFCoreConstants.ID, null, false))
-			{
-				path += "[@ID=\"" + getAttribute(JDFCoreConstants.ID) + "\"]";
-			}
-			else
-			{
-				KElement e = (p != null) ? p.getElement(path, null, 0) : null;
-				int i = 1;
-				while (e != null)
-				{
-					if (e.equals(this))
-					{
-						path += "[" + Integer.toString(i) + "]";
-						break;
-					}
-					do
-					{
-						e = e.getNextSiblingElement();
-					}
-					while (e != null && !e.fitsName_KElement(path, null));
-					i++;
-				}
-			}
-		}
-		path = "/" + path;
-		if (p != null)
-		{
-			path = p.buildXPath(relativeTo, methCountSiblings) + path;
-		}
-
-		if (relativeTo != null)
-		{
-			if (path.startsWith(relativeTo))
-			{
-				path = "." + path.substring(relativeTo.length());
-				if (path.startsWith(".["))
-				{
-					final int iB = path.indexOf("]");
-					if (iB > 0)
-					{
-						path = "." + path.substring(iB + 1);
-					}
-				}
-			}
-		}
-		return path;
+		return new XPathHelper(this).buildXPath(relativeTo, methCountSiblings);
 	}
 
 	/**
@@ -4220,12 +4170,12 @@ public class KElement extends ElementNSImpl implements Element
 	/**
 	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
+	 *
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * if null, assume .//@*, i.e. all of this
 	 * 
-	 * @return String the String value of the attribute or null if the xpath element does not exist
-	 * @throws JDFException if the defined path is a bad attribute path
+	 * @return String the String value of the xpath 
+	 *
 	 */
 	public JDFAttributeMap getXPathValueMap()
 	{
@@ -4579,7 +4529,8 @@ public class KElement extends ElementNSImpl implements Element
 		final StringBuffer strBuff = new StringBuffer(iBufferSize);
 
 		final NodeList nodeList = getChildNodes();
-		for (int i = 0; i < nodeList.getLength(); i++)
+		int length = nodeList.getLength();
+		for (int i = 0; i < length; i++)
 		{
 			final Node node = nodeList.item(i);
 			if (node.getNodeType() == TEXT_NODE)

@@ -759,7 +759,7 @@ public class XMLDoc
 	/**
 	 * set the xpath values of thei to the values in the node
 	 * 
-	 * @param valueMap the map of values, if this is still null, MUST be fully qualifie
+	 * @param valueMap the map of values, if this is still null, MUST be fully qualified
 	 */
 	public void setXPathValues(final JDFAttributeMap valueMap)
 	{

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -174,7 +174,7 @@ class XPathHelper
 				if (e != null)
 				{
 					next = path.substring(endPos + 1);
-					return e.getCreateXPathElement(next);
+					return new XPathHelper(e).getCreateXPathElement(next);
 				}
 			}
 
@@ -214,25 +214,20 @@ class XPathHelper
 					iSkip--;
 				}
 			}
+			fillMissing(iSkip, newPath, slash);
 			if (slash != -1)
 			{
-				fillMissing(iSkip, newPath, slash);
 				KElement e = theElement.getCreateElement_KElement(newPath.substring(0, slash), null, iSkip);
 				if (attName != null && !e.hasAttribute(attName))
 				{
 					e.setXPathAttribute(attName, attVal);
 				}
-				return e.getCreateXPathElement(newPath.substring(slash + 1));
-			}
-			final int n = theElement.numChildElements_KElement(newPath, null);
-			for (int i = n; i < iSkip; i++)
-			{
-				theElement.appendElement(newPath, null);
+				return new XPathHelper(e).getCreateXPathElement(newPath.substring(slash + 1));
 			}
 			final KElement newElem = theElement.getCreateElement_KElement(newPath, null, iSkip);
 			if (attName != null)
 			{
-				newElem.setXPathAttribute(attName, attVal);
+				new XPathHelper(newElem).setXPathAttribute(attName, attVal);
 			}
 			return newElem;
 		}
@@ -272,7 +267,7 @@ class XPathHelper
 				return theElement;
 			}
 
-			return r.getCreateXPathElement(path.substring(nextPos + 1));
+			return new XPathHelper(r).getCreateXPathElement(path.substring(nextPos + 1));
 		}
 
 		private int findSlashBrack(final int slash, final int brack)
@@ -331,10 +326,14 @@ class XPathHelper
 		 */
 		private void fillMissing(int iSkip, String newPath, int pos)
 		{
-			final int n = theElement.numChildElements_KElement(newPath.substring(0, pos), null);
-			for (int i = n; i < iSkip; i++)
+			if (iSkip > 0)
 			{
-				theElement.appendElement(newPath.substring(0, pos), null);
+				String elem = pos < 0 ? newPath : newPath.substring(0, pos);
+				final int n = theElement.numChildElements_KElement(elem, null);
+				for (int i = n; i < iSkip; i++)
+				{
+					theElement.appendElement(elem, null);
+				}
 			}
 		}
 	}
@@ -349,7 +348,7 @@ class XPathHelper
 	String buildXPath(final String relativeTo, final int methCountSiblings)
 	{
 		String path = theElement.getNodeName();
-		final KElement p = theElement.getParentNode_KElement();
+		final KElement parent = theElement.getParentNode_KElement();
 
 		if (methCountSiblings > 0)
 		{
@@ -359,11 +358,11 @@ class XPathHelper
 			}
 			else
 			{
-				KElement e = (p != null) ? p.getElement(path, null, 0) : null;
+				KElement e = (parent != null) ? parent.getElement_KElement(path, null, 0) : null;
 				int i = 1;
 				while (e != null)
 				{
-					if (e.equals(this))
+					if (e == theElement)
 					{
 						path += "[" + Integer.toString(i) + "]";
 						break;
@@ -378,9 +377,9 @@ class XPathHelper
 			}
 		}
 		path = "/" + path;
-		if (p != null)
+		if (parent != null)
 		{
-			path = p.buildXPath(relativeTo, methCountSiblings) + path;
+			path = new XPathHelper(parent).buildXPath(relativeTo, methCountSiblings) + path;
 		}
 
 		if (relativeTo != null)
@@ -418,7 +417,7 @@ class XPathHelper
 		}
 		else
 		{
-			VElement vEle = theElement.getXPathElementVector(path, -1);
+			VElement vEle = getXPathElementVectorInternal(path, -1, true);
 			if (vEle == null)
 			{
 				vEle = new VElement();
@@ -451,7 +450,9 @@ class XPathHelper
 		{
 			String xpath = it.next();
 			if (xpath.indexOf(AttributeName.XMLNS) >= 0)
+			{
 				setXPathValue(xpath, map.get(xpath));
+			}
 		}
 
 		it = map.getKeyIterator();
@@ -459,7 +460,9 @@ class XPathHelper
 		{
 			String xpath = it.next();
 			if (xpath.indexOf(AttributeName.XMLNS) < 0)
+			{
 				setXPathValue(xpath, map.get(xpath));
+			}
 		}
 	}
 
@@ -469,6 +472,7 @@ class XPathHelper
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
+	 * @param bRaw 
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
 	void setXPathAttribute(final String path, final String value)
@@ -620,16 +624,22 @@ class XPathHelper
 		final JDFAttributeMap map = new JDFAttributeMap();
 		for (KElement e : vEle)
 		{
-			JDFAttributeMap localMap = e.getAttributeMap();
-			VString vKeys = localMap == null ? null : localMap.getKeys();
-			String baseXPath = e.buildXPath(base, 1);
+			VString vKeys = e.getAttributeVector_KElement();
+			String baseXPath = new XPathHelper(e).buildXPath(base, 1);
+			String nodeName = e.getNodeName();
+			String prefix = KElement.xmlnsPrefix(nodeName);
+			if (prefix != null)
+			{
+				String uri = e.getNamespaceURI();
+				map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
+			}
 			if (vKeys != null)
 			{
 				for (String key : vKeys)
 				{
 					if (StringUtil.matches(key, attName))
 					{
-						String s = localMap.get(key);
+						String s = e.getAttributeRaw(key);
 						map.put(baseXPath + "/@" + key, s);
 					}
 				}
@@ -637,8 +647,12 @@ class XPathHelper
 			if (bWantText)
 			{
 				String text = e.getText();
-				if (text != null)
+				if (text != null || vKeys == null || vKeys.size() == 0)
+				{
+					if (text == null)
+						text = "";
 					map.put(baseXPath, text);
+				}
 			}
 		}
 		return map.size() > 0 ? map : null;
@@ -743,11 +757,15 @@ class XPathHelper
 			{
 				char next = path.charAt(posB0 + 1);
 				if (next < '0' || next > '9')
+				{
 					posB0 = -1;
+				}
 				else
+				{
 					posBAt = -1;
+				}
 			}
-			int iSkip = 0;
+			int iSkip = -1;
 			String newPath = path;
 			int pos = newPath.indexOf(JDFCoreConstants.SLASH);
 			JDFAttributeMap map = null;
@@ -768,7 +786,8 @@ class XPathHelper
 
 				iSkip--;
 				bExplicitSkip = true;
-				newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
+				String childName = path.substring(0, posB0);
+				newPath = childName + path.substring(posB1 + 1);
 				pos = newPath.indexOf(JDFCoreConstants.SLASH);
 			}
 			else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for [@a="b"]
@@ -782,24 +801,18 @@ class XPathHelper
 			if (pos != -1) // have another element
 			{
 				final String elmName = newPath.substring(0, pos);
-				VElement ve = getLocalElements(bLocal, newPath, map, elmName);
-				if (ve == null || ve.size() <= iSkip)
+				VElement ve = getLocalElements(bLocal, newPath, map, elmName, iSkip);
+				if (ve == null || ve.size() == 0)
 				{
 					return null;
 				}
 
-				final int iFirst = bExplicitSkip ? iSkip : 0;
-				final int iLast = bExplicitSkip ? iSkip + 1 : ve.size();
-				for (int i = iFirst; i < iLast; i++) // loop in case multiple
-				// elements contain the same attribute
+				final int iFirst = 0;
+				final int iLast = ve.size();
+				for (int i = iFirst; i < iLast; i++) // loop in case multiple elements contain the same attribute
 				{
-					VElement eRet = null;
 					final KElement ee = ve.item(i);
-					if (ee != null)
-					{
-						eRet = new XPathHelper(ee).getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
-					}
-
+					VElement eRet = new XPathHelper(ee).getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
 					if (eRet != null)
 					{
 						vRet.addAll(eRet);
@@ -829,12 +842,28 @@ class XPathHelper
 			return vRet;
 		}
 
-		private VElement getLocalElements(final boolean bLocal, String newPath, JDFAttributeMap map, final String elmName)
+		private VElement getLocalElements(final boolean bLocal, String newPath, JDFAttributeMap map, final String elmName, int iSkip)
 		{
 			VElement ve;
 			if (bLocal)
 			{
-				ve = getPathVector(elmName, map, false);
+				if (iSkip < 0)
+				{
+					ve = getPathVector(elmName, map, false);
+				}
+				else
+				{
+					KElement e = theElement.getElement_KElement(elmName, null, iSkip);
+					if (e == null)
+					{
+						ve = null;
+					}
+					else
+					{
+						ve = new VElement();
+						ve.add(e);
+					}
+				}
 			}
 			else
 			{
@@ -940,16 +969,19 @@ class XPathHelper
 	{
 		VElement v = theElement.getChildElementVector_KElement(newPath, null, null, true, 0);
 		VElement vRet = new VElement();
-		if (v != null)
+		if (v != null && v.size() > 0)
 		{
 			if (map != null && map.size() > 0)
 			{
-				for (String key : map.getKeys())
+				VString keys = map.getKeys();
+				for (String key : keys)
 				{
 					for (KElement e : v)
 					{
 						if (e.getXPathAttribute(key, "").equals(map.get(key)))
+						{
 							vRet.add(e);
+						}
 					}
 				}
 			}
@@ -958,12 +990,13 @@ class XPathHelper
 				vRet = v;
 			}
 		}
-		else
+		else if (map != null && create)
 		{
+			VString keys = map.getKeys();
 			KElement e = theElement.appendElement(newPath);
-			for (String key : map.getKeys())
+			for (String key : keys)
 			{
-				e.setXPathValue(key, map.get(key));
+				new XPathHelper(e).setXPathValue(key, map.get(key));
 			}
 			vRet.add(e);
 		}
@@ -979,5 +1012,14 @@ class XPathHelper
 		final String attVal = attEqVal.substring(attName.length() + 2, attEqVal.length() - 1);
 		map.put(attName, attVal);
 		return map;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "XPathHelper [theElement=" + theElement + "]";
 	}
 }
