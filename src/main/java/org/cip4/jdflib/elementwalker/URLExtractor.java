@@ -225,19 +225,23 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			}
 			boolean bOverwrite = !saved.contains(url);
 			final File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite);
-			if (baseURL != null && newFile != null)
+			if (newFile != null)
 			{
-				String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
-				s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
-				urlSetter.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
+				if (baseURL != null)
+				{
+					String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
+					s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
+					String urlWithDirectory = UrlUtil.getURLWithDirectory(baseURL, s);
+					urlSetter.setURL(urlWithDirectory);
+				}
 				if (wantLog && bOverwrite)
 				{
-					log.info("moved " + url + " to " + urlSetter.getURL());
+					log.info("copied " + url + " to " + urlSetter.getURL());
 				}
 			}
 			else if (wantLog)
 			{
-				log.warn("Could not move " + url + " to " + dir);
+				log.warn("Could not copy " + url + " to " + dir);
 			}
 			saved.add(url);
 			return e; //  continue
