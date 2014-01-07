@@ -90,7 +90,6 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -264,6 +263,10 @@ public class UrlUtil
 	 * pdf, duh...
 	 */
 	public static final String APPLICATION_PDF = JDFCoreConstants.MIME_PDF;
+	/**
+	 * ps, duh...
+	 */
+	public static final String APPLICATION_PS = JDFCoreConstants.MIME_PS;
 	/**
 	 * 
 	 */
@@ -954,6 +957,30 @@ public class UrlUtil
 	}
 
 	/**
+	 * generates the correct extension for a given mime content type 
+	 * 
+	 * @param contentType
+	 * @return
+	 */
+	public static String getExtensionFromMimeType(final String contentType)
+	{
+		if (contentType == null)
+		{
+			return null;
+		}
+		getMimeTypeFromURL(null);
+		String extension = mimeMap.getKey(contentType);
+		if (extension == null)
+		{
+			if (isZIPType(contentType))
+				extension = "zip";
+			else if (isXMLType(contentType))
+				extension = "xml";
+		}
+		return extension;
+	}
+
+	/**
 	 * generates the correct MIMEType for a given URL and sets it
 	 * 
 	 * @param url
@@ -963,7 +990,7 @@ public class UrlUtil
 	{
 		if (mimeMap == null)
 		{
-			mimeMap = new HashMap<String, String>();
+			mimeMap = new BiHashMap<String, String>();
 			mimeMap.put("pdf", JDFCoreConstants.MIME_PDF);
 			mimeMap.put("ps", JDFCoreConstants.MIME_PS);
 
@@ -974,11 +1001,12 @@ public class UrlUtil
 			mimeMap.put("jdf", JDFCoreConstants.MIME_JDF);
 			mimeMap.put("jmf", JDFCoreConstants.MIME_JMF);
 
-			mimeMap.put("xml", JDFCoreConstants.MIME_TEXTXML);
 			mimeMap.put("xsl", TEXT_XML);
 			mimeMap.put("xsd", TEXT_XML);
+			mimeMap.put("xml", TEXT_XML);
 
 			mimeMap.put("csv", TEXT_CSV);
+			mimeMap.put("txt", TEXT_UNKNOWN);
 
 			mimeMap.put("jpg", JDFCoreConstants.MIME_JPG);
 			mimeMap.put("jpeg", JDFCoreConstants.MIME_JPG);
@@ -1872,6 +1900,6 @@ public class UrlUtil
 		return strWork.substring(0, strWork.length() - ext.length() - 1);
 	}
 
-	private static HashMap<String, String> mimeMap = null;
+	private static BiHashMap<String, String> mimeMap = null;
 
 }

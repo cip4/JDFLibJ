@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -122,6 +122,24 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL(null, "foo/bar"), "foo/bar");
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
 		assertEquals(UrlUtil.getLocalURL("file://foo", "File://foo/bar/a.b"), "bar/a.b");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetExtensionTypeFromMimeType()
+	{
+		assertEquals("txt", UrlUtil.getExtensionFromMimeType(UrlUtil.TEXT_UNKNOWN));
+		assertEquals("jdf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_JDF));
+		assertEquals("jmf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_JMF));
+		assertEquals("xml", UrlUtil.getExtensionFromMimeType(UrlUtil.TEXT_XML));
+		assertEquals("xml", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_XML));
+		assertEquals("zip", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_ZIP));
+		assertEquals("zip", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_XZIP));
+		assertEquals("pdf", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_PDF));
+		assertEquals("ps", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_PS));
+		assertEquals("mim", UrlUtil.getExtensionFromMimeType(MimeUtil.MULTIPART_RELATED));
 	}
 
 	/**

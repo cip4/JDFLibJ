@@ -125,7 +125,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	protected final Set<String> saved;
 
 	/**
-	 * Getter for saved attribute.
+	 * Getter for list of saved files
 	 * @return the saved
 	 */
 	public Set<String> getSaved()
