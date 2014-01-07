@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,6 +123,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	protected Set<URLProtocol> protocols;
 	protected final String currentURL;
 	protected Set<String> saved;
+	private boolean wantLog;
 
 	/**
 	 * @param dumpDir the local directory where any files are dumped
@@ -137,6 +138,18 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		this.currentURL = currentURL;
 		saved = new HashSet<String>();
 		protocols = null;
+		setWantLog(false);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param bWant if true, we will log each move
+	 *  
+	 */
+	public void setWantLog(boolean bWant)
+	{
+		wantLog = bWant;
 	}
 
 	/**
@@ -182,10 +195,12 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			IURLSetter u = (IURLSetter) e;
-			String url = StringUtil.getNonEmpty(u.getURL());
+			IURLSetter urlSetter = (IURLSetter) e;
+			String url = StringUtil.getNonEmpty(urlSetter.getURL());
 			if (url == null)
+			{
 				return e;
+			}
 			// we have a circular reference to something we put here ourselves - no need to do anything
 			if (baseURL != null && url.startsWith(baseURL))
 				return e;
@@ -194,15 +209,25 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				URLProtocol protocol = UrlUtil.getProtocol(url);
 				if (!protocols.contains(protocol))
+				{
 					return e;
+				}
 			}
 			boolean bOverwrite = !saved.contains(url);
-			final File newFile = UrlUtil.moveToDir(u, dir, currentURL, bOverwrite);
+			final File newFile = UrlUtil.moveToDir(urlSetter, dir, currentURL, bOverwrite);
 			if (baseURL != null && newFile != null)
 			{
 				String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
 				s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
-				u.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
+				urlSetter.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
+				if (wantLog && bOverwrite)
+				{
+					log.info("moved " + url + " to " + urlSetter.getURL());
+				}
+			}
+			else if (wantLog)
+			{
+				log.warn("Could not move " + url + " to " + dir);
 			}
 			saved.add(url);
 			return e; //  continue
@@ -223,6 +248,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	/**
 	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
 	 */
+	@Override
 	public KElement convert(KElement e)
 	{
 		walkTree(e, null);

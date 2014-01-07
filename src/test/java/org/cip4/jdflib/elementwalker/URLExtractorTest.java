@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,73 +80,108 @@ import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class URLExtractorTest extends JDFTestCaseBase {
+public class URLExtractorTest extends JDFTestCaseBase
+{
 	/**
 	 * @return the created doc
 	 * 
 	 */
-	public JDFDoc testWalk() {
-		try {
+	public JDFDoc testWalk()
+	{
+		try
+		{
 			new MimeUtilTest().testBuildMimePackageDoc();
-		} catch (Exception x) {
-			Assert.fail("no build");
+		}
+		catch (Exception x)
+		{
+			fail("no build");
 		}
 		final String mimeFile = sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm";
 
 		MimeReader mr = new MimeReader(mimeFile);
 		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
 		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
-		Assert.assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
-		Assert.assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
+		assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 		return d;
+	}
+
+	/**
+	* @return the created doc
+	* 
+	*/
+	public void testWantLog()
+	{
+		try
+		{
+			new MimeUtilTest().testBuildMimePackageDoc();
+		}
+		catch (Exception x)
+		{
+			fail("no build");
+		}
+		final String mimeFile = sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm";
+
+		MimeReader mr = new MimeReader(mimeFile);
+		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
+		assertNotNull(d);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
+		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
+		ex.setWantLog(true);
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = d.write2String(0);
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
+		assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 	}
 
 	/**
 	 * extract from zip stream - also test CommentURL
 	 */
 	@Test
-	public void testReadZip() {
+	public void testReadZip()
+	{
 		ZipReader zipReader = new ZipReader(sm_dirTestData + "testZip.zip");
 		zipReader.getEntry("dummy.jdf");
 		JDFDoc d = zipReader.getJDFDoc();
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "ZipExtractor");
 		URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.walkTree(d.getJDFRoot(), null);
-		Assert.assertTrue("", FileUtil.getFileInDirectory(dumpDir, new File("content/boo.pdf")).canRead());
-		Assert.assertTrue("also extract commenturl", FileUtil.getFileInDirectory(dumpDir, new File("content/commentURL.pdf")).canRead());
+		assertTrue("", FileUtil.getFileInDirectory(dumpDir, new File("content/boo.pdf")).canRead());
+		assertTrue("also extract commenturl", FileUtil.getFileInDirectory(dumpDir, new File("content/commentURL.pdf")).canRead());
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testIgnoreSelf() {
+	public void testIgnoreSelf()
+	{
 		JDFDoc d = testWalk();
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtractSelf");
 		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
-		Assert.assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
-		Assert.assertFalse("we did not dump to #2 since our base is also foo", FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
+		assertFalse("we did not dump to #2 since our base is also foo", FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testRelativePath() {
+	public void testRelativePath()
+	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 		rl.addPDF("./content/boo.pdf", 0, -1);
@@ -158,25 +193,29 @@ public class URLExtractorTest extends JDFTestCaseBase {
 		URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn", "http://foo");
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
-		Assert.assertTrue(write2String.indexOf("http://foo/content/boo.pdf") > 0);
-		Assert.assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo.pdf").exists());
+		assertTrue(write2String.indexOf("http://foo/content/boo.pdf") > 0);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo.pdf").exists());
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testAddProtocol() {
-		try {
+	public void testAddProtocol()
+	{
+		try
+		{
 			new MimeUtilTest().testBuildMimePackageDoc();
-		} catch (Exception x) {
-			Assert.fail("no build");
+		}
+		catch (Exception x)
+		{
+			fail("no build");
 		}
 		final String mimeFile = sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm";
 
 		MimeReader mr = new MimeReader(mimeFile);
 		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
 		FileUtil.deleteAll(dumpDir);
 
@@ -186,14 +225,14 @@ public class URLExtractorTest extends JDFTestCaseBase {
 		ex.addProtocol(URLProtocol.file);
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
-		Assert.assertTrue(write2String.indexOf("http://foo/url2.pdf") < 0);
-		Assert.assertFalse(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") < 0);
+		assertFalse(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 
 		// only file and cid protocols are modified
 		ex.addProtocol(URLProtocol.cid);
 		ex.walkTree(d.getJDFRoot(), null);
 		write2String = d.write2String(0);
-		Assert.assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
-		Assert.assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
+		assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 	}
 }
