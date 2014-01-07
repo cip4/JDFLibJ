@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1730,7 +1730,9 @@ public class UrlUtil
 		{
 			fileName = cleanDots(url);
 			if (cwd != null)
+			{
 				url = UrlUtil.getURLWithDirectory(cwd, url);
+			}
 		}
 
 		// check for nop
@@ -1755,11 +1757,14 @@ public class UrlUtil
 		if (out.exists())
 		{
 			if (overWrite)
+			{
 				out.delete();
+			}
 			else
+			{
 				return out;
+			}
 		}
-
 		InputStream inputStream = new URLReader(url, d).getURLInputStream();
 		if (inputStream != null)
 		{

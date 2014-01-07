@@ -122,7 +122,17 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	protected final String baseURL;
 	protected Set<URLProtocol> protocols;
 	protected final String currentURL;
-	protected Set<String> saved;
+	protected final Set<String> saved;
+
+	/**
+	 * Getter for saved attribute.
+	 * @return the saved
+	 */
+	public Set<String> getSaved()
+	{
+		return saved;
+	}
+
 	private boolean wantLog;
 
 	/**
