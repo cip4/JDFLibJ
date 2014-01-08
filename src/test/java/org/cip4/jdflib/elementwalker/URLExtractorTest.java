@@ -69,6 +69,7 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.io.File;
+import java.util.Set;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -116,7 +117,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 	}
 
 	/**
-	* @return the created doc
+	*  
 	* 
 	*/
 	public void testWantLog()
@@ -141,6 +142,33 @@ public class URLExtractorTest extends JDFTestCaseBase
 		String write2String = d.write2String(0);
 		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
 		assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+	}
+
+	/**
+	*  
+	* 
+	*/
+	public void testGetSave()
+	{
+		try
+		{
+			new MimeUtilTest().testBuildMimePackageDoc();
+		}
+		catch (Exception x)
+		{
+			fail("no build");
+		}
+		final String mimeFile = sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm";
+
+		MimeReader mr = new MimeReader(mimeFile);
+		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
+		assertNotNull(d);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
+		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
+		ex.setWantLog(true);
+		ex.walkTree(d.getJDFRoot(), null);
+		Set<String> set = ex.getSaved();
+		assertEquals(4, set.size());
 	}
 
 	/**
