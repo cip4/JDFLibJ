@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -133,12 +133,21 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param key the key
 	 * @return 
 	 */
+	@Override
 	public b remove(final Object key)
 	{
-		final b val = mapKey.get(key);
-		mapVal.remove(val);
-		mapKey.remove(key);
-		return val;
+		if (key != null)
+		{
+			final b val = mapKey.get(key);
+			if (val != null)
+				mapVal.remove(val);
+			mapKey.remove(key);
+			return val;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -148,10 +157,20 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 */
 	public a removeVal(final Object value)
 	{
-		final a key = mapVal.get(value);
-		mapVal.remove(value);
-		mapKey.remove(key);
-		return key;
+		if (value != null)
+		{
+			final a key = mapVal.get(value);
+			mapVal.remove(value);
+			if (key != null)
+			{
+				mapKey.remove(key);
+			}
+			return key;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -161,6 +180,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param val the value
 	 * @return 
 	 */
+	@Override
 	public b put(final a key, final b val)
 	{
 		if (key == null || val == null)
@@ -185,6 +205,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * get the value for key
 	 */
+	@Override
 	public void clear()
 	{
 		mapVal.clear();
@@ -228,6 +249,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param arg0
 	 * @return
 	*/
+	@Override
 	public boolean containsKey(Object arg0)
 	{
 		return mapKey.containsKey(arg0);
@@ -238,6 +260,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param arg0
 	 * @return
 	*/
+	@Override
 	public boolean containsValue(Object arg0)
 	{
 		return mapKey.containsValue(arg0);
@@ -247,6 +270,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#entrySet()
 	 * @return
 	*/
+	@Override
 	public Set<java.util.Map.Entry<a, b>> entrySet()
 	{
 		return mapKey.entrySet();
@@ -257,6 +281,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @param arg0
 	 * @return
 	*/
+	@Override
 	public b get(Object arg0)
 	{
 		return mapKey.get(arg0);
@@ -266,6 +291,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#isEmpty()
 	 * @return
 	*/
+	@Override
 	public boolean isEmpty()
 	{
 		return mapKey.isEmpty();
@@ -275,6 +301,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#keySet()
 	 * @return
 	*/
+	@Override
 	public Set<a> keySet()
 	{
 		return mapKey.keySet();
@@ -284,6 +311,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#putAll(java.util.Map)
 	 * @param arg0
 	*/
+	@Override
 	public void putAll(Map<? extends a, ? extends b> arg0)
 	{
 		if (arg0 == null)
@@ -300,6 +328,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#size()
 	 * @return
 	*/
+	@Override
 	public int size()
 	{
 		return mapKey.size();
@@ -309,6 +338,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#values()
 	 * @return
 	*/
+	@Override
 	public Collection<b> values()
 	{
 		return mapKey.values();
