@@ -1416,7 +1416,12 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		return super.toString();
 	}
 
-	void setParentNode(final Node node)
+	/**
+	 * 
+	 *  
+	 * @param node
+	 */
+	public void setParentNode(final Node node)
 	{
 		m_ParentNode = node;
 	}
