@@ -76,6 +76,7 @@ import java.io.File;
 import org.apache.commons.io.FilenameUtils;
 import org.cip4.jdflib.resource.JDFResource;
 import org.junit.After;
+import org.junit.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -275,17 +276,11 @@ public class TestJDF extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// @Test
-	//	public void testMergeAmount()
-	//	{
-	//		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
-	//		final JDFNode n = d.getJDFRoot();
-	//		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
-	//		final VElement vr = rr.getLeaves(true);
-	//		for (KElement r : vr)
-	//			((JDFResource) r).updateAmounts(false);
-	//		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
-	//	}
+	@Test
+	public void testDumy()
+	{
+		assertNull(null);
+	}
 
 	/**
 	 * 
