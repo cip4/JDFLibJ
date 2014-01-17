@@ -72,24 +72,9 @@
 package org.cip4.jdflib;
 
 import java.io.File;
-import java.util.Vector;
 
 import org.apache.commons.io.FilenameUtils;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFNodeInfo;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.CPUTimer;
-import org.cip4.jdflib.util.JDFMerge;
-import org.cip4.jdflib.util.JDFSpawn;
-import org.cip4.jdflib.util.StringUtil;
 import org.junit.After;
 
 /**
@@ -132,81 +117,81 @@ public class TestJDF extends JDFTestCaseBase
 	 * 
 	 */
 	// @Test
-	public void testWriteJMF()
-	{
-		final JDFDoc d = new JDFDoc("JMF");
-		JDFJMF jmf = d.getJMFRoot();
-		jmf.appendCommand().setType("getVersion");
-		// JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
-		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
-
-	}
+	//	public void testWriteJMF()
+	//	{
+	//		final JDFDoc d = new JDFDoc("JMF");
+	//		JDFJMF jmf = d.getJMFRoot();
+	//		jmf.appendCommand().setType("getVersion");
+	//		// JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
+	//		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
+	//
+	//	}
 
 	/**
 	 * 
 	 * TODO Please insert comment!
 	 * @throws Throwable
 	 */
-
-	public void testSpawnRW() throws Throwable
-	{
-		JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
-		if (jdfDoc == null)
-			return;
-		JDFNode jdfRoot = jdfDoc.getJDFRoot();
-		JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null);
-		JDFResource.setUnpartitiondImplicit(true);
-		CPUTimer ct = new CPUTimer(false);
-		CPUTimer ctm = new CPUTimer(false);
-		JDFSpawn spawn;
-		spawn = new JDFSpawn(nodeProc);
-		spawn.bSpawnIdentical = true;
-		spawn.bSpawnRWPartsMultiple = true;
-		JDFMerge m = new JDFMerge(jdfRoot);
-
-		Vector<JDFNode> vSpawned = new Vector<JDFNode>();
-		for (int ii = 1; ii < 21; ii++)
+	/*
+		public void testSpawnRW() throws Throwable
 		{
-			final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-			for (int i = 1; i <= 20; i++)
+			JDFDoc jdfDoc = new JDFParser().parseFile("/share/data/fehler/PD-68493/giant.jdf");
+			if (jdfDoc == null)
+				return;
+			JDFNode jdfRoot = jdfDoc.getJDFRoot();
+			JDFNode nodeProc = jdfRoot.getJobPart("IPr0.PP", null);
+			JDFResource.setUnpartitiondImplicit(true);
+			CPUTimer ct = new CPUTimer(false);
+			CPUTimer ctm = new CPUTimer(false);
+			JDFSpawn spawn;
+			spawn = new JDFSpawn(nodeProc);
+			spawn.bSpawnIdentical = true;
+			spawn.bSpawnRWPartsMultiple = true;
+			JDFMerge m = new JDFMerge(jdfRoot);
+
+			Vector<JDFNode> vSpawned = new Vector<JDFNode>();
+			for (int ii = 1; ii < 21; ii++)
 			{
-				JDFAttributeMap amParts0 = new JDFAttributeMap();
-				amParts0.put("BinderySignatureName", "Booklet_" + ii);
-				amParts0.put("PartVersion", "Pol");
-				amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
-				amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i));
-				amParts0.put("Side", "Front");
-				vamParts.add(amParts0);
-				amParts0 = amParts0.clone();
-				amParts0.put("Side", "Back");
-				vamParts.add(amParts0);
+				final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+				for (int i = 1; i <= 20; i++)
+				{
+					JDFAttributeMap amParts0 = new JDFAttributeMap();
+					amParts0.put("BinderySignatureName", "Booklet_" + ii);
+					amParts0.put("PartVersion", "Pol");
+					amParts0.put("SheetName", StringUtil.sprintf("FB %03i", "" + i));
+					amParts0.put("SignatureName", StringUtil.sprintf("Sig%03i", "" + i));
+					amParts0.put("Side", "Front");
+					vamParts.add(amParts0);
+					amParts0 = amParts0.clone();
+					amParts0.put("Side", "Back");
+					vamParts.add(amParts0);
+				}
+				final VString vsRWResourceIDs = new VString("Output", null);
+
+				ct.start();
+				JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
+				vSpawned.add(nodeSubJDF);
+				log.info(ii + " " + ct.getSingleSummary());
+				ct.stop();
+				if (ii == 1)
+					nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false);
 			}
-			final VString vsRWResourceIDs = new VString("Output", null);
+			String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
+			jdfDoc.write2File(strOutJDFPath, 2, false);
+			int ii = 0;
+			for (JDFNode nodeSubJDF : vSpawned)
+			{
+				ctm.start();
+				m.mergeJDF(nodeSubJDF);
+				log.info(ii++ + " " + ctm.getSingleSummary());
+				ctm.stop();
+			}
+			strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
+			jdfDoc.write2File(strOutJDFPath, 2, false);
 
-			ct.start();
-			JDFNode nodeSubJDF = spawn.spawn(null, null, vsRWResourceIDs, vamParts, true, true, true, false);
-			vSpawned.add(nodeSubJDF);
-			log.info(ii + " " + ct.getSingleSummary());
-			ct.stop();
-			if (ii == 1)
-				nodeSubJDF.getOwnerDocument_JDFElement().write2File("/share/data/fehler/PD-68493/spawn.jdf", 2, false);
-		}
-		String strOutJDFPath = "/share/data/fehler/PD-68493/giant_out.jdf";
-		jdfDoc.write2File(strOutJDFPath, 2, false);
-		int ii = 0;
-		for (JDFNode nodeSubJDF : vSpawned)
-		{
-			ctm.start();
-			m.mergeJDF(nodeSubJDF);
-			log.info(ii++ + " " + ctm.getSingleSummary());
-			ctm.stop();
-		}
-		strOutJDFPath = "/share/data/fehler/PD-68493/giant_merged.jdf";
-		jdfDoc.write2File(strOutJDFPath, 2, false);
+		}*/
 
-	}
-
-	public void testSpawn() throws Throwable
+	/*public void testSpawn() throws Throwable
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/Vers_Sted.1(Vers_Sted.1).jdf");
 
@@ -240,7 +225,7 @@ public class TestJDF extends JDFTestCaseBase
 		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
 
 		assertNotNull(nodeSubJDF);
-	}
+	}*/
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
@@ -253,38 +238,39 @@ public class TestJDF extends JDFTestCaseBase
 		super.tearDown();
 	}
 
-	/**
-	 * 
-	 *  
-	 * @throws Throwable
-	 */
+	/*	*//**
+			* 
+			*  
+			* @throws Throwable
+			*/
+	/*
 	public void testAddNodeInfoParts() throws Throwable
 	{
-		final JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/InkZoneCalculator2.jdf");
-		if (jdfDoc == null)
-			return;
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.P", JDFConstants.EMPTYSTRING);
-		final JDFNodeInfo nodeInfo = nodeProc.getNodeInfo();
-		final VJDFAttributeMap vamDeepest = new VJDFAttributeMap();
-		JDFAttributeMap amPart0 = new JDFAttributeMap();
+	final JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/InkZoneCalculator2.jdf");
+	if (jdfDoc == null)
+		return;
+	final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.P", JDFConstants.EMPTYSTRING);
+	final JDFNodeInfo nodeInfo = nodeProc.getNodeInfo();
+	final VJDFAttributeMap vamDeepest = new VJDFAttributeMap();
+	JDFAttributeMap amPart0 = new JDFAttributeMap();
 
-		amPart0.put("PartVersion", "chn");
-		amPart0.put("SheetName", "IN_FB 001");
-		amPart0.put("Side", "Back");
-		amPart0.put("SignatureName", "Sig001");
+	amPart0.put("PartVersion", "chn");
+	amPart0.put("SheetName", "IN_FB 001");
+	amPart0.put("Side", "Back");
+	amPart0.put("SignatureName", "Sig001");
 
-		vamDeepest.add(amPart0);
+	vamDeepest.add(amPart0);
 
-		final VElement veParts = nodeInfo.getPartitionVector(vamDeepest, null);
+	final VElement veParts = nodeInfo.getPartitionVector(vamDeepest, null);
 
-		assertEquals("Number of spawnInfos", 1, veParts.size());
+	assertEquals("Number of spawnInfos", 1, veParts.size());
 
-		final JDFNodeInfo niFound = (JDFNodeInfo) veParts.get(0);
+	final JDFNodeInfo niFound = (JDFNodeInfo) veParts.get(0);
 
-		JDFAttributeMap amFound = niFound.getPartMap();
+	JDFAttributeMap amFound = niFound.getPartMap();
 
-		assertEquals("Found partmap must equal input partmap", amPart0, amFound);
-	}
+	assertEquals("Found partmap must equal input partmap", amPart0, amFound);
+	}*/
 
 	/**
 	 * 
