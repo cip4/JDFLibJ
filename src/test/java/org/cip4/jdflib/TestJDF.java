@@ -206,6 +206,42 @@ public class TestJDF extends JDFTestCaseBase
 
 	}
 
+	public void testSpawn() throws Throwable
+	{
+		JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/Vers_Sted.1(Vers_Sted.1).jdf");
+
+		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.I", JDFConstants.EMPTYSTRING);
+
+		VJDFAttributeMap vamParts = new VJDFAttributeMap();
+
+		JDFAttributeMap amParts0 = new JDFAttributeMap();
+
+		amParts0.put("PartVersion", "DT_Mac DT_Mac");
+		amParts0.put("Separation", "Cyan");
+		amParts0.put("SheetName", "FB 001");
+		amParts0.put("Side", "Front");
+		amParts0.put("SignatureName", "Sig001");
+
+		vamParts.add(amParts0);
+
+		VString vsRWResourceIDs = new VString();
+
+		vsRWResourceIDs.add("Link_131218_053435863_000421");
+		vsRWResourceIDs.add("Link_131218_053435871_000422");
+		vsRWResourceIDs.add("r_130507_125650793_001226");
+
+		JDFSpawn spawn = new JDFSpawn(nodeProc);
+
+		spawn.setNode(nodeProc);
+		spawn.bFixResources = false;
+		spawn.bSpawnRWPartsMultiple = true;
+		spawn.bSpawnIdentical = true;
+
+		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
+
+		assertNotNull(nodeSubJDF);
+	}
+
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
