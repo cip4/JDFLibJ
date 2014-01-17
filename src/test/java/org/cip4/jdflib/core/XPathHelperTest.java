@@ -203,6 +203,39 @@ public class XPathHelperTest extends JDFTestCaseBase
 
 		XMLDoc dNew = new XMLDoc();
 		dNew.setXPathValues(map);
-		assertTrue(dNew.getRoot().isEqual(root));
+		assertEquals(dNew.getRoot().toXML(), root.toXML());
+		String s = dNew.toXML();
+		XMLDoc dParsed = new XMLParser().parseString(s);
+		KElement root2 = dParsed.getRoot();
+		JDFAttributeMap map2 = root2.getXPathValueMap();
+		XMLDoc dNew2 = new XMLDoc();
+		dNew2.setXPathValues(map2);
+		assertEquals(dNew2.getRoot().toXML(), root.toXML());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetXPathValuesNSAttrib()
+	{
+		XMLDoc d = new XMLDoc("x", null);
+		KElement nsElem = d.getRoot().appendElement("nons");
+		nsElem.setAttribute("ns:bar", "barbar", "foo");
+		KElement root = d.getRoot();
+		JDFAttributeMap map = root.getXPathValueMap();
+
+		XMLDoc dNew = new XMLDoc();
+		dNew.setXPathValues(map);
+		assertEquals(dNew.getRoot().toXML(), root.toXML());
+
+		String s = dNew.toXML();
+
+		XMLDoc dParsed = new XMLParser().parseString(s);
+		KElement root2 = dParsed.getRoot();
+		JDFAttributeMap map2 = root2.getXPathValueMap();
+		XMLDoc dNew2 = new XMLDoc();
+		dNew2.setXPathValues(map2);
+		assertEquals(dNew2.getRoot().toXML(), root.toXML());
 	}
 }

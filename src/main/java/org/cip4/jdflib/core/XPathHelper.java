@@ -638,8 +638,13 @@ class XPathHelper
 				{
 					if (StringUtil.matches(key, attName))
 					{
-						String s = e.getAttributeRaw(key);
-						map.put(baseXPath + "/@" + key, s);
+						map.put(baseXPath + "/@" + key, e.getAttributeRaw(key));
+						prefix = KElement.xmlnsPrefix(key);
+						if (prefix != null)
+						{
+							String uri = e.getNamespaceURIFromPrefix(prefix);
+							map.put("/" + StringUtil.token(baseXPath, 0, "/") + "/@xmlns:" + prefix, uri);
+						}
 					}
 				}
 			}
