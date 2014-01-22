@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -325,6 +325,19 @@ public class JDFElementTest extends JDFTestCaseBase
 		xmpr.removeChildren("Media", null, null);
 		assertNull(xmpr.getMedia());
 		assertNotNull(rp.getElement("Media"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetInvalidAttributes()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setAttribute("xmlns:foo", "bar");
+		n.setAttribute("foo:junk", "crap");
+		assertEquals(n.getUnknownAttributes(false, 999).get(0), "foo:junk");
+		assertEquals(n.getUnknownAttributes(true, 999).size(), 0);
 	}
 
 	/**

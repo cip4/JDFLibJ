@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -640,12 +640,15 @@ public class JDFElement extends KElement
 
 		final boolean bAllNS = vInNameSpace.isEmpty();
 
-		for (int j = 0; j < vInNameSpace.size(); j++)
+		if (!bAllNS)
 		{
-			// tokenize needs a blank
-			if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+			for (int j = 0; j < vInNameSpace.size(); j++)
 			{
-				vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+				// tokenize needs a blank
+				if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+				{
+					vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+				}
 			}
 		}
 
@@ -3666,15 +3669,17 @@ public class JDFElement extends KElement
 			for (int i = 0; i < siz; i++)
 			{
 				final Node a = nm.item(i);
-				final String key = a.getLocalName();
-				final String ns = a.getNamespaceURI();
+				final String nodeName = a.getNodeName();
+				final String key = xmlnsLocalName(nodeName);
+				final String ns = xmlnsPrefix(nodeName);
 				if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
 				{
 					continue;
 				}
 				if (bIgnorePrivate && !isWildCard(ns) && !JDFConstants.JDFNAMESPACE.equals(ns))
+				{
 					continue;
-
+				}
 				if (ai.getAttributeType(key) == null || !ai.validAttribute(key, a.getNodeValue(), level))
 				{
 					vAttsReturn.add(key);
