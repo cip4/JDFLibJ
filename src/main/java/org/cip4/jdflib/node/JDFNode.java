@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -5157,7 +5157,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		// get the reslink pool
 		final JDFResourceLinkPool p = getResourceLinkPool();
-
 		if (p == null || r == null)
 		{
 			return null;
@@ -5168,13 +5167,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		if (v != null)
 		{
-			// is it the right one?
-			final int vSize = v.size();
-			for (int i = 0; i < vSize; i++)
+			String linkString = r.getLinkString();
+			String rID = r.getID();
+			for (KElement e : v)
 			{
-				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
-
-				if (resLink != null && resLink.getrRef().equals(r.getID()) && resLink.getNodeName().equals(r.getLinkString()))
+				final JDFResourceLink resLink = (JDFResourceLink) e;
+				// is it the right one?
+				if (resLink != null && resLink.getrRef().equals(rID) && resLink.getNodeName().equals(linkString))
 				{
 					return resLink;
 				}
@@ -6538,16 +6537,35 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return false;
 		}
+		removeLink(l, bRemoveResource);
+		return true;
+	}
+
+	/**
+	 * 
+	 * remove a resourceLink and potentially its linked resource
+	 * @param l
+	 * @param bRemoveResource
+	 */
+	public void removeLink(final JDFResourceLink l, final boolean bRemoveResource)
+	{
+		if (l == null)
+			return;
+
 		if (bRemoveResource)
 		{
 			final JDFResource r = l.getLinkRoot();
+			l.deleteNode();
+
 			if (r.getLinks(null, null).size() == 0)
 			{
-				r.deleteNode();
+				r.deleteUnLinked();
 			}
 		}
-		l.deleteNode();
-		return true;
+		else
+		{
+			l.deleteNode();
+		}
 	}
 
 	/**
@@ -6563,18 +6581,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public boolean removeMatchingLinks(final String resName, final EnumProcessUsage processUsage, final boolean bRemoveResource)
 	{
 		final VElement v = getMatchingLinks(resName, true, processUsage);
-		for (int i = 0; i < v.size(); i++)
+		for (KElement e : v)
 		{
-			if (bRemoveResource)
-			{
-				final JDFResource r = ((JDFResourceLink) v.elementAt(i)).getLinkRoot();
-				// only remove if not linked from elsewhere
-				if (r.getLinks(null, null).isEmpty())
-				{
-					r.deleteNode();
-				}
-			}
-			((JDFResourceLink) v.elementAt(i)).deleteNode();
+			removeLink((JDFResourceLink) e, bRemoveResource);
 		}
 		return v.size() > 0;
 	}
@@ -7065,10 +7074,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * remove a type from the types list - also cleaning up combinedprocessindex
 	 * @param type the type
 	 * @param iSkip the index of this type in the list of identical types - typically 0
-	 * 
+	 * @param bRemoveEmptyLink if true, remove any reslinks that have no remaining combinedprocessindex
 	 * 
 	 */
-	public void removeFromTypes(final String type, final int iSkip)
+	public void removeFromTypes(final String type, final int iSkip, boolean bRemoveEmptyLink)
 	{
 		final VString v = getTypes();
 		if (v == null)
@@ -7105,13 +7114,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						for (int i : ii)
 						{
 							if (i < posLast)
+							{
 								newList.add(i);
+							}
 							else if (i > posLast)
+							{
 								newList.add(i - 1);
+							}
 							// == is obviously omitted - the type is gone
 
 						}
-						rl.setCombinedProcessIndex(newList);
+						if (newList.size() > 0)
+						{
+							rl.setCombinedProcessIndex(newList);
+						}
+						else
+						{
+							JDFResource r = rl.getLinkRoot();
+							rl.deleteNode();
+						}
 					}
 				}
 			}
@@ -7129,26 +7150,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public JDFResource removeResource(final String nodeName, final int iSkip)
 	{
 		JDFResource kRet = null;
-
-		final JDFResourceLinkPool rlp = getResourceLinkPool();
-		if (rlp != null)
+		final JDFResourceLink rl = getLink(iSkip, nodeName, null, null);
+		if (rl != null)
 		{
-			final String linkName = nodeName + "Link";
-
-			final JDFResourceLink rl = (JDFResourceLink) rlp.getChildByTagName(linkName, null, iSkip, null, true, false);
-			if (rl != null)
-			{
-				kRet = rl.getTarget();
-				rlp.removeChild(rl);
-				if (kRet == null)
-				{
-					nLog.warn("resourcelink does not reference a resource - deleting link, rRef=" + rl.getrRef());
-				}
-				else if (!kRet.deleteUnLinked())
-				{
-					kRet = null;
-				}
-			}
+			kRet = rl.getTarget();
+			removeLink(rl, true);
 		}
 		return kRet;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -613,19 +612,8 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 */
 	public JDFDate getTimeStampDate()
 	{
-		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		if (str == null)
-		{
-			return null;
-		}
-		try
-		{
-			return new JDFDate(str);
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("not a valid date string. Malformed JDF");
-		}
+		final String date = getAttribute(AttributeName.TIMESTAMP, null, null);
+		return JDFDate.createDate(date);
 	}
 
 	/**

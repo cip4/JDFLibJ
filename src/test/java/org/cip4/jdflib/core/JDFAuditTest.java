@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,7 +85,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -105,18 +104,18 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
-		Assert.assertTrue(crea.hasAttribute("ID"));
-		Assert.assertTrue(crea.getID().startsWith("a"));
+		assertTrue(crea.hasAttribute("ID"));
+		assertTrue(crea.getID().startsWith("a"));
 		final JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, "me", null);
-		Assert.assertTrue(pr.hasAttribute("End"));
-		Assert.assertTrue(pr.hasAttribute("ID"));
+		assertTrue(pr.hasAttribute("End"));
+		assertTrue(pr.hasAttribute("ID"));
 		JDFSpawned sp = ap.addSpawned(n, null, null, null, null);
-		Assert.assertTrue(sp.hasAttribute("ID"));
+		assertTrue(sp.hasAttribute("ID"));
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
 		final JDFModified mod = ap.addModified("me", n);
-		Assert.assertFalse(mod.hasAttribute("ID"));
+		assertFalse(mod.hasAttribute("ID"));
 
 	}
 
@@ -132,11 +131,11 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
-		Assert.assertTrue(crea.hasAttribute("ID"));
+		assertTrue(crea.hasAttribute("ID"));
 		n.fixVersion(JDFElement.EnumVersion.Version_1_2);
-		Assert.assertFalse(crea.hasAttribute("ID"));
+		assertFalse(crea.hasAttribute("ID"));
 	}
 
 	/**
@@ -150,12 +149,12 @@ public class JDFAuditTest extends JDFTestCaseBase
 		n.setVersion(EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFModified mod = ap.addModified("foo", null);
-		Assert.assertEquals(mod.getAuthor(), "foo");
+		assertEquals(mod.getAuthor(), "foo");
 		n.fixVersion(EnumVersion.Version_1_4);
-		Assert.assertTrue(!mod.hasAttribute(AttributeName.AUTHOR));
-		Assert.assertEquals(mod.getEmployee(0).getDescriptiveName(), "foo");
+		assertTrue(!mod.hasAttribute(AttributeName.AUTHOR));
+		assertEquals(mod.getEmployee(0).getDescriptiveName(), "foo");
 
 	}
 
@@ -171,14 +170,30 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
 		final JDFPhaseTime pt2 = ap.setPhase(EnumNodeStatus.Aborted, null, null, null);
 		pt2.setRef(pt);
-		Assert.assertEquals(pt.getID(), pt2.getrefID());
+		assertEquals(pt.getID(), pt2.getrefID());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 */
+	@Test
+	public void testGetTimeStamp()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFAuditPool ap = n.getAuditPool();
+		JDFAudit audit = ap.getAudit(0, EnumAuditType.Created, null, null);
+		assertEquals(audit.getTimeStampDate().getTimeInMillis(), System.currentTimeMillis(), 1000);
+		audit.setAttribute(AttributeName.TIMESTAMP, "crap");
+		assertNull(audit.getTimeStampDate());
+	}
 
 	/**
 	 * 
@@ -190,15 +205,15 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
 		ap.addAudit(EnumAuditType.Modified, null);
 		ap.addAudit(EnumAuditType.PhaseTime, null);
 		final JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
-		Assert.assertEquals(pt.getID(), pt2.getrefID());
-		Assert.assertNotSame(pt.getID(), "");
-		Assert.assertNotSame(pt2.getID(), "");
-		Assert.assertNotSame(pt2.getID(), pt.getID());
+		assertEquals(pt.getID(), pt2.getrefID());
+		assertNotSame(pt.getID(), "");
+		assertNotSame(pt2.getID(), "");
+		assertNotSame(pt2.getID(), pt.getID());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -213,13 +228,13 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
 		ap.addAudit(EnumAuditType.Modified, null);
 		ap.addAudit(EnumAuditType.PhaseTime, null);
 		final JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
-		Assert.assertEquals(pt2.getUpdatedPreviousAudit(), pt);
-		Assert.assertNull(pt.getUpdatedPreviousAudit());
+		assertEquals(pt2.getUpdatedPreviousAudit(), pt);
+		assertNull(pt.getUpdatedPreviousAudit());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -234,13 +249,13 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
 		final JDFCreated c1 = ap.addCreated("foo", n2);
-		Assert.assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c1.getXPath());
+		assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c1.getXPath());
 		final JDFResource r = n2.addResource("CaseMakingParams", null, EnumUsage.Input, null, null, null, null);
 		final JDFCreated c2 = ap.addCreated("foo", r);
-		Assert.assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c2.getXPath());
+		assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c2.getXPath());
 
 		d.write2File(sm_dirTestDataTemp + "createdTest.jdf", 0, false);
 
@@ -257,9 +272,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-		Assert.assertEquals(p1.getTimeStampDate(), new JDFDate());
+		assertEquals(p1.getTimeStampDate(), new JDFDate());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -275,13 +290,13 @@ public class JDFAuditTest extends JDFTestCaseBase
 		n.setSpawnID("spawn");
 		n.setType(EnumType.ProcessGroup);
 		final JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-		Assert.assertEquals(p1.getSpawnID(), n.getSpawnID(false));
+		assertEquals(p1.getSpawnID(), n.getSpawnID(false));
 		final JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
 		final JDFProcessRun p2 = n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
-		Assert.assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
-		Assert.assertEquals(p2.getSpawnID(), n.getSpawnID(false));
+		assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
+		assertEquals(p2.getSpawnID(), n.getSpawnID(false));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -296,15 +311,15 @@ public class JDFAuditTest extends JDFTestCaseBase
 		JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		JDFAuditPool ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		// @Rainer (2013-03-10) - Not compatible to Linux
-//		Assert.assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
-//
-//		JDFResource.setAutoAgent(true);
+		//		assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
+		//
+		//		JDFResource.setAutoAgent(true);
 		JDFResource r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-//		Assert.assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
-//		Assert.assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
+		//		assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
+		//		assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
 		JDFAudit.setStaticAgentName(null);
 		JDFAudit.setStaticAgentVersion(null);
 		JDFAudit.setStaticAuthor(null);
@@ -312,14 +327,14 @@ public class JDFAuditTest extends JDFTestCaseBase
 		n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		ap = n.getAuditPool();
-		Assert.assertNotNull(ap);
+		assertNotNull(ap);
 		crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
-		Assert.assertEquals(crea.getAgentName(), "");
-		Assert.assertEquals(crea.getAgentVersion(), "");
-		Assert.assertEquals(crea.getAuthor(), "");
+		assertEquals(crea.getAgentName(), "");
+		assertEquals(crea.getAgentVersion(), "");
+		assertEquals(crea.getAuthor(), "");
 		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-		Assert.assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
-		Assert.assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
+		assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
+		assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
