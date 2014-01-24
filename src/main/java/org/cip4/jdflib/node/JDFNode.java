@@ -7074,6 +7074,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * remove a type from the types list - also cleaning up combinedprocessindex
 	 * @param type the type
 	 * @param iSkip the index of this type in the list of identical types - typically 0
+	 * @deprecated use the 3-parameter version
+	 * 
+	 */
+	@Deprecated
+	public void removeFromTypes(final String type, final int iSkip)
+	{
+		removeFromTypes(type, iSkip, false);
+	}
+
+	/**
+	 * remove a type from the types list - also cleaning up combinedprocessindex
+	 * @param type the type
+	 * @param iSkip the index of this type in the list of identical types - typically 0
 	 * @param bRemoveEmptyLink if true, remove any reslinks that have no remaining combinedprocessindex
 	 * 
 	 */
@@ -7128,10 +7141,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						{
 							rl.setCombinedProcessIndex(newList);
 						}
-						else
+						else if (bRemoveEmptyLink)
 						{
-							JDFResource r = rl.getLinkRoot();
-							rl.deleteNode();
+							removeLink(rl, true);
 						}
 					}
 				}
