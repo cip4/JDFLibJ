@@ -1674,6 +1674,34 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSpawnPartRefElem()
+	{
+		JDFNode nn = new JDFDoc("JDF").getJDFRoot();
+		nn.setType("Product", false);
+		JDFNode n = nn.addJDFNode(EnumType.ImageSetting);
+		n.setType(EnumType.ImageSetting);
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		nn.linkResource(xm, EnumUsage.Input, null);
+		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "s2");
+		JDFMedia m = (JDFMedia) xm.appendMedia().makeRootResource(null, nn, true);
+		n.linkResource(m, EnumUsage.Input, null);
+		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.SheetName, "s2");
+
+		JDFSpawn s = new JDFSpawn(n);
+		s.vRWResources_in = new VString("Media", null);
+		s.vSpawnParts = new VJDFAttributeMap();
+		JDFAttributeMap e = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		s.vSpawnParts.add(e);
+		JDFNode n2 = s.spawn();
+		assertNull(n2.getXPathAttribute("ResourcePool/Media/@SpawnIDs", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testSpawnPart()
 	{
 		for (int i = 0; i < 3; i++)

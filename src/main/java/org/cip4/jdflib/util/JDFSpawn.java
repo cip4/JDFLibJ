@@ -624,11 +624,8 @@ public class JDFSpawn
 		for (int loopRORW = 0; loopRORW < 2; loopRORW++)
 		{
 			// loop over all links
-			final Iterator<JDFElement> iter = vRootLinks.iterator();
-			while (iter.hasNext())
+			for (JDFElement liRoot : vRootLinks)
 			{
-				final JDFElement liRoot = iter.next();
-
 				// test for direct children of resourcepool - these will be added later
 				if (liRoot.getDeepParent(ElementName.RESOURCEPOOL, 0) != null)
 				{
@@ -750,9 +747,10 @@ public class JDFSpawn
 					if (resParts == 0 && spawnID.equals(r.getAttribute(AttributeName.SPAWNID)))
 						break;
 					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
+					PartSpawn partSpawner = new PartSpawn();
 					if (!bInformative)
-						new PartSpawn().spawnPart(rRoot1, spawnID, copyStatus, true);
-					new PartSpawn().spawnPart(r, spawnID, copyStatus, false);
+						partSpawner.spawnPart(rRoot1, spawnID, copyStatus, true, bSpawnROPartsOnly);
+					partSpawner.spawnPart(r, spawnID, copyStatus, false, bSpawnROPartsOnly);
 
 					if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
@@ -1590,11 +1588,12 @@ public class JDFSpawn
 			final JDFResource rNew = copyPart(targetResPool, r, bRW);
 
 			// if spawning, fix stati and locks
+			PartSpawn partSpawner = new PartSpawn();
 			if (!bInformative) // in case of informative, we kill main anyhow - no use modifying it
 			{
-				copyStatus = new PartSpawn().spawnPart(r, spawnID, copyStatus, true);
+				copyStatus = partSpawner.spawnPart(r, spawnID, copyStatus, true, bSpawnROPartsOnly);
 			}
-			copyStatus = new PartSpawn().spawnPart(rNew, spawnID, copyStatus, false);
+			copyStatus = partSpawner.spawnPart(rNew, spawnID, copyStatus, false, bSpawnROPartsOnly);
 			bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
 			if (bRW)
 			{
@@ -1619,11 +1618,8 @@ public class JDFSpawn
 			//			System.out.println("reuse" + r);
 		}
 		// add recursively copied resource references
-		final int size = vs.size();
-		for (int i = 0; i < size; i++)
+		for (String id : vs)
 		{
-			final String id = vs.elementAt(i);
-
 			// the referenced resource is already in this pool - continue
 			if (!allIDsCopied.contains(id))
 			{
@@ -1639,6 +1635,11 @@ public class JDFSpawn
 					{
 						copyStatus = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 					}
+					else if (resFitsRWRes(next, vRWResources))
+					{
+						continue; // we are spawning ro and the referenced resource is rw
+					}
+
 					// recurse into refelements
 					copySpawnedResource(targetResPool, next, copyStatus, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
 				}
@@ -1778,16 +1779,16 @@ public class JDFSpawn
 		 * @param bStayinMain
 		 * @return 
 		 */
-		private EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
+		private EnumSpawnStatus spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain, boolean partsRO)
 		{
-			if (vSpawnParts != null && vSpawnParts.size() > 0 && JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus))
+			if (vSpawnParts != null && vSpawnParts.size() > 0 && (JDFResource.EnumSpawnStatus.SpawnedRW.equals(copyStatus) || partsRO))
 			{
 				final JDFAttributeMap partMap = r.getPartMap();
 				VElement vSubParts = getSubParts(r, partMap);
 				int n = vSubParts.size();
 				if (n == 0)
 				{
-					return spawnPart(r, spawnID, JDFResource.EnumSpawnStatus.SpawnedRO, bStayinMain);
+					return spawnPart(r, spawnID, JDFResource.EnumSpawnStatus.SpawnedRO, bStayinMain, false);
 				}
 				for (int k = 0; k < vSubParts.size(); k++)
 				{

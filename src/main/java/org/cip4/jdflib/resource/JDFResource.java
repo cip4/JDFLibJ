@@ -2652,104 +2652,153 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getLinksAndRefs(final boolean bLink, final boolean bRef)
 	{
-		if (!bLink && !bRef)
+		return new RefFinder(bLink, bRef).getLinksAndRefs();
+	}
+
+	class RefFinder
+	{
+		/**
+		 * 
+		 * @param bLink if true, include resource links
+		 * @param bRef if true include resource refs
+		 */
+		RefFinder(boolean bLink, boolean bRef)
 		{
-			return null;
+			super();
+			this.bLink = bLink;
+			this.bRef = bRef;
 		}
 
-		final String resID = getID();
+		final boolean bLink;
+		final boolean bRef;
 
-		final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
-		final VString refList = new VString();
-		if (bLink)
+		/**
+		 * Gets all resourcelinks and refelements that link to this<br/>
+		 * note that this method may be tim consuming in a large loop <br/>
+		 * - in case of massive cleanup, use {@link LinkRefFinder} and access the complete map of references from within the loop @see {@link LinkRefFinder}
+		 * 
+		 * 
+		 * 
+		 * @return VElement - vector of all found elements, null if none found
+		 */
+		VElement getLinksAndRefs()
 		{
-			refList.add(getLinkString());
-		}
-
-		if (bRef)
-		{
-			refList.add(getRefString());
-		}
-
-		final JDFNode n = getParentJDF();
-		if (n == null)
-		{
-			return null;
-		}
-
-		VElement vRet = null;
-		if (bRef)
-		{
-			vRet = n.getChildrenFromList(refList, mID, false, null);
-		}
-		else
-		{
-			final VElement vNodes = n.getvJDFNode(null, null, false);
-			vRet = new VElement();
-			final int size = vNodes.size();
-			for (int i = 0; i < size; i++)
+			if (!bLink && !bRef)
 			{
-				final VElement vTmp = ((JDFNode) vNodes.elementAt(i)).getResourceLinks(null);
-				if (vTmp != null)
+				return null;
+			}
+			final JDFNode n = getParentJDF();
+			final String resID = getID();
+			if (n == null || StringUtil.getNonEmpty(resID) == null)
+			{
+				return null;
+			}
+
+			final VElement vRet = getRootLinksAndRefs(n, resID);
+			reduceParts(vRet);
+
+			return vRet.size() > 0 ? vRet : null;
+		}
+
+		private void reduceParts(final VElement vRet)
+		{
+			final JDFAttributeMap mPart = getPartMap();
+			if (mPart != null && mPart.size() > 0)
+			{
+				for (int i = vRet.size() - 1; i >= 0; i--)
 				{
-					final int size2 = vTmp.size();
-					for (int j = 0; j < size2; j++)
+					final KElement e = vRet.elementAt(i);
+					VJDFAttributeMap linkMapVector = null;
+					if (e instanceof JDFResourceLink)
 					{
-						final JDFResourceLink link = (JDFResourceLink) vTmp.item(j);
-						if (resID.equals(link.getrRef()))
+						linkMapVector = ((JDFResourceLink) e).getPartMapVector();
+					}
+					else if (e instanceof JDFRefElement)
+					{
+						final JDFAttributeMap partMap = ((JDFRefElement) e).getPartMap();
+						if (partMap != null)
 						{
-							vRet.add(link);
+							linkMapVector = new VJDFAttributeMap();
+							linkMapVector.add(partMap);
+						}
+					}
+
+					if (linkMapVector == null)
+					{
+						continue; // the link refers to the root, thus also to this
+					}
+
+					int nZapp = 0;
+					final int size = linkMapVector.size();
+					for (int j = 0; j < size; j++)
+					{
+						final JDFAttributeMap m2 = linkMapVector.elementAt(j);
+						if (!m2.overlapMap(mPart))
+						{
+							nZapp++;
+						}
+					}
+
+					if (nZapp == size) // no matching parts at all
+					{
+						vRet.remove(i);
+					}
+				}
+			}
+		}
+
+		private VElement getRootLinksAndRefs(final JDFNode n, final String resID)
+		{
+			final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
+			final VString refList = getRefList();
+
+			final VElement vRet;
+			if (bRef)
+			{
+				vRet = n.getChildrenFromList(refList, mID, false, null);
+			}
+			else
+			{
+				final VElement vNodes = n.getvJDFNode(null, null, false);
+				vRet = new VElement();
+				for (KElement nE : vNodes)
+				{
+					final VElement vTmp = ((JDFNode) nE).getResourceLinks(null);
+					if (vTmp != null)
+					{
+						for (KElement lE : vTmp)
+						{
+							final JDFResourceLink link = (JDFResourceLink) lE;
+							if (resID.equals(link.getrRef()))
+							{
+								vRet.add(link);
+							}
 						}
 					}
 				}
 			}
+			return vRet;
 		}
 
-		final JDFAttributeMap mPart = getPartMap();
-		if (mPart != null && mPart.size() > 0)
+		/**
+		 * 
+		 *  
+		 * @return
+		 */
+		private VString getRefList()
 		{
-			for (int i = vRet.size() - 1; i >= 0; i--)
+			final VString refList = new VString();
+			if (bLink)
 			{
-				final KElement e = vRet.elementAt(i);
-				VJDFAttributeMap linkMapVector = null;
-				if (e instanceof JDFResourceLink)
-				{
-					linkMapVector = ((JDFResourceLink) e).getPartMapVector();
-				}
-				else if (e instanceof JDFRefElement)
-				{
-					final JDFAttributeMap partMap = ((JDFRefElement) e).getPartMap();
-					if (partMap != null)
-					{
-						linkMapVector = new VJDFAttributeMap();
-						linkMapVector.add(partMap);
-					}
-				}
-
-				if (linkMapVector == null)
-				{
-					continue; // the link refers to the root, thus also to this
-				}
-
-				int nZapp = 0;
-				final int size = linkMapVector.size();
-				for (int j = 0; j < size; j++)
-				{
-					final JDFAttributeMap m2 = linkMapVector.elementAt(j);
-					if (!m2.overlapMap(mPart))
-					{
-						nZapp++;
-					}
-				}
-
-				if (nZapp == size) // no matching parts at all
-				{
-					vRet.remove(i);
-				}
+				refList.add(getLinkString());
 			}
-		}
 
-		return vRet.size() > 0 ? vRet : null;
+			if (bRef)
+			{
+				refList.add(getRefString());
+			}
+			return refList;
+		}
 	}
 
 	/**
