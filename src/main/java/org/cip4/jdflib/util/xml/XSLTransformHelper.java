@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -132,7 +132,8 @@ public class XSLTransformHelper implements IStreamWriter
 		DOMResult transformedResult = new DOMResult();
 		getTransformedResult(transformedResult);
 		Node transformedDoc = transformedResult.getNode();
-		return transformedDoc == null ? null : new XMLDoc((Document) transformedDoc);
+		Node root = transformedDoc == null ? null : transformedDoc.getFirstChild();
+		return root == null ? null : new XMLDoc((Document) transformedDoc);
 	}
 
 	private void getTransformedResult(Result transformedResult)
@@ -155,6 +156,7 @@ public class XSLTransformHelper implements IStreamWriter
 	* @param stream the stream to fill
 	*  
 	*/
+	@Override
 	public void writeStream(OutputStream stream)
 	{
 		if (xsl != null && stream != null)

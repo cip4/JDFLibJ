@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -665,118 +665,116 @@ public class JDFSpawn
 				}
 
 				// check for null and throw an exception in picky mode
-				if (rRoot == null)
+				if (rRoot != null)
 				{
-					continue;
-				}
-				// copy any missing linked resources, just in case
-				// the root is in the original jdf and can be used as a hook to  the original document
-				// get a list of all resources referenced by this link
-				// always do a copyresource in case some dangling rRefs are waiting
-				copySpawnedResource(rPool, rRoot, copyStatus, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
-				nSpawned += vvRO.size() + vvRW.size();
+					// copy any missing linked resources, just in case
+					// the root is in the original jdf and can be used as a hook to  the original document
+					// get a list of all resources referenced by this link
+					// always do a copyresource in case some dangling rRefs are waiting
+					copySpawnedResource(rPool, rRoot, copyStatus, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
+					nSpawned += vvRO.size() + vvRW.size();
 
-				// get the effected resources
-				VElement vRes = new VElement();
-				VElement vResRoot = new VElement();
-				if (liRoot instanceof JDFResourceLink)
-				{
-					final JDFResourceLink liRootLink = (JDFResourceLink) liRoot;
-					final VJDFAttributeMap vLinkMap = liRootLink.getPartMapVector();
-					// make sure that spawned resources are sufficiently
-					// partitioned if spawning rw so that no merge conflicts arise
-					// create a temporary dummy copy of the link so that we have
-					// a guaranteed copy that behaves the same as the original
-					final JDFResourceLink dummy = (JDFResourceLink) rootOut.getCreateResourceLinkPool().copyElement(liRoot, null);
-					fixResLinks(bResRW, liRootLink, dummy);
-					// reduce partitions in main so that the links remain consistent
-					liRootLink.setPartMapVector(vSpawnParts);
-					dummy.setPartMapVector(vSpawnParts);
-
-					vResRoot = ((JDFResourceLink) liRoot).getTargetVector(-1);
-
-					vRes = dummy.getTargetVector(-1);
-					if (vRes.size() == 0)
+					// get the effected resources
+					VElement vRes = new VElement();
+					VElement vResRoot = new VElement();
+					if (liRoot instanceof JDFResourceLink)
 					{
-						JDFResource r0 = dummy.getLinkRoot();
-						if (r0 != null)
+						final JDFResourceLink liRootLink = (JDFResourceLink) liRoot;
+						final VJDFAttributeMap vLinkMap = liRootLink.getPartMapVector();
+						// make sure that spawned resources are sufficiently
+						// partitioned if spawning rw so that no merge conflicts arise
+						// create a temporary dummy copy of the link so that we have
+						// a guaranteed copy that behaves the same as the original
+						final JDFResourceLink dummy = (JDFResourceLink) rootOut.getCreateResourceLinkPool().copyElement(liRoot, null);
+						fixResLinks(bResRW, liRootLink, dummy);
+						// reduce partitions in main so that the links remain consistent
+						liRootLink.setPartMapVector(vSpawnParts);
+						dummy.setPartMapVector(vSpawnParts);
+
+						vResRoot = ((JDFResourceLink) liRoot).getTargetVector(-1);
+
+						vRes = dummy.getTargetVector(-1);
+						if (vRes.size() == 0)
 						{
-							vRes.add(r0);
+							JDFResource r0 = dummy.getLinkRoot();
+							if (r0 != null)
+							{
+								vRes.add(r0);
+							}
+						}
+						dummy.deleteNode();
+						reduceLinkPartAmounts(liRootLink, vLinkMap);
+					}
+					else if (liRoot instanceof JDFRefElement)
+					{
+						vResRoot.add(((JDFRefElement) liRoot).getTarget());
+
+						// create a temporary dummy copy of the link so that we have
+						// a guaranteed copy that behaves the same as the original
+						final JDFRefElement dummy = (JDFRefElement) rootOut.copyElement(liRoot, null);
+						vRes.add(dummy.getTarget());
+						dummy.deleteNode();
+					}
+					else
+					{
+						log.error("we have a link that is neither ref nor link. Whazzup? " + liRoot == null ? " null" : liRoot.getNodeName());
+						continue; // snafu - should never get here
+					}
+					addIdentical(vResRoot);
+					addIdentical(vRes);
+
+					// fixed not to crash with corrupt jdfs.
+					// Now just continue and ignore the corrupt resource
+					final int siz = vRes.size() < vResRoot.size() ? vRes.size() : vResRoot.size();
+					// loop over all partitions
+					boolean bRealyRW = vSpawnParts == null || vSpawnParts.size() == 0;
+					if (!bRealyRW && siz > 0 && (bResRW || bSpawnROPartsOnly))
+					{
+						// reduce partitions of all RW resources and of RO resources if requested
+						final JDFResource copyRoot = ((JDFResource) vRes.elementAt(0)).getResourceRoot();
+						reducePartitions(copyRoot);
+					}
+					else
+					{
+						isReduced.add(rRoot.getID());
+					}
+
+					for (int resParts = 0; resParts < siz; resParts++)
+					{
+						final JDFResource r = (JDFResource) vRes.elementAt(resParts);
+						if (resParts == 0 && spawnID.equals(r.getAttribute(AttributeName.SPAWNID)))
+							break;
+						final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
+						PartSpawn partSpawner = new PartSpawn();
+						if (!bInformative)
+							partSpawner.spawnPart(rRoot1, spawnID, copyStatus, true, bSpawnROPartsOnly);
+						partSpawner.spawnPart(r, spawnID, copyStatus, false, bSpawnROPartsOnly);
+
+						if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
+						{
+							if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
+							{
+								bRealyRW = true;
+							}
 						}
 					}
-					dummy.deleteNode();
-					reduceLinkPartAmounts(liRootLink, vLinkMap);
-				}
-				else if (liRoot instanceof JDFRefElement)
-				{
-					vResRoot.add(((JDFRefElement) liRoot).getTarget());
 
-					// create a temporary dummy copy of the link so that we have
-					// a guaranteed copy that behaves the same as the original
-					final JDFRefElement dummy = (JDFRefElement) rootOut.copyElement(liRoot, null);
-					vRes.add(dummy.getTarget());
-					dummy.deleteNode();
-				}
-				else
-				{
-					log.error("we have a link that is neither ref nor link. Whazzup? " + liRoot == null ? " null" : liRoot.getNodeName());
-					continue; // snafu - should never get here
-				}
-				addIdentical(vResRoot);
-				addIdentical(vRes);
-
-				// fixed not to crash with corrupt jdfs.
-				// Now just continue and ignore the corrupt resource
-				final int siz = vRes.size() < vResRoot.size() ? vRes.size() : vResRoot.size();
-				// loop over all partitions
-				boolean bRealyRW = vSpawnParts == null || vSpawnParts.size() == 0;
-				if (!bRealyRW && siz > 0 && (bResRW || bSpawnROPartsOnly))
-				{
-					// reduce partitions of all RW resources and of RO resources if requested
-					final JDFResource copyRoot = ((JDFResource) vRes.elementAt(0)).getResourceRoot();
-					reducePartitions(copyRoot);
-				}
-				else
-				{
-					isReduced.add(rRoot.getID());
-				}
-
-				for (int resParts = 0; resParts < siz; resParts++)
-				{
-					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
-					if (resParts == 0 && spawnID.equals(r.getAttribute(AttributeName.SPAWNID)))
-						break;
-					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
-					PartSpawn partSpawner = new PartSpawn();
-					if (!bInformative)
-						partSpawner.spawnPart(rRoot1, spawnID, copyStatus, true, bSpawnROPartsOnly);
-					partSpawner.spawnPart(r, spawnID, copyStatus, false, bSpawnROPartsOnly);
-
-					if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
+					if (!bRealyRW && EnumSpawnStatus.SpawnedRO.equals(copyStatus))
 					{
-						if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
+						bResRW = false;
+						if (!vvRO.contains(rRoot.getID()) && !vvRW.contains(rRoot.getID()))
 						{
-							bRealyRW = true;
+							vvRO.add(rRoot.getID());
 						}
 					}
-				}
-
-				if (!bRealyRW && EnumSpawnStatus.SpawnedRO.equals(copyStatus))
-				{
-					bResRW = false;
-					if (!vvRO.contains(rRoot.getID()) && !vvRW.contains(rRoot.getID()))
+					if (isThereAlready && bResRW)
 					{
-						vvRO.add(rRoot.getID());
+						vvRW.add(rRoot.getID());
 					}
+					calcAuditSpawnIDs(spawnAudit, vvRO, vvRW);
 				}
-				if (isThereAlready && bResRW)
-				{
-					vvRW.add(rRoot.getID());
-				}
-				calcAuditSpawnIDs(spawnAudit, vvRO, vvRW);
 			}
 		}
-
 		// must remove ap after use
 		if (ap != null)
 		{
