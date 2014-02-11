@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,8 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
@@ -347,6 +349,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	 * 
 	 * @return
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier();
@@ -358,6 +361,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	 */
+	@Override
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)
@@ -475,10 +479,34 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 		{
 			return false;
 		}
-
-		if (!ContainerUtil.equals(getMISDetails(), lastphase.getMISDetails()))
+		if (!ContainerUtil.equals(getPartMapVector(), lastphase.getPartMapVector()))
+		{
 			return false;
-
+		}
+		if (!ContainerUtil.equals(getMISDetails(), lastphase.getMISDetails()))
+		{
+			return false;
+		}
+		VString ignore = new VString(new String[] { ElementName.PART, ElementName.MISDETAILS, ElementName.COSTCENTER });
+		VElement childrenIgnoreList = getChildrenIgnoreList(ignore, true, null);
+		VElement lastchildrenIgnoreList = lastphase.getChildrenIgnoreList(ignore, true, null);
+		if (childrenIgnoreList.size() > 0 || lastchildrenIgnoreList.size() > 0)
+		{
+			if (childrenIgnoreList.size() != lastchildrenIgnoreList.size())
+			{
+				return false;
+			}
+			else
+			{
+				for (int i = 0; i < childrenIgnoreList.size(); i++)
+				{
+					if (!childrenIgnoreList.get(i).isEqual(lastchildrenIgnoreList.get(i)))
+					{
+						return false;
+					}
+				}
+			}
+		}
 		return true;
 	}
 

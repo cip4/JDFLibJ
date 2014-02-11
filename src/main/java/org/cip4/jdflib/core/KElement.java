@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2415,7 +2415,7 @@ public class KElement extends ElementNSImpl implements Element
 			return false;
 		}
 		// performance: count attributes and compare
-		if (numChildNodes(2) != kElem.numChildNodes(2))
+		if (numChildNodes(ATTRIBUTE_NODE) != kElem.numChildNodes(ATTRIBUTE_NODE))
 		{
 			return false;
 		}
@@ -3953,7 +3953,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nodeNames list of node names that fit, both local and qualified node names are checked
 	 * @param map
 	 * @param bDirect
-	 * @param v
+	 * @param v the vector to be filled. if null, a new empty vector will be created
 	 * @return VElement the found child elements
 	 */
 	public VElement getChildrenFromList(final VString nodeNames, final JDFAttributeMap map, final boolean bDirect, VElement v)
@@ -3976,6 +3976,35 @@ public class KElement extends ElementNSImpl implements Element
 			if (!bDirect)
 			{
 				kElem.getChildrenFromList(nodeNames, map, bDirect, v);
+			}
+			kElem = kElem.getNextSiblingElement();
+		}
+		return v;
+	}
+
+	/**
+	 * get a vector of all Children that do not match the strings defined in nodeNames
+	 * @param nodeNames list of node names that fit, both local and qualified node names are checked
+	 * @param bDirect
+	 * @param v the vector to be filled. if null, a new empty vector will be created
+	 * @return VElement the found child elements
+	 */
+	public VElement getChildrenIgnoreList(final VString nodeNames, final boolean bDirect, VElement v)
+	{
+		KElement kElem = getFirstChildElement();
+		if (v == null)
+		{
+			v = new VElement();
+		}
+		while (kElem != null)
+		{
+			if (!nodeNames.contains(kElem.getLocalName()) && !nodeNames.contains(kElem.getNodeName()))
+			{
+				v.addElement(kElem);
+			}
+			if (!bDirect)
+			{
+				kElem.getChildrenIgnoreList(nodeNames, bDirect, v);
 			}
 			kElem = kElem.getNextSiblingElement();
 		}

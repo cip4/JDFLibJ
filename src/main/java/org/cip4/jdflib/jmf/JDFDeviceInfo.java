@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -352,11 +353,34 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			return false;
 		}
 		bGood = numJobPhases == 0;
-
 		for (int i = 0; i < numJobPhases; i++)
 		{
 			bGood = bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
 		}
+		if (bGood)
+		{
+			VString ignore = new VString(new String[] { ElementName.PART, ElementName.EMPLOYEE, ElementName.JOBPHASE });
+			VElement childrenIgnoreList = getChildrenIgnoreList(ignore, true, null);
+			VElement lastchildrenIgnoreList = lastInfo.getChildrenIgnoreList(ignore, true, null);
+			if (childrenIgnoreList.size() > 0 || lastchildrenIgnoreList.size() > 0)
+			{
+				if (childrenIgnoreList.size() != lastchildrenIgnoreList.size())
+				{
+					return false;
+				}
+				else
+				{
+					for (int i = 0; i < childrenIgnoreList.size(); i++)
+					{
+						if (!childrenIgnoreList.get(i).isEqual(lastchildrenIgnoreList.get(i)))
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+
 		return bGood;
 	}
 

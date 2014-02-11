@@ -2770,9 +2770,6 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("Wrong number of child elements found", v.size(), 5);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ///
-
 	/**
 	 * 
 	 */
@@ -2790,8 +2787,22 @@ public class KElementTest extends JDFTestCaseBase
 		assertFalse(root.getChildrenFromList(new VString("b:b", " "), null, false, null).contains(b));
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ///
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetChildrenIgnoreList()
+	{
+		final XMLDoc doc = new XMLDoc("Foo", null);
+		final KElement root = doc.getRoot();
+		final KElement a = root.appendElement("a");
+		final KElement b = root.appendElement("b");
+		final KElement b2 = root.appendElement("b:b", "s");
+		assertFalse(root.getChildrenIgnoreList(new VString("b", " "), true, null).contains(b));
+		assertFalse(root.getChildrenIgnoreList(new VString("b", " "), true, null).contains(b2));
+		assertFalse(root.getChildrenIgnoreList(new VString("b:b", " "), true, null).contains(b2));
+		assertTrue(root.getChildrenIgnoreList(new VString("a", " "), true, null).contains(b));
+	}
 
 	/**
 	 * 

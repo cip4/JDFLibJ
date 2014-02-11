@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -763,14 +763,14 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * remove all keys defined by set from this
 	 * 
-	 * @param set the set of keys ot remove
+	 * @param toRemove the set of keys to remove
 	 * @return this map 
 	 */
-	public JDFAttributeMap removeKeys(final Collection<String> set)
+	public JDFAttributeMap removeKeys(final Collection<String> toRemove)
 	{
-		if (set != null)
+		if (toRemove != null)
 		{
-			final Iterator<String> it = set.iterator();
+			final Iterator<String> it = toRemove.iterator();
 			while (it.hasNext())
 			{
 				final String key = it.next();

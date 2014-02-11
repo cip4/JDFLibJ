@@ -297,6 +297,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	@Test
 	public void testMemLeak()
 	{
+		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		for (int i = 0; i < 100000; i++)
 		{
 			sc.getDocJMFPhaseTime();
@@ -304,6 +305,38 @@ public class StatusCounterTest extends JDFTestCaseBase
 			sc.getDocJMFResource();
 		}
 		assertEquals(mem, getCurrentMem(), 100000);
+	}
+
+	/**
+	 * test for memory leaks in clone
+	 */
+	@Test
+	public void testMemLeak2()
+	{
+		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+		VElement v = new VElement();
+		for (int i = 0; i < 10000; i++)
+		{
+			if (i % 1000 == 0)
+				System.out.println(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
+			v.add(sc.getDocJMFPhaseTime().getRoot());
+		}
+	}
+
+	/**
+	 * test for memory leaks in clone
+	 */
+	@Test
+	public void testMemLeak3()
+	{
+		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 10000; i++)
+		{
+			if (i % 1000 == 0)
+				System.out.println(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
+			v.add(sc.getDocJMFPhaseTime().getRoot().getXPathValueMap());
+		}
 	}
 
 	/**
