@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -422,6 +422,26 @@ public class JDFJMF extends JDFAutoJMF
 		 * 
 		 */
 		public static final EnumJMFReturnCode QUEUE_ENTRY_NOT_RUNNING = new EnumJMFReturnCode(115, "Queue entry is not running");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode QUEUE_ENTRY_EXISTS = new EnumJMFReturnCode(116, "Queue entry already exists");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode URL_INACCESSIBLE = new EnumJMFReturnCode(120, "URL is not accessible");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode UNKNOWN_DEVICEID = new EnumJMFReturnCode(121, "Unknown DeviceID");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode GANGING_NOT_SUPPORTED = new EnumJMFReturnCode(130, "Ganging not supported");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode UNKNOWN_GANGNAME = new EnumJMFReturnCode(131, " Unknown Gang name");
 
 		// 200..299 Job and pipe specific errors
 		/**
@@ -443,6 +463,10 @@ public class JDFJMF extends JDFAutoJMF
 		 * 
 		 */
 		public static final EnumJMFReturnCode UNLINKED_RESOURCE_LINK = new EnumJMFReturnCode(203, "Unlinked resource link");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode JDF_NOT_CREATED = new EnumJMFReturnCode(204, "Could not create new JDF node");
 
 		/**
 		 * 
@@ -459,7 +483,23 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 * 
 		 */
-		public static final EnumJMFReturnCode CERTIFICATE_EXPIRED = new EnumJMFReturnCode(304, "Certificate is expired");
+		public static final EnumJMFReturnCode CERTIFICATE_EXPIRED = new EnumJMFReturnCode(303, "Certificate is expired");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode AUTHENTICATION_PENDING = new EnumJMFReturnCode(304, "Authentication pending");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode AUTHENTICATION_ESTABLISHED = new EnumJMFReturnCode(305, "Authentication already established");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode NO_AUTHENTICATION_IN_PROCESS = new EnumJMFReturnCode(306, "No Authentication in process");
+		/**
+		 * 
+		 */
+		public static final EnumJMFReturnCode CERTIFICATE_INVALID = new EnumJMFReturnCode(307, "Certificate is invalid");
 	}
 
 	/**

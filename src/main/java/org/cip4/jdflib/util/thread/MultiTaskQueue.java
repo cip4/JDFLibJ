@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -120,7 +120,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	 * 
 	 * grab the queue
 	 * @param name - must not be null
-	 * @param maxParallel 
+	 * @param maxParallel  ignored if <=0 
 	 * @return the queue to fill with tasks
 	 */
 	public static MultiTaskQueue getCreateQueue(String name, int maxParallel)

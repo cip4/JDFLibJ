@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -244,6 +244,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		}
 
 		o = new Object[] { new Integer(5), "foobar" };
+		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
+		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
+		o = new Object[] { new Long(5), "foobar" };
 		assertEquals(StringUtil.sprintf("abc %02i%7sdef", o), "abc 05 foobardef");
 		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
 		o = new Object[] { "5", "foobar" };

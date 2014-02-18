@@ -1689,7 +1689,7 @@ public class UrlUtil
 			}
 			catch (final Throwable x)
 			{
-				if (bWantLog && nLogged++ < 10 || nLogged % 100 == 0)
+				if (bWantLog && (nLogged++ < 10 || nLogged % 100 == 0))
 				{
 					LogFactory.getLog(URLWriter.class).error(x.getClass().getCanonicalName() + " snafu #" + nLogged + " writing to url: " + strUrl + " " + x.getMessage());
 				}

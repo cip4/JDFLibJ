@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -360,6 +360,10 @@ public class StringUtil
 			else if (ob instanceof Integer)
 			{
 				s += f.tostr((Integer) ob);
+			}
+			else if (ob instanceof Long)
+			{
+				s += f.tostr((Long) ob);
 			}
 			else if (ob instanceof Double)
 			{
