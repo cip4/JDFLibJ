@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,19 +81,22 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * general utilities for containers and objects
  * 
  * @author Rainer Prosi
  * 
  */
-public class ContainerUtilTest extends JDFTestCaseBase {
-	private class SimpleMatch implements IMatches {
+public class ContainerUtilTest extends JDFTestCaseBase
+{
+	private class SimpleMatch implements IMatches
+	{
 		private final int i;
 
-		public SimpleMatch(final int pi) {
+		public SimpleMatch(final int pi)
+		{
 			super();
 			this.i = pi;
 		}
@@ -102,7 +105,9 @@ public class ContainerUtilTest extends JDFTestCaseBase {
 		 * (non-Javadoc)
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
-		public boolean matches(final Object subset) {
+		@Override
+		public boolean matches(final Object subset)
+		{
 			return ((SimpleMatch) subset).i == i;
 		}
 
@@ -111,7 +116,8 @@ public class ContainerUtilTest extends JDFTestCaseBase {
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
-		public boolean equals(final Object obj) {
+		public boolean equals(final Object obj)
+		{
 			return matches(obj);
 		}
 
@@ -121,138 +127,181 @@ public class ContainerUtilTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testEquals() {
-		Assert.assertTrue(ContainerUtil.equals(null, null));
-		Assert.assertFalse(ContainerUtil.equals(null, ""));
-		Assert.assertFalse(ContainerUtil.equals("", null));
-		Assert.assertFalse(ContainerUtil.equals("", " "));
-		Assert.assertTrue(ContainerUtil.equals("a", "a"));
+	public void testEquals()
+	{
+		assertTrue(ContainerUtil.equals(null, null));
+		assertFalse(ContainerUtil.equals(null, ""));
+		assertFalse(ContainerUtil.equals("", null));
+		assertFalse(ContainerUtil.equals("", " "));
+		assertTrue(ContainerUtil.equals("a", "a"));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testMatches() {
+	public void testMatches()
+	{
 		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs.setCostCenterID("CS");
 		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
 		cs2.setCostCenterID("CS");
-		Assert.assertTrue(ContainerUtil.matches(cs, cs2));
-		Assert.assertTrue(ContainerUtil.matches(cs, "CS"));
-		Assert.assertTrue(ContainerUtil.matches(null, null));
+		assertTrue(ContainerUtil.matches(cs, cs2));
+		assertTrue(ContainerUtil.matches(cs, "CS"));
+		assertTrue(ContainerUtil.matches(null, null));
 		cs2.setCostCenterID("CS2");
-		Assert.assertFalse(ContainerUtil.matches(cs, cs2));
-		Assert.assertFalse(ContainerUtil.matches(cs, null));
-		Assert.assertFalse(ContainerUtil.matches(cs, "CS2"));
-		Assert.assertFalse(ContainerUtil.matches(null, "CS2"));
+		assertFalse(ContainerUtil.matches(cs, cs2));
+		assertFalse(ContainerUtil.matches(cs, null));
+		assertFalse(ContainerUtil.matches(cs, "CS2"));
+		assertFalse(ContainerUtil.matches(null, "CS2"));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testAddAll() {
+	public void testAddAll()
+	{
 		final VString v1 = new VString("a b c", null);
 		final VString v2 = new VString("e f g", null);
 		final VString v3 = new VString("a b c e f g", null);
-		Assert.assertEquals(ContainerUtil.addAll(null, null), null);
-		Assert.assertEquals(ContainerUtil.addAll(v1, null), v1);
-		Assert.assertEquals(ContainerUtil.addAll(null, v1), v1);
-		Assert.assertEquals(ContainerUtil.addAll(v1, v2), v3);
-		Assert.assertEquals(v1, v3);
+		assertEquals(ContainerUtil.addAll(null, null), null);
+		assertEquals(ContainerUtil.addAll(v1, null), v1);
+		assertEquals(ContainerUtil.addAll(null, v1), v1);
+		assertEquals(ContainerUtil.addAll(v1, v2), v3);
+		assertEquals(v1, v3);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testGetMatch() {
+	public void testGetMatch()
+	{
 		final Vector<SimpleMatch> v = new Vector<SimpleMatch>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			v.add(new SimpleMatch(i % 2));
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
-		Assert.assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
-		Assert.assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
+		assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
+		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testToHashSetArray() {
+	public void testToHashSetArray()
+	{
 		final String[] a = { "a", "b" };
 		final Set<String> s = ContainerUtil.toHashSet(a);
-		Assert.assertTrue(s.contains("a"));
-		Assert.assertTrue(s.contains("b"));
-		Assert.assertFalse(s.contains("c"));
-		Assert.assertEquals(s.size(), a.length);
+		assertTrue(s.contains("a"));
+		assertTrue(s.contains("b"));
+		assertFalse(s.contains("c"));
+		assertEquals(s.size(), a.length);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testToValueVector() {
+	public void testToValueVector()
+	{
 		final HashMap<String, String> hm = new HashMap<String, String>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			hm.put("" + i, "a" + i);
 		}
 		final Vector<String> v = ContainerUtil.toValueVector(hm, false);
-		Assert.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final Vector<String> vs = ContainerUtil.toValueVector(hm, true);
-		Assert.assertTrue(vs.containsAll(v));
-		Assert.assertTrue(v.containsAll(vs));
-		for (int i = 1; i < 10; i++) {
-			Assert.assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
+		for (int i = 1; i < 10; i++)
+		{
+			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
 		}
-
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testGetKeyVector() {
+	public void testGetKeyVector()
+	{
 		final HashMap<String, String> hm = new HashMap<String, String>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			hm.put("" + i, "a" + i);
 		}
 		final Vector<String> v = ContainerUtil.getKeyVector(hm);
-		Assert.assertEquals(v.size(), 10);
+		assertEquals(v.size(), 10);
 		final Vector<String> vs = ContainerUtil.getKeyVector(hm);
-		Assert.assertTrue(vs.containsAll(v));
-		Assert.assertTrue(v.containsAll(vs));
-		for (int i = 0; i < 10; i++) {
-			Assert.assertTrue(v.contains("" + i));
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
+		for (int i = 0; i < 10; i++)
+		{
+			assertTrue(v.contains("" + i));
 		}
-
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testEnsureSize() {
+	public void testGetInvertedVector()
+	{
+		final HashMap<String, String> hm = new HashMap<String, String>();
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("" + i, "a" + i);
+		}
+		VectorMap<String, String> inv = ContainerUtil.getInvertedMap(hm);
+		assertEquals(inv.size(), 10);
+		for (int i = 0; i < 10; i++)
+		{
+			assertEquals(inv.getOne("a" + i, 0), "" + i);
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("b" + i, "a" + i);
+		}
+		inv = ContainerUtil.getInvertedMap(hm);
+		assertEquals(inv.size(), 10);
+		for (int i = 0; i < 10; i++)
+		{
+			assertEquals(inv.get("a" + i).size(), 2);
+			assertTrue(inv.get("a" + i).contains("b" + i));
+			assertTrue(inv.get("a" + i).contains("" + i));
+		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEnsureSize()
+	{
 		final VString v = new VString();
 		ContainerUtil.ensureSize(4, v);
-		Assert.assertEquals(v.size(), 4);
+		assertEquals(v.size(), 4);
 		v.set(2, "foo");
-		Assert.assertEquals(v.get(2), "foo");
-		Assert.assertNull(v.get(0));
+		assertEquals(v.get(2), "foo");
+		assertNull(v.get(0));
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testCompare() {
-		Assert.assertEquals(ContainerUtil.compare("1", "0"), 1);
-		Assert.assertEquals(ContainerUtil.compare("1", "1"), 0);
-		Assert.assertEquals(ContainerUtil.compare("1", "2"), -1);
-		Assert.assertEquals(ContainerUtil.compare("1", null), 1);
-		Assert.assertEquals(ContainerUtil.compare(null, "2"), -1);
-		Assert.assertEquals(ContainerUtil.compare(null, null), 0);
+	public void testCompare()
+	{
+		assertEquals(ContainerUtil.compare("1", "0"), 1);
+		assertEquals(ContainerUtil.compare("1", "1"), 0);
+		assertEquals(ContainerUtil.compare("1", "2"), -1);
+		assertEquals(ContainerUtil.compare("1", null), 1);
+		assertEquals(ContainerUtil.compare(null, "2"), -1);
+		assertEquals(ContainerUtil.compare(null, null), 0);
 	}
 }

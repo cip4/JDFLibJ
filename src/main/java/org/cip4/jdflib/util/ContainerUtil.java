@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -361,6 +361,40 @@ public class ContainerUtil
 			}
 			v.addAll(values);
 			return v;
+		}
+	}
+
+	/**
+	 * create a Vector copy of entry values from a map
+	 * @param <a> data type of the map key
+	 * @param <b> data type of the map value
+	 * @param m the map to dump to an array
+	 * @return the vector
+	 */
+	public static <a, b> VectorMap<b, a> getInvertedMap(final Map<a, b> m)
+	{
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			VectorMap<b, a> inv = new VectorMap<>();
+			final Collection<a> keys = m.keySet();
+			if (keys.size() == 0)
+			{
+				return null;
+			}
+			for (a key : keys)
+			{
+				b val = m.get(key);
+				if (val != null)
+				{
+					inv.putOne(val, key);
+				}
+			}
+			return inv;
 		}
 	}
 
