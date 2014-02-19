@@ -855,6 +855,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/** * */
 		public static final EnumType ShapeDefProduction = new EnumType("ShapeDefProduction");
 		/** * */
+		public static final EnumType SheetOptimizing = new EnumType("SheetOptimizing");
+		/** * */
 		public static final EnumType Shrinking = new EnumType(JDFConstants.TYPE_SHRINKING);
 		/** * */
 		public static final EnumType SideSewing = new EnumType(JDFConstants.TYPE_SIDESEWING);

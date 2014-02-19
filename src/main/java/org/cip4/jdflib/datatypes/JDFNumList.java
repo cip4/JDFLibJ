@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -92,6 +93,46 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTypes, Cloneable
 {
+	/**
+	 * 
+	 *  
+	 * @author rainer prosi
+	 * @date Feb 19, 2014
+	 */
+	public static class VolumeComparator implements Comparator<JDFNumList>
+	{
+		/**
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(JDFNumList o1, JDFNumList o2)
+		{
+			double d1 = o1 == null ? Double.MIN_VALUE : o1.volume();
+			double d2 = o2 == null ? Double.MIN_VALUE : o2.volume();
+			return d1 < d2 ? -1 : d1 == d2 ? 0 : 1;
+		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @author rainer prosi
+	 * @date Feb 19, 2014
+	 */
+	public static class NormComparator implements Comparator<JDFNumList>
+	{
+		/**
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(JDFNumList o1, JDFNumList o2)
+		{
+			double d1 = o1 == null ? -1 : o1.norm();
+			double d2 = o2 == null ? -1 : o2.norm();
+			return d1 < d2 ? -1 : d1 == d2 ? 0 : 1;
+		}
+	}
+
 	/**
 	 * 
 	 */
@@ -131,7 +172,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 */
 	@SuppressWarnings("unchecked")
 	@Deprecated
-	public JDFNumList(final Vector v) throws DataFormatException
+	public JDFNumList(@SuppressWarnings("rawtypes") final Vector v) throws DataFormatException
 	{
 		super();
 		addAll(v);
@@ -412,7 +453,6 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @deprecated use clone()
 	 */
 	@Deprecated
-	@SuppressWarnings("unchecked")
 	public Vector<Object> copyNumList()
 	{
 		return clone();
@@ -680,6 +720,42 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * return the absolute norm (sqrt of sum of values)
+	 *  
+	 * @return
+	 */
+	public double norm()
+	{
+		double sum = 0;
+		int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			double di = doubleAt(i);
+			sum += di * di;
+		}
+		return Math.sqrt(sum);
+	}
+
+	/**
+	 * return the n dimensional volume (product of all values)
+	 *  
+	 * @return
+	 */
+	public double volume()
+	{
+		int size = size();
+		if (size == 0)
+			return 0;
+		double product = 1;
+		for (int i = 0; i < size; i++)
+		{
+			double di = doubleAt(i);
+			product *= di;
+		}
+		return product;
 	}
 
 	/**

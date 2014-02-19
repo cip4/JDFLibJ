@@ -365,11 +365,12 @@ public class ContainerUtil
 	}
 
 	/**
-	 * create a Vector copy of entry values from a map
+	 * create an inverted map with keys and values swapped.<br/>
+	 *  The new values are vectors since a map may have identical values for different keys
 	 * @param <a> data type of the map key
 	 * @param <b> data type of the map value
-	 * @param m the map to dump to an array
-	 * @return the vector
+	 * @param m the map to invert
+	 * @return the inverted map
 	 */
 	public static <a, b> VectorMap<b, a> getInvertedMap(final Map<a, b> m)
 	{
@@ -380,7 +381,7 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			VectorMap<b, a> inv = new VectorMap<>();
+			VectorMap<b, a> inv = new VectorMap<b, a>();
 			final Collection<a> keys = m.keySet();
 			if (keys.size() == 0)
 			{
