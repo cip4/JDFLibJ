@@ -203,9 +203,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			// write out the unspawned file
 			doc.write2File(sm_dirTestDataTemp + "Unspawn_" + strXMLFile, 0, true); // Unspawn_bookintent.jdf
 		}
-
-		// Vergleich, ob alles richtig gelaufen ist
-		// compareXMLFiles (strXMLFile + "_Unspawn.jdf", strXMLFile+".jdf");
 	}
 
 	/**
@@ -3284,6 +3281,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		rlS.getCreatePartition(map, pik);
 
 		assertTrue(rl.toString().indexOf("SpawnedRW") > 0);
+		assertEquals(spawned.getAncestorPool().getPartMapVector(), vm);
+
 		//		assertEquals(rl.getPartition(ms2, null).getAttribute_KElement(AttributeName.SPAWNSTATUS), "SpawnedRW");
 		// assertEquals(rl.getPartition(ms,
 		// null).getAttribute_KElement(AttributeName.SPAWNSTATUS),"");

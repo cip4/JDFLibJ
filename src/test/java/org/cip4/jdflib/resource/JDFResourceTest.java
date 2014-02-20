@@ -564,9 +564,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	public void testgetPartMapVector()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
-		final JDFParser p = new JDFParser();
-
-		final JDFDoc myJDFDoc = p.parseFile(strFileName);
+		final JDFDoc myJDFDoc = JDFDoc.parseFile(strFileName);
 		final JDFNode myRoot = myJDFDoc.getJDFRoot();
 		final JDFResourcePool myResPool = myRoot.getResourcePool();
 		final JDFResource myPreview = (JDFResource) myResPool.getElement("Preview", "", 0);
@@ -574,16 +572,37 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final VJDFAttributeMap vJDFAttrMap = myPreview.getPartMapVector(false);
 
 		// there must be 12 maps in the map vector
-		assertTrue(vJDFAttrMap.size() == 12);
+		assertEquals(vJDFAttrMap.size(), 12);
 
-		for (int i = 0; i < vJDFAttrMap.size(); i++)
+		for (JDFAttributeMap myMap : vJDFAttrMap)
 		{
-			final JDFAttributeMap myMap = vJDFAttrMap.elementAt(i);
-
 			assertTrue(myMap.containsKey("Side"));
 			assertTrue(myMap.containsKey("PreviewType"));
 			assertTrue(myMap.containsKey("SheetName"));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testgetPartMapVectorSequence()
+	{
+		JDFResource r = new JDFDoc("JDF").getJDFRoot().addResource("NodeInfo", EnumUsage.Input);
+		JDFResource sheet = r.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "1");
+		JDFResource f = sheet.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource b = sheet.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource sheet2 = r.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "2");
+		JDFResource f2 = sheet2.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource b2 = sheet2.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFAttributeMap m = new JDFAttributeMap();
+		m.put(EnumPartIDKey.SheetName, "1");
+		m.put(EnumPartIDKey.PartVersion, "v1");
+		VJDFAttributeMap v = r.getPartMapVector(false);
+		assertEquals(v.get(0), f.getPartMap());
+		assertEquals(v.get(1), b.getPartMap());
+		assertEquals(v.get(2), f2.getPartMap());
+		assertEquals(v.get(3), b2.getPartMap());
 	}
 
 	/**
@@ -1648,12 +1667,14 @@ public class JDFResourceTest extends JDFTestCaseBase
 		JDFResource sheet2 = r.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "2");
 		JDFResource f2 = sheet2.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.PartVersion, "v1");
 		JDFResource b2 = sheet2.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.PartVersion, "v1");
+		assertNotNull(b2);
+		assertNotNull(f2);
 		JDFAttributeMap m = new JDFAttributeMap();
 		m.put(EnumPartIDKey.SheetName, "1");
 		m.put(EnumPartIDKey.PartVersion, "v1");
 		VElement v = r.getPartitionVector(m, EnumPartUsage.Explicit);
-		assertTrue(v.contains(f));
-		assertTrue(v.contains(b));
+		assertEquals(v.get(0), f);
+		assertEquals(v.get(1), b);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
