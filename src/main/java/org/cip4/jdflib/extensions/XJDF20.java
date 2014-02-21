@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -487,7 +487,6 @@ public class XJDF20 extends BaseElementWalker
 				throw new JDFException("output file exists: " + file.getPath());
 			}
 		}
-		// file.createNewFile(fileName);
 
 		try
 		{
@@ -514,20 +513,18 @@ public class XJDF20 extends BaseElementWalker
 				}
 				catch (final ZipException x)
 				{
-					// TODO Auto-generated catch block
-					x.printStackTrace();
+					log.error("oops: ", x);
 				}
 				catch (final IOException x)
 				{
-					// TODO Auto-generated catch block
-					x.printStackTrace();
+					log.error("oops: ", x);
 				}
 			}
 			zos.close();
 		}
 		catch (final IOException x)
 		{
-			x.printStackTrace();
+			log.error("oops: ", x);
 		}
 	}
 
@@ -3547,12 +3544,210 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	 * Getter for bMergeLayout attribute.
+	 * @return the bMergeLayout
+	 */
+	public boolean isMergeLayout()
+	{
+		return bMergeLayout;
+	}
+
+	/**
+	 * Setter for bMergeLayout attribute.
+	 * @param bMergeLayout the bMergeLayout to set
+	 */
+	public void setMergeLayout(boolean bMergeLayout)
+	{
+		this.bMergeLayout = bMergeLayout;
+	}
+
+	/**
+	 * Getter for bMergeLayoutPrep attribute.
+	 * @return the bMergeLayoutPrep
+	 */
+	public boolean isMergeLayoutPrep()
+	{
+		return bMergeLayoutPrep;
+	}
+
+	/**
+	 * Setter for bMergeLayoutPrep attribute.
+	 * @param bMergeLayoutPrep the bMergeLayoutPrep to set
+	 */
+	public void setMergeLayoutPrep(boolean bMergeLayoutPrep)
+	{
+		this.bMergeLayoutPrep = bMergeLayoutPrep;
+	}
+
+	/**
+	 * Getter for bMergeRunList attribute.
+	 * @return the bMergeRunList
+	 */
+	public boolean isMergeRunList()
+	{
+		return bMergeRunList;
+	}
+
+	/**
+	 * Setter for bMergeRunList attribute.
+	 * @param bMergeRunList the bMergeRunList to set
+	 */
+	public void setMergeRunList(boolean bMergeRunList)
+	{
+		this.bMergeRunList = bMergeRunList;
+	}
+
+	/**
+	 * Getter for bRetainSpawnInfo attribute.
+	 * @return the bRetainSpawnInfo
+	 */
+	public boolean isRetainSpawnInfo()
+	{
+		return bRetainSpawnInfo;
+	}
+
+	/**
+	 * Setter for bRetainSpawnInfo attribute.
+	 * @param bRetainSpawnInfo the bRetainSpawnInfo to set
+	 */
+	public void setRetainSpawnInfo(boolean bRetainSpawnInfo)
+	{
+		this.bRetainSpawnInfo = bRetainSpawnInfo;
+	}
+
+	/**
+	 * Getter for bSingleNode attribute.
+	 * @return the bSingleNode
+	 */
+	public boolean isSingleNode()
+	{
+		return bSingleNode;
+	}
+
+	/**
+	 * Setter for bSingleNode attribute.
+	 * @param bSingleNode the bSingleNode to set
+	 */
+	public void setSingleNode(boolean bSingleNode)
+	{
+		this.bSingleNode = bSingleNode;
+	}
+
+	/**
 	 * Getter for bUpdateVersion attribute.
 	 * @return the bUpdateVersion
 	 */
 	public boolean isUpdateVersion()
 	{
 		return bUpdateVersion;
+	}
+
+	/**
+	 * Getter for bTypeSafeMessage attribute.
+	 * @return the bTypeSafeMessage
+	 */
+	public boolean isTypeSafeMessage()
+	{
+		return bTypeSafeMessage;
+	}
+
+	/**
+	 * Setter for bTypeSafeMessage attribute.
+	 * @param bTypeSafeMessage the bTypeSafeMessage to set
+	 */
+	public void setTypeSafeMessage(boolean bTypeSafeMessage)
+	{
+		this.bTypeSafeMessage = bTypeSafeMessage;
+	}
+
+	/**
+	 * Getter for bAbstractMessage attribute.
+	 * @return the bAbstractMessage
+	 */
+	public boolean isAbstractMessage()
+	{
+		return bAbstractMessage;
+	}
+
+	/**
+	 * Setter for bAbstractMessage attribute.
+	 * @param bAbstractMessage the bAbstractMessage to set
+	 */
+	public void setAbstractMessage(boolean bAbstractMessage)
+	{
+		this.bAbstractMessage = bAbstractMessage;
+	}
+
+	/**
+	 * Getter for bSpanAsAttribute attribute.
+	 * @return the bSpanAsAttribute
+	 */
+	public boolean isSpanAsAttribute()
+	{
+		return bSpanAsAttribute;
+	}
+
+	/**
+	 * Setter for bSpanAsAttribute attribute.
+	 * @param bSpanAsAttribute the bSpanAsAttribute to set
+	 */
+	public void setSpanAsAttribute(boolean bSpanAsAttribute)
+	{
+		this.bSpanAsAttribute = bSpanAsAttribute;
+	}
+
+	/**
+	 * Getter for bIntentPartition attribute.
+	 * @return the bIntentPartition
+	 */
+	public boolean isIntentPartition()
+	{
+		return bIntentPartition;
+	}
+
+	/**
+	 * Setter for bIntentPartition attribute.
+	 * @param bIntentPartition the bIntentPartition to set
+	 */
+	public void setIntentPartition(boolean bIntentPartition)
+	{
+		this.bIntentPartition = bIntentPartition;
+	}
+
+	/**
+	 * Getter for bHTMLColor attribute.
+	 * @return the bHTMLColor
+	 */
+	public boolean isHTMLColor()
+	{
+		return bHTMLColor;
+	}
+
+	/**
+	 * Setter for bHTMLColor attribute.
+	 * @param bHTMLColor the bHTMLColor to set
+	 */
+	public void setHTMLColor(boolean bHTMLColor)
+	{
+		this.bHTMLColor = bHTMLColor;
+	}
+
+	/**
+	 * Getter for bConvertTilde attribute.
+	 * @return the bConvertTilde
+	 */
+	public boolean isConvertTilde()
+	{
+		return bConvertTilde;
+	}
+
+	/**
+	 * Setter for bConvertTilde attribute.
+	 * @param bConvertTilde the bConvertTilde to set
+	 */
+	public void setConvertTilde(boolean bConvertTilde)
+	{
+		this.bConvertTilde = bConvertTilde;
 	}
 
 }

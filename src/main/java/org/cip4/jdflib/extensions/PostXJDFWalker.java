@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -632,6 +632,48 @@ class PostXJDFWalker extends BaseElementWalker
 				xjdf.deleteNode();
 				return null;
 			}
+			return ret;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkIntent extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkIntent()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "Intent".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			xjdf.removeAttribute(AttributeName.STATUS);
+			xjdf.removeAttribute(AttributeName.STATUSDETAILS);
+			KElement ret = super.walk(xjdf, dummy);
 			return ret;
 		}
 	}

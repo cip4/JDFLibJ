@@ -3539,6 +3539,42 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	@Test
+	public void testMergeResourceOrder()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+		tcp.getCreatePartition(partMap, null);
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+		spawnParts.add(new JDFAttributeMap("SheetName", "S1")); // want more granular
+		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.TRANSFERCURVEPOOL, null), spawnParts, false, false, false, false);
+
+		JDFTransferCurvePool tcps = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0).getCreatePartition(partMap, null);
+		JDFTransferCurvePool tcpsf = (JDFTransferCurvePool) tcps.addPartition(EnumPartIDKey.SectionIndex, "Front");
+		JDFTransferCurvePool tcpsb = (JDFTransferCurvePool) tcps.addPartition(EnumPartIDKey.SectionIndex, "Back");
+		for (int i = 0; i < 4; i++)
+		{
+			tcpsf.addPartition(EnumPartIDKey.PartVersion, "V" + i);
+			tcpsb.addPartition(EnumPartIDKey.PartVersion, "V" + i);
+		}
+
+		final JDFMerge m = new JDFMerge(n);
+		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+		assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
+
+		JDFResource tcpMerged = merged.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		VElement v = tcpMerged.getLeaves(false);
+		assertNotNull(v);
+	}
+
+	/**
 	* 
 	*/
 	@Test

@@ -281,6 +281,30 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testUnify()
+	{
+		final Vector<String> v = new Vector<String>();
+		final Vector<String> v2 = new Vector<String>();
+		for (int i = 0; i < 10; i++)
+		{
+			v.add("" + i);
+			v.add("" + i);
+			v2.add("" + i);
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			v.add("" + i);
+			v.add("" + i);
+		}
+
+		ContainerUtil.unify(v);
+		assertEquals(v, v2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testEnsureSize()
 	{
 		final VString v = new VString();

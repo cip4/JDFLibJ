@@ -529,6 +529,19 @@ public class XJDFTest extends JDFTestCaseBase
 	*
 	 */
 	@Test
+	public void testToXJDFWithBigProduct()
+	{
+		final JDFNode n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(false);
+		e = xjdf20.makeNewJDF(n, null);
+		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "job4.xjdf", 2, false);
+	}
+
+	/**
+	*
+	 */
+	@Test
 	public void testToXJDFIntermediate()
 	{
 		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
