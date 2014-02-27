@@ -1145,7 +1145,11 @@ public class UrlUtil
 	 */
 	public static String normalize(String urlString)
 	{
-		if (!UrlUtil.isRelativeURL(urlString))
+		if (UrlUtil.isUNC(urlString))
+			return uncToUrl(urlString, false);
+		else if (UrlUtil.isFile(urlString))
+			urlString = "file:" + urlString.substring(5);
+		else if (!UrlUtil.isRelativeURL(urlString))
 		{
 			final URL url = stringToURL(urlString);
 			if (url != null)

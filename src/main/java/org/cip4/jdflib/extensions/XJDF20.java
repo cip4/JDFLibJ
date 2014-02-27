@@ -120,6 +120,7 @@ import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFBlockPreparationParams;
 import org.cip4.jdflib.resource.JDFCreasingParams;
 import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
@@ -810,7 +811,9 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return toCheck instanceof JDFResource;
 		}
-	} // //////////////////////////////////////////////////////////////////////////////
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -2437,8 +2440,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFColorControlStrip) || (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams)
-					|| (toCheck instanceof JDFFoldingParams);
+			return (toCheck instanceof JDFBlockPreparationParams) || (toCheck instanceof JDFColorControlStrip) || (toCheck instanceof JDFCuttingParams)
+					|| (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
 		}
 
 		/**

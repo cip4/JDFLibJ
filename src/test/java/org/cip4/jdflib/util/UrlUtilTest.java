@@ -885,6 +885,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 * 
+	 */
+	@Test
+	public void testNormalizeFile()
+	{
+		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a a.b"), "file://host/dir/a%20a.b");
+		assertEquals(UrlUtil.normalize("\\\\host\\dir\\a ä.b"), "file://host/dir/a%20ä.b");
+		assertEquals(UrlUtil.normalize("FILE://host/dir/a ä.b"), "file://host/dir/a%20ä.b");
+	}
+
+	/**
+	 * 
 	 */
 	@Test
 	public void testUnEscape()

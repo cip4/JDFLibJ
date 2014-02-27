@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,12 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoInk;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Feb 26, 2014
+ */
 public class JDFInk extends JDFAutoInk
 {
 	private static final long serialVersionUID = 1L;
@@ -90,9 +96,10 @@ public class JDFInk extends JDFAutoInk
 	/**
 	 * Constructor for JDFInk
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
+	 * 
 	 */
 	public JDFInk(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -101,9 +108,9 @@ public class JDFInk extends JDFAutoInk
 
 	/**
 	 * Constructor for JDFInk
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -114,18 +121,21 @@ public class JDFInk extends JDFAutoInk
 
 	/**
 	 * Constructor for JDFInk
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
 	public JDFInk(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoInk#toString()
+	 */
 	@Override
 	public String toString()
 	{
