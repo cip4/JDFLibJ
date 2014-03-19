@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,8 +83,8 @@ import java.io.FileOutputStream;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -99,16 +99,16 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testisAbsoluteFile()
 	{
-		Assert.assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
-		Assert.assertFalse(FileUtil.isAbsoluteFile("foo"));
+		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
+		assertFalse(FileUtil.isAbsoluteFile("foo"));
 
 		if (PlatformUtil.isWindows())
 		{
-			Assert.assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
-			Assert.assertTrue(FileUtil.isAbsoluteFile("c:\\"));
-			Assert.assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
-			Assert.assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
-			Assert.assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
+			assertTrue(FileUtil.isAbsoluteFile("c:\\"));
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
+			assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
 		}
 	}
 
@@ -118,13 +118,13 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testisDirectory()
 	{
-		Assert.assertFalse(FileUtil.isDirectory(new File("foo")));
-		Assert.assertFalse(FileUtil.isDirectory("foo"));
-		Assert.assertFalse(FileUtil.isDirectory((String) null));
-		Assert.assertFalse(FileUtil.isDirectory((File) null));
-		Assert.assertTrue(FileUtil.isDirectory("/"));
-		Assert.assertTrue(FileUtil.isDirectory(sm_dirTestData + "SampleFiles"));
-		//		Assert.assertTrue(FileUtil.isDirectory(sm_dirTestData + "Samples2"));
+		assertFalse(FileUtil.isDirectory(new File("foo")));
+		assertFalse(FileUtil.isDirectory("foo"));
+		assertFalse(FileUtil.isDirectory((String) null));
+		assertFalse(FileUtil.isDirectory((File) null));
+		assertTrue(FileUtil.isDirectory("/"));
+		assertTrue(FileUtil.isDirectory(sm_dirTestData + "SampleFiles"));
+		//		assertTrue(FileUtil.isDirectory(sm_dirTestData + "Samples2"));
 
 	}
 
@@ -134,8 +134,8 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetExtension()
 	{
-		Assert.assertNull(FileUtil.getExtension(new File("foo")));
-		Assert.assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
+		assertNull(FileUtil.getExtension(new File("foo")));
+		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
 	}
 
 	/**
@@ -144,11 +144,11 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testCleanDots()
 	{
-		Assert.assertEquals(FileUtil.cleanDots(new File(".")), new File("."));
-		Assert.assertEquals(FileUtil.cleanDots(new File("..")), new File(".."));
-		Assert.assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile("a/..")), UrlUtil.urlToFile("."));
-		Assert.assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././../c.pdf")), UrlUtil.urlToFile("../../c.pdf"));
-		Assert.assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././a/../c.pdf")), UrlUtil.urlToFile("../c.pdf"));
+		assertEquals(FileUtil.cleanDots(new File(".")), new File("."));
+		assertEquals(FileUtil.cleanDots(new File("..")), new File(".."));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile("a/..")), UrlUtil.urlToFile("."));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././../c.pdf")), UrlUtil.urlToFile("../../c.pdf"));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././a/../c.pdf")), UrlUtil.urlToFile("../c.pdf"));
 	}
 
 	/**
@@ -157,10 +157,10 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testNewExtension()
 	{
-		Assert.assertNull(FileUtil.getExtension(new File("foo")));
-		Assert.assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), "bar"));
-		Assert.assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), ".bar"));
-		Assert.assertEquals(new File("a/foo.bar"), FileUtil.newExtension(new File("a/foo"), ".bar"));
+		assertNull(FileUtil.getExtension(new File("foo")));
+		assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), "bar"));
+		assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), ".bar"));
+		assertEquals(new File("a/foo.bar"), FileUtil.newExtension(new File("a/foo"), ".bar"));
 	}
 
 	/**
@@ -177,19 +177,19 @@ public class FileUtilTest extends JDFTestCaseBase
 		final File f = new File(sm_dirTestDataTemp + "bufOut.dat");
 		f.delete();
 		FileUtil.copyBytes(b, f);
-		Assert.assertEquals(f.length(), 66666);
+		assertEquals(f.length(), 66666);
 		final byte b2[] = FileUtil.fileToByteArray(f);
-		Assert.assertEquals(b.length, b2.length);
+		assertEquals(b.length, b2.length);
 		for (int i = 0; i < 66666; i++)
 		{
-			Assert.assertEquals(b[i], b2[i]);
+			assertEquals(b[i], b2[i]);
 		}
 		FileUtil.copyBytes(b, f);
-		Assert.assertEquals(f.length(), 2 * 66666);
+		assertEquals(f.length(), 2 * 66666);
 		final byte b3[] = FileUtil.fileToByteArray(f);
 		for (int i = 0; i < 66666; i++)
 		{
-			Assert.assertEquals(b[i % 66666], b3[i]);
+			assertEquals(b[i % 66666], b3[i]);
 		}
 	}
 
@@ -213,18 +213,18 @@ public class FileUtilTest extends JDFTestCaseBase
 		}
 
 		FileUtil.streamToFile(is, sm_dirTestDataTemp + "stream.dat");
-		Assert.assertTrue(f.exists());
+		assertTrue(f.exists());
 		final byte b2[] = FileUtil.fileToByteArray(f);
 		final byte b3[] = FileUtil.fileToByteArray(f);
-		Assert.assertEquals(b.length, b2.length);
+		assertEquals(b.length, b2.length);
 		for (int i = 0; i < 66666; i++)
 		{
-			Assert.assertEquals(b[i], b2[i]);
-			Assert.assertEquals(b[i], b3[i]);
+			assertEquals(b[i], b2[i]);
+			assertEquals(b[i], b3[i]);
 		}
 		f.delete();
 		final File f2 = new File(sm_dirTestDataTemp + "dummy_snafu.dat");
-		Assert.assertNull(FileUtil.fileToByteArray(f2));
+		assertNull(FileUtil.fileToByteArray(f2));
 	}
 
 	/**
@@ -235,10 +235,10 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		if (PlatformUtil.isWindows())
 		{
-			Assert.assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
-			Assert.assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
-			Assert.assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
-			Assert.assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
+			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
+			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
+			assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
+			assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
 		}
 	}
 
@@ -250,13 +250,13 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		Vector<File> list = FileUtil.listFilesInTree(root, "dir(.+)/");
-		Assert.assertEquals(list.size(), 2);
-		Assert.assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
-		Assert.assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
+		assertEquals(list.size(), 2);
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 		list = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("dir*/*.txt"));
-		Assert.assertEquals(list.size(), 4);
+		assertEquals(list.size(), 4);
 		Vector<File> list2 = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("*.txt"));
-		Assert.assertEquals(list2.size(), 6);
+		assertEquals(list2.size(), 6);
 	}
 
 	/**
@@ -268,9 +268,9 @@ public class FileUtilTest extends JDFTestCaseBase
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
 		for (File f : list)
-			Assert.assertTrue(f.isDirectory());
-		Assert.assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
-		Assert.assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
+			assertTrue(f.isDirectory());
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 	}
 
 	/**
@@ -281,9 +281,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo");
 		f.mkdir(); // make sure we have one
-		Assert.assertTrue(FileUtil.deleteAll(f));
-		Assert.assertTrue(f.mkdir());
-		Assert.assertNull(FileUtil.listFilesWithExtension(null, null));
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listFilesWithExtension(null, null));
 
 		for (char c = 'a'; c < 'g'; c++)
 		{
@@ -291,29 +291,29 @@ public class FileUtilTest extends JDFTestCaseBase
 			{
 				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
 				System.out.println("Create new File: " + f2.getAbsolutePath());
-				Assert.assertTrue(f2.createNewFile());
+				assertTrue(f2.createNewFile());
 				System.out.println("Is Created: " + f2.exists());
-				Assert.assertTrue(f2.exists());
+				assertTrue(f2.exists());
 			}
 		}
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
+		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
 		// TODO @Raier (2013-03-10) - File order depends from target system
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
-		Assert.assertNull(FileUtil.listFilesWithExtension(f, "CC"));
-		Assert.assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
+		// assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
+		assertNull(FileUtil.listFilesWithExtension(f, "CC"));
+		assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
 		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
 		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
+		// assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
 		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
 		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
+		// assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
 
 		if (PlatformUtil.isWindows())
 		{
-			Assert.assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
-			Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
+			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
+			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
 		}
 
 	}
@@ -326,38 +326,16 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo");
 		f.mkdir(); // make sure we have one
-		Assert.assertTrue(FileUtil.deleteAll(f));
-		Assert.assertTrue(f.mkdir());
-		Assert.assertNull(FileUtil.listFilesWithExtension(null, null));
-
-		for (char c = 'a'; c < 'g'; c++)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
-				Assert.assertTrue(f2.createNewFile());
-			}
-		}
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
-		// TODO @Raier (2013-03-10) - File order depends from target system
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
-		Assert.assertNull(FileUtil.listFilesWithExtension(f, "CC"));
-		Assert.assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
-		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
-		Assert.assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
-		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
-		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
-		// TODO @Raier (2013-03-10) - Works not on Linux Systems
-		// Assert.assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
-
-		if (PlatformUtil.isWindows())
-		{
-			Assert.assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
-			Assert.assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
-		}
-
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listFilesWithExpression(null, null));
+		final File f1 = FileUtil.getFileInDirectory(f, new File("a1.b.c"));
+		FileUtil.createNewFile(f1);
+		final File f2 = FileUtil.getFileInDirectory(f, new File("b.c"));
+		FileUtil.createNewFile(f2);
+		File[] listFilesWithExpression = FileUtil.listFilesWithExpression(f, "*.b.c");
+		assertEquals(listFilesWithExpression[0], f1);
+		assertEquals(listFilesWithExpression.length, 1);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -369,16 +347,16 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		final File f = new File(sm_dirTestDataTemp + File.separator + "foo");
 		f.mkdir(); // make sure we have one
-		Assert.assertTrue(FileUtil.deleteAll(f));
-		Assert.assertTrue(f.mkdir());
-		Assert.assertNull(FileUtil.listDirectories(null));
-		Assert.assertNull(FileUtil.listDirectories(f));
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listDirectories(null));
+		assertNull(FileUtil.listDirectories(f));
 		final File f1 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar1");
-		Assert.assertTrue(f1.mkdir());
+		assertTrue(f1.mkdir());
 		final File f2 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar2");
-		Assert.assertTrue(f2.createNewFile());
-		Assert.assertEquals(FileUtil.listDirectories(f).length, 1);
-		Assert.assertEquals("skipping bar2 - not a directory", FileUtil.listDirectories(f)[0], f1);
+		assertTrue(f2.createNewFile());
+		assertEquals(FileUtil.listDirectories(f).length, 1);
+		assertEquals("skipping bar2 - not a directory", FileUtil.listDirectories(f)[0], f1);
 
 	}
 
@@ -390,9 +368,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	public void testCreateFile()
 	{
 		final File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
-		Assert.assertTrue(FileUtil.createNewFile(f));
-		Assert.assertTrue(FileUtil.createNewFile(f));
-		Assert.assertFalse(FileUtil.createNewFile(null));
+		assertTrue(FileUtil.createNewFile(f));
+		assertTrue(FileUtil.createNewFile(f));
+		assertFalse(FileUtil.createNewFile(null));
 		f.delete();
 	}
 
@@ -402,37 +380,38 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testEquals()
 	{
-		Assert.assertTrue(FileUtil.equals(null, null));
-		Assert.assertFalse(FileUtil.equals(null, new File("a")));
-		Assert.assertFalse(FileUtil.equals(new File("a"), null));
-		Assert.assertTrue(FileUtil.equals(new File("a"), new File("a")));
+		assertTrue(FileUtil.equals(null, null));
+		assertFalse(FileUtil.equals(null, new File("a")));
+		assertFalse(FileUtil.equals(new File("a"), null));
+		assertTrue(FileUtil.equals(new File("a"), new File("a")));
 		if (PlatformUtil.isWindows())
 		{
-			Assert.assertTrue(FileUtil.equals(new File("a"), new File("A")));
+			assertTrue(FileUtil.equals(new File("a"), new File("A")));
 		}
 		else
 		{
-			Assert.assertFalse(FileUtil.equals(new File("a"), new File("A")));
+			assertFalse(FileUtil.equals(new File("a"), new File("A")));
 		}
 	}
 
 	/**
+	 * @throws Exception 
 	 * 
 	 */
 	@Test
 	public void testForceDelete() throws Exception
 	{
 		File f = new File(sm_dirTestDataTemp + "forcedelete.txt");
-		Assert.assertTrue(FileUtil.forceDelete(null));
-		Assert.assertTrue(FileUtil.forceDelete(f));
+		assertTrue(FileUtil.forceDelete(null));
+		assertTrue(FileUtil.forceDelete(f));
 		f.createNewFile();
-		Assert.assertTrue(FileUtil.forceDelete(f));
+		assertTrue(FileUtil.forceDelete(f));
 		f.createNewFile();
 		FileOutputStream fos = new FileOutputStream(f);
 		fos.write(32);
 		fos.flush();
 		fos.close();
-		Assert.assertTrue(FileUtil.forceDelete(f));
+		assertTrue(FileUtil.forceDelete(f));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -457,18 +436,18 @@ public class FileUtilTest extends JDFTestCaseBase
 		FileUtil.streamToFile(is, f.getPath());
 		final File f2 = new File(sm_dirTestDataTemp + "streamMove2.dat");
 
-		Assert.assertTrue(FileUtil.moveFile(f, f2));
-		Assert.assertFalse(f.exists());
-		Assert.assertTrue(f2.length() > 50000);
+		assertTrue(FileUtil.moveFile(f, f2));
+		assertFalse(f.exists());
+		assertTrue(f2.length() > 50000);
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDir";
 		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
-		Assert.assertFalse(fd.exists());
+		assertFalse(fd.exists());
 		fd.mkdirs();
 		final File f3 = new File(newdir + File.separator + "streamMove3.dat");
-		Assert.assertTrue(FileUtil.moveFile(f2, f3));
-		Assert.assertFalse(f2.exists());
-		Assert.assertTrue(f3.length() > 50000);
+		assertTrue(FileUtil.moveFile(f2, f3));
+		assertFalse(f2.exists());
+		assertTrue(f3.length() > 50000);
 
 	}
 
@@ -496,16 +475,16 @@ public class FileUtilTest extends JDFTestCaseBase
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDirCopy";
 		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
-		Assert.assertFalse(fd.exists());
+		assertFalse(fd.exists());
 		fd.mkdirs();
 		final File nf = FileUtil.copyFileToDir(f, fd);
-		Assert.assertNotNull(nf);
-		Assert.assertEquals(nf.getParentFile(), fd);
-		Assert.assertEquals(nf.getName(), f.getName());
-		Assert.assertTrue(f.exists());
-		Assert.assertTrue(nf.exists());
-		Assert.assertNull("do not copy self", FileUtil.copyFileToDir(nf, fd));
-		Assert.assertEquals(nf, FileUtil.copyFileToDir(f, fd));
+		assertNotNull(nf);
+		assertEquals(nf.getParentFile(), fd);
+		assertEquals(nf.getName(), f.getName());
+		assertTrue(f.exists());
+		assertTrue(nf.exists());
+		assertNull("do not copy self", FileUtil.copyFileToDir(nf, fd));
+		assertEquals(nf, FileUtil.copyFileToDir(f, fd));
 	}
 
 	/**
@@ -530,17 +509,17 @@ public class FileUtilTest extends JDFTestCaseBase
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDirCopy";
 		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
-		Assert.assertFalse(fd.exists());
+		assertFalse(fd.exists());
 		fd.mkdirs();
 		final File nf = FileUtil.ensureFileInDir(f, fd);
-		Assert.assertNotNull(nf);
+		assertNotNull(nf);
 		File parentDir = nf.getParentFile();
-		Assert.assertEquals(parentDir, fd);
-		Assert.assertEquals(nf.getName(), f.getName());
-		Assert.assertTrue(f.exists());
-		Assert.assertTrue(nf.exists());
-		Assert.assertEquals(nf, FileUtil.ensureFileInDir(f, fd));
-		Assert.assertEquals(nf, FileUtil.ensureFileInDir(nf, fd));
+		assertEquals(parentDir, fd);
+		assertEquals(nf.getName(), f.getName());
+		assertTrue(f.exists());
+		assertTrue(nf.exists());
+		assertEquals(nf, FileUtil.ensureFileInDir(f, fd));
+		assertEquals(nf, FileUtil.ensureFileInDir(nf, fd));
 	}
 
 	/**
@@ -565,14 +544,14 @@ public class FileUtilTest extends JDFTestCaseBase
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDir2";
 		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
-		Assert.assertFalse(fd.exists());
+		assertFalse(fd.exists());
 		fd.mkdirs();
 		final File nf = FileUtil.moveFileToDir(f, fd);
-		Assert.assertNotNull(nf);
-		Assert.assertEquals(nf.getParentFile(), fd);
-		Assert.assertEquals(nf.getName(), f.getName());
-		Assert.assertFalse(f.exists());
-		Assert.assertTrue(nf.exists());
+		assertNotNull(nf);
+		assertEquals(nf.getParentFile(), fd);
+		assertEquals(nf.getName(), f.getName());
+		assertFalse(f.exists());
+		assertTrue(nf.exists());
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -596,8 +575,8 @@ public class FileUtilTest extends JDFTestCaseBase
 		}
 
 		FileUtil.streamToFile(is.getInputStream(), sm_dirTestDataTemp + "stream.dat");
-		Assert.assertTrue(f.exists());
-		Assert.assertEquals(f.length(), 55555, 2000);
+		assertTrue(f.exists());
+		assertEquals(f.length(), 55555, 2000);
 
 		final FileInputStream fis = new FileInputStream(f);
 		for (int i = 0; i < 55555; i++)
@@ -605,24 +584,24 @@ public class FileUtilTest extends JDFTestCaseBase
 			b[i] = (byte) fis.read();
 			if (i % 287 == 0)
 			{
-				Assert.assertEquals((256 + b[i]) % 256, i % 256);
+				assertEquals((256 + b[i]) % 256, i % 256);
 			}
 		}
 
 		final int j = fis.read();
-		Assert.assertEquals("eof reached", j, -1);
+		assertEquals("eof reached", j, -1);
 		fis.close();
 		FileUtil.streamToFile(is.getInputStream(), sm_dirTestDataTemp + "stream.dat");
-		Assert.assertTrue(f.exists());
-		Assert.assertEquals("deleted old stuff", f.length(), 55555, 2000);
+		assertTrue(f.exists());
+		assertEquals("deleted old stuff", f.length(), 55555, 2000);
 
 		final FileInputStream fis2 = new FileInputStream(f);
 		final File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp + "stream2.dat");
-		Assert.assertTrue(f2.canRead());
-		Assert.assertTrue(f.delete());
-		Assert.assertTrue(f2.delete());
-		Assert.assertFalse(f.delete());
-		Assert.assertNull("null safe", FileUtil.streamToFile(null, sm_dirTestDataTemp + "stream2.dat"));
+		assertTrue(f2.canRead());
+		assertTrue(f.delete());
+		assertTrue(f2.delete());
+		assertFalse(f.delete());
+		assertNull("null safe", FileUtil.streamToFile(null, sm_dirTestDataTemp + "stream2.dat"));
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -632,23 +611,23 @@ public class FileUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetFileInDirectory()
 	{
-		Assert.assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
-		Assert.assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));
-		Assert.assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("/b")));
-		Assert.assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
-		Assert.assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("../c/d")), new File("a/c/d"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
-		Assert.assertEquals(FileUtil.getFileInDirectory(new File("a/b/"), new File("/c/d/")), new File("a/b/c/d"));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("/b")));
+		assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
+		assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("../c/d")), new File("a/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b/"), new File("/c/d/")), new File("a/b/c/d"));
 
 		if (PlatformUtil.isWindows())
 		{
-			Assert.assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
-			Assert.assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
 		}
 	}
 
