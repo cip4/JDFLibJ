@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,6 +91,9 @@ public class DelayedPersist extends Thread
 	private MyMutex waitMutex;
 	private final Log log;
 
+	/**
+	 * 
+	 */
 	private DelayedPersist()
 	{
 		super("DelayedPersist");
@@ -236,19 +239,22 @@ public class DelayedPersist extends Thread
 			}
 		}
 
-		boolean gotOne = false;
 		// now the unsynchronized stuff
 		for (IPersistable qp : theList)
 		{
 			qp.persist();
-			gotOne = true;
 		}
-		if (gotOne)
+		if (theList.size() > 0)
 		{
 			System.gc();
 			t0 -= System.currentTimeMillis() - t;
+			// we modified and may have added something in the process - check again
+			return persistQueues();
 		}
-		return (int) t0;
+		else
+		{
+			return (int) t0;
+		}
 	}
 
 	/**

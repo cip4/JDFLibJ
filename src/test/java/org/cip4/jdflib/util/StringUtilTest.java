@@ -675,7 +675,11 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.replaceChar("abbcc", 'a', null, 0), "bbcc");
 		assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 0), "acc");
 		assertEquals(StringUtil.replaceChar("abbcc", 'b', null, 2), "abcc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 0), "a_2_2cc");
 		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 2), "ab_2cc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 4), "abbcc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 5), "abbcc");
+		assertEquals(StringUtil.replaceChar("abbcc", 'b', "_2", 6), "abbcc");
 	}
 
 	/**

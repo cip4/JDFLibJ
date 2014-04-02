@@ -99,14 +99,15 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @return
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		VElement vParts = theElement.getChildElementVector(ElementName.PART, null);
 		if (vParts != null)
 		{
-			for (int i = 0; i < vParts.size(); i++)
-				vMap.add(vParts.get(i).getAttributeMap());
+			for (KElement e : vParts)
+				vMap.add(e.getAttributeMap());
 			if (vParts.size() == 0)
 				vMap.add(new JDFAttributeMap());
 		}
@@ -226,6 +227,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAmountPool()
 	 */
+	@Override
 	public JDFAmountPool getAmountPool()
 	{
 		return (JDFAmountPool) getRoot().getElement(ElementName.AMOUNTPOOL);
@@ -234,6 +236,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAttribute(java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	public String getAttribute(String attrib, String nameSpaceURI, String def)
 	{
 		return getRoot().getAttribute(attrib, nameSpaceURI, def);
@@ -242,6 +245,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getRealAttribute(java.lang.String, java.lang.String, double)
 	 */
+	@Override
 	public double getRealAttribute(String attName, String namespace, double def)
 	{
 		return def;
@@ -250,14 +254,16 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#hasAttribute(java.lang.String)
 	 */
+	@Override
 	public boolean hasAttribute(String attName)
 	{
-		return false;
+		return StringUtil.getNonEmpty(getAttribute(attName, null, null)) != null;
 	}
 
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getLinkRoot()
 	 */
+	@Override
 	public JDFResource getLinkRoot()
 	{
 		return (JDFResource) getResource();
@@ -266,6 +272,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#setAttribute(java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void setAttribute(String attrib, String value, String nameSpaceURI)
 	{
 		throw new IllegalArgumentException();
@@ -274,6 +281,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#removeAttribute(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void removeAttribute(String attrib, String nameSpaceURI)
 	{
 		// nop
@@ -283,6 +291,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getCreateAmountPool()
 	 */
+	@Override
 	public JDFAmountPool getCreateAmountPool()
 	{
 		return (JDFAmountPool) getRoot().getCreateElement(ElementName.AMOUNTPOOL);

@@ -852,7 +852,7 @@ public class StringUtil
 		{
 			return null;
 		}
-		if (offset > strWork.length())
+		if (offset > strWork.length() || strWork.indexOf(c, offset) < 0)
 		{
 			return strWork;
 		}

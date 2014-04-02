@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -103,7 +103,8 @@ public class UnitParser
 
 		final VString v = StringUtil.tokenize(val, " ", false);
 		boolean bGood = true;
-		for (int i = 0; i < v.size(); i++)
+		int size = v.size();
+		for (int i = 0; i < size; i++)
 		{
 			String tmp = v.get(i).toLowerCase();
 			double factor = 1.0;
@@ -168,6 +169,15 @@ public class UnitParser
 	public int getPrecision()
 	{
 		return precision;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "UnitParser [precision=" + precision + "]";
 	}
 
 }
