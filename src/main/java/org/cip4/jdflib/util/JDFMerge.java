@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -499,15 +499,21 @@ public class JDFMerge
 			JDFNode toMergeLocalNode = subJDFNode.getChildJDFNode(overwriteLocalNode.getID(), false);
 			// swap from / to in case of remerge, since we do not overwrite the main node
 			mergeResourceLinkPool(overwriteLocalNode, toMergeLocalNode);
+			fixPartStatus(numParts, toMergeLocalNode);
+		}
+	}
 
-			final EnumVersion version = toMergeLocalNode.getVersion(true);
-			if ((version != null) && (version.getValue() >= EnumVersion.Version_1_3.getValue()))
+	private void fixPartStatus(final int numParts, JDFNode toMergeLocalNode)
+	{
+		final EnumVersion version = toMergeLocalNode.getVersion(true);
+		if ((version != null) && (version.getValue() >= EnumVersion.Version_1_3.getValue()))
+		{
+			final JDFNode.EnumNodeStatus stat = toMergeLocalNode.getStatus();
+			if (stat != null && !stat.equals(JDFElement.EnumNodeStatus.Part) && !stat.equals(JDFElement.EnumNodeStatus.Pool) && numParts > 0)
 			{
-				final JDFNode.EnumNodeStatus stat = toMergeLocalNode.getStatus();
-				if (stat != null && !stat.equals(JDFElement.EnumNodeStatus.Part) && !stat.equals(JDFElement.EnumNodeStatus.Pool) && numParts > 0)
-				{
-					toMergeLocalNode.setPartStatus(parts, stat, null);
-				}
+				log.error("updating inconsistent node status from root status JobID=" + toMergeLocalNode.getJobID(true) + " / " + toMergeLocalNode.getJobPartID(false) + " "
+						+ parts);
+				toMergeLocalNode.setPartStatus(parts, stat, null);
 			}
 		}
 	}

@@ -9605,13 +9605,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					}
 				}
 
-				final VString partVector = getPartIDKeys(spawnPart);
-				if (getStatus() != EnumNodeStatus.Part)
+				if (!EnumNodeStatus.Part.equals(getStatus()))
 				{
 					ni.setAttribute(AttributeName.NODESTATUS, getAttribute(AttributeName.STATUS));
-					this.setStatus(EnumNodeStatus.Part);
+					setStatus(EnumNodeStatus.Part);
 				}
 
+				final VString partVector = getPartIDKeys(spawnPart);
 				for (int i = 0; i < vSpawnParts.size(); i++)
 				{
 					// in case we spawn a subset, try to get the superset list

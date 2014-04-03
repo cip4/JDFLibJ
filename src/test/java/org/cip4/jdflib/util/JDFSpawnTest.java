@@ -2489,6 +2489,47 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSpawnNILocalPartStatus()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType("ProcessGroup", false);
+
+		final VString v = new VString();
+		v.add("Interpreting");
+		v.add("Rendering");
+
+		final JDFNode n2 = n.addCombined(v);
+		n2.setJobPartID("J1");
+		JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SignatureName", "Sig1");
+		partMap.put("SheetName", "S1");
+
+		JDFNodeInfo nodeInfo = n2.getCreateNodeInfo();
+		nodeInfo.setPartIDKeys(new VString("SignatureName SheetName", null));
+		n2.setPartStatus(partMap, EnumNodeStatus.Setup, null);
+		nodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
+		n2.setStatus(EnumNodeStatus.Waiting);
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		VJDFAttributeMap vMap = new VJDFAttributeMap(partMap);
+		final JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, vMap, true, true, true, true);
+		spawnedNode.setPartStatus(partMap, EnumNodeStatus.Cleanup, null);
+		spawnedNode.setStatus(EnumNodeStatus.Suspended);
+
+		JDFMerge m = new JDFMerge(n);
+		m.mergeJDF(spawnedNode);
+		JDFNode n3 = n.getJobPart("J1", null);
+		assertEquals("inconsistent parts get merged to the root value", n3.getPartStatus(partMap, 0), EnumNodeStatus.Suspended);
+		n3.setStatus(EnumNodeStatus.Part);
+		assertEquals("inconsistent parts get merged to the root value", n3.getPartStatus(partMap, 0), EnumNodeStatus.Suspended);
+	}
+
+	/**
+	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
+	 * 
+	 */
+	@Test
 	public void testSpawnCINI()
 	{
 		for (int i = 0; i < 2; i++)

@@ -342,13 +342,12 @@ public class JDFSpawn
 			return;
 		}
 		final VElement vn = node.getvJDFNode(null, null, false);
-		final int size = vn.size();
 		// fill all resources and all links of all children into vResPool and links
-		for (int i = 0; i < size; i++)
+		for (KElement e : vn)
 		{
-			final JDFNode vnNode_i = (JDFNode) vn.elementAt(i);
+			final JDFNode node = (JDFNode) e;
 			// make sure we have a nodeinfo in all spawned nodes of main in case we have to merge stati
-			vnNode_i.prepareNodeInfo(vSpawnParts);
+			node.prepareNodeInfo(vSpawnParts);
 		}
 	}
 
