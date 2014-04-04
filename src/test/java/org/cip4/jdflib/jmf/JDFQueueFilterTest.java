@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,9 +82,11 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -97,16 +99,18 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	JDFQueueFilter filter;
 
 	/**
+	 * @throws Exception 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp()
+	public void setUp() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.QUEUE);
 		theQueue = (JDFQueue) d.getRoot();
 		d = new JDFDoc(ElementName.JMF);
 		theJMF = d.getJMFRoot();
 		filter = theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
+		super.setUp();
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -495,6 +499,34 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		Assert.assertEquals("we changed priority...", qCopy.numEntries(null), 1);
 		Assert.assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
 
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCopyToDeltaPerformance()
+	{
+		theQueue.setAutomated(true);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		CPUTimer ct = new CPUTimer(false);
+		for (int i = 0; i < 15000; i++)
+		{
+			final JDFQueue qLast = i < 11000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			if (i > 11000)
+			{
+				ct.start();
+				JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+				assertEquals("test " + i, qCopy.getQueueEntryVector().size(), 1);
+				assertEquals("test " + i, qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i);
+				log.info(i);
+				ct.stop();
+			}
+		}
+		log.info(ct.toString());
 	}
 
 	/**

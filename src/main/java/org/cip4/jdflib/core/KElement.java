@@ -2527,6 +2527,33 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Get the number of child elements of a certain class
+	 * <p>
+	 * @param clazz the child class
+	 * @param bRecurse if true search the tree
+	 *  
+	 * @return int the number of matching child elements
+	 */
+	public int numChildrenByClass(Class<?> clazz, boolean bRecurse)
+	{
+		int i = 0;
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			if (clazz.isInstance(n))
+			{
+				i++;
+			}
+			if (bRecurse && (n instanceof KElement))
+			{
+				i += ((KElement) n).numChildrenByClass(clazz, true);
+			}
+			n = n.getNextSibling();
+		}
+		return i;
+	}
+
+	/**
 	 * Get the number of child elements. If String 'node' is null, an empty string or '*', all nodes are counted. This method is the same as numChildElements
 	 * but prevents before the maybe unwanted virtuality of numChildElements.
 	 * <p>
@@ -3792,7 +3819,6 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return string representativ of this
 	 * @see Object#toString()
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public String toString()
 	{
@@ -3847,7 +3873,6 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return String the dom element serialized as a string
 	 * @throws JDFException if an error occurs while serializing
 	 */
-	@SuppressWarnings("deprecation")
 	public String toDisplayXML(final int indent)
 	{
 		final String s = toXML(indent);
@@ -5335,7 +5360,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAnchor(String newID)
 	{
-		String id = this.getAttribute(JDFCoreConstants.ID, null, null);
+		String id = StringUtil.getNonEmpty(getAttribute(JDFCoreConstants.ID, null, null));
 		if (id != null)
 		{
 			return id;

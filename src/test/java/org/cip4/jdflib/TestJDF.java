@@ -191,42 +191,44 @@ public class TestJDF extends JDFTestCaseBase
 			jdfDoc.write2File(strOutJDFPath, 2, false);
 
 		}*/
+	/*
+		public void testSpawn() throws Throwable
+		{
+			JDFDoc jdfDoc = JDFDoc.parseFile("/data/export.jdf");
 
-	/*public void testSpawn() throws Throwable
-	{
-		JDFDoc jdfDoc = JDFDoc.parseFile("/share/data/fehler/Vers_Sted.1(Vers_Sted.1).jdf");
+			JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("1001", JDFConstants.EMPTYSTRING);
+			VJDFAttributeMap vamParts = new VJDFAttributeMap();
+			JDFAttributeMap amParts0 = new JDFAttributeMap();
 
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("SFP0.I", JDFConstants.EMPTYSTRING);
+			//		amParts0.put("PartVersion", "DT_Mac DT_Mac");
+			//		amParts0.put("Separation", "Cyan");
+			amParts0.put("SheetName", "Umschlag");
+			amParts0.put("Side", "Front");
+			amParts0.put("SignatureName", "SIG001");
 
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
+			vamParts.add(amParts0);
 
-		JDFAttributeMap amParts0 = new JDFAttributeMap();
+			VString vsRWResourceIDs = new VString();
 
-		amParts0.put("PartVersion", "DT_Mac DT_Mac");
-		amParts0.put("Separation", "Cyan");
-		amParts0.put("SheetName", "FB 001");
-		amParts0.put("Side", "Front");
-		amParts0.put("SignatureName", "Sig001");
+			vsRWResourceIDs.add("Output");
 
-		vamParts.add(amParts0);
+			JDFSpawn spawn = new JDFSpawn(nodeProc);
 
-		VString vsRWResourceIDs = new VString();
+			spawn.setNode(nodeProc);
+			spawn.bFixResources = false;
+			spawn.bSpawnRWPartsMultiple = true;
+			spawn.bSpawnIdentical = true;
 
-		vsRWResourceIDs.add("Link_131218_053435863_000421");
-		vsRWResourceIDs.add("Link_131218_053435871_000422");
-		vsRWResourceIDs.add("r_130507_125650793_001226");
+			JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
+			nodeSubJDF.setPartStatus(vamParts, EnumNodeStatus.Completed, "test");
+			assertNotNull(nodeSubJDF);
+			JDFMerge m = new JDFMerge(jdfDoc.getJDFRoot());
+			m.mergeJDF(nodeSubJDF);
+			JDFNode nodeProcMerged = jdfDoc.getJDFRoot().getJobPart("1001", JDFConstants.EMPTYSTRING);
+			assertEquals(nodeProcMerged.getPartStatus(amParts0, 0), EnumNodeStatus.Completed);
 
-		JDFSpawn spawn = new JDFSpawn(nodeProc);
-
-		spawn.setNode(nodeProc);
-		spawn.bFixResources = false;
-		spawn.bSpawnRWPartsMultiple = true;
-		spawn.bSpawnIdentical = true;
-
-		JDFNode nodeSubJDF = spawn.spawn("", null, vsRWResourceIDs, vamParts, true, true, true, false);
-
-		assertNotNull(nodeSubJDF);
-	}*/
+		}
+	*/
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()

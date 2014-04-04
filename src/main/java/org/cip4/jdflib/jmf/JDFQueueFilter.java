@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -236,7 +236,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				qe.deleteNode();
 			}
-			if (noDifference(qe))
+			if (noDifference(qe, true))
 			{
 				qe.deleteNode();
 			}
@@ -257,9 +257,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 			if (qeMatch.matches(qe))
 			{
+				if (noDifference(qe, false))
+				{
+					return null;
+				}
 				qe = (JDFQueueEntry) newQueue.copyElement(qe, null);
 				cleanQE(qe);
-				if (noDifference(qe))
+				if (noDifference(qe, true))
 				{
 					qe.deleteNode();
 					qe = null;
@@ -308,7 +312,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * 
 		 * @return true if this element has been removed because it is identical to a previous element (no change)
 		 */
-		private boolean noDifference(final JDFQueueEntry qe)
+		private boolean noDifference(final JDFQueueEntry qe, boolean clean)
 		{
 			if (lastMap == null)
 			{
@@ -320,9 +324,15 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				return false;
 			}
-			lastMap.remove(qeID);
-			cleanQE(lastQueueEntry);
+			if (clean)
+			{
+				cleanQE(lastQueueEntry);
+			}
 			final boolean equal = qe.isEqual(lastQueueEntry);
+			if (clean || equal)
+			{
+				lastMap.remove(qeID);
+			}
 			return equal;
 		}
 
@@ -778,6 +788,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 * @return
 	*/
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
@@ -787,6 +798,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	*/
+	@Override
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)

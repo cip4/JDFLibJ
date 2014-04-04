@@ -366,6 +366,21 @@ public class KElementTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testNumChildrenByClass()
+	{
+		JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) root.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		assertEquals(root.numChildrenByClass(xm.getClass(), false), 0);
+		assertEquals(root.numChildrenByClass(xm.getClass(), true), 1);
+		assertEquals(root.numChildrenByClass(JDFResourcePool.class, false), 1);
+		xm.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "Sh1");
+		assertEquals(root.numChildrenByClass(xm.getClass(), true), 3);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetElementByClass()
 	{
 		final JDFDoc d = creatXMDoc();
