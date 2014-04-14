@@ -510,7 +510,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		CPUTimer ct = new CPUTimer(false);
-		for (int i = 0; i < 15000; i++)
+		for (int i = 0; i < 12000; i++)
 		{
 			final JDFQueue qLast = i < 11000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
@@ -522,7 +522,8 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 				JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 				assertEquals("test " + i, qCopy.getQueueEntryVector().size(), 1);
 				assertEquals("test " + i, qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i);
-				log.info(i);
+				if ((i % 100) == 0)
+					log.info(ct.toString());
 				ct.stop();
 			}
 		}

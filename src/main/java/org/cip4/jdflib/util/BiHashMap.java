@@ -90,6 +90,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	private final HashMap<a, b> mapKey;
 	private final HashMap<b, a> mapVal;
+	private boolean unique;
 
 	/**
 	 * 
@@ -98,6 +99,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	{
 		mapKey = new HashMap<a, b>();
 		mapVal = new HashMap<b, a>();
+		unique = true;
 	}
 
 	/**
@@ -187,15 +189,18 @@ public class BiHashMap<a, b> implements Map<a, b>
 		{
 			return null;
 		}
-		final b o = mapKey.get(key);
-		if (o != null)
+		if (unique)
 		{
-			mapVal.remove(o);
-		}
-		final a o2 = mapVal.get(val);
-		if (o2 != null)
-		{
-			mapKey.remove(o2);
+			final b o = mapKey.get(key);
+			if (o != null)
+			{
+				mapVal.remove(o);
+			}
+			final a o2 = mapVal.get(val);
+			if (o2 != null)
+			{
+				mapKey.remove(o2);
+			}
 		}
 		mapVal.put(val, key);
 		mapKey.put(key, val);
@@ -240,7 +245,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	@Override
 	public String toString()
 	{
-		final String s = "[BiHashMap]: " + mapKey;
+		final String s = "[BiHashMap]: " + unique + " " + mapKey;
 		return s;
 	}
 
@@ -342,6 +347,15 @@ public class BiHashMap<a, b> implements Map<a, b>
 	public Collection<b> values()
 	{
 		return mapKey.values();
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param b
+	 */
+	public void setUnique(boolean b)
+	{
+		unique = b;
 	}
 
 }

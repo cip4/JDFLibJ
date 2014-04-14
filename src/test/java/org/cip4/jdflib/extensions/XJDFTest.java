@@ -287,7 +287,7 @@ public class XJDFTest extends JDFTestCaseBase
 	{
 		n = JDFDoc.parseFile(sm_dirTestData + "job4.jdf").getJDFRoot();
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bSingleNode = false;
+		xjdf20.setSingleNode(false);
 		e = xjdf20.makeNewJDF(n, null);
 		KElement procList = e.getXPathElement("ProcessList");
 		assertNotNull(procList);
@@ -300,7 +300,7 @@ public class XJDFTest extends JDFTestCaseBase
 	public void testXJDFRunList()
 	{
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeRunList = true;
+		xjdf20.setMergeRunList(true);
 		n = new JDFDoc("JDF").getJDFRoot();
 		JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
 		JDFRunList rlr1 = rl.addPDF("test.pdf", 0, 2);
@@ -328,8 +328,8 @@ public class XJDFTest extends JDFTestCaseBase
 	public void testXJDFRangeList()
 	{
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeRunList = true;
-		xjdf20.bConvertTilde = true;
+		xjdf20.setMergeRunList(true);
+		xjdf20.setConvertTilde(true);
 		n = new JDFDoc("JDF").getJDFRoot();
 		JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
 		JDFRunList rlr1 = rl.addPDF("test.pdf", 0, 2);
@@ -391,7 +391,7 @@ public class XJDFTest extends JDFTestCaseBase
 		sp.appendPosition();
 
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeLayout = true;
+		xjdf20.setMergeLayout(true);
 
 		e = xjdf20.makeNewJDF(n, null);
 		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
@@ -426,7 +426,7 @@ public class XJDFTest extends JDFTestCaseBase
 		sp.appendPosition();
 
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeLayout = true;
+		xjdf20.setMergeLayout(true);
 
 		e = xjdf20.makeNewJDF(n, null);
 		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
@@ -553,10 +553,10 @@ public class XJDFTest extends JDFTestCaseBase
 		nP.linkResource(c, EnumUsage.Output, null);
 
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bSingleNode = true;
+		xjdf20.setSingleNode(true);
 		e = xjdf20.makeNewJDF(nP, null);
 		assertFalse(e.toString().contains("ExposedMedia"));
-		xjdf20.bSingleNode = false;
+		xjdf20.setSingleNode(false);
 		e = xjdf20.makeNewJDF(nP, null);
 		assertTrue(e.toString().contains("ExposedMedia"));
 	}
@@ -917,12 +917,12 @@ public class XJDFTest extends JDFTestCaseBase
 		fsc.setDescriptiveName("dep");
 		le.getDependencies().appendLayoutElement();
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeRunList = false;
+		xjdf20.setMergeRunList(false);
 		e = xjdf20.makeNewJDF(n, null);
 		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/LayoutElement/@Dependencies", null));
 
 		xjdf20 = new XJDF20();
-		xjdf20.bMergeRunList = true;
+		xjdf20.setMergeRunList(true);
 		e = xjdf20.makeNewJDF(n, null);
 		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/RunList/@Dependencies", null));
 	}
@@ -982,7 +982,7 @@ public class XJDFTest extends JDFTestCaseBase
 			}
 		}
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bMergeLayout = true;
+		xjdf20.setMergeLayout(true);
 		e = xjdf20.makeNewJDF(n, null);
 		assertNull(e.getChildByTagName("StrippingParams", null, 0, null, false, true));
 		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "mergelayout.xjdf", 2, false);

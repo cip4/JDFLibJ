@@ -272,7 +272,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		JDFNode n = gt.getNode();
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "cpGoldenTicket.jdf", 2, false);
 		XJDF20 jdfToXJD = new XJDF20();
-		jdfToXJD.bMergeLayout = true;
+		jdfToXJD.setMergeLayout(true);
 		KElement xjdf = jdfToXJD.makeNewJDF(n, null);
 		XMLDoc d = xjdf.getOwnerDocument_KElement();
 		d.write2File(sm_dirTestDataTemp + "cpGoldenTicket.xjdf", 2, false);

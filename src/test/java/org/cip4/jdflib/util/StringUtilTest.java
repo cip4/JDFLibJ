@@ -779,6 +779,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseBoolean("", true), true);
 		assertEquals(StringUtil.parseBoolean("TRUE ", false), true);
 		assertEquals(StringUtil.parseBoolean(" FalSe ", true), false);
+		assertEquals(StringUtil.parseBoolean("1 ", false), true);
+		assertEquals(StringUtil.parseBoolean(" 0 ", true), false);
 	}
 
 	/**

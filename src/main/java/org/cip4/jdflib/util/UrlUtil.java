@@ -993,6 +993,7 @@ public class UrlUtil
 		if (mimeMap == null)
 		{
 			mimeMap = new BiHashMap<String, String>();
+			mimeMap.setUnique(false);
 			mimeMap.put("pdf", JDFCoreConstants.MIME_PDF);
 			mimeMap.put("ps", JDFCoreConstants.MIME_PS);
 

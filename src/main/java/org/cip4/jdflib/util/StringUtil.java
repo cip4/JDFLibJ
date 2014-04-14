@@ -2152,11 +2152,12 @@ public class StringUtil
 	}
 
 	/**
-	 * parses a string to double and catches any format exception
+	 * parses a string to boolean and catches any format exception
+	 * "1" and "0" are treated as true and false respectively
 	 * 
 	 * @param s the string to parse
 	 * @param def the default to return in case of error
-	 * @return the parsed double of s
+	 * @return the parsed boolean of s
 	 * @since 080404 handles "" gracefully
 	 */
 	public static boolean parseBoolean(String s, final boolean def)
@@ -2167,12 +2168,12 @@ public class StringUtil
 		}
 
 		s = s.trim().toLowerCase();
-		if ("false".equals(s))
+		if ("false".equals(s) || "0".equals(s))
 		{
 			return false;
 		}
 
-		if ("true".equals(s))
+		if ("true".equals(s) || "1".equals(s))
 		{
 			return true;
 		}

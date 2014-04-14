@@ -219,23 +219,23 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * if true merge stripping and layout
 	 */
-	public boolean bMergeLayout = true;
+	private boolean bMergeLayout = true;
 	/**
 	 * if true merge stripping and layout
 	 */
-	public boolean bMergeLayoutPrep = true;
+	private boolean bMergeLayoutPrep = true;
 	/**
 	 * if true clean up runlist/LayoutElement
 	 */
-	public boolean bMergeRunList = true;
+	private boolean bMergeRunList = true;
 	/**
 	 * set to retain spawn information
 	 */
-	public boolean bRetainSpawnInfo = false;
+	boolean bRetainSpawnInfo = false;
 	/**
 	 * set to update version stamps
 	 */
-	public boolean bSingleNode = true;
+	private boolean bSingleNode = true;
 	/**
 	 * set to update version stamps
 	 */
@@ -243,28 +243,28 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * set to define type safe messages
 	 */
-	public boolean bTypeSafeMessage = true;
+	boolean bTypeSafeMessage = true;
 	/**
 	 * set to define one type for query, command and registration
 	 */
-	public boolean bAbstractMessage = true;
+	boolean bAbstractMessage = true;
 	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
 	 */
-	public boolean bSpanAsAttribute = true;
+	private boolean bSpanAsAttribute = true;
 	/**
 	 * if true, Intents are partitioned
 	 */
-	public boolean bIntentPartition = false;
+	boolean bIntentPartition = false;
 
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
-	public boolean bHTMLColor = false;
+	boolean bHTMLColor = false;
 	/**
 	 * if true tildes are retained as range delimitors
 	 */
-	public boolean bConvertTilde = false;
+	private boolean bConvertTilde = false;
 
 	/**
 	 * @param root the jdf or jmf to transform
@@ -429,7 +429,7 @@ public class XJDF20 extends BaseElementWalker
 	 * @param r
 	 * @return
 	 */
-	public String getClassName(final JDFResource r)
+	String getClassName(final JDFResource r)
 	{
 		if (r == null)
 		{
@@ -446,8 +446,9 @@ public class XJDF20 extends BaseElementWalker
 			}
 		}
 		if (resourceClass == null)
+		{
 			return "Parameter"; // assume parameter if unknown 3rd party stuff
-
+		}
 		String className = "Resource";
 		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
 		{
@@ -1013,28 +1014,32 @@ public class XJDF20 extends BaseElementWalker
 			VElement v = super.setResource(rl, linkTarget, xjdf);
 			KElement e0 = null;
 			VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);
-			for (KElement e : v)
+			for (KElement e1 : v)
 			{
-				JDFPart part = (JDFPart) e.getElement(ElementName.PART);
-				e = e.getElement(ElementName.COLORINTENT);
+				JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
+				KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
 
 				if (e0 == null)
-					e0 = e;
-				if (e == null)
+				{
+					e0 = colorIntent;
+				}
+				if (colorIntent == null)
 				{
 					if (part != null)
+					{
 						part.deleteNode();
+					}
 				}
 				else
 				{
 					if (part != null)
 					{
 						EnumSide side = part.getSide();
-						if (EnumSide.Front.equals(side) && e0 != e)
+						if (EnumSide.Front.equals(side) && e0 != colorIntent)
 						{
 							for (String att : frontBack)
 							{
-								String attVal = e.getAttribute(att, null, null);
+								String attVal = colorIntent.getAttribute(att, null, null);
 								if (attVal != null)
 								{
 									e0.setAttribute(att, attVal);
@@ -1045,7 +1050,7 @@ public class XJDF20 extends BaseElementWalker
 						{
 							for (String att : frontBack)
 							{
-								String attVal = e.getAttribute(att, null, null);
+								String attVal = colorIntent.getAttribute(att, null, null);
 								if (attVal != null)
 								{
 									e0.setAttribute(att + "Back", attVal);
@@ -1058,10 +1063,10 @@ public class XJDF20 extends BaseElementWalker
 					{
 						for (String att : frontBack)
 						{
-							String attVal = e.getAttribute(att, null, null);
+							String attVal = colorIntent.getAttribute(att, null, null);
 							if (attVal != null)
 							{
-								if (e0 != e)
+								if (e0 != colorIntent)
 								{
 									String attValBase = e0.getAttribute(att, null, null);
 									if (attValBase == null)
@@ -1141,7 +1146,7 @@ public class XJDF20 extends BaseElementWalker
 					return null;
 				}
 				setResource(rl, linkTarget, newRoot);
-				if (!bSingleNode)
+				if (!isSingleNode())
 				{
 					setProcess(rl);
 				}
@@ -1436,7 +1441,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			if (first.contains(jdf.getID()) || bSingleNode && first.size() > 0)
+			if (first.contains(jdf.getID()) || isSingleNode() && first.size() > 0)
 			{
 				return null;
 			}
@@ -1740,7 +1745,7 @@ public class XJDF20 extends BaseElementWalker
 		private JDFAttributeMap convertRanges(JDFElement jdf)
 		{
 			JDFAttributeMap map = jdf.getAttributeMap();
-			if (bConvertTilde)
+			if (isConvertTilde())
 			{
 				VString keys = map.getKeys();
 				for (String key : keys)
@@ -1923,7 +1928,7 @@ public class XJDF20 extends BaseElementWalker
 		public KElement walk(KElement jdf, KElement xjdf)
 		{
 			KElement e = super.walk(jdf, xjdf);
-			if (!bSingleNode && e != null)
+			if (!isSingleNode() && e != null)
 			{
 				JDFNode n = ((JDFAudit) jdf).getParentJDF();
 				e.copyAttribute(AttributeName.JOBPARTID, n);
@@ -2111,7 +2116,7 @@ public class XJDF20 extends BaseElementWalker
 			final KElement ret;
 			final JDFSpanBase span = (JDFSpanBase) jdf;
 
-			if (bSpanAsAttribute)
+			if (isSpanAsAttribute())
 			{
 				ret = spanToAttribute(span, xjdf);
 			}
@@ -2934,11 +2939,11 @@ public class XJDF20 extends BaseElementWalker
 			KElement parent = jdf.getParentNode_KElement();
 			boolean bInRunList = parent instanceof JDFRunList;
 			if (bInRunList)
-				bMerge = bMergeRunList;
+				bMerge = isMergeRunList();
 			else
 				bMerge = false;
 			KElement ret = super.walk(jdf, xjdf);
-			if (!bInRunList && bMergeRunList)
+			if (!bInRunList && isMergeRunList())
 			{
 				KElement retPar = ret.getDeepParent("ParameterSet", 0);
 				if (retPar != null)
