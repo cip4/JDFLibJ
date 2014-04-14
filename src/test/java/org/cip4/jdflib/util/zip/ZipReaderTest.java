@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -171,6 +171,26 @@ public class ZipReaderTest extends JDFTestCaseBase
 		assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
 		assertNotNull(e);
+
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetEntryEscaped()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		assertNotNull(r.getEntry("content/%20.pdf"));
+		assertNotNull(r.getEntry("content/a%20b.pdf"));
+		assertNotNull(r.getEntry("content/a b.pdf"));
+		assertNull(r.getEntry("content/ .pdf"));
+		r.setCaseSensitive(false);
+		assertNotNull(r.getEntry("content/A%20b.pdf"));
+		assertNotNull(r.getEntry("content/A b.pdf"));
+		assertNull(r.getEntry("content/ .Pdf"));
+		assertNotNull(r.getEntry("content/%20.Pdf"));
 	}
 
 	/**
@@ -299,6 +319,26 @@ public class ZipReaderTest extends JDFTestCaseBase
 		assertTrue(e2.getName().endsWith(".jdf"));
 		ZipEntry e3 = r.getMatchingEntry("*.jdf", 2);
 		assertNull(e3);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetMatchingEntryEscaped()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "testZip.zip");
+		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
+		assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("* b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
+		r.setCaseSensitive(false);
+		assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
 	}
 
 	/**

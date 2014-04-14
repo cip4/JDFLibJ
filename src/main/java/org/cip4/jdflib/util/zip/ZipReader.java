@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -297,15 +297,29 @@ public class ZipReader
 		}
 		urlString = UrlUtil.cleanDots(urlString);
 		ZipEntry ze = getNextEntry();
+		String urlUnEscaped = UrlUtil.unEscape(urlString);
+		if (urlString.equals(urlUnEscaped))
+			urlUnEscaped = null;
+
 		while (ze != null)
 		{
 			String name = UrlUtil.cleanDots(ze.getName());
 			boolean matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+			if (!matches && urlUnEscaped != null)
+			{
+				matches = caseSensitive ? urlUnEscaped.equals(name) : urlUnEscaped.equalsIgnoreCase(name);
+			}
 			if (!matches && rootEntry != null && name.startsWith(rootEntry))
 			{
 				name = StringUtil.rightStr(name, -rootEntry.length());
 				if (name != null && name.length() > 0)
+				{
 					matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+					if (!matches && urlUnEscaped != null)
+					{
+						matches = caseSensitive ? urlUnEscaped.equals(name) : urlUnEscaped.equalsIgnoreCase(name);
+					}
+				}
 			}
 
 			if (matches)
@@ -327,17 +341,30 @@ public class ZipReader
 	{
 		buffer();
 		ZipEntry ze = getNextEntry();
-		expr = StringUtil.simpleRegExptoRegExp(expr);
 		int n = 0;
+		String exprUnEscaped = UrlUtil.unEscape(expr);
+		if (expr.equals(exprUnEscaped))
+			exprUnEscaped = null;
+
 		while (ze != null)
 		{
 			String name = ze.getName();
 			boolean matches = caseSensitive ? StringUtil.matchesSimple(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+			if (!matches && exprUnEscaped != null)
+			{
+				matches = caseSensitive ? StringUtil.matchesSimple(name, exprUnEscaped) : StringUtil.matchesIgnoreCase(name, exprUnEscaped);
+			}
 			if (!matches && rootEntry != null && name.startsWith(rootEntry))
 			{
 				name = StringUtil.rightStr(name, -rootEntry.length());
 				if (name != null && name.length() > 0)
-					matches = caseSensitive ? StringUtil.matches(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+				{
+					matches = caseSensitive ? StringUtil.matchesSimple(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+					if (!matches && exprUnEscaped != null)
+					{
+						matches = caseSensitive ? StringUtil.matchesSimple(name, exprUnEscaped) : StringUtil.matchesIgnoreCase(name, exprUnEscaped);
+					}
+				}
 			}
 			if (matches)
 			{

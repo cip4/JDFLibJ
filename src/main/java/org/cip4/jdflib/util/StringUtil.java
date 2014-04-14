@@ -2484,7 +2484,7 @@ public class StringUtil
 	 * expression is assumed to match anything.
 	 * 
 	 * @param str the string to match
-	 * @param regExp the expression to match against
+	 * @param regExp the simplified expression to match against
 	 * @return true, if str matches regExp or regexp is empty
 	 */
 	public static boolean matchesIgnoreCase(final String str, final String regExp)
