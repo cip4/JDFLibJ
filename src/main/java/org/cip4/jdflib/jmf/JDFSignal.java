@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFNotification;
 
 /**
  *
@@ -215,5 +216,23 @@ public class JDFSignal extends JDFAutoSignal
 			setType(response.getEnumType());
 			copyAttribute(AttributeName.REFID, response);
 		}
+	}
+
+	/**
+	 * legacy get first notification
+	 * @return 
+	 */
+	public JDFNotification getNotification()
+	{
+		return getNotification(0);
+	}
+
+	/**
+	 * legacy get first notification
+	 * @return 
+	 */
+	public JDFNotification getCreateNotification()
+	{
+		return getCreateNotification(0);
 	}
 }

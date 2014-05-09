@@ -90,7 +90,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -331,7 +330,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		private JDFResource createNewResource(final JDFNode node, final JDFResource resCmd)
 		{
 			JDFResource resTarget = null;
-			final EnumUsage u = getUsage();
+			final JDFResourceLink.EnumUsage u = getUsage();
 			if (u != null)
 			{
 				resTarget = (JDFResource) node.getCreateResourcePool().copyElement(resCmd, null);
@@ -580,6 +579,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * 
 	 * @return {@link NodeIdentifier} the matching NodeIdentifier
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
@@ -613,6 +613,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 * @param ni
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier ni)
 	{
 		NodeIdentifier niLocal = ni;

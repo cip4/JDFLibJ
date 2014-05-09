@@ -227,6 +227,16 @@ public class JDFResponse extends JDFAutoResponse
 		return setErrorText(errorText, null);
 	}
 
+	/** (26) getCreateNotification
+	* 
+	* @param iSkip number of elements to skip
+	* @return JDFNotification the element
+	*/
+	public JDFNotification getCreateNotification()
+	{
+		return getCreateNotification(0);
+	}
+
 	/**
 	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if
 	 * ErroerText=null
