@@ -210,7 +210,7 @@ public class JDFAuditPool extends JDFPool
 			final JDFCreated c = addCreated(null, null);
 			if (a != null)
 			{
-				c.setTimeStamp(a.getTimeStampDate());
+				c.setTimeStamp(a.getTimeStamp());
 				moveElement(c, a);
 			}
 		}
@@ -373,7 +373,7 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public JDFAudit addEvent(final String by, final JDFAudit.EnumSeverity s)
 	{
-		final JDFAudit l = addAudit(JDFAudit.EnumAuditType.Notification, by);
+		final JDFNotification l = (JDFNotification) addAudit(JDFAudit.EnumAuditType.Notification, by);
 		l.setSeverity(s);
 		return l;
 	}
