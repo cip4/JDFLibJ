@@ -210,6 +210,52 @@ public class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * check that entries with backslash are correctly handled
+	 *  
+	 */
+	@Test
+	public void testunpackBackslash()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
+		File dir = new File(sm_dirTestDataTemp + "backslash.zip.dir");
+		FileUtil.deleteAll(dir);
+		r.unPack(dir);
+		assertTrue(dir.isDirectory());
+		File dir2 = FileUtil.getFileInDirectory(dir, new File("backslash/a"));
+		assertTrue(dir2.isDirectory());
+		assertEquals(dir2.listFiles().length, 2);
+	}
+
+	/**
+	 * check that entries with backslash are correctly handled
+	 *  
+	 */
+	@Test
+	public void testgetEntryBackslash()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
+		assertNotNull(r.getEntry("b.jmf"));
+		assertNotNull(r.getEntry("c.jmf"));
+		assertNotNull(r.getEntry("a/c.jmf"));
+		assertNotNull(r.getEntry("backslash/a/c.jmf"));
+		assertNotNull(r.getEntry("./backslash/a/c.jmf"));
+		assertNotNull(r.getEntry("backslash"));
+	}
+
+	/**
+	 * check that entries with backslash are correctly handled
+	 *  
+	 */
+	@Test
+	public void testgetMatchingEntryBackslash()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
+		assertNotNull(r.getMatchingEntry("?.jmf", 0));
+		assertNotNull(r.getMatchingEntry("?.jmf", 1));
+		assertNull(r.getMatchingEntry("?.jmf", 2));
+	}
+
+	/**
 	 * 
 	 *  
 	 */
