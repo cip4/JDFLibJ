@@ -415,8 +415,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	@Override
 	public int compare(final JDFAudit a1, final JDFAudit a2)
 	{
-		final JDFDate d1 = (a1 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a1).getEnd() : a1.getTimeStampDate();
-		final JDFDate d2 = (a2 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a2).getEnd() : a2.getTimeStampDate();
+		final JDFDate d1 = (a1 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a1).getEnd() : a1.getTimeStamp();
+		final JDFDate d2 = (a2 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a2).getEnd() : a2.getTimeStamp();
 		return ContainerUtil.compare(d1, d2);
 	}
 

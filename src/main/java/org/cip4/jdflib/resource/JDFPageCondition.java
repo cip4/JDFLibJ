@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,50 +79,16 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageCondition;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
 
 /**
- * class that maps both patitioned and non-partitoned layouts
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ *  
+ * @author rainer prosi
+ * @date May 9, 2014
  */
 public class JDFPageCondition extends JDFAutoPageCondition
 {
 	private static final long serialVersionUID = 1L;
-
-	// Handle partitioned layouts
-	private static ElemInfoTable[] elemInfoTable_Sheet = new ElemInfoTable[1];
-	static
-	{
-		elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x33333333);
-	}
-
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		return new ElementInfo(super.getTheElementInfo(), elemInfoTable_Sheet);
-	}
-
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-	}
-
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		AttributeInfo ai = super.getTheAttributeInfo();
-		if (getLocalName().equals(ElementName.SIGNATURE))
-			ai.updateReplace(atrInfoTable);
-		return ai;
-	}
 
 	/**
 	 * Constructor for JDFPageCondition

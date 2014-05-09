@@ -96,6 +96,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
@@ -114,7 +115,7 @@ public class JDFSignature extends JDFAutoLayout
 	private static ElemInfoTable[] elemInfoTable_Sheet = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x33333333);
+		elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x44444333);
 	}
 
 	@Override

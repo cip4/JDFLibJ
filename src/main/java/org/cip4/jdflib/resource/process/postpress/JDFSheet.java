@@ -130,11 +130,11 @@ public class JDFSheet extends JDFSignature
 		return ai;
 	}
 
-	// Handle partitioned layouts
+	// Handle non-partitioned layouts
 	private static ElemInfoTable[] elemInfoTable_Surface = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable_Surface[0] = new ElemInfoTable(ElementName.SURFACE, 0x33333333);
+		elemInfoTable_Surface[0] = new ElemInfoTable(ElementName.SURFACE, 0x44444333);
 	}
 
 	@Override

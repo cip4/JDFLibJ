@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,11 +88,14 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNotification;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -210,6 +213,17 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 		elemInfoTable[4] = new ElemInfoTable(ElementName.ERROR, 0x33333333);
 		elemInfoTable[5] = new ElemInfoTable(ElementName.EVENT, 0x33333333);
 		elemInfoTable[6] = new ElemInfoTable(ElementName.MILESTONE, 0x33333333);
+	}
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
 	@Override
@@ -595,6 +609,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 * gets the NodeIdetifier that matches this
 	 * @return the matching node identifier
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
@@ -604,6 +619,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 * @param ni
 	 */
+	@Override
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)
@@ -620,6 +636,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 * creates a JDFJMF that corresponds to this
 	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
 	 */
+	@Override
 	public JDFJMF toSignalJMF()
 	{
 		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Notification);
@@ -630,6 +647,7 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	/**
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
+	@Override
 	public boolean matches(Object subset)
 	{
 		if (!(subset instanceof JDFNotification))
@@ -653,6 +671,26 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 			return false;
 		return true;
 
+	}
+
+	/**
+	 * SetSeverity
+	 * @param s
+	 */
+	@Override
+	public void setSeverity(final EnumSeverity s)
+	{
+		setAttribute(JDFConstants.SEVERITY, s.getName(), null);
+	}
+
+	/**
+	 * GetSeverity
+	 * @return EnumSeverity
+	 */
+	@Override
+	public EnumSeverity getSeverity()
+	{
+		return EnumSeverity.getEnum(getAttribute(JDFConstants.SEVERITY, null, null));
 	}
 
 } // class JDFNotification

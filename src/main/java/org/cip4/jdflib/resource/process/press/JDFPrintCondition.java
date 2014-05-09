@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,16 +83,22 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPrintCondition;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date Apr 30, 2014
+ */
 public class JDFPrintCondition extends JDFAutoPrintCondition
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFPrintCondition
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -101,11 +107,11 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
@@ -114,23 +120,27 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
 	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoPrintCondition#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return "JDFPrintCondition[  --> " + super.toString() + " ]";
 	}
 
-} // class JDFIDPLayout
+}
 // ==========================================================================

@@ -506,7 +506,6 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * appends a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 */
-	@Override
 	public JDFSignature appendSignature() throws JDFException
 	{
 		return appendLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME);
@@ -528,7 +527,6 @@ public class JDFLayout extends JDFSurface
 	 * 
 	 * @param iSkip the number of signatures to skip
 	 */
-	@Override
 	public JDFSignature getCreateSignature(final int iSkip)
 	{
 		JDFSignature s = getSignature(iSkip);
@@ -544,7 +542,6 @@ public class JDFLayout extends JDFSurface
 	 * 
 	 * @param iSkip the number of signatures to skip
 	 */
-	@Override
 	public JDFSignature getSignature(final int iSkip)
 	{
 		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, iSkip);
