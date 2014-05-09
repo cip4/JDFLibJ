@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ public class BaseElementWalker extends ElementWalker
 	 * 
 	 * @param classPrefix
 	 */
-	protected void constructWalkers(final String classPrefix)
+	private void constructWalkers(final String classPrefix)
 	{
 		Class<?> parent = getClass();
 

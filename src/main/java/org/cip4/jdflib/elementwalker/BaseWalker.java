@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * 
 	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement, KElement)
 	 */
+	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		return e;
@@ -97,6 +98,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * @param e 
 	 * @param trackElem 
 	 */
+	@Override
 	public void prepareWalk(final KElement e, final KElement trackElem)
 	{
 		// nop
@@ -107,6 +109,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * @param e 
 	 * @param trackElem 
 	 */
+	@Override
 	public void finalizeWalk(final KElement e, final KElement trackElem)
 	{
 		// nop
@@ -122,7 +125,6 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 		log = LogFactory.getLog(getClass());
 		depth = 0;
 		addToFactory(factory);
-
 	}
 
 	/**
@@ -143,7 +145,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	private void addToFactory(final BaseWalkerFactory factory)
 	{
 		final Class<BaseWalker> cBase = BaseWalker.class;
-		Class<?> c = this.getClass().getSuperclass();
+		Class<?> c = getClass().getSuperclass();
 		// calculate the number of intermediate classes
 		while (cBase.isAssignableFrom(c))
 		{
@@ -162,12 +164,13 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
-	 * note the reverse order - high depth means up in list so that abstract classes get checked later (non-Javadoc)
+	 * note the reverse order - high depth means up in list so that abstract classes get checked later 
 	 * @param arg0 the other Basewalker
 	 * @return int
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(final BaseWalker arg0)
 	{
 		return (arg0 == null ? 0 : arg0.depth) - depth;
