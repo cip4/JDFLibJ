@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ import java.io.FileFilter;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.DOMException;
@@ -167,7 +166,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 		catch (DOMException e)
 		{
-			Assert.fail("DOMException : " + e.getMessage());
+			fail("DOMException : " + e.getMessage());
 		}
 	}
 
@@ -240,7 +239,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 		catch (DOMException e)
 		{
-			Assert.fail("DOMException : " + e.getMessage());
+			fail("DOMException : " + e.getMessage());
 		}
 	}
 

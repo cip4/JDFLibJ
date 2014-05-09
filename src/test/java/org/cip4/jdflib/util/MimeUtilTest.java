@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -119,8 +119,8 @@ import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -170,10 +170,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 				md.transferEncoding = UrlUtil.BINARY;
 			}
 			final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + ii + ".mjm", md);
-			Assert.assertTrue(out.canRead());
+			assertTrue(out.canRead());
 			MimeReader mr = new MimeReader(FileUtil.getBufferedInputStream(out));
 			Multipart mp = mr.getMultiPart();
-			Assert.assertEquals(mr.getBodyParts().length, 5);
+			assertEquals(mr.getBodyParts().length, 5);
 			MimeWriter mw = new MimeWriter(mp);
 			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
 		}
@@ -213,7 +213,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		 * (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData +
 		 * File.separator + "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) { rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator +
 		 * "url?.pdf", false), 0, -1); } final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc = MimeUtil.writeToURL(m,
-		 * "http://192.168.14.143:8010/FJC/Fiery", null); Assert.assertEquals(uc.getResponseCode(), 200); Assert.assertTrue(uc.getContentLength() > 0); final InputStream is =
+		 * "http://192.168.14.143:8010/FJC/Fiery", null); assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is =
 		 * uc.getInputStream(); IOUtils.copy(is, System.out);
 		 */
 	}
@@ -248,18 +248,18 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart m = MimeUtil.buildMimePackage(d1, doc, true);
 
 		JDFDoc[] d2 = MimeUtil.getJMFSubmission(m);
-		Assert.assertNotNull(d2);
-		Assert.assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
-		Assert.assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
+		assertNotNull(d2);
+		assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
+		assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
 
 		// now serialize to file and reread - should still work
 		MimeUtil.writeToFile(m, sm_dirTestDataTemp + "test2.mjm", null);
 		final Multipart m2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + "test2.mjm");
-		Assert.assertNotNull(m2);
+		assertNotNull(m2);
 		d2 = MimeUtil.getJMFSubmission(m);
-		Assert.assertNotNull(d2);
-		Assert.assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
-		Assert.assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
+		assertNotNull(d2);
+		assertEquals(d2[0].getJMFRoot().getCommand(0).getQueueSubmissionParams(0).getURL(), "cid:JDF.jdf");
+		assertEquals(d2[1].getJDFRoot().getEnumType(), EnumType.ColorSpaceConversion);
 
 	}
 
@@ -272,9 +272,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
-		Assert.assertNotNull(bp);
-		Assert.assertNull(MimeUtil.getPartByCID(mp, "gipps.nicht"));
-		Assert.assertEquals(bp.getFileName(), "JDF.jdf");
+		assertNotNull(bp);
+		assertNull(MimeUtil.getPartByCID(mp, "gipps.nicht"));
+		assertEquals(bp.getFileName(), "JDF.jdf");
 	}
 
 	/**
@@ -283,10 +283,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	public void testIsMimeMultiPart() throws Exception
 	{
-		Assert.assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED));
-		Assert.assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED + "; foo"));
-		Assert.assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED + "; foo"));
-		Assert.assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED.toUpperCase() + "; foo"));
+		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED));
+		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED + "; foo"));
+		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED + "; foo"));
+		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED.toUpperCase() + "; foo"));
 	}
 
 	/**
@@ -298,15 +298,15 @@ public class MimeUtilTest extends JDFTestCaseBase
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
-		Assert.assertNotNull(bp);
-		Assert.assertEquals(bp.getFileName(), "JDF.jdf");
-		Assert.assertEquals(MimeUtil.getContentID(bp), "JDF.jdf");
+		assertNotNull(bp);
+		assertEquals(bp.getFileName(), "JDF.jdf");
+		assertEquals(MimeUtil.getContentID(bp), "JDF.jdf");
 		MimeUtil.setContentID(bp, "TheJDF");
-		Assert.assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
 		MimeUtil.setContentID(bp, "<TheJDF>");
-		Assert.assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
 		MimeUtil.setContentID(bp, "<cid:TheJDF>");
-		Assert.assertEquals(MimeUtil.getContentID(bp), "TheJDF");
+		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
 	}
 
 	/**
@@ -324,9 +324,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final BodyPart bp2 = MimeUtil.getCreatePartByCID(multipart, "cid2");
 		bp2.setContent("bar", "Text/plain");
 		final BodyPart bp3 = MimeUtil.getCreatePartByCID(multipart, "cid1");
-		Assert.assertEquals(bp, bp3);
-		Assert.assertEquals(multipart.getCount(), 2);
-		Assert.assertEquals(bp3.getContent(), "boo");
+		assertEquals(bp, bp3);
+		assertEquals(multipart.getCount(), 2);
+		assertEquals(bp3.getContent(), "boo");
 	}
 
 	/**
@@ -338,16 +338,16 @@ public class MimeUtilTest extends JDFTestCaseBase
 		testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
-		Assert.assertNotNull(bp);
+		assertNotNull(bp);
 		final BodyPart bp2 = MimeUtil.getPartByCID(mp, "CID:JDF.jdf");
-		Assert.assertEquals(bp, bp2);
+		assertEquals(bp, bp2);
 		final BodyPart bp3 = MimeUtil.getPartByCID(mp, "<cid:JDF.jdf>");
-		Assert.assertEquals(bp, bp3);
-		Assert.assertEquals(bp.getFileName(), "JDF.jdf");
+		assertEquals(bp, bp3);
+		assertEquals(bp.getFileName(), "JDF.jdf");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		final JDFNode n = d.getJDFRoot();
-		Assert.assertNotNull(n);
+		assertNotNull(n);
 	}
 
 	/**
@@ -363,19 +363,19 @@ public class MimeUtilTest extends JDFTestCaseBase
 			fis.mark(9999999);
 			final MimeReader mr = new MimeReader();
 			mr.setMarkSize(9999999);
-			Assert.assertNotNull(mr.getJDFDoc(fis, 0));
+			assertNotNull(mr.getJDFDoc(fis, 0));
 			fis.reset();
-			Assert.assertNotNull(mr.getJDFDoc(fis, 1));
+			assertNotNull(mr.getJDFDoc(fis, 1));
 			fis.reset();
-			Assert.assertNull(mr.getJDFDoc(fis, 2));
+			assertNull(mr.getJDFDoc(fis, 2));
 			fis.close();
 			final JDFDoc d = new JDFDoc("JDF");
 			d.write2File(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf"), 2, false);
 			fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
-			Assert.assertNotNull(MimeUtil.getJDFDoc(fis, 0));
+			assertNotNull(MimeUtil.getJDFDoc(fis, 0));
 			fis.close();
 			fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
-			Assert.assertNull(MimeUtil.getJDFDoc(fis, 1));
+			assertNull(MimeUtil.getJDFDoc(fis, 1));
 			fis.close();
 		}
 	}
@@ -406,7 +406,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			MimeUtil.writeToFile(m, mimeFile, null);
 
 			final Multipart mp = MimeUtil.getMultiPart(mimeFile);
-			Assert.assertEquals("JDF, 2* rl, 2 icc", mp.getCount(), 5);
+			assertEquals("JDF, 2* rl, 2 icc", mp.getCount(), 5);
 		}
 	}
 
@@ -425,7 +425,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final InputStream is = bps[0].getInputStream();
 		final byte[] b = new byte[10];
 		final int n = is.read(b);
-		Assert.assertEquals(n, 7);
+		assertEquals(n, 7);
+		bos.close();
 	}
 
 	/**
@@ -445,7 +446,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		MimeUtil.writeToFile(multipart, mimeFile + "0.mjm", null);
 		Multipart multiparsed = MimeUtil.getMultiPart(mimeFile + "0.mjm");
 		BodyPart bp = multiparsed.getBodyPart(0);
-		Assert.assertTrue("cid >cid_", bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
+		assertTrue("cid >cid_", bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
 
 		final JDFDoc jDoc1 = new JDFDoc("JDF");
 		jDoc1.setOriginalFileName("jdf1.jdf");
@@ -455,7 +456,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		MimeUtil.writeToFile(multipart, mimeFile + "1.mjm", null);
 		multiparsed = MimeUtil.getMultiPart(mimeFile + "1.mjm");
 		bp = multiparsed.getBodyPart(0);
-		Assert.assertTrue("cid >cid_", bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
+		assertTrue("cid >cid_", bp.getHeader(UrlUtil.CONTENT_ID)[0].length() > 5);
 
 		final JDFDoc jDoc2 = new JDFDoc("JDF");
 		jDoc2.setOriginalFileName("jdf1.jdf");
@@ -484,16 +485,16 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
 		final Multipart mp = MimeUtil.buildMimePackage(null, doc, true);
-		Assert.assertEquals("JDF,  1 icc", mp.getCount(), 2);
+		assertEquals("JDF,  1 icc", mp.getCount(), 2);
 
 		final BodyPart bp = mp.getBodyPart(1);
-		Assert.assertNotNull(bp);
+		assertNotNull(bp);
 		final String newContents = "hello World";
 		bp.setContent(newContents, "text/plain");
 
 		final BodyPart bp2 = mp.getBodyPart(1);
 		final Object o = bp2.getContent();
-		Assert.assertEquals(o.toString(), "hello World");
+		assertEquals(o.toString(), "hello World");
 
 		final String mimeFile = sm_dirTestDataTemp + File.separator + "testReplaceContents";
 		MimeUtil.writeToFile(mp, mimeFile + ".mjm", null);
@@ -501,22 +502,22 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart mp2 = MimeUtil.getMultiPart(mimeFile + ".mjm");
 		final BodyPart bp21 = mp2.getBodyPart(1);
 		final Object o2 = bp21.getContent();
-		Assert.assertEquals(o2.toString(), "hello World");
+		assertEquals(o2.toString(), "hello World");
 
 		final BodyPart bp22 = mp2.getBodyPart(1);
-		Assert.assertNotNull(bp22);
+		assertNotNull(bp22);
 		final String newContents2 = "bye World";
 		bp22.setContent(newContents2, "text/plain");
 		final Object o22 = bp22.getContent();
-		Assert.assertEquals(o22.toString(), "bye World");
+		assertEquals(o22.toString(), "bye World");
 		final BodyPart bp23 = mp2.getBodyPart(1);
-		Assert.assertEquals(bp22, bp23);
+		assertEquals(bp22, bp23);
 
 		MimeUtil.writeToFile(mp2, mimeFile + "_1.mjm", null);
 		final Multipart mp3 = MimeUtil.getMultiPart(mimeFile + "_1.mjm");
 		final BodyPart bp31 = mp3.getBodyPart(1);
 		final Object o3 = bp31.getContent();
-		Assert.assertEquals(o3.toString(), "bye World");
+		assertEquals(o3.toString(), "bye World");
 
 	}
 
@@ -531,24 +532,24 @@ public class MimeUtilTest extends JDFTestCaseBase
 		// Build MIME package
 		final String path = sm_dirTestData + File.separator + "MISPrepress-ICS-Complex.jdf";
 		final JDFDoc jdfDoc = new JDFParser().parseFile(path);
-		Assert.assertNotNull("Could not parse JDF: " + path, jdfDoc);
+		assertNotNull("Could not parse JDF: " + path, jdfDoc);
 		final Multipart multipart = MimeUtil.buildMimePackage(null, jdfDoc, true);
-		Assert.assertNotNull("Could not build multipart", multipart);
+		assertNotNull("Could not build multipart", multipart);
 		// Verify contents
 		final BodyPart[] bodyParts = MimeUtil.getBodyParts(multipart);
-		Assert.assertEquals(3, bodyParts.length);
+		assertEquals(3, bodyParts.length);
 		final JDFDoc jdfDoc2 = MimeUtil.getJDFDoc(bodyParts[0]);
-		Assert.assertNotNull(jdfDoc2);
+		assertNotNull(jdfDoc2);
 		final JDFNode jdf = jdfDoc2.getJDFRoot();
-		Assert.assertNotNull(jdf);
+		assertNotNull(jdf);
 		final VElement fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-		Assert.assertEquals(3, fileSpecs.size());
+		assertEquals(3, fileSpecs.size());
 		for (final Iterator<KElement> i = fileSpecs.iterator(); i.hasNext();)
 		{
 			final JDFFileSpec fileSpec = (JDFFileSpec) i.next();
 			final String cid = fileSpec.getURL();
-			Assert.assertTrue(cid.startsWith("cid:"));
-			Assert.assertNotNull(MimeUtil.getPartByCID(multipart, cid));
+			assertTrue(cid.startsWith("cid:"));
+			assertNotNull(MimeUtil.getPartByCID(multipart, cid));
 		}
 
 	}
@@ -574,10 +575,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		final FileInputStream fis = new FileInputStream(file);
 		final BodyPart[] aBp = MimeUtil.extractMultipartMime(fis);
-		Assert.assertEquals(aBp.length, 2);
+		assertEquals(aBp.length, 2);
 
-		Assert.assertEquals(aBp[0].getFileName(), "JMF.jmf");
-		Assert.assertEquals(aBp[1].getFileName(), "JDF.jdf");
+		assertEquals(aBp[0].getFileName(), "JMF.jmf");
+		assertEquals(aBp[1].getFileName(), "JDF.jdf");
 	}
 
 	/**
@@ -597,12 +598,12 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		final FileInputStream fis = new FileInputStream(file);
 		final BodyPart[] aBp = MimeUtil.extractMultipartMime(fis);
-		Assert.assertEquals(aBp.length, 1);
+		assertEquals(aBp.length, 1);
 
-		Assert.assertEquals(aBp[0].getFileName(), "foo.xml");
+		assertEquals(aBp[0].getFileName(), "foo.xml");
 		BodyPartHelper bh = new BodyPartHelper(aBp[0]);
 		XMLDoc xmlDoc = bh.getXMLDoc();
-		Assert.assertNotNull(xmlDoc);
+		assertNotNull(xmlDoc);
 	}
 
 	// /////////////////////////////////////////////////////
@@ -622,7 +623,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			directory.delete();
 		}
 		MimeUtil.writeToDir(mp, directory);
-		Assert.assertTrue(new File(sm_dirTestDataTemp + File.separator + "TestWriteMime" + File.separator + "test.icc").exists());
+		assertTrue(new File(sm_dirTestDataTemp + File.separator + "TestWriteMime" + File.separator + "test.icc").exists());
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -639,11 +640,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm", null);
 		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm");
 		final File f2 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		Assert.assertTrue(f1.exists());
-		Assert.assertEquals(f1.length(), f2.length(), 100);
+		assertTrue(f1.exists());
+		assertEquals(f1.length(), f2.length(), 100);
 		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm");
-		Assert.assertNotNull(mp2);
-		Assert.assertEquals(mp.getCount(), mp2.getCount());
+		assertNotNull(mp2);
+		assertEquals(mp.getCount(), mp2.getCount());
 
 	}
 
@@ -663,14 +664,14 @@ public class MimeUtilTest extends JDFTestCaseBase
 		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm", md);
 		final File f2 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm");
 		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc1.mjm");
-		Assert.assertTrue(f2.exists());
-		Assert.assertEquals(f1.length(), f2.length(), 100);
+		assertTrue(f2.exists());
+		assertEquals(f1.length(), f2.length(), 100);
 		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm");
-		Assert.assertNotNull(mp2);
-		Assert.assertEquals(mp.getCount(), mp2.getCount());
+		assertNotNull(mp2);
+		assertEquals(mp.getCount(), mp2.getCount());
 		final StringWriter sw = new StringWriter();
 		IOUtils.copy(new FileInputStream(f2), sw);
-		Assert.assertEquals(sw.getBuffer().toString().indexOf("related;"), -1);
+		assertEquals(sw.getBuffer().toString().indexOf("related;"), -1);
 
 	}
 
@@ -688,8 +689,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc3.mjm");
 		MimeUtil.writeToURL(mp, UrlUtil.fileToUrl(f1, false));
 		final File f2 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		Assert.assertTrue(f1.exists());
-		Assert.assertEquals(f1.length(), f2.length(), 100);
+		assertTrue(f1.exists());
+		assertEquals(f1.length(), f2.length(), 100);
 	}
 
 	// /////////////////////////////////////////////////////
@@ -709,10 +710,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
 		final long getCID = System.currentTimeMillis();
 		System.out.println("get big time: " + (getCID - getMP));
-		Assert.assertNotNull(bp);
-		Assert.assertEquals(bp.getFileName(), "bigger.pdf");
+		assertNotNull(bp);
+		assertEquals(bp.getFileName(), "bigger.pdf");
 		final File outFile = FileUtil.streamToFile(bp.getInputStream(), sm_dirTestDataTemp + File.separator + "performance.pdf");
-		Assert.assertNotNull(outFile);
+		assertNotNull(outFile);
 		/*
 		 * InputStream is=bp.getInputStream(); byte[] b=new byte[1000]; int l=0; while (true) { int i=is.read(b); if(i<=0) break; l+=i; }
 		 */
@@ -735,8 +736,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
 		final long getCID = System.currentTimeMillis();
 		System.out.println("get big time: " + (getCID - getMP));
-		Assert.assertNotNull(bp);
-		Assert.assertEquals(bp.getFileName(), "bigger.pdf");
+		assertNotNull(bp);
+		assertEquals(bp.getFileName(), "bigger.pdf");
 	}
 
 	// /////////////////////////////////////////////////////
@@ -756,8 +757,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 			final BodyPart bp = MimeUtil.getPartByCID(mp, "bigger.pdf");
 			final long getCID = System.currentTimeMillis();
 			System.out.println("get big time: " + (getCID - getMP));
-			Assert.assertNotNull(bp);
-			Assert.assertEquals(bp.getFileName(), "bigger.pdf");
+			assertNotNull(bp);
+			assertEquals(bp.getFileName(), "bigger.pdf");
 			final HttpURLConnection uc = MimeUtil.writeToURL(mp, "http://localhost:8080/JDFUtility/dump");
 			final InputStream is = uc.getInputStream();
 			IOUtils.copy(is, System.out);
@@ -824,7 +825,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart m = MimeUtil.buildMimePackage(null, doc, true);
 		final long build = System.currentTimeMillis();
 		System.out.println("Build time: " + (build - setup));
-		Assert.assertNotNull(MimeUtil.writeToFile(m, sm_dirTestDataTemp + "performance.mjm", null));
+		assertNotNull(MimeUtil.writeToFile(m, sm_dirTestDataTemp + "performance.mjm", null));
 		final long write = System.currentTimeMillis();
 		System.out.println("Write time: " + (write - build));
 

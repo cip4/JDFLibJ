@@ -190,9 +190,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFAuditPool ap = n.getAuditPool();
 		JDFAudit audit = ap.getAudit(0, EnumAuditType.Created, null, null);
-		assertEquals(audit.getTimeStampDate().getTimeInMillis(), System.currentTimeMillis(), 1000);
+		assertEquals(audit.getTimeStamp().getTimeInMillis(), System.currentTimeMillis(), 1000);
 		audit.setAttribute(AttributeName.TIMESTAMP, "crap");
-		assertNull(audit.getTimeStampDate());
+		assertNull(audit.getTimeStamp());
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
 		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
-		assertEquals(p1.getTimeStampDate(), new JDFDate());
+		assertEquals(p1.getTimeStamp(), new JDFDate());
 	}
 
 	// ///////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,8 +76,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFNotification.EnumNotificationDetails;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
  */
@@ -93,11 +93,11 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testappendNotificationDetails()
 	{
 		final JDFMilestone ms = n.appendMilestone();
-		Assert.assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
-		Assert.assertNotNull(ms);
-		Assert.assertEquals(ms.getLocalName(), ElementName.MILESTONE);
-		Assert.assertNull(n.appendBarcode());
-		Assert.assertNull(n.getCreateBarcode());
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.MILESTONE);
+		assertNull(n.appendBarcode());
+		assertNull(n.getCreateBarcode());
 	}
 
 	/**
@@ -107,10 +107,10 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testgetNotificationDetails()
 	{
 		final JDFBarcode ms = n.appendBarcode();
-		Assert.assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
-		Assert.assertNotNull(ms);
-		Assert.assertEquals(ms.getLocalName(), ElementName.BARCODE);
-		Assert.assertEquals(n.getNotificationDetails(), ms);
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.BARCODE);
+		assertEquals(n.getNotificationDetails(), ms);
 	}
 
 	/**
@@ -120,10 +120,11 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testToSignalJMF()
 	{
 		n.setClass(EnumClass.Information);
-		Assert.assertTrue(n.isValid(EnumValidationLevel.Complete));
+		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "notification_in.xml", 2, false);
+		assertTrue(n.isValid(EnumValidationLevel.Complete));
 		final JDFJMF jmf = n.toSignalJMF();
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "notification.xml", 2, false);
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**
@@ -132,11 +133,11 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	@Test
 	public void testMatches()
 	{
-		Assert.assertTrue(n.matches(n));
+		assertTrue(n.matches(n));
 		JDFNotification n2 = (JDFNotification) new JDFDoc("Notification").getRoot();
-		Assert.assertTrue(n.matches(n2));
+		assertTrue(n.matches(n2));
 		n2.setModuleID("m1");
-		Assert.assertFalse(n.matches(n2));
+		assertFalse(n.matches(n2));
 	}
 
 	/**
@@ -146,11 +147,11 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testgetCreateNotificationDetails()
 	{
 		final JDFSystemTimeSet ms = n.getCreateSystemTimeSet();
-		Assert.assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
-		Assert.assertNotNull(ms);
-		Assert.assertEquals(ms.getLocalName(), ElementName.SYSTEMTIMESET);
-		Assert.assertEquals(n.getNotificationDetails(), ms);
-		Assert.assertNull(n.getCreateBarcode());
+		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
+		assertNotNull(ms);
+		assertEquals(ms.getLocalName(), ElementName.SYSTEMTIMESET);
+		assertEquals(n.getNotificationDetails(), ms);
+		assertNull(n.getCreateBarcode());
 	}
 
 	/**
@@ -160,9 +161,9 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testSetCommentText()
 	{
 		n.setCommentText("fooBar");
-		Assert.assertEquals(n.getCommentText(), "fooBar");
+		assertEquals(n.getCommentText(), "fooBar");
 		n.setCommentText("fooBar");
-		Assert.assertEquals(n.getCommentText(), "fooBar");
+		assertEquals(n.getCommentText(), "fooBar");
 	}
 
 	/**
@@ -172,19 +173,19 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	public void testsetEvent()
 	{
 		JDFEvent e = n.setEvent("id", "value", "bullshit");
-		Assert.assertEquals(e.getEventID(), "id");
-		Assert.assertEquals(e.getEventValue(), "value");
-		Assert.assertEquals(n.getComment(0).getText(), "bullshit");
+		assertEquals(e.getEventID(), "id");
+		assertEquals(e.getEventValue(), "value");
+		assertEquals(n.getComment(0).getText(), "bullshit");
 		final JDFEvent ee = n.setEvent("id2", "value2", "bullshit2");
-		Assert.assertEquals(ee, e);
+		assertEquals(ee, e);
 		e = (JDFEvent) n.getNotificationDetails();
-		Assert.assertEquals(e.getEventID(), "id2");
-		Assert.assertEquals(e.getEventValue(), "value2");
-		Assert.assertEquals(n.getComment(0).getText(), "bullshit2");
+		assertEquals(e.getEventID(), "id2");
+		assertEquals(e.getEventValue(), "value2");
+		assertEquals(n.getComment(0).getText(), "bullshit2");
 		e = n.getCreateEvent();
-		Assert.assertEquals(e.getEventID(), "id2");
-		Assert.assertEquals(e.getEventValue(), "value2");
-		Assert.assertEquals(n.getComment(0).getText(), "bullshit2");
+		assertEquals(e.getEventID(), "id2");
+		assertEquals(e.getEventValue(), "value2");
+		assertEquals(n.getComment(0).getText(), "bullshit2");
 	}
 
 	/**

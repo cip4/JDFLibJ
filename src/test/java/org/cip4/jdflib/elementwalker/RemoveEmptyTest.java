@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFComChannel;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
  * 
@@ -150,7 +151,7 @@ public class RemoveEmptyTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
-		JDFComChannel c = (JDFComChannel) n.addResource(ElementName.COMCHANNEL, EnumUsage.Input);
+		JDFComChannel c = ((JDFContact) n.addResource(ElementName.CONTACT, EnumUsage.Input)).appendComChannel();
 		c.setChannelType(EnumChannelType.Email);
 		RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);

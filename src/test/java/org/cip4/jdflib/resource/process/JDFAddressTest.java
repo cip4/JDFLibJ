@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,8 +78,14 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
-import org.junit.Assert;
 import org.junit.Test;
+
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date May 9, 2014
+ */
 public class JDFAddressTest extends JDFTestCaseBase
 {
 	/**
@@ -92,11 +98,12 @@ public class JDFAddressTest extends JDFTestCaseBase
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode root = doc.getJDFRoot();
 		JDFResourcePool resPool = root.getCreateResourcePool();
-		KElement kElem = resPool
-				.appendResource(ElementName.ADDRESS, null, null);
-		Assert.assertTrue(kElem instanceof JDFAddress);
+		JDFContact contact = (JDFContact) resPool.appendResource(ElementName.CONTACT, null, null);
+
+		KElement kElem = contact.appendPerson().appendAddress();
+		assertTrue(kElem instanceof JDFAddress);
 		JDFAddress ad = (JDFAddress) kElem;
 		JDFComment c = (JDFComment) ad.appendExtendedAddress();
-		Assert.assertFalse(c.hasAttribute(AttributeName.ID));
+		assertFalse(c.hasAttribute(AttributeName.ID));
 	}
 }

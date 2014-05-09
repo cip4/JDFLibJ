@@ -120,6 +120,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
@@ -872,8 +873,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		ni = (JDFNodeInfo) ni.addPartition(EnumPartIDKey.Run, "R1");
 		final JDFContact c = (JDFContact) node.addResource(ElementName.CONTACT, null, null, null, null, null, null);
 		ni.refElement(c);
-		final JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
-		c.refElement(cc);
+		final JDFComChannel cc = c.appendComChannel();
 		assertTrue("contact", ni.getContact() == c);
 		assertTrue("hasrefelement", ni.hasChildElement(ElementName.CONTACT, null));
 		final JDFRefElement re = (JDFRefElement) ni.getElement("ContactRef");
@@ -917,8 +917,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		c.setContactTypes(vCTypes);
 
 		ni.refElement(c);
-		final JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
-		c.refElement(cc);
+		final JDFComChannel cc = c.appendComChannel();
 
 		assertEquals("contact", ni.getChildWithMatchingAttribute(ElementName.CONTACT, "ContactTypes", null, "Customer", 0, true, null), c);
 		assertEquals("contact", ni.getParentJDF().getChildWithAttribute(ElementName.CONTACT, "ContactTypes", null, "Customer", 0, false), c);
@@ -946,8 +945,6 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertNotNull("refElement has been removed", node.getResourcePool().getElement("Contact"));
 		assertTrue("haselement 3", ni2.hasChildElement(ElementName.CONTACT, null));
 		c = ni2.getContact();
-		re = (JDFRefElement) c.getElement("ComChannelRef");
-		assertTrue("refelementok 2", re.getTarget() == cc);
 		ni2.inlineRefElements(null, null, false);
 		assertNull("get ref post inline 2", ni2.getElement("ComChannelRef"));
 		assertTrue("haselement 4", c.hasChildElement(ElementName.COMCHANNEL, null));
@@ -1026,44 +1023,46 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		final File testData = new File(sm_dirTestData + "BadSampleFiles");
 		assertTrue("testData dir", testData.isDirectory());
-		final File[] fList = testData.listFiles();
+		final File[] fList = FileUtil.listFilesWithExtension(testData, ".jdf");
 		final JDFParser p = new JDFParser();
 		final JDFParser p2 = new JDFParser();
 		p2.m_SchemaLocation = sm_dirTestSchema + "JDF.xsd";
-
-		for (int i = 0; i < fList.length; i++)
+		if (fList != null)
 		{
-			final File file = fList[i];
-			// skip directories in CVS environments
-			if (file.isDirectory())
+			for (int i = 0; i < fList.length; i++)
 			{
-				continue;
-			}
+				final File file = fList[i];
+				// skip directories in CVS environments
+				if (file.isDirectory())
+				{
+					continue;
+				}
 
-			// skip schema files
-			if (file.getPath().endsWith(".xsd"))
-			{
-				continue;
-			}
+				// skip schema files
+				if (file.getPath().endsWith(".xsd"))
+				{
+					continue;
+				}
 
-			System.out.println("Parsing: " + file.getPath());
-			JDFDoc jdfDoc = p.parseFile(file.getPath());
-			assertTrue("parse ok", jdfDoc != null);
-			JDFElement e = null;
-			if (jdfDoc != null)
-			{
-				e = (JDFElement) jdfDoc.getRoot();
-				assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
-			}
+				System.out.println("Parsing: " + file.getPath());
+				JDFDoc jdfDoc = p.parseFile(file.getPath());
+				assertNotNull("parse not ok:  " + file.getPath(), jdfDoc);
+				JDFElement e = null;
+				if (jdfDoc != null)
+				{
+					e = (JDFElement) jdfDoc.getRoot();
+					assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
+				}
 
-			// now with schema validation
-			jdfDoc = p2.parseFile(file.getPath());
-			assertTrue("schema parse ok", jdfDoc != null);
-			// TODO fix handling of prerelease default attributes
-			if (jdfDoc != null)
-			{
-				e = (JDFElement) jdfDoc.getRoot();
-				assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
+				// now with schema validation
+				jdfDoc = p2.parseFile(file.getPath());
+				assertTrue("schema parse ok", jdfDoc != null);
+				// TODO fix handling of prerelease default attributes
+				if (jdfDoc != null)
+				{
+					e = (JDFElement) jdfDoc.getRoot();
+					assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
+				}
 			}
 		}
 	}
@@ -1103,7 +1102,8 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFDoc d2 = new JDFDoc("d2");
 		assertNotNull(d1.getXMLDocUserData());
 		assertNotNull(d2.getXMLDocUserData());
-		assertTrue(d1.getXMLDocUserData().getIDCache());
+		d1.getXMLDocUserData();
+		assertTrue(XMLDocUserData.getIDCache());
 		final KElement e1 = d1.getRoot();
 		final KElement e2 = d2.getRoot();
 		for (int i = 0; i < 4; i++)
