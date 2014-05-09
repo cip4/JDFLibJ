@@ -2107,8 +2107,8 @@ public class JDFSpawn
 		/**
 		 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler
 		 * das undo aufrufen kann. die Methode hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
-		 * @param parent 
-		 * @param strSpawnID 
+		 *  
+		 *  
 		 * 
 		 * 
 		 * @return the fixed unspawned node

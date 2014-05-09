@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -187,6 +187,7 @@ public class MimeReader extends MimeHelper
 			// methods rely on the stream remaining open!
 			final ByteArrayIOStream bis = new ByteArrayIOStream(f);
 			final Multipart mp = getMultiPart(bis.getInputStream());
+			bis.close();
 			return mp;
 		}
 		catch (final FileNotFoundException e)
@@ -219,8 +220,7 @@ public class MimeReader extends MimeHelper
 	*/
 	public XMLDoc getXMLDoc(final InputStream stream, final int index)
 	{
-		ByteArrayIOStream bios = new ByteArrayIOStream(stream);
-		ByteArrayIOInputStream bis = bios.getInputStream();
+		ByteArrayIOInputStream bis = ByteArrayIOStream.getBufferedInputStream(stream);
 		final Multipart mp = getMultiPart(bis);
 		if (mp != null)
 		{
@@ -235,7 +235,7 @@ public class MimeReader extends MimeHelper
 		if (index == 0)
 		{
 
-			bis = bios.getInputStream();
+			bis = bis.getNewStream();
 			return XMLDoc.parseStream(bis);
 		}
 		else

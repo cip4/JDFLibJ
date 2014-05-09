@@ -1478,11 +1478,11 @@ public class JDFMerge
 				{
 					if (merged != null)
 					{
-						pr.setReturnTime(merged.getTimeStampDate());
+						pr.setReturnTime(merged.getTimeStamp());
 					}
 					if (spawned != null)
 					{
-						pr.setSubmissionTime(spawned.getTimeStampDate());
+						pr.setSubmissionTime(spawned.getTimeStamp());
 					}
 				}
 			}

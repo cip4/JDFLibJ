@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -397,6 +397,7 @@ public class MyArgs
 	 * convert character to boolean
 	 * 
 	 * @param c
+	 * @param defaultValue 
 	 * 
 	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
 	 * @deprecated defaultValue==true is kind of stupid...

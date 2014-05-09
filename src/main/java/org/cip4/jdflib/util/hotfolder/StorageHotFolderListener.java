@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -158,6 +158,7 @@ class StorageHotFolderListener implements HotFolderListener
 	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 */
+	@Override
 	public boolean hotFile(File hotFile)
 	{
 		log.info("processing hot file: " + hotFile);
@@ -305,7 +306,7 @@ class StorageHotFolderListener implements HotFolderListener
 	@Override
 	public String toString()
 	{
-		return "StorageHotFolderListener: ok=" + okStorage + " error=" + errorStorage;
+		return "StorageHotFolderListener: ok=" + okStorage + " error=" + errorStorage + " " + parent;
 	}
 
 }

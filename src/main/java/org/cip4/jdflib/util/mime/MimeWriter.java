@@ -279,10 +279,10 @@ public class MimeWriter extends MimeHelper
 		{
 			return null;
 		}
-		final ByteArrayIOStream ios = new ByteArrayIOStream(is);
 		try
 		{
-			final ByteArrayDataSource ds = new ByteArrayDataSource(ios.getInputStream(), contentType);
+			ByteArrayIOInputStream inputStream = ByteArrayIOStream.getBufferedInputStream(is);
+			final ByteArrayDataSource ds = new ByteArrayDataSource(inputStream, contentType);
 			bp.setDataHandler(new DataHandler(ds));
 		}
 		catch (final MessagingException e)
