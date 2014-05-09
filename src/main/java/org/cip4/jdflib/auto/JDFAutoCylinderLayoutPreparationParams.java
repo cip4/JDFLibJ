@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,146 +77,133 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionPath;
-    /**
-    *****************************************************************************
-    class JDFAutoCylinderLayoutPreparationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCylinderLayoutPreparationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PRODUCTIONPATH, 0x55555111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRODUCTIONPATH, 0x55555111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCylinderLayoutPreparationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayoutPreparationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderLayoutPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderLayoutPreparationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayoutPreparationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderLayoutPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderLayoutPreparationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayoutPreparationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCylinderLayoutPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCylinderLayoutPreparationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCylinderLayoutPreparationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	 * (24) const get element ProductionPath
+	 * @return JDFProductionPath the element
+	 */
+	public JDFProductionPath getProductionPath()
+	{
+		return (JDFProductionPath) getElement(ElementName.PRODUCTIONPATH, null, 0);
+	}
 
+	/** (25) getCreateProductionPath
+	 * 
+	 * @return JDFProductionPath the element
+	 */
+	public JDFProductionPath getCreateProductionPath()
+	{
+		return (JDFProductionPath) getCreateElement_KElement(ElementName.PRODUCTIONPATH, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * (29) append element ProductionPath
+	 * @return JDFProductionPath the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFProductionPath appendProductionPath() throws JDFException
+	{
+		return (JDFProductionPath) appendElementN(ElementName.PRODUCTIONPATH, 1, null);
+	}
 
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element ProductionPath
-     * @return JDFProductionPath the element
-     */
-    public JDFProductionPath getProductionPath()
-    {
-        return (JDFProductionPath) getElement(ElementName.PRODUCTIONPATH, null, 0);
-    }
-
-    /** (25) getCreateProductionPath
-     * 
-     * @return JDFProductionPath the element
-     */
-    public JDFProductionPath getCreateProductionPath()
-    {
-        return (JDFProductionPath) getCreateElement_KElement(ElementName.PRODUCTIONPATH, null, 0);
-    }
-
-    /**
-     * (29) append element ProductionPath
-     * @return JDFProductionPath the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFProductionPath appendProductionPath() throws JDFException
-    {
-        return (JDFProductionPath) appendElementN(ElementName.PRODUCTIONPATH, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refProductionPath(JDFProductionPath refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refProductionPath(JDFProductionPath refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

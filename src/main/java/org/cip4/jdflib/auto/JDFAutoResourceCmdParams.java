@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
@@ -122,7 +122,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.UPDATEIDS, 0x44444331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -308,6 +308,66 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		public static final EnumUpdateMethod Complete = new EnumUpdateMethod("Complete");
 		public static final EnumUpdateMethod Incremental = new EnumUpdateMethod("Incremental");
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
+	}
+
+	/**
+	* Enumeration strings for Usage
+	*/
+
+	public static class EnumUsage extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumUsage(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumUsage getEnum(String enumName)
+		{
+			return (EnumUsage) getEnum(EnumUsage.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumUsage getEnum(int enumValue)
+		{
+			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumUsage.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumUsage.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumUsage.class);
+		}
+
+		public static final EnumUsage Input = new EnumUsage("Input");
+		public static final EnumUsage Output = new EnumUsage("Output");
 	}
 
 	/* ************************************************************************
@@ -564,8 +624,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public VString getUpdateIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -598,7 +658,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  * (5) set attribute Usage
 	  * @param enumVar the enumVar to set the attribute to
 	  */
-	public void setUsage(EnumUsage enumVar)
+	public void setUsage(JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -607,9 +667,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  * (9) get attribute Usage
 	  * @return the value of the attribute
 	  */
-	public EnumUsage getUsage()
+	public JDFResourceLink.EnumUsage getUsage()
 	{
-		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
 	/* ***********************************************************************

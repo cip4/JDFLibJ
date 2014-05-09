@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoResubmissionParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoResubmissionParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoResubmissionParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoResubmissionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResubmissionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResubmissionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoResubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResubmissionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResubmissionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoResubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResubmissionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoResubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoResubmissionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoResubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoResubmissionParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoResubmissionParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
-
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

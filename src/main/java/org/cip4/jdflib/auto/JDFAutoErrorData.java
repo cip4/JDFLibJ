@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,240 +81,224 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoErrorData : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoErrorData : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoErrorData extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORURL, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FIXEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.PATH, 0x33333333, AttributeInfo.EnumAttributeType.XPath, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORURL, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FIXEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PATH, 0x33333333, AttributeInfo.EnumAttributeType.XPath, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoErrorData
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoErrorData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoErrorData
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoErrorData
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoErrorData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoErrorData
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoErrorData
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoErrorData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoErrorData
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoErrorData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoErrorData[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ErrorType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoErrorData[  --> " + super.toString() + " ]";
-    }
+	public static class EnumErrorType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumErrorType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ErrorType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumErrorType getEnum(String enumName)
+		{
+			return (EnumErrorType) getEnum(EnumErrorType.class, enumName);
+		}
 
-        public static class EnumErrorType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumErrorType getEnum(int enumValue)
+		{
+			return (EnumErrorType) getEnum(EnumErrorType.class, enumValue);
+		}
 
-            private EnumErrorType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumErrorType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumErrorType getEnum(String enumName)
-            {
-                return (EnumErrorType) getEnum(EnumErrorType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumErrorType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumErrorType getEnum(int enumValue)
-            {
-                return (EnumErrorType) getEnum(EnumErrorType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumErrorType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumErrorType.class);
-            }
+		public static final EnumErrorType Invalid = new EnumErrorType("Invalid");
+		public static final EnumErrorType Missing = new EnumErrorType("Missing");
+		public static final EnumErrorType Unsupported = new EnumErrorType("Unsupported");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumErrorType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumErrorType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ErrorType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setErrorType(EnumErrorType enumVar)
+	{
+		setAttribute(AttributeName.ERRORTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumErrorType Invalid = new EnumErrorType("Invalid");
-            public static final EnumErrorType Missing = new EnumErrorType("Missing");
-            public static final EnumErrorType Unsupported = new EnumErrorType("Unsupported");
-        }      
+	/**
+	  * (9) get attribute ErrorType
+	  * @return the value of the attribute
+	  */
+	public EnumErrorType getErrorType()
+	{
+		return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ErrorURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setErrorURL(String value)
+	{
+		setAttribute(AttributeName.ERRORURL, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ErrorURL
+	  * @return the value of the attribute
+	  */
+	public String getErrorURL()
+	{
+		return getAttribute(AttributeName.ERRORURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ErrorType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setErrorType(EnumErrorType enumVar)
-        {
-            setAttribute(AttributeName.ERRORTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FixExpression
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FixExpression
+	  * @param value the value to set the attribute to
+	  */
+	public void setFixExpression(String value)
+	{
+		setAttribute(AttributeName.FIXEXPRESSION, value, null);
+	}
 
-        /**
-          * (9) get attribute ErrorType
-          * @return the value of the attribute
-          */
-        public EnumErrorType getErrorType()
-        {
-            return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
-        }
+	/**
+	  * (23) get String attribute FixExpression
+	  * @return the value of the attribute
+	  */
+	public String getFixExpression()
+	{
+		return getAttribute(AttributeName.FIXEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ErrorURL
-          * @param value the value to set the attribute to
-          */
-        public void setErrorURL(String value)
-        {
-            setAttribute(AttributeName.ERRORURL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Path
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Path
+	  * @param value the value to set the attribute to
+	  */
+	public void setPath(String value)
+	{
+		setAttribute(AttributeName.PATH, value, null);
+	}
 
-        /**
-          * (23) get String attribute ErrorURL
-          * @return the value of the attribute
-          */
-        public String getErrorURL()
-        {
-            return getAttribute(AttributeName.ERRORURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FixExpression
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FixExpression
-          * @param value the value to set the attribute to
-          */
-        public void setFixExpression(String value)
-        {
-            setAttribute(AttributeName.FIXEXPRESSION, value, null);
-        }
-
-        /**
-          * (23) get String attribute FixExpression
-          * @return the value of the attribute
-          */
-        public String getFixExpression()
-        {
-            return getAttribute(AttributeName.FIXEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Path
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Path
-          * @param value the value to set the attribute to
-          */
-        public void setPath(String value)
-        {
-            setAttribute(AttributeName.PATH, value, null);
-        }
-
-        /**
-          * (23) get String attribute Path
-          * @return the value of the attribute
-          */
-        public String getPath()
-        {
-            return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Path
+	  * @return the value of the attribute
+	  */
+	public String getPath()
+	{
+		return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

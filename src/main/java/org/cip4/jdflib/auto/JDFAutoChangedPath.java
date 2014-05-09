@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,240 +81,224 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoChangedPath : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoChangedPath : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoChangedPath extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PATH, 0x22222222, AttributeInfo.EnumAttributeType.XPath, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MODIFICATION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumModification.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.OLDVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PATH, 0x22222222, AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODIFICATION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumModification.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OLDVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoChangedPath
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChangedPath(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedPath
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoChangedPath(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChangedPath
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChangedPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedPath
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoChangedPath(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChangedPath
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoChangedPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedPath
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoChangedPath(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoChangedPath[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Modification
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoChangedPath[  --> " + super.toString() + " ]";
-    }
+	public static class EnumModification extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumModification(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Modification
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumModification getEnum(String enumName)
+		{
+			return (EnumModification) getEnum(EnumModification.class, enumName);
+		}
 
-        public static class EnumModification extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumModification getEnum(int enumValue)
+		{
+			return (EnumModification) getEnum(EnumModification.class, enumValue);
+		}
 
-            private EnumModification(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumModification.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumModification getEnum(String enumName)
-            {
-                return (EnumModification) getEnum(EnumModification.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumModification.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumModification getEnum(int enumValue)
-            {
-                return (EnumModification) getEnum(EnumModification.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumModification.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumModification.class);
-            }
+		public static final EnumModification Create = new EnumModification("Create");
+		public static final EnumModification Delete = new EnumModification("Delete");
+		public static final EnumModification Modify = new EnumModification("Modify");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumModification.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumModification.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Path
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Path
+	  * @param value the value to set the attribute to
+	  */
+	public void setPath(String value)
+	{
+		setAttribute(AttributeName.PATH, value, null);
+	}
 
-            public static final EnumModification Create = new EnumModification("Create");
-            public static final EnumModification Delete = new EnumModification("Delete");
-            public static final EnumModification Modify = new EnumModification("Modify");
-        }      
+	/**
+	  * (23) get String attribute Path
+	  * @return the value of the attribute
+	  */
+	public String getPath()
+	{
+		return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Modification
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Modification
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setModification(EnumModification enumVar)
+	{
+		setAttribute(AttributeName.MODIFICATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute Modification
+	  * @return the value of the attribute
+	  */
+	public EnumModification getModification()
+	{
+		return EnumModification.getEnum(getAttribute(AttributeName.MODIFICATION, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Path
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Path
-          * @param value the value to set the attribute to
-          */
-        public void setPath(String value)
-        {
-            setAttribute(AttributeName.PATH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OldValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OldValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setOldValue(String value)
+	{
+		setAttribute(AttributeName.OLDVALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Path
-          * @return the value of the attribute
-          */
-        public String getPath()
-        {
-            return getAttribute(AttributeName.PATH, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute OldValue
+	  * @return the value of the attribute
+	  */
+	public String getOldValue()
+	{
+		return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Modification
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Modification
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setModification(EnumModification enumVar)
-        {
-            setAttribute(AttributeName.MODIFICATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NewValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NewValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setNewValue(String value)
+	{
+		setAttribute(AttributeName.NEWVALUE, value, null);
+	}
 
-        /**
-          * (9) get attribute Modification
-          * @return the value of the attribute
-          */
-        public EnumModification getModification()
-        {
-            return EnumModification.getEnum(getAttribute(AttributeName.MODIFICATION, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OldValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OldValue
-          * @param value the value to set the attribute to
-          */
-        public void setOldValue(String value)
-        {
-            setAttribute(AttributeName.OLDVALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute OldValue
-          * @return the value of the attribute
-          */
-        public String getOldValue()
-        {
-            return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NewValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NewValue
-          * @param value the value to set the attribute to
-          */
-        public void setNewValue(String value)
-        {
-            setAttribute(AttributeName.NEWVALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute NewValue
-          * @return the value of the attribute
-          */
-        public String getNewValue()
-        {
-            return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute NewValue
+	  * @return the value of the attribute
+	  */
+	public String getNewValue()
+	{
+		return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

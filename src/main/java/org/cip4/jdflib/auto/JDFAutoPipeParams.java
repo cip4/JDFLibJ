@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,248 +82,287 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoPipeParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPipeParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPipeParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), "InProgress");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROJECTID, 0x33311111, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), "InProgress");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66611111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPipeParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPipeParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPipeParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPipeParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPipeParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPipeParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPipeParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPipeParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPipeParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPipeParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPipeParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PipeID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PipeID
+	  * @param value the value to set the attribute to
+	  */
+	public void setPipeID(String value)
+	{
+		setAttribute(AttributeName.PIPEID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PipeID
+	  * @return the value of the attribute
+	  */
+	public String getPipeID()
+	{
+		return getAttribute(AttributeName.PIPEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PipeID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PipeID
-          * @param value the value to set the attribute to
-          */
-        public void setPipeID(String value)
-        {
-            setAttribute(AttributeName.PIPEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProjectID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ProjectID
+	  * @param value the value to set the attribute to
+	  */
+	public void setProjectID(String value)
+	{
+		setAttribute(AttributeName.PROJECTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute PipeID
-          * @return the value of the attribute
-          */
-        public String getPipeID()
-        {
-            return getAttribute(AttributeName.PIPEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ProjectID
+	  * @return the value of the attribute
+	  */
+	public String getProjectID()
+	{
+		return getAttribute(AttributeName.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UpdatedStatus
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute UpdatedStatus
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
-        {
-            setAttribute(AttributeName.UPDATEDSTATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UpdatedStatus
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute UpdatedStatus
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
+	{
+		setAttribute(AttributeName.UPDATEDSTATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (9) get attribute UpdatedStatus
-          * @return the value of the attribute
-          */
-        public JDFResource.EnumResStatus getUpdatedStatus()
-        {
-            return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
-        }
+	/**
+	  * (9) get attribute UpdatedStatus
+	  * @return the value of the attribute
+	  */
+	public JDFResource.EnumResStatus getUpdatedStatus()
+	{
+		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /** (26) getCreateResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     */
-    public JDFResource getCreateResource(int iSkip)
-    {
-        return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
-    }
+	/**
+	 * (24) const get element AmountPool
+	 * @return JDFAmountPool the element
+	 */
+	public JDFAmountPool getAmountPool()
+	{
+		return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, 0);
+	}
 
-    /**
-     * (27) const get element Resource
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     * default is getResource(0)     */
-    public JDFResource getResource(int iSkip)
-    {
-        return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
-    }
+	/** (25) getCreateAmountPool
+	 * 
+	 * @return JDFAmountPool the element
+	 */
+	public JDFAmountPool getCreateAmountPool()
+	{
+		return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL, null, 0);
+	}
 
-    /**
-     * Get all Resource from the current element
-     * 
-     * @return Collection<JDFResource>, null if none are available
-     */
-    public Collection<JDFResource> getAllResource()
-    {
-        final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (29) append element AmountPool
+	 * @return JDFAmountPool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFAmountPool appendAmountPool() throws JDFException
+	{
+		return (JDFAmountPool) appendElementN(ElementName.AMOUNTPOOL, 1, null);
+	}
 
-        final Vector<JDFResource> v = new Vector<JDFResource>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFResource) vc.get(i));
-        }
+	/** (26) getCreateResource
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource(int iSkip)
+	{
+		return (JDFResource) getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element Resource
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 * default is getResource(0)     */
+	public JDFResource getResource(int iSkip)
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-    /**
-     * (30) append element Resource
-     * @return JDFResource the element
-     */
-    public JDFResource appendResource()
-    {
-        return (JDFResource) appendElement(ElementName.RESOURCE, null);
-    }
+	/**
+	 * Get all Resource from the current element
+	 * 
+	 * @return Collection<JDFResource>, null if none are available
+	 */
+	public Collection<JDFResource> getAllResource()
+	{
+		final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFResource> v = new Vector<JDFResource>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFResource) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Resource
+	 * @return JDFResource the element
+	 */
+	public JDFResource appendResource()
+	{
+		return (JDFResource) appendElement(ElementName.RESOURCE, null);
+	}
 
 }// end namespace JDF

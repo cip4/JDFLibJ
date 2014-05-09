@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,176 +83,165 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
-    /**
-    *****************************************************************************
-    class JDFAutoAuthenticationResp : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAuthenticationResp : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAuthenticationResp extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.URL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.URL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33331111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAuthenticationResp
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationResp
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAuthenticationResp(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAuthenticationResp
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationResp
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAuthenticationResp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAuthenticationResp
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationResp
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAuthenticationResp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAuthenticationResp[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAuthenticationResp[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateCertificate
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateCertificate(int iSkip)
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.CERTIFICATE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Certificate
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 * default is getCertificate(0)     */
+	public JDFElement getCertificate(int iSkip)
+	{
+		return (JDFElement) getElement(ElementName.CERTIFICATE, null, iSkip);
+	}
 
-    /** (26) getCreateCertificate
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateCertificate(int iSkip)
-    {
-        return (JDFElement)getCreateElement_KElement(ElementName.CERTIFICATE, null, iSkip);
-    }
+	/**
+	 * Get all Certificate from the current element
+	 * 
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	public Collection<JDFElement> getAllCertificate()
+	{
+		final VElement vc = getChildElementVector(ElementName.CERTIFICATE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Certificate
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     * default is getCertificate(0)     */
-    public JDFElement getCertificate(int iSkip)
-    {
-        return (JDFElement) getElement(ElementName.CERTIFICATE, null, iSkip);
-    }
+		final Vector<JDFElement> v = new Vector<JDFElement>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFElement) vc.get(i));
+		}
 
-    /**
-     * Get all Certificate from the current element
-     * 
-     * @return Collection<JDFElement>, null if none are available
-     */
-    public Collection<JDFElement> getAllCertificate()
-    {
-        final VElement vc = getChildElementVector(ElementName.CERTIFICATE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFElement> v = new Vector<JDFElement>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFElement) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Certificate
-     * @return JDFElement the element
-     */
-    public JDFElement appendCertificate()
-    {
-        return (JDFElement) appendElement(ElementName.CERTIFICATE, null);
-    }
+	/**
+	 * (30) append element Certificate
+	 * @return JDFElement the element
+	 */
+	public JDFElement appendCertificate()
+	{
+		return (JDFElement) appendElement(ElementName.CERTIFICATE, null);
+	}
 
 }// end namespace JDF

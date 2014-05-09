@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,130 +75,117 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoJacketingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoJacketingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoJacketingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINGWIDTH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINGWIDTH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoJacketingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJacketingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoJacketingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJacketingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJacketingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoJacketingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJacketingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoJacketingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoJacketingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoJacketingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoJacketingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FoldingWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FoldingWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setFoldingWidth(double value)
+	{
+		setAttribute(AttributeName.FOLDINGWIDTH, value, null);
+	}
 
-
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FoldingWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FoldingWidth
-          * @param value the value to set the attribute to
-          */
-        public void setFoldingWidth(double value)
-        {
-            setAttribute(AttributeName.FOLDINGWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute FoldingWidth
-          * @return double the value of the attribute
-          */
-        public double getFoldingWidth()
-        {
-            return getRealAttribute(AttributeName.FOLDINGWIDTH, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute FoldingWidth
+	  * @return double the value of the attribute
+	  */
+	public double getFoldingWidth()
+	{
+		return getRealAttribute(AttributeName.FOLDINGWIDTH, null, 0.0);
+	}
 
 }// end namespace JDF

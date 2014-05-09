@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,244 +86,231 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoSizeIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSizeIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSizeIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777775);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PAGES, 0x77777776);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777775);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PAGES, 0x77777776);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSizeIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSizeIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSizeIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSizeIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSizeIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSizeIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSizeIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSizeIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSizeIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSizeIntent[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Type
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSizeIntent[  --> " + super.toString() + " ]";
-    }
+	public static class EnumType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Type
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumType getEnum(String enumName)
+		{
+			return (EnumType) getEnum(EnumType.class, enumName);
+		}
 
-        public static class EnumType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumType getEnum(int enumValue)
+		{
+			return (EnumType) getEnum(EnumType.class, enumValue);
+		}
 
-            private EnumType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumType getEnum(String enumName)
-            {
-                return (EnumType) getEnum(EnumType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumType getEnum(int enumValue)
-            {
-                return (EnumType) getEnum(EnumType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumType.class);
-            }
+		public static final EnumType Folded = new EnumType("Folded");
+		public static final EnumType Flat = new EnumType("Flat");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Type
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setType(EnumType enumVar)
+	{
+		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumType Folded = new EnumType("Folded");
-            public static final EnumType Flat = new EnumType("Flat");
-        }      
+	/**
+	  * (9) get attribute Type
+	  * @return the value of the attribute
+	  */
+	public EnumType getType()
+	{
+		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element Dimensions
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getDimensions()
+	{
+		return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Type
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Type
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setType(EnumType enumVar)
-        {
-            setAttribute(AttributeName.TYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateDimensions
+	 * 
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getCreateDimensions()
+	{
+		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
+	}
 
-        /**
-          * (9) get attribute Type
-          * @return the value of the attribute
-          */
-        public EnumType getType()
-        {
-            return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
-        }
+	/**
+	 * (29) append element Dimensions
+	 * @return JDFXYPairSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFXYPairSpan appendDimensions() throws JDFException
+	{
+		return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (24) const get element Pages
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getPages()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
+	}
 
-    /**
-     * (24) const get element Dimensions
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getDimensions()
-    {
-        return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
-    }
+	/** (25) getCreatePages
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreatePages()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
+	}
 
-    /** (25) getCreateDimensions
-     * 
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getCreateDimensions()
-    {
-        return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
-    }
-
-    /**
-     * (29) append element Dimensions
-     * @return JDFXYPairSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFXYPairSpan appendDimensions() throws JDFException
-    {
-        return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
-    }
-
-    /**
-     * (24) const get element Pages
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getPages()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
-    }
-
-    /** (25) getCreatePages
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreatePages()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
-    }
-
-    /**
-     * (29) append element Pages
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendPages() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
-    }
+	/**
+	 * (29) append element Pages
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendPages() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
+	}
 
 }// end namespace JDF

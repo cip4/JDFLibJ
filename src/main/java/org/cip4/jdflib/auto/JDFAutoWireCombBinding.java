@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,202 +80,191 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanWireCombMaterial;
 import org.cip4.jdflib.span.JDFSpanWireCombShape;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoWireCombBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoWireCombBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoWireCombBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.WIRECOMBBRAND, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.WIRECOMBMATERIAL, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.WIRECOMBSHAPE, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.WIRECOMBBRAND, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.WIRECOMBMATERIAL, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.WIRECOMBSHAPE, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoWireCombBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoWireCombBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoWireCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoWireCombBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoWireCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoWireCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoWireCombBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoWireCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoWireCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoWireCombBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoWireCombBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element WireCombBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getWireCombBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.WIRECOMBBRAND, null, 0);
+	}
 
+	/** (25) getCreateWireCombBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateWireCombBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.WIRECOMBBRAND, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element WireCombBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendWireCombBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.WIRECOMBBRAND, 1, null);
+	}
 
-    /**
-     * (24) const get element WireCombBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getWireCombBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.WIRECOMBBRAND, null, 0);
-    }
+	/**
+	 * (24) const get element WireCombMaterial
+	 * @return JDFSpanWireCombMaterial the element
+	 */
+	public JDFSpanWireCombMaterial getWireCombMaterial()
+	{
+		return (JDFSpanWireCombMaterial) getElement(ElementName.WIRECOMBMATERIAL, null, 0);
+	}
 
-    /** (25) getCreateWireCombBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateWireCombBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.WIRECOMBBRAND, null, 0);
-    }
+	/** (25) getCreateWireCombMaterial
+	 * 
+	 * @return JDFSpanWireCombMaterial the element
+	 */
+	public JDFSpanWireCombMaterial getCreateWireCombMaterial()
+	{
+		return (JDFSpanWireCombMaterial) getCreateElement_KElement(ElementName.WIRECOMBMATERIAL, null, 0);
+	}
 
-    /**
-     * (29) append element WireCombBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendWireCombBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.WIRECOMBBRAND, 1, null);
-    }
+	/**
+	 * (29) append element WireCombMaterial
+	 * @return JDFSpanWireCombMaterial the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanWireCombMaterial appendWireCombMaterial() throws JDFException
+	{
+		return (JDFSpanWireCombMaterial) appendElementN(ElementName.WIRECOMBMATERIAL, 1, null);
+	}
 
-    /**
-     * (24) const get element WireCombMaterial
-     * @return JDFSpanWireCombMaterial the element
-     */
-    public JDFSpanWireCombMaterial getWireCombMaterial()
-    {
-        return (JDFSpanWireCombMaterial) getElement(ElementName.WIRECOMBMATERIAL, null, 0);
-    }
+	/**
+	 * (24) const get element WireCombShape
+	 * @return JDFSpanWireCombShape the element
+	 */
+	public JDFSpanWireCombShape getWireCombShape()
+	{
+		return (JDFSpanWireCombShape) getElement(ElementName.WIRECOMBSHAPE, null, 0);
+	}
 
-    /** (25) getCreateWireCombMaterial
-     * 
-     * @return JDFSpanWireCombMaterial the element
-     */
-    public JDFSpanWireCombMaterial getCreateWireCombMaterial()
-    {
-        return (JDFSpanWireCombMaterial) getCreateElement_KElement(ElementName.WIRECOMBMATERIAL, null, 0);
-    }
+	/** (25) getCreateWireCombShape
+	 * 
+	 * @return JDFSpanWireCombShape the element
+	 */
+	public JDFSpanWireCombShape getCreateWireCombShape()
+	{
+		return (JDFSpanWireCombShape) getCreateElement_KElement(ElementName.WIRECOMBSHAPE, null, 0);
+	}
 
-    /**
-     * (29) append element WireCombMaterial
-     * @return JDFSpanWireCombMaterial the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanWireCombMaterial appendWireCombMaterial() throws JDFException
-    {
-        return (JDFSpanWireCombMaterial) appendElementN(ElementName.WIRECOMBMATERIAL, 1, null);
-    }
+	/**
+	 * (29) append element WireCombShape
+	 * @return JDFSpanWireCombShape the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanWireCombShape appendWireCombShape() throws JDFException
+	{
+		return (JDFSpanWireCombShape) appendElementN(ElementName.WIRECOMBSHAPE, 1, null);
+	}
 
-    /**
-     * (24) const get element WireCombShape
-     * @return JDFSpanWireCombShape the element
-     */
-    public JDFSpanWireCombShape getWireCombShape()
-    {
-        return (JDFSpanWireCombShape) getElement(ElementName.WIRECOMBSHAPE, null, 0);
-    }
+	/**
+	 * (24) const get element HoleList
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getHoleList()
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /** (25) getCreateWireCombShape
-     * 
-     * @return JDFSpanWireCombShape the element
-     */
-    public JDFSpanWireCombShape getCreateWireCombShape()
-    {
-        return (JDFSpanWireCombShape) getCreateElement_KElement(ElementName.WIRECOMBSHAPE, null, 0);
-    }
+	/** (25) getCreateHoleList
+	 * 
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleList()
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /**
-     * (29) append element WireCombShape
-     * @return JDFSpanWireCombShape the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanWireCombShape appendWireCombShape() throws JDFException
-    {
-        return (JDFSpanWireCombShape) appendElementN(ElementName.WIRECOMBSHAPE, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleList
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getHoleList()
-    {
-        return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /** (25) getCreateHoleList
-     * 
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getCreateHoleList()
-    {
-        return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /**
-     * (29) append element HoleList
-     * @return JDFHoleList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleList appendHoleList() throws JDFException
-    {
-        return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
-    }
+	/**
+	 * (29) append element HoleList
+	 * @return JDFHoleList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleList appendHoleList() throws JDFException
+	{
+		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+	}
 
 }// end namespace JDF

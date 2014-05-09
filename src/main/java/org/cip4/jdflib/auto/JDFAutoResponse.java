@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,279 +81,290 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoResponse : public JDFMessage
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoResponse : public JDFMessage
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoResponse extends JDFMessage
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBSCRIBED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBSCRIBED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoResponse
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResponse
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResponse
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResponse
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResponse
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoResponse
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoResponse(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoResponse[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoResponse[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Acknowledged
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Acknowledged
+	  * @param value the value to set the attribute to
+	  */
+	public void setAcknowledged(boolean value)
+	{
+		setAttribute(AttributeName.ACKNOWLEDGED, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute Acknowledged
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getAcknowledged()
+	{
+		return getBoolAttribute(AttributeName.ACKNOWLEDGED, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Acknowledged
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Acknowledged
-          * @param value the value to set the attribute to
-          */
-        public void setAcknowledged(boolean value)
-        {
-            setAttribute(AttributeName.ACKNOWLEDGED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute refID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute refID
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setrefID(String value)
+	{
+		setAttribute(AttributeName.REFID, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute Acknowledged
-          * @return boolean the value of the attribute
-          */
-        public boolean getAcknowledged()
-        {
-            return getBoolAttribute(AttributeName.ACKNOWLEDGED, null, false);
-        }
+	/**
+	  * (23) get String attribute refID
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getrefID()
+	{
+		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute refID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute refID
-          * @param value the value to set the attribute to
-          */
-        public void setrefID(String value)
-        {
-            setAttribute(AttributeName.REFID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReturnCode
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReturnCode
+	  * @param value the value to set the attribute to
+	  */
+	public void setReturnCode(int value)
+	{
+		setAttribute(AttributeName.RETURNCODE, value, null);
+	}
 
-        /**
-          * (23) get String attribute refID
-          * @return the value of the attribute
-          */
-        public String getrefID()
-        {
-            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute ReturnCode
+	  * @return int the value of the attribute
+	  */
+	@Override
+	public int getReturnCode()
+	{
+		return getIntAttribute(AttributeName.RETURNCODE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReturnCode
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReturnCode
-          * @param value the value to set the attribute to
-          */
-        public void setReturnCode(int value)
-        {
-            setAttribute(AttributeName.RETURNCODE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Subscribed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Subscribed
+	  * @param value the value to set the attribute to
+	  */
+	public void setSubscribed(boolean value)
+	{
+		setAttribute(AttributeName.SUBSCRIBED, value, null);
+	}
 
-        /**
-          * (15) get int attribute ReturnCode
-          * @return int the value of the attribute
-          */
-        public int getReturnCode()
-        {
-            return getIntAttribute(AttributeName.RETURNCODE, null, 0);
-        }
+	/**
+	  * (18) get boolean attribute Subscribed
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getSubscribed()
+	{
+		return getBoolAttribute(AttributeName.SUBSCRIBED, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Subscribed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Subscribed
-          * @param value the value to set the attribute to
-          */
-        public void setSubscribed(boolean value)
-        {
-            setAttribute(AttributeName.SUBSCRIBED, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (18) get boolean attribute Subscribed
-          * @return boolean the value of the attribute
-          */
-        public boolean getSubscribed()
-        {
-            return getBoolAttribute(AttributeName.SUBSCRIBED, null, false);
-        }
+	/** (26) getCreateNotification
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNotification the element
+	 */
+	public JDFNotification getCreateNotification(int iSkip)
+	{
+		return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Notification
+	 * @param iSkip number of elements to skip
+	 * @return JDFNotification the element
+	 * default is getNotification(0)     */
+	public JDFNotification getNotification(int iSkip)
+	{
+		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, iSkip);
+	}
 
-    /**
-     * (24) const get element Notification
-     * @return JDFNotification the element
-     */
-    public JDFNotification getNotification()
-    {
-        return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
-    }
+	/**
+	 * Get all Notification from the current element
+	 * 
+	 * @return Collection<JDFNotification>, null if none are available
+	 */
+	public Collection<JDFNotification> getAllNotification()
+	{
+		final VElement vc = getChildElementVector(ElementName.NOTIFICATION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateNotification
-     * 
-     * @return JDFNotification the element
-     */
-    public JDFNotification getCreateNotification()
-    {
-        return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
-    }
+		final Vector<JDFNotification> v = new Vector<JDFNotification>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNotification) vc.get(i));
+		}
 
-    /**
-     * (29) append element Notification
-     * @return JDFNotification the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNotification appendNotification() throws JDFException
-    {
-        return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * (30) append element Notification
+	 * @return JDFNotification the element
+	 */
+	public JDFNotification appendNotification()
+	{
+		return (JDFNotification) appendElement(ElementName.NOTIFICATION, null);
+	}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+		return v;
+	}
+
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
 }// end namespace JDF

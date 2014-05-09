@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,239 +81,223 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoLot : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLot : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLot extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.LOTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLot
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLot(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLot
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLot(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLot
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLot
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLot(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLot
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLot
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLot(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLot[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Consumption
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLot[  --> " + super.toString() + " ]";
-    }
+	public static class EnumConsumption extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumConsumption(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Consumption
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumConsumption getEnum(String enumName)
+		{
+			return (EnumConsumption) getEnum(EnumConsumption.class, enumName);
+		}
 
-        public static class EnumConsumption extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumConsumption getEnum(int enumValue)
+		{
+			return (EnumConsumption) getEnum(EnumConsumption.class, enumValue);
+		}
 
-            private EnumConsumption(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumConsumption.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumConsumption getEnum(String enumName)
-            {
-                return (EnumConsumption) getEnum(EnumConsumption.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumConsumption.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumConsumption getEnum(int enumValue)
-            {
-                return (EnumConsumption) getEnum(EnumConsumption.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumConsumption.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumConsumption.class);
-            }
+		public static final EnumConsumption Full = new EnumConsumption("Full");
+		public static final EnumConsumption Partial = new EnumConsumption("Partial");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumConsumption.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumConsumption.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ActualAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ActualAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setActualAmount(double value)
+	{
+		setAttribute(AttributeName.ACTUALAMOUNT, value, null);
+	}
 
-            public static final EnumConsumption Full = new EnumConsumption("Full");
-            public static final EnumConsumption Partial = new EnumConsumption("Partial");
-        }      
+	/**
+	  * (17) get double attribute ActualAmount
+	  * @return double the value of the attribute
+	  */
+	public double getActualAmount()
+	{
+		return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Amount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Amount
+	  * @param value the value to set the attribute to
+	  */
+	public void setAmount(double value)
+	{
+		setAttribute(AttributeName.AMOUNT, value, null);
+	}
 
+	/**
+	  * (17) get double attribute Amount
+	  * @return double the value of the attribute
+	  */
+	public double getAmount()
+	{
+		return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ActualAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ActualAmount
-          * @param value the value to set the attribute to
-          */
-        public void setActualAmount(double value)
-        {
-            setAttribute(AttributeName.ACTUALAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LotID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LotID
+	  * @param value the value to set the attribute to
+	  */
+	public void setLotID(String value)
+	{
+		setAttribute(AttributeName.LOTID, value, null);
+	}
 
-        /**
-          * (17) get double attribute ActualAmount
-          * @return double the value of the attribute
-          */
-        public double getActualAmount()
-        {
-            return getRealAttribute(AttributeName.ACTUALAMOUNT, null, 0.0);
-        }
+	/**
+	  * (23) get String attribute LotID
+	  * @return the value of the attribute
+	  */
+	public String getLotID()
+	{
+		return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Amount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Amount
-          * @param value the value to set the attribute to
-          */
-        public void setAmount(double value)
-        {
-            setAttribute(AttributeName.AMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Consumption
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Consumption
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setConsumption(EnumConsumption enumVar)
+	{
+		setAttribute(AttributeName.CONSUMPTION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (17) get double attribute Amount
-          * @return double the value of the attribute
-          */
-        public double getAmount()
-        {
-            return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LotID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LotID
-          * @param value the value to set the attribute to
-          */
-        public void setLotID(String value)
-        {
-            setAttribute(AttributeName.LOTID, value, null);
-        }
-
-        /**
-          * (23) get String attribute LotID
-          * @return the value of the attribute
-          */
-        public String getLotID()
-        {
-            return getAttribute(AttributeName.LOTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Consumption
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Consumption
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setConsumption(EnumConsumption enumVar)
-        {
-            setAttribute(AttributeName.CONSUMPTION, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Consumption
-          * @return the value of the attribute
-          */
-        public EnumConsumption getConsumption()
-        {
-            return EnumConsumption.getEnum(getAttribute(AttributeName.CONSUMPTION, null, null));
-        }
+	/**
+	  * (9) get attribute Consumption
+	  * @return the value of the attribute
+	  */
+	public EnumConsumption getConsumption()
+	{
+		return EnumConsumption.getEnum(getAttribute(AttributeName.CONSUMPTION, null, null));
+	}
 
 }// end namespace JDF

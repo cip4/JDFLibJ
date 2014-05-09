@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,988 +88,1005 @@ import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanCoatings;
 import org.cip4.jdflib.span.JDFSpanFluteDirection;
 import org.cip4.jdflib.span.JDFSpanGrainDirection;
+import org.cip4.jdflib.span.JDFSpanISOPaperSubstrate;
 import org.cip4.jdflib.span.JDFSpanMediaType;
 import org.cip4.jdflib.span.JDFSpanMediaUnit;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFSpanOpacity;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoMediaIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMediaIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMediaIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
-
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PREPRINTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[28];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
-        elemInfoTable[10] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-        elemInfoTable[11] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
-        elemInfoTable[12] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
-        elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
-        elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
-        elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
-        elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
-        elemInfoTable[17] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
-        elemInfoTable[18] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
-        elemInfoTable[19] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
-        elemInfoTable[20] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
-        elemInfoTable[21] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
-        elemInfoTable[22] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
-        elemInfoTable[23] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
-        elemInfoTable[24] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-        elemInfoTable[25] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
-        elemInfoTable[26] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
-        elemInfoTable[27] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
-
-    /**
-     * Constructor for JDFAutoMediaIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoMediaIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoMediaIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMediaIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMediaIntent[  --> " + super.toString() + " ]";
-    }
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrePrinted
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PrePrinted
-          * @param value the value to set the attribute to
-          */
-        public void setPrePrinted(boolean value)
-        {
-            setAttribute(AttributeName.PREPRINTED, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute PrePrinted
-          * @return boolean the value of the attribute
-          */
-        public boolean getPrePrinted()
-        {
-            return getBoolAttribute(AttributeName.PREPRINTED, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MediaSetCount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MediaSetCount
-          * @param value the value to set the attribute to
-          */
-        public void setMediaSetCount(int value)
-        {
-            setAttribute(AttributeName.MEDIASETCOUNT, value, null);
-        }
-
-        /**
-          * (15) get int attribute MediaSetCount
-          * @return int the value of the attribute
-          */
-        public int getMediaSetCount()
-        {
-            return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UserMediaType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute UserMediaType
-          * @param value the value to set the attribute to
-          */
-        public void setUserMediaType(String value)
-        {
-            setAttribute(AttributeName.USERMEDIATYPE, value, null);
-        }
-
-        /**
-          * (23) get String attribute UserMediaType
-          * @return the value of the attribute
-          */
-        public String getUserMediaType()
-        {
-            return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element BackCoatings
-     * @return JDFSpanCoatings the element
-     */
-    public JDFSpanCoatings getBackCoatings()
-    {
-        return (JDFSpanCoatings) getElement(ElementName.BACKCOATINGS, null, 0);
-    }
-
-    /** (25) getCreateBackCoatings
-     * 
-     * @return JDFSpanCoatings the element
-     */
-    public JDFSpanCoatings getCreateBackCoatings()
-    {
-        return (JDFSpanCoatings) getCreateElement_KElement(ElementName.BACKCOATINGS, null, 0);
-    }
-
-    /**
-     * (29) append element BackCoatings
-     * @return JDFSpanCoatings the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanCoatings appendBackCoatings() throws JDFException
-    {
-        return (JDFSpanCoatings) appendElementN(ElementName.BACKCOATINGS, 1, null);
-    }
-
-    /**
-     * (24) const get element Brightness
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getBrightness()
-    {
-        return (JDFNumberSpan) getElement(ElementName.BRIGHTNESS, null, 0);
-    }
-
-    /** (25) getCreateBrightness
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateBrightness()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.BRIGHTNESS, null, 0);
-    }
-
-    /**
-     * (29) append element Brightness
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendBrightness() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.BRIGHTNESS, 1, null);
-    }
-
-    /**
-     * (24) const get element BuyerSupplied
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getBuyerSupplied()
-    {
-        return (JDFOptionSpan) getElement(ElementName.BUYERSUPPLIED, null, 0);
-    }
-
-    /** (25) getCreateBuyerSupplied
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateBuyerSupplied()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.BUYERSUPPLIED, null, 0);
-    }
-
-    /**
-     * (29) append element BuyerSupplied
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendBuyerSupplied() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.BUYERSUPPLIED, 1, null);
-    }
-
-    /**
-     * (24) const get element Dimensions
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getDimensions()
-    {
-        return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
-    }
-
-    /** (25) getCreateDimensions
-     * 
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getCreateDimensions()
-    {
-        return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
-    }
-
-    /**
-     * (29) append element Dimensions
-     * @return JDFXYPairSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFXYPairSpan appendDimensions() throws JDFException
-    {
-        return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
-    }
-
-    /**
-     * (24) const get element Flute
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getFlute()
-    {
-        return (JDFNameSpan) getElement(ElementName.FLUTE, null, 0);
-    }
-
-    /** (25) getCreateFlute
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateFlute()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.FLUTE, null, 0);
-    }
-
-    /**
-     * (29) append element Flute
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendFlute() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.FLUTE, 1, null);
-    }
-
-    /**
-     * (24) const get element FluteDirection
-     * @return JDFSpanFluteDirection the element
-     */
-    public JDFSpanFluteDirection getFluteDirection()
-    {
-        return (JDFSpanFluteDirection) getElement(ElementName.FLUTEDIRECTION, null, 0);
-    }
-
-    /** (25) getCreateFluteDirection
-     * 
-     * @return JDFSpanFluteDirection the element
-     */
-    public JDFSpanFluteDirection getCreateFluteDirection()
-    {
-        return (JDFSpanFluteDirection) getCreateElement_KElement(ElementName.FLUTEDIRECTION, null, 0);
-    }
-
-    /**
-     * (29) append element FluteDirection
-     * @return JDFSpanFluteDirection the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanFluteDirection appendFluteDirection() throws JDFException
-    {
-        return (JDFSpanFluteDirection) appendElementN(ElementName.FLUTEDIRECTION, 1, null);
-    }
-
-    /**
-     * (24) const get element FrontCoatings
-     * @return JDFSpanCoatings the element
-     */
-    public JDFSpanCoatings getFrontCoatings()
-    {
-        return (JDFSpanCoatings) getElement(ElementName.FRONTCOATINGS, null, 0);
-    }
-
-    /** (25) getCreateFrontCoatings
-     * 
-     * @return JDFSpanCoatings the element
-     */
-    public JDFSpanCoatings getCreateFrontCoatings()
-    {
-        return (JDFSpanCoatings) getCreateElement_KElement(ElementName.FRONTCOATINGS, null, 0);
-    }
-
-    /**
-     * (29) append element FrontCoatings
-     * @return JDFSpanCoatings the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanCoatings appendFrontCoatings() throws JDFException
-    {
-        return (JDFSpanCoatings) appendElementN(ElementName.FRONTCOATINGS, 1, null);
-    }
-
-    /**
-     * (24) const get element Grade
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getGrade()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.GRADE, null, 0);
-    }
-
-    /** (25) getCreateGrade
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreateGrade()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.GRADE, null, 0);
-    }
-
-    /**
-     * (29) append element Grade
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendGrade() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.GRADE, 1, null);
-    }
-
-    /**
-     * (24) const get element GrainDirection
-     * @return JDFSpanGrainDirection the element
-     */
-    public JDFSpanGrainDirection getGrainDirection()
-    {
-        return (JDFSpanGrainDirection) getElement(ElementName.GRAINDIRECTION, null, 0);
-    }
-
-    /** (25) getCreateGrainDirection
-     * 
-     * @return JDFSpanGrainDirection the element
-     */
-    public JDFSpanGrainDirection getCreateGrainDirection()
-    {
-        return (JDFSpanGrainDirection) getCreateElement_KElement(ElementName.GRAINDIRECTION, null, 0);
-    }
-
-    /**
-     * (29) append element GrainDirection
-     * @return JDFSpanGrainDirection the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanGrainDirection appendGrainDirection() throws JDFException
-    {
-        return (JDFSpanGrainDirection) appendElementN(ElementName.GRAINDIRECTION, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleCount
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getHoleCount()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.HOLECOUNT, null, 0);
-    }
-
-    /** (25) getCreateHoleCount
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreateHoleCount()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.HOLECOUNT, null, 0);
-    }
-
-    /**
-     * (29) append element HoleCount
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendHoleCount() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.HOLECOUNT, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleType
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getHoleType()
-    {
-        return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
-    }
-
-    /** (25) getCreateHoleType
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateHoleType()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
-    }
-
-    /**
-     * (29) append element HoleType
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendHoleType() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaColor
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getMediaColor()
-    {
-        return (JDFSpanNamedColor) getElement(ElementName.MEDIACOLOR, null, 0);
-    }
-
-    /** (25) getCreateMediaColor
-     * 
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getCreateMediaColor()
-    {
-        return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.MEDIACOLOR, null, 0);
-    }
-
-    /**
-     * (29) append element MediaColor
-     * @return JDFSpanNamedColor the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanNamedColor appendMediaColor() throws JDFException
-    {
-        return (JDFSpanNamedColor) appendElementN(ElementName.MEDIACOLOR, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaColorDetails
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getMediaColorDetails()
-    {
-        return (JDFStringSpan) getElement(ElementName.MEDIACOLORDETAILS, null, 0);
-    }
-
-    /** (25) getCreateMediaColorDetails
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateMediaColorDetails()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIACOLORDETAILS, null, 0);
-    }
-
-    /**
-     * (29) append element MediaColorDetails
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendMediaColorDetails() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.MEDIACOLORDETAILS, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaQuality
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getMediaQuality()
-    {
-        return (JDFStringSpan) getElement(ElementName.MEDIAQUALITY, null, 0);
-    }
-
-    /** (25) getCreateMediaQuality
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateMediaQuality()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIAQUALITY, null, 0);
-    }
-
-    /**
-     * (29) append element MediaQuality
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendMediaQuality() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.MEDIAQUALITY, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaType
-     * @return JDFSpanMediaType the element
-     */
-    public JDFSpanMediaType getMediaType()
-    {
-        return (JDFSpanMediaType) getElement(ElementName.MEDIATYPE, null, 0);
-    }
-
-    /** (25) getCreateMediaType
-     * 
-     * @return JDFSpanMediaType the element
-     */
-    public JDFSpanMediaType getCreateMediaType()
-    {
-        return (JDFSpanMediaType) getCreateElement_KElement(ElementName.MEDIATYPE, null, 0);
-    }
-
-    /**
-     * (29) append element MediaType
-     * @return JDFSpanMediaType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanMediaType appendMediaType() throws JDFException
-    {
-        return (JDFSpanMediaType) appendElementN(ElementName.MEDIATYPE, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaTypeDetails
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getMediaTypeDetails()
-    {
-        return (JDFNameSpan) getElement(ElementName.MEDIATYPEDETAILS, null, 0);
-    }
-
-    /** (25) getCreateMediaTypeDetails
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateMediaTypeDetails()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.MEDIATYPEDETAILS, null, 0);
-    }
-
-    /**
-     * (29) append element MediaTypeDetails
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendMediaTypeDetails() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.MEDIATYPEDETAILS, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaUnit
-     * @return JDFSpanMediaUnit the element
-     */
-    public JDFSpanMediaUnit getMediaUnit()
-    {
-        return (JDFSpanMediaUnit) getElement(ElementName.MEDIAUNIT, null, 0);
-    }
-
-    /** (25) getCreateMediaUnit
-     * 
-     * @return JDFSpanMediaUnit the element
-     */
-    public JDFSpanMediaUnit getCreateMediaUnit()
-    {
-        return (JDFSpanMediaUnit) getCreateElement_KElement(ElementName.MEDIAUNIT, null, 0);
-    }
-
-    /**
-     * (29) append element MediaUnit
-     * @return JDFSpanMediaUnit the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanMediaUnit appendMediaUnit() throws JDFException
-    {
-        return (JDFSpanMediaUnit) appendElementN(ElementName.MEDIAUNIT, 1, null);
-    }
-
-    /**
-     * (24) const get element Opacity
-     * @return JDFSpanOpacity the element
-     */
-    public JDFSpanOpacity getOpacity()
-    {
-        return (JDFSpanOpacity) getElement(ElementName.OPACITY, null, 0);
-    }
-
-    /** (25) getCreateOpacity
-     * 
-     * @return JDFSpanOpacity the element
-     */
-    public JDFSpanOpacity getCreateOpacity()
-    {
-        return (JDFSpanOpacity) getCreateElement_KElement(ElementName.OPACITY, null, 0);
-    }
-
-    /**
-     * (29) append element Opacity
-     * @return JDFSpanOpacity the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanOpacity appendOpacity() throws JDFException
-    {
-        return (JDFSpanOpacity) appendElementN(ElementName.OPACITY, 1, null);
-    }
-
-    /**
-     * (24) const get element OpacityLevel
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getOpacityLevel()
-    {
-        return (JDFNumberSpan) getElement(ElementName.OPACITYLEVEL, null, 0);
-    }
-
-    /** (25) getCreateOpacityLevel
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateOpacityLevel()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.OPACITYLEVEL, null, 0);
-    }
-
-    /**
-     * (29) append element OpacityLevel
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendOpacityLevel() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.OPACITYLEVEL, 1, null);
-    }
-
-    /**
-     * (24) const get element Recycled
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getRecycled()
-    {
-        return (JDFOptionSpan) getElement(ElementName.RECYCLED, null, 0);
-    }
-
-    /** (25) getCreateRecycled
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateRecycled()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.RECYCLED, null, 0);
-    }
-
-    /**
-     * (29) append element Recycled
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendRecycled() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.RECYCLED, 1, null);
-    }
-
-    /**
-     * (24) const get element RecycledPercentage
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getRecycledPercentage()
-    {
-        return (JDFNumberSpan) getElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
-    }
-
-    /** (25) getCreateRecycledPercentage
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateRecycledPercentage()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
-    }
-
-    /**
-     * (29) append element RecycledPercentage
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendRecycledPercentage() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.RECYCLEDPERCENTAGE, 1, null);
-    }
-
-    /**
-     * (24) const get element StockBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getStockBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.STOCKBRAND, null, 0);
-    }
-
-    /** (25) getCreateStockBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateStockBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.STOCKBRAND, null, 0);
-    }
-
-    /**
-     * (29) append element StockBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendStockBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.STOCKBRAND, 1, null);
-    }
-
-    /**
-     * (24) const get element StockType
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getStockType()
-    {
-        return (JDFNameSpan) getElement(ElementName.STOCKTYPE, null, 0);
-    }
-
-    /** (25) getCreateStockType
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateStockType()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.STOCKTYPE, null, 0);
-    }
-
-    /**
-     * (29) append element StockType
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendStockType() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.STOCKTYPE, 1, null);
-    }
-
-    /**
-     * (24) const get element Texture
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getTexture()
-    {
-        return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
-    }
-
-    /** (25) getCreateTexture
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateTexture()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
-    }
-
-    /**
-     * (29) append element Texture
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendTexture() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
-    }
-
-    /**
-     * (24) const get element Thickness
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getThickness()
-    {
-        return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /** (25) getCreateThickness
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateThickness()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /**
-     * (29) append element Thickness
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendThickness() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
-    }
-
-    /**
-     * (24) const get element USWeight
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getUSWeight()
-    {
-        return (JDFNumberSpan) getElement(ElementName.USWEIGHT, null, 0);
-    }
-
-    /** (25) getCreateUSWeight
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateUSWeight()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.USWEIGHT, null, 0);
-    }
-
-    /**
-     * (29) append element USWeight
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendUSWeight() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.USWEIGHT, 1, null);
-    }
-
-    /**
-     * (24) const get element Weight
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getWeight()
-    {
-        return (JDFNumberSpan) getElement(ElementName.WEIGHT, null, 0);
-    }
-
-    /** (25) getCreateWeight
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateWeight()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.WEIGHT, null, 0);
-    }
-
-    /**
-     * (29) append element Weight
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendWeight() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.WEIGHT, 1, null);
-    }
-
-    /**
-     * (24) const get element MediaLayers
-     * @return JDFMediaLayers the element
-     */
-    public JDFMediaLayers getMediaLayers()
-    {
-        return (JDFMediaLayers) getElement(ElementName.MEDIALAYERS, null, 0);
-    }
-
-    /** (25) getCreateMediaLayers
-     * 
-     * @return JDFMediaLayers the element
-     */
-    public JDFMediaLayers getCreateMediaLayers()
-    {
-        return (JDFMediaLayers) getCreateElement_KElement(ElementName.MEDIALAYERS, null, 0);
-    }
-
-    /**
-     * (29) append element MediaLayers
-     * @return JDFMediaLayers the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMediaLayers appendMediaLayers() throws JDFException
-    {
-        return (JDFMediaLayers) appendElementN(ElementName.MEDIALAYERS, 1, null);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREPRINTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[29];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
+		elemInfoTable[11] = new ElemInfoTable(ElementName.ISOPAPERSUBSTRATE, 0x66666661);
+		elemInfoTable[12] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
+		elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
+		elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
+		elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
+		elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
+		elemInfoTable[17] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
+		elemInfoTable[18] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
+		elemInfoTable[19] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
+		elemInfoTable[20] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
+		elemInfoTable[21] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
+		elemInfoTable[22] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
+		elemInfoTable[23] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
+		elemInfoTable[24] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
+		elemInfoTable[25] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
+		elemInfoTable[26] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
+		elemInfoTable[27] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
+		elemInfoTable[28] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFAutoMediaIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoMediaIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoMediaIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMediaIntent[  --> " + super.toString() + " ]";
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrePrinted
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PrePrinted
+	  * @param value the value to set the attribute to
+	  */
+	public void setPrePrinted(boolean value)
+	{
+		setAttribute(AttributeName.PREPRINTED, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute PrePrinted
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPrePrinted()
+	{
+		return getBoolAttribute(AttributeName.PREPRINTED, null, false);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaSetCount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MediaSetCount
+	  * @param value the value to set the attribute to
+	  */
+	public void setMediaSetCount(int value)
+	{
+		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
+	}
+
+	/**
+	  * (15) get int attribute MediaSetCount
+	  * @return int the value of the attribute
+	  */
+	public int getMediaSetCount()
+	{
+		return getIntAttribute(AttributeName.MEDIASETCOUNT, null, 0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserMediaType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute UserMediaType
+	  * @param value the value to set the attribute to
+	  */
+	public void setUserMediaType(String value)
+	{
+		setAttribute(AttributeName.USERMEDIATYPE, value, null);
+	}
+
+	/**
+	  * (23) get String attribute UserMediaType
+	  * @return the value of the attribute
+	  */
+	public String getUserMediaType()
+	{
+		return getAttribute(AttributeName.USERMEDIATYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/**
+	 * (24) const get element BackCoatings
+	 * @return JDFSpanCoatings the element
+	 */
+	public JDFSpanCoatings getBackCoatings()
+	{
+		return (JDFSpanCoatings) getElement(ElementName.BACKCOATINGS, null, 0);
+	}
+
+	/** (25) getCreateBackCoatings
+	 * 
+	 * @return JDFSpanCoatings the element
+	 */
+	public JDFSpanCoatings getCreateBackCoatings()
+	{
+		return (JDFSpanCoatings) getCreateElement_KElement(ElementName.BACKCOATINGS, null, 0);
+	}
+
+	/**
+	 * (29) append element BackCoatings
+	 * @return JDFSpanCoatings the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanCoatings appendBackCoatings() throws JDFException
+	{
+		return (JDFSpanCoatings) appendElementN(ElementName.BACKCOATINGS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Brightness
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getBrightness()
+	{
+		return (JDFNumberSpan) getElement(ElementName.BRIGHTNESS, null, 0);
+	}
+
+	/** (25) getCreateBrightness
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateBrightness()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.BRIGHTNESS, null, 0);
+	}
+
+	/**
+	 * (29) append element Brightness
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendBrightness() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.BRIGHTNESS, 1, null);
+	}
+
+	/**
+	 * (24) const get element BuyerSupplied
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getBuyerSupplied()
+	{
+		return (JDFOptionSpan) getElement(ElementName.BUYERSUPPLIED, null, 0);
+	}
+
+	/** (25) getCreateBuyerSupplied
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateBuyerSupplied()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.BUYERSUPPLIED, null, 0);
+	}
+
+	/**
+	 * (29) append element BuyerSupplied
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendBuyerSupplied() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.BUYERSUPPLIED, 1, null);
+	}
+
+	/**
+	 * (24) const get element Dimensions
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getDimensions()
+	{
+		return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
+	}
+
+	/** (25) getCreateDimensions
+	 * 
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getCreateDimensions()
+	{
+		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
+	}
+
+	/**
+	 * (29) append element Dimensions
+	 * @return JDFXYPairSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFXYPairSpan appendDimensions() throws JDFException
+	{
+		return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Flute
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getFlute()
+	{
+		return (JDFNameSpan) getElement(ElementName.FLUTE, null, 0);
+	}
+
+	/** (25) getCreateFlute
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateFlute()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.FLUTE, null, 0);
+	}
+
+	/**
+	 * (29) append element Flute
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendFlute() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.FLUTE, 1, null);
+	}
+
+	/**
+	 * (24) const get element FluteDirection
+	 * @return JDFSpanFluteDirection the element
+	 */
+	public JDFSpanFluteDirection getFluteDirection()
+	{
+		return (JDFSpanFluteDirection) getElement(ElementName.FLUTEDIRECTION, null, 0);
+	}
+
+	/** (25) getCreateFluteDirection
+	 * 
+	 * @return JDFSpanFluteDirection the element
+	 */
+	public JDFSpanFluteDirection getCreateFluteDirection()
+	{
+		return (JDFSpanFluteDirection) getCreateElement_KElement(ElementName.FLUTEDIRECTION, null, 0);
+	}
+
+	/**
+	 * (29) append element FluteDirection
+	 * @return JDFSpanFluteDirection the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanFluteDirection appendFluteDirection() throws JDFException
+	{
+		return (JDFSpanFluteDirection) appendElementN(ElementName.FLUTEDIRECTION, 1, null);
+	}
+
+	/**
+	 * (24) const get element FrontCoatings
+	 * @return JDFSpanCoatings the element
+	 */
+	public JDFSpanCoatings getFrontCoatings()
+	{
+		return (JDFSpanCoatings) getElement(ElementName.FRONTCOATINGS, null, 0);
+	}
+
+	/** (25) getCreateFrontCoatings
+	 * 
+	 * @return JDFSpanCoatings the element
+	 */
+	public JDFSpanCoatings getCreateFrontCoatings()
+	{
+		return (JDFSpanCoatings) getCreateElement_KElement(ElementName.FRONTCOATINGS, null, 0);
+	}
+
+	/**
+	 * (29) append element FrontCoatings
+	 * @return JDFSpanCoatings the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanCoatings appendFrontCoatings() throws JDFException
+	{
+		return (JDFSpanCoatings) appendElementN(ElementName.FRONTCOATINGS, 1, null);
+	}
+
+	/**
+	 * (24) const get element Grade
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getGrade()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.GRADE, null, 0);
+	}
+
+	/** (25) getCreateGrade
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreateGrade()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.GRADE, null, 0);
+	}
+
+	/**
+	 * (29) append element Grade
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendGrade() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.GRADE, 1, null);
+	}
+
+	/**
+	 * (24) const get element GrainDirection
+	 * @return JDFSpanGrainDirection the element
+	 */
+	public JDFSpanGrainDirection getGrainDirection()
+	{
+		return (JDFSpanGrainDirection) getElement(ElementName.GRAINDIRECTION, null, 0);
+	}
+
+	/** (25) getCreateGrainDirection
+	 * 
+	 * @return JDFSpanGrainDirection the element
+	 */
+	public JDFSpanGrainDirection getCreateGrainDirection()
+	{
+		return (JDFSpanGrainDirection) getCreateElement_KElement(ElementName.GRAINDIRECTION, null, 0);
+	}
+
+	/**
+	 * (29) append element GrainDirection
+	 * @return JDFSpanGrainDirection the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanGrainDirection appendGrainDirection() throws JDFException
+	{
+		return (JDFSpanGrainDirection) appendElementN(ElementName.GRAINDIRECTION, 1, null);
+	}
+
+	/**
+	 * (24) const get element HoleCount
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getHoleCount()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.HOLECOUNT, null, 0);
+	}
+
+	/** (25) getCreateHoleCount
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreateHoleCount()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.HOLECOUNT, null, 0);
+	}
+
+	/**
+	 * (29) append element HoleCount
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendHoleCount() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.HOLECOUNT, 1, null);
+	}
+
+	/**
+	 * (24) const get element HoleType
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getHoleType()
+	{
+		return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
+	}
+
+	/** (25) getCreateHoleType
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateHoleType()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
+	}
+
+	/**
+	 * (29) append element HoleType
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendHoleType() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
+	}
+
+	/**
+	 * (24) const get element ISOPaperSubstrate
+	 * @return JDFSpanISOPaperSubstrate the element
+	 */
+	public JDFSpanISOPaperSubstrate getISOPaperSubstrate()
+	{
+		return (JDFSpanISOPaperSubstrate) getElement(ElementName.ISOPAPERSUBSTRATE, null, 0);
+	}
+
+	/** (25) getCreateISOPaperSubstrate
+	 * 
+	 * @return JDFSpanISOPaperSubstrate the element
+	 */
+	public JDFSpanISOPaperSubstrate getCreateISOPaperSubstrate()
+	{
+		return (JDFSpanISOPaperSubstrate) getCreateElement_KElement(ElementName.ISOPAPERSUBSTRATE, null, 0);
+	}
+
+	/**
+	 * (29) append element ISOPaperSubstrate
+	 * @return JDFSpanISOPaperSubstrate the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanISOPaperSubstrate appendISOPaperSubstrate() throws JDFException
+	{
+		return (JDFSpanISOPaperSubstrate) appendElementN(ElementName.ISOPAPERSUBSTRATE, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaColor
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getMediaColor()
+	{
+		return (JDFSpanNamedColor) getElement(ElementName.MEDIACOLOR, null, 0);
+	}
+
+	/** (25) getCreateMediaColor
+	 * 
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getCreateMediaColor()
+	{
+		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.MEDIACOLOR, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaColor
+	 * @return JDFSpanNamedColor the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanNamedColor appendMediaColor() throws JDFException
+	{
+		return (JDFSpanNamedColor) appendElementN(ElementName.MEDIACOLOR, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaColorDetails
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getMediaColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.MEDIACOLORDETAILS, null, 0);
+	}
+
+	/** (25) getCreateMediaColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateMediaColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIACOLORDETAILS, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaColorDetails
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendMediaColorDetails() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.MEDIACOLORDETAILS, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaQuality
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getMediaQuality()
+	{
+		return (JDFStringSpan) getElement(ElementName.MEDIAQUALITY, null, 0);
+	}
+
+	/** (25) getCreateMediaQuality
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateMediaQuality()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIAQUALITY, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaQuality
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendMediaQuality() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.MEDIAQUALITY, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaType
+	 * @return JDFSpanMediaType the element
+	 */
+	public JDFSpanMediaType getMediaType()
+	{
+		return (JDFSpanMediaType) getElement(ElementName.MEDIATYPE, null, 0);
+	}
+
+	/** (25) getCreateMediaType
+	 * 
+	 * @return JDFSpanMediaType the element
+	 */
+	public JDFSpanMediaType getCreateMediaType()
+	{
+		return (JDFSpanMediaType) getCreateElement_KElement(ElementName.MEDIATYPE, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaType
+	 * @return JDFSpanMediaType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanMediaType appendMediaType() throws JDFException
+	{
+		return (JDFSpanMediaType) appendElementN(ElementName.MEDIATYPE, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaTypeDetails
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getMediaTypeDetails()
+	{
+		return (JDFNameSpan) getElement(ElementName.MEDIATYPEDETAILS, null, 0);
+	}
+
+	/** (25) getCreateMediaTypeDetails
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateMediaTypeDetails()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.MEDIATYPEDETAILS, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaTypeDetails
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendMediaTypeDetails() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.MEDIATYPEDETAILS, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaUnit
+	 * @return JDFSpanMediaUnit the element
+	 */
+	public JDFSpanMediaUnit getMediaUnit()
+	{
+		return (JDFSpanMediaUnit) getElement(ElementName.MEDIAUNIT, null, 0);
+	}
+
+	/** (25) getCreateMediaUnit
+	 * 
+	 * @return JDFSpanMediaUnit the element
+	 */
+	public JDFSpanMediaUnit getCreateMediaUnit()
+	{
+		return (JDFSpanMediaUnit) getCreateElement_KElement(ElementName.MEDIAUNIT, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaUnit
+	 * @return JDFSpanMediaUnit the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanMediaUnit appendMediaUnit() throws JDFException
+	{
+		return (JDFSpanMediaUnit) appendElementN(ElementName.MEDIAUNIT, 1, null);
+	}
+
+	/**
+	 * (24) const get element Opacity
+	 * @return JDFSpanOpacity the element
+	 */
+	public JDFSpanOpacity getOpacity()
+	{
+		return (JDFSpanOpacity) getElement(ElementName.OPACITY, null, 0);
+	}
+
+	/** (25) getCreateOpacity
+	 * 
+	 * @return JDFSpanOpacity the element
+	 */
+	public JDFSpanOpacity getCreateOpacity()
+	{
+		return (JDFSpanOpacity) getCreateElement_KElement(ElementName.OPACITY, null, 0);
+	}
+
+	/**
+	 * (29) append element Opacity
+	 * @return JDFSpanOpacity the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanOpacity appendOpacity() throws JDFException
+	{
+		return (JDFSpanOpacity) appendElementN(ElementName.OPACITY, 1, null);
+	}
+
+	/**
+	 * (24) const get element OpacityLevel
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getOpacityLevel()
+	{
+		return (JDFNumberSpan) getElement(ElementName.OPACITYLEVEL, null, 0);
+	}
+
+	/** (25) getCreateOpacityLevel
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateOpacityLevel()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.OPACITYLEVEL, null, 0);
+	}
+
+	/**
+	 * (29) append element OpacityLevel
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendOpacityLevel() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.OPACITYLEVEL, 1, null);
+	}
+
+	/**
+	 * (24) const get element Recycled
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getRecycled()
+	{
+		return (JDFOptionSpan) getElement(ElementName.RECYCLED, null, 0);
+	}
+
+	/** (25) getCreateRecycled
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateRecycled()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.RECYCLED, null, 0);
+	}
+
+	/**
+	 * (29) append element Recycled
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendRecycled() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.RECYCLED, 1, null);
+	}
+
+	/**
+	 * (24) const get element RecycledPercentage
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getRecycledPercentage()
+	{
+		return (JDFNumberSpan) getElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
+	}
+
+	/** (25) getCreateRecycledPercentage
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateRecycledPercentage()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.RECYCLEDPERCENTAGE, null, 0);
+	}
+
+	/**
+	 * (29) append element RecycledPercentage
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendRecycledPercentage() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.RECYCLEDPERCENTAGE, 1, null);
+	}
+
+	/**
+	 * (24) const get element StockBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getStockBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.STOCKBRAND, null, 0);
+	}
+
+	/** (25) getCreateStockBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateStockBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.STOCKBRAND, null, 0);
+	}
+
+	/**
+	 * (29) append element StockBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendStockBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.STOCKBRAND, 1, null);
+	}
+
+	/**
+	 * (24) const get element StockType
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getStockType()
+	{
+		return (JDFNameSpan) getElement(ElementName.STOCKTYPE, null, 0);
+	}
+
+	/** (25) getCreateStockType
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateStockType()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.STOCKTYPE, null, 0);
+	}
+
+	/**
+	 * (29) append element StockType
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendStockType() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.STOCKTYPE, 1, null);
+	}
+
+	/**
+	 * (24) const get element Texture
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getTexture()
+	{
+		return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
+	}
+
+	/** (25) getCreateTexture
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateTexture()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
+	}
+
+	/**
+	 * (29) append element Texture
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendTexture() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
+	}
+
+	/**
+	 * (24) const get element Thickness
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getThickness()
+	{
+		return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
+	}
+
+	/** (25) getCreateThickness
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateThickness()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+	}
+
+	/**
+	 * (29) append element Thickness
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendThickness() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
+	}
+
+	/**
+	 * (24) const get element USWeight
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getUSWeight()
+	{
+		return (JDFNumberSpan) getElement(ElementName.USWEIGHT, null, 0);
+	}
+
+	/** (25) getCreateUSWeight
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateUSWeight()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.USWEIGHT, null, 0);
+	}
+
+	/**
+	 * (29) append element USWeight
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendUSWeight() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.USWEIGHT, 1, null);
+	}
+
+	/**
+	 * (24) const get element Weight
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getWeight()
+	{
+		return (JDFNumberSpan) getElement(ElementName.WEIGHT, null, 0);
+	}
+
+	/** (25) getCreateWeight
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateWeight()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.WEIGHT, null, 0);
+	}
+
+	/**
+	 * (29) append element Weight
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendWeight() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.WEIGHT, 1, null);
+	}
+
+	/**
+	 * (24) const get element MediaLayers
+	 * @return JDFMediaLayers the element
+	 */
+	public JDFMediaLayers getMediaLayers()
+	{
+		return (JDFMediaLayers) getElement(ElementName.MEDIALAYERS, null, 0);
+	}
+
+	/** (25) getCreateMediaLayers
+	 * 
+	 * @return JDFMediaLayers the element
+	 */
+	public JDFMediaLayers getCreateMediaLayers()
+	{
+		return (JDFMediaLayers) getCreateElement_KElement(ElementName.MEDIALAYERS, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaLayers
+	 * @return JDFMediaLayers the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMediaLayers appendMediaLayers() throws JDFException
+	{
+		return (JDFMediaLayers) appendElementN(ElementName.MEDIALAYERS, 1, null);
+	}
 
 }// end namespace JDF

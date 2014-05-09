@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,161 +77,149 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoEndSheet : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEndSheet : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEndSheet extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x44444333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x44444333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555555);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555555);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEndSheet
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEndSheet
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEndSheet(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEndSheet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEndSheet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEndSheet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEndSheet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEndSheet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEndSheet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEndSheet[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEndSheet[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Offset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Offset
+	  * @param value the value to set the attribute to
+	  */
+	public void setOffset(JDFXYPair value)
+	{
+		setAttribute(AttributeName.OFFSET, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Offset
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Offset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Offset
-          * @param value the value to set the attribute to
-          */
-        public void setOffset(JDFXYPair value)
-        {
-            setAttribute(AttributeName.OFFSET, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFXYPair attribute Offset
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.OFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
+	}
 
-    /**
-     * (24) const get element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getGlueLine()
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /** (25) getCreateGlueLine
-     * 
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine()
-    {
-        return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /**
-     * (29) append element GlueLine
-     * @return JDFGlueLine the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFGlueLine appendGlueLine() throws JDFException
-    {
-        return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
-    }
+	/**
+	 * (29) append element GlueLine
+	 * @return JDFGlueLine the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFGlueLine appendGlueLine() throws JDFException
+	{
+		return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
+	}
 
 }// end namespace JDF

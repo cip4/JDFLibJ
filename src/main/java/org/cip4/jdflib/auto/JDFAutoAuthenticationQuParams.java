@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,170 +80,157 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoAuthenticationQuParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAuthenticationQuParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAuthenticationQuParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationQuParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAuthenticationQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAuthenticationQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAuthenticationQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAuthenticationQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAuthenticationQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAuthenticationQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAuthenticationQuParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for AuthenticationType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAuthenticationQuParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumAuthenticationType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumAuthenticationType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for AuthenticationType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumAuthenticationType getEnum(String enumName)
+		{
+			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumName);
+		}
 
-        public static class EnumAuthenticationType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumAuthenticationType getEnum(int enumValue)
+		{
+			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumValue);
+		}
 
-            private EnumAuthenticationType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumAuthenticationType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumAuthenticationType getEnum(String enumName)
-            {
-                return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumAuthenticationType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumAuthenticationType getEnum(int enumValue)
-            {
-                return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumAuthenticationType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumAuthenticationType.class);
-            }
+		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
+		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumAuthenticationType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumAuthenticationType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AuthenticationType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute AuthenticationType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setAuthenticationType(EnumAuthenticationType enumVar)
+	{
+		setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
-            public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AuthenticationType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute AuthenticationType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setAuthenticationType(EnumAuthenticationType enumVar)
-        {
-            setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute AuthenticationType
-          * @return the value of the attribute
-          */
-        public EnumAuthenticationType getAuthenticationType()
-        {
-            return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
-        }
+	/**
+	  * (9) get attribute AuthenticationType
+	  * @return the value of the attribute
+	  */
+	public EnumAuthenticationType getAuthenticationType()
+	{
+		return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
+	}
 
 }// end namespace JDF

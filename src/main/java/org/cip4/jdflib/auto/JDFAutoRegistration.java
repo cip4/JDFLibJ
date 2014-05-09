@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,167 +82,156 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoRegistration : public JDFMessage
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRegistration : public JDFMessage
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRegistration extends JDFMessage
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRegistration
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegistration(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegistration
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRegistration(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegistration
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegistration(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegistration
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRegistration(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegistration
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRegistration(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegistration
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRegistration(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRegistration[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRegistration[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (24) const get element Subscription
+	 * @return JDFSubscription the element
+	 */
+	public JDFSubscription getSubscription()
+	{
+		return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
+	}
 
-        return v;
-    }
+	/** (25) getCreateSubscription
+	 * 
+	 * @return JDFSubscription the element
+	 */
+	public JDFSubscription getCreateSubscription()
+	{
+		return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
+	}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
-
-    /**
-     * (24) const get element Subscription
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getSubscription()
-    {
-        return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /** (25) getCreateSubscription
-     * 
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getCreateSubscription()
-    {
-        return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /**
-     * (29) append element Subscription
-     * @return JDFSubscription the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSubscription appendSubscription() throws JDFException
-    {
-        return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
-    }
+	/**
+	 * (29) append element Subscription
+	 * @return JDFSubscription the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSubscription appendSubscription() throws JDFException
+	{
+		return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
+	}
 
 }// end namespace JDF

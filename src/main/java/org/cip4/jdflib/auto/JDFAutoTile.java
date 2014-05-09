@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -89,303 +88,314 @@ import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
-    /**
-    *****************************************************************************
-    class JDFAutoTile : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTile : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTile extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPBOX, 0x22222222, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPBOX, 0x22222222, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMBOX, 0x33311111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777766);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777766);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTile
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTile
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTile(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTile[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTile[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClipBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setClipBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.CLIPBOX, value, null);
+	}
 
+	/**
+	  * (20) get JDFRectangle attribute ClipBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getClipBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CTM
+	  * @param value the value to set the attribute to
+	  */
+	public void setCTM(JDFMatrix value)
+	{
+		setAttribute(AttributeName.CTM, value, null);
+	}
 
+	/**
+	  * (20) get JDFMatrix attribute CTM
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getCTM()
+	{
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClipBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClipBox
-          * @param value the value to set the attribute to
-          */
-        public void setClipBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.CLIPBOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TrimBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrimBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.TRIMBOX, value, null);
+	}
 
-        /**
-          * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getClipBox()
-        {
-            String strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFRectangle attribute TrimBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getTrimBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.TRIMBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CTM
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CTM
-          * @param value the value to set the attribute to
-          */
-        public void setCTM(JDFMatrix value)
-        {
-            setAttribute(AttributeName.CTM, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getCTM()
-        {
-            String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateMarkObject
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject getCreateMarkObject(int iSkip)
+	{
+		return (JDFMarkObject) getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element MarkObject
+	 * @param iSkip number of elements to skip
+	 * @return JDFMarkObject the element
+	 * default is getMarkObject(0)     */
+	public JDFMarkObject getMarkObject(int iSkip)
+	{
+		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
+	}
 
-    /** (26) getCreateMarkObject
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFMarkObject the element
-     */
-    public JDFMarkObject getCreateMarkObject(int iSkip)
-    {
-        return (JDFMarkObject)getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
-    }
+	/**
+	 * Get all MarkObject from the current element
+	 * 
+	 * @return Collection<JDFMarkObject>, null if none are available
+	 */
+	public Collection<JDFMarkObject> getAllMarkObject()
+	{
+		final VElement vc = getChildElementVector(ElementName.MARKOBJECT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element MarkObject
-     * @param iSkip number of elements to skip
-     * @return JDFMarkObject the element
-     * default is getMarkObject(0)     */
-    public JDFMarkObject getMarkObject(int iSkip)
-    {
-        return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
-    }
+		final Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFMarkObject) vc.get(i));
+		}
 
-    /**
-     * Get all MarkObject from the current element
-     * 
-     * @return Collection<JDFMarkObject>, null if none are available
-     */
-    public Collection<JDFMarkObject> getAllMarkObject()
-    {
-        final VElement vc = getChildElementVector(ElementName.MARKOBJECT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFMarkObject) vc.get(i));
-        }
+	/**
+	 * (30) append element MarkObject
+	 * @return JDFMarkObject the element
+	 */
+	public JDFMarkObject appendMarkObject()
+	{
+		return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
+	}
 
-        return v;
-    }
+	/**
+	 * (24) const get element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
 
-    /**
-     * (30) append element MarkObject
-     * @return JDFMarkObject the element
-     */
-    public JDFMarkObject appendMarkObject()
-    {
-        return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
-    }
+	/** (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+	}
 
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
+	/**
+	 * (29) append element Media
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendMedia() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+	}
 
-    /** (25) getCreateMedia
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (29) append element Media
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendMedia() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
-    }
+	/**
+	 * (24) const get element MediaSource
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getMediaSource()
+	{
+		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreateMediaSource
+	 * 
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getCreateMediaSource()
+	{
+		return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
+	}
 
-    /**
-     * (24) const get element MediaSource
-     * @return JDFMediaSource the element
-     */
-    public JDFMediaSource getMediaSource()
-    {
-        return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
-    }
+	/**
+	 * (29) append element MediaSource
+	 * @return JDFMediaSource the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMediaSource appendMediaSource() throws JDFException
+	{
+		return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
+	}
 
-    /** (25) getCreateMediaSource
-     * 
-     * @return JDFMediaSource the element
-     */
-    public JDFMediaSource getCreateMediaSource()
-    {
-        return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
-    }
-
-    /**
-     * (29) append element MediaSource
-     * @return JDFMediaSource the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMediaSource appendMediaSource() throws JDFException
-    {
-        return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMediaSource(JDFMediaSource refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMediaSource(JDFMediaSource refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

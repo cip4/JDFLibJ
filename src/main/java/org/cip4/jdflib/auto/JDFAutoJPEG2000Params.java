@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,298 +79,279 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-    /**
-    *****************************************************************************
-    class JDFAutoJPEG2000Params : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoJPEG2000Params : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoJPEG2000Params extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CODEBLOCKSIZE, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LAYERSPERTILE, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERRATES, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMRESOLUTIONS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.PROGRESSIONORDER, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProgressionOrder.getEnum(0), null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CODEBLOCKSIZE, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LAYERSPERTILE, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERRATES, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMRESOLUTIONS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROGRESSIONORDER, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProgressionOrder.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoJPEG2000Params
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJPEG2000Params
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoJPEG2000Params(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJPEG2000Params
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJPEG2000Params
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoJPEG2000Params(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJPEG2000Params
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoJPEG2000Params
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoJPEG2000Params(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoJPEG2000Params[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ProgressionOrder
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoJPEG2000Params[  --> " + super.toString() + " ]";
-    }
+	public static class EnumProgressionOrder extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumProgressionOrder(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ProgressionOrder
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumProgressionOrder getEnum(String enumName)
+		{
+			return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumName);
+		}
 
-        public static class EnumProgressionOrder extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumProgressionOrder getEnum(int enumValue)
+		{
+			return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumValue);
+		}
 
-            private EnumProgressionOrder(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumProgressionOrder.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumProgressionOrder getEnum(String enumName)
-            {
-                return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumProgressionOrder.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumProgressionOrder getEnum(int enumValue)
-            {
-                return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumProgressionOrder.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumProgressionOrder.class);
-            }
+		public static final EnumProgressionOrder LRCP = new EnumProgressionOrder("LRCP");
+		public static final EnumProgressionOrder RLCP = new EnumProgressionOrder("RLCP");
+		public static final EnumProgressionOrder RPCL = new EnumProgressionOrder("RPCL");
+		public static final EnumProgressionOrder PCRL = new EnumProgressionOrder("PCRL");
+		public static final EnumProgressionOrder CPRL = new EnumProgressionOrder("CPRL");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumProgressionOrder.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumProgressionOrder.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CodeBlockSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CodeBlockSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setCodeBlockSize(int value)
+	{
+		setAttribute(AttributeName.CODEBLOCKSIZE, value, null);
+	}
 
-            public static final EnumProgressionOrder LRCP = new EnumProgressionOrder("LRCP");
-            public static final EnumProgressionOrder RLCP = new EnumProgressionOrder("RLCP");
-            public static final EnumProgressionOrder RPCL = new EnumProgressionOrder("RPCL");
-            public static final EnumProgressionOrder PCRL = new EnumProgressionOrder("PCRL");
-            public static final EnumProgressionOrder CPRL = new EnumProgressionOrder("CPRL");
-        }      
+	/**
+	  * (15) get int attribute CodeBlockSize
+	  * @return int the value of the attribute
+	  */
+	public int getCodeBlockSize()
+	{
+		return getIntAttribute(AttributeName.CODEBLOCKSIZE, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayersPerTile
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LayersPerTile
+	  * @param value the value to set the attribute to
+	  */
+	public void setLayersPerTile(int value)
+	{
+		setAttribute(AttributeName.LAYERSPERTILE, value, null);
+	}
 
+	/**
+	  * (15) get int attribute LayersPerTile
+	  * @return int the value of the attribute
+	  */
+	public int getLayersPerTile()
+	{
+		return getIntAttribute(AttributeName.LAYERSPERTILE, null, 1);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CodeBlockSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CodeBlockSize
-          * @param value the value to set the attribute to
-          */
-        public void setCodeBlockSize(int value)
-        {
-            setAttribute(AttributeName.CODEBLOCKSIZE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayerRates
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LayerRates
+	  * @param value the value to set the attribute to
+	  */
+	public void setLayerRates(JDFNumberList value)
+	{
+		setAttribute(AttributeName.LAYERRATES, value, null);
+	}
 
-        /**
-          * (15) get int attribute CodeBlockSize
-          * @return int the value of the attribute
-          */
-        public int getCodeBlockSize()
-        {
-            return getIntAttribute(AttributeName.CODEBLOCKSIZE, null, 0);
-        }
+	/**
+	  * (20) get JDFNumberList attribute LayerRates
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getLayerRates()
+	{
+		final String strAttrName = getAttribute(AttributeName.LAYERRATES, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LayersPerTile
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LayersPerTile
-          * @param value the value to set the attribute to
-          */
-        public void setLayersPerTile(int value)
-        {
-            setAttribute(AttributeName.LAYERSPERTILE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumResolutions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NumResolutions
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumResolutions(int value)
+	{
+		setAttribute(AttributeName.NUMRESOLUTIONS, value, null);
+	}
 
-        /**
-          * (15) get int attribute LayersPerTile
-          * @return int the value of the attribute
-          */
-        public int getLayersPerTile()
-        {
-            return getIntAttribute(AttributeName.LAYERSPERTILE, null, 1);
-        }
+	/**
+	  * (15) get int attribute NumResolutions
+	  * @return int the value of the attribute
+	  */
+	public int getNumResolutions()
+	{
+		return getIntAttribute(AttributeName.NUMRESOLUTIONS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LayerRates
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LayerRates
-          * @param value the value to set the attribute to
-          */
-        public void setLayerRates(JDFNumberList value)
-        {
-            setAttribute(AttributeName.LAYERRATES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProgressionOrder
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ProgressionOrder
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setProgressionOrder(EnumProgressionOrder enumVar)
+	{
+		setAttribute(AttributeName.PROGRESSIONORDER, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute LayerRates
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getLayerRates()
-        {
-            String strAttrName = getAttribute(AttributeName.LAYERRATES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute ProgressionOrder
+	  * @return the value of the attribute
+	  */
+	public EnumProgressionOrder getProgressionOrder()
+	{
+		return EnumProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NumResolutions
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NumResolutions
-          * @param value the value to set the attribute to
-          */
-        public void setNumResolutions(int value)
-        {
-            setAttribute(AttributeName.NUMRESOLUTIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TileSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TileSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setTileSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.TILESIZE, value, null);
+	}
 
-        /**
-          * (15) get int attribute NumResolutions
-          * @return int the value of the attribute
-          */
-        public int getNumResolutions()
-        {
-            return getIntAttribute(AttributeName.NUMRESOLUTIONS, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ProgressionOrder
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ProgressionOrder
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setProgressionOrder(EnumProgressionOrder enumVar)
-        {
-            setAttribute(AttributeName.PROGRESSIONORDER, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ProgressionOrder
-          * @return the value of the attribute
-          */
-        public EnumProgressionOrder getProgressionOrder()
-        {
-            return EnumProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TileSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TileSize
-          * @param value the value to set the attribute to
-          */
-        public void setTileSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TILESIZE, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute TileSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTileSize()
-        {
-            String strAttrName = getAttribute(AttributeName.TILESIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute TileSize
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getTileSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

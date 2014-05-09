@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,464 +89,442 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFObservationTarget;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoSubscription : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSubscription : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSubscription extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MINDELAYTIME, 0x33333111, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.RETRYPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumRetryPolicy.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINDELAYTIME, 0x33333111, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.RETRYPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumRetryPolicy.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.OBSERVATIONTARGET, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OBSERVATIONTARGET, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSubscription
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscription
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSubscription(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubscription
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscription
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSubscription(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubscription
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscription
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSubscription(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSubscription[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ChannelMode
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSubscription[  --> " + super.toString() + " ]";
-    }
+	public static class EnumChannelMode extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumChannelMode(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ChannelMode
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(String enumName)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
+		}
 
-        public static class EnumChannelMode extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(int enumValue)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
+		}
 
-            private EnumChannelMode(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(String enumName)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(int enumValue)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumChannelMode.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumChannelMode.class);
-            }
+		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumChannelMode.class);
-            }
+	/**
+	* Enumeration strings for RetryPolicy
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumChannelMode.class);
-            }
+	public static class EnumRetryPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
-            public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
-        }      
+		private EnumRetryPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumRetryPolicy getEnum(String enumName)
+		{
+			return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumRetryPolicy getEnum(int enumValue)
+		{
+			return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for RetryPolicy
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumRetryPolicy.class);
+		}
 
-        public static class EnumRetryPolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumRetryPolicy.class);
+		}
 
-            private EnumRetryPolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumRetryPolicy.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumRetryPolicy getEnum(String enumName)
-            {
-                return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumName);
-            }
+		public static final EnumRetryPolicy DiscardAtNextSignal = new EnumRetryPolicy("DiscardAtNextSignal");
+		public static final EnumRetryPolicy RetryForever = new EnumRetryPolicy("RetryForever");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumRetryPolicy getEnum(int enumValue)
-            {
-                return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumRetryPolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelMode
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ChannelMode
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setChannelMode(EnumChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumRetryPolicy.class);
-            }
+	/**
+	  * (9) get attribute ChannelMode
+	  * @return the value of the attribute
+	  */
+	public EnumChannelMode getChannelMode()
+	{
+		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumRetryPolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Format
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Format
+	  * @param value the value to set the attribute to
+	  */
+	public void setFormat(String value)
+	{
+		setAttribute(AttributeName.FORMAT, value, null);
+	}
 
-            public static final EnumRetryPolicy DiscardAtNextSignal = new EnumRetryPolicy("DiscardAtNextSignal");
-            public static final EnumRetryPolicy RetryForever = new EnumRetryPolicy("RetryForever");
-        }      
+	/**
+	  * (23) get String attribute Format
+	  * @return the value of the attribute
+	  */
+	public String getFormat()
+	{
+		return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinDelayTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinDelayTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinDelayTime(JDFDuration value)
+	{
+		setAttribute(AttributeName.MINDELAYTIME, value, null);
+	}
 
+	/**
+	  * (20) get JDFDuration attribute MinDelayTime
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getMinDelayTime()
+	{
+		final String strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelMode
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ChannelMode
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setChannelMode(EnumChannelMode enumVar)
-        {
-            setAttribute(AttributeName.CHANNELMODE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatStep
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RepeatStep
+	  * @param value the value to set the attribute to
+	  */
+	public void setRepeatStep(int value)
+	{
+		setAttribute(AttributeName.REPEATSTEP, value, null);
+	}
 
-        /**
-          * (9) get attribute ChannelMode
-          * @return the value of the attribute
-          */
-        public EnumChannelMode getChannelMode()
-        {
-            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
-        }
+	/**
+	  * (15) get int attribute RepeatStep
+	  * @return int the value of the attribute
+	  */
+	public int getRepeatStep()
+	{
+		return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Format
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Format
-          * @param value the value to set the attribute to
-          */
-        public void setFormat(String value)
-        {
-            setAttribute(AttributeName.FORMAT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RepeatTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setRepeatTime(double value)
+	{
+		setAttribute(AttributeName.REPEATTIME, value, null);
+	}
 
-        /**
-          * (23) get String attribute Format
-          * @return the value of the attribute
-          */
-        public String getFormat()
-        {
-            return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute RepeatTime
+	  * @return double the value of the attribute
+	  */
+	public double getRepeatTime()
+	{
+		return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinDelayTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinDelayTime
-          * @param value the value to set the attribute to
-          */
-        public void setMinDelayTime(JDFDuration value)
-        {
-            setAttribute(AttributeName.MINDELAYTIME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RetryPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute RetryPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setRetryPolicy(EnumRetryPolicy enumVar)
+	{
+		setAttribute(AttributeName.RETRYPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute MinDelayTime
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getMinDelayTime()
-        {
-            String strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute RetryPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumRetryPolicy getRetryPolicy()
+	{
+		return EnumRetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RepeatStep
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RepeatStep
-          * @param value the value to set the attribute to
-          */
-        public void setRepeatStep(int value)
-        {
-            setAttribute(AttributeName.REPEATSTEP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Template
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Template
+	  * @param value the value to set the attribute to
+	  */
+	public void setTemplate(String value)
+	{
+		setAttribute(AttributeName.TEMPLATE, value, null);
+	}
 
-        /**
-          * (15) get int attribute RepeatStep
-          * @return int the value of the attribute
-          */
-        public int getRepeatStep()
-        {
-            return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
-        }
+	/**
+	  * (23) get String attribute Template
+	  * @return the value of the attribute
+	  */
+	public String getTemplate()
+	{
+		return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RepeatTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RepeatTime
-          * @param value the value to set the attribute to
-          */
-        public void setRepeatTime(double value)
-        {
-            setAttribute(AttributeName.REPEATTIME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
-        /**
-          * (17) get double attribute RepeatTime
-          * @return double the value of the attribute
-          */
-        public double getRepeatTime()
-        {
-            return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
-        }
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RetryPolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute RetryPolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setRetryPolicy(EnumRetryPolicy enumVar)
-        {
-            setAttribute(AttributeName.RETRYPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute RetryPolicy
-          * @return the value of the attribute
-          */
-        public EnumRetryPolicy getRetryPolicy()
-        {
-            return EnumRetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));
-        }
+	/** (26) getCreateObservationTarget
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFObservationTarget the element
+	 */
+	public JDFObservationTarget getCreateObservationTarget(int iSkip)
+	{
+		return (JDFObservationTarget) getCreateElement_KElement(ElementName.OBSERVATIONTARGET, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Template
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Template
-          * @param value the value to set the attribute to
-          */
-        public void setTemplate(String value)
-        {
-            setAttribute(AttributeName.TEMPLATE, value, null);
-        }
+	/**
+	 * (27) const get element ObservationTarget
+	 * @param iSkip number of elements to skip
+	 * @return JDFObservationTarget the element
+	 * default is getObservationTarget(0)     */
+	public JDFObservationTarget getObservationTarget(int iSkip)
+	{
+		return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute Template
-          * @return the value of the attribute
-          */
-        public String getTemplate()
-        {
-            return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all ObservationTarget from the current element
+	 * 
+	 * @return Collection<JDFObservationTarget>, null if none are available
+	 */
+	public Collection<JDFObservationTarget> getAllObservationTarget()
+	{
+		final VElement vc = getChildElementVector(ElementName.OBSERVATIONTARGET, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
+		final Vector<JDFObservationTarget> v = new Vector<JDFObservationTarget>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFObservationTarget) vc.get(i));
+		}
 
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateObservationTarget
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFObservationTarget the element
-     */
-    public JDFObservationTarget getCreateObservationTarget(int iSkip)
-    {
-        return (JDFObservationTarget)getCreateElement_KElement(ElementName.OBSERVATIONTARGET, null, iSkip);
-    }
-
-    /**
-     * (27) const get element ObservationTarget
-     * @param iSkip number of elements to skip
-     * @return JDFObservationTarget the element
-     * default is getObservationTarget(0)     */
-    public JDFObservationTarget getObservationTarget(int iSkip)
-    {
-        return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, iSkip);
-    }
-
-    /**
-     * Get all ObservationTarget from the current element
-     * 
-     * @return Collection<JDFObservationTarget>, null if none are available
-     */
-    public Collection<JDFObservationTarget> getAllObservationTarget()
-    {
-        final VElement vc = getChildElementVector(ElementName.OBSERVATIONTARGET, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFObservationTarget> v = new Vector<JDFObservationTarget>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFObservationTarget) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ObservationTarget
-     * @return JDFObservationTarget the element
-     */
-    public JDFObservationTarget appendObservationTarget()
-    {
-        return (JDFObservationTarget) appendElement(ElementName.OBSERVATIONTARGET, null);
-    }
+	/**
+	 * (30) append element ObservationTarget
+	 * @return JDFObservationTarget the element
+	 */
+	public JDFObservationTarget appendObservationTarget()
+	{
+		return (JDFObservationTarget) appendElement(ElementName.OBSERVATIONTARGET, null);
+	}
 
 }// end namespace JDF

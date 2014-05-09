@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,321 +87,308 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoContentMetaData : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoContentMetaData : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoContentMetaData extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ISBN10, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ISBN13, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TITLE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ISBN10, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ISBN13, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TITLE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x66661111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoContentMetaData
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentMetaData
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoContentMetaData(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContentMetaData
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentMetaData
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoContentMetaData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContentMetaData
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoContentMetaData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentMetaData
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoContentMetaData(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoContentMetaData[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoContentMetaData[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ISBN10
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ISBN10
+	  * @param value the value to set the attribute to
+	  */
+	public void setISBN10(String value)
+	{
+		setAttribute(AttributeName.ISBN10, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ISBN10
+	  * @return the value of the attribute
+	  */
+	public String getISBN10()
+	{
+		return getAttribute(AttributeName.ISBN10, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ISBN10
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ISBN10
-          * @param value the value to set the attribute to
-          */
-        public void setISBN10(String value)
-        {
-            setAttribute(AttributeName.ISBN10, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ISBN13
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ISBN13
+	  * @param value the value to set the attribute to
+	  */
+	public void setISBN13(String value)
+	{
+		setAttribute(AttributeName.ISBN13, value, null);
+	}
 
-        /**
-          * (23) get String attribute ISBN10
-          * @return the value of the attribute
-          */
-        public String getISBN10()
-        {
-            return getAttribute(AttributeName.ISBN10, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ISBN13
+	  * @return the value of the attribute
+	  */
+	public String getISBN13()
+	{
+		return getAttribute(AttributeName.ISBN13, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ISBN13
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ISBN13
-          * @param value the value to set the attribute to
-          */
-        public void setISBN13(String value)
-        {
-            setAttribute(AttributeName.ISBN13, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Title
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Title
+	  * @param value the value to set the attribute to
+	  */
+	public void setTitle(String value)
+	{
+		setAttribute(AttributeName.TITLE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ISBN13
-          * @return the value of the attribute
-          */
-        public String getISBN13()
-        {
-            return getAttribute(AttributeName.ISBN13, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Title
+	  * @return the value of the attribute
+	  */
+	public String getTitle()
+	{
+		return getAttribute(AttributeName.TITLE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Title
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Title
-          * @param value the value to set the attribute to
-          */
-        public void setTitle(String value)
-        {
-            setAttribute(AttributeName.TITLE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Title
-          * @return the value of the attribute
-          */
-        public String getTitle()
-        {
-            return getAttribute(AttributeName.TITLE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refEmployee(JDFEmployee refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+	/**
+	 * (24) const get element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refEmployee(JDFEmployee refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
+	}
 
-    /**
-     * (24) const get element Part
-     * @return JDFPart the element
-     */
-    public JDFPart getPart()
-    {
-        return (JDFPart) getElement(ElementName.PART, null, 0);
-    }
-
-    /** (25) getCreatePart
-     * 
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart()
-    {
-        return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
-    }
-
-    /**
-     * (29) append element Part
-     * @return JDFPart the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPart appendPart() throws JDFException
-    {
-        return (JDFPart) appendElementN(ElementName.PART, 1, null);
-    }
+	/**
+	 * (29) append element Part
+	 * @return JDFPart the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPart appendPart() throws JDFException
+	{
+		return (JDFPart) appendElementN(ElementName.PART, 1, null);
+	}
 
 }// end namespace JDF

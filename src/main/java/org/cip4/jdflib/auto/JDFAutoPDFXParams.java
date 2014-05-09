@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,407 +82,406 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
-    /**
-    *****************************************************************************
-    class JDFAutoPDFXParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPDFXParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPDFXParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PDFX1ACHECK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PDFX3CHECK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.PDFXCOMPLIANTPDFONLY, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.PDFXOUTPUTCONDITION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PDFXOUTPUTINTENTPROFILE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0), null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PDFXCHECK, 0x33311111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PDFX1ACHECK, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PDFX3CHECK, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PDFXCOMPLIANTPDFONLY, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PDFXOUTPUTCONDITION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PDFXOUTPUTINTENTPROFILE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPDFXParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDFXParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPDFXParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDFXParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDFXParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPDFXParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDFXParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDFXParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPDFXParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPDFXParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for PDFXTrapped
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPDFXParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumPDFXTrapped extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPDFXTrapped(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for PDFXTrapped
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPDFXTrapped getEnum(String enumName)
+		{
+			return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumName);
+		}
 
-        public static class EnumPDFXTrapped extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPDFXTrapped getEnum(int enumValue)
+		{
+			return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumValue);
+		}
 
-            private EnumPDFXTrapped(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPDFXTrapped.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPDFXTrapped getEnum(String enumName)
-            {
-                return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPDFXTrapped.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPDFXTrapped getEnum(int enumValue)
-            {
-                return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPDFXTrapped.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPDFXTrapped.class);
-            }
+		public static final EnumPDFXTrapped Unknown = new EnumPDFXTrapped("Unknown");
+		public static final EnumPDFXTrapped True = new EnumPDFXTrapped("True");
+		public static final EnumPDFXTrapped False = new EnumPDFXTrapped("False");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPDFXTrapped.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPDFXTrapped.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXCheck
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXCheck
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXCheck(String value)
+	{
+		setAttribute(AttributeName.PDFXCHECK, value, null);
+	}
 
-            public static final EnumPDFXTrapped Unknown = new EnumPDFXTrapped("Unknown");
-            public static final EnumPDFXTrapped True = new EnumPDFXTrapped("True");
-            public static final EnumPDFXTrapped False = new EnumPDFXTrapped("False");
-        }      
+	/**
+	  * (23) get String attribute PDFXCheck
+	  * @return the value of the attribute
+	  */
+	public String getPDFXCheck()
+	{
+		return getAttribute(AttributeName.PDFXCHECK, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFX1aCheck
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFX1aCheck
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFX1aCheck(boolean value)
+	{
+		setAttribute(AttributeName.PDFX1ACHECK, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute PDFX1aCheck
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPDFX1aCheck()
+	{
+		return getBoolAttribute(AttributeName.PDFX1ACHECK, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFX1aCheck
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFX1aCheck
-          * @param value the value to set the attribute to
-          */
-        public void setPDFX1aCheck(boolean value)
-        {
-            setAttribute(AttributeName.PDFX1ACHECK, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFX3Check
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFX3Check
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFX3Check(boolean value)
+	{
+		setAttribute(AttributeName.PDFX3CHECK, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute PDFX1aCheck
-          * @return boolean the value of the attribute
-          */
-        public boolean getPDFX1aCheck()
-        {
-            return getBoolAttribute(AttributeName.PDFX1ACHECK, null, false);
-        }
+	/**
+	  * (18) get boolean attribute PDFX3Check
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPDFX3Check()
+	{
+		return getBoolAttribute(AttributeName.PDFX3CHECK, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFX3Check
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFX3Check
-          * @param value the value to set the attribute to
-          */
-        public void setPDFX3Check(boolean value)
-        {
-            setAttribute(AttributeName.PDFX3CHECK, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXBleedBoxToTrimBoxOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXBleedBoxToTrimBoxOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXBleedBoxToTrimBoxOffset(JDFRectangle value)
+	{
+		setAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute PDFX3Check
-          * @return boolean the value of the attribute
-          */
-        public boolean getPDFX3Check()
-        {
-            return getBoolAttribute(AttributeName.PDFX3CHECK, null, false);
-        }
+	/**
+	  * (20) get JDFRectangle attribute PDFXBleedBoxToTrimBoxOffset
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getPDFXBleedBoxToTrimBoxOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXBleedBoxToTrimBoxOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXBleedBoxToTrimBoxOffset
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXBleedBoxToTrimBoxOffset(JDFRectangle value)
-        {
-            setAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXCompliantPDFOnly
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXCompliantPDFOnly
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXCompliantPDFOnly(boolean value)
+	{
+		setAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, value, null);
+	}
 
-        /**
-          * (20) get JDFRectangle attribute PDFXBleedBoxToTrimBoxOffset
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getPDFXBleedBoxToTrimBoxOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (18) get boolean attribute PDFXCompliantPDFOnly
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPDFXCompliantPDFOnly()
+	{
+		return getBoolAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXCompliantPDFOnly
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXCompliantPDFOnly
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXCompliantPDFOnly(boolean value)
-        {
-            setAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXOutputCondition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXOutputCondition
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXOutputCondition(String value)
+	{
+		setAttribute(AttributeName.PDFXOUTPUTCONDITION, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute PDFXCompliantPDFOnly
-          * @return boolean the value of the attribute
-          */
-        public boolean getPDFXCompliantPDFOnly()
-        {
-            return getBoolAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, null, false);
-        }
+	/**
+	  * (23) get String attribute PDFXOutputCondition
+	  * @return the value of the attribute
+	  */
+	public String getPDFXOutputCondition()
+	{
+		return getAttribute(AttributeName.PDFXOUTPUTCONDITION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXOutputCondition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXOutputCondition
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXOutputCondition(String value)
-        {
-            setAttribute(AttributeName.PDFXOUTPUTCONDITION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXOutputIntentProfile
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXOutputIntentProfile
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXOutputIntentProfile(String value)
+	{
+		setAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, value, null);
+	}
 
-        /**
-          * (23) get String attribute PDFXOutputCondition
-          * @return the value of the attribute
-          */
-        public String getPDFXOutputCondition()
-        {
-            return getAttribute(AttributeName.PDFXOUTPUTCONDITION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PDFXOutputIntentProfile
+	  * @return the value of the attribute
+	  */
+	public String getPDFXOutputIntentProfile()
+	{
+		return getAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXOutputIntentProfile
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXOutputIntentProfile
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXOutputIntentProfile(String value)
-        {
-            setAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXNoTrimBoxError
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXNoTrimBoxError
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXNoTrimBoxError(boolean value)
+	{
+		setAttribute(AttributeName.PDFXNOTRIMBOXERROR, value, null);
+	}
 
-        /**
-          * (23) get String attribute PDFXOutputIntentProfile
-          * @return the value of the attribute
-          */
-        public String getPDFXOutputIntentProfile()
-        {
-            return getAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (18) get boolean attribute PDFXNoTrimBoxError
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPDFXNoTrimBoxError()
+	{
+		return getBoolAttribute(AttributeName.PDFXNOTRIMBOXERROR, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXNoTrimBoxError
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXNoTrimBoxError
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXNoTrimBoxError(boolean value)
-        {
-            setAttribute(AttributeName.PDFXNOTRIMBOXERROR, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXRegistryName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXRegistryName
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXRegistryName(String value)
+	{
+		setAttribute(AttributeName.PDFXREGISTRYNAME, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute PDFXNoTrimBoxError
-          * @return boolean the value of the attribute
-          */
-        public boolean getPDFXNoTrimBoxError()
-        {
-            return getBoolAttribute(AttributeName.PDFXNOTRIMBOXERROR, null, true);
-        }
+	/**
+	  * (23) get String attribute PDFXRegistryName
+	  * @return the value of the attribute
+	  */
+	public String getPDFXRegistryName()
+	{
+		return getAttribute(AttributeName.PDFXREGISTRYNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXRegistryName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXRegistryName
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXRegistryName(String value)
-        {
-            setAttribute(AttributeName.PDFXREGISTRYNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXSetBleedBoxToMediaBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXSetBleedBoxToMediaBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXSetBleedBoxToMediaBox(boolean value)
+	{
+		setAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, value, null);
+	}
 
-        /**
-          * (23) get String attribute PDFXRegistryName
-          * @return the value of the attribute
-          */
-        public String getPDFXRegistryName()
-        {
-            return getAttribute(AttributeName.PDFXREGISTRYNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (18) get boolean attribute PDFXSetBleedBoxToMediaBox
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPDFXSetBleedBoxToMediaBox()
+	{
+		return getBoolAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXSetBleedBoxToMediaBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXSetBleedBoxToMediaBox
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXSetBleedBoxToMediaBox(boolean value)
-        {
-            setAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXTrapped
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PDFXTrapped
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPDFXTrapped(EnumPDFXTrapped enumVar)
+	{
+		setAttribute(AttributeName.PDFXTRAPPED, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute PDFXSetBleedBoxToMediaBox
-          * @return boolean the value of the attribute
-          */
-        public boolean getPDFXSetBleedBoxToMediaBox()
-        {
-            return getBoolAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, null, true);
-        }
+	/**
+	  * (9) get attribute PDFXTrapped
+	  * @return the value of the attribute
+	  */
+	public EnumPDFXTrapped getPDFXTrapped()
+	{
+		return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXTrapped
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PDFXTrapped
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPDFXTrapped(EnumPDFXTrapped enumVar)
-        {
-            setAttribute(AttributeName.PDFXTRAPPED, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PDFXTrimBoxToMediaBoxOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PDFXTrimBoxToMediaBoxOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setPDFXTrimBoxToMediaBoxOffset(JDFRectangle value)
+	{
+		setAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, value, null);
+	}
 
-        /**
-          * (9) get attribute PDFXTrapped
-          * @return the value of the attribute
-          */
-        public EnumPDFXTrapped getPDFXTrapped()
-        {
-            return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PDFXTrimBoxToMediaBoxOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PDFXTrimBoxToMediaBoxOffset
-          * @param value the value to set the attribute to
-          */
-        public void setPDFXTrimBoxToMediaBoxOffset(JDFRectangle value)
-        {
-            setAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, value, null);
-        }
-
-        /**
-          * (20) get JDFRectangle attribute PDFXTrimBoxToMediaBoxOffset
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getPDFXTrimBoxToMediaBoxOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFRectangle attribute PDFXTrimBoxToMediaBoxOffset
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getPDFXTrimBoxToMediaBoxOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

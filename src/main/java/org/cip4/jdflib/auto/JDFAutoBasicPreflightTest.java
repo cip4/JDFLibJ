@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,368 +87,349 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
-    /**
-    *****************************************************************************
-    class JDFAutoBasicPreflightTest : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBasicPreflightTest : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBasicPreflightTest extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBasicPreflightTest
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBasicPreflightTest(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBasicPreflightTest
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBasicPreflightTest(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBasicPreflightTest
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBasicPreflightTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBasicPreflightTest
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBasicPreflightTest(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBasicPreflightTest
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBasicPreflightTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBasicPreflightTest
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBasicPreflightTest(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBasicPreflightTest[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ListType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBasicPreflightTest[  --> " + super.toString() + " ]";
-    }
+	public static class EnumListType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumListType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ListType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumListType getEnum(String enumName)
+		{
+			return (EnumListType) getEnum(EnumListType.class, enumName);
+		}
 
-        public static class EnumListType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumListType getEnum(int enumValue)
+		{
+			return (EnumListType) getEnum(EnumListType.class, enumValue);
+		}
 
-            private EnumListType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumListType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumListType getEnum(String enumName)
-            {
-                return (EnumListType) getEnum(EnumListType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumListType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumListType getEnum(int enumValue)
-            {
-                return (EnumListType) getEnum(EnumListType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumListType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumListType.class);
-            }
+		public static final EnumListType CompleteList = new EnumListType("CompleteList");
+		public static final EnumListType CompleteOrderedList = new EnumListType("CompleteOrderedList");
+		public static final EnumListType ContainedList = new EnumListType("ContainedList");
+		public static final EnumListType List = new EnumListType("List");
+		public static final EnumListType OrderedList = new EnumListType("OrderedList");
+		public static final EnumListType OrderedRangeList = new EnumListType("OrderedRangeList");
+		public static final EnumListType Range = new EnumListType("Range");
+		public static final EnumListType RangeList = new EnumListType("RangeList");
+		public static final EnumListType SingleValue = new EnumListType("SingleValue");
+		public static final EnumListType Span = new EnumListType("Span");
+		public static final EnumListType UniqueList = new EnumListType("UniqueList");
+		public static final EnumListType UniqueRangeList = new EnumListType("UniqueRangeList");
+		public static final EnumListType UniqueOrderedList = new EnumListType("UniqueOrderedList");
+		public static final EnumListType UniqueOrderedRangeList = new EnumListType("UniqueOrderedRangeList");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumListType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumListType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Classes
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Classes
+	  * @param value the value to set the attribute to
+	  */
+	public void setClasses(VString value)
+	{
+		setAttribute(AttributeName.CLASSES, value, null);
+	}
 
-            public static final EnumListType CompleteList = new EnumListType("CompleteList");
-            public static final EnumListType CompleteOrderedList = new EnumListType("CompleteOrderedList");
-            public static final EnumListType ContainedList = new EnumListType("ContainedList");
-            public static final EnumListType List = new EnumListType("List");
-            public static final EnumListType OrderedList = new EnumListType("OrderedList");
-            public static final EnumListType OrderedRangeList = new EnumListType("OrderedRangeList");
-            public static final EnumListType Range = new EnumListType("Range");
-            public static final EnumListType RangeList = new EnumListType("RangeList");
-            public static final EnumListType SingleValue = new EnumListType("SingleValue");
-            public static final EnumListType Span = new EnumListType("Span");
-            public static final EnumListType UniqueList = new EnumListType("UniqueList");
-            public static final EnumListType UniqueRangeList = new EnumListType("UniqueRangeList");
-            public static final EnumListType UniqueOrderedList = new EnumListType("UniqueOrderedList");
-            public static final EnumListType UniqueOrderedRangeList = new EnumListType("UniqueOrderedRangeList");
-        }      
+	/**
+	  * (21) get VString attribute Classes
+	  * @return VString the value of the attribute
+	  */
+	public VString getClasses()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CLASSES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClassName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClassName
+	  * @param value the value to set the attribute to
+	  */
+	public void setClassName(String value)
+	{
+		setAttribute(AttributeName.CLASSNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ClassName
+	  * @return the value of the attribute
+	  */
+	public String getClassName()
+	{
+		return getAttribute(AttributeName.CLASSNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Classes
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Classes
-          * @param value the value to set the attribute to
-          */
-        public void setClasses(VString value)
-        {
-            setAttribute(AttributeName.CLASSES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DevNS
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DevNS
+	  * @param value the value to set the attribute to
+	  */
+	public void setDevNS(String value)
+	{
+		setAttribute(AttributeName.DEVNS, value, null);
+	}
 
-        /**
-          * (21) get VString attribute Classes
-          * @return VString the value of the attribute
-          */
-        public VString getClasses()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CLASSES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (23) get String attribute DevNS
+	  * @return the value of the attribute
+	  */
+	public String getDevNS()
+	{
+		return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClassName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClassName
-          * @param value the value to set the attribute to
-          */
-        public void setClassName(String value)
-        {
-            setAttribute(AttributeName.CLASSNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ListType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ListType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setListType(EnumListType enumVar)
+	{
+		setAttribute(AttributeName.LISTTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (23) get String attribute ClassName
-          * @return the value of the attribute
-          */
-        public String getClassName()
-        {
-            return getAttribute(AttributeName.CLASSNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (9) get attribute ListType
+	  * @return the value of the attribute
+	  */
+	public EnumListType getListType()
+	{
+		return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DevNS
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DevNS
-          * @param value the value to set the attribute to
-          */
-        public void setDevNS(String value)
-        {
-            setAttribute(AttributeName.DEVNS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxOccurs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxOccurs
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxOccurs(int value)
+	{
+		setAttribute(AttributeName.MAXOCCURS, value, null);
+	}
 
-        /**
-          * (23) get String attribute DevNS
-          * @return the value of the attribute
-          */
-        public String getDevNS()
-        {
-            return getAttribute(AttributeName.DEVNS, null, "http://www.CIP4.org/JDFSchema_1_1");
-        }
+	/**
+	  * (15) get int attribute MaxOccurs
+	  * @return int the value of the attribute
+	  */
+	public int getMaxOccurs()
+	{
+		return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ListType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ListType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setListType(EnumListType enumVar)
-        {
-            setAttribute(AttributeName.LISTTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinOccurs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinOccurs
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinOccurs(int value)
+	{
+		setAttribute(AttributeName.MINOCCURS, value, null);
+	}
 
-        /**
-          * (9) get attribute ListType
-          * @return the value of the attribute
-          */
-        public EnumListType getListType()
-        {
-            return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));
-        }
+	/**
+	  * (15) get int attribute MinOccurs
+	  * @return int the value of the attribute
+	  */
+	public int getMinOccurs()
+	{
+		return getIntAttribute(AttributeName.MINOCCURS, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxOccurs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxOccurs
-          * @param value the value to set the attribute to
-          */
-        public void setMaxOccurs(int value)
-        {
-            setAttribute(AttributeName.MAXOCCURS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
-        /**
-          * (15) get int attribute MaxOccurs
-          * @return int the value of the attribute
-          */
-        public int getMaxOccurs()
-        {
-            return getIntAttribute(AttributeName.MAXOCCURS, null, 1);
-        }
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinOccurs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinOccurs
-          * @param value the value to set the attribute to
-          */
-        public void setMinOccurs(int value)
-        {
-            setAttribute(AttributeName.MINOCCURS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute MinOccurs
-          * @return int the value of the attribute
-          */
-        public int getMinOccurs()
-        {
-            return getIntAttribute(AttributeName.MINOCCURS, null, 1);
-        }
+	/**
+	 * (24) const get element PreflightArgument
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument getPreflightArgument()
+	{
+		return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/** (25) getCreatePreflightArgument
+	 * 
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument getCreatePreflightArgument()
+	{
+		return (JDFPreflightArgument) getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, 0);
+	}
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element PreflightArgument
-     * @return JDFPreflightArgument the element
-     */
-    public JDFPreflightArgument getPreflightArgument()
-    {
-        return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, 0);
-    }
-
-    /** (25) getCreatePreflightArgument
-     * 
-     * @return JDFPreflightArgument the element
-     */
-    public JDFPreflightArgument getCreatePreflightArgument()
-    {
-        return (JDFPreflightArgument) getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, 0);
-    }
-
-    /**
-     * (29) append element PreflightArgument
-     * @return JDFPreflightArgument the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPreflightArgument appendPreflightArgument() throws JDFException
-    {
-        return (JDFPreflightArgument) appendElementN(ElementName.PREFLIGHTARGUMENT, 1, null);
-    }
+	/**
+	 * (29) append element PreflightArgument
+	 * @return JDFPreflightArgument the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPreflightArgument appendPreflightArgument() throws JDFException
+	{
+		return (JDFPreflightArgument) appendElementN(ElementName.PREFLIGHTARGUMENT, 1, null);
+	}
 
 }// end namespace JDF

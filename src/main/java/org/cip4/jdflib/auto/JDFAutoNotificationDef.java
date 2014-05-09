@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,219 +82,204 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoNotificationDef : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNotificationDef : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNotificationDef extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNotificationDef
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotificationDef
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNotificationDef(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNotificationDef
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotificationDef
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNotificationDef(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNotificationDef
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotificationDef
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNotificationDef(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNotificationDef[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Classes
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNotificationDef[  --> " + super.toString() + " ]";
-    }
+	public static class EnumClasses extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumClasses(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Classes
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumClasses getEnum(String enumName)
+		{
+			return (EnumClasses) getEnum(EnumClasses.class, enumName);
+		}
 
-        public static class EnumClasses extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumClasses getEnum(int enumValue)
+		{
+			return (EnumClasses) getEnum(EnumClasses.class, enumValue);
+		}
 
-            private EnumClasses(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumClasses.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumClasses getEnum(String enumName)
-            {
-                return (EnumClasses) getEnum(EnumClasses.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumClasses.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumClasses getEnum(int enumValue)
-            {
-                return (EnumClasses) getEnum(EnumClasses.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumClasses.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumClasses.class);
-            }
+		public static final EnumClasses Event = new EnumClasses("Event");
+		public static final EnumClasses Information = new EnumClasses("Information");
+		public static final EnumClasses Warning = new EnumClasses("Warning");
+		public static final EnumClasses Error = new EnumClasses("Error");
+		public static final EnumClasses Fatal = new EnumClasses("Fatal");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumClasses.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumClasses.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Classes
+	--------------------------------------------------------------------- */
+	/**
+	  * (5.2) set attribute Classes
+	  * @param v vector of the enumeration values
+	  */
+	public void setClasses(Vector v)
+	{
+		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
+	}
 
-            public static final EnumClasses Event = new EnumClasses("Event");
-            public static final EnumClasses Information = new EnumClasses("Information");
-            public static final EnumClasses Warning = new EnumClasses("Warning");
-            public static final EnumClasses Error = new EnumClasses("Error");
-            public static final EnumClasses Fatal = new EnumClasses("Fatal");
-        }      
+	/**
+	  * (9.2) get Classes attribute Classes
+	  * @return Vector of the enumerations
+	  */
+	public Vector getClasses()
+	{
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SignalType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SignalType
+	  * @param value the value to set the attribute to
+	  */
+	public void setSignalType(String value)
+	{
+		setAttribute(AttributeName.SIGNALTYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute SignalType
+	  * @return the value of the attribute
+	  */
+	public String getSignalType()
+	{
+		return getAttribute(AttributeName.SIGNALTYPE, null, "Notification");
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Classes
-        --------------------------------------------------------------------- */
-        /**
-          * (5.2) set attribute Classes
-          * @param v vector of the enumeration values
-          */
-        public void setClasses(Vector v)
-        {
-            setEnumerationsAttribute(AttributeName.CLASSES, v, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Type
+	  * @param value the value to set the attribute to
+	  */
+	public void setType(String value)
+	{
+		setAttribute(AttributeName.TYPE, value, null);
+	}
 
-        /**
-          * (9.2) get Classes attribute Classes
-          * @return Vector of the enumerations
-          */
-        public Vector getClasses()
-        {
-            return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SignalType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SignalType
-          * @param value the value to set the attribute to
-          */
-        public void setSignalType(String value)
-        {
-            setAttribute(AttributeName.SIGNALTYPE, value, null);
-        }
-
-        /**
-          * (23) get String attribute SignalType
-          * @return the value of the attribute
-          */
-        public String getSignalType()
-        {
-            return getAttribute(AttributeName.SIGNALTYPE, null, "Notification");
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Type
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Type
-          * @param value the value to set the attribute to
-          */
-        public void setType(String value)
-        {
-            setAttribute(AttributeName.TYPE, value, null);
-        }
-
-        /**
-          * (23) get String attribute Type
-          * @return the value of the attribute
-          */
-        public String getType()
-        {
-            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Type
+	  * @return the value of the attribute
+	  */
+	public String getType()
+	{
+		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

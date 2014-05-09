@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,361 +83,339 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoLaminatingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLaminatingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLaminatingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.GAPLIST, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLaminatingMethod.getEnum(0), null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GAPLIST, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLaminatingMethod.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLaminatingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLaminatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLaminatingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLaminatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLaminatingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLaminatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLaminatingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLaminatingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for LaminatingMethod
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumLaminatingMethod extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumLaminatingMethod(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumLaminatingMethod getEnum(String enumName)
+		{
+			return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumLaminatingMethod getEnum(int enumValue)
+		{
+			return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for LaminatingMethod
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumLaminatingMethod.class);
+		}
 
-        public static class EnumLaminatingMethod extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumLaminatingMethod.class);
+		}
 
-            private EnumLaminatingMethod(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumLaminatingMethod.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumLaminatingMethod getEnum(String enumName)
-            {
-                return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumName);
-            }
+		public static final EnumLaminatingMethod CompoundFoil = new EnumLaminatingMethod("CompoundFoil");
+		public static final EnumLaminatingMethod DispersionGlue = new EnumLaminatingMethod("DispersionGlue");
+		public static final EnumLaminatingMethod Fusing = new EnumLaminatingMethod("Fusing");
+		public static final EnumLaminatingMethod Unknown = new EnumLaminatingMethod("Unknown");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumLaminatingMethod getEnum(int enumValue)
-            {
-                return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumLaminatingMethod.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdhesiveType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdhesiveType
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdhesiveType(String value)
+	{
+		setAttribute(AttributeName.ADHESIVETYPE, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumLaminatingMethod.class);
-            }
+	/**
+	  * (23) get String attribute AdhesiveType
+	  * @return the value of the attribute
+	  */
+	public String getAdhesiveType()
+	{
+		return getAttribute(AttributeName.ADHESIVETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumLaminatingMethod.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GapList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GapList
+	  * @param value the value to set the attribute to
+	  */
+	public void setGapList(JDFNumberList value)
+	{
+		setAttribute(AttributeName.GAPLIST, value, null);
+	}
 
-            public static final EnumLaminatingMethod CompoundFoil = new EnumLaminatingMethod("CompoundFoil");
-            public static final EnumLaminatingMethod DispersionGlue = new EnumLaminatingMethod("DispersionGlue");
-            public static final EnumLaminatingMethod Fusing = new EnumLaminatingMethod("Fusing");
-            public static final EnumLaminatingMethod Unknown = new EnumLaminatingMethod("Unknown");
-        }      
+	/**
+	  * (20) get JDFNumberList attribute GapList
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getGapList()
+	{
+		final String strAttrName = getAttribute(AttributeName.GAPLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HardenerType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute HardenerType
+	  * @param value the value to set the attribute to
+	  */
+	public void setHardenerType(String value)
+	{
+		setAttribute(AttributeName.HARDENERTYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute HardenerType
+	  * @return the value of the attribute
+	  */
+	public String getHardenerType()
+	{
+		return getAttribute(AttributeName.HARDENERTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdhesiveType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdhesiveType
-          * @param value the value to set the attribute to
-          */
-        public void setAdhesiveType(String value)
-        {
-            setAttribute(AttributeName.ADHESIVETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LaminatingBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LaminatingBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setLaminatingBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.LAMINATINGBOX, value, null);
+	}
 
-        /**
-          * (23) get String attribute AdhesiveType
-          * @return the value of the attribute
-          */
-        public String getAdhesiveType()
-        {
-            return getAttribute(AttributeName.ADHESIVETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFRectangle attribute LaminatingBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getLaminatingBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GapList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GapList
-          * @param value the value to set the attribute to
-          */
-        public void setGapList(JDFNumberList value)
-        {
-            setAttribute(AttributeName.GAPLIST, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LaminatingMethod
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute LaminatingMethod
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setLaminatingMethod(EnumLaminatingMethod enumVar)
+	{
+		setAttribute(AttributeName.LAMINATINGMETHOD, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute GapList
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getGapList()
-        {
-            String strAttrName = getAttribute(AttributeName.GAPLIST, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute LaminatingMethod
+	  * @return the value of the attribute
+	  */
+	public EnumLaminatingMethod getLaminatingMethod()
+	{
+		return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HardenerType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HardenerType
-          * @param value the value to set the attribute to
-          */
-        public void setHardenerType(String value)
-        {
-            setAttribute(AttributeName.HARDENERTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NipWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NipWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setNipWidth(double value)
+	{
+		setAttribute(AttributeName.NIPWIDTH, value, null);
+	}
 
-        /**
-          * (23) get String attribute HardenerType
-          * @return the value of the attribute
-          */
-        public String getHardenerType()
-        {
-            return getAttribute(AttributeName.HARDENERTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute NipWidth
+	  * @return double the value of the attribute
+	  */
+	public double getNipWidth()
+	{
+		return getRealAttribute(AttributeName.NIPWIDTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LaminatingBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LaminatingBox
-          * @param value the value to set the attribute to
-          */
-        public void setLaminatingBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.LAMINATINGBOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(int value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
-        /**
-          * (20) get JDFRectangle attribute LaminatingBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getLaminatingBox()
-        {
-            String strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (15) get int attribute ModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getModuleIndex()
+	{
+		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LaminatingMethod
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute LaminatingMethod
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setLaminatingMethod(EnumLaminatingMethod enumVar)
-        {
-            setAttribute(AttributeName.LAMINATINGMETHOD, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Temperature
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Temperature
+	  * @param value the value to set the attribute to
+	  */
+	public void setTemperature(double value)
+	{
+		setAttribute(AttributeName.TEMPERATURE, value, null);
+	}
 
-        /**
-          * (9) get attribute LaminatingMethod
-          * @return the value of the attribute
-          */
-        public EnumLaminatingMethod getLaminatingMethod()
-        {
-            return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NipWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NipWidth
-          * @param value the value to set the attribute to
-          */
-        public void setNipWidth(double value)
-        {
-            setAttribute(AttributeName.NIPWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute NipWidth
-          * @return double the value of the attribute
-          */
-        public double getNipWidth()
-        {
-            return getRealAttribute(AttributeName.NIPWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(int value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
-
-        /**
-          * (15) get int attribute ModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getModuleIndex()
-        {
-            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Temperature
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Temperature
-          * @param value the value to set the attribute to
-          */
-        public void setTemperature(double value)
-        {
-            setAttribute(AttributeName.TEMPERATURE, value, null);
-        }
-
-        /**
-          * (17) get double attribute Temperature
-          * @return double the value of the attribute
-          */
-        public double getTemperature()
-        {
-            return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute Temperature
+	  * @return double the value of the attribute
+	  */
+	public double getTemperature()
+	{
+		return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
+	}
 
 }// end namespace JDF

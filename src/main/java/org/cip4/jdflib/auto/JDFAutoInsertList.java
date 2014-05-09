@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFInsert;
-    /**
-    *****************************************************************************
-    class JDFAutoInsertList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoInsertList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoInsertList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.INSERT, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.INSERT, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoInsertList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoInsertList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsertList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoInsertList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsertList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoInsertList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoInsertList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoInsertList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateInsert
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFInsert the element
+	 */
+	public JDFInsert getCreateInsert(int iSkip)
+	{
+		return (JDFInsert) getCreateElement_KElement(ElementName.INSERT, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Insert
+	 * @param iSkip number of elements to skip
+	 * @return JDFInsert the element
+	 * default is getInsert(0)     */
+	public JDFInsert getInsert(int iSkip)
+	{
+		return (JDFInsert) getElement(ElementName.INSERT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Insert from the current element
+	 * 
+	 * @return Collection<JDFInsert>, null if none are available
+	 */
+	public Collection<JDFInsert> getAllInsert()
+	{
+		final VElement vc = getChildElementVector(ElementName.INSERT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateInsert
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFInsert the element
-     */
-    public JDFInsert getCreateInsert(int iSkip)
-    {
-        return (JDFInsert)getCreateElement_KElement(ElementName.INSERT, null, iSkip);
-    }
+		final Vector<JDFInsert> v = new Vector<JDFInsert>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFInsert) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Insert
-     * @param iSkip number of elements to skip
-     * @return JDFInsert the element
-     * default is getInsert(0)     */
-    public JDFInsert getInsert(int iSkip)
-    {
-        return (JDFInsert) getElement(ElementName.INSERT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Insert from the current element
-     * 
-     * @return Collection<JDFInsert>, null if none are available
-     */
-    public Collection<JDFInsert> getAllInsert()
-    {
-        final VElement vc = getChildElementVector(ElementName.INSERT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFInsert> v = new Vector<JDFInsert>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFInsert) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Insert
-     * @return JDFInsert the element
-     */
-    public JDFInsert appendInsert()
-    {
-        return (JDFInsert) appendElement(ElementName.INSERT, null);
-    }
+	/**
+	 * (30) append element Insert
+	 * @return JDFInsert the element
+	 */
+	public JDFInsert appendInsert()
+	{
+		return (JDFInsert) appendElement(ElementName.INSERT, null);
+	}
 
 }// end namespace JDF

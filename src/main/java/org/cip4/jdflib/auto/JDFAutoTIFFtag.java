@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,229 +78,213 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
-    /**
-    *****************************************************************************
-    class JDFAutoTIFFtag : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTIFFtag : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTIFFtag extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.INTEGERVALUE, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.STRINGVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.BINARYVALUE, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INTEGERVALUE, 0x44433311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERVALUE, 0x44433311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRINGVALUE, 0x44433311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.BINARYVALUE, 0x44433311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTIFFtag
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFtag(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFtag
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFtag(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFtag
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFtag
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFtag(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFtag
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTIFFtag(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFtag
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTIFFtag(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTIFFtag[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTIFFtag[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TagNumber
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TagNumber
+	  * @param value the value to set the attribute to
+	  */
+	public void setTagNumber(int value)
+	{
+		setAttribute(AttributeName.TAGNUMBER, value, null);
+	}
 
+	/**
+	  * (15) get int attribute TagNumber
+	  * @return int the value of the attribute
+	  */
+	public int getTagNumber()
+	{
+		return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TagNumber
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TagNumber
-          * @param value the value to set the attribute to
-          */
-        public void setTagNumber(int value)
-        {
-            setAttribute(AttributeName.TAGNUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TagType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TagType
+	  * @param value the value to set the attribute to
+	  */
+	public void setTagType(int value)
+	{
+		setAttribute(AttributeName.TAGTYPE, value, null);
+	}
 
-        /**
-          * (15) get int attribute TagNumber
-          * @return int the value of the attribute
-          */
-        public int getTagNumber()
-        {
-            return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
-        }
+	/**
+	  * (15) get int attribute TagType
+	  * @return int the value of the attribute
+	  */
+	public int getTagType()
+	{
+		return getIntAttribute(AttributeName.TAGTYPE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TagType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TagType
-          * @param value the value to set the attribute to
-          */
-        public void setTagType(int value)
-        {
-            setAttribute(AttributeName.TAGTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IntegerValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IntegerValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setIntegerValue(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.INTEGERVALUE, value, null);
+	}
 
-        /**
-          * (15) get int attribute TagType
-          * @return int the value of the attribute
-          */
-        public int getTagType()
-        {
-            return getIntAttribute(AttributeName.TAGTYPE, null, 0);
-        }
+	/**
+	  * (20) get JDFIntegerList attribute IntegerValue
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getIntegerValue()
+	{
+		final String strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IntegerValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IntegerValue
-          * @param value the value to set the attribute to
-          */
-        public void setIntegerValue(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.INTEGERVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NumberValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumberValue(JDFNumberList value)
+	{
+		setAttribute(AttributeName.NUMBERVALUE, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerList attribute IntegerValue
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getIntegerValue()
-        {
-            String strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFNumberList attribute NumberValue
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getNumberValue()
+	{
+		final String strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NumberValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NumberValue
-          * @param value the value to set the attribute to
-          */
-        public void setNumberValue(JDFNumberList value)
-        {
-            setAttribute(AttributeName.NUMBERVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StringValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StringValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setStringValue(String value)
+	{
+		setAttribute(AttributeName.STRINGVALUE, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute NumberValue
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getNumberValue()
-        {
-            String strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute StringValue
+	  * @return the value of the attribute
+	  */
+	public String getStringValue()
+	{
+		return getAttribute(AttributeName.STRINGVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StringValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StringValue
-          * @param value the value to set the attribute to
-          */
-        public void setStringValue(String value)
-        {
-            setAttribute(AttributeName.STRINGVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BinaryValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BinaryValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setBinaryValue(String value)
+	{
+		setAttribute(AttributeName.BINARYVALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute StringValue
-          * @return the value of the attribute
-          */
-        public String getStringValue()
-        {
-            return getAttribute(AttributeName.STRINGVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BinaryValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BinaryValue
-          * @param value the value to set the attribute to
-          */
-        public void setBinaryValue(String value)
-        {
-            setAttribute(AttributeName.BINARYVALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute BinaryValue
-          * @return the value of the attribute
-          */
-        public String getBinaryValue()
-        {
-            return getAttribute(AttributeName.BINARYVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute BinaryValue
+	  * @return the value of the attribute
+	  */
+	public String getBinaryValue()
+	{
+		return getAttribute(AttributeName.BINARYVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

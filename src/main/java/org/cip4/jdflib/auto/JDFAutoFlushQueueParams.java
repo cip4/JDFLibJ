@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
-    /**
-    *****************************************************************************
-    class JDFAutoFlushQueueParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFlushQueueParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFlushQueueParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFlushQueueParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFlushQueueParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushQueueParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFlushQueueParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFlushQueueParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushQueueParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFlushQueueParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFlushQueueParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushQueueParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFlushQueueParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFlushQueueParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFlushQueueParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element QueueFilter
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getQueueFilter()
+	{
+		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
+	/** (25) getCreateQueueFilter
+	 * 
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getCreateQueueFilter()
+	{
+		return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element QueueFilter
-     * @return JDFQueueFilter the element
-     */
-    public JDFQueueFilter getQueueFilter()
-    {
-        return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
-    }
-
-    /** (25) getCreateQueueFilter
-     * 
-     * @return JDFQueueFilter the element
-     */
-    public JDFQueueFilter getCreateQueueFilter()
-    {
-        return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
-    }
-
-    /**
-     * (29) append element QueueFilter
-     * @return JDFQueueFilter the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFQueueFilter appendQueueFilter() throws JDFException
-    {
-        return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
-    }
+	/**
+	 * (29) append element QueueFilter
+	 * @return JDFQueueFilter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFQueueFilter appendQueueFilter() throws JDFException
+	{
+		return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,231 +81,220 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanSurface;
 import org.cip4.jdflib.span.JDFSpanTemperature;
-    /**
-    *****************************************************************************
-    class JDFAutoLaminatingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLaminatingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LAMINATED, 0x77777776);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x55555555);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.SURFACE, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.TEXTURE, 0x66666111);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LAMINATED, 0x77777776);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x55555555);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SURFACE, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TEXTURE, 0x66666111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLaminatingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLaminatingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLaminatingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLaminatingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLaminatingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLaminatingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLaminatingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLaminatingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLaminatingIntent[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element Laminated
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getLaminated()
+	{
+		return (JDFOptionSpan) getElement(ElementName.LAMINATED, null, 0);
+	}
 
+	/** (25) getCreateLaminated
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateLaminated()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.LAMINATED, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element Laminated
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendLaminated() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.LAMINATED, 1, null);
+	}
 
-    /**
-     * (24) const get element Laminated
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getLaminated()
-    {
-        return (JDFOptionSpan) getElement(ElementName.LAMINATED, null, 0);
-    }
+	/**
+	 * (24) const get element Temperature
+	 * @return JDFSpanTemperature the element
+	 */
+	public JDFSpanTemperature getTemperature()
+	{
+		return (JDFSpanTemperature) getElement(ElementName.TEMPERATURE, null, 0);
+	}
 
-    /** (25) getCreateLaminated
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateLaminated()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.LAMINATED, null, 0);
-    }
+	/** (25) getCreateTemperature
+	 * 
+	 * @return JDFSpanTemperature the element
+	 */
+	public JDFSpanTemperature getCreateTemperature()
+	{
+		return (JDFSpanTemperature) getCreateElement_KElement(ElementName.TEMPERATURE, null, 0);
+	}
 
-    /**
-     * (29) append element Laminated
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendLaminated() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.LAMINATED, 1, null);
-    }
+	/**
+	 * (29) append element Temperature
+	 * @return JDFSpanTemperature the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanTemperature appendTemperature() throws JDFException
+	{
+		return (JDFSpanTemperature) appendElementN(ElementName.TEMPERATURE, 1, null);
+	}
 
-    /**
-     * (24) const get element Temperature
-     * @return JDFSpanTemperature the element
-     */
-    public JDFSpanTemperature getTemperature()
-    {
-        return (JDFSpanTemperature) getElement(ElementName.TEMPERATURE, null, 0);
-    }
+	/**
+	 * (24) const get element Surface
+	 * @return JDFSpanSurface the element
+	 */
+	public JDFSpanSurface getSurface()
+	{
+		return (JDFSpanSurface) getElement(ElementName.SURFACE, null, 0);
+	}
 
-    /** (25) getCreateTemperature
-     * 
-     * @return JDFSpanTemperature the element
-     */
-    public JDFSpanTemperature getCreateTemperature()
-    {
-        return (JDFSpanTemperature) getCreateElement_KElement(ElementName.TEMPERATURE, null, 0);
-    }
+	/** (25) getCreateSurface
+	 * 
+	 * @return JDFSpanSurface the element
+	 */
+	public JDFSpanSurface getCreateSurface()
+	{
+		return (JDFSpanSurface) getCreateElement_KElement(ElementName.SURFACE, null, 0);
+	}
 
-    /**
-     * (29) append element Temperature
-     * @return JDFSpanTemperature the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanTemperature appendTemperature() throws JDFException
-    {
-        return (JDFSpanTemperature) appendElementN(ElementName.TEMPERATURE, 1, null);
-    }
+	/**
+	 * (29) append element Surface
+	 * @return JDFSpanSurface the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanSurface appendSurface() throws JDFException
+	{
+		return (JDFSpanSurface) appendElementN(ElementName.SURFACE, 1, null);
+	}
 
-    /**
-     * (24) const get element Surface
-     * @return JDFSpanSurface the element
-     */
-    public JDFSpanSurface getSurface()
-    {
-        return (JDFSpanSurface) getElement(ElementName.SURFACE, null, 0);
-    }
+	/**
+	 * (24) const get element Texture
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getTexture()
+	{
+		return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
+	}
 
-    /** (25) getCreateSurface
-     * 
-     * @return JDFSpanSurface the element
-     */
-    public JDFSpanSurface getCreateSurface()
-    {
-        return (JDFSpanSurface) getCreateElement_KElement(ElementName.SURFACE, null, 0);
-    }
+	/** (25) getCreateTexture
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateTexture()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
+	}
 
-    /**
-     * (29) append element Surface
-     * @return JDFSpanSurface the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanSurface appendSurface() throws JDFException
-    {
-        return (JDFSpanSurface) appendElementN(ElementName.SURFACE, 1, null);
-    }
+	/**
+	 * (29) append element Texture
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendTexture() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
+	}
 
-    /**
-     * (24) const get element Texture
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getTexture()
-    {
-        return (JDFNameSpan) getElement(ElementName.TEXTURE, null, 0);
-    }
+	/**
+	 * (24) const get element Thickness
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getThickness()
+	{
+		return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /** (25) getCreateTexture
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateTexture()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.TEXTURE, null, 0);
-    }
+	/** (25) getCreateThickness
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateThickness()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /**
-     * (29) append element Texture
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendTexture() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.TEXTURE, 1, null);
-    }
-
-    /**
-     * (24) const get element Thickness
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getThickness()
-    {
-        return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /** (25) getCreateThickness
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateThickness()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /**
-     * (29) append element Thickness
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendThickness() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
-    }
+	/**
+	 * (29) append element Thickness
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendThickness() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
+	}
 
 }// end namespace JDF

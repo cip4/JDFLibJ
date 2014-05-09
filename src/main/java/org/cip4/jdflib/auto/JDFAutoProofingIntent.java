@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
-    /**
-    *****************************************************************************
-    class JDFAutoProofingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoProofingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoProofingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PROOFITEM, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PROOFITEM, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoProofingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProofingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoProofingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProofingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProofingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoProofingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProofingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoProofingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoProofingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoProofingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoProofingIntent[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateProofItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFProofItem the element
+	 */
+	public JDFProofItem getCreateProofItem(int iSkip)
+	{
+		return (JDFProofItem) getCreateElement_KElement(ElementName.PROOFITEM, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ProofItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFProofItem the element
+	 * default is getProofItem(0)     */
+	public JDFProofItem getProofItem(int iSkip)
+	{
+		return (JDFProofItem) getElement(ElementName.PROOFITEM, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all ProofItem from the current element
+	 * 
+	 * @return Collection<JDFProofItem>, null if none are available
+	 */
+	public Collection<JDFProofItem> getAllProofItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.PROOFITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateProofItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFProofItem the element
-     */
-    public JDFProofItem getCreateProofItem(int iSkip)
-    {
-        return (JDFProofItem)getCreateElement_KElement(ElementName.PROOFITEM, null, iSkip);
-    }
+		final Vector<JDFProofItem> v = new Vector<JDFProofItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFProofItem) vc.get(i));
+		}
 
-    /**
-     * (27) const get element ProofItem
-     * @param iSkip number of elements to skip
-     * @return JDFProofItem the element
-     * default is getProofItem(0)     */
-    public JDFProofItem getProofItem(int iSkip)
-    {
-        return (JDFProofItem) getElement(ElementName.PROOFITEM, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all ProofItem from the current element
-     * 
-     * @return Collection<JDFProofItem>, null if none are available
-     */
-    public Collection<JDFProofItem> getAllProofItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.PROOFITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFProofItem> v = new Vector<JDFProofItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFProofItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ProofItem
-     * @return JDFProofItem the element
-     */
-    public JDFProofItem appendProofItem()
-    {
-        return (JDFProofItem) appendElement(ElementName.PROOFITEM, null);
-    }
+	/**
+	 * (30) append element ProofItem
+	 * @return JDFProofItem the element
+	 */
+	public JDFProofItem appendProofItem()
+	{
+		return (JDFProofItem) appendElement(ElementName.PROOFITEM, null);
+	}
 
 }// end namespace JDF

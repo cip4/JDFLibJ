@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,379 +77,357 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoPerformance : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPerformance : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPerformance extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AVERAGEAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.AVERAGECLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.AVERAGESETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.MINCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.MINSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.NAME, 0x44444431, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.DEVCAPSREF, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVERAGEAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AVERAGECLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.AVERAGESETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINCLEANUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINSETUP, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.NAME, 0x44444431, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.DEVCAPSREF, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPerformance
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerformance
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPerformance(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerformance
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerformance
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPerformance(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerformance
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerformance
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPerformance(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPerformance[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPerformance[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AverageAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AverageAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setAverageAmount(double value)
+	{
+		setAttribute(AttributeName.AVERAGEAMOUNT, value, null);
+	}
 
+	/**
+	  * (17) get double attribute AverageAmount
+	  * @return double the value of the attribute
+	  */
+	public double getAverageAmount()
+	{
+		return getRealAttribute(AttributeName.AVERAGEAMOUNT, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AverageAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AverageAmount
-          * @param value the value to set the attribute to
-          */
-        public void setAverageAmount(double value)
-        {
-            setAttribute(AttributeName.AVERAGEAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AverageCleanup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AverageCleanup
+	  * @param value the value to set the attribute to
+	  */
+	public void setAverageCleanup(JDFDuration value)
+	{
+		setAttribute(AttributeName.AVERAGECLEANUP, value, null);
+	}
 
-        /**
-          * (17) get double attribute AverageAmount
-          * @return double the value of the attribute
-          */
-        public double getAverageAmount()
-        {
-            return getRealAttribute(AttributeName.AVERAGEAMOUNT, null, 0.0);
-        }
+	/**
+	  * (20) get JDFDuration attribute AverageCleanup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getAverageCleanup()
+	{
+		final String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AverageCleanup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AverageCleanup
-          * @param value the value to set the attribute to
-          */
-        public void setAverageCleanup(JDFDuration value)
-        {
-            setAttribute(AttributeName.AVERAGECLEANUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AverageSetup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AverageSetup
+	  * @param value the value to set the attribute to
+	  */
+	public void setAverageSetup(JDFDuration value)
+	{
+		setAttribute(AttributeName.AVERAGESETUP, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute AverageCleanup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getAverageCleanup()
-        {
-            String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFDuration attribute AverageSetup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getAverageSetup()
+	{
+		final String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AverageSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AverageSetup
-          * @param value the value to set the attribute to
-          */
-        public void setAverageSetup(JDFDuration value)
-        {
-            setAttribute(AttributeName.AVERAGESETUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxAmount(double value)
+	{
+		setAttribute(AttributeName.MAXAMOUNT, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute AverageSetup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getAverageSetup()
-        {
-            String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute MaxAmount
+	  * @return double the value of the attribute
+	  */
+	public double getMaxAmount()
+	{
+		return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxAmount
-          * @param value the value to set the attribute to
-          */
-        public void setMaxAmount(double value)
-        {
-            setAttribute(AttributeName.MAXAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxCleanup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxCleanup
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxCleanup(JDFDuration value)
+	{
+		setAttribute(AttributeName.MAXCLEANUP, value, null);
+	}
 
-        /**
-          * (17) get double attribute MaxAmount
-          * @return double the value of the attribute
-          */
-        public double getMaxAmount()
-        {
-            return getRealAttribute(AttributeName.MAXAMOUNT, null, 0.0);
-        }
+	/**
+	  * (20) get JDFDuration attribute MaxCleanup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getMaxCleanup()
+	{
+		final String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxCleanup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxCleanup
-          * @param value the value to set the attribute to
-          */
-        public void setMaxCleanup(JDFDuration value)
-        {
-            setAttribute(AttributeName.MAXCLEANUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxSetup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxSetup
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxSetup(JDFDuration value)
+	{
+		setAttribute(AttributeName.MAXSETUP, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute MaxCleanup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getMaxCleanup()
-        {
-            String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFDuration attribute MaxSetup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getMaxSetup()
+	{
+		final String strAttrName = getAttribute(AttributeName.MAXSETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxSetup
-          * @param value the value to set the attribute to
-          */
-        public void setMaxSetup(JDFDuration value)
-        {
-            setAttribute(AttributeName.MAXSETUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinAmount(double value)
+	{
+		setAttribute(AttributeName.MINAMOUNT, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute MaxSetup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getMaxSetup()
-        {
-            String strAttrName = getAttribute(AttributeName.MAXSETUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute MinAmount
+	  * @return double the value of the attribute
+	  */
+	public double getMinAmount()
+	{
+		return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinAmount
-          * @param value the value to set the attribute to
-          */
-        public void setMinAmount(double value)
-        {
-            setAttribute(AttributeName.MINAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinCleanup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinCleanup
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinCleanup(JDFDuration value)
+	{
+		setAttribute(AttributeName.MINCLEANUP, value, null);
+	}
 
-        /**
-          * (17) get double attribute MinAmount
-          * @return double the value of the attribute
-          */
-        public double getMinAmount()
-        {
-            return getRealAttribute(AttributeName.MINAMOUNT, null, 0.0);
-        }
+	/**
+	  * (20) get JDFDuration attribute MinCleanup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getMinCleanup()
+	{
+		final String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinCleanup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinCleanup
-          * @param value the value to set the attribute to
-          */
-        public void setMinCleanup(JDFDuration value)
-        {
-            setAttribute(AttributeName.MINCLEANUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinSetup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinSetup
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinSetup(JDFDuration value)
+	{
+		setAttribute(AttributeName.MINSETUP, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute MinCleanup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getMinCleanup()
-        {
-            String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFDuration attribute MinSetup
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getMinSetup()
+	{
+		final String strAttrName = getAttribute(AttributeName.MINSETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinSetup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinSetup
-          * @param value the value to set the attribute to
-          */
-        public void setMinSetup(JDFDuration value)
-        {
-            setAttribute(AttributeName.MINSETUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute MinSetup
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getMinSetup()
-        {
-            String strAttrName = getAttribute(AttributeName.MINSETUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DevCapsRef
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DevCapsRef
+	  * @param value the value to set the attribute to
+	  */
+	public void setDevCapsRef(String value)
+	{
+		setAttribute(AttributeName.DEVCAPSREF, value, null);
+	}
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute DevCapsRef
+	  * @return the value of the attribute
+	  */
+	public String getDevCapsRef()
+	{
+		return getAttribute(AttributeName.DEVCAPSREF, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DevCapsRef
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DevCapsRef
-          * @param value the value to set the attribute to
-          */
-        public void setDevCapsRef(String value)
-        {
-            setAttribute(AttributeName.DEVCAPSREF, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Unit
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Unit
+	  * @param value the value to set the attribute to
+	  */
+	public void setUnit(String value)
+	{
+		setAttribute(AttributeName.UNIT, value, null);
+	}
 
-        /**
-          * (23) get String attribute DevCapsRef
-          * @return the value of the attribute
-          */
-        public String getDevCapsRef()
-        {
-            return getAttribute(AttributeName.DEVCAPSREF, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Unit
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Unit
-          * @param value the value to set the attribute to
-          */
-        public void setUnit(String value)
-        {
-            setAttribute(AttributeName.UNIT, value, null);
-        }
-
-        /**
-          * (23) get String attribute Unit
-          * @return the value of the attribute
-          */
-        public String getUnit()
-        {
-            return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Unit
+	  * @return the value of the attribute
+	  */
+	public String getUnit()
+	{
+		return getAttribute(AttributeName.UNIT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

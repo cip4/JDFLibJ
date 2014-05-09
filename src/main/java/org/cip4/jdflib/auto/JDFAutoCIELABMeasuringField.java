@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,498 +85,476 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoCIELABMeasuringField : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCIELABMeasuringField : public JDFElement
 
-public abstract class JDFAutoCIELABMeasuringField extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoCIELABMeasuringField extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CIELAB, 0x22222222, AttributeInfo.EnumAttributeType.LabColor, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITYSTANDARD, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumDensityStandard.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LIGHT, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.OBSERVER, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTAGES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SCREENRULING, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.SCREENSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.SETUP, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CIELAB, 0x22222222, AttributeInfo.EnumAttributeType.LabColor, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITYSTANDARD, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDensityStandard.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LIGHT, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OBSERVER, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERCENTAGES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SCREENRULING, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SCREENSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SETUP, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCIELABMeasuringField
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCIELABMeasuringField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCIELABMeasuringField
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCIELABMeasuringField(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCIELABMeasuringField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCIELABMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCIELABMeasuringField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCIELABMeasuringField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCIELABMeasuringField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCIELABMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCIELABMeasuringField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCIELABMeasuringField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCIELABMeasuringField[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for DensityStandard
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCIELABMeasuringField[  --> " + super.toString() + " ]";
-    }
+	public static class EnumDensityStandard extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDensityStandard(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDensityStandard getEnum(String enumName)
+		{
+			return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDensityStandard getEnum(int enumValue)
+		{
+			return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDensityStandard.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDensityStandard.class);
+		}
 
-        /**
-        * Enumeration strings for DensityStandard
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDensityStandard.class);
+		}
 
-        public static class EnumDensityStandard extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumDensityStandard ANSIA = new EnumDensityStandard("ANSIA");
+		public static final EnumDensityStandard ANSIE = new EnumDensityStandard("ANSIE");
+		public static final EnumDensityStandard ANSII = new EnumDensityStandard("ANSII");
+		public static final EnumDensityStandard ANSIT = new EnumDensityStandard("ANSIT");
+		public static final EnumDensityStandard DIN16536 = new EnumDensityStandard("DIN16536");
+		public static final EnumDensityStandard DIN16536NB = new EnumDensityStandard("DIN16536NB");
+	}
 
-            private EnumDensityStandard(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDensityStandard getEnum(String enumName)
-            {
-                return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Center
+	  * @param value the value to set the attribute to
+	  */
+	public void setCenter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CENTER, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDensityStandard getEnum(int enumValue)
-            {
-                return (EnumDensityStandard) getEnum(EnumDensityStandard.class, enumValue);
-            }
+	/**
+	  * (20) get JDFXYPair attribute Center
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCenter()
+	{
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDensityStandard.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CIELab
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CIELab
+	  * @param value the value to set the attribute to
+	  */
+	public void setCIELab(JDFLabColor value)
+	{
+		setAttribute(AttributeName.CIELAB, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDensityStandard.class);
-            }
+	/**
+	  * (20) get JDFLabColor attribute CIELab
+	  * @return JDFLabColor the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFLabColor
+	  */
+	public JDFLabColor getCIELab()
+	{
+		final String strAttrName = getAttribute(AttributeName.CIELAB, null, null);
+		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDensityStandard.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DensityStandard
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute DensityStandard
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDensityStandard(EnumDensityStandard enumVar)
+	{
+		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumDensityStandard ANSIA = new EnumDensityStandard("ANSIA");
-            public static final EnumDensityStandard ANSIE = new EnumDensityStandard("ANSIE");
-            public static final EnumDensityStandard ANSII = new EnumDensityStandard("ANSII");
-            public static final EnumDensityStandard ANSIT = new EnumDensityStandard("ANSIT");
-            public static final EnumDensityStandard DIN16536 = new EnumDensityStandard("DIN16536");
-            public static final EnumDensityStandard DIN16536NB = new EnumDensityStandard("DIN16536NB");
-        }      
+	/**
+	  * (9) get attribute DensityStandard
+	  * @return the value of the attribute
+	  */
+	public EnumDensityStandard getDensityStandard()
+	{
+		return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Diameter
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Diameter
+	  * @param value the value to set the attribute to
+	  */
+	public void setDiameter(double value)
+	{
+		setAttribute(AttributeName.DIAMETER, value, null);
+	}
 
+	/**
+	  * (17) get double attribute Diameter
+	  * @return double the value of the attribute
+	  */
+	public double getDiameter()
+	{
+		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Center
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Center
-          * @param value the value to set the attribute to
-          */
-        public void setCenter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CENTER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Light
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Light
+	  * @param value the value to set the attribute to
+	  */
+	public void setLight(String value)
+	{
+		setAttribute(AttributeName.LIGHT, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Center
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCenter()
-        {
-            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Light
+	  * @return the value of the attribute
+	  */
+	public String getLight()
+	{
+		return getAttribute(AttributeName.LIGHT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CIELab
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CIELab
-          * @param value the value to set the attribute to
-          */
-        public void setCIELab(JDFLabColor value)
-        {
-            setAttribute(AttributeName.CIELAB, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Observer
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Observer
+	  * @param value the value to set the attribute to
+	  */
+	public void setObserver(int value)
+	{
+		setAttribute(AttributeName.OBSERVER, value, null);
+	}
 
-        /**
-          * (20) get JDFLabColor attribute CIELab
-          * @return JDFLabColor the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFLabColor
-          */
-        public JDFLabColor getCIELab()
-        {
-            String strAttrName = getAttribute(AttributeName.CIELAB, null, JDFCoreConstants.EMPTYSTRING);
-            JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (15) get int attribute Observer
+	  * @return int the value of the attribute
+	  */
+	public int getObserver()
+	{
+		return getIntAttribute(AttributeName.OBSERVER, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DensityStandard
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute DensityStandard
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDensityStandard(EnumDensityStandard enumVar)
-        {
-            setAttribute(AttributeName.DENSITYSTANDARD, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Percentages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Percentages
+	  * @param value the value to set the attribute to
+	  */
+	public void setPercentages(JDFNumberList value)
+	{
+		setAttribute(AttributeName.PERCENTAGES, value, null);
+	}
 
-        /**
-          * (9) get attribute DensityStandard
-          * @return the value of the attribute
-          */
-        public EnumDensityStandard getDensityStandard()
-        {
-            return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));
-        }
+	/**
+	  * (20) get JDFNumberList attribute Percentages
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getPercentages()
+	{
+		final String strAttrName = getAttribute(AttributeName.PERCENTAGES, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Diameter
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Diameter
-          * @param value the value to set the attribute to
-          */
-        public void setDiameter(double value)
-        {
-            setAttribute(AttributeName.DIAMETER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ScreenRuling
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ScreenRuling
+	  * @param value the value to set the attribute to
+	  */
+	public void setScreenRuling(JDFNumberList value)
+	{
+		setAttribute(AttributeName.SCREENRULING, value, null);
+	}
 
-        /**
-          * (17) get double attribute Diameter
-          * @return double the value of the attribute
-          */
-        public double getDiameter()
-        {
-            return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
-        }
+	/**
+	  * (20) get JDFNumberList attribute ScreenRuling
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getScreenRuling()
+	{
+		final String strAttrName = getAttribute(AttributeName.SCREENRULING, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Light
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Light
-          * @param value the value to set the attribute to
-          */
-        public void setLight(String value)
-        {
-            setAttribute(AttributeName.LIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ScreenShape
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ScreenShape
+	  * @param value the value to set the attribute to
+	  */
+	public void setScreenShape(String value)
+	{
+		setAttribute(AttributeName.SCREENSHAPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Light
-          * @return the value of the attribute
-          */
-        public String getLight()
-        {
-            return getAttribute(AttributeName.LIGHT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ScreenShape
+	  * @return the value of the attribute
+	  */
+	public String getScreenShape()
+	{
+		return getAttribute(AttributeName.SCREENSHAPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Observer
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Observer
-          * @param value the value to set the attribute to
-          */
-        public void setObserver(int value)
-        {
-            setAttribute(AttributeName.OBSERVER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Setup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Setup
+	  * @param value the value to set the attribute to
+	  */
+	public void setSetup(String value)
+	{
+		setAttribute(AttributeName.SETUP, value, null);
+	}
 
-        /**
-          * (15) get int attribute Observer
-          * @return int the value of the attribute
-          */
-        public int getObserver()
-        {
-            return getIntAttribute(AttributeName.OBSERVER, null, 0);
-        }
+	/**
+	  * (23) get String attribute Setup
+	  * @return the value of the attribute
+	  */
+	public String getSetup()
+	{
+		return getAttribute(AttributeName.SETUP, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Percentages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Percentages
-          * @param value the value to set the attribute to
-          */
-        public void setPercentages(JDFNumberList value)
-        {
-            setAttribute(AttributeName.PERCENTAGES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Tolerance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Tolerance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTolerance(double value)
+	{
+		setAttribute(AttributeName.TOLERANCE, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute Percentages
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getPercentages()
-        {
-            String strAttrName = getAttribute(AttributeName.PERCENTAGES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Tolerance
+	  * @return double the value of the attribute
+	  */
+	public double getTolerance()
+	{
+		return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ScreenRuling
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ScreenRuling
-          * @param value the value to set the attribute to
-          */
-        public void setScreenRuling(JDFNumberList value)
-        {
-            setAttribute(AttributeName.SCREENRULING, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFNumberList attribute ScreenRuling
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getScreenRuling()
-        {
-            String strAttrName = getAttribute(AttributeName.SCREENRULING, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateColorMeasurementConditions
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorMeasurementConditions the element
+	 */
+	public JDFColorMeasurementConditions getCreateColorMeasurementConditions(int iSkip)
+	{
+		return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ScreenShape
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ScreenShape
-          * @param value the value to set the attribute to
-          */
-        public void setScreenShape(String value)
-        {
-            setAttribute(AttributeName.SCREENSHAPE, value, null);
-        }
+	/**
+	 * (27) const get element ColorMeasurementConditions
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorMeasurementConditions the element
+	 * default is getColorMeasurementConditions(0)     */
+	public JDFColorMeasurementConditions getColorMeasurementConditions(int iSkip)
+	{
+		return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute ScreenShape
-          * @return the value of the attribute
-          */
-        public String getScreenShape()
-        {
-            return getAttribute(AttributeName.SCREENSHAPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all ColorMeasurementConditions from the current element
+	 * 
+	 * @return Collection<JDFColorMeasurementConditions>, null if none are available
+	 */
+	public Collection<JDFColorMeasurementConditions> getAllColorMeasurementConditions()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORMEASUREMENTCONDITIONS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Setup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Setup
-          * @param value the value to set the attribute to
-          */
-        public void setSetup(String value)
-        {
-            setAttribute(AttributeName.SETUP, value, null);
-        }
+		final Vector<JDFColorMeasurementConditions> v = new Vector<JDFColorMeasurementConditions>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFColorMeasurementConditions) vc.get(i));
+		}
 
-        /**
-          * (23) get String attribute Setup
-          * @return the value of the attribute
-          */
-        public String getSetup()
-        {
-            return getAttribute(AttributeName.SETUP, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		return v;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Tolerance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Tolerance
-          * @param value the value to set the attribute to
-          */
-        public void setTolerance(double value)
-        {
-            setAttribute(AttributeName.TOLERANCE, value, null);
-        }
+	/**
+	 * (30) append element ColorMeasurementConditions
+	 * @return JDFColorMeasurementConditions the element
+	 */
+	public JDFColorMeasurementConditions appendColorMeasurementConditions()
+	{
+		return (JDFColorMeasurementConditions) appendElement(ElementName.COLORMEASUREMENTCONDITIONS, null);
+	}
 
-        /**
-          * (17) get double attribute Tolerance
-          * @return double the value of the attribute
-          */
-        public double getTolerance()
-        {
-            return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element ColorMeasurementConditions
-     * @return JDFColorMeasurementConditions the element
-     */
-    public JDFColorMeasurementConditions getColorMeasurementConditions()
-    {
-        return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
-    }
-
-    /** (25) getCreateColorMeasurementConditions
-     * 
-     * @return JDFColorMeasurementConditions the element
-     */
-    public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
-    {
-        return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
-    }
-
-    /**
-     * (29) append element ColorMeasurementConditions
-     * @return JDFColorMeasurementConditions the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
-    {
-        return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

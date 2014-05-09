@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,200 +75,185 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoCCITTFaxParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCCITTFaxParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCCITTFaxParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.UNCOMPRESSED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.K, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDOFLINE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ENCODEDBYTEALIGN, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.ENDOFBLOCK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.UNCOMPRESSED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.K, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDOFLINE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENCODEDBYTEALIGN, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ENDOFBLOCK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCCITTFaxParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCCITTFaxParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCCITTFaxParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCCITTFaxParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCCITTFaxParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCCITTFaxParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCCITTFaxParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCCITTFaxParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCCITTFaxParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCCITTFaxParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCCITTFaxParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Uncompressed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Uncompressed
+	  * @param value the value to set the attribute to
+	  */
+	public void setUncompressed(boolean value)
+	{
+		setAttribute(AttributeName.UNCOMPRESSED, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute Uncompressed
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getUncompressed()
+	{
+		return getBoolAttribute(AttributeName.UNCOMPRESSED, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Uncompressed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Uncompressed
-          * @param value the value to set the attribute to
-          */
-        public void setUncompressed(boolean value)
-        {
-            setAttribute(AttributeName.UNCOMPRESSED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute K
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute K
+	  * @param value the value to set the attribute to
+	  */
+	public void setK(int value)
+	{
+		setAttribute(AttributeName.K, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute Uncompressed
-          * @return boolean the value of the attribute
-          */
-        public boolean getUncompressed()
-        {
-            return getBoolAttribute(AttributeName.UNCOMPRESSED, null, false);
-        }
+	/**
+	  * (15) get int attribute K
+	  * @return int the value of the attribute
+	  */
+	public int getK()
+	{
+		return getIntAttribute(AttributeName.K, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute K
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute K
-          * @param value the value to set the attribute to
-          */
-        public void setK(int value)
-        {
-            setAttribute(AttributeName.K, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EndOfLine
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EndOfLine
+	  * @param value the value to set the attribute to
+	  */
+	public void setEndOfLine(boolean value)
+	{
+		setAttribute(AttributeName.ENDOFLINE, value, null);
+	}
 
-        /**
-          * (15) get int attribute K
-          * @return int the value of the attribute
-          */
-        public int getK()
-        {
-            return getIntAttribute(AttributeName.K, null, 0);
-        }
+	/**
+	  * (18) get boolean attribute EndOfLine
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEndOfLine()
+	{
+		return getBoolAttribute(AttributeName.ENDOFLINE, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EndOfLine
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EndOfLine
-          * @param value the value to set the attribute to
-          */
-        public void setEndOfLine(boolean value)
-        {
-            setAttribute(AttributeName.ENDOFLINE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EncodedByteAlign
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EncodedByteAlign
+	  * @param value the value to set the attribute to
+	  */
+	public void setEncodedByteAlign(boolean value)
+	{
+		setAttribute(AttributeName.ENCODEDBYTEALIGN, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute EndOfLine
-          * @return boolean the value of the attribute
-          */
-        public boolean getEndOfLine()
-        {
-            return getBoolAttribute(AttributeName.ENDOFLINE, null, false);
-        }
+	/**
+	  * (18) get boolean attribute EncodedByteAlign
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEncodedByteAlign()
+	{
+		return getBoolAttribute(AttributeName.ENCODEDBYTEALIGN, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EncodedByteAlign
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EncodedByteAlign
-          * @param value the value to set the attribute to
-          */
-        public void setEncodedByteAlign(boolean value)
-        {
-            setAttribute(AttributeName.ENCODEDBYTEALIGN, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EndOfBlock
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EndOfBlock
+	  * @param value the value to set the attribute to
+	  */
+	public void setEndOfBlock(boolean value)
+	{
+		setAttribute(AttributeName.ENDOFBLOCK, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute EncodedByteAlign
-          * @return boolean the value of the attribute
-          */
-        public boolean getEncodedByteAlign()
-        {
-            return getBoolAttribute(AttributeName.ENCODEDBYTEALIGN, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EndOfBlock
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EndOfBlock
-          * @param value the value to set the attribute to
-          */
-        public void setEndOfBlock(boolean value)
-        {
-            setAttribute(AttributeName.ENDOFBLOCK, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute EndOfBlock
-          * @return boolean the value of the attribute
-          */
-        public boolean getEndOfBlock()
-        {
-            return getBoolAttribute(AttributeName.ENDOFBLOCK, null, false);
-        }
+	/**
+	  * (18) get boolean attribute EndOfBlock
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEndOfBlock()
+	{
+		return getBoolAttribute(AttributeName.ENDOFBLOCK, null, false);
+	}
 
 }// end namespace JDF

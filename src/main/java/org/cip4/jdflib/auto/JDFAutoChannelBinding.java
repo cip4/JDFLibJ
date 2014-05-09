@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoChannelBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoChannelBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoChannelBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CHANNELBRAND, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COVER, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CHANNELBRAND, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COVER, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoChannelBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChannelBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoChannelBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChannelBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChannelBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoChannelBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChannelBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoChannelBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoChannelBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoChannelBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoChannelBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element ChannelBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getChannelBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.CHANNELBRAND, null, 0);
+	}
 
+	/** (25) getCreateChannelBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateChannelBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.CHANNELBRAND, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element ChannelBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendChannelBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.CHANNELBRAND, 1, null);
+	}
 
-    /**
-     * (24) const get element ChannelBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getChannelBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.CHANNELBRAND, null, 0);
-    }
+	/**
+	 * (24) const get element Cover
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCover()
+	{
+		return (JDFOptionSpan) getElement(ElementName.COVER, null, 0);
+	}
 
-    /** (25) getCreateChannelBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateChannelBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.CHANNELBRAND, null, 0);
-    }
+	/** (25) getCreateCover
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateCover()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.COVER, null, 0);
+	}
 
-    /**
-     * (29) append element ChannelBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendChannelBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.CHANNELBRAND, 1, null);
-    }
+	/**
+	 * (29) append element Cover
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendCover() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.COVER, 1, null);
+	}
 
-    /**
-     * (24) const get element Cover
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCover()
-    {
-        return (JDFOptionSpan) getElement(ElementName.COVER, null, 0);
-    }
+	/**
+	 * (24) const get element Thickness
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getThickness()
+	{
+		return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /** (25) getCreateCover
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateCover()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.COVER, null, 0);
-    }
+	/** (25) getCreateThickness
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateThickness()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /**
-     * (29) append element Cover
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendCover() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.COVER, 1, null);
-    }
-
-    /**
-     * (24) const get element Thickness
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getThickness()
-    {
-        return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /** (25) getCreateThickness
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateThickness()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /**
-     * (29) append element Thickness
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendThickness() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
-    }
+	/**
+	 * (29) append element Thickness
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendThickness() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
+	}
 
 }// end namespace JDF

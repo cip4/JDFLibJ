@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,154 +76,141 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoColorantZoneDetails : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorantZoneDetails : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorantZoneDetails extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEPLIMIT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorantZoneDetails
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorantZoneDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorantZoneDetails
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorantZoneDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorantZoneDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorantZoneDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorantZoneDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorantZoneDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorantZoneDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorantZoneDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorantZoneDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorantZoneDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorantZoneDetails[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorantZoneDetails[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Colorant
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Colorant
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorant(String value)
+	{
+		setAttribute(AttributeName.COLORANT, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Colorant
+	  * @return the value of the attribute
+	  */
+	public String getColorant()
+	{
+		return getAttribute(AttributeName.COLORANT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Colorant
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Colorant
-          * @param value the value to set the attribute to
-          */
-        public void setColorant(String value)
-        {
-            setAttribute(AttributeName.COLORANT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StepLimit
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StepLimit
+	  * @param value the value to set the attribute to
+	  */
+	public void setStepLimit(double value)
+	{
+		setAttribute(AttributeName.STEPLIMIT, value, null);
+	}
 
-        /**
-          * (23) get String attribute Colorant
-          * @return the value of the attribute
-          */
-        public String getColorant()
-        {
-            return getAttribute(AttributeName.COLORANT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute StepLimit
+	  * @return double the value of the attribute
+	  */
+	public double getStepLimit()
+	{
+		return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StepLimit
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StepLimit
-          * @param value the value to set the attribute to
-          */
-        public void setStepLimit(double value)
-        {
-            setAttribute(AttributeName.STEPLIMIT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapColorScaling
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TrapColorScaling
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrapColorScaling(double value)
+	{
+		setAttribute(AttributeName.TRAPCOLORSCALING, value, null);
+	}
 
-        /**
-          * (17) get double attribute StepLimit
-          * @return double the value of the attribute
-          */
-        public double getStepLimit()
-        {
-            return getRealAttribute(AttributeName.STEPLIMIT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrapColorScaling
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrapColorScaling
-          * @param value the value to set the attribute to
-          */
-        public void setTrapColorScaling(double value)
-        {
-            setAttribute(AttributeName.TRAPCOLORSCALING, value, null);
-        }
-
-        /**
-          * (17) get double attribute TrapColorScaling
-          * @return double the value of the attribute
-          */
-        public double getTrapColorScaling()
-        {
-            return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute TrapColorScaling
+	  * @return double the value of the attribute
+	  */
+	public double getTrapColorScaling()
+	{
+		return getRealAttribute(AttributeName.TRAPCOLORSCALING, null, 0.0);
+	}
 
 }// end namespace JDF

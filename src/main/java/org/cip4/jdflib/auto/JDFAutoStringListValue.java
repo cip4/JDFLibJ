@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,176 +84,165 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFValue;
-    /**
-    *****************************************************************************
-    class JDFAutoStringListValue : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStringListValue : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStringListValue extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStringListValue
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStringListValue
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStringListValue(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStringListValue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStringListValue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStringListValue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStringListValue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStringListValue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStringListValue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStringListValue[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStringListValue[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFValue the element
+	 */
+	public JDFValue getCreateValue(int iSkip)
+	{
+		return (JDFValue) getCreateElement_KElement(ElementName.VALUE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Value
+	 * @param iSkip number of elements to skip
+	 * @return JDFValue the element
+	 * default is getValue(0)     */
+	public JDFValue getValue(int iSkip)
+	{
+		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+	}
 
-    /** (26) getCreateValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFValue the element
-     */
-    public JDFValue getCreateValue(int iSkip)
-    {
-        return (JDFValue)getCreateElement_KElement(ElementName.VALUE, null, iSkip);
-    }
+	/**
+	 * Get all Value from the current element
+	 * 
+	 * @return Collection<JDFValue>, null if none are available
+	 */
+	public Collection<JDFValue> getAllValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.VALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Value
-     * @param iSkip number of elements to skip
-     * @return JDFValue the element
-     * default is getValue(0)     */
-    public JDFValue getValue(int iSkip)
-    {
-        return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-    }
+		final Vector<JDFValue> v = new Vector<JDFValue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFValue) vc.get(i));
+		}
 
-    /**
-     * Get all Value from the current element
-     * 
-     * @return Collection<JDFValue>, null if none are available
-     */
-    public Collection<JDFValue> getAllValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.VALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFValue> v = new Vector<JDFValue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFValue) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Value
-     * @return JDFValue the element
-     */
-    public JDFValue appendValue()
-    {
-        return (JDFValue) appendElement(ElementName.VALUE, null);
-    }
+	/**
+	 * (30) append element Value
+	 * @return JDFValue the element
+	 */
+	public JDFValue appendValue()
+	{
+		return (JDFValue) appendElement(ElementName.VALUE, null);
+	}
 
 }// end namespace JDF

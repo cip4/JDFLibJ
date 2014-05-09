@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,144 +77,133 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFCreditCard;
-    /**
-    *****************************************************************************
-    class JDFAutoPayment : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPayment : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPayment extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PAYTERM, 0x77777661);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CREDITCARD, 0x77777661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PAYTERM, 0x77777661);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CREDITCARD, 0x77777661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPayment
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPayment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPayment
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPayment(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPayment
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPayment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPayment
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPayment(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPayment
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPayment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPayment
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPayment(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPayment[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPayment[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element PayTerm
+	 * @return JDFElement the element
+	 */
+	public JDFElement getPayTerm()
+	{
+		return (JDFElement) getElement(ElementName.PAYTERM, null, 0);
+	}
 
+	/** (25) getCreatePayTerm
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreatePayTerm()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.PAYTERM, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element PayTerm
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendPayTerm() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.PAYTERM, 1, null);
+	}
 
-    /**
-     * (24) const get element PayTerm
-     * @return JDFElement the element
-     */
-    public JDFElement getPayTerm()
-    {
-        return (JDFElement) getElement(ElementName.PAYTERM, null, 0);
-    }
+	/**
+	 * (24) const get element CreditCard
+	 * @return JDFCreditCard the element
+	 */
+	public JDFCreditCard getCreditCard()
+	{
+		return (JDFCreditCard) getElement(ElementName.CREDITCARD, null, 0);
+	}
 
-    /** (25) getCreatePayTerm
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreatePayTerm()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.PAYTERM, null, 0);
-    }
+	/** (25) getCreateCreditCard
+	 * 
+	 * @return JDFCreditCard the element
+	 */
+	public JDFCreditCard getCreateCreditCard()
+	{
+		return (JDFCreditCard) getCreateElement_KElement(ElementName.CREDITCARD, null, 0);
+	}
 
-    /**
-     * (29) append element PayTerm
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendPayTerm() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.PAYTERM, 1, null);
-    }
-
-    /**
-     * (24) const get element CreditCard
-     * @return JDFCreditCard the element
-     */
-    public JDFCreditCard getCreditCard()
-    {
-        return (JDFCreditCard) getElement(ElementName.CREDITCARD, null, 0);
-    }
-
-    /** (25) getCreateCreditCard
-     * 
-     * @return JDFCreditCard the element
-     */
-    public JDFCreditCard getCreateCreditCard()
-    {
-        return (JDFCreditCard) getCreateElement_KElement(ElementName.CREDITCARD, null, 0);
-    }
-
-    /**
-     * (29) append element CreditCard
-     * @return JDFCreditCard the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFCreditCard appendCreditCard() throws JDFException
-    {
-        return (JDFCreditCard) appendElementN(ElementName.CREDITCARD, 1, null);
-    }
+	/**
+	 * (29) append element CreditCard
+	 * @return JDFCreditCard the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFCreditCard appendCreditCard() throws JDFException
+	{
+		return (JDFCreditCard) appendElementN(ElementName.CREDITCARD, 1, null);
+	}
 
 }// end namespace JDF

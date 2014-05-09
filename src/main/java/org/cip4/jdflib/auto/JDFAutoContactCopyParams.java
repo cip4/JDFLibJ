@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,369 +82,348 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
-    /**
-    *****************************************************************************
-    class JDFAutoContactCopyParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoContactCopyParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoContactCopyParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTSCREEN, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITYCHANGE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CYCLE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.VACUUM, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTACTSCREEN, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITYCHANGE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CYCLE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.VACUUM, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoContactCopyParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContactCopyParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoContactCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContactCopyParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContactCopyParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoContactCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContactCopyParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoContactCopyParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoContactCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoContactCopyParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoContactCopyParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Diffusion
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumDiffusion extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDiffusion(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDiffusion getEnum(String enumName)
+		{
+			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDiffusion getEnum(int enumValue)
+		{
+			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Diffusion
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDiffusion.class);
+		}
 
-        public static class EnumDiffusion extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDiffusion.class);
+		}
 
-            private EnumDiffusion(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDiffusion.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDiffusion getEnum(String enumName)
-            {
-                return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
-            }
+		public static final EnumDiffusion On = new EnumDiffusion("On");
+		public static final EnumDiffusion Off = new EnumDiffusion("Off");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDiffusion getEnum(int enumValue)
-            {
-                return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDiffusion.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContactScreen
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContactScreen
+	  * @param value the value to set the attribute to
+	  */
+	public void setContactScreen(boolean value)
+	{
+		setAttribute(AttributeName.CONTACTSCREEN, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDiffusion.class);
-            }
+	/**
+	  * (18) get boolean attribute ContactScreen
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getContactScreen()
+	{
+		return getBoolAttribute(AttributeName.CONTACTSCREEN, null, false);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDiffusion.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PolarityChange
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PolarityChange
+	  * @param value the value to set the attribute to
+	  */
+	public void setPolarityChange(boolean value)
+	{
+		setAttribute(AttributeName.POLARITYCHANGE, value, null);
+	}
 
-            public static final EnumDiffusion On = new EnumDiffusion("On");
-            public static final EnumDiffusion Off = new EnumDiffusion("Off");
-        }      
+	/**
+	  * (18) get boolean attribute PolarityChange
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPolarityChange()
+	{
+		return getBoolAttribute(AttributeName.POLARITYCHANGE, null, true);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatStep
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RepeatStep
+	  * @param value the value to set the attribute to
+	  */
+	public void setRepeatStep(JDFXYPair value)
+	{
+		setAttribute(AttributeName.REPEATSTEP, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute RepeatStep
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getRepeatStep()
+	{
+		final String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContactScreen
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContactScreen
-          * @param value the value to set the attribute to
-          */
-        public void setContactScreen(boolean value)
-        {
-            setAttribute(AttributeName.CONTACTSCREEN, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Cycle
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Cycle
+	  * @param value the value to set the attribute to
+	  */
+	public void setCycle(int value)
+	{
+		setAttribute(AttributeName.CYCLE, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute ContactScreen
-          * @return boolean the value of the attribute
-          */
-        public boolean getContactScreen()
-        {
-            return getBoolAttribute(AttributeName.CONTACTSCREEN, null, false);
-        }
+	/**
+	  * (15) get int attribute Cycle
+	  * @return int the value of the attribute
+	  */
+	public int getCycle()
+	{
+		return getIntAttribute(AttributeName.CYCLE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PolarityChange
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PolarityChange
-          * @param value the value to set the attribute to
-          */
-        public void setPolarityChange(boolean value)
-        {
-            setAttribute(AttributeName.POLARITYCHANGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Diffusion
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Diffusion
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDiffusion(EnumDiffusion enumVar)
+	{
+		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute PolarityChange
-          * @return boolean the value of the attribute
-          */
-        public boolean getPolarityChange()
-        {
-            return getBoolAttribute(AttributeName.POLARITYCHANGE, null, true);
-        }
+	/**
+	  * (9) get attribute Diffusion
+	  * @return the value of the attribute
+	  */
+	public EnumDiffusion getDiffusion()
+	{
+		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RepeatStep
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RepeatStep
-          * @param value the value to set the attribute to
-          */
-        public void setRepeatStep(JDFXYPair value)
-        {
-            setAttribute(AttributeName.REPEATSTEP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Vacuum
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Vacuum
+	  * @param value the value to set the attribute to
+	  */
+	public void setVacuum(double value)
+	{
+		setAttribute(AttributeName.VACUUM, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute RepeatStep
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getRepeatStep()
-        {
-            String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Vacuum
+	  * @return double the value of the attribute
+	  */
+	public double getVacuum()
+	{
+		return getRealAttribute(AttributeName.VACUUM, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Cycle
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Cycle
-          * @param value the value to set the attribute to
-          */
-        public void setCycle(int value)
-        {
-            setAttribute(AttributeName.CYCLE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute Cycle
-          * @return int the value of the attribute
-          */
-        public int getCycle()
-        {
-            return getIntAttribute(AttributeName.CYCLE, null, 0);
-        }
+	/**
+	 * (24) const get element ScreeningParams
+	 * @return JDFScreeningParams the element
+	 */
+	public JDFScreeningParams getScreeningParams()
+	{
+		return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Diffusion
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Diffusion
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDiffusion(EnumDiffusion enumVar)
-        {
-            setAttribute(AttributeName.DIFFUSION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateScreeningParams
+	 * 
+	 * @return JDFScreeningParams the element
+	 */
+	public JDFScreeningParams getCreateScreeningParams()
+	{
+		return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
+	}
 
-        /**
-          * (9) get attribute Diffusion
-          * @return the value of the attribute
-          */
-        public EnumDiffusion getDiffusion()
-        {
-            return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
-        }
+	/**
+	 * (29) append element ScreeningParams
+	 * @return JDFScreeningParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFScreeningParams appendScreeningParams() throws JDFException
+	{
+		return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Vacuum
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Vacuum
-          * @param value the value to set the attribute to
-          */
-        public void setVacuum(double value)
-        {
-            setAttribute(AttributeName.VACUUM, value, null);
-        }
-
-        /**
-          * (17) get double attribute Vacuum
-          * @return double the value of the attribute
-          */
-        public double getVacuum()
-        {
-            return getRealAttribute(AttributeName.VACUUM, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element ScreeningParams
-     * @return JDFScreeningParams the element
-     */
-    public JDFScreeningParams getScreeningParams()
-    {
-        return (JDFScreeningParams) getElement(ElementName.SCREENINGPARAMS, null, 0);
-    }
-
-    /** (25) getCreateScreeningParams
-     * 
-     * @return JDFScreeningParams the element
-     */
-    public JDFScreeningParams getCreateScreeningParams()
-    {
-        return (JDFScreeningParams) getCreateElement_KElement(ElementName.SCREENINGPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element ScreeningParams
-     * @return JDFScreeningParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFScreeningParams appendScreeningParams() throws JDFException
-    {
-        return (JDFScreeningParams) appendElementN(ElementName.SCREENINGPARAMS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refScreeningParams(JDFScreeningParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refScreeningParams(JDFScreeningParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

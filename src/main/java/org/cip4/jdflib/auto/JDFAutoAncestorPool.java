@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,190 +81,179 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFPart;
-    /**
-    *****************************************************************************
-    class JDFAutoAncestorPool : public JDFPool
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAncestorPool : public JDFPool
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAncestorPool extends JDFPool
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ANCESTOR, 0x22222222);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ANCESTOR, 0x22222222);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAncestorPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAncestorPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAncestorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAncestorPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAncestorPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAncestorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAncestorPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAncestorPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAncestorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAncestorPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAncestorPool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateAncestor
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFAncestor the element
+	 */
+	public JDFAncestor getCreateAncestor(int iSkip)
+	{
+		return (JDFAncestor) getCreateElement_KElement(ElementName.ANCESTOR, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Ancestor
+	 * @param iSkip number of elements to skip
+	 * @return JDFAncestor the element
+	 * default is getAncestor(0)     */
+	public JDFAncestor getAncestor(int iSkip)
+	{
+		return (JDFAncestor) getElement(ElementName.ANCESTOR, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Ancestor from the current element
+	 * 
+	 * @return Collection<JDFAncestor>, null if none are available
+	 */
+	public Collection<JDFAncestor> getAllAncestor()
+	{
+		final VElement vc = getChildElementVector(ElementName.ANCESTOR, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateAncestor
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFAncestor the element
-     */
-    public JDFAncestor getCreateAncestor(int iSkip)
-    {
-        return (JDFAncestor)getCreateElement_KElement(ElementName.ANCESTOR, null, iSkip);
-    }
+		final Vector<JDFAncestor> v = new Vector<JDFAncestor>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFAncestor) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Ancestor
-     * @param iSkip number of elements to skip
-     * @return JDFAncestor the element
-     * default is getAncestor(0)     */
-    public JDFAncestor getAncestor(int iSkip)
-    {
-        return (JDFAncestor) getElement(ElementName.ANCESTOR, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Ancestor from the current element
-     * 
-     * @return Collection<JDFAncestor>, null if none are available
-     */
-    public Collection<JDFAncestor> getAllAncestor()
-    {
-        final VElement vc = getChildElementVector(ElementName.ANCESTOR, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element Ancestor
+	 * @return JDFAncestor the element
+	 */
+	public JDFAncestor appendAncestor()
+	{
+		return (JDFAncestor) appendElement(ElementName.ANCESTOR, null);
+	}
 
-        final Vector<JDFAncestor> v = new Vector<JDFAncestor>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFAncestor) vc.get(i));
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-    /**
-     * (30) append element Ancestor
-     * @return JDFAncestor the element
-     */
-    public JDFAncestor appendAncestor()
-    {
-        return (JDFAncestor) appendElement(ElementName.ANCESTOR, null);
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

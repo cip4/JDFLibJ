@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,344 +86,330 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanCutType;
 import org.cip4.jdflib.span.JDFSpanShapeType;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoShapeCut : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShapeCut : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShapeCut extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTOUT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTOUT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MATERIAL, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CUTTYPE, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x66666661);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPETYPE, 0x55555555);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MATERIAL, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTTYPE, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPEDEPTH, 0x66666661);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SHAPETYPE, 0x55555555);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShapeCut
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeCut
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeCut(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeCut
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeCut
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeCut(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeCut
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeCut
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShapeCut(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShapeCut[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShapeCut[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CutBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setCutBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.CUTBOX, value, null);
+	}
 
+	/**
+	  * (20) get JDFRectangle attribute CutBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getCutBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CutBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CutBox
-          * @param value the value to set the attribute to
-          */
-        public void setCutBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.CUTBOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutOut
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CutOut
+	  * @param value the value to set the attribute to
+	  */
+	public void setCutOut(boolean value)
+	{
+		setAttribute(AttributeName.CUTOUT, value, null);
+	}
 
-        /**
-          * (20) get JDFRectangle attribute CutBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getCutBox()
-        {
-            String strAttrName = getAttribute(AttributeName.CUTBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (18) get boolean attribute CutOut
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getCutOut()
+	{
+		return getBoolAttribute(AttributeName.CUTOUT, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CutOut
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CutOut
-          * @param value the value to set the attribute to
-          */
-        public void setCutOut(boolean value)
-        {
-            setAttribute(AttributeName.CUTOUT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutPath
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CutPath
+	  * @param value the value to set the attribute to
+	  */
+	public void setCutPath(String value)
+	{
+		setAttribute(AttributeName.CUTPATH, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute CutOut
-          * @return boolean the value of the attribute
-          */
-        public boolean getCutOut()
-        {
-            return getBoolAttribute(AttributeName.CUTOUT, null, false);
-        }
+	/**
+	  * (23) get String attribute CutPath
+	  * @return the value of the attribute
+	  */
+	public String getCutPath()
+	{
+		return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CutPath
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CutPath
-          * @param value the value to set the attribute to
-          */
-        public void setCutPath(String value)
-        {
-            setAttribute(AttributeName.CUTPATH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Pages
+	  * @param value the value to set the attribute to
+	  */
+	public void setPages(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.PAGES, value, null);
+	}
 
-        /**
-          * (23) get String attribute CutPath
-          * @return the value of the attribute
-          */
-        public String getCutPath()
-        {
-            return getAttribute(AttributeName.CUTPATH, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute Pages
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getPages()
+	{
+		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Pages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Pages
-          * @param value the value to set the attribute to
-          */
-        public void setPages(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.PAGES, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFIntegerRangeList attribute Pages
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getPages()
-        {
-            String strAttrName = getAttribute(AttributeName.PAGES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element Material
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getMaterial()
+	{
+		return (JDFStringSpan) getElement(ElementName.MATERIAL, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateMaterial
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateMaterial()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.MATERIAL, null, 0);
+	}
 
-    /**
-     * (24) const get element Material
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getMaterial()
-    {
-        return (JDFStringSpan) getElement(ElementName.MATERIAL, null, 0);
-    }
+	/**
+	 * (29) append element Material
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendMaterial() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.MATERIAL, 1, null);
+	}
 
-    /** (25) getCreateMaterial
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateMaterial()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.MATERIAL, null, 0);
-    }
+	/**
+	 * (24) const get element CutType
+	 * @return JDFSpanCutType the element
+	 */
+	public JDFSpanCutType getCutType()
+	{
+		return (JDFSpanCutType) getElement(ElementName.CUTTYPE, null, 0);
+	}
 
-    /**
-     * (29) append element Material
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendMaterial() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.MATERIAL, 1, null);
-    }
+	/** (25) getCreateCutType
+	 * 
+	 * @return JDFSpanCutType the element
+	 */
+	public JDFSpanCutType getCreateCutType()
+	{
+		return (JDFSpanCutType) getCreateElement_KElement(ElementName.CUTTYPE, null, 0);
+	}
 
-    /**
-     * (24) const get element CutType
-     * @return JDFSpanCutType the element
-     */
-    public JDFSpanCutType getCutType()
-    {
-        return (JDFSpanCutType) getElement(ElementName.CUTTYPE, null, 0);
-    }
+	/**
+	 * (29) append element CutType
+	 * @return JDFSpanCutType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanCutType appendCutType() throws JDFException
+	{
+		return (JDFSpanCutType) appendElementN(ElementName.CUTTYPE, 1, null);
+	}
 
-    /** (25) getCreateCutType
-     * 
-     * @return JDFSpanCutType the element
-     */
-    public JDFSpanCutType getCreateCutType()
-    {
-        return (JDFSpanCutType) getCreateElement_KElement(ElementName.CUTTYPE, null, 0);
-    }
+	/**
+	 * (24) const get element ShapeDepth
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getShapeDepth()
+	{
+		return (JDFNumberSpan) getElement(ElementName.SHAPEDEPTH, null, 0);
+	}
 
-    /**
-     * (29) append element CutType
-     * @return JDFSpanCutType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanCutType appendCutType() throws JDFException
-    {
-        return (JDFSpanCutType) appendElementN(ElementName.CUTTYPE, 1, null);
-    }
+	/** (25) getCreateShapeDepth
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateShapeDepth()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.SHAPEDEPTH, null, 0);
+	}
 
-    /**
-     * (24) const get element ShapeDepth
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getShapeDepth()
-    {
-        return (JDFNumberSpan) getElement(ElementName.SHAPEDEPTH, null, 0);
-    }
+	/**
+	 * (29) append element ShapeDepth
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendShapeDepth() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.SHAPEDEPTH, 1, null);
+	}
 
-    /** (25) getCreateShapeDepth
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateShapeDepth()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.SHAPEDEPTH, null, 0);
-    }
+	/**
+	 * (24) const get element ShapeType
+	 * @return JDFSpanShapeType the element
+	 */
+	public JDFSpanShapeType getShapeType()
+	{
+		return (JDFSpanShapeType) getElement(ElementName.SHAPETYPE, null, 0);
+	}
 
-    /**
-     * (29) append element ShapeDepth
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendShapeDepth() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.SHAPEDEPTH, 1, null);
-    }
+	/** (25) getCreateShapeType
+	 * 
+	 * @return JDFSpanShapeType the element
+	 */
+	public JDFSpanShapeType getCreateShapeType()
+	{
+		return (JDFSpanShapeType) getCreateElement_KElement(ElementName.SHAPETYPE, null, 0);
+	}
 
-    /**
-     * (24) const get element ShapeType
-     * @return JDFSpanShapeType the element
-     */
-    public JDFSpanShapeType getShapeType()
-    {
-        return (JDFSpanShapeType) getElement(ElementName.SHAPETYPE, null, 0);
-    }
+	/**
+	 * (29) append element ShapeType
+	 * @return JDFSpanShapeType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanShapeType appendShapeType() throws JDFException
+	{
+		return (JDFSpanShapeType) appendElementN(ElementName.SHAPETYPE, 1, null);
+	}
 
-    /** (25) getCreateShapeType
-     * 
-     * @return JDFSpanShapeType the element
-     */
-    public JDFSpanShapeType getCreateShapeType()
-    {
-        return (JDFSpanShapeType) getCreateElement_KElement(ElementName.SHAPETYPE, null, 0);
-    }
+	/**
+	 * (24) const get element TeethPerDimension
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getTeethPerDimension()
+	{
+		return (JDFNumberSpan) getElement(ElementName.TEETHPERDIMENSION, null, 0);
+	}
 
-    /**
-     * (29) append element ShapeType
-     * @return JDFSpanShapeType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanShapeType appendShapeType() throws JDFException
-    {
-        return (JDFSpanShapeType) appendElementN(ElementName.SHAPETYPE, 1, null);
-    }
+	/** (25) getCreateTeethPerDimension
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateTeethPerDimension()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.TEETHPERDIMENSION, null, 0);
+	}
 
-    /**
-     * (24) const get element TeethPerDimension
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getTeethPerDimension()
-    {
-        return (JDFNumberSpan) getElement(ElementName.TEETHPERDIMENSION, null, 0);
-    }
-
-    /** (25) getCreateTeethPerDimension
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateTeethPerDimension()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.TEETHPERDIMENSION, null, 0);
-    }
-
-    /**
-     * (29) append element TeethPerDimension
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendTeethPerDimension() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.TEETHPERDIMENSION, 1, null);
-    }
+	/**
+	 * (29) append element TeethPerDimension
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendTeethPerDimension() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.TEETHPERDIMENSION, 1, null);
+	}
 
 }// end namespace JDF

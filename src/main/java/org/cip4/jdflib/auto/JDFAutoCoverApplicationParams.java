@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,268 +80,254 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFScore;
-    /**
-    *****************************************************************************
-    class JDFAutoCoverApplicationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCoverApplicationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCoverApplicationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COVEROFFSET, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COVEROFFSET, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SCORE, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SCORE, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCoverApplicationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoverApplicationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCoverApplicationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCoverApplicationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoverApplicationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCoverApplicationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCoverApplicationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoverApplicationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCoverApplicationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCoverApplicationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCoverApplicationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CoverOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CoverOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setCoverOffset(JDFXYPair value)
+	{
+		setAttribute(AttributeName.COVEROFFSET, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute CoverOffset
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCoverOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateGlueApplication
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	{
+		return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CoverOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CoverOffset
-          * @param value the value to set the attribute to
-          */
-        public void setCoverOffset(JDFXYPair value)
-        {
-            setAttribute(AttributeName.COVEROFFSET, value, null);
-        }
+	/**
+	 * (27) const get element GlueApplication
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueApplication the element
+	 * default is getGlueApplication(0)     */
+	public JDFGlueApplication getGlueApplication(int iSkip)
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute CoverOffset
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCoverOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * Get all GlueApplication from the current element
+	 * 
+	 * @return Collection<JDFGlueApplication>, null if none are available
+	 */
+	public Collection<JDFGlueApplication> getAllGlueApplication()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueApplication) vc.get(i));
+		}
 
-    /** (26) getCreateGlueApplication
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication getCreateGlueApplication(int iSkip)
-    {
-        return (JDFGlueApplication)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element GlueApplication
-     * @param iSkip number of elements to skip
-     * @return JDFGlueApplication the element
-     * default is getGlueApplication(0)     */
-    public JDFGlueApplication getGlueApplication(int iSkip)
-    {
-        return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
-    }
+	/**
+	 * (30) append element GlueApplication
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication appendGlueApplication()
+	{
+		return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
+	}
 
-    /**
-     * Get all GlueApplication from the current element
-     * 
-     * @return Collection<JDFGlueApplication>, null if none are available
-     */
-    public Collection<JDFGlueApplication> getAllGlueApplication()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refGlueApplication(JDFGlueApplication refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueApplication) vc.get(i));
-        }
+	/** (26) getCreateScore
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFScore the element
+	 */
+	public JDFScore getCreateScore(int iSkip)
+	{
+		return (JDFScore) getCreateElement_KElement(ElementName.SCORE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element Score
+	 * @param iSkip number of elements to skip
+	 * @return JDFScore the element
+	 * default is getScore(0)     */
+	public JDFScore getScore(int iSkip)
+	{
+		return (JDFScore) getElement(ElementName.SCORE, null, iSkip);
+	}
 
-    /**
-     * (30) append element GlueApplication
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication appendGlueApplication()
-    {
-        return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
-    }
+	/**
+	 * Get all Score from the current element
+	 * 
+	 * @return Collection<JDFScore>, null if none are available
+	 */
+	public Collection<JDFScore> getAllScore()
+	{
+		final VElement vc = getChildElementVector(ElementName.SCORE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueApplication(JDFGlueApplication refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFScore> v = new Vector<JDFScore>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFScore) vc.get(i));
+		}
 
-    /** (26) getCreateScore
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFScore the element
-     */
-    public JDFScore getCreateScore(int iSkip)
-    {
-        return (JDFScore)getCreateElement_KElement(ElementName.SCORE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Score
-     * @param iSkip number of elements to skip
-     * @return JDFScore the element
-     * default is getScore(0)     */
-    public JDFScore getScore(int iSkip)
-    {
-        return (JDFScore) getElement(ElementName.SCORE, null, iSkip);
-    }
-
-    /**
-     * Get all Score from the current element
-     * 
-     * @return Collection<JDFScore>, null if none are available
-     */
-    public Collection<JDFScore> getAllScore()
-    {
-        final VElement vc = getChildElementVector(ElementName.SCORE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFScore> v = new Vector<JDFScore>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFScore) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Score
-     * @return JDFScore the element
-     */
-    public JDFScore appendScore()
-    {
-        return (JDFScore) appendElement(ElementName.SCORE, null);
-    }
+	/**
+	 * (30) append element Score
+	 * @return JDFScore the element
+	 */
+	public JDFScore appendScore()
+	{
+		return (JDFScore) appendElement(ElementName.SCORE, null);
+	}
 
 }// end namespace JDF

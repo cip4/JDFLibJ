@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,131 +75,119 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoRuleLength : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRuleLength : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRuleLength extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x22221111, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x22221111, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRuleLength
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRuleLength
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRuleLength(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRuleLength
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRuleLength
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRuleLength(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRuleLength
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRuleLength
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRuleLength(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRuleLength[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRuleLength[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DDESCutType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DDESCutType
+	  * @param value the value to set the attribute to
+	  */
+	public void setDDESCutType(int value)
+	{
+		setAttribute(AttributeName.DDESCUTTYPE, value, null);
+	}
 
+	/**
+	  * (15) get int attribute DDESCutType
+	  * @return int the value of the attribute
+	  */
+	public int getDDESCutType()
+	{
+		return getIntAttribute(AttributeName.DDESCUTTYPE, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DDESCutType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DDESCutType
-          * @param value the value to set the attribute to
-          */
-        public void setDDESCutType(int value)
-        {
-            setAttribute(AttributeName.DDESCUTTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LengthJDF
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LengthJDF
+	  * @param value the value to set the attribute to
+	  */
+	public void setLengthJDF(double value)
+	{
+		setAttribute(AttributeName.LENGTHJDF, value, null);
+	}
 
-        /**
-          * (15) get int attribute DDESCutType
-          * @return int the value of the attribute
-          */
-        public int getDDESCutType()
-        {
-            return getIntAttribute(AttributeName.DDESCUTTYPE, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LengthJDF
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LengthJDF
-          * @param value the value to set the attribute to
-          */
-        public void setLengthJDF(double value)
-        {
-            setAttribute(AttributeName.LENGTHJDF, value, null);
-        }
-
-        /**
-          * (17) get double attribute LengthJDF
-          * @return double the value of the attribute
-          */
-        public double getLengthJDF()
-        {
-            return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute LengthJDF
+	  * @return double the value of the attribute
+	  */
+	public double getLengthJDF()
+	{
+		return getRealAttribute(AttributeName.LENGTHJDF, null, 0.0);
+	}
 
 }// end namespace JDF

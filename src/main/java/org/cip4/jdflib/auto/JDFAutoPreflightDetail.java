@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,203 +84,191 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightDetail : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightDetail : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightDetail extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGEREFS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGEREFS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightDetail
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightDetail
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightDetail(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightDetail
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightDetail
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightDetail(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightDetail
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightDetail
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightDetail(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightDetail[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightDetail[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageRefs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PageRefs
+	  * @param value the value to set the attribute to
+	  */
+	public void setPageRefs(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.PAGEREFS, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerRangeList attribute PageRefs
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getPageRefs()
+	{
+		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PageRefs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PageRefs
-          * @param value the value to set the attribute to
-          */
-        public void setPageRefs(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.PAGEREFS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Property
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Property
+	  * @param value the value to set the attribute to
+	  */
+	public void setProperty(String value)
+	{
+		setAttribute(AttributeName.PROPERTY, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute PageRefs
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getPageRefs()
-        {
-            String strAttrName = getAttribute(AttributeName.PAGEREFS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Property
+	  * @return the value of the attribute
+	  */
+	public String getProperty()
+	{
+		return getAttribute(AttributeName.PROPERTY, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Property
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Property
-          * @param value the value to set the attribute to
-          */
-        public void setProperty(String value)
-        {
-            setAttribute(AttributeName.PROPERTY, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Property
-          * @return the value of the attribute
-          */
-        public String getProperty()
-        {
-            return getAttribute(AttributeName.PROPERTY, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateValue(int iSkip)
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.VALUE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Value
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 * default is getValue(0)     */
+	public JDFElement getValue(int iSkip)
+	{
+		return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
+	}
 
-    /** (26) getCreateValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateValue(int iSkip)
-    {
-        return (JDFElement)getCreateElement_KElement(ElementName.VALUE, null, iSkip);
-    }
+	/**
+	 * Get all Value from the current element
+	 * 
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	public Collection<JDFElement> getAllValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.VALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Value
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     * default is getValue(0)     */
-    public JDFElement getValue(int iSkip)
-    {
-        return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
-    }
+		final Vector<JDFElement> v = new Vector<JDFElement>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFElement) vc.get(i));
+		}
 
-    /**
-     * Get all Value from the current element
-     * 
-     * @return Collection<JDFElement>, null if none are available
-     */
-    public Collection<JDFElement> getAllValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.VALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFElement> v = new Vector<JDFElement>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFElement) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Value
-     * @return JDFElement the element
-     */
-    public JDFElement appendValue()
-    {
-        return (JDFElement) appendElement(ElementName.VALUE, null);
-    }
+	/**
+	 * (30) append element Value
+	 * @return JDFElement the element
+	 */
+	public JDFElement appendValue()
+	{
+		return (JDFElement) appendElement(ElementName.VALUE, null);
+	}
 
 }// end namespace JDF

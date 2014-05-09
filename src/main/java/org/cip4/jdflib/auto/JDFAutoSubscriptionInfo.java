@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,343 +86,326 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.JDFPart;
-    /**
-    *****************************************************************************
-    class JDFAutoSubscriptionInfo : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSubscriptionInfo : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSubscriptionInfo extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SENDERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SENDERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAMILY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MESSAGETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSubscriptionInfo
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubscriptionInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscriptionInfo
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSubscriptionInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubscriptionInfo
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubscriptionInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscriptionInfo
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSubscriptionInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubscriptionInfo
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSubscriptionInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubscriptionInfo
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSubscriptionInfo(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSubscriptionInfo[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSubscriptionInfo[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ChannelID
+	  * @param value the value to set the attribute to
+	  */
+	public void setChannelID(String value)
+	{
+		setAttribute(AttributeName.CHANNELID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ChannelID
+	  * @return the value of the attribute
+	  */
+	public String getChannelID()
+	{
+		return getAttribute(AttributeName.CHANNELID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ChannelID
-          * @param value the value to set the attribute to
-          */
-        public void setChannelID(String value)
-        {
-            setAttribute(AttributeName.CHANNELID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SenderID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SenderID
+	  * @param value the value to set the attribute to
+	  */
+	public void setSenderID(String value)
+	{
+		setAttribute(AttributeName.SENDERID, value, null);
+	}
 
-        /**
-          * (23) get String attribute ChannelID
-          * @return the value of the attribute
-          */
-        public String getChannelID()
-        {
-            return getAttribute(AttributeName.CHANNELID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute SenderID
+	  * @return the value of the attribute
+	  */
+	public String getSenderID()
+	{
+		return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SenderID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SenderID
-          * @param value the value to set the attribute to
-          */
-        public void setSenderID(String value)
-        {
-            setAttribute(AttributeName.SENDERID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Family
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Family
+	  * @param value the value to set the attribute to
+	  */
+	public void setFamily(String value)
+	{
+		setAttribute(AttributeName.FAMILY, value, null);
+	}
 
-        /**
-          * (23) get String attribute SenderID
-          * @return the value of the attribute
-          */
-        public String getSenderID()
-        {
-            return getAttribute(AttributeName.SENDERID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Family
+	  * @return the value of the attribute
+	  */
+	public String getFamily()
+	{
+		return getAttribute(AttributeName.FAMILY, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Family
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Family
-          * @param value the value to set the attribute to
-          */
-        public void setFamily(String value)
-        {
-            setAttribute(AttributeName.FAMILY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-        /**
-          * (23) get String attribute Family
-          * @return the value of the attribute
-          */
-        public String getFamily()
-        {
-            return getAttribute(AttributeName.FAMILY, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MessageType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MessageType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMessageType(String value)
+	{
+		setAttribute(AttributeName.MESSAGETYPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute MessageType
+	  * @return the value of the attribute
+	  */
+	public String getMessageType()
+	{
+		return getAttribute(AttributeName.MESSAGETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MessageType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MessageType
-          * @param value the value to set the attribute to
-          */
-        public void setMessageType(String value)
-        {
-            setAttribute(AttributeName.MESSAGETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute MessageType
-          * @return the value of the attribute
-          */
-        public String getMessageType()
-        {
-            return getAttribute(AttributeName.MESSAGETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
-        return v;
-    }
+	/**
+	 * (24) const get element Subscription
+	 * @return JDFSubscription the element
+	 */
+	public JDFSubscription getSubscription()
+	{
+		return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
+	}
 
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/** (25) getCreateSubscription
+	 * 
+	 * @return JDFSubscription the element
+	 */
+	public JDFSubscription getCreateSubscription()
+	{
+		return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
+	}
 
-    /**
-     * (24) const get element Subscription
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getSubscription()
-    {
-        return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /** (25) getCreateSubscription
-     * 
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getCreateSubscription()
-    {
-        return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /**
-     * (29) append element Subscription
-     * @return JDFSubscription the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSubscription appendSubscription() throws JDFException
-    {
-        return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
-    }
+	/**
+	 * (29) append element Subscription
+	 * @return JDFSubscription the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSubscription appendSubscription() throws JDFException
+	{
+		return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
+	}
 
 }// end namespace JDF

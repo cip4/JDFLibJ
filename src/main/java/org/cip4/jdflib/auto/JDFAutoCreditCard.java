@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,200 +76,185 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoCreditCard : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCreditCard : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCreditCard extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHORIZATION, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.AUTHORIZATIONEXPIRES, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.EXPIRES, 0x44444221, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBER, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.TYPE, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHORIZATION, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AUTHORIZATIONEXPIRES, 0x44444331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXPIRES, 0x44444221, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBER, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TYPE, 0x44444221, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCreditCard
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreditCard
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCreditCard(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCreditCard
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreditCard
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCreditCard(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCreditCard
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreditCard
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCreditCard(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCreditCard[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCreditCard[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Authorization
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Authorization
+	  * @param value the value to set the attribute to
+	  */
+	public void setAuthorization(String value)
+	{
+		setAttribute(AttributeName.AUTHORIZATION, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Authorization
+	  * @return the value of the attribute
+	  */
+	public String getAuthorization()
+	{
+		return getAttribute(AttributeName.AUTHORIZATION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Authorization
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Authorization
-          * @param value the value to set the attribute to
-          */
-        public void setAuthorization(String value)
-        {
-            setAttribute(AttributeName.AUTHORIZATION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AuthorizationExpires
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AuthorizationExpires
+	  * @param value the value to set the attribute to
+	  */
+	public void setAuthorizationExpires(String value)
+	{
+		setAttribute(AttributeName.AUTHORIZATIONEXPIRES, value, null);
+	}
 
-        /**
-          * (23) get String attribute Authorization
-          * @return the value of the attribute
-          */
-        public String getAuthorization()
-        {
-            return getAttribute(AttributeName.AUTHORIZATION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute AuthorizationExpires
+	  * @return the value of the attribute
+	  */
+	public String getAuthorizationExpires()
+	{
+		return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AuthorizationExpires
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AuthorizationExpires
-          * @param value the value to set the attribute to
-          */
-        public void setAuthorizationExpires(String value)
-        {
-            setAttribute(AttributeName.AUTHORIZATIONEXPIRES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Expires
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Expires
+	  * @param value the value to set the attribute to
+	  */
+	public void setExpires(String value)
+	{
+		setAttribute(AttributeName.EXPIRES, value, null);
+	}
 
-        /**
-          * (23) get String attribute AuthorizationExpires
-          * @return the value of the attribute
-          */
-        public String getAuthorizationExpires()
-        {
-            return getAttribute(AttributeName.AUTHORIZATIONEXPIRES, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Expires
+	  * @return the value of the attribute
+	  */
+	public String getExpires()
+	{
+		return getAttribute(AttributeName.EXPIRES, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Expires
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Expires
-          * @param value the value to set the attribute to
-          */
-        public void setExpires(String value)
-        {
-            setAttribute(AttributeName.EXPIRES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Number
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Number
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumber(String value)
+	{
+		setAttribute(AttributeName.NUMBER, value, null);
+	}
 
-        /**
-          * (23) get String attribute Expires
-          * @return the value of the attribute
-          */
-        public String getExpires()
-        {
-            return getAttribute(AttributeName.EXPIRES, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Number
+	  * @return the value of the attribute
+	  */
+	public String getNumber()
+	{
+		return getAttribute(AttributeName.NUMBER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Number
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Number
-          * @param value the value to set the attribute to
-          */
-        public void setNumber(String value)
-        {
-            setAttribute(AttributeName.NUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Type
+	  * @param value the value to set the attribute to
+	  */
+	public void setType(String value)
+	{
+		setAttribute(AttributeName.TYPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Number
-          * @return the value of the attribute
-          */
-        public String getNumber()
-        {
-            return getAttribute(AttributeName.NUMBER, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Type
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Type
-          * @param value the value to set the attribute to
-          */
-        public void setType(String value)
-        {
-            setAttribute(AttributeName.TYPE, value, null);
-        }
-
-        /**
-          * (23) get String attribute Type
-          * @return the value of the attribute
-          */
-        public String getType()
-        {
-            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Type
+	  * @return the value of the attribute
+	  */
+	public String getType()
+	{
+		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

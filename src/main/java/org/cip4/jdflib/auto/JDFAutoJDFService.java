@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,308 +82,290 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-    /**
-    *****************************************************************************
-    class JDFAutoJDFService : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoJDFService : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoJDFService extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumCombinedMethod.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPE, 0x44444422, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumCombinedMethod.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPE, 0x44444422, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoJDFService
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJDFService
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoJDFService(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJDFService
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJDFService
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoJDFService(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJDFService
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoJDFService
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoJDFService(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoJDFService[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for CombinedMethod
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoJDFService[  --> " + super.toString() + " ]";
-    }
+	public static class EnumCombinedMethod extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumCombinedMethod(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for CombinedMethod
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumCombinedMethod getEnum(String enumName)
+		{
+			return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumName);
+		}
 
-        public static class EnumCombinedMethod extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumCombinedMethod getEnum(int enumValue)
+		{
+			return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumValue);
+		}
 
-            private EnumCombinedMethod(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumCombinedMethod.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumCombinedMethod getEnum(String enumName)
-            {
-                return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumCombinedMethod.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumCombinedMethod getEnum(int enumValue)
-            {
-                return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumCombinedMethod.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumCombinedMethod.class);
-            }
+		public static final EnumCombinedMethod Combined = new EnumCombinedMethod("Combined");
+		public static final EnumCombinedMethod CombinedProcessGroup = new EnumCombinedMethod("CombinedProcessGroup");
+		public static final EnumCombinedMethod GrayBox = new EnumCombinedMethod("GrayBox");
+		public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
+		public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumCombinedMethod.class);
-            }
+	/**
+	* Enumeration strings for TypeOrder
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumCombinedMethod.class);
-            }
+	public static class EnumTypeOrder extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumCombinedMethod Combined = new EnumCombinedMethod("Combined");
-            public static final EnumCombinedMethod CombinedProcessGroup = new EnumCombinedMethod("CombinedProcessGroup");
-            public static final EnumCombinedMethod GrayBox = new EnumCombinedMethod("GrayBox");
-            public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
-            public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
-        }      
+		private EnumTypeOrder(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTypeOrder getEnum(String enumName)
+		{
+			return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTypeOrder getEnum(int enumValue)
+		{
+			return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for TypeOrder
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTypeOrder.class);
+		}
 
-        public static class EnumTypeOrder extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTypeOrder.class);
+		}
 
-            private EnumTypeOrder(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTypeOrder.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTypeOrder getEnum(String enumName)
-            {
-                return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumName);
-            }
+		public static final EnumTypeOrder Fixed = new EnumTypeOrder("Fixed");
+		public static final EnumTypeOrder Unordered = new EnumTypeOrder("Unordered");
+		public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTypeOrder getEnum(int enumValue)
-            {
-                return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTypeOrder.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CombinedMethod
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute CombinedMethod
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setCombinedMethod(EnumCombinedMethod enumVar)
+	{
+		setAttribute(AttributeName.COMBINEDMETHOD, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTypeOrder.class);
-            }
+	/**
+	  * (9) get attribute CombinedMethod
+	  * @return the value of the attribute
+	  */
+	public EnumCombinedMethod getCombinedMethod()
+	{
+		return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTypeOrder.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Type
+	  * @param value the value to set the attribute to
+	  */
+	public void setType(String value)
+	{
+		setAttribute(AttributeName.TYPE, value, null);
+	}
 
-            public static final EnumTypeOrder Fixed = new EnumTypeOrder("Fixed");
-            public static final EnumTypeOrder Unordered = new EnumTypeOrder("Unordered");
-            public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
-        }      
+	/**
+	  * (23) get String attribute Type
+	  * @return the value of the attribute
+	  */
+	public String getType()
+	{
+		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TypeOrder
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TypeOrder
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTypeOrder(EnumTypeOrder enumVar)
+	{
+		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute TypeOrder
+	  * @return the value of the attribute
+	  */
+	public EnumTypeOrder getTypeOrder()
+	{
+		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CombinedMethod
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute CombinedMethod
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setCombinedMethod(EnumCombinedMethod enumVar)
-        {
-            setAttribute(AttributeName.COMBINEDMETHOD, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Types
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Types
+	  * @param value the value to set the attribute to
+	  */
+	public void setTypes(VString value)
+	{
+		setAttribute(AttributeName.TYPES, value, null);
+	}
 
-        /**
-          * (9) get attribute CombinedMethod
-          * @return the value of the attribute
-          */
-        public EnumCombinedMethod getCombinedMethod()
-        {
-            return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Type
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Type
-          * @param value the value to set the attribute to
-          */
-        public void setType(String value)
-        {
-            setAttribute(AttributeName.TYPE, value, null);
-        }
-
-        /**
-          * (23) get String attribute Type
-          * @return the value of the attribute
-          */
-        public String getType()
-        {
-            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TypeOrder
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TypeOrder
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTypeOrder(EnumTypeOrder enumVar)
-        {
-            setAttribute(AttributeName.TYPEORDER, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute TypeOrder
-          * @return the value of the attribute
-          */
-        public EnumTypeOrder getTypeOrder()
-        {
-            return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Types
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Types
-          * @param value the value to set the attribute to
-          */
-        public void setTypes(VString value)
-        {
-            setAttribute(AttributeName.TYPES, value, null);
-        }
-
-        /**
-          * (21) get VString attribute Types
-          * @return VString the value of the attribute
-          */
-        public VString getTypes()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute Types
+	  * @return VString the value of the attribute
+	  */
+	public VString getTypes()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
 }// end namespace JDF

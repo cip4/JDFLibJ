@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,223 +83,210 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightConstraint : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightConstraint : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightConstraint extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPERRORS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPWARNINGS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CONSTRAINT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPERRORS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPWARNINGS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONSTRAINT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONSTRAINTVALUE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONSTRAINTVALUE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightConstraint
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightConstraint
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightConstraint(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightConstraint
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightConstraint
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightConstraint(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightConstraint
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightConstraint
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightConstraint(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightConstraint[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightConstraint[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AttemptFixupErrors
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AttemptFixupErrors
+	  * @param value the value to set the attribute to
+	  */
+	public void setAttemptFixupErrors(boolean value)
+	{
+		setAttribute(AttributeName.ATTEMPTFIXUPERRORS, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute AttemptFixupErrors
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getAttemptFixupErrors()
+	{
+		return getBoolAttribute(AttributeName.ATTEMPTFIXUPERRORS, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AttemptFixupErrors
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AttemptFixupErrors
-          * @param value the value to set the attribute to
-          */
-        public void setAttemptFixupErrors(boolean value)
-        {
-            setAttribute(AttributeName.ATTEMPTFIXUPERRORS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AttemptFixupWarnings
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AttemptFixupWarnings
+	  * @param value the value to set the attribute to
+	  */
+	public void setAttemptFixupWarnings(boolean value)
+	{
+		setAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute AttemptFixupErrors
-          * @return boolean the value of the attribute
-          */
-        public boolean getAttemptFixupErrors()
-        {
-            return getBoolAttribute(AttributeName.ATTEMPTFIXUPERRORS, null, false);
-        }
+	/**
+	  * (18) get boolean attribute AttemptFixupWarnings
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getAttemptFixupWarnings()
+	{
+		return getBoolAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AttemptFixupWarnings
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AttemptFixupWarnings
-          * @param value the value to set the attribute to
-          */
-        public void setAttemptFixupWarnings(boolean value)
-        {
-            setAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Constraint
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Constraint
+	  * @param value the value to set the attribute to
+	  */
+	public void setConstraint(String value)
+	{
+		setAttribute(AttributeName.CONSTRAINT, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute AttemptFixupWarnings
-          * @return boolean the value of the attribute
-          */
-        public boolean getAttemptFixupWarnings()
-        {
-            return getBoolAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, null, false);
-        }
+	/**
+	  * (23) get String attribute Constraint
+	  * @return the value of the attribute
+	  */
+	public String getConstraint()
+	{
+		return getAttribute(AttributeName.CONSTRAINT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Constraint
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Constraint
-          * @param value the value to set the attribute to
-          */
-        public void setConstraint(String value)
-        {
-            setAttribute(AttributeName.CONSTRAINT, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Constraint
-          * @return the value of the attribute
-          */
-        public String getConstraint()
-        {
-            return getAttribute(AttributeName.CONSTRAINT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateConstraintValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateConstraintValue(int iSkip)
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.CONSTRAINTVALUE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element ConstraintValue
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 * default is getConstraintValue(0)     */
+	public JDFElement getConstraintValue(int iSkip)
+	{
+		return (JDFElement) getElement(ElementName.CONSTRAINTVALUE, null, iSkip);
+	}
 
-    /** (26) getCreateConstraintValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateConstraintValue(int iSkip)
-    {
-        return (JDFElement)getCreateElement_KElement(ElementName.CONSTRAINTVALUE, null, iSkip);
-    }
+	/**
+	 * Get all ConstraintValue from the current element
+	 * 
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	public Collection<JDFElement> getAllConstraintValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONSTRAINTVALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element ConstraintValue
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     * default is getConstraintValue(0)     */
-    public JDFElement getConstraintValue(int iSkip)
-    {
-        return (JDFElement) getElement(ElementName.CONSTRAINTVALUE, null, iSkip);
-    }
+		final Vector<JDFElement> v = new Vector<JDFElement>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFElement) vc.get(i));
+		}
 
-    /**
-     * Get all ConstraintValue from the current element
-     * 
-     * @return Collection<JDFElement>, null if none are available
-     */
-    public Collection<JDFElement> getAllConstraintValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONSTRAINTVALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFElement> v = new Vector<JDFElement>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFElement) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ConstraintValue
-     * @return JDFElement the element
-     */
-    public JDFElement appendConstraintValue()
-    {
-        return (JDFElement) appendElement(ElementName.CONSTRAINTVALUE, null);
-    }
+	/**
+	 * (30) append element ConstraintValue
+	 * @return JDFElement the element
+	 */
+	public JDFElement appendConstraintValue()
+	{
+		return (JDFElement) appendElement(ElementName.CONSTRAINTVALUE, null);
+	}
 
 }// end namespace JDF

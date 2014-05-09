@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,180 +77,166 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-    /**
-    *****************************************************************************
-    class JDFAutoPageAssignedList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPageAssignedList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPageAssignedList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BROADSHEETNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALPRINTERSECTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x22222111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEPLACEMENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BROADSHEETNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALPRINTERSECTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x22222111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEPLACEMENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPageAssignedList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageAssignedList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPageAssignedList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPageAssignedList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageAssignedList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPageAssignedList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPageAssignedList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageAssignedList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPageAssignedList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPageAssignedList[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPageAssignedList[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BroadsheetNumber
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BroadsheetNumber
+	  * @param value the value to set the attribute to
+	  */
+	public void setBroadsheetNumber(int value)
+	{
+		setAttribute(AttributeName.BROADSHEETNUMBER, value, null);
+	}
 
+	/**
+	  * (15) get int attribute BroadsheetNumber
+	  * @return int the value of the attribute
+	  */
+	public int getBroadsheetNumber()
+	{
+		return getIntAttribute(AttributeName.BROADSHEETNUMBER, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BroadsheetNumber
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BroadsheetNumber
-          * @param value the value to set the attribute to
-          */
-        public void setBroadsheetNumber(int value)
-        {
-            setAttribute(AttributeName.BROADSHEETNUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogicalPrinterSection
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LogicalPrinterSection
+	  * @param value the value to set the attribute to
+	  */
+	public void setLogicalPrinterSection(String value)
+	{
+		setAttribute(AttributeName.LOGICALPRINTERSECTION, value, null);
+	}
 
-        /**
-          * (15) get int attribute BroadsheetNumber
-          * @return int the value of the attribute
-          */
-        public int getBroadsheetNumber()
-        {
-            return getIntAttribute(AttributeName.BROADSHEETNUMBER, null, 0);
-        }
+	/**
+	  * (23) get String attribute LogicalPrinterSection
+	  * @return the value of the attribute
+	  */
+	public String getLogicalPrinterSection()
+	{
+		return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LogicalPrinterSection
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LogicalPrinterSection
-          * @param value the value to set the attribute to
-          */
-        public void setLogicalPrinterSection(String value)
-        {
-            setAttribute(AttributeName.LOGICALPRINTERSECTION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageListIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PageListIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setPageListIndex(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.PAGELISTINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute LogicalPrinterSection
-          * @return the value of the attribute
-          */
-        public String getLogicalPrinterSection()
-        {
-            return getAttribute(AttributeName.LOGICALPRINTERSECTION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute PageListIndex
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getPageListIndex()
+	{
+		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PageListIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PageListIndex
-          * @param value the value to set the attribute to
-          */
-        public void setPageListIndex(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.PAGELISTINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PagePlacementName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PagePlacementName
+	  * @param value the value to set the attribute to
+	  */
+	public void setPagePlacementName(String value)
+	{
+		setAttribute(AttributeName.PAGEPLACEMENTNAME, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute PageListIndex
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getPageListIndex()
-        {
-            String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PagePlacementName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PagePlacementName
-          * @param value the value to set the attribute to
-          */
-        public void setPagePlacementName(String value)
-        {
-            setAttribute(AttributeName.PAGEPLACEMENTNAME, value, null);
-        }
-
-        /**
-          * (23) get String attribute PagePlacementName
-          * @return the value of the attribute
-          */
-        public String getPagePlacementName()
-        {
-            return getAttribute(AttributeName.PAGEPLACEMENTNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PagePlacementName
+	  * @return the value of the attribute
+	  */
+	public String getPagePlacementName()
+	{
+		return getAttribute(AttributeName.PAGEPLACEMENTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

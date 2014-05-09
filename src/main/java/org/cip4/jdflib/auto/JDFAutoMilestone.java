@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoMilestone : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMilestone : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMilestone extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MILESTONETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MILESTONETYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMilestone
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMilestone(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMilestone
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMilestone(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMilestone
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMilestone(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMilestone
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMilestone(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMilestone
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMilestone(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMilestone
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMilestone(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMilestone[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMilestone[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MilestoneType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MilestoneType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMilestoneType(String value)
+	{
+		setAttribute(AttributeName.MILESTONETYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute MilestoneType
+	  * @return the value of the attribute
+	  */
+	public String getMilestoneType()
+	{
+		return getAttribute(AttributeName.MILESTONETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MilestoneType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MilestoneType
-          * @param value the value to set the attribute to
-          */
-        public void setMilestoneType(String value)
-        {
-            setAttribute(AttributeName.MILESTONETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TypeAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TypeAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setTypeAmount(int value)
+	{
+		setAttribute(AttributeName.TYPEAMOUNT, value, null);
+	}
 
-        /**
-          * (23) get String attribute MilestoneType
-          * @return the value of the attribute
-          */
-        public String getMilestoneType()
-        {
-            return getAttribute(AttributeName.MILESTONETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TypeAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TypeAmount
-          * @param value the value to set the attribute to
-          */
-        public void setTypeAmount(int value)
-        {
-            setAttribute(AttributeName.TYPEAMOUNT, value, null);
-        }
-
-        /**
-          * (15) get int attribute TypeAmount
-          * @return int the value of the attribute
-          */
-        public int getTypeAmount()
-        {
-            return getIntAttribute(AttributeName.TYPEAMOUNT, null, 0);
-        }
+	/**
+	  * (15) get int attribute TypeAmount
+	  * @return int the value of the attribute
+	  */
+	public int getTypeAmount()
+	{
+		return getIntAttribute(AttributeName.TYPEAMOUNT, null, 0);
+	}
 
 }// end namespace JDF

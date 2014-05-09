@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,221 +83,207 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFScreenSelector;
-    /**
-    *****************************************************************************
-    class JDFAutoScreeningParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoScreeningParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoScreeningParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNORESOURCEFILE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNORESOURCEFILE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoScreeningParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoScreeningParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScreeningParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoScreeningParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScreeningParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoScreeningParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoScreeningParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoScreeningParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IgnoreSourceFile
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IgnoreSourceFile
+	  * @param value the value to set the attribute to
+	  */
+	public void setIgnoreSourceFile(boolean value)
+	{
+		setAttribute(AttributeName.IGNORESOURCEFILE, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute IgnoreSourceFile
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getIgnoreSourceFile()
+	{
+		return getBoolAttribute(AttributeName.IGNORESOURCEFILE, null, true);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AbortJobWhenScreenMatchingFails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AbortJobWhenScreenMatchingFails
+	  * @param value the value to set the attribute to
+	  */
+	public void setAbortJobWhenScreenMatchingFails(boolean value)
+	{
+		setAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute AbortJobWhenScreenMatchingFails
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getAbortJobWhenScreenMatchingFails()
+	{
+		return getBoolAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IgnoreSourceFile
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IgnoreSourceFile
-          * @param value the value to set the attribute to
-          */
-        public void setIgnoreSourceFile(boolean value)
-        {
-            setAttribute(AttributeName.IGNORESOURCEFILE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (18) get boolean attribute IgnoreSourceFile
-          * @return boolean the value of the attribute
-          */
-        public boolean getIgnoreSourceFile()
-        {
-            return getBoolAttribute(AttributeName.IGNORESOURCEFILE, null, true);
-        }
+	/** (26) getCreateScreenSelector
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector getCreateScreenSelector(int iSkip)
+	{
+		return (JDFScreenSelector) getCreateElement_KElement(ElementName.SCREENSELECTOR, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AbortJobWhenScreenMatchingFails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AbortJobWhenScreenMatchingFails
-          * @param value the value to set the attribute to
-          */
-        public void setAbortJobWhenScreenMatchingFails(boolean value)
-        {
-            setAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, value, null);
-        }
+	/**
+	 * (27) const get element ScreenSelector
+	 * @param iSkip number of elements to skip
+	 * @return JDFScreenSelector the element
+	 * default is getScreenSelector(0)     */
+	public JDFScreenSelector getScreenSelector(int iSkip)
+	{
+		return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
+	}
 
-        /**
-          * (18) get boolean attribute AbortJobWhenScreenMatchingFails
-          * @return boolean the value of the attribute
-          */
-        public boolean getAbortJobWhenScreenMatchingFails()
-        {
-            return getBoolAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, null, false);
-        }
+	/**
+	 * Get all ScreenSelector from the current element
+	 * 
+	 * @return Collection<JDFScreenSelector>, null if none are available
+	 */
+	public Collection<JDFScreenSelector> getAllScreenSelector()
+	{
+		final VElement vc = getChildElementVector(ElementName.SCREENSELECTOR, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFScreenSelector> v = new Vector<JDFScreenSelector>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFScreenSelector) vc.get(i));
+		}
 
-    /** (26) getCreateScreenSelector
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFScreenSelector the element
-     */
-    public JDFScreenSelector getCreateScreenSelector(int iSkip)
-    {
-        return (JDFScreenSelector)getCreateElement_KElement(ElementName.SCREENSELECTOR, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ScreenSelector
-     * @param iSkip number of elements to skip
-     * @return JDFScreenSelector the element
-     * default is getScreenSelector(0)     */
-    public JDFScreenSelector getScreenSelector(int iSkip)
-    {
-        return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
-    }
-
-    /**
-     * Get all ScreenSelector from the current element
-     * 
-     * @return Collection<JDFScreenSelector>, null if none are available
-     */
-    public Collection<JDFScreenSelector> getAllScreenSelector()
-    {
-        final VElement vc = getChildElementVector(ElementName.SCREENSELECTOR, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFScreenSelector> v = new Vector<JDFScreenSelector>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFScreenSelector) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ScreenSelector
-     * @return JDFScreenSelector the element
-     */
-    public JDFScreenSelector appendScreenSelector()
-    {
-        return (JDFScreenSelector) appendElement(ElementName.SCREENSELECTOR, null);
-    }
+	/**
+	 * (30) append element ScreenSelector
+	 * @return JDFScreenSelector the element
+	 */
+	public JDFScreenSelector appendScreenSelector()
+	{
+		return (JDFScreenSelector) appendElement(ElementName.SCREENSELECTOR, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,206 +77,191 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-    /**
-    *****************************************************************************
-    class JDFAutoReturnQueueEntryParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoReturnQueueEntryParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ABORTED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPLETED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222211, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABORTED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPLETED, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222211, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoReturnQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoReturnQueueEntryParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoReturnQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoReturnQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoReturnQueueEntryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoReturnQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoReturnQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoReturnQueueEntryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoReturnQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoReturnQueueEntryParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoReturnQueueEntryParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Aborted
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Aborted
+	  * @param value the value to set the attribute to
+	  */
+	public void setAborted(VString value)
+	{
+		setAttribute(AttributeName.ABORTED, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute Aborted
+	  * @return VString the value of the attribute
+	  */
+	public VString getAborted()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Aborted
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Aborted
-          * @param value the value to set the attribute to
-          */
-        public void setAborted(VString value)
-        {
-            setAttribute(AttributeName.ABORTED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Completed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Completed
+	  * @param value the value to set the attribute to
+	  */
+	public void setCompleted(VString value)
+	{
+		setAttribute(AttributeName.COMPLETED, value, null);
+	}
 
-        /**
-          * (21) get VString attribute Aborted
-          * @return VString the value of the attribute
-          */
-        public VString getAborted()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute Completed
+	  * @return VString the value of the attribute
+	  */
+	public VString getCompleted()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Completed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Completed
-          * @param value the value to set the attribute to
-          */
-        public void setCompleted(VString value)
-        {
-            setAttribute(AttributeName.COMPLETED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Priority
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Priority
+	  * @param value the value to set the attribute to
+	  */
+	public void setPriority(int value)
+	{
+		setAttribute(AttributeName.PRIORITY, value, null);
+	}
 
-        /**
-          * (21) get VString attribute Completed
-          * @return VString the value of the attribute
-          */
-        public VString getCompleted()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (15) get int attribute Priority
+	  * @return int the value of the attribute
+	  */
+	public int getPriority()
+	{
+		return getIntAttribute(AttributeName.PRIORITY, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Priority
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Priority
-          * @param value the value to set the attribute to
-          */
-        public void setPriority(int value)
-        {
-            setAttribute(AttributeName.PRIORITY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (15) get int attribute Priority
-          * @return int the value of the attribute
-          */
-        public int getPriority()
-        {
-            return getIntAttribute(AttributeName.PRIORITY, null, 0);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
-
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

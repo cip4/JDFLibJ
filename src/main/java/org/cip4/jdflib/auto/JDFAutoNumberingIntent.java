@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,257 +84,246 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoNumberingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNumberingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x33331111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x33331111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNumberingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNumberingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNumberingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNumberingIntent[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element ColorName
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getColorName()
+	{
+		return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
+	}
 
+	/** (25) getCreateColorName
+	 * 
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getCreateColorName()
+	{
+		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element ColorName
+	 * @return JDFSpanNamedColor the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanNamedColor appendColorName() throws JDFException
+	{
+		return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
+	}
 
-    /**
-     * (24) const get element ColorName
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getColorName()
-    {
-        return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
-    }
+	/** (26) getCreateColorNameDetails
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateColorNameDetails(int iSkip)
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+	}
 
-    /** (25) getCreateColorName
-     * 
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getCreateColorName()
-    {
-        return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
-    }
+	/**
+	 * (27) const get element ColorNameDetails
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringSpan the element
+	 * default is getColorNameDetails(0)     */
+	public JDFStringSpan getColorNameDetails(int iSkip)
+	{
+		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+	}
 
-    /**
-     * (29) append element ColorName
-     * @return JDFSpanNamedColor the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanNamedColor appendColorName() throws JDFException
-    {
-        return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
-    }
+	/**
+	 * Get all ColorNameDetails from the current element
+	 * 
+	 * @return Collection<JDFStringSpan>, null if none are available
+	 */
+	public Collection<JDFStringSpan> getAllColorNameDetails()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORNAMEDETAILS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateColorNameDetails
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateColorNameDetails(int iSkip)
-    {
-        return (JDFStringSpan)getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
-    }
+		final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFStringSpan) vc.get(i));
+		}
 
-    /**
-     * (27) const get element ColorNameDetails
-     * @param iSkip number of elements to skip
-     * @return JDFStringSpan the element
-     * default is getColorNameDetails(0)     */
-    public JDFStringSpan getColorNameDetails(int iSkip)
-    {
-        return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all ColorNameDetails from the current element
-     * 
-     * @return Collection<JDFStringSpan>, null if none are available
-     */
-    public Collection<JDFStringSpan> getAllColorNameDetails()
-    {
-        final VElement vc = getChildElementVector(ElementName.COLORNAMEDETAILS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element ColorNameDetails
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan appendColorNameDetails()
+	{
+		return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
+	}
 
-        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFStringSpan) vc.get(i));
-        }
+	/**
+	 * (24) const get element ColorPool
+	 * @return JDFColorPool the element
+	 */
+	public JDFColorPool getColorPool()
+	{
+		return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
+	}
 
-        return v;
-    }
+	/** (25) getCreateColorPool
+	 * 
+	 * @return JDFColorPool the element
+	 */
+	public JDFColorPool getCreateColorPool()
+	{
+		return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
+	}
 
-    /**
-     * (30) append element ColorNameDetails
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan appendColorNameDetails()
-    {
-        return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
-    }
+	/**
+	 * (29) append element ColorPool
+	 * @return JDFColorPool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFColorPool appendColorPool() throws JDFException
+	{
+		return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
+	}
 
-    /**
-     * (24) const get element ColorPool
-     * @return JDFColorPool the element
-     */
-    public JDFColorPool getColorPool()
-    {
-        return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refColorPool(JDFColorPool refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /** (25) getCreateColorPool
-     * 
-     * @return JDFColorPool the element
-     */
-    public JDFColorPool getCreateColorPool()
-    {
-        return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
-    }
+	/** (26) getCreateNumberItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberItem the element
+	 */
+	public JDFNumberItem getCreateNumberItem(int iSkip)
+	{
+		return (JDFNumberItem) getCreateElement_KElement(ElementName.NUMBERITEM, null, iSkip);
+	}
 
-    /**
-     * (29) append element ColorPool
-     * @return JDFColorPool the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFColorPool appendColorPool() throws JDFException
-    {
-        return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
-    }
+	/**
+	 * (27) const get element NumberItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberItem the element
+	 * default is getNumberItem(0)     */
+	public JDFNumberItem getNumberItem(int iSkip)
+	{
+		return (JDFNumberItem) getElement(ElementName.NUMBERITEM, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refColorPool(JDFColorPool refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * Get all NumberItem from the current element
+	 * 
+	 * @return Collection<JDFNumberItem>, null if none are available
+	 */
+	public Collection<JDFNumberItem> getAllNumberItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.NUMBERITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateNumberItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFNumberItem the element
-     */
-    public JDFNumberItem getCreateNumberItem(int iSkip)
-    {
-        return (JDFNumberItem)getCreateElement_KElement(ElementName.NUMBERITEM, null, iSkip);
-    }
+		final Vector<JDFNumberItem> v = new Vector<JDFNumberItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNumberItem) vc.get(i));
+		}
 
-    /**
-     * (27) const get element NumberItem
-     * @param iSkip number of elements to skip
-     * @return JDFNumberItem the element
-     * default is getNumberItem(0)     */
-    public JDFNumberItem getNumberItem(int iSkip)
-    {
-        return (JDFNumberItem) getElement(ElementName.NUMBERITEM, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all NumberItem from the current element
-     * 
-     * @return Collection<JDFNumberItem>, null if none are available
-     */
-    public Collection<JDFNumberItem> getAllNumberItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.NUMBERITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFNumberItem> v = new Vector<JDFNumberItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFNumberItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element NumberItem
-     * @return JDFNumberItem the element
-     */
-    public JDFNumberItem appendNumberItem()
-    {
-        return (JDFNumberItem) appendElement(ElementName.NUMBERITEM, null);
-    }
+	/**
+	 * (30) append element NumberItem
+	 * @return JDFNumberItem the element
+	 */
+	public JDFNumberItem appendNumberItem()
+	{
+		return (JDFNumberItem) appendElement(ElementName.NUMBERITEM, null);
+	}
 
 }// end namespace JDF

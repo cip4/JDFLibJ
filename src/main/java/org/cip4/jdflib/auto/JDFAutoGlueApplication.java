@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,247 +85,223 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoGlueApplication : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoGlueApplication : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoGlueApplication extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555551);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555551);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoGlueApplication
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueApplication
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoGlueApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlueApplication
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueApplication
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoGlueApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlueApplication
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueApplication
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoGlueApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoGlueApplication[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoGlueApplication[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for GluingTechnique
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumGluingTechnique extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumGluingTechnique(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumGluingTechnique getEnum(String enumName)
+		{
+			return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumGluingTechnique getEnum(int enumValue)
+		{
+			return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for GluingTechnique
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumGluingTechnique.class);
+		}
 
-        public static class EnumGluingTechnique extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumGluingTechnique.class);
+		}
 
-            private EnumGluingTechnique(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumGluingTechnique.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumGluingTechnique getEnum(String enumName)
-            {
-                return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumName);
-            }
+		public static final EnumGluingTechnique SpineGluing = new EnumGluingTechnique("SpineGluing");
+		public static final EnumGluingTechnique SideGluingFront = new EnumGluingTechnique("SideGluingFront");
+		public static final EnumGluingTechnique SideGluingBack = new EnumGluingTechnique("SideGluingBack");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumGluingTechnique getEnum(int enumValue)
-            {
-                return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumGluingTechnique.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GluingTechnique
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute GluingTechnique
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setGluingTechnique(EnumGluingTechnique enumVar)
+	{
+		setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumGluingTechnique.class);
-            }
+	/**
+	  * (9) get attribute GluingTechnique
+	  * @return the value of the attribute
+	  */
+	public EnumGluingTechnique getGluingTechnique()
+	{
+		return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumGluingTechnique.class);
-            }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-            public static final EnumGluingTechnique SpineGluing = new EnumGluingTechnique("SpineGluing");
-            public static final EnumGluingTechnique SideGluingFront = new EnumGluingTechnique("SideGluingFront");
-            public static final EnumGluingTechnique SideGluingBack = new EnumGluingTechnique("SideGluingBack");
-        }      
+	/**
+	 * (24) const get element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
 
+	/** (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GluingTechnique
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute GluingTechnique
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setGluingTechnique(EnumGluingTechnique enumVar)
-        {
-            setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute GluingTechnique
-          * @return the value of the attribute
-          */
-        public EnumGluingTechnique getGluingTechnique()
-        {
-            return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getGlueLine()
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /** (25) getCreateGlueLine
-     * 
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine()
-    {
-        return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /**
-     * (29) append element GlueLine
-     * @return JDFGlueLine the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFGlueLine appendGlueLine() throws JDFException
-    {
-        return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueLine(JDFGlueLine refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element GlueLine
+	 * @return JDFGlueLine the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFGlueLine appendGlueLine() throws JDFException
+	{
+		return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,284 +88,269 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFErrorData;
-    /**
-    *****************************************************************************
-    class JDFAutoError : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoError : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoError extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumResend.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumResend.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ERRORDATA, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ERRORDATA, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoError
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoError
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoError(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoError
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoError
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoError(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoError
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoError
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoError(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoError[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Resend
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoError[  --> " + super.toString() + " ]";
-    }
+	public static class EnumResend extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumResend(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Resend
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumResend getEnum(String enumName)
+		{
+			return (EnumResend) getEnum(EnumResend.class, enumName);
+		}
 
-        public static class EnumResend extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumResend getEnum(int enumValue)
+		{
+			return (EnumResend) getEnum(EnumResend.class, enumValue);
+		}
 
-            private EnumResend(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumResend.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumResend getEnum(String enumName)
-            {
-                return (EnumResend) getEnum(EnumResend.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumResend.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumResend getEnum(int enumValue)
-            {
-                return (EnumResend) getEnum(EnumResend.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumResend.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumResend.class);
-            }
+		public static final EnumResend Required = new EnumResend("Required");
+		public static final EnumResend Prohibited = new EnumResend("Prohibited");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumResend.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumResend.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ErrorID
+	  * @param value the value to set the attribute to
+	  */
+	public void setErrorID(String value)
+	{
+		setAttribute(AttributeName.ERRORID, value, null);
+	}
 
-            public static final EnumResend Required = new EnumResend("Required");
-            public static final EnumResend Prohibited = new EnumResend("Prohibited");
-        }      
+	/**
+	  * (23) get String attribute ErrorID
+	  * @return the value of the attribute
+	  */
+	public String getErrorID()
+	{
+		return getAttribute(AttributeName.ERRORID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Resend
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Resend
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setResend(EnumResend enumVar)
+	{
+		setAttribute(AttributeName.RESEND, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute Resend
+	  * @return the value of the attribute
+	  */
+	public EnumResend getResend()
+	{
+		return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ErrorID
-          * @param value the value to set the attribute to
-          */
-        public void setErrorID(String value)
-        {
-            setAttribute(AttributeName.ERRORID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReturnCode
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReturnCode
+	  * @param value the value to set the attribute to
+	  */
+	public void setReturnCode(int value)
+	{
+		setAttribute(AttributeName.RETURNCODE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ErrorID
-          * @return the value of the attribute
-          */
-        public String getErrorID()
-        {
-            return getAttribute(AttributeName.ERRORID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute ReturnCode
+	  * @return int the value of the attribute
+	  */
+	public int getReturnCode()
+	{
+		return getIntAttribute(AttributeName.RETURNCODE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Resend
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Resend
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setResend(EnumResend enumVar)
-        {
-            setAttribute(AttributeName.RESEND, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute Resend
-          * @return the value of the attribute
-          */
-        public EnumResend getResend()
-        {
-            return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
-        }
+	/** (26) getCreateErrorData
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFErrorData the element
+	 */
+	public JDFErrorData getCreateErrorData(int iSkip)
+	{
+		return (JDFErrorData) getCreateElement_KElement(ElementName.ERRORDATA, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReturnCode
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReturnCode
-          * @param value the value to set the attribute to
-          */
-        public void setReturnCode(int value)
-        {
-            setAttribute(AttributeName.RETURNCODE, value, null);
-        }
+	/**
+	 * (27) const get element ErrorData
+	 * @param iSkip number of elements to skip
+	 * @return JDFErrorData the element
+	 * default is getErrorData(0)     */
+	public JDFErrorData getErrorData(int iSkip)
+	{
+		return (JDFErrorData) getElement(ElementName.ERRORDATA, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute ReturnCode
-          * @return int the value of the attribute
-          */
-        public int getReturnCode()
-        {
-            return getIntAttribute(AttributeName.RETURNCODE, null, 0);
-        }
+	/**
+	 * Get all ErrorData from the current element
+	 * 
+	 * @return Collection<JDFErrorData>, null if none are available
+	 */
+	public Collection<JDFErrorData> getAllErrorData()
+	{
+		final VElement vc = getChildElementVector(ElementName.ERRORDATA, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFErrorData> v = new Vector<JDFErrorData>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFErrorData) vc.get(i));
+		}
 
-    /** (26) getCreateErrorData
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFErrorData the element
-     */
-    public JDFErrorData getCreateErrorData(int iSkip)
-    {
-        return (JDFErrorData)getCreateElement_KElement(ElementName.ERRORDATA, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ErrorData
-     * @param iSkip number of elements to skip
-     * @return JDFErrorData the element
-     * default is getErrorData(0)     */
-    public JDFErrorData getErrorData(int iSkip)
-    {
-        return (JDFErrorData) getElement(ElementName.ERRORDATA, null, iSkip);
-    }
-
-    /**
-     * Get all ErrorData from the current element
-     * 
-     * @return Collection<JDFErrorData>, null if none are available
-     */
-    public Collection<JDFErrorData> getAllErrorData()
-    {
-        final VElement vc = getChildElementVector(ElementName.ERRORDATA, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFErrorData> v = new Vector<JDFErrorData>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFErrorData) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ErrorData
-     * @return JDFErrorData the element
-     */
-    public JDFErrorData appendErrorData()
-    {
-        return (JDFErrorData) appendElement(ElementName.ERRORDATA, null);
-    }
+	/**
+	 * (30) append element ErrorData
+	 * @return JDFErrorData the element
+	 */
+	public JDFErrorData appendErrorData()
+	{
+		return (JDFErrorData) appendElement(ElementName.ERRORDATA, null);
+	}
 
 }// end namespace JDF

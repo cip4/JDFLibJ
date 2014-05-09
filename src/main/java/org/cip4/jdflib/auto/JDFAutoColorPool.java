@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,198 +84,185 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColor;
-    /**
-    *****************************************************************************
-    class JDFAutoColorPool : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorPool : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorPool extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTSETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTSETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorPool[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorPool[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorantSetName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ColorantSetName
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorantSetName(String value)
+	{
+		setAttribute(AttributeName.COLORANTSETNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ColorantSetName
+	  * @return the value of the attribute
+	  */
+	public String getColorantSetName()
+	{
+		return getAttribute(AttributeName.COLORANTSETNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateColor
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFColor the element
+	 */
+	public JDFColor getCreateColor(int iSkip)
+	{
+		return (JDFColor) getCreateElement_KElement(ElementName.COLOR, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ColorantSetName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ColorantSetName
-          * @param value the value to set the attribute to
-          */
-        public void setColorantSetName(String value)
-        {
-            setAttribute(AttributeName.COLORANTSETNAME, value, null);
-        }
+	/**
+	 * (27) const get element Color
+	 * @param iSkip number of elements to skip
+	 * @return JDFColor the element
+	 * default is getColor(0)     */
+	public JDFColor getColor(int iSkip)
+	{
+		return (JDFColor) getElement(ElementName.COLOR, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute ColorantSetName
-          * @return the value of the attribute
-          */
-        public String getColorantSetName()
-        {
-            return getAttribute(AttributeName.COLORANTSETNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Color from the current element
+	 * 
+	 * @return Collection<JDFColor>, null if none are available
+	 */
+	public Collection<JDFColor> getAllColor()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLOR, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFColor> v = new Vector<JDFColor>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFColor) vc.get(i));
+		}
 
-    /** (26) getCreateColor
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFColor the element
-     */
-    public JDFColor getCreateColor(int iSkip)
-    {
-        return (JDFColor)getCreateElement_KElement(ElementName.COLOR, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Color
-     * @param iSkip number of elements to skip
-     * @return JDFColor the element
-     * default is getColor(0)     */
-    public JDFColor getColor(int iSkip)
-    {
-        return (JDFColor) getElement(ElementName.COLOR, null, iSkip);
-    }
-
-    /**
-     * Get all Color from the current element
-     * 
-     * @return Collection<JDFColor>, null if none are available
-     */
-    public Collection<JDFColor> getAllColor()
-    {
-        final VElement vc = getChildElementVector(ElementName.COLOR, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFColor> v = new Vector<JDFColor>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFColor) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Color
-     * @return JDFColor the element
-     */
-    public JDFColor appendColor()
-    {
-        return (JDFColor) appendElement(ElementName.COLOR, null);
-    }
+	/**
+	 * (30) append element Color
+	 * @return JDFColor the element
+	 */
+	public JDFColor appendColor()
+	{
+		return (JDFColor) appendElement(ElementName.COLOR, null);
+	}
 
 }// end namespace JDF

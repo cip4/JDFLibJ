@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,288 +83,270 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-    /**
-    *****************************************************************************
-    class JDFAutoSubmissionMethods : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSubmissionMethods : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSubmissionMethods extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x44443333, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x44443333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSubmissionMethods
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubmissionMethods
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSubmissionMethods(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubmissionMethods
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubmissionMethods
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSubmissionMethods(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSubmissionMethods
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSubmissionMethods
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSubmissionMethods(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSubmissionMethods[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Packaging
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSubmissionMethods[  --> " + super.toString() + " ]";
-    }
+	public static class EnumPackaging extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPackaging(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Packaging
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPackaging getEnum(String enumName)
+		{
+			return (EnumPackaging) getEnum(EnumPackaging.class, enumName);
+		}
 
-        public static class EnumPackaging extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPackaging getEnum(int enumValue)
+		{
+			return (EnumPackaging) getEnum(EnumPackaging.class, enumValue);
+		}
 
-            private EnumPackaging(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPackaging.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPackaging getEnum(String enumName)
-            {
-                return (EnumPackaging) getEnum(EnumPackaging.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPackaging.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPackaging getEnum(int enumValue)
-            {
-                return (EnumPackaging) getEnum(EnumPackaging.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPackaging.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPackaging.class);
-            }
+		public static final EnumPackaging MIME = new EnumPackaging("MIME");
+		public static final EnumPackaging None = new EnumPackaging("None");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPackaging.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPackaging.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute File
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute File
+	  * @param value the value to set the attribute to
+	  */
+	public void setFile(boolean value)
+	{
+		setAttribute(AttributeName.FILE, value, null);
+	}
 
-            public static final EnumPackaging MIME = new EnumPackaging("MIME");
-            public static final EnumPackaging None = new EnumPackaging("None");
-        }      
+	/**
+	  * (18) get boolean attribute File
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getFile()
+	{
+		return getBoolAttribute(AttributeName.FILE, null, false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HotFolder
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute HotFolder
+	  * @param value the value to set the attribute to
+	  */
+	public void setHotFolder(String value)
+	{
+		setAttribute(AttributeName.HOTFOLDER, value, null);
+	}
 
+	/**
+	  * (23) get String attribute HotFolder
+	  * @return the value of the attribute
+	  */
+	public String getHotFolder()
+	{
+		return getAttribute(AttributeName.HOTFOLDER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute File
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute File
-          * @param value the value to set the attribute to
-          */
-        public void setFile(boolean value)
-        {
-            setAttribute(AttributeName.FILE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HttpGet
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute HttpGet
+	  * @param value the value to set the attribute to
+	  */
+	public void setHttpGet(boolean value)
+	{
+		setAttribute(AttributeName.HTTPGET, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute File
-          * @return boolean the value of the attribute
-          */
-        public boolean getFile()
-        {
-            return getBoolAttribute(AttributeName.FILE, null, false);
-        }
+	/**
+	  * (18) get boolean attribute HttpGet
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getHttpGet()
+	{
+		return getBoolAttribute(AttributeName.HTTPGET, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HotFolder
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HotFolder
-          * @param value the value to set the attribute to
-          */
-        public void setHotFolder(String value)
-        {
-            setAttribute(AttributeName.HOTFOLDER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Packaging
+	--------------------------------------------------------------------- */
+	/**
+	  * (5.2) set attribute Packaging
+	  * @param v vector of the enumeration values
+	  */
+	public void setPackaging(Vector v)
+	{
+		setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
+	}
 
-        /**
-          * (23) get String attribute HotFolder
-          * @return the value of the attribute
-          */
-        public String getHotFolder()
-        {
-            return getAttribute(AttributeName.HOTFOLDER, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (9.2) get Packaging attribute Packaging
+	  * @return Vector of the enumerations
+	  */
+	public Vector getPackaging()
+	{
+		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HttpGet
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HttpGet
-          * @param value the value to set the attribute to
-          */
-        public void setHttpGet(boolean value)
-        {
-            setAttribute(AttributeName.HTTPGET, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MIME
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MIME
+	  * @param value the value to set the attribute to
+	  */
+	public void setMIME(boolean value)
+	{
+		setAttribute(AttributeName.MIME, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute HttpGet
-          * @return boolean the value of the attribute
-          */
-        public boolean getHttpGet()
-        {
-            return getBoolAttribute(AttributeName.HTTPGET, null, false);
-        }
+	/**
+	  * (18) get boolean attribute MIME
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getMIME()
+	{
+		return getBoolAttribute(AttributeName.MIME, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Packaging
-        --------------------------------------------------------------------- */
-        /**
-          * (5.2) set attribute Packaging
-          * @param v vector of the enumeration values
-          */
-        public void setPackaging(Vector v)
-        {
-            setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URLSchemes
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URLSchemes
+	  * @param value the value to set the attribute to
+	  */
+	public void setURLSchemes(VString value)
+	{
+		setAttribute(AttributeName.URLSCHEMES, value, null);
+	}
 
-        /**
-          * (9.2) get Packaging attribute Packaging
-          * @return Vector of the enumerations
-          */
-        public Vector getPackaging()
-        {
-            return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MIME
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MIME
-          * @param value the value to set the attribute to
-          */
-        public void setMIME(boolean value)
-        {
-            setAttribute(AttributeName.MIME, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute MIME
-          * @return boolean the value of the attribute
-          */
-        public boolean getMIME()
-        {
-            return getBoolAttribute(AttributeName.MIME, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URLSchemes
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URLSchemes
-          * @param value the value to set the attribute to
-          */
-        public void setURLSchemes(VString value)
-        {
-            setAttribute(AttributeName.URLSCHEMES, value, null);
-        }
-
-        /**
-          * (21) get VString attribute URLSchemes
-          * @return VString the value of the attribute
-          */
-        public VString getURLSchemes()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute URLSchemes
+	  * @return VString the value of the attribute
+	  */
+	public VString getURLSchemes()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
 }// end namespace JDF

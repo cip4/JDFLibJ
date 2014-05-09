@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,440 +84,490 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.node.JDFActivity;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFModulePhase;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
-    /**
-    *****************************************************************************
-    class JDFAutoPhaseTime : public JDFAudit
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPhaseTime : public JDFAudit
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.MODULEPHASE, 0x33333333);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.PART, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ACTIVITY, 0x33311111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MODULEPHASE, 0x33333333);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PART, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPhaseTime
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPhaseTime
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPhaseTime
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPhaseTime
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPhaseTime
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPhaseTime
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPhaseTime(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPhaseTime[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPhaseTime[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute End
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute End
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setEnd(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.END, date.getDateTimeISO(), null);
+	}
 
+	/**
+	  * (12) get JDFDate attribute End
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getEnd()
+	{
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute End
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute End
-          * @param value the value to set the attribute to or null
-          */
-        public void setEnd(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.END, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Start
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute Start
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setStart(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (12) get JDFDate attribute End
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getEnd()
-        {
-            String str = getAttribute(AttributeName.END, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (12) get JDFDate attribute Start
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getStart()
+	{
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Start
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute Start
-          * @param value the value to set the attribute to or null
-          */
-        public void setStart(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.START, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StatusDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StatusDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setStatusDetails(String value)
+	{
+		setAttribute(AttributeName.STATUSDETAILS, value, null);
+	}
 
-        /**
-          * (12) get JDFDate attribute Start
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getStart()
-        {
-            String str = getAttribute(AttributeName.START, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (23) get String attribute StatusDetails
+	  * @return the value of the attribute
+	  */
+	public String getStatusDetails()
+	{
+		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StatusDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StatusDetails
-          * @param value the value to set the attribute to
-          */
-        public void setStatusDetails(String value)
-        {
-            setAttribute(AttributeName.STATUSDETAILS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute StatusDetails
-          * @return the value of the attribute
-          */
-        public String getStatusDetails()
-        {
-            return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateDevice
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice(int iSkip)
+	{
+		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Device
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 * default is getDevice(0)     */
+	public JDFDevice getDevice(int iSkip)
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+	}
 
-    /** (26) getCreateDevice
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     */
-    public JDFDevice getCreateDevice(int iSkip)
-    {
-        return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
-    }
+	/**
+	 * Get all Device from the current element
+	 * 
+	 * @return Collection<JDFDevice>, null if none are available
+	 */
+	public Collection<JDFDevice> getAllDevice()
+	{
+		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Device
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     * default is getDevice(0)     */
-    public JDFDevice getDevice(int iSkip)
-    {
-        return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
-    }
+		final Vector<JDFDevice> v = new Vector<JDFDevice>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDevice) vc.get(i));
+		}
 
-    /**
-     * Get all Device from the current element
-     * 
-     * @return Collection<JDFDevice>, null if none are available
-     */
-    public Collection<JDFDevice> getAllDevice()
-    {
-        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFDevice> v = new Vector<JDFDevice>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDevice) vc.get(i));
-        }
+	/**
+	 * (30) append element Device
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice appendDevice()
+	{
+		return (JDFDevice) appendElement(ElementName.DEVICE, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refDevice(JDFDevice refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element Device
-     * @return JDFDevice the element
-     */
-    public JDFDevice appendDevice()
-    {
-        return (JDFDevice) appendElement(ElementName.DEVICE, null);
-    }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDevice(JDFDevice refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	@Override
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	@Override
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refEmployee(JDFEmployee refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+	/** (26) getCreateActivity
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity getCreateActivity(int iSkip)
+	{
+		return (JDFActivity) getCreateElement_KElement(ElementName.ACTIVITY, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refEmployee(JDFEmployee refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (27) const get element Activity
+	 * @param iSkip number of elements to skip
+	 * @return JDFActivity the element
+	 * default is getActivity(0)     */
+	public JDFActivity getActivity(int iSkip)
+	{
+		return (JDFActivity) getElement(ElementName.ACTIVITY, null, iSkip);
+	}
 
-    /**
-     * (24) const get element MISDetails
-     * @return JDFMISDetails the element
-     */
-    public JDFMISDetails getMISDetails()
-    {
-        return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
-    }
+	/**
+	 * Get all Activity from the current element
+	 * 
+	 * @return Collection<JDFActivity>, null if none are available
+	 */
+	public Collection<JDFActivity> getAllActivity()
+	{
+		final VElement vc = getChildElementVector(ElementName.ACTIVITY, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateMISDetails
-     * 
-     * @return JDFMISDetails the element
-     */
-    public JDFMISDetails getCreateMISDetails()
-    {
-        return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
-    }
+		final Vector<JDFActivity> v = new Vector<JDFActivity>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFActivity) vc.get(i));
+		}
 
-    /**
-     * (29) append element MISDetails
-     * @return JDFMISDetails the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMISDetails appendMISDetails() throws JDFException
-    {
-        return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateModulePhase
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFModulePhase the element
-     */
-    public JDFModulePhase getCreateModulePhase(int iSkip)
-    {
-        return (JDFModulePhase)getCreateElement_KElement(ElementName.MODULEPHASE, null, iSkip);
-    }
+	/**
+	 * (30) append element Activity
+	 * @return JDFActivity the element
+	 */
+	public JDFActivity appendActivity()
+	{
+		return (JDFActivity) appendElement(ElementName.ACTIVITY, null);
+	}
 
-    /**
-     * (27) const get element ModulePhase
-     * @param iSkip number of elements to skip
-     * @return JDFModulePhase the element
-     * default is getModulePhase(0)     */
-    public JDFModulePhase getModulePhase(int iSkip)
-    {
-        return (JDFModulePhase) getElement(ElementName.MODULEPHASE, null, iSkip);
-    }
+	/**
+	 * (24) const get element MISDetails
+	 * @return JDFMISDetails the element
+	 */
+	public JDFMISDetails getMISDetails()
+	{
+		return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
+	}
 
-    /**
-     * Get all ModulePhase from the current element
-     * 
-     * @return Collection<JDFModulePhase>, null if none are available
-     */
-    public Collection<JDFModulePhase> getAllModulePhase()
-    {
-        final VElement vc = getChildElementVector(ElementName.MODULEPHASE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (25) getCreateMISDetails
+	 * 
+	 * @return JDFMISDetails the element
+	 */
+	public JDFMISDetails getCreateMISDetails()
+	{
+		return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
+	}
 
-        final Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFModulePhase) vc.get(i));
-        }
+	/**
+	 * (29) append element MISDetails
+	 * @return JDFMISDetails the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMISDetails appendMISDetails() throws JDFException
+	{
+		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreateModulePhase
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFModulePhase the element
+	 */
+	public JDFModulePhase getCreateModulePhase(int iSkip)
+	{
+		return (JDFModulePhase) getCreateElement_KElement(ElementName.MODULEPHASE, null, iSkip);
+	}
 
-    /**
-     * (30) append element ModulePhase
-     * @return JDFModulePhase the element
-     */
-    public JDFModulePhase appendModulePhase()
-    {
-        return (JDFModulePhase) appendElement(ElementName.MODULEPHASE, null);
-    }
+	/**
+	 * (27) const get element ModulePhase
+	 * @param iSkip number of elements to skip
+	 * @return JDFModulePhase the element
+	 * default is getModulePhase(0)     */
+	public JDFModulePhase getModulePhase(int iSkip)
+	{
+		return (JDFModulePhase) getElement(ElementName.MODULEPHASE, null, iSkip);
+	}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+	/**
+	 * Get all ModulePhase from the current element
+	 * 
+	 * @return Collection<JDFModulePhase>, null if none are available
+	 */
+	public Collection<JDFModulePhase> getAllModulePhase()
+	{
+		final VElement vc = getChildElementVector(ElementName.MODULEPHASE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
+		final Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFModulePhase) vc.get(i));
+		}
 
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
+	/**
+	 * (30) append element ModulePhase
+	 * @return JDFModulePhase the element
+	 */
+	public JDFModulePhase appendModulePhase()
+	{
+		return (JDFModulePhase) appendElement(ElementName.MODULEPHASE, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
+
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

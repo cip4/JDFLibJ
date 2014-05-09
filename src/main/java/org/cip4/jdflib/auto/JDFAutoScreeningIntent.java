@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,202 +79,191 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanFrequencySelection;
 import org.cip4.jdflib.span.JDFSpanScreeningType;
-    /**
-    *****************************************************************************
-    class JDFAutoScreeningIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoScreeningIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DOTSIZE, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.FREQUENCY, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.FREQUENCYSELECTION, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGTYPE, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DOTSIZE, 0x66666611);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FREQUENCY, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FREQUENCYSELECTION, 0x66666611);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGTYPE, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoScreeningIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScreeningIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoScreeningIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScreeningIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScreeningIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoScreeningIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScreeningIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoScreeningIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoScreeningIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoScreeningIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoScreeningIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoScreeningIntent[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element DotSize
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getDotSize()
+	{
+		return (JDFNumberSpan) getElement(ElementName.DOTSIZE, null, 0);
+	}
 
+	/** (25) getCreateDotSize
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateDotSize()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.DOTSIZE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element DotSize
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendDotSize() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.DOTSIZE, 1, null);
+	}
 
-    /**
-     * (24) const get element DotSize
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getDotSize()
-    {
-        return (JDFNumberSpan) getElement(ElementName.DOTSIZE, null, 0);
-    }
+	/**
+	 * (24) const get element Frequency
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getFrequency()
+	{
+		return (JDFNumberSpan) getElement(ElementName.FREQUENCY, null, 0);
+	}
 
-    /** (25) getCreateDotSize
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateDotSize()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.DOTSIZE, null, 0);
-    }
+	/** (25) getCreateFrequency
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateFrequency()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.FREQUENCY, null, 0);
+	}
 
-    /**
-     * (29) append element DotSize
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendDotSize() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.DOTSIZE, 1, null);
-    }
+	/**
+	 * (29) append element Frequency
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendFrequency() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.FREQUENCY, 1, null);
+	}
 
-    /**
-     * (24) const get element Frequency
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getFrequency()
-    {
-        return (JDFNumberSpan) getElement(ElementName.FREQUENCY, null, 0);
-    }
+	/**
+	 * (24) const get element FrequencySelection
+	 * @return JDFSpanFrequencySelection the element
+	 */
+	public JDFSpanFrequencySelection getFrequencySelection()
+	{
+		return (JDFSpanFrequencySelection) getElement(ElementName.FREQUENCYSELECTION, null, 0);
+	}
 
-    /** (25) getCreateFrequency
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateFrequency()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.FREQUENCY, null, 0);
-    }
+	/** (25) getCreateFrequencySelection
+	 * 
+	 * @return JDFSpanFrequencySelection the element
+	 */
+	public JDFSpanFrequencySelection getCreateFrequencySelection()
+	{
+		return (JDFSpanFrequencySelection) getCreateElement_KElement(ElementName.FREQUENCYSELECTION, null, 0);
+	}
 
-    /**
-     * (29) append element Frequency
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendFrequency() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.FREQUENCY, 1, null);
-    }
+	/**
+	 * (29) append element FrequencySelection
+	 * @return JDFSpanFrequencySelection the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanFrequencySelection appendFrequencySelection() throws JDFException
+	{
+		return (JDFSpanFrequencySelection) appendElementN(ElementName.FREQUENCYSELECTION, 1, null);
+	}
 
-    /**
-     * (24) const get element FrequencySelection
-     * @return JDFSpanFrequencySelection the element
-     */
-    public JDFSpanFrequencySelection getFrequencySelection()
-    {
-        return (JDFSpanFrequencySelection) getElement(ElementName.FREQUENCYSELECTION, null, 0);
-    }
+	/**
+	 * (24) const get element ScreeningType
+	 * @return JDFSpanScreeningType the element
+	 */
+	public JDFSpanScreeningType getScreeningType()
+	{
+		return (JDFSpanScreeningType) getElement(ElementName.SCREENINGTYPE, null, 0);
+	}
 
-    /** (25) getCreateFrequencySelection
-     * 
-     * @return JDFSpanFrequencySelection the element
-     */
-    public JDFSpanFrequencySelection getCreateFrequencySelection()
-    {
-        return (JDFSpanFrequencySelection) getCreateElement_KElement(ElementName.FREQUENCYSELECTION, null, 0);
-    }
+	/** (25) getCreateScreeningType
+	 * 
+	 * @return JDFSpanScreeningType the element
+	 */
+	public JDFSpanScreeningType getCreateScreeningType()
+	{
+		return (JDFSpanScreeningType) getCreateElement_KElement(ElementName.SCREENINGTYPE, null, 0);
+	}
 
-    /**
-     * (29) append element FrequencySelection
-     * @return JDFSpanFrequencySelection the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanFrequencySelection appendFrequencySelection() throws JDFException
-    {
-        return (JDFSpanFrequencySelection) appendElementN(ElementName.FREQUENCYSELECTION, 1, null);
-    }
-
-    /**
-     * (24) const get element ScreeningType
-     * @return JDFSpanScreeningType the element
-     */
-    public JDFSpanScreeningType getScreeningType()
-    {
-        return (JDFSpanScreeningType) getElement(ElementName.SCREENINGTYPE, null, 0);
-    }
-
-    /** (25) getCreateScreeningType
-     * 
-     * @return JDFSpanScreeningType the element
-     */
-    public JDFSpanScreeningType getCreateScreeningType()
-    {
-        return (JDFSpanScreeningType) getCreateElement_KElement(ElementName.SCREENINGTYPE, null, 0);
-    }
-
-    /**
-     * (29) append element ScreeningType
-     * @return JDFSpanScreeningType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanScreeningType appendScreeningType() throws JDFException
-    {
-        return (JDFSpanScreeningType) appendElementN(ElementName.SCREENINGTYPE, 1, null);
-    }
+	/**
+	 * (29) append element ScreeningType
+	 * @return JDFSpanScreeningType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanScreeningType appendScreeningType() throws JDFException
+	{
+		return (JDFSpanScreeningType) appendElementN(ElementName.SCREENINGTYPE, 1, null);
+	}
 
 }// end namespace JDF

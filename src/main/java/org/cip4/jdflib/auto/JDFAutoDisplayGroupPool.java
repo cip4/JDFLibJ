@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDisplayGroup;
-    /**
-    *****************************************************************************
-    class JDFAutoDisplayGroupPool : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDisplayGroupPool : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDisplayGroupPool extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DISPLAYGROUP, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DISPLAYGROUP, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDisplayGroupPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroupPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDisplayGroupPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDisplayGroupPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroupPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDisplayGroupPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDisplayGroupPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroupPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDisplayGroupPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDisplayGroupPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDisplayGroupPool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateDisplayGroup
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDisplayGroup the element
+	 */
+	public JDFDisplayGroup getCreateDisplayGroup(int iSkip)
+	{
+		return (JDFDisplayGroup) getCreateElement_KElement(ElementName.DISPLAYGROUP, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element DisplayGroup
+	 * @param iSkip number of elements to skip
+	 * @return JDFDisplayGroup the element
+	 * default is getDisplayGroup(0)     */
+	public JDFDisplayGroup getDisplayGroup(int iSkip)
+	{
+		return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all DisplayGroup from the current element
+	 * 
+	 * @return Collection<JDFDisplayGroup>, null if none are available
+	 */
+	public Collection<JDFDisplayGroup> getAllDisplayGroup()
+	{
+		final VElement vc = getChildElementVector(ElementName.DISPLAYGROUP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateDisplayGroup
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDisplayGroup the element
-     */
-    public JDFDisplayGroup getCreateDisplayGroup(int iSkip)
-    {
-        return (JDFDisplayGroup)getCreateElement_KElement(ElementName.DISPLAYGROUP, null, iSkip);
-    }
+		final Vector<JDFDisplayGroup> v = new Vector<JDFDisplayGroup>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDisplayGroup) vc.get(i));
+		}
 
-    /**
-     * (27) const get element DisplayGroup
-     * @param iSkip number of elements to skip
-     * @return JDFDisplayGroup the element
-     * default is getDisplayGroup(0)     */
-    public JDFDisplayGroup getDisplayGroup(int iSkip)
-    {
-        return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all DisplayGroup from the current element
-     * 
-     * @return Collection<JDFDisplayGroup>, null if none are available
-     */
-    public Collection<JDFDisplayGroup> getAllDisplayGroup()
-    {
-        final VElement vc = getChildElementVector(ElementName.DISPLAYGROUP, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFDisplayGroup> v = new Vector<JDFDisplayGroup>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDisplayGroup) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element DisplayGroup
-     * @return JDFDisplayGroup the element
-     */
-    public JDFDisplayGroup appendDisplayGroup()
-    {
-        return (JDFDisplayGroup) appendElement(ElementName.DISPLAYGROUP, null);
-    }
+	/**
+	 * (30) append element DisplayGroup
+	 * @return JDFDisplayGroup the element
+	 */
+	public JDFDisplayGroup appendDisplayGroup()
+	{
+		return (JDFDisplayGroup) appendElement(ElementName.DISPLAYGROUP, null);
+	}
 
 }// end namespace JDF

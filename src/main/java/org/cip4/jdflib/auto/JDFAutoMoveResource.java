@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,154 +76,141 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoMoveResource : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMoveResource : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMoveResource extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCEID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCEID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMoveResource
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMoveResource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMoveResource
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMoveResource(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMoveResource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMoveResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMoveResource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMoveResource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMoveResource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMoveResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMoveResource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMoveResource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMoveResource[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMoveResource[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ResourceID
+	  * @param value the value to set the attribute to
+	  */
+	public void setResourceID(String value)
+	{
+		setAttribute(AttributeName.RESOURCEID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ResourceID
+	  * @return the value of the attribute
+	  */
+	public String getResourceID()
+	{
+		return getAttribute(AttributeName.RESOURCEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ResourceID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ResourceID
-          * @param value the value to set the attribute to
-          */
-        public void setResourceID(String value)
-        {
-            setAttribute(AttributeName.RESOURCEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParentJobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ParentJobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setParentJobID(String value)
+	{
+		setAttribute(AttributeName.PARENTJOBID, value, null);
+	}
 
-        /**
-          * (23) get String attribute ResourceID
-          * @return the value of the attribute
-          */
-        public String getResourceID()
-        {
-            return getAttribute(AttributeName.RESOURCEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ParentJobID
+	  * @return the value of the attribute
+	  */
+	public String getParentJobID()
+	{
+		return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ParentJobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ParentJobID
-          * @param value the value to set the attribute to
-          */
-        public void setParentJobID(String value)
-        {
-            setAttribute(AttributeName.PARENTJOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParentJobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ParentJobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setParentJobPartID(String value)
+	{
+		setAttribute(AttributeName.PARENTJOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute ParentJobID
-          * @return the value of the attribute
-          */
-        public String getParentJobID()
-        {
-            return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ParentJobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ParentJobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setParentJobPartID(String value)
-        {
-            setAttribute(AttributeName.PARENTJOBPARTID, value, null);
-        }
-
-        /**
-          * (23) get String attribute ParentJobPartID
-          * @return the value of the attribute
-          */
-        public String getParentJobPartID()
-        {
-            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ParentJobPartID
+	  * @return the value of the attribute
+	  */
+	public String getParentJobPartID()
+	{
+		return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

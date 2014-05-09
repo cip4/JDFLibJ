@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -92,683 +91,657 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /**
-    *****************************************************************************
-    class JDFAutoEmboss : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEmboss : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEmboss extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
-
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumDirection.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EDGEANGLE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.EDGESHAPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumEdgeShape.getEnum(0), "Rounded");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.EMBOSSINGTYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumEmbossingType.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.IMAGESIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.LEVEL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.TOOL, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
-
-    /**
-     * Constructor for JDFAutoEmboss
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEmboss(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoEmboss
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEmboss(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoEmboss
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEmboss(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEmboss[  --> " + super.toString() + " ]";
-    }
-
-
-        /**
-        * Enumeration strings for Direction
-        */
-
-        public static class EnumDirection extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumDirection(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDirection getEnum(String enumName)
-            {
-                return (EnumDirection) getEnum(EnumDirection.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDirection getEnum(int enumValue)
-            {
-                return (EnumDirection) getEnum(EnumDirection.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDirection.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDirection.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDirection.class);
-            }
-
-            public static final EnumDirection Both = new EnumDirection("Both");
-            public static final EnumDirection Flat = new EnumDirection("Flat");
-            public static final EnumDirection Raised = new EnumDirection("Raised");
-            public static final EnumDirection Depressed = new EnumDirection("Depressed");
-        }      
-
-
-
-        /**
-        * Enumeration strings for EdgeShape
-        */
-
-        public static class EnumEdgeShape extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumEdgeShape(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumEdgeShape getEnum(String enumName)
-            {
-                return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumEdgeShape getEnum(int enumValue)
-            {
-                return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumEdgeShape.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumEdgeShape.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumEdgeShape.class);
-            }
-
-            public static final EnumEdgeShape Beveled = new EnumEdgeShape("Beveled");
-            public static final EnumEdgeShape Rounded = new EnumEdgeShape("Rounded");
-        }      
-
-
-
-        /**
-        * Enumeration strings for EmbossingType
-        */
-
-        public static class EnumEmbossingType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumEmbossingType(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumEmbossingType getEnum(String enumName)
-            {
-                return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumEmbossingType getEnum(int enumValue)
-            {
-                return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumEmbossingType.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumEmbossingType.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumEmbossingType.class);
-            }
-
-            public static final EnumEmbossingType BlindEmbossing = new EnumEmbossingType("BlindEmbossing");
-            public static final EnumEmbossingType Braille = new EnumEmbossingType("Braille");
-            public static final EnumEmbossingType EmbossedFinish = new EnumEmbossingType("EmbossedFinish");
-            public static final EnumEmbossingType FoilEmbossing = new EnumEmbossingType("FoilEmbossing");
-            public static final EnumEmbossingType FoilStamping = new EnumEmbossingType("FoilStamping");
-            public static final EnumEmbossingType RegisteredEmbossing = new EnumEmbossingType("RegisteredEmbossing");
-        }      
-
-
-
-        /**
-        * Enumeration strings for Level
-        */
-
-        public static class EnumLevel extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumLevel(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumLevel getEnum(String enumName)
-            {
-                return (EnumLevel) getEnum(EnumLevel.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumLevel getEnum(int enumValue)
-            {
-                return (EnumLevel) getEnum(EnumLevel.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumLevel.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumLevel.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumLevel.class);
-            }
-
-            public static final EnumLevel SingleLevel = new EnumLevel("SingleLevel");
-            public static final EnumLevel MultiLevel = new EnumLevel("MultiLevel");
-            public static final EnumLevel Sculpted = new EnumLevel("Sculpted");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Direction
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Direction
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDirection(EnumDirection enumVar)
-        {
-            setAttribute(AttributeName.DIRECTION, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Direction
-          * @return the value of the attribute
-          */
-        public EnumDirection getDirection()
-        {
-            return EnumDirection.getEnum(getAttribute(AttributeName.DIRECTION, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EdgeAngle
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EdgeAngle
-          * @param value the value to set the attribute to
-          */
-        public void setEdgeAngle(double value)
-        {
-            setAttribute(AttributeName.EDGEANGLE, value, null);
-        }
-
-        /**
-          * (17) get double attribute EdgeAngle
-          * @return double the value of the attribute
-          */
-        public double getEdgeAngle()
-        {
-            return getRealAttribute(AttributeName.EDGEANGLE, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EdgeShape
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute EdgeShape
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setEdgeShape(EnumEdgeShape enumVar)
-        {
-            setAttribute(AttributeName.EDGESHAPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute EdgeShape
-          * @return the value of the attribute
-          */
-        public EnumEdgeShape getEdgeShape()
-        {
-            return EnumEdgeShape.getEnum(getAttribute(AttributeName.EDGESHAPE, null, "Rounded"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmbossingType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute EmbossingType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setEmbossingType(EnumEmbossingType enumVar)
-        {
-            setAttribute(AttributeName.EMBOSSINGTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute EmbossingType
-          * @return the value of the attribute
-          */
-        public EnumEmbossingType getEmbossingType()
-        {
-            return EnumEmbossingType.getEnum(getAttribute(AttributeName.EMBOSSINGTYPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Height
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Height
-          * @param value the value to set the attribute to
-          */
-        public void setHeight(double value)
-        {
-            setAttribute(AttributeName.HEIGHT, value, null);
-        }
-
-        /**
-          * (17) get double attribute Height
-          * @return double the value of the attribute
-          */
-        public double getHeight()
-        {
-            return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ImageSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ImageSize
-          * @param value the value to set the attribute to
-          */
-        public void setImageSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.IMAGESIZE, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute ImageSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getImageSize()
-        {
-            String strAttrName = getAttribute(AttributeName.IMAGESIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Level
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Level
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setLevel(EnumLevel enumVar)
-        {
-            setAttribute(AttributeName.LEVEL, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Level
-          * @return the value of the attribute
-          */
-        public EnumLevel getLevel()
-        {
-            return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Position
-          * @param value the value to set the attribute to
-          */
-        public void setPosition(JDFXYPair value)
-        {
-            setAttribute(AttributeName.POSITION, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute Position
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getPosition()
-        {
-            String strAttrName = getAttribute(AttributeName.POSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateIdentificationField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
-
-    /**
-     * (27) const get element IdentificationField
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
-
-    /**
-     * Get all IdentificationField from the current element
-     * 
-     * @return Collection<JDFIdentificationField>, null if none are available
-     */
-    public Collection<JDFIdentificationField> getAllIdentificationField()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIdentificationField) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField appendIdentificationField()
-    {
-        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
-
-    /** (25) getCreateMedia
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
-    }
-
-    /**
-     * (29) append element Media
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendMedia() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element Tool
-     * @return JDFMedia the element
-     */
-    public JDFMedia getTool()
-    {
-        return (JDFMedia) getElement(ElementName.TOOL, null, 0);
-    }
-
-    /** (25) getCreateTool
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateTool()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.TOOL, null, 0);
-    }
-
-    /**
-     * (29) append element Tool
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendTool() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.TOOL, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTool(JDFTool refTarget)
-    {
-        refElement(refTarget);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumDirection.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDGEANGLE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.EDGESHAPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumEdgeShape.getEnum(0), "Rounded");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMBOSSINGTYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumEmbossingType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.IMAGESIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LEVEL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TOOL, 0x66661111);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFAutoEmboss
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmboss(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoEmboss
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmboss(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoEmboss
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEmboss(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEmboss[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	* Enumeration strings for Direction
+	*/
+
+	public static class EnumDirection extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumDirection(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDirection getEnum(String enumName)
+		{
+			return (EnumDirection) getEnum(EnumDirection.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDirection getEnum(int enumValue)
+		{
+			return (EnumDirection) getEnum(EnumDirection.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDirection.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDirection.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDirection.class);
+		}
+
+		public static final EnumDirection Both = new EnumDirection("Both");
+		public static final EnumDirection Flat = new EnumDirection("Flat");
+		public static final EnumDirection Raised = new EnumDirection("Raised");
+		public static final EnumDirection Depressed = new EnumDirection("Depressed");
+	}
+
+	/**
+	* Enumeration strings for EdgeShape
+	*/
+
+	public static class EnumEdgeShape extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumEdgeShape(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumEdgeShape getEnum(String enumName)
+		{
+			return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumEdgeShape getEnum(int enumValue)
+		{
+			return (EnumEdgeShape) getEnum(EnumEdgeShape.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumEdgeShape.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumEdgeShape.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumEdgeShape.class);
+		}
+
+		public static final EnumEdgeShape Beveled = new EnumEdgeShape("Beveled");
+		public static final EnumEdgeShape Rounded = new EnumEdgeShape("Rounded");
+	}
+
+	/**
+	* Enumeration strings for EmbossingType
+	*/
+
+	public static class EnumEmbossingType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumEmbossingType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumEmbossingType getEnum(String enumName)
+		{
+			return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumEmbossingType getEnum(int enumValue)
+		{
+			return (EnumEmbossingType) getEnum(EnumEmbossingType.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumEmbossingType.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumEmbossingType.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumEmbossingType.class);
+		}
+
+		public static final EnumEmbossingType BlindEmbossing = new EnumEmbossingType("BlindEmbossing");
+		public static final EnumEmbossingType Braille = new EnumEmbossingType("Braille");
+		public static final EnumEmbossingType EmbossedFinish = new EnumEmbossingType("EmbossedFinish");
+		public static final EnumEmbossingType FoilEmbossing = new EnumEmbossingType("FoilEmbossing");
+		public static final EnumEmbossingType FoilStamping = new EnumEmbossingType("FoilStamping");
+		public static final EnumEmbossingType RegisteredEmbossing = new EnumEmbossingType("RegisteredEmbossing");
+	}
+
+	/**
+	* Enumeration strings for Level
+	*/
+
+	public static class EnumLevel extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumLevel(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumLevel getEnum(String enumName)
+		{
+			return (EnumLevel) getEnum(EnumLevel.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumLevel getEnum(int enumValue)
+		{
+			return (EnumLevel) getEnum(EnumLevel.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumLevel.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumLevel.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumLevel.class);
+		}
+
+		public static final EnumLevel SingleLevel = new EnumLevel("SingleLevel");
+		public static final EnumLevel MultiLevel = new EnumLevel("MultiLevel");
+		public static final EnumLevel Sculpted = new EnumLevel("Sculpted");
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Direction
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Direction
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDirection(EnumDirection enumVar)
+	{
+		setAttribute(AttributeName.DIRECTION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Direction
+	  * @return the value of the attribute
+	  */
+	public EnumDirection getDirection()
+	{
+		return EnumDirection.getEnum(getAttribute(AttributeName.DIRECTION, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EdgeAngle
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EdgeAngle
+	  * @param value the value to set the attribute to
+	  */
+	public void setEdgeAngle(double value)
+	{
+		setAttribute(AttributeName.EDGEANGLE, value, null);
+	}
+
+	/**
+	  * (17) get double attribute EdgeAngle
+	  * @return double the value of the attribute
+	  */
+	public double getEdgeAngle()
+	{
+		return getRealAttribute(AttributeName.EDGEANGLE, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EdgeShape
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute EdgeShape
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setEdgeShape(EnumEdgeShape enumVar)
+	{
+		setAttribute(AttributeName.EDGESHAPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute EdgeShape
+	  * @return the value of the attribute
+	  */
+	public EnumEdgeShape getEdgeShape()
+	{
+		return EnumEdgeShape.getEnum(getAttribute(AttributeName.EDGESHAPE, null, "Rounded"));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmbossingType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute EmbossingType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setEmbossingType(EnumEmbossingType enumVar)
+	{
+		setAttribute(AttributeName.EMBOSSINGTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute EmbossingType
+	  * @return the value of the attribute
+	  */
+	public EnumEmbossingType getEmbossingType()
+	{
+		return EnumEmbossingType.getEnum(getAttribute(AttributeName.EMBOSSINGTYPE, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Height
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Height
+	  * @param value the value to set the attribute to
+	  */
+	public void setHeight(double value)
+	{
+		setAttribute(AttributeName.HEIGHT, value, null);
+	}
+
+	/**
+	  * (17) get double attribute Height
+	  * @return double the value of the attribute
+	  */
+	public double getHeight()
+	{
+		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ImageSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ImageSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setImageSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.IMAGESIZE, value, null);
+	}
+
+	/**
+	  * (20) get JDFXYPair attribute ImageSize
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getImageSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.IMAGESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Level
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Level
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setLevel(EnumLevel enumVar)
+	{
+		setAttribute(AttributeName.LEVEL, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Level
+	  * @return the value of the attribute
+	  */
+	public EnumLevel getLevel()
+	{
+		return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Position
+	  * @param value the value to set the attribute to
+	  */
+	public void setPosition(JDFXYPair value)
+	{
+		setAttribute(AttributeName.POSITION, value, null);
+	}
+
+	/**
+	  * (20) get JDFXYPair attribute Position
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getPosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/** (26) getCreateIdentificationField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element IdentificationField
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 * default is getIdentificationField(0)     */
+	public JDFIdentificationField getIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
+
+	/**
+	 * Get all IdentificationField from the current element
+	 * 
+	 * @return Collection<JDFIdentificationField>, null if none are available
+	 */
+	public Collection<JDFIdentificationField> getAllIdentificationField()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIdentificationField) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField appendIdentificationField()
+	{
+		return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
+
+	/** (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+	}
+
+	/**
+	 * (29) append element Media
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendMedia() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element Tool
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getTool()
+	{
+		return (JDFMedia) getElement(ElementName.TOOL, null, 0);
+	}
+
+	/** (25) getCreateTool
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateTool()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.TOOL, null, 0);
+	}
+
+	/**
+	 * (29) append element Tool
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendTool() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.TOOL, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTool(JDFTool refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

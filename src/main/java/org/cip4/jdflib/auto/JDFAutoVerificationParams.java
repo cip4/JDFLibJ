@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,202 +77,186 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoVerificationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoVerificationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoVerificationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FIELDRANGE, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.INSERTERROR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.INSERTOK, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FIELDRANGE, 0x44433333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INSERTERROR, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INSERTOK, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoVerificationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoVerificationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoVerificationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoVerificationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoVerificationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoVerificationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoVerificationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoVerificationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoVerificationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoVerificationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoVerificationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FieldRange
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FieldRange
+	  * @param value the value to set the attribute to
+	  */
+	public void setFieldRange(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.FIELDRANGE, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerRangeList attribute FieldRange
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getFieldRange()
+	{
+		final String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InsertError
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute InsertError
+	  * @param value the value to set the attribute to
+	  */
+	public void setInsertError(String value)
+	{
+		setAttribute(AttributeName.INSERTERROR, value, null);
+	}
 
+	/**
+	  * (23) get String attribute InsertError
+	  * @return the value of the attribute
+	  */
+	public String getInsertError()
+	{
+		return getAttribute(AttributeName.INSERTERROR, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FieldRange
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FieldRange
-          * @param value the value to set the attribute to
-          */
-        public void setFieldRange(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.FIELDRANGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InsertOK
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute InsertOK
+	  * @param value the value to set the attribute to
+	  */
+	public void setInsertOK(String value)
+	{
+		setAttribute(AttributeName.INSERTOK, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute FieldRange
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getFieldRange()
-        {
-            String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute InsertOK
+	  * @return the value of the attribute
+	  */
+	public String getInsertOK()
+	{
+		return getAttribute(AttributeName.INSERTOK, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute InsertError
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute InsertError
-          * @param value the value to set the attribute to
-          */
-        public void setInsertError(String value)
-        {
-            setAttribute(AttributeName.INSERTERROR, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Tolerance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Tolerance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTolerance(double value)
+	{
+		setAttribute(AttributeName.TOLERANCE, value, null);
+	}
 
-        /**
-          * (23) get String attribute InsertError
-          * @return the value of the attribute
-          */
-        public String getInsertError()
-        {
-            return getAttribute(AttributeName.INSERTERROR, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute InsertOK
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute InsertOK
-          * @param value the value to set the attribute to
-          */
-        public void setInsertOK(String value)
-        {
-            setAttribute(AttributeName.INSERTOK, value, null);
-        }
-
-        /**
-          * (23) get String attribute InsertOK
-          * @return the value of the attribute
-          */
-        public String getInsertOK()
-        {
-            return getAttribute(AttributeName.INSERTOK, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Tolerance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Tolerance
-          * @param value the value to set the attribute to
-          */
-        public void setTolerance(double value)
-        {
-            setAttribute(AttributeName.TOLERANCE, value, null);
-        }
-
-        /**
-          * (17) get double attribute Tolerance
-          * @return double the value of the attribute
-          */
-        public double getTolerance()
-        {
-            return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute Tolerance
+	  * @return double the value of the attribute
+	  */
+	public double getTolerance()
+	{
+		return getRealAttribute(AttributeName.TOLERANCE, null, 0.0);
+	}
 
 }// end namespace JDF

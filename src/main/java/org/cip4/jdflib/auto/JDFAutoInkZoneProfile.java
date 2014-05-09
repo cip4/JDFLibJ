@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,208 +74,191 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoInkZoneProfile : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoInkZoneProfile : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoInkZoneProfile extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ZONESETTINGSX, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONESETTINGSY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ZONESETTINGSX, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ZONEWIDTH, 0x22222222, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ZONESETTINGSY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoInkZoneProfile
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInkZoneProfile
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoInkZoneProfile(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInkZoneProfile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInkZoneProfile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoInkZoneProfile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInkZoneProfile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoInkZoneProfile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoInkZoneProfile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoInkZoneProfile[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoInkZoneProfile[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneSettingsX
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ZoneSettingsX
+	  * @param value the value to set the attribute to
+	  */
+	public void setZoneSettingsX(JDFNumberList value)
+	{
+		setAttribute(AttributeName.ZONESETTINGSX, value, null);
+	}
 
+	/**
+	  * (20) get JDFNumberList attribute ZoneSettingsX
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getZoneSettingsX()
+	{
+		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ZoneWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setZoneWidth(double value)
+	{
+		setAttribute(AttributeName.ZONEWIDTH, value, null);
+	}
 
+	/**
+	  * (17) get double attribute ZoneWidth
+	  * @return double the value of the attribute
+	  */
+	public double getZoneWidth()
+	{
+		return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ZoneSettingsX
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ZoneSettingsX
-          * @param value the value to set the attribute to
-          */
-        public void setZoneSettingsX(JDFNumberList value)
-        {
-            setAttribute(AttributeName.ZONESETTINGSX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneHeight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ZoneHeight
+	  * @param value the value to set the attribute to
+	  */
+	public void setZoneHeight(double value)
+	{
+		setAttribute(AttributeName.ZONEHEIGHT, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute ZoneSettingsX
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getZoneSettingsX()
-        {
-            String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute ZoneHeight
+	  * @return double the value of the attribute
+	  */
+	public double getZoneHeight()
+	{
+		return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ZoneWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ZoneWidth
-          * @param value the value to set the attribute to
-          */
-        public void setZoneWidth(double value)
-        {
-            setAttribute(AttributeName.ZONEWIDTH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ZoneSettingsY
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ZoneSettingsY
+	  * @param value the value to set the attribute to
+	  */
+	public void setZoneSettingsY(JDFNumberList value)
+	{
+		setAttribute(AttributeName.ZONESETTINGSY, value, null);
+	}
 
-        /**
-          * (17) get double attribute ZoneWidth
-          * @return double the value of the attribute
-          */
-        public double getZoneWidth()
-        {
-            return getRealAttribute(AttributeName.ZONEWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ZoneHeight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ZoneHeight
-          * @param value the value to set the attribute to
-          */
-        public void setZoneHeight(double value)
-        {
-            setAttribute(AttributeName.ZONEHEIGHT, value, null);
-        }
-
-        /**
-          * (17) get double attribute ZoneHeight
-          * @return double the value of the attribute
-          */
-        public double getZoneHeight()
-        {
-            return getRealAttribute(AttributeName.ZONEHEIGHT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ZoneSettingsY
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ZoneSettingsY
-          * @param value the value to set the attribute to
-          */
-        public void setZoneSettingsY(JDFNumberList value)
-        {
-            setAttribute(AttributeName.ZONESETTINGSY, value, null);
-        }
-
-        /**
-          * (20) get JDFNumberList attribute ZoneSettingsY
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getZoneSettingsY()
-        {
-            String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFNumberList attribute ZoneSettingsY
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getZoneSettingsY()
+	{
+		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

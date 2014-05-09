@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,332 +88,317 @@ import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoPrintCondition : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPrintCondition : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPrintCondition extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222211, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.AIMCURVE, 0x33333311, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222211, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.AIMCURVE, 0x33333311, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666611);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPrintCondition
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPrintCondition
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPrintCondition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPrintCondition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPrintCondition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPrintCondition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPrintCondition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPrintCondition[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPrintCondition[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AimCurve
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AimCurve
+	  * @param value the value to set the attribute to
+	  */
+	public void setAimCurve(JDFTransferFunction value)
+	{
+		setAttribute(AttributeName.AIMCURVE, value, null);
+	}
 
+	/**
+	  * (20) get JDFTransferFunction attribute AimCurve
+	  * @return JDFTransferFunction the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFTransferFunction
+	  */
+	public JDFTransferFunction getAimCurve()
+	{
+		final String strAttrName = getAttribute(AttributeName.AIMCURVE, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Density
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Density
+	  * @param value the value to set the attribute to
+	  */
+	public void setDensity(double value)
+	{
+		setAttribute(AttributeName.DENSITY, value, null);
+	}
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute Density
+	  * @return double the value of the attribute
+	  */
+	public double getDensity()
+	{
+		return getRealAttribute(AttributeName.DENSITY, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AimCurve
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AimCurve
-          * @param value the value to set the attribute to
-          */
-        public void setAimCurve(JDFTransferFunction value)
-        {
-            setAttribute(AttributeName.AIMCURVE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFTransferFunction attribute AimCurve
-          * @return JDFTransferFunction the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFTransferFunction
-          */
-        public JDFTransferFunction getAimCurve()
-        {
-            String strAttrName = getAttribute(AttributeName.AIMCURVE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element ColorMeasurementConditions
+	 * @return JDFColorMeasurementConditions the element
+	 */
+	public JDFColorMeasurementConditions getColorMeasurementConditions()
+	{
+		return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Density
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Density
-          * @param value the value to set the attribute to
-          */
-        public void setDensity(double value)
-        {
-            setAttribute(AttributeName.DENSITY, value, null);
-        }
+	/** (25) getCreateColorMeasurementConditions
+	 * 
+	 * @return JDFColorMeasurementConditions the element
+	 */
+	public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
+	{
+		return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
+	}
 
-        /**
-          * (17) get double attribute Density
-          * @return double the value of the attribute
-          */
-        public double getDensity()
-        {
-            return getRealAttribute(AttributeName.DENSITY, null, 0.0);
-        }
+	/**
+	 * (29) append element ColorMeasurementConditions
+	 * @return JDFColorMeasurementConditions the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
+	{
+		return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element ColorMeasurementConditions
-     * @return JDFColorMeasurementConditions the element
-     */
-    public JDFColorMeasurementConditions getColorMeasurementConditions()
-    {
-        return (JDFColorMeasurementConditions) getElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
-    }
+	/**
+	 * (24) const get element Device
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
 
-    /** (25) getCreateColorMeasurementConditions
-     * 
-     * @return JDFColorMeasurementConditions the element
-     */
-    public JDFColorMeasurementConditions getCreateColorMeasurementConditions()
-    {
-        return (JDFColorMeasurementConditions) getCreateElement_KElement(ElementName.COLORMEASUREMENTCONDITIONS, null, 0);
-    }
+	/** (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
+	}
 
-    /**
-     * (29) append element ColorMeasurementConditions
-     * @return JDFColorMeasurementConditions the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFColorMeasurementConditions appendColorMeasurementConditions() throws JDFException
-    {
-        return (JDFColorMeasurementConditions) appendElementN(ElementName.COLORMEASUREMENTCONDITIONS, 1, null);
-    }
+	/**
+	 * (29) append element Device
+	 * @return JDFDevice the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFDevice appendDevice() throws JDFException
+	{
+		return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refDevice(JDFDevice refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element Device
-     * @return JDFDevice the element
-     */
-    public JDFDevice getDevice()
-    {
-        return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
-    }
+	/** (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-    /** (25) getCreateDevice
-     * 
-     * @return JDFDevice the element
-     */
-    public JDFDevice getCreateDevice()
-    {
-        return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
-    }
+	/**
+	 * (27) const get element FileSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 * default is getFileSpec(0)     */
+	public JDFFileSpec getFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-    /**
-     * (29) append element Device
-     * @return JDFDevice the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFDevice appendDevice() throws JDFException
-    {
-        return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
-    }
+	/**
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDevice(JDFDevice refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFileSpec) vc.get(i));
+		}
 
-    /** (26) getCreateFileSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec(int iSkip)
-    {
-        return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element FileSpec
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     * default is getFileSpec(0)     */
-    public JDFFileSpec getFileSpec(int iSkip)
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
-    }
+	/**
+	 * (30) append element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
+	}
 
-    /**
-     * Get all FileSpec from the current element
-     * 
-     * @return Collection<JDFFileSpec>, null if none are available
-     */
-    public Collection<JDFFileSpec> getAllFileSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFileSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec appendFileSpec()
-    {
-        return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
-    /**
-    *****************************************************************************
-    class JDFAutoTestPool : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTestPool : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTestPool extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TEST, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TEST, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTestPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTestPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTestPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTestPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTestPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTestPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTestPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTestPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTestPool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateTest
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTest the element
+	 */
+	public JDFTest getCreateTest(int iSkip)
+	{
+		return (JDFTest) getCreateElement_KElement(ElementName.TEST, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Test
+	 * @param iSkip number of elements to skip
+	 * @return JDFTest the element
+	 * default is getTest(0)     */
+	public JDFTest getTest(int iSkip)
+	{
+		return (JDFTest) getElement(ElementName.TEST, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Test from the current element
+	 * 
+	 * @return Collection<JDFTest>, null if none are available
+	 */
+	public Collection<JDFTest> getAllTest()
+	{
+		final VElement vc = getChildElementVector(ElementName.TEST, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateTest
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTest the element
-     */
-    public JDFTest getCreateTest(int iSkip)
-    {
-        return (JDFTest)getCreateElement_KElement(ElementName.TEST, null, iSkip);
-    }
+		final Vector<JDFTest> v = new Vector<JDFTest>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTest) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Test
-     * @param iSkip number of elements to skip
-     * @return JDFTest the element
-     * default is getTest(0)     */
-    public JDFTest getTest(int iSkip)
-    {
-        return (JDFTest) getElement(ElementName.TEST, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Test from the current element
-     * 
-     * @return Collection<JDFTest>, null if none are available
-     */
-    public Collection<JDFTest> getAllTest()
-    {
-        final VElement vc = getChildElementVector(ElementName.TEST, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTest> v = new Vector<JDFTest>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTest) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Test
-     * @return JDFTest the element
-     */
-    public JDFTest appendTest()
-    {
-        return (JDFTest) appendElement(ElementName.TEST, null);
-    }
+	/**
+	 * (30) append element Test
+	 * @return JDFTest the element
+	 */
+	public JDFTest appendTest()
+	{
+		return (JDFTest) appendElement(ElementName.TEST, null);
+	}
 
 }// end namespace JDF

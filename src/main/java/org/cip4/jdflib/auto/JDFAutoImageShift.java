@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,316 +79,297 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-    /**
-    *****************************************************************************
-    class JDFAutoImageShift : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoImageShift : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoImageShift extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTBACK, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTBACK, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoImageShift
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageShift
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoImageShift(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoImageShift
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageShift
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoImageShift(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoImageShift
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageShift
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoImageShift(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoImageShift[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for PositionX
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoImageShift[  --> " + super.toString() + " ]";
-    }
+	public static class EnumPositionX extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPositionX(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for PositionX
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPositionX getEnum(String enumName)
+		{
+			return (EnumPositionX) getEnum(EnumPositionX.class, enumName);
+		}
 
-        public static class EnumPositionX extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPositionX getEnum(int enumValue)
+		{
+			return (EnumPositionX) getEnum(EnumPositionX.class, enumValue);
+		}
 
-            private EnumPositionX(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPositionX.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPositionX getEnum(String enumName)
-            {
-                return (EnumPositionX) getEnum(EnumPositionX.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPositionX.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPositionX getEnum(int enumValue)
-            {
-                return (EnumPositionX) getEnum(EnumPositionX.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPositionX.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPositionX.class);
-            }
+		public static final EnumPositionX Left = new EnumPositionX("Left");
+		public static final EnumPositionX Right = new EnumPositionX("Right");
+		public static final EnumPositionX Center = new EnumPositionX("Center");
+		public static final EnumPositionX Spine = new EnumPositionX("Spine");
+		public static final EnumPositionX None = new EnumPositionX("None");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPositionX.class);
-            }
+	/**
+	* Enumeration strings for PositionY
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPositionX.class);
-            }
+	public static class EnumPositionY extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumPositionX Left = new EnumPositionX("Left");
-            public static final EnumPositionX Right = new EnumPositionX("Right");
-            public static final EnumPositionX Center = new EnumPositionX("Center");
-            public static final EnumPositionX Spine = new EnumPositionX("Spine");
-            public static final EnumPositionX None = new EnumPositionX("None");
-        }      
+		private EnumPositionY(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPositionY getEnum(String enumName)
+		{
+			return (EnumPositionY) getEnum(EnumPositionY.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPositionY getEnum(int enumValue)
+		{
+			return (EnumPositionY) getEnum(EnumPositionY.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for PositionY
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPositionY.class);
+		}
 
-        public static class EnumPositionY extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPositionY.class);
+		}
 
-            private EnumPositionY(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPositionY.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPositionY getEnum(String enumName)
-            {
-                return (EnumPositionY) getEnum(EnumPositionY.class, enumName);
-            }
+		public static final EnumPositionY Bottom = new EnumPositionY("Bottom");
+		public static final EnumPositionY Top = new EnumPositionY("Top");
+		public static final EnumPositionY Center = new EnumPositionY("Center");
+		public static final EnumPositionY Spine = new EnumPositionY("Spine");
+		public static final EnumPositionY None = new EnumPositionY("None");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPositionY getEnum(int enumValue)
-            {
-                return (EnumPositionY) getEnum(EnumPositionY.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPositionY.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PositionX
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PositionX
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPositionX(EnumPositionX enumVar)
+	{
+		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPositionY.class);
-            }
+	/**
+	  * (9) get attribute PositionX
+	  * @return the value of the attribute
+	  */
+	public EnumPositionX getPositionX()
+	{
+		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPositionY.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PositionY
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PositionY
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPositionY(EnumPositionY enumVar)
+	{
+		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumPositionY Bottom = new EnumPositionY("Bottom");
-            public static final EnumPositionY Top = new EnumPositionY("Top");
-            public static final EnumPositionY Center = new EnumPositionY("Center");
-            public static final EnumPositionY Spine = new EnumPositionY("Spine");
-            public static final EnumPositionY None = new EnumPositionY("None");
-        }      
+	/**
+	  * (9) get attribute PositionY
+	  * @return the value of the attribute
+	  */
+	public EnumPositionY getPositionY()
+	{
+		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShiftBack
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ShiftBack
+	  * @param value the value to set the attribute to
+	  */
+	public void setShiftBack(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SHIFTBACK, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute ShiftBack
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getShiftBack()
+	{
+		final String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PositionX
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PositionX
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPositionX(EnumPositionX enumVar)
-        {
-            setAttribute(AttributeName.POSITIONX, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShiftFront
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ShiftFront
+	  * @param value the value to set the attribute to
+	  */
+	public void setShiftFront(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SHIFTFRONT, value, null);
+	}
 
-        /**
-          * (9) get attribute PositionX
-          * @return the value of the attribute
-          */
-        public EnumPositionX getPositionX()
-        {
-            return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PositionY
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PositionY
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPositionY(EnumPositionY enumVar)
-        {
-            setAttribute(AttributeName.POSITIONY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute PositionY
-          * @return the value of the attribute
-          */
-        public EnumPositionY getPositionY()
-        {
-            return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShiftBack
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ShiftBack
-          * @param value the value to set the attribute to
-          */
-        public void setShiftBack(JDFXYPair value)
-        {
-            setAttribute(AttributeName.SHIFTBACK, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute ShiftBack
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getShiftBack()
-        {
-            String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShiftFront
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ShiftFront
-          * @param value the value to set the attribute to
-          */
-        public void setShiftFront(JDFXYPair value)
-        {
-            setAttribute(AttributeName.SHIFTFRONT, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute ShiftFront
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getShiftFront()
-        {
-            String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute ShiftFront
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getShiftFront()
+	{
+		final String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

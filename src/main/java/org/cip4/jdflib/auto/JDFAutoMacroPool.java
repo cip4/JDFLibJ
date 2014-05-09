@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFmacro;
-    /**
-    *****************************************************************************
-    class JDFAutoMacroPool : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMacroPool : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMacroPool extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MACRO, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MACRO, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMacroPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMacroPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMacroPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMacroPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMacroPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMacroPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMacroPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMacroPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMacroPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMacroPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMacroPool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreatemacro
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFmacro the element
+	 */
+	public JDFmacro getCreatemacro(int iSkip)
+	{
+		return (JDFmacro) getCreateElement_KElement(ElementName.MACRO, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element macro
+	 * @param iSkip number of elements to skip
+	 * @return JDFmacro the element
+	 * default is getmacro(0)     */
+	public JDFmacro getmacro(int iSkip)
+	{
+		return (JDFmacro) getElement(ElementName.MACRO, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all macro from the current element
+	 * 
+	 * @return Collection<JDFmacro>, null if none are available
+	 */
+	public Collection<JDFmacro> getAllmacro()
+	{
+		final VElement vc = getChildElementVector(ElementName.MACRO, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreatemacro
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFmacro the element
-     */
-    public JDFmacro getCreatemacro(int iSkip)
-    {
-        return (JDFmacro)getCreateElement_KElement(ElementName.MACRO, null, iSkip);
-    }
+		final Vector<JDFmacro> v = new Vector<JDFmacro>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFmacro) vc.get(i));
+		}
 
-    /**
-     * (27) const get element macro
-     * @param iSkip number of elements to skip
-     * @return JDFmacro the element
-     * default is getmacro(0)     */
-    public JDFmacro getmacro(int iSkip)
-    {
-        return (JDFmacro) getElement(ElementName.MACRO, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all macro from the current element
-     * 
-     * @return Collection<JDFmacro>, null if none are available
-     */
-    public Collection<JDFmacro> getAllmacro()
-    {
-        final VElement vc = getChildElementVector(ElementName.MACRO, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFmacro> v = new Vector<JDFmacro>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFmacro) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element macro
-     * @return JDFmacro the element
-     */
-    public JDFmacro appendmacro()
-    {
-        return (JDFmacro) appendElement(ElementName.MACRO, null);
-    }
+	/**
+	 * (30) append element macro
+	 * @return JDFmacro the element
+	 */
+	public JDFmacro appendmacro()
+	{
+		return (JDFmacro) appendElement(ElementName.MACRO, null);
+	}
 
 }// end namespace JDF

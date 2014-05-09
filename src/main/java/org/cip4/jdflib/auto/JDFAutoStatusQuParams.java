@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,444 +88,423 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
-    /**
-    *****************************************************************************
-    class JDFAutoStatusQuParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStatusQuParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStatusQuParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0), "None");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0), "None");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStatusQuParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusQuParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStatusQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStatusQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStatusQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStatusQuParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for DeviceDetails
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStatusQuParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumDeviceDetails extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDeviceDetails(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for DeviceDetails
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDeviceDetails getEnum(String enumName)
+		{
+			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumName);
+		}
 
-        public static class EnumDeviceDetails extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDeviceDetails getEnum(int enumValue)
+		{
+			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumValue);
+		}
 
-            private EnumDeviceDetails(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDeviceDetails.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDeviceDetails getEnum(String enumName)
-            {
-                return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDeviceDetails.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDeviceDetails getEnum(int enumValue)
-            {
-                return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDeviceDetails.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDeviceDetails.class);
-            }
+		public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
+		public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
+		public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
+		public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
+		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
+		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDeviceDetails.class);
-            }
+	/**
+	* Enumeration strings for JobDetails
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDeviceDetails.class);
-            }
+	public static class EnumJobDetails extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
-            public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
-            public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
-            public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
-            public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
-            public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
-        }      
+		private EnumJobDetails(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumJobDetails getEnum(String enumName)
+		{
+			return (EnumJobDetails) getEnum(EnumJobDetails.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumJobDetails getEnum(int enumValue)
+		{
+			return (EnumJobDetails) getEnum(EnumJobDetails.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for JobDetails
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumJobDetails.class);
+		}
 
-        public static class EnumJobDetails extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumJobDetails.class);
+		}
 
-            private EnumJobDetails(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumJobDetails.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumJobDetails getEnum(String enumName)
-            {
-                return (EnumJobDetails) getEnum(EnumJobDetails.class, enumName);
-            }
+		public static final EnumJobDetails None = new EnumJobDetails("None");
+		public static final EnumJobDetails MIS = new EnumJobDetails("MIS");
+		public static final EnumJobDetails Brief = new EnumJobDetails("Brief");
+		public static final EnumJobDetails Full = new EnumJobDetails("Full");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumJobDetails getEnum(int enumValue)
-            {
-                return (EnumJobDetails) getEnum(EnumJobDetails.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumJobDetails.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute DeviceDetails
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDeviceDetails(EnumDeviceDetails enumVar)
+	{
+		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumJobDetails.class);
-            }
+	/**
+	  * (9) get attribute DeviceDetails
+	  * @return the value of the attribute
+	  */
+	public EnumDeviceDetails getDeviceDetails()
+	{
+		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumJobDetails.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmployeeInfo
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EmployeeInfo
+	  * @param value the value to set the attribute to
+	  */
+	public void setEmployeeInfo(boolean value)
+	{
+		setAttribute(AttributeName.EMPLOYEEINFO, value, null);
+	}
 
-            public static final EnumJobDetails None = new EnumJobDetails("None");
-            public static final EnumJobDetails MIS = new EnumJobDetails("MIS");
-            public static final EnumJobDetails Brief = new EnumJobDetails("Brief");
-            public static final EnumJobDetails Full = new EnumJobDetails("Full");
-        }      
+	/**
+	  * (18) get boolean attribute EmployeeInfo
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEmployeeInfo()
+	{
+		return getBoolAttribute(AttributeName.EMPLOYEEINFO, null, false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute JobDetails
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setJobDetails(EnumJobDetails enumVar)
+	{
+		setAttribute(AttributeName.JOBDETAILS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute JobDetails
+	  * @return the value of the attribute
+	  */
+	public EnumJobDetails getJobDetails()
+	{
+		return EnumJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute DeviceDetails
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDeviceDetails(EnumDeviceDetails enumVar)
-        {
-            setAttribute(AttributeName.DEVICEDETAILS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-        /**
-          * (9) get attribute DeviceDetails
-          * @return the value of the attribute
-          */
-        public EnumDeviceDetails getDeviceDetails()
-        {
-            return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
-        }
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmployeeInfo
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EmployeeInfo
-          * @param value the value to set the attribute to
-          */
-        public void setEmployeeInfo(boolean value)
-        {
-            setAttribute(AttributeName.EMPLOYEEINFO, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute EmployeeInfo
-          * @return boolean the value of the attribute
-          */
-        public boolean getEmployeeInfo()
-        {
-            return getBoolAttribute(AttributeName.EMPLOYEEINFO, null, false);
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute JobDetails
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setJobDetails(EnumJobDetails enumVar)
-        {
-            setAttribute(AttributeName.JOBDETAILS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (9) get attribute JobDetails
-          * @return the value of the attribute
-          */
-        public EnumJobDetails getJobDetails()
-        {
-            return EnumJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueInfo
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueInfo
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueInfo(boolean value)
+	{
+		setAttribute(AttributeName.QUEUEINFO, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (18) get boolean attribute QueueInfo
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getQueueInfo()
+	{
+		return getBoolAttribute(AttributeName.QUEUEINFO, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueInfo
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueInfo
-          * @param value the value to set the attribute to
-          */
-        public void setQueueInfo(boolean value)
-        {
-            setAttribute(AttributeName.QUEUEINFO, value, null);
-        }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-        /**
-          * (18) get boolean attribute QueueInfo
-          * @return boolean the value of the attribute
-          */
-        public boolean getQueueInfo()
-        {
-            return getBoolAttribute(AttributeName.QUEUEINFO, null, false);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

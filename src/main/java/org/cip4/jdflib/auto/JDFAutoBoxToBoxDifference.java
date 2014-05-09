@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,265 +80,249 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoBoxToBoxDifference : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBoxToBoxDifference : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FROMBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFromBox.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TOBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumToBox.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROMBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFromBox.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumToBox.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBoxToBoxDifference
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxToBoxDifference(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxToBoxDifference
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxToBoxDifference(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxToBoxDifference
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxToBoxDifference(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxToBoxDifference
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxToBoxDifference(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxToBoxDifference
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBoxToBoxDifference(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxToBoxDifference
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBoxToBoxDifference(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBoxToBoxDifference[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for FromBox
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBoxToBoxDifference[  --> " + super.toString() + " ]";
-    }
+	public static class EnumFromBox extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumFromBox(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for FromBox
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFromBox getEnum(String enumName)
+		{
+			return (EnumFromBox) getEnum(EnumFromBox.class, enumName);
+		}
 
-        public static class EnumFromBox extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFromBox getEnum(int enumValue)
+		{
+			return (EnumFromBox) getEnum(EnumFromBox.class, enumValue);
+		}
 
-            private EnumFromBox(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFromBox.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFromBox getEnum(String enumName)
-            {
-                return (EnumFromBox) getEnum(EnumFromBox.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFromBox.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFromBox getEnum(int enumValue)
-            {
-                return (EnumFromBox) getEnum(EnumFromBox.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFromBox.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFromBox.class);
-            }
+		public static final EnumFromBox ArtBox = new EnumFromBox("ArtBox");
+		public static final EnumFromBox BleedBox = new EnumFromBox("BleedBox");
+		public static final EnumFromBox CropBox = new EnumFromBox("CropBox");
+		public static final EnumFromBox MarginsBox = new EnumFromBox("MarginsBox");
+		public static final EnumFromBox MediaBox = new EnumFromBox("MediaBox");
+		public static final EnumFromBox SlugBox = new EnumFromBox("SlugBox");
+		public static final EnumFromBox TrimBox = new EnumFromBox("TrimBox");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFromBox.class);
-            }
+	/**
+	* Enumeration strings for ToBox
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFromBox.class);
-            }
+	public static class EnumToBox extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumFromBox ArtBox = new EnumFromBox("ArtBox");
-            public static final EnumFromBox BleedBox = new EnumFromBox("BleedBox");
-            public static final EnumFromBox CropBox = new EnumFromBox("CropBox");
-            public static final EnumFromBox MarginsBox = new EnumFromBox("MarginsBox");
-            public static final EnumFromBox MediaBox = new EnumFromBox("MediaBox");
-            public static final EnumFromBox SlugBox = new EnumFromBox("SlugBox");
-            public static final EnumFromBox TrimBox = new EnumFromBox("TrimBox");
-        }      
+		private EnumToBox(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumToBox getEnum(String enumName)
+		{
+			return (EnumToBox) getEnum(EnumToBox.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumToBox getEnum(int enumValue)
+		{
+			return (EnumToBox) getEnum(EnumToBox.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for ToBox
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumToBox.class);
+		}
 
-        public static class EnumToBox extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumToBox.class);
+		}
 
-            private EnumToBox(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumToBox.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumToBox getEnum(String enumName)
-            {
-                return (EnumToBox) getEnum(EnumToBox.class, enumName);
-            }
+		public static final EnumToBox ArtBox = new EnumToBox("ArtBox");
+		public static final EnumToBox BleedBox = new EnumToBox("BleedBox");
+		public static final EnumToBox CropBox = new EnumToBox("CropBox");
+		public static final EnumToBox MarginsBox = new EnumToBox("MarginsBox");
+		public static final EnumToBox MediaBox = new EnumToBox("MediaBox");
+		public static final EnumToBox SlugBox = new EnumToBox("SlugBox");
+		public static final EnumToBox TrimBox = new EnumToBox("TrimBox");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumToBox getEnum(int enumValue)
-            {
-                return (EnumToBox) getEnum(EnumToBox.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumToBox.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FromBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FromBox
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFromBox(EnumFromBox enumVar)
+	{
+		setAttribute(AttributeName.FROMBOX, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumToBox.class);
-            }
+	/**
+	  * (9) get attribute FromBox
+	  * @return the value of the attribute
+	  */
+	public EnumFromBox getFromBox()
+	{
+		return EnumFromBox.getEnum(getAttribute(AttributeName.FROMBOX, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumToBox.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ToBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ToBox
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setToBox(EnumToBox enumVar)
+	{
+		setAttribute(AttributeName.TOBOX, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumToBox ArtBox = new EnumToBox("ArtBox");
-            public static final EnumToBox BleedBox = new EnumToBox("BleedBox");
-            public static final EnumToBox CropBox = new EnumToBox("CropBox");
-            public static final EnumToBox MarginsBox = new EnumToBox("MarginsBox");
-            public static final EnumToBox MediaBox = new EnumToBox("MediaBox");
-            public static final EnumToBox SlugBox = new EnumToBox("SlugBox");
-            public static final EnumToBox TrimBox = new EnumToBox("TrimBox");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FromBox
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FromBox
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFromBox(EnumFromBox enumVar)
-        {
-            setAttribute(AttributeName.FROMBOX, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute FromBox
-          * @return the value of the attribute
-          */
-        public EnumFromBox getFromBox()
-        {
-            return EnumFromBox.getEnum(getAttribute(AttributeName.FROMBOX, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ToBox
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ToBox
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setToBox(EnumToBox enumVar)
-        {
-            setAttribute(AttributeName.TOBOX, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ToBox
-          * @return the value of the attribute
-          */
-        public EnumToBox getToBox()
-        {
-            return EnumToBox.getEnum(getAttribute(AttributeName.TOBOX, null, null));
-        }
+	/**
+	  * (9) get attribute ToBox
+	  * @return the value of the attribute
+	  */
+	public EnumToBox getToBox()
+	{
+		return EnumToBox.getEnum(getAttribute(AttributeName.TOBOX, null, null));
+	}
 
 }// end namespace JDF

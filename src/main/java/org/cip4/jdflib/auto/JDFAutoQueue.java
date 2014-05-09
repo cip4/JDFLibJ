@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,340 +89,325 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.resource.JDFDevice;
-    /**
-    *****************************************************************************
-    class JDFAutoQueue : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueue : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueue extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUEENTRY, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUEENTRY, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueue
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueue
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueue(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueue[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for QueueStatus
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueue[  --> " + super.toString() + " ]";
-    }
+	public static class EnumQueueStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumQueueStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for QueueStatus
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumQueueStatus getEnum(String enumName)
+		{
+			return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumName);
+		}
 
-        public static class EnumQueueStatus extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumQueueStatus getEnum(int enumValue)
+		{
+			return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumValue);
+		}
 
-            private EnumQueueStatus(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumQueueStatus.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumQueueStatus getEnum(String enumName)
-            {
-                return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumQueueStatus.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumQueueStatus getEnum(int enumValue)
-            {
-                return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumQueueStatus.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumQueueStatus.class);
-            }
+		public static final EnumQueueStatus Blocked = new EnumQueueStatus("Blocked");
+		public static final EnumQueueStatus Closed = new EnumQueueStatus("Closed");
+		public static final EnumQueueStatus Full = new EnumQueueStatus("Full");
+		public static final EnumQueueStatus Running = new EnumQueueStatus("Running");
+		public static final EnumQueueStatus Waiting = new EnumQueueStatus("Waiting");
+		public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumQueueStatus.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumQueueStatus.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Status
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Status
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setQueueStatus(EnumQueueStatus enumVar)
+	{
+		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumQueueStatus Blocked = new EnumQueueStatus("Blocked");
-            public static final EnumQueueStatus Closed = new EnumQueueStatus("Closed");
-            public static final EnumQueueStatus Full = new EnumQueueStatus("Full");
-            public static final EnumQueueStatus Running = new EnumQueueStatus("Running");
-            public static final EnumQueueStatus Waiting = new EnumQueueStatus("Waiting");
-            public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
-        }      
+	/**
+	  * (9) get attribute Status
+	  * @return the value of the attribute
+	  */
+	public EnumQueueStatus getQueueStatus()
+	{
+		return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DeviceID
+	  * @param value the value to set the attribute to
+	  */
+	public void setDeviceID(String value)
+	{
+		setAttribute(AttributeName.DEVICEID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute DeviceID
+	  * @return the value of the attribute
+	  */
+	public String getDeviceID()
+	{
+		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Status
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Status
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setQueueStatus(EnumQueueStatus enumVar)
-        {
-            setAttribute(AttributeName.STATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueSize(int value)
+	{
+		setAttribute(AttributeName.QUEUESIZE, value, null);
+	}
 
-        /**
-          * (9) get attribute Status
-          * @return the value of the attribute
-          */
-        public EnumQueueStatus getQueueStatus()
-        {
-            return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
-        }
+	/**
+	  * (15) get int attribute QueueSize
+	  * @return int the value of the attribute
+	  */
+	public int getQueueSize()
+	{
+		return getIntAttribute(AttributeName.QUEUESIZE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DeviceID
-          * @param value the value to set the attribute to
-          */
-        public void setDeviceID(String value)
-        {
-            setAttribute(AttributeName.DEVICEID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute DeviceID
-          * @return the value of the attribute
-          */
-        public String getDeviceID()
-        {
-            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateDevice
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice(int iSkip)
+	{
+		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueSize
-          * @param value the value to set the attribute to
-          */
-        public void setQueueSize(int value)
-        {
-            setAttribute(AttributeName.QUEUESIZE, value, null);
-        }
+	/**
+	 * (27) const get element Device
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 * default is getDevice(0)     */
+	public JDFDevice getDevice(int iSkip)
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute QueueSize
-          * @return int the value of the attribute
-          */
-        public int getQueueSize()
-        {
-            return getIntAttribute(AttributeName.QUEUESIZE, null, 0);
-        }
+	/**
+	 * Get all Device from the current element
+	 * 
+	 * @return Collection<JDFDevice>, null if none are available
+	 */
+	public Collection<JDFDevice> getAllDevice()
+	{
+		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFDevice> v = new Vector<JDFDevice>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDevice) vc.get(i));
+		}
 
-    /** (26) getCreateDevice
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     */
-    public JDFDevice getCreateDevice(int iSkip)
-    {
-        return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Device
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     * default is getDevice(0)     */
-    public JDFDevice getDevice(int iSkip)
-    {
-        return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
-    }
+	/**
+	 * (30) append element Device
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice appendDevice()
+	{
+		return (JDFDevice) appendElement(ElementName.DEVICE, null);
+	}
 
-    /**
-     * Get all Device from the current element
-     * 
-     * @return Collection<JDFDevice>, null if none are available
-     */
-    public Collection<JDFDevice> getAllDevice()
-    {
-        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateQueueEntry
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFQueueEntry the element
+	 */
+	public JDFQueueEntry getCreateQueueEntry(int iSkip)
+	{
+		return (JDFQueueEntry) getCreateElement_KElement(ElementName.QUEUEENTRY, null, iSkip);
+	}
 
-        final Vector<JDFDevice> v = new Vector<JDFDevice>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDevice) vc.get(i));
-        }
+	/**
+	 * (27) const get element QueueEntry
+	 * @param iSkip number of elements to skip
+	 * @return JDFQueueEntry the element
+	 * default is getQueueEntry(0)     */
+	public JDFQueueEntry getQueueEntry(int iSkip)
+	{
+		return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all QueueEntry from the current element
+	 * 
+	 * @return Collection<JDFQueueEntry>, null if none are available
+	 */
+	public Collection<JDFQueueEntry> getAllQueueEntry()
+	{
+		final VElement vc = getChildElementVector(ElementName.QUEUEENTRY, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element Device
-     * @return JDFDevice the element
-     */
-    public JDFDevice appendDevice()
-    {
-        return (JDFDevice) appendElement(ElementName.DEVICE, null);
-    }
+		final Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFQueueEntry) vc.get(i));
+		}
 
-    /** (26) getCreateQueueEntry
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFQueueEntry the element
-     */
-    public JDFQueueEntry getCreateQueueEntry(int iSkip)
-    {
-        return (JDFQueueEntry)getCreateElement_KElement(ElementName.QUEUEENTRY, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element QueueEntry
-     * @param iSkip number of elements to skip
-     * @return JDFQueueEntry the element
-     * default is getQueueEntry(0)     */
-    public JDFQueueEntry getQueueEntry(int iSkip)
-    {
-        return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, iSkip);
-    }
-
-    /**
-     * Get all QueueEntry from the current element
-     * 
-     * @return Collection<JDFQueueEntry>, null if none are available
-     */
-    public Collection<JDFQueueEntry> getAllQueueEntry()
-    {
-        final VElement vc = getChildElementVector(ElementName.QUEUEENTRY, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFQueueEntry) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element QueueEntry
-     * @return JDFQueueEntry the element
-     */
-    public JDFQueueEntry appendQueueEntry()
-    {
-        return (JDFQueueEntry) appendElement(ElementName.QUEUEENTRY, null);
-    }
+	/**
+	 * (30) append element QueueEntry
+	 * @return JDFQueueEntry the element
+	 */
+	public JDFQueueEntry appendQueueEntry()
+	{
+		return (JDFQueueEntry) appendElement(ElementName.QUEUEENTRY, null);
+	}
 
 }// end namespace JDF

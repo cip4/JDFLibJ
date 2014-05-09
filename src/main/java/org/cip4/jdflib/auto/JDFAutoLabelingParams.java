@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,257 +70,315 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoLabelingParams : public JDFResource
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLabelingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLabelingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.APPLICATION, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPLICATION, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33311111);
+	}
 
-    /**
-     * Constructor for JDFAutoLabelingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLabelingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
-    /**
-     * Constructor for JDFAutoLabelingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLabelingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLabelingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLabelingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLabelingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFAutoLabelingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFAutoLabelingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLabelingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLabelingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Position
+	*/
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	public static class EnumPosition extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPosition(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Position
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPosition getEnum(String enumName)
+		{
+			return (EnumPosition) getEnum(EnumPosition.class, enumName);
+		}
 
-        public static class EnumPosition extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPosition getEnum(int enumValue)
+		{
+			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
+		}
 
-            private EnumPosition(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPosition.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPosition getEnum(String enumName)
-            {
-                return (EnumPosition) getEnum(EnumPosition.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPosition.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPosition getEnum(int enumValue)
-            {
-                return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPosition.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPosition.class);
-            }
+		public static final EnumPosition Top = new EnumPosition("Top");
+		public static final EnumPosition Bottom = new EnumPosition("Bottom");
+		public static final EnumPosition Left = new EnumPosition("Left");
+		public static final EnumPosition Right = new EnumPosition("Right");
+		public static final EnumPosition Front = new EnumPosition("Front");
+		public static final EnumPosition Back = new EnumPosition("Back");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPosition.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPosition.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CTM
+	  * @param value the value to set the attribute to
+	  */
+	public void setCTM(JDFMatrix value)
+	{
+		setAttribute(AttributeName.CTM, value, null);
+	}
 
-            public static final EnumPosition Top = new EnumPosition("Top");
-            public static final EnumPosition Bottom = new EnumPosition("Bottom");
-            public static final EnumPosition Left = new EnumPosition("Left");
-            public static final EnumPosition Right = new EnumPosition("Right");
-            public static final EnumPosition Front = new EnumPosition("Front");
-            public static final EnumPosition Back = new EnumPosition("Back");
-        }      
+	/**
+	  * (20) get JDFMatrix attribute CTM
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getCTM()
+	{
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Application
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Application
+	  * @param value the value to set the attribute to
+	  */
+	public void setApplication(String value)
+	{
+		setAttribute(AttributeName.APPLICATION, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Application
+	  * @return the value of the attribute
+	  */
+	public String getApplication()
+	{
+		return getAttribute(AttributeName.APPLICATION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CTM
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CTM
-          * @param value the value to set the attribute to
-          */
-        public void setCTM(JDFMatrix value)
-        {
-            setAttribute(AttributeName.CTM, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Position
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPosition(EnumPosition enumVar)
+	{
+		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getCTM()
-        {
-            String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute Position
+	  * @return the value of the attribute
+	  */
+	public EnumPosition getPosition()
+	{
+		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Application
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Application
-          * @param value the value to set the attribute to
-          */
-        public void setApplication(String value)
-        {
-            setAttribute(AttributeName.APPLICATION, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Application
-          * @return the value of the attribute
-          */
-        public String getApplication()
-        {
-            return getAttribute(AttributeName.APPLICATION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Position
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPosition(EnumPosition enumVar)
-        {
-            setAttribute(AttributeName.POSITION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element FileSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 * default is getFileSpec(0)     */
+	public JDFFileSpec getFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute Position
-          * @return the value of the attribute
-          */
-        public EnumPosition getPosition()
-        {
-            return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
-        }
+	/**
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFileSpec) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
+	}
 
 }// end namespace JDF

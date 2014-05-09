@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFIntegerSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoSaddleStitching : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSaddleStitching : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSaddleStitching extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHNUMBER, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHNUMBER, 0x66666661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSaddleStitching
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitching
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSaddleStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSaddleStitching
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitching
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSaddleStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSaddleStitching
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSaddleStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitching
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSaddleStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSaddleStitching[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSaddleStitching[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element StitchNumber
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getStitchNumber()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.STITCHNUMBER, null, 0);
+	}
 
+	/** (25) getCreateStitchNumber
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreateStitchNumber()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.STITCHNUMBER, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element StitchNumber
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getStitchNumber()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.STITCHNUMBER, null, 0);
-    }
-
-    /** (25) getCreateStitchNumber
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreateStitchNumber()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.STITCHNUMBER, null, 0);
-    }
-
-    /**
-     * (29) append element StitchNumber
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendStitchNumber() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.STITCHNUMBER, 1, null);
-    }
+	/**
+	 * (29) append element StitchNumber
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendStitchNumber() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.STITCHNUMBER, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,162 +78,142 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /**
-    *****************************************************************************
-    class JDFAutoBarcodeProductionParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBarcodeProductionParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x55555111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x55555111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBarcodeProductionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeProductionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBarcodeProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBarcodeProductionParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBarcodeProductionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element BarcodeReproParams
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams getBarcodeReproParams()
+	{
+		return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, 0);
+	}
 
+	/** (25) getCreateBarcodeReproParams
+	 * 
+	 * @return JDFBarcodeReproParams the element
+	 */
+	public JDFBarcodeReproParams getCreateBarcodeReproParams()
+	{
+		return (JDFBarcodeReproParams) getCreateElement_KElement(ElementName.BARCODEREPROPARAMS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element BarcodeReproParams
+	 * @return JDFBarcodeReproParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFBarcodeReproParams appendBarcodeReproParams() throws JDFException
+	{
+		return (JDFBarcodeReproParams) appendElementN(ElementName.BARCODEREPROPARAMS, 1, null);
+	}
 
-    /**
-     * (24) const get element BarcodeReproParams
-     * @return JDFBarcodeReproParams the element
-     */
-    public JDFBarcodeReproParams getBarcodeReproParams()
-    {
-        return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, 0);
-    }
+	/**
+	 * (24) const get element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getIdentificationField()
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
 
-    /** (25) getCreateBarcodeReproParams
-     * 
-     * @return JDFBarcodeReproParams the element
-     */
-    public JDFBarcodeReproParams getCreateBarcodeReproParams()
-    {
-        return (JDFBarcodeReproParams) getCreateElement_KElement(ElementName.BARCODEREPROPARAMS, null, 0);
-    }
+	/** (25) getCreateIdentificationField
+	 * 
+	 * @return JDFIdentificationField the element
+	 */
+	public JDFIdentificationField getCreateIdentificationField()
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, 0);
+	}
 
-    /**
-     * (29) append element BarcodeReproParams
-     * @return JDFBarcodeReproParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFBarcodeReproParams appendBarcodeReproParams() throws JDFException
-    {
-        return (JDFBarcodeReproParams) appendElementN(ElementName.BARCODEREPROPARAMS, 1, null);
-    }
+	/**
+	 * (29) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIdentificationField appendIdentificationField() throws JDFException
+	{
+		return (JDFIdentificationField) appendElementN(ElementName.IDENTIFICATIONFIELD, 1, null);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refBarcodeReproParams(JDFBarcodeReproParams refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getIdentificationField()
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, 0);
-    }
-
-    /** (25) getCreateIdentificationField
-     * 
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField()
-    {
-        return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, 0);
-    }
-
-    /**
-     * (29) append element IdentificationField
-     * @return JDFIdentificationField the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
-    {
-        return (JDFIdentificationField) appendElementN(ElementName.IDENTIFICATIONFIELD, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

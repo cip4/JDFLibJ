@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,271 +80,235 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoComChannel : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoComChannel : public JDFElement
 
-public abstract class JDFAutoComChannel extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoComChannel extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoComChannel
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoComChannel
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoComChannel(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoComChannel
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoComChannel
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoComChannel(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoComChannel
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoComChannel
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoComChannel(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoComChannel[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ChannelType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoComChannel[  --> " + super.toString() + " ]";
-    }
+	public static class EnumChannelType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumChannelType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumChannelType getEnum(String enumName)
+		{
+			return (EnumChannelType) getEnum(EnumChannelType.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumChannelType getEnum(int enumValue)
+		{
+			return (EnumChannelType) getEnum(EnumChannelType.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumChannelType.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumChannelType.class);
+		}
 
-        /**
-        * Enumeration strings for ChannelType
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumChannelType.class);
+		}
 
-        public static class EnumChannelType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumChannelType ComputerName = new EnumChannelType("ComputerName");
+		public static final EnumChannelType Email = new EnumChannelType("Email");
+		public static final EnumChannelType Fax = new EnumChannelType("Fax");
+		public static final EnumChannelType InstantMessaging = new EnumChannelType("InstantMessaging");
+		public static final EnumChannelType JMF = new EnumChannelType("JMF");
+		public static final EnumChannelType Mobile = new EnumChannelType("Mobile");
+		public static final EnumChannelType Phone = new EnumChannelType("Phone");
+		public static final EnumChannelType PrivateDirectory = new EnumChannelType("PrivateDirectory");
+		public static final EnumChannelType WWW = new EnumChannelType("WWW");
+	}
 
-            private EnumChannelType(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumChannelType getEnum(String enumName)
-            {
-                return (EnumChannelType) getEnum(EnumChannelType.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ChannelType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setChannelType(EnumChannelType enumVar)
+	{
+		setAttribute(AttributeName.CHANNELTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumChannelType getEnum(int enumValue)
-            {
-                return (EnumChannelType) getEnum(EnumChannelType.class, enumValue);
-            }
+	/**
+	  * (9) get attribute ChannelType
+	  * @return the value of the attribute
+	  */
+	public EnumChannelType getChannelType()
+	{
+		return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumChannelType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Locator
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Locator
+	  * @param value the value to set the attribute to
+	  */
+	public void setLocator(String value)
+	{
+		setAttribute(AttributeName.LOCATOR, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumChannelType.class);
-            }
+	/**
+	  * (23) get String attribute Locator
+	  * @return the value of the attribute
+	  */
+	public String getLocator()
+	{
+		return getAttribute(AttributeName.LOCATOR, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumChannelType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelTypeDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ChannelTypeDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setChannelTypeDetails(String value)
+	{
+		setAttribute(AttributeName.CHANNELTYPEDETAILS, value, null);
+	}
 
-            public static final EnumChannelType Phone = new EnumChannelType("Phone");
-            public static final EnumChannelType Email = new EnumChannelType("Email");
-            public static final EnumChannelType Fax = new EnumChannelType("Fax");
-            public static final EnumChannelType WWW = new EnumChannelType("WWW");
-            public static final EnumChannelType JMF = new EnumChannelType("JMF");
-            public static final EnumChannelType PrivateDirectory = new EnumChannelType("PrivateDirectory");
-            public static final EnumChannelType InstantMessaging = new EnumChannelType("InstantMessaging");
-        }      
+	/**
+	  * (23) get String attribute ChannelTypeDetails
+	  * @return the value of the attribute
+	  */
+	public String getChannelTypeDetails()
+	{
+		return getAttribute(AttributeName.CHANNELTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelUsage
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ChannelUsage
+	  * @param value the value to set the attribute to
+	  */
+	public void setChannelUsage(VString value)
+	{
+		setAttribute(AttributeName.CHANNELUSAGE, value, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ChannelType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setChannelType(EnumChannelType enumVar)
-        {
-            setAttribute(AttributeName.CHANNELTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ChannelType
-          * @return the value of the attribute
-          */
-        public EnumChannelType getChannelType()
-        {
-            return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Locator
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Locator
-          * @param value the value to set the attribute to
-          */
-        public void setLocator(String value)
-        {
-            setAttribute(AttributeName.LOCATOR, value, null);
-        }
-
-        /**
-          * (23) get String attribute Locator
-          * @return the value of the attribute
-          */
-        public String getLocator()
-        {
-            return getAttribute(AttributeName.LOCATOR, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelTypeDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ChannelTypeDetails
-          * @param value the value to set the attribute to
-          */
-        public void setChannelTypeDetails(String value)
-        {
-            setAttribute(AttributeName.CHANNELTYPEDETAILS, value, null);
-        }
-
-        /**
-          * (23) get String attribute ChannelTypeDetails
-          * @return the value of the attribute
-          */
-        public String getChannelTypeDetails()
-        {
-            return getAttribute(AttributeName.CHANNELTYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelUsage
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ChannelUsage
-          * @param value the value to set the attribute to
-          */
-        public void setChannelUsage(VString value)
-        {
-            setAttribute(AttributeName.CHANNELUSAGE, value, null);
-        }
-
-        /**
-          * (21) get VString attribute ChannelUsage
-          * @return VString the value of the attribute
-          */
-        public VString getChannelUsage()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute ChannelUsage
+	  * @return VString the value of the attribute
+	  */
+	public VString getChannelUsage()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
 }// end namespace JDF

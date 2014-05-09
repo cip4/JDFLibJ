@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,262 +86,240 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoGlue : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoGlue : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoGlue extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x66666111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x66666111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoGlue
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlue
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoGlue(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoGlue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoGlue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoGlue[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for WorkingDirection
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoGlue[  --> " + super.toString() + " ]";
-    }
+	public static class EnumWorkingDirection extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumWorkingDirection(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for WorkingDirection
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumWorkingDirection getEnum(String enumName)
+		{
+			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
+		}
 
-        public static class EnumWorkingDirection extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumWorkingDirection getEnum(int enumValue)
+		{
+			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
+		}
 
-            private EnumWorkingDirection(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumWorkingDirection.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumWorkingDirection getEnum(String enumName)
-            {
-                return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumWorkingDirection.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumWorkingDirection getEnum(int enumValue)
-            {
-                return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumWorkingDirection.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumWorkingDirection.class);
-            }
+		public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
+		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumWorkingDirection.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumWorkingDirection.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WorkingDirection
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute WorkingDirection
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setWorkingDirection(EnumWorkingDirection enumVar)
+	{
+		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
-            public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
-        }      
+	/**
+	  * (9) get attribute WorkingDirection
+	  * @return the value of the attribute
+	  */
+	public EnumWorkingDirection getWorkingDirection()
+	{
+		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element GlueApplication
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getGlueApplication()
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WorkingDirection
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute WorkingDirection
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setWorkingDirection(EnumWorkingDirection enumVar)
-        {
-            setAttribute(AttributeName.WORKINGDIRECTION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateGlueApplication
+	 * 
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication()
+	{
+		return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, 0);
+	}
 
-        /**
-          * (9) get attribute WorkingDirection
-          * @return the value of the attribute
-          */
-        public EnumWorkingDirection getWorkingDirection()
-        {
-            return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
-        }
+	/**
+	 * (29) append element GlueApplication
+	 * @return JDFGlueApplication the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFGlueApplication appendGlueApplication() throws JDFException
+	{
+		return (JDFGlueApplication) appendElementN(ElementName.GLUEAPPLICATION, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refGlueApplication(JDFGlueApplication refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element GlueApplication
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication getGlueApplication()
-    {
-        return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, 0);
-    }
+	/**
+	 * (24) const get element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getGlueLine()
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
+	}
 
-    /** (25) getCreateGlueApplication
-     * 
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication getCreateGlueApplication()
-    {
-        return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, 0);
-    }
+	/** (25) getCreateGlueLine
+	 * 
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine()
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
+	}
 
-    /**
-     * (29) append element GlueApplication
-     * @return JDFGlueApplication the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFGlueApplication appendGlueApplication() throws JDFException
-    {
-        return (JDFGlueApplication) appendElementN(ElementName.GLUEAPPLICATION, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueApplication(JDFGlueApplication refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getGlueLine()
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /** (25) getCreateGlueLine
-     * 
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine()
-    {
-        return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, 0);
-    }
-
-    /**
-     * (29) append element GlueLine
-     * @return JDFGlueLine the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFGlueLine appendGlueLine() throws JDFException
-    {
-        return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueLine(JDFGlueLine refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element GlueLine
+	 * @return JDFGlueLine the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFGlueLine appendGlueLine() throws JDFException
+	{
+		return (JDFGlueLine) appendElementN(ElementName.GLUELINE, 1, null);
+	}
 
 }// end namespace JDF

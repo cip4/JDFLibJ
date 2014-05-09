@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,308 +80,289 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoKnownMsgQuParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoKnownMsgQuParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoKnownMsgQuParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoKnownMsgQuParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoKnownMsgQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoKnownMsgQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoKnownMsgQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoKnownMsgQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoKnownMsgQuParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoKnownMsgQuParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoKnownMsgQuParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoKnownMsgQuParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ChannelMode
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoKnownMsgQuParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumChannelMode extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumChannelMode(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ChannelMode
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(String enumName)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
+		}
 
-        public static class EnumChannelMode extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(int enumValue)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
+		}
 
-            private EnumChannelMode(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(String enumName)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(int enumValue)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumChannelMode.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumChannelMode.class);
-            }
+		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumChannelMode.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumChannelMode.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelMode
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ChannelMode
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setChannelMode(EnumChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
-            public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
-        }      
+	/**
+	  * (9) get attribute ChannelMode
+	  * @return the value of the attribute
+	  */
+	public EnumChannelMode getChannelMode()
+	{
+		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Exact
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Exact
+	  * @param value the value to set the attribute to
+	  */
+	public void setExact(boolean value)
+	{
+		setAttribute(AttributeName.EXACT, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute Exact
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getExact()
+	{
+		return getBoolAttribute(AttributeName.EXACT, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelMode
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ChannelMode
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setChannelMode(EnumChannelMode enumVar)
-        {
-            setAttribute(AttributeName.CHANNELMODE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ListCommands
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ListCommands
+	  * @param value the value to set the attribute to
+	  */
+	public void setListCommands(boolean value)
+	{
+		setAttribute(AttributeName.LISTCOMMANDS, value, null);
+	}
 
-        /**
-          * (9) get attribute ChannelMode
-          * @return the value of the attribute
-          */
-        public EnumChannelMode getChannelMode()
-        {
-            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
-        }
+	/**
+	  * (18) get boolean attribute ListCommands
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getListCommands()
+	{
+		return getBoolAttribute(AttributeName.LISTCOMMANDS, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Exact
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Exact
-          * @param value the value to set the attribute to
-          */
-        public void setExact(boolean value)
-        {
-            setAttribute(AttributeName.EXACT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ListQueries
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ListQueries
+	  * @param value the value to set the attribute to
+	  */
+	public void setListQueries(boolean value)
+	{
+		setAttribute(AttributeName.LISTQUERIES, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute Exact
-          * @return boolean the value of the attribute
-          */
-        public boolean getExact()
-        {
-            return getBoolAttribute(AttributeName.EXACT, null, false);
-        }
+	/**
+	  * (18) get boolean attribute ListQueries
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getListQueries()
+	{
+		return getBoolAttribute(AttributeName.LISTQUERIES, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ListCommands
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ListCommands
-          * @param value the value to set the attribute to
-          */
-        public void setListCommands(boolean value)
-        {
-            setAttribute(AttributeName.LISTCOMMANDS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ListRegistrations
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ListRegistrations
+	  * @param value the value to set the attribute to
+	  */
+	public void setListRegistrations(boolean value)
+	{
+		setAttribute(AttributeName.LISTREGISTRATIONS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute ListCommands
-          * @return boolean the value of the attribute
-          */
-        public boolean getListCommands()
-        {
-            return getBoolAttribute(AttributeName.LISTCOMMANDS, null, true);
-        }
+	/**
+	  * (18) get boolean attribute ListRegistrations
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getListRegistrations()
+	{
+		return getBoolAttribute(AttributeName.LISTREGISTRATIONS, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ListQueries
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ListQueries
-          * @param value the value to set the attribute to
-          */
-        public void setListQueries(boolean value)
-        {
-            setAttribute(AttributeName.LISTQUERIES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ListSignals
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ListSignals
+	  * @param value the value to set the attribute to
+	  */
+	public void setListSignals(boolean value)
+	{
+		setAttribute(AttributeName.LISTSIGNALS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute ListQueries
-          * @return boolean the value of the attribute
-          */
-        public boolean getListQueries()
-        {
-            return getBoolAttribute(AttributeName.LISTQUERIES, null, true);
-        }
+	/**
+	  * (18) get boolean attribute ListSignals
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getListSignals()
+	{
+		return getBoolAttribute(AttributeName.LISTSIGNALS, null, true);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ListRegistrations
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ListRegistrations
-          * @param value the value to set the attribute to
-          */
-        public void setListRegistrations(boolean value)
-        {
-            setAttribute(AttributeName.LISTREGISTRATIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Persistent
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Persistent
+	  * @param value the value to set the attribute to
+	  */
+	public void setPersistent(boolean value)
+	{
+		setAttribute(AttributeName.PERSISTENT, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute ListRegistrations
-          * @return boolean the value of the attribute
-          */
-        public boolean getListRegistrations()
-        {
-            return getBoolAttribute(AttributeName.LISTREGISTRATIONS, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ListSignals
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ListSignals
-          * @param value the value to set the attribute to
-          */
-        public void setListSignals(boolean value)
-        {
-            setAttribute(AttributeName.LISTSIGNALS, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute ListSignals
-          * @return boolean the value of the attribute
-          */
-        public boolean getListSignals()
-        {
-            return getBoolAttribute(AttributeName.LISTSIGNALS, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Persistent
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Persistent
-          * @param value the value to set the attribute to
-          */
-        public void setPersistent(boolean value)
-        {
-            setAttribute(AttributeName.PERSISTENT, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute Persistent
-          * @return boolean the value of the attribute
-          */
-        public boolean getPersistent()
-        {
-            return getBoolAttribute(AttributeName.PERSISTENT, null, false);
-        }
+	/**
+	  * (18) get boolean attribute Persistent
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPersistent()
+	{
+		return getBoolAttribute(AttributeName.PERSISTENT, null, false);
+	}
 
 }// end namespace JDF

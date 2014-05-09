@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -82,693 +84,723 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.span.JDFIntegerSpan;
+import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanFinishedGrainDirection;
 import org.cip4.jdflib.span.JDFSpanSizePolicy;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoLayoutIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLayoutIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
-
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumFolioCount.getEnum(0), "Booklet");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DIMENSIONS, 0x66666661);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.FINISHEDDIMENSIONS, 0x66666661);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.FINISHEDGRAINDIRECTION, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.PAGES, 0x66666661);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.PAGEVARIANCE, 0x66666661);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.LAYOUT, 0x66666661);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.SIZEPOLICY, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
-
-    /**
-     * Constructor for JDFAutoLayoutIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoLayoutIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoLayoutIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLayoutIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLayoutIntent[  --> " + super.toString() + " ]";
-    }
-
-
-        /**
-        * Enumeration strings for FolioCount
-        */
-
-        public static class EnumFolioCount extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumFolioCount(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFolioCount getEnum(String enumName)
-            {
-                return (EnumFolioCount) getEnum(EnumFolioCount.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFolioCount getEnum(int enumValue)
-            {
-                return (EnumFolioCount) getEnum(EnumFolioCount.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFolioCount.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFolioCount.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFolioCount.class);
-            }
-
-            public static final EnumFolioCount Booklet = new EnumFolioCount("Booklet");
-            public static final EnumFolioCount Flat = new EnumFolioCount("Flat");
-        }      
-
-
-
-        /**
-        * Enumeration strings for FinishedPageOrientation
-        */
-
-        public static class EnumFinishedPageOrientation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumFinishedPageOrientation(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFinishedPageOrientation getEnum(String enumName)
-            {
-                return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFinishedPageOrientation getEnum(int enumValue)
-            {
-                return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFinishedPageOrientation.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFinishedPageOrientation.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFinishedPageOrientation.class);
-            }
-
-            public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
-            public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
-        }      
-
-
-
-        /**
-        * Enumeration strings for RotatePolicy
-        */
-
-        public static class EnumRotatePolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumRotatePolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumRotatePolicy getEnum(String enumName)
-            {
-                return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumRotatePolicy getEnum(int enumValue)
-            {
-                return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumRotatePolicy.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumRotatePolicy.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumRotatePolicy.class);
-            }
-
-            public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
-            public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
-            public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
-            public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
-        }      
-
-
-
-        /**
-        * Enumeration strings for Sides
-        */
-
-        public static class EnumSides extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumSides(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSides getEnum(String enumName)
-            {
-                return (EnumSides) getEnum(EnumSides.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSides getEnum(int enumValue)
-            {
-                return (EnumSides) getEnum(EnumSides.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSides.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSides.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSides.class);
-            }
-
-            public static final EnumSides OneSided = new EnumSides("OneSided");
-            public static final EnumSides OneSidedBack = new EnumSides("OneSidedBack");
-            public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
-            public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FolioCount
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FolioCount
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFolioCount(EnumFolioCount enumVar)
-        {
-            setAttribute(AttributeName.FOLIOCOUNT, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute FolioCount
-          * @return the value of the attribute
-          */
-        public EnumFolioCount getFolioCount()
-        {
-            return EnumFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NumberUp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NumberUp
-          * @param value the value to set the attribute to
-          */
-        public void setNumberUp(JDFXYPair value)
-        {
-            setAttribute(AttributeName.NUMBERUP, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute NumberUp
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getNumberUp()
-        {
-            String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FinishedPageOrientation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FinishedPageOrientation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
-        {
-            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute FinishedPageOrientation
-          * @return the value of the attribute
-          */
-        public EnumFinishedPageOrientation getFinishedPageOrientation()
-        {
-            return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RotatePolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute RotatePolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setRotatePolicy(EnumRotatePolicy enumVar)
-        {
-            setAttribute(AttributeName.ROTATEPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute RotatePolicy
-          * @return the value of the attribute
-          */
-        public EnumRotatePolicy getRotatePolicy()
-        {
-            return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Sides
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Sides
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSides(EnumSides enumVar)
-        {
-            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Sides
-          * @return the value of the attribute
-          */
-        public EnumSides getSides()
-        {
-            return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Dimensions
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getDimensions()
-    {
-        return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
-    }
-
-    /** (25) getCreateDimensions
-     * 
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getCreateDimensions()
-    {
-        return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
-    }
-
-    /**
-     * (29) append element Dimensions
-     * @return JDFXYPairSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFXYPairSpan appendDimensions() throws JDFException
-    {
-        return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
-    }
-
-    /**
-     * (24) const get element FinishedDimensions
-     * @return JDFShapeSpan the element
-     */
-    public JDFShapeSpan getFinishedDimensions()
-    {
-        return (JDFShapeSpan) getElement(ElementName.FINISHEDDIMENSIONS, null, 0);
-    }
-
-    /** (25) getCreateFinishedDimensions
-     * 
-     * @return JDFShapeSpan the element
-     */
-    public JDFShapeSpan getCreateFinishedDimensions()
-    {
-        return (JDFShapeSpan) getCreateElement_KElement(ElementName.FINISHEDDIMENSIONS, null, 0);
-    }
-
-    /**
-     * (29) append element FinishedDimensions
-     * @return JDFShapeSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFShapeSpan appendFinishedDimensions() throws JDFException
-    {
-        return (JDFShapeSpan) appendElementN(ElementName.FINISHEDDIMENSIONS, 1, null);
-    }
-
-    /**
-     * (24) const get element FinishedGrainDirection
-     * @return JDFSpanFinishedGrainDirection the element
-     */
-    public JDFSpanFinishedGrainDirection getFinishedGrainDirection()
-    {
-        return (JDFSpanFinishedGrainDirection) getElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
-    }
-
-    /** (25) getCreateFinishedGrainDirection
-     * 
-     * @return JDFSpanFinishedGrainDirection the element
-     */
-    public JDFSpanFinishedGrainDirection getCreateFinishedGrainDirection()
-    {
-        return (JDFSpanFinishedGrainDirection) getCreateElement_KElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
-    }
-
-    /**
-     * (29) append element FinishedGrainDirection
-     * @return JDFSpanFinishedGrainDirection the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanFinishedGrainDirection appendFinishedGrainDirection() throws JDFException
-    {
-        return (JDFSpanFinishedGrainDirection) appendElementN(ElementName.FINISHEDGRAINDIRECTION, 1, null);
-    }
-
-    /**
-     * (24) const get element Pages
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getPages()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
-    }
-
-    /** (25) getCreatePages
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreatePages()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
-    }
-
-    /**
-     * (29) append element Pages
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendPages() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
-    }
-
-    /**
-     * (24) const get element PageVariance
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getPageVariance()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.PAGEVARIANCE, null, 0);
-    }
-
-    /** (25) getCreatePageVariance
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreatePageVariance()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGEVARIANCE, null, 0);
-    }
-
-    /**
-     * (29) append element PageVariance
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendPageVariance() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.PAGEVARIANCE, 1, null);
-    }
-
-    /**
-     * (24) const get element Layout
-     * @return JDFLayout the element
-     */
-    public JDFLayout getLayout()
-    {
-        return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
-    }
-
-    /** (25) getCreateLayout
-     * 
-     * @return JDFLayout the element
-     */
-    public JDFLayout getCreateLayout()
-    {
-        return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
-    }
-
-    /**
-     * (29) append element Layout
-     * @return JDFLayout the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFLayout appendLayout() throws JDFException
-    {
-        return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refLayout(JDFLayout refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element SizePolicy
-     * @return JDFSpanSizePolicy the element
-     */
-    public JDFSpanSizePolicy getSizePolicy()
-    {
-        return (JDFSpanSizePolicy) getElement(ElementName.SIZEPOLICY, null, 0);
-    }
-
-    /** (25) getCreateSizePolicy
-     * 
-     * @return JDFSpanSizePolicy the element
-     */
-    public JDFSpanSizePolicy getCreateSizePolicy()
-    {
-        return (JDFSpanSizePolicy) getCreateElement_KElement(ElementName.SIZEPOLICY, null, 0);
-    }
-
-    /**
-     * (29) append element SizePolicy
-     * @return JDFSpanSizePolicy the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanSizePolicy appendSizePolicy() throws JDFException
-    {
-        return (JDFSpanSizePolicy) appendElementN(ElementName.SIZEPOLICY, 1, null);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumFolioCount.getEnum(0), "Booklet");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BLEED, 0x33311111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DIMENSIONS, 0x66666661);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FINISHEDDIMENSIONS, 0x66666661);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FINISHEDGRAINDIRECTION, 0x77766611);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PAGES, 0x66666661);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGEVARIANCE, 0x66666661);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.LAYOUT, 0x66666661);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.SIZEPOLICY, 0x66666611);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFAutoLayoutIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoLayoutIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoLayoutIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLayoutIntent[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	* Enumeration strings for FolioCount
+	*/
+
+	public static class EnumFolioCount extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumFolioCount(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFolioCount getEnum(String enumName)
+		{
+			return (EnumFolioCount) getEnum(EnumFolioCount.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFolioCount getEnum(int enumValue)
+		{
+			return (EnumFolioCount) getEnum(EnumFolioCount.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFolioCount.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFolioCount.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFolioCount.class);
+		}
+
+		public static final EnumFolioCount Booklet = new EnumFolioCount("Booklet");
+		public static final EnumFolioCount Flat = new EnumFolioCount("Flat");
+	}
+
+	/**
+	* Enumeration strings for FinishedPageOrientation
+	*/
+
+	public static class EnumFinishedPageOrientation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumFinishedPageOrientation(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFinishedPageOrientation getEnum(String enumName)
+		{
+			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFinishedPageOrientation getEnum(int enumValue)
+		{
+			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFinishedPageOrientation.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFinishedPageOrientation.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFinishedPageOrientation.class);
+		}
+
+		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
+		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
+	}
+
+	/**
+	* Enumeration strings for RotatePolicy
+	*/
+
+	public static class EnumRotatePolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumRotatePolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumRotatePolicy getEnum(String enumName)
+		{
+			return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumRotatePolicy getEnum(int enumValue)
+		{
+			return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumRotatePolicy.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumRotatePolicy.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumRotatePolicy.class);
+		}
+
+		public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
+		public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
+		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
+		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
+	}
+
+	/**
+	* Enumeration strings for Sides
+	*/
+
+	public static class EnumSides extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumSides(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSides getEnum(String enumName)
+		{
+			return (EnumSides) getEnum(EnumSides.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSides getEnum(int enumValue)
+		{
+			return (EnumSides) getEnum(EnumSides.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSides.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSides.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSides.class);
+		}
+
+		public static final EnumSides OneSided = new EnumSides("OneSided");
+		public static final EnumSides OneSidedBack = new EnumSides("OneSidedBack");
+		public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
+		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FolioCount
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FolioCount
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFolioCount(EnumFolioCount enumVar)
+	{
+		setAttribute(AttributeName.FOLIOCOUNT, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute FolioCount
+	  * @return the value of the attribute
+	  */
+	public EnumFolioCount getFolioCount()
+	{
+		return EnumFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberUp
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NumberUp
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumberUp(JDFXYPair value)
+	{
+		setAttribute(AttributeName.NUMBERUP, value, null);
+	}
+
+	/**
+	  * (20) get JDFXYPair attribute NumberUp
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getNumberUp()
+	{
+		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FinishedPageOrientation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FinishedPageOrientation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
+	{
+		setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute FinishedPageOrientation
+	  * @return the value of the attribute
+	  */
+	public EnumFinishedPageOrientation getFinishedPageOrientation()
+	{
+		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RotatePolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute RotatePolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setRotatePolicy(EnumRotatePolicy enumVar)
+	{
+		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute RotatePolicy
+	  * @return the value of the attribute
+	  */
+	public EnumRotatePolicy getRotatePolicy()
+	{
+		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Sides
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Sides
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSides(EnumSides enumVar)
+	{
+		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Sides
+	  * @return the value of the attribute
+	  */
+	public EnumSides getSides()
+	{
+		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/** (26) getCreateBleed
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateBleed(int iSkip)
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.BLEED, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Bleed
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberSpan the element
+	 * default is getBleed(0)     */
+	public JDFNumberSpan getBleed(int iSkip)
+	{
+		return (JDFNumberSpan) getElement(ElementName.BLEED, null, iSkip);
+	}
+
+	/**
+	 * Get all Bleed from the current element
+	 * 
+	 * @return Collection<JDFNumberSpan>, null if none are available
+	 */
+	public Collection<JDFNumberSpan> getAllBleed()
+	{
+		final VElement vc = getChildElementVector(ElementName.BLEED, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFNumberSpan> v = new Vector<JDFNumberSpan>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNumberSpan) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Bleed
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan appendBleed()
+	{
+		return (JDFNumberSpan) appendElement(ElementName.BLEED, null);
+	}
+
+	/**
+	 * (24) const get element Dimensions
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getDimensions()
+	{
+		return (JDFXYPairSpan) getElement(ElementName.DIMENSIONS, null, 0);
+	}
+
+	/** (25) getCreateDimensions
+	 * 
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getCreateDimensions()
+	{
+		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.DIMENSIONS, null, 0);
+	}
+
+	/**
+	 * (29) append element Dimensions
+	 * @return JDFXYPairSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFXYPairSpan appendDimensions() throws JDFException
+	{
+		return (JDFXYPairSpan) appendElementN(ElementName.DIMENSIONS, 1, null);
+	}
+
+	/**
+	 * (24) const get element FinishedDimensions
+	 * @return JDFShapeSpan the element
+	 */
+	public JDFShapeSpan getFinishedDimensions()
+	{
+		return (JDFShapeSpan) getElement(ElementName.FINISHEDDIMENSIONS, null, 0);
+	}
+
+	/** (25) getCreateFinishedDimensions
+	 * 
+	 * @return JDFShapeSpan the element
+	 */
+	public JDFShapeSpan getCreateFinishedDimensions()
+	{
+		return (JDFShapeSpan) getCreateElement_KElement(ElementName.FINISHEDDIMENSIONS, null, 0);
+	}
+
+	/**
+	 * (29) append element FinishedDimensions
+	 * @return JDFShapeSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFShapeSpan appendFinishedDimensions() throws JDFException
+	{
+		return (JDFShapeSpan) appendElementN(ElementName.FINISHEDDIMENSIONS, 1, null);
+	}
+
+	/**
+	 * (24) const get element FinishedGrainDirection
+	 * @return JDFSpanFinishedGrainDirection the element
+	 */
+	public JDFSpanFinishedGrainDirection getFinishedGrainDirection()
+	{
+		return (JDFSpanFinishedGrainDirection) getElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
+	}
+
+	/** (25) getCreateFinishedGrainDirection
+	 * 
+	 * @return JDFSpanFinishedGrainDirection the element
+	 */
+	public JDFSpanFinishedGrainDirection getCreateFinishedGrainDirection()
+	{
+		return (JDFSpanFinishedGrainDirection) getCreateElement_KElement(ElementName.FINISHEDGRAINDIRECTION, null, 0);
+	}
+
+	/**
+	 * (29) append element FinishedGrainDirection
+	 * @return JDFSpanFinishedGrainDirection the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanFinishedGrainDirection appendFinishedGrainDirection() throws JDFException
+	{
+		return (JDFSpanFinishedGrainDirection) appendElementN(ElementName.FINISHEDGRAINDIRECTION, 1, null);
+	}
+
+	/**
+	 * (24) const get element Pages
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getPages()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.PAGES, null, 0);
+	}
+
+	/** (25) getCreatePages
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreatePages()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGES, null, 0);
+	}
+
+	/**
+	 * (29) append element Pages
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendPages() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.PAGES, 1, null);
+	}
+
+	/**
+	 * (24) const get element PageVariance
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getPageVariance()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.PAGEVARIANCE, null, 0);
+	}
+
+	/** (25) getCreatePageVariance
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreatePageVariance()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.PAGEVARIANCE, null, 0);
+	}
+
+	/**
+	 * (29) append element PageVariance
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendPageVariance() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.PAGEVARIANCE, 1, null);
+	}
+
+	/**
+	 * (24) const get element Layout
+	 * @return JDFLayout the element
+	 */
+	public JDFLayout getLayout()
+	{
+		return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
+	}
+
+	/** (25) getCreateLayout
+	 * 
+	 * @return JDFLayout the element
+	 */
+	public JDFLayout getCreateLayout()
+	{
+		return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
+	}
+
+	/**
+	 * (29) append element Layout
+	 * @return JDFLayout the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFLayout appendLayout() throws JDFException
+	{
+		return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refLayout(JDFLayout refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element SizePolicy
+	 * @return JDFSpanSizePolicy the element
+	 */
+	public JDFSpanSizePolicy getSizePolicy()
+	{
+		return (JDFSpanSizePolicy) getElement(ElementName.SIZEPOLICY, null, 0);
+	}
+
+	/** (25) getCreateSizePolicy
+	 * 
+	 * @return JDFSpanSizePolicy the element
+	 */
+	public JDFSpanSizePolicy getCreateSizePolicy()
+	{
+		return (JDFSpanSizePolicy) getCreateElement_KElement(ElementName.SIZEPOLICY, null, 0);
+	}
+
+	/**
+	 * (29) append element SizePolicy
+	 * @return JDFSpanSizePolicy the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanSizePolicy appendSizePolicy() throws JDFException
+	{
+		return (JDFSpanSizePolicy) appendElementN(ElementName.SIZEPOLICY, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,252 +77,236 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoChannelBindingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoChannelBindingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoChannelBindingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAMPSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CLAMPCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAMPSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLAMPCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoChannelBindingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBindingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoChannelBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChannelBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoChannelBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChannelBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoChannelBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoChannelBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoChannelBindingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoChannelBindingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClampSystem
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClampSystem
+	  * @param value the value to set the attribute to
+	  */
+	public void setClampSystem(boolean value)
+	{
+		setAttribute(AttributeName.CLAMPSYSTEM, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute ClampSystem
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getClampSystem()
+	{
+		return getBoolAttribute(AttributeName.CLAMPSYSTEM, null, false);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Brand
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Brand
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setBrand(String value)
+	{
+		setAttribute(AttributeName.BRAND, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Brand
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getBrand()
+	{
+		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClampSystem
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClampSystem
-          * @param value the value to set the attribute to
-          */
-        public void setClampSystem(boolean value)
-        {
-            setAttribute(AttributeName.CLAMPSYSTEM, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClampColor
+	--------------------------------------------------------------------- */
+	/**
+	  * (13) set attribute ClampColor
+	  * @param value the value to set the attribute to
+	  */
+	public void setClampColor(EnumNamedColor value)
+	{
+		setAttribute(AttributeName.CLAMPCOLOR, value == null ? null : value.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute ClampSystem
-          * @return boolean the value of the attribute
-          */
-        public boolean getClampSystem()
-        {
-            return getBoolAttribute(AttributeName.CLAMPSYSTEM, null, false);
-        }
+	/**
+	  * (19) get EnumNamedColor attribute ClampColor
+	  * @return EnumNamedColor the value of the attribute
+	  */
+	public EnumNamedColor getClampColor()
+	{
+		String strAttrName = "";
+		EnumNamedColor nPlaceHolder = null;
+		strAttrName = getAttribute(AttributeName.CLAMPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
+		nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Brand
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Brand
-          * @param value the value to set the attribute to
-          */
-        public void setBrand(String value)
-        {
-            setAttribute(AttributeName.BRAND, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClampColorDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClampColorDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setClampColorDetails(String value)
+	{
+		setAttribute(AttributeName.CLAMPCOLORDETAILS, value, null);
+	}
 
-        /**
-          * (23) get String attribute Brand
-          * @return the value of the attribute
-          */
-        public String getBrand()
-        {
-            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ClampColorDetails
+	  * @return the value of the attribute
+	  */
+	public String getClampColorDetails()
+	{
+		return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClampColor
-        --------------------------------------------------------------------- */
-        /**
-          * (13) set attribute ClampColor
-          * @param value the value to set the attribute to
-          */
-        public void setClampColor(EnumNamedColor value)
-        {
-            setAttribute(AttributeName.CLAMPCOLOR, value==null ? null : value.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClampD
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClampD
+	  * @param value the value to set the attribute to
+	  */
+	public void setClampD(double value)
+	{
+		setAttribute(AttributeName.CLAMPD, value, null);
+	}
 
-        /**
-          * (19) get EnumNamedColor attribute ClampColor
-          * @return EnumNamedColor the value of the attribute
-          */
-        public EnumNamedColor getClampColor()
-        {
-            String strAttrName = "";
-            EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLAMPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
-            nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute ClampD
+	  * @return double the value of the attribute
+	  */
+	public double getClampD()
+	{
+		return getRealAttribute(AttributeName.CLAMPD, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClampColorDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClampColorDetails
-          * @param value the value to set the attribute to
-          */
-        public void setClampColorDetails(String value)
-        {
-            setAttribute(AttributeName.CLAMPCOLORDETAILS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClampSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClampSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setClampSize(JDFShape value)
+	{
+		setAttribute(AttributeName.CLAMPSIZE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ClampColorDetails
-          * @return the value of the attribute
-          */
-        public String getClampColorDetails()
-        {
-            return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClampD
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClampD
-          * @param value the value to set the attribute to
-          */
-        public void setClampD(double value)
-        {
-            setAttribute(AttributeName.CLAMPD, value, null);
-        }
-
-        /**
-          * (17) get double attribute ClampD
-          * @return double the value of the attribute
-          */
-        public double getClampD()
-        {
-            return getRealAttribute(AttributeName.CLAMPD, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClampSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClampSize
-          * @param value the value to set the attribute to
-          */
-        public void setClampSize(JDFShape value)
-        {
-            setAttribute(AttributeName.CLAMPSIZE, value, null);
-        }
-
-        /**
-          * (20) get JDFShape attribute ClampSize
-          * @return JDFShape the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFShape
-          */
-        public JDFShape getClampSize()
-        {
-            String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFShape attribute ClampSize
+	  * @return JDFShape the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFShape
+	  */
+	public JDFShape getClampSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

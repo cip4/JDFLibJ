@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,190 +81,179 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFBoxArgument;
 import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightArgument : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightArgument : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightArgument extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BOXARGUMENT, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.BOXTOBOXDIFFERENCE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXARGUMENT, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BOXTOBOXDIFFERENCE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightArgument
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightArgument
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightArgument
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightArgument
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightArgument
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightArgument
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightArgument(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightArgument[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightArgument[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateBoxArgument
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxArgument the element
+	 */
+	public JDFBoxArgument getCreateBoxArgument(int iSkip)
+	{
+		return (JDFBoxArgument) getCreateElement_KElement(ElementName.BOXARGUMENT, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element BoxArgument
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxArgument the element
+	 * default is getBoxArgument(0)     */
+	public JDFBoxArgument getBoxArgument(int iSkip)
+	{
+		return (JDFBoxArgument) getElement(ElementName.BOXARGUMENT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all BoxArgument from the current element
+	 * 
+	 * @return Collection<JDFBoxArgument>, null if none are available
+	 */
+	public Collection<JDFBoxArgument> getAllBoxArgument()
+	{
+		final VElement vc = getChildElementVector(ElementName.BOXARGUMENT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBoxArgument
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBoxArgument the element
-     */
-    public JDFBoxArgument getCreateBoxArgument(int iSkip)
-    {
-        return (JDFBoxArgument)getCreateElement_KElement(ElementName.BOXARGUMENT, null, iSkip);
-    }
+		final Vector<JDFBoxArgument> v = new Vector<JDFBoxArgument>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBoxArgument) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BoxArgument
-     * @param iSkip number of elements to skip
-     * @return JDFBoxArgument the element
-     * default is getBoxArgument(0)     */
-    public JDFBoxArgument getBoxArgument(int iSkip)
-    {
-        return (JDFBoxArgument) getElement(ElementName.BOXARGUMENT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BoxArgument from the current element
-     * 
-     * @return Collection<JDFBoxArgument>, null if none are available
-     */
-    public Collection<JDFBoxArgument> getAllBoxArgument()
-    {
-        final VElement vc = getChildElementVector(ElementName.BOXARGUMENT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element BoxArgument
+	 * @return JDFBoxArgument the element
+	 */
+	public JDFBoxArgument appendBoxArgument()
+	{
+		return (JDFBoxArgument) appendElement(ElementName.BOXARGUMENT, null);
+	}
 
-        final Vector<JDFBoxArgument> v = new Vector<JDFBoxArgument>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBoxArgument) vc.get(i));
-        }
+	/** (26) getCreateBoxToBoxDifference
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxToBoxDifference the element
+	 */
+	public JDFBoxToBoxDifference getCreateBoxToBoxDifference(int iSkip)
+	{
+		return (JDFBoxToBoxDifference) getCreateElement_KElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element BoxToBoxDifference
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxToBoxDifference the element
+	 * default is getBoxToBoxDifference(0)     */
+	public JDFBoxToBoxDifference getBoxToBoxDifference(int iSkip)
+	{
+		return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
+	}
 
-    /**
-     * (30) append element BoxArgument
-     * @return JDFBoxArgument the element
-     */
-    public JDFBoxArgument appendBoxArgument()
-    {
-        return (JDFBoxArgument) appendElement(ElementName.BOXARGUMENT, null);
-    }
+	/**
+	 * Get all BoxToBoxDifference from the current element
+	 * 
+	 * @return Collection<JDFBoxToBoxDifference>, null if none are available
+	 */
+	public Collection<JDFBoxToBoxDifference> getAllBoxToBoxDifference()
+	{
+		final VElement vc = getChildElementVector(ElementName.BOXTOBOXDIFFERENCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBoxToBoxDifference
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBoxToBoxDifference the element
-     */
-    public JDFBoxToBoxDifference getCreateBoxToBoxDifference(int iSkip)
-    {
-        return (JDFBoxToBoxDifference)getCreateElement_KElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
-    }
+		final Vector<JDFBoxToBoxDifference> v = new Vector<JDFBoxToBoxDifference>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBoxToBoxDifference) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BoxToBoxDifference
-     * @param iSkip number of elements to skip
-     * @return JDFBoxToBoxDifference the element
-     * default is getBoxToBoxDifference(0)     */
-    public JDFBoxToBoxDifference getBoxToBoxDifference(int iSkip)
-    {
-        return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BoxToBoxDifference from the current element
-     * 
-     * @return Collection<JDFBoxToBoxDifference>, null if none are available
-     */
-    public Collection<JDFBoxToBoxDifference> getAllBoxToBoxDifference()
-    {
-        final VElement vc = getChildElementVector(ElementName.BOXTOBOXDIFFERENCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBoxToBoxDifference> v = new Vector<JDFBoxToBoxDifference>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBoxToBoxDifference) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BoxToBoxDifference
-     * @return JDFBoxToBoxDifference the element
-     */
-    public JDFBoxToBoxDifference appendBoxToBoxDifference()
-    {
-        return (JDFBoxToBoxDifference) appendElement(ElementName.BOXTOBOXDIFFERENCE, null);
-    }
+	/**
+	 * (30) append element BoxToBoxDifference
+	 * @return JDFBoxToBoxDifference the element
+	 */
+	public JDFBoxToBoxDifference appendBoxToBoxDifference()
+	{
+		return (JDFBoxToBoxDifference) appendElement(ElementName.BOXTOBOXDIFFERENCE, null);
+	}
 
 }// end namespace JDF

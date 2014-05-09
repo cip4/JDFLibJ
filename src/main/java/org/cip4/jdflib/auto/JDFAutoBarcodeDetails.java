@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,177 +76,163 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoBarcodeDetails : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBarcodeDetails : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBarcodeDetails extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BARCODEVERSION, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORCORRECTIONLEVEL, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.XCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.YCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BARCODEVERSION, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORCORRECTIONLEVEL, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.XCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.YCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBarcodeDetails
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeDetails
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBarcodeDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBarcodeDetails[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBarcodeDetails[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BarcodeVersion
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BarcodeVersion
+	  * @param value the value to set the attribute to
+	  */
+	public void setBarcodeVersion(String value)
+	{
+		setAttribute(AttributeName.BARCODEVERSION, value, null);
+	}
 
+	/**
+	  * (23) get String attribute BarcodeVersion
+	  * @return the value of the attribute
+	  */
+	public String getBarcodeVersion()
+	{
+		return getAttribute(AttributeName.BARCODEVERSION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BarcodeVersion
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BarcodeVersion
-          * @param value the value to set the attribute to
-          */
-        public void setBarcodeVersion(String value)
-        {
-            setAttribute(AttributeName.BARCODEVERSION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorCorrectionLevel
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ErrorCorrectionLevel
+	  * @param value the value to set the attribute to
+	  */
+	public void setErrorCorrectionLevel(String value)
+	{
+		setAttribute(AttributeName.ERRORCORRECTIONLEVEL, value, null);
+	}
 
-        /**
-          * (23) get String attribute BarcodeVersion
-          * @return the value of the attribute
-          */
-        public String getBarcodeVersion()
-        {
-            return getAttribute(AttributeName.BARCODEVERSION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ErrorCorrectionLevel
+	  * @return the value of the attribute
+	  */
+	public String getErrorCorrectionLevel()
+	{
+		return getAttribute(AttributeName.ERRORCORRECTIONLEVEL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorCorrectionLevel
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ErrorCorrectionLevel
-          * @param value the value to set the attribute to
-          */
-        public void setErrorCorrectionLevel(String value)
-        {
-            setAttribute(AttributeName.ERRORCORRECTIONLEVEL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute XCells
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute XCells
+	  * @param value the value to set the attribute to
+	  */
+	public void setXCells(int value)
+	{
+		setAttribute(AttributeName.XCELLS, value, null);
+	}
 
-        /**
-          * (23) get String attribute ErrorCorrectionLevel
-          * @return the value of the attribute
-          */
-        public String getErrorCorrectionLevel()
-        {
-            return getAttribute(AttributeName.ERRORCORRECTIONLEVEL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute XCells
+	  * @return int the value of the attribute
+	  */
+	public int getXCells()
+	{
+		return getIntAttribute(AttributeName.XCELLS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute XCells
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute XCells
-          * @param value the value to set the attribute to
-          */
-        public void setXCells(int value)
-        {
-            setAttribute(AttributeName.XCELLS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute YCells
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute YCells
+	  * @param value the value to set the attribute to
+	  */
+	public void setYCells(int value)
+	{
+		setAttribute(AttributeName.YCELLS, value, null);
+	}
 
-        /**
-          * (15) get int attribute XCells
-          * @return int the value of the attribute
-          */
-        public int getXCells()
-        {
-            return getIntAttribute(AttributeName.XCELLS, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute YCells
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute YCells
-          * @param value the value to set the attribute to
-          */
-        public void setYCells(int value)
-        {
-            setAttribute(AttributeName.YCELLS, value, null);
-        }
-
-        /**
-          * (15) get int attribute YCells
-          * @return int the value of the attribute
-          */
-        public int getYCells()
-        {
-            return getIntAttribute(AttributeName.YCELLS, null, 0);
-        }
+	/**
+	  * (15) get int attribute YCells
+	  * @return int the value of the attribute
+	  */
+	public int getYCells()
+	{
+		return getIntAttribute(AttributeName.YCELLS, null, 0);
+	}
 
 }// end namespace JDF

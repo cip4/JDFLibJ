@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,326 +87,312 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoOccupation : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoOccupation : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoOccupation extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BUSY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "100");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUSY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "100");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x55555555);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x55555555);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoOccupation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoOccupation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoOccupation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoOccupation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoOccupation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoOccupation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoOccupation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoOccupation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoOccupation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoOccupation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoOccupation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoOccupation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoOccupation[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoOccupation[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Busy
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Busy
+	  * @param value the value to set the attribute to
+	  */
+	public void setBusy(double value)
+	{
+		setAttribute(AttributeName.BUSY, value, null);
+	}
 
+	/**
+	  * (17) get double attribute Busy
+	  * @return double the value of the attribute
+	  */
+	public double getBusy()
+	{
+		return getRealAttribute(AttributeName.BUSY, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Busy
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Busy
-          * @param value the value to set the attribute to
-          */
-        public void setBusy(double value)
-        {
-            setAttribute(AttributeName.BUSY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-        /**
-          * (17) get double attribute Busy
-          * @return double the value of the attribute
-          */
-        public double getBusy()
-        {
-            return getRealAttribute(AttributeName.BUSY, null, 0.0);
-        }
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateDevice
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice(int iSkip)
+	{
+		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Device
+	 * @param iSkip number of elements to skip
+	 * @return JDFDevice the element
+	 * default is getDevice(0)     */
+	public JDFDevice getDevice(int iSkip)
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+	}
 
-    /** (26) getCreateDevice
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     */
-    public JDFDevice getCreateDevice(int iSkip)
-    {
-        return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
-    }
+	/**
+	 * Get all Device from the current element
+	 * 
+	 * @return Collection<JDFDevice>, null if none are available
+	 */
+	public Collection<JDFDevice> getAllDevice()
+	{
+		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Device
-     * @param iSkip number of elements to skip
-     * @return JDFDevice the element
-     * default is getDevice(0)     */
-    public JDFDevice getDevice(int iSkip)
-    {
-        return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
-    }
+		final Vector<JDFDevice> v = new Vector<JDFDevice>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDevice) vc.get(i));
+		}
 
-    /**
-     * Get all Device from the current element
-     * 
-     * @return Collection<JDFDevice>, null if none are available
-     */
-    public Collection<JDFDevice> getAllDevice()
-    {
-        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFDevice> v = new Vector<JDFDevice>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDevice) vc.get(i));
-        }
+	/**
+	 * (30) append element Device
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice appendDevice()
+	{
+		return (JDFDevice) appendElement(ElementName.DEVICE, null);
+	}
 
-        return v;
-    }
+	/**
+	 * (24) const get element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getEmployee()
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
+	}
 
-    /**
-     * (30) append element Device
-     * @return JDFDevice the element
-     */
-    public JDFDevice appendDevice()
-    {
-        return (JDFDevice) appendElement(ElementName.DEVICE, null);
-    }
+	/** (25) getCreateEmployee
+	 * 
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, 0);
+	}
 
-    /**
-     * (24) const get element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getEmployee()
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, 0);
-    }
+	/**
+	 * (29) append element Employee
+	 * @return JDFEmployee the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFEmployee appendEmployee() throws JDFException
+	{
+		return (JDFEmployee) appendElementN(ElementName.EMPLOYEE, 1, null);
+	}
 
-    /** (25) getCreateEmployee
-     * 
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee()
-    {
-        return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, 0);
-    }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-    /**
-     * (29) append element Employee
-     * @return JDFEmployee the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFEmployee appendEmployee() throws JDFException
-    {
-        return (JDFEmployee) appendElementN(ElementName.EMPLOYEE, 1, null);
-    }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,215 +85,202 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFFlushQueueParams;
-    /**
-    *****************************************************************************
-    class JDFAutoShutDownCmdParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShutDownCmdParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShutDownCmdParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FLUSHQUEUEPARAMS, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FLUSHQUEUEPARAMS, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShutDownCmdParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShutDownCmdParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShutDownCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShutDownCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShutDownCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShutDownCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShutDownCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShutDownCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShutDownCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShutDownCmdParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ShutDownType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShutDownCmdParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumShutDownType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumShutDownType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ShutDownType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumShutDownType getEnum(String enumName)
+		{
+			return (EnumShutDownType) getEnum(EnumShutDownType.class, enumName);
+		}
 
-        public static class EnumShutDownType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumShutDownType getEnum(int enumValue)
+		{
+			return (EnumShutDownType) getEnum(EnumShutDownType.class, enumValue);
+		}
 
-            private EnumShutDownType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumShutDownType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumShutDownType getEnum(String enumName)
-            {
-                return (EnumShutDownType) getEnum(EnumShutDownType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumShutDownType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumShutDownType getEnum(int enumValue)
-            {
-                return (EnumShutDownType) getEnum(EnumShutDownType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumShutDownType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumShutDownType.class);
-            }
+		public static final EnumShutDownType StandBy = new EnumShutDownType("StandBy");
+		public static final EnumShutDownType Full = new EnumShutDownType("Full");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumShutDownType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumShutDownType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShutDownType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ShutDownType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setShutDownType(EnumShutDownType enumVar)
+	{
+		setAttribute(AttributeName.SHUTDOWNTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumShutDownType StandBy = new EnumShutDownType("StandBy");
-            public static final EnumShutDownType Full = new EnumShutDownType("Full");
-        }      
+	/**
+	  * (9) get attribute ShutDownType
+	  * @return the value of the attribute
+	  */
+	public EnumShutDownType getShutDownType()
+	{
+		return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element FlushQueueParams
+	 * @return JDFFlushQueueParams the element
+	 */
+	public JDFFlushQueueParams getFlushQueueParams()
+	{
+		return (JDFFlushQueueParams) getElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShutDownType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ShutDownType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setShutDownType(EnumShutDownType enumVar)
-        {
-            setAttribute(AttributeName.SHUTDOWNTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateFlushQueueParams
+	 * 
+	 * @return JDFFlushQueueParams the element
+	 */
+	public JDFFlushQueueParams getCreateFlushQueueParams()
+	{
+		return (JDFFlushQueueParams) getCreateElement_KElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
+	}
 
-        /**
-          * (9) get attribute ShutDownType
-          * @return the value of the attribute
-          */
-        public EnumShutDownType getShutDownType()
-        {
-            return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element FlushQueueParams
-     * @return JDFFlushQueueParams the element
-     */
-    public JDFFlushQueueParams getFlushQueueParams()
-    {
-        return (JDFFlushQueueParams) getElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
-    }
-
-    /** (25) getCreateFlushQueueParams
-     * 
-     * @return JDFFlushQueueParams the element
-     */
-    public JDFFlushQueueParams getCreateFlushQueueParams()
-    {
-        return (JDFFlushQueueParams) getCreateElement_KElement(ElementName.FLUSHQUEUEPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element FlushQueueParams
-     * @return JDFFlushQueueParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFlushQueueParams appendFlushQueueParams() throws JDFException
-    {
-        return (JDFFlushQueueParams) appendElementN(ElementName.FLUSHQUEUEPARAMS, 1, null);
-    }
+	/**
+	 * (29) append element FlushQueueParams
+	 * @return JDFFlushQueueParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFlushQueueParams appendFlushQueueParams() throws JDFException
+	{
+		return (JDFFlushQueueParams) appendElementN(ElementName.FLUSHQUEUEPARAMS, 1, null);
+	}
 
 }// end namespace JDF

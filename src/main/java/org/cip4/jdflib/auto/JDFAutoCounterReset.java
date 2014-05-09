@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoCounterReset : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCounterReset : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCounterReset extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCounterReset
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCounterReset(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCounterReset
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCounterReset(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCounterReset
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCounterReset(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCounterReset
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCounterReset(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCounterReset
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCounterReset(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCounterReset
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCounterReset(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCounterReset[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCounterReset[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CounterID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CounterID
+	  * @param value the value to set the attribute to
+	  */
+	public void setCounterID(String value)
+	{
+		setAttribute(AttributeName.COUNTERID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute CounterID
+	  * @return the value of the attribute
+	  */
+	public String getCounterID()
+	{
+		return getAttribute(AttributeName.COUNTERID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CounterID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CounterID
-          * @param value the value to set the attribute to
-          */
-        public void setCounterID(String value)
-        {
-            setAttribute(AttributeName.COUNTERID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LastCount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LastCount
+	  * @param value the value to set the attribute to
+	  */
+	public void setLastCount(int value)
+	{
+		setAttribute(AttributeName.LASTCOUNT, value, null);
+	}
 
-        /**
-          * (23) get String attribute CounterID
-          * @return the value of the attribute
-          */
-        public String getCounterID()
-        {
-            return getAttribute(AttributeName.COUNTERID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LastCount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LastCount
-          * @param value the value to set the attribute to
-          */
-        public void setLastCount(int value)
-        {
-            setAttribute(AttributeName.LASTCOUNT, value, null);
-        }
-
-        /**
-          * (15) get int attribute LastCount
-          * @return int the value of the attribute
-          */
-        public int getLastCount()
-        {
-            return getIntAttribute(AttributeName.LASTCOUNT, null, 0);
-        }
+	/**
+	  * (15) get int attribute LastCount
+	  * @return int the value of the attribute
+	  */
+	public int getLastCount()
+	{
+		return getIntAttribute(AttributeName.LASTCOUNT, null, 0);
+	}
 
 }// end namespace JDF

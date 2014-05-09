@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,433 +85,432 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoProcessRun : public JDFAudit
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoProcessRun : public JDFAudit
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoProcessRun extends JDFAudit
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoProcessRun
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProcessRun(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProcessRun
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoProcessRun(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProcessRun
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProcessRun(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProcessRun
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoProcessRun(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProcessRun
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoProcessRun(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoProcessRun
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoProcessRun(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoProcessRun[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for EndStatus
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoProcessRun[  --> " + super.toString() + " ]";
-    }
+	public static class EnumEndStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumEndStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for EndStatus
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumEndStatus getEnum(String enumName)
+		{
+			return (EnumEndStatus) getEnum(EnumEndStatus.class, enumName);
+		}
 
-        public static class EnumEndStatus extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumEndStatus getEnum(int enumValue)
+		{
+			return (EnumEndStatus) getEnum(EnumEndStatus.class, enumValue);
+		}
 
-            private EnumEndStatus(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumEndStatus.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumEndStatus getEnum(String enumName)
-            {
-                return (EnumEndStatus) getEnum(EnumEndStatus.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumEndStatus.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumEndStatus getEnum(int enumValue)
-            {
-                return (EnumEndStatus) getEnum(EnumEndStatus.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumEndStatus.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumEndStatus.class);
-            }
+		public static final EnumEndStatus Aborted = new EnumEndStatus("Aborted");
+		public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
+		public static final EnumEndStatus FailedTestRun = new EnumEndStatus("FailedTestRun");
+		public static final EnumEndStatus Ready = new EnumEndStatus("Ready");
+		public static final EnumEndStatus Stopped = new EnumEndStatus("Stopped");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumEndStatus.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumEndStatus.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Duration
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Duration
+	  * @param value the value to set the attribute to
+	  */
+	public void setDuration(JDFDuration value)
+	{
+		setAttribute(AttributeName.DURATION, value, null);
+	}
 
-            public static final EnumEndStatus Aborted = new EnumEndStatus("Aborted");
-            public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
-            public static final EnumEndStatus FailedTestRun = new EnumEndStatus("FailedTestRun");
-            public static final EnumEndStatus Ready = new EnumEndStatus("Ready");
-            public static final EnumEndStatus Stopped = new EnumEndStatus("Stopped");
-        }      
+	/**
+	  * (20) get JDFDuration attribute Duration
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getDuration()
+	{
+		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute End
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute End
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setEnd(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.END, date.getDateTimeISO(), null);
+	}
 
+	/**
+	  * (12) get JDFDate attribute End
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getEnd()
+	{
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Duration
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Duration
-          * @param value the value to set the attribute to
-          */
-        public void setDuration(JDFDuration value)
-        {
-            setAttribute(AttributeName.DURATION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EndStatus
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute EndStatus
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	@Override
+	public void setEndStatus(EnumNodeStatus enumVar)
+	{
+		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute Duration
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getDuration()
-        {
-            String strAttrName = getAttribute(AttributeName.DURATION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute EndStatus
+	  * @return the value of the attribute
+	  */
+	@Override
+	public EnumNodeStatus getEndStatus()
+	{
+		return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute End
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute End
-          * @param value the value to set the attribute to or null
-          */
-        public void setEnd(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.END, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReturnTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute ReturnTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setReturnTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.RETURNTIME, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (12) get JDFDate attribute End
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getEnd()
-        {
-            String str = getAttribute(AttributeName.END, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (12) get JDFDate attribute ReturnTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getReturnTime()
+	{
+		final String str = getAttribute(AttributeName.RETURNTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EndStatus
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute EndStatus
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setEndStatus(EnumNodeStatus enumVar)
-        {
-            setAttribute(AttributeName.ENDSTATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Start
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute Start
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setStart(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (9) get attribute EndStatus
-          * @return the value of the attribute
-          */
-        public EnumNodeStatus getEndStatus()
-        {
-            return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
-        }
+	/**
+	  * (12) get JDFDate attribute Start
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getStart()
+	{
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReturnTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute ReturnTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setReturnTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.RETURNTIME, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SubmissionTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute SubmissionTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setSubmissionTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (12) get JDFDate attribute ReturnTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getReturnTime()
-        {
-            String str = getAttribute(AttributeName.RETURNTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (12) get JDFDate attribute SubmissionTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getSubmissionTime()
+	{
+		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Start
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute Start
-          * @param value the value to set the attribute to or null
-          */
-        public void setStart(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.START, date.getDateTimeISO(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (12) get JDFDate attribute Start
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getStart()
-        {
-            String str = getAttribute(AttributeName.START, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SubmissionTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute SubmissionTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setSubmissionTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
-        }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	@Override
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        /**
-          * (12) get JDFDate attribute SubmissionTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getSubmissionTime()
-        {
-            String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	@Override
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

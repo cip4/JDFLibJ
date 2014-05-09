@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,475 +89,455 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFFeederQualityParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /**
-    *****************************************************************************
-    class JDFAutoFeeder : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFeeder : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFeeder extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ALTERNATEPOSITIONS, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDERSYNCHRONIZATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFeederSynchronization.getEnum(0), "Primary");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDERTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LOADING, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALTERNATEPOSITIONS, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDERSYNCHRONIZATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFeederSynchronization.getEnum(0), "Primary");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDERTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LOADING, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.FEEDERQUALITYPARAMS, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x66666611);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FEEDERQUALITYPARAMS, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFeeder
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeeder
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFeeder(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeeder
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeeder
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFeeder(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeeder
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeeder
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFeeder(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFeeder[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for FeederSynchronization
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFeeder[  --> " + super.toString() + " ]";
-    }
+	public static class EnumFeederSynchronization extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumFeederSynchronization(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for FeederSynchronization
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFeederSynchronization getEnum(String enumName)
+		{
+			return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumName);
+		}
 
-        public static class EnumFeederSynchronization extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFeederSynchronization getEnum(int enumValue)
+		{
+			return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumValue);
+		}
 
-            private EnumFeederSynchronization(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFeederSynchronization.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFeederSynchronization getEnum(String enumName)
-            {
-                return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFeederSynchronization.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFeederSynchronization getEnum(int enumValue)
-            {
-                return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFeederSynchronization.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFeederSynchronization.class);
-            }
+		public static final EnumFeederSynchronization Alternate = new EnumFeederSynchronization("Alternate");
+		public static final EnumFeederSynchronization Backup = new EnumFeederSynchronization("Backup");
+		public static final EnumFeederSynchronization Chain = new EnumFeederSynchronization("Chain");
+		public static final EnumFeederSynchronization Primary = new EnumFeederSynchronization("Primary");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFeederSynchronization.class);
-            }
+	/**
+	* Enumeration strings for Opening
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFeederSynchronization.class);
-            }
+	public static class EnumOpening extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumFeederSynchronization Alternate = new EnumFeederSynchronization("Alternate");
-            public static final EnumFeederSynchronization Backup = new EnumFeederSynchronization("Backup");
-            public static final EnumFeederSynchronization Chain = new EnumFeederSynchronization("Chain");
-            public static final EnumFeederSynchronization Primary = new EnumFeederSynchronization("Primary");
-        }      
+		private EnumOpening(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumOpening getEnum(String enumName)
+		{
+			return (EnumOpening) getEnum(EnumOpening.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumOpening getEnum(int enumValue)
+		{
+			return (EnumOpening) getEnum(EnumOpening.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Opening
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOpening.class);
+		}
 
-        public static class EnumOpening extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOpening.class);
+		}
 
-            private EnumOpening(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumOpening.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumOpening getEnum(String enumName)
-            {
-                return (EnumOpening) getEnum(EnumOpening.class, enumName);
-            }
+		public static final EnumOpening Back = new EnumOpening("Back");
+		public static final EnumOpening Front = new EnumOpening("Front");
+		public static final EnumOpening None = new EnumOpening("None");
+		public static final EnumOpening Sucker = new EnumOpening("Sucker");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumOpening getEnum(int enumValue)
-            {
-                return (EnumOpening) getEnum(EnumOpening.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumOpening.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AlternatePositions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AlternatePositions
+	  * @param value the value to set the attribute to
+	  */
+	public void setAlternatePositions(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.ALTERNATEPOSITIONS, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumOpening.class);
-            }
+	/**
+	  * (20) get JDFIntegerList attribute AlternatePositions
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getAlternatePositions()
+	{
+		final String strAttrName = getAttribute(AttributeName.ALTERNATEPOSITIONS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumOpening.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Position
+	  * @param value the value to set the attribute to
+	  */
+	public void setPosition(int value)
+	{
+		setAttribute(AttributeName.POSITION, value, null);
+	}
 
-            public static final EnumOpening Back = new EnumOpening("Back");
-            public static final EnumOpening Front = new EnumOpening("Front");
-            public static final EnumOpening None = new EnumOpening("None");
-            public static final EnumOpening Sucker = new EnumOpening("Sucker");
-        }      
+	/**
+	  * (15) get int attribute Position
+	  * @return int the value of the attribute
+	  */
+	public int getPosition()
+	{
+		return getIntAttribute(AttributeName.POSITION, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FeederSynchronization
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FeederSynchronization
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFeederSynchronization(EnumFeederSynchronization enumVar)
+	{
+		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute FeederSynchronization
+	  * @return the value of the attribute
+	  */
+	public EnumFeederSynchronization getFeederSynchronization()
+	{
+		return EnumFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AlternatePositions
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AlternatePositions
-          * @param value the value to set the attribute to
-          */
-        public void setAlternatePositions(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.ALTERNATEPOSITIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FeederType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FeederType
+	  * @param value the value to set the attribute to
+	  */
+	public void setFeederType(String value)
+	{
+		setAttribute(AttributeName.FEEDERTYPE, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerList attribute AlternatePositions
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getAlternatePositions()
-        {
-            String strAttrName = getAttribute(AttributeName.ALTERNATEPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute FeederType
+	  * @return the value of the attribute
+	  */
+	public String getFeederType()
+	{
+		return getAttribute(AttributeName.FEEDERTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Position
-          * @param value the value to set the attribute to
-          */
-        public void setPosition(int value)
-        {
-            setAttribute(AttributeName.POSITION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Loading
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Loading
+	  * @param value the value to set the attribute to
+	  */
+	public void setLoading(String value)
+	{
+		setAttribute(AttributeName.LOADING, value, null);
+	}
 
-        /**
-          * (15) get int attribute Position
-          * @return int the value of the attribute
-          */
-        public int getPosition()
-        {
-            return getIntAttribute(AttributeName.POSITION, null, 0);
-        }
+	/**
+	  * (23) get String attribute Loading
+	  * @return the value of the attribute
+	  */
+	public String getLoading()
+	{
+		return getAttribute(AttributeName.LOADING, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FeederSynchronization
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FeederSynchronization
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFeederSynchronization(EnumFeederSynchronization enumVar)
-        {
-            setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Opening
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Opening
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setOpening(EnumOpening enumVar)
+	{
+		setAttribute(AttributeName.OPENING, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (9) get attribute FeederSynchronization
-          * @return the value of the attribute
-          */
-        public EnumFeederSynchronization getFeederSynchronization()
-        {
-            return EnumFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
-        }
+	/**
+	  * (9) get attribute Opening
+	  * @return the value of the attribute
+	  */
+	public EnumOpening getOpening()
+	{
+		return EnumOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FeederType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FeederType
-          * @param value the value to set the attribute to
-          */
-        public void setFeederType(String value)
-        {
-            setAttribute(AttributeName.FEEDERTYPE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute FeederType
-          * @return the value of the attribute
-          */
-        public String getFeederType()
-        {
-            return getAttribute(AttributeName.FEEDERTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element Component
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getComponent()
+	{
+		return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Loading
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Loading
-          * @param value the value to set the attribute to
-          */
-        public void setLoading(String value)
-        {
-            setAttribute(AttributeName.LOADING, value, null);
-        }
+	/** (25) getCreateComponent
+	 * 
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getCreateComponent()
+	{
+		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
+	}
 
-        /**
-          * (23) get String attribute Loading
-          * @return the value of the attribute
-          */
-        public String getLoading()
-        {
-            return getAttribute(AttributeName.LOADING, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Component
+	 * @return JDFComponent the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFComponent appendComponent() throws JDFException
+	{
+		return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Opening
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Opening
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setOpening(EnumOpening enumVar)
-        {
-            setAttribute(AttributeName.OPENING, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refComponent(JDFComponent refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        /**
-          * (9) get attribute Opening
-          * @return the value of the attribute
-          */
-        public EnumOpening getOpening()
-        {
-            return EnumOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
-        }
+	/**
+	 * (24) const get element FeederQualityParams
+	 * @return JDFFeederQualityParams the element
+	 */
+	public JDFFeederQualityParams getFeederQualityParams()
+	{
+		return (JDFFeederQualityParams) getElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateFeederQualityParams
+	 * 
+	 * @return JDFFeederQualityParams the element
+	 */
+	public JDFFeederQualityParams getCreateFeederQualityParams()
+	{
+		return (JDFFeederQualityParams) getCreateElement_KElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element Component
-     * @return JDFComponent the element
-     */
-    public JDFComponent getComponent()
-    {
-        return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
-    }
+	/**
+	 * (29) append element FeederQualityParams
+	 * @return JDFFeederQualityParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFeederQualityParams appendFeederQualityParams() throws JDFException
+	{
+		return (JDFFeederQualityParams) appendElementN(ElementName.FEEDERQUALITYPARAMS, 1, null);
+	}
 
-    /** (25) getCreateComponent
-     * 
-     * @return JDFComponent the element
-     */
-    public JDFComponent getCreateComponent()
-    {
-        return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
-    }
+	/**
+	 * (24) const get element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
 
-    /**
-     * (29) append element Component
-     * @return JDFComponent the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFComponent appendComponent() throws JDFException
-    {
-        return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
-    }
+	/** (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComponent(JDFComponent refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element Media
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendMedia() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+	}
 
-    /**
-     * (24) const get element FeederQualityParams
-     * @return JDFFeederQualityParams the element
-     */
-    public JDFFeederQualityParams getFeederQualityParams()
-    {
-        return (JDFFeederQualityParams) getElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
-    }
-
-    /** (25) getCreateFeederQualityParams
-     * 
-     * @return JDFFeederQualityParams the element
-     */
-    public JDFFeederQualityParams getCreateFeederQualityParams()
-    {
-        return (JDFFeederQualityParams) getCreateElement_KElement(ElementName.FEEDERQUALITYPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element FeederQualityParams
-     * @return JDFFeederQualityParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFeederQualityParams appendFeederQualityParams() throws JDFException
-    {
-        return (JDFFeederQualityParams) appendElementN(ElementName.FEEDERQUALITYPARAMS, 1, null);
-    }
-
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
-
-    /** (25) getCreateMedia
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
-    }
-
-    /**
-     * (29) append element Media
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendMedia() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

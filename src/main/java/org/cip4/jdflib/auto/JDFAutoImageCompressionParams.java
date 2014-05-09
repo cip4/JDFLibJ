@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,160 +80,147 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFImageCompression;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoImageCompressionParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoImageCompressionParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoImageCompressionParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGECOMPRESSION, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGECOMPRESSION, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoImageCompressionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoImageCompressionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageCompressionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoImageCompressionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoImageCompressionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoImageCompressionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageCompressionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoImageCompressionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoImageCompressionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoImageCompressionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoImageCompressionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoImageCompressionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoImageCompressionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoImageCompressionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateImageCompression
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageCompression the element
+	 */
+	public JDFImageCompression getCreateImageCompression(int iSkip)
+	{
+		return (JDFImageCompression) getCreateElement_KElement(ElementName.IMAGECOMPRESSION, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ImageCompression
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageCompression the element
+	 * default is getImageCompression(0)     */
+	public JDFImageCompression getImageCompression(int iSkip)
+	{
+		return (JDFImageCompression) getElement(ElementName.IMAGECOMPRESSION, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all ImageCompression from the current element
+	 * 
+	 * @return Collection<JDFImageCompression>, null if none are available
+	 */
+	public Collection<JDFImageCompression> getAllImageCompression()
+	{
+		final VElement vc = getChildElementVector(ElementName.IMAGECOMPRESSION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFImageCompression> v = new Vector<JDFImageCompression>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFImageCompression) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateImageCompression
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFImageCompression the element
-     */
-    public JDFImageCompression getCreateImageCompression(int iSkip)
-    {
-        return (JDFImageCompression)getCreateElement_KElement(ElementName.IMAGECOMPRESSION, null, iSkip);
-    }
-
-    /**
-     * (27) const get element ImageCompression
-     * @param iSkip number of elements to skip
-     * @return JDFImageCompression the element
-     * default is getImageCompression(0)     */
-    public JDFImageCompression getImageCompression(int iSkip)
-    {
-        return (JDFImageCompression) getElement(ElementName.IMAGECOMPRESSION, null, iSkip);
-    }
-
-    /**
-     * Get all ImageCompression from the current element
-     * 
-     * @return Collection<JDFImageCompression>, null if none are available
-     */
-    public Collection<JDFImageCompression> getAllImageCompression()
-    {
-        final VElement vc = getChildElementVector(ElementName.IMAGECOMPRESSION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFImageCompression> v = new Vector<JDFImageCompression>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFImageCompression) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ImageCompression
-     * @return JDFImageCompression the element
-     */
-    public JDFImageCompression appendImageCompression()
-    {
-        return (JDFImageCompression) appendElement(ElementName.IMAGECOMPRESSION, null);
-    }
+	/**
+	 * (30) append element ImageCompression
+	 * @return JDFImageCompression the element
+	 */
+	public JDFImageCompression appendImageCompression()
+	{
+		return (JDFImageCompression) appendElement(ElementName.IMAGECOMPRESSION, null);
+	}
 
 }// end namespace JDF

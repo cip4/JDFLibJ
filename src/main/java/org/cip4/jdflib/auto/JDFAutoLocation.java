@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,208 +84,187 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFAddress;
-    /**
-    *****************************************************************************
-    class JDFAutoLocation : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLocation : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLocation extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOCATIONNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLocation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLocation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLocation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLocation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLocation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLocation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLocation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLocation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLocation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLocation[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLocation[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LocationName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LocationName
+	  * @param value the value to set the attribute to
+	  */
+	public void setLocationName(String value)
+	{
+		setAttribute(AttributeName.LOCATIONNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute LocationName
+	  * @return the value of the attribute
+	  */
+	public String getLocationName()
+	{
+		return getAttribute(AttributeName.LOCATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LocationName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LocationName
-          * @param value the value to set the attribute to
-          */
-        public void setLocationName(String value)
-        {
-            setAttribute(AttributeName.LOCATIONNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LocID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LocID
+	  * @param value the value to set the attribute to
+	  */
+	public void setLocID(String value)
+	{
+		setAttribute(AttributeName.LOCID, value, null);
+	}
 
-        /**
-          * (23) get String attribute LocationName
-          * @return the value of the attribute
-          */
-        public String getLocationName()
-        {
-            return getAttribute(AttributeName.LOCATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute LocID
+	  * @return the value of the attribute
+	  */
+	public String getLocID()
+	{
+		return getAttribute(AttributeName.LOCID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LocID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LocID
-          * @param value the value to set the attribute to
-          */
-        public void setLocID(String value)
-        {
-            setAttribute(AttributeName.LOCID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute LocID
-          * @return the value of the attribute
-          */
-        public String getLocID()
-        {
-            return getAttribute(AttributeName.LOCID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateAddress
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress getCreateAddress(int iSkip)
+	{
+		return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Address
+	 * @param iSkip number of elements to skip
+	 * @return JDFAddress the element
+	 * default is getAddress(0)     */
+	public JDFAddress getAddress(int iSkip)
+	{
+		return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
+	}
 
-    /** (26) getCreateAddress
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFAddress the element
-     */
-    public JDFAddress getCreateAddress(int iSkip)
-    {
-        return (JDFAddress)getCreateElement_KElement(ElementName.ADDRESS, null, iSkip);
-    }
+	/**
+	 * Get all Address from the current element
+	 * 
+	 * @return Collection<JDFAddress>, null if none are available
+	 */
+	public Collection<JDFAddress> getAllAddress()
+	{
+		final VElement vc = getChildElementVector(ElementName.ADDRESS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Address
-     * @param iSkip number of elements to skip
-     * @return JDFAddress the element
-     * default is getAddress(0)     */
-    public JDFAddress getAddress(int iSkip)
-    {
-        return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
-    }
+		final Vector<JDFAddress> v = new Vector<JDFAddress>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFAddress) vc.get(i));
+		}
 
-    /**
-     * Get all Address from the current element
-     * 
-     * @return Collection<JDFAddress>, null if none are available
-     */
-    public Collection<JDFAddress> getAllAddress()
-    {
-        final VElement vc = getChildElementVector(ElementName.ADDRESS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFAddress> v = new Vector<JDFAddress>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFAddress) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Address
-     * @return JDFAddress the element
-     */
-    public JDFAddress appendAddress()
-    {
-        return (JDFAddress) appendElement(ElementName.ADDRESS, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refAddress(JDFAddress refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element Address
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress appendAddress()
+	{
+		return (JDFAddress) appendElement(ElementName.ADDRESS, null);
+	}
 
 }// end namespace JDF

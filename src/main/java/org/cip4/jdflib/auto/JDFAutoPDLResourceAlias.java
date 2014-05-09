@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,207 +81,193 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoPDLResourceAlias : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPDLResourceAlias : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPDLResourceAlias extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCETYPE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOURCETYPE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPDLResourceAlias
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLResourceAlias
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPDLResourceAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDLResourceAlias
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLResourceAlias
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPDLResourceAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDLResourceAlias
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLResourceAlias
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPDLResourceAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPDLResourceAlias[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPDLResourceAlias[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ResourceType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ResourceType
+	  * @param value the value to set the attribute to
+	  */
+	public void setResourceType(String value)
+	{
+		setAttribute(AttributeName.RESOURCETYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ResourceType
+	  * @return the value of the attribute
+	  */
+	public String getResourceType()
+	{
+		return getAttribute(AttributeName.RESOURCETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SourceName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SourceName
+	  * @param value the value to set the attribute to
+	  */
+	public void setSourceName(String value)
+	{
+		setAttribute(AttributeName.SOURCENAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute SourceName
+	  * @return the value of the attribute
+	  */
+	public String getSourceName()
+	{
+		return getAttribute(AttributeName.SOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ResourceType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ResourceType
-          * @param value the value to set the attribute to
-          */
-        public void setResourceType(String value)
-        {
-            setAttribute(AttributeName.RESOURCETYPE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute ResourceType
-          * @return the value of the attribute
-          */
-        public String getResourceType()
-        {
-            return getAttribute(AttributeName.RESOURCETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SourceName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SourceName
-          * @param value the value to set the attribute to
-          */
-        public void setSourceName(String value)
-        {
-            setAttribute(AttributeName.SOURCENAME, value, null);
-        }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-        /**
-          * (23) get String attribute SourceName
-          * @return the value of the attribute
-          */
-        public String getSourceName()
-        {
-            return getAttribute(AttributeName.SOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

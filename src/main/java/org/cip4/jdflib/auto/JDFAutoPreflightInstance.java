@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,202 +85,190 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightInstance : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightInstance : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightInstance extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.IDENTIFIER, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGEREFS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IDENTIFIER, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGEREFS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTINSTANCEDETAIL, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTINSTANCEDETAIL, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightInstance
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightInstance
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightInstance(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightInstance
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightInstance
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightInstance(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightInstance
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightInstance
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightInstance(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightInstance[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightInstance[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Identifier
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Identifier
+	  * @param value the value to set the attribute to
+	  */
+	public void setIdentifier(String value)
+	{
+		setAttribute(AttributeName.IDENTIFIER, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Identifier
+	  * @return the value of the attribute
+	  */
+	public String getIdentifier()
+	{
+		return getAttribute(AttributeName.IDENTIFIER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Identifier
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Identifier
-          * @param value the value to set the attribute to
-          */
-        public void setIdentifier(String value)
-        {
-            setAttribute(AttributeName.IDENTIFIER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageRefs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PageRefs
+	  * @param value the value to set the attribute to
+	  */
+	public void setPageRefs(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.PAGEREFS, value, null);
+	}
 
-        /**
-          * (23) get String attribute Identifier
-          * @return the value of the attribute
-          */
-        public String getIdentifier()
-        {
-            return getAttribute(AttributeName.IDENTIFIER, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute PageRefs
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getPageRefs()
+	{
+		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PageRefs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PageRefs
-          * @param value the value to set the attribute to
-          */
-        public void setPageRefs(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.PAGEREFS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFIntegerRangeList attribute PageRefs
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getPageRefs()
-        {
-            String strAttrName = getAttribute(AttributeName.PAGEREFS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreatePreflightInstanceDetail
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightInstanceDetail the element
+	 */
+	public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail(int iSkip)
+	{
+		return (JDFPreflightInstanceDetail) getCreateElement_KElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element PreflightInstanceDetail
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightInstanceDetail the element
+	 * default is getPreflightInstanceDetail(0)     */
+	public JDFPreflightInstanceDetail getPreflightInstanceDetail(int iSkip)
+	{
+		return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
+	}
 
-    /** (26) getCreatePreflightInstanceDetail
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPreflightInstanceDetail the element
-     */
-    public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail(int iSkip)
-    {
-        return (JDFPreflightInstanceDetail)getCreateElement_KElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
-    }
+	/**
+	 * Get all PreflightInstanceDetail from the current element
+	 * 
+	 * @return Collection<JDFPreflightInstanceDetail>, null if none are available
+	 */
+	public Collection<JDFPreflightInstanceDetail> getAllPreflightInstanceDetail()
+	{
+		final VElement vc = getChildElementVector(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element PreflightInstanceDetail
-     * @param iSkip number of elements to skip
-     * @return JDFPreflightInstanceDetail the element
-     * default is getPreflightInstanceDetail(0)     */
-    public JDFPreflightInstanceDetail getPreflightInstanceDetail(int iSkip)
-    {
-        return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
-    }
+		final Vector<JDFPreflightInstanceDetail> v = new Vector<JDFPreflightInstanceDetail>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPreflightInstanceDetail) vc.get(i));
+		}
 
-    /**
-     * Get all PreflightInstanceDetail from the current element
-     * 
-     * @return Collection<JDFPreflightInstanceDetail>, null if none are available
-     */
-    public Collection<JDFPreflightInstanceDetail> getAllPreflightInstanceDetail()
-    {
-        final VElement vc = getChildElementVector(ElementName.PREFLIGHTINSTANCEDETAIL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPreflightInstanceDetail> v = new Vector<JDFPreflightInstanceDetail>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPreflightInstanceDetail) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PreflightInstanceDetail
-     * @return JDFPreflightInstanceDetail the element
-     */
-    public JDFPreflightInstanceDetail appendPreflightInstanceDetail()
-    {
-        return (JDFPreflightInstanceDetail) appendElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
-    }
+	/**
+	 * (30) append element PreflightInstanceDetail
+	 * @return JDFPreflightInstanceDetail the element
+	 */
+	public JDFPreflightInstanceDetail appendPreflightInstanceDetail()
+	{
+		return (JDFPreflightInstanceDetail) appendElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+	}
 
 }// end namespace JDF

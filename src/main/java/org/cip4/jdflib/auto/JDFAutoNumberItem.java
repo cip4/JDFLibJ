@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,344 +87,332 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoNumberItem : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNumberItem : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNumberItem extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "1");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x22221111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.XPOSITION, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.YPOSITION, 0x66666666);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.ORIENTATION, 0x66666666);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x22221111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.XPOSITION, 0x66666666);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.YPOSITION, 0x66666666);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.ORIENTATION, 0x66666666);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNumberItem
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberItem
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberItem(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNumberItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNumberItem[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNumberItem[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StartValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StartValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setStartValue(String value)
+	{
+		setAttribute(AttributeName.STARTVALUE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute StartValue
+	  * @return the value of the attribute
+	  */
+	public String getStartValue()
+	{
+		return getAttribute(AttributeName.STARTVALUE, null, "1");
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StartValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StartValue
-          * @param value the value to set the attribute to
-          */
-        public void setStartValue(String value)
-        {
-            setAttribute(AttributeName.STARTVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Step
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Step
+	  * @param value the value to set the attribute to
+	  */
+	public void setStep(int value)
+	{
+		setAttribute(AttributeName.STEP, value, null);
+	}
 
-        /**
-          * (23) get String attribute StartValue
-          * @return the value of the attribute
-          */
-        public String getStartValue()
-        {
-            return getAttribute(AttributeName.STARTVALUE, null, "1");
-        }
+	/**
+	  * (15) get int attribute Step
+	  * @return int the value of the attribute
+	  */
+	public int getStep()
+	{
+		return getIntAttribute(AttributeName.STEP, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Step
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Step
-          * @param value the value to set the attribute to
-          */
-        public void setStep(int value)
-        {
-            setAttribute(AttributeName.STEP, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute Step
-          * @return int the value of the attribute
-          */
-        public int getStep()
-        {
-            return getIntAttribute(AttributeName.STEP, null, 1);
-        }
+	/**
+	 * (24) const get element ColorName
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getColorName()
+	{
+		return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateColorName
+	 * 
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getCreateColorName()
+	{
+		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
+	}
 
-    /**
-     * (24) const get element ColorName
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getColorName()
-    {
-        return (JDFSpanNamedColor) getElement(ElementName.COLORNAME, null, 0);
-    }
+	/**
+	 * (29) append element ColorName
+	 * @return JDFSpanNamedColor the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanNamedColor appendColorName() throws JDFException
+	{
+		return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
+	}
 
-    /** (25) getCreateColorName
-     * 
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getCreateColorName()
-    {
-        return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.COLORNAME, null, 0);
-    }
+	/** (26) getCreateColorNameDetails
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateColorNameDetails(int iSkip)
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+	}
 
-    /**
-     * (29) append element ColorName
-     * @return JDFSpanNamedColor the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanNamedColor appendColorName() throws JDFException
-    {
-        return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
-    }
+	/**
+	 * (27) const get element ColorNameDetails
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringSpan the element
+	 * default is getColorNameDetails(0)     */
+	public JDFStringSpan getColorNameDetails(int iSkip)
+	{
+		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+	}
 
-    /** (26) getCreateColorNameDetails
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateColorNameDetails(int iSkip)
-    {
-        return (JDFStringSpan)getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
-    }
+	/**
+	 * Get all ColorNameDetails from the current element
+	 * 
+	 * @return Collection<JDFStringSpan>, null if none are available
+	 */
+	public Collection<JDFStringSpan> getAllColorNameDetails()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORNAMEDETAILS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element ColorNameDetails
-     * @param iSkip number of elements to skip
-     * @return JDFStringSpan the element
-     * default is getColorNameDetails(0)     */
-    public JDFStringSpan getColorNameDetails(int iSkip)
-    {
-        return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
-    }
+		final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFStringSpan) vc.get(i));
+		}
 
-    /**
-     * Get all ColorNameDetails from the current element
-     * 
-     * @return Collection<JDFStringSpan>, null if none are available
-     */
-    public Collection<JDFStringSpan> getAllColorNameDetails()
-    {
-        final VElement vc = getChildElementVector(ElementName.COLORNAMEDETAILS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFStringSpan) vc.get(i));
-        }
+	/**
+	 * (30) append element ColorNameDetails
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan appendColorNameDetails()
+	{
+		return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
+	}
 
-        return v;
-    }
+	/**
+	 * (24) const get element XPosition
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getXPosition()
+	{
+		return (JDFNumberSpan) getElement(ElementName.XPOSITION, null, 0);
+	}
 
-    /**
-     * (30) append element ColorNameDetails
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan appendColorNameDetails()
-    {
-        return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
-    }
+	/** (25) getCreateXPosition
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateXPosition()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.XPOSITION, null, 0);
+	}
 
-    /**
-     * (24) const get element XPosition
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getXPosition()
-    {
-        return (JDFNumberSpan) getElement(ElementName.XPOSITION, null, 0);
-    }
+	/**
+	 * (29) append element XPosition
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendXPosition() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.XPOSITION, 1, null);
+	}
 
-    /** (25) getCreateXPosition
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateXPosition()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.XPOSITION, null, 0);
-    }
+	/**
+	 * (24) const get element YPosition
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getYPosition()
+	{
+		return (JDFNumberSpan) getElement(ElementName.YPOSITION, null, 0);
+	}
 
-    /**
-     * (29) append element XPosition
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendXPosition() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.XPOSITION, 1, null);
-    }
+	/** (25) getCreateYPosition
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateYPosition()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.YPOSITION, null, 0);
+	}
 
-    /**
-     * (24) const get element YPosition
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getYPosition()
-    {
-        return (JDFNumberSpan) getElement(ElementName.YPOSITION, null, 0);
-    }
+	/**
+	 * (29) append element YPosition
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendYPosition() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.YPOSITION, 1, null);
+	}
 
-    /** (25) getCreateYPosition
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateYPosition()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.YPOSITION, null, 0);
-    }
+	/**
+	 * (24) const get element Orientation
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getOrientation()
+	{
+		return (JDFNumberSpan) getElement(ElementName.ORIENTATION, null, 0);
+	}
 
-    /**
-     * (29) append element YPosition
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendYPosition() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.YPOSITION, 1, null);
-    }
+	/** (25) getCreateOrientation
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateOrientation()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.ORIENTATION, null, 0);
+	}
 
-    /**
-     * (24) const get element Orientation
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getOrientation()
-    {
-        return (JDFNumberSpan) getElement(ElementName.ORIENTATION, null, 0);
-    }
+	/**
+	 * (29) append element Orientation
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendOrientation() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.ORIENTATION, 1, null);
+	}
 
-    /** (25) getCreateOrientation
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateOrientation()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.ORIENTATION, null, 0);
-    }
+	/**
+	 * (24) const get element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getSeparationSpec()
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
 
-    /**
-     * (29) append element Orientation
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendOrientation() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.ORIENTATION, 1, null);
-    }
+	/** (25) getCreateSeparationSpec
+	 * 
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec()
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, 0);
+	}
 
-    /**
-     * (24) const get element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getSeparationSpec()
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, 0);
-    }
-
-    /** (25) getCreateSeparationSpec
-     * 
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec()
-    {
-        return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, 0);
-    }
-
-    /**
-     * (29) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSeparationSpec appendSeparationSpec() throws JDFException
-    {
-        return (JDFSeparationSpec) appendElementN(ElementName.SEPARATIONSPEC, 1, null);
-    }
+	/**
+	 * (29) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSeparationSpec appendSeparationSpec() throws JDFException
+	{
+		return (JDFSeparationSpec) appendElementN(ElementName.SEPARATIONSPEC, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.pool.JDFPool;
-    /**
-    *****************************************************************************
-    class JDFAutoAmountPool : public JDFPool
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAmountPool : public JDFPool
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAmountPool extends JDFPool
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PARTAMOUNT, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PARTAMOUNT, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAmountPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAmountPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAmountPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAmountPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAmountPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAmountPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAmountPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAmountPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAmountPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAmountPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAmountPool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreatePartAmount
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPartAmount the element
+	 */
+	public JDFPartAmount getCreatePartAmount(int iSkip)
+	{
+		return (JDFPartAmount) getCreateElement_KElement(ElementName.PARTAMOUNT, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element PartAmount
+	 * @param iSkip number of elements to skip
+	 * @return JDFPartAmount the element
+	 * default is getPartAmount(0)     */
+	public JDFPartAmount getPartAmount(int iSkip)
+	{
+		return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all PartAmount from the current element
+	 * 
+	 * @return Collection<JDFPartAmount>, null if none are available
+	 */
+	public Collection<JDFPartAmount> getAllPartAmount()
+	{
+		final VElement vc = getChildElementVector(ElementName.PARTAMOUNT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreatePartAmount
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPartAmount the element
-     */
-    public JDFPartAmount getCreatePartAmount(int iSkip)
-    {
-        return (JDFPartAmount)getCreateElement_KElement(ElementName.PARTAMOUNT, null, iSkip);
-    }
+		final Vector<JDFPartAmount> v = new Vector<JDFPartAmount>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPartAmount) vc.get(i));
+		}
 
-    /**
-     * (27) const get element PartAmount
-     * @param iSkip number of elements to skip
-     * @return JDFPartAmount the element
-     * default is getPartAmount(0)     */
-    public JDFPartAmount getPartAmount(int iSkip)
-    {
-        return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all PartAmount from the current element
-     * 
-     * @return Collection<JDFPartAmount>, null if none are available
-     */
-    public Collection<JDFPartAmount> getAllPartAmount()
-    {
-        final VElement vc = getChildElementVector(ElementName.PARTAMOUNT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPartAmount> v = new Vector<JDFPartAmount>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPartAmount) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PartAmount
-     * @return JDFPartAmount the element
-     */
-    public JDFPartAmount appendPartAmount()
-    {
-        return (JDFPartAmount) appendElement(ElementName.PARTAMOUNT, null);
-    }
+	/**
+	 * (30) append element PartAmount
+	 * @return JDFPartAmount the element
+	 */
+	public JDFPartAmount appendPartAmount()
+	{
+		return (JDFPartAmount) appendElement(ElementName.PARTAMOUNT, null);
+	}
 
 }// end namespace JDF

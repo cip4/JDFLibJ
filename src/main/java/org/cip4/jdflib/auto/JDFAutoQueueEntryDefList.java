@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
-    /**
-    *****************************************************************************
-    class JDFAutoQueueEntryDefList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueueEntryDefList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueueEntryDefList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x44444431);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x44444431);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueueEntryDefList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryDefList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryDefList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryDefList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryDefList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryDefList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryDefList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryDefList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueueEntryDefList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueueEntryDefList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueueEntryDefList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateQueueEntryDef
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
+	{
+		return (JDFQueueEntryDef) getCreateElement_KElement(ElementName.QUEUEENTRYDEF, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element QueueEntryDef
+	 * @param iSkip number of elements to skip
+	 * @return JDFQueueEntryDef the element
+	 * default is getQueueEntryDef(0)     */
+	public JDFQueueEntryDef getQueueEntryDef(int iSkip)
+	{
+		return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all QueueEntryDef from the current element
+	 * 
+	 * @return Collection<JDFQueueEntryDef>, null if none are available
+	 */
+	public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
+	{
+		final VElement vc = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateQueueEntryDef
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFQueueEntryDef the element
-     */
-    public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
-    {
-        return (JDFQueueEntryDef)getCreateElement_KElement(ElementName.QUEUEENTRYDEF, null, iSkip);
-    }
+		final Vector<JDFQueueEntryDef> v = new Vector<JDFQueueEntryDef>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFQueueEntryDef) vc.get(i));
+		}
 
-    /**
-     * (27) const get element QueueEntryDef
-     * @param iSkip number of elements to skip
-     * @return JDFQueueEntryDef the element
-     * default is getQueueEntryDef(0)     */
-    public JDFQueueEntryDef getQueueEntryDef(int iSkip)
-    {
-        return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all QueueEntryDef from the current element
-     * 
-     * @return Collection<JDFQueueEntryDef>, null if none are available
-     */
-    public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
-    {
-        final VElement vc = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFQueueEntryDef> v = new Vector<JDFQueueEntryDef>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFQueueEntryDef) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element QueueEntryDef
-     * @return JDFQueueEntryDef the element
-     */
-    public JDFQueueEntryDef appendQueueEntryDef()
-    {
-        return (JDFQueueEntryDef) appendElement(ElementName.QUEUEENTRYDEF, null);
-    }
+	/**
+	 * (30) append element QueueEntryDef
+	 * @return JDFQueueEntryDef the element
+	 */
+	public JDFQueueEntryDef appendQueueEntryDef()
+	{
+		return (JDFQueueEntryDef) appendElement(ElementName.QUEUEENTRYDEF, null);
+	}
 
 }// end namespace JDF

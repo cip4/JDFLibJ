@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -78,283 +81,260 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoJobField : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoJobField : public JDFElement
 
-public abstract class JDFAutoJobField extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoJobField extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x77776666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoJobField
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJobField
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoJobField(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJobField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoJobField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoJobField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoJobField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoJobField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoJobField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoJobField[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoJobField[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShowList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ShowList
+	  * @param value the value to set the attribute to
+	  */
+	public void setShowList(VString value)
+	{
+		setAttribute(AttributeName.SHOWLIST, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute ShowList
+	  * @return VString the value of the attribute
+	  */
+	public VString getShowList()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobFormat
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobFormat
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobFormat(String value)
+	{
+		setAttribute(AttributeName.JOBFORMAT, value, null);
+	}
 
+	/**
+	  * (23) get String attribute JobFormat
+	  * @return the value of the attribute
+	  */
+	public String getJobFormat()
+	{
+		return getAttribute(AttributeName.JOBFORMAT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobTemplate
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobTemplate
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobTemplate(String value)
+	{
+		setAttribute(AttributeName.JOBTEMPLATE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute JobTemplate
+	  * @return the value of the attribute
+	  */
+	public String getJobTemplate()
+	{
+		return getAttribute(AttributeName.JOBTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShowList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ShowList
-          * @param value the value to set the attribute to
-          */
-        public void setShowList(VString value)
-        {
-            setAttribute(AttributeName.SHOWLIST, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OperatorText
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OperatorText
+	  * @param value the value to set the attribute to
+	  */
+	public void setOperatorText(String value)
+	{
+		setAttribute(AttributeName.OPERATORTEXT, value, null);
+	}
 
-        /**
-          * (21) get VString attribute ShowList
-          * @return VString the value of the attribute
-          */
-        public VString getShowList()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (23) get String attribute OperatorText
+	  * @return the value of the attribute
+	  */
+	public String getOperatorText()
+	{
+		return getAttribute(AttributeName.OPERATORTEXT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobFormat
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobFormat
-          * @param value the value to set the attribute to
-          */
-        public void setJobFormat(String value)
-        {
-            setAttribute(AttributeName.JOBFORMAT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserText
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute UserText
+	  * @param value the value to set the attribute to
+	  */
+	public void setUserText(String value)
+	{
+		setAttribute(AttributeName.USERTEXT, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobFormat
-          * @return the value of the attribute
-          */
-        public String getJobFormat()
-        {
-            return getAttribute(AttributeName.JOBFORMAT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute UserText
+	  * @return the value of the attribute
+	  */
+	public String getUserText()
+	{
+		return getAttribute(AttributeName.USERTEXT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobTemplate
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobTemplate
-          * @param value the value to set the attribute to
-          */
-        public void setJobTemplate(String value)
-        {
-            setAttribute(AttributeName.JOBTEMPLATE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute JobTemplate
-          * @return the value of the attribute
-          */
-        public String getJobTemplate()
-        {
-            return getAttribute(AttributeName.JOBTEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateDeviceMark
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceMark the element
+	 */
+	public JDFDeviceMark getCreateDeviceMark(int iSkip)
+	{
+		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OperatorText
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OperatorText
-          * @param value the value to set the attribute to
-          */
-        public void setOperatorText(String value)
-        {
-            setAttribute(AttributeName.OPERATORTEXT, value, null);
-        }
+	/**
+	 * (27) const get element DeviceMark
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceMark the element
+	 * default is getDeviceMark(0)     */
+	public JDFDeviceMark getDeviceMark(int iSkip)
+	{
+		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute OperatorText
-          * @return the value of the attribute
-          */
-        public String getOperatorText()
-        {
-            return getAttribute(AttributeName.OPERATORTEXT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all DeviceMark from the current element
+	 * 
+	 * @return Collection<JDFDeviceMark>, null if none are available
+	 */
+	public Collection<JDFDeviceMark> getAllDeviceMark()
+	{
+		final VElement vc = getChildElementVector(ElementName.DEVICEMARK, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UserText
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute UserText
-          * @param value the value to set the attribute to
-          */
-        public void setUserText(String value)
-        {
-            setAttribute(AttributeName.USERTEXT, value, null);
-        }
+		final Vector<JDFDeviceMark> v = new Vector<JDFDeviceMark>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDeviceMark) vc.get(i));
+		}
 
-        /**
-          * (23) get String attribute UserText
-          * @return the value of the attribute
-          */
-        public String getUserText()
-        {
-            return getAttribute(AttributeName.USERTEXT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element DeviceMark
-     * @return JDFDeviceMark the element
-     */
-    public JDFDeviceMark getDeviceMark()
-    {
-        return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
-    }
-
-    /** (25) getCreateDeviceMark
-     * 
-     * @return JDFDeviceMark the element
-     */
-    public JDFDeviceMark getCreateDeviceMark()
-    {
-        return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
-    }
-
-    /**
-     * (29) append element DeviceMark
-     * @return JDFDeviceMark the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFDeviceMark appendDeviceMark() throws JDFException
-    {
-        return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDeviceMark(JDFDeviceMark refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element DeviceMark
+	 * @return JDFDeviceMark the element
+	 */
+	public JDFDeviceMark appendDeviceMark()
+	{
+		return (JDFDeviceMark) appendElement(ElementName.DEVICEMARK, null);
+	}
 
 }// end namespace JDF

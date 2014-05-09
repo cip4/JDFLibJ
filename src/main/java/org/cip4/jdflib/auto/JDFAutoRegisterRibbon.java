@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,387 +85,373 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /**
-    *****************************************************************************
-    class JDFAutoRegisterRibbon : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRegisterRibbon : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRegisterRibbon extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.RIBBONEND, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RIBBONEND, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRegisterRibbon
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegisterRibbon(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterRibbon
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRegisterRibbon(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegisterRibbon
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegisterRibbon(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterRibbon
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRegisterRibbon(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegisterRibbon
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRegisterRibbon(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterRibbon
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRegisterRibbon(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRegisterRibbon[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Consumable);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRegisterRibbon[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Consumable;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Consumable);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LengthOverall
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LengthOverall
+	  * @param value the value to set the attribute to
+	  */
+	public void setLengthOverall(double value)
+	{
+		setAttribute(AttributeName.LENGTHOVERALL, value, null);
+	}
 
+	/**
+	  * (17) get double attribute LengthOverall
+	  * @return double the value of the attribute
+	  */
+	public double getLengthOverall()
+	{
+		return getRealAttribute(AttributeName.LENGTHOVERALL, null, 0.0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Consumable;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Material
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Material
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaterial(String value)
+	{
+		setAttribute(AttributeName.MATERIAL, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Material
+	  * @return the value of the attribute
+	  */
+	public String getMaterial()
+	{
+		return getAttribute(AttributeName.MATERIAL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LengthOverall
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LengthOverall
-          * @param value the value to set the attribute to
-          */
-        public void setLengthOverall(double value)
-        {
-            setAttribute(AttributeName.LENGTHOVERALL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RibbonColor
+	--------------------------------------------------------------------- */
+	/**
+	  * (13) set attribute RibbonColor
+	  * @param value the value to set the attribute to
+	  */
+	public void setRibbonColor(EnumNamedColor value)
+	{
+		setAttribute(AttributeName.RIBBONCOLOR, value == null ? null : value.getName(), null);
+	}
 
-        /**
-          * (17) get double attribute LengthOverall
-          * @return double the value of the attribute
-          */
-        public double getLengthOverall()
-        {
-            return getRealAttribute(AttributeName.LENGTHOVERALL, null, 0.0);
-        }
+	/**
+	  * (19) get EnumNamedColor attribute RibbonColor
+	  * @return EnumNamedColor the value of the attribute
+	  */
+	public EnumNamedColor getRibbonColor()
+	{
+		String strAttrName = "";
+		EnumNamedColor nPlaceHolder = null;
+		strAttrName = getAttribute(AttributeName.RIBBONCOLOR, null, JDFCoreConstants.EMPTYSTRING);
+		nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Material
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Material
-          * @param value the value to set the attribute to
-          */
-        public void setMaterial(String value)
-        {
-            setAttribute(AttributeName.MATERIAL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RibbonColorDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RibbonColorDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setRibbonColorDetails(String value)
+	{
+		setAttribute(AttributeName.RIBBONCOLORDETAILS, value, null);
+	}
 
-        /**
-          * (23) get String attribute Material
-          * @return the value of the attribute
-          */
-        public String getMaterial()
-        {
-            return getAttribute(AttributeName.MATERIAL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute RibbonColorDetails
+	  * @return the value of the attribute
+	  */
+	public String getRibbonColorDetails()
+	{
+		return getAttribute(AttributeName.RIBBONCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RibbonColor
-        --------------------------------------------------------------------- */
-        /**
-          * (13) set attribute RibbonColor
-          * @param value the value to set the attribute to
-          */
-        public void setRibbonColor(EnumNamedColor value)
-        {
-            setAttribute(AttributeName.RIBBONCOLOR, value==null ? null : value.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RibbonEnd
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RibbonEnd
+	  * @param value the value to set the attribute to
+	  */
+	public void setRibbonEnd(String value)
+	{
+		setAttribute(AttributeName.RIBBONEND, value, null);
+	}
 
-        /**
-          * (19) get EnumNamedColor attribute RibbonColor
-          * @return EnumNamedColor the value of the attribute
-          */
-        public EnumNamedColor getRibbonColor()
-        {
-            String strAttrName = "";
-            EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RIBBONCOLOR, null, JDFCoreConstants.EMPTYSTRING);
-            nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute RibbonEnd
+	  * @return the value of the attribute
+	  */
+	public String getRibbonEnd()
+	{
+		return getAttribute(AttributeName.RIBBONEND, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RibbonColorDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RibbonColorDetails
-          * @param value the value to set the attribute to
-          */
-        public void setRibbonColorDetails(String value)
-        {
-            setAttribute(AttributeName.RIBBONCOLORDETAILS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute VisibleLength
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute VisibleLength
+	  * @param value the value to set the attribute to
+	  */
+	public void setVisibleLength(double value)
+	{
+		setAttribute(AttributeName.VISIBLELENGTH, value, null);
+	}
 
-        /**
-          * (23) get String attribute RibbonColorDetails
-          * @return the value of the attribute
-          */
-        public String getRibbonColorDetails()
-        {
-            return getAttribute(AttributeName.RIBBONCOLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute VisibleLength
+	  * @return double the value of the attribute
+	  */
+	public double getVisibleLength()
+	{
+		return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RibbonEnd
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RibbonEnd
-          * @param value the value to set the attribute to
-          */
-        public void setRibbonEnd(String value)
-        {
-            setAttribute(AttributeName.RIBBONEND, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute RibbonEnd
-          * @return the value of the attribute
-          */
-        public String getRibbonEnd()
-        {
-            return getAttribute(AttributeName.RIBBONEND, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute VisibleLength
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute VisibleLength
-          * @param value the value to set the attribute to
-          */
-        public void setVisibleLength(double value)
-        {
-            setAttribute(AttributeName.VISIBLELENGTH, value, null);
-        }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute VisibleLength
-          * @return double the value of the attribute
-          */
-        public double getVisibleLength()
-        {
-            return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/** (26) getCreateIdentificationField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element IdentificationField
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 * default is getIdentificationField(0)     */
+	@Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+	/**
+	 * Get all IdentificationField from the current element
+	 * 
+	 * @return Collection<JDFIdentificationField>, null if none are available
+	 */
+	public Collection<JDFIdentificationField> getAllIdentificationField()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIdentificationField) vc.get(i));
+		}
 
-    /** (26) getCreateIdentificationField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element IdentificationField
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+	/**
+	 * (30) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField appendIdentificationField()
+	{
+		return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+	}
 
-    /**
-     * Get all IdentificationField from the current element
-     * 
-     * @return Collection<JDFIdentificationField>, null if none are available
-     */
-    public Collection<JDFIdentificationField> getAllIdentificationField()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIdentificationField) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField appendIdentificationField()
-    {
-        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

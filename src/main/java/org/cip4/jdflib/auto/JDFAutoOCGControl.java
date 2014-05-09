@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoOCGControl : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoOCGControl : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoOCGControl extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.INCLUDEOCG, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.OCGNAME, 0x22222221, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCLUDEOCG, 0x33311111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OCGNAME, 0x22211111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoOCGControl
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoOCGControl
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoOCGControl(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoOCGControl
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoOCGControl
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoOCGControl(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoOCGControl
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoOCGControl
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoOCGControl(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoOCGControl[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoOCGControl[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IncludeOCG
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IncludeOCG
+	  * @param value the value to set the attribute to
+	  */
+	public void setIncludeOCG(boolean value)
+	{
+		setAttribute(AttributeName.INCLUDEOCG, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute IncludeOCG
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getIncludeOCG()
+	{
+		return getBoolAttribute(AttributeName.INCLUDEOCG, null, true);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IncludeOCG
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IncludeOCG
-          * @param value the value to set the attribute to
-          */
-        public void setIncludeOCG(boolean value)
-        {
-            setAttribute(AttributeName.INCLUDEOCG, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OCGName
+	  * @param value the value to set the attribute to
+	  */
+	public void setOCGName(String value)
+	{
+		setAttribute(AttributeName.OCGNAME, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute IncludeOCG
-          * @return boolean the value of the attribute
-          */
-        public boolean getIncludeOCG()
-        {
-            return getBoolAttribute(AttributeName.INCLUDEOCG, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OCGName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OCGName
-          * @param value the value to set the attribute to
-          */
-        public void setOCGName(String value)
-        {
-            setAttribute(AttributeName.OCGNAME, value, null);
-        }
-
-        /**
-          * (23) get String attribute OCGName
-          * @return the value of the attribute
-          */
-        public String getOCGName()
-        {
-            return getAttribute(AttributeName.OCGNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute OCGName
+	  * @return the value of the attribute
+	  */
+	public String getOCGName()
+	{
+		return getAttribute(AttributeName.OCGNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

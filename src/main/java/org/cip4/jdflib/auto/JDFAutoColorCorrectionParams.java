@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,259 +85,246 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
-    /**
-    *****************************************************************************
-    class JDFAutoColorCorrectionParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorCorrectionParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorCorrectionParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorCorrectionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorCorrectionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorCorrectionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorCorrectionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorCorrectionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorCorrectionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorCorrectionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorCorrectionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorManagementSystem
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ColorManagementSystem
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorManagementSystem(String value)
+	{
+		setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ColorManagementSystem
+	  * @return the value of the attribute
+	  */
+	public String getColorManagementSystem()
+	{
+		return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ColorManagementSystem
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ColorManagementSystem
-          * @param value the value to set the attribute to
-          */
-        public void setColorManagementSystem(String value)
-        {
-            setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
-        }
+	/**
+	 * (27) const get element FileSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 * default is getFileSpec(0)     */
+	public JDFFileSpec getFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute ColorManagementSystem
-          * @return the value of the attribute
-          */
-        public String getColorManagementSystem()
-        {
-            return getAttribute(AttributeName.COLORMANAGEMENTSYSTEM, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFileSpec) vc.get(i));
+		}
 
-    /** (26) getCreateFileSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec(int iSkip)
-    {
-        return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element FileSpec
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     * default is getFileSpec(0)     */
-    public JDFFileSpec getFileSpec(int iSkip)
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
-    }
+	/**
+	 * (30) append element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
+	}
 
-    /**
-     * Get all FileSpec from the current element
-     * 
-     * @return Collection<JDFFileSpec>, null if none are available
-     */
-    public Collection<JDFFileSpec> getAllFileSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFileSpec) vc.get(i));
-        }
+	/** (26) getCreateColorCorrectionOp
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
+	{
+		return (JDFColorCorrectionOp) getCreateElement_KElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element ColorCorrectionOp
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionOp the element
+	 * default is getColorCorrectionOp(0)     */
+	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
+	{
+		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+	}
 
-    /**
-     * (30) append element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec appendFileSpec()
-    {
-        return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
-    }
+	/**
+	 * Get all ColorCorrectionOp from the current element
+	 * 
+	 * @return Collection<JDFColorCorrectionOp>, null if none are available
+	 */
+	public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORCORRECTIONOP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFColorCorrectionOp) vc.get(i));
+		}
 
-    /** (26) getCreateColorCorrectionOp
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFColorCorrectionOp the element
-     */
-    public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
-    {
-        return (JDFColorCorrectionOp)getCreateElement_KElement(ElementName.COLORCORRECTIONOP, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ColorCorrectionOp
-     * @param iSkip number of elements to skip
-     * @return JDFColorCorrectionOp the element
-     * default is getColorCorrectionOp(0)     */
-    public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
-    {
-        return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
-    }
-
-    /**
-     * Get all ColorCorrectionOp from the current element
-     * 
-     * @return Collection<JDFColorCorrectionOp>, null if none are available
-     */
-    public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
-    {
-        final VElement vc = getChildElementVector(ElementName.COLORCORRECTIONOP, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFColorCorrectionOp) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ColorCorrectionOp
-     * @return JDFColorCorrectionOp the element
-     */
-    public JDFColorCorrectionOp appendColorCorrectionOp()
-    {
-        return (JDFColorCorrectionOp) appendElement(ElementName.COLORCORRECTIONOP, null);
-    }
+	/**
+	 * (30) append element ColorCorrectionOp
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp appendColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) appendElement(ElementName.COLORCORRECTIONOP, null);
+	}
 
 }// end namespace JDF

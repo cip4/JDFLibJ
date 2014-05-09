@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,230 +81,208 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTransferFunctionControl;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
-    /**
-    *****************************************************************************
-    class JDFAutoSeparationControlParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSeparationControlParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TRANSFERFUNCTIONCONTROL, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TRANSFERFUNCTIONCONTROL, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSeparationControlParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSeparationControlParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSeparationControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSeparationControlParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSeparationControlParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSeparationControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSeparationControlParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSeparationControlParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSeparationControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSeparationControlParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSeparationControlParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateAutomatedOverPrintParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(int iSkip)
+	{
+		return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element AutomatedOverPrintParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFAutomatedOverPrintParams the element
+	 * default is getAutomatedOverPrintParams(0)     */
+	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(int iSkip)
+	{
+		return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all AutomatedOverPrintParams from the current element
+	 * 
+	 * @return Collection<JDFAutomatedOverPrintParams>, null if none are available
+	 */
+	public Collection<JDFAutomatedOverPrintParams> getAllAutomatedOverPrintParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFAutomatedOverPrintParams> v = new Vector<JDFAutomatedOverPrintParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFAutomatedOverPrintParams) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateAutomatedOverPrintParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFAutomatedOverPrintParams the element
-     */
-    public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(int iSkip)
-    {
-        return (JDFAutomatedOverPrintParams)getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
-    }
+	/**
+	 * (30) append element AutomatedOverPrintParams
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
+	{
+		return (JDFAutomatedOverPrintParams) appendElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+	}
 
-    /**
-     * (27) const get element AutomatedOverPrintParams
-     * @param iSkip number of elements to skip
-     * @return JDFAutomatedOverPrintParams the element
-     * default is getAutomatedOverPrintParams(0)     */
-    public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(int iSkip)
-    {
-        return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
-    }
+	/** (26) getCreateTransferFunctionControl
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferFunctionControl the element
+	 */
+	public JDFTransferFunctionControl getCreateTransferFunctionControl(int iSkip)
+	{
+		return (JDFTransferFunctionControl) getCreateElement_KElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
+	}
 
-    /**
-     * Get all AutomatedOverPrintParams from the current element
-     * 
-     * @return Collection<JDFAutomatedOverPrintParams>, null if none are available
-     */
-    public Collection<JDFAutomatedOverPrintParams> getAllAutomatedOverPrintParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element TransferFunctionControl
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferFunctionControl the element
+	 * default is getTransferFunctionControl(0)     */
+	public JDFTransferFunctionControl getTransferFunctionControl(int iSkip)
+	{
+		return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
+	}
 
-        final Vector<JDFAutomatedOverPrintParams> v = new Vector<JDFAutomatedOverPrintParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFAutomatedOverPrintParams) vc.get(i));
-        }
+	/**
+	 * Get all TransferFunctionControl from the current element
+	 * 
+	 * @return Collection<JDFTransferFunctionControl>, null if none are available
+	 */
+	public Collection<JDFTransferFunctionControl> getAllTransferFunctionControl()
+	{
+		final VElement vc = getChildElementVector(ElementName.TRANSFERFUNCTIONCONTROL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFTransferFunctionControl> v = new Vector<JDFTransferFunctionControl>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTransferFunctionControl) vc.get(i));
+		}
 
-    /**
-     * (30) append element AutomatedOverPrintParams
-     * @return JDFAutomatedOverPrintParams the element
-     */
-    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
-    {
-        return (JDFAutomatedOverPrintParams) appendElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element TransferFunctionControl
+	 * @return JDFTransferFunctionControl the element
+	 */
+	public JDFTransferFunctionControl appendTransferFunctionControl()
+	{
+		return (JDFTransferFunctionControl) appendElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
+	}
 
-    /** (26) getCreateTransferFunctionControl
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTransferFunctionControl the element
-     */
-    public JDFTransferFunctionControl getCreateTransferFunctionControl(int iSkip)
-    {
-        return (JDFTransferFunctionControl)getCreateElement_KElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
-    }
-
-    /**
-     * (27) const get element TransferFunctionControl
-     * @param iSkip number of elements to skip
-     * @return JDFTransferFunctionControl the element
-     * default is getTransferFunctionControl(0)     */
-    public JDFTransferFunctionControl getTransferFunctionControl(int iSkip)
-    {
-        return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
-    }
-
-    /**
-     * Get all TransferFunctionControl from the current element
-     * 
-     * @return Collection<JDFTransferFunctionControl>, null if none are available
-     */
-    public Collection<JDFTransferFunctionControl> getAllTransferFunctionControl()
-    {
-        final VElement vc = getChildElementVector(ElementName.TRANSFERFUNCTIONCONTROL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTransferFunctionControl> v = new Vector<JDFTransferFunctionControl>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTransferFunctionControl) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element TransferFunctionControl
-     * @return JDFTransferFunctionControl the element
-     */
-    public JDFTransferFunctionControl appendTransferFunctionControl()
-    {
-        return (JDFTransferFunctionControl) appendElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTransferFunctionControl(JDFTransferFunctionControl refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTransferFunctionControl(JDFTransferFunctionControl refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

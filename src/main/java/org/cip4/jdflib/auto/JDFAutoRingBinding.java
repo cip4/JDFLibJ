@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,347 +81,336 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanHoleType;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoRingBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRingBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRingBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERBRAND, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.BINDERMATERIAL, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.RINGDIAMETER, 0x66666666);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.RINGMECHANIC, 0x66666666);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.RINGSHAPE, 0x66666666);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.RINGSYSTEM, 0x77777776);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.RIVETSEXPOSED, 0x66666666);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.VIEWBINDER, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDERBRAND, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.BINDERMATERIAL, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RINGDIAMETER, 0x66666666);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.RINGMECHANIC, 0x66666666);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.RINGSHAPE, 0x66666666);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.RINGSYSTEM, 0x77777776);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.RIVETSEXPOSED, 0x66666666);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.VIEWBINDER, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRingBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRingBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRingBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRingBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRingBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRingBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRingBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRingBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRingBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRingBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRingBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRingBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRingBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRingBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element BinderBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getBinderBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.BINDERBRAND, null, 0);
+	}
 
+	/** (25) getCreateBinderBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateBinderBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.BINDERBRAND, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element BinderBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendBinderBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.BINDERBRAND, 1, null);
+	}
 
-    /**
-     * (24) const get element BinderBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getBinderBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.BINDERBRAND, null, 0);
-    }
+	/**
+	 * (24) const get element BinderMaterial
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getBinderMaterial()
+	{
+		return (JDFNameSpan) getElement(ElementName.BINDERMATERIAL, null, 0);
+	}
 
-    /** (25) getCreateBinderBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateBinderBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.BINDERBRAND, null, 0);
-    }
+	/** (25) getCreateBinderMaterial
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateBinderMaterial()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.BINDERMATERIAL, null, 0);
+	}
 
-    /**
-     * (29) append element BinderBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendBinderBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.BINDERBRAND, 1, null);
-    }
+	/**
+	 * (29) append element BinderMaterial
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendBinderMaterial() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.BINDERMATERIAL, 1, null);
+	}
 
-    /**
-     * (24) const get element BinderMaterial
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getBinderMaterial()
-    {
-        return (JDFNameSpan) getElement(ElementName.BINDERMATERIAL, null, 0);
-    }
+	/**
+	 * (24) const get element HoleType
+	 * @return JDFSpanHoleType the element
+	 */
+	public JDFSpanHoleType getHoleType()
+	{
+		return (JDFSpanHoleType) getElement(ElementName.HOLETYPE, null, 0);
+	}
 
-    /** (25) getCreateBinderMaterial
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateBinderMaterial()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.BINDERMATERIAL, null, 0);
-    }
+	/** (25) getCreateHoleType
+	 * 
+	 * @return JDFSpanHoleType the element
+	 */
+	public JDFSpanHoleType getCreateHoleType()
+	{
+		return (JDFSpanHoleType) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
+	}
 
-    /**
-     * (29) append element BinderMaterial
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendBinderMaterial() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.BINDERMATERIAL, 1, null);
-    }
+	/**
+	 * (29) append element HoleType
+	 * @return JDFSpanHoleType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanHoleType appendHoleType() throws JDFException
+	{
+		return (JDFSpanHoleType) appendElementN(ElementName.HOLETYPE, 1, null);
+	}
 
-    /**
-     * (24) const get element HoleType
-     * @return JDFSpanHoleType the element
-     */
-    public JDFSpanHoleType getHoleType()
-    {
-        return (JDFSpanHoleType) getElement(ElementName.HOLETYPE, null, 0);
-    }
+	/**
+	 * (24) const get element RingDiameter
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getRingDiameter()
+	{
+		return (JDFNumberSpan) getElement(ElementName.RINGDIAMETER, null, 0);
+	}
 
-    /** (25) getCreateHoleType
-     * 
-     * @return JDFSpanHoleType the element
-     */
-    public JDFSpanHoleType getCreateHoleType()
-    {
-        return (JDFSpanHoleType) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
-    }
+	/** (25) getCreateRingDiameter
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateRingDiameter()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.RINGDIAMETER, null, 0);
+	}
 
-    /**
-     * (29) append element HoleType
-     * @return JDFSpanHoleType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanHoleType appendHoleType() throws JDFException
-    {
-        return (JDFSpanHoleType) appendElementN(ElementName.HOLETYPE, 1, null);
-    }
+	/**
+	 * (29) append element RingDiameter
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendRingDiameter() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.RINGDIAMETER, 1, null);
+	}
 
-    /**
-     * (24) const get element RingDiameter
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getRingDiameter()
-    {
-        return (JDFNumberSpan) getElement(ElementName.RINGDIAMETER, null, 0);
-    }
+	/**
+	 * (24) const get element RingMechanic
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getRingMechanic()
+	{
+		return (JDFOptionSpan) getElement(ElementName.RINGMECHANIC, null, 0);
+	}
 
-    /** (25) getCreateRingDiameter
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateRingDiameter()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.RINGDIAMETER, null, 0);
-    }
+	/** (25) getCreateRingMechanic
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateRingMechanic()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.RINGMECHANIC, null, 0);
+	}
 
-    /**
-     * (29) append element RingDiameter
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendRingDiameter() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.RINGDIAMETER, 1, null);
-    }
+	/**
+	 * (29) append element RingMechanic
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendRingMechanic() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.RINGMECHANIC, 1, null);
+	}
 
-    /**
-     * (24) const get element RingMechanic
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getRingMechanic()
-    {
-        return (JDFOptionSpan) getElement(ElementName.RINGMECHANIC, null, 0);
-    }
+	/**
+	 * (24) const get element RingShape
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getRingShape()
+	{
+		return (JDFNameSpan) getElement(ElementName.RINGSHAPE, null, 0);
+	}
 
-    /** (25) getCreateRingMechanic
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateRingMechanic()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.RINGMECHANIC, null, 0);
-    }
+	/** (25) getCreateRingShape
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateRingShape()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSHAPE, null, 0);
+	}
 
-    /**
-     * (29) append element RingMechanic
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendRingMechanic() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.RINGMECHANIC, 1, null);
-    }
+	/**
+	 * (29) append element RingShape
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendRingShape() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.RINGSHAPE, 1, null);
+	}
 
-    /**
-     * (24) const get element RingShape
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getRingShape()
-    {
-        return (JDFNameSpan) getElement(ElementName.RINGSHAPE, null, 0);
-    }
+	/**
+	 * (24) const get element RingSystem
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getRingSystem()
+	{
+		return (JDFNameSpan) getElement(ElementName.RINGSYSTEM, null, 0);
+	}
 
-    /** (25) getCreateRingShape
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateRingShape()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSHAPE, null, 0);
-    }
+	/** (25) getCreateRingSystem
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateRingSystem()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSYSTEM, null, 0);
+	}
 
-    /**
-     * (29) append element RingShape
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendRingShape() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.RINGSHAPE, 1, null);
-    }
+	/**
+	 * (29) append element RingSystem
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendRingSystem() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.RINGSYSTEM, 1, null);
+	}
 
-    /**
-     * (24) const get element RingSystem
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getRingSystem()
-    {
-        return (JDFNameSpan) getElement(ElementName.RINGSYSTEM, null, 0);
-    }
+	/**
+	 * (24) const get element RivetsExposed
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getRivetsExposed()
+	{
+		return (JDFOptionSpan) getElement(ElementName.RIVETSEXPOSED, null, 0);
+	}
 
-    /** (25) getCreateRingSystem
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateRingSystem()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.RINGSYSTEM, null, 0);
-    }
+	/** (25) getCreateRivetsExposed
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateRivetsExposed()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.RIVETSEXPOSED, null, 0);
+	}
 
-    /**
-     * (29) append element RingSystem
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendRingSystem() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.RINGSYSTEM, 1, null);
-    }
+	/**
+	 * (29) append element RivetsExposed
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendRivetsExposed() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.RIVETSEXPOSED, 1, null);
+	}
 
-    /**
-     * (24) const get element RivetsExposed
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getRivetsExposed()
-    {
-        return (JDFOptionSpan) getElement(ElementName.RIVETSEXPOSED, null, 0);
-    }
+	/**
+	 * (24) const get element ViewBinder
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getViewBinder()
+	{
+		return (JDFNameSpan) getElement(ElementName.VIEWBINDER, null, 0);
+	}
 
-    /** (25) getCreateRivetsExposed
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateRivetsExposed()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.RIVETSEXPOSED, null, 0);
-    }
+	/** (25) getCreateViewBinder
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateViewBinder()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.VIEWBINDER, null, 0);
+	}
 
-    /**
-     * (29) append element RivetsExposed
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendRivetsExposed() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.RIVETSEXPOSED, 1, null);
-    }
-
-    /**
-     * (24) const get element ViewBinder
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getViewBinder()
-    {
-        return (JDFNameSpan) getElement(ElementName.VIEWBINDER, null, 0);
-    }
-
-    /** (25) getCreateViewBinder
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateViewBinder()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.VIEWBINDER, null, 0);
-    }
-
-    /**
-     * (29) append element ViewBinder
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendViewBinder() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.VIEWBINDER, 1, null);
-    }
+	/**
+	 * (29) append element ViewBinder
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendViewBinder() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.VIEWBINDER, 1, null);
+	}
 
 }// end namespace JDF

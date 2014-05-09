@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,234 +85,221 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
-    /**
-    *****************************************************************************
-    class JDFAutoStation : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStation : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStation extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATIONAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x33331111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStation[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStation[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyIDs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AssemblyIDs
+	  * @param value the value to set the attribute to
+	  */
+	public void setAssemblyIDs(VString value)
+	{
+		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute AssemblyIDs
+	  * @return VString the value of the attribute
+	  */
+	public VString getAssemblyIDs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AssemblyIDs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AssemblyIDs
-          * @param value the value to set the attribute to
-          */
-        public void setAssemblyIDs(VString value)
-        {
-            setAttribute(AttributeName.ASSEMBLYIDS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StationAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StationAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setStationAmount(int value)
+	{
+		setAttribute(AttributeName.STATIONAMOUNT, value, null);
+	}
 
-        /**
-          * (21) get VString attribute AssemblyIDs
-          * @return VString the value of the attribute
-          */
-        public VString getAssemblyIDs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (15) get int attribute StationAmount
+	  * @return int the value of the attribute
+	  */
+	public int getStationAmount()
+	{
+		return getIntAttribute(AttributeName.STATIONAMOUNT, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StationAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StationAmount
-          * @param value the value to set the attribute to
-          */
-        public void setStationAmount(int value)
-        {
-            setAttribute(AttributeName.STATIONAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StationName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StationName
+	  * @param value the value to set the attribute to
+	  */
+	public void setStationName(String value)
+	{
+		setAttribute(AttributeName.STATIONNAME, value, null);
+	}
 
-        /**
-          * (15) get int attribute StationAmount
-          * @return int the value of the attribute
-          */
-        public int getStationAmount()
-        {
-            return getIntAttribute(AttributeName.STATIONAMOUNT, null, 1);
-        }
+	/**
+	  * (23) get String attribute StationName
+	  * @return the value of the attribute
+	  */
+	public String getStationName()
+	{
+		return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StationName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StationName
-          * @param value the value to set the attribute to
-          */
-        public void setStationName(String value)
-        {
-            setAttribute(AttributeName.STATIONNAME, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute StationName
-          * @return the value of the attribute
-          */
-        public String getStationName()
-        {
-            return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateShapeDef
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFShapeDef the element
+	 */
+	public JDFShapeDef getCreateShapeDef(int iSkip)
+	{
+		return (JDFShapeDef) getCreateElement_KElement(ElementName.SHAPEDEF, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element ShapeDef
+	 * @param iSkip number of elements to skip
+	 * @return JDFShapeDef the element
+	 * default is getShapeDef(0)     */
+	public JDFShapeDef getShapeDef(int iSkip)
+	{
+		return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, iSkip);
+	}
 
-    /** (26) getCreateShapeDef
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFShapeDef the element
-     */
-    public JDFShapeDef getCreateShapeDef(int iSkip)
-    {
-        return (JDFShapeDef)getCreateElement_KElement(ElementName.SHAPEDEF, null, iSkip);
-    }
+	/**
+	 * Get all ShapeDef from the current element
+	 * 
+	 * @return Collection<JDFShapeDef>, null if none are available
+	 */
+	public Collection<JDFShapeDef> getAllShapeDef()
+	{
+		final VElement vc = getChildElementVector(ElementName.SHAPEDEF, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element ShapeDef
-     * @param iSkip number of elements to skip
-     * @return JDFShapeDef the element
-     * default is getShapeDef(0)     */
-    public JDFShapeDef getShapeDef(int iSkip)
-    {
-        return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, iSkip);
-    }
+		final Vector<JDFShapeDef> v = new Vector<JDFShapeDef>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFShapeDef) vc.get(i));
+		}
 
-    /**
-     * Get all ShapeDef from the current element
-     * 
-     * @return Collection<JDFShapeDef>, null if none are available
-     */
-    public Collection<JDFShapeDef> getAllShapeDef()
-    {
-        final VElement vc = getChildElementVector(ElementName.SHAPEDEF, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFShapeDef> v = new Vector<JDFShapeDef>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFShapeDef) vc.get(i));
-        }
+	/**
+	 * (30) append element ShapeDef
+	 * @return JDFShapeDef the element
+	 */
+	public JDFShapeDef appendShapeDef()
+	{
+		return (JDFShapeDef) appendElement(ElementName.SHAPEDEF, null);
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element ShapeDef
-     * @return JDFShapeDef the element
-     */
-    public JDFShapeDef appendShapeDef()
-    {
-        return (JDFShapeDef) appendElement(ElementName.SHAPEDEF, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refShapeDef(JDFShapeDef refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refShapeDef(JDFShapeDef refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

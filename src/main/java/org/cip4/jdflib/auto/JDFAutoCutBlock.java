@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,432 +84,408 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoCutBlock : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCutBlock : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCutBlock extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.BLOCKSUBDIVISION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKTRF, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, "1 0 0 1 0 0");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLOCKSUBDIVISION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKTRF, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, "1 0 0 1 0 0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCutBlock
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCutBlock(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutBlock
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCutBlock(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCutBlock
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCutBlock(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutBlock
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCutBlock(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCutBlock
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCutBlock(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutBlock
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCutBlock(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCutBlock[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCutBlock[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for BlockType
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumBlockType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumBlockType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBlockType getEnum(String enumName)
+		{
+			return (EnumBlockType) getEnum(EnumBlockType.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBlockType getEnum(int enumValue)
+		{
+			return (EnumBlockType) getEnum(EnumBlockType.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for BlockType
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBlockType.class);
+		}
 
-        public static class EnumBlockType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBlockType.class);
+		}
 
-            private EnumBlockType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBlockType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumBlockType getEnum(String enumName)
-            {
-                return (EnumBlockType) getEnum(EnumBlockType.class, enumName);
-            }
+		public static final EnumBlockType CutBlock = new EnumBlockType("CutBlock");
+		public static final EnumBlockType SaveBlock = new EnumBlockType("SaveBlock");
+		public static final EnumBlockType TempBlock = new EnumBlockType("TempBlock");
+		public static final EnumBlockType MarkBlock = new EnumBlockType("MarkBlock");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumBlockType getEnum(int enumValue)
-            {
-                return (EnumBlockType) getEnum(EnumBlockType.class, enumValue);
-            }
+	/**
+	* Enumeration strings for BlockElementType
+	*/
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumBlockType.class);
-            }
+	public static class EnumBlockElementType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumBlockType.class);
-            }
+		private EnumBlockElementType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumBlockType.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBlockElementType getEnum(String enumName)
+		{
+			return (EnumBlockElementType) getEnum(EnumBlockElementType.class, enumName);
+		}
 
-            public static final EnumBlockType CutBlock = new EnumBlockType("CutBlock");
-            public static final EnumBlockType SaveBlock = new EnumBlockType("SaveBlock");
-            public static final EnumBlockType TempBlock = new EnumBlockType("TempBlock");
-            public static final EnumBlockType MarkBlock = new EnumBlockType("MarkBlock");
-        }      
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBlockElementType getEnum(int enumValue)
+		{
+			return (EnumBlockElementType) getEnum(EnumBlockElementType.class, enumValue);
+		}
 
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBlockElementType.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBlockElementType.class);
+		}
 
-        /**
-        * Enumeration strings for BlockElementType
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBlockElementType.class);
+		}
 
-        public static class EnumBlockElementType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumBlockElementType CutElement = new EnumBlockElementType("CutElement");
+		public static final EnumBlockElementType PunchElement = new EnumBlockElementType("PunchElement");
+	}
 
-            private EnumBlockElementType(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumBlockElementType getEnum(String enumName)
-            {
-                return (EnumBlockElementType) getEnum(EnumBlockElementType.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlockSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlockSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.BLOCKSIZE, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumBlockElementType getEnum(int enumValue)
-            {
-                return (EnumBlockElementType) getEnum(EnumBlockElementType.class, enumValue);
-            }
+	/**
+	  * (20) get JDFXYPair attribute BlockSize
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getBlockSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLOCKSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumBlockElementType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockSubdivision
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlockSubdivision
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlockSubdivision(JDFXYPair value)
+	{
+		setAttribute(AttributeName.BLOCKSUBDIVISION, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumBlockElementType.class);
-            }
+	/**
+	  * (20) get JDFXYPair attribute BlockSubdivision
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getBlockSubdivision()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLOCKSUBDIVISION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumBlockElementType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockTrf
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlockTrf
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlockTrf(JDFMatrix value)
+	{
+		setAttribute(AttributeName.BLOCKTRF, value, null);
+	}
 
-            public static final EnumBlockElementType CutElement = new EnumBlockElementType("CutElement");
-            public static final EnumBlockElementType PunchElement = new EnumBlockElementType("PunchElement");
-        }      
+	/**
+	  * (20) get JDFMatrix attribute BlockTrf
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getBlockTrf()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLOCKTRF, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute BlockType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setBlockType(EnumBlockType enumVar)
+	{
+		setAttribute(AttributeName.BLOCKTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute BlockType
+	  * @return the value of the attribute
+	  */
+	public EnumBlockType getBlockType()
+	{
+		return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlockSize
-          * @param value the value to set the attribute to
-          */
-        public void setBlockSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.BLOCKSIZE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AssemblyIDs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AssemblyIDs
+	  * @param value the value to set the attribute to
+	  */
+	public void setAssemblyIDs(VString value)
+	{
+		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute BlockSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getBlockSize()
-        {
-            String strAttrName = getAttribute(AttributeName.BLOCKSIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (21) get VString attribute AssemblyIDs
+	  * @return VString the value of the attribute
+	  */
+	public VString getAssemblyIDs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockSubdivision
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlockSubdivision
-          * @param value the value to set the attribute to
-          */
-        public void setBlockSubdivision(JDFXYPair value)
-        {
-            setAttribute(AttributeName.BLOCKSUBDIVISION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CutWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CutWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setCutWidth(double value)
+	{
+		setAttribute(AttributeName.CUTWIDTH, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute BlockSubdivision
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getBlockSubdivision()
-        {
-            String strAttrName = getAttribute(AttributeName.BLOCKSUBDIVISION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute CutWidth
+	  * @return double the value of the attribute
+	  */
+	public double getCutWidth()
+	{
+		return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockTrf
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlockTrf
-          * @param value the value to set the attribute to
-          */
-        public void setBlockTrf(JDFMatrix value)
-        {
-            setAttribute(AttributeName.BLOCKTRF, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockElementSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlockElementSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlockElementSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.BLOCKELEMENTSIZE, value, null);
+	}
 
-        /**
-          * (20) get JDFMatrix attribute BlockTrf
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getBlockTrf()
-        {
-            String strAttrName = getAttribute(AttributeName.BLOCKTRF, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute BlockElementSize
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getBlockElementSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLOCKELEMENTSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BlockType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setBlockType(EnumBlockType enumVar)
-        {
-            setAttribute(AttributeName.BLOCKTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlockElementType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute BlockElementType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setBlockElementType(EnumBlockElementType enumVar)
+	{
+		setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (9) get attribute BlockType
-          * @return the value of the attribute
-          */
-        public EnumBlockType getBlockType()
-        {
-            return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AssemblyIDs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AssemblyIDs
-          * @param value the value to set the attribute to
-          */
-        public void setAssemblyIDs(VString value)
-        {
-            setAttribute(AttributeName.ASSEMBLYIDS, value, null);
-        }
-
-        /**
-          * (21) get VString attribute AssemblyIDs
-          * @return VString the value of the attribute
-          */
-        public VString getAssemblyIDs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CutWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CutWidth
-          * @param value the value to set the attribute to
-          */
-        public void setCutWidth(double value)
-        {
-            setAttribute(AttributeName.CUTWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute CutWidth
-          * @return double the value of the attribute
-          */
-        public double getCutWidth()
-        {
-            return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockElementSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlockElementSize
-          * @param value the value to set the attribute to
-          */
-        public void setBlockElementSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.BLOCKELEMENTSIZE, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute BlockElementSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getBlockElementSize()
-        {
-            String strAttrName = getAttribute(AttributeName.BLOCKELEMENTSIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlockElementType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BlockElementType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setBlockElementType(EnumBlockElementType enumVar)
-        {
-            setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute BlockElementType
-          * @return the value of the attribute
-          */
-        public EnumBlockElementType getBlockElementType()
-        {
-            return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
-        }
+	/**
+	  * (9) get attribute BlockElementType
+	  * @return the value of the attribute
+	  */
+	public EnumBlockElementType getBlockElementType()
+	{
+		return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
+	}
 
 }// end namespace JDF

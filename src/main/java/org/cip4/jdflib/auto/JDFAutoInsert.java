@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
@@ -90,315 +89,301 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
-    /**
-    *****************************************************************************
-    class JDFAutoInsert : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoInsert : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoInsert extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIO, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLIO, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WRAPPAGES, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoInsert
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsert(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsert
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoInsert(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsert
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsert(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsert
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoInsert(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsert
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoInsert(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsert
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoInsert(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoInsert[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoInsert[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Folio
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Folio
+	  * @param value the value to set the attribute to
+	  */
+	public void setFolio(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.FOLIO, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerRangeList attribute Folio
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getFolio()
+	{
+		final String strAttrName = getAttribute(AttributeName.FOLIO, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Folio
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Folio
-          * @param value the value to set the attribute to
-          */
-        public void setFolio(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.FOLIO, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SheetOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setSheetOffset(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SHEETOFFSET, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute Folio
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getFolio()
-        {
-            String strAttrName = getAttribute(AttributeName.FOLIO, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute SheetOffset
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getSheetOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SheetOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SheetOffset
-          * @param value the value to set the attribute to
-          */
-        public void setSheetOffset(JDFXYPair value)
-        {
-            setAttribute(AttributeName.SHEETOFFSET, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Transformation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Transformation
+	  * @param value the value to set the attribute to
+	  */
+	public void setTransformation(JDFMatrix value)
+	{
+		setAttribute(AttributeName.TRANSFORMATION, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute SheetOffset
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getSheetOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFMatrix attribute Transformation
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getTransformation()
+	{
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Transformation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Transformation
-          * @param value the value to set the attribute to
-          */
-        public void setTransformation(JDFMatrix value)
-        {
-            setAttribute(AttributeName.TRANSFORMATION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WrapPages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WrapPages
+	  * @param value the value to set the attribute to
+	  */
+	public void setWrapPages(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.WRAPPAGES, value, null);
+	}
 
-        /**
-          * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getTransformation()
-        {
-            String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute WrapPages
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getWrapPages()
+	{
+		final String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WrapPages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WrapPages
-          * @param value the value to set the attribute to
-          */
-        public void setWrapPages(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.WRAPPAGES, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFIntegerRangeList attribute WrapPages
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getWrapPages()
-        {
-            String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element GlueType
+	 * @return JDFSpanGlueType the element
+	 */
+	public JDFSpanGlueType getGlueType()
+	{
+		return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateGlueType
+	 * 
+	 * @return JDFSpanGlueType the element
+	 */
+	public JDFSpanGlueType getCreateGlueType()
+	{
+		return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
+	}
 
-    /**
-     * (24) const get element GlueType
-     * @return JDFSpanGlueType the element
-     */
-    public JDFSpanGlueType getGlueType()
-    {
-        return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
-    }
+	/**
+	 * (29) append element GlueType
+	 * @return JDFSpanGlueType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanGlueType appendGlueType() throws JDFException
+	{
+		return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
+	}
 
-    /** (25) getCreateGlueType
-     * 
-     * @return JDFSpanGlueType the element
-     */
-    public JDFSpanGlueType getCreateGlueType()
-    {
-        return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
-    }
+	/**
+	 * (24) const get element Method
+	 * @return JDFSpanMethod the element
+	 */
+	public JDFSpanMethod getMethod()
+	{
+		return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
+	}
 
-    /**
-     * (29) append element GlueType
-     * @return JDFSpanGlueType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanGlueType appendGlueType() throws JDFException
-    {
-        return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
-    }
+	/** (25) getCreateMethod
+	 * 
+	 * @return JDFSpanMethod the element
+	 */
+	public JDFSpanMethod getCreateMethod()
+	{
+		return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
+	}
 
-    /**
-     * (24) const get element Method
-     * @return JDFSpanMethod the element
-     */
-    public JDFSpanMethod getMethod()
-    {
-        return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
-    }
+	/**
+	 * (29) append element Method
+	 * @return JDFSpanMethod the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanMethod appendMethod() throws JDFException
+	{
+		return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
+	}
 
-    /** (25) getCreateMethod
-     * 
-     * @return JDFSpanMethod the element
-     */
-    public JDFSpanMethod getCreateMethod()
-    {
-        return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
-    }
+	/** (26) getCreateGlueLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /**
-     * (29) append element Method
-     * @return JDFSpanMethod the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanMethod appendMethod() throws JDFException
-    {
-        return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
-    }
+	/**
+	 * (27) const get element GlueLine
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 * default is getGlueLine(0)     */
+	public JDFGlueLine getGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /** (26) getCreateGlueLine
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine(int iSkip)
-    {
-        return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
-    }
+	/**
+	 * Get all GlueLine from the current element
+	 * 
+	 * @return Collection<JDFGlueLine>, null if none are available
+	 */
+	public Collection<JDFGlueLine> getAllGlueLine()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element GlueLine
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     * default is getGlueLine(0)     */
-    public JDFGlueLine getGlueLine(int iSkip)
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
-    }
+		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueLine) vc.get(i));
+		}
 
-    /**
-     * Get all GlueLine from the current element
-     * 
-     * @return Collection<JDFGlueLine>, null if none are available
-     */
-    public Collection<JDFGlueLine> getAllGlueLine()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueLine) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine appendGlueLine()
-    {
-        return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
-    }
+	/**
+	 * (30) append element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine appendGlueLine()
+	{
+		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,131 +75,119 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoLZWParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLZWParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLZWParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLYCHANGE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLYCHANGE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLZWParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLZWParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLZWParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLZWParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLZWParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLZWParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLZWParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLZWParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLZWParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLZWParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLZWParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLZWParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLZWParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLZWParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EarlyChange
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EarlyChange
+	  * @param value the value to set the attribute to
+	  */
+	public void setEarlyChange(int value)
+	{
+		setAttribute(AttributeName.EARLYCHANGE, value, null);
+	}
 
+	/**
+	  * (15) get int attribute EarlyChange
+	  * @return int the value of the attribute
+	  */
+	public int getEarlyChange()
+	{
+		return getIntAttribute(AttributeName.EARLYCHANGE, null, 1);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EarlyChange
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EarlyChange
-          * @param value the value to set the attribute to
-          */
-        public void setEarlyChange(int value)
-        {
-            setAttribute(AttributeName.EARLYCHANGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Predictor
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Predictor
+	  * @param value the value to set the attribute to
+	  */
+	public void setPredictor(int value)
+	{
+		setAttribute(AttributeName.PREDICTOR, value, null);
+	}
 
-        /**
-          * (15) get int attribute EarlyChange
-          * @return int the value of the attribute
-          */
-        public int getEarlyChange()
-        {
-            return getIntAttribute(AttributeName.EARLYCHANGE, null, 1);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Predictor
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Predictor
-          * @param value the value to set the attribute to
-          */
-        public void setPredictor(int value)
-        {
-            setAttribute(AttributeName.PREDICTOR, value, null);
-        }
-
-        /**
-          * (15) get int attribute Predictor
-          * @return int the value of the attribute
-          */
-        public int getPredictor()
-        {
-            return getIntAttribute(AttributeName.PREDICTOR, null, 1);
-        }
+	/**
+	  * (15) get int attribute Predictor
+	  * @return int the value of the attribute
+	  */
+	public int getPredictor()
+	{
+		return getIntAttribute(AttributeName.PREDICTOR, null, 1);
+	}
 
 }// end namespace JDF

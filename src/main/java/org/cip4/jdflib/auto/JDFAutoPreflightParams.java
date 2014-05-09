@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,227 +83,214 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateActionPool
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFActionPool the element
+	 */
+	public JDFActionPool getCreateActionPool(int iSkip)
+	{
+		return (JDFActionPool) getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ActionPool
+	 * @param iSkip number of elements to skip
+	 * @return JDFActionPool the element
+	 * default is getActionPool(0)     */
+	public JDFActionPool getActionPool(int iSkip)
+	{
+		return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all ActionPool from the current element
+	 * 
+	 * @return Collection<JDFActionPool>, null if none are available
+	 */
+	public Collection<JDFActionPool> getAllActionPool()
+	{
+		final VElement vc = getChildElementVector(ElementName.ACTIONPOOL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFActionPool> v = new Vector<JDFActionPool>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFActionPool) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateActionPool
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFActionPool the element
-     */
-    public JDFActionPool getCreateActionPool(int iSkip)
-    {
-        return (JDFActionPool)getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
-    }
+	/**
+	 * (30) append element ActionPool
+	 * @return JDFActionPool the element
+	 */
+	public JDFActionPool appendActionPool()
+	{
+		return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
+	}
 
-    /**
-     * (27) const get element ActionPool
-     * @param iSkip number of elements to skip
-     * @return JDFActionPool the element
-     * default is getActionPool(0)     */
-    public JDFActionPool getActionPool(int iSkip)
-    {
-        return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
-    }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * Get all ActionPool from the current element
-     * 
-     * @return Collection<JDFActionPool>, null if none are available
-     */
-    public Collection<JDFActionPool> getAllActionPool()
-    {
-        final VElement vc = getChildElementVector(ElementName.ACTIONPOOL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-        final Vector<JDFActionPool> v = new Vector<JDFActionPool>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFActionPool) vc.get(i));
-        }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element ActionPool
-     * @return JDFActionPool the element
-     */
-    public JDFActionPool appendActionPool()
-    {
-        return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
-    }
+	/**
+	 * (24) const get element TestPool
+	 * @return JDFTestPool the element
+	 */
+	public JDFTestPool getTestPool()
+	{
+		return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
+	/** (25) getCreateTestPool
+	 * 
+	 * @return JDFTestPool the element
+	 */
+	public JDFTestPool getCreateTestPool()
+	{
+		return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
+	}
 
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element TestPool
-     * @return JDFTestPool the element
-     */
-    public JDFTestPool getTestPool()
-    {
-        return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
-    }
-
-    /** (25) getCreateTestPool
-     * 
-     * @return JDFTestPool the element
-     */
-    public JDFTestPool getCreateTestPool()
-    {
-        return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
-    }
-
-    /**
-     * (29) append element TestPool
-     * @return JDFTestPool the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTestPool appendTestPool() throws JDFException
-    {
-        return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
-    }
+	/**
+	 * (29) append element TestPool
+	 * @return JDFTestPool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTestPool appendTestPool() throws JDFException
+	{
+		return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
+	}
 
 }// end namespace JDF

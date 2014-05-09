@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,272 +86,257 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /**
-    *****************************************************************************
-    class JDFAutoApprovalPerson : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoApprovalPerson : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoApprovalPerson extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.OBLIGATED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0), "Obligated");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBLIGATED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0), "Obligated");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x55555555);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x55555555);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoApprovalPerson
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalPerson(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalPerson
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalPerson
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalPerson
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalPerson
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoApprovalPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalPerson
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoApprovalPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoApprovalPerson[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ApprovalRole
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoApprovalPerson[  --> " + super.toString() + " ]";
-    }
+	public static class EnumApprovalRole extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumApprovalRole(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ApprovalRole
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumApprovalRole getEnum(String enumName)
+		{
+			return (EnumApprovalRole) getEnum(EnumApprovalRole.class, enumName);
+		}
 
-        public static class EnumApprovalRole extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumApprovalRole getEnum(int enumValue)
+		{
+			return (EnumApprovalRole) getEnum(EnumApprovalRole.class, enumValue);
+		}
 
-            private EnumApprovalRole(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumApprovalRole.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumApprovalRole getEnum(String enumName)
-            {
-                return (EnumApprovalRole) getEnum(EnumApprovalRole.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumApprovalRole.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumApprovalRole getEnum(int enumValue)
-            {
-                return (EnumApprovalRole) getEnum(EnumApprovalRole.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumApprovalRole.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumApprovalRole.class);
-            }
+		public static final EnumApprovalRole Approvinator = new EnumApprovalRole("Approvinator");
+		public static final EnumApprovalRole Group = new EnumApprovalRole("Group");
+		public static final EnumApprovalRole Informative = new EnumApprovalRole("Informative");
+		public static final EnumApprovalRole Obligated = new EnumApprovalRole("Obligated");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumApprovalRole.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumApprovalRole.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Obligated
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Obligated
+	  * @param value the value to set the attribute to
+	  */
+	public void setObligated(boolean value)
+	{
+		setAttribute(AttributeName.OBLIGATED, value, null);
+	}
 
-            public static final EnumApprovalRole Approvinator = new EnumApprovalRole("Approvinator");
-            public static final EnumApprovalRole Group = new EnumApprovalRole("Group");
-            public static final EnumApprovalRole Informative = new EnumApprovalRole("Informative");
-            public static final EnumApprovalRole Obligated = new EnumApprovalRole("Obligated");
-        }      
+	/**
+	  * (18) get boolean attribute Obligated
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getObligated()
+	{
+		return getBoolAttribute(AttributeName.OBLIGATED, null, false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ApprovalRole
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ApprovalRole
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setApprovalRole(EnumApprovalRole enumVar)
+	{
+		setAttribute(AttributeName.APPROVALROLE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute ApprovalRole
+	  * @return the value of the attribute
+	  */
+	public EnumApprovalRole getApprovalRole()
+	{
+		return EnumApprovalRole.getEnum(getAttribute(AttributeName.APPROVALROLE, null, "Obligated"));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Obligated
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Obligated
-          * @param value the value to set the attribute to
-          */
-        public void setObligated(boolean value)
-        {
-            setAttribute(AttributeName.OBLIGATED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ApprovalRoleDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ApprovalRoleDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setApprovalRoleDetails(String value)
+	{
+		setAttribute(AttributeName.APPROVALROLEDETAILS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute Obligated
-          * @return boolean the value of the attribute
-          */
-        public boolean getObligated()
-        {
-            return getBoolAttribute(AttributeName.OBLIGATED, null, false);
-        }
+	/**
+	  * (23) get String attribute ApprovalRoleDetails
+	  * @return the value of the attribute
+	  */
+	public String getApprovalRoleDetails()
+	{
+		return getAttribute(AttributeName.APPROVALROLEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ApprovalRole
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ApprovalRole
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setApprovalRole(EnumApprovalRole enumVar)
-        {
-            setAttribute(AttributeName.APPROVALROLE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute ApprovalRole
-          * @return the value of the attribute
-          */
-        public EnumApprovalRole getApprovalRole()
-        {
-            return EnumApprovalRole.getEnum(getAttribute(AttributeName.APPROVALROLE, null, "Obligated"));
-        }
+	/**
+	 * (24) const get element Contact
+	 * @return JDFContact the element
+	 */
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ApprovalRoleDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ApprovalRoleDetails
-          * @param value the value to set the attribute to
-          */
-        public void setApprovalRoleDetails(String value)
-        {
-            setAttribute(AttributeName.APPROVALROLEDETAILS, value, null);
-        }
+	/** (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
+	}
 
-        /**
-          * (23) get String attribute ApprovalRoleDetails
-          * @return the value of the attribute
-          */
-        public String getApprovalRoleDetails()
-        {
-            return getAttribute(AttributeName.APPROVALROLEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Contact
+	 * @return JDFContact the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFContact appendContact() throws JDFException
+	{
+		return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact getContact()
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, 0);
-    }
-
-    /** (25) getCreateContact
-     * 
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact()
-    {
-        return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
-    }
-
-    /**
-     * (29) append element Contact
-     * @return JDFContact the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFContact appendContact() throws JDFException
-    {
-        return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

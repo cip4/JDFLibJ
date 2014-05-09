@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,329 +86,319 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /**
-    *****************************************************************************
-    class JDFAutoRollStand : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRollStand : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRollStand extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXDIAMETER, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXWIDTH, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXDIAMETER, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXWIDTH, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRollStand
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRollStand(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRollStand
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRollStand(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRollStand
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRollStand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRollStand
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRollStand(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRollStand
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRollStand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRollStand
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRollStand(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRollStand[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Handling);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRollStand[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Handling;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Handling);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxDiameter
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxDiameter
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxDiameter(double value)
+	{
+		setAttribute(AttributeName.MAXDIAMETER, value, null);
+	}
 
+	/**
+	  * (17) get double attribute MaxDiameter
+	  * @return double the value of the attribute
+	  */
+	public double getMaxDiameter()
+	{
+		return getRealAttribute(AttributeName.MAXDIAMETER, null, 0.0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Handling;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxWidth(double value)
+	{
+		setAttribute(AttributeName.MAXWIDTH, value, null);
+	}
 
+	/**
+	  * (17) get double attribute MaxWidth
+	  * @return double the value of the attribute
+	  */
+	public double getMaxWidth()
+	{
+		return getRealAttribute(AttributeName.MAXWIDTH, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxDiameter
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxDiameter
-          * @param value the value to set the attribute to
-          */
-        public void setMaxDiameter(double value)
-        {
-            setAttribute(AttributeName.MAXDIAMETER, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute MaxDiameter
-          * @return double the value of the attribute
-          */
-        public double getMaxDiameter()
-        {
-            return getRealAttribute(AttributeName.MAXDIAMETER, null, 0.0);
-        }
+	/**
+	 * (24) const get element Device
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getDevice()
+	{
+		return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxWidth
-          * @param value the value to set the attribute to
-          */
-        public void setMaxWidth(double value)
-        {
-            setAttribute(AttributeName.MAXWIDTH, value, null);
-        }
+	/** (25) getCreateDevice
+	 * 
+	 * @return JDFDevice the element
+	 */
+	public JDFDevice getCreateDevice()
+	{
+		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
+	}
 
-        /**
-          * (17) get double attribute MaxWidth
-          * @return double the value of the attribute
-          */
-        public double getMaxWidth()
-        {
-            return getRealAttribute(AttributeName.MAXWIDTH, null, 0.0);
-        }
+	/**
+	 * (29) append element Device
+	 * @return JDFDevice the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFDevice appendDevice() throws JDFException
+	{
+		return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refDevice(JDFDevice refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element Device
-     * @return JDFDevice the element
-     */
-    public JDFDevice getDevice()
-    {
-        return (JDFDevice) getElement(ElementName.DEVICE, null, 0);
-    }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /** (25) getCreateDevice
-     * 
-     * @return JDFDevice the element
-     */
-    public JDFDevice getCreateDevice()
-    {
-        return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, 0);
-    }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /**
-     * (29) append element Device
-     * @return JDFDevice the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFDevice appendDevice() throws JDFException
-    {
-        return (JDFDevice) appendElementN(ElementName.DEVICE, 1, null);
-    }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDevice(JDFDevice refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/** (26) getCreateIdentificationField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element IdentificationField
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 * default is getIdentificationField(0)     */
+	@Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+	/**
+	 * Get all IdentificationField from the current element
+	 * 
+	 * @return Collection<JDFIdentificationField>, null if none are available
+	 */
+	public Collection<JDFIdentificationField> getAllIdentificationField()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIdentificationField) vc.get(i));
+		}
 
-    /** (26) getCreateIdentificationField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element IdentificationField
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+	/**
+	 * (30) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField appendIdentificationField()
+	{
+		return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+	}
 
-    /**
-     * Get all IdentificationField from the current element
-     * 
-     * @return Collection<JDFIdentificationField>, null if none are available
-     */
-    public Collection<JDFIdentificationField> getAllIdentificationField()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIdentificationField) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField appendIdentificationField()
-    {
-        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

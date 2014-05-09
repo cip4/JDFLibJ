@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
-    /**
-    *****************************************************************************
-    class JDFAutoModulePool : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoModulePool : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoModulePool extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MODULECAP, 0x22222111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MODULECAP, 0x22222111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoModulePool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModulePool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoModulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModulePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModulePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoModulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModulePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoModulePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoModulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoModulePool[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoModulePool[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateModuleCap
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFModuleCap the element
+	 */
+	public JDFModuleCap getCreateModuleCap(int iSkip)
+	{
+		return (JDFModuleCap) getCreateElement_KElement(ElementName.MODULECAP, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ModuleCap
+	 * @param iSkip number of elements to skip
+	 * @return JDFModuleCap the element
+	 * default is getModuleCap(0)     */
+	public JDFModuleCap getModuleCap(int iSkip)
+	{
+		return (JDFModuleCap) getElement(ElementName.MODULECAP, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all ModuleCap from the current element
+	 * 
+	 * @return Collection<JDFModuleCap>, null if none are available
+	 */
+	public Collection<JDFModuleCap> getAllModuleCap()
+	{
+		final VElement vc = getChildElementVector(ElementName.MODULECAP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateModuleCap
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFModuleCap the element
-     */
-    public JDFModuleCap getCreateModuleCap(int iSkip)
-    {
-        return (JDFModuleCap)getCreateElement_KElement(ElementName.MODULECAP, null, iSkip);
-    }
+		final Vector<JDFModuleCap> v = new Vector<JDFModuleCap>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFModuleCap) vc.get(i));
+		}
 
-    /**
-     * (27) const get element ModuleCap
-     * @param iSkip number of elements to skip
-     * @return JDFModuleCap the element
-     * default is getModuleCap(0)     */
-    public JDFModuleCap getModuleCap(int iSkip)
-    {
-        return (JDFModuleCap) getElement(ElementName.MODULECAP, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all ModuleCap from the current element
-     * 
-     * @return Collection<JDFModuleCap>, null if none are available
-     */
-    public Collection<JDFModuleCap> getAllModuleCap()
-    {
-        final VElement vc = getChildElementVector(ElementName.MODULECAP, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFModuleCap> v = new Vector<JDFModuleCap>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFModuleCap) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ModuleCap
-     * @return JDFModuleCap the element
-     */
-    public JDFModuleCap appendModuleCap()
-    {
-        return (JDFModuleCap) appendElement(ElementName.MODULECAP, null);
-    }
+	/**
+	 * (30) append element ModuleCap
+	 * @return JDFModuleCap the element
+	 */
+	public JDFModuleCap appendModuleCap()
+	{
+		return (JDFModuleCap) appendElement(ElementName.MODULECAP, null);
+	}
 
 }// end namespace JDF

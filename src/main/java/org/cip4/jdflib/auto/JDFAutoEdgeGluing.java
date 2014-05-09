@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFSpanGlue;
-    /**
-    *****************************************************************************
-    class JDFAutoEdgeGluing : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEdgeGluing : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEdgeGluing extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EDGEGLUE, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EDGEGLUE, 0x66666661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEdgeGluing
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEdgeGluing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEdgeGluing
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEdgeGluing(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEdgeGluing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEdgeGluing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEdgeGluing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEdgeGluing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEdgeGluing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEdgeGluing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEdgeGluing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEdgeGluing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEdgeGluing[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEdgeGluing[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element EdgeGlue
+	 * @return JDFSpanGlue the element
+	 */
+	public JDFSpanGlue getEdgeGlue()
+	{
+		return (JDFSpanGlue) getElement(ElementName.EDGEGLUE, null, 0);
+	}
 
+	/** (25) getCreateEdgeGlue
+	 * 
+	 * @return JDFSpanGlue the element
+	 */
+	public JDFSpanGlue getCreateEdgeGlue()
+	{
+		return (JDFSpanGlue) getCreateElement_KElement(ElementName.EDGEGLUE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element EdgeGlue
-     * @return JDFSpanGlue the element
-     */
-    public JDFSpanGlue getEdgeGlue()
-    {
-        return (JDFSpanGlue) getElement(ElementName.EDGEGLUE, null, 0);
-    }
-
-    /** (25) getCreateEdgeGlue
-     * 
-     * @return JDFSpanGlue the element
-     */
-    public JDFSpanGlue getCreateEdgeGlue()
-    {
-        return (JDFSpanGlue) getCreateElement_KElement(ElementName.EDGEGLUE, null, 0);
-    }
-
-    /**
-     * (29) append element EdgeGlue
-     * @return JDFSpanGlue the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanGlue appendEdgeGlue() throws JDFException
-    {
-        return (JDFSpanGlue) appendElementN(ElementName.EDGEGLUE, 1, null);
-    }
+	/**
+	 * (29) append element EdgeGlue
+	 * @return JDFSpanGlue the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanGlue appendEdgeGlue() throws JDFException
+	{
+		return (JDFSpanGlue) appendElementN(ElementName.EDGEGLUE, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,287 +81,269 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoTabDimensions : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTabDimensions : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTabDimensions extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTabEdge.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TABEXTENSIONDISTANCE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TABOFFSET, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.TABSETCOLLATIONORDER, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TABWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTabEdge.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABEXTENSIONDISTANCE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABOFFSET, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TABSETCOLLATIONORDER, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TABWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTabDimensions
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTabDimensions
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTabDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTabDimensions
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTabDimensions
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTabDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTabDimensions
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTabDimensions
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTabDimensions(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTabDimensions[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for TabEdge
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTabDimensions[  --> " + super.toString() + " ]";
-    }
+	public static class EnumTabEdge extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumTabEdge(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for TabEdge
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTabEdge getEnum(String enumName)
+		{
+			return (EnumTabEdge) getEnum(EnumTabEdge.class, enumName);
+		}
 
-        public static class EnumTabEdge extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTabEdge getEnum(int enumValue)
+		{
+			return (EnumTabEdge) getEnum(EnumTabEdge.class, enumValue);
+		}
 
-            private EnumTabEdge(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTabEdge.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTabEdge getEnum(String enumName)
-            {
-                return (EnumTabEdge) getEnum(EnumTabEdge.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTabEdge.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTabEdge getEnum(int enumValue)
-            {
-                return (EnumTabEdge) getEnum(EnumTabEdge.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTabEdge.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTabEdge.class);
-            }
+		public static final EnumTabEdge Left = new EnumTabEdge("Left");
+		public static final EnumTabEdge Rigth = new EnumTabEdge("Rigth");
+		public static final EnumTabEdge Top = new EnumTabEdge("Top");
+		public static final EnumTabEdge Bottom = new EnumTabEdge("Bottom");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTabEdge.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTabEdge.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabEdge
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TabEdge
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTabEdge(EnumTabEdge enumVar)
+	{
+		setAttribute(AttributeName.TABEDGE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumTabEdge Left = new EnumTabEdge("Left");
-            public static final EnumTabEdge Rigth = new EnumTabEdge("Rigth");
-            public static final EnumTabEdge Top = new EnumTabEdge("Top");
-            public static final EnumTabEdge Bottom = new EnumTabEdge("Bottom");
-        }      
+	/**
+	  * (9) get attribute TabEdge
+	  * @return the value of the attribute
+	  */
+	public EnumTabEdge getTabEdge()
+	{
+		return EnumTabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabExtensionDistance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TabExtensionDistance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTabExtensionDistance(double value)
+	{
+		setAttribute(AttributeName.TABEXTENSIONDISTANCE, value, null);
+	}
 
+	/**
+	  * (17) get double attribute TabExtensionDistance
+	  * @return double the value of the attribute
+	  */
+	public double getTabExtensionDistance()
+	{
+		return getRealAttribute(AttributeName.TABEXTENSIONDISTANCE, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabEdge
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TabEdge
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTabEdge(EnumTabEdge enumVar)
-        {
-            setAttribute(AttributeName.TABEDGE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TabOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setTabOffset(double value)
+	{
+		setAttribute(AttributeName.TABOFFSET, value, null);
+	}
 
-        /**
-          * (9) get attribute TabEdge
-          * @return the value of the attribute
-          */
-        public EnumTabEdge getTabEdge()
-        {
-            return EnumTabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
-        }
+	/**
+	  * (17) get double attribute TabOffset
+	  * @return double the value of the attribute
+	  */
+	public double getTabOffset()
+	{
+		return getRealAttribute(AttributeName.TABOFFSET, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabExtensionDistance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TabExtensionDistance
-          * @param value the value to set the attribute to
-          */
-        public void setTabExtensionDistance(double value)
-        {
-            setAttribute(AttributeName.TABEXTENSIONDISTANCE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabsPerBank
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TabsPerBank
+	  * @param value the value to set the attribute to
+	  */
+	public void setTabsPerBank(int value)
+	{
+		setAttribute(AttributeName.TABSPERBANK, value, null);
+	}
 
-        /**
-          * (17) get double attribute TabExtensionDistance
-          * @return double the value of the attribute
-          */
-        public double getTabExtensionDistance()
-        {
-            return getRealAttribute(AttributeName.TABEXTENSIONDISTANCE, null, 0.0);
-        }
+	/**
+	  * (15) get int attribute TabsPerBank
+	  * @return int the value of the attribute
+	  */
+	public int getTabsPerBank()
+	{
+		return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TabOffset
-          * @param value the value to set the attribute to
-          */
-        public void setTabOffset(double value)
-        {
-            setAttribute(AttributeName.TABOFFSET, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabSetCollationOrder
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TabSetCollationOrder
+	  * @param value the value to set the attribute to
+	  */
+	public void setTabSetCollationOrder(String value)
+	{
+		setAttribute(AttributeName.TABSETCOLLATIONORDER, value, null);
+	}
 
-        /**
-          * (17) get double attribute TabOffset
-          * @return double the value of the attribute
-          */
-        public double getTabOffset()
-        {
-            return getRealAttribute(AttributeName.TABOFFSET, null, 0.0);
-        }
+	/**
+	  * (23) get String attribute TabSetCollationOrder
+	  * @return the value of the attribute
+	  */
+	public String getTabSetCollationOrder()
+	{
+		return getAttribute(AttributeName.TABSETCOLLATIONORDER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabsPerBank
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TabsPerBank
-          * @param value the value to set the attribute to
-          */
-        public void setTabsPerBank(int value)
-        {
-            setAttribute(AttributeName.TABSPERBANK, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TabWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TabWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setTabWidth(double value)
+	{
+		setAttribute(AttributeName.TABWIDTH, value, null);
+	}
 
-        /**
-          * (15) get int attribute TabsPerBank
-          * @return int the value of the attribute
-          */
-        public int getTabsPerBank()
-        {
-            return getIntAttribute(AttributeName.TABSPERBANK, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabSetCollationOrder
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TabSetCollationOrder
-          * @param value the value to set the attribute to
-          */
-        public void setTabSetCollationOrder(String value)
-        {
-            setAttribute(AttributeName.TABSETCOLLATIONORDER, value, null);
-        }
-
-        /**
-          * (23) get String attribute TabSetCollationOrder
-          * @return the value of the attribute
-          */
-        public String getTabSetCollationOrder()
-        {
-            return getAttribute(AttributeName.TABSETCOLLATIONORDER, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TabWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TabWidth
-          * @param value the value to set the attribute to
-          */
-        public void setTabWidth(double value)
-        {
-            setAttribute(AttributeName.TABWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute TabWidth
-          * @return double the value of the attribute
-          */
-        public double getTabWidth()
-        {
-            return getRealAttribute(AttributeName.TABWIDTH, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute TabWidth
+	  * @return double the value of the attribute
+	  */
+	public double getTabWidth()
+	{
+		return getRealAttribute(AttributeName.TABWIDTH, null, 0.0);
+	}
 
 }// end namespace JDF

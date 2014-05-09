@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,268 +85,259 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /**
-    *****************************************************************************
-    class JDFAutoMiscConsumable : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMiscConsumable : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMiscConsumable extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONSUMABLETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONSUMABLETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMiscConsumable
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMiscConsumable(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMiscConsumable
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMiscConsumable(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMiscConsumable
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMiscConsumable(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMiscConsumable
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMiscConsumable(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMiscConsumable
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMiscConsumable(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMiscConsumable
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMiscConsumable(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMiscConsumable[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Consumable);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMiscConsumable[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Consumable;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Consumable);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ConsumableType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ConsumableType
+	  * @param value the value to set the attribute to
+	  */
+	public void setConsumableType(String value)
+	{
+		setAttribute(AttributeName.CONSUMABLETYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ConsumableType
+	  * @return the value of the attribute
+	  */
+	public String getConsumableType()
+	{
+		return getAttribute(AttributeName.CONSUMABLETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Consumable;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ConsumableType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ConsumableType
-          * @param value the value to set the attribute to
-          */
-        public void setConsumableType(String value)
-        {
-            setAttribute(AttributeName.CONSUMABLETYPE, value, null);
-        }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute ConsumableType
-          * @return the value of the attribute
-          */
-        public String getConsumableType()
-        {
-            return getAttribute(AttributeName.CONSUMABLETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/** (26) getCreateIdentificationField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element IdentificationField
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 * default is getIdentificationField(0)     */
+	@Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+	/**
+	 * Get all IdentificationField from the current element
+	 * 
+	 * @return Collection<JDFIdentificationField>, null if none are available
+	 */
+	public Collection<JDFIdentificationField> getAllIdentificationField()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIdentificationField) vc.get(i));
+		}
 
-    /** (26) getCreateIdentificationField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element IdentificationField
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
+	/**
+	 * (30) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField appendIdentificationField()
+	{
+		return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+	}
 
-    /**
-     * Get all IdentificationField from the current element
-     * 
-     * @return Collection<JDFIdentificationField>, null if none are available
-     */
-    public Collection<JDFIdentificationField> getAllIdentificationField()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIdentificationField) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField appendIdentificationField()
-    {
-        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,237 +85,215 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFComChannel;
-    /**
-    *****************************************************************************
-    class JDFAutoCustomerMessage : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCustomerMessage : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCustomerMessage extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LANGUAGE, 0x33333311, AttributeInfo.EnumAttributeType.language, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MESSAGEEVENTS, 0x22222211, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LANGUAGE, 0x33333311, AttributeInfo.EnumAttributeType.language, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MESSAGEEVENTS, 0x22222211, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCustomerMessage
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCustomerMessage
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCustomerMessage(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCustomerMessage
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCustomerMessage
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCustomerMessage(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCustomerMessage
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCustomerMessage
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCustomerMessage(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCustomerMessage[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCustomerMessage[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Language
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Language
+	  * @param value the value to set the attribute to
+	  */
+	public void setLanguage(String value)
+	{
+		setAttribute(AttributeName.LANGUAGE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Language
+	  * @return the value of the attribute
+	  */
+	public String getLanguage()
+	{
+		return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Language
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Language
-          * @param value the value to set the attribute to
-          */
-        public void setLanguage(String value)
-        {
-            setAttribute(AttributeName.LANGUAGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MessageEvents
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MessageEvents
+	  * @param value the value to set the attribute to
+	  */
+	public void setMessageEvents(VString value)
+	{
+		setAttribute(AttributeName.MESSAGEEVENTS, value, null);
+	}
 
-        /**
-          * (23) get String attribute Language
-          * @return the value of the attribute
-          */
-        public String getLanguage()
-        {
-            return getAttribute(AttributeName.LANGUAGE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (21) get VString attribute MessageEvents
+	  * @return VString the value of the attribute
+	  */
+	public VString getMessageEvents()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MessageEvents
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MessageEvents
-          * @param value the value to set the attribute to
-          */
-        public void setMessageEvents(VString value)
-        {
-            setAttribute(AttributeName.MESSAGEEVENTS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShowList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ShowList
+	  * @param value the value to set the attribute to
+	  */
+	public void setShowList(VString value)
+	{
+		setAttribute(AttributeName.SHOWLIST, value, null);
+	}
 
-        /**
-          * (21) get VString attribute MessageEvents
-          * @return VString the value of the attribute
-          */
-        public VString getMessageEvents()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute ShowList
+	  * @return VString the value of the attribute
+	  */
+	public VString getShowList()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShowList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ShowList
-          * @param value the value to set the attribute to
-          */
-        public void setShowList(VString value)
-        {
-            setAttribute(AttributeName.SHOWLIST, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (21) get VString attribute ShowList
-          * @return VString the value of the attribute
-          */
-        public VString getShowList()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/** (26) getCreateComChannel
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel getCreateComChannel(int iSkip)
+	{
+		return (JDFComChannel) getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element ComChannel
+	 * @param iSkip number of elements to skip
+	 * @return JDFComChannel the element
+	 * default is getComChannel(0)     */
+	public JDFComChannel getComChannel(int iSkip)
+	{
+		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
+	}
 
-    /** (26) getCreateComChannel
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFComChannel the element
-     */
-    public JDFComChannel getCreateComChannel(int iSkip)
-    {
-        return (JDFComChannel)getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
-    }
+	/**
+	 * Get all ComChannel from the current element
+	 * 
+	 * @return Collection<JDFComChannel>, null if none are available
+	 */
+	public Collection<JDFComChannel> getAllComChannel()
+	{
+		final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element ComChannel
-     * @param iSkip number of elements to skip
-     * @return JDFComChannel the element
-     * default is getComChannel(0)     */
-    public JDFComChannel getComChannel(int iSkip)
-    {
-        return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
-    }
+		final Vector<JDFComChannel> v = new Vector<JDFComChannel>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFComChannel) vc.get(i));
+		}
 
-    /**
-     * Get all ComChannel from the current element
-     * 
-     * @return Collection<JDFComChannel>, null if none are available
-     */
-    public Collection<JDFComChannel> getAllComChannel()
-    {
-        final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFComChannel> v = new Vector<JDFComChannel>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFComChannel) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ComChannel
-     * @return JDFComChannel the element
-     */
-    public JDFComChannel appendComChannel()
-    {
-        return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComChannel(JDFComChannel refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element ComChannel
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel appendComChannel()
+	{
+		return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
+	}
 
 }// end namespace JDF

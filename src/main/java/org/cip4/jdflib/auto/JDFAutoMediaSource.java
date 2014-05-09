@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,354 +87,336 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /**
-    *****************************************************************************
-    class JDFAutoMediaSource : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMediaSource : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMediaSource extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MANUALFEED, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LEADINGEDGE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MANUALFEED, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LEADINGEDGE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x77777776);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x77777776);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x77777776);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMPONENT, 0x77777776);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMediaSource
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaSource
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaSource(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMediaSource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaSource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaSource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMediaSource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaSource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMediaSource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMediaSource[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMediaSource[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for SheetLay
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumSheetLay extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumSheetLay(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(String enumName)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(int enumValue)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for SheetLay
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSheetLay.class);
+		}
 
-        public static class EnumSheetLay extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSheetLay.class);
+		}
 
-            private EnumSheetLay(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSheetLay.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSheetLay getEnum(String enumName)
-            {
-                return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
-            }
+		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		public static final EnumSheetLay Center = new EnumSheetLay("Center");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSheetLay getEnum(int enumValue)
-            {
-                return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSheetLay.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ManualFeed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ManualFeed
+	  * @param value the value to set the attribute to
+	  */
+	public void setManualFeed(boolean value)
+	{
+		setAttribute(AttributeName.MANUALFEED, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSheetLay.class);
-            }
+	/**
+	  * (18) get boolean attribute ManualFeed
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getManualFeed()
+	{
+		return getBoolAttribute(AttributeName.MANUALFEED, null, false);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSheetLay.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LeadingEdge
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LeadingEdge
+	  * @param value the value to set the attribute to
+	  */
+	public void setLeadingEdge(double value)
+	{
+		setAttribute(AttributeName.LEADINGEDGE, value, null);
+	}
 
-            public static final EnumSheetLay Left = new EnumSheetLay("Left");
-            public static final EnumSheetLay Right = new EnumSheetLay("Right");
-            public static final EnumSheetLay Center = new EnumSheetLay("Center");
-        }      
+	/**
+	  * (17) get double attribute LeadingEdge
+	  * @return double the value of the attribute
+	  */
+	public double getLeadingEdge()
+	{
+		return getRealAttribute(AttributeName.LEADINGEDGE, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MediaLocation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MediaLocation
+	  * @param value the value to set the attribute to
+	  */
+	public void setMediaLocation(String value)
+	{
+		setAttribute(AttributeName.MEDIALOCATION, value, null);
+	}
 
+	/**
+	  * (23) get String attribute MediaLocation
+	  * @return the value of the attribute
+	  */
+	public String getMediaLocation()
+	{
+		return getAttribute(AttributeName.MEDIALOCATION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ManualFeed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ManualFeed
-          * @param value the value to set the attribute to
-          */
-        public void setManualFeed(boolean value)
-        {
-            setAttribute(AttributeName.MANUALFEED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetLay
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute SheetLay
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSheetLay(EnumSheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute ManualFeed
-          * @return boolean the value of the attribute
-          */
-        public boolean getManualFeed()
-        {
-            return getBoolAttribute(AttributeName.MANUALFEED, null, false);
-        }
+	/**
+	  * (9) get attribute SheetLay
+	  * @return the value of the attribute
+	  */
+	public EnumSheetLay getSheetLay()
+	{
+		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LeadingEdge
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LeadingEdge
-          * @param value the value to set the attribute to
-          */
-        public void setLeadingEdge(double value)
-        {
-            setAttribute(AttributeName.LEADINGEDGE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute LeadingEdge
-          * @return double the value of the attribute
-          */
-        public double getLeadingEdge()
-        {
-            return getRealAttribute(AttributeName.LEADINGEDGE, null, 0.0);
-        }
+	/**
+	 * (24) const get element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MediaLocation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MediaLocation
-          * @param value the value to set the attribute to
-          */
-        public void setMediaLocation(String value)
-        {
-            setAttribute(AttributeName.MEDIALOCATION, value, null);
-        }
+	/** (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+	}
 
-        /**
-          * (23) get String attribute MediaLocation
-          * @return the value of the attribute
-          */
-        public String getMediaLocation()
-        {
-            return getAttribute(AttributeName.MEDIALOCATION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Media
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendMedia() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SheetLay
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute SheetLay
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSheetLay(EnumSheetLay enumVar)
-        {
-            setAttribute(AttributeName.SHEETLAY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        /**
-          * (9) get attribute SheetLay
-          * @return the value of the attribute
-          */
-        public EnumSheetLay getSheetLay()
-        {
-            return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-        }
+	/**
+	 * (24) const get element Component
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getComponent()
+	{
+		return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateComponent
+	 * 
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getCreateComponent()
+	{
+		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
+	}
 
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
+	/**
+	 * (29) append element Component
+	 * @return JDFComponent the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFComponent appendComponent() throws JDFException
+	{
+		return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
+	}
 
-    /** (25) getCreateMedia
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
-    }
-
-    /**
-     * (29) append element Media
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendMedia() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element Component
-     * @return JDFComponent the element
-     */
-    public JDFComponent getComponent()
-    {
-        return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
-    }
-
-    /** (25) getCreateComponent
-     * 
-     * @return JDFComponent the element
-     */
-    public JDFComponent getCreateComponent()
-    {
-        return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
-    }
-
-    /**
-     * (29) append element Component
-     * @return JDFComponent the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFComponent appendComponent() throws JDFException
-    {
-        return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComponent(JDFComponent refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refComponent(JDFComponent refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

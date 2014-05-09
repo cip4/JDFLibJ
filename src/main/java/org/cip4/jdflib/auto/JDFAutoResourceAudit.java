@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,366 +90,355 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
-    /**
-    *****************************************************************************
-    class JDFAutoResourceAudit : public JDFAudit
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoResourceAudit : public JDFAudit
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoResourceAudit
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResourceAudit
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoResourceAudit(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResourceAudit
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoResourceAudit
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoResourceAudit(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoResourceAudit
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoResourceAudit
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoResourceAudit(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Reason
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
-    }
+	public static class EnumReason extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumReason(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Reason
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumReason getEnum(String enumName)
+		{
+			return (EnumReason) getEnum(EnumReason.class, enumName);
+		}
 
-        public static class EnumReason extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumReason getEnum(int enumValue)
+		{
+			return (EnumReason) getEnum(EnumReason.class, enumValue);
+		}
 
-            private EnumReason(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumReason.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumReason getEnum(String enumName)
-            {
-                return (EnumReason) getEnum(EnumReason.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumReason.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumReason getEnum(int enumValue)
-            {
-                return (EnumReason) getEnum(EnumReason.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumReason.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumReason.class);
-            }
+		public static final EnumReason OperatorInput = new EnumReason("OperatorInput");
+		public static final EnumReason PlanChange = new EnumReason("PlanChange");
+		public static final EnumReason ProcessResult = new EnumReason("ProcessResult");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumReason.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumReason.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentsModified
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContentsModified
+	  * @param value the value to set the attribute to
+	  */
+	public void setContentsModified(boolean value)
+	{
+		setAttribute(AttributeName.CONTENTSMODIFIED, value, null);
+	}
 
-            public static final EnumReason OperatorInput = new EnumReason("OperatorInput");
-            public static final EnumReason PlanChange = new EnumReason("PlanChange");
-            public static final EnumReason ProcessResult = new EnumReason("ProcessResult");
-        }      
+	/**
+	  * (18) get boolean attribute ContentsModified
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getContentsModified()
+	{
+		return getBoolAttribute(AttributeName.CONTENTSMODIFIED, null, false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NodeStatus
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute NodeStatus
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setNodeStatus(EnumNodeStatus enumVar)
+	{
+		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute NodeStatus
+	  * @return the value of the attribute
+	  */
+	public EnumNodeStatus getNodeStatus()
+	{
+		return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContentsModified
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentsModified
-          * @param value the value to set the attribute to
-          */
-        public void setContentsModified(boolean value)
-        {
-            setAttribute(AttributeName.CONTENTSMODIFIED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Reason
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Reason
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setReason(EnumReason enumVar)
+	{
+		setAttribute(AttributeName.REASON, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute ContentsModified
-          * @return boolean the value of the attribute
-          */
-        public boolean getContentsModified()
-        {
-            return getBoolAttribute(AttributeName.CONTENTSMODIFIED, null, false);
-        }
+	/**
+	  * (9) get attribute Reason
+	  * @return the value of the attribute
+	  */
+	public EnumReason getReason()
+	{
+		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NodeStatus
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute NodeStatus
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setNodeStatus(EnumNodeStatus enumVar)
-        {
-            setAttribute(AttributeName.NODESTATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute NodeStatus
-          * @return the value of the attribute
-          */
-        public EnumNodeStatus getNodeStatus()
-        {
-            return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
-        }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Reason
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Reason
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setReason(EnumReason enumVar)
-        {
-            setAttribute(AttributeName.REASON, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	@Override
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute Reason
-          * @return the value of the attribute
-          */
-        public EnumReason getReason()
-        {
-            return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
-        }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	@Override
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (24) const get element MISDetails
+	 * @return JDFMISDetails the element
+	 */
+	public JDFMISDetails getMISDetails()
+	{
+		return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/** (25) getCreateMISDetails
+	 * 
+	 * @return JDFMISDetails the element
+	 */
+	public JDFMISDetails getCreateMISDetails()
+	{
+		return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
+	}
 
-        return v;
-    }
+	/**
+	 * (29) append element MISDetails
+	 * @return JDFMISDetails the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMISDetails appendMISDetails() throws JDFException
+	{
+		return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
+	}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-    /**
-     * (24) const get element MISDetails
-     * @return JDFMISDetails the element
-     */
-    public JDFMISDetails getMISDetails()
-    {
-        return (JDFMISDetails) getElement(ElementName.MISDETAILS, null, 0);
-    }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-    /** (25) getCreateMISDetails
-     * 
-     * @return JDFMISDetails the element
-     */
-    public JDFMISDetails getCreateMISDetails()
-    {
-        return (JDFMISDetails) getCreateElement_KElement(ElementName.MISDETAILS, null, 0);
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (29) append element MISDetails
-     * @return JDFMISDetails the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMISDetails appendMISDetails() throws JDFException
-    {
-        return (JDFMISDetails) appendElementN(ElementName.MISDETAILS, 1, null);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

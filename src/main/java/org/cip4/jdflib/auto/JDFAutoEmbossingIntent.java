@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFEmbossingItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
-    /**
-    *****************************************************************************
-    class JDFAutoEmbossingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEmbossingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSSINGITEM, 0x22222221);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSSINGITEM, 0x22222221);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEmbossingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEmbossingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEmbossingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEmbossingIntent[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateEmbossingItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmbossingItem the element
+	 */
+	public JDFEmbossingItem getCreateEmbossingItem(int iSkip)
+	{
+		return (JDFEmbossingItem) getCreateElement_KElement(ElementName.EMBOSSINGITEM, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element EmbossingItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmbossingItem the element
+	 * default is getEmbossingItem(0)     */
+	public JDFEmbossingItem getEmbossingItem(int iSkip)
+	{
+		return (JDFEmbossingItem) getElement(ElementName.EMBOSSINGITEM, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all EmbossingItem from the current element
+	 * 
+	 * @return Collection<JDFEmbossingItem>, null if none are available
+	 */
+	public Collection<JDFEmbossingItem> getAllEmbossingItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMBOSSINGITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateEmbossingItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmbossingItem the element
-     */
-    public JDFEmbossingItem getCreateEmbossingItem(int iSkip)
-    {
-        return (JDFEmbossingItem)getCreateElement_KElement(ElementName.EMBOSSINGITEM, null, iSkip);
-    }
+		final Vector<JDFEmbossingItem> v = new Vector<JDFEmbossingItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmbossingItem) vc.get(i));
+		}
 
-    /**
-     * (27) const get element EmbossingItem
-     * @param iSkip number of elements to skip
-     * @return JDFEmbossingItem the element
-     * default is getEmbossingItem(0)     */
-    public JDFEmbossingItem getEmbossingItem(int iSkip)
-    {
-        return (JDFEmbossingItem) getElement(ElementName.EMBOSSINGITEM, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all EmbossingItem from the current element
-     * 
-     * @return Collection<JDFEmbossingItem>, null if none are available
-     */
-    public Collection<JDFEmbossingItem> getAllEmbossingItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMBOSSINGITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFEmbossingItem> v = new Vector<JDFEmbossingItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmbossingItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element EmbossingItem
-     * @return JDFEmbossingItem the element
-     */
-    public JDFEmbossingItem appendEmbossingItem()
-    {
-        return (JDFEmbossingItem) appendElement(ElementName.EMBOSSINGITEM, null);
-    }
+	/**
+	 * (30) append element EmbossingItem
+	 * @return JDFEmbossingItem the element
+	 */
+	public JDFEmbossingItem appendEmbossingItem()
+	{
+		return (JDFEmbossingItem) appendElement(ElementName.EMBOSSINGITEM, null);
+	}
 
 }// end namespace JDF

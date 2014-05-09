@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,211 +85,199 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
-    /**
-    *****************************************************************************
-    class JDFAutoTransferCurveSet : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTransferCurveSet : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTransferCurveSet extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTransferCurveSet
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurveSet
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurveSet(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurveSet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurveSet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurveSet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurveSet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurveSet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTransferCurveSet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTransferCurveSet[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTransferCurveSet[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CTM
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CTM
+	  * @param value the value to set the attribute to
+	  */
+	public void setCTM(JDFMatrix value)
+	{
+		setAttribute(AttributeName.CTM, value, null);
+	}
 
+	/**
+	  * (20) get JDFMatrix attribute CTM
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getCTM()
+	{
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CTM
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CTM
-          * @param value the value to set the attribute to
-          */
-        public void setCTM(JDFMatrix value)
-        {
-            setAttribute(AttributeName.CTM, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
-        /**
-          * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getCTM()
-        {
-            String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateTransferCurve
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve getCreateTransferCurve(int iSkip)
+	{
+		return (JDFTransferCurve) getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element TransferCurve
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferCurve the element
+	 * default is getTransferCurve(0)     */
+	public JDFTransferCurve getTransferCurve(int iSkip)
+	{
+		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
+	}
 
-    /** (26) getCreateTransferCurve
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTransferCurve the element
-     */
-    public JDFTransferCurve getCreateTransferCurve(int iSkip)
-    {
-        return (JDFTransferCurve)getCreateElement_KElement(ElementName.TRANSFERCURVE, null, iSkip);
-    }
+	/**
+	 * Get all TransferCurve from the current element
+	 * 
+	 * @return Collection<JDFTransferCurve>, null if none are available
+	 */
+	public Collection<JDFTransferCurve> getAllTransferCurve()
+	{
+		final VElement vc = getChildElementVector(ElementName.TRANSFERCURVE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element TransferCurve
-     * @param iSkip number of elements to skip
-     * @return JDFTransferCurve the element
-     * default is getTransferCurve(0)     */
-    public JDFTransferCurve getTransferCurve(int iSkip)
-    {
-        return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
-    }
+		final Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTransferCurve) vc.get(i));
+		}
 
-    /**
-     * Get all TransferCurve from the current element
-     * 
-     * @return Collection<JDFTransferCurve>, null if none are available
-     */
-    public Collection<JDFTransferCurve> getAllTransferCurve()
-    {
-        final VElement vc = getChildElementVector(ElementName.TRANSFERCURVE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTransferCurve) vc.get(i));
-        }
+	/**
+	 * (30) append element TransferCurve
+	 * @return JDFTransferCurve the element
+	 */
+	public JDFTransferCurve appendTransferCurve()
+	{
+		return (JDFTransferCurve) appendElement(ElementName.TRANSFERCURVE, null);
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element TransferCurve
-     * @return JDFTransferCurve the element
-     */
-    public JDFTransferCurve appendTransferCurve()
-    {
-        return (JDFTransferCurve) appendElement(ElementName.TRANSFERCURVE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTransferCurve(JDFTransferCurve refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTransferCurve(JDFTransferCurve refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

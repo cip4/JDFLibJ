@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,209 +79,194 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
-    /**
-    *****************************************************************************
-    class JDFAutoPageElement : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPageElement : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPageElement extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x44443111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x44443111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPageElement
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageElement
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPageElement(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPageElement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageElement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPageElement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPageElement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPageElement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPageElement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPageElement[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPageElement[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentDataRefs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContentDataRefs
+	  * @param value the value to set the attribute to
+	  */
+	public void setContentDataRefs(VString value)
+	{
+		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute ContentDataRefs
+	  * @return VString the value of the attribute
+	  */
+	public VString getContentDataRefs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContentDataRefs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentDataRefs
-          * @param value the value to set the attribute to
-          */
-        public void setContentDataRefs(VString value)
-        {
-            setAttribute(AttributeName.CONTENTDATAREFS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentListIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContentListIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setContentListIndex(int value)
+	{
+		setAttribute(AttributeName.CONTENTLISTINDEX, value, null);
+	}
 
-        /**
-          * (21) get VString attribute ContentDataRefs
-          * @return VString the value of the attribute
-          */
-        public VString getContentDataRefs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (15) get int attribute ContentListIndex
+	  * @return int the value of the attribute
+	  */
+	public int getContentListIndex()
+	{
+		return getIntAttribute(AttributeName.CONTENTLISTINDEX, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContentListIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentListIndex
-          * @param value the value to set the attribute to
-          */
-        public void setContentListIndex(int value)
-        {
-            setAttribute(AttributeName.CONTENTLISTINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ElementPages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ElementPages
+	  * @param value the value to set the attribute to
+	  */
+	public void setElementPages(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.ELEMENTPAGES, value, null);
+	}
 
-        /**
-          * (15) get int attribute ContentListIndex
-          * @return int the value of the attribute
-          */
-        public int getContentListIndex()
-        {
-            return getIntAttribute(AttributeName.CONTENTLISTINDEX, null, 0);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute ElementPages
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getElementPages()
+	{
+		final String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ElementPages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ElementPages
-          * @param value the value to set the attribute to
-          */
-        public void setElementPages(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.ELEMENTPAGES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContentType
+	  * @param value the value to set the attribute to
+	  */
+	public void setContentType(String value)
+	{
+		setAttribute(AttributeName.CONTENTTYPE, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute ElementPages
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getElementPages()
-        {
-            String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute ContentType
+	  * @return the value of the attribute
+	  */
+	public String getContentType()
+	{
+		return getAttribute(AttributeName.CONTENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContentType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentType
-          * @param value the value to set the attribute to
-          */
-        public void setContentType(String value)
-        {
-            setAttribute(AttributeName.CONTENTTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RelativeBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setRelativeBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.RELATIVEBOX, value, null);
+	}
 
-        /**
-          * (23) get String attribute ContentType
-          * @return the value of the attribute
-          */
-        public String getContentType()
-        {
-            return getAttribute(AttributeName.CONTENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RelativeBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RelativeBox
-          * @param value the value to set the attribute to
-          */
-        public void setRelativeBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.RELATIVEBOX, value, null);
-        }
-
-        /**
-          * (20) get JDFRectangle attribute RelativeBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getRelativeBox()
-        {
-            String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFRectangle attribute RelativeBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getRelativeBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

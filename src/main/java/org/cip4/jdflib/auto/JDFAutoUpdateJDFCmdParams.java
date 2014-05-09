@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,294 +83,283 @@ import org.cip4.jdflib.jmf.JDFCreateLink;
 import org.cip4.jdflib.jmf.JDFCreateResource;
 import org.cip4.jdflib.jmf.JDFMoveResource;
 import org.cip4.jdflib.jmf.JDFRemoveLink;
-    /**
-    *****************************************************************************
-    class JDFAutoUpdateJDFCmdParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoUpdateJDFCmdParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CREATELINK, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CREATERESOURCE, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MOVERESOURCE, 0x33333333);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVELINK, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CREATELINK, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CREATERESOURCE, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MOVERESOURCE, 0x33333333);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVELINK, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoUpdateJDFCmdParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoUpdateJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoUpdateJDFCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoUpdateJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoUpdateJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoUpdateJDFCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoUpdateJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoUpdateJDFCmdParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoUpdateJDFCmdParams[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateCreateLink
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCreateLink the element
+	 */
+	public JDFCreateLink getCreateCreateLink(int iSkip)
+	{
+		return (JDFCreateLink) getCreateElement_KElement(ElementName.CREATELINK, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element CreateLink
+	 * @param iSkip number of elements to skip
+	 * @return JDFCreateLink the element
+	 * default is getCreateLink(0)     */
+	public JDFCreateLink getCreateLink(int iSkip)
+	{
+		return (JDFCreateLink) getElement(ElementName.CREATELINK, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all CreateLink from the current element
+	 * 
+	 * @return Collection<JDFCreateLink>, null if none are available
+	 */
+	public Collection<JDFCreateLink> getAllCreateLink()
+	{
+		final VElement vc = getChildElementVector(ElementName.CREATELINK, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateCreateLink
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCreateLink the element
-     */
-    public JDFCreateLink getCreateCreateLink(int iSkip)
-    {
-        return (JDFCreateLink)getCreateElement_KElement(ElementName.CREATELINK, null, iSkip);
-    }
+		final Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCreateLink) vc.get(i));
+		}
 
-    /**
-     * (27) const get element CreateLink
-     * @param iSkip number of elements to skip
-     * @return JDFCreateLink the element
-     * default is getCreateLink(0)     */
-    public JDFCreateLink getCreateLink(int iSkip)
-    {
-        return (JDFCreateLink) getElement(ElementName.CREATELINK, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all CreateLink from the current element
-     * 
-     * @return Collection<JDFCreateLink>, null if none are available
-     */
-    public Collection<JDFCreateLink> getAllCreateLink()
-    {
-        final VElement vc = getChildElementVector(ElementName.CREATELINK, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element CreateLink
+	 * @return JDFCreateLink the element
+	 */
+	public JDFCreateLink appendCreateLink()
+	{
+		return (JDFCreateLink) appendElement(ElementName.CREATELINK, null);
+	}
 
-        final Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCreateLink) vc.get(i));
-        }
+	/** (26) getCreateCreateResource
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCreateResource the element
+	 */
+	public JDFCreateResource getCreateCreateResource(int iSkip)
+	{
+		return (JDFCreateResource) getCreateElement_KElement(ElementName.CREATERESOURCE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element CreateResource
+	 * @param iSkip number of elements to skip
+	 * @return JDFCreateResource the element
+	 * default is getCreateResource(0)     */
+	public JDFCreateResource getCreateResource(int iSkip)
+	{
+		return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
+	}
 
-    /**
-     * (30) append element CreateLink
-     * @return JDFCreateLink the element
-     */
-    public JDFCreateLink appendCreateLink()
-    {
-        return (JDFCreateLink) appendElement(ElementName.CREATELINK, null);
-    }
+	/**
+	 * Get all CreateResource from the current element
+	 * 
+	 * @return Collection<JDFCreateResource>, null if none are available
+	 */
+	public Collection<JDFCreateResource> getAllCreateResource()
+	{
+		final VElement vc = getChildElementVector(ElementName.CREATERESOURCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateCreateResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCreateResource the element
-     */
-    public JDFCreateResource getCreateCreateResource(int iSkip)
-    {
-        return (JDFCreateResource)getCreateElement_KElement(ElementName.CREATERESOURCE, null, iSkip);
-    }
+		final Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCreateResource) vc.get(i));
+		}
 
-    /**
-     * (27) const get element CreateResource
-     * @param iSkip number of elements to skip
-     * @return JDFCreateResource the element
-     * default is getCreateResource(0)     */
-    public JDFCreateResource getCreateResource(int iSkip)
-    {
-        return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all CreateResource from the current element
-     * 
-     * @return Collection<JDFCreateResource>, null if none are available
-     */
-    public Collection<JDFCreateResource> getAllCreateResource()
-    {
-        final VElement vc = getChildElementVector(ElementName.CREATERESOURCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element CreateResource
+	 * @return JDFCreateResource the element
+	 */
+	public JDFCreateResource appendCreateResource()
+	{
+		return (JDFCreateResource) appendElement(ElementName.CREATERESOURCE, null);
+	}
 
-        final Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCreateResource) vc.get(i));
-        }
+	/** (26) getCreateMoveResource
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFMoveResource the element
+	 */
+	public JDFMoveResource getCreateMoveResource(int iSkip)
+	{
+		return (JDFMoveResource) getCreateElement_KElement(ElementName.MOVERESOURCE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element MoveResource
+	 * @param iSkip number of elements to skip
+	 * @return JDFMoveResource the element
+	 * default is getMoveResource(0)     */
+	public JDFMoveResource getMoveResource(int iSkip)
+	{
+		return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, iSkip);
+	}
 
-    /**
-     * (30) append element CreateResource
-     * @return JDFCreateResource the element
-     */
-    public JDFCreateResource appendCreateResource()
-    {
-        return (JDFCreateResource) appendElement(ElementName.CREATERESOURCE, null);
-    }
+	/**
+	 * Get all MoveResource from the current element
+	 * 
+	 * @return Collection<JDFMoveResource>, null if none are available
+	 */
+	public Collection<JDFMoveResource> getAllMoveResource()
+	{
+		final VElement vc = getChildElementVector(ElementName.MOVERESOURCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateMoveResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFMoveResource the element
-     */
-    public JDFMoveResource getCreateMoveResource(int iSkip)
-    {
-        return (JDFMoveResource)getCreateElement_KElement(ElementName.MOVERESOURCE, null, iSkip);
-    }
+		final Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFMoveResource) vc.get(i));
+		}
 
-    /**
-     * (27) const get element MoveResource
-     * @param iSkip number of elements to skip
-     * @return JDFMoveResource the element
-     * default is getMoveResource(0)     */
-    public JDFMoveResource getMoveResource(int iSkip)
-    {
-        return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all MoveResource from the current element
-     * 
-     * @return Collection<JDFMoveResource>, null if none are available
-     */
-    public Collection<JDFMoveResource> getAllMoveResource()
-    {
-        final VElement vc = getChildElementVector(ElementName.MOVERESOURCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element MoveResource
+	 * @return JDFMoveResource the element
+	 */
+	public JDFMoveResource appendMoveResource()
+	{
+		return (JDFMoveResource) appendElement(ElementName.MOVERESOURCE, null);
+	}
 
-        final Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFMoveResource) vc.get(i));
-        }
+	/** (26) getCreateRemoveLink
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFRemoveLink the element
+	 */
+	public JDFRemoveLink getCreateRemoveLink(int iSkip)
+	{
+		return (JDFRemoveLink) getCreateElement_KElement(ElementName.REMOVELINK, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element RemoveLink
+	 * @param iSkip number of elements to skip
+	 * @return JDFRemoveLink the element
+	 * default is getRemoveLink(0)     */
+	public JDFRemoveLink getRemoveLink(int iSkip)
+	{
+		return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
+	}
 
-    /**
-     * (30) append element MoveResource
-     * @return JDFMoveResource the element
-     */
-    public JDFMoveResource appendMoveResource()
-    {
-        return (JDFMoveResource) appendElement(ElementName.MOVERESOURCE, null);
-    }
+	/**
+	 * Get all RemoveLink from the current element
+	 * 
+	 * @return Collection<JDFRemoveLink>, null if none are available
+	 */
+	public Collection<JDFRemoveLink> getAllRemoveLink()
+	{
+		final VElement vc = getChildElementVector(ElementName.REMOVELINK, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateRemoveLink
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFRemoveLink the element
-     */
-    public JDFRemoveLink getCreateRemoveLink(int iSkip)
-    {
-        return (JDFRemoveLink)getCreateElement_KElement(ElementName.REMOVELINK, null, iSkip);
-    }
+		final Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFRemoveLink) vc.get(i));
+		}
 
-    /**
-     * (27) const get element RemoveLink
-     * @param iSkip number of elements to skip
-     * @return JDFRemoveLink the element
-     * default is getRemoveLink(0)     */
-    public JDFRemoveLink getRemoveLink(int iSkip)
-    {
-        return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all RemoveLink from the current element
-     * 
-     * @return Collection<JDFRemoveLink>, null if none are available
-     */
-    public Collection<JDFRemoveLink> getAllRemoveLink()
-    {
-        final VElement vc = getChildElementVector(ElementName.REMOVELINK, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFRemoveLink) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element RemoveLink
-     * @return JDFRemoveLink the element
-     */
-    public JDFRemoveLink appendRemoveLink()
-    {
-        return (JDFRemoveLink) appendElement(ElementName.REMOVELINK, null);
-    }
+	/**
+	 * (30) append element RemoveLink
+	 * @return JDFRemoveLink the element
+	 */
+	public JDFRemoveLink appendRemoveLink()
+	{
+		return (JDFRemoveLink) appendElement(ElementName.REMOVELINK, null);
+	}
 
 }// end namespace JDF

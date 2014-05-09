@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanShape;
-    /**
-    *****************************************************************************
-    class JDFAutoBookCase : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBookCase : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBookCase extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HEADBANDS, 0x77777776);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPE, 0x77777776);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.THICKNESS, 0x77777776);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HEADBANDS, 0x77777776);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPE, 0x77777776);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.THICKNESS, 0x77777776);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBookCase
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBookCase(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBookCase
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBookCase(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBookCase
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBookCase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBookCase
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBookCase(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBookCase
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBookCase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBookCase
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBookCase(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBookCase[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBookCase[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element HeadBands
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getHeadBands()
+	{
+		return (JDFOptionSpan) getElement(ElementName.HEADBANDS, null, 0);
+	}
 
+	/** (25) getCreateHeadBands
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateHeadBands()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.HEADBANDS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element HeadBands
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendHeadBands() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.HEADBANDS, 1, null);
+	}
 
-    /**
-     * (24) const get element HeadBands
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getHeadBands()
-    {
-        return (JDFOptionSpan) getElement(ElementName.HEADBANDS, null, 0);
-    }
+	/**
+	 * (24) const get element Shape
+	 * @return JDFSpanShape the element
+	 */
+	public JDFSpanShape getShape()
+	{
+		return (JDFSpanShape) getElement(ElementName.SHAPE, null, 0);
+	}
 
-    /** (25) getCreateHeadBands
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateHeadBands()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.HEADBANDS, null, 0);
-    }
+	/** (25) getCreateShape
+	 * 
+	 * @return JDFSpanShape the element
+	 */
+	public JDFSpanShape getCreateShape()
+	{
+		return (JDFSpanShape) getCreateElement_KElement(ElementName.SHAPE, null, 0);
+	}
 
-    /**
-     * (29) append element HeadBands
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendHeadBands() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.HEADBANDS, 1, null);
-    }
+	/**
+	 * (29) append element Shape
+	 * @return JDFSpanShape the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanShape appendShape() throws JDFException
+	{
+		return (JDFSpanShape) appendElementN(ElementName.SHAPE, 1, null);
+	}
 
-    /**
-     * (24) const get element Shape
-     * @return JDFSpanShape the element
-     */
-    public JDFSpanShape getShape()
-    {
-        return (JDFSpanShape) getElement(ElementName.SHAPE, null, 0);
-    }
+	/**
+	 * (24) const get element Thickness
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getThickness()
+	{
+		return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /** (25) getCreateShape
-     * 
-     * @return JDFSpanShape the element
-     */
-    public JDFSpanShape getCreateShape()
-    {
-        return (JDFSpanShape) getCreateElement_KElement(ElementName.SHAPE, null, 0);
-    }
+	/** (25) getCreateThickness
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateThickness()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
+	}
 
-    /**
-     * (29) append element Shape
-     * @return JDFSpanShape the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanShape appendShape() throws JDFException
-    {
-        return (JDFSpanShape) appendElementN(ElementName.SHAPE, 1, null);
-    }
-
-    /**
-     * (24) const get element Thickness
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getThickness()
-    {
-        return (JDFNumberSpan) getElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /** (25) getCreateThickness
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateThickness()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.THICKNESS, null, 0);
-    }
-
-    /**
-     * (29) append element Thickness
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendThickness() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
-    }
+	/**
+	 * (29) append element Thickness
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendThickness() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.THICKNESS, 1, null);
+	}
 
 }// end namespace JDF

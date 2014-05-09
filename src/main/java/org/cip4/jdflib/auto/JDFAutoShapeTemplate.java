@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,234 +85,221 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoShapeTemplate : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShapeTemplate : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShapeTemplate extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.INNERDIMENSIONS, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STANDARD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INNERDIMENSIONS, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STANDARD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShapeTemplate
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeTemplate
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeTemplate(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeTemplate
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeTemplate
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeTemplate(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeTemplate
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeTemplate
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShapeTemplate(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShapeTemplate[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShapeTemplate[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InnerDimensions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute InnerDimensions
+	  * @param value the value to set the attribute to
+	  */
+	public void setInnerDimensions(JDFShape value)
+	{
+		setAttribute(AttributeName.INNERDIMENSIONS, value, null);
+	}
 
+	/**
+	  * (20) get JDFShape attribute InnerDimensions
+	  * @return JDFShape the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFShape
+	  */
+	public JDFShape getInnerDimensions()
+	{
+		final String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute InnerDimensions
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute InnerDimensions
-          * @param value the value to set the attribute to
-          */
-        public void setInnerDimensions(JDFShape value)
-        {
-            setAttribute(AttributeName.INNERDIMENSIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
-        /**
-          * (20) get JDFShape attribute InnerDimensions
-          * @return JDFShape the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFShape
-          */
-        public JDFShape getInnerDimensions()
-        {
-            String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Standard
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Standard
+	  * @param value the value to set the attribute to
+	  */
+	public void setStandard(String value)
+	{
+		setAttribute(AttributeName.STANDARD, value, null);
+	}
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Standard
+	  * @return the value of the attribute
+	  */
+	public String getStandard()
+	{
+		return getAttribute(AttributeName.STANDARD, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Standard
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Standard
-          * @param value the value to set the attribute to
-          */
-        public void setStandard(String value)
-        {
-            setAttribute(AttributeName.STANDARD, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Standard
-          * @return the value of the attribute
-          */
-        public String getStandard()
-        {
-            return getAttribute(AttributeName.STANDARD, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element FileSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 * default is getFileSpec(0)     */
+	public JDFFileSpec getFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-    /** (26) getCreateFileSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec(int iSkip)
-    {
-        return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
-    }
+	/**
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element FileSpec
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     * default is getFileSpec(0)     */
-    public JDFFileSpec getFileSpec(int iSkip)
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
-    }
+		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFileSpec) vc.get(i));
+		}
 
-    /**
-     * Get all FileSpec from the current element
-     * 
-     * @return Collection<JDFFileSpec>, null if none are available
-     */
-    public Collection<JDFFileSpec> getAllFileSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFileSpec) vc.get(i));
-        }
+	/**
+	 * (30) append element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec appendFileSpec()
-    {
-        return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

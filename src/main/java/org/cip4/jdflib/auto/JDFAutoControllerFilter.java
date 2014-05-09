@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,196 +82,182 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoControllerFilter : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoControllerFilter : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoControllerFilter extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.URLTYPES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumURLTypes.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.URLTYPES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumURLTypes.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoControllerFilter
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoControllerFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoControllerFilter
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoControllerFilter(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoControllerFilter
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoControllerFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoControllerFilter
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoControllerFilter(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoControllerFilter
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoControllerFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoControllerFilter
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoControllerFilter(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoControllerFilter[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for URLTypes
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoControllerFilter[  --> " + super.toString() + " ]";
-    }
+	public static class EnumURLTypes extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumURLTypes(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for URLTypes
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumURLTypes getEnum(String enumName)
+		{
+			return (EnumURLTypes) getEnum(EnumURLTypes.class, enumName);
+		}
 
-        public static class EnumURLTypes extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumURLTypes getEnum(int enumValue)
+		{
+			return (EnumURLTypes) getEnum(EnumURLTypes.class, enumValue);
+		}
 
-            private EnumURLTypes(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumURLTypes.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumURLTypes getEnum(String enumName)
-            {
-                return (EnumURLTypes) getEnum(EnumURLTypes.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumURLTypes.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumURLTypes getEnum(int enumValue)
-            {
-                return (EnumURLTypes) getEnum(EnumURLTypes.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumURLTypes.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumURLTypes.class);
-            }
+		public static final EnumURLTypes JDFError = new EnumURLTypes("JDFError");
+		public static final EnumURLTypes JDFInput = new EnumURLTypes("JDFInput");
+		public static final EnumURLTypes JDFOutput = new EnumURLTypes("JDFOutput");
+		public static final EnumURLTypes JMF = new EnumURLTypes("JMF");
+		public static final EnumURLTypes SecureJMF = new EnumURLTypes("SecureJMF");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumURLTypes.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumURLTypes.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ControllerID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ControllerID
+	  * @param value the value to set the attribute to
+	  */
+	public void setControllerID(String value)
+	{
+		setAttribute(AttributeName.CONTROLLERID, value, null);
+	}
 
-            public static final EnumURLTypes JDFError = new EnumURLTypes("JDFError");
-            public static final EnumURLTypes JDFInput = new EnumURLTypes("JDFInput");
-            public static final EnumURLTypes JDFOutput = new EnumURLTypes("JDFOutput");
-            public static final EnumURLTypes JMF = new EnumURLTypes("JMF");
-            public static final EnumURLTypes SecureJMF = new EnumURLTypes("SecureJMF");
-        }      
+	/**
+	  * (23) get String attribute ControllerID
+	  * @return the value of the attribute
+	  */
+	public String getControllerID()
+	{
+		return getAttribute(AttributeName.CONTROLLERID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URLTypes
+	--------------------------------------------------------------------- */
+	/**
+	  * (5.2) set attribute URLTypes
+	  * @param v vector of the enumeration values
+	  */
+	public void setURLTypes(Vector v)
+	{
+		setEnumerationsAttribute(AttributeName.URLTYPES, v, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ControllerID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ControllerID
-          * @param value the value to set the attribute to
-          */
-        public void setControllerID(String value)
-        {
-            setAttribute(AttributeName.CONTROLLERID, value, null);
-        }
-
-        /**
-          * (23) get String attribute ControllerID
-          * @return the value of the attribute
-          */
-        public String getControllerID()
-        {
-            return getAttribute(AttributeName.CONTROLLERID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URLTypes
-        --------------------------------------------------------------------- */
-        /**
-          * (5.2) set attribute URLTypes
-          * @param v vector of the enumeration values
-          */
-        public void setURLTypes(Vector v)
-        {
-            setEnumerationsAttribute(AttributeName.URLTYPES, v, null);
-        }
-
-        /**
-          * (9.2) get URLTypes attribute URLTypes
-          * @return Vector of the enumerations
-          */
-        public Vector getURLTypes()
-        {
-            return getEnumerationsAttribute(AttributeName.URLTYPES, null, EnumURLTypes.getEnum(0), false);
-        }
+	/**
+	  * (9.2) get URLTypes attribute URLTypes
+	  * @return Vector of the enumerations
+	  */
+	public Vector getURLTypes()
+	{
+		return getEnumerationsAttribute(AttributeName.URLTYPES, null, EnumURLTypes.getEnum(0), false);
+	}
 
 }// end namespace JDF

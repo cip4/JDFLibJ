@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
-    /**
-    *****************************************************************************
-    class JDFAutoDeviceList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDeviceList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDeviceList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEINFO, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEINFO, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDeviceList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeviceList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeviceList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDeviceList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDeviceList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDeviceList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateDeviceInfo
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceInfo the element
+	 */
+	public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
+	{
+		return (JDFDeviceInfo) getCreateElement_KElement(ElementName.DEVICEINFO, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element DeviceInfo
+	 * @param iSkip number of elements to skip
+	 * @return JDFDeviceInfo the element
+	 * default is getDeviceInfo(0)     */
+	public JDFDeviceInfo getDeviceInfo(int iSkip)
+	{
+		return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all DeviceInfo from the current element
+	 * 
+	 * @return Collection<JDFDeviceInfo>, null if none are available
+	 */
+	public Collection<JDFDeviceInfo> getAllDeviceInfo()
+	{
+		final VElement vc = getChildElementVector(ElementName.DEVICEINFO, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateDeviceInfo
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDeviceInfo the element
-     */
-    public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
-    {
-        return (JDFDeviceInfo)getCreateElement_KElement(ElementName.DEVICEINFO, null, iSkip);
-    }
+		final Vector<JDFDeviceInfo> v = new Vector<JDFDeviceInfo>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDeviceInfo) vc.get(i));
+		}
 
-    /**
-     * (27) const get element DeviceInfo
-     * @param iSkip number of elements to skip
-     * @return JDFDeviceInfo the element
-     * default is getDeviceInfo(0)     */
-    public JDFDeviceInfo getDeviceInfo(int iSkip)
-    {
-        return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all DeviceInfo from the current element
-     * 
-     * @return Collection<JDFDeviceInfo>, null if none are available
-     */
-    public Collection<JDFDeviceInfo> getAllDeviceInfo()
-    {
-        final VElement vc = getChildElementVector(ElementName.DEVICEINFO, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFDeviceInfo> v = new Vector<JDFDeviceInfo>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDeviceInfo) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element DeviceInfo
-     * @return JDFDeviceInfo the element
-     */
-    public JDFDeviceInfo appendDeviceInfo()
-    {
-        return (JDFDeviceInfo) appendElement(ElementName.DEVICEINFO, null);
-    }
+	/**
+	 * (30) append element DeviceInfo
+	 * @return JDFDeviceInfo the element
+	 */
+	public JDFDeviceInfo appendDeviceInfo()
+	{
+		return (JDFDeviceInfo) appendElement(ElementName.DEVICEINFO, null);
+	}
 
 }// end namespace JDF

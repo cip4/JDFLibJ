@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,176 +76,161 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoFontPolicy : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFontPolicy : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFontPolicy extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFERREDFONT, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.USEDEFAULTFONT, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.USEFONTEMULATION, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFERREDFONT, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.USEDEFAULTFONT, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USEFONTEMULATION, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFontPolicy
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFontPolicy
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFontPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFontPolicy
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFontPolicy
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFontPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFontPolicy
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFontPolicy
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFontPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFontPolicy[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFontPolicy[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreferredFont
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PreferredFont
+	  * @param value the value to set the attribute to
+	  */
+	public void setPreferredFont(String value)
+	{
+		setAttribute(AttributeName.PREFERREDFONT, value, null);
+	}
 
+	/**
+	  * (23) get String attribute PreferredFont
+	  * @return the value of the attribute
+	  */
+	public String getPreferredFont()
+	{
+		return getAttribute(AttributeName.PREFERREDFONT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UseDefaultFont
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute UseDefaultFont
+	  * @param value the value to set the attribute to
+	  */
+	public void setUseDefaultFont(boolean value)
+	{
+		setAttribute(AttributeName.USEDEFAULTFONT, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute UseDefaultFont
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getUseDefaultFont()
+	{
+		return getBoolAttribute(AttributeName.USEDEFAULTFONT, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PreferredFont
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PreferredFont
-          * @param value the value to set the attribute to
-          */
-        public void setPreferredFont(String value)
-        {
-            setAttribute(AttributeName.PREFERREDFONT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UseFontEmulation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute UseFontEmulation
+	  * @param value the value to set the attribute to
+	  */
+	public void setUseFontEmulation(boolean value)
+	{
+		setAttribute(AttributeName.USEFONTEMULATION, value, null);
+	}
 
-        /**
-          * (23) get String attribute PreferredFont
-          * @return the value of the attribute
-          */
-        public String getPreferredFont()
-        {
-            return getAttribute(AttributeName.PREFERREDFONT, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UseDefaultFont
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute UseDefaultFont
-          * @param value the value to set the attribute to
-          */
-        public void setUseDefaultFont(boolean value)
-        {
-            setAttribute(AttributeName.USEDEFAULTFONT, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute UseDefaultFont
-          * @return boolean the value of the attribute
-          */
-        public boolean getUseDefaultFont()
-        {
-            return getBoolAttribute(AttributeName.USEDEFAULTFONT, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UseFontEmulation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute UseFontEmulation
-          * @param value the value to set the attribute to
-          */
-        public void setUseFontEmulation(boolean value)
-        {
-            setAttribute(AttributeName.USEFONTEMULATION, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute UseFontEmulation
-          * @return boolean the value of the attribute
-          */
-        public boolean getUseFontEmulation()
-        {
-            return getBoolAttribute(AttributeName.USEFONTEMULATION, null, false);
-        }
+	/**
+	  * (18) get boolean attribute UseFontEmulation
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getUseFontEmulation()
+	{
+		return getBoolAttribute(AttributeName.USEFONTEMULATION, null, false);
+	}
 
 }// end namespace JDF

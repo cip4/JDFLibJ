@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,500 +84,478 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFTIFFEmbeddedFile;
 import org.cip4.jdflib.resource.process.JDFTIFFtag;
-    /**
-    *****************************************************************************
-    class JDFAutoTIFFFormatParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTIFFFormatParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTIFFFormatParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumByteOrder.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERLEAVING, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.WHITEISZERO, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSegmentation.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.ROWSPERSTRIP, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "270");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x44433311, AttributeInfo.EnumAttributeType.enumeration, EnumByteOrder.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERLEAVING, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.WHITEISZERO, 0x44433311, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x44433311, AttributeInfo.EnumAttributeType.enumeration, EnumSegmentation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROWSPERSTRIP, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x44433311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x44433311, AttributeInfo.EnumAttributeType.integer, null, "270");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TIFFTAG, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFEMBEDDEDFILE, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TIFFTAG, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFEMBEDDEDFILE, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTIFFFormatParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFFormatParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFFormatParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFFormatParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFFormatParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFFormatParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFFormatParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFFormatParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTIFFFormatParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTIFFFormatParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ByteOrder
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTIFFFormatParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumByteOrder extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumByteOrder(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ByteOrder
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumByteOrder getEnum(String enumName)
+		{
+			return (EnumByteOrder) getEnum(EnumByteOrder.class, enumName);
+		}
 
-        public static class EnumByteOrder extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumByteOrder getEnum(int enumValue)
+		{
+			return (EnumByteOrder) getEnum(EnumByteOrder.class, enumValue);
+		}
 
-            private EnumByteOrder(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumByteOrder.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumByteOrder getEnum(String enumName)
-            {
-                return (EnumByteOrder) getEnum(EnumByteOrder.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumByteOrder.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumByteOrder getEnum(int enumValue)
-            {
-                return (EnumByteOrder) getEnum(EnumByteOrder.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumByteOrder.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumByteOrder.class);
-            }
+		public static final EnumByteOrder II = new EnumByteOrder("II");
+		public static final EnumByteOrder MM = new EnumByteOrder("MM");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumByteOrder.class);
-            }
+	/**
+	* Enumeration strings for Segmentation
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumByteOrder.class);
-            }
+	public static class EnumSegmentation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumByteOrder II = new EnumByteOrder("II");
-            public static final EnumByteOrder MM = new EnumByteOrder("MM");
-        }      
+		private EnumSegmentation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSegmentation getEnum(String enumName)
+		{
+			return (EnumSegmentation) getEnum(EnumSegmentation.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSegmentation getEnum(int enumValue)
+		{
+			return (EnumSegmentation) getEnum(EnumSegmentation.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Segmentation
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSegmentation.class);
+		}
 
-        public static class EnumSegmentation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSegmentation.class);
+		}
 
-            private EnumSegmentation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSegmentation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSegmentation getEnum(String enumName)
-            {
-                return (EnumSegmentation) getEnum(EnumSegmentation.class, enumName);
-            }
+		public static final EnumSegmentation SingleStrip = new EnumSegmentation("SingleStrip");
+		public static final EnumSegmentation Stripped = new EnumSegmentation("Stripped");
+		public static final EnumSegmentation Tiled = new EnumSegmentation("Tiled");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSegmentation getEnum(int enumValue)
-            {
-                return (EnumSegmentation) getEnum(EnumSegmentation.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSegmentation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ByteOrder
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ByteOrder
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setByteOrder(EnumByteOrder enumVar)
+	{
+		setAttribute(AttributeName.BYTEORDER, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSegmentation.class);
-            }
+	/**
+	  * (9) get attribute ByteOrder
+	  * @return the value of the attribute
+	  */
+	public EnumByteOrder getByteOrder()
+	{
+		return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSegmentation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Interleaving
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Interleaving
+	  * @param value the value to set the attribute to
+	  */
+	public void setInterleaving(int value)
+	{
+		setAttribute(AttributeName.INTERLEAVING, value, null);
+	}
 
-            public static final EnumSegmentation SingleStrip = new EnumSegmentation("SingleStrip");
-            public static final EnumSegmentation Stripped = new EnumSegmentation("Stripped");
-            public static final EnumSegmentation Tiled = new EnumSegmentation("Tiled");
-        }      
+	/**
+	  * (15) get int attribute Interleaving
+	  * @return int the value of the attribute
+	  */
+	public int getInterleaving()
+	{
+		return getIntAttribute(AttributeName.INTERLEAVING, null, 1);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WhiteIsZero
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WhiteIsZero
+	  * @param value the value to set the attribute to
+	  */
+	public void setWhiteIsZero(boolean value)
+	{
+		setAttribute(AttributeName.WHITEISZERO, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute WhiteIsZero
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getWhiteIsZero()
+	{
+		return getBoolAttribute(AttributeName.WHITEISZERO, null, true);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ByteOrder
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ByteOrder
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setByteOrder(EnumByteOrder enumVar)
-        {
-            setAttribute(AttributeName.BYTEORDER, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Segmentation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Segmentation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSegmentation(EnumSegmentation enumVar)
+	{
+		setAttribute(AttributeName.SEGMENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (9) get attribute ByteOrder
-          * @return the value of the attribute
-          */
-        public EnumByteOrder getByteOrder()
-        {
-            return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
-        }
+	/**
+	  * (9) get attribute Segmentation
+	  * @return the value of the attribute
+	  */
+	public EnumSegmentation getSegmentation()
+	{
+		return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Interleaving
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Interleaving
-          * @param value the value to set the attribute to
-          */
-        public void setInterleaving(int value)
-        {
-            setAttribute(AttributeName.INTERLEAVING, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RowsPerStrip
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RowsPerStrip
+	  * @param value the value to set the attribute to
+	  */
+	public void setRowsPerStrip(int value)
+	{
+		setAttribute(AttributeName.ROWSPERSTRIP, value, null);
+	}
 
-        /**
-          * (15) get int attribute Interleaving
-          * @return int the value of the attribute
-          */
-        public int getInterleaving()
-        {
-            return getIntAttribute(AttributeName.INTERLEAVING, null, 1);
-        }
+	/**
+	  * (15) get int attribute RowsPerStrip
+	  * @return int the value of the attribute
+	  */
+	public int getRowsPerStrip()
+	{
+		return getIntAttribute(AttributeName.ROWSPERSTRIP, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WhiteIsZero
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WhiteIsZero
-          * @param value the value to set the attribute to
-          */
-        public void setWhiteIsZero(boolean value)
-        {
-            setAttribute(AttributeName.WHITEISZERO, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TileSize
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TileSize
+	  * @param value the value to set the attribute to
+	  */
+	public void setTileSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.TILESIZE, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute WhiteIsZero
-          * @return boolean the value of the attribute
-          */
-        public boolean getWhiteIsZero()
-        {
-            return getBoolAttribute(AttributeName.WHITEISZERO, null, true);
-        }
+	/**
+	  * (20) get JDFXYPair attribute TileSize
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getTileSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Segmentation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Segmentation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSegmentation(EnumSegmentation enumVar)
-        {
-            setAttribute(AttributeName.SEGMENTATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SeparationNameTag
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SeparationNameTag
+	  * @param value the value to set the attribute to
+	  */
+	public void setSeparationNameTag(int value)
+	{
+		setAttribute(AttributeName.SEPARATIONNAMETAG, value, null);
+	}
 
-        /**
-          * (9) get attribute Segmentation
-          * @return the value of the attribute
-          */
-        public EnumSegmentation getSegmentation()
-        {
-            return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
-        }
+	/**
+	  * (15) get int attribute SeparationNameTag
+	  * @return int the value of the attribute
+	  */
+	public int getSeparationNameTag()
+	{
+		return getIntAttribute(AttributeName.SEPARATIONNAMETAG, null, 270);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RowsPerStrip
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RowsPerStrip
-          * @param value the value to set the attribute to
-          */
-        public void setRowsPerStrip(int value)
-        {
-            setAttribute(AttributeName.ROWSPERSTRIP, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute RowsPerStrip
-          * @return int the value of the attribute
-          */
-        public int getRowsPerStrip()
-        {
-            return getIntAttribute(AttributeName.ROWSPERSTRIP, null, 0);
-        }
+	/** (26) getCreateTIFFtag
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTIFFtag the element
+	 */
+	public JDFTIFFtag getCreateTIFFtag(int iSkip)
+	{
+		return (JDFTIFFtag) getCreateElement_KElement(ElementName.TIFFTAG, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TileSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TileSize
-          * @param value the value to set the attribute to
-          */
-        public void setTileSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TILESIZE, value, null);
-        }
+	/**
+	 * (27) const get element TIFFtag
+	 * @param iSkip number of elements to skip
+	 * @return JDFTIFFtag the element
+	 * default is getTIFFtag(0)     */
+	public JDFTIFFtag getTIFFtag(int iSkip)
+	{
+		return (JDFTIFFtag) getElement(ElementName.TIFFTAG, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute TileSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTileSize()
-        {
-            String strAttrName = getAttribute(AttributeName.TILESIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * Get all TIFFtag from the current element
+	 * 
+	 * @return Collection<JDFTIFFtag>, null if none are available
+	 */
+	public Collection<JDFTIFFtag> getAllTIFFtag()
+	{
+		final VElement vc = getChildElementVector(ElementName.TIFFTAG, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SeparationNameTag
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SeparationNameTag
-          * @param value the value to set the attribute to
-          */
-        public void setSeparationNameTag(int value)
-        {
-            setAttribute(AttributeName.SEPARATIONNAMETAG, value, null);
-        }
+		final Vector<JDFTIFFtag> v = new Vector<JDFTIFFtag>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTIFFtag) vc.get(i));
+		}
 
-        /**
-          * (15) get int attribute SeparationNameTag
-          * @return int the value of the attribute
-          */
-        public int getSeparationNameTag()
-        {
-            return getIntAttribute(AttributeName.SEPARATIONNAMETAG, null, 270);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element TIFFtag
+	 * @return JDFTIFFtag the element
+	 */
+	public JDFTIFFtag appendTIFFtag()
+	{
+		return (JDFTIFFtag) appendElement(ElementName.TIFFTAG, null);
+	}
 
-    /** (26) getCreateTIFFtag
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTIFFtag the element
-     */
-    public JDFTIFFtag getCreateTIFFtag(int iSkip)
-    {
-        return (JDFTIFFtag)getCreateElement_KElement(ElementName.TIFFTAG, null, iSkip);
-    }
+	/** (26) getCreateTIFFEmbeddedFile
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTIFFEmbeddedFile the element
+	 */
+	public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile(int iSkip)
+	{
+		return (JDFTIFFEmbeddedFile) getCreateElement_KElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
+	}
 
-    /**
-     * (27) const get element TIFFtag
-     * @param iSkip number of elements to skip
-     * @return JDFTIFFtag the element
-     * default is getTIFFtag(0)     */
-    public JDFTIFFtag getTIFFtag(int iSkip)
-    {
-        return (JDFTIFFtag) getElement(ElementName.TIFFTAG, null, iSkip);
-    }
+	/**
+	 * (27) const get element TIFFEmbeddedFile
+	 * @param iSkip number of elements to skip
+	 * @return JDFTIFFEmbeddedFile the element
+	 * default is getTIFFEmbeddedFile(0)     */
+	public JDFTIFFEmbeddedFile getTIFFEmbeddedFile(int iSkip)
+	{
+		return (JDFTIFFEmbeddedFile) getElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
+	}
 
-    /**
-     * Get all TIFFtag from the current element
-     * 
-     * @return Collection<JDFTIFFtag>, null if none are available
-     */
-    public Collection<JDFTIFFtag> getAllTIFFtag()
-    {
-        final VElement vc = getChildElementVector(ElementName.TIFFTAG, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all TIFFEmbeddedFile from the current element
+	 * 
+	 * @return Collection<JDFTIFFEmbeddedFile>, null if none are available
+	 */
+	public Collection<JDFTIFFEmbeddedFile> getAllTIFFEmbeddedFile()
+	{
+		final VElement vc = getChildElementVector(ElementName.TIFFEMBEDDEDFILE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFTIFFtag> v = new Vector<JDFTIFFtag>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTIFFtag) vc.get(i));
-        }
+		final Vector<JDFTIFFEmbeddedFile> v = new Vector<JDFTIFFEmbeddedFile>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTIFFEmbeddedFile) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element TIFFtag
-     * @return JDFTIFFtag the element
-     */
-    public JDFTIFFtag appendTIFFtag()
-    {
-        return (JDFTIFFtag) appendElement(ElementName.TIFFTAG, null);
-    }
-
-    /** (26) getCreateTIFFEmbeddedFile
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTIFFEmbeddedFile the element
-     */
-    public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile(int iSkip)
-    {
-        return (JDFTIFFEmbeddedFile)getCreateElement_KElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
-    }
-
-    /**
-     * (27) const get element TIFFEmbeddedFile
-     * @param iSkip number of elements to skip
-     * @return JDFTIFFEmbeddedFile the element
-     * default is getTIFFEmbeddedFile(0)     */
-    public JDFTIFFEmbeddedFile getTIFFEmbeddedFile(int iSkip)
-    {
-        return (JDFTIFFEmbeddedFile) getElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
-    }
-
-    /**
-     * Get all TIFFEmbeddedFile from the current element
-     * 
-     * @return Collection<JDFTIFFEmbeddedFile>, null if none are available
-     */
-    public Collection<JDFTIFFEmbeddedFile> getAllTIFFEmbeddedFile()
-    {
-        final VElement vc = getChildElementVector(ElementName.TIFFEMBEDDEDFILE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTIFFEmbeddedFile> v = new Vector<JDFTIFFEmbeddedFile>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTIFFEmbeddedFile) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element TIFFEmbeddedFile
-     * @return JDFTIFFEmbeddedFile the element
-     */
-    public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile()
-    {
-        return (JDFTIFFEmbeddedFile) appendElement(ElementName.TIFFEMBEDDEDFILE, null);
-    }
+	/**
+	 * (30) append element TIFFEmbeddedFile
+	 * @return JDFTIFFEmbeddedFile the element
+	 */
+	public JDFTIFFEmbeddedFile appendTIFFEmbeddedFile()
+	{
+		return (JDFTIFFEmbeddedFile) appendElement(ElementName.TIFFEMBEDDEDFILE, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,160 +80,147 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPerforate;
-    /**
-    *****************************************************************************
-    class JDFAutoPerforatingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPerforatingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPerforatingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PERFORATE, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PERFORATE, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPerforatingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerforatingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPerforatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerforatingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerforatingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPerforatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerforatingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerforatingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPerforatingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPerforatingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPerforatingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreatePerforate
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPerforate the element
+	 */
+	public JDFPerforate getCreatePerforate(int iSkip)
+	{
+		return (JDFPerforate) getCreateElement_KElement(ElementName.PERFORATE, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Perforate
+	 * @param iSkip number of elements to skip
+	 * @return JDFPerforate the element
+	 * default is getPerforate(0)     */
+	public JDFPerforate getPerforate(int iSkip)
+	{
+		return (JDFPerforate) getElement(ElementName.PERFORATE, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all Perforate from the current element
+	 * 
+	 * @return Collection<JDFPerforate>, null if none are available
+	 */
+	public Collection<JDFPerforate> getAllPerforate()
+	{
+		final VElement vc = getChildElementVector(ElementName.PERFORATE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFPerforate> v = new Vector<JDFPerforate>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPerforate) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreatePerforate
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPerforate the element
-     */
-    public JDFPerforate getCreatePerforate(int iSkip)
-    {
-        return (JDFPerforate)getCreateElement_KElement(ElementName.PERFORATE, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Perforate
-     * @param iSkip number of elements to skip
-     * @return JDFPerforate the element
-     * default is getPerforate(0)     */
-    public JDFPerforate getPerforate(int iSkip)
-    {
-        return (JDFPerforate) getElement(ElementName.PERFORATE, null, iSkip);
-    }
-
-    /**
-     * Get all Perforate from the current element
-     * 
-     * @return Collection<JDFPerforate>, null if none are available
-     */
-    public Collection<JDFPerforate> getAllPerforate()
-    {
-        final VElement vc = getChildElementVector(ElementName.PERFORATE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPerforate> v = new Vector<JDFPerforate>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPerforate) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Perforate
-     * @return JDFPerforate the element
-     */
-    public JDFPerforate appendPerforate()
-    {
-        return (JDFPerforate) appendElement(ElementName.PERFORATE, null);
-    }
+	/**
+	 * (30) append element Perforate
+	 * @return JDFPerforate the element
+	 */
+	public JDFPerforate appendPerforate()
+	{
+		return (JDFPerforate) appendElement(ElementName.PERFORATE, null);
+	}
 
 }// end namespace JDF

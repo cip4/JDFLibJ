@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,93 +71,110 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoFoldOperation : public JDFResource
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoHoldQueueEntryParams : public JDFElement
 
-public abstract class JDFAutoFoldOperation extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoHoldQueueEntryParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66611111);
+	}
 
-    /**
-     * Constructor for JDFAutoFoldOperation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFoldOperation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
-    /**
-     * Constructor for JDFAutoFoldOperation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFoldOperation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoldQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoldQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFoldOperation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFoldOperation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFAutoHoldQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoldQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFAutoHoldQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoHoldQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFoldOperation[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoHoldQueueEntryParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	 * (24) const get element QueueFilter
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getQueueFilter()
+	{
+		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
+	/** (25) getCreateQueueFilter
+	 * 
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getCreateQueueFilter()
+	{
+		return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
-
+	/**
+	 * (29) append element QueueFilter
+	 * @return JDFQueueFilter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFQueueFilter appendQueueFilter() throws JDFException
+	{
+		return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
+	}
 
 }// end namespace JDF

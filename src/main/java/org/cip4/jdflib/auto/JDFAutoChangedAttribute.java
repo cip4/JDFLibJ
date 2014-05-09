@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,200 +76,185 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoChangedAttribute : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoChangedAttribute : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoChangedAttribute extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTENAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ELEMENTID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OLDVALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.NEWVALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTENAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ELEMENTID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OLDVALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.NEWVALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoChangedAttribute
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedAttribute
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoChangedAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChangedAttribute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedAttribute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoChangedAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoChangedAttribute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoChangedAttribute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoChangedAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoChangedAttribute[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoChangedAttribute[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AttributeName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AttributeName
+	  * @param value the value to set the attribute to
+	  */
+	public void setAttributeName(String value)
+	{
+		setAttribute(AttributeName.ATTRIBUTENAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute AttributeName
+	  * @return the value of the attribute
+	  */
+	public String getAttributeName()
+	{
+		return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AttributeName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AttributeName
-          * @param value the value to set the attribute to
-          */
-        public void setAttributeName(String value)
-        {
-            setAttribute(AttributeName.ATTRIBUTENAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ElementID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ElementID
+	  * @param value the value to set the attribute to
+	  */
+	public void setElementID(String value)
+	{
+		setAttribute(AttributeName.ELEMENTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute AttributeName
-          * @return the value of the attribute
-          */
-        public String getAttributeName()
-        {
-            return getAttribute(AttributeName.ATTRIBUTENAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ElementID
+	  * @return the value of the attribute
+	  */
+	public String getElementID()
+	{
+		return getAttribute(AttributeName.ELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ElementID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ElementID
-          * @param value the value to set the attribute to
-          */
-        public void setElementID(String value)
-        {
-            setAttribute(AttributeName.ELEMENTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ElementType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ElementType
+	  * @param value the value to set the attribute to
+	  */
+	public void setElementType(String value)
+	{
+		setAttribute(AttributeName.ELEMENTTYPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ElementID
-          * @return the value of the attribute
-          */
-        public String getElementID()
-        {
-            return getAttribute(AttributeName.ELEMENTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ElementType
+	  * @return the value of the attribute
+	  */
+	public String getElementType()
+	{
+		return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ElementType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ElementType
-          * @param value the value to set the attribute to
-          */
-        public void setElementType(String value)
-        {
-            setAttribute(AttributeName.ELEMENTTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OldValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OldValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setOldValue(String value)
+	{
+		setAttribute(AttributeName.OLDVALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ElementType
-          * @return the value of the attribute
-          */
-        public String getElementType()
-        {
-            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute OldValue
+	  * @return the value of the attribute
+	  */
+	public String getOldValue()
+	{
+		return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OldValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OldValue
-          * @param value the value to set the attribute to
-          */
-        public void setOldValue(String value)
-        {
-            setAttribute(AttributeName.OLDVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NewValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NewValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setNewValue(String value)
+	{
+		setAttribute(AttributeName.NEWVALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute OldValue
-          * @return the value of the attribute
-          */
-        public String getOldValue()
-        {
-            return getAttribute(AttributeName.OLDVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NewValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NewValue
-          * @param value the value to set the attribute to
-          */
-        public void setNewValue(String value)
-        {
-            setAttribute(AttributeName.NEWVALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute NewValue
-          * @return the value of the attribute
-          */
-        public String getNewValue()
-        {
-            return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute NewValue
+	  * @return the value of the attribute
+	  */
+	public String getNewValue()
+	{
+		return getAttribute(AttributeName.NEWVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

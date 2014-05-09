@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,183 +77,169 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-    /**
-    *****************************************************************************
-    class JDFAutoObservationTarget : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoObservationTarget : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoObservationTarget extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTRIBUTES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTIDS, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OBSERVATIONPATH, 0x33333311, AttributeInfo.EnumAttributeType.XPath, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTRIBUTES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTIDS, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBSERVATIONPATH, 0x33333311, AttributeInfo.EnumAttributeType.XPath, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoObservationTarget
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoObservationTarget
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoObservationTarget(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoObservationTarget
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoObservationTarget
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoObservationTarget(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoObservationTarget
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoObservationTarget
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoObservationTarget(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoObservationTarget[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoObservationTarget[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ElementType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ElementType
+	  * @param value the value to set the attribute to
+	  */
+	public void setElementType(String value)
+	{
+		setAttribute(AttributeName.ELEMENTTYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ElementType
+	  * @return the value of the attribute
+	  */
+	public String getElementType()
+	{
+		return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ElementType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ElementType
-          * @param value the value to set the attribute to
-          */
-        public void setElementType(String value)
-        {
-            setAttribute(AttributeName.ELEMENTTYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Attributes
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Attributes
+	  * @param value the value to set the attribute to
+	  */
+	public void setAttributes(VString value)
+	{
+		setAttribute(AttributeName.ATTRIBUTES, value, null);
+	}
 
-        /**
-          * (23) get String attribute ElementType
-          * @return the value of the attribute
-          */
-        public String getElementType()
-        {
-            return getAttribute(AttributeName.ELEMENTTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (21) get VString attribute AttributesJDF
+	  * @return VString the value of the attribute
+	  */
+	public VString getAttributesJDF()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Attributes
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Attributes
-          * @param value the value to set the attribute to
-          */
-        public void setAttributes(VString value)
-        {
-            setAttribute(AttributeName.ATTRIBUTES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ElementIDs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ElementIDs
+	  * @param value the value to set the attribute to
+	  */
+	public void setElementIDs(VString value)
+	{
+		setAttribute(AttributeName.ELEMENTIDS, value, null);
+	}
 
-        /**
-          * (21) get VString attribute AttributesJDF
-          * @return VString the value of the attribute
-          */
-        public VString getAttributesJDF()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute ElementIDs
+	  * @return VString the value of the attribute
+	  */
+	public VString getElementIDs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ElementIDs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ElementIDs
-          * @param value the value to set the attribute to
-          */
-        public void setElementIDs(VString value)
-        {
-            setAttribute(AttributeName.ELEMENTIDS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ObservationPath
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ObservationPath
+	  * @param value the value to set the attribute to
+	  */
+	public void setObservationPath(String value)
+	{
+		setAttribute(AttributeName.OBSERVATIONPATH, value, null);
+	}
 
-        /**
-          * (21) get VString attribute ElementIDs
-          * @return VString the value of the attribute
-          */
-        public VString getElementIDs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ObservationPath
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ObservationPath
-          * @param value the value to set the attribute to
-          */
-        public void setObservationPath(String value)
-        {
-            setAttribute(AttributeName.OBSERVATIONPATH, value, null);
-        }
-
-        /**
-          * (23) get String attribute ObservationPath
-          * @return the value of the attribute
-          */
-        public String getObservationPath()
-        {
-            return getAttribute(AttributeName.OBSERVATIONPATH, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ObservationPath
+	  * @return the value of the attribute
+	  */
+	public String getObservationPath()
+	{
+		return getAttribute(AttributeName.OBSERVATIONPATH, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

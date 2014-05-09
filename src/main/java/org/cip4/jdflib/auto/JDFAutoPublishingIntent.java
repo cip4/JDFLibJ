@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,281 +86,270 @@ import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoPublishingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPublishingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ISSUEDATE, 0x55555111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x55555111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x55555111);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ISSUEDATE, 0x55555111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x55555111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x55555111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66661111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPublishingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPublishingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPublishingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPublishingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPublishingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPublishingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPublishingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPublishingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPublishingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ContentDataRefs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ContentDataRefs
+	  * @param value the value to set the attribute to
+	  */
+	public void setContentDataRefs(VString value)
+	{
+		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute ContentDataRefs
+	  * @return VString the value of the attribute
+	  */
+	public VString getContentDataRefs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ContentDataRefs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentDataRefs
-          * @param value the value to set the attribute to
-          */
-        public void setContentDataRefs(VString value)
-        {
-            setAttribute(AttributeName.CONTENTDATAREFS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (21) get VString attribute ContentDataRefs
-          * @return VString the value of the attribute
-          */
-        public VString getContentDataRefs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	 * (24) const get element IssueDate
+	 * @return JDFTimeSpan the element
+	 */
+	public JDFTimeSpan getIssueDate()
+	{
+		return (JDFTimeSpan) getElement(ElementName.ISSUEDATE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateIssueDate
+	 * 
+	 * @return JDFTimeSpan the element
+	 */
+	public JDFTimeSpan getCreateIssueDate()
+	{
+		return (JDFTimeSpan) getCreateElement_KElement(ElementName.ISSUEDATE, null, 0);
+	}
 
-    /**
-     * (24) const get element IssueDate
-     * @return JDFTimeSpan the element
-     */
-    public JDFTimeSpan getIssueDate()
-    {
-        return (JDFTimeSpan) getElement(ElementName.ISSUEDATE, null, 0);
-    }
+	/**
+	 * (29) append element IssueDate
+	 * @return JDFTimeSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTimeSpan appendIssueDate() throws JDFException
+	{
+		return (JDFTimeSpan) appendElementN(ElementName.ISSUEDATE, 1, null);
+	}
 
-    /** (25) getCreateIssueDate
-     * 
-     * @return JDFTimeSpan the element
-     */
-    public JDFTimeSpan getCreateIssueDate()
-    {
-        return (JDFTimeSpan) getCreateElement_KElement(ElementName.ISSUEDATE, null, 0);
-    }
+	/**
+	 * (24) const get element IssueName
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getIssueName()
+	{
+		return (JDFStringSpan) getElement(ElementName.ISSUENAME, null, 0);
+	}
 
-    /**
-     * (29) append element IssueDate
-     * @return JDFTimeSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTimeSpan appendIssueDate() throws JDFException
-    {
-        return (JDFTimeSpan) appendElementN(ElementName.ISSUEDATE, 1, null);
-    }
+	/** (25) getCreateIssueName
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateIssueName()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.ISSUENAME, null, 0);
+	}
 
-    /**
-     * (24) const get element IssueName
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getIssueName()
-    {
-        return (JDFStringSpan) getElement(ElementName.ISSUENAME, null, 0);
-    }
+	/**
+	 * (29) append element IssueName
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendIssueName() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.ISSUENAME, 1, null);
+	}
 
-    /** (25) getCreateIssueName
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateIssueName()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.ISSUENAME, null, 0);
-    }
+	/**
+	 * (24) const get element IssueType
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getIssueType()
+	{
+		return (JDFNameSpan) getElement(ElementName.ISSUETYPE, null, 0);
+	}
 
-    /**
-     * (29) append element IssueName
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendIssueName() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.ISSUENAME, 1, null);
-    }
+	/** (25) getCreateIssueType
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreateIssueType()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.ISSUETYPE, null, 0);
+	}
 
-    /**
-     * (24) const get element IssueType
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getIssueType()
-    {
-        return (JDFNameSpan) getElement(ElementName.ISSUETYPE, null, 0);
-    }
+	/**
+	 * (29) append element IssueType
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendIssueType() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.ISSUETYPE, 1, null);
+	}
 
-    /** (25) getCreateIssueType
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreateIssueType()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.ISSUETYPE, null, 0);
-    }
+	/**
+	 * (24) const get element Circulation
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCirculation()
+	{
+		return (JDFIntegerSpan) getElement(ElementName.CIRCULATION, null, 0);
+	}
 
-    /**
-     * (29) append element IssueType
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendIssueType() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.ISSUETYPE, 1, null);
-    }
+	/** (25) getCreateCirculation
+	 * 
+	 * @return JDFIntegerSpan the element
+	 */
+	public JDFIntegerSpan getCreateCirculation()
+	{
+		return (JDFIntegerSpan) getCreateElement_KElement(ElementName.CIRCULATION, null, 0);
+	}
 
-    /**
-     * (24) const get element Circulation
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCirculation()
-    {
-        return (JDFIntegerSpan) getElement(ElementName.CIRCULATION, null, 0);
-    }
+	/**
+	 * (29) append element Circulation
+	 * @return JDFIntegerSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIntegerSpan appendCirculation() throws JDFException
+	{
+		return (JDFIntegerSpan) appendElementN(ElementName.CIRCULATION, 1, null);
+	}
 
-    /** (25) getCreateCirculation
-     * 
-     * @return JDFIntegerSpan the element
-     */
-    public JDFIntegerSpan getCreateCirculation()
-    {
-        return (JDFIntegerSpan) getCreateElement_KElement(ElementName.CIRCULATION, null, 0);
-    }
+	/**
+	 * (24) const get element ContentList
+	 * @return JDFContentList the element
+	 */
+	public JDFContentList getContentList()
+	{
+		return (JDFContentList) getElement(ElementName.CONTENTLIST, null, 0);
+	}
 
-    /**
-     * (29) append element Circulation
-     * @return JDFIntegerSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIntegerSpan appendCirculation() throws JDFException
-    {
-        return (JDFIntegerSpan) appendElementN(ElementName.CIRCULATION, 1, null);
-    }
+	/** (25) getCreateContentList
+	 * 
+	 * @return JDFContentList the element
+	 */
+	public JDFContentList getCreateContentList()
+	{
+		return (JDFContentList) getCreateElement_KElement(ElementName.CONTENTLIST, null, 0);
+	}
 
-    /**
-     * (24) const get element ContentList
-     * @return JDFContentList the element
-     */
-    public JDFContentList getContentList()
-    {
-        return (JDFContentList) getElement(ElementName.CONTENTLIST, null, 0);
-    }
+	/**
+	 * (29) append element ContentList
+	 * @return JDFContentList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFContentList appendContentList() throws JDFException
+	{
+		return (JDFContentList) appendElementN(ElementName.CONTENTLIST, 1, null);
+	}
 
-    /** (25) getCreateContentList
-     * 
-     * @return JDFContentList the element
-     */
-    public JDFContentList getCreateContentList()
-    {
-        return (JDFContentList) getCreateElement_KElement(ElementName.CONTENTLIST, null, 0);
-    }
-
-    /**
-     * (29) append element ContentList
-     * @return JDFContentList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFContentList appendContentList() throws JDFException
-    {
-        return (JDFContentList) appendElementN(ElementName.CONTENTLIST, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContentList(JDFContentList refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContentList(JDFContentList refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,234 +74,216 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoDevelopingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDevelopingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDevelopingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PREHEATTEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREHEATTIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.POSTBAKETEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBAKETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEXPOSETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREHEATTEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREHEATTIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.POSTBAKETEMP, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBAKETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEXPOSETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDevelopingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDevelopingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDevelopingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDevelopingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDevelopingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDevelopingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDevelopingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDevelopingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDevelopingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDevelopingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDevelopingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreHeatTemp
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PreHeatTemp
+	  * @param value the value to set the attribute to
+	  */
+	public void setPreHeatTemp(double value)
+	{
+		setAttribute(AttributeName.PREHEATTEMP, value, null);
+	}
 
+	/**
+	  * (17) get double attribute PreHeatTemp
+	  * @return double the value of the attribute
+	  */
+	public double getPreHeatTemp()
+	{
+		return getRealAttribute(AttributeName.PREHEATTEMP, null, 0.0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PreHeatTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PreHeatTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setPreHeatTime(JDFDuration value)
+	{
+		setAttribute(AttributeName.PREHEATTIME, value, null);
+	}
 
+	/**
+	  * (20) get JDFDuration attribute PreHeatTime
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getPreHeatTime()
+	{
+		final String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PreHeatTemp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PreHeatTemp
-          * @param value the value to set the attribute to
-          */
-        public void setPreHeatTemp(double value)
-        {
-            setAttribute(AttributeName.PREHEATTEMP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostBakeTemp
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PostBakeTemp
+	  * @param value the value to set the attribute to
+	  */
+	public void setPostBakeTemp(double value)
+	{
+		setAttribute(AttributeName.POSTBAKETEMP, value, null);
+	}
 
-        /**
-          * (17) get double attribute PreHeatTemp
-          * @return double the value of the attribute
-          */
-        public double getPreHeatTemp()
-        {
-            return getRealAttribute(AttributeName.PREHEATTEMP, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute PostBakeTemp
+	  * @return double the value of the attribute
+	  */
+	public double getPostBakeTemp()
+	{
+		return getRealAttribute(AttributeName.POSTBAKETEMP, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PreHeatTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PreHeatTime
-          * @param value the value to set the attribute to
-          */
-        public void setPreHeatTime(JDFDuration value)
-        {
-            setAttribute(AttributeName.PREHEATTIME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostBakeTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PostBakeTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setPostBakeTime(JDFDuration value)
+	{
+		setAttribute(AttributeName.POSTBAKETIME, value, null);
+	}
 
-        /**
-          * (20) get JDFDuration attribute PreHeatTime
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getPreHeatTime()
-        {
-            String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFDuration attribute PostBakeTime
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getPostBakeTime()
+	{
+		final String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PostBakeTemp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PostBakeTemp
-          * @param value the value to set the attribute to
-          */
-        public void setPostBakeTemp(double value)
-        {
-            setAttribute(AttributeName.POSTBAKETEMP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostExposeTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PostExposeTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setPostExposeTime(JDFDuration value)
+	{
+		setAttribute(AttributeName.POSTEXPOSETIME, value, null);
+	}
 
-        /**
-          * (17) get double attribute PostBakeTemp
-          * @return double the value of the attribute
-          */
-        public double getPostBakeTemp()
-        {
-            return getRealAttribute(AttributeName.POSTBAKETEMP, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PostBakeTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PostBakeTime
-          * @param value the value to set the attribute to
-          */
-        public void setPostBakeTime(JDFDuration value)
-        {
-            setAttribute(AttributeName.POSTBAKETIME, value, null);
-        }
-
-        /**
-          * (20) get JDFDuration attribute PostBakeTime
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getPostBakeTime()
-        {
-            String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PostExposeTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PostExposeTime
-          * @param value the value to set the attribute to
-          */
-        public void setPostExposeTime(JDFDuration value)
-        {
-            setAttribute(AttributeName.POSTEXPOSETIME, value, null);
-        }
-
-        /**
-          * (20) get JDFDuration attribute PostExposeTime
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getPostExposeTime()
-        {
-            String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFDuration attribute PostExposeTime
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getPostExposeTime()
+	{
+		final String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

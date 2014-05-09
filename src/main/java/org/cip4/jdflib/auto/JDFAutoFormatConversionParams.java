@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,251 +80,238 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
-    /**
-    *****************************************************************************
-    class JDFAutoFormatConversionParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFormatConversionParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFormatConversionParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77777755);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x77777755);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFormatConversionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFormatConversionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFormatConversionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFormatConversionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFormatConversionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFormatConversionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFormatConversionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFormatConversionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFormatConversionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFormatConversionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFormatConversionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (24) const get element TIFFFormatParams
+	 * @return JDFTIFFFormatParams the element
+	 */
+	public JDFTIFFFormatParams getTIFFFormatParams()
+	{
+		return (JDFTIFFFormatParams) getElement(ElementName.TIFFFORMATPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
+	/** (25) getCreateTIFFFormatParams
+	 * 
+	 * @return JDFTIFFFormatParams the element
+	 */
+	public JDFTIFFFormatParams getCreateTIFFFormatParams()
+	{
+		return (JDFTIFFFormatParams) getCreateElement_KElement(ElementName.TIFFFORMATPARAMS, null, 0);
+	}
 
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
+	/**
+	 * (29) append element TIFFFormatParams
+	 * @return JDFTIFFFormatParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTIFFFormatParams appendTIFFFormatParams() throws JDFException
+	{
+		return (JDFTIFFFormatParams) appendElementN(ElementName.TIFFFORMATPARAMS, 1, null);
+	}
 
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
+	/**
+	 * (24) const get element ImageCompressionParams
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams getImageCompressionParams()
+	{
+		return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreateImageCompressionParams
+	 * 
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams getCreateImageCompressionParams()
+	{
+		return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element TIFFFormatParams
-     * @return JDFTIFFFormatParams the element
-     */
-    public JDFTIFFFormatParams getTIFFFormatParams()
-    {
-        return (JDFTIFFFormatParams) getElement(ElementName.TIFFFORMATPARAMS, null, 0);
-    }
+	/**
+	 * (29) append element ImageCompressionParams
+	 * @return JDFImageCompressionParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
+	{
+		return (JDFImageCompressionParams) appendElementN(ElementName.IMAGECOMPRESSIONPARAMS, 1, null);
+	}
 
-    /** (25) getCreateTIFFFormatParams
-     * 
-     * @return JDFTIFFFormatParams the element
-     */
-    public JDFTIFFFormatParams getCreateTIFFFormatParams()
-    {
-        return (JDFTIFFFormatParams) getCreateElement_KElement(ElementName.TIFFFORMATPARAMS, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (29) append element TIFFFormatParams
-     * @return JDFTIFFFormatParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTIFFFormatParams appendTIFFFormatParams() throws JDFException
-    {
-        return (JDFTIFFFormatParams) appendElementN(ElementName.TIFFFORMATPARAMS, 1, null);
-    }
+	/**
+	 * (24) const get element ColorPool
+	 * @return JDFColorPool the element
+	 */
+	public JDFColorPool getColorPool()
+	{
+		return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element ImageCompressionParams
-     * @return JDFImageCompressionParams the element
-     */
-    public JDFImageCompressionParams getImageCompressionParams()
-    {
-        return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
-    }
+	/** (25) getCreateColorPool
+	 * 
+	 * @return JDFColorPool the element
+	 */
+	public JDFColorPool getCreateColorPool()
+	{
+		return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
+	}
 
-    /** (25) getCreateImageCompressionParams
-     * 
-     * @return JDFImageCompressionParams the element
-     */
-    public JDFImageCompressionParams getCreateImageCompressionParams()
-    {
-        return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, 0);
-    }
+	/**
+	 * (29) append element ColorPool
+	 * @return JDFColorPool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFColorPool appendColorPool() throws JDFException
+	{
+		return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
+	}
 
-    /**
-     * (29) append element ImageCompressionParams
-     * @return JDFImageCompressionParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFImageCompressionParams appendImageCompressionParams() throws JDFException
-    {
-        return (JDFImageCompressionParams) appendElementN(ElementName.IMAGECOMPRESSIONPARAMS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refImageCompressionParams(JDFImageCompressionParams refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element ColorPool
-     * @return JDFColorPool the element
-     */
-    public JDFColorPool getColorPool()
-    {
-        return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
-    }
-
-    /** (25) getCreateColorPool
-     * 
-     * @return JDFColorPool the element
-     */
-    public JDFColorPool getCreateColorPool()
-    {
-        return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
-    }
-
-    /**
-     * (29) append element ColorPool
-     * @return JDFColorPool the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFColorPool appendColorPool() throws JDFException
-    {
-        return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refColorPool(JDFColorPool refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refColorPool(JDFColorPool refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

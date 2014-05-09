@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,314 +79,293 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoThreadSealingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoThreadSealingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoThreadSealingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.THREADPOSITIONS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.THREADLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADSTITCHWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.THREADPOSITIONS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.THREADLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADSTITCHWIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEALINGTEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoThreadSealingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSealingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoThreadSealingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThreadSealingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSealingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoThreadSealingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThreadSealingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSealingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoThreadSealingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoThreadSealingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoThreadSealingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for ThreadMaterial
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumThreadMaterial extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumThreadMaterial(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumThreadMaterial getEnum(String enumName)
+		{
+			return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumThreadMaterial getEnum(int enumValue)
+		{
+			return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for ThreadMaterial
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumThreadMaterial.class);
+		}
 
-        public static class EnumThreadMaterial extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumThreadMaterial.class);
+		}
 
-            private EnumThreadMaterial(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumThreadMaterial.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumThreadMaterial getEnum(String enumName)
-            {
-                return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumName);
-            }
+		public static final EnumThreadMaterial Cotton = new EnumThreadMaterial("Cotton");
+		public static final EnumThreadMaterial Nylon = new EnumThreadMaterial("Nylon");
+		public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumThreadMaterial getEnum(int enumValue)
-            {
-                return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumThreadMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlindStitch
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlindStitch
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlindStitch(boolean value)
+	{
+		setAttribute(AttributeName.BLINDSTITCH, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumThreadMaterial.class);
-            }
+	/**
+	  * (18) get boolean attribute BlindStitch
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getBlindStitch()
+	{
+		return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumThreadMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ThreadMaterial
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ThreadMaterial
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setThreadMaterial(EnumThreadMaterial enumVar)
+	{
+		setAttribute(AttributeName.THREADMATERIAL, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumThreadMaterial Cotton = new EnumThreadMaterial("Cotton");
-            public static final EnumThreadMaterial Nylon = new EnumThreadMaterial("Nylon");
-            public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
-        }      
+	/**
+	  * (9) get attribute ThreadMaterial
+	  * @return the value of the attribute
+	  */
+	public EnumThreadMaterial getThreadMaterial()
+	{
+		return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ThreadPositions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ThreadPositions
+	  * @param value the value to set the attribute to
+	  */
+	public void setThreadPositions(JDFNumberList value)
+	{
+		setAttribute(AttributeName.THREADPOSITIONS, value, null);
+	}
 
+	/**
+	  * (20) get JDFNumberList attribute ThreadPositions
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getThreadPositions()
+	{
+		final String strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlindStitch
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlindStitch
-          * @param value the value to set the attribute to
-          */
-        public void setBlindStitch(boolean value)
-        {
-            setAttribute(AttributeName.BLINDSTITCH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ThreadLength
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ThreadLength
+	  * @param value the value to set the attribute to
+	  */
+	public void setThreadLength(double value)
+	{
+		setAttribute(AttributeName.THREADLENGTH, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute BlindStitch
-          * @return boolean the value of the attribute
-          */
-        public boolean getBlindStitch()
-        {
-            return getBoolAttribute(AttributeName.BLINDSTITCH, null, false);
-        }
+	/**
+	  * (17) get double attribute ThreadLength
+	  * @return double the value of the attribute
+	  */
+	public double getThreadLength()
+	{
+		return getRealAttribute(AttributeName.THREADLENGTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ThreadMaterial
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ThreadMaterial
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setThreadMaterial(EnumThreadMaterial enumVar)
-        {
-            setAttribute(AttributeName.THREADMATERIAL, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ThreadStitchWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ThreadStitchWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setThreadStitchWidth(double value)
+	{
+		setAttribute(AttributeName.THREADSTITCHWIDTH, value, null);
+	}
 
-        /**
-          * (9) get attribute ThreadMaterial
-          * @return the value of the attribute
-          */
-        public EnumThreadMaterial getThreadMaterial()
-        {
-            return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
-        }
+	/**
+	  * (17) get double attribute ThreadStitchWidth
+	  * @return double the value of the attribute
+	  */
+	public double getThreadStitchWidth()
+	{
+		return getRealAttribute(AttributeName.THREADSTITCHWIDTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ThreadPositions
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ThreadPositions
-          * @param value the value to set the attribute to
-          */
-        public void setThreadPositions(JDFNumberList value)
-        {
-            setAttribute(AttributeName.THREADPOSITIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SealingTemperature
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SealingTemperature
+	  * @param value the value to set the attribute to
+	  */
+	public void setSealingTemperature(int value)
+	{
+		setAttribute(AttributeName.SEALINGTEMPERATURE, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute ThreadPositions
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getThreadPositions()
-        {
-            String strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ThreadLength
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ThreadLength
-          * @param value the value to set the attribute to
-          */
-        public void setThreadLength(double value)
-        {
-            setAttribute(AttributeName.THREADLENGTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute ThreadLength
-          * @return double the value of the attribute
-          */
-        public double getThreadLength()
-        {
-            return getRealAttribute(AttributeName.THREADLENGTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ThreadStitchWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ThreadStitchWidth
-          * @param value the value to set the attribute to
-          */
-        public void setThreadStitchWidth(double value)
-        {
-            setAttribute(AttributeName.THREADSTITCHWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute ThreadStitchWidth
-          * @return double the value of the attribute
-          */
-        public double getThreadStitchWidth()
-        {
-            return getRealAttribute(AttributeName.THREADSTITCHWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SealingTemperature
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SealingTemperature
-          * @param value the value to set the attribute to
-          */
-        public void setSealingTemperature(int value)
-        {
-            setAttribute(AttributeName.SEALINGTEMPERATURE, value, null);
-        }
-
-        /**
-          * (15) get int attribute SealingTemperature
-          * @return int the value of the attribute
-          */
-        public int getSealingTemperature()
-        {
-            return getIntAttribute(AttributeName.SEALINGTEMPERATURE, null, 0);
-        }
+	/**
+	  * (15) get int attribute SealingTemperature
+	  * @return int the value of the attribute
+	  */
+	public int getSealingTemperature()
+	{
+		return getIntAttribute(AttributeName.SEALINGTEMPERATURE, null, 0);
+	}
 
 }// end namespace JDF

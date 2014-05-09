@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,198 +83,185 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFEmboss;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoEmbossingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEmbossingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEmbossingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSS, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSS, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEmbossingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEmbossingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEmbossingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEmbossingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(int value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
+	/**
+	  * (15) get int attribute ModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getModuleIndex()
+	{
+		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateEmboss
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmboss the element
+	 */
+	public JDFEmboss getCreateEmboss(int iSkip)
+	{
+		return (JDFEmboss) getCreateElement_KElement(ElementName.EMBOSS, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(int value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
+	/**
+	 * (27) const get element Emboss
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmboss the element
+	 * default is getEmboss(0)     */
+	public JDFEmboss getEmboss(int iSkip)
+	{
+		return (JDFEmboss) getElement(ElementName.EMBOSS, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute ModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getModuleIndex()
-        {
-            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
-        }
+	/**
+	 * Get all Emboss from the current element
+	 * 
+	 * @return Collection<JDFEmboss>, null if none are available
+	 */
+	public Collection<JDFEmboss> getAllEmboss()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMBOSS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFEmboss> v = new Vector<JDFEmboss>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmboss) vc.get(i));
+		}
 
-    /** (26) getCreateEmboss
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmboss the element
-     */
-    public JDFEmboss getCreateEmboss(int iSkip)
-    {
-        return (JDFEmboss)getCreateElement_KElement(ElementName.EMBOSS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Emboss
-     * @param iSkip number of elements to skip
-     * @return JDFEmboss the element
-     * default is getEmboss(0)     */
-    public JDFEmboss getEmboss(int iSkip)
-    {
-        return (JDFEmboss) getElement(ElementName.EMBOSS, null, iSkip);
-    }
-
-    /**
-     * Get all Emboss from the current element
-     * 
-     * @return Collection<JDFEmboss>, null if none are available
-     */
-    public Collection<JDFEmboss> getAllEmboss()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMBOSS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFEmboss> v = new Vector<JDFEmboss>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmboss) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Emboss
-     * @return JDFEmboss the element
-     */
-    public JDFEmboss appendEmboss()
-    {
-        return (JDFEmboss) appendElement(ElementName.EMBOSS, null);
-    }
+	/**
+	 * (30) append element Emboss
+	 * @return JDFEmboss the element
+	 */
+	public JDFEmboss appendEmboss()
+	{
+		return (JDFEmboss) appendElement(ElementName.EMBOSS, null);
+	}
 
 }// end namespace JDF

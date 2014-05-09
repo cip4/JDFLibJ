@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,193 +80,179 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoFolderProduction : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFolderProduction : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFolderProduction extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFolderProduction
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFolderProduction
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFolderProduction(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFolderProduction
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFolderProduction
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFolderProduction(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFolderProduction
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFolderProduction
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFolderProduction(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFolderProduction[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ProductionType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFolderProduction[  --> " + super.toString() + " ]";
-    }
+	public static class EnumProductionType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumProductionType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ProductionType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumProductionType getEnum(String enumName)
+		{
+			return (EnumProductionType) getEnum(EnumProductionType.class, enumName);
+		}
 
-        public static class EnumProductionType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumProductionType getEnum(int enumValue)
+		{
+			return (EnumProductionType) getEnum(EnumProductionType.class, enumValue);
+		}
 
-            private EnumProductionType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumProductionType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumProductionType getEnum(String enumName)
-            {
-                return (EnumProductionType) getEnum(EnumProductionType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumProductionType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumProductionType getEnum(int enumValue)
-            {
-                return (EnumProductionType) getEnum(EnumProductionType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumProductionType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumProductionType.class);
-            }
+		public static final EnumProductionType Collect = new EnumProductionType("Collect");
+		public static final EnumProductionType NonCollect = new EnumProductionType("NonCollect");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumProductionType.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumProductionType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FolderModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FolderModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setFolderModuleIndex(int value)
+	{
+		setAttribute(AttributeName.FOLDERMODULEINDEX, value, null);
+	}
 
-            public static final EnumProductionType Collect = new EnumProductionType("Collect");
-            public static final EnumProductionType NonCollect = new EnumProductionType("NonCollect");
-        }      
+	/**
+	  * (15) get int attribute FolderModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getFolderModuleIndex()
+	{
+		return getIntAttribute(AttributeName.FOLDERMODULEINDEX, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProductionType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ProductionType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setProductionType(EnumProductionType enumVar)
+	{
+		setAttribute(AttributeName.PRODUCTIONTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FolderModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FolderModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setFolderModuleIndex(int value)
-        {
-            setAttribute(AttributeName.FOLDERMODULEINDEX, value, null);
-        }
-
-        /**
-          * (15) get int attribute FolderModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getFolderModuleIndex()
-        {
-            return getIntAttribute(AttributeName.FOLDERMODULEINDEX, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ProductionType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ProductionType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setProductionType(EnumProductionType enumVar)
-        {
-            setAttribute(AttributeName.PRODUCTIONTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ProductionType
-          * @return the value of the attribute
-          */
-        public EnumProductionType getProductionType()
-        {
-            return EnumProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));
-        }
+	/**
+	  * (9) get attribute ProductionType
+	  * @return the value of the attribute
+	  */
+	public EnumProductionType getProductionType()
+	{
+		return EnumProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));
+	}
 
 }// end namespace JDF

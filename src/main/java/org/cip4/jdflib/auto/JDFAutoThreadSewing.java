@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFOptionSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoThreadSewing : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoThreadSewing : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoThreadSewing extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SEALING, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEALING, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoThreadSewing
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThreadSewing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSewing
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoThreadSewing(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThreadSewing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThreadSewing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSewing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoThreadSewing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThreadSewing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoThreadSewing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoThreadSewing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoThreadSewing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoThreadSewing[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoThreadSewing[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element Sealing
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getSealing()
+	{
+		return (JDFOptionSpan) getElement(ElementName.SEALING, null, 0);
+	}
 
+	/** (25) getCreateSealing
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateSealing()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.SEALING, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Sealing
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getSealing()
-    {
-        return (JDFOptionSpan) getElement(ElementName.SEALING, null, 0);
-    }
-
-    /** (25) getCreateSealing
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateSealing()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.SEALING, null, 0);
-    }
-
-    /**
-     * (29) append element Sealing
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendSealing() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.SEALING, 1, null);
-    }
+	/**
+	 * (29) append element Sealing
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendSealing() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.SEALING, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,474 +84,422 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
-    /**
-    *****************************************************************************
-    class JDFAutoBarcodeReproParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBarcodeReproParams : public JDFElement
 
-public abstract class JDFAutoBarcodeReproParams extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoBarcodeReproParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBarcodeReproParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeReproParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeReproParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeReproParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeReproParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeReproParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeReproParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeReproParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBarcodeReproParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBarcodeReproParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for BearerBars
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBarcodeReproParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumBearerBars extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumBearerBars(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBearerBars getEnum(String enumName)
+		{
+			return (EnumBearerBars) getEnum(EnumBearerBars.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBearerBars getEnum(int enumValue)
+		{
+			return (EnumBearerBars) getEnum(EnumBearerBars.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBearerBars.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBearerBars.class);
+		}
 
-        /**
-        * Enumeration strings for BearerBars
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBearerBars.class);
+		}
 
-        public static class EnumBearerBars extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumBearerBars None = new EnumBearerBars("None");
+		public static final EnumBearerBars TopBottom = new EnumBearerBars("TopBottom");
+		public static final EnumBearerBars Box = new EnumBearerBars("Box");
+		public static final EnumBearerBars BoxHMarks = new EnumBearerBars("BoxHMarks");
+	}
 
-            private EnumBearerBars(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	* Enumeration strings for Masking
+	*/
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumBearerBars getEnum(String enumName)
-            {
-                return (EnumBearerBars) getEnum(EnumBearerBars.class, enumName);
-            }
+	public static class EnumMasking extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumBearerBars getEnum(int enumValue)
-            {
-                return (EnumBearerBars) getEnum(EnumBearerBars.class, enumValue);
-            }
+		private EnumMasking(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumBearerBars.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMasking getEnum(String enumName)
+		{
+			return (EnumMasking) getEnum(EnumMasking.class, enumName);
+		}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumBearerBars.class);
-            }
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMasking getEnum(int enumValue)
+		{
+			return (EnumMasking) getEnum(EnumMasking.class, enumValue);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumBearerBars.class);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMasking.class);
+		}
 
-            public static final EnumBearerBars None = new EnumBearerBars("None");
-            public static final EnumBearerBars TopBottom = new EnumBearerBars("TopBottom");
-            public static final EnumBearerBars Box = new EnumBearerBars("Box");
-            public static final EnumBearerBars BoxHMarks = new EnumBearerBars("BoxHMarks");
-        }      
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMasking.class);
+		}
 
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMasking.class);
+		}
 
+		public static final EnumMasking None = new EnumMasking("None");
+		public static final EnumMasking WhiteBox = new EnumMasking("WhiteBox");
+	}
 
-        /**
-        * Enumeration strings for Masking
-        */
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-        public static class EnumMasking extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BearerBars
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute BearerBars
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setBearerBars(EnumBearerBars enumVar)
+	{
+		setAttribute(AttributeName.BEARERBARS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            private EnumMasking(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	  * (9) get attribute BearerBars
+	  * @return the value of the attribute
+	  */
+	public EnumBearerBars getBearerBars()
+	{
+		return EnumBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
+	}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumMasking getEnum(String enumName)
-            {
-                return (EnumMasking) getEnum(EnumMasking.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Height
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Height
+	  * @param value the value to set the attribute to
+	  */
+	public void setHeight(double value)
+	{
+		setAttribute(AttributeName.HEIGHT, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumMasking getEnum(int enumValue)
-            {
-                return (EnumMasking) getEnum(EnumMasking.class, enumValue);
-            }
+	/**
+	  * (17) get double attribute Height
+	  * @return double the value of the attribute
+	  */
+	public double getHeight()
+	{
+		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumMasking.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Magnification
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Magnification
+	  * @param value the value to set the attribute to
+	  */
+	public void setMagnification(double value)
+	{
+		setAttribute(AttributeName.MAGNIFICATION, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumMasking.class);
-            }
+	/**
+	  * (17) get double attribute Magnification
+	  * @return double the value of the attribute
+	  */
+	public double getMagnification()
+	{
+		return getRealAttribute(AttributeName.MAGNIFICATION, null, 0.0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumMasking.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Masking
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Masking
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setMasking(EnumMasking enumVar)
+	{
+		setAttribute(AttributeName.MASKING, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumMasking None = new EnumMasking("None");
-            public static final EnumMasking WhiteBox = new EnumMasking("WhiteBox");
-        }      
+	/**
+	  * (9) get attribute Masking
+	  * @return the value of the attribute
+	  */
+	public EnumMasking getMasking()
+	{
+		return EnumMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleHeight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleHeight
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleHeight(double value)
+	{
+		setAttribute(AttributeName.MODULEHEIGHT, value, null);
+	}
 
+	/**
+	  * (17) get double attribute ModuleHeight
+	  * @return double the value of the attribute
+	  */
+	public double getModuleHeight()
+	{
+		return getRealAttribute(AttributeName.MODULEHEIGHT, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BearerBars
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BearerBars
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setBearerBars(EnumBearerBars enumVar)
-        {
-            setAttribute(AttributeName.BEARERBARS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleWidth(double value)
+	{
+		setAttribute(AttributeName.MODULEWIDTH, value, null);
+	}
 
-        /**
-          * (9) get attribute BearerBars
-          * @return the value of the attribute
-          */
-        public EnumBearerBars getBearerBars()
-        {
-            return EnumBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
-        }
+	/**
+	  * (17) get double attribute ModuleWidth
+	  * @return double the value of the attribute
+	  */
+	public double getModuleWidth()
+	{
+		return getRealAttribute(AttributeName.MODULEWIDTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Height
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Height
-          * @param value the value to set the attribute to
-          */
-        public void setHeight(double value)
-        {
-            setAttribute(AttributeName.HEIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ratio
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Ratio
+	  * @param value the value to set the attribute to
+	  */
+	public void setRatio(double value)
+	{
+		setAttribute(AttributeName.RATIO, value, null);
+	}
 
-        /**
-          * (17) get double attribute Height
-          * @return double the value of the attribute
-          */
-        public double getHeight()
-        {
-            return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute Ratio
+	  * @return double the value of the attribute
+	  */
+	public double getRatio()
+	{
+		return getRealAttribute(AttributeName.RATIO, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Magnification
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Magnification
-          * @param value the value to set the attribute to
-          */
-        public void setMagnification(double value)
-        {
-            setAttribute(AttributeName.MAGNIFICATION, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute Magnification
-          * @return double the value of the attribute
-          */
-        public double getMagnification()
-        {
-            return getRealAttribute(AttributeName.MAGNIFICATION, null, 0.0);
-        }
+	/** (26) getCreateBarcodeCompParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBarcodeCompParams the element
+	 */
+	public JDFBarcodeCompParams getCreateBarcodeCompParams(int iSkip)
+	{
+		return (JDFBarcodeCompParams) getCreateElement_KElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Masking
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Masking
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setMasking(EnumMasking enumVar)
-        {
-            setAttribute(AttributeName.MASKING, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element BarcodeCompParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFBarcodeCompParams the element
+	 * default is getBarcodeCompParams(0)     */
+	public JDFBarcodeCompParams getBarcodeCompParams(int iSkip)
+	{
+		return (JDFBarcodeCompParams) getElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute Masking
-          * @return the value of the attribute
-          */
-        public EnumMasking getMasking()
-        {
-            return EnumMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));
-        }
+	/**
+	 * Get all BarcodeCompParams from the current element
+	 * 
+	 * @return Collection<JDFBarcodeCompParams>, null if none are available
+	 */
+	public Collection<JDFBarcodeCompParams> getAllBarcodeCompParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.BARCODECOMPPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleHeight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleHeight
-          * @param value the value to set the attribute to
-          */
-        public void setModuleHeight(double value)
-        {
-            setAttribute(AttributeName.MODULEHEIGHT, value, null);
-        }
+		final Vector<JDFBarcodeCompParams> v = new Vector<JDFBarcodeCompParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBarcodeCompParams) vc.get(i));
+		}
 
-        /**
-          * (17) get double attribute ModuleHeight
-          * @return double the value of the attribute
-          */
-        public double getModuleHeight()
-        {
-            return getRealAttribute(AttributeName.MODULEHEIGHT, null, 0.0);
-        }
+		return v;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleWidth
-          * @param value the value to set the attribute to
-          */
-        public void setModuleWidth(double value)
-        {
-            setAttribute(AttributeName.MODULEWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute ModuleWidth
-          * @return double the value of the attribute
-          */
-        public double getModuleWidth()
-        {
-            return getRealAttribute(AttributeName.MODULEWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Ratio
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Ratio
-          * @param value the value to set the attribute to
-          */
-        public void setRatio(double value)
-        {
-            setAttribute(AttributeName.RATIO, value, null);
-        }
-
-        /**
-          * (17) get double attribute Ratio
-          * @return double the value of the attribute
-          */
-        public double getRatio()
-        {
-            return getRealAttribute(AttributeName.RATIO, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateBarcodeCompParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBarcodeCompParams the element
-     */
-    public JDFBarcodeCompParams getCreateBarcodeCompParams(int iSkip)
-    {
-        return (JDFBarcodeCompParams)getCreateElement_KElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
-    }
-
-    /**
-     * (27) const get element BarcodeCompParams
-     * @param iSkip number of elements to skip
-     * @return JDFBarcodeCompParams the element
-     * default is getBarcodeCompParams(0)     */
-    public JDFBarcodeCompParams getBarcodeCompParams(int iSkip)
-    {
-        return (JDFBarcodeCompParams) getElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
-    }
-
-    /**
-     * Get all BarcodeCompParams from the current element
-     * 
-     * @return Collection<JDFBarcodeCompParams>, null if none are available
-     */
-    public Collection<JDFBarcodeCompParams> getAllBarcodeCompParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.BARCODECOMPPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBarcodeCompParams> v = new Vector<JDFBarcodeCompParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBarcodeCompParams) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BarcodeCompParams
-     * @return JDFBarcodeCompParams the element
-     */
-    public JDFBarcodeCompParams appendBarcodeCompParams()
-    {
-        return (JDFBarcodeCompParams) appendElement(ElementName.BARCODECOMPPARAMS, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refBarcodeCompParams(JDFBarcodeCompParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element BarcodeCompParams
+	 * @return JDFBarcodeCompParams the element
+	 */
+	public JDFBarcodeCompParams appendBarcodeCompParams()
+	{
+		return (JDFBarcodeCompParams) appendElement(ElementName.BARCODECOMPPARAMS, null);
+	}
 
 }// end namespace JDF

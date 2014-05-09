@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,131 +75,119 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoBindingQualityMeasurement : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBindingQualityMeasurement : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBindingQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindingQualityMeasurement
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBindingQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBindingQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindingQualityMeasurement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBindingQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBindingQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindingQualityMeasurement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBindingQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBindingQualityMeasurement[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBindingQualityMeasurement[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FlexValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FlexValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setFlexValue(double value)
+	{
+		setAttribute(AttributeName.FLEXVALUE, value, null);
+	}
 
+	/**
+	  * (17) get double attribute FlexValue
+	  * @return double the value of the attribute
+	  */
+	public double getFlexValue()
+	{
+		return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FlexValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FlexValue
-          * @param value the value to set the attribute to
-          */
-        public void setFlexValue(double value)
-        {
-            setAttribute(AttributeName.FLEXVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PullOutValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PullOutValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setPullOutValue(double value)
+	{
+		setAttribute(AttributeName.PULLOUTVALUE, value, null);
+	}
 
-        /**
-          * (17) get double attribute FlexValue
-          * @return double the value of the attribute
-          */
-        public double getFlexValue()
-        {
-            return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PullOutValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PullOutValue
-          * @param value the value to set the attribute to
-          */
-        public void setPullOutValue(double value)
-        {
-            setAttribute(AttributeName.PULLOUTVALUE, value, null);
-        }
-
-        /**
-          * (17) get double attribute PullOutValue
-          * @return double the value of the attribute
-          */
-        public double getPullOutValue()
-        {
-            return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute PullOutValue
+	  * @return double the value of the attribute
+	  */
+	public double getPullOutValue()
+	{
+		return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
+	}
 
 }// end namespace JDF

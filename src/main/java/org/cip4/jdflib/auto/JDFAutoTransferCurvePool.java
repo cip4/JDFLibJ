@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,160 +80,147 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
-    /**
-    *****************************************************************************
-    class JDFAutoTransferCurvePool : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTransferCurvePool : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTransferCurvePool extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVESET, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVESET, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTransferCurvePool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurvePool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurvePool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurvePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurvePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurvePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurvePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurvePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTransferCurvePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTransferCurvePool[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTransferCurvePool[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateTransferCurveSet
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferCurveSet the element
+	 */
+	public JDFTransferCurveSet getCreateTransferCurveSet(int iSkip)
+	{
+		return (JDFTransferCurveSet) getCreateElement_KElement(ElementName.TRANSFERCURVESET, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element TransferCurveSet
+	 * @param iSkip number of elements to skip
+	 * @return JDFTransferCurveSet the element
+	 * default is getTransferCurveSet(0)     */
+	public JDFTransferCurveSet getTransferCurveSet(int iSkip)
+	{
+		return (JDFTransferCurveSet) getElement(ElementName.TRANSFERCURVESET, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all TransferCurveSet from the current element
+	 * 
+	 * @return Collection<JDFTransferCurveSet>, null if none are available
+	 */
+	public Collection<JDFTransferCurveSet> getAllTransferCurveSet()
+	{
+		final VElement vc = getChildElementVector(ElementName.TRANSFERCURVESET, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFTransferCurveSet> v = new Vector<JDFTransferCurveSet>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTransferCurveSet) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateTransferCurveSet
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTransferCurveSet the element
-     */
-    public JDFTransferCurveSet getCreateTransferCurveSet(int iSkip)
-    {
-        return (JDFTransferCurveSet)getCreateElement_KElement(ElementName.TRANSFERCURVESET, null, iSkip);
-    }
-
-    /**
-     * (27) const get element TransferCurveSet
-     * @param iSkip number of elements to skip
-     * @return JDFTransferCurveSet the element
-     * default is getTransferCurveSet(0)     */
-    public JDFTransferCurveSet getTransferCurveSet(int iSkip)
-    {
-        return (JDFTransferCurveSet) getElement(ElementName.TRANSFERCURVESET, null, iSkip);
-    }
-
-    /**
-     * Get all TransferCurveSet from the current element
-     * 
-     * @return Collection<JDFTransferCurveSet>, null if none are available
-     */
-    public Collection<JDFTransferCurveSet> getAllTransferCurveSet()
-    {
-        final VElement vc = getChildElementVector(ElementName.TRANSFERCURVESET, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTransferCurveSet> v = new Vector<JDFTransferCurveSet>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTransferCurveSet) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element TransferCurveSet
-     * @return JDFTransferCurveSet the element
-     */
-    public JDFTransferCurveSet appendTransferCurveSet()
-    {
-        return (JDFTransferCurveSet) appendElement(ElementName.TRANSFERCURVESET, null);
-    }
+	/**
+	 * (30) append element TransferCurveSet
+	 * @return JDFTransferCurveSet the element
+	 */
+	public JDFTransferCurveSet appendTransferCurveSet()
+	{
+		return (JDFTransferCurveSet) appendElement(ElementName.TRANSFERCURVESET, null);
+	}
 
 }// end namespace JDF

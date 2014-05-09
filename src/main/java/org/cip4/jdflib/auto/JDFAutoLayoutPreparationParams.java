@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -214,7 +214,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -714,8 +714,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public VString getBackMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.BACKMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.BACKMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -739,8 +739,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getCreepValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CREEPVALUE, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CREEPVALUE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -783,8 +783,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public VString getFrontMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.FRONTMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.FRONTMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -808,8 +808,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getGutter()
 	{
-		String strAttrName = getAttribute(AttributeName.GUTTER, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GUTTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -832,8 +832,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getGutterMinimumLimit()
 	{
-		String strAttrName = getAttribute(AttributeName.GUTTERMINIMUMLIMIT, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GUTTERMINIMUMLIMIT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -856,8 +856,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFIntegerList getHorizontalCreep()
 	{
-		String strAttrName = getAttribute(AttributeName.HORIZONTALCREEP, null, JDFCoreConstants.EMPTYSTRING);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HORIZONTALCREEP, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -880,8 +880,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getImplicitGutter()
 	{
-		String strAttrName = getAttribute(AttributeName.IMPLICITGUTTER, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -904,8 +904,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getImplicitGutterMinimumLimit()
 	{
-		String strAttrName = getAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -928,8 +928,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getNumberUp()
 	{
-		String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -994,8 +994,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFXYPair getStepDocs()
 	{
-		String strAttrName = getAttribute(AttributeName.STEPDOCS, null, JDFCoreConstants.EMPTYSTRING);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STEPDOCS, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1004,22 +1004,22 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	--------------------------------------------------------------------- */
 	/**
 	  * (36) set attribute StepRepeat
-	  * @param jdfIntegerList the value to set the attribute to
+	  * @param value the value to set the attribute to
 	  */
-	public void setStepRepeat(JDFIntegerList jdfIntegerList)
+	public void setStepRepeat(JDFIntegerList value)
 	{
-		setAttribute(AttributeName.STEPREPEAT, jdfIntegerList, null);
+		setAttribute(AttributeName.STEPREPEAT, value, null);
 	}
 
 	/**
-	  * (20) get JDFIntegerRange attribute StepRepeat
-	  * @return JDFIntegerRange the value of the attribute, null if a the
-	  *         attribute value is not a valid to create a JDFIntegerRange
+	  * (20) get JDFIntegerList attribute StepRepeat
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
 	  */
 	public JDFIntegerList getStepRepeat()
 	{
-		String strAttrName = getAttribute(AttributeName.STEPREPEAT, null, JDFCoreConstants.EMPTYSTRING);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STEPREPEAT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1042,8 +1042,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFRectangle getSurfaceContentsBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, JDFCoreConstants.EMPTYSTRING);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1066,8 +1066,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	  */
 	public JDFIntegerList getVerticalCreep()
 	{
-		String strAttrName = getAttribute(AttributeName.VERTICALCREEP, null, JDFCoreConstants.EMPTYSTRING);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VERTICALCREEP, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1193,15 +1193,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
-	public void refDeviceMark(JDFDeviceMark refTarget)
-	{
-		refElement(refTarget);
-	}
-
-	/**
 	 * (24) const get element ExternalImpositionTemplate
 	 * @return JDFExternalImpositionTemplate the element
 	 */
@@ -1266,15 +1257,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		return (JDFFitPolicy) appendElementN(ElementName.FITPOLICY, 1, null);
 	}
 
-	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
-	public void refFitPolicy(JDFFitPolicy refTarget)
-	{
-		refElement(refTarget);
-	}
-
 	/** (26) getCreateJobField
 	 * 
 	 * @param iSkip number of elements to skip
@@ -1324,15 +1306,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	public JDFJobField appendJobField()
 	{
 		return (JDFJobField) appendElement(ElementName.JOBFIELD, null);
-	}
-
-	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
-	public void refJobField(JDFJobField refTarget)
-	{
-		refElement(refTarget);
 	}
 
 	/**

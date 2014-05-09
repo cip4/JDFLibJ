@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,210 +82,196 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoTrapRegion : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTrapRegion : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTrapRegion extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGES, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPZONE, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGES, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TRAPZONE, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTrapRegion
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrapRegion
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTrapRegion(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrapRegion
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrapRegion
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTrapRegion(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrapRegion
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrapRegion
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTrapRegion(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTrapRegion[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTrapRegion[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Pages
+	  * @param value the value to set the attribute to
+	  */
+	public void setPages(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.PAGES, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerRangeList attribute Pages
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getPages()
+	{
+		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrapZone
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TrapZone
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrapZone(String value)
+	{
+		setAttribute(AttributeName.TRAPZONE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute TrapZone
+	  * @return the value of the attribute
+	  */
+	public String getTrapZone()
+	{
+		return getAttribute(AttributeName.TRAPZONE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Pages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Pages
-          * @param value the value to set the attribute to
-          */
-        public void setPages(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.PAGES, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFIntegerRangeList attribute Pages
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getPages()
-        {
-            String strAttrName = getAttribute(AttributeName.PAGES, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element TrappingParams
+	 * @return JDFTrappingParams the element
+	 */
+	public JDFTrappingParams getTrappingParams()
+	{
+		return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrapZone
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrapZone
-          * @param value the value to set the attribute to
-          */
-        public void setTrapZone(String value)
-        {
-            setAttribute(AttributeName.TRAPZONE, value, null);
-        }
+	/** (25) getCreateTrappingParams
+	 * 
+	 * @return JDFTrappingParams the element
+	 */
+	public JDFTrappingParams getCreateTrappingParams()
+	{
+		return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
+	}
 
-        /**
-          * (23) get String attribute TrapZone
-          * @return the value of the attribute
-          */
-        public String getTrapZone()
-        {
-            return getAttribute(AttributeName.TRAPZONE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element TrappingParams
+	 * @return JDFTrappingParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTrappingParams appendTrappingParams() throws JDFException
+	{
+		return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element TrappingParams
-     * @return JDFTrappingParams the element
-     */
-    public JDFTrappingParams getTrappingParams()
-    {
-        return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
-    }
-
-    /** (25) getCreateTrappingParams
-     * 
-     * @return JDFTrappingParams the element
-     */
-    public JDFTrappingParams getCreateTrappingParams()
-    {
-        return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element TrappingParams
-     * @return JDFTrappingParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTrappingParams appendTrappingParams() throws JDFException
-    {
-        return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTrappingParams(JDFTrappingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTrappingParams(JDFTrappingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

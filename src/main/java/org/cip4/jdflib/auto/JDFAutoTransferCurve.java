@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,156 +77,144 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoTransferCurve : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTransferCurve : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTransferCurve extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x22222222, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x22222222, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTransferCurve
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurve
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurve(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurve
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurve
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferCurve(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferCurve
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferCurve
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTransferCurve(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTransferCurve[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTransferCurve[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Curve
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Curve
+	  * @param value the value to set the attribute to
+	  */
+	public void setCurve(JDFTransferFunction value)
+	{
+		setAttribute(AttributeName.CURVE, value, null);
+	}
 
+	/**
+	  * (20) get JDFTransferFunction attribute Curve
+	  * @return JDFTransferFunction the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFTransferFunction
+	  */
+	public JDFTransferFunction getCurve()
+	{
+		final String strAttrName = getAttribute(AttributeName.CURVE, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Separation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Separation
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setSeparation(String value)
+	{
+		setAttribute(AttributeName.SEPARATION, value, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Curve
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Curve
-          * @param value the value to set the attribute to
-          */
-        public void setCurve(JDFTransferFunction value)
-        {
-            setAttribute(AttributeName.CURVE, value, null);
-        }
-
-        /**
-          * (20) get JDFTransferFunction attribute Curve
-          * @return JDFTransferFunction the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFTransferFunction
-          */
-        public JDFTransferFunction getCurve()
-        {
-            String strAttrName = getAttribute(AttributeName.CURVE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Separation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Separation
-          * @param value the value to set the attribute to
-          */
-        public void setSeparation(String value)
-        {
-            setAttribute(AttributeName.SEPARATION, value, null);
-        }
-
-        /**
-          * (23) get String attribute Separation
-          * @return the value of the attribute
-          */
-        public String getSeparation()
-        {
-            return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Separation
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getSeparation()
+	{
+		return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

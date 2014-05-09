@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,177 +84,166 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.pool.JDFPool;
-    /**
-    *****************************************************************************
-    class JDFAutoStatusPool : public JDFPool
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStatusPool : public JDFPool
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStatusPool extends JDFPool
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x44444333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x44444333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStatusPool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusPool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStatusPool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStatusPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStatusPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStatusPool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStatusPool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStatusPool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStatusPool[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStatusPool[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StatusDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StatusDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setStatusDetails(String value)
+	{
+		setAttribute(AttributeName.STATUSDETAILS, value, null);
+	}
 
+	/**
+	  * (23) get String attribute StatusDetails
+	  * @return the value of the attribute
+	  */
+	public String getStatusDetails()
+	{
+		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StatusDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StatusDetails
-          * @param value the value to set the attribute to
-          */
-        public void setStatusDetails(String value)
-        {
-            setAttribute(AttributeName.STATUSDETAILS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute StatusDetails
-          * @return the value of the attribute
-          */
-        public String getStatusDetails()
-        {
-            return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreatePartStatus
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPartStatus the element
+	 */
+	public JDFPartStatus getCreatePartStatus(int iSkip)
+	{
+		return (JDFPartStatus) getCreateElement_KElement(ElementName.PARTSTATUS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element PartStatus
+	 * @param iSkip number of elements to skip
+	 * @return JDFPartStatus the element
+	 * default is getPartStatus(0)     */
+	public JDFPartStatus getPartStatus(int iSkip)
+	{
+		return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, iSkip);
+	}
 
-    /** (26) getCreatePartStatus
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPartStatus the element
-     */
-    public JDFPartStatus getCreatePartStatus(int iSkip)
-    {
-        return (JDFPartStatus)getCreateElement_KElement(ElementName.PARTSTATUS, null, iSkip);
-    }
+	/**
+	 * Get all PartStatus from the current element
+	 * 
+	 * @return Collection<JDFPartStatus>, null if none are available
+	 */
+	public Collection<JDFPartStatus> getAllPartStatus()
+	{
+		final VElement vc = getChildElementVector(ElementName.PARTSTATUS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element PartStatus
-     * @param iSkip number of elements to skip
-     * @return JDFPartStatus the element
-     * default is getPartStatus(0)     */
-    public JDFPartStatus getPartStatus(int iSkip)
-    {
-        return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, iSkip);
-    }
+		final Vector<JDFPartStatus> v = new Vector<JDFPartStatus>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPartStatus) vc.get(i));
+		}
 
-    /**
-     * Get all PartStatus from the current element
-     * 
-     * @return Collection<JDFPartStatus>, null if none are available
-     */
-    public Collection<JDFPartStatus> getAllPartStatus()
-    {
-        final VElement vc = getChildElementVector(ElementName.PARTSTATUS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPartStatus> v = new Vector<JDFPartStatus>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPartStatus) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PartStatus
-     * @return JDFPartStatus the element
-     */
-    public JDFPartStatus appendPartStatus()
-    {
-        return (JDFPartStatus) appendElement(ElementName.PARTSTATUS, null);
-    }
+	/**
+	 * (30) append element PartStatus
+	 * @return JDFPartStatus the element
+	 */
+	public JDFPartStatus appendPartStatus()
+	{
+		return (JDFPartStatus) appendElement(ElementName.PARTSTATUS, null);
+	}
 
 }// end namespace JDF

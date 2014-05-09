@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,316 +83,303 @@ import org.cip4.jdflib.resource.process.JDFLongFold;
 import org.cip4.jdflib.resource.process.JDFLongGlue;
 import org.cip4.jdflib.resource.process.JDFLongPerforate;
 import org.cip4.jdflib.resource.process.JDFLongSlit;
-    /**
-    *****************************************************************************
-    class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LONGFOLD, 0x44444443);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.LONGGLUE, 0x44444443);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.LONGPERFORATE, 0x44444443);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.LONGSLIT, 0x44444443);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LONGFOLD, 0x44444443);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.LONGGLUE, 0x44444443);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.LONGPERFORATE, 0x44444443);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.LONGSLIT, 0x44444443);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongitudinalRibbonOperationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLongitudinalRibbonOperationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongitudinalRibbonOperationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLongitudinalRibbonOperationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLongitudinalRibbonOperationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongitudinalRibbonOperationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLongitudinalRibbonOperationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLongitudinalRibbonOperationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLongitudinalRibbonOperationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateLongFold
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongFold the element
+	 */
+	public JDFLongFold getCreateLongFold(int iSkip)
+	{
+		return (JDFLongFold) getCreateElement_KElement(ElementName.LONGFOLD, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element LongFold
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongFold the element
+	 * default is getLongFold(0)     */
+	public JDFLongFold getLongFold(int iSkip)
+	{
+		return (JDFLongFold) getElement(ElementName.LONGFOLD, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all LongFold from the current element
+	 * 
+	 * @return Collection<JDFLongFold>, null if none are available
+	 */
+	public Collection<JDFLongFold> getAllLongFold()
+	{
+		final VElement vc = getChildElementVector(ElementName.LONGFOLD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFLongFold> v = new Vector<JDFLongFold>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLongFold) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateLongFold
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLongFold the element
-     */
-    public JDFLongFold getCreateLongFold(int iSkip)
-    {
-        return (JDFLongFold)getCreateElement_KElement(ElementName.LONGFOLD, null, iSkip);
-    }
+	/**
+	 * (30) append element LongFold
+	 * @return JDFLongFold the element
+	 */
+	public JDFLongFold appendLongFold()
+	{
+		return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
+	}
 
-    /**
-     * (27) const get element LongFold
-     * @param iSkip number of elements to skip
-     * @return JDFLongFold the element
-     * default is getLongFold(0)     */
-    public JDFLongFold getLongFold(int iSkip)
-    {
-        return (JDFLongFold) getElement(ElementName.LONGFOLD, null, iSkip);
-    }
+	/** (26) getCreateLongGlue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongGlue the element
+	 */
+	public JDFLongGlue getCreateLongGlue(int iSkip)
+	{
+		return (JDFLongGlue) getCreateElement_KElement(ElementName.LONGGLUE, null, iSkip);
+	}
 
-    /**
-     * Get all LongFold from the current element
-     * 
-     * @return Collection<JDFLongFold>, null if none are available
-     */
-    public Collection<JDFLongFold> getAllLongFold()
-    {
-        final VElement vc = getChildElementVector(ElementName.LONGFOLD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element LongGlue
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongGlue the element
+	 * default is getLongGlue(0)     */
+	public JDFLongGlue getLongGlue(int iSkip)
+	{
+		return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
+	}
 
-        final Vector<JDFLongFold> v = new Vector<JDFLongFold>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLongFold) vc.get(i));
-        }
+	/**
+	 * Get all LongGlue from the current element
+	 * 
+	 * @return Collection<JDFLongGlue>, null if none are available
+	 */
+	public Collection<JDFLongGlue> getAllLongGlue()
+	{
+		final VElement vc = getChildElementVector(ElementName.LONGGLUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLongGlue) vc.get(i));
+		}
 
-    /**
-     * (30) append element LongFold
-     * @return JDFLongFold the element
-     */
-    public JDFLongFold appendLongFold()
-    {
-        return (JDFLongFold) appendElement(ElementName.LONGFOLD, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateLongGlue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLongGlue the element
-     */
-    public JDFLongGlue getCreateLongGlue(int iSkip)
-    {
-        return (JDFLongGlue)getCreateElement_KElement(ElementName.LONGGLUE, null, iSkip);
-    }
+	/**
+	 * (30) append element LongGlue
+	 * @return JDFLongGlue the element
+	 */
+	public JDFLongGlue appendLongGlue()
+	{
+		return (JDFLongGlue) appendElement(ElementName.LONGGLUE, null);
+	}
 
-    /**
-     * (27) const get element LongGlue
-     * @param iSkip number of elements to skip
-     * @return JDFLongGlue the element
-     * default is getLongGlue(0)     */
-    public JDFLongGlue getLongGlue(int iSkip)
-    {
-        return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
-    }
+	/** (26) getCreateLongPerforate
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongPerforate the element
+	 */
+	public JDFLongPerforate getCreateLongPerforate(int iSkip)
+	{
+		return (JDFLongPerforate) getCreateElement_KElement(ElementName.LONGPERFORATE, null, iSkip);
+	}
 
-    /**
-     * Get all LongGlue from the current element
-     * 
-     * @return Collection<JDFLongGlue>, null if none are available
-     */
-    public Collection<JDFLongGlue> getAllLongGlue()
-    {
-        final VElement vc = getChildElementVector(ElementName.LONGGLUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element LongPerforate
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongPerforate the element
+	 * default is getLongPerforate(0)     */
+	public JDFLongPerforate getLongPerforate(int iSkip)
+	{
+		return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, iSkip);
+	}
 
-        final Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLongGlue) vc.get(i));
-        }
+	/**
+	 * Get all LongPerforate from the current element
+	 * 
+	 * @return Collection<JDFLongPerforate>, null if none are available
+	 */
+	public Collection<JDFLongPerforate> getAllLongPerforate()
+	{
+		final VElement vc = getChildElementVector(ElementName.LONGPERFORATE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLongPerforate) vc.get(i));
+		}
 
-    /**
-     * (30) append element LongGlue
-     * @return JDFLongGlue the element
-     */
-    public JDFLongGlue appendLongGlue()
-    {
-        return (JDFLongGlue) appendElement(ElementName.LONGGLUE, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateLongPerforate
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLongPerforate the element
-     */
-    public JDFLongPerforate getCreateLongPerforate(int iSkip)
-    {
-        return (JDFLongPerforate)getCreateElement_KElement(ElementName.LONGPERFORATE, null, iSkip);
-    }
+	/**
+	 * (30) append element LongPerforate
+	 * @return JDFLongPerforate the element
+	 */
+	public JDFLongPerforate appendLongPerforate()
+	{
+		return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
+	}
 
-    /**
-     * (27) const get element LongPerforate
-     * @param iSkip number of elements to skip
-     * @return JDFLongPerforate the element
-     * default is getLongPerforate(0)     */
-    public JDFLongPerforate getLongPerforate(int iSkip)
-    {
-        return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, iSkip);
-    }
+	/** (26) getCreateLongSlit
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongSlit the element
+	 */
+	public JDFLongSlit getCreateLongSlit(int iSkip)
+	{
+		return (JDFLongSlit) getCreateElement_KElement(ElementName.LONGSLIT, null, iSkip);
+	}
 
-    /**
-     * Get all LongPerforate from the current element
-     * 
-     * @return Collection<JDFLongPerforate>, null if none are available
-     */
-    public Collection<JDFLongPerforate> getAllLongPerforate()
-    {
-        final VElement vc = getChildElementVector(ElementName.LONGPERFORATE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element LongSlit
+	 * @param iSkip number of elements to skip
+	 * @return JDFLongSlit the element
+	 * default is getLongSlit(0)     */
+	public JDFLongSlit getLongSlit(int iSkip)
+	{
+		return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
+	}
 
-        final Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLongPerforate) vc.get(i));
-        }
+	/**
+	 * Get all LongSlit from the current element
+	 * 
+	 * @return Collection<JDFLongSlit>, null if none are available
+	 */
+	public Collection<JDFLongSlit> getAllLongSlit()
+	{
+		final VElement vc = getChildElementVector(ElementName.LONGSLIT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLongSlit) vc.get(i));
+		}
 
-    /**
-     * (30) append element LongPerforate
-     * @return JDFLongPerforate the element
-     */
-    public JDFLongPerforate appendLongPerforate()
-    {
-        return (JDFLongPerforate) appendElement(ElementName.LONGPERFORATE, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateLongSlit
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLongSlit the element
-     */
-    public JDFLongSlit getCreateLongSlit(int iSkip)
-    {
-        return (JDFLongSlit)getCreateElement_KElement(ElementName.LONGSLIT, null, iSkip);
-    }
-
-    /**
-     * (27) const get element LongSlit
-     * @param iSkip number of elements to skip
-     * @return JDFLongSlit the element
-     * default is getLongSlit(0)     */
-    public JDFLongSlit getLongSlit(int iSkip)
-    {
-        return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
-    }
-
-    /**
-     * Get all LongSlit from the current element
-     * 
-     * @return Collection<JDFLongSlit>, null if none are available
-     */
-    public Collection<JDFLongSlit> getAllLongSlit()
-    {
-        final VElement vc = getChildElementVector(ElementName.LONGSLIT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLongSlit) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element LongSlit
-     * @return JDFLongSlit the element
-     */
-    public JDFLongSlit appendLongSlit()
-    {
-        return (JDFLongSlit) appendElement(ElementName.LONGSLIT, null);
-    }
+	/**
+	 * (30) append element LongSlit
+	 * @return JDFLongSlit the element
+	 */
+	public JDFLongSlit appendLongSlit()
+	{
+		return (JDFLongSlit) appendElement(ElementName.LONGSLIT, null);
+	}
 
 }// end namespace JDF

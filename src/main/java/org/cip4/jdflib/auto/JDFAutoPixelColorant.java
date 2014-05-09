@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoPixelColorant : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPixelColorant : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPixelColorant extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PIXELDEPTH, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORANTNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PIXELDEPTH, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPixelColorant
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPixelColorant(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPixelColorant
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPixelColorant(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPixelColorant
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPixelColorant(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPixelColorant
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPixelColorant(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPixelColorant
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPixelColorant(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPixelColorant
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPixelColorant(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPixelColorant[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPixelColorant[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorantName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ColorantName
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorantName(String value)
+	{
+		setAttribute(AttributeName.COLORANTNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ColorantName
+	  * @return the value of the attribute
+	  */
+	public String getColorantName()
+	{
+		return getAttribute(AttributeName.COLORANTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ColorantName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ColorantName
-          * @param value the value to set the attribute to
-          */
-        public void setColorantName(String value)
-        {
-            setAttribute(AttributeName.COLORANTNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PixelDepth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PixelDepth
+	  * @param value the value to set the attribute to
+	  */
+	public void setPixelDepth(int value)
+	{
+		setAttribute(AttributeName.PIXELDEPTH, value, null);
+	}
 
-        /**
-          * (23) get String attribute ColorantName
-          * @return the value of the attribute
-          */
-        public String getColorantName()
-        {
-            return getAttribute(AttributeName.COLORANTNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PixelDepth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PixelDepth
-          * @param value the value to set the attribute to
-          */
-        public void setPixelDepth(int value)
-        {
-            setAttribute(AttributeName.PIXELDEPTH, value, null);
-        }
-
-        /**
-          * (15) get int attribute PixelDepth
-          * @return int the value of the attribute
-          */
-        public int getPixelDepth()
-        {
-            return getIntAttribute(AttributeName.PIXELDEPTH, null, 0);
-        }
+	/**
+	  * (15) get int attribute PixelDepth
+	  * @return int the value of the attribute
+	  */
+	public int getPixelDepth()
+	{
+		return getIntAttribute(AttributeName.PIXELDEPTH, null, 0);
+	}
 
 }// end namespace JDF

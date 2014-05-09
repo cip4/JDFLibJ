@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,153 +80,142 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFIDInfo;
-    /**
-    *****************************************************************************
-    class JDFAutoNewJDFCmdParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNewJDFCmdParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.JDFDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, "Brief");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JDFDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, "Brief");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.IDINFO, 0x55555511);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDINFO, 0x55555511);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNewJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNewJDFCmdParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNewJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNewJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNewJDFCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNewJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNewJDFCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNewJDFCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNewJDFCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNewJDFCmdParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNewJDFCmdParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JDFDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JDFDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setJDFDetails(String value)
+	{
+		setAttribute(AttributeName.JDFDETAILS, value, null);
+	}
 
+	/**
+	  * (23) get String attribute JDFDetails
+	  * @return the value of the attribute
+	  */
+	public String getJDFDetails()
+	{
+		return getAttribute(AttributeName.JDFDETAILS, null, "Brief");
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JDFDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JDFDetails
-          * @param value the value to set the attribute to
-          */
-        public void setJDFDetails(String value)
-        {
-            setAttribute(AttributeName.JDFDETAILS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute JDFDetails
-          * @return the value of the attribute
-          */
-        public String getJDFDetails()
-        {
-            return getAttribute(AttributeName.JDFDETAILS, null, "Brief");
-        }
+	/**
+	 * (24) const get element IDInfo
+	 * @return JDFIDInfo the element
+	 */
+	public JDFIDInfo getIDInfo()
+	{
+		return (JDFIDInfo) getElement(ElementName.IDINFO, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateIDInfo
+	 * 
+	 * @return JDFIDInfo the element
+	 */
+	public JDFIDInfo getCreateIDInfo()
+	{
+		return (JDFIDInfo) getCreateElement_KElement(ElementName.IDINFO, null, 0);
+	}
 
-    /**
-     * (24) const get element IDInfo
-     * @return JDFIDInfo the element
-     */
-    public JDFIDInfo getIDInfo()
-    {
-        return (JDFIDInfo) getElement(ElementName.IDINFO, null, 0);
-    }
-
-    /** (25) getCreateIDInfo
-     * 
-     * @return JDFIDInfo the element
-     */
-    public JDFIDInfo getCreateIDInfo()
-    {
-        return (JDFIDInfo) getCreateElement_KElement(ElementName.IDINFO, null, 0);
-    }
-
-    /**
-     * (29) append element IDInfo
-     * @return JDFIDInfo the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIDInfo appendIDInfo() throws JDFException
-    {
-        return (JDFIDInfo) appendElementN(ElementName.IDINFO, 1, null);
-    }
+	/**
+	 * (29) append element IDInfo
+	 * @return JDFIDInfo the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIDInfo appendIDInfo() throws JDFException
+	{
+		return (JDFIDInfo) appendElementN(ElementName.IDINFO, 1, null);
+	}
 
 }// end namespace JDF

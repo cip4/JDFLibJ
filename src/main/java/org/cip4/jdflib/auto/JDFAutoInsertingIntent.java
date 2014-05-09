@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.resource.JDFInsertList;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
-    /**
-    *****************************************************************************
-    class JDFAutoInsertingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoInsertingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTLIST, 0x55555555);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUETYPE, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTLIST, 0x55555555);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoInsertingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoInsertingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsertingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoInsertingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoInsertingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoInsertingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoInsertingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoInsertingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoInsertingIntent[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element GlueType
+	 * @return JDFSpanGlueType the element
+	 */
+	public JDFSpanGlueType getGlueType()
+	{
+		return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
+	}
 
+	/** (25) getCreateGlueType
+	 * 
+	 * @return JDFSpanGlueType the element
+	 */
+	public JDFSpanGlueType getCreateGlueType()
+	{
+		return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element GlueType
+	 * @return JDFSpanGlueType the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanGlueType appendGlueType() throws JDFException
+	{
+		return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
+	}
 
-    /**
-     * (24) const get element GlueType
-     * @return JDFSpanGlueType the element
-     */
-    public JDFSpanGlueType getGlueType()
-    {
-        return (JDFSpanGlueType) getElement(ElementName.GLUETYPE, null, 0);
-    }
+	/**
+	 * (24) const get element InsertList
+	 * @return JDFInsertList the element
+	 */
+	public JDFInsertList getInsertList()
+	{
+		return (JDFInsertList) getElement(ElementName.INSERTLIST, null, 0);
+	}
 
-    /** (25) getCreateGlueType
-     * 
-     * @return JDFSpanGlueType the element
-     */
-    public JDFSpanGlueType getCreateGlueType()
-    {
-        return (JDFSpanGlueType) getCreateElement_KElement(ElementName.GLUETYPE, null, 0);
-    }
+	/** (25) getCreateInsertList
+	 * 
+	 * @return JDFInsertList the element
+	 */
+	public JDFInsertList getCreateInsertList()
+	{
+		return (JDFInsertList) getCreateElement_KElement(ElementName.INSERTLIST, null, 0);
+	}
 
-    /**
-     * (29) append element GlueType
-     * @return JDFSpanGlueType the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanGlueType appendGlueType() throws JDFException
-    {
-        return (JDFSpanGlueType) appendElementN(ElementName.GLUETYPE, 1, null);
-    }
+	/**
+	 * (29) append element InsertList
+	 * @return JDFInsertList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFInsertList appendInsertList() throws JDFException
+	{
+		return (JDFInsertList) appendElementN(ElementName.INSERTLIST, 1, null);
+	}
 
-    /**
-     * (24) const get element InsertList
-     * @return JDFInsertList the element
-     */
-    public JDFInsertList getInsertList()
-    {
-        return (JDFInsertList) getElement(ElementName.INSERTLIST, null, 0);
-    }
+	/**
+	 * (24) const get element Method
+	 * @return JDFSpanMethod the element
+	 */
+	public JDFSpanMethod getMethod()
+	{
+		return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
+	}
 
-    /** (25) getCreateInsertList
-     * 
-     * @return JDFInsertList the element
-     */
-    public JDFInsertList getCreateInsertList()
-    {
-        return (JDFInsertList) getCreateElement_KElement(ElementName.INSERTLIST, null, 0);
-    }
+	/** (25) getCreateMethod
+	 * 
+	 * @return JDFSpanMethod the element
+	 */
+	public JDFSpanMethod getCreateMethod()
+	{
+		return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
+	}
 
-    /**
-     * (29) append element InsertList
-     * @return JDFInsertList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFInsertList appendInsertList() throws JDFException
-    {
-        return (JDFInsertList) appendElementN(ElementName.INSERTLIST, 1, null);
-    }
-
-    /**
-     * (24) const get element Method
-     * @return JDFSpanMethod the element
-     */
-    public JDFSpanMethod getMethod()
-    {
-        return (JDFSpanMethod) getElement(ElementName.METHOD, null, 0);
-    }
-
-    /** (25) getCreateMethod
-     * 
-     * @return JDFSpanMethod the element
-     */
-    public JDFSpanMethod getCreateMethod()
-    {
-        return (JDFSpanMethod) getCreateElement_KElement(ElementName.METHOD, null, 0);
-    }
-
-    /**
-     * (29) append element Method
-     * @return JDFSpanMethod the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanMethod appendMethod() throws JDFException
-    {
-        return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
-    }
+	/**
+	 * (29) append element Method
+	 * @return JDFSpanMethod the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanMethod appendMethod() throws JDFException
+	{
+		return (JDFSpanMethod) appendElementN(ElementName.METHOD, 1, null);
+	}
 
 }// end namespace JDF

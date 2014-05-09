@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,441 +84,414 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBoxApplication;
 import org.cip4.jdflib.resource.process.JDFBoxFoldAction;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoBoxFoldingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBoxFoldingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBoxFoldingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSX, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSY, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBoxFoldingType.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSX, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSY, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBoxFoldingType.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BOXFOLDACTION, 0x33333111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.BOXAPPLICATION, 0x44443333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BOXFOLDACTION, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.BOXAPPLICATION, 0x44443333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBoxFoldingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxFoldingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxFoldingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxFoldingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxFoldingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxFoldingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxFoldingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxFoldingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBoxFoldingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBoxFoldingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBoxFoldingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for BoxFoldingType
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumBoxFoldingType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumBoxFoldingType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBoxFoldingType getEnum(String enumName)
+		{
+			return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBoxFoldingType getEnum(int enumValue)
+		{
+			return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for BoxFoldingType
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBoxFoldingType.class);
+		}
 
-        public static class EnumBoxFoldingType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBoxFoldingType.class);
+		}
 
-            private EnumBoxFoldingType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBoxFoldingType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumBoxFoldingType getEnum(String enumName)
-            {
-                return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumName);
-            }
+		public static final EnumBoxFoldingType Type00 = new EnumBoxFoldingType("Type00");
+		public static final EnumBoxFoldingType Type01 = new EnumBoxFoldingType("Type01");
+		public static final EnumBoxFoldingType Type02 = new EnumBoxFoldingType("Type02");
+		public static final EnumBoxFoldingType Type03 = new EnumBoxFoldingType("Type03");
+		public static final EnumBoxFoldingType Type04 = new EnumBoxFoldingType("Type04");
+		public static final EnumBoxFoldingType Type10 = new EnumBoxFoldingType("Type10");
+		public static final EnumBoxFoldingType Type11 = new EnumBoxFoldingType("Type11");
+		public static final EnumBoxFoldingType Type12 = new EnumBoxFoldingType("Type12");
+		public static final EnumBoxFoldingType Type13 = new EnumBoxFoldingType("Type13");
+		public static final EnumBoxFoldingType Type15 = new EnumBoxFoldingType("Type15");
+		public static final EnumBoxFoldingType Type20 = new EnumBoxFoldingType("Type20");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumBoxFoldingType getEnum(int enumValue)
-            {
-                return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumBoxFoldingType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlankDimensionsX
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlankDimensionsX
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlankDimensionsX(JDFNumberList value)
+	{
+		setAttribute(AttributeName.BLANKDIMENSIONSX, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumBoxFoldingType.class);
-            }
+	/**
+	  * (20) get JDFNumberList attribute BlankDimensionsX
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getBlankDimensionsX()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumBoxFoldingType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BlankDimensionsY
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BlankDimensionsY
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlankDimensionsY(JDFNumberList value)
+	{
+		setAttribute(AttributeName.BLANKDIMENSIONSY, value, null);
+	}
 
-            public static final EnumBoxFoldingType Type00 = new EnumBoxFoldingType("Type00");
-            public static final EnumBoxFoldingType Type01 = new EnumBoxFoldingType("Type01");
-            public static final EnumBoxFoldingType Type02 = new EnumBoxFoldingType("Type02");
-            public static final EnumBoxFoldingType Type03 = new EnumBoxFoldingType("Type03");
-            public static final EnumBoxFoldingType Type04 = new EnumBoxFoldingType("Type04");
-            public static final EnumBoxFoldingType Type10 = new EnumBoxFoldingType("Type10");
-            public static final EnumBoxFoldingType Type11 = new EnumBoxFoldingType("Type11");
-            public static final EnumBoxFoldingType Type12 = new EnumBoxFoldingType("Type12");
-            public static final EnumBoxFoldingType Type13 = new EnumBoxFoldingType("Type13");
-            public static final EnumBoxFoldingType Type15 = new EnumBoxFoldingType("Type15");
-            public static final EnumBoxFoldingType Type20 = new EnumBoxFoldingType("Type20");
-        }      
+	/**
+	  * (20) get JDFNumberList attribute BlankDimensionsY
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getBlankDimensionsY()
+	{
+		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BoxFoldingType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute BoxFoldingType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setBoxFoldingType(EnumBoxFoldingType enumVar)
+	{
+		setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute BoxFoldingType
+	  * @return the value of the attribute
+	  */
+	public EnumBoxFoldingType getBoxFoldingType()
+	{
+		return EnumBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlankDimensionsX
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlankDimensionsX
-          * @param value the value to set the attribute to
-          */
-        public void setBlankDimensionsX(JDFNumberList value)
-        {
-            setAttribute(AttributeName.BLANKDIMENSIONSX, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFNumberList attribute BlankDimensionsX
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getBlankDimensionsX()
-        {
-            String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateBoxFoldAction
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxFoldAction the element
+	 */
+	public JDFBoxFoldAction getCreateBoxFoldAction(int iSkip)
+	{
+		return (JDFBoxFoldAction) getCreateElement_KElement(ElementName.BOXFOLDACTION, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BlankDimensionsY
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BlankDimensionsY
-          * @param value the value to set the attribute to
-          */
-        public void setBlankDimensionsY(JDFNumberList value)
-        {
-            setAttribute(AttributeName.BLANKDIMENSIONSY, value, null);
-        }
+	/**
+	 * (27) const get element BoxFoldAction
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxFoldAction the element
+	 * default is getBoxFoldAction(0)     */
+	public JDFBoxFoldAction getBoxFoldAction(int iSkip)
+	{
+		return (JDFBoxFoldAction) getElement(ElementName.BOXFOLDACTION, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute BlankDimensionsY
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getBlankDimensionsY()
-        {
-            String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * Get all BoxFoldAction from the current element
+	 * 
+	 * @return Collection<JDFBoxFoldAction>, null if none are available
+	 */
+	public Collection<JDFBoxFoldAction> getAllBoxFoldAction()
+	{
+		final VElement vc = getChildElementVector(ElementName.BOXFOLDACTION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BoxFoldingType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BoxFoldingType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setBoxFoldingType(EnumBoxFoldingType enumVar)
-        {
-            setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+		final Vector<JDFBoxFoldAction> v = new Vector<JDFBoxFoldAction>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBoxFoldAction) vc.get(i));
+		}
 
-        /**
-          * (9) get attribute BoxFoldingType
-          * @return the value of the attribute
-          */
-        public EnumBoxFoldingType getBoxFoldingType()
-        {
-            return EnumBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element BoxFoldAction
+	 * @return JDFBoxFoldAction the element
+	 */
+	public JDFBoxFoldAction appendBoxFoldAction()
+	{
+		return (JDFBoxFoldAction) appendElement(ElementName.BOXFOLDACTION, null);
+	}
 
-    /** (26) getCreateBoxFoldAction
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBoxFoldAction the element
-     */
-    public JDFBoxFoldAction getCreateBoxFoldAction(int iSkip)
-    {
-        return (JDFBoxFoldAction)getCreateElement_KElement(ElementName.BOXFOLDACTION, null, iSkip);
-    }
+	/** (26) getCreateGlueLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /**
-     * (27) const get element BoxFoldAction
-     * @param iSkip number of elements to skip
-     * @return JDFBoxFoldAction the element
-     * default is getBoxFoldAction(0)     */
-    public JDFBoxFoldAction getBoxFoldAction(int iSkip)
-    {
-        return (JDFBoxFoldAction) getElement(ElementName.BOXFOLDACTION, null, iSkip);
-    }
+	/**
+	 * (27) const get element GlueLine
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 * default is getGlueLine(0)     */
+	public JDFGlueLine getGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /**
-     * Get all BoxFoldAction from the current element
-     * 
-     * @return Collection<JDFBoxFoldAction>, null if none are available
-     */
-    public Collection<JDFBoxFoldAction> getAllBoxFoldAction()
-    {
-        final VElement vc = getChildElementVector(ElementName.BOXFOLDACTION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all GlueLine from the current element
+	 * 
+	 * @return Collection<JDFGlueLine>, null if none are available
+	 */
+	public Collection<JDFGlueLine> getAllGlueLine()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFBoxFoldAction> v = new Vector<JDFBoxFoldAction>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBoxFoldAction) vc.get(i));
-        }
+		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueLine) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element BoxFoldAction
-     * @return JDFBoxFoldAction the element
-     */
-    public JDFBoxFoldAction appendBoxFoldAction()
-    {
-        return (JDFBoxFoldAction) appendElement(ElementName.BOXFOLDACTION, null);
-    }
+	/**
+	 * (30) append element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine appendGlueLine()
+	{
+		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
 
-    /** (26) getCreateGlueLine
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine(int iSkip)
-    {
-        return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
-    }
+	/** (26) getCreateBoxApplication
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxApplication the element
+	 */
+	public JDFBoxApplication getCreateBoxApplication(int iSkip)
+	{
+		return (JDFBoxApplication) getCreateElement_KElement(ElementName.BOXAPPLICATION, null, iSkip);
+	}
 
-    /**
-     * (27) const get element GlueLine
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     * default is getGlueLine(0)     */
-    public JDFGlueLine getGlueLine(int iSkip)
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
-    }
+	/**
+	 * (27) const get element BoxApplication
+	 * @param iSkip number of elements to skip
+	 * @return JDFBoxApplication the element
+	 * default is getBoxApplication(0)     */
+	public JDFBoxApplication getBoxApplication(int iSkip)
+	{
+		return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, iSkip);
+	}
 
-    /**
-     * Get all GlueLine from the current element
-     * 
-     * @return Collection<JDFGlueLine>, null if none are available
-     */
-    public Collection<JDFGlueLine> getAllGlueLine()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all BoxApplication from the current element
+	 * 
+	 * @return Collection<JDFBoxApplication>, null if none are available
+	 */
+	public Collection<JDFBoxApplication> getAllBoxApplication()
+	{
+		final VElement vc = getChildElementVector(ElementName.BOXAPPLICATION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueLine) vc.get(i));
-        }
+		final Vector<JDFBoxApplication> v = new Vector<JDFBoxApplication>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBoxApplication) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine appendGlueLine()
-    {
-        return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueLine(JDFGlueLine refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /** (26) getCreateBoxApplication
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBoxApplication the element
-     */
-    public JDFBoxApplication getCreateBoxApplication(int iSkip)
-    {
-        return (JDFBoxApplication)getCreateElement_KElement(ElementName.BOXAPPLICATION, null, iSkip);
-    }
-
-    /**
-     * (27) const get element BoxApplication
-     * @param iSkip number of elements to skip
-     * @return JDFBoxApplication the element
-     * default is getBoxApplication(0)     */
-    public JDFBoxApplication getBoxApplication(int iSkip)
-    {
-        return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, iSkip);
-    }
-
-    /**
-     * Get all BoxApplication from the current element
-     * 
-     * @return Collection<JDFBoxApplication>, null if none are available
-     */
-    public Collection<JDFBoxApplication> getAllBoxApplication()
-    {
-        final VElement vc = getChildElementVector(ElementName.BOXAPPLICATION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBoxApplication> v = new Vector<JDFBoxApplication>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBoxApplication) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BoxApplication
-     * @return JDFBoxApplication the element
-     */
-    public JDFBoxApplication appendBoxApplication()
-    {
-        return (JDFBoxApplication) appendElement(ElementName.BOXAPPLICATION, null);
-    }
+	/**
+	 * (30) append element BoxApplication
+	 * @return JDFBoxApplication the element
+	 */
+	public JDFBoxApplication appendBoxApplication()
+	{
+		return (JDFBoxApplication) appendElement(ElementName.BOXAPPLICATION, null);
+	}
 
 }// end namespace JDF

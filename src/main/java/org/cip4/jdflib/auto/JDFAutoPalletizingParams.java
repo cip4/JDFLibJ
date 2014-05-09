@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,331 +86,313 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoPalletizingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPalletizingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERHANG, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERHANGOFFSET, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PATTERN, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERHANG, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERHANGOFFSET, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PATTERN, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLE, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLE, 0x33331111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPalletizingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPalletizingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPalletizingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPalletizingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPalletizingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPalletizingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPalletizingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPalletizingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPalletizingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPalletizingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPalletizingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LayerAmount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LayerAmount
+	  * @param value the value to set the attribute to
+	  */
+	public void setLayerAmount(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.LAYERAMOUNT, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerList attribute LayerAmount
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getLayerAmount()
+	{
+		final String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxHeight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxHeight
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxHeight(double value)
+	{
+		setAttribute(AttributeName.MAXHEIGHT, value, null);
+	}
 
+	/**
+	  * (17) get double attribute MaxHeight
+	  * @return double the value of the attribute
+	  */
+	public double getMaxHeight()
+	{
+		return getRealAttribute(AttributeName.MAXHEIGHT, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LayerAmount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LayerAmount
-          * @param value the value to set the attribute to
-          */
-        public void setLayerAmount(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.LAYERAMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxWeight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxWeight
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxWeight(double value)
+	{
+		setAttribute(AttributeName.MAXWEIGHT, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerList attribute LayerAmount
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getLayerAmount()
-        {
-            String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute MaxWeight
+	  * @return double the value of the attribute
+	  */
+	public double getMaxWeight()
+	{
+		return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxHeight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxHeight
-          * @param value the value to set the attribute to
-          */
-        public void setMaxHeight(double value)
-        {
-            setAttribute(AttributeName.MAXHEIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Overhang
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Overhang
+	  * @param value the value to set the attribute to
+	  */
+	public void setOverhang(JDFXYPair value)
+	{
+		setAttribute(AttributeName.OVERHANG, value, null);
+	}
 
-        /**
-          * (17) get double attribute MaxHeight
-          * @return double the value of the attribute
-          */
-        public double getMaxHeight()
-        {
-            return getRealAttribute(AttributeName.MAXHEIGHT, null, 0.0);
-        }
+	/**
+	  * (20) get JDFXYPair attribute Overhang
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getOverhang()
+	{
+		final String strAttrName = getAttribute(AttributeName.OVERHANG, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxWeight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxWeight
-          * @param value the value to set the attribute to
-          */
-        public void setMaxWeight(double value)
-        {
-            setAttribute(AttributeName.MAXWEIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OverhangOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OverhangOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setOverhangOffset(JDFXYPair value)
+	{
+		setAttribute(AttributeName.OVERHANGOFFSET, value, null);
+	}
 
-        /**
-          * (17) get double attribute MaxWeight
-          * @return double the value of the attribute
-          */
-        public double getMaxWeight()
-        {
-            return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
-        }
+	/**
+	  * (20) get JDFXYPair attribute OverhangOffset
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getOverhangOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Overhang
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Overhang
-          * @param value the value to set the attribute to
-          */
-        public void setOverhang(JDFXYPair value)
-        {
-            setAttribute(AttributeName.OVERHANG, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pattern
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Pattern
+	  * @param value the value to set the attribute to
+	  */
+	public void setPattern(String value)
+	{
+		setAttribute(AttributeName.PATTERN, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Overhang
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getOverhang()
-        {
-            String strAttrName = getAttribute(AttributeName.OVERHANG, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Pattern
+	  * @return the value of the attribute
+	  */
+	public String getPattern()
+	{
+		return getAttribute(AttributeName.PATTERN, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OverhangOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OverhangOffset
-          * @param value the value to set the attribute to
-          */
-        public void setOverhangOffset(JDFXYPair value)
-        {
-            setAttribute(AttributeName.OVERHANGOFFSET, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFXYPair attribute OverhangOffset
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getOverhangOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateBundle
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle getCreateBundle(int iSkip)
+	{
+		return (JDFBundle) getCreateElement_KElement(ElementName.BUNDLE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Pattern
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Pattern
-          * @param value the value to set the attribute to
-          */
-        public void setPattern(String value)
-        {
-            setAttribute(AttributeName.PATTERN, value, null);
-        }
+	/**
+	 * (27) const get element Bundle
+	 * @param iSkip number of elements to skip
+	 * @return JDFBundle the element
+	 * default is getBundle(0)     */
+	public JDFBundle getBundle(int iSkip)
+	{
+		return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute Pattern
-          * @return the value of the attribute
-          */
-        public String getPattern()
-        {
-            return getAttribute(AttributeName.PATTERN, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Bundle from the current element
+	 * 
+	 * @return Collection<JDFBundle>, null if none are available
+	 */
+	public Collection<JDFBundle> getAllBundle()
+	{
+		final VElement vc = getChildElementVector(ElementName.BUNDLE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFBundle> v = new Vector<JDFBundle>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBundle) vc.get(i));
+		}
 
-    /** (26) getCreateBundle
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBundle the element
-     */
-    public JDFBundle getCreateBundle(int iSkip)
-    {
-        return (JDFBundle)getCreateElement_KElement(ElementName.BUNDLE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Bundle
-     * @param iSkip number of elements to skip
-     * @return JDFBundle the element
-     * default is getBundle(0)     */
-    public JDFBundle getBundle(int iSkip)
-    {
-        return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
-    }
+	/**
+	 * (30) append element Bundle
+	 * @return JDFBundle the element
+	 */
+	public JDFBundle appendBundle()
+	{
+		return (JDFBundle) appendElement(ElementName.BUNDLE, null);
+	}
 
-    /**
-     * Get all Bundle from the current element
-     * 
-     * @return Collection<JDFBundle>, null if none are available
-     */
-    public Collection<JDFBundle> getAllBundle()
-    {
-        final VElement vc = getChildElementVector(ElementName.BUNDLE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBundle> v = new Vector<JDFBundle>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBundle) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Bundle
-     * @return JDFBundle the element
-     */
-    public JDFBundle appendBundle()
-    {
-        return (JDFBundle) appendElement(ElementName.BUNDLE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refBundle(JDFBundle refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refBundle(JDFBundle refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,160 +80,147 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFNumberingParam;
-    /**
-    *****************************************************************************
-    class JDFAutoNumberingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNumberingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNumberingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.NUMBERINGPARAM, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.NUMBERINGPARAM, 0x44433333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNumberingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNumberingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNumberingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNumberingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateNumberingParam
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberingParam the element
+	 */
+	public JDFNumberingParam getCreateNumberingParam(int iSkip)
+	{
+		return (JDFNumberingParam) getCreateElement_KElement(ElementName.NUMBERINGPARAM, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element NumberingParam
+	 * @param iSkip number of elements to skip
+	 * @return JDFNumberingParam the element
+	 * default is getNumberingParam(0)     */
+	public JDFNumberingParam getNumberingParam(int iSkip)
+	{
+		return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all NumberingParam from the current element
+	 * 
+	 * @return Collection<JDFNumberingParam>, null if none are available
+	 */
+	public Collection<JDFNumberingParam> getAllNumberingParam()
+	{
+		final VElement vc = getChildElementVector(ElementName.NUMBERINGPARAM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFNumberingParam> v = new Vector<JDFNumberingParam>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNumberingParam) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateNumberingParam
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFNumberingParam the element
-     */
-    public JDFNumberingParam getCreateNumberingParam(int iSkip)
-    {
-        return (JDFNumberingParam)getCreateElement_KElement(ElementName.NUMBERINGPARAM, null, iSkip);
-    }
-
-    /**
-     * (27) const get element NumberingParam
-     * @param iSkip number of elements to skip
-     * @return JDFNumberingParam the element
-     * default is getNumberingParam(0)     */
-    public JDFNumberingParam getNumberingParam(int iSkip)
-    {
-        return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, iSkip);
-    }
-
-    /**
-     * Get all NumberingParam from the current element
-     * 
-     * @return Collection<JDFNumberingParam>, null if none are available
-     */
-    public Collection<JDFNumberingParam> getAllNumberingParam()
-    {
-        final VElement vc = getChildElementVector(ElementName.NUMBERINGPARAM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFNumberingParam> v = new Vector<JDFNumberingParam>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFNumberingParam) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element NumberingParam
-     * @return JDFNumberingParam the element
-     */
-    public JDFNumberingParam appendNumberingParam()
-    {
-        return (JDFNumberingParam) appendElement(ElementName.NUMBERINGPARAM, null);
-    }
+	/**
+	 * (30) append element NumberingParam
+	 * @return JDFNumberingParam the element
+	 */
+	public JDFNumberingParam appendNumberingParam()
+	{
+		return (JDFNumberingParam) appendElement(ElementName.NUMBERINGPARAM, null);
+	}
 
 }// end namespace JDF

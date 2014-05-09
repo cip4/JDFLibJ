@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,485 +91,502 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JDFDate;
-    /**
-    *****************************************************************************
-    class JDFAutoDeliveryParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDeliveryParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDeliveryParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLIEST, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PICKUP, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.REQUIRED, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SERVICELEVEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSFER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EARLIEST, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PICKUP, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.REQUIRED, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SERVICELEVEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSFER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.DROP, 0x22222222);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPANY, 0x77777776);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.DROP, 0x22222222);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FILESPEC, 0x66611111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDeliveryParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeliveryParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeliveryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeliveryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeliveryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeliveryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDeliveryParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDeliveryParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Transfer
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumTransfer extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumTransfer(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTransfer getEnum(String enumName)
+		{
+			return (EnumTransfer) getEnum(EnumTransfer.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTransfer getEnum(int enumValue)
+		{
+			return (EnumTransfer) getEnum(EnumTransfer.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Transfer
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTransfer.class);
+		}
 
-        public static class EnumTransfer extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTransfer.class);
+		}
 
-            private EnumTransfer(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTransfer.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTransfer getEnum(String enumName)
-            {
-                return (EnumTransfer) getEnum(EnumTransfer.class, enumName);
-            }
+		public static final EnumTransfer BuyerToPrinterDeliver = new EnumTransfer("BuyerToPrinterDeliver");
+		public static final EnumTransfer BuyerToPrinterPickup = new EnumTransfer("BuyerToPrinterPickup");
+		public static final EnumTransfer PrinterToBuyerDeliver = new EnumTransfer("PrinterToBuyerDeliver");
+		public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTransfer getEnum(int enumValue)
-            {
-                return (EnumTransfer) getEnum(EnumTransfer.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTransfer.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Earliest
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute Earliest
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setEarliest(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.EARLIEST, date.getDateTimeISO(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTransfer.class);
-            }
+	/**
+	  * (12) get JDFDate attribute Earliest
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getEarliest()
+	{
+		final String str = getAttribute(AttributeName.EARLIEST, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTransfer.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Method
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Method
+	  * @param value the value to set the attribute to
+	  */
+	public void setMethod(String value)
+	{
+		setAttribute(AttributeName.METHOD, value, null);
+	}
 
-            public static final EnumTransfer BuyerToPrinterDeliver = new EnumTransfer("BuyerToPrinterDeliver");
-            public static final EnumTransfer BuyerToPrinterPickup = new EnumTransfer("BuyerToPrinterPickup");
-            public static final EnumTransfer PrinterToBuyerDeliver = new EnumTransfer("PrinterToBuyerDeliver");
-            public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
-        }      
+	/**
+	  * (23) get String attribute Method
+	  * @return the value of the attribute
+	  */
+	public String getMethod()
+	{
+		return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pickup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Pickup
+	  * @param value the value to set the attribute to
+	  */
+	public void setPickup(boolean value)
+	{
+		setAttribute(AttributeName.PICKUP, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute Pickup
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPickup()
+	{
+		return getBoolAttribute(AttributeName.PICKUP, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Earliest
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute Earliest
-          * @param value the value to set the attribute to or null
-          */
-        public void setEarliest(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.EARLIEST, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Required
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute Required
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setRequired(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.REQUIRED, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (12) get JDFDate attribute Earliest
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getEarliest()
-        {
-            String str = getAttribute(AttributeName.EARLIEST, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (12) get JDFDate attribute Required
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getRequired()
+	{
+		final String str = getAttribute(AttributeName.REQUIRED, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Method
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Method
-          * @param value the value to set the attribute to
-          */
-        public void setMethod(String value)
-        {
-            setAttribute(AttributeName.METHOD, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ServiceLevel
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ServiceLevel
+	  * @param value the value to set the attribute to
+	  */
+	public void setServiceLevel(String value)
+	{
+		setAttribute(AttributeName.SERVICELEVEL, value, null);
+	}
 
-        /**
-          * (23) get String attribute Method
-          * @return the value of the attribute
-          */
-        public String getMethod()
-        {
-            return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ServiceLevel
+	  * @return the value of the attribute
+	  */
+	public String getServiceLevel()
+	{
+		return getAttribute(AttributeName.SERVICELEVEL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Pickup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Pickup
-          * @param value the value to set the attribute to
-          */
-        public void setPickup(boolean value)
-        {
-            setAttribute(AttributeName.PICKUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Transfer
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Transfer
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTransfer(EnumTransfer enumVar)
+	{
+		setAttribute(AttributeName.TRANSFER, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute Pickup
-          * @return boolean the value of the attribute
-          */
-        public boolean getPickup()
-        {
-            return getBoolAttribute(AttributeName.PICKUP, null, false);
-        }
+	/**
+	  * (9) get attribute Transfer
+	  * @return the value of the attribute
+	  */
+	public EnumTransfer getTransfer()
+	{
+		return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Required
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute Required
-          * @param value the value to set the attribute to or null
-          */
-        public void setRequired(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.REQUIRED, date.getDateTimeISO(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (12) get JDFDate attribute Required
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getRequired()
-        {
-            String str = getAttribute(AttributeName.REQUIRED, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	 * (24) const get element Company
+	 * @return JDFCompany the element
+	 */
+	public JDFCompany getCompany()
+	{
+		return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ServiceLevel
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ServiceLevel
-          * @param value the value to set the attribute to
-          */
-        public void setServiceLevel(String value)
-        {
-            setAttribute(AttributeName.SERVICELEVEL, value, null);
-        }
+	/** (25) getCreateCompany
+	 * 
+	 * @return JDFCompany the element
+	 */
+	public JDFCompany getCreateCompany()
+	{
+		return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
+	}
 
-        /**
-          * (23) get String attribute ServiceLevel
-          * @return the value of the attribute
-          */
-        public String getServiceLevel()
-        {
-            return getAttribute(AttributeName.SERVICELEVEL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Company
+	 * @return JDFCompany the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFCompany appendCompany() throws JDFException
+	{
+		return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Transfer
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Transfer
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTransfer(EnumTransfer enumVar)
-        {
-            setAttribute(AttributeName.TRANSFER, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refCompany(JDFCompany refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        /**
-          * (9) get attribute Transfer
-          * @return the value of the attribute
-          */
-        public EnumTransfer getTransfer()
-        {
-            return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
-        }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /**
-     * (24) const get element Company
-     * @return JDFCompany the element
-     */
-    public JDFCompany getCompany()
-    {
-        return (JDFCompany) getElement(ElementName.COMPANY, null, 0);
-    }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateCompany
-     * 
-     * @return JDFCompany the element
-     */
-    public JDFCompany getCreateCompany()
-    {
-        return (JDFCompany) getCreateElement_KElement(ElementName.COMPANY, null, 0);
-    }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /**
-     * (29) append element Company
-     * @return JDFCompany the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFCompany appendCompany() throws JDFException
-    {
-        return (JDFCompany) appendElementN(ElementName.COMPANY, 1, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refCompany(JDFCompany refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/** (26) getCreateDrop
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDrop the element
+	 */
+	public JDFDrop getCreateDrop(int iSkip)
+	{
+		return (JDFDrop) getCreateElement_KElement(ElementName.DROP, null, iSkip);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element Drop
+	 * @param iSkip number of elements to skip
+	 * @return JDFDrop the element
+	 * default is getDrop(0)     */
+	public JDFDrop getDrop(int iSkip)
+	{
+		return (JDFDrop) getElement(ElementName.DROP, null, iSkip);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/**
+	 * Get all Drop from the current element
+	 * 
+	 * @return Collection<JDFDrop>, null if none are available
+	 */
+	public Collection<JDFDrop> getAllDrop()
+	{
+		final VElement vc = getChildElementVector(ElementName.DROP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFDrop> v = new Vector<JDFDrop>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDrop) vc.get(i));
+		}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element Drop
+	 * @return JDFDrop the element
+	 */
+	public JDFDrop appendDrop()
+	{
+		return (JDFDrop) appendElement(ElementName.DROP, null);
+	}
 
-    /** (26) getCreateDrop
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDrop the element
-     */
-    public JDFDrop getCreateDrop(int iSkip)
-    {
-        return (JDFDrop)getCreateElement_KElement(ElementName.DROP, null, iSkip);
-    }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * (27) const get element Drop
-     * @param iSkip number of elements to skip
-     * @return JDFDrop the element
-     * default is getDrop(0)     */
-    public JDFDrop getDrop(int iSkip)
-    {
-        return (JDFDrop) getElement(ElementName.DROP, null, iSkip);
-    }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * Get all Drop from the current element
-     * 
-     * @return Collection<JDFDrop>, null if none are available
-     */
-    public Collection<JDFDrop> getAllDrop()
-    {
-        final VElement vc = getChildElementVector(ElementName.DROP, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFDrop> v = new Vector<JDFDrop>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDrop) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Drop
-     * @return JDFDrop the element
-     */
-    public JDFDrop appendDrop()
-    {
-        return (JDFDrop) appendElement(ElementName.DROP, null);
-    }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
 }// end namespace JDF

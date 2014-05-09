@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,177 +75,163 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoThinPDFParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoThinPDFParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoThinPDFParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FILEPERPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SIDELINEEPS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDELINEFONTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SIDELINEIMAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILEPERPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIDELINEEPS, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDELINEFONTS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SIDELINEIMAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoThinPDFParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThinPDFParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoThinPDFParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThinPDFParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoThinPDFParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoThinPDFParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoThinPDFParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoThinPDFParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoThinPDFParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoThinPDFParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoThinPDFParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FilePerPage
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FilePerPage
+	  * @param value the value to set the attribute to
+	  */
+	public void setFilePerPage(boolean value)
+	{
+		setAttribute(AttributeName.FILEPERPAGE, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute FilePerPage
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getFilePerPage()
+	{
+		return getBoolAttribute(AttributeName.FILEPERPAGE, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FilePerPage
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FilePerPage
-          * @param value the value to set the attribute to
-          */
-        public void setFilePerPage(boolean value)
-        {
-            setAttribute(AttributeName.FILEPERPAGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SidelineEPS
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SidelineEPS
+	  * @param value the value to set the attribute to
+	  */
+	public void setSidelineEPS(boolean value)
+	{
+		setAttribute(AttributeName.SIDELINEEPS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute FilePerPage
-          * @return boolean the value of the attribute
-          */
-        public boolean getFilePerPage()
-        {
-            return getBoolAttribute(AttributeName.FILEPERPAGE, null, false);
-        }
+	/**
+	  * (18) get boolean attribute SidelineEPS
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getSidelineEPS()
+	{
+		return getBoolAttribute(AttributeName.SIDELINEEPS, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SidelineEPS
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SidelineEPS
-          * @param value the value to set the attribute to
-          */
-        public void setSidelineEPS(boolean value)
-        {
-            setAttribute(AttributeName.SIDELINEEPS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SidelineFonts
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SidelineFonts
+	  * @param value the value to set the attribute to
+	  */
+	public void setSidelineFonts(boolean value)
+	{
+		setAttribute(AttributeName.SIDELINEFONTS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute SidelineEPS
-          * @return boolean the value of the attribute
-          */
-        public boolean getSidelineEPS()
-        {
-            return getBoolAttribute(AttributeName.SIDELINEEPS, null, false);
-        }
+	/**
+	  * (18) get boolean attribute SidelineFonts
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getSidelineFonts()
+	{
+		return getBoolAttribute(AttributeName.SIDELINEFONTS, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SidelineFonts
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SidelineFonts
-          * @param value the value to set the attribute to
-          */
-        public void setSidelineFonts(boolean value)
-        {
-            setAttribute(AttributeName.SIDELINEFONTS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SidelineImages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SidelineImages
+	  * @param value the value to set the attribute to
+	  */
+	public void setSidelineImages(boolean value)
+	{
+		setAttribute(AttributeName.SIDELINEIMAGES, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute SidelineFonts
-          * @return boolean the value of the attribute
-          */
-        public boolean getSidelineFonts()
-        {
-            return getBoolAttribute(AttributeName.SIDELINEFONTS, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SidelineImages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SidelineImages
-          * @param value the value to set the attribute to
-          */
-        public void setSidelineImages(boolean value)
-        {
-            setAttribute(AttributeName.SIDELINEIMAGES, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute SidelineImages
-          * @return boolean the value of the attribute
-          */
-        public boolean getSidelineImages()
-        {
-            return getBoolAttribute(AttributeName.SIDELINEIMAGES, null, false);
-        }
+	/**
+	  * (18) get boolean attribute SidelineImages
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getSidelineImages()
+	{
+		return getBoolAttribute(AttributeName.SIDELINEIMAGES, null, false);
+	}
 
 }// end namespace JDF

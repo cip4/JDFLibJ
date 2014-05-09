@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,175 +80,162 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
-    /**
-    *****************************************************************************
-    class JDFAutoHoleLine : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoHoleLine : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoHoleLine extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PITCH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PITCH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x55555551);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x55555551);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoHoleLine
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleLine
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleLine(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleLine
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleLine
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleLine(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleLine
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleLine
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoHoleLine(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoHoleLine[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoHoleLine[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Pitch
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Pitch
+	  * @param value the value to set the attribute to
+	  */
+	public void setPitch(double value)
+	{
+		setAttribute(AttributeName.PITCH, value, null);
+	}
 
+	/**
+	  * (17) get double attribute Pitch
+	  * @return double the value of the attribute
+	  */
+	public double getPitch()
+	{
+		return getRealAttribute(AttributeName.PITCH, null, 0.0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element Hole
+	 * @return JDFHole the element
+	 */
+	public JDFHole getHole()
+	{
+		return (JDFHole) getElement(ElementName.HOLE, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Pitch
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Pitch
-          * @param value the value to set the attribute to
-          */
-        public void setPitch(double value)
-        {
-            setAttribute(AttributeName.PITCH, value, null);
-        }
+	/** (25) getCreateHole
+	 * 
+	 * @return JDFHole the element
+	 */
+	public JDFHole getCreateHole()
+	{
+		return (JDFHole) getCreateElement_KElement(ElementName.HOLE, null, 0);
+	}
 
-        /**
-          * (17) get double attribute Pitch
-          * @return double the value of the attribute
-          */
-        public double getPitch()
-        {
-            return getRealAttribute(AttributeName.PITCH, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Hole
-     * @return JDFHole the element
-     */
-    public JDFHole getHole()
-    {
-        return (JDFHole) getElement(ElementName.HOLE, null, 0);
-    }
-
-    /** (25) getCreateHole
-     * 
-     * @return JDFHole the element
-     */
-    public JDFHole getCreateHole()
-    {
-        return (JDFHole) getCreateElement_KElement(ElementName.HOLE, null, 0);
-    }
-
-    /**
-     * (29) append element Hole
-     * @return JDFHole the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHole appendHole() throws JDFException
-    {
-        return (JDFHole) appendElementN(ElementName.HOLE, 1, null);
-    }
+	/**
+	 * (29) append element Hole
+	 * @return JDFHole the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHole appendHole() throws JDFException
+	{
+		return (JDFHole) appendElementN(ElementName.HOLE, 1, null);
+	}
 
 }// end namespace JDF

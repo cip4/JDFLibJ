@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,160 +80,147 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContentData;
-    /**
-    *****************************************************************************
-    class JDFAutoContentList : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoContentList : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoContentList extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x22221111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x22222111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoContentList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoContentList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContentList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoContentList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoContentList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoContentList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoContentList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoContentList[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoContentList[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateContentData
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContentData the element
+	 */
+	public JDFContentData getCreateContentData(int iSkip)
+	{
+		return (JDFContentData) getCreateElement_KElement(ElementName.CONTENTDATA, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ContentData
+	 * @param iSkip number of elements to skip
+	 * @return JDFContentData the element
+	 * default is getContentData(0)     */
+	public JDFContentData getContentData(int iSkip)
+	{
+		return (JDFContentData) getElement(ElementName.CONTENTDATA, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all ContentData from the current element
+	 * 
+	 * @return Collection<JDFContentData>, null if none are available
+	 */
+	public Collection<JDFContentData> getAllContentData()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTENTDATA, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFContentData> v = new Vector<JDFContentData>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContentData) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateContentData
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContentData the element
-     */
-    public JDFContentData getCreateContentData(int iSkip)
-    {
-        return (JDFContentData)getCreateElement_KElement(ElementName.CONTENTDATA, null, iSkip);
-    }
-
-    /**
-     * (27) const get element ContentData
-     * @param iSkip number of elements to skip
-     * @return JDFContentData the element
-     * default is getContentData(0)     */
-    public JDFContentData getContentData(int iSkip)
-    {
-        return (JDFContentData) getElement(ElementName.CONTENTDATA, null, iSkip);
-    }
-
-    /**
-     * Get all ContentData from the current element
-     * 
-     * @return Collection<JDFContentData>, null if none are available
-     */
-    public Collection<JDFContentData> getAllContentData()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTENTDATA, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFContentData> v = new Vector<JDFContentData>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContentData) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ContentData
-     * @return JDFContentData the element
-     */
-    public JDFContentData appendContentData()
-    {
-        return (JDFContentData) appendElement(ElementName.CONTENTDATA, null);
-    }
+	/**
+	 * (30) append element ContentData
+	 * @return JDFContentData the element
+	 */
+	public JDFContentData appendContentData()
+	{
+		return (JDFContentData) appendElement(ElementName.CONTENTDATA, null);
+	}
 
 }// end namespace JDF

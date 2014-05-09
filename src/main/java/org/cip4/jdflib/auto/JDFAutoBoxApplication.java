@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,255 +80,234 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoBoxApplication : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBoxApplication : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBoxApplication extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x44443111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x44443111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x44443333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x44443333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x44443333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x44443333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBoxApplication
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxApplication
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxApplication
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxApplication
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBoxApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBoxApplication
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBoxApplication
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBoxApplication(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBoxApplication[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBoxApplication[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ApplicationArea
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ApplicationArea
+	  * @param value the value to set the attribute to
+	  */
+	public void setApplicationArea(JDFRectangle value)
+	{
+		setAttribute(AttributeName.APPLICATIONAREA, value, null);
+	}
 
+	/**
+	  * (20) get JDFRectangle attribute ApplicationArea
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getApplicationArea()
+	{
+		final String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ApplicationArea
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ApplicationArea
-          * @param value the value to set the attribute to
-          */
-        public void setApplicationArea(JDFRectangle value)
-        {
-            setAttribute(AttributeName.APPLICATIONAREA, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFRectangle attribute ApplicationArea
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getApplicationArea()
-        {
-            String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateComponent
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getCreateComponent(int iSkip)
+	{
+		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Component
+	 * @param iSkip number of elements to skip
+	 * @return JDFComponent the element
+	 * default is getComponent(0)     */
+	public JDFComponent getComponent(int iSkip)
+	{
+		return (JDFComponent) getElement(ElementName.COMPONENT, null, iSkip);
+	}
 
-    /** (26) getCreateComponent
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFComponent the element
-     */
-    public JDFComponent getCreateComponent(int iSkip)
-    {
-        return (JDFComponent)getCreateElement_KElement(ElementName.COMPONENT, null, iSkip);
-    }
+	/**
+	 * Get all Component from the current element
+	 * 
+	 * @return Collection<JDFComponent>, null if none are available
+	 */
+	public Collection<JDFComponent> getAllComponent()
+	{
+		final VElement vc = getChildElementVector(ElementName.COMPONENT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Component
-     * @param iSkip number of elements to skip
-     * @return JDFComponent the element
-     * default is getComponent(0)     */
-    public JDFComponent getComponent(int iSkip)
-    {
-        return (JDFComponent) getElement(ElementName.COMPONENT, null, iSkip);
-    }
+		final Vector<JDFComponent> v = new Vector<JDFComponent>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFComponent) vc.get(i));
+		}
 
-    /**
-     * Get all Component from the current element
-     * 
-     * @return Collection<JDFComponent>, null if none are available
-     */
-    public Collection<JDFComponent> getAllComponent()
-    {
-        final VElement vc = getChildElementVector(ElementName.COMPONENT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFComponent> v = new Vector<JDFComponent>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFComponent) vc.get(i));
-        }
+	/**
+	 * (30) append element Component
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent appendComponent()
+	{
+		return (JDFComponent) appendElement(ElementName.COMPONENT, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refComponent(JDFComponent refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element Component
-     * @return JDFComponent the element
-     */
-    public JDFComponent appendComponent()
-    {
-        return (JDFComponent) appendElement(ElementName.COMPONENT, null);
-    }
+	/** (26) getCreateGlueLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComponent(JDFComponent refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (27) const get element GlueLine
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 * default is getGlueLine(0)     */
+	public JDFGlueLine getGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-    /** (26) getCreateGlueLine
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine(int iSkip)
-    {
-        return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
-    }
+	/**
+	 * Get all GlueLine from the current element
+	 * 
+	 * @return Collection<JDFGlueLine>, null if none are available
+	 */
+	public Collection<JDFGlueLine> getAllGlueLine()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element GlueLine
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     * default is getGlueLine(0)     */
-    public JDFGlueLine getGlueLine(int iSkip)
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
-    }
+		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueLine) vc.get(i));
+		}
 
-    /**
-     * Get all GlueLine from the current element
-     * 
-     * @return Collection<JDFGlueLine>, null if none are available
-     */
-    public Collection<JDFGlueLine> getAllGlueLine()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueLine) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine appendGlueLine()
-    {
-        return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueLine(JDFGlueLine refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine appendGlueLine()
+	{
+		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,277 +81,252 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFDeviceMark;
-    /**
-    *****************************************************************************
-    class JDFAutoDynamicField : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDynamicField : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDynamicField extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FORMAT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.INPUTFIELD, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEFIELD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TEMPLATE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORMAT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INPUTFIELD, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPLACEFIELD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TEMPLATE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDynamicField
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDynamicField
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDynamicField(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDynamicField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDynamicField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDynamicField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDynamicField
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDynamicField
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDynamicField(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDynamicField[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDynamicField[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Format
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Format
+	  * @param value the value to set the attribute to
+	  */
+	public void setFormat(String value)
+	{
+		setAttribute(AttributeName.FORMAT, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Format
+	  * @return the value of the attribute
+	  */
+	public String getFormat()
+	{
+		return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Format
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Format
-          * @param value the value to set the attribute to
-          */
-        public void setFormat(String value)
-        {
-            setAttribute(AttributeName.FORMAT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute InputField
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute InputField
+	  * @param value the value to set the attribute to
+	  */
+	public void setInputField(String value)
+	{
+		setAttribute(AttributeName.INPUTFIELD, value, null);
+	}
 
-        /**
-          * (23) get String attribute Format
-          * @return the value of the attribute
-          */
-        public String getFormat()
-        {
-            return getAttribute(AttributeName.FORMAT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute InputField
+	  * @return the value of the attribute
+	  */
+	public String getInputField()
+	{
+		return getAttribute(AttributeName.INPUTFIELD, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute InputField
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute InputField
-          * @param value the value to set the attribute to
-          */
-        public void setInputField(String value)
-        {
-            setAttribute(AttributeName.INPUTFIELD, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Ord
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Ord
+	  * @param value the value to set the attribute to
+	  */
+	public void setOrd(int value)
+	{
+		setAttribute(AttributeName.ORD, value, null);
+	}
 
-        /**
-          * (23) get String attribute InputField
-          * @return the value of the attribute
-          */
-        public String getInputField()
-        {
-            return getAttribute(AttributeName.INPUTFIELD, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute Ord
+	  * @return int the value of the attribute
+	  */
+	public int getOrd()
+	{
+		return getIntAttribute(AttributeName.ORD, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Ord
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Ord
-          * @param value the value to set the attribute to
-          */
-        public void setOrd(int value)
-        {
-            setAttribute(AttributeName.ORD, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrdExpression
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OrdExpression
+	  * @param value the value to set the attribute to
+	  */
+	public void setOrdExpression(String value)
+	{
+		setAttribute(AttributeName.ORDEXPRESSION, value, null);
+	}
 
-        /**
-          * (15) get int attribute Ord
-          * @return int the value of the attribute
-          */
-        public int getOrd()
-        {
-            return getIntAttribute(AttributeName.ORD, null, 0);
-        }
+	/**
+	  * (23) get String attribute OrdExpression
+	  * @return the value of the attribute
+	  */
+	public String getOrdExpression()
+	{
+		return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OrdExpression
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OrdExpression
-          * @param value the value to set the attribute to
-          */
-        public void setOrdExpression(String value)
-        {
-            setAttribute(AttributeName.ORDEXPRESSION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReplaceField
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReplaceField
+	  * @param value the value to set the attribute to
+	  */
+	public void setReplaceField(String value)
+	{
+		setAttribute(AttributeName.REPLACEFIELD, value, null);
+	}
 
-        /**
-          * (23) get String attribute OrdExpression
-          * @return the value of the attribute
-          */
-        public String getOrdExpression()
-        {
-            return getAttribute(AttributeName.ORDEXPRESSION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ReplaceField
+	  * @return the value of the attribute
+	  */
+	public String getReplaceField()
+	{
+		return getAttribute(AttributeName.REPLACEFIELD, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReplaceField
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReplaceField
-          * @param value the value to set the attribute to
-          */
-        public void setReplaceField(String value)
-        {
-            setAttribute(AttributeName.REPLACEFIELD, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Template
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Template
+	  * @param value the value to set the attribute to
+	  */
+	public void setTemplate(String value)
+	{
+		setAttribute(AttributeName.TEMPLATE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ReplaceField
-          * @return the value of the attribute
-          */
-        public String getReplaceField()
-        {
-            return getAttribute(AttributeName.REPLACEFIELD, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Template
+	  * @return the value of the attribute
+	  */
+	public String getTemplate()
+	{
+		return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Template
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Template
-          * @param value the value to set the attribute to
-          */
-        public void setTemplate(String value)
-        {
-            setAttribute(AttributeName.TEMPLATE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Template
-          * @return the value of the attribute
-          */
-        public String getTemplate()
-        {
-            return getAttribute(AttributeName.TEMPLATE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element DeviceMark
+	 * @return JDFDeviceMark the element
+	 */
+	public JDFDeviceMark getDeviceMark()
+	{
+		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateDeviceMark
+	 * 
+	 * @return JDFDeviceMark the element
+	 */
+	public JDFDeviceMark getCreateDeviceMark()
+	{
+		return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
+	}
 
-    /**
-     * (24) const get element DeviceMark
-     * @return JDFDeviceMark the element
-     */
-    public JDFDeviceMark getDeviceMark()
-    {
-        return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, 0);
-    }
-
-    /** (25) getCreateDeviceMark
-     * 
-     * @return JDFDeviceMark the element
-     */
-    public JDFDeviceMark getCreateDeviceMark()
-    {
-        return (JDFDeviceMark) getCreateElement_KElement(ElementName.DEVICEMARK, null, 0);
-    }
-
-    /**
-     * (29) append element DeviceMark
-     * @return JDFDeviceMark the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFDeviceMark appendDeviceMark() throws JDFException
-    {
-        return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDeviceMark(JDFDeviceMark refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element DeviceMark
+	 * @return JDFDeviceMark the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFDeviceMark appendDeviceMark() throws JDFException
+	{
+		return (JDFDeviceMark) appendElementN(ElementName.DEVICEMARK, 1, null);
+	}
 
 }// end namespace JDF

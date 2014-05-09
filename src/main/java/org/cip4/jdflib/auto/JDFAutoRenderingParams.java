@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,443 +84,459 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
-    /**
-    *****************************************************************************
-    class JDFAutoRenderingParams : public JDFResource
+import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRenderingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRenderingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22211111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x77777761);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x77777761);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TIFFFORMATPARAMS, 0x66611111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRenderingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRenderingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRenderingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRenderingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRenderingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRenderingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRenderingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRenderingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRenderingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRenderingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRenderingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for BandOrdering
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumBandOrdering extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumBandOrdering(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumBandOrdering getEnum(String enumName)
+		{
+			return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumBandOrdering getEnum(int enumValue)
+		{
+			return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for BandOrdering
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumBandOrdering.class);
+		}
 
-        public static class EnumBandOrdering extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumBandOrdering.class);
+		}
 
-            private EnumBandOrdering(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumBandOrdering.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumBandOrdering getEnum(String enumName)
-            {
-                return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumName);
-            }
+		public static final EnumBandOrdering BandMajor = new EnumBandOrdering("BandMajor");
+		public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumBandOrdering getEnum(int enumValue)
-            {
-                return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumBandOrdering.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MimeType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMimeType(String value)
+	{
+		setAttribute(AttributeName.MIMETYPE, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumBandOrdering.class);
-            }
+	/**
+	  * (23) get String attribute MimeType
+	  * @return the value of the attribute
+	  */
+	public String getMimeType()
+	{
+		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumBandOrdering.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BandHeight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BandHeight
+	  * @param value the value to set the attribute to
+	  */
+	public void setBandHeight(int value)
+	{
+		setAttribute(AttributeName.BANDHEIGHT, value, null);
+	}
 
-            public static final EnumBandOrdering BandMajor = new EnumBandOrdering("BandMajor");
-            public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
-        }      
+	/**
+	  * (15) get int attribute BandHeight
+	  * @return int the value of the attribute
+	  */
+	public int getBandHeight()
+	{
+		return getIntAttribute(AttributeName.BANDHEIGHT, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BandOrdering
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute BandOrdering
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setBandOrdering(EnumBandOrdering enumVar)
+	{
+		setAttribute(AttributeName.BANDORDERING, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute BandOrdering
+	  * @return the value of the attribute
+	  */
+	public EnumBandOrdering getBandOrdering()
+	{
+		return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BandHeight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BandHeight
-          * @param value the value to set the attribute to
-          */
-        public void setBandHeight(int value)
-        {
-            setAttribute(AttributeName.BANDHEIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute BandWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute BandWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setBandWidth(int value)
+	{
+		setAttribute(AttributeName.BANDWIDTH, value, null);
+	}
 
-        /**
-          * (15) get int attribute BandHeight
-          * @return int the value of the attribute
-          */
-        public int getBandHeight()
-        {
-            return getIntAttribute(AttributeName.BANDHEIGHT, null, 0);
-        }
+	/**
+	  * (15) get int attribute BandWidth
+	  * @return int the value of the attribute
+	  */
+	public int getBandWidth()
+	{
+		return getIntAttribute(AttributeName.BANDWIDTH, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BandOrdering
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BandOrdering
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setBandOrdering(EnumBandOrdering enumVar)
-        {
-            setAttribute(AttributeName.BANDORDERING, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorantDepth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ColorantDepth
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorantDepth(int value)
+	{
+		setAttribute(AttributeName.COLORANTDEPTH, value, null);
+	}
 
-        /**
-          * (9) get attribute BandOrdering
-          * @return the value of the attribute
-          */
-        public EnumBandOrdering getBandOrdering()
-        {
-            return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
-        }
+	/**
+	  * (15) get int attribute ColorantDepth
+	  * @return int the value of the attribute
+	  */
+	public int getColorantDepth()
+	{
+		return getIntAttribute(AttributeName.COLORANTDEPTH, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BandWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BandWidth
-          * @param value the value to set the attribute to
-          */
-        public void setBandWidth(int value)
-        {
-            setAttribute(AttributeName.BANDWIDTH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Interleaved
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Interleaved
+	  * @param value the value to set the attribute to
+	  */
+	public void setInterleaved(boolean value)
+	{
+		setAttribute(AttributeName.INTERLEAVED, value, null);
+	}
 
-        /**
-          * (15) get int attribute BandWidth
-          * @return int the value of the attribute
-          */
-        public int getBandWidth()
-        {
-            return getIntAttribute(AttributeName.BANDWIDTH, null, 0);
-        }
+	/**
+	  * (18) get boolean attribute Interleaved
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getInterleaved()
+	{
+		return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ColorantDepth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ColorantDepth
-          * @param value the value to set the attribute to
-          */
-        public void setColorantDepth(int value)
-        {
-            setAttribute(AttributeName.COLORANTDEPTH, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute ColorantDepth
-          * @return int the value of the attribute
-          */
-        public int getColorantDepth()
-        {
-            return getIntAttribute(AttributeName.COLORANTDEPTH, null, 0);
-        }
+	/**
+	 * (24) const get element AutomatedOverPrintParams
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams()
+	{
+		return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Interleaved
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Interleaved
-          * @param value the value to set the attribute to
-          */
-        public void setInterleaved(boolean value)
-        {
-            setAttribute(AttributeName.INTERLEAVED, value, null);
-        }
+	/** (25) getCreateAutomatedOverPrintParams
+	 * 
+	 * @return JDFAutomatedOverPrintParams the element
+	 */
+	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
+	{
+		return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
+	}
 
-        /**
-          * (18) get boolean attribute Interleaved
-          * @return boolean the value of the attribute
-          */
-        public boolean getInterleaved()
-        {
-            return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
-        }
+	/**
+	 * (29) append element AutomatedOverPrintParams
+	 * @return JDFAutomatedOverPrintParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
+	{
+		return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (26) getCreateObjectResolution
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getCreateObjectResolution(int iSkip)
+	{
+		return (JDFObjectResolution) getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+	}
 
-    /**
-     * (24) const get element AutomatedOverPrintParams
-     * @return JDFAutomatedOverPrintParams the element
-     */
-    public JDFAutomatedOverPrintParams getAutomatedOverPrintParams()
-    {
-        return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
-    }
+	/**
+	 * (27) const get element ObjectResolution
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectResolution the element
+	 * default is getObjectResolution(0)     */
+	public JDFObjectResolution getObjectResolution(int iSkip)
+	{
+		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+	}
 
-    /** (25) getCreateAutomatedOverPrintParams
-     * 
-     * @return JDFAutomatedOverPrintParams the element
-     */
-    public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams()
-    {
-        return (JDFAutomatedOverPrintParams) getCreateElement_KElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, 0);
-    }
+	/**
+	 * Get all ObjectResolution from the current element
+	 * 
+	 * @return Collection<JDFObjectResolution>, null if none are available
+	 */
+	public Collection<JDFObjectResolution> getAllObjectResolution()
+	{
+		final VElement vc = getChildElementVector(ElementName.OBJECTRESOLUTION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (29) append element AutomatedOverPrintParams
-     * @return JDFAutomatedOverPrintParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
-    {
-        return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
-    }
+		final Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFObjectResolution) vc.get(i));
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
-    {
-        refElement(refTarget);
-    }
+		return v;
+	}
 
-    /** (26) getCreateObjectResolution
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFObjectResolution the element
-     */
-    public JDFObjectResolution getCreateObjectResolution(int iSkip)
-    {
-        return (JDFObjectResolution)getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
-    }
+	/**
+	 * (30) append element ObjectResolution
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution appendObjectResolution()
+	{
+		return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
+	}
 
-    /**
-     * (27) const get element ObjectResolution
-     * @param iSkip number of elements to skip
-     * @return JDFObjectResolution the element
-     * default is getObjectResolution(0)     */
-    public JDFObjectResolution getObjectResolution(int iSkip)
-    {
-        return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
-    }
+	/**
+	 * (24) const get element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getMedia()
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+	}
 
-    /**
-     * Get all ObjectResolution from the current element
-     * 
-     * @return Collection<JDFObjectResolution>, null if none are available
-     */
-    public Collection<JDFObjectResolution> getAllObjectResolution()
-    {
-        final VElement vc = getChildElementVector(ElementName.OBJECTRESOLUTION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (25) getCreateMedia
+	 * 
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia()
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+	}
 
-        final Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFObjectResolution) vc.get(i));
-        }
+	/**
+	 * (29) append element Media
+	 * @return JDFMedia the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMedia appendMedia() throws JDFException
+	{
+		return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+	}
 
-        return v;
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (30) append element ObjectResolution
-     * @return JDFObjectResolution the element
-     */
-    public JDFObjectResolution appendObjectResolution()
-    {
-        return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
-    }
+	/**
+	 * (24) const get element TIFFFormatParams
+	 * @return JDFTIFFFormatParams the element
+	 */
+	public JDFTIFFFormatParams getTIFFFormatParams()
+	{
+		return (JDFTIFFFormatParams) getElement(ElementName.TIFFFORMATPARAMS, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refObjectResolution(JDFObjectResolution refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreateTIFFFormatParams
+	 * 
+	 * @return JDFTIFFFormatParams the element
+	 */
+	public JDFTIFFFormatParams getCreateTIFFFormatParams()
+	{
+		return (JDFTIFFFormatParams) getCreateElement_KElement(ElementName.TIFFFORMATPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia getMedia()
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
-    }
-
-    /** (25) getCreateMedia
-     * 
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia()
-    {
-        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
-    }
-
-    /**
-     * (29) append element Media
-     * @return JDFMedia the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMedia appendMedia() throws JDFException
-    {
-        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element TIFFFormatParams
+	 * @return JDFTIFFFormatParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTIFFFormatParams appendTIFFFormatParams() throws JDFException
+	{
+		return (JDFTIFFFormatParams) appendElementN(ElementName.TIFFFORMATPARAMS, 1, null);
+	}
 
 }// end namespace JDF

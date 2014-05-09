@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
-    /**
-    *****************************************************************************
-    class JDFAutoDisplayGroup : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDisplayGroup : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDisplayGroup extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDisplayGroup
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDisplayGroup(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroup
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDisplayGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDisplayGroup
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDisplayGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroup
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDisplayGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDisplayGroup
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDisplayGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDisplayGroup
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDisplayGroup(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDisplayGroup[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDisplayGroup[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateLoc
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc getCreateLoc(int iSkip)
+	{
+		return (JDFLoc) getCreateElement_KElement(ElementName.LOC, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Loc
+	 * @param iSkip number of elements to skip
+	 * @return JDFLoc the element
+	 * default is getLoc(0)     */
+	public JDFLoc getLoc(int iSkip)
+	{
+		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Loc from the current element
+	 * 
+	 * @return Collection<JDFLoc>, null if none are available
+	 */
+	public Collection<JDFLoc> getAllLoc()
+	{
+		final VElement vc = getChildElementVector(ElementName.LOC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateLoc
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLoc the element
-     */
-    public JDFLoc getCreateLoc(int iSkip)
-    {
-        return (JDFLoc)getCreateElement_KElement(ElementName.LOC, null, iSkip);
-    }
+		final Vector<JDFLoc> v = new Vector<JDFLoc>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLoc) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Loc
-     * @param iSkip number of elements to skip
-     * @return JDFLoc the element
-     * default is getLoc(0)     */
-    public JDFLoc getLoc(int iSkip)
-    {
-        return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Loc from the current element
-     * 
-     * @return Collection<JDFLoc>, null if none are available
-     */
-    public Collection<JDFLoc> getAllLoc()
-    {
-        final VElement vc = getChildElementVector(ElementName.LOC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFLoc> v = new Vector<JDFLoc>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLoc) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Loc
-     * @return JDFLoc the element
-     */
-    public JDFLoc appendLoc()
-    {
-        return (JDFLoc) appendElement(ElementName.LOC, null);
-    }
+	/**
+	 * (30) append element Loc
+	 * @return JDFLoc the element
+	 */
+	public JDFLoc appendLoc()
+	{
+		return (JDFLoc) appendElement(ElementName.LOC, null);
+	}
 
 }// end namespace JDF

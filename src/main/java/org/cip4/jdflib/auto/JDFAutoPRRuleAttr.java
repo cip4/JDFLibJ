@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,206 +77,191 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-    /**
-    *****************************************************************************
-    class JDFAutoPRRuleAttr : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPRRuleAttr : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPRRuleAttr extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.GROUPBY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Tested");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.REPORTATTR, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.LOGERRORS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXGROUPS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXPERGROUP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GROUPBY, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Tested");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPORTATTR, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOGERRORS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXGROUPS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXPERGROUP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPRRuleAttr
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRuleAttr
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPRRuleAttr(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRRuleAttr
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRuleAttr
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPRRuleAttr(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRRuleAttr
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRuleAttr
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPRRuleAttr(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPRRuleAttr[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPRRuleAttr[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GroupBy
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GroupBy
+	  * @param value the value to set the attribute to
+	  */
+	public void setGroupBy(VString value)
+	{
+		setAttribute(AttributeName.GROUPBY, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute GroupBy
+	  * @return VString the value of the attribute
+	  */
+	public VString getGroupBy()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GROUPBY, null, "Tested");
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GroupBy
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GroupBy
-          * @param value the value to set the attribute to
-          */
-        public void setGroupBy(VString value)
-        {
-            setAttribute(AttributeName.GROUPBY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReportAttr
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReportAttr
+	  * @param value the value to set the attribute to
+	  */
+	public void setReportAttr(VString value)
+	{
+		setAttribute(AttributeName.REPORTATTR, value, null);
+	}
 
-        /**
-          * (21) get VString attribute GroupBy
-          * @return VString the value of the attribute
-          */
-        public VString getGroupBy()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.GROUPBY, null, "Tested");
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (21) get VString attribute ReportAttr
+	  * @return VString the value of the attribute
+	  */
+	public VString getReportAttr()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReportAttr
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReportAttr
-          * @param value the value to set the attribute to
-          */
-        public void setReportAttr(VString value)
-        {
-            setAttribute(AttributeName.REPORTATTR, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogErrors
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LogErrors
+	  * @param value the value to set the attribute to
+	  */
+	public void setLogErrors(int value)
+	{
+		setAttribute(AttributeName.LOGERRORS, value, null);
+	}
 
-        /**
-          * (21) get VString attribute ReportAttr
-          * @return VString the value of the attribute
-          */
-        public VString getReportAttr()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (15) get int attribute LogErrors
+	  * @return int the value of the attribute
+	  */
+	public int getLogErrors()
+	{
+		return getIntAttribute(AttributeName.LOGERRORS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LogErrors
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LogErrors
-          * @param value the value to set the attribute to
-          */
-        public void setLogErrors(int value)
-        {
-            setAttribute(AttributeName.LOGERRORS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxGroups
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxGroups
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxGroups(int value)
+	{
+		setAttribute(AttributeName.MAXGROUPS, value, null);
+	}
 
-        /**
-          * (15) get int attribute LogErrors
-          * @return int the value of the attribute
-          */
-        public int getLogErrors()
-        {
-            return getIntAttribute(AttributeName.LOGERRORS, null, 0);
-        }
+	/**
+	  * (15) get int attribute MaxGroups
+	  * @return int the value of the attribute
+	  */
+	public int getMaxGroups()
+	{
+		return getIntAttribute(AttributeName.MAXGROUPS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxGroups
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxGroups
-          * @param value the value to set the attribute to
-          */
-        public void setMaxGroups(int value)
-        {
-            setAttribute(AttributeName.MAXGROUPS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxPerGroup
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxPerGroup
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxPerGroup(int value)
+	{
+		setAttribute(AttributeName.MAXPERGROUP, value, null);
+	}
 
-        /**
-          * (15) get int attribute MaxGroups
-          * @return int the value of the attribute
-          */
-        public int getMaxGroups()
-        {
-            return getIntAttribute(AttributeName.MAXGROUPS, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxPerGroup
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxPerGroup
-          * @param value the value to set the attribute to
-          */
-        public void setMaxPerGroup(int value)
-        {
-            setAttribute(AttributeName.MAXPERGROUP, value, null);
-        }
-
-        /**
-          * (15) get int attribute MaxPerGroup
-          * @return int the value of the attribute
-          */
-        public int getMaxPerGroup()
-        {
-            return getIntAttribute(AttributeName.MAXPERGROUP, null, 0);
-        }
+	/**
+	  * (15) get int attribute MaxPerGroup
+	  * @return int the value of the attribute
+	  */
+	public int getMaxPerGroup()
+	{
+		return getIntAttribute(AttributeName.MAXPERGROUP, null, 0);
+	}
 
 }// end namespace JDF

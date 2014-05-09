@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -131,17 +131,17 @@ public abstract class JDFAutoDropItem extends JDFElement
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[11];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.INK, 0x33333333);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x33333333);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.PALLET, 0x33333333);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333333);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.STRAP, 0x33333333);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.BUNDLE, 0x33333333);
-		elemInfoTable[8] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x33333333);
-		elemInfoTable[9] = new ElemInfoTable(ElementName.ROLLSTAND, 0x33333333);
-		elemInfoTable[10] = new ElemInfoTable(ElementName.TOOL, 0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x22222222);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EXPOSEDMEDIA, 0x22222222);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.INK, 0x22222222);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x22222222);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PALLET, 0x22222222);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x22222222);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.STRAP, 0x22222222);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.BUNDLE, 0x22222222);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.DIGITALMEDIA, 0x22222222);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.ROLLSTAND, 0x22222222);
+		elemInfoTable[10] = new ElemInfoTable(ElementName.TOOL, 0x22222222);
 	}
 
 	@Override
@@ -300,8 +300,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	  */
 	public JDFShape getTotalDimensions()
 	{
-		String strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 

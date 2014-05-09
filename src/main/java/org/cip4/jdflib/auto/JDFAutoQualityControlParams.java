@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,206 +77,191 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoQualityControlParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQualityControlParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQualityControlParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TIMEINTERVAL, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SAMPLEINTERVAL, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TIMEINTERVAL, 0x33333311, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SAMPLEINTERVAL, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYPARAMS, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYPARAMS, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQualityControlParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityControlParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQualityControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQualityControlParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityControlParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQualityControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQualityControlParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityControlParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQualityControlParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQualityControlParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQualityControlParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TimeInterval
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TimeInterval
+	  * @param value the value to set the attribute to
+	  */
+	public void setTimeInterval(JDFDuration value)
+	{
+		setAttribute(AttributeName.TIMEINTERVAL, value, null);
+	}
 
+	/**
+	  * (20) get JDFDuration attribute TimeInterval
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getTimeInterval()
+	{
+		final String strAttrName = getAttribute(AttributeName.TIMEINTERVAL, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SampleInterval
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SampleInterval
+	  * @param value the value to set the attribute to
+	  */
+	public void setSampleInterval(int value)
+	{
+		setAttribute(AttributeName.SAMPLEINTERVAL, value, null);
+	}
 
+	/**
+	  * (15) get int attribute SampleInterval
+	  * @return int the value of the attribute
+	  */
+	public int getSampleInterval()
+	{
+		return getIntAttribute(AttributeName.SAMPLEINTERVAL, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TimeInterval
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TimeInterval
-          * @param value the value to set the attribute to
-          */
-        public void setTimeInterval(JDFDuration value)
-        {
-            setAttribute(AttributeName.TIMEINTERVAL, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFDuration attribute TimeInterval
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getTimeInterval()
-        {
-            String strAttrName = getAttribute(AttributeName.TIMEINTERVAL, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (24) const get element BindingQualityParams
+	 * @return JDFBindingQualityParams the element
+	 */
+	public JDFBindingQualityParams getBindingQualityParams()
+	{
+		return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SampleInterval
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SampleInterval
-          * @param value the value to set the attribute to
-          */
-        public void setSampleInterval(int value)
-        {
-            setAttribute(AttributeName.SAMPLEINTERVAL, value, null);
-        }
+	/** (25) getCreateBindingQualityParams
+	 * 
+	 * @return JDFBindingQualityParams the element
+	 */
+	public JDFBindingQualityParams getCreateBindingQualityParams()
+	{
+		return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
+	}
 
-        /**
-          * (15) get int attribute SampleInterval
-          * @return int the value of the attribute
-          */
-        public int getSampleInterval()
-        {
-            return getIntAttribute(AttributeName.SAMPLEINTERVAL, null, 0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element BindingQualityParams
-     * @return JDFBindingQualityParams the element
-     */
-    public JDFBindingQualityParams getBindingQualityParams()
-    {
-        return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
-    }
-
-    /** (25) getCreateBindingQualityParams
-     * 
-     * @return JDFBindingQualityParams the element
-     */
-    public JDFBindingQualityParams getCreateBindingQualityParams()
-    {
-        return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element BindingQualityParams
-     * @return JDFBindingQualityParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFBindingQualityParams appendBindingQualityParams() throws JDFException
-    {
-        return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYPARAMS, 1, null);
-    }
+	/**
+	 * (29) append element BindingQualityParams
+	 * @return JDFBindingQualityParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFBindingQualityParams appendBindingQualityParams() throws JDFException
+	{
+		return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYPARAMS, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,262 +83,238 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFPerson;
-    /**
-    *****************************************************************************
-    class JDFAutoEmployee : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEmployee : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEmployee extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PERSONALID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ROLES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PERSONALID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROLES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PERSON, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PERSON, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEmployee
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmployee
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEmployee(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmployee
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmployee
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEmployee(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmployee
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmployee
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEmployee(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEmployee[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Implementation);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEmployee[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Implementation;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Implementation);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PersonalID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PersonalID
+	  * @param value the value to set the attribute to
+	  */
+	public void setPersonalID(String value)
+	{
+		setAttribute(AttributeName.PERSONALID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute PersonalID
+	  * @return the value of the attribute
+	  */
+	public String getPersonalID()
+	{
+		return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Implementation;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Roles
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Roles
+	  * @param value the value to set the attribute to
+	  */
+	public void setRoles(VString value)
+	{
+		setAttribute(AttributeName.ROLES, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute Roles
+	  * @return VString the value of the attribute
+	  */
+	public VString getRoles()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PersonalID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PersonalID
-          * @param value the value to set the attribute to
-          */
-        public void setPersonalID(String value)
-        {
-            setAttribute(AttributeName.PERSONALID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Shift
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Shift
+	  * @param value the value to set the attribute to
+	  */
+	public void setShift(String value)
+	{
+		setAttribute(AttributeName.SHIFT, value, null);
+	}
 
-        /**
-          * (23) get String attribute PersonalID
-          * @return the value of the attribute
-          */
-        public String getPersonalID()
-        {
-            return getAttribute(AttributeName.PERSONALID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Shift
+	  * @return the value of the attribute
+	  */
+	public String getShift()
+	{
+		return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Roles
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Roles
-          * @param value the value to set the attribute to
-          */
-        public void setRoles(VString value)
-        {
-            setAttribute(AttributeName.ROLES, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (21) get VString attribute Roles
-          * @return VString the value of the attribute
-          */
-        public VString getRoles()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	 * (24) const get element CostCenter
+	 * @return JDFCostCenter the element
+	 */
+	public JDFCostCenter getCostCenter()
+	{
+		return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Shift
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Shift
-          * @param value the value to set the attribute to
-          */
-        public void setShift(String value)
-        {
-            setAttribute(AttributeName.SHIFT, value, null);
-        }
+	/** (25) getCreateCostCenter
+	 * 
+	 * @return JDFCostCenter the element
+	 */
+	public JDFCostCenter getCreateCostCenter()
+	{
+		return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
+	}
 
-        /**
-          * (23) get String attribute Shift
-          * @return the value of the attribute
-          */
-        public String getShift()
-        {
-            return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element CostCenter
+	 * @return JDFCostCenter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFCostCenter appendCostCenter() throws JDFException
+	{
+		return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (24) const get element Person
+	 * @return JDFPerson the element
+	 */
+	public JDFPerson getPerson()
+	{
+		return (JDFPerson) getElement(ElementName.PERSON, null, 0);
+	}
 
-    /**
-     * (24) const get element CostCenter
-     * @return JDFCostCenter the element
-     */
-    public JDFCostCenter getCostCenter()
-    {
-        return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
-    }
+	/** (25) getCreatePerson
+	 * 
+	 * @return JDFPerson the element
+	 */
+	public JDFPerson getCreatePerson()
+	{
+		return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
+	}
 
-    /** (25) getCreateCostCenter
-     * 
-     * @return JDFCostCenter the element
-     */
-    public JDFCostCenter getCreateCostCenter()
-    {
-        return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
-    }
-
-    /**
-     * (29) append element CostCenter
-     * @return JDFCostCenter the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFCostCenter appendCostCenter() throws JDFException
-    {
-        return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
-    }
-
-    /**
-     * (24) const get element Person
-     * @return JDFPerson the element
-     */
-    public JDFPerson getPerson()
-    {
-        return (JDFPerson) getElement(ElementName.PERSON, null, 0);
-    }
-
-    /** (25) getCreatePerson
-     * 
-     * @return JDFPerson the element
-     */
-    public JDFPerson getCreatePerson()
-    {
-        return (JDFPerson) getCreateElement_KElement(ElementName.PERSON, null, 0);
-    }
-
-    /**
-     * (29) append element Person
-     * @return JDFPerson the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPerson appendPerson() throws JDFException
-    {
-        return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPerson(JDFPerson refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (29) append element Person
+	 * @return JDFPerson the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPerson appendPerson() throws JDFException
+	{
+		return (JDFPerson) appendElementN(ElementName.PERSON, 1, null);
+	}
 
 }// end namespace JDF

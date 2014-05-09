@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,497 +86,474 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoWireCombBindingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoWireCombBindingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoWireCombBindingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FLIPBACKCOVER, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), "Single");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.COLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.DISTANCE, 0x44444433, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLIPBACKCOVER, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), "Single");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.DISTANCE, 0x44444433, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoWireCombBindingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoWireCombBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBindingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoWireCombBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoWireCombBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoWireCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoWireCombBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoWireCombBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoWireCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoWireCombBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoWireCombBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoWireCombBindingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoWireCombBindingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Shape
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumShape extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumShape(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumShape getEnum(String enumName)
+		{
+			return (EnumShape) getEnum(EnumShape.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumShape getEnum(int enumValue)
+		{
+			return (EnumShape) getEnum(EnumShape.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Shape
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumShape.class);
+		}
 
-        public static class EnumShape extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumShape.class);
+		}
 
-            private EnumShape(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumShape.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumShape getEnum(String enumName)
-            {
-                return (EnumShape) getEnum(EnumShape.class, enumName);
-            }
+		public static final EnumShape Single = new EnumShape("Single");
+		public static final EnumShape Twin = new EnumShape("Twin");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumShape getEnum(int enumValue)
-            {
-                return (EnumShape) getEnum(EnumShape.class, enumValue);
-            }
+	/**
+	* Enumeration strings for Material
+	*/
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumShape.class);
-            }
+	public static class EnumMaterial extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumShape.class);
-            }
+		private EnumMaterial(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumShape.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMaterial getEnum(String enumName)
+		{
+			return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
+		}
 
-            public static final EnumShape Single = new EnumShape("Single");
-            public static final EnumShape Twin = new EnumShape("Twin");
-        }      
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMaterial getEnum(int enumValue)
+		{
+			return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
+		}
 
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMaterial.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMaterial.class);
+		}
 
-        /**
-        * Enumeration strings for Material
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMaterial.class);
+		}
 
-        public static class EnumMaterial extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumMaterial LaqueredSteel = new EnumMaterial("LaqueredSteel");
+		public static final EnumMaterial TinnedSteel = new EnumMaterial("TinnedSteel");
+		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
+	}
 
-            private EnumMaterial(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumMaterial getEnum(String enumName)
-            {
-                return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FlipBackCover
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FlipBackCover
+	  * @param value the value to set the attribute to
+	  */
+	public void setFlipBackCover(boolean value)
+	{
+		setAttribute(AttributeName.FLIPBACKCOVER, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumMaterial getEnum(int enumValue)
-            {
-                return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
-            }
+	/**
+	  * (18) get boolean attribute FlipBackCover
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getFlipBackCover()
+	{
+		return getBoolAttribute(AttributeName.FLIPBACKCOVER, null, false);
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Shape
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Shape
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setShape(EnumShape enumVar)
+	{
+		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumMaterial.class);
-            }
+	/**
+	  * (9) get attribute Shape
+	  * @return the value of the attribute
+	  */
+	public EnumShape getShape()
+	{
+		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, "Single"));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Brand
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Brand
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setBrand(String value)
+	{
+		setAttribute(AttributeName.BRAND, value, null);
+	}
 
-            public static final EnumMaterial LaqueredSteel = new EnumMaterial("LaqueredSteel");
-            public static final EnumMaterial TinnedSteel = new EnumMaterial("TinnedSteel");
-            public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
-        }      
+	/**
+	  * (23) get String attribute Brand
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getBrand()
+	{
+		return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Color
+	--------------------------------------------------------------------- */
+	/**
+	  * (13) set attribute Color
+	  * @param value the value to set the attribute to
+	  */
+	public void setColor(EnumNamedColor value)
+	{
+		setAttribute(AttributeName.COLOR, value == null ? null : value.getName(), null);
+	}
 
+	/**
+	  * (19) get EnumNamedColor attribute Color
+	  * @return EnumNamedColor the value of the attribute
+	  */
+	public EnumNamedColor getColor()
+	{
+		String strAttrName = "";
+		EnumNamedColor nPlaceHolder = null;
+		strAttrName = getAttribute(AttributeName.COLOR, null, JDFCoreConstants.EMPTYSTRING);
+		nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FlipBackCover
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FlipBackCover
-          * @param value the value to set the attribute to
-          */
-        public void setFlipBackCover(boolean value)
-        {
-            setAttribute(AttributeName.FLIPBACKCOVER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ColorDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ColorDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setColorDetails(String value)
+	{
+		setAttribute(AttributeName.COLORDETAILS, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute FlipBackCover
-          * @return boolean the value of the attribute
-          */
-        public boolean getFlipBackCover()
-        {
-            return getBoolAttribute(AttributeName.FLIPBACKCOVER, null, false);
-        }
+	/**
+	  * (23) get String attribute ColorDetails
+	  * @return the value of the attribute
+	  */
+	public String getColorDetails()
+	{
+		return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Shape
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Shape
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setShape(EnumShape enumVar)
-        {
-            setAttribute(AttributeName.SHAPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Diameter
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Diameter
+	  * @param value the value to set the attribute to
+	  */
+	public void setDiameter(double value)
+	{
+		setAttribute(AttributeName.DIAMETER, value, null);
+	}
 
-        /**
-          * (9) get attribute Shape
-          * @return the value of the attribute
-          */
-        public EnumShape getShape()
-        {
-            return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, "Single"));
-        }
+	/**
+	  * (17) get double attribute Diameter
+	  * @return double the value of the attribute
+	  */
+	public double getDiameter()
+	{
+		return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Brand
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Brand
-          * @param value the value to set the attribute to
-          */
-        public void setBrand(String value)
-        {
-            setAttribute(AttributeName.BRAND, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Distance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Distance
+	  * @param value the value to set the attribute to
+	  */
+	public void setDistance(double value)
+	{
+		setAttribute(AttributeName.DISTANCE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Brand
-          * @return the value of the attribute
-          */
-        public String getBrand()
-        {
-            return getAttribute(AttributeName.BRAND, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute Distance
+	  * @return double the value of the attribute
+	  */
+	public double getDistance()
+	{
+		return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Color
-        --------------------------------------------------------------------- */
-        /**
-          * (13) set attribute Color
-          * @param value the value to set the attribute to
-          */
-        public void setColor(EnumNamedColor value)
-        {
-            setAttribute(AttributeName.COLOR, value==null ? null : value.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Material
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Material
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setMaterial(EnumMaterial enumVar)
+	{
+		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (19) get EnumNamedColor attribute Color
-          * @return EnumNamedColor the value of the attribute
-          */
-        public EnumNamedColor getColor()
-        {
-            String strAttrName = "";
-            EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.COLOR, null, JDFCoreConstants.EMPTYSTRING);
-            nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute Material
+	  * @return the value of the attribute
+	  */
+	public EnumMaterial getMaterial()
+	{
+		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ColorDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ColorDetails
-          * @param value the value to set the attribute to
-          */
-        public void setColorDetails(String value)
-        {
-            setAttribute(AttributeName.COLORDETAILS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Thickness
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Thickness
+	  * @param value the value to set the attribute to
+	  */
+	public void setThickness(double value)
+	{
+		setAttribute(AttributeName.THICKNESS, value, null);
+	}
 
-        /**
-          * (23) get String attribute ColorDetails
-          * @return the value of the attribute
-          */
-        public String getColorDetails()
-        {
-            return getAttribute(AttributeName.COLORDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute Thickness
+	  * @return double the value of the attribute
+	  */
+	public double getThickness()
+	{
+		return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Diameter
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Diameter
-          * @param value the value to set the attribute to
-          */
-        public void setDiameter(double value)
-        {
-            setAttribute(AttributeName.DIAMETER, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute Diameter
-          * @return double the value of the attribute
-          */
-        public double getDiameter()
-        {
-            return getRealAttribute(AttributeName.DIAMETER, null, 0.0);
-        }
+	/**
+	 * (24) const get element HoleMakingParams
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams getHoleMakingParams()
+	{
+		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Distance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Distance
-          * @param value the value to set the attribute to
-          */
-        public void setDistance(double value)
-        {
-            setAttribute(AttributeName.DISTANCE, value, null);
-        }
+	/** (25) getCreateHoleMakingParams
+	 * 
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams getCreateHoleMakingParams()
+	{
+		return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
+	}
 
-        /**
-          * (17) get double attribute Distance
-          * @return double the value of the attribute
-          */
-        public double getDistance()
-        {
-            return getRealAttribute(AttributeName.DISTANCE, null, 0.0);
-        }
+	/**
+	 * (29) append element HoleMakingParams
+	 * @return JDFHoleMakingParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
+	{
+		return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Material
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Material
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setMaterial(EnumMaterial enumVar)
-        {
-            setAttribute(AttributeName.MATERIAL, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Material
-          * @return the value of the attribute
-          */
-        public EnumMaterial getMaterial()
-        {
-            return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Thickness
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Thickness
-          * @param value the value to set the attribute to
-          */
-        public void setThickness(double value)
-        {
-            setAttribute(AttributeName.THICKNESS, value, null);
-        }
-
-        /**
-          * (17) get double attribute Thickness
-          * @return double the value of the attribute
-          */
-        public double getThickness()
-        {
-            return getRealAttribute(AttributeName.THICKNESS, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element HoleMakingParams
-     * @return JDFHoleMakingParams the element
-     */
-    public JDFHoleMakingParams getHoleMakingParams()
-    {
-        return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, 0);
-    }
-
-    /** (25) getCreateHoleMakingParams
-     * 
-     * @return JDFHoleMakingParams the element
-     */
-    public JDFHoleMakingParams getCreateHoleMakingParams()
-    {
-        return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element HoleMakingParams
-     * @return JDFHoleMakingParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleMakingParams appendHoleMakingParams() throws JDFException
-    {
-        return (JDFHoleMakingParams) appendElementN(ElementName.HOLEMAKINGPARAMS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refHoleMakingParams(JDFHoleMakingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,227 +85,214 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPRRule;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightReportRulePool : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightReportRulePool : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXOCCURRENCES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULE, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PRRULEATTR, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULE, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRRULEATTR, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightReportRulePool
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightReportRulePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReportRulePool
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightReportRulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightReportRulePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightReportRulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReportRulePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightReportRulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightReportRulePool
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightReportRulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReportRulePool
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightReportRulePool(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightReportRulePool[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightReportRulePool[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MaxOccurrences
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MaxOccurrences
+	  * @param value the value to set the attribute to
+	  */
+	public void setMaxOccurrences(int value)
+	{
+		setAttribute(AttributeName.MAXOCCURRENCES, value, null);
+	}
 
+	/**
+	  * (15) get int attribute MaxOccurrences
+	  * @return int the value of the attribute
+	  */
+	public int getMaxOccurrences()
+	{
+		return getIntAttribute(AttributeName.MAXOCCURRENCES, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreatePRRule
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRRule the element
+	 */
+	public JDFPRRule getCreatePRRule(int iSkip)
+	{
+		return (JDFPRRule) getCreateElement_KElement(ElementName.PRRULE, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MaxOccurrences
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MaxOccurrences
-          * @param value the value to set the attribute to
-          */
-        public void setMaxOccurrences(int value)
-        {
-            setAttribute(AttributeName.MAXOCCURRENCES, value, null);
-        }
+	/**
+	 * (27) const get element PRRule
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRRule the element
+	 * default is getPRRule(0)     */
+	public JDFPRRule getPRRule(int iSkip)
+	{
+		return (JDFPRRule) getElement(ElementName.PRRULE, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute MaxOccurrences
-          * @return int the value of the attribute
-          */
-        public int getMaxOccurrences()
-        {
-            return getIntAttribute(AttributeName.MAXOCCURRENCES, null, 0);
-        }
+	/**
+	 * Get all PRRule from the current element
+	 * 
+	 * @return Collection<JDFPRRule>, null if none are available
+	 */
+	public Collection<JDFPRRule> getAllPRRule()
+	{
+		final VElement vc = getChildElementVector(ElementName.PRRULE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFPRRule> v = new Vector<JDFPRRule>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPRRule) vc.get(i));
+		}
 
-    /** (26) getCreatePRRule
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPRRule the element
-     */
-    public JDFPRRule getCreatePRRule(int iSkip)
-    {
-        return (JDFPRRule)getCreateElement_KElement(ElementName.PRRULE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element PRRule
-     * @param iSkip number of elements to skip
-     * @return JDFPRRule the element
-     * default is getPRRule(0)     */
-    public JDFPRRule getPRRule(int iSkip)
-    {
-        return (JDFPRRule) getElement(ElementName.PRRULE, null, iSkip);
-    }
+	/**
+	 * (30) append element PRRule
+	 * @return JDFPRRule the element
+	 */
+	public JDFPRRule appendPRRule()
+	{
+		return (JDFPRRule) appendElement(ElementName.PRRULE, null);
+	}
 
-    /**
-     * Get all PRRule from the current element
-     * 
-     * @return Collection<JDFPRRule>, null if none are available
-     */
-    public Collection<JDFPRRule> getAllPRRule()
-    {
-        final VElement vc = getChildElementVector(ElementName.PRRULE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (24) const get element PRRuleAttr
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr getPRRuleAttr()
+	{
+		return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, 0);
+	}
 
-        final Vector<JDFPRRule> v = new Vector<JDFPRRule>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPRRule) vc.get(i));
-        }
+	/** (25) getCreatePRRuleAttr
+	 * 
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr getCreatePRRuleAttr()
+	{
+		return (JDFPRRuleAttr) getCreateElement_KElement(ElementName.PRRULEATTR, null, 0);
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element PRRule
-     * @return JDFPRRule the element
-     */
-    public JDFPRRule appendPRRule()
-    {
-        return (JDFPRRule) appendElement(ElementName.PRRULE, null);
-    }
-
-    /**
-     * (24) const get element PRRuleAttr
-     * @return JDFPRRuleAttr the element
-     */
-    public JDFPRRuleAttr getPRRuleAttr()
-    {
-        return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, 0);
-    }
-
-    /** (25) getCreatePRRuleAttr
-     * 
-     * @return JDFPRRuleAttr the element
-     */
-    public JDFPRRuleAttr getCreatePRRuleAttr()
-    {
-        return (JDFPRRuleAttr) getCreateElement_KElement(ElementName.PRRULEATTR, null, 0);
-    }
-
-    /**
-     * (29) append element PRRuleAttr
-     * @return JDFPRRuleAttr the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
-    {
-        return (JDFPRRuleAttr) appendElementN(ElementName.PRRULEATTR, 1, null);
-    }
+	/**
+	 * (29) append element PRRuleAttr
+	 * @return JDFPRRuleAttr the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPRRuleAttr appendPRRuleAttr() throws JDFException
+	{
+		return (JDFPRRuleAttr) appendElementN(ElementName.PRRULEATTR, 1, null);
+	}
 
 }// end namespace JDF

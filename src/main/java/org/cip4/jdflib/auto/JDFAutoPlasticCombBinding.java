@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoPlasticCombBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPlasticCombBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPlasticCombBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMBBRAND, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PLASTICCOMBTYPE, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMBBRAND, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PLASTICCOMBTYPE, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPlasticCombBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlasticCombBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPlasticCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPlasticCombBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlasticCombBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPlasticCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPlasticCombBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPlasticCombBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlasticCombBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPlasticCombBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPlasticCombBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPlasticCombBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element CombBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCombBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.COMBBRAND, null, 0);
+	}
 
+	/** (25) getCreateCombBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateCombBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.COMBBRAND, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element CombBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendCombBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.COMBBRAND, 1, null);
+	}
 
-    /**
-     * (24) const get element CombBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCombBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.COMBBRAND, null, 0);
-    }
+	/**
+	 * (24) const get element PlasticCombType
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getPlasticCombType()
+	{
+		return (JDFNameSpan) getElement(ElementName.PLASTICCOMBTYPE, null, 0);
+	}
 
-    /** (25) getCreateCombBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateCombBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.COMBBRAND, null, 0);
-    }
+	/** (25) getCreatePlasticCombType
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreatePlasticCombType()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.PLASTICCOMBTYPE, null, 0);
+	}
 
-    /**
-     * (29) append element CombBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendCombBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.COMBBRAND, 1, null);
-    }
+	/**
+	 * (29) append element PlasticCombType
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendPlasticCombType() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.PLASTICCOMBTYPE, 1, null);
+	}
 
-    /**
-     * (24) const get element PlasticCombType
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getPlasticCombType()
-    {
-        return (JDFNameSpan) getElement(ElementName.PLASTICCOMBTYPE, null, 0);
-    }
+	/**
+	 * (24) const get element HoleList
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getHoleList()
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /** (25) getCreatePlasticCombType
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreatePlasticCombType()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.PLASTICCOMBTYPE, null, 0);
-    }
+	/** (25) getCreateHoleList
+	 * 
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleList()
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /**
-     * (29) append element PlasticCombType
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendPlasticCombType() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.PLASTICCOMBTYPE, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleList
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getHoleList()
-    {
-        return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /** (25) getCreateHoleList
-     * 
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getCreateHoleList()
-    {
-        return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /**
-     * (29) append element HoleList
-     * @return JDFHoleList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleList appendHoleList() throws JDFException
-    {
-        return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
-    }
+	/**
+	 * (29) append element HoleList
+	 * @return JDFHoleList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleList appendHoleList() throws JDFException
+	{
+		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+	}
 
 }// end namespace JDF

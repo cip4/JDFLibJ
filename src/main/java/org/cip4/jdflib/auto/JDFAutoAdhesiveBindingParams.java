@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,377 +86,363 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSpinePreparationParams;
 import org.cip4.jdflib.resource.JDFSpineTapingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
-    /**
-    *****************************************************************************
-    class JDFAutoAdhesiveBindingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAdhesiveBindingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SPINEPREPARATIONPARAMS, 0x44444442);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x44444442);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.SPINETAPINGPARAMS, 0x44444442);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAPPLICATIONPARAMS, 0x44444442);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SPINEPREPARATIONPARAMS, 0x44444442);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x44444442);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SPINETAPINGPARAMS, 0x44444442);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAPPLICATIONPARAMS, 0x44444442);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAdhesiveBindingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBindingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAdhesiveBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAdhesiveBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAdhesiveBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAdhesiveBindingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBindingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAdhesiveBindingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAdhesiveBindingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAdhesiveBindingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PullOutValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PullOutValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setPullOutValue(double value)
+	{
+		setAttribute(AttributeName.PULLOUTVALUE, value, null);
+	}
 
+	/**
+	  * (17) get double attribute PullOutValue
+	  * @return double the value of the attribute
+	  */
+	public double getPullOutValue()
+	{
+		return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FlexValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FlexValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setFlexValue(double value)
+	{
+		setAttribute(AttributeName.FLEXVALUE, value, null);
+	}
 
+	/**
+	  * (17) get double attribute FlexValue
+	  * @return double the value of the attribute
+	  */
+	public double getFlexValue()
+	{
+		return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PullOutValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PullOutValue
-          * @param value the value to set the attribute to
-          */
-        public void setPullOutValue(double value)
-        {
-            setAttribute(AttributeName.PULLOUTVALUE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute PullOutValue
-          * @return double the value of the attribute
-          */
-        public double getPullOutValue()
-        {
-            return getRealAttribute(AttributeName.PULLOUTVALUE, null, 0.0);
-        }
+	/** (26) getCreateSpinePreparationParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSpinePreparationParams the element
+	 */
+	public JDFSpinePreparationParams getCreateSpinePreparationParams(int iSkip)
+	{
+		return (JDFSpinePreparationParams) getCreateElement_KElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FlexValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FlexValue
-          * @param value the value to set the attribute to
-          */
-        public void setFlexValue(double value)
-        {
-            setAttribute(AttributeName.FLEXVALUE, value, null);
-        }
+	/**
+	 * (27) const get element SpinePreparationParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFSpinePreparationParams the element
+	 * default is getSpinePreparationParams(0)     */
+	public JDFSpinePreparationParams getSpinePreparationParams(int iSkip)
+	{
+		return (JDFSpinePreparationParams) getElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute FlexValue
-          * @return double the value of the attribute
-          */
-        public double getFlexValue()
-        {
-            return getRealAttribute(AttributeName.FLEXVALUE, null, 0.0);
-        }
+	/**
+	 * Get all SpinePreparationParams from the current element
+	 * 
+	 * @return Collection<JDFSpinePreparationParams>, null if none are available
+	 */
+	public Collection<JDFSpinePreparationParams> getAllSpinePreparationParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.SPINEPREPARATIONPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFSpinePreparationParams> v = new Vector<JDFSpinePreparationParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSpinePreparationParams) vc.get(i));
+		}
 
-    /** (26) getCreateSpinePreparationParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSpinePreparationParams the element
-     */
-    public JDFSpinePreparationParams getCreateSpinePreparationParams(int iSkip)
-    {
-        return (JDFSpinePreparationParams)getCreateElement_KElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element SpinePreparationParams
-     * @param iSkip number of elements to skip
-     * @return JDFSpinePreparationParams the element
-     * default is getSpinePreparationParams(0)     */
-    public JDFSpinePreparationParams getSpinePreparationParams(int iSkip)
-    {
-        return (JDFSpinePreparationParams) getElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
-    }
+	/**
+	 * (30) append element SpinePreparationParams
+	 * @return JDFSpinePreparationParams the element
+	 */
+	public JDFSpinePreparationParams appendSpinePreparationParams()
+	{
+		return (JDFSpinePreparationParams) appendElement(ElementName.SPINEPREPARATIONPARAMS, null);
+	}
 
-    /**
-     * Get all SpinePreparationParams from the current element
-     * 
-     * @return Collection<JDFSpinePreparationParams>, null if none are available
-     */
-    public Collection<JDFSpinePreparationParams> getAllSpinePreparationParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.SPINEPREPARATIONPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateGlueApplication
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	{
+		return (JDFGlueApplication) getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
+	}
 
-        final Vector<JDFSpinePreparationParams> v = new Vector<JDFSpinePreparationParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSpinePreparationParams) vc.get(i));
-        }
+	/**
+	 * (27) const get element GlueApplication
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueApplication the element
+	 * default is getGlueApplication(0)     */
+	public JDFGlueApplication getGlueApplication(int iSkip)
+	{
+		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all GlueApplication from the current element
+	 * 
+	 * @return Collection<JDFGlueApplication>, null if none are available
+	 */
+	public Collection<JDFGlueApplication> getAllGlueApplication()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element SpinePreparationParams
-     * @return JDFSpinePreparationParams the element
-     */
-    public JDFSpinePreparationParams appendSpinePreparationParams()
-    {
-        return (JDFSpinePreparationParams) appendElement(ElementName.SPINEPREPARATIONPARAMS, null);
-    }
+		final Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueApplication) vc.get(i));
+		}
 
-    /** (26) getCreateGlueApplication
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication getCreateGlueApplication(int iSkip)
-    {
-        return (JDFGlueApplication)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element GlueApplication
-     * @param iSkip number of elements to skip
-     * @return JDFGlueApplication the element
-     * default is getGlueApplication(0)     */
-    public JDFGlueApplication getGlueApplication(int iSkip)
-    {
-        return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
-    }
+	/**
+	 * (30) append element GlueApplication
+	 * @return JDFGlueApplication the element
+	 */
+	public JDFGlueApplication appendGlueApplication()
+	{
+		return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
+	}
 
-    /**
-     * Get all GlueApplication from the current element
-     * 
-     * @return Collection<JDFGlueApplication>, null if none are available
-     */
-    public Collection<JDFGlueApplication> getAllGlueApplication()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateSpineTapingParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSpineTapingParams the element
+	 */
+	public JDFSpineTapingParams getCreateSpineTapingParams(int iSkip)
+	{
+		return (JDFSpineTapingParams) getCreateElement_KElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
+	}
 
-        final Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueApplication) vc.get(i));
-        }
+	/**
+	 * (27) const get element SpineTapingParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFSpineTapingParams the element
+	 * default is getSpineTapingParams(0)     */
+	public JDFSpineTapingParams getSpineTapingParams(int iSkip)
+	{
+		return (JDFSpineTapingParams) getElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all SpineTapingParams from the current element
+	 * 
+	 * @return Collection<JDFSpineTapingParams>, null if none are available
+	 */
+	public Collection<JDFSpineTapingParams> getAllSpineTapingParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.SPINETAPINGPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element GlueApplication
-     * @return JDFGlueApplication the element
-     */
-    public JDFGlueApplication appendGlueApplication()
-    {
-        return (JDFGlueApplication) appendElement(ElementName.GLUEAPPLICATION, null);
-    }
+		final Vector<JDFSpineTapingParams> v = new Vector<JDFSpineTapingParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSpineTapingParams) vc.get(i));
+		}
 
-    /** (26) getCreateSpineTapingParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSpineTapingParams the element
-     */
-    public JDFSpineTapingParams getCreateSpineTapingParams(int iSkip)
-    {
-        return (JDFSpineTapingParams)getCreateElement_KElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element SpineTapingParams
-     * @param iSkip number of elements to skip
-     * @return JDFSpineTapingParams the element
-     * default is getSpineTapingParams(0)     */
-    public JDFSpineTapingParams getSpineTapingParams(int iSkip)
-    {
-        return (JDFSpineTapingParams) getElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
-    }
+	/**
+	 * (30) append element SpineTapingParams
+	 * @return JDFSpineTapingParams the element
+	 */
+	public JDFSpineTapingParams appendSpineTapingParams()
+	{
+		return (JDFSpineTapingParams) appendElement(ElementName.SPINETAPINGPARAMS, null);
+	}
 
-    /**
-     * Get all SpineTapingParams from the current element
-     * 
-     * @return Collection<JDFSpineTapingParams>, null if none are available
-     */
-    public Collection<JDFSpineTapingParams> getAllSpineTapingParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.SPINETAPINGPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateCoverApplicationParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCoverApplicationParams the element
+	 */
+	public JDFCoverApplicationParams getCreateCoverApplicationParams(int iSkip)
+	{
+		return (JDFCoverApplicationParams) getCreateElement_KElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
+	}
 
-        final Vector<JDFSpineTapingParams> v = new Vector<JDFSpineTapingParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSpineTapingParams) vc.get(i));
-        }
+	/**
+	 * (27) const get element CoverApplicationParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFCoverApplicationParams the element
+	 * default is getCoverApplicationParams(0)     */
+	public JDFCoverApplicationParams getCoverApplicationParams(int iSkip)
+	{
+		return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all CoverApplicationParams from the current element
+	 * 
+	 * @return Collection<JDFCoverApplicationParams>, null if none are available
+	 */
+	public Collection<JDFCoverApplicationParams> getAllCoverApplicationParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.COVERAPPLICATIONPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element SpineTapingParams
-     * @return JDFSpineTapingParams the element
-     */
-    public JDFSpineTapingParams appendSpineTapingParams()
-    {
-        return (JDFSpineTapingParams) appendElement(ElementName.SPINETAPINGPARAMS, null);
-    }
+		final Vector<JDFCoverApplicationParams> v = new Vector<JDFCoverApplicationParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCoverApplicationParams) vc.get(i));
+		}
 
-    /** (26) getCreateCoverApplicationParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCoverApplicationParams the element
-     */
-    public JDFCoverApplicationParams getCreateCoverApplicationParams(int iSkip)
-    {
-        return (JDFCoverApplicationParams)getCreateElement_KElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element CoverApplicationParams
-     * @param iSkip number of elements to skip
-     * @return JDFCoverApplicationParams the element
-     * default is getCoverApplicationParams(0)     */
-    public JDFCoverApplicationParams getCoverApplicationParams(int iSkip)
-    {
-        return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
-    }
-
-    /**
-     * Get all CoverApplicationParams from the current element
-     * 
-     * @return Collection<JDFCoverApplicationParams>, null if none are available
-     */
-    public Collection<JDFCoverApplicationParams> getAllCoverApplicationParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.COVERAPPLICATIONPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFCoverApplicationParams> v = new Vector<JDFCoverApplicationParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCoverApplicationParams) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element CoverApplicationParams
-     * @return JDFCoverApplicationParams the element
-     */
-    public JDFCoverApplicationParams appendCoverApplicationParams()
-    {
-        return (JDFCoverApplicationParams) appendElement(ElementName.COVERAPPLICATIONPARAMS, null);
-    }
+	/**
+	 * (30) append element CoverApplicationParams
+	 * @return JDFCoverApplicationParams the element
+	 */
+	public JDFCoverApplicationParams appendCoverApplicationParams()
+	{
+		return (JDFCoverApplicationParams) appendElement(ElementName.COVERAPPLICATIONPARAMS, null);
+	}
 
 }// end namespace JDF

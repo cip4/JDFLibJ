@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,315 +88,299 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /**
-    *****************************************************************************
-    class JDFAutoDigitalDeliveryParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDigitalDeliveryParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DIGITALDELIVERYDIRECTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDigitalDeliveryDirection.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DIGITALDELIVERYPROTOCOL, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.METHOD, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIGITALDELIVERYDIRECTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDigitalDeliveryDirection.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIGITALDELIVERYPROTOCOL, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.METHOD, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDigitalDeliveryParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDigitalDeliveryParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDigitalDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDigitalDeliveryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDigitalDeliveryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDigitalDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDigitalDeliveryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDigitalDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDigitalDeliveryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDigitalDeliveryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDigitalDeliveryParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDigitalDeliveryParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for DigitalDeliveryDirection
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumDigitalDeliveryDirection extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDigitalDeliveryDirection(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDigitalDeliveryDirection getEnum(String enumName)
+		{
+			return (EnumDigitalDeliveryDirection) getEnum(EnumDigitalDeliveryDirection.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDigitalDeliveryDirection getEnum(int enumValue)
+		{
+			return (EnumDigitalDeliveryDirection) getEnum(EnumDigitalDeliveryDirection.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for DigitalDeliveryDirection
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDigitalDeliveryDirection.class);
+		}
 
-        public static class EnumDigitalDeliveryDirection extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDigitalDeliveryDirection.class);
+		}
 
-            private EnumDigitalDeliveryDirection(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDigitalDeliveryDirection.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDigitalDeliveryDirection getEnum(String enumName)
-            {
-                return (EnumDigitalDeliveryDirection) getEnum(EnumDigitalDeliveryDirection.class, enumName);
-            }
+		public static final EnumDigitalDeliveryDirection Push = new EnumDigitalDeliveryDirection("Push");
+		public static final EnumDigitalDeliveryDirection Pull = new EnumDigitalDeliveryDirection("Pull");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDigitalDeliveryDirection getEnum(int enumValue)
-            {
-                return (EnumDigitalDeliveryDirection) getEnum(EnumDigitalDeliveryDirection.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDigitalDeliveryDirection.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DigitalDeliveryDirection
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute DigitalDeliveryDirection
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDigitalDeliveryDirection(EnumDigitalDeliveryDirection enumVar)
+	{
+		setAttribute(AttributeName.DIGITALDELIVERYDIRECTION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDigitalDeliveryDirection.class);
-            }
+	/**
+	  * (9) get attribute DigitalDeliveryDirection
+	  * @return the value of the attribute
+	  */
+	public EnumDigitalDeliveryDirection getDigitalDeliveryDirection()
+	{
+		return EnumDigitalDeliveryDirection.getEnum(getAttribute(AttributeName.DIGITALDELIVERYDIRECTION, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDigitalDeliveryDirection.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DigitalDeliveryProtocol
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DigitalDeliveryProtocol
+	  * @param value the value to set the attribute to
+	  */
+	public void setDigitalDeliveryProtocol(String value)
+	{
+		setAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, value, null);
+	}
 
-            public static final EnumDigitalDeliveryDirection Push = new EnumDigitalDeliveryDirection("Push");
-            public static final EnumDigitalDeliveryDirection Pull = new EnumDigitalDeliveryDirection("Pull");
-        }      
+	/**
+	  * (23) get String attribute DigitalDeliveryProtocol
+	  * @return the value of the attribute
+	  */
+	public String getDigitalDeliveryProtocol()
+	{
+		return getAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Method
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Method
+	  * @param value the value to set the attribute to
+	  */
+	public void setMethod(String value)
+	{
+		setAttribute(AttributeName.METHOD, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Method
+	  * @return the value of the attribute
+	  */
+	public String getMethod()
+	{
+		return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DigitalDeliveryDirection
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute DigitalDeliveryDirection
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDigitalDeliveryDirection(EnumDigitalDeliveryDirection enumVar)
-        {
-            setAttribute(AttributeName.DIGITALDELIVERYDIRECTION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute DigitalDeliveryDirection
-          * @return the value of the attribute
-          */
-        public EnumDigitalDeliveryDirection getDigitalDeliveryDirection()
-        {
-            return EnumDigitalDeliveryDirection.getEnum(getAttribute(AttributeName.DIGITALDELIVERYDIRECTION, null, null));
-        }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DigitalDeliveryProtocol
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DigitalDeliveryProtocol
-          * @param value the value to set the attribute to
-          */
-        public void setDigitalDeliveryProtocol(String value)
-        {
-            setAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, value, null);
-        }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute DigitalDeliveryProtocol
-          * @return the value of the attribute
-          */
-        public String getDigitalDeliveryProtocol()
-        {
-            return getAttribute(AttributeName.DIGITALDELIVERYPROTOCOL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Method
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Method
-          * @param value the value to set the attribute to
-          */
-        public void setMethod(String value)
-        {
-            setAttribute(AttributeName.METHOD, value, null);
-        }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-        /**
-          * (23) get String attribute Method
-          * @return the value of the attribute
-          */
-        public String getMethod()
-        {
-            return getAttribute(AttributeName.METHOD, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
-
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

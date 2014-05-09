@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,312 +84,295 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFRectangleRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /**
-    *****************************************************************************
-    class JDFAutoRectangleEvaluation : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRectangleEvaluation : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRectangleEvaluation extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.HWRELATION, 0x33333333, AttributeInfo.EnumAttributeType.XYRelation, EnumHWRelation.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HWRELATION, 0x33333333, AttributeInfo.EnumAttributeType.XYRelation, EnumHWRelation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRectangleEvaluation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRectangleEvaluation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRectangleEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRectangleEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRectangleEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRectangleEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRectangleEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRectangleEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRectangleEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRectangleEvaluation[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRectangleEvaluation[  --> " + super.toString() + " ]";
-    }
+	/**
+	* Enumeration strings for HWRelation
+	*/
 
+	public static class EnumHWRelation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		private EnumHWRelation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumHWRelation getEnum(String enumName)
+		{
+			return (EnumHWRelation) getEnum(EnumHWRelation.class, enumName);
+		}
 
-        /**
-        * Enumeration strings for HWRelation
-        */
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumHWRelation getEnum(int enumValue)
+		{
+			return (EnumHWRelation) getEnum(EnumHWRelation.class, enumValue);
+		}
 
-        public static class EnumHWRelation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumHWRelation.class);
+		}
 
-            private EnumHWRelation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumHWRelation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumHWRelation getEnum(String enumName)
-            {
-                return (EnumHWRelation) getEnum(EnumHWRelation.class, enumName);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumHWRelation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumHWRelation getEnum(int enumValue)
-            {
-                return (EnumHWRelation) getEnum(EnumHWRelation.class, enumValue);
-            }
+		public static final EnumHWRelation gt = new EnumHWRelation("gt");
+		public static final EnumHWRelation ge = new EnumHWRelation("ge");
+		public static final EnumHWRelation eq = new EnumHWRelation("eq");
+		public static final EnumHWRelation le = new EnumHWRelation("le");
+		public static final EnumHWRelation lt = new EnumHWRelation("lt");
+		public static final EnumHWRelation ne = new EnumHWRelation("ne");
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumHWRelation.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumHWRelation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HWRelation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute HWRelation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setHWRelation(EnumHWRelation enumVar)
+	{
+		setAttribute(AttributeName.HWRELATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumHWRelation.class);
-            }
+	/**
+	  * (9) get attribute HWRelation
+	  * @return the value of the attribute
+	  */
+	public EnumHWRelation getHWRelation()
+	{
+		return EnumHWRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));
+	}
 
-            public static final EnumHWRelation gt = new EnumHWRelation("gt");
-            public static final EnumHWRelation ge = new EnumHWRelation("ge");
-            public static final EnumHWRelation eq = new EnumHWRelation("eq");
-            public static final EnumHWRelation le = new EnumHWRelation("le");
-            public static final EnumHWRelation lt = new EnumHWRelation("lt");
-            public static final EnumHWRelation ne = new EnumHWRelation("ne");
-        }      
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Tolerance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Tolerance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTolerance(JDFXYPair value)
+	{
+		setAttribute(AttributeName.TOLERANCE, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Tolerance
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getTolerance()
+	{
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ValueList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ValueList
+	  * @param value the value to set the attribute to
+	  */
+	public void setValueList(JDFRectangleRangeList value)
+	{
+		setAttribute(AttributeName.VALUELIST, value, null);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HWRelation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute HWRelation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setHWRelation(EnumHWRelation enumVar)
-        {
-            setAttribute(AttributeName.HWRELATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	  * (20) get JDFRectangleRangeList attribute ValueList
+	  * @return JDFRectangleRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangleRangeList
+	  */
+	public JDFRectangleRangeList getValueList()
+	{
+		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		final JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (9) get attribute HWRelation
-          * @return the value of the attribute
-          */
-        public EnumHWRelation getHWRelation()
-        {
-            return EnumHWRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Tolerance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Tolerance
-          * @param value the value to set the attribute to
-          */
-        public void setTolerance(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TOLERANCE, value, null);
-        }
+	/** (26) getCreateBasicPreflightTest
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Tolerance
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTolerance()
-        {
-            String strAttrName = getAttribute(AttributeName.TOLERANCE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (27) const get element BasicPreflightTest
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 * default is getBasicPreflightTest(0)     */
+	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ValueList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ValueList
-          * @param value the value to set the attribute to
-          */
-        public void setValueList(JDFRectangleRangeList value)
-        {
-            setAttribute(AttributeName.VALUELIST, value, null);
-        }
+	/**
+	 * Get all BasicPreflightTest from the current element
+	 * 
+	 * @return Collection<JDFBasicPreflightTest>, null if none are available
+	 */
+	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+	{
+		final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        /**
-          * (20) get JDFRectangleRangeList attribute ValueList
-          * @return JDFRectangleRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangleRangeList
-          */
-        public JDFRectangleRangeList getValueList()
-        {
-            String strAttrName = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+		final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBasicPreflightTest) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateBasicPreflightTest
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
-
-    /**
-     * (27) const get element BasicPreflightTest
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     * default is getBasicPreflightTest(0)     */
-    public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
-
-    /**
-     * Get all BasicPreflightTest from the current element
-     * 
-     * @return Collection<JDFBasicPreflightTest>, null if none are available
-     */
-    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
-    {
-        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBasicPreflightTest) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BasicPreflightTest
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest appendBasicPreflightTest()
-    {
-        return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
-    }
+	/**
+	 * (30) append element BasicPreflightTest
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest appendBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
+	}
 
 }// end namespace JDF

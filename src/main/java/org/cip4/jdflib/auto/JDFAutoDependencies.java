@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,147 +80,136 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
-    /**
-    *****************************************************************************
-    class JDFAutoDependencies : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDependencies : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDependencies extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDependencies
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDependencies
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDependencies(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDependencies
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDependencies
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDependencies(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDependencies
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDependencies
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDependencies(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDependencies[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDependencies[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateLayoutElement
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement getCreateLayoutElement(int iSkip)
+	{
+		return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element LayoutElement
+	 * @param iSkip number of elements to skip
+	 * @return JDFLayoutElement the element
+	 * default is getLayoutElement(0)     */
+	public JDFLayoutElement getLayoutElement(int iSkip)
+	{
+		return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all LayoutElement from the current element
+	 * 
+	 * @return Collection<JDFLayoutElement>, null if none are available
+	 */
+	public Collection<JDFLayoutElement> getAllLayoutElement()
+	{
+		final VElement vc = getChildElementVector(ElementName.LAYOUTELEMENT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateLayoutElement
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLayoutElement the element
-     */
-    public JDFLayoutElement getCreateLayoutElement(int iSkip)
-    {
-        return (JDFLayoutElement)getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, iSkip);
-    }
+		final Vector<JDFLayoutElement> v = new Vector<JDFLayoutElement>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLayoutElement) vc.get(i));
+		}
 
-    /**
-     * (27) const get element LayoutElement
-     * @param iSkip number of elements to skip
-     * @return JDFLayoutElement the element
-     * default is getLayoutElement(0)     */
-    public JDFLayoutElement getLayoutElement(int iSkip)
-    {
-        return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all LayoutElement from the current element
-     * 
-     * @return Collection<JDFLayoutElement>, null if none are available
-     */
-    public Collection<JDFLayoutElement> getAllLayoutElement()
-    {
-        final VElement vc = getChildElementVector(ElementName.LAYOUTELEMENT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element LayoutElement
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement appendLayoutElement()
+	{
+		return (JDFLayoutElement) appendElement(ElementName.LAYOUTELEMENT, null);
+	}
 
-        final Vector<JDFLayoutElement> v = new Vector<JDFLayoutElement>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLayoutElement) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element LayoutElement
-     * @return JDFLayoutElement the element
-     */
-    public JDFLayoutElement appendLayoutElement()
-    {
-        return (JDFLayoutElement) appendElement(ElementName.LAYOUTELEMENT, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refLayoutElement(JDFLayoutElement refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refLayoutElement(JDFLayoutElement refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,194 +81,180 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightAction : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightAction : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightAction extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0), "RunList");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0), "RunList");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightAction
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAction
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightAction(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightAction
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAction
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightAction(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightAction
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAction
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightAction(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightAction[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for SetSplitBy
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightAction[  --> " + super.toString() + " ]";
-    }
+	public static class EnumSetSplitBy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumSetSplitBy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for SetSplitBy
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSetSplitBy getEnum(String enumName)
+		{
+			return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumName);
+		}
 
-        public static class EnumSetSplitBy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSetSplitBy getEnum(int enumValue)
+		{
+			return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumValue);
+		}
 
-            private EnumSetSplitBy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSetSplitBy.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSetSplitBy getEnum(String enumName)
-            {
-                return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSetSplitBy.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSetSplitBy getEnum(int enumValue)
-            {
-                return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSetSplitBy.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSetSplitBy.class);
-            }
+		public static final EnumSetSplitBy Page = new EnumSetSplitBy("Page");
+		public static final EnumSetSplitBy Document = new EnumSetSplitBy("Document");
+		public static final EnumSetSplitBy RunList = new EnumSetSplitBy("RunList");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSetSplitBy.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSetSplitBy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetSplitBy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute SetSplitBy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSetSplitBy(EnumSetSplitBy enumVar)
+	{
+		setAttribute(AttributeName.SETSPLITBY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumSetSplitBy Page = new EnumSetSplitBy("Page");
-            public static final EnumSetSplitBy Document = new EnumSetSplitBy("Document");
-            public static final EnumSetSplitBy RunList = new EnumSetSplitBy("RunList");
-        }      
+	/**
+	  * (9) get attribute SetSplitBy
+	  * @return the value of the attribute
+	  */
+	public EnumSetSplitBy getSetSplitBy()
+	{
+		return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SetRef
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SetRef
+	  * @param value the value to set the attribute to
+	  */
+	public void setSetRef(String value)
+	{
+		setAttribute(AttributeName.SETREF, value, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SetSplitBy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute SetSplitBy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSetSplitBy(EnumSetSplitBy enumVar)
-        {
-            setAttribute(AttributeName.SETSPLITBY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute SetSplitBy
-          * @return the value of the attribute
-          */
-        public EnumSetSplitBy getSetSplitBy()
-        {
-            return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SetRef
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SetRef
-          * @param value the value to set the attribute to
-          */
-        public void setSetRef(String value)
-        {
-            setAttribute(AttributeName.SETREF, value, null);
-        }
-
-        /**
-          * (23) get String attribute SetRef
-          * @return the value of the attribute
-          */
-        public String getSetRef()
-        {
-            return getAttribute(AttributeName.SETREF, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute SetRef
+	  * @return the value of the attribute
+	  */
+	public String getSetRef()
+	{
+		return getAttribute(AttributeName.SETREF, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,308 +80,269 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoRefAnchor : public JDFResource
+import org.cip4.jdflib.core.JDFElement;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRefAnchor : public JDFElement
 
-public abstract class JDFAutoRefAnchor extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoRefAnchor extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRefAnchor
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRefAnchor
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRefAnchor(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRefAnchor
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRefAnchor
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRefAnchor(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRefAnchor
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRefAnchor
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRefAnchor(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRefAnchor[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Anchor
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRefAnchor[  --> " + super.toString() + " ]";
-    }
+	public static class EnumAnchor extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumAnchor(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumAnchor getEnum(String enumName)
+		{
+			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumAnchor getEnum(int enumValue)
+		{
+			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumAnchor.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumAnchor.class);
+		}
 
-        /**
-        * Enumeration strings for Anchor
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumAnchor.class);
+		}
 
-        public static class EnumAnchor extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+		public static final EnumAnchor Center = new EnumAnchor("Center");
+		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
+	}
 
-            private EnumAnchor(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	* Enumeration strings for AnchorType
+	*/
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumAnchor getEnum(String enumName)
-            {
-                return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-            }
+	public static class EnumAnchorType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumAnchor getEnum(int enumValue)
-            {
-                return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-            }
+		private EnumAnchorType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumAnchor.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumAnchorType getEnum(String enumName)
+		{
+			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumName);
+		}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumAnchor.class);
-            }
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumAnchorType getEnum(int enumValue)
+		{
+			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumValue);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumAnchor.class);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumAnchorType.class);
+		}
 
-            public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-            public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-            public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-            public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-            public static final EnumAnchor Center = new EnumAnchor("Center");
-            public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-            public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-            public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-            public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
-        }      
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumAnchorType.class);
+		}
 
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumAnchorType.class);
+		}
 
+		public static final EnumAnchorType Parent = new EnumAnchorType("Parent");
+		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
+	}
 
-        /**
-        * Enumeration strings for AnchorType
-        */
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-        public static class EnumAnchorType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Anchor
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Anchor
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setAnchor(EnumAnchor enumVar)
+	{
+		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            private EnumAnchorType(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	  * (9) get attribute Anchor
+	  * @return the value of the attribute
+	  */
+	public EnumAnchor getAnchor()
+	{
+		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+	}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumAnchorType getEnum(String enumName)
-            {
-                return (EnumAnchorType) getEnum(EnumAnchorType.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AnchorType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute AnchorType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setAnchorType(EnumAnchorType enumVar)
+	{
+		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumAnchorType getEnum(int enumValue)
-            {
-                return (EnumAnchorType) getEnum(EnumAnchorType.class, enumValue);
-            }
+	/**
+	  * (9) get attribute AnchorType
+	  * @return the value of the attribute
+	  */
+	public EnumAnchorType getAnchorType()
+	{
+		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumAnchorType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute rRef
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute rRef
+	  * @param value the value to set the attribute to
+	  */
+	public void setrRef(String value)
+	{
+		setAttribute(AttributeName.RREF, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumAnchorType.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumAnchorType.class);
-            }
-
-            public static final EnumAnchorType Parent = new EnumAnchorType("Parent");
-            public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Anchor
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Anchor
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setAnchor(EnumAnchor enumVar)
-        {
-            setAttribute(AttributeName.ANCHOR, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Anchor
-          * @return the value of the attribute
-          */
-        public EnumAnchor getAnchor()
-        {
-            return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AnchorType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute AnchorType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setAnchorType(EnumAnchorType enumVar)
-        {
-            setAttribute(AttributeName.ANCHORTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute AnchorType
-          * @return the value of the attribute
-          */
-        public EnumAnchorType getAnchorType()
-        {
-            return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute rRef
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute rRef
-          * @param value the value to set the attribute to
-          */
-        public void setrRef(String value)
-        {
-            setAttribute(AttributeName.RREF, value, null);
-        }
-
-        /**
-          * (23) get String attribute rRef
-          * @return the value of the attribute
-          */
-        public String getrRef()
-        {
-            return getAttribute(AttributeName.RREF, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute rRef
+	  * @return the value of the attribute
+	  */
+	public String getrRef()
+	{
+		return getAttribute(AttributeName.RREF, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

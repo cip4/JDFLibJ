@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,328 +90,311 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAssembly;
-    /**
-    *****************************************************************************
-    class JDFAutoCutMark : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCutMark : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCutMark extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumMarkType.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumMarkType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCutMark
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutMark
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCutMark(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCutMark
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutMark
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCutMark(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCutMark
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCutMark
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCutMark(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCutMark[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCutMark[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for MarkType
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumMarkType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumMarkType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMarkType getEnum(String enumName)
+		{
+			return (EnumMarkType) getEnum(EnumMarkType.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMarkType getEnum(int enumValue)
+		{
+			return (EnumMarkType) getEnum(EnumMarkType.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for MarkType
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMarkType.class);
+		}
 
-        public static class EnumMarkType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMarkType.class);
+		}
 
-            private EnumMarkType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMarkType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumMarkType getEnum(String enumName)
-            {
-                return (EnumMarkType) getEnum(EnumMarkType.class, enumName);
-            }
+		public static final EnumMarkType CrossCutMark = new EnumMarkType("CrossCutMark");
+		public static final EnumMarkType TopVerticalCutMark = new EnumMarkType("TopVerticalCutMark");
+		public static final EnumMarkType BottomVerticalCutMark = new EnumMarkType("BottomVerticalCutMark");
+		public static final EnumMarkType LeftHorizontalCutMark = new EnumMarkType("LeftHorizontalCutMark");
+		public static final EnumMarkType RightHorizontalCutMark = new EnumMarkType("RightHorizontalCutMark");
+		public static final EnumMarkType LowerLeftCutMark = new EnumMarkType("LowerLeftCutMark");
+		public static final EnumMarkType UpperLeftCutMark = new EnumMarkType("UpperLeftCutMark");
+		public static final EnumMarkType LowerRightCutMark = new EnumMarkType("LowerRightCutMark");
+		public static final EnumMarkType UpperRightCutMark = new EnumMarkType("UpperRightCutMark");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumMarkType getEnum(int enumValue)
-            {
-                return (EnumMarkType) getEnum(EnumMarkType.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumMarkType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute MarkType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setMarkType(EnumMarkType enumVar)
+	{
+		setAttribute(AttributeName.MARKTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumMarkType.class);
-            }
+	/**
+	  * (9) get attribute MarkType
+	  * @return the value of the attribute
+	  */
+	public EnumMarkType getMarkType()
+	{
+		return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumMarkType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Position
+	  * @param value the value to set the attribute to
+	  */
+	public void setPosition(JDFXYPair value)
+	{
+		setAttribute(AttributeName.POSITION, value, null);
+	}
 
-            public static final EnumMarkType CrossCutMark = new EnumMarkType("CrossCutMark");
-            public static final EnumMarkType TopVerticalCutMark = new EnumMarkType("TopVerticalCutMark");
-            public static final EnumMarkType BottomVerticalCutMark = new EnumMarkType("BottomVerticalCutMark");
-            public static final EnumMarkType LeftHorizontalCutMark = new EnumMarkType("LeftHorizontalCutMark");
-            public static final EnumMarkType RightHorizontalCutMark = new EnumMarkType("RightHorizontalCutMark");
-            public static final EnumMarkType LowerLeftCutMark = new EnumMarkType("LowerLeftCutMark");
-            public static final EnumMarkType UpperLeftCutMark = new EnumMarkType("UpperLeftCutMark");
-            public static final EnumMarkType LowerRightCutMark = new EnumMarkType("LowerRightCutMark");
-            public static final EnumMarkType UpperRightCutMark = new EnumMarkType("UpperRightCutMark");
-        }      
+	/**
+	  * (20) get JDFXYPair attribute Position
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getPosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Blocks
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Blocks
+	  * @param value the value to set the attribute to
+	  */
+	public void setBlocks(VString value)
+	{
+		setAttribute(AttributeName.BLOCKS, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute Blocks
+	  * @return VString the value of the attribute
+	  */
+	public VString getBlocks()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarkType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute MarkType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setMarkType(EnumMarkType enumVar)
-        {
-            setAttribute(AttributeName.MARKTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute MarkType
-          * @return the value of the attribute
-          */
-        public EnumMarkType getMarkType()
-        {
-            return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
-        }
+	/** (26) getCreateAssembly
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFAssembly the element
+	 */
+	public JDFAssembly getCreateAssembly(int iSkip)
+	{
+		return (JDFAssembly) getCreateElement_KElement(ElementName.ASSEMBLY, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Position
-          * @param value the value to set the attribute to
-          */
-        public void setPosition(JDFXYPair value)
-        {
-            setAttribute(AttributeName.POSITION, value, null);
-        }
+	/**
+	 * (27) const get element Assembly
+	 * @param iSkip number of elements to skip
+	 * @return JDFAssembly the element
+	 * default is getAssembly(0)     */
+	public JDFAssembly getAssembly(int iSkip)
+	{
+		return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Position
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getPosition()
-        {
-            String strAttrName = getAttribute(AttributeName.POSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * Get all Assembly from the current element
+	 * 
+	 * @return Collection<JDFAssembly>, null if none are available
+	 */
+	public Collection<JDFAssembly> getAllAssembly()
+	{
+		final VElement vc = getChildElementVector(ElementName.ASSEMBLY, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Blocks
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Blocks
-          * @param value the value to set the attribute to
-          */
-        public void setBlocks(VString value)
-        {
-            setAttribute(AttributeName.BLOCKS, value, null);
-        }
+		final Vector<JDFAssembly> v = new Vector<JDFAssembly>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFAssembly) vc.get(i));
+		}
 
-        /**
-          * (21) get VString attribute Blocks
-          * @return VString the value of the attribute
-          */
-        public VString getBlocks()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element Assembly
+	 * @return JDFAssembly the element
+	 */
+	public JDFAssembly appendAssembly()
+	{
+		return (JDFAssembly) appendElement(ElementName.ASSEMBLY, null);
+	}
 
-    /** (26) getCreateAssembly
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFAssembly the element
-     */
-    public JDFAssembly getCreateAssembly(int iSkip)
-    {
-        return (JDFAssembly)getCreateElement_KElement(ElementName.ASSEMBLY, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Assembly
-     * @param iSkip number of elements to skip
-     * @return JDFAssembly the element
-     * default is getAssembly(0)     */
-    public JDFAssembly getAssembly(int iSkip)
-    {
-        return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, iSkip);
-    }
-
-    /**
-     * Get all Assembly from the current element
-     * 
-     * @return Collection<JDFAssembly>, null if none are available
-     */
-    public Collection<JDFAssembly> getAllAssembly()
-    {
-        final VElement vc = getChildElementVector(ElementName.ASSEMBLY, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFAssembly> v = new Vector<JDFAssembly>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFAssembly) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Assembly
-     * @return JDFAssembly the element
-     */
-    public JDFAssembly appendAssembly()
-    {
-        return (JDFAssembly) appendElement(ElementName.ASSEMBLY, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refAssembly(JDFAssembly refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refAssembly(JDFAssembly refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

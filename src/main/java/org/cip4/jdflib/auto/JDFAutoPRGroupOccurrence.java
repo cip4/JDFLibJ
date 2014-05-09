@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,190 +81,179 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
-    /**
-    *****************************************************************************
-    class JDFAutoPRGroupOccurrence : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPRGroupOccurrence : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.STRINGLISTVALUE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.ARGUMENTVALUE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STRINGLISTVALUE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ARGUMENTVALUE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPRGroupOccurrence
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRGroupOccurrence
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPRGroupOccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRGroupOccurrence
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRGroupOccurrence
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPRGroupOccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRGroupOccurrence
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRGroupOccurrence
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPRGroupOccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPRGroupOccurrence[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPRGroupOccurrence[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateStringListValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringListValue the element
+	 */
+	public JDFStringListValue getCreateStringListValue(int iSkip)
+	{
+		return (JDFStringListValue) getCreateElement_KElement(ElementName.STRINGLISTVALUE, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element StringListValue
+	 * @param iSkip number of elements to skip
+	 * @return JDFStringListValue the element
+	 * default is getStringListValue(0)     */
+	public JDFStringListValue getStringListValue(int iSkip)
+	{
+		return (JDFStringListValue) getElement(ElementName.STRINGLISTVALUE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all StringListValue from the current element
+	 * 
+	 * @return Collection<JDFStringListValue>, null if none are available
+	 */
+	public Collection<JDFStringListValue> getAllStringListValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.STRINGLISTVALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateStringListValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFStringListValue the element
-     */
-    public JDFStringListValue getCreateStringListValue(int iSkip)
-    {
-        return (JDFStringListValue)getCreateElement_KElement(ElementName.STRINGLISTVALUE, null, iSkip);
-    }
+		final Vector<JDFStringListValue> v = new Vector<JDFStringListValue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFStringListValue) vc.get(i));
+		}
 
-    /**
-     * (27) const get element StringListValue
-     * @param iSkip number of elements to skip
-     * @return JDFStringListValue the element
-     * default is getStringListValue(0)     */
-    public JDFStringListValue getStringListValue(int iSkip)
-    {
-        return (JDFStringListValue) getElement(ElementName.STRINGLISTVALUE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all StringListValue from the current element
-     * 
-     * @return Collection<JDFStringListValue>, null if none are available
-     */
-    public Collection<JDFStringListValue> getAllStringListValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.STRINGLISTVALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element StringListValue
+	 * @return JDFStringListValue the element
+	 */
+	public JDFStringListValue appendStringListValue()
+	{
+		return (JDFStringListValue) appendElement(ElementName.STRINGLISTVALUE, null);
+	}
 
-        final Vector<JDFStringListValue> v = new Vector<JDFStringListValue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFStringListValue) vc.get(i));
-        }
+	/** (26) getCreateArgumentValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFArgumentValue the element
+	 */
+	public JDFArgumentValue getCreateArgumentValue(int iSkip)
+	{
+		return (JDFArgumentValue) getCreateElement_KElement(ElementName.ARGUMENTVALUE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element ArgumentValue
+	 * @param iSkip number of elements to skip
+	 * @return JDFArgumentValue the element
+	 * default is getArgumentValue(0)     */
+	public JDFArgumentValue getArgumentValue(int iSkip)
+	{
+		return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, iSkip);
+	}
 
-    /**
-     * (30) append element StringListValue
-     * @return JDFStringListValue the element
-     */
-    public JDFStringListValue appendStringListValue()
-    {
-        return (JDFStringListValue) appendElement(ElementName.STRINGLISTVALUE, null);
-    }
+	/**
+	 * Get all ArgumentValue from the current element
+	 * 
+	 * @return Collection<JDFArgumentValue>, null if none are available
+	 */
+	public Collection<JDFArgumentValue> getAllArgumentValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.ARGUMENTVALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateArgumentValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFArgumentValue the element
-     */
-    public JDFArgumentValue getCreateArgumentValue(int iSkip)
-    {
-        return (JDFArgumentValue)getCreateElement_KElement(ElementName.ARGUMENTVALUE, null, iSkip);
-    }
+		final Vector<JDFArgumentValue> v = new Vector<JDFArgumentValue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFArgumentValue) vc.get(i));
+		}
 
-    /**
-     * (27) const get element ArgumentValue
-     * @param iSkip number of elements to skip
-     * @return JDFArgumentValue the element
-     * default is getArgumentValue(0)     */
-    public JDFArgumentValue getArgumentValue(int iSkip)
-    {
-        return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all ArgumentValue from the current element
-     * 
-     * @return Collection<JDFArgumentValue>, null if none are available
-     */
-    public Collection<JDFArgumentValue> getAllArgumentValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.ARGUMENTVALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFArgumentValue> v = new Vector<JDFArgumentValue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFArgumentValue) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ArgumentValue
-     * @return JDFArgumentValue the element
-     */
-    public JDFArgumentValue appendArgumentValue()
-    {
-        return (JDFArgumentValue) appendElement(ElementName.ARGUMENTVALUE, null);
-    }
+	/**
+	 * (30) append element ArgumentValue
+	 * @return JDFArgumentValue the element
+	 */
+	public JDFArgumentValue appendArgumentValue()
+	{
+		return (JDFArgumentValue) appendElement(ElementName.ARGUMENTVALUE, null);
+	}
 
 }// end namespace JDF

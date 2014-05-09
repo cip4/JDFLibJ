@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,282 +77,269 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightAnalysis : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightAnalysis : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightAnalysis extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSRESULTSPOOL, 0x77777766);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTRESULTSPOOL, 0x77777766);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSRESULTSPOOL, 0x77777766);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPERESULTSPOOL, 0x77777766);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESRESULTSPOOL, 0x77777766);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESRESULTSPOOL, 0x77777766);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORSRESULTSPOOL, 0x77777766);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DOCUMENTRESULTSPOOL, 0x77777766);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.FONTSRESULTSPOOL, 0x77777766);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.FILETYPERESULTSPOOL, 0x77777766);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGESRESULTSPOOL, 0x77777766);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.PAGESRESULTSPOOL, 0x77777766);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightAnalysis
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightAnalysis(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAnalysis
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightAnalysis(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightAnalysis
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightAnalysis(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAnalysis
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightAnalysis(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightAnalysis
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightAnalysis(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightAnalysis
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightAnalysis(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightAnalysis[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightAnalysis[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	 * (24) const get element ColorsResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getColorsResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.COLORSRESULTSPOOL, null, 0);
+	}
 
+	/** (25) getCreateColorsResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateColorsResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.COLORSRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * (29) append element ColorsResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendColorsResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.COLORSRESULTSPOOL, 1, null);
+	}
 
+	/**
+	 * (24) const get element DocumentResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getDocumentResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateDocumentResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateDocumentResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element ColorsResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getColorsResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.COLORSRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (29) append element DocumentResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendDocumentResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.DOCUMENTRESULTSPOOL, 1, null);
+	}
 
-    /** (25) getCreateColorsResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateColorsResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.COLORSRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (24) const get element FontsResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getFontsResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.FONTSRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (29) append element ColorsResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendColorsResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.COLORSRESULTSPOOL, 1, null);
-    }
+	/** (25) getCreateFontsResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateFontsResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.FONTSRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element DocumentResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getDocumentResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (29) append element FontsResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendFontsResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.FONTSRESULTSPOOL, 1, null);
+	}
 
-    /** (25) getCreateDocumentResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateDocumentResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.DOCUMENTRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (24) const get element FileTypeResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getFileTypeResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.FILETYPERESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (29) append element DocumentResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendDocumentResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.DOCUMENTRESULTSPOOL, 1, null);
-    }
+	/** (25) getCreateFileTypeResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateFileTypeResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.FILETYPERESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element FontsResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getFontsResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.FONTSRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (29) append element FileTypeResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendFileTypeResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.FILETYPERESULTSPOOL, 1, null);
+	}
 
-    /** (25) getCreateFontsResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateFontsResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.FONTSRESULTSPOOL, null, 0);
-    }
+	/**
+	 * (24) const get element ImagesResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getImagesResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.IMAGESRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (29) append element FontsResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendFontsResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.FONTSRESULTSPOOL, 1, null);
-    }
+	/** (25) getCreateImagesResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateImagesResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.IMAGESRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element FileTypeResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getFileTypeResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.FILETYPERESULTSPOOL, null, 0);
-    }
+	/**
+	 * (29) append element ImagesResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendImagesResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.IMAGESRESULTSPOOL, 1, null);
+	}
 
-    /** (25) getCreateFileTypeResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateFileTypeResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.FILETYPERESULTSPOOL, null, 0);
-    }
+	/**
+	 * (24) const get element PagesResultsPool
+	 * @return JDFElement the element
+	 */
+	public JDFElement getPagesResultsPool()
+	{
+		return (JDFElement) getElement(ElementName.PAGESRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (29) append element FileTypeResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendFileTypeResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.FILETYPERESULTSPOOL, 1, null);
-    }
+	/** (25) getCreatePagesResultsPool
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreatePagesResultsPool()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.PAGESRESULTSPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element ImagesResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getImagesResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.IMAGESRESULTSPOOL, null, 0);
-    }
-
-    /** (25) getCreateImagesResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateImagesResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.IMAGESRESULTSPOOL, null, 0);
-    }
-
-    /**
-     * (29) append element ImagesResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendImagesResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.IMAGESRESULTSPOOL, 1, null);
-    }
-
-    /**
-     * (24) const get element PagesResultsPool
-     * @return JDFElement the element
-     */
-    public JDFElement getPagesResultsPool()
-    {
-        return (JDFElement) getElement(ElementName.PAGESRESULTSPOOL, null, 0);
-    }
-
-    /** (25) getCreatePagesResultsPool
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreatePagesResultsPool()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.PAGESRESULTSPOOL, null, 0);
-    }
-
-    /**
-     * (29) append element PagesResultsPool
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendPagesResultsPool() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.PAGESRESULTSPOOL, 1, null);
-    }
+	/**
+	 * (29) append element PagesResultsPool
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendPagesResultsPool() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.PAGESRESULTSPOOL, 1, null);
+	}
 
 }// end namespace JDF

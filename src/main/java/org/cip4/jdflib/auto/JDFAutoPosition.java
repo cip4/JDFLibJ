@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,323 +79,303 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
-    /**
-    *****************************************************************************
-    class JDFAutoPosition : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPosition : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPosition extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ABSOLUTEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPosition
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPosition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPosition
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPosition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPosition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPosition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPosition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPosition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPosition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPosition[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Orientation
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPosition[  --> " + super.toString() + " ]";
-    }
+	public static class EnumOrientation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumOrientation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Orientation
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(String enumName)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
+		}
 
-        public static class EnumOrientation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(int enumValue)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
+		}
 
-            private EnumOrientation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOrientation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumOrientation getEnum(String enumName)
-            {
-                return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOrientation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumOrientation getEnum(int enumValue)
-            {
-                return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumOrientation.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumOrientation.class);
-            }
+		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumOrientation.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumOrientation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AbsoluteBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AbsoluteBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setAbsoluteBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.ABSOLUTEBOX, value, null);
+	}
 
-            public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
-            public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
-            public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
-            public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
-            public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
-            public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
-            public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
-            public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
-        }      
+	/**
+	  * (20) get JDFRectangle attribute AbsoluteBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getAbsoluteBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.ABSOLUTEBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarginBottom
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MarginBottom
+	  * @param value the value to set the attribute to
+	  */
+	public void setMarginBottom(double value)
+	{
+		setAttribute(AttributeName.MARGINBOTTOM, value, null);
+	}
 
+	/**
+	  * (17) get double attribute MarginBottom
+	  * @return double the value of the attribute
+	  */
+	public double getMarginBottom()
+	{
+		return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AbsoluteBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AbsoluteBox
-          * @param value the value to set the attribute to
-          */
-        public void setAbsoluteBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.ABSOLUTEBOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarginTop
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MarginTop
+	  * @param value the value to set the attribute to
+	  */
+	public void setMarginTop(double value)
+	{
+		setAttribute(AttributeName.MARGINTOP, value, null);
+	}
 
-        /**
-          * (20) get JDFRectangle attribute AbsoluteBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getAbsoluteBox()
-        {
-            String strAttrName = getAttribute(AttributeName.ABSOLUTEBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute MarginTop
+	  * @return double the value of the attribute
+	  */
+	public double getMarginTop()
+	{
+		return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarginBottom
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MarginBottom
-          * @param value the value to set the attribute to
-          */
-        public void setMarginBottom(double value)
-        {
-            setAttribute(AttributeName.MARGINBOTTOM, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarginLeft
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MarginLeft
+	  * @param value the value to set the attribute to
+	  */
+	public void setMarginLeft(double value)
+	{
+		setAttribute(AttributeName.MARGINLEFT, value, null);
+	}
 
-        /**
-          * (17) get double attribute MarginBottom
-          * @return double the value of the attribute
-          */
-        public double getMarginBottom()
-        {
-            return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute MarginLeft
+	  * @return double the value of the attribute
+	  */
+	public double getMarginLeft()
+	{
+		return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarginTop
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MarginTop
-          * @param value the value to set the attribute to
-          */
-        public void setMarginTop(double value)
-        {
-            setAttribute(AttributeName.MARGINTOP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarginRight
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MarginRight
+	  * @param value the value to set the attribute to
+	  */
+	public void setMarginRight(double value)
+	{
+		setAttribute(AttributeName.MARGINRIGHT, value, null);
+	}
 
-        /**
-          * (17) get double attribute MarginTop
-          * @return double the value of the attribute
-          */
-        public double getMarginTop()
-        {
-            return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute MarginRight
+	  * @return double the value of the attribute
+	  */
+	public double getMarginRight()
+	{
+		return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarginLeft
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MarginLeft
-          * @param value the value to set the attribute to
-          */
-        public void setMarginLeft(double value)
-        {
-            setAttribute(AttributeName.MARGINLEFT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Orientation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setOrientation(EnumOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (17) get double attribute MarginLeft
-          * @return double the value of the attribute
-          */
-        public double getMarginLeft()
-        {
-            return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
-        }
+	/**
+	  * (9) get attribute Orientation
+	  * @return the value of the attribute
+	  */
+	public EnumOrientation getOrientation()
+	{
+		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarginRight
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MarginRight
-          * @param value the value to set the attribute to
-          */
-        public void setMarginRight(double value)
-        {
-            setAttribute(AttributeName.MARGINRIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RelativeBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setRelativeBox(JDFRectangle value)
+	{
+		setAttribute(AttributeName.RELATIVEBOX, value, null);
+	}
 
-        /**
-          * (17) get double attribute MarginRight
-          * @return double the value of the attribute
-          */
-        public double getMarginRight()
-        {
-            return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Orientation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Orientation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setOrientation(EnumOrientation enumVar)
-        {
-            setAttribute(AttributeName.ORIENTATION, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Orientation
-          * @return the value of the attribute
-          */
-        public EnumOrientation getOrientation()
-        {
-            return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RelativeBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RelativeBox
-          * @param value the value to set the attribute to
-          */
-        public void setRelativeBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.RELATIVEBOX, value, null);
-        }
-
-        /**
-          * (20) get JDFRectangle attribute RelativeBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getRelativeBox()
-        {
-            String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFRectangle attribute RelativeBox
+	  * @return JDFRectangle the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFRectangle
+	  */
+	public JDFRectangle getRelativeBox()
+	{
+		final String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

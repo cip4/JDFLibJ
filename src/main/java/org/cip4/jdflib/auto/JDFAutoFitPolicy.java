@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,422 +79,378 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoFitPolicy : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFitPolicy : public JDFElement
 
-public abstract class JDFAutoFitPolicy extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoFitPolicy extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFitPolicy
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFitPolicy(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFitPolicy
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFitPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFitPolicy
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFitPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFitPolicy
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFitPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFitPolicy
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFitPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFitPolicy
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFitPolicy(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFitPolicy[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for GutterPolicy
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFitPolicy[  --> " + super.toString() + " ]";
-    }
+	public static class EnumGutterPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumGutterPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumGutterPolicy getEnum(String enumName)
+		{
+			return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumGutterPolicy getEnum(int enumValue)
+		{
+			return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumGutterPolicy.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumGutterPolicy.class);
+		}
 
-        /**
-        * Enumeration strings for GutterPolicy
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumGutterPolicy.class);
+		}
 
-        public static class EnumGutterPolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumGutterPolicy Distribute = new EnumGutterPolicy("Distribute");
+		public static final EnumGutterPolicy Fixed = new EnumGutterPolicy("Fixed");
+	}
 
-            private EnumGutterPolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	* Enumeration strings for RotatePolicy
+	*/
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumGutterPolicy getEnum(String enumName)
-            {
-                return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumName);
-            }
+	public static class EnumRotatePolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumGutterPolicy getEnum(int enumValue)
-            {
-                return (EnumGutterPolicy) getEnum(EnumGutterPolicy.class, enumValue);
-            }
+		private EnumRotatePolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumGutterPolicy.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumRotatePolicy getEnum(String enumName)
+		{
+			return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
+		}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumGutterPolicy.class);
-            }
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumRotatePolicy getEnum(int enumValue)
+		{
+			return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumGutterPolicy.class);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumRotatePolicy.class);
+		}
 
-            public static final EnumGutterPolicy Distribute = new EnumGutterPolicy("Distribute");
-            public static final EnumGutterPolicy Fixed = new EnumGutterPolicy("Fixed");
-        }      
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumRotatePolicy.class);
+		}
 
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumRotatePolicy.class);
+		}
 
+		public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
+		public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
+		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
+		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
+	}
 
-        /**
-        * Enumeration strings for RotatePolicy
-        */
+	/**
+	* Enumeration strings for SizePolicy
+	*/
 
-        public static class EnumRotatePolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+	public static class EnumSizePolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            private EnumRotatePolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		private EnumSizePolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumRotatePolicy getEnum(String enumName)
-            {
-                return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumName);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSizePolicy getEnum(String enumName)
+		{
+			return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumName);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumRotatePolicy getEnum(int enumValue)
-            {
-                return (EnumRotatePolicy) getEnum(EnumRotatePolicy.class, enumValue);
-            }
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSizePolicy getEnum(int enumValue)
+		{
+			return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumValue);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumRotatePolicy.class);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSizePolicy.class);
+		}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumRotatePolicy.class);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSizePolicy.class);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumRotatePolicy.class);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSizePolicy.class);
+		}
 
-            public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
-            public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
-            public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
-            public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
-        }      
+		public static final EnumSizePolicy ClipToMaxPage = new EnumSizePolicy("ClipToMaxPage");
+		public static final EnumSizePolicy Abort = new EnumSizePolicy("Abort");
+		public static final EnumSizePolicy FitToPage = new EnumSizePolicy("FitToPage");
+		public static final EnumSizePolicy ReduceToFit = new EnumSizePolicy("ReduceToFit");
+		public static final EnumSizePolicy Tile = new EnumSizePolicy("Tile");
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GutterPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute GutterPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setGutterPolicy(EnumGutterPolicy enumVar)
+	{
+		setAttribute(AttributeName.GUTTERPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-        * Enumeration strings for SizePolicy
-        */
+	/**
+	  * (9) get attribute GutterPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumGutterPolicy getGutterPolicy()
+	{
+		return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
+	}
 
-        public static class EnumSizePolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ClipOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ClipOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setClipOffset(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CLIPOFFSET, value, null);
+	}
 
-            private EnumSizePolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/**
+	  * (20) get JDFXYPair attribute ClipOffset
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getClipOffset()
+	{
+		final String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSizePolicy getEnum(String enumName)
-            {
-                return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinGutter
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinGutter
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinGutter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.MINGUTTER, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSizePolicy getEnum(int enumValue)
-            {
-                return (EnumSizePolicy) getEnum(EnumSizePolicy.class, enumValue);
-            }
+	/**
+	  * (20) get JDFXYPair attribute MinGutter
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getMinGutter()
+	{
+		final String strAttrName = getAttribute(AttributeName.MINGUTTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSizePolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RotatePolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute RotatePolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setRotatePolicy(EnumRotatePolicy enumVar)
+	{
+		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSizePolicy.class);
-            }
+	/**
+	  * (9) get attribute RotatePolicy
+	  * @return the value of the attribute
+	  */
+	public EnumRotatePolicy getRotatePolicy()
+	{
+		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSizePolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SizePolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute SizePolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSizePolicy(EnumSizePolicy enumVar)
+	{
+		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumSizePolicy ClipToMaxPage = new EnumSizePolicy("ClipToMaxPage");
-            public static final EnumSizePolicy Abort = new EnumSizePolicy("Abort");
-            public static final EnumSizePolicy FitToPage = new EnumSizePolicy("FitToPage");
-            public static final EnumSizePolicy ReduceToFit = new EnumSizePolicy("ReduceToFit");
-            public static final EnumSizePolicy Tile = new EnumSizePolicy("Tile");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GutterPolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute GutterPolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setGutterPolicy(EnumGutterPolicy enumVar)
-        {
-            setAttribute(AttributeName.GUTTERPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute GutterPolicy
-          * @return the value of the attribute
-          */
-        public EnumGutterPolicy getGutterPolicy()
-        {
-            return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClipOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClipOffset
-          * @param value the value to set the attribute to
-          */
-        public void setClipOffset(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CLIPOFFSET, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute ClipOffset
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getClipOffset()
-        {
-            String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinGutter
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinGutter
-          * @param value the value to set the attribute to
-          */
-        public void setMinGutter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.MINGUTTER, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute MinGutter
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getMinGutter()
-        {
-            String strAttrName = getAttribute(AttributeName.MINGUTTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RotatePolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute RotatePolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setRotatePolicy(EnumRotatePolicy enumVar)
-        {
-            setAttribute(AttributeName.ROTATEPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute RotatePolicy
-          * @return the value of the attribute
-          */
-        public EnumRotatePolicy getRotatePolicy()
-        {
-            return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SizePolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute SizePolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSizePolicy(EnumSizePolicy enumVar)
-        {
-            setAttribute(AttributeName.SIZEPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute SizePolicy
-          * @return the value of the attribute
-          */
-        public EnumSizePolicy getSizePolicy()
-        {
-            return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
-        }
+	/**
+	  * (9) get attribute SizePolicy
+	  * @return the value of the attribute
+	  */
+	public EnumSizePolicy getSizePolicy()
+	{
+		return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
+	}
 
 }// end namespace JDF

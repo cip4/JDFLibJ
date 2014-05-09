@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,337 +90,407 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFQueue;
 import org.cip4.jdflib.resource.JDFPart;
-    /**
-    *****************************************************************************
-    class JDFAutoRequestQueueEntryParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRequestQueueEntryParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEURL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEURL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUE, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUE, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRequestQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRequestQueueEntryParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRequestQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRequestQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRequestQueueEntryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRequestQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRequestQueueEntryParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRequestQueueEntryParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRequestQueueEntryParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRequestQueueEntryParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Activation
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRequestQueueEntryParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumActivation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumActivation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for SubmitPolicy
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(String enumName)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumName);
+		}
 
-        public static class EnumSubmitPolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(int enumValue)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
+		}
 
-            private EnumSubmitPolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumActivation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSubmitPolicy getEnum(String enumName)
-            {
-                return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumActivation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSubmitPolicy getEnum(int enumValue)
-            {
-                return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumActivation.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSubmitPolicy.class);
-            }
+		public static final EnumActivation Inactive = new EnumActivation("Inactive");
+		public static final EnumActivation Informative = new EnumActivation("Informative");
+		public static final EnumActivation Held = new EnumActivation("Held");
+		public static final EnumActivation Active = new EnumActivation("Active");
+		public static final EnumActivation TestRun = new EnumActivation("TestRun");
+		public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSubmitPolicy.class);
-            }
+	/**
+	* Enumeration strings for SubmitPolicy
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSubmitPolicy.class);
-            }
+	public static class EnumSubmitPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumSubmitPolicy Standard = new EnumSubmitPolicy("Standard");
-            public static final EnumSubmitPolicy Late = new EnumSubmitPolicy("Late");
-            public static final EnumSubmitPolicy Force = new EnumSubmitPolicy("Force");
-        }      
+		private EnumSubmitPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSubmitPolicy getEnum(String enumName)
+		{
+			return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSubmitPolicy getEnum(int enumValue)
+		{
+			return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumValue);
+		}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSubmitPolicy.class);
+		}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSubmitPolicy.class);
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSubmitPolicy.class);
+		}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		public static final EnumSubmitPolicy Standard = new EnumSubmitPolicy("Standard");
+		public static final EnumSubmitPolicy Late = new EnumSubmitPolicy("Late");
+		public static final EnumSubmitPolicy Force = new EnumSubmitPolicy("Force");
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueURL
-          * @param value the value to set the attribute to
-          */
-        public void setQueueURL(String value)
-        {
-            setAttribute(AttributeName.QUEUEURL, value, null);
-        }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-        /**
-          * (23) get String attribute QueueURL
-          * @return the value of the attribute
-          */
-        public String getQueueURL()
-        {
-            return getAttribute(AttributeName.QUEUEURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Activation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Activation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setActivation(EnumActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SubmitPolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute SubmitPolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSubmitPolicy(EnumSubmitPolicy enumVar)
-        {
-            setAttribute(AttributeName.SUBMITPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	  * (9) get attribute Activation
+	  * @return the value of the attribute
+	  */
+	public EnumActivation getActivation()
+	{
+		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
+	}
 
-        /**
-          * (9) get attribute SubmitPolicy
-          * @return the value of the attribute
-          */
-        public EnumSubmitPolicy getSubmitPolicy()
-        {
-            return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueURL(String value)
+	{
+		setAttribute(AttributeName.QUEUEURL, value, null);
+	}
 
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
+	/**
+	  * (23) get String attribute QueueURL
+	  * @return the value of the attribute
+	  */
+	public String getQueueURL()
+	{
+		return getAttribute(AttributeName.QUEUEURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        return v;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SubmitPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute SubmitPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSubmitPolicy(EnumSubmitPolicy enumVar)
+	{
+		setAttribute(AttributeName.SUBMITPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	  * (9) get attribute SubmitPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumSubmitPolicy getSubmitPolicy()
+	{
+		return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
+	}
 
-    /**
-     * (24) const get element Queue
-     * @return JDFQueue the element
-     */
-    public JDFQueue getQueue()
-    {
-        return (JDFQueue) getElement(ElementName.QUEUE, null, 0);
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /** (25) getCreateQueue
-     * 
-     * @return JDFQueue the element
-     */
-    public JDFQueue getCreateQueue()
-    {
-        return (JDFQueue) getCreateElement_KElement(ElementName.QUEUE, null, 0);
-    }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-    /**
-     * (29) append element Queue
-     * @return JDFQueue the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFQueue appendQueue() throws JDFException
-    {
-        return (JDFQueue) appendElementN(ElementName.QUEUE, 1, null);
-    }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
+
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
+
+	/**
+	 * (24) const get element Queue
+	 * @return JDFQueue the element
+	 */
+	public JDFQueue getQueue()
+	{
+		return (JDFQueue) getElement(ElementName.QUEUE, null, 0);
+	}
+
+	/** (25) getCreateQueue
+	 * 
+	 * @return JDFQueue the element
+	 */
+	public JDFQueue getCreateQueue()
+	{
+		return (JDFQueue) getCreateElement_KElement(ElementName.QUEUE, null, 0);
+	}
+
+	/**
+	 * (29) append element Queue
+	 * @return JDFQueue the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFQueue appendQueue() throws JDFException
+	{
+		return (JDFQueue) appendElementN(ElementName.QUEUE, 1, null);
+	}
 
 }// end namespace JDF

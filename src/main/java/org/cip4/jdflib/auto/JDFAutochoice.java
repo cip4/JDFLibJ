@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,167 +82,156 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFotherwise;
 import org.cip4.jdflib.resource.devicecapability.JDFwhen;
-    /**
-    *****************************************************************************
-    class JDFAutochoice : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutochoice : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutochoice extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.WHEN, 0x22222211);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.OTHERWISE, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.WHEN, 0x22222211);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.OTHERWISE, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutochoice
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutochoice
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutochoice(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutochoice
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutochoice
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutochoice(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutochoice
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutochoice
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutochoice(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutochoice[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutochoice[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreatewhen
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFwhen the element
+	 */
+	public JDFwhen getCreatewhen(int iSkip)
+	{
+		return (JDFwhen) getCreateElement_KElement(ElementName.WHEN, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element when
+	 * @param iSkip number of elements to skip
+	 * @return JDFwhen the element
+	 * default is getwhen(0)     */
+	public JDFwhen getwhen(int iSkip)
+	{
+		return (JDFwhen) getElement(ElementName.WHEN, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all when from the current element
+	 * 
+	 * @return Collection<JDFwhen>, null if none are available
+	 */
+	public Collection<JDFwhen> getAllwhen()
+	{
+		final VElement vc = getChildElementVector(ElementName.WHEN, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreatewhen
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFwhen the element
-     */
-    public JDFwhen getCreatewhen(int iSkip)
-    {
-        return (JDFwhen)getCreateElement_KElement(ElementName.WHEN, null, iSkip);
-    }
+		final Vector<JDFwhen> v = new Vector<JDFwhen>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFwhen) vc.get(i));
+		}
 
-    /**
-     * (27) const get element when
-     * @param iSkip number of elements to skip
-     * @return JDFwhen the element
-     * default is getwhen(0)     */
-    public JDFwhen getwhen(int iSkip)
-    {
-        return (JDFwhen) getElement(ElementName.WHEN, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all when from the current element
-     * 
-     * @return Collection<JDFwhen>, null if none are available
-     */
-    public Collection<JDFwhen> getAllwhen()
-    {
-        final VElement vc = getChildElementVector(ElementName.WHEN, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element when
+	 * @return JDFwhen the element
+	 */
+	public JDFwhen appendwhen()
+	{
+		return (JDFwhen) appendElement(ElementName.WHEN, null);
+	}
 
-        final Vector<JDFwhen> v = new Vector<JDFwhen>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFwhen) vc.get(i));
-        }
+	/**
+	 * (24) const get element otherwise
+	 * @return JDFotherwise the element
+	 */
+	public JDFotherwise getotherwise()
+	{
+		return (JDFotherwise) getElement(ElementName.OTHERWISE, null, 0);
+	}
 
-        return v;
-    }
+	/** (25) getCreateotherwise
+	 * 
+	 * @return JDFotherwise the element
+	 */
+	public JDFotherwise getCreateotherwise()
+	{
+		return (JDFotherwise) getCreateElement_KElement(ElementName.OTHERWISE, null, 0);
+	}
 
-    /**
-     * (30) append element when
-     * @return JDFwhen the element
-     */
-    public JDFwhen appendwhen()
-    {
-        return (JDFwhen) appendElement(ElementName.WHEN, null);
-    }
-
-    /**
-     * (24) const get element otherwise
-     * @return JDFotherwise the element
-     */
-    public JDFotherwise getotherwise()
-    {
-        return (JDFotherwise) getElement(ElementName.OTHERWISE, null, 0);
-    }
-
-    /** (25) getCreateotherwise
-     * 
-     * @return JDFotherwise the element
-     */
-    public JDFotherwise getCreateotherwise()
-    {
-        return (JDFotherwise) getCreateElement_KElement(ElementName.OTHERWISE, null, 0);
-    }
-
-    /**
-     * (29) append element otherwise
-     * @return JDFotherwise the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFotherwise appendotherwise() throws JDFException
-    {
-        return (JDFotherwise) appendElementN(ElementName.OTHERWISE, 1, null);
-    }
+	/**
+	 * (29) append element otherwise
+	 * @return JDFotherwise the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFotherwise appendotherwise() throws JDFException
+	{
+		return (JDFotherwise) appendElementN(ElementName.OTHERWISE, 1, null);
+	}
 
 }// end namespace JDF

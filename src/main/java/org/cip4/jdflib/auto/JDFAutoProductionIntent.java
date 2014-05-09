@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,205 +83,194 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanPrintPreference;
-    /**
-    *****************************************************************************
-    class JDFAutoProductionIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoProductionIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoProductionIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PRINTPREFERENCE, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PRINTPROCESS, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRINTPREFERENCE, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PRINTPROCESS, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoProductionIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoProductionIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProductionIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoProductionIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProductionIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoProductionIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoProductionIntent[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoProductionIntent[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element PrintPreference
+	 * @return JDFSpanPrintPreference the element
+	 */
+	public JDFSpanPrintPreference getPrintPreference()
+	{
+		return (JDFSpanPrintPreference) getElement(ElementName.PRINTPREFERENCE, null, 0);
+	}
 
+	/** (25) getCreatePrintPreference
+	 * 
+	 * @return JDFSpanPrintPreference the element
+	 */
+	public JDFSpanPrintPreference getCreatePrintPreference()
+	{
+		return (JDFSpanPrintPreference) getCreateElement_KElement(ElementName.PRINTPREFERENCE, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element PrintPreference
+	 * @return JDFSpanPrintPreference the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanPrintPreference appendPrintPreference() throws JDFException
+	{
+		return (JDFSpanPrintPreference) appendElementN(ElementName.PRINTPREFERENCE, 1, null);
+	}
 
-    /**
-     * (24) const get element PrintPreference
-     * @return JDFSpanPrintPreference the element
-     */
-    public JDFSpanPrintPreference getPrintPreference()
-    {
-        return (JDFSpanPrintPreference) getElement(ElementName.PRINTPREFERENCE, null, 0);
-    }
+	/**
+	 * (24) const get element PrintProcess
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getPrintProcess()
+	{
+		return (JDFNameSpan) getElement(ElementName.PRINTPROCESS, null, 0);
+	}
 
-    /** (25) getCreatePrintPreference
-     * 
-     * @return JDFSpanPrintPreference the element
-     */
-    public JDFSpanPrintPreference getCreatePrintPreference()
-    {
-        return (JDFSpanPrintPreference) getCreateElement_KElement(ElementName.PRINTPREFERENCE, null, 0);
-    }
+	/** (25) getCreatePrintProcess
+	 * 
+	 * @return JDFNameSpan the element
+	 */
+	public JDFNameSpan getCreatePrintProcess()
+	{
+		return (JDFNameSpan) getCreateElement_KElement(ElementName.PRINTPROCESS, null, 0);
+	}
 
-    /**
-     * (29) append element PrintPreference
-     * @return JDFSpanPrintPreference the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanPrintPreference appendPrintPreference() throws JDFException
-    {
-        return (JDFSpanPrintPreference) appendElementN(ElementName.PRINTPREFERENCE, 1, null);
-    }
+	/**
+	 * (29) append element PrintProcess
+	 * @return JDFNameSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNameSpan appendPrintProcess() throws JDFException
+	{
+		return (JDFNameSpan) appendElementN(ElementName.PRINTPROCESS, 1, null);
+	}
 
-    /**
-     * (24) const get element PrintProcess
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getPrintProcess()
-    {
-        return (JDFNameSpan) getElement(ElementName.PRINTPROCESS, null, 0);
-    }
+	/** (26) getCreateResource
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource(int iSkip)
+	{
+		return (JDFResource) getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-    /** (25) getCreatePrintProcess
-     * 
-     * @return JDFNameSpan the element
-     */
-    public JDFNameSpan getCreatePrintProcess()
-    {
-        return (JDFNameSpan) getCreateElement_KElement(ElementName.PRINTPROCESS, null, 0);
-    }
+	/**
+	 * (27) const get element Resource
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 * default is getResource(0)     */
+	public JDFResource getResource(int iSkip)
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-    /**
-     * (29) append element PrintProcess
-     * @return JDFNameSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNameSpan appendPrintProcess() throws JDFException
-    {
-        return (JDFNameSpan) appendElementN(ElementName.PRINTPROCESS, 1, null);
-    }
+	/**
+	 * Get all Resource from the current element
+	 * 
+	 * @return Collection<JDFResource>, null if none are available
+	 */
+	public Collection<JDFResource> getAllResource()
+	{
+		final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     */
-    public JDFResource getCreateResource(int iSkip)
-    {
-        return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
-    }
+		final Vector<JDFResource> v = new Vector<JDFResource>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFResource) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Resource
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     * default is getResource(0)     */
-    public JDFResource getResource(int iSkip)
-    {
-        return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Resource from the current element
-     * 
-     * @return Collection<JDFResource>, null if none are available
-     */
-    public Collection<JDFResource> getAllResource()
-    {
-        final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element Resource
+	 * @return JDFResource the element
+	 */
+	public JDFResource appendResource()
+	{
+		return (JDFResource) appendElement(ElementName.RESOURCE, null);
+	}
 
-        final Vector<JDFResource> v = new Vector<JDFResource>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFResource) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Resource
-     * @return JDFResource the element
-     */
-    public JDFResource appendResource()
-    {
-        return (JDFResource) appendElement(ElementName.RESOURCE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refResource(JDFResource refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refResource(JDFResource refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

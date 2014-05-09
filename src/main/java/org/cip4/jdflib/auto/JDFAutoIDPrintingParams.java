@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,676 +95,652 @@ import org.cip4.jdflib.resource.process.JDFCover;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPrintingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPrintingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPrintingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
-
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTESNATURALLANG, 0x44444443, AttributeInfo.EnumAttributeType.language, null, "US");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.IDPATTRIBUTEFIDELITY, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, "50");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COVER, 0x44444443);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDPFINISHING, 0x77777776);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x77777776);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.JOBSHEET, 0x44444443);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x77777776);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
-
-    /**
-     * Constructor for JDFAutoIDPrintingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPrintingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoIDPrintingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPrintingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoIDPrintingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPrintingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPrintingParams[  --> " + super.toString() + " ]";
-    }
-
-
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
-
-
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
-
-
-        /**
-        * Enumeration strings for PageDelivery
-        */
-
-        public static class EnumPageDelivery extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumPageDelivery(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPageDelivery getEnum(String enumName)
-            {
-                return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPageDelivery getEnum(int enumValue)
-            {
-                return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPageDelivery.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPageDelivery.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPageDelivery.class);
-            }
-
-            public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
-            public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
-            public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
-            public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
-            public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
-        }      
-
-
-
-        /**
-        * Enumeration strings for PrintQuality
-        */
-
-        public static class EnumPrintQuality extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumPrintQuality(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPrintQuality getEnum(String enumName)
-            {
-                return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
-            }
-
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPrintQuality getEnum(int enumValue)
-            {
-                return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
-            }
-
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPrintQuality.class);
-            }
-
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPrintQuality.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPrintQuality.class);
-            }
-
-            public static final EnumPrintQuality High = new EnumPrintQuality("High");
-            public static final EnumPrintQuality Normal = new EnumPrintQuality("Normal");
-            public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AttributesNaturalLang
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AttributesNaturalLang
-          * @param value the value to set the attribute to
-          */
-        public void setAttributesNaturalLang(String value)
-        {
-            setAttribute(AttributeName.ATTRIBUTESNATURALLANG, value, null);
-        }
-
-        /**
-          * (23) get String attribute AttributesNaturalLang
-          * @return the value of the attribute
-          */
-        public String getAttributesNaturalLang()
-        {
-            return getAttribute(AttributeName.ATTRIBUTESNATURALLANG, null, "US");
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IDPAttributeFidelity
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IDPAttributeFidelity
-          * @param value the value to set the attribute to
-          */
-        public void setIDPAttributeFidelity(boolean value)
-        {
-            setAttribute(AttributeName.IDPATTRIBUTEFIDELITY, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute IDPAttributeFidelity
-          * @return boolean the value of the attribute
-          */
-        public boolean getIDPAttributeFidelity()
-        {
-            return getBoolAttribute(AttributeName.IDPATTRIBUTEFIDELITY, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IPPJobPriority
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IPPJobPriority
-          * @param value the value to set the attribute to
-          */
-        public void setIPPJobPriority(int value)
-        {
-            setAttribute(AttributeName.IPPJOBPRIORITY, value, null);
-        }
-
-        /**
-          * (15) get int attribute IPPJobPriority
-          * @return int the value of the attribute
-          */
-        public int getIPPJobPriority()
-        {
-            return getIntAttribute(AttributeName.IPPJOBPRIORITY, null, 50);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IPPVersion
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IPPVersion
-          * @param value the value to set the attribute to
-          */
-        public void setIPPVersion(JDFXYPair value)
-        {
-            setAttribute(AttributeName.IPPVERSION, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute IPPVersion
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getIPPVersion()
-        {
-            String strAttrName = getAttribute(AttributeName.IPPVERSION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OutputBin
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OutputBin
-          * @param value the value to set the attribute to
-          */
-        public void setOutputBin(String value)
-        {
-            setAttribute(AttributeName.OUTPUTBIN, value, null);
-        }
-
-        /**
-          * (23) get String attribute OutputBin
-          * @return the value of the attribute
-          */
-        public String getOutputBin()
-        {
-            return getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PageDelivery
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PageDelivery
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPageDelivery(EnumPageDelivery enumVar)
-        {
-            setAttribute(AttributeName.PAGEDELIVERY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute PageDelivery
-          * @return the value of the attribute
-          */
-        public EnumPageDelivery getPageDelivery()
-        {
-            return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrintQuality
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PrintQuality
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPrintQuality(EnumPrintQuality enumVar)
-        {
-            setAttribute(AttributeName.PRINTQUALITY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute PrintQuality
-          * @return the value of the attribute
-          */
-        public EnumPrintQuality getPrintQuality()
-        {
-            return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SheetCollate
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SheetCollate
-          * @param value the value to set the attribute to
-          */
-        public void setSheetCollate(boolean value)
-        {
-            setAttribute(AttributeName.SHEETCOLLATE, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute SheetCollate
-          * @return boolean the value of the attribute
-          */
-        public boolean getSheetCollate()
-        {
-            return getBoolAttribute(AttributeName.SHEETCOLLATE, null, false);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateCover
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCover the element
-     */
-    public JDFCover getCreateCover(int iSkip)
-    {
-        return (JDFCover)getCreateElement_KElement(ElementName.COVER, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Cover
-     * @param iSkip number of elements to skip
-     * @return JDFCover the element
-     * default is getCover(0)     */
-    public JDFCover getCover(int iSkip)
-    {
-        return (JDFCover) getElement(ElementName.COVER, null, iSkip);
-    }
-
-    /**
-     * Get all Cover from the current element
-     * 
-     * @return Collection<JDFCover>, null if none are available
-     */
-    public Collection<JDFCover> getAllCover()
-    {
-        final VElement vc = getChildElementVector(ElementName.COVER, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFCover> v = new Vector<JDFCover>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCover) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Cover
-     * @return JDFCover the element
-     */
-    public JDFCover appendCover()
-    {
-        return (JDFCover) appendElement(ElementName.COVER, null);
-    }
-
-    /**
-     * (24) const get element IDPFinishing
-     * @return JDFIDPFinishing the element
-     */
-    public JDFIDPFinishing getIDPFinishing()
-    {
-        return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, 0);
-    }
-
-    /** (25) getCreateIDPFinishing
-     * 
-     * @return JDFIDPFinishing the element
-     */
-    public JDFIDPFinishing getCreateIDPFinishing()
-    {
-        return (JDFIDPFinishing) getCreateElement_KElement(ElementName.IDPFINISHING, null, 0);
-    }
-
-    /**
-     * (29) append element IDPFinishing
-     * @return JDFIDPFinishing the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIDPFinishing appendIDPFinishing() throws JDFException
-    {
-        return (JDFIDPFinishing) appendElementN(ElementName.IDPFINISHING, 1, null);
-    }
-
-    /**
-     * (24) const get element IDPLayout
-     * @return JDFIDPLayout the element
-     */
-    public JDFIDPLayout getIDPLayout()
-    {
-        return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, 0);
-    }
-
-    /** (25) getCreateIDPLayout
-     * 
-     * @return JDFIDPLayout the element
-     */
-    public JDFIDPLayout getCreateIDPLayout()
-    {
-        return (JDFIDPLayout) getCreateElement_KElement(ElementName.IDPLAYOUT, null, 0);
-    }
-
-    /**
-     * (29) append element IDPLayout
-     * @return JDFIDPLayout the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFIDPLayout appendIDPLayout() throws JDFException
-    {
-        return (JDFIDPLayout) appendElementN(ElementName.IDPLAYOUT, 1, null);
-    }
-
-    /** (26) getCreateJobSheet
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFJobSheet the element
-     */
-    public JDFJobSheet getCreateJobSheet(int iSkip)
-    {
-        return (JDFJobSheet)getCreateElement_KElement(ElementName.JOBSHEET, null, iSkip);
-    }
-
-    /**
-     * (27) const get element JobSheet
-     * @param iSkip number of elements to skip
-     * @return JDFJobSheet the element
-     * default is getJobSheet(0)     */
-    public JDFJobSheet getJobSheet(int iSkip)
-    {
-        return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, iSkip);
-    }
-
-    /**
-     * Get all JobSheet from the current element
-     * 
-     * @return Collection<JDFJobSheet>, null if none are available
-     */
-    public Collection<JDFJobSheet> getAllJobSheet()
-    {
-        final VElement vc = getChildElementVector(ElementName.JOBSHEET, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFJobSheet> v = new Vector<JDFJobSheet>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFJobSheet) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element JobSheet
-     * @return JDFJobSheet the element
-     */
-    public JDFJobSheet appendJobSheet()
-    {
-        return (JDFJobSheet) appendElement(ElementName.JOBSHEET, null);
-    }
-
-    /**
-     * (24) const get element MediaIntent
-     * @return JDFMediaIntent the element
-     */
-    public JDFMediaIntent getMediaIntent()
-    {
-        return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, 0);
-    }
-
-    /** (25) getCreateMediaIntent
-     * 
-     * @return JDFMediaIntent the element
-     */
-    public JDFMediaIntent getCreateMediaIntent()
-    {
-        return (JDFMediaIntent) getCreateElement_KElement(ElementName.MEDIAINTENT, null, 0);
-    }
-
-    /**
-     * (29) append element MediaIntent
-     * @return JDFMediaIntent the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMediaIntent appendMediaIntent() throws JDFException
-    {
-        return (JDFMediaIntent) appendElementN(ElementName.MEDIAINTENT, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMediaIntent(JDFMediaIntent refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element MediaSource
-     * @return JDFMediaSource the element
-     */
-    public JDFMediaSource getMediaSource()
-    {
-        return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
-    }
-
-    /** (25) getCreateMediaSource
-     * 
-     * @return JDFMediaSource the element
-     */
-    public JDFMediaSource getCreateMediaSource()
-    {
-        return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
-    }
-
-    /**
-     * (29) append element MediaSource
-     * @return JDFMediaSource the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFMediaSource appendMediaSource() throws JDFException
-    {
-        return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMediaSource(JDFMediaSource refTarget)
-    {
-        refElement(refTarget);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTRIBUTESNATURALLANG, 0x44444443, AttributeInfo.EnumAttributeType.language, null, "US");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDPATTRIBUTEFIDELITY, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, "50");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COVER, 0x44444443);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPFINISHING, 0x77777776);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPLAYOUT, 0x77777776);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.JOBSHEET, 0x44444443);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIAINTENT, 0x77777776);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFAutoIDPrintingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoIDPrintingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoIDPrintingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPrintingParams[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
+
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	* Enumeration strings for PageDelivery
+	*/
+
+	public static class EnumPageDelivery extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumPageDelivery(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPageDelivery getEnum(String enumName)
+		{
+			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPageDelivery getEnum(int enumValue)
+		{
+			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPageDelivery.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPageDelivery.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPageDelivery.class);
+		}
+
+		public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
+		public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
+		public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
+		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
+		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
+	}
+
+	/**
+	* Enumeration strings for PrintQuality
+	*/
+
+	public static class EnumPrintQuality extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumPrintQuality(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPrintQuality getEnum(String enumName)
+		{
+			return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPrintQuality getEnum(int enumValue)
+		{
+			return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPrintQuality.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPrintQuality.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPrintQuality.class);
+		}
+
+		public static final EnumPrintQuality High = new EnumPrintQuality("High");
+		public static final EnumPrintQuality Normal = new EnumPrintQuality("Normal");
+		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AttributesNaturalLang
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AttributesNaturalLang
+	  * @param value the value to set the attribute to
+	  */
+	public void setAttributesNaturalLang(String value)
+	{
+		setAttribute(AttributeName.ATTRIBUTESNATURALLANG, value, null);
+	}
+
+	/**
+	  * (23) get String attribute AttributesNaturalLang
+	  * @return the value of the attribute
+	  */
+	public String getAttributesNaturalLang()
+	{
+		return getAttribute(AttributeName.ATTRIBUTESNATURALLANG, null, "US");
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IDPAttributeFidelity
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IDPAttributeFidelity
+	  * @param value the value to set the attribute to
+	  */
+	public void setIDPAttributeFidelity(boolean value)
+	{
+		setAttribute(AttributeName.IDPATTRIBUTEFIDELITY, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute IDPAttributeFidelity
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getIDPAttributeFidelity()
+	{
+		return getBoolAttribute(AttributeName.IDPATTRIBUTEFIDELITY, null, false);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IPPJobPriority
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IPPJobPriority
+	  * @param value the value to set the attribute to
+	  */
+	public void setIPPJobPriority(int value)
+	{
+		setAttribute(AttributeName.IPPJOBPRIORITY, value, null);
+	}
+
+	/**
+	  * (15) get int attribute IPPJobPriority
+	  * @return int the value of the attribute
+	  */
+	public int getIPPJobPriority()
+	{
+		return getIntAttribute(AttributeName.IPPJOBPRIORITY, null, 50);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IPPVersion
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IPPVersion
+	  * @param value the value to set the attribute to
+	  */
+	public void setIPPVersion(JDFXYPair value)
+	{
+		setAttribute(AttributeName.IPPVERSION, value, null);
+	}
+
+	/**
+	  * (20) get JDFXYPair attribute IPPVersion
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getIPPVersion()
+	{
+		final String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OutputBin
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OutputBin
+	  * @param value the value to set the attribute to
+	  */
+	public void setOutputBin(String value)
+	{
+		setAttribute(AttributeName.OUTPUTBIN, value, null);
+	}
+
+	/**
+	  * (23) get String attribute OutputBin
+	  * @return the value of the attribute
+	  */
+	public String getOutputBin()
+	{
+		return getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PageDelivery
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PageDelivery
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPageDelivery(EnumPageDelivery enumVar)
+	{
+		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute PageDelivery
+	  * @return the value of the attribute
+	  */
+	public EnumPageDelivery getPageDelivery()
+	{
+		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintQuality
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PrintQuality
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPrintQuality(EnumPrintQuality enumVar)
+	{
+		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute PrintQuality
+	  * @return the value of the attribute
+	  */
+	public EnumPrintQuality getPrintQuality()
+	{
+		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetCollate
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SheetCollate
+	  * @param value the value to set the attribute to
+	  */
+	public void setSheetCollate(boolean value)
+	{
+		setAttribute(AttributeName.SHEETCOLLATE, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute SheetCollate
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getSheetCollate()
+	{
+		return getBoolAttribute(AttributeName.SHEETCOLLATE, null, false);
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/** (26) getCreateCover
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCover the element
+	 */
+	public JDFCover getCreateCover(int iSkip)
+	{
+		return (JDFCover) getCreateElement_KElement(ElementName.COVER, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Cover
+	 * @param iSkip number of elements to skip
+	 * @return JDFCover the element
+	 * default is getCover(0)     */
+	public JDFCover getCover(int iSkip)
+	{
+		return (JDFCover) getElement(ElementName.COVER, null, iSkip);
+	}
+
+	/**
+	 * Get all Cover from the current element
+	 * 
+	 * @return Collection<JDFCover>, null if none are available
+	 */
+	public Collection<JDFCover> getAllCover()
+	{
+		final VElement vc = getChildElementVector(ElementName.COVER, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFCover> v = new Vector<JDFCover>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCover) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Cover
+	 * @return JDFCover the element
+	 */
+	public JDFCover appendCover()
+	{
+		return (JDFCover) appendElement(ElementName.COVER, null);
+	}
+
+	/**
+	 * (24) const get element IDPFinishing
+	 * @return JDFIDPFinishing the element
+	 */
+	public JDFIDPFinishing getIDPFinishing()
+	{
+		return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, 0);
+	}
+
+	/** (25) getCreateIDPFinishing
+	 * 
+	 * @return JDFIDPFinishing the element
+	 */
+	public JDFIDPFinishing getCreateIDPFinishing()
+	{
+		return (JDFIDPFinishing) getCreateElement_KElement(ElementName.IDPFINISHING, null, 0);
+	}
+
+	/**
+	 * (29) append element IDPFinishing
+	 * @return JDFIDPFinishing the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIDPFinishing appendIDPFinishing() throws JDFException
+	{
+		return (JDFIDPFinishing) appendElementN(ElementName.IDPFINISHING, 1, null);
+	}
+
+	/**
+	 * (24) const get element IDPLayout
+	 * @return JDFIDPLayout the element
+	 */
+	public JDFIDPLayout getIDPLayout()
+	{
+		return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, 0);
+	}
+
+	/** (25) getCreateIDPLayout
+	 * 
+	 * @return JDFIDPLayout the element
+	 */
+	public JDFIDPLayout getCreateIDPLayout()
+	{
+		return (JDFIDPLayout) getCreateElement_KElement(ElementName.IDPLAYOUT, null, 0);
+	}
+
+	/**
+	 * (29) append element IDPLayout
+	 * @return JDFIDPLayout the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFIDPLayout appendIDPLayout() throws JDFException
+	{
+		return (JDFIDPLayout) appendElementN(ElementName.IDPLAYOUT, 1, null);
+	}
+
+	/** (26) getCreateJobSheet
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFJobSheet the element
+	 */
+	public JDFJobSheet getCreateJobSheet(int iSkip)
+	{
+		return (JDFJobSheet) getCreateElement_KElement(ElementName.JOBSHEET, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element JobSheet
+	 * @param iSkip number of elements to skip
+	 * @return JDFJobSheet the element
+	 * default is getJobSheet(0)     */
+	public JDFJobSheet getJobSheet(int iSkip)
+	{
+		return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, iSkip);
+	}
+
+	/**
+	 * Get all JobSheet from the current element
+	 * 
+	 * @return Collection<JDFJobSheet>, null if none are available
+	 */
+	public Collection<JDFJobSheet> getAllJobSheet()
+	{
+		final VElement vc = getChildElementVector(ElementName.JOBSHEET, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFJobSheet> v = new Vector<JDFJobSheet>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFJobSheet) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element JobSheet
+	 * @return JDFJobSheet the element
+	 */
+	public JDFJobSheet appendJobSheet()
+	{
+		return (JDFJobSheet) appendElement(ElementName.JOBSHEET, null);
+	}
+
+	/**
+	 * (24) const get element MediaIntent
+	 * @return JDFMediaIntent the element
+	 */
+	public JDFMediaIntent getMediaIntent()
+	{
+		return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, 0);
+	}
+
+	/** (25) getCreateMediaIntent
+	 * 
+	 * @return JDFMediaIntent the element
+	 */
+	public JDFMediaIntent getCreateMediaIntent()
+	{
+		return (JDFMediaIntent) getCreateElement_KElement(ElementName.MEDIAINTENT, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaIntent
+	 * @return JDFMediaIntent the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMediaIntent appendMediaIntent() throws JDFException
+	{
+		return (JDFMediaIntent) appendElementN(ElementName.MEDIAINTENT, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMediaIntent(JDFMediaIntent refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element MediaSource
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getMediaSource()
+	{
+		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, 0);
+	}
+
+	/** (25) getCreateMediaSource
+	 * 
+	 * @return JDFMediaSource the element
+	 */
+	public JDFMediaSource getCreateMediaSource()
+	{
+		return (JDFMediaSource) getCreateElement_KElement(ElementName.MEDIASOURCE, null, 0);
+	}
+
+	/**
+	 * (29) append element MediaSource
+	 * @return JDFMediaSource the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFMediaSource appendMediaSource() throws JDFException
+	{
+		return (JDFMediaSource) appendElementN(ElementName.MEDIASOURCE, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMediaSource(JDFMediaSource refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

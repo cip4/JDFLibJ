@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,230 +81,222 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBindingQualityMeasurement;
 import org.cip4.jdflib.util.JDFDate;
-    /**
-    *****************************************************************************
-    class JDFAutoQualityMeasurement : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQualityMeasurement : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQualityMeasurement extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FAILED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PASSED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAILED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PASSED, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYMEASUREMENT, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYMEASUREMENT, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityMeasurement
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityMeasurement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQualityMeasurement
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQualityMeasurement
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQualityMeasurement(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQualityMeasurement[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQualityMeasurement[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute End
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute End
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setEnd(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.END, date.getDateTimeISO(), null);
+	}
 
+	/**
+	  * (12) get JDFDate attribute End
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getEnd()
+	{
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute End
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute End
-          * @param value the value to set the attribute to or null
-          */
-        public void setEnd(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.END, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Failed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Failed
+	  * @param value the value to set the attribute to
+	  */
+	public void setFailed(int value)
+	{
+		setAttribute(AttributeName.FAILED, value, null);
+	}
 
-        /**
-          * (12) get JDFDate attribute End
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getEnd()
-        {
-            String str = getAttribute(AttributeName.END, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (15) get int attribute Failed
+	  * @return int the value of the attribute
+	  */
+	public int getFailed()
+	{
+		return getIntAttribute(AttributeName.FAILED, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Failed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Failed
-          * @param value the value to set the attribute to
-          */
-        public void setFailed(int value)
-        {
-            setAttribute(AttributeName.FAILED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Passed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Passed
+	  * @param value the value to set the attribute to
+	  */
+	public void setPassed(int value)
+	{
+		setAttribute(AttributeName.PASSED, value, null);
+	}
 
-        /**
-          * (15) get int attribute Failed
-          * @return int the value of the attribute
-          */
-        public int getFailed()
-        {
-            return getIntAttribute(AttributeName.FAILED, null, 0);
-        }
+	/**
+	  * (15) get int attribute Passed
+	  * @return int the value of the attribute
+	  */
+	public int getPassed()
+	{
+		return getIntAttribute(AttributeName.PASSED, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Passed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Passed
-          * @param value the value to set the attribute to
-          */
-        public void setPassed(int value)
-        {
-            setAttribute(AttributeName.PASSED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Start
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute Start
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setStart(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (15) get int attribute Passed
-          * @return int the value of the attribute
-          */
-        public int getPassed()
-        {
-            return getIntAttribute(AttributeName.PASSED, null, 0);
-        }
+	/**
+	  * (12) get JDFDate attribute Start
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getStart()
+	{
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Start
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute Start
-          * @param value the value to set the attribute to or null
-          */
-        public void setStart(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.START, date.getDateTimeISO(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (12) get JDFDate attribute Start
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getStart()
-        {
-            String str = getAttribute(AttributeName.START, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	 * (24) const get element BindingQualityMeasurement
+	 * @return JDFBindingQualityMeasurement the element
+	 */
+	public JDFBindingQualityMeasurement getBindingQualityMeasurement()
+	{
+		return (JDFBindingQualityMeasurement) getElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateBindingQualityMeasurement
+	 * 
+	 * @return JDFBindingQualityMeasurement the element
+	 */
+	public JDFBindingQualityMeasurement getCreateBindingQualityMeasurement()
+	{
+		return (JDFBindingQualityMeasurement) getCreateElement_KElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
+	}
 
-    /**
-     * (24) const get element BindingQualityMeasurement
-     * @return JDFBindingQualityMeasurement the element
-     */
-    public JDFBindingQualityMeasurement getBindingQualityMeasurement()
-    {
-        return (JDFBindingQualityMeasurement) getElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
-    }
-
-    /** (25) getCreateBindingQualityMeasurement
-     * 
-     * @return JDFBindingQualityMeasurement the element
-     */
-    public JDFBindingQualityMeasurement getCreateBindingQualityMeasurement()
-    {
-        return (JDFBindingQualityMeasurement) getCreateElement_KElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
-    }
-
-    /**
-     * (29) append element BindingQualityMeasurement
-     * @return JDFBindingQualityMeasurement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFBindingQualityMeasurement appendBindingQualityMeasurement() throws JDFException
-    {
-        return (JDFBindingQualityMeasurement) appendElementN(ElementName.BINDINGQUALITYMEASUREMENT, 1, null);
-    }
+	/**
+	 * (29) append element BindingQualityMeasurement
+	 * @return JDFBindingQualityMeasurement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFBindingQualityMeasurement appendBindingQualityMeasurement() throws JDFException
+	{
+		return (JDFBindingQualityMeasurement) appendElementN(ElementName.BINDINGQUALITYMEASUREMENT, 1, null);
+	}
 
 }// end namespace JDF

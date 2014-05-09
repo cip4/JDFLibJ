@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,446 +86,423 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFDisposition;
-    /**
-    *****************************************************************************
-    class JDFAutoQueueSubmissionParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueueSubmissionParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.HOLD, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NEXTQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.PREVQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.REFID, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.RETURNJMF, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.RETURNURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.WATCHURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HOLD, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEXTQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PREVQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.REFID, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RETURNJMF, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.RETURNURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.WATCHURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DISPOSITION, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DISPOSITION, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueueSubmissionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueSubmissionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueSubmissionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueSubmissionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueSubmissionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueSubmissionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueueSubmissionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueueSubmissionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for GangPolicy
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueueSubmissionParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumGangPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumGangPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for GangPolicy
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumGangPolicy getEnum(String enumName)
+		{
+			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
+		}
 
-        public static class EnumGangPolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumGangPolicy getEnum(int enumValue)
+		{
+			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
+		}
 
-            private EnumGangPolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumGangPolicy.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumGangPolicy getEnum(String enumName)
-            {
-                return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumGangPolicy.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumGangPolicy getEnum(int enumValue)
-            {
-                return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumGangPolicy.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumGangPolicy.class);
-            }
+		public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
+		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
+		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumGangPolicy.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumGangPolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GangName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GangName
+	  * @param value the value to set the attribute to
+	  */
+	public void setGangName(String value)
+	{
+		setAttribute(AttributeName.GANGNAME, value, null);
+	}
 
-            public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
-            public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
-            public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
-        }      
+	/**
+	  * (23) get String attribute GangName
+	  * @return the value of the attribute
+	  */
+	public String getGangName()
+	{
+		return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GangPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute GangPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setGangPolicy(EnumGangPolicy enumVar)
+	{
+		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute GangPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumGangPolicy getGangPolicy()
+	{
+		return EnumGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GangName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GangName
-          * @param value the value to set the attribute to
-          */
-        public void setGangName(String value)
-        {
-            setAttribute(AttributeName.GANGNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Hold
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Hold
+	  * @param value the value to set the attribute to
+	  */
+	public void setHold(boolean value)
+	{
+		setAttribute(AttributeName.HOLD, value, null);
+	}
 
-        /**
-          * (23) get String attribute GangName
-          * @return the value of the attribute
-          */
-        public String getGangName()
-        {
-            return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (18) get boolean attribute Hold
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getHold()
+	{
+		return getBoolAttribute(AttributeName.HOLD, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GangPolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute GangPolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setGangPolicy(EnumGangPolicy enumVar)
-        {
-            setAttribute(AttributeName.GANGPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NextQueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NextQueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setNextQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (9) get attribute GangPolicy
-          * @return the value of the attribute
-          */
-        public EnumGangPolicy getGangPolicy()
-        {
-            return EnumGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
-        }
+	/**
+	  * (23) get String attribute NextQueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getNextQueueEntryID()
+	{
+		return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Hold
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Hold
-          * @param value the value to set the attribute to
-          */
-        public void setHold(boolean value)
-        {
-            setAttribute(AttributeName.HOLD, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrevQueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PrevQueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setPrevQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute Hold
-          * @return boolean the value of the attribute
-          */
-        public boolean getHold()
-        {
-            return getBoolAttribute(AttributeName.HOLD, null, false);
-        }
+	/**
+	  * (23) get String attribute PrevQueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getPrevQueueEntryID()
+	{
+		return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NextQueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NextQueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setNextQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Priority
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Priority
+	  * @param value the value to set the attribute to
+	  */
+	public void setPriority(int value)
+	{
+		setAttribute(AttributeName.PRIORITY, value, null);
+	}
 
-        /**
-          * (23) get String attribute NextQueueEntryID
-          * @return the value of the attribute
-          */
-        public String getNextQueueEntryID()
-        {
-            return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute Priority
+	  * @return int the value of the attribute
+	  */
+	public int getPriority()
+	{
+		return getIntAttribute(AttributeName.PRIORITY, null, 1);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrevQueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PrevQueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setPrevQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute refID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute refID
+	  * @param value the value to set the attribute to
+	  */
+	public void setrefID(String value)
+	{
+		setAttribute(AttributeName.REFID, value, null);
+	}
 
-        /**
-          * (23) get String attribute PrevQueueEntryID
-          * @return the value of the attribute
-          */
-        public String getPrevQueueEntryID()
-        {
-            return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute refID
+	  * @return the value of the attribute
+	  */
+	public String getrefID()
+	{
+		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Priority
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Priority
-          * @param value the value to set the attribute to
-          */
-        public void setPriority(int value)
-        {
-            setAttribute(AttributeName.PRIORITY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReturnJMF
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReturnJMF
+	  * @param value the value to set the attribute to
+	  */
+	public void setReturnJMF(String value)
+	{
+		setAttribute(AttributeName.RETURNJMF, value, null);
+	}
 
-        /**
-          * (15) get int attribute Priority
-          * @return int the value of the attribute
-          */
-        public int getPriority()
-        {
-            return getIntAttribute(AttributeName.PRIORITY, null, 1);
-        }
+	/**
+	  * (23) get String attribute ReturnJMF
+	  * @return the value of the attribute
+	  */
+	public String getReturnJMF()
+	{
+		return getAttribute(AttributeName.RETURNJMF, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute refID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute refID
-          * @param value the value to set the attribute to
-          */
-        public void setrefID(String value)
-        {
-            setAttribute(AttributeName.REFID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ReturnURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ReturnURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setReturnURL(String value)
+	{
+		setAttribute(AttributeName.RETURNURL, value, null);
+	}
 
-        /**
-          * (23) get String attribute refID
-          * @return the value of the attribute
-          */
-        public String getrefID()
-        {
-            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ReturnURL
+	  * @return the value of the attribute
+	  */
+	public String getReturnURL()
+	{
+		return getAttribute(AttributeName.RETURNURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReturnJMF
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReturnJMF
-          * @param value the value to set the attribute to
-          */
-        public void setReturnJMF(String value)
-        {
-            setAttribute(AttributeName.RETURNJMF, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
-        /**
-          * (23) get String attribute ReturnJMF
-          * @return the value of the attribute
-          */
-        public String getReturnJMF()
-        {
-            return getAttribute(AttributeName.RETURNJMF, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ReturnURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ReturnURL
-          * @param value the value to set the attribute to
-          */
-        public void setReturnURL(String value)
-        {
-            setAttribute(AttributeName.RETURNURL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WatchURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WatchURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setWatchURL(String value)
+	{
+		setAttribute(AttributeName.WATCHURL, value, null);
+	}
 
-        /**
-          * (23) get String attribute ReturnURL
-          * @return the value of the attribute
-          */
-        public String getReturnURL()
-        {
-            return getAttribute(AttributeName.RETURNURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute WatchURL
+	  * @return the value of the attribute
+	  */
+	public String getWatchURL()
+	{
+		return getAttribute(AttributeName.WATCHURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element Disposition
+	 * @return JDFDisposition the element
+	 */
+	public JDFDisposition getDisposition()
+	{
+		return (JDFDisposition) getElement(ElementName.DISPOSITION, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WatchURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WatchURL
-          * @param value the value to set the attribute to
-          */
-        public void setWatchURL(String value)
-        {
-            setAttribute(AttributeName.WATCHURL, value, null);
-        }
+	/** (25) getCreateDisposition
+	 * 
+	 * @return JDFDisposition the element
+	 */
+	public JDFDisposition getCreateDisposition()
+	{
+		return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
+	}
 
-        /**
-          * (23) get String attribute WatchURL
-          * @return the value of the attribute
-          */
-        public String getWatchURL()
-        {
-            return getAttribute(AttributeName.WATCHURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Disposition
-     * @return JDFDisposition the element
-     */
-    public JDFDisposition getDisposition()
-    {
-        return (JDFDisposition) getElement(ElementName.DISPOSITION, null, 0);
-    }
-
-    /** (25) getCreateDisposition
-     * 
-     * @return JDFDisposition the element
-     */
-    public JDFDisposition getCreateDisposition()
-    {
-        return (JDFDisposition) getCreateElement_KElement(ElementName.DISPOSITION, null, 0);
-    }
-
-    /**
-     * (29) append element Disposition
-     * @return JDFDisposition the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFDisposition appendDisposition() throws JDFException
-    {
-        return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
-    }
+	/**
+	 * (29) append element Disposition
+	 * @return JDFDisposition the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFDisposition appendDisposition() throws JDFException
+	{
+		return (JDFDisposition) appendElementN(ElementName.DISPOSITION, 1, null);
+	}
 
 }// end namespace JDF

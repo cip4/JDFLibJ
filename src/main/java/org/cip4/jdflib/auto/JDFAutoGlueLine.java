@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,417 +80,373 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoGlueLine : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoGlueLine : public JDFElement
 
-public abstract class JDFAutoGlueLine extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoGlueLine extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoGlueLine
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueLine
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoGlueLine(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlueLine
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueLine
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoGlueLine(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGlueLine
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoGlueLine
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoGlueLine(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoGlueLine[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for GlueType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoGlueLine[  --> " + super.toString() + " ]";
-    }
+	public static class EnumGlueType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumGlueType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumGlueType getEnum(String enumName)
+		{
+			return (EnumGlueType) getEnum(EnumGlueType.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumGlueType getEnum(int enumValue)
+		{
+			return (EnumGlueType) getEnum(EnumGlueType.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumGlueType.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumGlueType.class);
+		}
 
-        /**
-        * Enumeration strings for GlueType
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumGlueType.class);
+		}
 
-        public static class EnumGlueType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumGlueType ColdGlue = new EnumGlueType("ColdGlue");
+		public static final EnumGlueType Hotmelt = new EnumGlueType("Hotmelt");
+		public static final EnumGlueType PUR = new EnumGlueType("PUR");
+	}
 
-            private EnumGlueType(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumGlueType getEnum(String enumName)
-            {
-                return (EnumGlueType) getEnum(EnumGlueType.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AreaGlue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AreaGlue
+	  * @param value the value to set the attribute to
+	  */
+	public void setAreaGlue(boolean value)
+	{
+		setAttribute(AttributeName.AREAGLUE, value, null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumGlueType getEnum(int enumValue)
-            {
-                return (EnumGlueType) getEnum(EnumGlueType.class, enumValue);
-            }
+	/**
+	  * (18) get boolean attribute AreaGlue
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getAreaGlue()
+	{
+		return getBoolAttribute(AttributeName.AREAGLUE, null, false);
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumGlueType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GlueBrand
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GlueBrand
+	  * @param value the value to set the attribute to
+	  */
+	public void setGlueBrand(String value)
+	{
+		setAttribute(AttributeName.GLUEBRAND, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumGlueType.class);
-            }
+	/**
+	  * (23) get String attribute GlueBrand
+	  * @return the value of the attribute
+	  */
+	public String getGlueBrand()
+	{
+		return getAttribute(AttributeName.GLUEBRAND, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumGlueType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GlueLineWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GlueLineWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setGlueLineWidth(double value)
+	{
+		setAttribute(AttributeName.GLUELINEWIDTH, value, null);
+	}
 
-            public static final EnumGlueType ColdGlue = new EnumGlueType("ColdGlue");
-            public static final EnumGlueType Hotmelt = new EnumGlueType("Hotmelt");
-            public static final EnumGlueType PUR = new EnumGlueType("PUR");
-        }      
+	/**
+	  * (17) get double attribute GlueLineWidth
+	  * @return double the value of the attribute
+	  */
+	public double getGlueLineWidth()
+	{
+		return getRealAttribute(AttributeName.GLUELINEWIDTH, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GluingPattern
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GluingPattern
+	  * @param value the value to set the attribute to
+	  */
+	public void setGluingPattern(JDFXYPair value)
+	{
+		setAttribute(AttributeName.GLUINGPATTERN, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute GluingPattern
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getGluingPattern()
+	{
+		final String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AreaGlue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AreaGlue
-          * @param value the value to set the attribute to
-          */
-        public void setAreaGlue(boolean value)
-        {
-            setAttribute(AttributeName.AREAGLUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GlueType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute GlueType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setGlueType(EnumGlueType enumVar)
+	{
+		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (18) get boolean attribute AreaGlue
-          * @return boolean the value of the attribute
-          */
-        public boolean getAreaGlue()
-        {
-            return getBoolAttribute(AttributeName.AREAGLUE, null, false);
-        }
+	/**
+	  * (9) get attribute GlueType
+	  * @return the value of the attribute
+	  */
+	public EnumGlueType getGlueType()
+	{
+		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GlueBrand
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GlueBrand
-          * @param value the value to set the attribute to
-          */
-        public void setGlueBrand(String value)
-        {
-            setAttribute(AttributeName.GLUEBRAND, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MeltingTemperature
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MeltingTemperature
+	  * @param value the value to set the attribute to
+	  */
+	public void setMeltingTemperature(int value)
+	{
+		setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
+	}
 
-        /**
-          * (23) get String attribute GlueBrand
-          * @return the value of the attribute
-          */
-        public String getGlueBrand()
-        {
-            return getAttribute(AttributeName.GLUEBRAND, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute MeltingTemperature
+	  * @return int the value of the attribute
+	  */
+	public int getMeltingTemperature()
+	{
+		return getIntAttribute(AttributeName.MELTINGTEMPERATURE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GlueLineWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GlueLineWidth
-          * @param value the value to set the attribute to
-          */
-        public void setGlueLineWidth(double value)
-        {
-            setAttribute(AttributeName.GLUELINEWIDTH, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeStartPosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RelativeStartPosition
+	  * @param value the value to set the attribute to
+	  */
+	public void setRelativeStartPosition(JDFXYPair value)
+	{
+		setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
+	}
 
-        /**
-          * (17) get double attribute GlueLineWidth
-          * @return double the value of the attribute
-          */
-        public double getGlueLineWidth()
-        {
-            return getRealAttribute(AttributeName.GLUELINEWIDTH, null, 0.0);
-        }
+	/**
+	  * (20) get JDFXYPair attribute RelativeStartPosition
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getRelativeStartPosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GluingPattern
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GluingPattern
-          * @param value the value to set the attribute to
-          */
-        public void setGluingPattern(JDFXYPair value)
-        {
-            setAttribute(AttributeName.GLUINGPATTERN, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RelativeWorkingPath
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RelativeWorkingPath
+	  * @param value the value to set the attribute to
+	  */
+	public void setRelativeWorkingPath(JDFXYPair value)
+	{
+		setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute GluingPattern
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getGluingPattern()
-        {
-            String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute RelativeWorkingPath
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getRelativeWorkingPath()
+	{
+		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GlueType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute GlueType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setGlueType(EnumGlueType enumVar)
-        {
-            setAttribute(AttributeName.GLUETYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StartPosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StartPosition
+	  * @param value the value to set the attribute to
+	  */
+	public void setStartPosition(JDFXYPair value)
+	{
+		setAttribute(AttributeName.STARTPOSITION, value, null);
+	}
 
-        /**
-          * (9) get attribute GlueType
-          * @return the value of the attribute
-          */
-        public EnumGlueType getGlueType()
-        {
-            return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
-        }
+	/**
+	  * (20) get JDFXYPair attribute StartPosition
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getStartPosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MeltingTemperature
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MeltingTemperature
-          * @param value the value to set the attribute to
-          */
-        public void setMeltingTemperature(int value)
-        {
-            setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WorkingPath
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WorkingPath
+	  * @param value the value to set the attribute to
+	  */
+	public void setWorkingPath(JDFXYPair value)
+	{
+		setAttribute(AttributeName.WORKINGPATH, value, null);
+	}
 
-        /**
-          * (15) get int attribute MeltingTemperature
-          * @return int the value of the attribute
-          */
-        public int getMeltingTemperature()
-        {
-            return getIntAttribute(AttributeName.MELTINGTEMPERATURE, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RelativeStartPosition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RelativeStartPosition
-          * @param value the value to set the attribute to
-          */
-        public void setRelativeStartPosition(JDFXYPair value)
-        {
-            setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute RelativeStartPosition
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getRelativeStartPosition()
-        {
-            String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RelativeWorkingPath
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RelativeWorkingPath
-          * @param value the value to set the attribute to
-          */
-        public void setRelativeWorkingPath(JDFXYPair value)
-        {
-            setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute RelativeWorkingPath
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getRelativeWorkingPath()
-        {
-            String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StartPosition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StartPosition
-          * @param value the value to set the attribute to
-          */
-        public void setStartPosition(JDFXYPair value)
-        {
-            setAttribute(AttributeName.STARTPOSITION, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute StartPosition
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getStartPosition()
-        {
-            String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WorkingPath
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WorkingPath
-          * @param value the value to set the attribute to
-          */
-        public void setWorkingPath(JDFXYPair value)
-        {
-            setAttribute(AttributeName.WORKINGPATH, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute WorkingPath
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getWorkingPath()
-        {
-            String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute WorkingPath
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getWorkingPath()
+	{
+		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
 }// end namespace JDF

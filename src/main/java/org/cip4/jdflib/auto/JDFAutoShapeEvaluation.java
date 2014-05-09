@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,302 +80,285 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFShapeRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /**
-    *****************************************************************************
-    class JDFAutoShapeEvaluation : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShapeEvaluation : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShapeEvaluation extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.ShapeRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.X, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.Y, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.Z, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShapeEvaluation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeEvaluation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShapeEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShapeEvaluation[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShapeEvaluation[  --> " + super.toString() + " ]";
-    }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Tolerance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Tolerance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTolerance(JDFXYPair value)
+	{
+		setAttribute(AttributeName.TOLERANCE, value, null);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	  * (20) get JDFXYPair attribute Tolerance
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getTolerance()
+	{
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ValueList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ValueList
+	  * @param value the value to set the attribute to
+	  */
+	public void setValueList(JDFShapeRangeList value)
+	{
+		setAttribute(AttributeName.VALUELIST, value, null);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Tolerance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Tolerance
-          * @param value the value to set the attribute to
-          */
-        public void setTolerance(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TOLERANCE, value, null);
-        }
+	/**
+	  * (20) get JDFShapeRangeList attribute ValueList
+	  * @return JDFShapeRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFShapeRangeList
+	  */
+	public JDFShapeRangeList getValueList()
+	{
+		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Tolerance
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTolerance()
-        {
-            String strAttrName = getAttribute(AttributeName.TOLERANCE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute X
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute X
+	  * @param value the value to set the attribute to
+	  */
+	public void setX(JDFNumberRangeList value)
+	{
+		setAttribute(AttributeName.X, value, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ValueList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ValueList
-          * @param value the value to set the attribute to
-          */
-        public void setValueList(JDFShapeRangeList value)
-        {
-            setAttribute(AttributeName.VALUELIST, value, null);
-        }
+	/**
+	  * (20) get JDFNumberRangeList attribute X
+	  * @return JDFNumberRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberRangeList
+	  */
+	public JDFNumberRangeList getX()
+	{
+		final String strAttrName = getAttribute(AttributeName.X, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (20) get JDFShapeRangeList attribute ValueList
-          * @return JDFShapeRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFShapeRangeList
-          */
-        public JDFShapeRangeList getValueList()
-        {
-            String strAttrName = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
-            JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Y
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Y
+	  * @param value the value to set the attribute to
+	  */
+	public void setY(JDFNumberRangeList value)
+	{
+		setAttribute(AttributeName.Y, value, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute X
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute X
-          * @param value the value to set the attribute to
-          */
-        public void setX(JDFNumberRangeList value)
-        {
-            setAttribute(AttributeName.X, value, null);
-        }
+	/**
+	  * (20) get JDFNumberRangeList attribute Y
+	  * @return JDFNumberRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberRangeList
+	  */
+	public JDFNumberRangeList getY()
+	{
+		final String strAttrName = getAttribute(AttributeName.Y, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (20) get JDFNumberRangeList attribute X
-          * @return JDFNumberRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberRangeList
-          */
-        public JDFNumberRangeList getX()
-        {
-            String strAttrName = getAttribute(AttributeName.X, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Z
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Z
+	  * @param value the value to set the attribute to
+	  */
+	public void setZ(JDFNumberRangeList value)
+	{
+		setAttribute(AttributeName.Z, value, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Y
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Y
-          * @param value the value to set the attribute to
-          */
-        public void setY(JDFNumberRangeList value)
-        {
-            setAttribute(AttributeName.Y, value, null);
-        }
+	/**
+	  * (20) get JDFNumberRangeList attribute Z
+	  * @return JDFNumberRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberRangeList
+	  */
+	public JDFNumberRangeList getZ()
+	{
+		final String strAttrName = getAttribute(AttributeName.Z, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (20) get JDFNumberRangeList attribute Y
-          * @return JDFNumberRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberRangeList
-          */
-        public JDFNumberRangeList getY()
-        {
-            String strAttrName = getAttribute(AttributeName.Y, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Z
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Z
-          * @param value the value to set the attribute to
-          */
-        public void setZ(JDFNumberRangeList value)
-        {
-            setAttribute(AttributeName.Z, value, null);
-        }
+	/** (26) getCreateBasicPreflightTest
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFNumberRangeList attribute Z
-          * @return JDFNumberRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberRangeList
-          */
-        public JDFNumberRangeList getZ()
-        {
-            String strAttrName = getAttribute(AttributeName.Z, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (27) const get element BasicPreflightTest
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 * default is getBasicPreflightTest(0)     */
+	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all BasicPreflightTest from the current element
+	 * 
+	 * @return Collection<JDFBasicPreflightTest>, null if none are available
+	 */
+	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+	{
+		final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBasicPreflightTest
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBasicPreflightTest) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BasicPreflightTest
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     * default is getBasicPreflightTest(0)     */
-    public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BasicPreflightTest from the current element
-     * 
-     * @return Collection<JDFBasicPreflightTest>, null if none are available
-     */
-    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
-    {
-        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBasicPreflightTest) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BasicPreflightTest
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest appendBasicPreflightTest()
-    {
-        return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
-    }
+	/**
+	 * (30) append element BasicPreflightTest
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest appendBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
+	}
 
 }// end namespace JDF

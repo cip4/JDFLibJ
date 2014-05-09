@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanCoilMaterial;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoCoilBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCoilBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCoilBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COILBRAND, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COILMATERIAL, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COILBRAND, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COILMATERIAL, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCoilBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCoilBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoilBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCoilBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCoilBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCoilBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoilBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCoilBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCoilBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCoilBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCoilBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCoilBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCoilBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCoilBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element CoilBrand
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCoilBrand()
+	{
+		return (JDFStringSpan) getElement(ElementName.COILBRAND, null, 0);
+	}
 
+	/** (25) getCreateCoilBrand
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateCoilBrand()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.COILBRAND, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element CoilBrand
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendCoilBrand() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.COILBRAND, 1, null);
+	}
 
-    /**
-     * (24) const get element CoilBrand
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCoilBrand()
-    {
-        return (JDFStringSpan) getElement(ElementName.COILBRAND, null, 0);
-    }
+	/**
+	 * (24) const get element CoilMaterial
+	 * @return JDFSpanCoilMaterial the element
+	 */
+	public JDFSpanCoilMaterial getCoilMaterial()
+	{
+		return (JDFSpanCoilMaterial) getElement(ElementName.COILMATERIAL, null, 0);
+	}
 
-    /** (25) getCreateCoilBrand
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateCoilBrand()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.COILBRAND, null, 0);
-    }
+	/** (25) getCreateCoilMaterial
+	 * 
+	 * @return JDFSpanCoilMaterial the element
+	 */
+	public JDFSpanCoilMaterial getCreateCoilMaterial()
+	{
+		return (JDFSpanCoilMaterial) getCreateElement_KElement(ElementName.COILMATERIAL, null, 0);
+	}
 
-    /**
-     * (29) append element CoilBrand
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendCoilBrand() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.COILBRAND, 1, null);
-    }
+	/**
+	 * (29) append element CoilMaterial
+	 * @return JDFSpanCoilMaterial the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanCoilMaterial appendCoilMaterial() throws JDFException
+	{
+		return (JDFSpanCoilMaterial) appendElementN(ElementName.COILMATERIAL, 1, null);
+	}
 
-    /**
-     * (24) const get element CoilMaterial
-     * @return JDFSpanCoilMaterial the element
-     */
-    public JDFSpanCoilMaterial getCoilMaterial()
-    {
-        return (JDFSpanCoilMaterial) getElement(ElementName.COILMATERIAL, null, 0);
-    }
+	/**
+	 * (24) const get element HoleList
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getHoleList()
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /** (25) getCreateCoilMaterial
-     * 
-     * @return JDFSpanCoilMaterial the element
-     */
-    public JDFSpanCoilMaterial getCreateCoilMaterial()
-    {
-        return (JDFSpanCoilMaterial) getCreateElement_KElement(ElementName.COILMATERIAL, null, 0);
-    }
+	/** (25) getCreateHoleList
+	 * 
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleList()
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /**
-     * (29) append element CoilMaterial
-     * @return JDFSpanCoilMaterial the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanCoilMaterial appendCoilMaterial() throws JDFException
-    {
-        return (JDFSpanCoilMaterial) appendElementN(ElementName.COILMATERIAL, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleList
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getHoleList()
-    {
-        return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /** (25) getCreateHoleList
-     * 
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getCreateHoleList()
-    {
-        return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /**
-     * (29) append element HoleList
-     * @return JDFHoleList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleList appendHoleList() throws JDFException
-    {
-        return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
-    }
+	/**
+	 * (29) append element HoleList
+	 * @return JDFHoleList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleList appendHoleList() throws JDFException
+	{
+		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+	}
 
 }// end namespace JDF

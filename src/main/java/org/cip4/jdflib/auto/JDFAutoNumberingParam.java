@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,203 +77,188 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
-    /**
-    *****************************************************************************
-    class JDFAutoNumberingParam : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNumberingParam : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNumberingParam extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.XPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.YPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STARTVALUE, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.XPOSITION, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.YPOSITION, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x44433333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STEP, 0x44433333, AttributeInfo.EnumAttributeType.integer, null, "1");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNumberingParam
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParam
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingParam(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingParam
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParam
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNumberingParam(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNumberingParam
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNumberingParam
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNumberingParam(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNumberingParam[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNumberingParam[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StartValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StartValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setStartValue(String value)
+	{
+		setAttribute(AttributeName.STARTVALUE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute StartValue
+	  * @return the value of the attribute
+	  */
+	public String getStartValue()
+	{
+		return getAttribute(AttributeName.STARTVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StartValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StartValue
-          * @param value the value to set the attribute to
-          */
-        public void setStartValue(String value)
-        {
-            setAttribute(AttributeName.STARTVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute XPosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute XPosition
+	  * @param value the value to set the attribute to
+	  */
+	public void setXPosition(double value)
+	{
+		setAttribute(AttributeName.XPOSITION, value, null);
+	}
 
-        /**
-          * (23) get String attribute StartValue
-          * @return the value of the attribute
-          */
-        public String getStartValue()
-        {
-            return getAttribute(AttributeName.STARTVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (17) get double attribute XPosition
+	  * @return double the value of the attribute
+	  */
+	public double getXPosition()
+	{
+		return getRealAttribute(AttributeName.XPOSITION, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute XPosition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute XPosition
-          * @param value the value to set the attribute to
-          */
-        public void setXPosition(double value)
-        {
-            setAttribute(AttributeName.XPOSITION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute YPosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute YPosition
+	  * @param value the value to set the attribute to
+	  */
+	public void setYPosition(JDFNumberList value)
+	{
+		setAttribute(AttributeName.YPOSITION, value, null);
+	}
 
-        /**
-          * (17) get double attribute XPosition
-          * @return double the value of the attribute
-          */
-        public double getXPosition()
-        {
-            return getRealAttribute(AttributeName.XPOSITION, null, 0.0);
-        }
+	/**
+	  * (20) get JDFNumberList attribute YPosition
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getYPosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.YPOSITION, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute YPosition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute YPosition
-          * @param value the value to set the attribute to
-          */
-        public void setYPosition(JDFNumberList value)
-        {
-            setAttribute(AttributeName.YPOSITION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Orientation
+	  * @param value the value to set the attribute to
+	  */
+	public void setOrientation(double value)
+	{
+		setAttribute(AttributeName.ORIENTATION, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute YPosition
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getYPosition()
-        {
-            String strAttrName = getAttribute(AttributeName.YPOSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Orientation
+	  * @return double the value of the attribute
+	  */
+	public double getOrientation()
+	{
+		return getRealAttribute(AttributeName.ORIENTATION, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Orientation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Orientation
-          * @param value the value to set the attribute to
-          */
-        public void setOrientation(double value)
-        {
-            setAttribute(AttributeName.ORIENTATION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Step
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Step
+	  * @param value the value to set the attribute to
+	  */
+	public void setStep(int value)
+	{
+		setAttribute(AttributeName.STEP, value, null);
+	}
 
-        /**
-          * (17) get double attribute Orientation
-          * @return double the value of the attribute
-          */
-        public double getOrientation()
-        {
-            return getRealAttribute(AttributeName.ORIENTATION, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Step
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Step
-          * @param value the value to set the attribute to
-          */
-        public void setStep(int value)
-        {
-            setAttribute(AttributeName.STEP, value, null);
-        }
-
-        /**
-          * (15) get int attribute Step
-          * @return int the value of the attribute
-          */
-        public int getStep()
-        {
-            return getIntAttribute(AttributeName.STEP, null, 1);
-        }
+	/**
+	  * (15) get int attribute Step
+	  * @return int the value of the attribute
+	  */
+	public int getStep()
+	{
+		return getIntAttribute(AttributeName.STEP, null, 1);
+	}
 
 }// end namespace JDF

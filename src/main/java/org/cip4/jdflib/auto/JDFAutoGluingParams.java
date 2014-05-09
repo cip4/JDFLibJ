@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,198 +84,185 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
-    /**
-    *****************************************************************************
-    class JDFAutoGluingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoGluingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoGluingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGPRODUCTIONID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGPRODUCTIONID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUE, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUE, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoGluingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGluingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoGluingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGluingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoGluingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoGluingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoGluingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoGluingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoGluingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoGluingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoGluingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GluingProductionID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute GluingProductionID
+	  * @param value the value to set the attribute to
+	  */
+	public void setGluingProductionID(String value)
+	{
+		setAttribute(AttributeName.GLUINGPRODUCTIONID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute GluingProductionID
+	  * @return the value of the attribute
+	  */
+	public String getGluingProductionID()
+	{
+		return getAttribute(AttributeName.GLUINGPRODUCTIONID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateGlue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlue the element
+	 */
+	public JDFGlue getCreateGlue(int iSkip)
+	{
+		return (JDFGlue) getCreateElement_KElement(ElementName.GLUE, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute GluingProductionID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute GluingProductionID
-          * @param value the value to set the attribute to
-          */
-        public void setGluingProductionID(String value)
-        {
-            setAttribute(AttributeName.GLUINGPRODUCTIONID, value, null);
-        }
+	/**
+	 * (27) const get element Glue
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlue the element
+	 * default is getGlue(0)     */
+	public JDFGlue getGlue(int iSkip)
+	{
+		return (JDFGlue) getElement(ElementName.GLUE, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute GluingProductionID
-          * @return the value of the attribute
-          */
-        public String getGluingProductionID()
-        {
-            return getAttribute(AttributeName.GLUINGPRODUCTIONID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Glue from the current element
+	 * 
+	 * @return Collection<JDFGlue>, null if none are available
+	 */
+	public Collection<JDFGlue> getAllGlue()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFGlue> v = new Vector<JDFGlue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlue) vc.get(i));
+		}
 
-    /** (26) getCreateGlue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlue the element
-     */
-    public JDFGlue getCreateGlue(int iSkip)
-    {
-        return (JDFGlue)getCreateElement_KElement(ElementName.GLUE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Glue
-     * @param iSkip number of elements to skip
-     * @return JDFGlue the element
-     * default is getGlue(0)     */
-    public JDFGlue getGlue(int iSkip)
-    {
-        return (JDFGlue) getElement(ElementName.GLUE, null, iSkip);
-    }
-
-    /**
-     * Get all Glue from the current element
-     * 
-     * @return Collection<JDFGlue>, null if none are available
-     */
-    public Collection<JDFGlue> getAllGlue()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFGlue> v = new Vector<JDFGlue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlue) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Glue
-     * @return JDFGlue the element
-     */
-    public JDFGlue appendGlue()
-    {
-        return (JDFGlue) appendElement(ElementName.GLUE, null);
-    }
+	/**
+	 * (30) append element Glue
+	 * @return JDFGlue the element
+	 */
+	public JDFGlue appendGlue()
+	{
+		return (JDFGlue) appendElement(ElementName.GLUE, null);
+	}
 
 }// end namespace JDF

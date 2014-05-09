@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,216 +79,180 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoBarcodeCompParams : public JDFResource
+import org.cip4.jdflib.core.JDFElement;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBarcodeCompParams : public JDFElement
 
-public abstract class JDFAutoBarcodeCompParams extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoBarcodeCompParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBarcodeCompParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeCompParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeCompParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeCompParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeCompParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBarcodeCompParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeCompParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBarcodeCompParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBarcodeCompParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBarcodeCompParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBarcodeCompParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBarcodeCompParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBarcodeCompParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for CompensationProcess
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBarcodeCompParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumCompensationProcess extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumCompensationProcess(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumCompensationProcess getEnum(String enumName)
+		{
+			return (EnumCompensationProcess) getEnum(EnumCompensationProcess.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumCompensationProcess getEnum(int enumValue)
+		{
+			return (EnumCompensationProcess) getEnum(EnumCompensationProcess.class, enumValue);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumCompensationProcess.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumCompensationProcess.class);
+		}
 
-        /**
-        * Enumeration strings for CompensationProcess
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumCompensationProcess.class);
+		}
 
-        public static class EnumCompensationProcess extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumCompensationProcess Printing = new EnumCompensationProcess("Printing");
+		public static final EnumCompensationProcess Platemaking = new EnumCompensationProcess("Platemaking");
+	}
 
-            private EnumCompensationProcess(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumCompensationProcess getEnum(String enumName)
-            {
-                return (EnumCompensationProcess) getEnum(EnumCompensationProcess.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationProcess
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute CompensationProcess
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setCompensationProcess(EnumCompensationProcess enumVar)
+	{
+		setAttribute(AttributeName.COMPENSATIONPROCESS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumCompensationProcess getEnum(int enumValue)
-            {
-                return (EnumCompensationProcess) getEnum(EnumCompensationProcess.class, enumValue);
-            }
+	/**
+	  * (9) get attribute CompensationProcess
+	  * @return the value of the attribute
+	  */
+	public EnumCompensationProcess getCompensationProcess()
+	{
+		return EnumCompensationProcess.getEnum(getAttribute(AttributeName.COMPENSATIONPROCESS, null, null));
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumCompensationProcess.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CompensationValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CompensationValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setCompensationValue(double value)
+	{
+		setAttribute(AttributeName.COMPENSATIONVALUE, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumCompensationProcess.class);
-            }
-
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumCompensationProcess.class);
-            }
-
-            public static final EnumCompensationProcess Printing = new EnumCompensationProcess("Printing");
-            public static final EnumCompensationProcess Platemaking = new EnumCompensationProcess("Platemaking");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CompensationProcess
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute CompensationProcess
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setCompensationProcess(EnumCompensationProcess enumVar)
-        {
-            setAttribute(AttributeName.COMPENSATIONPROCESS, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute CompensationProcess
-          * @return the value of the attribute
-          */
-        public EnumCompensationProcess getCompensationProcess()
-        {
-            return EnumCompensationProcess.getEnum(getAttribute(AttributeName.COMPENSATIONPROCESS, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CompensationValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CompensationValue
-          * @param value the value to set the attribute to
-          */
-        public void setCompensationValue(double value)
-        {
-            setAttribute(AttributeName.COMPENSATIONVALUE, value, null);
-        }
-
-        /**
-          * (17) get double attribute CompensationValue
-          * @return double the value of the attribute
-          */
-        public double getCompensationValue()
-        {
-            return getRealAttribute(AttributeName.COMPENSATIONVALUE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute CompensationValue
+	  * @return double the value of the attribute
+	  */
+	public double getCompensationValue()
+	{
+		return getRealAttribute(AttributeName.COMPENSATIONVALUE, null, 0.0);
+	}
 
 }// end namespace JDF

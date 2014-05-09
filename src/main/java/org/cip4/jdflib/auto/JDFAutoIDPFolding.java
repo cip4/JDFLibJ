@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,147 +80,136 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPFolding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPFolding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPFolding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDINGPARAMS, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDINGPARAMS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIDPFolding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFolding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPFolding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPFolding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFolding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPFolding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPFolding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFolding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPFolding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPFolding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPFolding[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateFoldingParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFoldingParams the element
+	 */
+	public JDFFoldingParams getCreateFoldingParams(int iSkip)
+	{
+		return (JDFFoldingParams) getCreateElement_KElement(ElementName.FOLDINGPARAMS, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element FoldingParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFFoldingParams the element
+	 * default is getFoldingParams(0)     */
+	public JDFFoldingParams getFoldingParams(int iSkip)
+	{
+		return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all FoldingParams from the current element
+	 * 
+	 * @return Collection<JDFFoldingParams>, null if none are available
+	 */
+	public Collection<JDFFoldingParams> getAllFoldingParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.FOLDINGPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateFoldingParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFoldingParams the element
-     */
-    public JDFFoldingParams getCreateFoldingParams(int iSkip)
-    {
-        return (JDFFoldingParams)getCreateElement_KElement(ElementName.FOLDINGPARAMS, null, iSkip);
-    }
+		final Vector<JDFFoldingParams> v = new Vector<JDFFoldingParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFoldingParams) vc.get(i));
+		}
 
-    /**
-     * (27) const get element FoldingParams
-     * @param iSkip number of elements to skip
-     * @return JDFFoldingParams the element
-     * default is getFoldingParams(0)     */
-    public JDFFoldingParams getFoldingParams(int iSkip)
-    {
-        return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all FoldingParams from the current element
-     * 
-     * @return Collection<JDFFoldingParams>, null if none are available
-     */
-    public Collection<JDFFoldingParams> getAllFoldingParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.FOLDINGPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element FoldingParams
+	 * @return JDFFoldingParams the element
+	 */
+	public JDFFoldingParams appendFoldingParams()
+	{
+		return (JDFFoldingParams) appendElement(ElementName.FOLDINGPARAMS, null);
+	}
 
-        final Vector<JDFFoldingParams> v = new Vector<JDFFoldingParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFoldingParams) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element FoldingParams
-     * @return JDFFoldingParams the element
-     */
-    public JDFFoldingParams appendFoldingParams()
-    {
-        return (JDFFoldingParams) appendElement(ElementName.FOLDINGPARAMS, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFoldingParams(JDFFoldingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFoldingParams(JDFFoldingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

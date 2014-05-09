@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,179 +77,164 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoDBSelection : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDBSelection : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDBSelection extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DATABASE, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.RECORDS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SELECT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATABASE, 0x44422222, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RECORDS, 0x44433333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SELECT, 0x44433333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDBSelection
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDBSelection
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDBSelection(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDBSelection
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDBSelection
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDBSelection(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDBSelection
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDBSelection
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDBSelection(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDBSelection[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDBSelection[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DataBase
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DataBase
+	  * @param value the value to set the attribute to
+	  */
+	public void setDataBase(String value)
+	{
+		setAttribute(AttributeName.DATABASE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute DataBase
+	  * @return the value of the attribute
+	  */
+	public String getDataBase()
+	{
+		return getAttribute(AttributeName.DATABASE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Records
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Records
+	  * @param value the value to set the attribute to
+	  */
+	public void setRecords(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.RECORDS, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerRangeList attribute Records
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getRecords()
+	{
+		final String strAttrName = getAttribute(AttributeName.RECORDS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DataBase
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DataBase
-          * @param value the value to set the attribute to
-          */
-        public void setDataBase(String value)
-        {
-            setAttribute(AttributeName.DATABASE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Select
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Select
+	  * @param value the value to set the attribute to
+	  */
+	public void setSelect(String value)
+	{
+		setAttribute(AttributeName.SELECT, value, null);
+	}
 
-        /**
-          * (23) get String attribute DataBase
-          * @return the value of the attribute
-          */
-        public String getDataBase()
-        {
-            return getAttribute(AttributeName.DATABASE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Records
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Records
-          * @param value the value to set the attribute to
-          */
-        public void setRecords(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.RECORDS, value, null);
-        }
-
-        /**
-          * (20) get JDFIntegerRangeList attribute Records
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getRecords()
-        {
-            String strAttrName = getAttribute(AttributeName.RECORDS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Select
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Select
-          * @param value the value to set the attribute to
-          */
-        public void setSelect(String value)
-        {
-            setAttribute(AttributeName.SELECT, value, null);
-        }
-
-        /**
-          * (23) get String attribute Select
-          * @return the value of the attribute
-          */
-        public String getSelect()
-        {
-            return getAttribute(AttributeName.SELECT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Select
+	  * @return the value of the attribute
+	  */
+	public String getSelect()
+	{
+		return getAttribute(AttributeName.SELECT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

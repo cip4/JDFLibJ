@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,312 +86,297 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /**
-    *****************************************************************************
-    class JDFAutoMatrixEvaluation : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMatrixEvaluation : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMatrixEvaluation extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMatrixEvaluation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMatrixEvaluation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMatrixEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMatrixEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMatrixEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMatrixEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMatrixEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMatrixEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMatrixEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMatrixEvaluation[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMatrixEvaluation[  --> " + super.toString() + " ]";
-    }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RotateMod
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RotateMod
+	  * @param value the value to set the attribute to
+	  */
+	public void setRotateMod(double value)
+	{
+		setAttribute(AttributeName.ROTATEMOD, value, null);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	  * (17) get double attribute RotateMod
+	  * @return double the value of the attribute
+	  */
+	public double getRotateMod()
+	{
+		return getRealAttribute(AttributeName.ROTATEMOD, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Shift
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Shift
+	  * @param value the value to set the attribute to
+	  */
+	public void setShift(String value)
+	{
+		setAttribute(AttributeName.SHIFT, value, null);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RotateMod
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RotateMod
-          * @param value the value to set the attribute to
-          */
-        public void setRotateMod(double value)
-        {
-            setAttribute(AttributeName.ROTATEMOD, value, null);
-        }
+	/**
+	  * (23) get String attribute Shift
+	  * @return the value of the attribute
+	  */
+	public String getShift()
+	{
+		return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        /**
-          * (17) get double attribute RotateMod
-          * @return double the value of the attribute
-          */
-        public double getRotateMod()
-        {
-            return getRealAttribute(AttributeName.ROTATEMOD, null, 0.0);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Tolerance
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Tolerance
+	  * @param value the value to set the attribute to
+	  */
+	public void setTolerance(JDFXYPair value)
+	{
+		setAttribute(AttributeName.TOLERANCE, value, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Shift
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Shift
-          * @param value the value to set the attribute to
-          */
-        public void setShift(String value)
-        {
-            setAttribute(AttributeName.SHIFT, value, null);
-        }
+	/**
+	  * (20) get JDFXYPair attribute Tolerance
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getTolerance()
+	{
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        /**
-          * (23) get String attribute Shift
-          * @return the value of the attribute
-          */
-        public String getShift()
-        {
-            return getAttribute(AttributeName.SHIFT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Transforms
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Transforms
+	  * @param value the value to set the attribute to
+	  */
+	public void setTransforms(String value)
+	{
+		setAttribute(AttributeName.TRANSFORMS, value, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Tolerance
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Tolerance
-          * @param value the value to set the attribute to
-          */
-        public void setTolerance(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TOLERANCE, value, null);
-        }
+	/**
+	  * (23) get String attribute Transforms
+	  * @return the value of the attribute
+	  */
+	public String getTransforms()
+	{
+		return getAttribute(AttributeName.TRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Tolerance
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTolerance()
-        {
-            String strAttrName = getAttribute(AttributeName.TOLERANCE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Transforms
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Transforms
-          * @param value the value to set the attribute to
-          */
-        public void setTransforms(String value)
-        {
-            setAttribute(AttributeName.TRANSFORMS, value, null);
-        }
+	/** (26) getCreateBasicPreflightTest
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute Transforms
-          * @return the value of the attribute
-          */
-        public String getTransforms()
-        {
-            return getAttribute(AttributeName.TRANSFORMS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (27) const get element BasicPreflightTest
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 * default is getBasicPreflightTest(0)     */
+	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all BasicPreflightTest from the current element
+	 * 
+	 * @return Collection<JDFBasicPreflightTest>, null if none are available
+	 */
+	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+	{
+		final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBasicPreflightTest
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBasicPreflightTest) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BasicPreflightTest
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     * default is getBasicPreflightTest(0)     */
-    public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BasicPreflightTest from the current element
-     * 
-     * @return Collection<JDFBasicPreflightTest>, null if none are available
-     */
-    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
-    {
-        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element BasicPreflightTest
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest appendBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
+	}
 
-        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBasicPreflightTest) vc.get(i));
-        }
+	/** (26) getCreateValue
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFValue the element
+	 */
+	public JDFValue getCreateValue(int iSkip)
+	{
+		return (JDFValue) getCreateElement_KElement(ElementName.VALUE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element Value
+	 * @param iSkip number of elements to skip
+	 * @return JDFValue the element
+	 * default is getValue(0)     */
+	public JDFValue getValue(int iSkip)
+	{
+		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+	}
 
-    /**
-     * (30) append element BasicPreflightTest
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest appendBasicPreflightTest()
-    {
-        return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
-    }
+	/**
+	 * Get all Value from the current element
+	 * 
+	 * @return Collection<JDFValue>, null if none are available
+	 */
+	public Collection<JDFValue> getAllValue()
+	{
+		final VElement vc = getChildElementVector(ElementName.VALUE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateValue
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFValue the element
-     */
-    public JDFValue getCreateValue(int iSkip)
-    {
-        return (JDFValue)getCreateElement_KElement(ElementName.VALUE, null, iSkip);
-    }
+		final Vector<JDFValue> v = new Vector<JDFValue>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFValue) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Value
-     * @param iSkip number of elements to skip
-     * @return JDFValue the element
-     * default is getValue(0)     */
-    public JDFValue getValue(int iSkip)
-    {
-        return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Value from the current element
-     * 
-     * @return Collection<JDFValue>, null if none are available
-     */
-    public Collection<JDFValue> getAllValue()
-    {
-        final VElement vc = getChildElementVector(ElementName.VALUE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFValue> v = new Vector<JDFValue>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFValue) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Value
-     * @return JDFValue the element
-     */
-    public JDFValue appendValue()
-    {
-        return (JDFValue) appendElement(ElementName.VALUE, null);
-    }
+	/**
+	 * (30) append element Value
+	 * @return JDFValue the element
+	 */
+	public JDFValue appendValue()
+	{
+		return (JDFValue) appendElement(ElementName.VALUE, null);
+	}
 
 }// end namespace JDF

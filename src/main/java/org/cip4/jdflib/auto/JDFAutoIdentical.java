@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPart;
-    /**
-    *****************************************************************************
-    class JDFAutoIdentical : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIdentical : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIdentical extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x55555111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x55555111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIdentical
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIdentical(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIdentical
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIdentical(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIdentical
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIdentical(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIdentical
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIdentical(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIdentical
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIdentical(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIdentical
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIdentical(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIdentical[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIdentical[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
 
+	/** (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Part
-     * @return JDFPart the element
-     */
-    public JDFPart getPart()
-    {
-        return (JDFPart) getElement(ElementName.PART, null, 0);
-    }
-
-    /** (25) getCreatePart
-     * 
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart()
-    {
-        return (JDFPart) getCreateElement_KElement(ElementName.PART, null, 0);
-    }
-
-    /**
-     * (29) append element Part
-     * @return JDFPart the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPart appendPart() throws JDFException
-    {
-        return (JDFPart) appendElementN(ElementName.PART, 1, null);
-    }
+	/**
+	 * (29) append element Part
+	 * @return JDFPart the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPart appendPart() throws JDFException
+	{
+		return (JDFPart) appendElementN(ElementName.PART, 1, null);
+	}
 
 }// end namespace JDF

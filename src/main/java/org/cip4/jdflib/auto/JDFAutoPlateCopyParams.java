@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,238 +80,221 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoPlateCopyParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPlateCopyParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPlateCopyParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CYCLE, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.VACUUM, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CYCLE, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VACUUM, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPlateCopyParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlateCopyParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPlateCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPlateCopyParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlateCopyParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPlateCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPlateCopyParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPlateCopyParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPlateCopyParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPlateCopyParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPlateCopyParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Diffusion
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumDiffusion extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDiffusion(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDiffusion getEnum(String enumName)
+		{
+			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDiffusion getEnum(int enumValue)
+		{
+			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Diffusion
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDiffusion.class);
+		}
 
-        public static class EnumDiffusion extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDiffusion.class);
+		}
 
-            private EnumDiffusion(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDiffusion.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDiffusion getEnum(String enumName)
-            {
-                return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
-            }
+		public static final EnumDiffusion On = new EnumDiffusion("On");
+		public static final EnumDiffusion Off = new EnumDiffusion("Off");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDiffusion getEnum(int enumValue)
-            {
-                return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDiffusion.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Cycle
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Cycle
+	  * @param value the value to set the attribute to
+	  */
+	public void setCycle(int value)
+	{
+		setAttribute(AttributeName.CYCLE, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDiffusion.class);
-            }
+	/**
+	  * (15) get int attribute Cycle
+	  * @return int the value of the attribute
+	  */
+	public int getCycle()
+	{
+		return getIntAttribute(AttributeName.CYCLE, null, 0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDiffusion.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Diffusion
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Diffusion
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDiffusion(EnumDiffusion enumVar)
+	{
+		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumDiffusion On = new EnumDiffusion("On");
-            public static final EnumDiffusion Off = new EnumDiffusion("Off");
-        }      
+	/**
+	  * (9) get attribute Diffusion
+	  * @return the value of the attribute
+	  */
+	public EnumDiffusion getDiffusion()
+	{
+		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Vacuum
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Vacuum
+	  * @param value the value to set the attribute to
+	  */
+	public void setVacuum(double value)
+	{
+		setAttribute(AttributeName.VACUUM, value, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Cycle
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Cycle
-          * @param value the value to set the attribute to
-          */
-        public void setCycle(int value)
-        {
-            setAttribute(AttributeName.CYCLE, value, null);
-        }
-
-        /**
-          * (15) get int attribute Cycle
-          * @return int the value of the attribute
-          */
-        public int getCycle()
-        {
-            return getIntAttribute(AttributeName.CYCLE, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Diffusion
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Diffusion
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDiffusion(EnumDiffusion enumVar)
-        {
-            setAttribute(AttributeName.DIFFUSION, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Diffusion
-          * @return the value of the attribute
-          */
-        public EnumDiffusion getDiffusion()
-        {
-            return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Vacuum
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Vacuum
-          * @param value the value to set the attribute to
-          */
-        public void setVacuum(double value)
-        {
-            setAttribute(AttributeName.VACUUM, value, null);
-        }
-
-        /**
-          * (17) get double attribute Vacuum
-          * @return double the value of the attribute
-          */
-        public double getVacuum()
-        {
-            return getRealAttribute(AttributeName.VACUUM, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute Vacuum
+	  * @return double the value of the attribute
+	  */
+	public double getVacuum()
+	{
+		return getRealAttribute(AttributeName.VACUUM, null, 0.0);
+	}
 
 }// end namespace JDF

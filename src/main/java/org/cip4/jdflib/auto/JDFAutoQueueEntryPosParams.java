@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,177 +76,163 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoQueueEntryPosParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueueEntryPosParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NEXTQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NEXTQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVQUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueueEntryPosParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPosParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryPosParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryPosParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPosParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryPosParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryPosParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPosParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueueEntryPosParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueueEntryPosParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueueEntryPosParams[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NextQueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NextQueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setNextQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute NextQueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getNextQueueEntryID()
+	{
+		return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NextQueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NextQueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setNextQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute NextQueueEntryID
-          * @return the value of the attribute
-          */
-        public String getNextQueueEntryID()
-        {
-            return getAttribute(AttributeName.NEXTQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrevQueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PrevQueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setPrevQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PrevQueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getPrevQueueEntryID()
+	{
+		return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrevQueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PrevQueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setPrevQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Position
+	  * @param value the value to set the attribute to
+	  */
+	public void setPosition(int value)
+	{
+		setAttribute(AttributeName.POSITION, value, null);
+	}
 
-        /**
-          * (23) get String attribute PrevQueueEntryID
-          * @return the value of the attribute
-          */
-        public String getPrevQueueEntryID()
-        {
-            return getAttribute(AttributeName.PREVQUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Position
-          * @param value the value to set the attribute to
-          */
-        public void setPosition(int value)
-        {
-            setAttribute(AttributeName.POSITION, value, null);
-        }
-
-        /**
-          * (15) get int attribute Position
-          * @return int the value of the attribute
-          */
-        public int getPosition()
-        {
-            return getIntAttribute(AttributeName.POSITION, null, 0);
-        }
+	/**
+	  * (15) get int attribute Position
+	  * @return int the value of the attribute
+	  */
+	public int getPosition()
+	{
+		return getIntAttribute(AttributeName.POSITION, null, 0);
+	}
 
 }// end namespace JDF

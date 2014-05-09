@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,280 +86,271 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFcall;
 import org.cip4.jdflib.resource.devicecapability.JDFchoice;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
-    /**
-    *****************************************************************************
-    class JDFAutomacro : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutomacro : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutomacro extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CHOICE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SET, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.CALL, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CHOICE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SET, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CALL, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutomacro
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutomacro
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutomacro(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutomacro
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutomacro
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutomacro(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutomacro
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutomacro
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutomacro(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutomacro[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutomacro[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ID
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setID(String value)
+	{
+		setAttribute(AttributeName.ID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ID
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getID()
+	{
+		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ID
-          * @param value the value to set the attribute to
-          */
-        public void setID(String value)
-        {
-            setAttribute(AttributeName.ID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute ID
-          * @return the value of the attribute
-          */
-        public String getID()
-        {
-            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreatechoice
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFchoice the element
+	 */
+	public JDFchoice getCreatechoice(int iSkip)
+	{
+		return (JDFchoice) getCreateElement_KElement(ElementName.CHOICE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element choice
+	 * @param iSkip number of elements to skip
+	 * @return JDFchoice the element
+	 * default is getchoice(0)     */
+	public JDFchoice getchoice(int iSkip)
+	{
+		return (JDFchoice) getElement(ElementName.CHOICE, null, iSkip);
+	}
 
-    /** (26) getCreatechoice
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFchoice the element
-     */
-    public JDFchoice getCreatechoice(int iSkip)
-    {
-        return (JDFchoice)getCreateElement_KElement(ElementName.CHOICE, null, iSkip);
-    }
+	/**
+	 * Get all choice from the current element
+	 * 
+	 * @return Collection<JDFchoice>, null if none are available
+	 */
+	public Collection<JDFchoice> getAllchoice()
+	{
+		final VElement vc = getChildElementVector(ElementName.CHOICE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element choice
-     * @param iSkip number of elements to skip
-     * @return JDFchoice the element
-     * default is getchoice(0)     */
-    public JDFchoice getchoice(int iSkip)
-    {
-        return (JDFchoice) getElement(ElementName.CHOICE, null, iSkip);
-    }
+		final Vector<JDFchoice> v = new Vector<JDFchoice>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFchoice) vc.get(i));
+		}
 
-    /**
-     * Get all choice from the current element
-     * 
-     * @return Collection<JDFchoice>, null if none are available
-     */
-    public Collection<JDFchoice> getAllchoice()
-    {
-        final VElement vc = getChildElementVector(ElementName.CHOICE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFchoice> v = new Vector<JDFchoice>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFchoice) vc.get(i));
-        }
+	/**
+	 * (30) append element choice
+	 * @return JDFchoice the element
+	 */
+	public JDFchoice appendchoice()
+	{
+		return (JDFchoice) appendElement(ElementName.CHOICE, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreateset
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFset the element
+	 */
+	public JDFset getCreateset(int iSkip)
+	{
+		return (JDFset) getCreateElement_KElement(ElementName.SET, null, iSkip);
+	}
 
-    /**
-     * (30) append element choice
-     * @return JDFchoice the element
-     */
-    public JDFchoice appendchoice()
-    {
-        return (JDFchoice) appendElement(ElementName.CHOICE, null);
-    }
+	/**
+	 * (27) const get element set
+	 * @param iSkip number of elements to skip
+	 * @return JDFset the element
+	 * default is getset(0)     */
+	public JDFset getset(int iSkip)
+	{
+		return (JDFset) getElement(ElementName.SET, null, iSkip);
+	}
 
-    /** (26) getCreateset
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFset the element
-     */
-    public JDFset getCreateset(int iSkip)
-    {
-        return (JDFset)getCreateElement_KElement(ElementName.SET, null, iSkip);
-    }
+	/**
+	 * Get all set from the current element
+	 * 
+	 * @return Collection<JDFset>, null if none are available
+	 */
+	public Collection<JDFset> getAllset()
+	{
+		final VElement vc = getChildElementVector(ElementName.SET, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element set
-     * @param iSkip number of elements to skip
-     * @return JDFset the element
-     * default is getset(0)     */
-    public JDFset getset(int iSkip)
-    {
-        return (JDFset) getElement(ElementName.SET, null, iSkip);
-    }
+		final Vector<JDFset> v = new Vector<JDFset>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFset) vc.get(i));
+		}
 
-    /**
-     * Get all set from the current element
-     * 
-     * @return Collection<JDFset>, null if none are available
-     */
-    public Collection<JDFset> getAllset()
-    {
-        final VElement vc = getChildElementVector(ElementName.SET, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFset> v = new Vector<JDFset>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFset) vc.get(i));
-        }
+	/**
+	 * (30) append element set
+	 * @return JDFset the element
+	 */
+	public JDFset appendset()
+	{
+		return (JDFset) appendElement(ElementName.SET, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreatecall
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFcall the element
+	 */
+	public JDFcall getCreatecall(int iSkip)
+	{
+		return (JDFcall) getCreateElement_KElement(ElementName.CALL, null, iSkip);
+	}
 
-    /**
-     * (30) append element set
-     * @return JDFset the element
-     */
-    public JDFset appendset()
-    {
-        return (JDFset) appendElement(ElementName.SET, null);
-    }
+	/**
+	 * (27) const get element call
+	 * @param iSkip number of elements to skip
+	 * @return JDFcall the element
+	 * default is getcall(0)     */
+	public JDFcall getcall(int iSkip)
+	{
+		return (JDFcall) getElement(ElementName.CALL, null, iSkip);
+	}
 
-    /** (26) getCreatecall
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFcall the element
-     */
-    public JDFcall getCreatecall(int iSkip)
-    {
-        return (JDFcall)getCreateElement_KElement(ElementName.CALL, null, iSkip);
-    }
+	/**
+	 * Get all call from the current element
+	 * 
+	 * @return Collection<JDFcall>, null if none are available
+	 */
+	public Collection<JDFcall> getAllcall()
+	{
+		final VElement vc = getChildElementVector(ElementName.CALL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element call
-     * @param iSkip number of elements to skip
-     * @return JDFcall the element
-     * default is getcall(0)     */
-    public JDFcall getcall(int iSkip)
-    {
-        return (JDFcall) getElement(ElementName.CALL, null, iSkip);
-    }
+		final Vector<JDFcall> v = new Vector<JDFcall>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFcall) vc.get(i));
+		}
 
-    /**
-     * Get all call from the current element
-     * 
-     * @return Collection<JDFcall>, null if none are available
-     */
-    public Collection<JDFcall> getAllcall()
-    {
-        final VElement vc = getChildElementVector(ElementName.CALL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFcall> v = new Vector<JDFcall>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFcall) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element call
-     * @return JDFcall the element
-     */
-    public JDFcall appendcall()
-    {
-        return (JDFcall) appendElement(ElementName.CALL, null);
-    }
+	/**
+	 * (30) append element call
+	 * @return JDFcall the element
+	 */
+	public JDFcall appendcall()
+	{
+		return (JDFcall) appendElement(ElementName.CALL, null);
+	}
 
 }// end namespace JDF

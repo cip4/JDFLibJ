@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,259 +85,247 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /**
-    *****************************************************************************
-    class JDFAutoCompany : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCompany : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCompany extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ORGANIZATIONNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORGANIZATIONNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x44444443);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.ORGANIZATIONALUNIT, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x44444443);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ORGANIZATIONALUNIT, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCompany
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCompany
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCompany(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCompany
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCompany
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCompany(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCompany
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCompany
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCompany(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCompany[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCompany[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OrganizationName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OrganizationName
+	  * @param value the value to set the attribute to
+	  */
+	public void setOrganizationName(String value)
+	{
+		setAttribute(AttributeName.ORGANIZATIONNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute OrganizationName
+	  * @return the value of the attribute
+	  */
+	public String getOrganizationName()
+	{
+		return getAttribute(AttributeName.ORGANIZATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OrganizationName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OrganizationName
-          * @param value the value to set the attribute to
-          */
-        public void setOrganizationName(String value)
-        {
-            setAttribute(AttributeName.ORGANIZATIONNAME, value, null);
-        }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute OrganizationName
-          * @return the value of the attribute
-          */
-        public String getOrganizationName()
-        {
-            return getAttribute(AttributeName.ORGANIZATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/** (26) getCreateOrganizationalUnit
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateOrganizationalUnit(int iSkip)
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element OrganizationalUnit
+	 * @param iSkip number of elements to skip
+	 * @return JDFElement the element
+	 * default is getOrganizationalUnit(0)     */
+	public JDFElement getOrganizationalUnit(int iSkip)
+	{
+		return (JDFElement) getElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
+	}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+	/**
+	 * Get all OrganizationalUnit from the current element
+	 * 
+	 * @return Collection<JDFElement>, null if none are available
+	 */
+	public Collection<JDFElement> getAllOrganizationalUnit()
+	{
+		final VElement vc = getChildElementVector(ElementName.ORGANIZATIONALUNIT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFElement> v = new Vector<JDFElement>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFElement) vc.get(i));
+		}
 
-    /** (26) getCreateOrganizationalUnit
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateOrganizationalUnit(int iSkip)
-    {
-        return (JDFElement)getCreateElement_KElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element OrganizationalUnit
-     * @param iSkip number of elements to skip
-     * @return JDFElement the element
-     * default is getOrganizationalUnit(0)     */
-    public JDFElement getOrganizationalUnit(int iSkip)
-    {
-        return (JDFElement) getElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
-    }
-
-    /**
-     * Get all OrganizationalUnit from the current element
-     * 
-     * @return Collection<JDFElement>, null if none are available
-     */
-    public Collection<JDFElement> getAllOrganizationalUnit()
-    {
-        final VElement vc = getChildElementVector(ElementName.ORGANIZATIONALUNIT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFElement> v = new Vector<JDFElement>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFElement) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element OrganizationalUnit
-     * @return JDFElement the element
-     */
-    public JDFElement appendOrganizationalUnit()
-    {
-        return (JDFElement) appendElement(ElementName.ORGANIZATIONALUNIT, null);
-    }
+	/**
+	 * (30) append element OrganizationalUnit
+	 * @return JDFElement the element
+	 */
+	public JDFElement appendOrganizationalUnit()
+	{
+		return (JDFElement) appendElement(ElementName.ORGANIZATIONALUNIT, null);
+	}
 
 }// end namespace JDF

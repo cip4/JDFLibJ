@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,217 +81,202 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoFeatureAttribute : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFeatureAttribute : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFeatureAttribute extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFeatureAttribute
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeatureAttribute(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeatureAttribute
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFeatureAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeatureAttribute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeatureAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeatureAttribute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFeatureAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeatureAttribute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFeatureAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeatureAttribute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFeatureAttribute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFeatureAttribute[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for UserDisplay
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFeatureAttribute[  --> " + super.toString() + " ]";
-    }
+	public static class EnumUserDisplay extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumUserDisplay(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for UserDisplay
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumUserDisplay getEnum(String enumName)
+		{
+			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumName);
+		}
 
-        public static class EnumUserDisplay extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumUserDisplay getEnum(int enumValue)
+		{
+			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumValue);
+		}
 
-            private EnumUserDisplay(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumUserDisplay.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumUserDisplay getEnum(String enumName)
-            {
-                return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumUserDisplay.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumUserDisplay getEnum(int enumValue)
-            {
-                return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumUserDisplay.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumUserDisplay.class);
-            }
+		public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
+		public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
+		public static final EnumUserDisplay Dependant = new EnumUserDisplay("Dependant");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumUserDisplay.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumUserDisplay.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CurrentValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CurrentValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setCurrentValue(String value)
+	{
+		setAttribute(AttributeName.CURRENTVALUE, value, null);
+	}
 
-            public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
-            public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
-            public static final EnumUserDisplay Dependant = new EnumUserDisplay("Dependant");
-        }      
+	/**
+	  * (23) get String attribute CurrentValue
+	  * @return the value of the attribute
+	  */
+	public String getCurrentValue()
+	{
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Editable
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Editable
+	  * @param value the value to set the attribute to
+	  */
+	public void setEditable(boolean value)
+	{
+		setAttribute(AttributeName.EDITABLE, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute Editable
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEditable()
+	{
+		return getBoolAttribute(AttributeName.EDITABLE, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CurrentValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CurrentValue
-          * @param value the value to set the attribute to
-          */
-        public void setCurrentValue(String value)
-        {
-            setAttribute(AttributeName.CURRENTVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute UserDisplay
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute UserDisplay
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setUserDisplay(EnumUserDisplay enumVar)
+	{
+		setAttribute(AttributeName.USERDISPLAY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (23) get String attribute CurrentValue
-          * @return the value of the attribute
-          */
-        public String getCurrentValue()
-        {
-            return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Editable
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Editable
-          * @param value the value to set the attribute to
-          */
-        public void setEditable(boolean value)
-        {
-            setAttribute(AttributeName.EDITABLE, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute Editable
-          * @return boolean the value of the attribute
-          */
-        public boolean getEditable()
-        {
-            return getBoolAttribute(AttributeName.EDITABLE, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute UserDisplay
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute UserDisplay
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setUserDisplay(EnumUserDisplay enumVar)
-        {
-            setAttribute(AttributeName.USERDISPLAY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute UserDisplay
-          * @return the value of the attribute
-          */
-        public EnumUserDisplay getUserDisplay()
-        {
-            return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, null));
-        }
+	/**
+	  * (9) get attribute UserDisplay
+	  * @return the value of the attribute
+	  */
+	public EnumUserDisplay getUserDisplay()
+	{
+		return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, null));
+	}
 
 }// end namespace JDF

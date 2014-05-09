@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,403 +89,388 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
-    /**
-    *****************************************************************************
-    class JDFAutoDieLayoutProductionParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDieLayoutProductionParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x22221111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.REPEATDESC, 0x22221111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONVERTINGCONFIG, 0x22221111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.REPEATDESC, 0x22221111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDieLayoutProductionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDieLayoutProductionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDieLayoutProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDieLayoutProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDieLayoutProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDieLayoutProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDieLayoutProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDieLayoutProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDieLayoutProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDieLayoutProductionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDieLayoutProductionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Position
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumPosition extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPosition(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPosition getEnum(String enumName)
+		{
+			return (EnumPosition) getEnum(EnumPosition.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPosition getEnum(int enumValue)
+		{
+			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Position
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPosition.class);
+		}
 
-        public static class EnumPosition extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPosition.class);
+		}
 
-            private EnumPosition(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPosition.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPosition getEnum(String enumName)
-            {
-                return (EnumPosition) getEnum(EnumPosition.class, enumName);
-            }
+		public static final EnumPosition TopLeft = new EnumPosition("TopLeft");
+		public static final EnumPosition TopCenter = new EnumPosition("TopCenter");
+		public static final EnumPosition TopRight = new EnumPosition("TopRight");
+		public static final EnumPosition CenterLeft = new EnumPosition("CenterLeft");
+		public static final EnumPosition Center = new EnumPosition("Center");
+		public static final EnumPosition CenterRight = new EnumPosition("CenterRight");
+		public static final EnumPosition BottomLeft = new EnumPosition("BottomLeft");
+		public static final EnumPosition BottomCenter = new EnumPosition("BottomCenter");
+		public static final EnumPosition BottomRight = new EnumPosition("BottomRight");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPosition getEnum(int enumValue)
-            {
-                return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPosition.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Estimate
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Estimate
+	  * @param value the value to set the attribute to
+	  */
+	public void setEstimate(boolean value)
+	{
+		setAttribute(AttributeName.ESTIMATE, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPosition.class);
-            }
+	/**
+	  * (18) get boolean attribute Estimate
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEstimate()
+	{
+		return getBoolAttribute(AttributeName.ESTIMATE, null, false);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPosition.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Position
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Position
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPosition(EnumPosition enumVar)
+	{
+		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumPosition TopLeft = new EnumPosition("TopLeft");
-            public static final EnumPosition TopCenter = new EnumPosition("TopCenter");
-            public static final EnumPosition TopRight = new EnumPosition("TopRight");
-            public static final EnumPosition CenterLeft = new EnumPosition("CenterLeft");
-            public static final EnumPosition Center = new EnumPosition("Center");
-            public static final EnumPosition CenterRight = new EnumPosition("CenterRight");
-            public static final EnumPosition BottomLeft = new EnumPosition("BottomLeft");
-            public static final EnumPosition BottomCenter = new EnumPosition("BottomCenter");
-            public static final EnumPosition BottomRight = new EnumPosition("BottomRight");
-        }      
+	/**
+	  * (9) get attribute Position
+	  * @return the value of the attribute
+	  */
+	public EnumPosition getPosition()
+	{
+		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateConvertingConfig
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
+	{
+		return (JDFConvertingConfig) getCreateElement_KElement(ElementName.CONVERTINGCONFIG, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Estimate
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Estimate
-          * @param value the value to set the attribute to
-          */
-        public void setEstimate(boolean value)
-        {
-            setAttribute(AttributeName.ESTIMATE, value, null);
-        }
+	/**
+	 * (27) const get element ConvertingConfig
+	 * @param iSkip number of elements to skip
+	 * @return JDFConvertingConfig the element
+	 * default is getConvertingConfig(0)     */
+	public JDFConvertingConfig getConvertingConfig(int iSkip)
+	{
+		return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, iSkip);
+	}
 
-        /**
-          * (18) get boolean attribute Estimate
-          * @return boolean the value of the attribute
-          */
-        public boolean getEstimate()
-        {
-            return getBoolAttribute(AttributeName.ESTIMATE, null, false);
-        }
+	/**
+	 * Get all ConvertingConfig from the current element
+	 * 
+	 * @return Collection<JDFConvertingConfig>, null if none are available
+	 */
+	public Collection<JDFConvertingConfig> getAllConvertingConfig()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONVERTINGCONFIG, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Position
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Position
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPosition(EnumPosition enumVar)
-        {
-            setAttribute(AttributeName.POSITION, enumVar==null ? null : enumVar.getName(), null);
-        }
+		final Vector<JDFConvertingConfig> v = new Vector<JDFConvertingConfig>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFConvertingConfig) vc.get(i));
+		}
 
-        /**
-          * (9) get attribute Position
-          * @return the value of the attribute
-          */
-        public EnumPosition getPosition()
-        {
-            return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element ConvertingConfig
+	 * @return JDFConvertingConfig the element
+	 */
+	public JDFConvertingConfig appendConvertingConfig()
+	{
+		return (JDFConvertingConfig) appendElement(ElementName.CONVERTINGCONFIG, null);
+	}
 
-    /** (26) getCreateConvertingConfig
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFConvertingConfig the element
-     */
-    public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
-    {
-        return (JDFConvertingConfig)getCreateElement_KElement(ElementName.CONVERTINGCONFIG, null, iSkip);
-    }
+	/** (26) getCreateRepeatDesc
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFRepeatDesc the element
+	 */
+	public JDFRepeatDesc getCreateRepeatDesc(int iSkip)
+	{
+		return (JDFRepeatDesc) getCreateElement_KElement(ElementName.REPEATDESC, null, iSkip);
+	}
 
-    /**
-     * (27) const get element ConvertingConfig
-     * @param iSkip number of elements to skip
-     * @return JDFConvertingConfig the element
-     * default is getConvertingConfig(0)     */
-    public JDFConvertingConfig getConvertingConfig(int iSkip)
-    {
-        return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, iSkip);
-    }
+	/**
+	 * (27) const get element RepeatDesc
+	 * @param iSkip number of elements to skip
+	 * @return JDFRepeatDesc the element
+	 * default is getRepeatDesc(0)     */
+	public JDFRepeatDesc getRepeatDesc(int iSkip)
+	{
+		return (JDFRepeatDesc) getElement(ElementName.REPEATDESC, null, iSkip);
+	}
 
-    /**
-     * Get all ConvertingConfig from the current element
-     * 
-     * @return Collection<JDFConvertingConfig>, null if none are available
-     */
-    public Collection<JDFConvertingConfig> getAllConvertingConfig()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONVERTINGCONFIG, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all RepeatDesc from the current element
+	 * 
+	 * @return Collection<JDFRepeatDesc>, null if none are available
+	 */
+	public Collection<JDFRepeatDesc> getAllRepeatDesc()
+	{
+		final VElement vc = getChildElementVector(ElementName.REPEATDESC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFConvertingConfig> v = new Vector<JDFConvertingConfig>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFConvertingConfig) vc.get(i));
-        }
+		final Vector<JDFRepeatDesc> v = new Vector<JDFRepeatDesc>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFRepeatDesc) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element ConvertingConfig
-     * @return JDFConvertingConfig the element
-     */
-    public JDFConvertingConfig appendConvertingConfig()
-    {
-        return (JDFConvertingConfig) appendElement(ElementName.CONVERTINGCONFIG, null);
-    }
+	/**
+	 * (30) append element RepeatDesc
+	 * @return JDFRepeatDesc the element
+	 */
+	public JDFRepeatDesc appendRepeatDesc()
+	{
+		return (JDFRepeatDesc) appendElement(ElementName.REPEATDESC, null);
+	}
 
-    /** (26) getCreateRepeatDesc
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFRepeatDesc the element
-     */
-    public JDFRepeatDesc getCreateRepeatDesc(int iSkip)
-    {
-        return (JDFRepeatDesc)getCreateElement_KElement(ElementName.REPEATDESC, null, iSkip);
-    }
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /**
-     * (27) const get element RepeatDesc
-     * @param iSkip number of elements to skip
-     * @return JDFRepeatDesc the element
-     * default is getRepeatDesc(0)     */
-    public JDFRepeatDesc getRepeatDesc(int iSkip)
-    {
-        return (JDFRepeatDesc) getElement(ElementName.REPEATDESC, null, iSkip);
-    }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-    /**
-     * Get all RepeatDesc from the current element
-     * 
-     * @return Collection<JDFRepeatDesc>, null if none are available
-     */
-    public Collection<JDFRepeatDesc> getAllRepeatDesc()
-    {
-        final VElement vc = getChildElementVector(ElementName.REPEATDESC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFRepeatDesc> v = new Vector<JDFRepeatDesc>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFRepeatDesc) vc.get(i));
-        }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element RepeatDesc
-     * @return JDFRepeatDesc the element
-     */
-    public JDFRepeatDesc appendRepeatDesc()
-    {
-        return (JDFRepeatDesc) appendElement(ElementName.REPEATDESC, null);
-    }
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
-
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

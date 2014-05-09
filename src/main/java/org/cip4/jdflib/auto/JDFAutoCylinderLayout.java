@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,236 +86,223 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCylinderPosition;
 import org.cip4.jdflib.resource.process.JDFLayout;
-    /**
-    *****************************************************************************
-    class JDFAutoCylinderLayout : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCylinderLayout : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCylinderLayout extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LAYOUT, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CYLINDERPOSITION, 0x22222111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LAYOUT, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CYLINDERPOSITION, 0x22222111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCylinderLayout
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayout
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderLayout
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayout
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderLayout
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderLayout
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCylinderLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCylinderLayout[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCylinderLayout[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DeviceID
+	  * @param value the value to set the attribute to
+	  */
+	public void setDeviceID(String value)
+	{
+		setAttribute(AttributeName.DEVICEID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute DeviceID
+	  * @return the value of the attribute
+	  */
+	public String getDeviceID()
+	{
+		return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element Layout
+	 * @return JDFLayout the element
+	 */
+	public JDFLayout getLayout()
+	{
+		return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DeviceID
-          * @param value the value to set the attribute to
-          */
-        public void setDeviceID(String value)
-        {
-            setAttribute(AttributeName.DEVICEID, value, null);
-        }
+	/** (25) getCreateLayout
+	 * 
+	 * @return JDFLayout the element
+	 */
+	public JDFLayout getCreateLayout()
+	{
+		return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
+	}
 
-        /**
-          * (23) get String attribute DeviceID
-          * @return the value of the attribute
-          */
-        public String getDeviceID()
-        {
-            return getAttribute(AttributeName.DEVICEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Layout
+	 * @return JDFLayout the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFLayout appendLayout() throws JDFException
+	{
+		return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refLayout(JDFLayout refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element Layout
-     * @return JDFLayout the element
-     */
-    public JDFLayout getLayout()
-    {
-        return (JDFLayout) getElement(ElementName.LAYOUT, null, 0);
-    }
+	/** (26) getCreateCylinderPosition
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCylinderPosition the element
+	 */
+	public JDFCylinderPosition getCreateCylinderPosition(int iSkip)
+	{
+		return (JDFCylinderPosition) getCreateElement_KElement(ElementName.CYLINDERPOSITION, null, iSkip);
+	}
 
-    /** (25) getCreateLayout
-     * 
-     * @return JDFLayout the element
-     */
-    public JDFLayout getCreateLayout()
-    {
-        return (JDFLayout) getCreateElement_KElement(ElementName.LAYOUT, null, 0);
-    }
+	/**
+	 * (27) const get element CylinderPosition
+	 * @param iSkip number of elements to skip
+	 * @return JDFCylinderPosition the element
+	 * default is getCylinderPosition(0)     */
+	public JDFCylinderPosition getCylinderPosition(int iSkip)
+	{
+		return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, iSkip);
+	}
 
-    /**
-     * (29) append element Layout
-     * @return JDFLayout the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFLayout appendLayout() throws JDFException
-    {
-        return (JDFLayout) appendElementN(ElementName.LAYOUT, 1, null);
-    }
+	/**
+	 * Get all CylinderPosition from the current element
+	 * 
+	 * @return Collection<JDFCylinderPosition>, null if none are available
+	 */
+	public Collection<JDFCylinderPosition> getAllCylinderPosition()
+	{
+		final VElement vc = getChildElementVector(ElementName.CYLINDERPOSITION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refLayout(JDFLayout refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFCylinderPosition> v = new Vector<JDFCylinderPosition>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCylinderPosition) vc.get(i));
+		}
 
-    /** (26) getCreateCylinderPosition
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCylinderPosition the element
-     */
-    public JDFCylinderPosition getCreateCylinderPosition(int iSkip)
-    {
-        return (JDFCylinderPosition)getCreateElement_KElement(ElementName.CYLINDERPOSITION, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element CylinderPosition
-     * @param iSkip number of elements to skip
-     * @return JDFCylinderPosition the element
-     * default is getCylinderPosition(0)     */
-    public JDFCylinderPosition getCylinderPosition(int iSkip)
-    {
-        return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, iSkip);
-    }
-
-    /**
-     * Get all CylinderPosition from the current element
-     * 
-     * @return Collection<JDFCylinderPosition>, null if none are available
-     */
-    public Collection<JDFCylinderPosition> getAllCylinderPosition()
-    {
-        final VElement vc = getChildElementVector(ElementName.CYLINDERPOSITION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFCylinderPosition> v = new Vector<JDFCylinderPosition>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCylinderPosition) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element CylinderPosition
-     * @return JDFCylinderPosition the element
-     */
-    public JDFCylinderPosition appendCylinderPosition()
-    {
-        return (JDFCylinderPosition) appendElement(ElementName.CYLINDERPOSITION, null);
-    }
+	/**
+	 * (30) append element CylinderPosition
+	 * @return JDFCylinderPosition the element
+	 */
+	public JDFCylinderPosition appendCylinderPosition()
+	{
+		return (JDFCylinderPosition) appendElement(ElementName.CYLINDERPOSITION, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 
 /**
@@ -118,13 +119,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.AUTOMATEDOVERPRINTPARAMS, 0x66666611);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333311);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x66666611);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33311111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORSPACECONVERSIONOP, 0x66666611);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
 	}
 
 	@Override
@@ -181,7 +183,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -336,15 +338,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 		return (JDFAutomatedOverPrintParams) appendElementN(ElementName.AUTOMATEDOVERPRINTPARAMS, 1, null);
 	}
 
-	/**
-	  * (31) create inter-resource link to refTarget
-	  * @param refTarget the element that is referenced
-	  */
-	public void refAutomatedOverPrintParams(JDFAutomatedOverPrintParams refTarget)
-	{
-		refElement(refTarget);
-	}
-
 	/** (26) getCreateColorantAlias
 	 * 
 	 * @param iSkip number of elements to skip
@@ -403,6 +396,57 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	public void refColorantAlias(JDFColorantAlias refTarget)
 	{
 		refElement(refTarget);
+	}
+
+	/** (26) getCreateColorCorrectionOp
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
+	{
+		return (JDFColorCorrectionOp) getCreateElement_KElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element ColorCorrectionOp
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionOp the element
+	 * default is getColorCorrectionOp(0)     */
+	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
+	{
+		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+	}
+
+	/**
+	 * Get all ColorCorrectionOp from the current element
+	 * 
+	 * @return Collection<JDFColorCorrectionOp>, null if none are available
+	 */
+	public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORCORRECTIONOP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFColorCorrectionOp) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element ColorCorrectionOp
+	 * @return JDFColorCorrectionOp the element
+	 */
+	public JDFColorCorrectionOp appendColorCorrectionOp()
+	{
+		return (JDFColorCorrectionOp) appendElement(ElementName.COLORCORRECTIONOP, null);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,19 +103,22 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGNAME, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRIORITY, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.STARTTIME, 0x33333331, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33311111, AttributeInfo.EnumAttributeType.shortString, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
 	@Override
@@ -177,6 +180,131 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	public String toString()
 	{
 		return " JDFAutoQueueEntry[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	* Enumeration strings for Activation
+	*/
+
+	public static class EnumActivation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumActivation(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(String enumName)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(int enumValue)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumActivation.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumActivation.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumActivation.class);
+		}
+
+		public static final EnumActivation Inactive = new EnumActivation("Inactive");
+		public static final EnumActivation Informative = new EnumActivation("Informative");
+		public static final EnumActivation Held = new EnumActivation("Held");
+		public static final EnumActivation Active = new EnumActivation("Active");
+		public static final EnumActivation TestRun = new EnumActivation("TestRun");
+		public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
+	}
+
+	/**
+	* Enumeration strings for GangPolicy
+	*/
+
+	public static class EnumGangPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumGangPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumGangPolicy getEnum(String enumName)
+		{
+			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumGangPolicy getEnum(int enumValue)
+		{
+			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumGangPolicy.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumGangPolicy.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumGangPolicy.class);
+		}
+
+		public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
+		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
+		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
 	}
 
 	/**
@@ -251,6 +379,27 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 
 	/* ---------------------------------------------------------------------
+	Methods for Attribute Activation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Activation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setActivation(EnumActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Activation
+	  * @return the value of the attribute
+	  */
+	public EnumActivation getActivation()
+	{
+		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
 	Methods for Attribute DeviceID
 	--------------------------------------------------------------------- */
 	/**
@@ -282,7 +431,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.ENDTIME, date.getDateTimeISO(), null);
 	}
 
@@ -292,8 +443,8 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	  */
 	public JDFDate getEndTime()
 	{
-		String str = getAttribute(AttributeName.ENDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.ENDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -316,6 +467,27 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	public String getGangName()
 	{
 		return getAttribute(AttributeName.GANGNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute GangPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute GangPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setGangPolicy(EnumGangPolicy enumVar)
+	{
+		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute GangPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumGangPolicy getGangPolicy()
+	{
+		return EnumGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
 	}
 
 	/* ---------------------------------------------------------------------
@@ -434,7 +606,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.STARTTIME, date.getDateTimeISO(), null);
 	}
 
@@ -444,9 +618,30 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	  */
 	public JDFDate getStartTime()
 	{
-		String str = getAttribute(AttributeName.STARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.STARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StatusDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StatusDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setStatusDetails(String value)
+	{
+		setAttribute(AttributeName.STATUSDETAILS, value, null);
+	}
+
+	/**
+	  * (23) get String attribute StatusDetails
+	  * @return the value of the attribute
+	  */
+	public String getStatusDetails()
+	{
+		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/* ---------------------------------------------------------------------
@@ -460,7 +655,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
 	}
 
@@ -470,8 +667,8 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	  */
 	public JDFDate getSubmissionTime()
 	{
-		String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

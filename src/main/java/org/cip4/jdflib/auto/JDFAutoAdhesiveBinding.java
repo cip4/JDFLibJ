@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,173 +79,162 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanGlue;
 import org.cip4.jdflib.span.JDFSpanScoring;
-    /**
-    *****************************************************************************
-    class JDFAutoAdhesiveBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAdhesiveBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoAdhesiveBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SCORING, 0x77777776);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SPINEGLUE, 0x77777776);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.TAPEBINDING, 0x77777776);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SCORING, 0x77777776);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SPINEGLUE, 0x77777776);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TAPEBINDING, 0x77777776);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAdhesiveBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAdhesiveBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAdhesiveBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAdhesiveBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAdhesiveBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAdhesiveBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAdhesiveBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAdhesiveBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAdhesiveBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAdhesiveBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAdhesiveBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAdhesiveBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element Scoring
+	 * @return JDFSpanScoring the element
+	 */
+	public JDFSpanScoring getScoring()
+	{
+		return (JDFSpanScoring) getElement(ElementName.SCORING, null, 0);
+	}
 
+	/** (25) getCreateScoring
+	 * 
+	 * @return JDFSpanScoring the element
+	 */
+	public JDFSpanScoring getCreateScoring()
+	{
+		return (JDFSpanScoring) getCreateElement_KElement(ElementName.SCORING, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element Scoring
+	 * @return JDFSpanScoring the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanScoring appendScoring() throws JDFException
+	{
+		return (JDFSpanScoring) appendElementN(ElementName.SCORING, 1, null);
+	}
 
-    /**
-     * (24) const get element Scoring
-     * @return JDFSpanScoring the element
-     */
-    public JDFSpanScoring getScoring()
-    {
-        return (JDFSpanScoring) getElement(ElementName.SCORING, null, 0);
-    }
+	/**
+	 * (24) const get element SpineGlue
+	 * @return JDFSpanGlue the element
+	 */
+	public JDFSpanGlue getSpineGlue()
+	{
+		return (JDFSpanGlue) getElement(ElementName.SPINEGLUE, null, 0);
+	}
 
-    /** (25) getCreateScoring
-     * 
-     * @return JDFSpanScoring the element
-     */
-    public JDFSpanScoring getCreateScoring()
-    {
-        return (JDFSpanScoring) getCreateElement_KElement(ElementName.SCORING, null, 0);
-    }
+	/** (25) getCreateSpineGlue
+	 * 
+	 * @return JDFSpanGlue the element
+	 */
+	public JDFSpanGlue getCreateSpineGlue()
+	{
+		return (JDFSpanGlue) getCreateElement_KElement(ElementName.SPINEGLUE, null, 0);
+	}
 
-    /**
-     * (29) append element Scoring
-     * @return JDFSpanScoring the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanScoring appendScoring() throws JDFException
-    {
-        return (JDFSpanScoring) appendElementN(ElementName.SCORING, 1, null);
-    }
+	/**
+	 * (29) append element SpineGlue
+	 * @return JDFSpanGlue the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanGlue appendSpineGlue() throws JDFException
+	{
+		return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
+	}
 
-    /**
-     * (24) const get element SpineGlue
-     * @return JDFSpanGlue the element
-     */
-    public JDFSpanGlue getSpineGlue()
-    {
-        return (JDFSpanGlue) getElement(ElementName.SPINEGLUE, null, 0);
-    }
+	/**
+	 * (24) const get element TapeBinding
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getTapeBinding()
+	{
+		return (JDFOptionSpan) getElement(ElementName.TAPEBINDING, null, 0);
+	}
 
-    /** (25) getCreateSpineGlue
-     * 
-     * @return JDFSpanGlue the element
-     */
-    public JDFSpanGlue getCreateSpineGlue()
-    {
-        return (JDFSpanGlue) getCreateElement_KElement(ElementName.SPINEGLUE, null, 0);
-    }
+	/** (25) getCreateTapeBinding
+	 * 
+	 * @return JDFOptionSpan the element
+	 */
+	public JDFOptionSpan getCreateTapeBinding()
+	{
+		return (JDFOptionSpan) getCreateElement_KElement(ElementName.TAPEBINDING, null, 0);
+	}
 
-    /**
-     * (29) append element SpineGlue
-     * @return JDFSpanGlue the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanGlue appendSpineGlue() throws JDFException
-    {
-        return (JDFSpanGlue) appendElementN(ElementName.SPINEGLUE, 1, null);
-    }
-
-    /**
-     * (24) const get element TapeBinding
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getTapeBinding()
-    {
-        return (JDFOptionSpan) getElement(ElementName.TAPEBINDING, null, 0);
-    }
-
-    /** (25) getCreateTapeBinding
-     * 
-     * @return JDFOptionSpan the element
-     */
-    public JDFOptionSpan getCreateTapeBinding()
-    {
-        return (JDFOptionSpan) getCreateElement_KElement(ElementName.TAPEBINDING, null, 0);
-    }
-
-    /**
-     * (29) append element TapeBinding
-     * @return JDFOptionSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFOptionSpan appendTapeBinding() throws JDFException
-    {
-        return (JDFOptionSpan) appendElementN(ElementName.TAPEBINDING, 1, null);
-    }
+	/**
+	 * (29) append element TapeBinding
+	 * @return JDFOptionSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFOptionSpan appendTapeBinding() throws JDFException
+	{
+		return (JDFOptionSpan) appendElementN(ElementName.TAPEBINDING, 1, null);
+	}
 
 }// end namespace JDF

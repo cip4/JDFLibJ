@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,131 +76,119 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoExtraValues : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoExtraValues : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoExtraValues extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.USAGE, 0x22222111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.USAGE, 0x22222111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoExtraValues
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoExtraValues
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoExtraValues(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoExtraValues
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoExtraValues
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoExtraValues(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoExtraValues
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoExtraValues
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoExtraValues(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoExtraValues[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoExtraValues[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Usage
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Usage
+	  * @param value the value to set the attribute to
+	  */
+	public void setUsage(String value)
+	{
+		setAttribute(AttributeName.USAGE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Usage
+	  * @return the value of the attribute
+	  */
+	public String getUsage()
+	{
+		return getAttribute(AttributeName.USAGE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Usage
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Usage
-          * @param value the value to set the attribute to
-          */
-        public void setUsage(String value)
-        {
-            setAttribute(AttributeName.USAGE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Value
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Value
+	  * @param value the value to set the attribute to
+	  */
+	public void setValue(String value)
+	{
+		setAttribute(AttributeName.VALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Usage
-          * @return the value of the attribute
-          */
-        public String getUsage()
-        {
-            return getAttribute(AttributeName.USAGE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Value
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Value
-          * @param value the value to set the attribute to
-          */
-        public void setValue(String value)
-        {
-            setAttribute(AttributeName.VALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute Value
-          * @return the value of the attribute
-          */
-        public String getValue()
-        {
-            return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Value
+	  * @return the value of the attribute
+	  */
+	public String getValue()
+	{
+		return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

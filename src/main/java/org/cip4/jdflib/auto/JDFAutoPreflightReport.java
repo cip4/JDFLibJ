@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,458 +92,441 @@ import org.cip4.jdflib.resource.process.JDFPRItem;
 import org.cip4.jdflib.resource.process.JDFPreflightParams;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
 import org.cip4.jdflib.resource.process.JDFRunList;
-    /**
-    *****************************************************************************
-    class JDFAutoPreflightReport : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPreflightReport : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPreflightReport extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x55555511);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.RUNLIST, 0x55555511);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.PRITEM, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x55555511);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x66666611);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.RUNLIST, 0x55555511);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.PRITEM, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPreflightReport
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReport
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightReport(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightReport
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReport
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPreflightReport(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPreflightReport
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPreflightReport
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPreflightReport(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPreflightReport[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPreflightReport[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for ErrorState
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumErrorState extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumErrorState(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumErrorState getEnum(String enumName)
+		{
+			return (EnumErrorState) getEnum(EnumErrorState.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumErrorState getEnum(int enumValue)
+		{
+			return (EnumErrorState) getEnum(EnumErrorState.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for ErrorState
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumErrorState.class);
+		}
 
-        public static class EnumErrorState extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumErrorState.class);
+		}
 
-            private EnumErrorState(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumErrorState.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumErrorState getEnum(String enumName)
-            {
-                return (EnumErrorState) getEnum(EnumErrorState.class, enumName);
-            }
+		public static final EnumErrorState TestNotSupported = new EnumErrorState("TestNotSupported");
+		public static final EnumErrorState TestWrongPDL = new EnumErrorState("TestWrongPDL");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumErrorState getEnum(int enumValue)
-            {
-                return (EnumErrorState) getEnum(EnumErrorState.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumErrorState.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorCount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ErrorCount
+	  * @param value the value to set the attribute to
+	  */
+	public void setErrorCount(int value)
+	{
+		setAttribute(AttributeName.ERRORCOUNT, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumErrorState.class);
-            }
+	/**
+	  * (15) get int attribute ErrorCount
+	  * @return int the value of the attribute
+	  */
+	public int getErrorCount()
+	{
+		return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumErrorState.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ErrorState
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ErrorState
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setErrorState(EnumErrorState enumVar)
+	{
+		setAttribute(AttributeName.ERRORSTATE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumErrorState TestNotSupported = new EnumErrorState("TestNotSupported");
-            public static final EnumErrorState TestWrongPDL = new EnumErrorState("TestWrongPDL");
-        }      
+	/**
+	  * (9) get attribute ErrorState
+	  * @return the value of the attribute
+	  */
+	public EnumErrorState getErrorState()
+	{
+		return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WarningCount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WarningCount
+	  * @param value the value to set the attribute to
+	  */
+	public void setWarningCount(int value)
+	{
+		setAttribute(AttributeName.WARNINGCOUNT, value, null);
+	}
 
+	/**
+	  * (15) get int attribute WarningCount
+	  * @return int the value of the attribute
+	  */
+	public int getWarningCount()
+	{
+		return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorCount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ErrorCount
-          * @param value the value to set the attribute to
-          */
-        public void setErrorCount(int value)
-        {
-            setAttribute(AttributeName.ERRORCOUNT, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute ErrorCount
-          * @return int the value of the attribute
-          */
-        public int getErrorCount()
-        {
-            return getIntAttribute(AttributeName.ERRORCOUNT, null, 0);
-        }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ErrorState
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ErrorState
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setErrorState(EnumErrorState enumVar)
-        {
-            setAttribute(AttributeName.ERRORSTATE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-        /**
-          * (9) get attribute ErrorState
-          * @return the value of the attribute
-          */
-        public EnumErrorState getErrorState()
-        {
-            return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
-        }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WarningCount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WarningCount
-          * @param value the value to set the attribute to
-          */
-        public void setWarningCount(int value)
-        {
-            setAttribute(AttributeName.WARNINGCOUNT, value, null);
-        }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
-        /**
-          * (15) get int attribute WarningCount
-          * @return int the value of the attribute
-          */
-        public int getWarningCount()
-        {
-            return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
-        }
+	/**
+	 * (24) const get element PreflightParams
+	 * @return JDFPreflightParams the element
+	 */
+	public JDFPreflightParams getPreflightParams()
+	{
+		return (JDFPreflightParams) getElement(ElementName.PREFLIGHTPARAMS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreatePreflightParams
+	 * 
+	 * @return JDFPreflightParams the element
+	 */
+	public JDFPreflightParams getCreatePreflightParams()
+	{
+		return (JDFPreflightParams) getCreateElement_KElement(ElementName.PREFLIGHTPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
+	/**
+	 * (29) append element PreflightParams
+	 * @return JDFPreflightParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPreflightParams appendPreflightParams() throws JDFException
+	{
+		return (JDFPreflightParams) appendElementN(ElementName.PREFLIGHTPARAMS, 1, null);
+	}
 
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refPreflightParams(JDFPreflightParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
+	/**
+	 * (24) const get element PreflightReportRulePool
+	 * @return JDFPreflightReportRulePool the element
+	 */
+	public JDFPreflightReportRulePool getPreflightReportRulePool()
+	{
+		return (JDFPreflightReportRulePool) getElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreatePreflightReportRulePool
+	 * 
+	 * @return JDFPreflightReportRulePool the element
+	 */
+	public JDFPreflightReportRulePool getCreatePreflightReportRulePool()
+	{
+		return (JDFPreflightReportRulePool) getCreateElement_KElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
+	}
 
-    /**
-     * (24) const get element PreflightParams
-     * @return JDFPreflightParams the element
-     */
-    public JDFPreflightParams getPreflightParams()
-    {
-        return (JDFPreflightParams) getElement(ElementName.PREFLIGHTPARAMS, null, 0);
-    }
+	/**
+	 * (29) append element PreflightReportRulePool
+	 * @return JDFPreflightReportRulePool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPreflightReportRulePool appendPreflightReportRulePool() throws JDFException
+	{
+		return (JDFPreflightReportRulePool) appendElementN(ElementName.PREFLIGHTREPORTRULEPOOL, 1, null);
+	}
 
-    /** (25) getCreatePreflightParams
-     * 
-     * @return JDFPreflightParams the element
-     */
-    public JDFPreflightParams getCreatePreflightParams()
-    {
-        return (JDFPreflightParams) getCreateElement_KElement(ElementName.PREFLIGHTPARAMS, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refPreflightReportRulePool(JDFPreflightReportRulePool refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (29) append element PreflightParams
-     * @return JDFPreflightParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPreflightParams appendPreflightParams() throws JDFException
-    {
-        return (JDFPreflightParams) appendElementN(ElementName.PREFLIGHTPARAMS, 1, null);
-    }
+	/**
+	 * (24) const get element RunList
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getRunList()
+	{
+		return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPreflightParams(JDFPreflightParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/** (25) getCreateRunList
+	 * 
+	 * @return JDFRunList the element
+	 */
+	public JDFRunList getCreateRunList()
+	{
+		return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
+	}
 
-    /**
-     * (24) const get element PreflightReportRulePool
-     * @return JDFPreflightReportRulePool the element
-     */
-    public JDFPreflightReportRulePool getPreflightReportRulePool()
-    {
-        return (JDFPreflightReportRulePool) getElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
-    }
+	/**
+	 * (29) append element RunList
+	 * @return JDFRunList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFRunList appendRunList() throws JDFException
+	{
+		return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
+	}
 
-    /** (25) getCreatePreflightReportRulePool
-     * 
-     * @return JDFPreflightReportRulePool the element
-     */
-    public JDFPreflightReportRulePool getCreatePreflightReportRulePool()
-    {
-        return (JDFPreflightReportRulePool) getCreateElement_KElement(ElementName.PREFLIGHTREPORTRULEPOOL, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refRunList(JDFRunList refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (29) append element PreflightReportRulePool
-     * @return JDFPreflightReportRulePool the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPreflightReportRulePool appendPreflightReportRulePool() throws JDFException
-    {
-        return (JDFPreflightReportRulePool) appendElementN(ElementName.PREFLIGHTREPORTRULEPOOL, 1, null);
-    }
+	/** (26) getCreatePRItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRItem the element
+	 */
+	public JDFPRItem getCreatePRItem(int iSkip)
+	{
+		return (JDFPRItem) getCreateElement_KElement(ElementName.PRITEM, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPreflightReportRulePool(JDFPreflightReportRulePool refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (27) const get element PRItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRItem the element
+	 * default is getPRItem(0)     */
+	public JDFPRItem getPRItem(int iSkip)
+	{
+		return (JDFPRItem) getElement(ElementName.PRITEM, null, iSkip);
+	}
 
-    /**
-     * (24) const get element RunList
-     * @return JDFRunList the element
-     */
-    public JDFRunList getRunList()
-    {
-        return (JDFRunList) getElement(ElementName.RUNLIST, null, 0);
-    }
+	/**
+	 * Get all PRItem from the current element
+	 * 
+	 * @return Collection<JDFPRItem>, null if none are available
+	 */
+	public Collection<JDFPRItem> getAllPRItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.PRITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateRunList
-     * 
-     * @return JDFRunList the element
-     */
-    public JDFRunList getCreateRunList()
-    {
-        return (JDFRunList) getCreateElement_KElement(ElementName.RUNLIST, null, 0);
-    }
+		final Vector<JDFPRItem> v = new Vector<JDFPRItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPRItem) vc.get(i));
+		}
 
-    /**
-     * (29) append element RunList
-     * @return JDFRunList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFRunList appendRunList() throws JDFException
-    {
-        return (JDFRunList) appendElementN(ElementName.RUNLIST, 1, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refRunList(JDFRunList refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /** (26) getCreatePRItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPRItem the element
-     */
-    public JDFPRItem getCreatePRItem(int iSkip)
-    {
-        return (JDFPRItem)getCreateElement_KElement(ElementName.PRITEM, null, iSkip);
-    }
-
-    /**
-     * (27) const get element PRItem
-     * @param iSkip number of elements to skip
-     * @return JDFPRItem the element
-     * default is getPRItem(0)     */
-    public JDFPRItem getPRItem(int iSkip)
-    {
-        return (JDFPRItem) getElement(ElementName.PRITEM, null, iSkip);
-    }
-
-    /**
-     * Get all PRItem from the current element
-     * 
-     * @return Collection<JDFPRItem>, null if none are available
-     */
-    public Collection<JDFPRItem> getAllPRItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.PRITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPRItem> v = new Vector<JDFPRItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPRItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PRItem
-     * @return JDFPRItem the element
-     */
-    public JDFPRItem appendPRItem()
-    {
-        return (JDFPRItem) appendElement(ElementName.PRITEM, null);
-    }
+	/**
+	 * (30) append element PRItem
+	 * @return JDFPRItem the element
+	 */
+	public JDFPRItem appendPRItem()
+	{
+		return (JDFPRItem) appendElement(ElementName.PRITEM, null);
+	}
 
 }// end namespace JDF

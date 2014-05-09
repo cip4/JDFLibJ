@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,279 +82,264 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoHoleMakingIntent : public JDFIntentResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoHoleMakingIntent : public JDFIntentResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), "Left");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), "Left");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLETYPE, 0x55555555);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELIST, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLETYPE, 0x55555555);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELIST, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoHoleMakingIntent
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleMakingIntent
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleMakingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleMakingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleMakingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleMakingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleMakingIntent
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleMakingIntent
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoHoleMakingIntent(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoHoleMakingIntent[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for HoleReferenceEdge
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoHoleMakingIntent[  --> " + super.toString() + " ]";
-    }
+	public static class EnumHoleReferenceEdge extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumHoleReferenceEdge(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for HoleReferenceEdge
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumHoleReferenceEdge getEnum(String enumName)
+		{
+			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumName);
+		}
 
-        public static class EnumHoleReferenceEdge extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumHoleReferenceEdge getEnum(int enumValue)
+		{
+			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumValue);
+		}
 
-            private EnumHoleReferenceEdge(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumHoleReferenceEdge.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumHoleReferenceEdge getEnum(String enumName)
-            {
-                return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumHoleReferenceEdge.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumHoleReferenceEdge getEnum(int enumValue)
-            {
-                return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumHoleReferenceEdge.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumHoleReferenceEdge.class);
-            }
+		public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
+		public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
+		public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
+		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
+		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumHoleReferenceEdge.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumHoleReferenceEdge.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HoleReferenceEdge
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute HoleReferenceEdge
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
-            public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
-            public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
-            public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
-            public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
-        }      
+	/**
+	  * (9) get attribute HoleReferenceEdge
+	  * @return the value of the attribute
+	  */
+	public EnumHoleReferenceEdge getHoleReferenceEdge()
+	{
+		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Extent
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Extent
+	  * @param value the value to set the attribute to
+	  */
+	public void setExtent(JDFXYPair value)
+	{
+		setAttribute(AttributeName.EXTENT, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Extent
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getExtent()
+	{
+		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HoleReferenceEdge
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute HoleReferenceEdge
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
-        {
-            setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute HoleReferenceEdge
-          * @return the value of the attribute
-          */
-        public EnumHoleReferenceEdge getHoleReferenceEdge()
-        {
-            return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
-        }
+	/**
+	 * (24) const get element HoleType
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getHoleType()
+	{
+		return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Extent
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Extent
-          * @param value the value to set the attribute to
-          */
-        public void setExtent(JDFXYPair value)
-        {
-            setAttribute(AttributeName.EXTENT, value, null);
-        }
+	/** (25) getCreateHoleType
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateHoleType()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Extent
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getExtent()
-        {
-            String strAttrName = getAttribute(AttributeName.EXTENT, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (29) append element HoleType
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendHoleType() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (24) const get element HoleList
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getHoleList()
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /**
-     * (24) const get element HoleType
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getHoleType()
-    {
-        return (JDFStringSpan) getElement(ElementName.HOLETYPE, null, 0);
-    }
+	/** (25) getCreateHoleList
+	 * 
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleList()
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+	}
 
-    /** (25) getCreateHoleType
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateHoleType()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.HOLETYPE, null, 0);
-    }
-
-    /**
-     * (29) append element HoleType
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendHoleType() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.HOLETYPE, 1, null);
-    }
-
-    /**
-     * (24) const get element HoleList
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getHoleList()
-    {
-        return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /** (25) getCreateHoleList
-     * 
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getCreateHoleList()
-    {
-        return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /**
-     * (29) append element HoleList
-     * @return JDFHoleList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleList appendHoleList() throws JDFException
-    {
-        return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
-    }
+	/**
+	 * (29) append element HoleList
+	 * @return JDFHoleList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleList appendHoleList() throws JDFException
+	{
+		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+	}
 
 }// end namespace JDF

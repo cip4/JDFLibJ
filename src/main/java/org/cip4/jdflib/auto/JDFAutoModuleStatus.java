@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,297 +87,281 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoModuleStatus : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoModuleStatus : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoModuleStatus extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULETYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULETYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x44433333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoModuleStatus
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModuleStatus(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleStatus
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModuleStatus
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleStatus
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModuleStatus
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoModuleStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleStatus
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoModuleStatus(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoModuleStatus[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoModuleStatus[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CombinedProcessIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CombinedProcessIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setCombinedProcessIndex(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerList attribute CombinedProcessIndex
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getCombinedProcessIndex()
+	{
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CombinedProcessIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CombinedProcessIndex
-          * @param value the value to set the attribute to
-          */
-        public void setCombinedProcessIndex(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceStatus
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute DeviceStatus
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
+	{
+		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFIntegerList attribute CombinedProcessIndex
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getCombinedProcessIndex()
-        {
-            String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute DeviceStatus
+	  * @return the value of the attribute
+	  */
+	public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
+	{
+		return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceStatus
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute DeviceStatus
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
-        {
-            setAttribute(AttributeName.DEVICESTATUS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleID
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleID(String value)
+	{
+		setAttribute(AttributeName.MODULEID, value, null);
+	}
 
-        /**
-          * (9) get attribute DeviceStatus
-          * @return the value of the attribute
-          */
-        public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
-        {
-            return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
-        }
+	/**
+	  * (23) get String attribute ModuleID
+	  * @return the value of the attribute
+	  */
+	public String getModuleID()
+	{
+		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleID
-          * @param value the value to set the attribute to
-          */
-        public void setModuleID(String value)
-        {
-            setAttribute(AttributeName.MODULEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModuleID
-          * @return the value of the attribute
-          */
-        public String getModuleID()
-        {
-            return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute ModuleIndex
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getModuleIndex()
+	{
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleType
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleType(String value)
+	{
+		setAttribute(AttributeName.MODULETYPE, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute ModuleIndex
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getModuleIndex()
-        {
-            String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute ModuleType
+	  * @return the value of the attribute
+	  */
+	public String getModuleType()
+	{
+		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleType
-          * @param value the value to set the attribute to
-          */
-        public void setModuleType(String value)
-        {
-            setAttribute(AttributeName.MODULETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StatusDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StatusDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setStatusDetails(String value)
+	{
+		setAttribute(AttributeName.STATUSDETAILS, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModuleType
-          * @return the value of the attribute
-          */
-        public String getModuleType()
-        {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute StatusDetails
+	  * @return the value of the attribute
+	  */
+	public String getStatusDetails()
+	{
+		return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StatusDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StatusDetails
-          * @param value the value to set the attribute to
-          */
-        public void setStatusDetails(String value)
-        {
-            setAttribute(AttributeName.STATUSDETAILS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute StatusDetails
-          * @return the value of the attribute
-          */
-        public String getStatusDetails()
-        {
-            return getAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
 }// end namespace JDF

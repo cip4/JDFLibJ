@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,302 +87,286 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFComponent;
-    /**
-    *****************************************************************************
-    class JDFAutoBundleItem : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBundleItem : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBundleItem extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x22222221, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ITEMNAME, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x22222221, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ITEMNAME, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x55555551);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x55555551);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBundleItem
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBundleItem
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBundleItem(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBundleItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBundleItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBundleItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBundleItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBundleItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBundleItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBundleItem[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Orientation
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBundleItem[  --> " + super.toString() + " ]";
-    }
+	public static class EnumOrientation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumOrientation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Orientation
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(String enumName)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
+		}
 
-        public static class EnumOrientation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumOrientation getEnum(int enumValue)
+		{
+			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
+		}
 
-            private EnumOrientation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOrientation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumOrientation getEnum(String enumName)
-            {
-                return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOrientation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumOrientation getEnum(int enumValue)
-            {
-                return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumOrientation.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumOrientation.class);
-            }
+		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumOrientation.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumOrientation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Amount
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Amount
+	  * @param value the value to set the attribute to
+	  */
+	public void setAmount(int value)
+	{
+		setAttribute(AttributeName.AMOUNT, value, null);
+	}
 
-            public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
-            public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
-            public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
-            public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
-            public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
-            public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
-            public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
-            public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
-        }      
+	/**
+	  * (15) get int attribute Amount
+	  * @return int the value of the attribute
+	  */
+	public int getAmount()
+	{
+		return getIntAttribute(AttributeName.AMOUNT, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ItemName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ItemName
+	  * @param value the value to set the attribute to
+	  */
+	public void setItemName(String value)
+	{
+		setAttribute(AttributeName.ITEMNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ItemName
+	  * @return the value of the attribute
+	  */
+	public String getItemName()
+	{
+		return getAttribute(AttributeName.ITEMNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Amount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Amount
-          * @param value the value to set the attribute to
-          */
-        public void setAmount(int value)
-        {
-            setAttribute(AttributeName.AMOUNT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Orientation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Orientation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setOrientation(EnumOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (15) get int attribute Amount
-          * @return int the value of the attribute
-          */
-        public int getAmount()
-        {
-            return getIntAttribute(AttributeName.AMOUNT, null, 0);
-        }
+	/**
+	  * (9) get attribute Orientation
+	  * @return the value of the attribute
+	  */
+	public EnumOrientation getOrientation()
+	{
+		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ItemName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ItemName
-          * @param value the value to set the attribute to
-          */
-        public void setItemName(String value)
-        {
-            setAttribute(AttributeName.ITEMNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Transformation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Transformation
+	  * @param value the value to set the attribute to
+	  */
+	public void setTransformation(JDFMatrix value)
+	{
+		setAttribute(AttributeName.TRANSFORMATION, value, null);
+	}
 
-        /**
-          * (23) get String attribute ItemName
-          * @return the value of the attribute
-          */
-        public String getItemName()
-        {
-            return getAttribute(AttributeName.ITEMNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFMatrix attribute Transformation
+	  * @return JDFMatrix the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFMatrix
+	  */
+	public JDFMatrix getTransformation()
+	{
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Orientation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Orientation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setOrientation(EnumOrientation enumVar)
-        {
-            setAttribute(AttributeName.ORIENTATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute Orientation
-          * @return the value of the attribute
-          */
-        public EnumOrientation getOrientation()
-        {
-            return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-        }
+	/**
+	 * (24) const get element Component
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getComponent()
+	{
+		return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Transformation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Transformation
-          * @param value the value to set the attribute to
-          */
-        public void setTransformation(JDFMatrix value)
-        {
-            setAttribute(AttributeName.TRANSFORMATION, value, null);
-        }
+	/** (25) getCreateComponent
+	 * 
+	 * @return JDFComponent the element
+	 */
+	public JDFComponent getCreateComponent()
+	{
+		return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
+	}
 
-        /**
-          * (20) get JDFMatrix attribute Transformation
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getTransformation()
-        {
-            String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (29) append element Component
+	 * @return JDFComponent the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFComponent appendComponent() throws JDFException
+	{
+		return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element Component
-     * @return JDFComponent the element
-     */
-    public JDFComponent getComponent()
-    {
-        return (JDFComponent) getElement(ElementName.COMPONENT, null, 0);
-    }
-
-    /** (25) getCreateComponent
-     * 
-     * @return JDFComponent the element
-     */
-    public JDFComponent getCreateComponent()
-    {
-        return (JDFComponent) getCreateElement_KElement(ElementName.COMPONENT, null, 0);
-    }
-
-    /**
-     * (29) append element Component
-     * @return JDFComponent the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFComponent appendComponent() throws JDFException
-    {
-        return (JDFComponent) appendElementN(ElementName.COMPONENT, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComponent(JDFComponent refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refComponent(JDFComponent refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

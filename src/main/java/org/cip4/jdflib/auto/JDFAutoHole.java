@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,248 +79,230 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoHole : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoHole : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoHole extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoHole
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHole
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoHole(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHole
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHole
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoHole(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHole
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoHole
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoHole(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoHole[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoHole[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for Shape
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumShape extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumShape(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumShape getEnum(String enumName)
+		{
+			return (EnumShape) getEnum(EnumShape.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumShape getEnum(int enumValue)
+		{
+			return (EnumShape) getEnum(EnumShape.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Shape
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumShape.class);
+		}
 
-        public static class EnumShape extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumShape.class);
+		}
 
-            private EnumShape(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumShape.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumShape getEnum(String enumName)
-            {
-                return (EnumShape) getEnum(EnumShape.class, enumName);
-            }
+		public static final EnumShape Eliptical = new EnumShape("Eliptical");
+		public static final EnumShape Round = new EnumShape("Round");
+		public static final EnumShape Rectangular = new EnumShape("Rectangular");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumShape getEnum(int enumValue)
-            {
-                return (EnumShape) getEnum(EnumShape.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumShape.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Center
+	  * @param value the value to set the attribute to
+	  */
+	public void setCenter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CENTER, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumShape.class);
-            }
+	/**
+	  * (20) get JDFXYPair attribute Center
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCenter()
+	{
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumShape.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Extent
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Extent
+	  * @param value the value to set the attribute to
+	  */
+	public void setExtent(JDFXYPair value)
+	{
+		setAttribute(AttributeName.EXTENT, value, null);
+	}
 
-            public static final EnumShape Eliptical = new EnumShape("Eliptical");
-            public static final EnumShape Round = new EnumShape("Round");
-            public static final EnumShape Rectangular = new EnumShape("Rectangular");
-        }      
+	/**
+	  * (20) get JDFXYPair attribute Extent
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getExtent()
+	{
+		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Shape
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Shape
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setShape(EnumShape enumVar)
+	{
+		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Center
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Center
-          * @param value the value to set the attribute to
-          */
-        public void setCenter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CENTER, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute Center
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCenter()
-        {
-            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Extent
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Extent
-          * @param value the value to set the attribute to
-          */
-        public void setExtent(JDFXYPair value)
-        {
-            setAttribute(AttributeName.EXTENT, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute Extent
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getExtent()
-        {
-            String strAttrName = getAttribute(AttributeName.EXTENT, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Shape
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Shape
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setShape(EnumShape enumVar)
-        {
-            setAttribute(AttributeName.SHAPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute Shape
-          * @return the value of the attribute
-          */
-        public EnumShape getShape()
-        {
-            return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
-        }
+	/**
+	  * (9) get attribute Shape
+	  * @return the value of the attribute
+	  */
+	public EnumShape getShape()
+	{
+		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
+	}
 
 }// end namespace JDF

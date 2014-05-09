@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,313 +82,293 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoSaddleStitchingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSaddleStitchingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x44444442, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.WIREBRAND, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x44444442, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.WIREBRAND, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSaddleStitchingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitchingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSaddleStitchingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSaddleStitchingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitchingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSaddleStitchingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSaddleStitchingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSaddleStitchingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSaddleStitchingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSaddleStitchingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSaddleStitchingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for StapleShape
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumStapleShape extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumStapleShape(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumStapleShape getEnum(String enumName)
+		{
+			return (EnumStapleShape) getEnum(EnumStapleShape.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumStapleShape getEnum(int enumValue)
+		{
+			return (EnumStapleShape) getEnum(EnumStapleShape.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for StapleShape
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumStapleShape.class);
+		}
 
-        public static class EnumStapleShape extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumStapleShape.class);
+		}
 
-            private EnumStapleShape(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumStapleShape.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumStapleShape getEnum(String enumName)
-            {
-                return (EnumStapleShape) getEnum(EnumStapleShape.class, enumName);
-            }
+		public static final EnumStapleShape Crown = new EnumStapleShape("Crown");
+		public static final EnumStapleShape Overlap = new EnumStapleShape("Overlap");
+		public static final EnumStapleShape Butted = new EnumStapleShape("Butted");
+		public static final EnumStapleShape ClinchOut = new EnumStapleShape("ClinchOut");
+		public static final EnumStapleShape Eyelet = new EnumStapleShape("Eyelet");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumStapleShape getEnum(int enumValue)
-            {
-                return (EnumStapleShape) getEnum(EnumStapleShape.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumStapleShape.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberOfStitches
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NumberOfStitches
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumberOfStitches(int value)
+	{
+		setAttribute(AttributeName.NUMBEROFSTITCHES, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumStapleShape.class);
-            }
+	/**
+	  * (15) get int attribute NumberOfStitches
+	  * @return int the value of the attribute
+	  */
+	public int getNumberOfStitches()
+	{
+		return getIntAttribute(AttributeName.NUMBEROFSTITCHES, null, 0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumStapleShape.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StitchPositions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StitchPositions
+	  * @param value the value to set the attribute to
+	  */
+	public void setStitchPositions(JDFNumberList value)
+	{
+		setAttribute(AttributeName.STITCHPOSITIONS, value, null);
+	}
 
-            public static final EnumStapleShape Crown = new EnumStapleShape("Crown");
-            public static final EnumStapleShape Overlap = new EnumStapleShape("Overlap");
-            public static final EnumStapleShape Butted = new EnumStapleShape("Butted");
-            public static final EnumStapleShape ClinchOut = new EnumStapleShape("ClinchOut");
-            public static final EnumStapleShape Eyelet = new EnumStapleShape("Eyelet");
-        }      
+	/**
+	  * (20) get JDFNumberList attribute StitchPositions
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getStitchPositions()
+	{
+		final String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StapleShape
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute StapleShape
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setStapleShape(EnumStapleShape enumVar)
+	{
+		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute StapleShape
+	  * @return the value of the attribute
+	  */
+	public EnumStapleShape getStapleShape()
+	{
+		return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NumberOfStitches
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NumberOfStitches
-          * @param value the value to set the attribute to
-          */
-        public void setNumberOfStitches(int value)
-        {
-            setAttribute(AttributeName.NUMBEROFSTITCHES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StitchWidth
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StitchWidth
+	  * @param value the value to set the attribute to
+	  */
+	public void setStitchWidth(double value)
+	{
+		setAttribute(AttributeName.STITCHWIDTH, value, null);
+	}
 
-        /**
-          * (15) get int attribute NumberOfStitches
-          * @return int the value of the attribute
-          */
-        public int getNumberOfStitches()
-        {
-            return getIntAttribute(AttributeName.NUMBEROFSTITCHES, null, 0);
-        }
+	/**
+	  * (17) get double attribute StitchWidth
+	  * @return double the value of the attribute
+	  */
+	public double getStitchWidth()
+	{
+		return getRealAttribute(AttributeName.STITCHWIDTH, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StitchPositions
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StitchPositions
-          * @param value the value to set the attribute to
-          */
-        public void setStitchPositions(JDFNumberList value)
-        {
-            setAttribute(AttributeName.STITCHPOSITIONS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WireGauge
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WireGauge
+	  * @param value the value to set the attribute to
+	  */
+	public void setWireGauge(double value)
+	{
+		setAttribute(AttributeName.WIREGAUGE, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute StitchPositions
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getStitchPositions()
-        {
-            String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute WireGauge
+	  * @return double the value of the attribute
+	  */
+	public double getWireGauge()
+	{
+		return getRealAttribute(AttributeName.WIREGAUGE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StapleShape
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute StapleShape
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setStapleShape(EnumStapleShape enumVar)
-        {
-            setAttribute(AttributeName.STAPLESHAPE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WireBrand
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WireBrand
+	  * @param value the value to set the attribute to
+	  */
+	public void setWireBrand(String value)
+	{
+		setAttribute(AttributeName.WIREBRAND, value, null);
+	}
 
-        /**
-          * (9) get attribute StapleShape
-          * @return the value of the attribute
-          */
-        public EnumStapleShape getStapleShape()
-        {
-            return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StitchWidth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StitchWidth
-          * @param value the value to set the attribute to
-          */
-        public void setStitchWidth(double value)
-        {
-            setAttribute(AttributeName.STITCHWIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute StitchWidth
-          * @return double the value of the attribute
-          */
-        public double getStitchWidth()
-        {
-            return getRealAttribute(AttributeName.STITCHWIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WireGauge
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WireGauge
-          * @param value the value to set the attribute to
-          */
-        public void setWireGauge(double value)
-        {
-            setAttribute(AttributeName.WIREGAUGE, value, null);
-        }
-
-        /**
-          * (17) get double attribute WireGauge
-          * @return double the value of the attribute
-          */
-        public double getWireGauge()
-        {
-            return getRealAttribute(AttributeName.WIREGAUGE, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WireBrand
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WireBrand
-          * @param value the value to set the attribute to
-          */
-        public void setWireBrand(String value)
-        {
-            setAttribute(AttributeName.WIREBRAND, value, null);
-        }
-
-        /**
-          * (23) get String attribute WireBrand
-          * @return the value of the attribute
-          */
-        public String getWireBrand()
-        {
-            return getAttribute(AttributeName.WIREBRAND, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute WireBrand
+	  * @return the value of the attribute
+	  */
+	public String getWireBrand()
+	{
+		return getAttribute(AttributeName.WIREBRAND, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

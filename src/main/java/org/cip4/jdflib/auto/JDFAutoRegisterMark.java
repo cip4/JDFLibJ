@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,336 +90,318 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoRegisterMark : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoRegisterMark : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoRegisterMark extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoRegisterMark
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterMark
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoRegisterMark(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegisterMark
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterMark
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoRegisterMark(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoRegisterMark
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoRegisterMark
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoRegisterMark(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoRegisterMark[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoRegisterMark[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for MarkUsage
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumMarkUsage extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumMarkUsage(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMarkUsage getEnum(String enumName)
+		{
+			return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMarkUsage getEnum(int enumValue)
+		{
+			return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for MarkUsage
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMarkUsage.class);
+		}
 
-        public static class EnumMarkUsage extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMarkUsage.class);
+		}
 
-            private EnumMarkUsage(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMarkUsage.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumMarkUsage getEnum(String enumName)
-            {
-                return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumName);
-            }
+		public static final EnumMarkUsage Color = new EnumMarkUsage("Color");
+		public static final EnumMarkUsage PaperPath = new EnumMarkUsage("PaperPath");
+		public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumMarkUsage getEnum(int enumValue)
-            {
-                return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumMarkUsage.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Center
+	  * @param value the value to set the attribute to
+	  */
+	public void setCenter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CENTER, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumMarkUsage.class);
-            }
+	/**
+	  * (20) get JDFXYPair attribute Center
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCenter()
+	{
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumMarkUsage.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MarkType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMarkType(VString value)
+	{
+		setAttribute(AttributeName.MARKTYPE, value, null);
+	}
 
-            public static final EnumMarkUsage Color = new EnumMarkUsage("Color");
-            public static final EnumMarkUsage PaperPath = new EnumMarkUsage("PaperPath");
-            public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
-        }      
+	/**
+	  * (21) get VString attribute MarkType
+	  * @return VString the value of the attribute
+	  */
+	public VString getMarkType()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MarkUsage
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute MarkUsage
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setMarkUsage(EnumMarkUsage enumVar)
+	{
+		setAttribute(AttributeName.MARKUSAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute MarkUsage
+	  * @return the value of the attribute
+	  */
+	public EnumMarkUsage getMarkUsage()
+	{
+		return EnumMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Center
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Center
-          * @param value the value to set the attribute to
-          */
-        public void setCenter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CENTER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Rotation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Rotation
+	  * @param value the value to set the attribute to
+	  */
+	public void setRotation(double value)
+	{
+		setAttribute(AttributeName.ROTATION, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Center
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCenter()
-        {
-            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Rotation
+	  * @return double the value of the attribute
+	  */
+	public double getRotation()
+	{
+		return getRealAttribute(AttributeName.ROTATION, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarkType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MarkType
-          * @param value the value to set the attribute to
-          */
-        public void setMarkType(VString value)
-        {
-            setAttribute(AttributeName.MARKTYPE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (21) get VString attribute MarkType
-          * @return VString the value of the attribute
-          */
-        public VString getMarkType()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/** (26) getCreateSeparationSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MarkUsage
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute MarkUsage
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setMarkUsage(EnumMarkUsage enumVar)
-        {
-            setAttribute(AttributeName.MARKUSAGE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element SeparationSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 * default is getSeparationSpec(0)     */
+	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute MarkUsage
-          * @return the value of the attribute
-          */
-        public EnumMarkUsage getMarkUsage()
-        {
-            return EnumMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
-        }
+	/**
+	 * Get all SeparationSpec from the current element
+	 * 
+	 * @return Collection<JDFSeparationSpec>, null if none are available
+	 */
+	public Collection<JDFSeparationSpec> getAllSeparationSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rotation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rotation
-          * @param value the value to set the attribute to
-          */
-        public void setRotation(double value)
-        {
-            setAttribute(AttributeName.ROTATION, value, null);
-        }
+		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSeparationSpec) vc.get(i));
+		}
 
-        /**
-          * (17) get double attribute Rotation
-          * @return double the value of the attribute
-          */
-        public double getRotation()
-        {
-            return getRealAttribute(AttributeName.ROTATION, null, 0.0);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateSeparationSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * (27) const get element SeparationSpec
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     * default is getSeparationSpec(0)     */
-    public JDFSeparationSpec getSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * Get all SeparationSpec from the current element
-     * 
-     * @return Collection<JDFSeparationSpec>, null if none are available
-     */
-    public Collection<JDFSeparationSpec> getAllSeparationSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSeparationSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec appendSeparationSpec()
-    {
-        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
-    }
+	/**
+	 * (30) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec appendSeparationSpec()
+	{
+		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
+	}
 
 }// end namespace JDF

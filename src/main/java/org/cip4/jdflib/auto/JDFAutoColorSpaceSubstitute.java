@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,176 +82,165 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFPDLResourceAlias;
-    /**
-    *****************************************************************************
-    class JDFAutoColorSpaceSubstitute : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorSpaceSubstitute : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PDLRESOURCEALIAS, 0x55555555);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PDLRESOURCEALIAS, 0x55555555);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorSpaceSubstitute
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorSpaceSubstitute
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorSpaceSubstitute(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorSpaceSubstitute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorSpaceSubstitute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorSpaceSubstitute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorSpaceSubstitute
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorSpaceSubstitute
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorSpaceSubstitute(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorSpaceSubstitute[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorSpaceSubstitute[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element PDLResourceAlias
+	 * @return JDFPDLResourceAlias the element
+	 */
+	public JDFPDLResourceAlias getPDLResourceAlias()
+	{
+		return (JDFPDLResourceAlias) getElement(ElementName.PDLRESOURCEALIAS, null, 0);
+	}
 
+	/** (25) getCreatePDLResourceAlias
+	 * 
+	 * @return JDFPDLResourceAlias the element
+	 */
+	public JDFPDLResourceAlias getCreatePDLResourceAlias()
+	{
+		return (JDFPDLResourceAlias) getCreateElement_KElement(ElementName.PDLRESOURCEALIAS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element PDLResourceAlias
+	 * @return JDFPDLResourceAlias the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPDLResourceAlias appendPDLResourceAlias() throws JDFException
+	{
+		return (JDFPDLResourceAlias) appendElementN(ElementName.PDLRESOURCEALIAS, 1, null);
+	}
 
-    /**
-     * (24) const get element PDLResourceAlias
-     * @return JDFPDLResourceAlias the element
-     */
-    public JDFPDLResourceAlias getPDLResourceAlias()
-    {
-        return (JDFPDLResourceAlias) getElement(ElementName.PDLRESOURCEALIAS, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refPDLResourceAlias(JDFPDLResourceAlias refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /** (25) getCreatePDLResourceAlias
-     * 
-     * @return JDFPDLResourceAlias the element
-     */
-    public JDFPDLResourceAlias getCreatePDLResourceAlias()
-    {
-        return (JDFPDLResourceAlias) getCreateElement_KElement(ElementName.PDLRESOURCEALIAS, null, 0);
-    }
+	/** (26) getCreateSeparationSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-    /**
-     * (29) append element PDLResourceAlias
-     * @return JDFPDLResourceAlias the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPDLResourceAlias appendPDLResourceAlias() throws JDFException
-    {
-        return (JDFPDLResourceAlias) appendElementN(ElementName.PDLRESOURCEALIAS, 1, null);
-    }
+	/**
+	 * (27) const get element SeparationSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 * default is getSeparationSpec(0)     */
+	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPDLResourceAlias(JDFPDLResourceAlias refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * Get all SeparationSpec from the current element
+	 * 
+	 * @return Collection<JDFSeparationSpec>, null if none are available
+	 */
+	public Collection<JDFSeparationSpec> getAllSeparationSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateSeparationSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
+		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSeparationSpec) vc.get(i));
+		}
 
-    /**
-     * (27) const get element SeparationSpec
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     * default is getSeparationSpec(0)     */
-    public JDFSeparationSpec getSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all SeparationSpec from the current element
-     * 
-     * @return Collection<JDFSeparationSpec>, null if none are available
-     */
-    public Collection<JDFSeparationSpec> getAllSeparationSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSeparationSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec appendSeparationSpec()
-    {
-        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
-    }
+	/**
+	 * (30) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec appendSeparationSpec()
+	{
+		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
+	}
 
 }// end namespace JDF

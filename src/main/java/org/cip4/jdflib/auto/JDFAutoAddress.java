@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,314 +80,274 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoAddress : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoAddress : public JDFElement
 
-public abstract class JDFAutoAddress extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoAddress extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CITY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.COUNTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBOX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTALCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.REGION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CITY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COUNTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTRYCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSTBOX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTALCODE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.REGION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoAddress
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAddress
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoAddress(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAddress
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoAddress
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoAddress(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoAddress
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoAddress
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoAddress(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoAddress[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoAddress[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute City
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute City
+	  * @param value the value to set the attribute to
+	  */
+	public void setCity(String value)
+	{
+		setAttribute(AttributeName.CITY, value, null);
+	}
 
+	/**
+	  * (23) get String attribute City
+	  * @return the value of the attribute
+	  */
+	public String getCity()
+	{
+		return getAttribute(AttributeName.CITY, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Country
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Country
+	  * @param value the value to set the attribute to
+	  */
+	public void setCountry(String value)
+	{
+		setAttribute(AttributeName.COUNTRY, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Country
+	  * @return the value of the attribute
+	  */
+	public String getCountry()
+	{
+		return getAttribute(AttributeName.COUNTRY, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CountryCode
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CountryCode
+	  * @param value the value to set the attribute to
+	  */
+	public void setCountryCode(String value)
+	{
+		setAttribute(AttributeName.COUNTRYCODE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute CountryCode
+	  * @return the value of the attribute
+	  */
+	public String getCountryCode()
+	{
+		return getAttribute(AttributeName.COUNTRYCODE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute City
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute City
-          * @param value the value to set the attribute to
-          */
-        public void setCity(String value)
-        {
-            setAttribute(AttributeName.CITY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostBox
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PostBox
+	  * @param value the value to set the attribute to
+	  */
+	public void setPostBox(String value)
+	{
+		setAttribute(AttributeName.POSTBOX, value, null);
+	}
 
-        /**
-          * (23) get String attribute City
-          * @return the value of the attribute
-          */
-        public String getCity()
-        {
-            return getAttribute(AttributeName.CITY, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PostBox
+	  * @return the value of the attribute
+	  */
+	public String getPostBox()
+	{
+		return getAttribute(AttributeName.POSTBOX, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Country
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Country
-          * @param value the value to set the attribute to
-          */
-        public void setCountry(String value)
-        {
-            setAttribute(AttributeName.COUNTRY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PostalCode
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PostalCode
+	  * @param value the value to set the attribute to
+	  */
+	public void setPostalCode(String value)
+	{
+		setAttribute(AttributeName.POSTALCODE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Country
-          * @return the value of the attribute
-          */
-        public String getCountry()
-        {
-            return getAttribute(AttributeName.COUNTRY, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PostalCode
+	  * @return the value of the attribute
+	  */
+	public String getPostalCode()
+	{
+		return getAttribute(AttributeName.POSTALCODE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CountryCode
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CountryCode
-          * @param value the value to set the attribute to
-          */
-        public void setCountryCode(String value)
-        {
-            setAttribute(AttributeName.COUNTRYCODE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Region
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Region
+	  * @param value the value to set the attribute to
+	  */
+	public void setRegion(String value)
+	{
+		setAttribute(AttributeName.REGION, value, null);
+	}
 
-        /**
-          * (23) get String attribute CountryCode
-          * @return the value of the attribute
-          */
-        public String getCountryCode()
-        {
-            return getAttribute(AttributeName.COUNTRYCODE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Region
+	  * @return the value of the attribute
+	  */
+	public String getRegion()
+	{
+		return getAttribute(AttributeName.REGION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PostBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PostBox
-          * @param value the value to set the attribute to
-          */
-        public void setPostBox(String value)
-        {
-            setAttribute(AttributeName.POSTBOX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Street
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Street
+	  * @param value the value to set the attribute to
+	  */
+	public void setStreet(String value)
+	{
+		setAttribute(AttributeName.STREET, value, null);
+	}
 
-        /**
-          * (23) get String attribute PostBox
-          * @return the value of the attribute
-          */
-        public String getPostBox()
-        {
-            return getAttribute(AttributeName.POSTBOX, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Street
+	  * @return the value of the attribute
+	  */
+	public String getStreet()
+	{
+		return getAttribute(AttributeName.STREET, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PostalCode
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PostalCode
-          * @param value the value to set the attribute to
-          */
-        public void setPostalCode(String value)
-        {
-            setAttribute(AttributeName.POSTALCODE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute PostalCode
-          * @return the value of the attribute
-          */
-        public String getPostalCode()
-        {
-            return getAttribute(AttributeName.POSTALCODE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element ExtendedAddress
+	 * @return JDFElement the element
+	 */
+	public JDFElement getExtendedAddress()
+	{
+		return (JDFElement) getElement(ElementName.EXTENDEDADDRESS, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Region
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Region
-          * @param value the value to set the attribute to
-          */
-        public void setRegion(String value)
-        {
-            setAttribute(AttributeName.REGION, value, null);
-        }
+	/** (25) getCreateExtendedAddress
+	 * 
+	 * @return JDFElement the element
+	 */
+	public JDFElement getCreateExtendedAddress()
+	{
+		return (JDFElement) getCreateElement_KElement(ElementName.EXTENDEDADDRESS, null, 0);
+	}
 
-        /**
-          * (23) get String attribute Region
-          * @return the value of the attribute
-          */
-        public String getRegion()
-        {
-            return getAttribute(AttributeName.REGION, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Street
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Street
-          * @param value the value to set the attribute to
-          */
-        public void setStreet(String value)
-        {
-            setAttribute(AttributeName.STREET, value, null);
-        }
-
-        /**
-          * (23) get String attribute Street
-          * @return the value of the attribute
-          */
-        public String getStreet()
-        {
-            return getAttribute(AttributeName.STREET, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element ExtendedAddress
-     * @return JDFElement the element
-     */
-    public JDFElement getExtendedAddress()
-    {
-        return (JDFElement) getElement(ElementName.EXTENDEDADDRESS, null, 0);
-    }
-
-    /** (25) getCreateExtendedAddress
-     * 
-     * @return JDFElement the element
-     */
-    public JDFElement getCreateExtendedAddress()
-    {
-        return (JDFElement) getCreateElement_KElement(ElementName.EXTENDEDADDRESS, null, 0);
-    }
-
-    /**
-     * (29) append element ExtendedAddress
-     * @return JDFElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFElement appendExtendedAddress() throws JDFException
-    {
-        return (JDFElement) appendElementN(ElementName.EXTENDEDADDRESS, 1, null);
-    }
+	/**
+	 * (29) append element ExtendedAddress
+	 * @return JDFElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFElement appendExtendedAddress() throws JDFException
+	{
+		return (JDFElement) appendElementN(ElementName.EXTENDEDADDRESS, 1, null);
+	}
 
 }// end namespace JDF

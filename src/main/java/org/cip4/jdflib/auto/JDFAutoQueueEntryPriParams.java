@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,133 +74,171 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoQueueEntryPriParams : public JDFElement
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoQueueEntryPriParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PRIORITY, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRIORITY, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44433333, AttributeInfo.EnumAttributeType.shortString, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66611111);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPriParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryPriParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPriParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoQueueEntryPriParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryPriParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoQueueEntryPriParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoQueueEntryPriParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * Constructor for JDFAutoQueueEntryPriParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFAutoQueueEntryPriParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoQueueEntryPriParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoQueueEntryPriParams[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Priority
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Priority
-          * @param value the value to set the attribute to
-          */
-        public void setPriority(int value)
-        {
-            setAttribute(AttributeName.PRIORITY, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Priority
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Priority
+	  * @param value the value to set the attribute to
+	  */
+	public void setPriority(int value)
+	{
+		setAttribute(AttributeName.PRIORITY, value, null);
+	}
 
-        /**
-          * (15) get int attribute Priority
-          * @return int the value of the attribute
-          */
-        public int getPriority()
-        {
-            return getIntAttribute(AttributeName.PRIORITY, null, 0);
-        }
+	/**
+	  * (15) get int attribute Priority
+	  * @return int the value of the attribute
+	  */
+	public int getPriority()
+	{
+		return getIntAttribute(AttributeName.PRIORITY, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute QueueEntryID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute QueueEntryID
-          * @param value the value to set the attribute to
-          */
-        public void setQueueEntryID(String value)
-        {
-            setAttribute(AttributeName.QUEUEENTRYID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute QueueEntryID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute QueueEntryID
+	  * @param value the value to set the attribute to
+	  */
+	public void setQueueEntryID(String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value, null);
+	}
 
-        /**
-          * (23) get String attribute QueueEntryID
-          * @return the value of the attribute
-          */
-        public String getQueueEntryID()
-        {
-            return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute QueueEntryID
+	  * @return the value of the attribute
+	  */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/**
+	 * (24) const get element QueueFilter
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getQueueFilter()
+	{
+		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
+	}
+
+	/** (25) getCreateQueueFilter
+	 * 
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getCreateQueueFilter()
+	{
+		return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
+	}
+
+	/**
+	 * (29) append element QueueFilter
+	 * @return JDFQueueFilter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFQueueFilter appendQueueFilter() throws JDFException
+	{
+		return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
+	}
 
 }// end namespace JDF

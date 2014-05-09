@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,376 +83,365 @@ import org.cip4.jdflib.span.JDFSpanLevel;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /**
-    *****************************************************************************
-    class JDFAutoEmbossingItem : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoEmbossingItem : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoEmbossingItem extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DIRECTION, 0x55555551);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EDGEANGLE, 0x66666661);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.EDGESHAPE, 0x66666661);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.EMBOSSINGTYPE, 0x66666661);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.FOILCOLOR, 0x66666661);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.FOILCOLORDETAILS, 0x66661111);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.HEIGHT, 0x66666661);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.IMAGESIZE, 0x66666661);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.LEVEL, 0x66666661);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.DIRECTION, 0x55555551);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EDGEANGLE, 0x66666661);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.EDGESHAPE, 0x66666661);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.EMBOSSINGTYPE, 0x66666661);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.FOILCOLOR, 0x66666661);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.FOILCOLORDETAILS, 0x66661111);
+		elemInfoTable[6] = new ElemInfoTable(ElementName.HEIGHT, 0x66666661);
+		elemInfoTable[7] = new ElemInfoTable(ElementName.IMAGESIZE, 0x66666661);
+		elemInfoTable[8] = new ElemInfoTable(ElementName.LEVEL, 0x66666661);
+		elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoEmbossingItem
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingItem
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingItem(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoEmbossingItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoEmbossingItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoEmbossingItem
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoEmbossingItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoEmbossingItem
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoEmbossingItem(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoEmbossingItem[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoEmbossingItem[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element Direction
+	 * @return JDFSpanDirection the element
+	 */
+	public JDFSpanDirection getDirection()
+	{
+		return (JDFSpanDirection) getElement(ElementName.DIRECTION, null, 0);
+	}
 
+	/** (25) getCreateDirection
+	 * 
+	 * @return JDFSpanDirection the element
+	 */
+	public JDFSpanDirection getCreateDirection()
+	{
+		return (JDFSpanDirection) getCreateElement_KElement(ElementName.DIRECTION, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (29) append element Direction
+	 * @return JDFSpanDirection the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanDirection appendDirection() throws JDFException
+	{
+		return (JDFSpanDirection) appendElementN(ElementName.DIRECTION, 1, null);
+	}
 
-    /**
-     * (24) const get element Direction
-     * @return JDFSpanDirection the element
-     */
-    public JDFSpanDirection getDirection()
-    {
-        return (JDFSpanDirection) getElement(ElementName.DIRECTION, null, 0);
-    }
+	/**
+	 * (24) const get element EdgeAngle
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getEdgeAngle()
+	{
+		return (JDFNumberSpan) getElement(ElementName.EDGEANGLE, null, 0);
+	}
 
-    /** (25) getCreateDirection
-     * 
-     * @return JDFSpanDirection the element
-     */
-    public JDFSpanDirection getCreateDirection()
-    {
-        return (JDFSpanDirection) getCreateElement_KElement(ElementName.DIRECTION, null, 0);
-    }
+	/** (25) getCreateEdgeAngle
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateEdgeAngle()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.EDGEANGLE, null, 0);
+	}
 
-    /**
-     * (29) append element Direction
-     * @return JDFSpanDirection the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanDirection appendDirection() throws JDFException
-    {
-        return (JDFSpanDirection) appendElementN(ElementName.DIRECTION, 1, null);
-    }
+	/**
+	 * (29) append element EdgeAngle
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendEdgeAngle() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.EDGEANGLE, 1, null);
+	}
 
-    /**
-     * (24) const get element EdgeAngle
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getEdgeAngle()
-    {
-        return (JDFNumberSpan) getElement(ElementName.EDGEANGLE, null, 0);
-    }
+	/**
+	 * (24) const get element EdgeShape
+	 * @return JDFSpanEdgeShape the element
+	 */
+	public JDFSpanEdgeShape getEdgeShape()
+	{
+		return (JDFSpanEdgeShape) getElement(ElementName.EDGESHAPE, null, 0);
+	}
 
-    /** (25) getCreateEdgeAngle
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateEdgeAngle()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.EDGEANGLE, null, 0);
-    }
+	/** (25) getCreateEdgeShape
+	 * 
+	 * @return JDFSpanEdgeShape the element
+	 */
+	public JDFSpanEdgeShape getCreateEdgeShape()
+	{
+		return (JDFSpanEdgeShape) getCreateElement_KElement(ElementName.EDGESHAPE, null, 0);
+	}
 
-    /**
-     * (29) append element EdgeAngle
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendEdgeAngle() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.EDGEANGLE, 1, null);
-    }
+	/**
+	 * (29) append element EdgeShape
+	 * @return JDFSpanEdgeShape the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanEdgeShape appendEdgeShape() throws JDFException
+	{
+		return (JDFSpanEdgeShape) appendElementN(ElementName.EDGESHAPE, 1, null);
+	}
 
-    /**
-     * (24) const get element EdgeShape
-     * @return JDFSpanEdgeShape the element
-     */
-    public JDFSpanEdgeShape getEdgeShape()
-    {
-        return (JDFSpanEdgeShape) getElement(ElementName.EDGESHAPE, null, 0);
-    }
+	/**
+	 * (24) const get element EmbossingType
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getEmbossingType()
+	{
+		return (JDFStringSpan) getElement(ElementName.EMBOSSINGTYPE, null, 0);
+	}
 
-    /** (25) getCreateEdgeShape
-     * 
-     * @return JDFSpanEdgeShape the element
-     */
-    public JDFSpanEdgeShape getCreateEdgeShape()
-    {
-        return (JDFSpanEdgeShape) getCreateElement_KElement(ElementName.EDGESHAPE, null, 0);
-    }
+	/** (25) getCreateEmbossingType
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateEmbossingType()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.EMBOSSINGTYPE, null, 0);
+	}
 
-    /**
-     * (29) append element EdgeShape
-     * @return JDFSpanEdgeShape the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanEdgeShape appendEdgeShape() throws JDFException
-    {
-        return (JDFSpanEdgeShape) appendElementN(ElementName.EDGESHAPE, 1, null);
-    }
+	/**
+	 * (29) append element EmbossingType
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendEmbossingType() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.EMBOSSINGTYPE, 1, null);
+	}
 
-    /**
-     * (24) const get element EmbossingType
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getEmbossingType()
-    {
-        return (JDFStringSpan) getElement(ElementName.EMBOSSINGTYPE, null, 0);
-    }
+	/**
+	 * (24) const get element FoilColor
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getFoilColor()
+	{
+		return (JDFSpanNamedColor) getElement(ElementName.FOILCOLOR, null, 0);
+	}
 
-    /** (25) getCreateEmbossingType
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateEmbossingType()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.EMBOSSINGTYPE, null, 0);
-    }
+	/** (25) getCreateFoilColor
+	 * 
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getCreateFoilColor()
+	{
+		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.FOILCOLOR, null, 0);
+	}
 
-    /**
-     * (29) append element EmbossingType
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendEmbossingType() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.EMBOSSINGTYPE, 1, null);
-    }
+	/**
+	 * (29) append element FoilColor
+	 * @return JDFSpanNamedColor the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanNamedColor appendFoilColor() throws JDFException
+	{
+		return (JDFSpanNamedColor) appendElementN(ElementName.FOILCOLOR, 1, null);
+	}
 
-    /**
-     * (24) const get element FoilColor
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getFoilColor()
-    {
-        return (JDFSpanNamedColor) getElement(ElementName.FOILCOLOR, null, 0);
-    }
+	/**
+	 * (24) const get element FoilColorDetails
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getFoilColorDetails()
+	{
+		return (JDFStringSpan) getElement(ElementName.FOILCOLORDETAILS, null, 0);
+	}
 
-    /** (25) getCreateFoilColor
-     * 
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getCreateFoilColor()
-    {
-        return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.FOILCOLOR, null, 0);
-    }
+	/** (25) getCreateFoilColorDetails
+	 * 
+	 * @return JDFStringSpan the element
+	 */
+	public JDFStringSpan getCreateFoilColorDetails()
+	{
+		return (JDFStringSpan) getCreateElement_KElement(ElementName.FOILCOLORDETAILS, null, 0);
+	}
 
-    /**
-     * (29) append element FoilColor
-     * @return JDFSpanNamedColor the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanNamedColor appendFoilColor() throws JDFException
-    {
-        return (JDFSpanNamedColor) appendElementN(ElementName.FOILCOLOR, 1, null);
-    }
+	/**
+	 * (29) append element FoilColorDetails
+	 * @return JDFStringSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFStringSpan appendFoilColorDetails() throws JDFException
+	{
+		return (JDFStringSpan) appendElementN(ElementName.FOILCOLORDETAILS, 1, null);
+	}
 
-    /**
-     * (24) const get element FoilColorDetails
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getFoilColorDetails()
-    {
-        return (JDFStringSpan) getElement(ElementName.FOILCOLORDETAILS, null, 0);
-    }
+	/**
+	 * (24) const get element Height
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getHeight()
+	{
+		return (JDFNumberSpan) getElement(ElementName.HEIGHT, null, 0);
+	}
 
-    /** (25) getCreateFoilColorDetails
-     * 
-     * @return JDFStringSpan the element
-     */
-    public JDFStringSpan getCreateFoilColorDetails()
-    {
-        return (JDFStringSpan) getCreateElement_KElement(ElementName.FOILCOLORDETAILS, null, 0);
-    }
+	/** (25) getCreateHeight
+	 * 
+	 * @return JDFNumberSpan the element
+	 */
+	public JDFNumberSpan getCreateHeight()
+	{
+		return (JDFNumberSpan) getCreateElement_KElement(ElementName.HEIGHT, null, 0);
+	}
 
-    /**
-     * (29) append element FoilColorDetails
-     * @return JDFStringSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFStringSpan appendFoilColorDetails() throws JDFException
-    {
-        return (JDFStringSpan) appendElementN(ElementName.FOILCOLORDETAILS, 1, null);
-    }
+	/**
+	 * (29) append element Height
+	 * @return JDFNumberSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFNumberSpan appendHeight() throws JDFException
+	{
+		return (JDFNumberSpan) appendElementN(ElementName.HEIGHT, 1, null);
+	}
 
-    /**
-     * (24) const get element Height
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getHeight()
-    {
-        return (JDFNumberSpan) getElement(ElementName.HEIGHT, null, 0);
-    }
+	/**
+	 * (24) const get element ImageSize
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getImageSize()
+	{
+		return (JDFXYPairSpan) getElement(ElementName.IMAGESIZE, null, 0);
+	}
 
-    /** (25) getCreateHeight
-     * 
-     * @return JDFNumberSpan the element
-     */
-    public JDFNumberSpan getCreateHeight()
-    {
-        return (JDFNumberSpan) getCreateElement_KElement(ElementName.HEIGHT, null, 0);
-    }
+	/** (25) getCreateImageSize
+	 * 
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getCreateImageSize()
+	{
+		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.IMAGESIZE, null, 0);
+	}
 
-    /**
-     * (29) append element Height
-     * @return JDFNumberSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNumberSpan appendHeight() throws JDFException
-    {
-        return (JDFNumberSpan) appendElementN(ElementName.HEIGHT, 1, null);
-    }
+	/**
+	 * (29) append element ImageSize
+	 * @return JDFXYPairSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFXYPairSpan appendImageSize() throws JDFException
+	{
+		return (JDFXYPairSpan) appendElementN(ElementName.IMAGESIZE, 1, null);
+	}
 
-    /**
-     * (24) const get element ImageSize
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getImageSize()
-    {
-        return (JDFXYPairSpan) getElement(ElementName.IMAGESIZE, null, 0);
-    }
+	/**
+	 * (24) const get element Level
+	 * @return JDFSpanLevel the element
+	 */
+	public JDFSpanLevel getLevel()
+	{
+		return (JDFSpanLevel) getElement(ElementName.LEVEL, null, 0);
+	}
 
-    /** (25) getCreateImageSize
-     * 
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getCreateImageSize()
-    {
-        return (JDFXYPairSpan) getCreateElement_KElement(ElementName.IMAGESIZE, null, 0);
-    }
+	/** (25) getCreateLevel
+	 * 
+	 * @return JDFSpanLevel the element
+	 */
+	public JDFSpanLevel getCreateLevel()
+	{
+		return (JDFSpanLevel) getCreateElement_KElement(ElementName.LEVEL, null, 0);
+	}
 
-    /**
-     * (29) append element ImageSize
-     * @return JDFXYPairSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFXYPairSpan appendImageSize() throws JDFException
-    {
-        return (JDFXYPairSpan) appendElementN(ElementName.IMAGESIZE, 1, null);
-    }
+	/**
+	 * (29) append element Level
+	 * @return JDFSpanLevel the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanLevel appendLevel() throws JDFException
+	{
+		return (JDFSpanLevel) appendElementN(ElementName.LEVEL, 1, null);
+	}
 
-    /**
-     * (24) const get element Level
-     * @return JDFSpanLevel the element
-     */
-    public JDFSpanLevel getLevel()
-    {
-        return (JDFSpanLevel) getElement(ElementName.LEVEL, null, 0);
-    }
+	/**
+	 * (24) const get element Position
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getPosition()
+	{
+		return (JDFXYPairSpan) getElement(ElementName.POSITION, null, 0);
+	}
 
-    /** (25) getCreateLevel
-     * 
-     * @return JDFSpanLevel the element
-     */
-    public JDFSpanLevel getCreateLevel()
-    {
-        return (JDFSpanLevel) getCreateElement_KElement(ElementName.LEVEL, null, 0);
-    }
+	/** (25) getCreatePosition
+	 * 
+	 * @return JDFXYPairSpan the element
+	 */
+	public JDFXYPairSpan getCreatePosition()
+	{
+		return (JDFXYPairSpan) getCreateElement_KElement(ElementName.POSITION, null, 0);
+	}
 
-    /**
-     * (29) append element Level
-     * @return JDFSpanLevel the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanLevel appendLevel() throws JDFException
-    {
-        return (JDFSpanLevel) appendElementN(ElementName.LEVEL, 1, null);
-    }
-
-    /**
-     * (24) const get element Position
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getPosition()
-    {
-        return (JDFXYPairSpan) getElement(ElementName.POSITION, null, 0);
-    }
-
-    /** (25) getCreatePosition
-     * 
-     * @return JDFXYPairSpan the element
-     */
-    public JDFXYPairSpan getCreatePosition()
-    {
-        return (JDFXYPairSpan) getCreateElement_KElement(ElementName.POSITION, null, 0);
-    }
-
-    /**
-     * (29) append element Position
-     * @return JDFXYPairSpan the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFXYPairSpan appendPosition() throws JDFException
-    {
-        return (JDFXYPairSpan) appendElementN(ElementName.POSITION, 1, null);
-    }
+	/**
+	 * (29) append element Position
+	 * @return JDFXYPairSpan the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFXYPairSpan appendPosition() throws JDFException
+	{
+		return (JDFXYPairSpan) appendElementN(ElementName.POSITION, 1, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,307 +79,288 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
-    /**
-    *****************************************************************************
-    class JDFAutoCylinderPosition : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCylinderPosition : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCylinderPosition extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PLATEPOSITION, 0x22222111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PLATETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), "Content");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PLATEUSAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateUsage.getEnum(0), "Original");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PLATEPOSITION, 0x22222111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PLATETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), "Content");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PLATEUSAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateUsage.getEnum(0), "Original");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCylinderPosition
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderPosition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderPosition
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderPosition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCylinderPosition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderPosition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCylinderPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCylinderPosition
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCylinderPosition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCylinderPosition
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCylinderPosition(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCylinderPosition[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for PlateType
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCylinderPosition[  --> " + super.toString() + " ]";
-    }
+	public static class EnumPlateType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumPlateType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for PlateType
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPlateType getEnum(String enumName)
+		{
+			return (EnumPlateType) getEnum(EnumPlateType.class, enumName);
+		}
 
-        public static class EnumPlateType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPlateType getEnum(int enumValue)
+		{
+			return (EnumPlateType) getEnum(EnumPlateType.class, enumValue);
+		}
 
-            private EnumPlateType(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPlateType.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPlateType getEnum(String enumName)
-            {
-                return (EnumPlateType) getEnum(EnumPlateType.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPlateType.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPlateType getEnum(int enumValue)
-            {
-                return (EnumPlateType) getEnum(EnumPlateType.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPlateType.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPlateType.class);
-            }
+		public static final EnumPlateType Content = new EnumPlateType("Content");
+		public static final EnumPlateType Dummy = new EnumPlateType("Dummy");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPlateType.class);
-            }
+	/**
+	* Enumeration strings for PlateUsage
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPlateType.class);
-            }
+	public static class EnumPlateUsage extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumPlateType Content = new EnumPlateType("Content");
-            public static final EnumPlateType Dummy = new EnumPlateType("Dummy");
-        }      
+		private EnumPlateUsage(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumPlateUsage getEnum(String enumName)
+		{
+			return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumPlateUsage getEnum(int enumValue)
+		{
+			return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for PlateUsage
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPlateUsage.class);
+		}
 
-        public static class EnumPlateUsage extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPlateUsage.class);
+		}
 
-            private EnumPlateUsage(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumPlateUsage.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumPlateUsage getEnum(String enumName)
-            {
-                return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumName);
-            }
+		public static final EnumPlateUsage Original = new EnumPlateUsage("Original");
+		public static final EnumPlateUsage Reuse = new EnumPlateUsage("Reuse");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumPlateUsage getEnum(int enumValue)
-            {
-                return (EnumPlateUsage) getEnum(EnumPlateUsage.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumPlateUsage.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PlatePosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PlatePosition
+	  * @param value the value to set the attribute to
+	  */
+	public void setPlatePosition(JDFXYPairRangeList value)
+	{
+		setAttribute(AttributeName.PLATEPOSITION, value.toString(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumPlateUsage.class);
-            }
+	/**
+	  * (20) get JDFXYPairRangeList attribute PlatePosition
+	  * @return JDFXYPairRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPairRangeList
+	  */
+	public JDFXYPairRangeList getPlatePosition()
+	{
+		final String strAttrName = getAttribute(AttributeName.PLATEPOSITION, null, null);
+		final JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumPlateUsage.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PlateType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PlateType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPlateType(EnumPlateType enumVar)
+	{
+		setAttribute(AttributeName.PLATETYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumPlateUsage Original = new EnumPlateUsage("Original");
-            public static final EnumPlateUsage Reuse = new EnumPlateUsage("Reuse");
-        }      
+	/**
+	  * (9) get attribute PlateType
+	  * @return the value of the attribute
+	  */
+	public EnumPlateType getPlateType()
+	{
+		return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, "Content"));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PlateUsage
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute PlateUsage
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setPlateUsage(EnumPlateUsage enumVar)
+	{
+		setAttribute(AttributeName.PLATEUSAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute PlateUsage
+	  * @return the value of the attribute
+	  */
+	public EnumPlateUsage getPlateUsage()
+	{
+		return EnumPlateUsage.getEnum(getAttribute(AttributeName.PLATEUSAGE, null, "Original"));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PlatePosition
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PlatePosition
-          * @param value the value to set the attribute to
-          */
-        public void setPlatePosition(JDFXYPairRangeList value)
-        {
-            setAttribute(AttributeName.PLATEPOSITION, value.toString(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DeviceModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setDeviceModuleIndex(int value)
+	{
+		setAttribute(AttributeName.DEVICEMODULEINDEX, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPairRangeList attribute PlatePosition
-          * @return JDFXYPairRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPairRangeList
-          */
-        public JDFXYPairRangeList getPlatePosition()
-        {
-            String strAttrName = getAttribute(AttributeName.PLATEPOSITION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PlateType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PlateType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPlateType(EnumPlateType enumVar)
-        {
-            setAttribute(AttributeName.PLATETYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute PlateType
-          * @return the value of the attribute
-          */
-        public EnumPlateType getPlateType()
-        {
-            return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, "Content"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PlateUsage
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute PlateUsage
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setPlateUsage(EnumPlateUsage enumVar)
-        {
-            setAttribute(AttributeName.PLATEUSAGE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute PlateUsage
-          * @return the value of the attribute
-          */
-        public EnumPlateUsage getPlateUsage()
-        {
-            return EnumPlateUsage.getEnum(getAttribute(AttributeName.PLATEUSAGE, null, "Original"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DeviceModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setDeviceModuleIndex(int value)
-        {
-            setAttribute(AttributeName.DEVICEMODULEINDEX, value, null);
-        }
-
-        /**
-          * (15) get int attribute DeviceModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getDeviceModuleIndex()
-        {
-            return getIntAttribute(AttributeName.DEVICEMODULEINDEX, null, 0);
-        }
+	/**
+	  * (15) get int attribute DeviceModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getDeviceModuleIndex()
+	{
+		return getIntAttribute(AttributeName.DEVICEMODULEINDEX, null, 0);
+	}
 
 }// end namespace JDF

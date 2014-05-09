@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,222 +82,209 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFPDFToPSConversionParams;
 import org.cip4.jdflib.resource.process.prepress.JDFPSToPDFConversionParams;
-    /**
-    *****************************************************************************
-    class JDFAutoPDLCreationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPDLCreationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPDLCreationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PDFTOPSCONVERSIONPARAMS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PSTOPDFCONVERSIONPARAMS, 0x66666111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PDFTOPSCONVERSIONPARAMS, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PSTOPDFCONVERSIONPARAMS, 0x66666111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPDLCreationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLCreationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPDLCreationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDLCreationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLCreationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPDLCreationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPDLCreationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPDLCreationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPDLCreationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPDLCreationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPDLCreationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MimeType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMimeType(String value)
+	{
+		setAttribute(AttributeName.MIMETYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute MimeType
+	  * @return the value of the attribute
+	  */
+	public String getMimeType()
+	{
+		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element PDFToPSConversionParams
+	 * @return JDFPDFToPSConversionParams the element
+	 */
+	public JDFPDFToPSConversionParams getPDFToPSConversionParams()
+	{
+		return (JDFPDFToPSConversionParams) getElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MimeType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MimeType
-          * @param value the value to set the attribute to
-          */
-        public void setMimeType(String value)
-        {
-            setAttribute(AttributeName.MIMETYPE, value, null);
-        }
+	/** (25) getCreatePDFToPSConversionParams
+	 * 
+	 * @return JDFPDFToPSConversionParams the element
+	 */
+	public JDFPDFToPSConversionParams getCreatePDFToPSConversionParams()
+	{
+		return (JDFPDFToPSConversionParams) getCreateElement_KElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
+	}
 
-        /**
-          * (23) get String attribute MimeType
-          * @return the value of the attribute
-          */
-        public String getMimeType()
-        {
-            return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element PDFToPSConversionParams
+	 * @return JDFPDFToPSConversionParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPDFToPSConversionParams appendPDFToPSConversionParams() throws JDFException
+	{
+		return (JDFPDFToPSConversionParams) appendElementN(ElementName.PDFTOPSCONVERSIONPARAMS, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refPDFToPSConversionParams(JDFPDFToPSConversionParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element PDFToPSConversionParams
-     * @return JDFPDFToPSConversionParams the element
-     */
-    public JDFPDFToPSConversionParams getPDFToPSConversionParams()
-    {
-        return (JDFPDFToPSConversionParams) getElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
-    }
+	/**
+	 * (24) const get element PSToPDFConversionParams
+	 * @return JDFPSToPDFConversionParams the element
+	 */
+	public JDFPSToPDFConversionParams getPSToPDFConversionParams()
+	{
+		return (JDFPSToPDFConversionParams) getElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
+	}
 
-    /** (25) getCreatePDFToPSConversionParams
-     * 
-     * @return JDFPDFToPSConversionParams the element
-     */
-    public JDFPDFToPSConversionParams getCreatePDFToPSConversionParams()
-    {
-        return (JDFPDFToPSConversionParams) getCreateElement_KElement(ElementName.PDFTOPSCONVERSIONPARAMS, null, 0);
-    }
+	/** (25) getCreatePSToPDFConversionParams
+	 * 
+	 * @return JDFPSToPDFConversionParams the element
+	 */
+	public JDFPSToPDFConversionParams getCreatePSToPDFConversionParams()
+	{
+		return (JDFPSToPDFConversionParams) getCreateElement_KElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
+	}
 
-    /**
-     * (29) append element PDFToPSConversionParams
-     * @return JDFPDFToPSConversionParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPDFToPSConversionParams appendPDFToPSConversionParams() throws JDFException
-    {
-        return (JDFPDFToPSConversionParams) appendElementN(ElementName.PDFTOPSCONVERSIONPARAMS, 1, null);
-    }
+	/**
+	 * (29) append element PSToPDFConversionParams
+	 * @return JDFPSToPDFConversionParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPSToPDFConversionParams appendPSToPDFConversionParams() throws JDFException
+	{
+		return (JDFPSToPDFConversionParams) appendElementN(ElementName.PSTOPDFCONVERSIONPARAMS, 1, null);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPDFToPSConversionParams(JDFPDFToPSConversionParams refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element PSToPDFConversionParams
-     * @return JDFPSToPDFConversionParams the element
-     */
-    public JDFPSToPDFConversionParams getPSToPDFConversionParams()
-    {
-        return (JDFPSToPDFConversionParams) getElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
-    }
-
-    /** (25) getCreatePSToPDFConversionParams
-     * 
-     * @return JDFPSToPDFConversionParams the element
-     */
-    public JDFPSToPDFConversionParams getCreatePSToPDFConversionParams()
-    {
-        return (JDFPSToPDFConversionParams) getCreateElement_KElement(ElementName.PSTOPDFCONVERSIONPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element PSToPDFConversionParams
-     * @return JDFPSToPDFConversionParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPSToPDFConversionParams appendPSToPDFConversionParams() throws JDFException
-    {
-        return (JDFPSToPDFConversionParams) appendElementN(ElementName.PSTOPDFCONVERSIONPARAMS, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refPSToPDFConversionParams(JDFPSToPDFConversionParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refPSToPDFConversionParams(JDFPSToPDFConversionParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,489 +93,473 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoNotification : public JDFAudit
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoNotification : public JDFAudit
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoNotification extends JDFAudit
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoNotification
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotification
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoNotification(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNotification
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotification
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoNotification(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoNotification
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoNotification
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoNotification(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoNotification[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Class
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoNotification[  --> " + super.toString() + " ]";
-    }
+	public static class EnumClass extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumClass(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Class
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumClass getEnum(String enumName)
+		{
+			return (EnumClass) getEnum(EnumClass.class, enumName);
+		}
 
-        public static class EnumClass extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumClass getEnum(int enumValue)
+		{
+			return (EnumClass) getEnum(EnumClass.class, enumValue);
+		}
 
-            private EnumClass(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumClass.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumClass getEnum(String enumName)
-            {
-                return (EnumClass) getEnum(EnumClass.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumClass.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumClass getEnum(int enumValue)
-            {
-                return (EnumClass) getEnum(EnumClass.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumClass.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumClass.class);
-            }
+		public static final EnumClass Event = new EnumClass("Event");
+		public static final EnumClass Information = new EnumClass("Information");
+		public static final EnumClass Warning = new EnumClass("Warning");
+		public static final EnumClass Error = new EnumClass("Error");
+		public static final EnumClass Fatal = new EnumClass("Fatal");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumClass.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumClass.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Class
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Class
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setClass(EnumClass enumVar)
+	{
+		setAttribute(AttributeName.CLASS, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumClass Event = new EnumClass("Event");
-            public static final EnumClass Information = new EnumClass("Information");
-            public static final EnumClass Warning = new EnumClass("Warning");
-            public static final EnumClass Error = new EnumClass("Error");
-            public static final EnumClass Fatal = new EnumClass("Fatal");
-        }      
+	/**
+	  * (6) get EnumClass attribute Class
+	  * @return EnumClass the value of the attribute
+	  */
+	public EnumClass getClassJDF()
+	{
+		return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute CombinedProcessIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute CombinedProcessIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setCombinedProcessIndex(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerList attribute CombinedProcessIndex
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getCombinedProcessIndex()
+	{
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Class
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Class
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setClass(EnumClass enumVar)
-        {
-            setAttribute(AttributeName.CLASS, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
-        /**
-          * (6) get EnumClass attribute Class
-          * @return EnumClass the value of the attribute
-          */
-        public EnumClass getClassJDF()
-        {
-            return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
-        }
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CombinedProcessIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CombinedProcessIndex
-          * @param value the value to set the attribute to
-          */
-        public void setCombinedProcessIndex(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerList attribute CombinedProcessIndex
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getCombinedProcessIndex()
-        {
-            String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleID
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleID(String value)
+	{
+		setAttribute(AttributeName.MODULEID, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModuleID
+	  * @return the value of the attribute
+	  */
+	public String getModuleID()
+	{
+		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(JDFIntegerRangeList value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (20) get JDFIntegerRangeList attribute ModuleIndex
+	  * @return JDFIntegerRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerRangeList
+	  */
+	public JDFIntegerRangeList getModuleIndex()
+	{
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleID
-          * @param value the value to set the attribute to
-          */
-        public void setModuleID(String value)
-        {
-            setAttribute(AttributeName.MODULEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleType
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleType(String value)
+	{
+		setAttribute(AttributeName.MODULETYPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModuleID
-          * @return the value of the attribute
-          */
-        public String getModuleID()
-        {
-            return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModuleType
+	  * @return the value of the attribute
+	  */
+	public String getModuleType()
+	{
+		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(JDFIntegerRangeList value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Type
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Type
+	  * @param value the value to set the attribute to
+	  */
+	public void setType(String value)
+	{
+		setAttribute(AttributeName.TYPE, value, null);
+	}
 
-        /**
-          * (20) get JDFIntegerRangeList attribute ModuleIndex
-          * @return JDFIntegerRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerRangeList
-          */
-        public JDFIntegerRangeList getModuleIndex()
-        {
-            String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (23) get String attribute Type
+	  * @return the value of the attribute
+	  */
+	public String getType()
+	{
+		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleType
-          * @param value the value to set the attribute to
-          */
-        public void setModuleType(String value)
-        {
-            setAttribute(AttributeName.MODULETYPE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute ModuleType
-          * @return the value of the attribute
-          */
-        public String getModuleType()
-        {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element CostCenter
+	 * @return JDFCostCenter the element
+	 */
+	public JDFCostCenter getCostCenter()
+	{
+		return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Type
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Type
-          * @param value the value to set the attribute to
-          */
-        public void setType(String value)
-        {
-            setAttribute(AttributeName.TYPE, value, null);
-        }
+	/** (25) getCreateCostCenter
+	 * 
+	 * @return JDFCostCenter the element
+	 */
+	public JDFCostCenter getCreateCostCenter()
+	{
+		return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
+	}
 
-        /**
-          * (23) get String attribute Type
-          * @return the value of the attribute
-          */
-        public String getType()
-        {
-            return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element CostCenter
+	 * @return JDFCostCenter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFCostCenter appendCostCenter() throws JDFException
+	{
+		return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /**
-     * (24) const get element CostCenter
-     * @return JDFCostCenter the element
-     */
-    public JDFCostCenter getCostCenter()
-    {
-        return (JDFCostCenter) getElement(ElementName.COSTCENTER, null, 0);
-    }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	@Override
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-    /** (25) getCreateCostCenter
-     * 
-     * @return JDFCostCenter the element
-     */
-    public JDFCostCenter getCreateCostCenter()
-    {
-        return (JDFCostCenter) getCreateElement_KElement(ElementName.COSTCENTER, null, 0);
-    }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	@Override
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (29) append element CostCenter
-     * @return JDFCostCenter the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFCostCenter appendCostCenter() throws JDFException
-    {
-        return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
-    }
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	@Override
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_KElement(ElementName.PART, null, iSkip);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (27) const get element Part
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 * default is getPart(0)     */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		final VElement vc = getChildElementVector(ElementName.PART, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+		final Vector<JDFPart> v = new Vector<JDFPart>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPart) vc.get(i));
+		}
 
-    /** (26) getCreatePart
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     */
-    public JDFPart getCreatePart(int iSkip)
-    {
-        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Part
-     * @param iSkip number of elements to skip
-     * @return JDFPart the element
-     * default is getPart(0)     */
-    public JDFPart getPart(int iSkip)
-    {
-        return (JDFPart) getElement(ElementName.PART, null, iSkip);
-    }
-
-    /**
-     * Get all Part from the current element
-     * 
-     * @return Collection<JDFPart>, null if none are available
-     */
-    public Collection<JDFPart> getAllPart()
-    {
-        final VElement vc = getChildElementVector(ElementName.PART, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFPart> v = new Vector<JDFPart>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPart) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Part
-     * @return JDFPart the element
-     */
-    public JDFPart appendPart()
-    {
-        return (JDFPart) appendElement(ElementName.PART, null);
-    }
+	/**
+	 * (30) append element Part
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
+	}
 
 }// end namespace JDF

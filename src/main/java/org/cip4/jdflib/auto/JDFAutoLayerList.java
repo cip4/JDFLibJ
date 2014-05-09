@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFLayerDetails;
-    /**
-    *****************************************************************************
-    class JDFAutoLayerList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLayerList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLayerList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LAYERDETAILS, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.LAYERDETAILS, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLayerList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayerList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLayerList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLayerList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayerList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLayerList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLayerList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayerList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLayerList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLayerList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLayerList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateLayerDetails
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFLayerDetails the element
+	 */
+	public JDFLayerDetails getCreateLayerDetails(int iSkip)
+	{
+		return (JDFLayerDetails) getCreateElement_KElement(ElementName.LAYERDETAILS, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element LayerDetails
+	 * @param iSkip number of elements to skip
+	 * @return JDFLayerDetails the element
+	 * default is getLayerDetails(0)     */
+	public JDFLayerDetails getLayerDetails(int iSkip)
+	{
+		return (JDFLayerDetails) getElement(ElementName.LAYERDETAILS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all LayerDetails from the current element
+	 * 
+	 * @return Collection<JDFLayerDetails>, null if none are available
+	 */
+	public Collection<JDFLayerDetails> getAllLayerDetails()
+	{
+		final VElement vc = getChildElementVector(ElementName.LAYERDETAILS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateLayerDetails
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFLayerDetails the element
-     */
-    public JDFLayerDetails getCreateLayerDetails(int iSkip)
-    {
-        return (JDFLayerDetails)getCreateElement_KElement(ElementName.LAYERDETAILS, null, iSkip);
-    }
+		final Vector<JDFLayerDetails> v = new Vector<JDFLayerDetails>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFLayerDetails) vc.get(i));
+		}
 
-    /**
-     * (27) const get element LayerDetails
-     * @param iSkip number of elements to skip
-     * @return JDFLayerDetails the element
-     * default is getLayerDetails(0)     */
-    public JDFLayerDetails getLayerDetails(int iSkip)
-    {
-        return (JDFLayerDetails) getElement(ElementName.LAYERDETAILS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all LayerDetails from the current element
-     * 
-     * @return Collection<JDFLayerDetails>, null if none are available
-     */
-    public Collection<JDFLayerDetails> getAllLayerDetails()
-    {
-        final VElement vc = getChildElementVector(ElementName.LAYERDETAILS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFLayerDetails> v = new Vector<JDFLayerDetails>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFLayerDetails) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element LayerDetails
-     * @return JDFLayerDetails the element
-     */
-    public JDFLayerDetails appendLayerDetails()
-    {
-        return (JDFLayerDetails) appendElement(ElementName.LAYERDETAILS, null);
-    }
+	/**
+	 * (30) append element LayerDetails
+	 * @return JDFLayerDetails the element
+	 */
+	public JDFLayerDetails appendLayerDetails()
+	{
+		return (JDFLayerDetails) appendElement(ElementName.LAYERDETAILS, null);
+	}
 
 }// end namespace JDF

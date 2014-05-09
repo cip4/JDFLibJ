@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,317 +87,300 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoBlockPreparationParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBlockPreparationParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBlockPreparationParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBlockPreparationParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBlockPreparationParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBlockPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBlockPreparationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBlockPreparationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBlockPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBlockPreparationParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBlockPreparationParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBlockPreparationParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBlockPreparationParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBlockPreparationParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for TightBacking
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumTightBacking extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumTightBacking(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTightBacking getEnum(String enumName)
+		{
+			return (EnumTightBacking) getEnum(EnumTightBacking.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTightBacking getEnum(int enumValue)
+		{
+			return (EnumTightBacking) getEnum(EnumTightBacking.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for TightBacking
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTightBacking.class);
+		}
 
-        public static class EnumTightBacking extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTightBacking.class);
+		}
 
-            private EnumTightBacking(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTightBacking.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTightBacking getEnum(String enumName)
-            {
-                return (EnumTightBacking) getEnum(EnumTightBacking.class, enumName);
-            }
+		public static final EnumTightBacking Flat = new EnumTightBacking("Flat");
+		public static final EnumTightBacking Round = new EnumTightBacking("Round");
+		public static final EnumTightBacking FlatBacked = new EnumTightBacking("FlatBacked");
+		public static final EnumTightBacking RoundBacked = new EnumTightBacking("RoundBacked");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTightBacking getEnum(int enumValue)
-            {
-                return (EnumTightBacking) getEnum(EnumTightBacking.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTightBacking.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Backing
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Backing
+	  * @param value the value to set the attribute to
+	  */
+	public void setBacking(double value)
+	{
+		setAttribute(AttributeName.BACKING, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTightBacking.class);
-            }
+	/**
+	  * (17) get double attribute Backing
+	  * @return double the value of the attribute
+	  */
+	public double getBacking()
+	{
+		return getRealAttribute(AttributeName.BACKING, null, 0.0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTightBacking.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Rounding
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Rounding
+	  * @param value the value to set the attribute to
+	  */
+	public void setRounding(double value)
+	{
+		setAttribute(AttributeName.ROUNDING, value, null);
+	}
 
-            public static final EnumTightBacking Flat = new EnumTightBacking("Flat");
-            public static final EnumTightBacking Round = new EnumTightBacking("Round");
-            public static final EnumTightBacking FlatBacked = new EnumTightBacking("FlatBacked");
-            public static final EnumTightBacking RoundBacked = new EnumTightBacking("RoundBacked");
-        }      
+	/**
+	  * (17) get double attribute Rounding
+	  * @return double the value of the attribute
+	  */
+	public double getRounding()
+	{
+		return getRealAttribute(AttributeName.ROUNDING, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TightBacking
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TightBacking
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTightBacking(EnumTightBacking enumVar)
+	{
+		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute TightBacking
+	  * @return the value of the attribute
+	  */
+	public EnumTightBacking getTightBacking()
+	{
+		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Backing
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Backing
-          * @param value the value to set the attribute to
-          */
-        public void setBacking(double value)
-        {
-            setAttribute(AttributeName.BACKING, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute Backing
-          * @return double the value of the attribute
-          */
-        public double getBacking()
-        {
-            return getRealAttribute(AttributeName.BACKING, null, 0.0);
-        }
+	/** (26) getCreateRegisterRibbon
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
+	{
+		return (JDFRegisterRibbon) getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rounding
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rounding
-          * @param value the value to set the attribute to
-          */
-        public void setRounding(double value)
-        {
-            setAttribute(AttributeName.ROUNDING, value, null);
-        }
+	/**
+	 * (27) const get element RegisterRibbon
+	 * @param iSkip number of elements to skip
+	 * @return JDFRegisterRibbon the element
+	 * default is getRegisterRibbon(0)     */
+	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
+	{
+		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute Rounding
-          * @return double the value of the attribute
-          */
-        public double getRounding()
-        {
-            return getRealAttribute(AttributeName.ROUNDING, null, 0.0);
-        }
+	/**
+	 * Get all RegisterRibbon from the current element
+	 * 
+	 * @return Collection<JDFRegisterRibbon>, null if none are available
+	 */
+	public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
+	{
+		final VElement vc = getChildElementVector(ElementName.REGISTERRIBBON, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TightBacking
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TightBacking
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTightBacking(EnumTightBacking enumVar)
-        {
-            setAttribute(AttributeName.TIGHTBACKING, enumVar==null ? null : enumVar.getName(), null);
-        }
+		final Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFRegisterRibbon) vc.get(i));
+		}
 
-        /**
-          * (9) get attribute TightBacking
-          * @return the value of the attribute
-          */
-        public EnumTightBacking getTightBacking()
-        {
-            return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element RegisterRibbon
+	 * @return JDFRegisterRibbon the element
+	 */
+	public JDFRegisterRibbon appendRegisterRibbon()
+	{
+		return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
+	}
 
-    /** (26) getCreateRegisterRibbon
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFRegisterRibbon the element
-     */
-    public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
-    {
-        return (JDFRegisterRibbon)getCreateElement_KElement(ElementName.REGISTERRIBBON, null, iSkip);
-    }
-
-    /**
-     * (27) const get element RegisterRibbon
-     * @param iSkip number of elements to skip
-     * @return JDFRegisterRibbon the element
-     * default is getRegisterRibbon(0)     */
-    public JDFRegisterRibbon getRegisterRibbon(int iSkip)
-    {
-        return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
-    }
-
-    /**
-     * Get all RegisterRibbon from the current element
-     * 
-     * @return Collection<JDFRegisterRibbon>, null if none are available
-     */
-    public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
-    {
-        final VElement vc = getChildElementVector(ElementName.REGISTERRIBBON, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFRegisterRibbon) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element RegisterRibbon
-     * @return JDFRegisterRibbon the element
-     */
-    public JDFRegisterRibbon appendRegisterRibbon()
-    {
-        return (JDFRegisterRibbon) appendElement(ElementName.REGISTERRIBBON, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refRegisterRibbon(JDFRegisterRibbon refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

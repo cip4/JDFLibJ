@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,137 +74,124 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
-    /**
-    *****************************************************************************
-    class JDFAutoLongSlit : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLongSlit : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLongSlit extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x44444443, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x44444443, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLongSlit
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongSlit
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLongSlit(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLongSlit
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongSlit
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLongSlit(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLongSlit
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLongSlit
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLongSlit(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLongSlit[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLongSlit[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WorkingList
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WorkingList
+	  * @param value the value to set the attribute to
+	  */
+	public void setWorkingList(JDFNumberList value)
+	{
+		setAttribute(AttributeName.WORKINGLIST, value, null);
+	}
 
+	/**
+	  * (20) get JDFNumberList attribute WorkingList
+	  * @return JDFNumberList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberList
+	  */
+	public JDFNumberList getWorkingList()
+	{
+		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WorkingList
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WorkingList
-          * @param value the value to set the attribute to
-          */
-        public void setWorkingList(JDFNumberList value)
-        {
-            setAttribute(AttributeName.WORKINGLIST, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute XOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute XOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setXOffset(double value)
+	{
+		setAttribute(AttributeName.XOFFSET, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberList attribute WorkingList
-          * @return JDFNumberList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberList
-          */
-        public JDFNumberList getWorkingList()
-        {
-            String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute XOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute XOffset
-          * @param value the value to set the attribute to
-          */
-        public void setXOffset(double value)
-        {
-            setAttribute(AttributeName.XOFFSET, value, null);
-        }
-
-        /**
-          * (17) get double attribute XOffset
-          * @return double the value of the attribute
-          */
-        public double getXOffset()
-        {
-            return getRealAttribute(AttributeName.XOFFSET, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute XOffset
+	  * @return double the value of the attribute
+	  */
+	public double getXOffset()
+	{
+		return getRealAttribute(AttributeName.XOFFSET, null, 0.0);
+	}
 
 }// end namespace JDF

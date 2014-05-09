@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,189 +82,176 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFObjectModel;
 import org.cip4.jdflib.resource.process.JDFShapeTemplate;
-    /**
-    *****************************************************************************
-    class JDFAutoShapeDefProductionParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShapeDefProductionParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.OBJECTMODEL, 0x33331111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPETEMPLATE, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OBJECTMODEL, 0x33331111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPETEMPLATE, 0x66661111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShapeDefProductionParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeDefProductionParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeDefProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeDefProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeDefProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShapeDefProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShapeDefProductionParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShapeDefProductionParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShapeDefProductionParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShapeDefProductionParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShapeDefProductionParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateObjectModel
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectModel the element
+	 */
+	public JDFObjectModel getCreateObjectModel(int iSkip)
+	{
+		return (JDFObjectModel) getCreateElement_KElement(ElementName.OBJECTMODEL, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element ObjectModel
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectModel the element
+	 * default is getObjectModel(0)     */
+	public JDFObjectModel getObjectModel(int iSkip)
+	{
+		return (JDFObjectModel) getElement(ElementName.OBJECTMODEL, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all ObjectModel from the current element
+	 * 
+	 * @return Collection<JDFObjectModel>, null if none are available
+	 */
+	public Collection<JDFObjectModel> getAllObjectModel()
+	{
+		final VElement vc = getChildElementVector(ElementName.OBJECTMODEL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFObjectModel> v = new Vector<JDFObjectModel>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFObjectModel) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateObjectModel
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFObjectModel the element
-     */
-    public JDFObjectModel getCreateObjectModel(int iSkip)
-    {
-        return (JDFObjectModel)getCreateElement_KElement(ElementName.OBJECTMODEL, null, iSkip);
-    }
+	/**
+	 * (30) append element ObjectModel
+	 * @return JDFObjectModel the element
+	 */
+	public JDFObjectModel appendObjectModel()
+	{
+		return (JDFObjectModel) appendElement(ElementName.OBJECTMODEL, null);
+	}
 
-    /**
-     * (27) const get element ObjectModel
-     * @param iSkip number of elements to skip
-     * @return JDFObjectModel the element
-     * default is getObjectModel(0)     */
-    public JDFObjectModel getObjectModel(int iSkip)
-    {
-        return (JDFObjectModel) getElement(ElementName.OBJECTMODEL, null, iSkip);
-    }
+	/**
+	 * (24) const get element ShapeTemplate
+	 * @return JDFShapeTemplate the element
+	 */
+	public JDFShapeTemplate getShapeTemplate()
+	{
+		return (JDFShapeTemplate) getElement(ElementName.SHAPETEMPLATE, null, 0);
+	}
 
-    /**
-     * Get all ObjectModel from the current element
-     * 
-     * @return Collection<JDFObjectModel>, null if none are available
-     */
-    public Collection<JDFObjectModel> getAllObjectModel()
-    {
-        final VElement vc = getChildElementVector(ElementName.OBJECTMODEL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (25) getCreateShapeTemplate
+	 * 
+	 * @return JDFShapeTemplate the element
+	 */
+	public JDFShapeTemplate getCreateShapeTemplate()
+	{
+		return (JDFShapeTemplate) getCreateElement_KElement(ElementName.SHAPETEMPLATE, null, 0);
+	}
 
-        final Vector<JDFObjectModel> v = new Vector<JDFObjectModel>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFObjectModel) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ObjectModel
-     * @return JDFObjectModel the element
-     */
-    public JDFObjectModel appendObjectModel()
-    {
-        return (JDFObjectModel) appendElement(ElementName.OBJECTMODEL, null);
-    }
-
-    /**
-     * (24) const get element ShapeTemplate
-     * @return JDFShapeTemplate the element
-     */
-    public JDFShapeTemplate getShapeTemplate()
-    {
-        return (JDFShapeTemplate) getElement(ElementName.SHAPETEMPLATE, null, 0);
-    }
-
-    /** (25) getCreateShapeTemplate
-     * 
-     * @return JDFShapeTemplate the element
-     */
-    public JDFShapeTemplate getCreateShapeTemplate()
-    {
-        return (JDFShapeTemplate) getCreateElement_KElement(ElementName.SHAPETEMPLATE, null, 0);
-    }
-
-    /**
-     * (29) append element ShapeTemplate
-     * @return JDFShapeTemplate the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFShapeTemplate appendShapeTemplate() throws JDFException
-    {
-        return (JDFShapeTemplate) appendElementN(ElementName.SHAPETEMPLATE, 1, null);
-    }
+	/**
+	 * (29) append element ShapeTemplate
+	 * @return JDFShapeTemplate the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFShapeTemplate appendShapeTemplate() throws JDFException
+	{
+		return (JDFShapeTemplate) appendElementN(ElementName.SHAPETEMPLATE, 1, null);
+	}
 
 }// end namespace JDF

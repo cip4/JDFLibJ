@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,12 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -80,330 +84,398 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
-    /**
-    *****************************************************************************
-    class JDFAutoCuttingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCuttingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCuttingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.CUTMARK, 0x44444331);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.CUT, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CUTBLOCK, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.CUTMARK, 0x44444331);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CUT, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCuttingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCuttingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCuttingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCuttingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCuttingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCuttingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCuttingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCuttingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCuttingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCuttingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCuttingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for SheetLay
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumSheetLay extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumSheetLay(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(String enumName)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSheetLay getEnum(int enumValue)
+		{
+			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
+		}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NUpSeparation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NUpSeparation
-          * @param value the value to set the attribute to
-          */
-        public void setNUpSeparation(JDFXYPair value)
-        {
-            setAttribute(AttributeName.NUPSEPARATION, value, null);
-        }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSheetLay.class);
+		}
 
-        /**
-          * (20) get JDFXYPair attribute NUpSeparation
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getNUpSeparation()
-        {
-            String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSheetLay.class);
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSheetLay.class);
+		}
 
-    /** (26) getCreateCutBlock
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCutBlock the element
-     */
-    public JDFCutBlock getCreateCutBlock(int iSkip)
-    {
-        return (JDFCutBlock)getCreateElement_KElement(ElementName.CUTBLOCK, null, iSkip);
-    }
+		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+	}
 
-    /**
-     * (27) const get element CutBlock
-     * @param iSkip number of elements to skip
-     * @return JDFCutBlock the element
-     * default is getCutBlock(0)     */
-    public JDFCutBlock getCutBlock(int iSkip)
-    {
-        return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, iSkip);
-    }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * Get all CutBlock from the current element
-     * 
-     * @return Collection<JDFCutBlock>, null if none are available
-     */
-    public Collection<JDFCutBlock> getAllCutBlock()
-    {
-        final VElement vc = getChildElementVector(ElementName.CUTBLOCK, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NUpSeparation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NUpSeparation
+	  * @param value the value to set the attribute to
+	  */
+	public void setNUpSeparation(JDFXYPair value)
+	{
+		setAttribute(AttributeName.NUPSEPARATION, value, null);
+	}
 
-        final Vector<JDFCutBlock> v = new Vector<JDFCutBlock>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCutBlock) vc.get(i));
-        }
+	/**
+	  * (20) get JDFXYPair attribute NUpSeparation
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getNUpSeparation()
+	{
+		final String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        return v;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SheetLay
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute SheetLay
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSheetLay(EnumSheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * (30) append element CutBlock
-     * @return JDFCutBlock the element
-     */
-    public JDFCutBlock appendCutBlock()
-    {
-        return (JDFCutBlock) appendElement(ElementName.CUTBLOCK, null);
-    }
+	/**
+	  * (9) get attribute SheetLay
+	  * @return the value of the attribute
+	  */
+	public EnumSheetLay getSheetLay()
+	{
+		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refCutBlock(JDFCutBlock refTarget)
-    {
-        refElement(refTarget);
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /** (26) getCreateCutMark
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCutMark the element
-     */
-    public JDFCutMark getCreateCutMark(int iSkip)
-    {
-        return (JDFCutMark)getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
-    }
+	/** (26) getCreateCutBlock
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock getCreateCutBlock(int iSkip)
+	{
+		return (JDFCutBlock) getCreateElement_KElement(ElementName.CUTBLOCK, null, iSkip);
+	}
 
-    /**
-     * (27) const get element CutMark
-     * @param iSkip number of elements to skip
-     * @return JDFCutMark the element
-     * default is getCutMark(0)     */
-    public JDFCutMark getCutMark(int iSkip)
-    {
-        return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
-    }
+	/**
+	 * (27) const get element CutBlock
+	 * @param iSkip number of elements to skip
+	 * @return JDFCutBlock the element
+	 * default is getCutBlock(0)     */
+	public JDFCutBlock getCutBlock(int iSkip)
+	{
+		return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, iSkip);
+	}
 
-    /**
-     * Get all CutMark from the current element
-     * 
-     * @return Collection<JDFCutMark>, null if none are available
-     */
-    public Collection<JDFCutMark> getAllCutMark()
-    {
-        final VElement vc = getChildElementVector(ElementName.CUTMARK, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all CutBlock from the current element
+	 * 
+	 * @return Collection<JDFCutBlock>, null if none are available
+	 */
+	public Collection<JDFCutBlock> getAllCutBlock()
+	{
+		final VElement vc = getChildElementVector(ElementName.CUTBLOCK, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFCutMark> v = new Vector<JDFCutMark>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCutMark) vc.get(i));
-        }
+		final Vector<JDFCutBlock> v = new Vector<JDFCutBlock>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCutBlock) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element CutMark
-     * @return JDFCutMark the element
-     */
-    public JDFCutMark appendCutMark()
-    {
-        return (JDFCutMark) appendElement(ElementName.CUTMARK, null);
-    }
+	/**
+	 * (30) append element CutBlock
+	 * @return JDFCutBlock the element
+	 */
+	public JDFCutBlock appendCutBlock()
+	{
+		return (JDFCutBlock) appendElement(ElementName.CUTBLOCK, null);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refCutMark(JDFCutMark refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refCutBlock(JDFCutBlock refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /** (26) getCreateCut
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCut the element
-     */
-    public JDFCut getCreateCut(int iSkip)
-    {
-        return (JDFCut)getCreateElement_KElement(ElementName.CUT, null, iSkip);
-    }
+	/** (26) getCreateCutMark
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark getCreateCutMark(int iSkip)
+	{
+		return (JDFCutMark) getCreateElement_KElement(ElementName.CUTMARK, null, iSkip);
+	}
 
-    /**
-     * (27) const get element Cut
-     * @param iSkip number of elements to skip
-     * @return JDFCut the element
-     * default is getCut(0)     */
-    public JDFCut getCut(int iSkip)
-    {
-        return (JDFCut) getElement(ElementName.CUT, null, iSkip);
-    }
+	/**
+	 * (27) const get element CutMark
+	 * @param iSkip number of elements to skip
+	 * @return JDFCutMark the element
+	 * default is getCutMark(0)     */
+	public JDFCutMark getCutMark(int iSkip)
+	{
+		return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
+	}
 
-    /**
-     * Get all Cut from the current element
-     * 
-     * @return Collection<JDFCut>, null if none are available
-     */
-    public Collection<JDFCut> getAllCut()
-    {
-        final VElement vc = getChildElementVector(ElementName.CUT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all CutMark from the current element
+	 * 
+	 * @return Collection<JDFCutMark>, null if none are available
+	 */
+	public Collection<JDFCutMark> getAllCutMark()
+	{
+		final VElement vc = getChildElementVector(ElementName.CUTMARK, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFCut> v = new Vector<JDFCut>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCut) vc.get(i));
-        }
+		final Vector<JDFCutMark> v = new Vector<JDFCutMark>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCutMark) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element Cut
-     * @return JDFCut the element
-     */
-    public JDFCut appendCut()
-    {
-        return (JDFCut) appendElement(ElementName.CUT, null);
-    }
+	/**
+	 * (30) append element CutMark
+	 * @return JDFCutMark the element
+	 */
+	public JDFCutMark appendCutMark()
+	{
+		return (JDFCutMark) appendElement(ElementName.CUTMARK, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refCutMark(JDFCutMark refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/** (26) getCreateCut
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCut the element
+	 */
+	public JDFCut getCreateCut(int iSkip)
+	{
+		return (JDFCut) getCreateElement_KElement(ElementName.CUT, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Cut
+	 * @param iSkip number of elements to skip
+	 * @return JDFCut the element
+	 * default is getCut(0)     */
+	public JDFCut getCut(int iSkip)
+	{
+		return (JDFCut) getElement(ElementName.CUT, null, iSkip);
+	}
+
+	/**
+	 * Get all Cut from the current element
+	 * 
+	 * @return Collection<JDFCut>, null if none are available
+	 */
+	public Collection<JDFCut> getAllCut()
+	{
+		final VElement vc = getChildElementVector(ElementName.CUT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFCut> v = new Vector<JDFCut>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCut) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element Cut
+	 * @return JDFCut the element
+	 */
+	public JDFCut appendCut()
+	{
+		return (JDFCut) appendElement(ElementName.CUT, null);
+	}
 
 }// end namespace JDF

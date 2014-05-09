@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,185 +80,173 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoTIFFEmbeddedFile : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTIFFEmbeddedFile : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TAGNUMBER, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x44422211, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555511);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555511);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTIFFEmbeddedFile
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFEmbeddedFile
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFEmbeddedFile(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFEmbeddedFile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFEmbeddedFile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTIFFEmbeddedFile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTIFFEmbeddedFile
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTIFFEmbeddedFile
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTIFFEmbeddedFile(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTIFFEmbeddedFile[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTIFFEmbeddedFile[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TagNumber
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TagNumber
+	  * @param value the value to set the attribute to
+	  */
+	public void setTagNumber(int value)
+	{
+		setAttribute(AttributeName.TAGNUMBER, value, null);
+	}
 
+	/**
+	  * (15) get int attribute TagNumber
+	  * @return int the value of the attribute
+	  */
+	public int getTagNumber()
+	{
+		return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TagNumber
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TagNumber
-          * @param value the value to set the attribute to
-          */
-        public void setTagNumber(int value)
-        {
-            setAttribute(AttributeName.TAGNUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TagType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TagType
+	  * @param value the value to set the attribute to
+	  */
+	public void setTagType(int value)
+	{
+		setAttribute(AttributeName.TAGTYPE, value, null);
+	}
 
-        /**
-          * (15) get int attribute TagNumber
-          * @return int the value of the attribute
-          */
-        public int getTagNumber()
-        {
-            return getIntAttribute(AttributeName.TAGNUMBER, null, 0);
-        }
+	/**
+	  * (15) get int attribute TagType
+	  * @return int the value of the attribute
+	  */
+	public int getTagType()
+	{
+		return getIntAttribute(AttributeName.TAGTYPE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TagType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TagType
-          * @param value the value to set the attribute to
-          */
-        public void setTagType(int value)
-        {
-            setAttribute(AttributeName.TAGTYPE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute TagType
-          * @return int the value of the attribute
-          */
-        public int getTagType()
-        {
-            return getIntAttribute(AttributeName.TAGTYPE, null, 0);
-        }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

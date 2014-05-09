@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,230 +81,218 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
-    /**
-    *****************************************************************************
-    class JDFAutoHoleList : public JDFResource
+import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoHoleList : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoHoleList extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x22222211);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELINE, 0x22222211);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoHoleList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoHoleList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoHoleList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoHoleList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoHoleList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoHoleList[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoHoleList[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateHole
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFHole the element
+	 */
+	public JDFHole getCreateHole(int iSkip)
+	{
+		return (JDFHole) getCreateElement_KElement(ElementName.HOLE, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Hole
+	 * @param iSkip number of elements to skip
+	 * @return JDFHole the element
+	 * default is getHole(0)     */
+	public JDFHole getHole(int iSkip)
+	{
+		return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all Hole from the current element
+	 * 
+	 * @return Collection<JDFHole>, null if none are available
+	 */
+	public Collection<JDFHole> getAllHole()
+	{
+		final VElement vc = getChildElementVector(ElementName.HOLE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFHole> v = new Vector<JDFHole>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFHole) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateHole
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFHole the element
-     */
-    public JDFHole getCreateHole(int iSkip)
-    {
-        return (JDFHole)getCreateElement_KElement(ElementName.HOLE, null, iSkip);
-    }
+	/**
+	 * (30) append element Hole
+	 * @return JDFHole the element
+	 */
+	public JDFHole appendHole()
+	{
+		return (JDFHole) appendElement(ElementName.HOLE, null);
+	}
 
-    /**
-     * (27) const get element Hole
-     * @param iSkip number of elements to skip
-     * @return JDFHole the element
-     * default is getHole(0)     */
-    public JDFHole getHole(int iSkip)
-    {
-        return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refHole(JDFHole refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * Get all Hole from the current element
-     * 
-     * @return Collection<JDFHole>, null if none are available
-     */
-    public Collection<JDFHole> getAllHole()
-    {
-        final VElement vc = getChildElementVector(ElementName.HOLE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateHoleLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleLine(int iSkip)
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
+	}
 
-        final Vector<JDFHole> v = new Vector<JDFHole>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFHole) vc.get(i));
-        }
+	/**
+	 * (27) const get element HoleLine
+	 * @param iSkip number of elements to skip
+	 * @return JDFHoleList the element
+	 * default is getHoleLine(0)     */
+	public JDFHoleList getHoleLine(int iSkip)
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELINE, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all HoleLine from the current element
+	 * 
+	 * @return Collection<JDFHoleList>, null if none are available
+	 */
+	public Collection<JDFHoleList> getAllHoleLine()
+	{
+		final VElement vc = getChildElementVector(ElementName.HOLELINE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element Hole
-     * @return JDFHole the element
-     */
-    public JDFHole appendHole()
-    {
-        return (JDFHole) appendElement(ElementName.HOLE, null);
-    }
+		final Vector<JDFHoleList> v = new Vector<JDFHoleList>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFHoleList) vc.get(i));
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refHole(JDFHole refTarget)
-    {
-        refElement(refTarget);
-    }
+		return v;
+	}
 
-    /** (26) getCreateHoleLine
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFHoleLine the element
-     */
-    public JDFHoleLine getCreateHoleLine(int iSkip)
-    {
-        return (JDFHoleLine)getCreateElement_KElement(ElementName.HOLELINE, null, iSkip);
-    }
+	/**
+	 * (30) append element HoleLine
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList appendHoleLine()
+	{
+		return (JDFHoleList) appendElement(ElementName.HOLELINE, null);
+	}
 
-    /**
-     * (27) const get element HoleLine
-     * @param iSkip number of elements to skip
-     * @return JDFHoleLine the element
-     * default is getHoleLine(0)     */
-    public JDFHoleLine getHoleLine(int iSkip)
-    {
-        return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
-    }
-
-    /**
-     * Get all HoleLine from the current element
-     * 
-     * @return Collection<JDFHoleLine>, null if none are available
-     */
-    public Collection<JDFHoleLine> getAllHoleLine()
-    {
-        final VElement vc = getChildElementVector(ElementName.HOLELINE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFHoleLine> v = new Vector<JDFHoleLine>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFHoleLine) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element HoleLine
-     * @return JDFHoleLine the element
-     */
-    public JDFHoleLine appendHoleLine()
-    {
-        return (JDFHoleLine) appendElement(ElementName.HOLELINE, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refHoleLine(JDFHoleLine refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refHoleLine(JDFHoleLine refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

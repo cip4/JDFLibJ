@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,199 +84,187 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoCreateResource : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoCreateResource : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoCreateResource extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PARENTJOBID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoCreateResource
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCreateResource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreateResource
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoCreateResource(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCreateResource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoCreateResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreateResource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoCreateResource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoCreateResource
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoCreateResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoCreateResource
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoCreateResource(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoCreateResource[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoCreateResource[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParentJobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ParentJobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setParentJobID(String value)
+	{
+		setAttribute(AttributeName.PARENTJOBID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ParentJobID
+	  * @return the value of the attribute
+	  */
+	public String getParentJobID()
+	{
+		return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ParentJobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ParentJobID
-          * @param value the value to set the attribute to
-          */
-        public void setParentJobID(String value)
-        {
-            setAttribute(AttributeName.PARENTJOBID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ParentJobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ParentJobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setParentJobPartID(String value)
+	{
+		setAttribute(AttributeName.PARENTJOBPARTID, value, null);
+	}
 
-        /**
-          * (23) get String attribute ParentJobID
-          * @return the value of the attribute
-          */
-        public String getParentJobID()
-        {
-            return getAttribute(AttributeName.PARENTJOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ParentJobPartID
+	  * @return the value of the attribute
+	  */
+	public String getParentJobPartID()
+	{
+		return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ParentJobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ParentJobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setParentJobPartID(String value)
-        {
-            setAttribute(AttributeName.PARENTJOBPARTID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute ParentJobPartID
-          * @return the value of the attribute
-          */
-        public String getParentJobPartID()
-        {
-            return getAttribute(AttributeName.PARENTJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateResource
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 */
+	public JDFResource getCreateResource(int iSkip)
+	{
+		return (JDFResource) getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Resource
+	 * @param iSkip number of elements to skip
+	 * @return JDFResource the element
+	 * default is getResource(0)     */
+	public JDFResource getResource(int iSkip)
+	{
+		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
+	}
 
-    /** (26) getCreateResource
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     */
-    public JDFResource getCreateResource(int iSkip)
-    {
-        return (JDFResource)getCreateElement_KElement(ElementName.RESOURCE, null, iSkip);
-    }
+	/**
+	 * Get all Resource from the current element
+	 * 
+	 * @return Collection<JDFResource>, null if none are available
+	 */
+	public Collection<JDFResource> getAllResource()
+	{
+		final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Resource
-     * @param iSkip number of elements to skip
-     * @return JDFResource the element
-     * default is getResource(0)     */
-    public JDFResource getResource(int iSkip)
-    {
-        return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
-    }
+		final Vector<JDFResource> v = new Vector<JDFResource>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFResource) vc.get(i));
+		}
 
-    /**
-     * Get all Resource from the current element
-     * 
-     * @return Collection<JDFResource>, null if none are available
-     */
-    public Collection<JDFResource> getAllResource()
-    {
-        final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFResource> v = new Vector<JDFResource>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFResource) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Resource
-     * @return JDFResource the element
-     */
-    public JDFResource appendResource()
-    {
-        return (JDFResource) appendElement(ElementName.RESOURCE, null);
-    }
+	/**
+	 * (30) append element Resource
+	 * @return JDFResource the element
+	 */
+	public JDFResource appendResource()
+	{
+		return (JDFResource) appendElement(ElementName.RESOURCE, null);
+	}
 
 }// end namespace JDF

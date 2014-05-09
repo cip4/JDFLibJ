@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,392 +81,401 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.resource.process.JDFComChannel;
-    /**
-    *****************************************************************************
-    class JDFAutoPerson : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPerson : public JDFElement
 
-public abstract class JDFAutoPerson extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoPerson extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALNAMES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILYNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FIRSTNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBTITLE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x33331111, AttributeInfo.EnumAttributeType.languages, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALNAMES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILYNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FIRSTNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBTITLE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x33333333, AttributeInfo.EnumAttributeType.languages, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PHONETICFIRSTNAME, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.PHONETICLASTNAME, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ADDRESS, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPerson
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerson
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerson
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerson
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPerson
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPerson
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPerson(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPerson[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPerson[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdditionalNames
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdditionalNames
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdditionalNames(String value)
+	{
+		setAttribute(AttributeName.ADDITIONALNAMES, value, null);
+	}
 
+	/**
+	  * (23) get String attribute AdditionalNames
+	  * @return the value of the attribute
+	  */
+	public String getAdditionalNames()
+	{
+		return getAttribute(AttributeName.ADDITIONALNAMES, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FamilyName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FamilyName
+	  * @param value the value to set the attribute to
+	  */
+	public void setFamilyName(String value)
+	{
+		setAttribute(AttributeName.FAMILYNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute FamilyName
+	  * @return the value of the attribute
+	  */
+	public String getFamilyName()
+	{
+		return getAttribute(AttributeName.FAMILYNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FirstName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute FirstName
+	  * @param value the value to set the attribute to
+	  */
+	public void setFirstName(String value)
+	{
+		setAttribute(AttributeName.FIRSTNAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute FirstName
+	  * @return the value of the attribute
+	  */
+	public String getFirstName()
+	{
+		return getAttribute(AttributeName.FIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdditionalNames
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdditionalNames
-          * @param value the value to set the attribute to
-          */
-        public void setAdditionalNames(String value)
-        {
-            setAttribute(AttributeName.ADDITIONALNAMES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobTitle
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobTitle
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobTitle(String value)
+	{
+		setAttribute(AttributeName.JOBTITLE, value, null);
+	}
 
-        /**
-          * (23) get String attribute AdditionalNames
-          * @return the value of the attribute
-          */
-        public String getAdditionalNames()
-        {
-            return getAttribute(AttributeName.ADDITIONALNAMES, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute JobTitle
+	  * @return the value of the attribute
+	  */
+	public String getJobTitle()
+	{
+		return getAttribute(AttributeName.JOBTITLE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FamilyName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FamilyName
-          * @param value the value to set the attribute to
-          */
-        public void setFamilyName(String value)
-        {
-            setAttribute(AttributeName.FAMILYNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Languages
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Languages
+	  * @param value the value to set the attribute to
+	  */
+	public void setLanguages(VString value)
+	{
+		setAttribute(AttributeName.LANGUAGES, value, null);
+	}
 
-        /**
-          * (23) get String attribute FamilyName
-          * @return the value of the attribute
-          */
-        public String getFamilyName()
-        {
-            return getAttribute(AttributeName.FAMILYNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (21) get VString attribute Languages
+	  * @return VString the value of the attribute
+	  */
+	public VString getLanguages()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FirstName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute FirstName
-          * @param value the value to set the attribute to
-          */
-        public void setFirstName(String value)
-        {
-            setAttribute(AttributeName.FIRSTNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NamePrefix
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NamePrefix
+	  * @param value the value to set the attribute to
+	  */
+	public void setNamePrefix(String value)
+	{
+		setAttribute(AttributeName.NAMEPREFIX, value, null);
+	}
 
-        /**
-          * (23) get String attribute FirstName
-          * @return the value of the attribute
-          */
-        public String getFirstName()
-        {
-            return getAttribute(AttributeName.FIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute NamePrefix
+	  * @return the value of the attribute
+	  */
+	public String getNamePrefix()
+	{
+		return getAttribute(AttributeName.NAMEPREFIX, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobTitle
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobTitle
-          * @param value the value to set the attribute to
-          */
-        public void setJobTitle(String value)
-        {
-            setAttribute(AttributeName.JOBTITLE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NameSuffix
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NameSuffix
+	  * @param value the value to set the attribute to
+	  */
+	public void setNameSuffix(String value)
+	{
+		setAttribute(AttributeName.NAMESUFFIX, value, null);
+	}
 
-        /**
-          * (23) get String attribute JobTitle
-          * @return the value of the attribute
-          */
-        public String getJobTitle()
-        {
-            return getAttribute(AttributeName.JOBTITLE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute NameSuffix
+	  * @return the value of the attribute
+	  */
+	public String getNameSuffix()
+	{
+		return getAttribute(AttributeName.NAMESUFFIX, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Languages
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Languages
-          * @param value the value to set the attribute to
-          */
-        public void setLanguages(VString value)
-        {
-            setAttribute(AttributeName.LANGUAGES, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PhoneticFirstName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PhoneticFirstName
+	  * @param value the value to set the attribute to
+	  */
+	public void setPhoneticFirstName(String value)
+	{
+		setAttribute(AttributeName.PHONETICFIRSTNAME, value, null);
+	}
 
-        /**
-          * (21) get VString attribute Languages
-          * @return VString the value of the attribute
-          */
-        public VString getLanguages()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	  * (23) get String attribute PhoneticFirstName
+	  * @return the value of the attribute
+	  */
+	public String getPhoneticFirstName()
+	{
+		return getAttribute(AttributeName.PHONETICFIRSTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NamePrefix
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NamePrefix
-          * @param value the value to set the attribute to
-          */
-        public void setNamePrefix(String value)
-        {
-            setAttribute(AttributeName.NAMEPREFIX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PhoneticLastName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PhoneticLastName
+	  * @param value the value to set the attribute to
+	  */
+	public void setPhoneticLastName(String value)
+	{
+		setAttribute(AttributeName.PHONETICLASTNAME, value, null);
+	}
 
-        /**
-          * (23) get String attribute NamePrefix
-          * @return the value of the attribute
-          */
-        public String getNamePrefix()
-        {
-            return getAttribute(AttributeName.NAMEPREFIX, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute PhoneticLastName
+	  * @return the value of the attribute
+	  */
+	public String getPhoneticLastName()
+	{
+		return getAttribute(AttributeName.PHONETICLASTNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NameSuffix
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NameSuffix
-          * @param value the value to set the attribute to
-          */
-        public void setNameSuffix(String value)
-        {
-            setAttribute(AttributeName.NAMESUFFIX, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute NameSuffix
-          * @return the value of the attribute
-          */
-        public String getNameSuffix()
-        {
-            return getAttribute(AttributeName.NAMESUFFIX, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateAddress
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress getCreateAddress(int iSkip)
+	{
+		return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Address
+	 * @param iSkip number of elements to skip
+	 * @return JDFAddress the element
+	 * default is getAddress(0)     */
+	public JDFAddress getAddress(int iSkip)
+	{
+		return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
+	}
 
-    /**
-     * (24) const get element Address
-     * @return JDFAddress the element
-     */
-    public JDFAddress getAddress()
-    {
-        return (JDFAddress) getElement(ElementName.ADDRESS, null, 0);
-    }
+	/**
+	 * Get all Address from the current element
+	 * 
+	 * @return Collection<JDFAddress>, null if none are available
+	 */
+	public Collection<JDFAddress> getAllAddress()
+	{
+		final VElement vc = getChildElementVector(ElementName.ADDRESS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateAddress
-     * 
-     * @return JDFAddress the element
-     */
-    public JDFAddress getCreateAddress()
-    {
-        return (JDFAddress) getCreateElement_KElement(ElementName.ADDRESS, null, 0);
-    }
+		final Vector<JDFAddress> v = new Vector<JDFAddress>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFAddress) vc.get(i));
+		}
 
-    /**
-     * (29) append element Address
-     * @return JDFAddress the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFAddress appendAddress() throws JDFException
-    {
-        return (JDFAddress) appendElementN(ElementName.ADDRESS, 1, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refAddress(JDFAddress refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element Address
+	 * @return JDFAddress the element
+	 */
+	public JDFAddress appendAddress()
+	{
+		return (JDFAddress) appendElement(ElementName.ADDRESS, null);
+	}
 
-    /** (26) getCreateComChannel
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFComChannel the element
-     */
-    public JDFComChannel getCreateComChannel(int iSkip)
-    {
-        return (JDFComChannel)getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
-    }
+	/** (26) getCreateComChannel
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel getCreateComChannel(int iSkip)
+	{
+		return (JDFComChannel) getCreateElement_KElement(ElementName.COMCHANNEL, null, iSkip);
+	}
 
-    /**
-     * (27) const get element ComChannel
-     * @param iSkip number of elements to skip
-     * @return JDFComChannel the element
-     * default is getComChannel(0)     */
-    public JDFComChannel getComChannel(int iSkip)
-    {
-        return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
-    }
+	/**
+	 * (27) const get element ComChannel
+	 * @param iSkip number of elements to skip
+	 * @return JDFComChannel the element
+	 * default is getComChannel(0)     */
+	public JDFComChannel getComChannel(int iSkip)
+	{
+		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
+	}
 
-    /**
-     * Get all ComChannel from the current element
-     * 
-     * @return Collection<JDFComChannel>, null if none are available
-     */
-    public Collection<JDFComChannel> getAllComChannel()
-    {
-        final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * Get all ComChannel from the current element
+	 * 
+	 * @return Collection<JDFComChannel>, null if none are available
+	 */
+	public Collection<JDFComChannel> getAllComChannel()
+	{
+		final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        final Vector<JDFComChannel> v = new Vector<JDFComChannel>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFComChannel) vc.get(i));
-        }
+		final Vector<JDFComChannel> v = new Vector<JDFComChannel>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFComChannel) vc.get(i));
+		}
 
-        return v;
-    }
+		return v;
+	}
 
-    /**
-     * (30) append element ComChannel
-     * @return JDFComChannel the element
-     */
-    public JDFComChannel appendComChannel()
-    {
-        return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refComChannel(JDFComChannel refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element ComChannel
+	 * @return JDFComChannel the element
+	 */
+	public JDFComChannel appendComChannel()
+	{
+		return (JDFComChannel) appendElement(ElementName.COMCHANNEL, null);
+	}
 
 }// end namespace JDF

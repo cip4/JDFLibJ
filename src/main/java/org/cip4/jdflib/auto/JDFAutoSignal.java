@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,342 +91,352 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFTrigger;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /**
-    *****************************************************************************
-    class JDFAutoSignal : public JDFMessage
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSignal : public JDFMessage
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSignal extends JDFMessage
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.TRIGGER, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.TRIGGER, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSignal
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSignal
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSignal(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSignal
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSignal
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSignal(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSignal
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSignal
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSignal(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSignal[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ChannelMode
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSignal[  --> " + super.toString() + " ]";
-    }
+	public static class EnumChannelMode extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumChannelMode(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ChannelMode
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(String enumName)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
+		}
 
-        public static class EnumChannelMode extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumChannelMode getEnum(int enumValue)
+		{
+			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
+		}
 
-            private EnumChannelMode(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(String enumName)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumChannelMode.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumChannelMode getEnum(int enumValue)
-            {
-                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumChannelMode.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumChannelMode.class);
-            }
+		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumChannelMode.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumChannelMode.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ChannelMode
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ChannelMode
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setChannelMode(EnumChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
-            public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
-        }      
+	/**
+	  * (9) get attribute ChannelMode
+	  * @return the value of the attribute
+	  */
+	public EnumChannelMode getChannelMode()
+	{
+		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LastRepeat
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LastRepeat
+	  * @param value the value to set the attribute to
+	  */
+	public void setLastRepeat(boolean value)
+	{
+		setAttribute(AttributeName.LASTREPEAT, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute LastRepeat
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getLastRepeat()
+	{
+		return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ChannelMode
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ChannelMode
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setChannelMode(EnumChannelMode enumVar)
-        {
-            setAttribute(AttributeName.CHANNELMODE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute refID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute refID
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setrefID(String value)
+	{
+		setAttribute(AttributeName.REFID, value, null);
+	}
 
-        /**
-          * (9) get attribute ChannelMode
-          * @return the value of the attribute
-          */
-        public EnumChannelMode getChannelMode()
-        {
-            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
-        }
+	/**
+	  * (23) get String attribute refID
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getrefID()
+	{
+		return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LastRepeat
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LastRepeat
-          * @param value the value to set the attribute to
-          */
-        public void setLastRepeat(boolean value)
-        {
-            setAttribute(AttributeName.LASTREPEAT, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (18) get boolean attribute LastRepeat
-          * @return boolean the value of the attribute
-          */
-        public boolean getLastRepeat()
-        {
-            return getBoolAttribute(AttributeName.LASTREPEAT, null, false);
-        }
+	/** (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee(int iSkip)
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute refID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute refID
-          * @param value the value to set the attribute to
-          */
-        public void setrefID(String value)
-        {
-            setAttribute(AttributeName.REFID, value, null);
-        }
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 * default is getEmployee(0)     */
+	public JDFEmployee getEmployee(int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute refID
-          * @return the value of the attribute
-          */
-        public String getrefID()
-        {
-            return getAttribute(AttributeName.REFID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>, null if none are available
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFEmployee) vc.get(i));
+		}
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
+	/**
+	 * (30) append element Employee
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee appendEmployee()
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>, null if none are available
-     */
-    public Collection<JDFEmployee> getAllEmployee()
-    {
-        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateNotification
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNotification the element
+	 */
+	public JDFNotification getCreateNotification(int iSkip)
+	{
+		return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, iSkip);
+	}
 
-        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFEmployee) vc.get(i));
-        }
+	/**
+	 * (27) const get element Notification
+	 * @param iSkip number of elements to skip
+	 * @return JDFNotification the element
+	 * default is getNotification(0)     */
+	public JDFNotification getNotification(int iSkip)
+	{
+		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all Notification from the current element
+	 * 
+	 * @return Collection<JDFNotification>, null if none are available
+	 */
+	public Collection<JDFNotification> getAllNotification()
+	{
+		final VElement vc = getChildElementVector(ElementName.NOTIFICATION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element Employee
-     * @return JDFEmployee the element
-     */
-    public JDFEmployee appendEmployee()
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+		final Vector<JDFNotification> v = new Vector<JDFNotification>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNotification) vc.get(i));
+		}
 
-    /**
-     * (24) const get element Notification
-     * @return JDFNotification the element
-     */
-    public JDFNotification getNotification()
-    {
-        return (JDFNotification) getElement(ElementName.NOTIFICATION, null, 0);
-    }
+		return v;
+	}
 
-    /** (25) getCreateNotification
-     * 
-     * @return JDFNotification the element
-     */
-    public JDFNotification getCreateNotification()
-    {
-        return (JDFNotification) getCreateElement_KElement(ElementName.NOTIFICATION, null, 0);
-    }
+	/**
+	 * (30) append element Notification
+	 * @return JDFNotification the element
+	 */
+	public JDFNotification appendNotification()
+	{
+		return (JDFNotification) appendElement(ElementName.NOTIFICATION, null);
+	}
 
-    /**
-     * (29) append element Notification
-     * @return JDFNotification the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFNotification appendNotification() throws JDFException
-    {
-        return (JDFNotification) appendElementN(ElementName.NOTIFICATION, 1, null);
-    }
+	/**
+	 * (24) const get element Trigger
+	 * @return JDFTrigger the element
+	 */
+	public JDFTrigger getTrigger()
+	{
+		return (JDFTrigger) getElement(ElementName.TRIGGER, null, 0);
+	}
 
-    /**
-     * (24) const get element Trigger
-     * @return JDFTrigger the element
-     */
-    public JDFTrigger getTrigger()
-    {
-        return (JDFTrigger) getElement(ElementName.TRIGGER, null, 0);
-    }
+	/** (25) getCreateTrigger
+	 * 
+	 * @return JDFTrigger the element
+	 */
+	public JDFTrigger getCreateTrigger()
+	{
+		return (JDFTrigger) getCreateElement_KElement(ElementName.TRIGGER, null, 0);
+	}
 
-    /** (25) getCreateTrigger
-     * 
-     * @return JDFTrigger the element
-     */
-    public JDFTrigger getCreateTrigger()
-    {
-        return (JDFTrigger) getCreateElement_KElement(ElementName.TRIGGER, null, 0);
-    }
-
-    /**
-     * (29) append element Trigger
-     * @return JDFTrigger the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTrigger appendTrigger() throws JDFException
-    {
-        return (JDFTrigger) appendElementN(ElementName.TRIGGER, 1, null);
-    }
+	/**
+	 * (29) append element Trigger
+	 * @return JDFTrigger the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTrigger appendTrigger() throws JDFException
+	{
+		return (JDFTrigger) appendElementN(ElementName.TRIGGER, 1, null);
+	}
 
 }// end namespace JDF

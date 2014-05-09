@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,317 +86,300 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoFileAlias : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFileAlias : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFileAlias extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ALIAS, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITION, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MIMETYPE, 0x44444433, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RAWALIAS, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x44444433, AttributeInfo.EnumAttributeType.URL, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALIAS, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITION, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MIMETYPE, 0x44444433, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.RAWALIAS, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x44444433, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFileAlias
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFileAlias(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFileAlias
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFileAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFileAlias
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFileAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFileAlias
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFileAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFileAlias
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFileAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFileAlias
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFileAlias(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFileAlias[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Disposition
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFileAlias[  --> " + super.toString() + " ]";
-    }
+	public static class EnumDisposition extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumDisposition(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Disposition
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumDisposition getEnum(String enumName)
+		{
+			return (EnumDisposition) getEnum(EnumDisposition.class, enumName);
+		}
 
-        public static class EnumDisposition extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumDisposition getEnum(int enumValue)
+		{
+			return (EnumDisposition) getEnum(EnumDisposition.class, enumValue);
+		}
 
-            private EnumDisposition(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumDisposition.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumDisposition getEnum(String enumName)
-            {
-                return (EnumDisposition) getEnum(EnumDisposition.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumDisposition.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumDisposition getEnum(int enumValue)
-            {
-                return (EnumDisposition) getEnum(EnumDisposition.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumDisposition.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumDisposition.class);
-            }
+		public static final EnumDisposition Unlink = new EnumDisposition("Unlink");
+		public static final EnumDisposition Delete = new EnumDisposition("Delete");
+		public static final EnumDisposition Retain = new EnumDisposition("Retain");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumDisposition.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumDisposition.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Alias
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Alias
+	  * @param value the value to set the attribute to
+	  */
+	public void setAlias(String value)
+	{
+		setAttribute(AttributeName.ALIAS, value, null);
+	}
 
-            public static final EnumDisposition Unlink = new EnumDisposition("Unlink");
-            public static final EnumDisposition Delete = new EnumDisposition("Delete");
-            public static final EnumDisposition Retain = new EnumDisposition("Retain");
-        }      
+	/**
+	  * (23) get String attribute Alias
+	  * @return the value of the attribute
+	  */
+	public String getAlias()
+	{
+		return getAttribute(AttributeName.ALIAS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Disposition
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Disposition
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setDisposition(EnumDisposition enumVar)
+	{
+		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute Disposition
+	  * @return the value of the attribute
+	  */
+	public EnumDisposition getDisposition()
+	{
+		return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Alias
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Alias
-          * @param value the value to set the attribute to
-          */
-        public void setAlias(String value)
-        {
-            setAttribute(AttributeName.ALIAS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MimeType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMimeType(String value)
+	{
+		setAttribute(AttributeName.MIMETYPE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Alias
-          * @return the value of the attribute
-          */
-        public String getAlias()
-        {
-            return getAttribute(AttributeName.ALIAS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute MimeType
+	  * @return the value of the attribute
+	  */
+	public String getMimeType()
+	{
+		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Disposition
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Disposition
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setDisposition(EnumDisposition enumVar)
-        {
-            setAttribute(AttributeName.DISPOSITION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RawAlias
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RawAlias
+	  * @param value the value to set the attribute to
+	  */
+	public void setRawAlias(String value)
+	{
+		setAttribute(AttributeName.RAWALIAS, value, null);
+	}
 
-        /**
-          * (9) get attribute Disposition
-          * @return the value of the attribute
-          */
-        public EnumDisposition getDisposition()
-        {
-            return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
-        }
+	/**
+	  * (23) get String attribute RawAlias
+	  * @return the value of the attribute
+	  */
+	public String getRawAlias()
+	{
+		return getAttribute(AttributeName.RAWALIAS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MimeType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MimeType
-          * @param value the value to set the attribute to
-          */
-        public void setMimeType(String value)
-        {
-            setAttribute(AttributeName.MIMETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute URL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute URL
+	  * @param value the value to set the attribute to
+	  */
+	public void setURL(String value)
+	{
+		setAttribute(AttributeName.URL, value, null);
+	}
 
-        /**
-          * (23) get String attribute MimeType
-          * @return the value of the attribute
-          */
-        public String getMimeType()
-        {
-            return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute URL
+	  * @return the value of the attribute
+	  */
+	public String getURL()
+	{
+		return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RawAlias
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RawAlias
-          * @param value the value to set the attribute to
-          */
-        public void setRawAlias(String value)
-        {
-            setAttribute(AttributeName.RAWALIAS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute RawAlias
-          * @return the value of the attribute
-          */
-        public String getRawAlias()
-        {
-            return getAttribute(AttributeName.RAWALIAS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute URL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute URL
-          * @param value the value to set the attribute to
-          */
-        public void setURL(String value)
-        {
-            setAttribute(AttributeName.URL, value, null);
-        }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-        /**
-          * (23) get String attribute URL
-          * @return the value of the attribute
-          */
-        public String getURL()
-        {
-            return getAttribute(AttributeName.URL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

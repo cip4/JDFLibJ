@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,176 +84,165 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
-    /**
-    *****************************************************************************
-    class JDFAutoArgumentValue : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoArgumentValue : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoArgumentValue extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoArgumentValue
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoArgumentValue
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoArgumentValue(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoArgumentValue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoArgumentValue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoArgumentValue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoArgumentValue
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoArgumentValue
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoArgumentValue(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoArgumentValue[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoArgumentValue[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreatePreflightArgument
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument getCreatePreflightArgument(int iSkip)
+	{
+		return (JDFPreflightArgument) getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element PreflightArgument
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreflightArgument the element
+	 * default is getPreflightArgument(0)     */
+	public JDFPreflightArgument getPreflightArgument(int iSkip)
+	{
+		return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
+	}
 
-    /** (26) getCreatePreflightArgument
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPreflightArgument the element
-     */
-    public JDFPreflightArgument getCreatePreflightArgument(int iSkip)
-    {
-        return (JDFPreflightArgument)getCreateElement_KElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
-    }
+	/**
+	 * Get all PreflightArgument from the current element
+	 * 
+	 * @return Collection<JDFPreflightArgument>, null if none are available
+	 */
+	public Collection<JDFPreflightArgument> getAllPreflightArgument()
+	{
+		final VElement vc = getChildElementVector(ElementName.PREFLIGHTARGUMENT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element PreflightArgument
-     * @param iSkip number of elements to skip
-     * @return JDFPreflightArgument the element
-     * default is getPreflightArgument(0)     */
-    public JDFPreflightArgument getPreflightArgument(int iSkip)
-    {
-        return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
-    }
+		final Vector<JDFPreflightArgument> v = new Vector<JDFPreflightArgument>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPreflightArgument) vc.get(i));
+		}
 
-    /**
-     * Get all PreflightArgument from the current element
-     * 
-     * @return Collection<JDFPreflightArgument>, null if none are available
-     */
-    public Collection<JDFPreflightArgument> getAllPreflightArgument()
-    {
-        final VElement vc = getChildElementVector(ElementName.PREFLIGHTARGUMENT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPreflightArgument> v = new Vector<JDFPreflightArgument>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPreflightArgument) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PreflightArgument
-     * @return JDFPreflightArgument the element
-     */
-    public JDFPreflightArgument appendPreflightArgument()
-    {
-        return (JDFPreflightArgument) appendElement(ElementName.PREFLIGHTARGUMENT, null);
-    }
+	/**
+	 * (30) append element PreflightArgument
+	 * @return JDFPreflightArgument the element
+	 */
+	public JDFPreflightArgument appendPreflightArgument()
+	{
+		return (JDFPreflightArgument) appendElement(ElementName.PREFLIGHTARGUMENT, null);
+	}
 
 }// end namespace JDF

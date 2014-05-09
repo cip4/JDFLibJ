@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,208 +81,188 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /**
-    *****************************************************************************
-    class JDFAutoMediaLayers : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoMediaLayers : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoMediaLayers extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoMediaLayers
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaLayers(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaLayers
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaLayers(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMediaLayers
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoMediaLayers(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaLayers
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoMediaLayers(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoMediaLayers
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoMediaLayers(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoMediaLayers
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoMediaLayers(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoMediaLayers[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoMediaLayers[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateGlueLine
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine getCreateGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element GlueLine
+	 * @param iSkip number of elements to skip
+	 * @return JDFGlueLine the element
+	 * default is getGlueLine(0)     */
+	public JDFGlueLine getGlueLine(int iSkip)
+	{
+		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all GlueLine from the current element
+	 * 
+	 * @return Collection<JDFGlueLine>, null if none are available
+	 */
+	public Collection<JDFGlueLine> getAllGlueLine()
+	{
+		final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateGlueLine
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine getCreateGlueLine(int iSkip)
-    {
-        return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUELINE, null, iSkip);
-    }
+		final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFGlueLine) vc.get(i));
+		}
 
-    /**
-     * (27) const get element GlueLine
-     * @param iSkip number of elements to skip
-     * @return JDFGlueLine the element
-     * default is getGlueLine(0)     */
-    public JDFGlueLine getGlueLine(int iSkip)
-    {
-        return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all GlueLine from the current element
-     * 
-     * @return Collection<JDFGlueLine>, null if none are available
-     */
-    public Collection<JDFGlueLine> getAllGlueLine()
-    {
-        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element GlueLine
+	 * @return JDFGlueLine the element
+	 */
+	public JDFGlueLine appendGlueLine()
+	{
+		return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
+	}
 
-        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFGlueLine) vc.get(i));
-        }
+	/** (26) getCreateMedia
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia getCreateMedia(int iSkip)
+	{
+		return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * (27) const get element Media
+	 * @param iSkip number of elements to skip
+	 * @return JDFMedia the element
+	 * default is getMedia(0)     */
+	public JDFMedia getMedia(int iSkip)
+	{
+		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+	}
 
-    /**
-     * (30) append element GlueLine
-     * @return JDFGlueLine the element
-     */
-    public JDFGlueLine appendGlueLine()
-    {
-        return (JDFGlueLine) appendElement(ElementName.GLUELINE, null);
-    }
+	/**
+	 * Get all Media from the current element
+	 * 
+	 * @return Collection<JDFMedia>, null if none are available
+	 */
+	public Collection<JDFMedia> getAllMedia()
+	{
+		final VElement vc = getChildElementVector(ElementName.MEDIA, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refGlueLine(JDFGlueLine refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFMedia> v = new Vector<JDFMedia>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFMedia) vc.get(i));
+		}
 
-    /** (26) getCreateMedia
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFMedia the element
-     */
-    public JDFMedia getCreateMedia(int iSkip)
-    {
-        return (JDFMedia)getCreateElement_KElement(ElementName.MEDIA, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element Media
-     * @param iSkip number of elements to skip
-     * @return JDFMedia the element
-     * default is getMedia(0)     */
-    public JDFMedia getMedia(int iSkip)
-    {
-        return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
-    }
+	/**
+	 * (30) append element Media
+	 * @return JDFMedia the element
+	 */
+	public JDFMedia appendMedia()
+	{
+		return (JDFMedia) appendElement(ElementName.MEDIA, null);
+	}
 
-    /**
-     * Get all Media from the current element
-     * 
-     * @return Collection<JDFMedia>, null if none are available
-     */
-    public Collection<JDFMedia> getAllMedia()
-    {
-        final VElement vc = getChildElementVector(ElementName.MEDIA, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFMedia> v = new Vector<JDFMedia>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFMedia) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Media
-     * @return JDFMedia the element
-     */
-    public JDFMedia appendMedia()
-    {
-        return (JDFMedia) appendElement(ElementName.MEDIA, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refMedia(JDFMedia refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refMedia(JDFMedia refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

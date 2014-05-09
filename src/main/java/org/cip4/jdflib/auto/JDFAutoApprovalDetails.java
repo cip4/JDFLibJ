@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,286 +87,272 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoApprovalDetails : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoApprovalDetails : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoApprovalDetails extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalState.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x22222111, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalState.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoApprovalDetails
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalDetails
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoApprovalDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoApprovalDetails[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for ApprovalState
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoApprovalDetails[  --> " + super.toString() + " ]";
-    }
+	public static class EnumApprovalState extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumApprovalState(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for ApprovalState
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumApprovalState getEnum(String enumName)
+		{
+			return (EnumApprovalState) getEnum(EnumApprovalState.class, enumName);
+		}
 
-        public static class EnumApprovalState extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumApprovalState getEnum(int enumValue)
+		{
+			return (EnumApprovalState) getEnum(EnumApprovalState.class, enumValue);
+		}
 
-            private EnumApprovalState(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumApprovalState.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumApprovalState getEnum(String enumName)
-            {
-                return (EnumApprovalState) getEnum(EnumApprovalState.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumApprovalState.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumApprovalState getEnum(int enumValue)
-            {
-                return (EnumApprovalState) getEnum(EnumApprovalState.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumApprovalState.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumApprovalState.class);
-            }
+		public static final EnumApprovalState Approved = new EnumApprovalState("Approved");
+		public static final EnumApprovalState ApprovedWithComment = new EnumApprovalState("ApprovedWithComment");
+		public static final EnumApprovalState Rejected = new EnumApprovalState("Rejected");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumApprovalState.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumApprovalState.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ApprovalState
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ApprovalState
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setApprovalState(EnumApprovalState enumVar)
+	{
+		setAttribute(AttributeName.APPROVALSTATE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumApprovalState Approved = new EnumApprovalState("Approved");
-            public static final EnumApprovalState ApprovedWithComment = new EnumApprovalState("ApprovedWithComment");
-            public static final EnumApprovalState Rejected = new EnumApprovalState("Rejected");
-        }      
+	/**
+	  * (9) get attribute ApprovalState
+	  * @return the value of the attribute
+	  */
+	public EnumApprovalState getApprovalState()
+	{
+		return EnumApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ApprovalStateDetails
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ApprovalStateDetails
+	  * @param value the value to set the attribute to
+	  */
+	public void setApprovalStateDetails(String value)
+	{
+		setAttribute(AttributeName.APPROVALSTATEDETAILS, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ApprovalStateDetails
+	  * @return the value of the attribute
+	  */
+	public String getApprovalStateDetails()
+	{
+		return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ApprovalState
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ApprovalState
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setApprovalState(EnumApprovalState enumVar)
-        {
-            setAttribute(AttributeName.APPROVALSTATE, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (9) get attribute ApprovalState
-          * @return the value of the attribute
-          */
-        public EnumApprovalState getApprovalState()
-        {
-            return EnumApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
-        }
+	/**
+	 * (24) const get element Contact
+	 * @return JDFContact the element
+	 */
+	public JDFContact getContact()
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ApprovalStateDetails
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ApprovalStateDetails
-          * @param value the value to set the attribute to
-          */
-        public void setApprovalStateDetails(String value)
-        {
-            setAttribute(AttributeName.APPROVALSTATEDETAILS, value, null);
-        }
+	/** (25) getCreateContact
+	 * 
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact()
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
+	}
 
-        /**
-          * (23) get String attribute ApprovalStateDetails
-          * @return the value of the attribute
-          */
-        public String getApprovalStateDetails()
-        {
-            return getAttribute(AttributeName.APPROVALSTATEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element Contact
+	 * @return JDFContact the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFContact appendContact() throws JDFException
+	{
+		return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact getContact()
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, 0);
-    }
+	/**
+	 * (24) const get element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getFileSpec()
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /** (25) getCreateContact
-     * 
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact()
-    {
-        return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, 0);
-    }
+	/** (25) getCreateFileSpec
+	 * 
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec()
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+	}
 
-    /**
-     * (29) append element Contact
-     * @return JDFContact the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFContact appendContact() throws JDFException
-    {
-        return (JDFContact) appendElementN(ElementName.CONTACT, 1, null);
-    }
+	/**
+	 * (29) append element FileSpec
+	 * @return JDFFileSpec the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFFileSpec appendFileSpec() throws JDFException
+	{
+		return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
-
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /** (25) getCreateFileSpec
-     * 
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec()
-    {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /**
-     * (29) append element FileSpec
-     * @return JDFFileSpec the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFFileSpec appendFileSpec() throws JDFException
-    {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

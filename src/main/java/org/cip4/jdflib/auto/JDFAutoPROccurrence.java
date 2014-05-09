@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,176 +83,165 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
-    /**
-    *****************************************************************************
-    class JDFAutoPROccurrence : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPROccurrence : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPROccurrence extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.OCCURRENCES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PRGROUP, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRGROUP, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPROccurrence
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPROccurrence
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPROccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPROccurrence
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPROccurrence
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPROccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPROccurrence
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPROccurrence
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPROccurrence(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPROccurrence[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPROccurrence[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Occurrences
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Occurrences
+	  * @param value the value to set the attribute to
+	  */
+	public void setOccurrences(int value)
+	{
+		setAttribute(AttributeName.OCCURRENCES, value, null);
+	}
 
+	/**
+	  * (15) get int attribute Occurrences
+	  * @return int the value of the attribute
+	  */
+	public int getOccurrences()
+	{
+		return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Occurrences
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Occurrences
-          * @param value the value to set the attribute to
-          */
-        public void setOccurrences(int value)
-        {
-            setAttribute(AttributeName.OCCURRENCES, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute Occurrences
-          * @return int the value of the attribute
-          */
-        public int getOccurrences()
-        {
-            return getIntAttribute(AttributeName.OCCURRENCES, null, 0);
-        }
+	/** (26) getCreatePRGroup
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup getCreatePRGroup(int iSkip)
+	{
+		return (JDFPRGroup) getCreateElement_KElement(ElementName.PRGROUP, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element PRGroup
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRGroup the element
+	 * default is getPRGroup(0)     */
+	public JDFPRGroup getPRGroup(int iSkip)
+	{
+		return (JDFPRGroup) getElement(ElementName.PRGROUP, null, iSkip);
+	}
 
-    /** (26) getCreatePRGroup
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPRGroup the element
-     */
-    public JDFPRGroup getCreatePRGroup(int iSkip)
-    {
-        return (JDFPRGroup)getCreateElement_KElement(ElementName.PRGROUP, null, iSkip);
-    }
+	/**
+	 * Get all PRGroup from the current element
+	 * 
+	 * @return Collection<JDFPRGroup>, null if none are available
+	 */
+	public Collection<JDFPRGroup> getAllPRGroup()
+	{
+		final VElement vc = getChildElementVector(ElementName.PRGROUP, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element PRGroup
-     * @param iSkip number of elements to skip
-     * @return JDFPRGroup the element
-     * default is getPRGroup(0)     */
-    public JDFPRGroup getPRGroup(int iSkip)
-    {
-        return (JDFPRGroup) getElement(ElementName.PRGROUP, null, iSkip);
-    }
+		final Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPRGroup) vc.get(i));
+		}
 
-    /**
-     * Get all PRGroup from the current element
-     * 
-     * @return Collection<JDFPRGroup>, null if none are available
-     */
-    public Collection<JDFPRGroup> getAllPRGroup()
-    {
-        final VElement vc = getChildElementVector(ElementName.PRGROUP, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPRGroup) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PRGroup
-     * @return JDFPRGroup the element
-     */
-    public JDFPRGroup appendPRGroup()
-    {
-        return (JDFPRGroup) appendElement(ElementName.PRGROUP, null);
-    }
+	/**
+	 * (30) append element PRGroup
+	 * @return JDFPRGroup the element
+	 */
+	public JDFPRGroup appendPRGroup()
+	{
+		return (JDFPRGroup) appendElement(ElementName.PRGROUP, null);
+	}
 
 }// end namespace JDF

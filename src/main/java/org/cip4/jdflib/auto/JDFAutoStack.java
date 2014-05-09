@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,193 +80,179 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoStack : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStack : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStack extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumLogicalStackSequence.getEnum(0), "SheetIndex");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x22221111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumLogicalStackSequence.getEnum(0), "SheetIndex");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStack
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStack(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStack
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStack(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStack
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStack(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStack
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStack(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStack
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStack(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStack
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStack(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStack[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for LogicalStackSequence
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStack[  --> " + super.toString() + " ]";
-    }
+	public static class EnumLogicalStackSequence extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumLogicalStackSequence(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for LogicalStackSequence
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumLogicalStackSequence getEnum(String enumName)
+		{
+			return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumName);
+		}
 
-        public static class EnumLogicalStackSequence extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumLogicalStackSequence getEnum(int enumValue)
+		{
+			return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumValue);
+		}
 
-            private EnumLogicalStackSequence(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumLogicalStackSequence.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumLogicalStackSequence getEnum(String enumName)
-            {
-                return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumLogicalStackSequence.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumLogicalStackSequence getEnum(int enumValue)
-            {
-                return (EnumLogicalStackSequence) getEnum(EnumLogicalStackSequence.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumLogicalStackSequence.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumLogicalStackSequence.class);
-            }
+		public static final EnumLogicalStackSequence SheetIndex = new EnumLogicalStackSequence("SheetIndex");
+		public static final EnumLogicalStackSequence DescendingSheetIndex = new EnumLogicalStackSequence("DescendingSheetIndex");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumLogicalStackSequence.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumLogicalStackSequence.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogicalStackOrd
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute LogicalStackOrd
+	  * @param value the value to set the attribute to
+	  */
+	public void setLogicalStackOrd(int value)
+	{
+		setAttribute(AttributeName.LOGICALSTACKORD, value, null);
+	}
 
-            public static final EnumLogicalStackSequence SheetIndex = new EnumLogicalStackSequence("SheetIndex");
-            public static final EnumLogicalStackSequence DescendingSheetIndex = new EnumLogicalStackSequence("DescendingSheetIndex");
-        }      
+	/**
+	  * (15) get int attribute LogicalStackOrd
+	  * @return int the value of the attribute
+	  */
+	public int getLogicalStackOrd()
+	{
+		return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute LogicalStackSequence
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute LogicalStackSequence
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
+	{
+		setAttribute(AttributeName.LOGICALSTACKSEQUENCE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LogicalStackOrd
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LogicalStackOrd
-          * @param value the value to set the attribute to
-          */
-        public void setLogicalStackOrd(int value)
-        {
-            setAttribute(AttributeName.LOGICALSTACKORD, value, null);
-        }
-
-        /**
-          * (15) get int attribute LogicalStackOrd
-          * @return int the value of the attribute
-          */
-        public int getLogicalStackOrd()
-        {
-            return getIntAttribute(AttributeName.LOGICALSTACKORD, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LogicalStackSequence
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute LogicalStackSequence
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
-        {
-            setAttribute(AttributeName.LOGICALSTACKSEQUENCE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute LogicalStackSequence
-          * @return the value of the attribute
-          */
-        public EnumLogicalStackSequence getLogicalStackSequence()
-        {
-            return EnumLogicalStackSequence.getEnum(getAttribute(AttributeName.LOGICALSTACKSEQUENCE, null, "SheetIndex"));
-        }
+	/**
+	  * (9) get attribute LogicalStackSequence
+	  * @return the value of the attribute
+	  */
+	public EnumLogicalStackSequence getLogicalStackSequence()
+	{
+		return EnumLogicalStackSequence.getEnum(getAttribute(AttributeName.LOGICALSTACKSEQUENCE, null, "SheetIndex"));
+	}
 
 }// end namespace JDF

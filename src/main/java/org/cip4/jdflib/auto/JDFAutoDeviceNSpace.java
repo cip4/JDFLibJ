@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,224 +81,190 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoDeviceNSpace : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDeviceNSpace : public JDFElement
 
-public abstract class JDFAutoDeviceNSpace extends JDFResource
+*****************************************************************************
+*/
+
+public abstract class JDFAutoDeviceNSpace extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.N, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.N, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDeviceNSpace
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeviceNSpace(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceNSpace
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDeviceNSpace(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeviceNSpace
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDeviceNSpace(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceNSpace
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDeviceNSpace(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDeviceNSpace
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDeviceNSpace(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDeviceNSpace
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDeviceNSpace(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDeviceNSpace[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDeviceNSpace[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute N
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute N
+	  * @param value the value to set the attribute to
+	  */
+	public void setN(int value)
+	{
+		setAttribute(AttributeName.N, value, null);
+	}
 
+	/**
+	  * (15) get int attribute N
+	  * @return int the value of the attribute
+	  */
+	public int getN()
+	{
+		return getIntAttribute(AttributeName.N, null, 0);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Name
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Name
+	  * @param value the value to set the attribute to
+	  */
+	public void setName(String value)
+	{
+		setAttribute(AttributeName.NAME, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Name
+	  * @return the value of the attribute
+	  */
+	public String getName()
+	{
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateSeparationSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute N
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute N
-          * @param value the value to set the attribute to
-          */
-        public void setN(int value)
-        {
-            setAttribute(AttributeName.N, value, null);
-        }
+	/**
+	 * (27) const get element SeparationSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 * default is getSeparationSpec(0)     */
+	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute N
-          * @return int the value of the attribute
-          */
-        public int getN()
-        {
-            return getIntAttribute(AttributeName.N, null, 0);
-        }
+	/**
+	 * Get all SeparationSpec from the current element
+	 * 
+	 * @return Collection<JDFSeparationSpec>, null if none are available
+	 */
+	public Collection<JDFSeparationSpec> getAllSeparationSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Name
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Name
-          * @param value the value to set the attribute to
-          */
-        public void setName(String value)
-        {
-            setAttribute(AttributeName.NAME, value, null);
-        }
+		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSeparationSpec) vc.get(i));
+		}
 
-        /**
-          * (23) get String attribute Name
-          * @return the value of the attribute
-          */
-        public String getName()
-        {
-            return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateSeparationSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * (27) const get element SeparationSpec
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     * default is getSeparationSpec(0)     */
-    public JDFSeparationSpec getSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * Get all SeparationSpec from the current element
-     * 
-     * @return Collection<JDFSeparationSpec>, null if none are available
-     */
-    public Collection<JDFSeparationSpec> getAllSeparationSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSeparationSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec appendSeparationSpec()
-    {
-        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
-    }
+	/**
+	 * (30) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec appendSeparationSpec()
+	{
+		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
+	}
 
 }// end namespace JDF

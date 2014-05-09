@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,279 +85,266 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionSubPath;
-    /**
-    *****************************************************************************
-    class JDFAutoProductionPath : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoProductionPath : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoProductionPath extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PRODUCTIONPATHID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PRODUCTIONPATHID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.POSTPRESSCOMPONENTPATH, 0x33333111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTINGUNITWEBPATH, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.POSTPRESSCOMPONENTPATH, 0x33333111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.PRINTINGUNITWEBPATH, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoProductionPath
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionPath
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoProductionPath(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProductionPath
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionPath
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoProductionPath(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoProductionPath
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoProductionPath
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoProductionPath(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoProductionPath[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoProductionPath[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ProductionPathID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ProductionPathID
+	  * @param value the value to set the attribute to
+	  */
+	public void setProductionPathID(String value)
+	{
+		setAttribute(AttributeName.PRODUCTIONPATHID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ProductionPathID
+	  * @return the value of the attribute
+	  */
+	public String getProductionPathID()
+	{
+		return getAttribute(AttributeName.PRODUCTIONPATHID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element FolderSuperstructureWebPath
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getFolderSuperstructureWebPath()
+	{
+		return (JDFProductionSubPath) getElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ProductionPathID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ProductionPathID
-          * @param value the value to set the attribute to
-          */
-        public void setProductionPathID(String value)
-        {
-            setAttribute(AttributeName.PRODUCTIONPATHID, value, null);
-        }
+	/** (25) getCreateFolderSuperstructureWebPath
+	 * 
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getCreateFolderSuperstructureWebPath()
+	{
+		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
+	}
 
-        /**
-          * (23) get String attribute ProductionPathID
-          * @return the value of the attribute
-          */
-        public String getProductionPathID()
-        {
-            return getAttribute(AttributeName.PRODUCTIONPATHID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (29) append element FolderSuperstructureWebPath
+	 * @return JDFProductionSubPath the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFProductionSubPath appendFolderSuperstructureWebPath() throws JDFException
+	{
+		return (JDFProductionSubPath) appendElementN(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (26) getCreatePostPressComponentPath
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getCreatePostPressComponentPath(int iSkip)
+	{
+		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
+	}
 
-    /**
-     * (24) const get element FolderSuperstructureWebPath
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath getFolderSuperstructureWebPath()
-    {
-        return (JDFProductionSubPath) getElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
-    }
+	/**
+	 * (27) const get element PostPressComponentPath
+	 * @param iSkip number of elements to skip
+	 * @return JDFProductionSubPath the element
+	 * default is getPostPressComponentPath(0)     */
+	public JDFProductionSubPath getPostPressComponentPath(int iSkip)
+	{
+		return (JDFProductionSubPath) getElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
+	}
 
-    /** (25) getCreateFolderSuperstructureWebPath
-     * 
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath getCreateFolderSuperstructureWebPath()
-    {
-        return (JDFProductionSubPath) getCreateElement_KElement(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, null, 0);
-    }
+	/**
+	 * Get all PostPressComponentPath from the current element
+	 * 
+	 * @return Collection<JDFProductionSubPath>, null if none are available
+	 */
+	public Collection<JDFProductionSubPath> getAllPostPressComponentPath()
+	{
+		final VElement vc = getChildElementVector(ElementName.POSTPRESSCOMPONENTPATH, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (29) append element FolderSuperstructureWebPath
-     * @return JDFProductionSubPath the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFProductionSubPath appendFolderSuperstructureWebPath() throws JDFException
-    {
-        return (JDFProductionSubPath) appendElementN(ElementName.FOLDERSUPERSTRUCTUREWEBPATH, 1, null);
-    }
+		final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFProductionSubPath) vc.get(i));
+		}
 
-    /** (26) getCreatePostPressComponentPath
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath getCreatePostPressComponentPath(int iSkip)
-    {
-        return (JDFProductionSubPath)getCreateElement_KElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element PostPressComponentPath
-     * @param iSkip number of elements to skip
-     * @return JDFProductionSubPath the element
-     * default is getPostPressComponentPath(0)     */
-    public JDFProductionSubPath getPostPressComponentPath(int iSkip)
-    {
-        return (JDFProductionSubPath) getElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
-    }
+	/**
+	 * (30) append element PostPressComponentPath
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath appendPostPressComponentPath()
+	{
+		return (JDFProductionSubPath) appendElement(ElementName.POSTPRESSCOMPONENTPATH, null);
+	}
 
-    /**
-     * Get all PostPressComponentPath from the current element
-     * 
-     * @return Collection<JDFProductionSubPath>, null if none are available
-     */
-    public Collection<JDFProductionSubPath> getAllPostPressComponentPath()
-    {
-        final VElement vc = getChildElementVector(ElementName.POSTPRESSCOMPONENTPATH, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreatePrintingUnitWebPath
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath getCreatePrintingUnitWebPath(int iSkip)
+	{
+		return (JDFProductionSubPath) getCreateElement_KElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
+	}
 
-        final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFProductionSubPath) vc.get(i));
-        }
+	/**
+	 * (27) const get element PrintingUnitWebPath
+	 * @param iSkip number of elements to skip
+	 * @return JDFProductionSubPath the element
+	 * default is getPrintingUnitWebPath(0)     */
+	public JDFProductionSubPath getPrintingUnitWebPath(int iSkip)
+	{
+		return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all PrintingUnitWebPath from the current element
+	 * 
+	 * @return Collection<JDFProductionSubPath>, null if none are available
+	 */
+	public Collection<JDFProductionSubPath> getAllPrintingUnitWebPath()
+	{
+		final VElement vc = getChildElementVector(ElementName.PRINTINGUNITWEBPATH, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element PostPressComponentPath
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath appendPostPressComponentPath()
-    {
-        return (JDFProductionSubPath) appendElement(ElementName.POSTPRESSCOMPONENTPATH, null);
-    }
+		final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFProductionSubPath) vc.get(i));
+		}
 
-    /** (26) getCreatePrintingUnitWebPath
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath getCreatePrintingUnitWebPath(int iSkip)
-    {
-        return (JDFProductionSubPath)getCreateElement_KElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element PrintingUnitWebPath
-     * @param iSkip number of elements to skip
-     * @return JDFProductionSubPath the element
-     * default is getPrintingUnitWebPath(0)     */
-    public JDFProductionSubPath getPrintingUnitWebPath(int iSkip)
-    {
-        return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
-    }
-
-    /**
-     * Get all PrintingUnitWebPath from the current element
-     * 
-     * @return Collection<JDFProductionSubPath>, null if none are available
-     */
-    public Collection<JDFProductionSubPath> getAllPrintingUnitWebPath()
-    {
-        final VElement vc = getChildElementVector(ElementName.PRINTINGUNITWEBPATH, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFProductionSubPath) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PrintingUnitWebPath
-     * @return JDFProductionSubPath the element
-     */
-    public JDFProductionSubPath appendPrintingUnitWebPath()
-    {
-        return (JDFProductionSubPath) appendElement(ElementName.PRINTINGUNITWEBPATH, null);
-    }
+	/**
+	 * (30) append element PrintingUnitWebPath
+	 * @return JDFProductionSubPath the element
+	 */
+	public JDFProductionSubPath appendPrintingUnitWebPath()
+	{
+		return (JDFProductionSubPath) appendElement(ElementName.PRINTINGUNITWEBPATH, null);
+	}
 
 }// end namespace JDF

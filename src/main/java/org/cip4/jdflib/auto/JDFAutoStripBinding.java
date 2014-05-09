@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
-    /**
-    *****************************************************************************
-    class JDFAutoStripBinding : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStripBinding : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStripBinding extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStripBinding
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStripBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStripBinding
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStripBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStripBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStripBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStripBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStripBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStripBinding
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStripBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStripBinding
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStripBinding(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStripBinding[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStripBinding[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element HoleList
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getHoleList()
+	{
+		return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
+	}
 
+	/** (25) getCreateHoleList
+	 * 
+	 * @return JDFHoleList the element
+	 */
+	public JDFHoleList getCreateHoleList()
+	{
+		return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element HoleList
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getHoleList()
-    {
-        return (JDFHoleList) getElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /** (25) getCreateHoleList
-     * 
-     * @return JDFHoleList the element
-     */
-    public JDFHoleList getCreateHoleList()
-    {
-        return (JDFHoleList) getCreateElement_KElement(ElementName.HOLELIST, null, 0);
-    }
-
-    /**
-     * (29) append element HoleList
-     * @return JDFHoleList the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFHoleList appendHoleList() throws JDFException
-    {
-        return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
-    }
+	/**
+	 * (29) append element HoleList
+	 * @return JDFHoleList the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFHoleList appendHoleList() throws JDFException
+	{
+		return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+	}
 
 }// end namespace JDF

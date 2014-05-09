@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,404 +87,379 @@ import org.cip4.jdflib.resource.process.JDFObjectResolution;
 import org.cip4.jdflib.resource.process.JDFTrapRegion;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingOrder;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoTrappingDetails : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTrappingDetails : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTrappingDetails extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREFILEPARAMS, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPPING, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAPPINGTYPE, 0x44444433, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTTRAPPING, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREFILEPARAMS, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPPING, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAPPINGTYPE, 0x44444433, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGORDER, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333331);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.TRAPREGION, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRAPPINGORDER, 0x66666666);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TRAPPINGPARAMS, 0x66666666);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333331);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.TRAPREGION, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTrappingDetails
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrappingDetails
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTrappingDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrappingDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrappingDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTrappingDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrappingDetails
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrappingDetails
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTrappingDetails(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTrappingDetails[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTrappingDetails[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DefaultTrapping
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DefaultTrapping
+	  * @param value the value to set the attribute to
+	  */
+	public void setDefaultTrapping(boolean value)
+	{
+		setAttribute(AttributeName.DEFAULTTRAPPING, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute DefaultTrapping
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getDefaultTrapping()
+	{
+		return getBoolAttribute(AttributeName.DEFAULTTRAPPING, null, false);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute IgnoreFileParams
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute IgnoreFileParams
+	  * @param value the value to set the attribute to
+	  */
+	public void setIgnoreFileParams(boolean value)
+	{
+		setAttribute(AttributeName.IGNOREFILEPARAMS, value, null);
+	}
 
+	/**
+	  * (18) get boolean attribute IgnoreFileParams
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getIgnoreFileParams()
+	{
+		return getBoolAttribute(AttributeName.IGNOREFILEPARAMS, null, false);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DefaultTrapping
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DefaultTrapping
-          * @param value the value to set the attribute to
-          */
-        public void setDefaultTrapping(boolean value)
-        {
-            setAttribute(AttributeName.DEFAULTTRAPPING, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Trapping
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Trapping
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrapping(boolean value)
+	{
+		setAttribute(AttributeName.TRAPPING, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute DefaultTrapping
-          * @return boolean the value of the attribute
-          */
-        public boolean getDefaultTrapping()
-        {
-            return getBoolAttribute(AttributeName.DEFAULTTRAPPING, null, false);
-        }
+	/**
+	  * (18) get boolean attribute Trapping
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getTrapping()
+	{
+		return getBoolAttribute(AttributeName.TRAPPING, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute IgnoreFileParams
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IgnoreFileParams
-          * @param value the value to set the attribute to
-          */
-        public void setIgnoreFileParams(boolean value)
-        {
-            setAttribute(AttributeName.IGNOREFILEPARAMS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrappingType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TrappingType
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrappingType(int value)
+	{
+		setAttribute(AttributeName.TRAPPINGTYPE, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute IgnoreFileParams
-          * @return boolean the value of the attribute
-          */
-        public boolean getIgnoreFileParams()
-        {
-            return getBoolAttribute(AttributeName.IGNOREFILEPARAMS, null, false);
-        }
+	/**
+	  * (15) get int attribute TrappingType
+	  * @return int the value of the attribute
+	  */
+	public int getTrappingType()
+	{
+		return getIntAttribute(AttributeName.TRAPPINGTYPE, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Trapping
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Trapping
-          * @param value the value to set the attribute to
-          */
-        public void setTrapping(boolean value)
-        {
-            setAttribute(AttributeName.TRAPPING, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (18) get boolean attribute Trapping
-          * @return boolean the value of the attribute
-          */
-        public boolean getTrapping()
-        {
-            return getBoolAttribute(AttributeName.TRAPPING, null, false);
-        }
+	/**
+	 * (24) const get element TrappingOrder
+	 * @return JDFTrappingOrder the element
+	 */
+	public JDFTrappingOrder getTrappingOrder()
+	{
+		return (JDFTrappingOrder) getElement(ElementName.TRAPPINGORDER, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrappingType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrappingType
-          * @param value the value to set the attribute to
-          */
-        public void setTrappingType(int value)
-        {
-            setAttribute(AttributeName.TRAPPINGTYPE, value, null);
-        }
+	/** (25) getCreateTrappingOrder
+	 * 
+	 * @return JDFTrappingOrder the element
+	 */
+	public JDFTrappingOrder getCreateTrappingOrder()
+	{
+		return (JDFTrappingOrder) getCreateElement_KElement(ElementName.TRAPPINGORDER, null, 0);
+	}
 
-        /**
-          * (15) get int attribute TrappingType
-          * @return int the value of the attribute
-          */
-        public int getTrappingType()
-        {
-            return getIntAttribute(AttributeName.TRAPPINGTYPE, null, 0);
-        }
+	/**
+	 * (29) append element TrappingOrder
+	 * @return JDFTrappingOrder the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTrappingOrder appendTrappingOrder() throws JDFException
+	{
+		return (JDFTrappingOrder) appendElementN(ElementName.TRAPPINGORDER, 1, null);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (24) const get element TrappingParams
+	 * @return JDFTrappingParams the element
+	 */
+	public JDFTrappingParams getTrappingParams()
+	{
+		return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element TrappingOrder
-     * @return JDFTrappingOrder the element
-     */
-    public JDFTrappingOrder getTrappingOrder()
-    {
-        return (JDFTrappingOrder) getElement(ElementName.TRAPPINGORDER, null, 0);
-    }
+	/** (25) getCreateTrappingParams
+	 * 
+	 * @return JDFTrappingParams the element
+	 */
+	public JDFTrappingParams getCreateTrappingParams()
+	{
+		return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
+	}
 
-    /** (25) getCreateTrappingOrder
-     * 
-     * @return JDFTrappingOrder the element
-     */
-    public JDFTrappingOrder getCreateTrappingOrder()
-    {
-        return (JDFTrappingOrder) getCreateElement_KElement(ElementName.TRAPPINGORDER, null, 0);
-    }
+	/**
+	 * (29) append element TrappingParams
+	 * @return JDFTrappingParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTrappingParams appendTrappingParams() throws JDFException
+	{
+		return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
+	}
 
-    /**
-     * (29) append element TrappingOrder
-     * @return JDFTrappingOrder the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTrappingOrder appendTrappingOrder() throws JDFException
-    {
-        return (JDFTrappingOrder) appendElementN(ElementName.TRAPPINGORDER, 1, null);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTrappingParams(JDFTrappingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (24) const get element TrappingParams
-     * @return JDFTrappingParams the element
-     */
-    public JDFTrappingParams getTrappingParams()
-    {
-        return (JDFTrappingParams) getElement(ElementName.TRAPPINGPARAMS, null, 0);
-    }
+	/** (26) getCreateObjectResolution
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution getCreateObjectResolution(int iSkip)
+	{
+		return (JDFObjectResolution) getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+	}
 
-    /** (25) getCreateTrappingParams
-     * 
-     * @return JDFTrappingParams the element
-     */
-    public JDFTrappingParams getCreateTrappingParams()
-    {
-        return (JDFTrappingParams) getCreateElement_KElement(ElementName.TRAPPINGPARAMS, null, 0);
-    }
+	/**
+	 * (27) const get element ObjectResolution
+	 * @param iSkip number of elements to skip
+	 * @return JDFObjectResolution the element
+	 * default is getObjectResolution(0)     */
+	public JDFObjectResolution getObjectResolution(int iSkip)
+	{
+		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+	}
 
-    /**
-     * (29) append element TrappingParams
-     * @return JDFTrappingParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTrappingParams appendTrappingParams() throws JDFException
-    {
-        return (JDFTrappingParams) appendElementN(ElementName.TRAPPINGPARAMS, 1, null);
-    }
+	/**
+	 * Get all ObjectResolution from the current element
+	 * 
+	 * @return Collection<JDFObjectResolution>, null if none are available
+	 */
+	public Collection<JDFObjectResolution> getAllObjectResolution()
+	{
+		final VElement vc = getChildElementVector(ElementName.OBJECTRESOLUTION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTrappingParams(JDFTrappingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+		final Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFObjectResolution) vc.get(i));
+		}
 
-    /** (26) getCreateObjectResolution
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFObjectResolution the element
-     */
-    public JDFObjectResolution getCreateObjectResolution(int iSkip)
-    {
-        return (JDFObjectResolution)getCreateElement_KElement(ElementName.OBJECTRESOLUTION, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ObjectResolution
-     * @param iSkip number of elements to skip
-     * @return JDFObjectResolution the element
-     * default is getObjectResolution(0)     */
-    public JDFObjectResolution getObjectResolution(int iSkip)
-    {
-        return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
-    }
+	/**
+	 * (30) append element ObjectResolution
+	 * @return JDFObjectResolution the element
+	 */
+	public JDFObjectResolution appendObjectResolution()
+	{
+		return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
+	}
 
-    /**
-     * Get all ObjectResolution from the current element
-     * 
-     * @return Collection<JDFObjectResolution>, null if none are available
-     */
-    public Collection<JDFObjectResolution> getAllObjectResolution()
-    {
-        final VElement vc = getChildElementVector(ElementName.OBJECTRESOLUTION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateTrapRegion
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFTrapRegion the element
+	 */
+	public JDFTrapRegion getCreateTrapRegion(int iSkip)
+	{
+		return (JDFTrapRegion) getCreateElement_KElement(ElementName.TRAPREGION, null, iSkip);
+	}
 
-        final Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFObjectResolution) vc.get(i));
-        }
+	/**
+	 * (27) const get element TrapRegion
+	 * @param iSkip number of elements to skip
+	 * @return JDFTrapRegion the element
+	 * default is getTrapRegion(0)     */
+	public JDFTrapRegion getTrapRegion(int iSkip)
+	{
+		return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all TrapRegion from the current element
+	 * 
+	 * @return Collection<JDFTrapRegion>, null if none are available
+	 */
+	public Collection<JDFTrapRegion> getAllTrapRegion()
+	{
+		final VElement vc = getChildElementVector(ElementName.TRAPREGION, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element ObjectResolution
-     * @return JDFObjectResolution the element
-     */
-    public JDFObjectResolution appendObjectResolution()
-    {
-        return (JDFObjectResolution) appendElement(ElementName.OBJECTRESOLUTION, null);
-    }
+		final Vector<JDFTrapRegion> v = new Vector<JDFTrapRegion>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFTrapRegion) vc.get(i));
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refObjectResolution(JDFObjectResolution refTarget)
-    {
-        refElement(refTarget);
-    }
+		return v;
+	}
 
-    /** (26) getCreateTrapRegion
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTrapRegion the element
-     */
-    public JDFTrapRegion getCreateTrapRegion(int iSkip)
-    {
-        return (JDFTrapRegion)getCreateElement_KElement(ElementName.TRAPREGION, null, iSkip);
-    }
+	/**
+	 * (30) append element TrapRegion
+	 * @return JDFTrapRegion the element
+	 */
+	public JDFTrapRegion appendTrapRegion()
+	{
+		return (JDFTrapRegion) appendElement(ElementName.TRAPREGION, null);
+	}
 
-    /**
-     * (27) const get element TrapRegion
-     * @param iSkip number of elements to skip
-     * @return JDFTrapRegion the element
-     * default is getTrapRegion(0)     */
-    public JDFTrapRegion getTrapRegion(int iSkip)
-    {
-        return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, iSkip);
-    }
-
-    /**
-     * Get all TrapRegion from the current element
-     * 
-     * @return Collection<JDFTrapRegion>, null if none are available
-     */
-    public Collection<JDFTrapRegion> getAllTrapRegion()
-    {
-        final VElement vc = getChildElementVector(ElementName.TRAPREGION, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTrapRegion> v = new Vector<JDFTrapRegion>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTrapRegion) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element TrapRegion
-     * @return JDFTrapRegion the element
-     */
-    public JDFTrapRegion appendTrapRegion()
-    {
-        return (JDFTrapRegion) appendElement(ElementName.TRAPREGION, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTrapRegion(JDFTrapRegion refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTrapRegion(JDFTrapRegion refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

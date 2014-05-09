@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,429 +84,407 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
-    /**
-    *****************************************************************************
-    class JDFAutoModule : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoModule : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoModule extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODELNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODELURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.SUBMODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICETYPE, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MANUFACTURERURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MODELDESCRIPTION, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODELNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODELNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODELURL, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SERIALNUMBER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SUBMODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoModule
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModule
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoModule(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModule
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModule
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoModule(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModule
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoModule
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoModule(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoModule[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoModule[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute DeviceType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute DeviceType
+	  * @param value the value to set the attribute to
+	  */
+	public void setDeviceType(String value)
+	{
+		setAttribute(AttributeName.DEVICETYPE, value, null);
+	}
 
+	/**
+	  * (23) get String attribute DeviceType
+	  * @return the value of the attribute
+	  */
+	public String getDeviceType()
+	{
+		return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute DeviceType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute DeviceType
-          * @param value the value to set the attribute to
-          */
-        public void setDeviceType(String value)
-        {
-            setAttribute(AttributeName.DEVICETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Manufacturer
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Manufacturer
+	  * @param value the value to set the attribute to
+	  */
+	public void setManufacturer(String value)
+	{
+		setAttribute(AttributeName.MANUFACTURER, value, null);
+	}
 
-        /**
-          * (23) get String attribute DeviceType
-          * @return the value of the attribute
-          */
-        public String getDeviceType()
-        {
-            return getAttribute(AttributeName.DEVICETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Manufacturer
+	  * @return the value of the attribute
+	  */
+	public String getManufacturer()
+	{
+		return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Manufacturer
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Manufacturer
-          * @param value the value to set the attribute to
-          */
-        public void setManufacturer(String value)
-        {
-            setAttribute(AttributeName.MANUFACTURER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ManufacturerURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ManufacturerURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setManufacturerURL(String value)
+	{
+		setAttribute(AttributeName.MANUFACTURERURL, value, null);
+	}
 
-        /**
-          * (23) get String attribute Manufacturer
-          * @return the value of the attribute
-          */
-        public String getManufacturer()
-        {
-            return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ManufacturerURL
+	  * @return the value of the attribute
+	  */
+	public String getManufacturerURL()
+	{
+		return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ManufacturerURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ManufacturerURL
-          * @param value the value to set the attribute to
-          */
-        public void setManufacturerURL(String value)
-        {
-            setAttribute(AttributeName.MANUFACTURERURL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModelDescription
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModelDescription
+	  * @param value the value to set the attribute to
+	  */
+	public void setModelDescription(String value)
+	{
+		setAttribute(AttributeName.MODELDESCRIPTION, value, null);
+	}
 
-        /**
-          * (23) get String attribute ManufacturerURL
-          * @return the value of the attribute
-          */
-        public String getManufacturerURL()
-        {
-            return getAttribute(AttributeName.MANUFACTURERURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModelDescription
+	  * @return the value of the attribute
+	  */
+	public String getModelDescription()
+	{
+		return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModelDescription
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModelDescription
-          * @param value the value to set the attribute to
-          */
-        public void setModelDescription(String value)
-        {
-            setAttribute(AttributeName.MODELDESCRIPTION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModelName
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModelName
+	  * @param value the value to set the attribute to
+	  */
+	public void setModelName(String value)
+	{
+		setAttribute(AttributeName.MODELNAME, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModelDescription
-          * @return the value of the attribute
-          */
-        public String getModelDescription()
-        {
-            return getAttribute(AttributeName.MODELDESCRIPTION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModelName
+	  * @return the value of the attribute
+	  */
+	public String getModelName()
+	{
+		return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModelName
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModelName
-          * @param value the value to set the attribute to
-          */
-        public void setModelName(String value)
-        {
-            setAttribute(AttributeName.MODELNAME, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModelNumber
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModelNumber
+	  * @param value the value to set the attribute to
+	  */
+	public void setModelNumber(String value)
+	{
+		setAttribute(AttributeName.MODELNUMBER, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModelName
-          * @return the value of the attribute
-          */
-        public String getModelName()
-        {
-            return getAttribute(AttributeName.MODELNAME, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModelNumber
+	  * @return the value of the attribute
+	  */
+	public String getModelNumber()
+	{
+		return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModelNumber
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModelNumber
-          * @param value the value to set the attribute to
-          */
-        public void setModelNumber(String value)
-        {
-            setAttribute(AttributeName.MODELNUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModelURL
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModelURL
+	  * @param value the value to set the attribute to
+	  */
+	public void setModelURL(String value)
+	{
+		setAttribute(AttributeName.MODELURL, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModelNumber
-          * @return the value of the attribute
-          */
-        public String getModelNumber()
-        {
-            return getAttribute(AttributeName.MODELNUMBER, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModelURL
+	  * @return the value of the attribute
+	  */
+	public String getModelURL()
+	{
+		return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModelURL
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModelURL
-          * @param value the value to set the attribute to
-          */
-        public void setModelURL(String value)
-        {
-            setAttribute(AttributeName.MODELURL, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleID
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleID(String value)
+	{
+		setAttribute(AttributeName.MODULEID, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModelURL
-          * @return the value of the attribute
-          */
-        public String getModelURL()
-        {
-            return getAttribute(AttributeName.MODELURL, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ModuleID
+	  * @return the value of the attribute
+	  */
+	public String getModuleID()
+	{
+		return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleID
-          * @param value the value to set the attribute to
-          */
-        public void setModuleID(String value)
-        {
-            setAttribute(AttributeName.MODULEID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(int value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModuleID
-          * @return the value of the attribute
-          */
-        public String getModuleID()
-        {
-            return getAttribute(AttributeName.MODULEID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute ModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getModuleIndex()
+	{
+		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(int value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleType
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleType(String value)
+	{
+		setAttribute(AttributeName.MODULETYPE, value, null);
+	}
 
-        /**
-          * (15) get int attribute ModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getModuleIndex()
-        {
-            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
-        }
+	/**
+	  * (23) get String attribute ModuleType
+	  * @return the value of the attribute
+	  */
+	public String getModuleType()
+	{
+		return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleType
-          * @param value the value to set the attribute to
-          */
-        public void setModuleType(String value)
-        {
-            setAttribute(AttributeName.MODULETYPE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SerialNumber
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SerialNumber
+	  * @param value the value to set the attribute to
+	  */
+	public void setSerialNumber(String value)
+	{
+		setAttribute(AttributeName.SERIALNUMBER, value, null);
+	}
 
-        /**
-          * (23) get String attribute ModuleType
-          * @return the value of the attribute
-          */
-        public String getModuleType()
-        {
-            return getAttribute(AttributeName.MODULETYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute SerialNumber
+	  * @return the value of the attribute
+	  */
+	public String getSerialNumber()
+	{
+		return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SerialNumber
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SerialNumber
-          * @param value the value to set the attribute to
-          */
-        public void setSerialNumber(String value)
-        {
-            setAttribute(AttributeName.SERIALNUMBER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SubModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute SubModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setSubModuleIndex(int value)
+	{
+		setAttribute(AttributeName.SUBMODULEINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute SerialNumber
-          * @return the value of the attribute
-          */
-        public String getSerialNumber()
-        {
-            return getAttribute(AttributeName.SERIALNUMBER, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute SubModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getSubModuleIndex()
+	{
+		return getIntAttribute(AttributeName.SUBMODULEINDEX, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SubModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute SubModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setSubModuleIndex(int value)
-        {
-            setAttribute(AttributeName.SUBMODULEINDEX, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute SubModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getSubModuleIndex()
-        {
-            return getIntAttribute(AttributeName.SUBMODULEINDEX, null, 0);
-        }
+	/** (26) getCreateModule
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFModule the element
+	 */
+	public JDFModule getCreateModule(int iSkip)
+	{
+		return (JDFModule) getCreateElement_KElement(ElementName.MODULE, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element Module
+	 * @param iSkip number of elements to skip
+	 * @return JDFModule the element
+	 * default is getModule(0)     */
+	public JDFModule getModule(int iSkip)
+	{
+		return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
+	}
 
-    /** (26) getCreateModule
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFModule the element
-     */
-    public JDFModule getCreateModule(int iSkip)
-    {
-        return (JDFModule)getCreateElement_KElement(ElementName.MODULE, null, iSkip);
-    }
+	/**
+	 * Get all Module from the current element
+	 * 
+	 * @return Collection<JDFModule>, null if none are available
+	 */
+	public Collection<JDFModule> getAllModule()
+	{
+		final VElement vc = getChildElementVector(ElementName.MODULE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element Module
-     * @param iSkip number of elements to skip
-     * @return JDFModule the element
-     * default is getModule(0)     */
-    public JDFModule getModule(int iSkip)
-    {
-        return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
-    }
+		final Vector<JDFModule> v = new Vector<JDFModule>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFModule) vc.get(i));
+		}
 
-    /**
-     * Get all Module from the current element
-     * 
-     * @return Collection<JDFModule>, null if none are available
-     */
-    public Collection<JDFModule> getAllModule()
-    {
-        final VElement vc = getChildElementVector(ElementName.MODULE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFModule> v = new Vector<JDFModule>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFModule) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Module
-     * @return JDFModule the element
-     */
-    public JDFModule appendModule()
-    {
-        return (JDFModule) appendElement(ElementName.MODULE, null);
-    }
+	/**
+	 * (30) append element Module
+	 * @return JDFModule the element
+	 */
+	public JDFModule appendModule()
+	{
+		return (JDFModule) appendElement(ElementName.MODULE, null);
+	}
 
 }// end namespace JDF

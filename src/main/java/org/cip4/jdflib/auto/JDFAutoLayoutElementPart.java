@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -80,223 +83,401 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
+import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
+import org.cip4.jdflib.resource.process.JDFImageEnhancementParams;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFPositionObj;
-    /**
-    *****************************************************************************
-    class JDFAutoLayoutElementPart : public JDFElement
+import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionParams;
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLayoutElementPart : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.ID, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.ID, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66661111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x66666111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONPARAMS, 0x33311111);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x33311111);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGEENHANCEMENTPARAMS, 0x33311111);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66661111);
+		elemInfoTable[5] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x66661111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLayoutElementPart
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayoutElementPart
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutElementPart(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLayoutElementPart
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayoutElementPart
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutElementPart(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLayoutElementPart
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayoutElementPart
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLayoutElementPart(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ID
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setID(String value)
+	{
+		setAttribute(AttributeName.ID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute ID
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getID()
+	{
+		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ID
-          * @param value the value to set the attribute to
-          */
-        public void setID(String value)
-        {
-            setAttribute(AttributeName.ID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute ID
-          * @return the value of the attribute
-          */
-        public String getID()
-        {
-            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * (24) const get element BarcodeProductionParams
+	 * @return JDFBarcodeProductionParams the element
+	 */
+	public JDFBarcodeProductionParams getBarcodeProductionParams()
+	{
+		return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/** (25) getCreateBarcodeProductionParams
+	 * 
+	 * @return JDFBarcodeProductionParams the element
+	 */
+	public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
+	{
+		return (JDFBarcodeProductionParams) getCreateElement_KElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
+	}
 
-    /**
-     * (24) const get element BarcodeProductionParams
-     * @return JDFBarcodeProductionParams the element
-     */
-    public JDFBarcodeProductionParams getBarcodeProductionParams()
-    {
-        return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
-    }
+	/**
+	 * (29) append element BarcodeProductionParams
+	 * @return JDFBarcodeProductionParams the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
+	{
+		return (JDFBarcodeProductionParams) appendElementN(ElementName.BARCODEPRODUCTIONPARAMS, 1, null);
+	}
 
-    /** (25) getCreateBarcodeProductionParams
-     * 
-     * @return JDFBarcodeProductionParams the element
-     */
-    public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
-    {
-        return (JDFBarcodeProductionParams) getCreateElement_KElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
-    }
+	/** (26) getCreateColorCorrectionParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionParams the element
+	 */
+	public JDFColorCorrectionParams getCreateColorCorrectionParams(int iSkip)
+	{
+		return (JDFColorCorrectionParams) getCreateElement_KElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
+	}
 
-    /**
-     * (29) append element BarcodeProductionParams
-     * @return JDFBarcodeProductionParams the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
-    {
-        return (JDFBarcodeProductionParams) appendElementN(ElementName.BARCODEPRODUCTIONPARAMS, 1, null);
-    }
+	/**
+	 * (27) const get element ColorCorrectionParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFColorCorrectionParams the element
+	 * default is getColorCorrectionParams(0)     */
+	public JDFColorCorrectionParams getColorCorrectionParams(int iSkip)
+	{
+		return (JDFColorCorrectionParams) getElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
+	}
 
-    /**
-     * (24) const get element LayoutElement
-     * @return JDFLayoutElement the element
-     */
-    public JDFLayoutElement getLayoutElement()
-    {
-        return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
-    }
+	/**
+	 * Get all ColorCorrectionParams from the current element
+	 * 
+	 * @return Collection<JDFColorCorrectionParams>, null if none are available
+	 */
+	public Collection<JDFColorCorrectionParams> getAllColorCorrectionParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLORCORRECTIONPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (25) getCreateLayoutElement
-     * 
-     * @return JDFLayoutElement the element
-     */
-    public JDFLayoutElement getCreateLayoutElement()
-    {
-        return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
-    }
+		final Vector<JDFColorCorrectionParams> v = new Vector<JDFColorCorrectionParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFColorCorrectionParams) vc.get(i));
+		}
 
-    /**
-     * (29) append element LayoutElement
-     * @return JDFLayoutElement the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFLayoutElement appendLayoutElement() throws JDFException
-    {
-        return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refLayoutElement(JDFLayoutElement refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element ColorCorrectionParams
+	 * @return JDFColorCorrectionParams the element
+	 */
+	public JDFColorCorrectionParams appendColorCorrectionParams()
+	{
+		return (JDFColorCorrectionParams) appendElement(ElementName.COLORCORRECTIONPARAMS, null);
+	}
 
-    /**
-     * (24) const get element PositionObj
-     * @return JDFPositionObj the element
-     */
-    public JDFPositionObj getPositionObj()
-    {
-        return (JDFPositionObj) getElement(ElementName.POSITIONOBJ, null, 0);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refColorCorrectionParams(JDFColorCorrectionParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /** (25) getCreatePositionObj
-     * 
-     * @return JDFPositionObj the element
-     */
-    public JDFPositionObj getCreatePositionObj()
-    {
-        return (JDFPositionObj) getCreateElement_KElement(ElementName.POSITIONOBJ, null, 0);
-    }
+	/** (26) getCreateImageCompressionParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams getCreateImageCompressionParams(int iSkip)
+	{
+		return (JDFImageCompressionParams) getCreateElement_KElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
+	}
 
-    /**
-     * (29) append element PositionObj
-     * @return JDFPositionObj the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFPositionObj appendPositionObj() throws JDFException
-    {
-        return (JDFPositionObj) appendElementN(ElementName.POSITIONOBJ, 1, null);
-    }
+	/**
+	 * (27) const get element ImageCompressionParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageCompressionParams the element
+	 * default is getImageCompressionParams(0)     */
+	public JDFImageCompressionParams getImageCompressionParams(int iSkip)
+	{
+		return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
+	}
+
+	/**
+	 * Get all ImageCompressionParams from the current element
+	 * 
+	 * @return Collection<JDFImageCompressionParams>, null if none are available
+	 */
+	public Collection<JDFImageCompressionParams> getAllImageCompressionParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.IMAGECOMPRESSIONPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFImageCompressionParams> v = new Vector<JDFImageCompressionParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFImageCompressionParams) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element ImageCompressionParams
+	 * @return JDFImageCompressionParams the element
+	 */
+	public JDFImageCompressionParams appendImageCompressionParams()
+	{
+		return (JDFImageCompressionParams) appendElement(ElementName.IMAGECOMPRESSIONPARAMS, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/** (26) getCreateImageEnhancementParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageEnhancementParams the element
+	 */
+	public JDFImageEnhancementParams getCreateImageEnhancementParams(int iSkip)
+	{
+		return (JDFImageEnhancementParams) getCreateElement_KElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element ImageEnhancementParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageEnhancementParams the element
+	 * default is getImageEnhancementParams(0)     */
+	public JDFImageEnhancementParams getImageEnhancementParams(int iSkip)
+	{
+		return (JDFImageEnhancementParams) getElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
+	}
+
+	/**
+	 * Get all ImageEnhancementParams from the current element
+	 * 
+	 * @return Collection<JDFImageEnhancementParams>, null if none are available
+	 */
+	public Collection<JDFImageEnhancementParams> getAllImageEnhancementParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.IMAGEENHANCEMENTPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFImageEnhancementParams> v = new Vector<JDFImageEnhancementParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFImageEnhancementParams) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element ImageEnhancementParams
+	 * @return JDFImageEnhancementParams the element
+	 */
+	public JDFImageEnhancementParams appendImageEnhancementParams()
+	{
+		return (JDFImageEnhancementParams) appendElement(ElementName.IMAGEENHANCEMENTPARAMS, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refImageEnhancementParams(JDFImageEnhancementParams refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element LayoutElement
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement getLayoutElement()
+	{
+		return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
+	}
+
+	/** (25) getCreateLayoutElement
+	 * 
+	 * @return JDFLayoutElement the element
+	 */
+	public JDFLayoutElement getCreateLayoutElement()
+	{
+		return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
+	}
+
+	/**
+	 * (29) append element LayoutElement
+	 * @return JDFLayoutElement the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFLayoutElement appendLayoutElement() throws JDFException
+	{
+		return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
+	}
+
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refLayoutElement(JDFLayoutElement refTarget)
+	{
+		refElement(refTarget);
+	}
+
+	/**
+	 * (24) const get element PositionObj
+	 * @return JDFPositionObj the element
+	 */
+	public JDFPositionObj getPositionObj()
+	{
+		return (JDFPositionObj) getElement(ElementName.POSITIONOBJ, null, 0);
+	}
+
+	/** (25) getCreatePositionObj
+	 * 
+	 * @return JDFPositionObj the element
+	 */
+	public JDFPositionObj getCreatePositionObj()
+	{
+		return (JDFPositionObj) getCreateElement_KElement(ElementName.POSITIONOBJ, null, 0);
+	}
+
+	/**
+	 * (29) append element PositionObj
+	 * @return JDFPositionObj the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFPositionObj appendPositionObj() throws JDFException
+	{
+		return (JDFPositionObj) appendElementN(ElementName.POSITIONOBJ, 1, null);
+	}
 
 }// end namespace JDF

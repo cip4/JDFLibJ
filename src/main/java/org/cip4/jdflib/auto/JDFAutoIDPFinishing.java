@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -88,335 +87,324 @@ import org.cip4.jdflib.resource.process.JDFIDPFolding;
 import org.cip4.jdflib.resource.process.JDFIDPHoleMaking;
 import org.cip4.jdflib.resource.process.JDFIDPStitching;
 import org.cip4.jdflib.resource.process.JDFIDPTrimming;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPFinishing : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPFinishing : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPFinishing extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFOLDING, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDPHOLEMAKING, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.IDPSTITCHING, 0x33333333);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.IDPTRIMMING, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IDPFOLDING, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDPHOLEMAKING, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.IDPSTITCHING, 0x33333333);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.IDPTRIMMING, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIDPFinishing
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFinishing
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPFinishing(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPFinishing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFinishing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPFinishing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPFinishing
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPFinishing
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPFinishing(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPFinishing[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPFinishing[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Finishings
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Finishings
+	  * @param value the value to set the attribute to
+	  */
+	public void setFinishings(JDFIntegerList value)
+	{
+		setAttribute(AttributeName.FINISHINGS, value, null);
+	}
 
+	/**
+	  * (20) get JDFIntegerList attribute Finishings
+	  * @return JDFIntegerList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFIntegerList
+	  */
+	public JDFIntegerList getFinishings()
+	{
+		final String strAttrName = getAttribute(AttributeName.FINISHINGS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Finishings
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Finishings
-          * @param value the value to set the attribute to
-          */
-        public void setFinishings(JDFIntegerList value)
-        {
-            setAttribute(AttributeName.FINISHINGS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFIntegerList attribute Finishings
-          * @return JDFIntegerList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFIntegerList
-          */
-        public JDFIntegerList getFinishings()
-        {
-            String strAttrName = getAttribute(AttributeName.FINISHINGS, null, JDFCoreConstants.EMPTYSTRING);
-            JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateIDPFolding
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPFolding the element
+	 */
+	public JDFIDPFolding getCreateIDPFolding(int iSkip)
+	{
+		return (JDFIDPFolding) getCreateElement_KElement(ElementName.IDPFOLDING, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element IDPFolding
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPFolding the element
+	 * default is getIDPFolding(0)     */
+	public JDFIDPFolding getIDPFolding(int iSkip)
+	{
+		return (JDFIDPFolding) getElement(ElementName.IDPFOLDING, null, iSkip);
+	}
 
-    /** (26) getCreateIDPFolding
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIDPFolding the element
-     */
-    public JDFIDPFolding getCreateIDPFolding(int iSkip)
-    {
-        return (JDFIDPFolding)getCreateElement_KElement(ElementName.IDPFOLDING, null, iSkip);
-    }
+	/**
+	 * Get all IDPFolding from the current element
+	 * 
+	 * @return Collection<JDFIDPFolding>, null if none are available
+	 */
+	public Collection<JDFIDPFolding> getAllIDPFolding()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDPFOLDING, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element IDPFolding
-     * @param iSkip number of elements to skip
-     * @return JDFIDPFolding the element
-     * default is getIDPFolding(0)     */
-    public JDFIDPFolding getIDPFolding(int iSkip)
-    {
-        return (JDFIDPFolding) getElement(ElementName.IDPFOLDING, null, iSkip);
-    }
+		final Vector<JDFIDPFolding> v = new Vector<JDFIDPFolding>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIDPFolding) vc.get(i));
+		}
 
-    /**
-     * Get all IDPFolding from the current element
-     * 
-     * @return Collection<JDFIDPFolding>, null if none are available
-     */
-    public Collection<JDFIDPFolding> getAllIDPFolding()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDPFOLDING, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFIDPFolding> v = new Vector<JDFIDPFolding>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIDPFolding) vc.get(i));
-        }
+	/**
+	 * (30) append element IDPFolding
+	 * @return JDFIDPFolding the element
+	 */
+	public JDFIDPFolding appendIDPFolding()
+	{
+		return (JDFIDPFolding) appendElement(ElementName.IDPFOLDING, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreateIDPHoleMaking
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPHoleMaking the element
+	 */
+	public JDFIDPHoleMaking getCreateIDPHoleMaking(int iSkip)
+	{
+		return (JDFIDPHoleMaking) getCreateElement_KElement(ElementName.IDPHOLEMAKING, null, iSkip);
+	}
 
-    /**
-     * (30) append element IDPFolding
-     * @return JDFIDPFolding the element
-     */
-    public JDFIDPFolding appendIDPFolding()
-    {
-        return (JDFIDPFolding) appendElement(ElementName.IDPFOLDING, null);
-    }
+	/**
+	 * (27) const get element IDPHoleMaking
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPHoleMaking the element
+	 * default is getIDPHoleMaking(0)     */
+	public JDFIDPHoleMaking getIDPHoleMaking(int iSkip)
+	{
+		return (JDFIDPHoleMaking) getElement(ElementName.IDPHOLEMAKING, null, iSkip);
+	}
 
-    /** (26) getCreateIDPHoleMaking
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIDPHoleMaking the element
-     */
-    public JDFIDPHoleMaking getCreateIDPHoleMaking(int iSkip)
-    {
-        return (JDFIDPHoleMaking)getCreateElement_KElement(ElementName.IDPHOLEMAKING, null, iSkip);
-    }
+	/**
+	 * Get all IDPHoleMaking from the current element
+	 * 
+	 * @return Collection<JDFIDPHoleMaking>, null if none are available
+	 */
+	public Collection<JDFIDPHoleMaking> getAllIDPHoleMaking()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDPHOLEMAKING, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element IDPHoleMaking
-     * @param iSkip number of elements to skip
-     * @return JDFIDPHoleMaking the element
-     * default is getIDPHoleMaking(0)     */
-    public JDFIDPHoleMaking getIDPHoleMaking(int iSkip)
-    {
-        return (JDFIDPHoleMaking) getElement(ElementName.IDPHOLEMAKING, null, iSkip);
-    }
+		final Vector<JDFIDPHoleMaking> v = new Vector<JDFIDPHoleMaking>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIDPHoleMaking) vc.get(i));
+		}
 
-    /**
-     * Get all IDPHoleMaking from the current element
-     * 
-     * @return Collection<JDFIDPHoleMaking>, null if none are available
-     */
-    public Collection<JDFIDPHoleMaking> getAllIDPHoleMaking()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDPHOLEMAKING, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFIDPHoleMaking> v = new Vector<JDFIDPHoleMaking>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIDPHoleMaking) vc.get(i));
-        }
+	/**
+	 * (30) append element IDPHoleMaking
+	 * @return JDFIDPHoleMaking the element
+	 */
+	public JDFIDPHoleMaking appendIDPHoleMaking()
+	{
+		return (JDFIDPHoleMaking) appendElement(ElementName.IDPHOLEMAKING, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreateIDPStitching
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPStitching the element
+	 */
+	public JDFIDPStitching getCreateIDPStitching(int iSkip)
+	{
+		return (JDFIDPStitching) getCreateElement_KElement(ElementName.IDPSTITCHING, null, iSkip);
+	}
 
-    /**
-     * (30) append element IDPHoleMaking
-     * @return JDFIDPHoleMaking the element
-     */
-    public JDFIDPHoleMaking appendIDPHoleMaking()
-    {
-        return (JDFIDPHoleMaking) appendElement(ElementName.IDPHOLEMAKING, null);
-    }
+	/**
+	 * (27) const get element IDPStitching
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPStitching the element
+	 * default is getIDPStitching(0)     */
+	public JDFIDPStitching getIDPStitching(int iSkip)
+	{
+		return (JDFIDPStitching) getElement(ElementName.IDPSTITCHING, null, iSkip);
+	}
 
-    /** (26) getCreateIDPStitching
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIDPStitching the element
-     */
-    public JDFIDPStitching getCreateIDPStitching(int iSkip)
-    {
-        return (JDFIDPStitching)getCreateElement_KElement(ElementName.IDPSTITCHING, null, iSkip);
-    }
+	/**
+	 * Get all IDPStitching from the current element
+	 * 
+	 * @return Collection<JDFIDPStitching>, null if none are available
+	 */
+	public Collection<JDFIDPStitching> getAllIDPStitching()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDPSTITCHING, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element IDPStitching
-     * @param iSkip number of elements to skip
-     * @return JDFIDPStitching the element
-     * default is getIDPStitching(0)     */
-    public JDFIDPStitching getIDPStitching(int iSkip)
-    {
-        return (JDFIDPStitching) getElement(ElementName.IDPSTITCHING, null, iSkip);
-    }
+		final Vector<JDFIDPStitching> v = new Vector<JDFIDPStitching>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIDPStitching) vc.get(i));
+		}
 
-    /**
-     * Get all IDPStitching from the current element
-     * 
-     * @return Collection<JDFIDPStitching>, null if none are available
-     */
-    public Collection<JDFIDPStitching> getAllIDPStitching()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDPSTITCHING, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFIDPStitching> v = new Vector<JDFIDPStitching>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIDPStitching) vc.get(i));
-        }
+	/**
+	 * (30) append element IDPStitching
+	 * @return JDFIDPStitching the element
+	 */
+	public JDFIDPStitching appendIDPStitching()
+	{
+		return (JDFIDPStitching) appendElement(ElementName.IDPSTITCHING, null);
+	}
 
-        return v;
-    }
+	/** (26) getCreateIDPTrimming
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPTrimming the element
+	 */
+	public JDFIDPTrimming getCreateIDPTrimming(int iSkip)
+	{
+		return (JDFIDPTrimming) getCreateElement_KElement(ElementName.IDPTRIMMING, null, iSkip);
+	}
 
-    /**
-     * (30) append element IDPStitching
-     * @return JDFIDPStitching the element
-     */
-    public JDFIDPStitching appendIDPStitching()
-    {
-        return (JDFIDPStitching) appendElement(ElementName.IDPSTITCHING, null);
-    }
+	/**
+	 * (27) const get element IDPTrimming
+	 * @param iSkip number of elements to skip
+	 * @return JDFIDPTrimming the element
+	 * default is getIDPTrimming(0)     */
+	public JDFIDPTrimming getIDPTrimming(int iSkip)
+	{
+		return (JDFIDPTrimming) getElement(ElementName.IDPTRIMMING, null, iSkip);
+	}
 
-    /** (26) getCreateIDPTrimming
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIDPTrimming the element
-     */
-    public JDFIDPTrimming getCreateIDPTrimming(int iSkip)
-    {
-        return (JDFIDPTrimming)getCreateElement_KElement(ElementName.IDPTRIMMING, null, iSkip);
-    }
+	/**
+	 * Get all IDPTrimming from the current element
+	 * 
+	 * @return Collection<JDFIDPTrimming>, null if none are available
+	 */
+	public Collection<JDFIDPTrimming> getAllIDPTrimming()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDPTRIMMING, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element IDPTrimming
-     * @param iSkip number of elements to skip
-     * @return JDFIDPTrimming the element
-     * default is getIDPTrimming(0)     */
-    public JDFIDPTrimming getIDPTrimming(int iSkip)
-    {
-        return (JDFIDPTrimming) getElement(ElementName.IDPTRIMMING, null, iSkip);
-    }
+		final Vector<JDFIDPTrimming> v = new Vector<JDFIDPTrimming>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIDPTrimming) vc.get(i));
+		}
 
-    /**
-     * Get all IDPTrimming from the current element
-     * 
-     * @return Collection<JDFIDPTrimming>, null if none are available
-     */
-    public Collection<JDFIDPTrimming> getAllIDPTrimming()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDPTRIMMING, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFIDPTrimming> v = new Vector<JDFIDPTrimming>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIDPTrimming) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IDPTrimming
-     * @return JDFIDPTrimming the element
-     */
-    public JDFIDPTrimming appendIDPTrimming()
-    {
-        return (JDFIDPTrimming) appendElement(ElementName.IDPTRIMMING, null);
-    }
+	/**
+	 * (30) append element IDPTrimming
+	 * @return JDFIDPTrimming the element
+	 */
+	public JDFIDPTrimming appendIDPTrimming()
+	{
+		return (JDFIDPTrimming) appendElement(ElementName.IDPTRIMMING, null);
+	}
 
 }// end namespace JDF

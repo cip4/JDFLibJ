@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,154 +77,143 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
-    /**
-    *****************************************************************************
-    class JDFAutoModuleCap : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoModuleCap : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoModuleCap extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x22222111, AttributeInfo.EnumAttributeType.ID, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x22222111, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoModuleCap
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleCap
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoModuleCap(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModuleCap
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleCap
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoModuleCap(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModuleCap
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoModuleCap
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoModuleCap(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoModuleCap[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoModuleCap[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Availability
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Availability
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
+	{
+		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
+	/**
+	  * (9) get attribute Availability
+	  * @return the value of the attribute
+	  */
+	public JDFDeviceCap.EnumAvailability getAvailability()
+	{
+		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Availability
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Availability
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
-        {
-            setAttribute(AttributeName.AVAILABILITY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ID
+	  * @param value the value to set the attribute to
+	  */
+	@Override
+	public void setID(String value)
+	{
+		setAttribute(AttributeName.ID, value, null);
+	}
 
-        /**
-          * (9) get attribute Availability
-          * @return the value of the attribute
-          */
-        public JDFDeviceCap.EnumAvailability getAvailability()
-        {
-            return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
-        }
+	/**
+	  * (23) get String attribute ID
+	  * @return the value of the attribute
+	  */
+	@Override
+	public String getID()
+	{
+		return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ID
-          * @param value the value to set the attribute to
-          */
-        public void setID(String value)
-        {
-            setAttribute(AttributeName.ID, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ModuleIndex
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ModuleIndex
+	  * @param value the value to set the attribute to
+	  */
+	public void setModuleIndex(int value)
+	{
+		setAttribute(AttributeName.MODULEINDEX, value, null);
+	}
 
-        /**
-          * (23) get String attribute ID
-          * @return the value of the attribute
-          */
-        public String getID()
-        {
-            return getAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ModuleIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ModuleIndex
-          * @param value the value to set the attribute to
-          */
-        public void setModuleIndex(int value)
-        {
-            setAttribute(AttributeName.MODULEINDEX, value, null);
-        }
-
-        /**
-          * (15) get int attribute ModuleIndex
-          * @return int the value of the attribute
-          */
-        public int getModuleIndex()
-        {
-            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
-        }
+	/**
+	  * (15) get int attribute ModuleIndex
+	  * @return int the value of the attribute
+	  */
+	public int getModuleIndex()
+	{
+		return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
+	}
 
 }// end namespace JDF

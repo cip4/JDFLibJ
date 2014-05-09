@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,331 +87,317 @@ import org.cip4.jdflib.jmf.JDFChangedPath;
 import org.cip4.jdflib.resource.JDFChangedAttribute;
 import org.cip4.jdflib.resource.JDFRemoved;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoTrigger : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTrigger : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTrigger extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CHANGEDATTRIBUTE, 0x44444433);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.ADDED, 0x77777766);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.CHANGEDPATH, 0x33333311);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVED, 0x77777766);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CHANGEDATTRIBUTE, 0x44444433);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.ADDED, 0x77777766);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.CHANGEDPATH, 0x33333311);
+		elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVED, 0x77777766);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTrigger
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrigger
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTrigger(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrigger
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrigger
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTrigger(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrigger
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrigger
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTrigger(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTrigger[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTrigger[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatStep
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RepeatStep
+	  * @param value the value to set the attribute to
+	  */
+	public void setRepeatStep(int value)
+	{
+		setAttribute(AttributeName.REPEATSTEP, value, null);
+	}
 
+	/**
+	  * (15) get int attribute RepeatStep
+	  * @return int the value of the attribute
+	  */
+	public int getRepeatStep()
+	{
+		return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute RepeatTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute RepeatTime
+	  * @param value the value to set the attribute to
+	  */
+	public void setRepeatTime(double value)
+	{
+		setAttribute(AttributeName.REPEATTIME, value, null);
+	}
 
+	/**
+	  * (17) get double attribute RepeatTime
+	  * @return double the value of the attribute
+	  */
+	public double getRepeatTime()
+	{
+		return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RepeatStep
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RepeatStep
-          * @param value the value to set the attribute to
-          */
-        public void setRepeatStep(int value)
-        {
-            setAttribute(AttributeName.REPEATSTEP, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (15) get int attribute RepeatStep
-          * @return int the value of the attribute
-          */
-        public int getRepeatStep()
-        {
-            return getIntAttribute(AttributeName.REPEATSTEP, null, 0);
-        }
+	/** (26) getCreateChangedAttribute
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFChangedAttribute the element
+	 */
+	public JDFChangedAttribute getCreateChangedAttribute(int iSkip)
+	{
+		return (JDFChangedAttribute) getCreateElement_KElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute RepeatTime
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute RepeatTime
-          * @param value the value to set the attribute to
-          */
-        public void setRepeatTime(double value)
-        {
-            setAttribute(AttributeName.REPEATTIME, value, null);
-        }
+	/**
+	 * (27) const get element ChangedAttribute
+	 * @param iSkip number of elements to skip
+	 * @return JDFChangedAttribute the element
+	 * default is getChangedAttribute(0)     */
+	public JDFChangedAttribute getChangedAttribute(int iSkip)
+	{
+		return (JDFChangedAttribute) getElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute RepeatTime
-          * @return double the value of the attribute
-          */
-        public double getRepeatTime()
-        {
-            return getRealAttribute(AttributeName.REPEATTIME, null, 0.0);
-        }
+	/**
+	 * Get all ChangedAttribute from the current element
+	 * 
+	 * @return Collection<JDFChangedAttribute>, null if none are available
+	 */
+	public Collection<JDFChangedAttribute> getAllChangedAttribute()
+	{
+		final VElement vc = getChildElementVector(ElementName.CHANGEDATTRIBUTE, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFChangedAttribute> v = new Vector<JDFChangedAttribute>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFChangedAttribute) vc.get(i));
+		}
 
-    /** (26) getCreateChangedAttribute
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFChangedAttribute the element
-     */
-    public JDFChangedAttribute getCreateChangedAttribute(int iSkip)
-    {
-        return (JDFChangedAttribute)getCreateElement_KElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ChangedAttribute
-     * @param iSkip number of elements to skip
-     * @return JDFChangedAttribute the element
-     * default is getChangedAttribute(0)     */
-    public JDFChangedAttribute getChangedAttribute(int iSkip)
-    {
-        return (JDFChangedAttribute) getElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
-    }
+	/**
+	 * (30) append element ChangedAttribute
+	 * @return JDFChangedAttribute the element
+	 */
+	public JDFChangedAttribute appendChangedAttribute()
+	{
+		return (JDFChangedAttribute) appendElement(ElementName.CHANGEDATTRIBUTE, null);
+	}
 
-    /**
-     * Get all ChangedAttribute from the current element
-     * 
-     * @return Collection<JDFChangedAttribute>, null if none are available
-     */
-    public Collection<JDFChangedAttribute> getAllChangedAttribute()
-    {
-        final VElement vc = getChildElementVector(ElementName.CHANGEDATTRIBUTE, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (24) const get element Added
+	 * @return JDFAdded the element
+	 */
+	public JDFAdded getAdded()
+	{
+		return (JDFAdded) getElement(ElementName.ADDED, null, 0);
+	}
 
-        final Vector<JDFChangedAttribute> v = new Vector<JDFChangedAttribute>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFChangedAttribute) vc.get(i));
-        }
+	/** (25) getCreateAdded
+	 * 
+	 * @return JDFAdded the element
+	 */
+	public JDFAdded getCreateAdded()
+	{
+		return (JDFAdded) getCreateElement_KElement(ElementName.ADDED, null, 0);
+	}
 
-        return v;
-    }
+	/**
+	 * (29) append element Added
+	 * @return JDFAdded the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFAdded appendAdded() throws JDFException
+	{
+		return (JDFAdded) appendElementN(ElementName.ADDED, 1, null);
+	}
 
-    /**
-     * (30) append element ChangedAttribute
-     * @return JDFChangedAttribute the element
-     */
-    public JDFChangedAttribute appendChangedAttribute()
-    {
-        return (JDFChangedAttribute) appendElement(ElementName.CHANGEDATTRIBUTE, null);
-    }
+	/** (26) getCreateChangedPath
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFChangedPath the element
+	 */
+	public JDFChangedPath getCreateChangedPath(int iSkip)
+	{
+		return (JDFChangedPath) getCreateElement_KElement(ElementName.CHANGEDPATH, null, iSkip);
+	}
 
-    /**
-     * (24) const get element Added
-     * @return JDFAdded the element
-     */
-    public JDFAdded getAdded()
-    {
-        return (JDFAdded) getElement(ElementName.ADDED, null, 0);
-    }
+	/**
+	 * (27) const get element ChangedPath
+	 * @param iSkip number of elements to skip
+	 * @return JDFChangedPath the element
+	 * default is getChangedPath(0)     */
+	public JDFChangedPath getChangedPath(int iSkip)
+	{
+		return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, iSkip);
+	}
 
-    /** (25) getCreateAdded
-     * 
-     * @return JDFAdded the element
-     */
-    public JDFAdded getCreateAdded()
-    {
-        return (JDFAdded) getCreateElement_KElement(ElementName.ADDED, null, 0);
-    }
+	/**
+	 * Get all ChangedPath from the current element
+	 * 
+	 * @return Collection<JDFChangedPath>, null if none are available
+	 */
+	public Collection<JDFChangedPath> getAllChangedPath()
+	{
+		final VElement vc = getChildElementVector(ElementName.CHANGEDPATH, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (29) append element Added
-     * @return JDFAdded the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFAdded appendAdded() throws JDFException
-    {
-        return (JDFAdded) appendElementN(ElementName.ADDED, 1, null);
-    }
+		final Vector<JDFChangedPath> v = new Vector<JDFChangedPath>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFChangedPath) vc.get(i));
+		}
 
-    /** (26) getCreateChangedPath
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFChangedPath the element
-     */
-    public JDFChangedPath getCreateChangedPath(int iSkip)
-    {
-        return (JDFChangedPath)getCreateElement_KElement(ElementName.CHANGEDPATH, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ChangedPath
-     * @param iSkip number of elements to skip
-     * @return JDFChangedPath the element
-     * default is getChangedPath(0)     */
-    public JDFChangedPath getChangedPath(int iSkip)
-    {
-        return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, iSkip);
-    }
+	/**
+	 * (30) append element ChangedPath
+	 * @return JDFChangedPath the element
+	 */
+	public JDFChangedPath appendChangedPath()
+	{
+		return (JDFChangedPath) appendElement(ElementName.CHANGEDPATH, null);
+	}
 
-    /**
-     * Get all ChangedPath from the current element
-     * 
-     * @return Collection<JDFChangedPath>, null if none are available
-     */
-    public Collection<JDFChangedPath> getAllChangedPath()
-    {
-        final VElement vc = getChildElementVector(ElementName.CHANGEDPATH, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (24) const get element Removed
+	 * @return JDFRemoved the element
+	 */
+	public JDFRemoved getRemoved()
+	{
+		return (JDFRemoved) getElement(ElementName.REMOVED, null, 0);
+	}
 
-        final Vector<JDFChangedPath> v = new Vector<JDFChangedPath>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFChangedPath) vc.get(i));
-        }
+	/** (25) getCreateRemoved
+	 * 
+	 * @return JDFRemoved the element
+	 */
+	public JDFRemoved getCreateRemoved()
+	{
+		return (JDFRemoved) getCreateElement_KElement(ElementName.REMOVED, null, 0);
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element ChangedPath
-     * @return JDFChangedPath the element
-     */
-    public JDFChangedPath appendChangedPath()
-    {
-        return (JDFChangedPath) appendElement(ElementName.CHANGEDPATH, null);
-    }
-
-    /**
-     * (24) const get element Removed
-     * @return JDFRemoved the element
-     */
-    public JDFRemoved getRemoved()
-    {
-        return (JDFRemoved) getElement(ElementName.REMOVED, null, 0);
-    }
-
-    /** (25) getCreateRemoved
-     * 
-     * @return JDFRemoved the element
-     */
-    public JDFRemoved getCreateRemoved()
-    {
-        return (JDFRemoved) getCreateElement_KElement(ElementName.REMOVED, null, 0);
-    }
-
-    /**
-     * (29) append element Removed
-     * @return JDFRemoved the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFRemoved appendRemoved() throws JDFException
-    {
-        return (JDFRemoved) appendElementN(ElementName.REMOVED, 1, null);
-    }
+	/**
+	 * (29) append element Removed
+	 * @return JDFRemoved the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFRemoved appendRemoved() throws JDFException
+	{
+		return (JDFRemoved) appendElementN(ElementName.REMOVED, 1, null);
+	}
 
 }// end namespace JDF

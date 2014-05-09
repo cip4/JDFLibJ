@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,200 +76,185 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoBand : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBand : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBand extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DATA, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MASK, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.WASMARKED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATA, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MASK, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WASMARKED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBand
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBand
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBand(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBand
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBand
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBand(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBand
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBand
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBand(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBand[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBand[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Data
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Data
+	  * @param value the value to set the attribute to
+	  */
+	public void setData(String value)
+	{
+		setAttribute(AttributeName.DATA, value, null);
+	}
 
+	/**
+	  * (23) get String attribute Data
+	  * @return the value of the attribute
+	  */
+	public String getData()
+	{
+		return getAttribute(AttributeName.DATA, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Data
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Data
-          * @param value the value to set the attribute to
-          */
-        public void setData(String value)
-        {
-            setAttribute(AttributeName.DATA, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Height
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Height
+	  * @param value the value to set the attribute to
+	  */
+	public void setHeight(int value)
+	{
+		setAttribute(AttributeName.HEIGHT, value, null);
+	}
 
-        /**
-          * (23) get String attribute Data
-          * @return the value of the attribute
-          */
-        public String getData()
-        {
-            return getAttribute(AttributeName.DATA, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (15) get int attribute Height
+	  * @return int the value of the attribute
+	  */
+	public int getHeight()
+	{
+		return getIntAttribute(AttributeName.HEIGHT, null, 0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Height
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Height
-          * @param value the value to set the attribute to
-          */
-        public void setHeight(int value)
-        {
-            setAttribute(AttributeName.HEIGHT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Mask
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Mask
+	  * @param value the value to set the attribute to
+	  */
+	public void setMask(String value)
+	{
+		setAttribute(AttributeName.MASK, value, null);
+	}
 
-        /**
-          * (15) get int attribute Height
-          * @return int the value of the attribute
-          */
-        public int getHeight()
-        {
-            return getIntAttribute(AttributeName.HEIGHT, null, 0);
-        }
+	/**
+	  * (23) get String attribute Mask
+	  * @return the value of the attribute
+	  */
+	public String getMask()
+	{
+		return getAttribute(AttributeName.MASK, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Mask
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Mask
-          * @param value the value to set the attribute to
-          */
-        public void setMask(String value)
-        {
-            setAttribute(AttributeName.MASK, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute WasMarked
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute WasMarked
+	  * @param value the value to set the attribute to
+	  */
+	public void setWasMarked(boolean value)
+	{
+		setAttribute(AttributeName.WASMARKED, value, null);
+	}
 
-        /**
-          * (23) get String attribute Mask
-          * @return the value of the attribute
-          */
-        public String getMask()
-        {
-            return getAttribute(AttributeName.MASK, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (18) get boolean attribute WasMarked
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getWasMarked()
+	{
+		return getBoolAttribute(AttributeName.WASMARKED, null, false);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute WasMarked
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WasMarked
-          * @param value the value to set the attribute to
-          */
-        public void setWasMarked(boolean value)
-        {
-            setAttribute(AttributeName.WASMARKED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Width
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Width
+	  * @param value the value to set the attribute to
+	  */
+	public void setWidth(int value)
+	{
+		setAttribute(AttributeName.WIDTH, value, null);
+	}
 
-        /**
-          * (18) get boolean attribute WasMarked
-          * @return boolean the value of the attribute
-          */
-        public boolean getWasMarked()
-        {
-            return getBoolAttribute(AttributeName.WASMARKED, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Width
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Width
-          * @param value the value to set the attribute to
-          */
-        public void setWidth(int value)
-        {
-            setAttribute(AttributeName.WIDTH, value, null);
-        }
-
-        /**
-          * (15) get int attribute Width
-          * @return int the value of the attribute
-          */
-        public int getWidth()
-        {
-            return getIntAttribute(AttributeName.WIDTH, null, 0);
-        }
+	/**
+	  * (15) get int attribute Width
+	  * @return int the value of the attribute
+	  */
+	public int getWidth()
+	{
+		return getIntAttribute(AttributeName.WIDTH, null, 0);
+	}
 
 }// end namespace JDF

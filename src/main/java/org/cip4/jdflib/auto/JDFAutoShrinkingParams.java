@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,244 +79,226 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
-    /**
-    *****************************************************************************
-    class JDFAutoShrinkingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoShrinkingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoShrinkingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumShrinkingMethod.getEnum(0), "ShrinkHot");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.DURATION, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumShrinkingMethod.getEnum(0), "ShrinkHot");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DURATION, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoShrinkingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShrinkingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShrinkingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoShrinkingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShrinkingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoShrinkingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoShrinkingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoShrinkingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoShrinkingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoShrinkingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoShrinkingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoShrinkingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoShrinkingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoShrinkingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for ShrinkingMethod
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumShrinkingMethod extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumShrinkingMethod(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumShrinkingMethod getEnum(String enumName)
+		{
+			return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumShrinkingMethod getEnum(int enumValue)
+		{
+			return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for ShrinkingMethod
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumShrinkingMethod.class);
+		}
 
-        public static class EnumShrinkingMethod extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumShrinkingMethod.class);
+		}
 
-            private EnumShrinkingMethod(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumShrinkingMethod.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumShrinkingMethod getEnum(String enumName)
-            {
-                return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumName);
-            }
+		public static final EnumShrinkingMethod ShrinkCool = new EnumShrinkingMethod("ShrinkCool");
+		public static final EnumShrinkingMethod ShrinkHot = new EnumShrinkingMethod("ShrinkHot");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumShrinkingMethod getEnum(int enumValue)
-            {
-                return (EnumShrinkingMethod) getEnum(EnumShrinkingMethod.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumShrinkingMethod.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShrinkingMethod
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute ShrinkingMethod
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setShrinkingMethod(EnumShrinkingMethod enumVar)
+	{
+		setAttribute(AttributeName.SHRINKINGMETHOD, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumShrinkingMethod.class);
-            }
+	/**
+	  * (9) get attribute ShrinkingMethod
+	  * @return the value of the attribute
+	  */
+	public EnumShrinkingMethod getShrinkingMethod()
+	{
+		return EnumShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumShrinkingMethod.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Duration
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Duration
+	  * @param value the value to set the attribute to
+	  */
+	public void setDuration(JDFDuration value)
+	{
+		setAttribute(AttributeName.DURATION, value, null);
+	}
 
-            public static final EnumShrinkingMethod ShrinkCool = new EnumShrinkingMethod("ShrinkCool");
-            public static final EnumShrinkingMethod ShrinkHot = new EnumShrinkingMethod("ShrinkHot");
-        }      
+	/**
+	  * (20) get JDFDuration attribute Duration
+	  * @return JDFDuration the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDuration
+	  */
+	public JDFDuration getDuration()
+	{
+		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Temperature
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Temperature
+	  * @param value the value to set the attribute to
+	  */
+	public void setTemperature(double value)
+	{
+		setAttribute(AttributeName.TEMPERATURE, value, null);
+	}
 
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShrinkingMethod
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ShrinkingMethod
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setShrinkingMethod(EnumShrinkingMethod enumVar)
-        {
-            setAttribute(AttributeName.SHRINKINGMETHOD, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ShrinkingMethod
-          * @return the value of the attribute
-          */
-        public EnumShrinkingMethod getShrinkingMethod()
-        {
-            return EnumShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Duration
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Duration
-          * @param value the value to set the attribute to
-          */
-        public void setDuration(JDFDuration value)
-        {
-            setAttribute(AttributeName.DURATION, value, null);
-        }
-
-        /**
-          * (20) get JDFDuration attribute Duration
-          * @return JDFDuration the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDuration
-          */
-        public JDFDuration getDuration()
-        {
-            String strAttrName = getAttribute(AttributeName.DURATION, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Temperature
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Temperature
-          * @param value the value to set the attribute to
-          */
-        public void setTemperature(double value)
-        {
-            setAttribute(AttributeName.TEMPERATURE, value, null);
-        }
-
-        /**
-          * (17) get double attribute Temperature
-          * @return double the value of the attribute
-          */
-        public double getTemperature()
-        {
-            return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute Temperature
+	  * @return double the value of the attribute
+	  */
+	public double getTemperature()
+	{
+		return getRealAttribute(AttributeName.TEMPERATURE, null, 0.0);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFIcon;
-    /**
-    *****************************************************************************
-    class JDFAutoIconList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIconList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIconList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ICON, 0x22222221);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.ICON, 0x22222221);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIconList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIconList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIconList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIconList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIconList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIconList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIconList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIconList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIconList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIconList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIconList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateIcon
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIcon the element
+	 */
+	public JDFIcon getCreateIcon(int iSkip)
+	{
+		return (JDFIcon) getCreateElement_KElement(ElementName.ICON, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Icon
+	 * @param iSkip number of elements to skip
+	 * @return JDFIcon the element
+	 * default is getIcon(0)     */
+	public JDFIcon getIcon(int iSkip)
+	{
+		return (JDFIcon) getElement(ElementName.ICON, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all Icon from the current element
+	 * 
+	 * @return Collection<JDFIcon>, null if none are available
+	 */
+	public Collection<JDFIcon> getAllIcon()
+	{
+		final VElement vc = getChildElementVector(ElementName.ICON, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateIcon
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIcon the element
-     */
-    public JDFIcon getCreateIcon(int iSkip)
-    {
-        return (JDFIcon)getCreateElement_KElement(ElementName.ICON, null, iSkip);
-    }
+		final Vector<JDFIcon> v = new Vector<JDFIcon>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIcon) vc.get(i));
+		}
 
-    /**
-     * (27) const get element Icon
-     * @param iSkip number of elements to skip
-     * @return JDFIcon the element
-     * default is getIcon(0)     */
-    public JDFIcon getIcon(int iSkip)
-    {
-        return (JDFIcon) getElement(ElementName.ICON, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all Icon from the current element
-     * 
-     * @return Collection<JDFIcon>, null if none are available
-     */
-    public Collection<JDFIcon> getAllIcon()
-    {
-        final VElement vc = getChildElementVector(ElementName.ICON, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIcon> v = new Vector<JDFIcon>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIcon) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Icon
-     * @return JDFIcon the element
-     */
-    public JDFIcon appendIcon()
-    {
-        return (JDFIcon) appendElement(ElementName.ICON, null);
-    }
+	/**
+	 * (30) append element Icon
+	 * @return JDFIcon the element
+	 */
+	public JDFIcon appendIcon()
+	{
+		return (JDFIcon) appendElement(ElementName.ICON, null);
+	}
 
 }// end namespace JDF

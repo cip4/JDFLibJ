@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,198 +83,185 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalPerson;
-    /**
-    *****************************************************************************
-    class JDFAutoApprovalParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoApprovalParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoApprovalParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MINAPPROVALS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MINAPPROVALS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.APPROVALPERSON, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.APPROVALPERSON, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoApprovalParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoApprovalParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoApprovalParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoApprovalParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoApprovalParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoApprovalParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoApprovalParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MinApprovals
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MinApprovals
+	  * @param value the value to set the attribute to
+	  */
+	public void setMinApprovals(int value)
+	{
+		setAttribute(AttributeName.MINAPPROVALS, value, null);
+	}
 
+	/**
+	  * (15) get int attribute MinApprovals
+	  * @return int the value of the attribute
+	  */
+	public int getMinApprovals()
+	{
+		return getIntAttribute(AttributeName.MINAPPROVALS, null, 1);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateApprovalPerson
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFApprovalPerson the element
+	 */
+	public JDFApprovalPerson getCreateApprovalPerson(int iSkip)
+	{
+		return (JDFApprovalPerson) getCreateElement_KElement(ElementName.APPROVALPERSON, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute MinApprovals
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute MinApprovals
-          * @param value the value to set the attribute to
-          */
-        public void setMinApprovals(int value)
-        {
-            setAttribute(AttributeName.MINAPPROVALS, value, null);
-        }
+	/**
+	 * (27) const get element ApprovalPerson
+	 * @param iSkip number of elements to skip
+	 * @return JDFApprovalPerson the element
+	 * default is getApprovalPerson(0)     */
+	public JDFApprovalPerson getApprovalPerson(int iSkip)
+	{
+		return (JDFApprovalPerson) getElement(ElementName.APPROVALPERSON, null, iSkip);
+	}
 
-        /**
-          * (15) get int attribute MinApprovals
-          * @return int the value of the attribute
-          */
-        public int getMinApprovals()
-        {
-            return getIntAttribute(AttributeName.MINAPPROVALS, null, 1);
-        }
+	/**
+	 * Get all ApprovalPerson from the current element
+	 * 
+	 * @return Collection<JDFApprovalPerson>, null if none are available
+	 */
+	public Collection<JDFApprovalPerson> getAllApprovalPerson()
+	{
+		final VElement vc = getChildElementVector(ElementName.APPROVALPERSON, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFApprovalPerson> v = new Vector<JDFApprovalPerson>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFApprovalPerson) vc.get(i));
+		}
 
-    /** (26) getCreateApprovalPerson
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFApprovalPerson the element
-     */
-    public JDFApprovalPerson getCreateApprovalPerson(int iSkip)
-    {
-        return (JDFApprovalPerson)getCreateElement_KElement(ElementName.APPROVALPERSON, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element ApprovalPerson
-     * @param iSkip number of elements to skip
-     * @return JDFApprovalPerson the element
-     * default is getApprovalPerson(0)     */
-    public JDFApprovalPerson getApprovalPerson(int iSkip)
-    {
-        return (JDFApprovalPerson) getElement(ElementName.APPROVALPERSON, null, iSkip);
-    }
-
-    /**
-     * Get all ApprovalPerson from the current element
-     * 
-     * @return Collection<JDFApprovalPerson>, null if none are available
-     */
-    public Collection<JDFApprovalPerson> getAllApprovalPerson()
-    {
-        final VElement vc = getChildElementVector(ElementName.APPROVALPERSON, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFApprovalPerson> v = new Vector<JDFApprovalPerson>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFApprovalPerson) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ApprovalPerson
-     * @return JDFApprovalPerson the element
-     */
-    public JDFApprovalPerson appendApprovalPerson()
-    {
-        return (JDFApprovalPerson) appendElement(ElementName.APPROVALPERSON, null);
-    }
+	/**
+	 * (30) append element ApprovalPerson
+	 * @return JDFApprovalPerson the element
+	 */
+	public JDFApprovalPerson appendApprovalPerson()
+	{
+		return (JDFApprovalPerson) appendElement(ElementName.APPROVALPERSON, null);
+	}
 
 }// end namespace JDF

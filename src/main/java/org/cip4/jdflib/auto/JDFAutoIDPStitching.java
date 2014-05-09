@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,345 +87,329 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPStitching : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPStitching : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPStitching extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHINGPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingPosition.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHINGREFERENCEEDGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingReferenceEdge.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHINGPOSITION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingPosition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHINGREFERENCEEDGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingReferenceEdge.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHINGPARAMS, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHINGPARAMS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIDPStitching
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPStitching(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPStitching
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPStitching
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPStitching
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPStitching
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPStitching
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPStitching(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPStitching[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for StitchingPosition
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPStitching[  --> " + super.toString() + " ]";
-    }
+	public static class EnumStitchingPosition extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumStitchingPosition(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for StitchingPosition
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumStitchingPosition getEnum(String enumName)
+		{
+			return (EnumStitchingPosition) getEnum(EnumStitchingPosition.class, enumName);
+		}
 
-        public static class EnumStitchingPosition extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumStitchingPosition getEnum(int enumValue)
+		{
+			return (EnumStitchingPosition) getEnum(EnumStitchingPosition.class, enumValue);
+		}
 
-            private EnumStitchingPosition(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumStitchingPosition.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumStitchingPosition getEnum(String enumName)
-            {
-                return (EnumStitchingPosition) getEnum(EnumStitchingPosition.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumStitchingPosition.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumStitchingPosition getEnum(int enumValue)
-            {
-                return (EnumStitchingPosition) getEnum(EnumStitchingPosition.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumStitchingPosition.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumStitchingPosition.class);
-            }
+		public static final EnumStitchingPosition None = new EnumStitchingPosition("None");
+		public static final EnumStitchingPosition TopLeft = new EnumStitchingPosition("TopLeft");
+		public static final EnumStitchingPosition BottomLeft = new EnumStitchingPosition("BottomLeft");
+		public static final EnumStitchingPosition TopRight = new EnumStitchingPosition("TopRight");
+		public static final EnumStitchingPosition BottomRight = new EnumStitchingPosition("BottomRight");
+		public static final EnumStitchingPosition LeftEdge = new EnumStitchingPosition("LeftEdge");
+		public static final EnumStitchingPosition TopEdge = new EnumStitchingPosition("TopEdge");
+		public static final EnumStitchingPosition RightEdge = new EnumStitchingPosition("RightEdge");
+		public static final EnumStitchingPosition BottomEdge = new EnumStitchingPosition("BottomEdge");
+		public static final EnumStitchingPosition DualLeftEdge = new EnumStitchingPosition("DualLeftEdge");
+		public static final EnumStitchingPosition DualTopEdge = new EnumStitchingPosition("DualTopEdge");
+		public static final EnumStitchingPosition DualRightEdge = new EnumStitchingPosition("DualRightEdge");
+		public static final EnumStitchingPosition DualBottomEdge = new EnumStitchingPosition("DualBottomEdge");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumStitchingPosition.class);
-            }
+	/**
+	* Enumeration strings for StitchingReferenceEdge
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumStitchingPosition.class);
-            }
+	public static class EnumStitchingReferenceEdge extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumStitchingPosition None = new EnumStitchingPosition("None");
-            public static final EnumStitchingPosition TopLeft = new EnumStitchingPosition("TopLeft");
-            public static final EnumStitchingPosition BottomLeft = new EnumStitchingPosition("BottomLeft");
-            public static final EnumStitchingPosition TopRight = new EnumStitchingPosition("TopRight");
-            public static final EnumStitchingPosition BottomRight = new EnumStitchingPosition("BottomRight");
-            public static final EnumStitchingPosition LeftEdge = new EnumStitchingPosition("LeftEdge");
-            public static final EnumStitchingPosition TopEdge = new EnumStitchingPosition("TopEdge");
-            public static final EnumStitchingPosition RightEdge = new EnumStitchingPosition("RightEdge");
-            public static final EnumStitchingPosition BottomEdge = new EnumStitchingPosition("BottomEdge");
-            public static final EnumStitchingPosition DualLeftEdge = new EnumStitchingPosition("DualLeftEdge");
-            public static final EnumStitchingPosition DualTopEdge = new EnumStitchingPosition("DualTopEdge");
-            public static final EnumStitchingPosition DualRightEdge = new EnumStitchingPosition("DualRightEdge");
-            public static final EnumStitchingPosition DualBottomEdge = new EnumStitchingPosition("DualBottomEdge");
-        }      
+		private EnumStitchingReferenceEdge(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumStitchingReferenceEdge getEnum(String enumName)
+		{
+			return (EnumStitchingReferenceEdge) getEnum(EnumStitchingReferenceEdge.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumStitchingReferenceEdge getEnum(int enumValue)
+		{
+			return (EnumStitchingReferenceEdge) getEnum(EnumStitchingReferenceEdge.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for StitchingReferenceEdge
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumStitchingReferenceEdge.class);
+		}
 
-        public static class EnumStitchingReferenceEdge extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumStitchingReferenceEdge.class);
+		}
 
-            private EnumStitchingReferenceEdge(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumStitchingReferenceEdge.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumStitchingReferenceEdge getEnum(String enumName)
-            {
-                return (EnumStitchingReferenceEdge) getEnum(EnumStitchingReferenceEdge.class, enumName);
-            }
+		public static final EnumStitchingReferenceEdge Bottom = new EnumStitchingReferenceEdge("Bottom");
+		public static final EnumStitchingReferenceEdge Top = new EnumStitchingReferenceEdge("Top");
+		public static final EnumStitchingReferenceEdge Left = new EnumStitchingReferenceEdge("Left");
+		public static final EnumStitchingReferenceEdge Right = new EnumStitchingReferenceEdge("Right");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumStitchingReferenceEdge getEnum(int enumValue)
-            {
-                return (EnumStitchingReferenceEdge) getEnum(EnumStitchingReferenceEdge.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumStitchingReferenceEdge.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StitchingPosition
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute StitchingPosition
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setStitchingPosition(EnumStitchingPosition enumVar)
+	{
+		setAttribute(AttributeName.STITCHINGPOSITION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumStitchingReferenceEdge.class);
-            }
+	/**
+	  * (9) get attribute StitchingPosition
+	  * @return the value of the attribute
+	  */
+	public EnumStitchingPosition getStitchingPosition()
+	{
+		return EnumStitchingPosition.getEnum(getAttribute(AttributeName.STITCHINGPOSITION, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumStitchingReferenceEdge.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StitchingReferenceEdge
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute StitchingReferenceEdge
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumStitchingReferenceEdge Bottom = new EnumStitchingReferenceEdge("Bottom");
-            public static final EnumStitchingReferenceEdge Top = new EnumStitchingReferenceEdge("Top");
-            public static final EnumStitchingReferenceEdge Left = new EnumStitchingReferenceEdge("Left");
-            public static final EnumStitchingReferenceEdge Right = new EnumStitchingReferenceEdge("Right");
-        }      
+	/**
+	  * (9) get attribute StitchingReferenceEdge
+	  * @return the value of the attribute
+	  */
+	public EnumStitchingReferenceEdge getStitchingReferenceEdge()
+	{
+		return EnumStitchingReferenceEdge.getEnum(getAttribute(AttributeName.STITCHINGREFERENCEEDGE, null, null));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateStitchingParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFStitchingParams the element
+	 */
+	public JDFStitchingParams getCreateStitchingParams(int iSkip)
+	{
+		return (JDFStitchingParams) getCreateElement_KElement(ElementName.STITCHINGPARAMS, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StitchingPosition
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute StitchingPosition
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setStitchingPosition(EnumStitchingPosition enumVar)
-        {
-            setAttribute(AttributeName.STITCHINGPOSITION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element StitchingParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFStitchingParams the element
+	 * default is getStitchingParams(0)     */
+	public JDFStitchingParams getStitchingParams(int iSkip)
+	{
+		return (JDFStitchingParams) getElement(ElementName.STITCHINGPARAMS, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute StitchingPosition
-          * @return the value of the attribute
-          */
-        public EnumStitchingPosition getStitchingPosition()
-        {
-            return EnumStitchingPosition.getEnum(getAttribute(AttributeName.STITCHINGPOSITION, null, null));
-        }
+	/**
+	 * Get all StitchingParams from the current element
+	 * 
+	 * @return Collection<JDFStitchingParams>, null if none are available
+	 */
+	public Collection<JDFStitchingParams> getAllStitchingParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.STITCHINGPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StitchingReferenceEdge
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute StitchingReferenceEdge
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
-        {
-            setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar==null ? null : enumVar.getName(), null);
-        }
+		final Vector<JDFStitchingParams> v = new Vector<JDFStitchingParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFStitchingParams) vc.get(i));
+		}
 
-        /**
-          * (9) get attribute StitchingReferenceEdge
-          * @return the value of the attribute
-          */
-        public EnumStitchingReferenceEdge getStitchingReferenceEdge()
-        {
-            return EnumStitchingReferenceEdge.getEnum(getAttribute(AttributeName.STITCHINGREFERENCEEDGE, null, null));
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element StitchingParams
+	 * @return JDFStitchingParams the element
+	 */
+	public JDFStitchingParams appendStitchingParams()
+	{
+		return (JDFStitchingParams) appendElement(ElementName.STITCHINGPARAMS, null);
+	}
 
-    /** (26) getCreateStitchingParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFStitchingParams the element
-     */
-    public JDFStitchingParams getCreateStitchingParams(int iSkip)
-    {
-        return (JDFStitchingParams)getCreateElement_KElement(ElementName.STITCHINGPARAMS, null, iSkip);
-    }
-
-    /**
-     * (27) const get element StitchingParams
-     * @param iSkip number of elements to skip
-     * @return JDFStitchingParams the element
-     * default is getStitchingParams(0)     */
-    public JDFStitchingParams getStitchingParams(int iSkip)
-    {
-        return (JDFStitchingParams) getElement(ElementName.STITCHINGPARAMS, null, iSkip);
-    }
-
-    /**
-     * Get all StitchingParams from the current element
-     * 
-     * @return Collection<JDFStitchingParams>, null if none are available
-     */
-    public Collection<JDFStitchingParams> getAllStitchingParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.STITCHINGPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFStitchingParams> v = new Vector<JDFStitchingParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFStitchingParams) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element StitchingParams
-     * @return JDFStitchingParams the element
-     */
-    public JDFStitchingParams appendStitchingParams()
-    {
-        return (JDFStitchingParams) appendElement(ElementName.STITCHINGPARAMS, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refStitchingParams(JDFStitchingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refStitchingParams(JDFStitchingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

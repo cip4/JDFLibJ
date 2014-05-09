@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,196 +80,183 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFDurationRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /**
-    *****************************************************************************
-    class JDFAutoDurationEvaluation : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoDurationEvaluation : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoDurationEvaluation extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUERANGE, 0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUERANGE, 0x33333333, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoDurationEvaluation
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDurationEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDurationEvaluation
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoDurationEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDurationEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoDurationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoDurationEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoDurationEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoDurationEvaluation
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoDurationEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoDurationEvaluation
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoDurationEvaluation(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoDurationEvaluation[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoDurationEvaluation[  --> " + super.toString() + " ]";
-    }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ValueRange
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ValueRange
+	  * @param value the value to set the attribute to
+	  */
+	public void setValueRange(JDFDurationRangeList value)
+	{
+		setAttribute(AttributeName.VALUERANGE, value, null);
+	}
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/**
+	  * (20) get JDFDurationRangeList attribute ValueRange
+	  * @return JDFDurationRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFDurationRangeList
+	  */
+	public JDFDurationRangeList getValueRange()
+	{
+		final String strAttrName = getAttribute(AttributeName.VALUERANGE, null, null);
+		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ValueRange
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ValueRange
-          * @param value the value to set the attribute to
-          */
-        public void setValueRange(JDFDurationRangeList value)
-        {
-            setAttribute(AttributeName.VALUERANGE, value, null);
-        }
+	/** (26) getCreateBasicPreflightTest
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-        /**
-          * (20) get JDFDurationRangeList attribute ValueRange
-          * @return JDFDurationRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFDurationRangeList
-          */
-        public JDFDurationRangeList getValueRange()
-        {
-            String strAttrName = getAttribute(AttributeName.VALUERANGE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	 * (27) const get element BasicPreflightTest
+	 * @param iSkip number of elements to skip
+	 * @return JDFBasicPreflightTest the element
+	 * default is getBasicPreflightTest(0)     */
+	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	{
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all BasicPreflightTest from the current element
+	 * 
+	 * @return Collection<JDFBasicPreflightTest>, null if none are available
+	 */
+	public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+	{
+		final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBasicPreflightTest
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest)getCreateElement_KElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBasicPreflightTest) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BasicPreflightTest
-     * @param iSkip number of elements to skip
-     * @return JDFBasicPreflightTest the element
-     * default is getBasicPreflightTest(0)     */
-    public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
-    {
-        return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BasicPreflightTest from the current element
-     * 
-     * @return Collection<JDFBasicPreflightTest>, null if none are available
-     */
-    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
-    {
-        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBasicPreflightTest) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BasicPreflightTest
-     * @return JDFBasicPreflightTest the element
-     */
-    public JDFBasicPreflightTest appendBasicPreflightTest()
-    {
-        return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
-    }
+	/**
+	 * (30) append element BasicPreflightTest
+	 * @return JDFBasicPreflightTest the element
+	 */
+	public JDFBasicPreflightTest appendBasicPreflightTest()
+	{
+		return (JDFBasicPreflightTest) appendElement(ElementName.BASICPREFLIGHTTEST, null);
+	}
 
 }// end namespace JDF

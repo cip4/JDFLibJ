@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,438 +89,417 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoColorCorrectionOp : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorCorrectionOp : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorCorrectionOp extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ADJUSTCYANRED, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ADJUSTMAGENTAGREEN, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ADJUSTYELLOWBLUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.ADJUSTCONTRAST, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ADJUSTHUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTLIGHTNESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.ADJUSTSATURATION, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ADJUSTCYANRED, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ADJUSTMAGENTAGREEN, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADJUSTYELLOWBLUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ADJUSTCONTRAST, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ADJUSTHUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTLIGHTNESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.ADJUSTSATURATION, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorCorrectionOp
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionOp
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorCorrectionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorCorrectionOp
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionOp
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorCorrectionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorCorrectionOp
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorCorrectionOp
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorCorrectionOp(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorCorrectionOp[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for SourceObjects
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorCorrectionOp[  --> " + super.toString() + " ]";
-    }
+	public static class EnumSourceObjects extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumSourceObjects(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for SourceObjects
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSourceObjects getEnum(String enumName)
+		{
+			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
+		}
 
-        public static class EnumSourceObjects extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSourceObjects getEnum(int enumValue)
+		{
+			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
+		}
 
-            private EnumSourceObjects(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSourceObjects.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSourceObjects getEnum(String enumName)
-            {
-                return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSourceObjects.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSourceObjects getEnum(int enumValue)
-            {
-                return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSourceObjects.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSourceObjects.class);
-            }
+		public static final EnumSourceObjects All = new EnumSourceObjects("All");
+		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
+		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
+		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
+		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
+		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSourceObjects.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSourceObjects.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute SourceObjects
+	--------------------------------------------------------------------- */
+	/**
+	  * (5.2) set attribute SourceObjects
+	  * @param v vector of the enumeration values
+	  */
+	public void setSourceObjects(Vector v)
+	{
+		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
 
-            public static final EnumSourceObjects All = new EnumSourceObjects("All");
-            public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
-            public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
-            public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
-            public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
-            public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
-        }      
+	/**
+	  * (9.2) get SourceObjects attribute SourceObjects
+	  * @return Vector of the enumerations
+	  */
+	public Vector getSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustCyanRed
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustCyanRed
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustCyanRed(double value)
+	{
+		setAttribute(AttributeName.ADJUSTCYANRED, value, null);
+	}
 
+	/**
+	  * (17) get double attribute AdjustCyanRed
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustCyanRed()
+	{
+		return getRealAttribute(AttributeName.ADJUSTCYANRED, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute SourceObjects
-        --------------------------------------------------------------------- */
-        /**
-          * (5.2) set attribute SourceObjects
-          * @param v vector of the enumeration values
-          */
-        public void setSourceObjects(Vector v)
-        {
-            setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustMagentaGreen
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustMagentaGreen
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustMagentaGreen(double value)
+	{
+		setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
+	}
 
-        /**
-          * (9.2) get SourceObjects attribute SourceObjects
-          * @return Vector of the enumerations
-          */
-        public Vector getSourceObjects()
-        {
-            return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
-        }
+	/**
+	  * (17) get double attribute AdjustMagentaGreen
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustMagentaGreen()
+	{
+		return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustCyanRed
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustCyanRed
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustCyanRed(double value)
-        {
-            setAttribute(AttributeName.ADJUSTCYANRED, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustYellowBlue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustYellowBlue
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustYellowBlue(double value)
+	{
+		setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustCyanRed
-          * @return double the value of the attribute
-          */
-        public double getAdjustCyanRed()
-        {
-            return getRealAttribute(AttributeName.ADJUSTCYANRED, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute AdjustYellowBlue
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustYellowBlue()
+	{
+		return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustMagentaGreen
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustMagentaGreen
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustMagentaGreen(double value)
-        {
-            setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustContrast
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustContrast
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustContrast(double value)
+	{
+		setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustMagentaGreen
-          * @return double the value of the attribute
-          */
-        public double getAdjustMagentaGreen()
-        {
-            return getRealAttribute(AttributeName.ADJUSTMAGENTAGREEN, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute AdjustContrast
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustContrast()
+	{
+		return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustYellowBlue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustYellowBlue
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustYellowBlue(double value)
-        {
-            setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustHue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustHue
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustHue(double value)
+	{
+		setAttribute(AttributeName.ADJUSTHUE, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustYellowBlue
-          * @return double the value of the attribute
-          */
-        public double getAdjustYellowBlue()
-        {
-            return getRealAttribute(AttributeName.ADJUSTYELLOWBLUE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute AdjustHue
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustHue()
+	{
+		return getRealAttribute(AttributeName.ADJUSTHUE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustContrast
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustContrast
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustContrast(double value)
-        {
-            setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustLightness
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustLightness
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustLightness(double value)
+	{
+		setAttribute(AttributeName.ADJUSTLIGHTNESS, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustContrast
-          * @return double the value of the attribute
-          */
-        public double getAdjustContrast()
-        {
-            return getRealAttribute(AttributeName.ADJUSTCONTRAST, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute AdjustLightness
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustLightness()
+	{
+		return getRealAttribute(AttributeName.ADJUSTLIGHTNESS, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustHue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustHue
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustHue(double value)
-        {
-            setAttribute(AttributeName.ADJUSTHUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute AdjustSaturation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute AdjustSaturation
+	  * @param value the value to set the attribute to
+	  */
+	public void setAdjustSaturation(double value)
+	{
+		setAttribute(AttributeName.ADJUSTSATURATION, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustHue
-          * @return double the value of the attribute
-          */
-        public double getAdjustHue()
-        {
-            return getRealAttribute(AttributeName.ADJUSTHUE, null, 0.0);
-        }
+	/**
+	  * (17) get double attribute AdjustSaturation
+	  * @return double the value of the attribute
+	  */
+	public double getAdjustSaturation()
+	{
+		return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustLightness
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustLightness
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustLightness(double value)
-        {
-            setAttribute(AttributeName.ADJUSTLIGHTNESS, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ObjectTags
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ObjectTags
+	  * @param value the value to set the attribute to
+	  */
+	public void setObjectTags(VString value)
+	{
+		setAttribute(AttributeName.OBJECTTAGS, value, null);
+	}
 
-        /**
-          * (17) get double attribute AdjustLightness
-          * @return double the value of the attribute
-          */
-        public double getAdjustLightness()
-        {
-            return getRealAttribute(AttributeName.ADJUSTLIGHTNESS, null, 0.0);
-        }
+	/**
+	  * (21) get VString attribute ObjectTags
+	  * @return VString the value of the attribute
+	  */
+	public VString getObjectTags()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute AdjustSaturation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute AdjustSaturation
-          * @param value the value to set the attribute to
-          */
-        public void setAdjustSaturation(double value)
-        {
-            setAttribute(AttributeName.ADJUSTSATURATION, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (17) get double attribute AdjustSaturation
-          * @return double the value of the attribute
-          */
-        public double getAdjustSaturation()
-        {
-            return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
-        }
+	/** (26) getCreateFileSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec getCreateFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ObjectTags
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ObjectTags
-          * @param value the value to set the attribute to
-          */
-        public void setObjectTags(VString value)
-        {
-            setAttribute(AttributeName.OBJECTTAGS, value, null);
-        }
+	/**
+	 * (27) const get element FileSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFFileSpec the element
+	 * default is getFileSpec(0)     */
+	public JDFFileSpec getFileSpec(int iSkip)
+	{
+		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+	}
 
-        /**
-          * (21) get VString attribute ObjectTags
-          * @return VString the value of the attribute
-          */
-        public VString getObjectTags()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/**
+	 * Get all FileSpec from the current element
+	 * 
+	 * @return Collection<JDFFileSpec>, null if none are available
+	 */
+	public Collection<JDFFileSpec> getAllFileSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFileSpec) vc.get(i));
+		}
 
-    /** (26) getCreateFileSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getCreateFileSpec(int iSkip)
-    {
-        return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element FileSpec
-     * @param iSkip number of elements to skip
-     * @return JDFFileSpec the element
-     * default is getFileSpec(0)     */
-    public JDFFileSpec getFileSpec(int iSkip)
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
-    }
+	/**
+	 * (30) append element FileSpec
+	 * @return JDFFileSpec the element
+	 */
+	public JDFFileSpec appendFileSpec()
+	{
+		return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
+	}
 
-    /**
-     * Get all FileSpec from the current element
-     * 
-     * @return Collection<JDFFileSpec>, null if none are available
-     */
-    public Collection<JDFFileSpec> getAllFileSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFileSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec appendFileSpec()
-    {
-        return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refFileSpec(JDFFileSpec refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refFileSpec(JDFFileSpec refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

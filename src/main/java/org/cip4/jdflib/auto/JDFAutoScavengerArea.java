@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,255 +80,239 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoScavengerArea : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoScavengerArea : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoScavengerArea extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SIZE, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ROTATION, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIZE, 0x22222221, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ROTATION, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoScavengerArea
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScavengerArea(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScavengerArea
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoScavengerArea(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScavengerArea
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoScavengerArea(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoScavengerArea
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoScavengerArea(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoScavengerArea
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoScavengerArea(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoScavengerArea
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoScavengerArea(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoScavengerArea[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoScavengerArea[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Center
+	  * @param value the value to set the attribute to
+	  */
+	public void setCenter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CENTER, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Center
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCenter()
+	{
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Size
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Size
+	  * @param value the value to set the attribute to
+	  */
+	public void setSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SIZE, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Size
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Center
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Center
-          * @param value the value to set the attribute to
-          */
-        public void setCenter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CENTER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Rotation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Rotation
+	  * @param value the value to set the attribute to
+	  */
+	public void setRotation(double value)
+	{
+		setAttribute(AttributeName.ROTATION, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Center
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCenter()
-        {
-            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Rotation
+	  * @return double the value of the attribute
+	  */
+	public double getRotation()
+	{
+		return getRealAttribute(AttributeName.ROTATION, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Size
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Size
-          * @param value the value to set the attribute to
-          */
-        public void setSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.SIZE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFXYPair attribute Size
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getSize()
-        {
-            String strAttrName = getAttribute(AttributeName.SIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateSeparationSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rotation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rotation
-          * @param value the value to set the attribute to
-          */
-        public void setRotation(double value)
-        {
-            setAttribute(AttributeName.ROTATION, value, null);
-        }
+	/**
+	 * (27) const get element SeparationSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 * default is getSeparationSpec(0)     */
+	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute Rotation
-          * @return double the value of the attribute
-          */
-        public double getRotation()
-        {
-            return getRealAttribute(AttributeName.ROTATION, null, 0.0);
-        }
+	/**
+	 * Get all SeparationSpec from the current element
+	 * 
+	 * @return Collection<JDFSeparationSpec>, null if none are available
+	 */
+	public Collection<JDFSeparationSpec> getAllSeparationSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSeparationSpec) vc.get(i));
+		}
 
-    /** (26) getCreateSeparationSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element SeparationSpec
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     * default is getSeparationSpec(0)     */
-    public JDFSeparationSpec getSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * Get all SeparationSpec from the current element
-     * 
-     * @return Collection<JDFSeparationSpec>, null if none are available
-     */
-    public Collection<JDFSeparationSpec> getAllSeparationSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSeparationSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec appendSeparationSpec()
-    {
-        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
-    }
+	/**
+	 * (30) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec appendSeparationSpec()
+	{
+		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
+	}
 
 }// end namespace JDF

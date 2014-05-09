@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,216 +85,203 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
-    /**
-    *****************************************************************************
-    class JDFAutoFlushResourceParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFlushResourceParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFlushResourceParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFlushResourceParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushResourceParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFlushResourceParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFlushResourceParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushResourceParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFlushResourceParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFlushResourceParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFlushResourceParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFlushResourceParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFlushResourceParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for FlushPolicy
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFlushResourceParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumFlushPolicy extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumFlushPolicy(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for FlushPolicy
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFlushPolicy getEnum(String enumName)
+		{
+			return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumName);
+		}
 
-        public static class EnumFlushPolicy extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFlushPolicy getEnum(int enumValue)
+		{
+			return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumValue);
+		}
 
-            private EnumFlushPolicy(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFlushPolicy.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFlushPolicy getEnum(String enumName)
-            {
-                return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFlushPolicy.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFlushPolicy getEnum(int enumValue)
-            {
-                return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFlushPolicy.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFlushPolicy.class);
-            }
+		public static final EnumFlushPolicy Complete = new EnumFlushPolicy("Complete");
+		public static final EnumFlushPolicy QueueEntry = new EnumFlushPolicy("QueueEntry");
+		public static final EnumFlushPolicy Intermediate = new EnumFlushPolicy("Intermediate");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFlushPolicy.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFlushPolicy.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FlushPolicy
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FlushPolicy
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFlushPolicy(EnumFlushPolicy enumVar)
+	{
+		setAttribute(AttributeName.FLUSHPOLICY, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumFlushPolicy Complete = new EnumFlushPolicy("Complete");
-            public static final EnumFlushPolicy QueueEntry = new EnumFlushPolicy("QueueEntry");
-            public static final EnumFlushPolicy Intermediate = new EnumFlushPolicy("Intermediate");
-        }      
+	/**
+	  * (9) get attribute FlushPolicy
+	  * @return the value of the attribute
+	  */
+	public EnumFlushPolicy getFlushPolicy()
+	{
+		return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/**
+	 * (24) const get element QueueFilter
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getQueueFilter()
+	{
+		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FlushPolicy
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FlushPolicy
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFlushPolicy(EnumFlushPolicy enumVar)
-        {
-            setAttribute(AttributeName.FLUSHPOLICY, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/** (25) getCreateQueueFilter
+	 * 
+	 * @return JDFQueueFilter the element
+	 */
+	public JDFQueueFilter getCreateQueueFilter()
+	{
+		return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
+	}
 
-        /**
-          * (9) get attribute FlushPolicy
-          * @return the value of the attribute
-          */
-        public EnumFlushPolicy getFlushPolicy()
-        {
-            return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element QueueFilter
-     * @return JDFQueueFilter the element
-     */
-    public JDFQueueFilter getQueueFilter()
-    {
-        return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, 0);
-    }
-
-    /** (25) getCreateQueueFilter
-     * 
-     * @return JDFQueueFilter the element
-     */
-    public JDFQueueFilter getCreateQueueFilter()
-    {
-        return (JDFQueueFilter) getCreateElement_KElement(ElementName.QUEUEFILTER, null, 0);
-    }
-
-    /**
-     * (29) append element QueueFilter
-     * @return JDFQueueFilter the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFQueueFilter appendQueueFilter() throws JDFException
-    {
-        return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
-    }
+	/**
+	 * (29) append element QueueFilter
+	 * @return JDFQueueFilter the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFQueueFilter appendQueueFilter() throws JDFException
+	{
+		return (JDFQueueFilter) appendElementN(ElementName.QUEUEFILTER, 1, null);
+	}
 
 }// end namespace JDF

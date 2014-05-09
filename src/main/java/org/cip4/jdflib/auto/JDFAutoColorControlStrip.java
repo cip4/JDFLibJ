@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,395 +87,370 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
 import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /**
-    *****************************************************************************
-    class JDFAutoColorControlStrip : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoColorControlStrip : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPTYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DENSITYMEASURINGFIELD, 0x33333331);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33331111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.DENSITYMEASURINGFIELD, 0x33333331);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33331111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoColorControlStrip
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorControlStrip
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoColorControlStrip(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorControlStrip
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorControlStrip
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoColorControlStrip(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoColorControlStrip
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoColorControlStrip
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoColorControlStrip(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoColorControlStrip[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoColorControlStrip[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Center
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Center
+	  * @param value the value to set the attribute to
+	  */
+	public void setCenter(JDFXYPair value)
+	{
+		setAttribute(AttributeName.CENTER, value, null);
+	}
 
+	/**
+	  * (20) get JDFXYPair attribute Center
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getCenter()
+	{
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Rotation
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Rotation
+	  * @param value the value to set the attribute to
+	  */
+	public void setRotation(double value)
+	{
+		setAttribute(AttributeName.ROTATION, value, null);
+	}
 
+	/**
+	  * (17) get double attribute Rotation
+	  * @return double the value of the attribute
+	  */
+	public double getRotation()
+	{
+		return getRealAttribute(AttributeName.ROTATION, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Center
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Center
-          * @param value the value to set the attribute to
-          */
-        public void setCenter(JDFXYPair value)
-        {
-            setAttribute(AttributeName.CENTER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Size
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Size
+	  * @param value the value to set the attribute to
+	  */
+	public void setSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SIZE, value, null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute Center
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getCenter()
-        {
-            String strAttrName = getAttribute(AttributeName.CENTER, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (20) get JDFXYPair attribute Size
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getSize()
+	{
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rotation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rotation
-          * @param value the value to set the attribute to
-          */
-        public void setRotation(double value)
-        {
-            setAttribute(AttributeName.ROTATION, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StripType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute StripType
+	  * @param value the value to set the attribute to
+	  */
+	public void setStripType(String value)
+	{
+		setAttribute(AttributeName.STRIPTYPE, value, null);
+	}
 
-        /**
-          * (17) get double attribute Rotation
-          * @return double the value of the attribute
-          */
-        public double getRotation()
-        {
-            return getRealAttribute(AttributeName.ROTATION, null, 0.0);
-        }
+	/**
+	  * (23) get String attribute StripType
+	  * @return the value of the attribute
+	  */
+	public String getStripType()
+	{
+		return getAttribute(AttributeName.STRIPTYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Size
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Size
-          * @param value the value to set the attribute to
-          */
-        public void setSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.SIZE, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (20) get JDFXYPair attribute Size
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getSize()
-        {
-            String strAttrName = getAttribute(AttributeName.SIZE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/** (26) getCreateCIELABMeasuringField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField getCreateCIELABMeasuringField(int iSkip)
+	{
+		return (JDFCIELABMeasuringField) getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StripType
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StripType
-          * @param value the value to set the attribute to
-          */
-        public void setStripType(String value)
-        {
-            setAttribute(AttributeName.STRIPTYPE, value, null);
-        }
+	/**
+	 * (27) const get element CIELABMeasuringField
+	 * @param iSkip number of elements to skip
+	 * @return JDFCIELABMeasuringField the element
+	 * default is getCIELABMeasuringField(0)     */
+	public JDFCIELABMeasuringField getCIELABMeasuringField(int iSkip)
+	{
+		return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute StripType
-          * @return the value of the attribute
-          */
-        public String getStripType()
-        {
-            return getAttribute(AttributeName.STRIPTYPE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all CIELABMeasuringField from the current element
+	 * 
+	 * @return Collection<JDFCIELABMeasuringField>, null if none are available
+	 */
+	public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
+	{
+		final VElement vc = getChildElementVector(ElementName.CIELABMEASURINGFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCIELABMeasuringField) vc.get(i));
+		}
 
-    /** (26) getCreateCIELABMeasuringField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCIELABMeasuringField the element
-     */
-    public JDFCIELABMeasuringField getCreateCIELABMeasuringField(int iSkip)
-    {
-        return (JDFCIELABMeasuringField)getCreateElement_KElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element CIELABMeasuringField
-     * @param iSkip number of elements to skip
-     * @return JDFCIELABMeasuringField the element
-     * default is getCIELABMeasuringField(0)     */
-    public JDFCIELABMeasuringField getCIELABMeasuringField(int iSkip)
-    {
-        return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
-    }
+	/**
+	 * (30) append element CIELABMeasuringField
+	 * @return JDFCIELABMeasuringField the element
+	 */
+	public JDFCIELABMeasuringField appendCIELABMeasuringField()
+	{
+		return (JDFCIELABMeasuringField) appendElement(ElementName.CIELABMEASURINGFIELD, null);
+	}
 
-    /**
-     * Get all CIELABMeasuringField from the current element
-     * 
-     * @return Collection<JDFCIELABMeasuringField>, null if none are available
-     */
-    public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
-    {
-        final VElement vc = getChildElementVector(ElementName.CIELABMEASURINGFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateDensityMeasuringField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField getCreateDensityMeasuringField(int iSkip)
+	{
+		return (JDFDensityMeasuringField) getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+	}
 
-        final Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCIELABMeasuringField) vc.get(i));
-        }
+	/**
+	 * (27) const get element DensityMeasuringField
+	 * @param iSkip number of elements to skip
+	 * @return JDFDensityMeasuringField the element
+	 * default is getDensityMeasuringField(0)     */
+	public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
+	{
+		return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all DensityMeasuringField from the current element
+	 * 
+	 * @return Collection<JDFDensityMeasuringField>, null if none are available
+	 */
+	public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
+	{
+		final VElement vc = getChildElementVector(ElementName.DENSITYMEASURINGFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element CIELABMeasuringField
-     * @return JDFCIELABMeasuringField the element
-     */
-    public JDFCIELABMeasuringField appendCIELABMeasuringField()
-    {
-        return (JDFCIELABMeasuringField) appendElement(ElementName.CIELABMEASURINGFIELD, null);
-    }
+		final Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFDensityMeasuringField) vc.get(i));
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refCIELABMeasuringField(JDFCIELABMeasuringField refTarget)
-    {
-        refElement(refTarget);
-    }
+		return v;
+	}
 
-    /** (26) getCreateDensityMeasuringField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFDensityMeasuringField the element
-     */
-    public JDFDensityMeasuringField getCreateDensityMeasuringField(int iSkip)
-    {
-        return (JDFDensityMeasuringField)getCreateElement_KElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
-    }
+	/**
+	 * (30) append element DensityMeasuringField
+	 * @return JDFDensityMeasuringField the element
+	 */
+	public JDFDensityMeasuringField appendDensityMeasuringField()
+	{
+		return (JDFDensityMeasuringField) appendElement(ElementName.DENSITYMEASURINGFIELD, null);
+	}
 
-    /**
-     * (27) const get element DensityMeasuringField
-     * @param iSkip number of elements to skip
-     * @return JDFDensityMeasuringField the element
-     * default is getDensityMeasuringField(0)     */
-    public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
-    {
-        return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refDensityMeasuringField(JDFDensityMeasuringField refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * Get all DensityMeasuringField from the current element
-     * 
-     * @return Collection<JDFDensityMeasuringField>, null if none are available
-     */
-    public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
-    {
-        final VElement vc = getChildElementVector(ElementName.DENSITYMEASURINGFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/** (26) getCreateSeparationSpec
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        final Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFDensityMeasuringField) vc.get(i));
-        }
+	/**
+	 * (27) const get element SeparationSpec
+	 * @param iSkip number of elements to skip
+	 * @return JDFSeparationSpec the element
+	 * default is getSeparationSpec(0)     */
+	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	{
+		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+	}
 
-        return v;
-    }
+	/**
+	 * Get all SeparationSpec from the current element
+	 * 
+	 * @return Collection<JDFSeparationSpec>, null if none are available
+	 */
+	public Collection<JDFSeparationSpec> getAllSeparationSpec()
+	{
+		final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (30) append element DensityMeasuringField
-     * @return JDFDensityMeasuringField the element
-     */
-    public JDFDensityMeasuringField appendDensityMeasuringField()
-    {
-        return (JDFDensityMeasuringField) appendElement(ElementName.DENSITYMEASURINGFIELD, null);
-    }
+		final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFSeparationSpec) vc.get(i));
+		}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refDensityMeasuringField(JDFDensityMeasuringField refTarget)
-    {
-        refElement(refTarget);
-    }
+		return v;
+	}
 
-    /** (26) getCreateSeparationSpec
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * (27) const get element SeparationSpec
-     * @param iSkip number of elements to skip
-     * @return JDFSeparationSpec the element
-     * default is getSeparationSpec(0)     */
-    public JDFSeparationSpec getSeparationSpec(int iSkip)
-    {
-        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
-    }
-
-    /**
-     * Get all SeparationSpec from the current element
-     * 
-     * @return Collection<JDFSeparationSpec>, null if none are available
-     */
-    public Collection<JDFSeparationSpec> getAllSeparationSpec()
-    {
-        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFSeparationSpec) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element SeparationSpec
-     * @return JDFSeparationSpec the element
-     */
-    public JDFSeparationSpec appendSeparationSpec()
-    {
-        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
-    }
+	/**
+	 * (30) append element SeparationSpec
+	 * @return JDFSeparationSpec the element
+	 */
+	public JDFSeparationSpec appendSeparationSpec()
+	{
+		return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
+	}
 
 }// end namespace JDF

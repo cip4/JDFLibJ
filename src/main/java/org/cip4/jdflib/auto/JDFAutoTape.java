@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,115 +77,104 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
-    /**
-    *****************************************************************************
-    class JDFAutoTape : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTape : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTape extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TAPECOLOR, 0x77776661);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TAPECOLOR, 0x77776661);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTape
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTape(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTape
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTape(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTape
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTape
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTape(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTape
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTape
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTape(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTape[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTape[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * (24) const get element TapeColor
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getTapeColor()
+	{
+		return (JDFSpanNamedColor) getElement(ElementName.TAPECOLOR, null, 0);
+	}
 
+	/** (25) getCreateTapeColor
+	 * 
+	 * @return JDFSpanNamedColor the element
+	 */
+	public JDFSpanNamedColor getCreateTapeColor()
+	{
+		return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.TAPECOLOR, null, 0);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element TapeColor
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getTapeColor()
-    {
-        return (JDFSpanNamedColor) getElement(ElementName.TAPECOLOR, null, 0);
-    }
-
-    /** (25) getCreateTapeColor
-     * 
-     * @return JDFSpanNamedColor the element
-     */
-    public JDFSpanNamedColor getCreateTapeColor()
-    {
-        return (JDFSpanNamedColor) getCreateElement_KElement(ElementName.TAPECOLOR, null, 0);
-    }
-
-    /**
-     * (29) append element TapeColor
-     * @return JDFSpanNamedColor the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFSpanNamedColor appendTapeColor() throws JDFException
-    {
-        return (JDFSpanNamedColor) appendElementN(ElementName.TAPECOLOR, 1, null);
-    }
+	/**
+	 * (29) append element TapeColor
+	 * @return JDFSpanNamedColor the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFSpanNamedColor appendTapeColor() throws JDFException
+	{
+		return (JDFSpanNamedColor) appendElementN(ElementName.TAPECOLOR, 1, null);
+	}
 
 }// end namespace JDF

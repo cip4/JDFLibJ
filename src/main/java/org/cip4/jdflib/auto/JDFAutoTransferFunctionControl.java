@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,247 +85,232 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
-    /**
-    *****************************************************************************
-    class JDFAutoTransferFunctionControl : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTransferFunctionControl : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTransferFunctionControl extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionSource.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionSource.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666666);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666666);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTransferFunctionControl
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferFunctionControl
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferFunctionControl(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferFunctionControl
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferFunctionControl
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTransferFunctionControl(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTransferFunctionControl
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTransferFunctionControl
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTransferFunctionControl(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTransferFunctionControl[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTransferFunctionControl[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for TransferFunctionSource
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumTransferFunctionSource extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumTransferFunctionSource(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTransferFunctionSource getEnum(String enumName)
+		{
+			return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTransferFunctionSource getEnum(int enumValue)
+		{
+			return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for TransferFunctionSource
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTransferFunctionSource.class);
+		}
 
-        public static class EnumTransferFunctionSource extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTransferFunctionSource.class);
+		}
 
-            private EnumTransferFunctionSource(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTransferFunctionSource.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTransferFunctionSource getEnum(String enumName)
-            {
-                return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumName);
-            }
+		public static final EnumTransferFunctionSource Document = new EnumTransferFunctionSource("Document");
+		public static final EnumTransferFunctionSource Device = new EnumTransferFunctionSource("Device");
+		public static final EnumTransferFunctionSource Custom = new EnumTransferFunctionSource("Custom");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTransferFunctionSource getEnum(int enumValue)
-            {
-                return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTransferFunctionSource.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TransferFunctionSource
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TransferFunctionSource
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
+	{
+		setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTransferFunctionSource.class);
-            }
+	/**
+	  * (9) get attribute TransferFunctionSource
+	  * @return the value of the attribute
+	  */
+	public EnumTransferFunctionSource getTransferFunctionSource()
+	{
+		return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTransferFunctionSource.class);
-            }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-            public static final EnumTransferFunctionSource Document = new EnumTransferFunctionSource("Document");
-            public static final EnumTransferFunctionSource Device = new EnumTransferFunctionSource("Device");
-            public static final EnumTransferFunctionSource Custom = new EnumTransferFunctionSource("Custom");
-        }      
+	/**
+	 * (24) const get element TransferCurvePool
+	 * @return JDFTransferCurvePool the element
+	 */
+	public JDFTransferCurvePool getTransferCurvePool()
+	{
+		return (JDFTransferCurvePool) getElement(ElementName.TRANSFERCURVEPOOL, null, 0);
+	}
 
+	/** (25) getCreateTransferCurvePool
+	 * 
+	 * @return JDFTransferCurvePool the element
+	 */
+	public JDFTransferCurvePool getCreateTransferCurvePool()
+	{
+		return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
+	}
 
+	/**
+	 * (29) append element TransferCurvePool
+	 * @return JDFTransferCurvePool the element
+	 * @throws JDFException if the element already exists
+	 */
+	public JDFTransferCurvePool appendTransferCurvePool() throws JDFException
+	{
+		return (JDFTransferCurvePool) appendElementN(ElementName.TRANSFERCURVEPOOL, 1, null);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TransferFunctionSource
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TransferFunctionSource
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
-        {
-            setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute TransferFunctionSource
-          * @return the value of the attribute
-          */
-        public EnumTransferFunctionSource getTransferFunctionSource()
-        {
-            return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /**
-     * (24) const get element TransferCurvePool
-     * @return JDFTransferCurvePool the element
-     */
-    public JDFTransferCurvePool getTransferCurvePool()
-    {
-        return (JDFTransferCurvePool) getElement(ElementName.TRANSFERCURVEPOOL, null, 0);
-    }
-
-    /** (25) getCreateTransferCurvePool
-     * 
-     * @return JDFTransferCurvePool the element
-     */
-    public JDFTransferCurvePool getCreateTransferCurvePool()
-    {
-        return (JDFTransferCurvePool) getCreateElement_KElement(ElementName.TRANSFERCURVEPOOL, null, 0);
-    }
-
-    /**
-     * (29) append element TransferCurvePool
-     * @return JDFTransferCurvePool the element
-     * @throws JDFException if the element already exists
-     */
-    public JDFTransferCurvePool appendTransferCurvePool() throws JDFException
-    {
-        return (JDFTransferCurvePool) appendElementN(ElementName.TRANSFERCURVEPOOL, 1, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refTransferCurvePool(JDFTransferCurvePool refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refTransferCurvePool(JDFTransferCurvePool refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,288 +88,273 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFNewComment;
-    /**
-    *****************************************************************************
-    class JDFAutoModifyNodeCmdParams : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoModifyNodeCmdParams : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.NEWCOMMENT, 0x33333111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.NEWCOMMENT, 0x33333111);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoModifyNodeCmdParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModifyNodeCmdParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoModifyNodeCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModifyNodeCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoModifyNodeCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoModifyNodeCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoModifyNodeCmdParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoModifyNodeCmdParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoModifyNodeCmdParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoModifyNodeCmdParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for Activation
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoModifyNodeCmdParams[  --> " + super.toString() + " ]";
-    }
+	public static class EnumActivation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumActivation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for Activation
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(String enumName)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumName);
+		}
 
-        public static class EnumActivation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumActivation getEnum(int enumValue)
+		{
+			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
+		}
 
-            private EnumActivation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumActivation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumActivation getEnum(String enumName)
-            {
-                return (EnumActivation) getEnum(EnumActivation.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumActivation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumActivation getEnum(int enumValue)
-            {
-                return (EnumActivation) getEnum(EnumActivation.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumActivation.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumActivation.class);
-            }
+		public static final EnumActivation Inactive = new EnumActivation("Inactive");
+		public static final EnumActivation Informative = new EnumActivation("Informative");
+		public static final EnumActivation Held = new EnumActivation("Held");
+		public static final EnumActivation Active = new EnumActivation("Active");
+		public static final EnumActivation TestRun = new EnumActivation("TestRun");
+		public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumActivation.class);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumActivation.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Activation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Activation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setActivation(EnumActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumActivation Inactive = new EnumActivation("Inactive");
-            public static final EnumActivation Informative = new EnumActivation("Informative");
-            public static final EnumActivation Held = new EnumActivation("Held");
-            public static final EnumActivation Active = new EnumActivation("Active");
-            public static final EnumActivation TestRun = new EnumActivation("TestRun");
-            public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
-        }      
+	/**
+	  * (9) get attribute Activation
+	  * @return the value of the attribute
+	  */
+	public EnumActivation getActivation()
+	{
+		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobID(String value)
+	{
+		setAttribute(AttributeName.JOBID, value, null);
+	}
 
+	/**
+	  * (23) get String attribute JobID
+	  * @return the value of the attribute
+	  */
+	public String getJobID()
+	{
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Activation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Activation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setActivation(EnumActivation enumVar)
-        {
-            setAttribute(AttributeName.ACTIVATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute JobPartID
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute JobPartID
+	  * @param value the value to set the attribute to
+	  */
+	public void setJobPartID(String value)
+	{
+		setAttribute(AttributeName.JOBPARTID, value, null);
+	}
 
-        /**
-          * (9) get attribute Activation
-          * @return the value of the attribute
-          */
-        public EnumActivation getActivation()
-        {
-            return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-        }
+	/**
+	  * (23) get String attribute JobPartID
+	  * @return the value of the attribute
+	  */
+	public String getJobPartID()
+	{
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobID
-          * @param value the value to set the attribute to
-          */
-        public void setJobID(String value)
-        {
-            setAttribute(AttributeName.JOBID, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute JobID
-          * @return the value of the attribute
-          */
-        public String getJobID()
-        {
-            return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateNewComment
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFNewComment the element
+	 */
+	public JDFNewComment getCreateNewComment(int iSkip)
+	{
+		return (JDFNewComment) getCreateElement_KElement(ElementName.NEWCOMMENT, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute JobPartID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute JobPartID
-          * @param value the value to set the attribute to
-          */
-        public void setJobPartID(String value)
-        {
-            setAttribute(AttributeName.JOBPARTID, value, null);
-        }
+	/**
+	 * (27) const get element NewComment
+	 * @param iSkip number of elements to skip
+	 * @return JDFNewComment the element
+	 * default is getNewComment(0)     */
+	public JDFNewComment getNewComment(int iSkip)
+	{
+		return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, iSkip);
+	}
 
-        /**
-          * (23) get String attribute JobPartID
-          * @return the value of the attribute
-          */
-        public String getJobPartID()
-        {
-            return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	 * Get all NewComment from the current element
+	 * 
+	 * @return Collection<JDFNewComment>, null if none are available
+	 */
+	public Collection<JDFNewComment> getAllNewComment()
+	{
+		final VElement vc = getChildElementVector(ElementName.NEWCOMMENT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		final Vector<JDFNewComment> v = new Vector<JDFNewComment>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFNewComment) vc.get(i));
+		}
 
-    /** (26) getCreateNewComment
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFNewComment the element
-     */
-    public JDFNewComment getCreateNewComment(int iSkip)
-    {
-        return (JDFNewComment)getCreateElement_KElement(ElementName.NEWCOMMENT, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * (27) const get element NewComment
-     * @param iSkip number of elements to skip
-     * @return JDFNewComment the element
-     * default is getNewComment(0)     */
-    public JDFNewComment getNewComment(int iSkip)
-    {
-        return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, iSkip);
-    }
-
-    /**
-     * Get all NewComment from the current element
-     * 
-     * @return Collection<JDFNewComment>, null if none are available
-     */
-    public Collection<JDFNewComment> getAllNewComment()
-    {
-        final VElement vc = getChildElementVector(ElementName.NEWCOMMENT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFNewComment> v = new Vector<JDFNewComment>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFNewComment) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element NewComment
-     * @return JDFNewComment the element
-     */
-    public JDFNewComment appendNewComment()
-    {
-        return (JDFNewComment) appendElement(ElementName.NEWCOMMENT, null);
-    }
+	/**
+	 * (30) append element NewComment
+	 * @return JDFNewComment the element
+	 */
+	public JDFNewComment appendNewComment()
+	{
+		return (JDFNewComment) appendElement(ElementName.NEWCOMMENT, null);
+	}
 
 }// end namespace JDF

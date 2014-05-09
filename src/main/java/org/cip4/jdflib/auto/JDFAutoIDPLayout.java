@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,445 +90,424 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFImageShift;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPLayout : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPLayout : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPLayout extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), "Portrait");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.FORCEFRONTSIDE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ROTATE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSided");
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FINISHEDPAGEORIENTATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFinishedPageOrientation.getEnum(0), "Portrait");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FORCEFRONTSIDE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTATIONDIRECTION, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ROTATE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, "0");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSided");
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIDPLayout
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPLayout
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPLayout
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPLayout
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPLayout
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPLayout
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPLayout(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPLayout[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	* Enumeration strings for FinishedPageOrientation
+	*/
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPLayout[  --> " + super.toString() + " ]";
-    }
+	public static class EnumFinishedPageOrientation extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumFinishedPageOrientation(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-        /**
-        * Enumeration strings for FinishedPageOrientation
-        */
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFinishedPageOrientation getEnum(String enumName)
+		{
+			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
+		}
 
-        public static class EnumFinishedPageOrientation extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFinishedPageOrientation getEnum(int enumValue)
+		{
+			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
+		}
 
-            private EnumFinishedPageOrientation(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFinishedPageOrientation.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumFinishedPageOrientation getEnum(String enumName)
-            {
-                return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
-            }
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFinishedPageOrientation.class);
+		}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumFinishedPageOrientation getEnum(int enumValue)
-            {
-                return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFinishedPageOrientation.class);
+		}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumFinishedPageOrientation.class);
-            }
+		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
+		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumFinishedPageOrientation.class);
-            }
+	/**
+	* Enumeration strings for Sides
+	*/
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumFinishedPageOrientation.class);
-            }
+	public static class EnumSides extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-            public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
-            public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
-        }      
+		private EnumSides(String name)
+		{
+			super(name, m_startValue++);
+		}
 
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumSides getEnum(String enumName)
+		{
+			return (EnumSides) getEnum(EnumSides.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumSides getEnum(int enumValue)
+		{
+			return (EnumSides) getEnum(EnumSides.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Sides
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumSides.class);
+		}
 
-        public static class EnumSides extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumSides.class);
+		}
 
-            private EnumSides(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumSides.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumSides getEnum(String enumName)
-            {
-                return (EnumSides) getEnum(EnumSides.class, enumName);
-            }
+		public static final EnumSides OneSided = new EnumSides("OneSided");
+		public static final EnumSides TwoSidedLongEdge = new EnumSides("TwoSidedLongEdge");
+		public static final EnumSides TwoSidedShortEdge = new EnumSides("TwoSidedShortEdge");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumSides getEnum(int enumValue)
-            {
-                return (EnumSides) getEnum(EnumSides.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumSides.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Border
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Border
+	  * @param value the value to set the attribute to
+	  */
+	public void setBorder(double value)
+	{
+		setAttribute(AttributeName.BORDER, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumSides.class);
-            }
+	/**
+	  * (17) get double attribute Border
+	  * @return double the value of the attribute
+	  */
+	public double getBorder()
+	{
+		return getRealAttribute(AttributeName.BORDER, null, 0.0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumSides.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute FinishedPageOrientation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute FinishedPageOrientation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
+	{
+		setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-            public static final EnumSides OneSided = new EnumSides("OneSided");
-            public static final EnumSides TwoSidedLongEdge = new EnumSides("TwoSidedLongEdge");
-            public static final EnumSides TwoSidedShortEdge = new EnumSides("TwoSidedShortEdge");
-        }      
+	/**
+	  * (9) get attribute FinishedPageOrientation
+	  * @return the value of the attribute
+	  */
+	public EnumFinishedPageOrientation getFinishedPageOrientation()
+	{
+		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, "Portrait"));
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ForceFrontSide
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ForceFrontSide
+	  * @param value the value to set the attribute to
+	  */
+	public void setForceFrontSide(JDFNumberRangeList value)
+	{
+		setAttribute(AttributeName.FORCEFRONTSIDE, value, null);
+	}
 
+	/**
+	  * (20) get JDFNumberRangeList attribute ForceFrontSide
+	  * @return JDFNumberRangeList the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFNumberRangeList
+	  */
+	public JDFNumberRangeList getForceFrontSide()
+	{
+		final String strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		return nPlaceHolder;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Border
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Border
-          * @param value the value to set the attribute to
-          */
-        public void setBorder(double value)
-        {
-            setAttribute(AttributeName.BORDER, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NumberUp
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute NumberUp
+	  * @param value the value to set the attribute to
+	  */
+	public void setNumberUp(JDFXYPair value)
+	{
+		setAttribute(AttributeName.NUMBERUP, value, null);
+	}
 
-        /**
-          * (17) get double attribute Border
-          * @return double the value of the attribute
-          */
-        public double getBorder()
-        {
-            return getRealAttribute(AttributeName.BORDER, null, 0.0);
-        }
+	/**
+	  * (20) get JDFXYPair attribute NumberUp
+	  * @return JDFXYPair the value of the attribute, null if a the
+	  *         attribute value is not a valid to create a JDFXYPair
+	  */
+	public JDFXYPair getNumberUp()
+	{
+		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute FinishedPageOrientation
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute FinishedPageOrientation
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
-        {
-            setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PresentationDirection
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PresentationDirection
+	  * @param value the value to set the attribute to
+	  */
+	public void setPresentationDirection(String value)
+	{
+		setAttribute(AttributeName.PRESENTATIONDIRECTION, value, null);
+	}
 
-        /**
-          * (9) get attribute FinishedPageOrientation
-          * @return the value of the attribute
-          */
-        public EnumFinishedPageOrientation getFinishedPageOrientation()
-        {
-            return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, "Portrait"));
-        }
+	/**
+	  * (23) get String attribute PresentationDirection
+	  * @return the value of the attribute
+	  */
+	public String getPresentationDirection()
+	{
+		return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ForceFrontSide
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ForceFrontSide
-          * @param value the value to set the attribute to
-          */
-        public void setForceFrontSide(JDFNumberRangeList value)
-        {
-            setAttribute(AttributeName.FORCEFRONTSIDE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Rotate
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Rotate
+	  * @param value the value to set the attribute to
+	  */
+	public void setRotate(double value)
+	{
+		setAttribute(AttributeName.ROTATE, value, null);
+	}
 
-        /**
-          * (20) get JDFNumberRangeList attribute ForceFrontSide
-          * @return JDFNumberRangeList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFNumberRangeList
-          */
-        public JDFNumberRangeList getForceFrontSide()
-        {
-            String strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, JDFCoreConstants.EMPTYSTRING);
-            JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (17) get double attribute Rotate
+	  * @return double the value of the attribute
+	  */
+	public double getRotate()
+	{
+		return getRealAttribute(AttributeName.ROTATE, null, 0.0);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NumberUp
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute NumberUp
-          * @param value the value to set the attribute to
-          */
-        public void setNumberUp(JDFXYPair value)
-        {
-            setAttribute(AttributeName.NUMBERUP, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Sides
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Sides
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setSides(EnumSides enumVar)
+	{
+		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (20) get JDFXYPair attribute NumberUp
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getNumberUp()
-        {
-            String strAttrName = getAttribute(AttributeName.NUMBERUP, null, JDFCoreConstants.EMPTYSTRING);
-            JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-            return nPlaceHolder;
-        }
+	/**
+	  * (9) get attribute Sides
+	  * @return the value of the attribute
+	  */
+	public EnumSides getSides()
+	{
+		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSided"));
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PresentationDirection
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PresentationDirection
-          * @param value the value to set the attribute to
-          */
-        public void setPresentationDirection(String value)
-        {
-            setAttribute(AttributeName.PRESENTATIONDIRECTION, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (23) get String attribute PresentationDirection
-          * @return the value of the attribute
-          */
-        public String getPresentationDirection()
-        {
-            return getAttribute(AttributeName.PRESENTATIONDIRECTION, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/** (26) getCreateImageShift
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageShift the element
+	 */
+	public JDFImageShift getCreateImageShift(int iSkip)
+	{
+		return (JDFImageShift) getCreateElement_KElement(ElementName.IMAGESHIFT, null, iSkip);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rotate
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rotate
-          * @param value the value to set the attribute to
-          */
-        public void setRotate(double value)
-        {
-            setAttribute(AttributeName.ROTATE, value, null);
-        }
+	/**
+	 * (27) const get element ImageShift
+	 * @param iSkip number of elements to skip
+	 * @return JDFImageShift the element
+	 * default is getImageShift(0)     */
+	public JDFImageShift getImageShift(int iSkip)
+	{
+		return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, iSkip);
+	}
 
-        /**
-          * (17) get double attribute Rotate
-          * @return double the value of the attribute
-          */
-        public double getRotate()
-        {
-            return getRealAttribute(AttributeName.ROTATE, null, 0.0);
-        }
+	/**
+	 * Get all ImageShift from the current element
+	 * 
+	 * @return Collection<JDFImageShift>, null if none are available
+	 */
+	public Collection<JDFImageShift> getAllImageShift()
+	{
+		final VElement vc = getChildElementVector(ElementName.IMAGESHIFT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Sides
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Sides
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setSides(EnumSides enumVar)
-        {
-            setAttribute(AttributeName.SIDES, enumVar==null ? null : enumVar.getName(), null);
-        }
+		final Vector<JDFImageShift> v = new Vector<JDFImageShift>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFImageShift) vc.get(i));
+		}
 
-        /**
-          * (9) get attribute Sides
-          * @return the value of the attribute
-          */
-        public EnumSides getSides()
-        {
-            return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSided"));
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateImageShift
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFImageShift the element
-     */
-    public JDFImageShift getCreateImageShift(int iSkip)
-    {
-        return (JDFImageShift)getCreateElement_KElement(ElementName.IMAGESHIFT, null, iSkip);
-    }
-
-    /**
-     * (27) const get element ImageShift
-     * @param iSkip number of elements to skip
-     * @return JDFImageShift the element
-     * default is getImageShift(0)     */
-    public JDFImageShift getImageShift(int iSkip)
-    {
-        return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, iSkip);
-    }
-
-    /**
-     * Get all ImageShift from the current element
-     * 
-     * @return Collection<JDFImageShift>, null if none are available
-     */
-    public Collection<JDFImageShift> getAllImageShift()
-    {
-        final VElement vc = getChildElementVector(ElementName.IMAGESHIFT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFImageShift> v = new Vector<JDFImageShift>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFImageShift) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element ImageShift
-     * @return JDFImageShift the element
-     */
-    public JDFImageShift appendImageShift()
-    {
-        return (JDFImageShift) appendElement(ElementName.IMAGESHIFT, null);
-    }
+	/**
+	 * (30) append element ImageShift
+	 * @return JDFImageShift the element
+	 */
+	public JDFImageShift appendImageShift()
+	{
+		return (JDFImageShift) appendElement(ElementName.IMAGESHIFT, null);
+	}
 
 }// end namespace JDF

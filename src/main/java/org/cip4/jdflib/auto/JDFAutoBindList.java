@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,138 +80,127 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFBindItem;
-    /**
-    *****************************************************************************
-    class JDFAutoBindList : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoBindList : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoBindList extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BINDITEM, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BINDITEM, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoBindList
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBindList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindList
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoBindList(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBindList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoBindList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoBindList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoBindList
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoBindList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoBindList
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoBindList(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoBindList[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoBindList[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateBindItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFBindItem the element
+	 */
+	public JDFBindItem getCreateBindItem(int iSkip)
+	{
+		return (JDFBindItem) getCreateElement_KElement(ElementName.BINDITEM, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element BindItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFBindItem the element
+	 * default is getBindItem(0)     */
+	public JDFBindItem getBindItem(int iSkip)
+	{
+		return (JDFBindItem) getElement(ElementName.BINDITEM, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all BindItem from the current element
+	 * 
+	 * @return Collection<JDFBindItem>, null if none are available
+	 */
+	public Collection<JDFBindItem> getAllBindItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.BINDITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateBindItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFBindItem the element
-     */
-    public JDFBindItem getCreateBindItem(int iSkip)
-    {
-        return (JDFBindItem)getCreateElement_KElement(ElementName.BINDITEM, null, iSkip);
-    }
+		final Vector<JDFBindItem> v = new Vector<JDFBindItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFBindItem) vc.get(i));
+		}
 
-    /**
-     * (27) const get element BindItem
-     * @param iSkip number of elements to skip
-     * @return JDFBindItem the element
-     * default is getBindItem(0)     */
-    public JDFBindItem getBindItem(int iSkip)
-    {
-        return (JDFBindItem) getElement(ElementName.BINDITEM, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all BindItem from the current element
-     * 
-     * @return Collection<JDFBindItem>, null if none are available
-     */
-    public Collection<JDFBindItem> getAllBindItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.BINDITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFBindItem> v = new Vector<JDFBindItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFBindItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element BindItem
-     * @return JDFBindItem the element
-     */
-    public JDFBindItem appendBindItem()
-    {
-        return (JDFBindItem) appendElement(ElementName.BINDITEM, null);
-    }
+	/**
+	 * (30) append element BindItem
+	 * @return JDFBindItem the element
+	 */
+	public JDFBindItem appendBindItem()
+	{
+		return (JDFBindItem) appendElement(ElementName.BINDITEM, null);
+	}
 
 }// end namespace JDF

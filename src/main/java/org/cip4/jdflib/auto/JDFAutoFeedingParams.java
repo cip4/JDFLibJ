@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,212 +81,199 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCollatingItem;
 import org.cip4.jdflib.resource.process.JDFFeeder;
-    /**
-    *****************************************************************************
-    class JDFAutoFeedingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoFeedingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoFeedingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FEEDER, 0x33333311);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLLATINGITEM, 0x33333311);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.FEEDER, 0x33333311);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.COLLATINGITEM, 0x33333311);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoFeedingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeedingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoFeedingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeedingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeedingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoFeedingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoFeedingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoFeedingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoFeedingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoFeedingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoFeedingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	/** (26) getCreateFeeder
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFFeeder the element
+	 */
+	public JDFFeeder getCreateFeeder(int iSkip)
+	{
+		return (JDFFeeder) getCreateElement_KElement(ElementName.FEEDER, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element Feeder
+	 * @param iSkip number of elements to skip
+	 * @return JDFFeeder the element
+	 * default is getFeeder(0)     */
+	public JDFFeeder getFeeder(int iSkip)
+	{
+		return (JDFFeeder) getElement(ElementName.FEEDER, null, iSkip);
+	}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+	/**
+	 * Get all Feeder from the current element
+	 * 
+	 * @return Collection<JDFFeeder>, null if none are available
+	 */
+	public Collection<JDFFeeder> getAllFeeder()
+	{
+		final VElement vc = getChildElementVector(ElementName.FEEDER, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
+		final Vector<JDFFeeder> v = new Vector<JDFFeeder>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFFeeder) vc.get(i));
+		}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+		return v;
+	}
 
-    /** (26) getCreateFeeder
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFFeeder the element
-     */
-    public JDFFeeder getCreateFeeder(int iSkip)
-    {
-        return (JDFFeeder)getCreateElement_KElement(ElementName.FEEDER, null, iSkip);
-    }
+	/**
+	 * (30) append element Feeder
+	 * @return JDFFeeder the element
+	 */
+	public JDFFeeder appendFeeder()
+	{
+		return (JDFFeeder) appendElement(ElementName.FEEDER, null);
+	}
 
-    /**
-     * (27) const get element Feeder
-     * @param iSkip number of elements to skip
-     * @return JDFFeeder the element
-     * default is getFeeder(0)     */
-    public JDFFeeder getFeeder(int iSkip)
-    {
-        return (JDFFeeder) getElement(ElementName.FEEDER, null, iSkip);
-    }
+	/** (26) getCreateCollatingItem
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFCollatingItem the element
+	 */
+	public JDFCollatingItem getCreateCollatingItem(int iSkip)
+	{
+		return (JDFCollatingItem) getCreateElement_KElement(ElementName.COLLATINGITEM, null, iSkip);
+	}
 
-    /**
-     * Get all Feeder from the current element
-     * 
-     * @return Collection<JDFFeeder>, null if none are available
-     */
-    public Collection<JDFFeeder> getAllFeeder()
-    {
-        final VElement vc = getChildElementVector(ElementName.FEEDER, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element CollatingItem
+	 * @param iSkip number of elements to skip
+	 * @return JDFCollatingItem the element
+	 * default is getCollatingItem(0)     */
+	public JDFCollatingItem getCollatingItem(int iSkip)
+	{
+		return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, iSkip);
+	}
 
-        final Vector<JDFFeeder> v = new Vector<JDFFeeder>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFFeeder) vc.get(i));
-        }
+	/**
+	 * Get all CollatingItem from the current element
+	 * 
+	 * @return Collection<JDFCollatingItem>, null if none are available
+	 */
+	public Collection<JDFCollatingItem> getAllCollatingItem()
+	{
+		final VElement vc = getChildElementVector(ElementName.COLLATINGITEM, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFCollatingItem> v = new Vector<JDFCollatingItem>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFCollatingItem) vc.get(i));
+		}
 
-    /**
-     * (30) append element Feeder
-     * @return JDFFeeder the element
-     */
-    public JDFFeeder appendFeeder()
-    {
-        return (JDFFeeder) appendElement(ElementName.FEEDER, null);
-    }
+		return v;
+	}
 
-    /** (26) getCreateCollatingItem
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFCollatingItem the element
-     */
-    public JDFCollatingItem getCreateCollatingItem(int iSkip)
-    {
-        return (JDFCollatingItem)getCreateElement_KElement(ElementName.COLLATINGITEM, null, iSkip);
-    }
-
-    /**
-     * (27) const get element CollatingItem
-     * @param iSkip number of elements to skip
-     * @return JDFCollatingItem the element
-     * default is getCollatingItem(0)     */
-    public JDFCollatingItem getCollatingItem(int iSkip)
-    {
-        return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, iSkip);
-    }
-
-    /**
-     * Get all CollatingItem from the current element
-     * 
-     * @return Collection<JDFCollatingItem>, null if none are available
-     */
-    public Collection<JDFCollatingItem> getAllCollatingItem()
-    {
-        final VElement vc = getChildElementVector(ElementName.COLLATINGITEM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFCollatingItem> v = new Vector<JDFCollatingItem>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFCollatingItem) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element CollatingItem
-     * @return JDFCollatingItem the element
-     */
-    public JDFCollatingItem appendCollatingItem()
-    {
-        return (JDFCollatingItem) appendElement(ElementName.COLLATINGITEM, null);
-    }
+	/**
+	 * (30) append element CollatingItem
+	 * @return JDFCollatingItem the element
+	 */
+	public JDFCollatingItem appendCollatingItem()
+	{
+		return (JDFCollatingItem) appendElement(ElementName.COLLATINGITEM, null);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,179 +85,168 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
-    /**
-    *****************************************************************************
-    class JDFAutoPRRule : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoPRRule : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoPRRule extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREFS, 0x22222222, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIONREFS, 0x22222222, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULEATTR, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PRRULEATTR, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoPRRule
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRule
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPRRule(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRRule
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRule
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPRRule(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoPRRule
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoPRRule
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPRRule(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPRRule[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoPRRule[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ActionRefs
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ActionRefs
+	  * @param value the value to set the attribute to
+	  */
+	public void setActionRefs(VString value)
+	{
+		setAttribute(AttributeName.ACTIONREFS, value, null);
+	}
 
+	/**
+	  * (21) get VString attribute ActionRefs
+	  * @return VString the value of the attribute
+	  */
+	public VString getActionRefs()
+	{
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
+		vStrAttrib.setAllStrings(s, " ");
+		return vStrAttrib;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ActionRefs
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ActionRefs
-          * @param value the value to set the attribute to
-          */
-        public void setActionRefs(VString value)
-        {
-            setAttribute(AttributeName.ACTIONREFS, value, null);
-        }
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-        /**
-          * (21) get VString attribute ActionRefs
-          * @return VString the value of the attribute
-          */
-        public VString getActionRefs()
-        {
-            VString vStrAttrib = new VString();
-            String  s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
-            vStrAttrib.setAllStrings(s, " ");
-            return vStrAttrib;
-        }
+	/** (26) getCreatePRRuleAttr
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr getCreatePRRuleAttr(int iSkip)
+	{
+		return (JDFPRRuleAttr) getCreateElement_KElement(ElementName.PRRULEATTR, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (27) const get element PRRuleAttr
+	 * @param iSkip number of elements to skip
+	 * @return JDFPRRuleAttr the element
+	 * default is getPRRuleAttr(0)     */
+	public JDFPRRuleAttr getPRRuleAttr(int iSkip)
+	{
+		return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, iSkip);
+	}
 
-    /** (26) getCreatePRRuleAttr
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPRRuleAttr the element
-     */
-    public JDFPRRuleAttr getCreatePRRuleAttr(int iSkip)
-    {
-        return (JDFPRRuleAttr)getCreateElement_KElement(ElementName.PRRULEATTR, null, iSkip);
-    }
+	/**
+	 * Get all PRRuleAttr from the current element
+	 * 
+	 * @return Collection<JDFPRRuleAttr>, null if none are available
+	 */
+	public Collection<JDFPRRuleAttr> getAllPRRuleAttr()
+	{
+		final VElement vc = getChildElementVector(ElementName.PRRULEATTR, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /**
-     * (27) const get element PRRuleAttr
-     * @param iSkip number of elements to skip
-     * @return JDFPRRuleAttr the element
-     * default is getPRRuleAttr(0)     */
-    public JDFPRRuleAttr getPRRuleAttr(int iSkip)
-    {
-        return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, iSkip);
-    }
+		final Vector<JDFPRRuleAttr> v = new Vector<JDFPRRuleAttr>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFPRRuleAttr) vc.get(i));
+		}
 
-    /**
-     * Get all PRRuleAttr from the current element
-     * 
-     * @return Collection<JDFPRRuleAttr>, null if none are available
-     */
-    public Collection<JDFPRRuleAttr> getAllPRRuleAttr()
-    {
-        final VElement vc = getChildElementVector(ElementName.PRRULEATTR, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+		return v;
+	}
 
-        final Vector<JDFPRRuleAttr> v = new Vector<JDFPRRuleAttr>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFPRRuleAttr) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element PRRuleAttr
-     * @return JDFPRRuleAttr the element
-     */
-    public JDFPRRuleAttr appendPRRuleAttr()
-    {
-        return (JDFPRRuleAttr) appendElement(ElementName.PRRULEATTR, null);
-    }
+	/**
+	 * (30) append element PRRuleAttr
+	 * @return JDFPRRuleAttr the element
+	 */
+	public JDFPRRuleAttr appendPRRuleAttr()
+	{
+		return (JDFPRRuleAttr) appendElement(ElementName.PRRULEATTR, null);
+	}
 
 }// end namespace JDF

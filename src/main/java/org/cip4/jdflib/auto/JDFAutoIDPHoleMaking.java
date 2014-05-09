@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,147 +80,136 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-    /**
-    *****************************************************************************
-    class JDFAutoIDPHoleMaking : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoIDPHoleMaking : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoIDPHoleMaking extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x33333333);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x33333333);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoIDPHoleMaking
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPHoleMaking
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPHoleMaking(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPHoleMaking
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPHoleMaking
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoIDPHoleMaking(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoIDPHoleMaking
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoIDPHoleMaking
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoIDPHoleMaking(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoIDPHoleMaking[  --> " + super.toString() + " ]";
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoIDPHoleMaking[  --> " + super.toString() + " ]";
-    }
+	/** (26) getCreateHoleMakingParams
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams getCreateHoleMakingParams(int iSkip)
+	{
+		return (JDFHoleMakingParams) getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
+	}
 
+	/**
+	 * (27) const get element HoleMakingParams
+	 * @param iSkip number of elements to skip
+	 * @return JDFHoleMakingParams the element
+	 * default is getHoleMakingParams(0)     */
+	public JDFHoleMakingParams getHoleMakingParams(int iSkip)
+	{
+		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * Get all HoleMakingParams from the current element
+	 * 
+	 * @return Collection<JDFHoleMakingParams>, null if none are available
+	 */
+	public Collection<JDFHoleMakingParams> getAllHoleMakingParams()
+	{
+		final VElement vc = getChildElementVector(ElementName.HOLEMAKINGPARAMS, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-    /** (26) getCreateHoleMakingParams
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFHoleMakingParams the element
-     */
-    public JDFHoleMakingParams getCreateHoleMakingParams(int iSkip)
-    {
-        return (JDFHoleMakingParams)getCreateElement_KElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
-    }
+		final Vector<JDFHoleMakingParams> v = new Vector<JDFHoleMakingParams>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFHoleMakingParams) vc.get(i));
+		}
 
-    /**
-     * (27) const get element HoleMakingParams
-     * @param iSkip number of elements to skip
-     * @return JDFHoleMakingParams the element
-     * default is getHoleMakingParams(0)     */
-    public JDFHoleMakingParams getHoleMakingParams(int iSkip)
-    {
-        return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
-    }
+		return v;
+	}
 
-    /**
-     * Get all HoleMakingParams from the current element
-     * 
-     * @return Collection<JDFHoleMakingParams>, null if none are available
-     */
-    public Collection<JDFHoleMakingParams> getAllHoleMakingParams()
-    {
-        final VElement vc = getChildElementVector(ElementName.HOLEMAKINGPARAMS, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (30) append element HoleMakingParams
+	 * @return JDFHoleMakingParams the element
+	 */
+	public JDFHoleMakingParams appendHoleMakingParams()
+	{
+		return (JDFHoleMakingParams) appendElement(ElementName.HOLEMAKINGPARAMS, null);
+	}
 
-        final Vector<JDFHoleMakingParams> v = new Vector<JDFHoleMakingParams>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFHoleMakingParams) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element HoleMakingParams
-     * @return JDFHoleMakingParams the element
-     */
-    public JDFHoleMakingParams appendHoleMakingParams()
-    {
-        return (JDFHoleMakingParams) appendElement(ElementName.HOLEMAKINGPARAMS, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refHoleMakingParams(JDFHoleMakingParams refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,139 +76,133 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
-    /**
-    *****************************************************************************
-    class JDFAutoSystemTimeSet : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoSystemTimeSet : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoSystemTimeSet extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NEWTIME, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.OLDTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NEWTIME, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.OLDTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoSystemTimeSet
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSystemTimeSet
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoSystemTimeSet(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSystemTimeSet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoSystemTimeSet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoSystemTimeSet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoSystemTimeSet
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoSystemTimeSet
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoSystemTimeSet(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoSystemTimeSet[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoSystemTimeSet[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute NewTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute NewTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setNewTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.NEWTIME, date.getDateTimeISO(), null);
+	}
 
+	/**
+	  * (12) get JDFDate attribute NewTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getNewTime()
+	{
+		final String str = getAttribute(AttributeName.NEWTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute NewTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute NewTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setNewTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.NEWTIME, date.getDateTimeISO(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OldTime
+	--------------------------------------------------------------------- */
+	/**
+	  * (11) set attribute OldTime
+	  * @param value the value to set the attribute to or null
+	  */
+	public void setOldTime(JDFDate value)
+	{
+		JDFDate date = value;
+		if (date == null)
+		{
+			date = new JDFDate();
+		}
+		setAttribute(AttributeName.OLDTIME, date.getDateTimeISO(), null);
+	}
 
-        /**
-          * (12) get JDFDate attribute NewTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getNewTime()
-        {
-            String str = getAttribute(AttributeName.NEWTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OldTime
-        --------------------------------------------------------------------- */
-        /**
-          * (11) set attribute OldTime
-          * @param value the value to set the attribute to or null
-          */
-        public void setOldTime(JDFDate value)
-        {
-            JDFDate date = value;
-            if (date == null) date = new JDFDate();
-            setAttribute(AttributeName.OLDTIME, date.getDateTimeISO(), null);
-        }
-
-        /**
-          * (12) get JDFDate attribute OldTime
-          * @return JDFDate the value of the attribute
-          */
-        public JDFDate getOldTime()
-        {
-            String str = getAttribute(AttributeName.OLDTIME, null, null);
-                    JDFDate ret = JDFDate.createDate(str);
-            return ret;
-        }
+	/**
+	  * (12) get JDFDate attribute OldTime
+	  * @return JDFDate the value of the attribute
+	  */
+	public JDFDate getOldTime()
+	{
+		final String str = getAttribute(AttributeName.OLDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
+		return ret;
+	}
 
 }// end namespace JDF

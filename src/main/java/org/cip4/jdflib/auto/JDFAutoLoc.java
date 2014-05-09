@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,177 +76,163 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /**
-    *****************************************************************************
-    class JDFAutoLoc : public JDFElement
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoLoc : public JDFElement
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoLoc extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.HELPTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LANG, 0x33333333, AttributeInfo.EnumAttributeType.language, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHORTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HELPTEXT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LANG, 0x33333333, AttributeInfo.EnumAttributeType.language, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHORTVALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLoc
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLoc
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLoc(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLoc
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLoc
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLoc(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLoc
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLoc
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLoc(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoLoc[  --> " + super.toString() + " ]";
+	}
 
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoLoc[  --> " + super.toString() + " ]";
-    }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HelpText
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute HelpText
+	  * @param value the value to set the attribute to
+	  */
+	public void setHelpText(String value)
+	{
+		setAttribute(AttributeName.HELPTEXT, value, null);
+	}
 
+	/**
+	  * (23) get String attribute HelpText
+	  * @return the value of the attribute
+	  */
+	public String getHelpText()
+	{
+		return getAttribute(AttributeName.HELPTEXT, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HelpText
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HelpText
-          * @param value the value to set the attribute to
-          */
-        public void setHelpText(String value)
-        {
-            setAttribute(AttributeName.HELPTEXT, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Lang
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Lang
+	  * @param value the value to set the attribute to
+	  */
+	public void setLang(String value)
+	{
+		setAttribute(AttributeName.LANG, value, null);
+	}
 
-        /**
-          * (23) get String attribute HelpText
-          * @return the value of the attribute
-          */
-        public String getHelpText()
-        {
-            return getAttribute(AttributeName.HELPTEXT, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Lang
+	  * @return the value of the attribute
+	  */
+	public String getLang()
+	{
+		return getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Lang
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Lang
-          * @param value the value to set the attribute to
-          */
-        public void setLang(String value)
-        {
-            setAttribute(AttributeName.LANG, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ShortValue
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ShortValue
+	  * @param value the value to set the attribute to
+	  */
+	public void setShortValue(String value)
+	{
+		setAttribute(AttributeName.SHORTVALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute Lang
-          * @return the value of the attribute
-          */
-        public String getLang()
-        {
-            return getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute ShortValue
+	  * @return the value of the attribute
+	  */
+	public String getShortValue()
+	{
+		return getAttribute(AttributeName.SHORTVALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ShortValue
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ShortValue
-          * @param value the value to set the attribute to
-          */
-        public void setShortValue(String value)
-        {
-            setAttribute(AttributeName.SHORTVALUE, value, null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Value
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Value
+	  * @param value the value to set the attribute to
+	  */
+	public void setValue(String value)
+	{
+		setAttribute(AttributeName.VALUE, value, null);
+	}
 
-        /**
-          * (23) get String attribute ShortValue
-          * @return the value of the attribute
-          */
-        public String getShortValue()
-        {
-            return getAttribute(AttributeName.SHORTVALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Value
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Value
-          * @param value the value to set the attribute to
-          */
-        public void setValue(String value)
-        {
-            setAttribute(AttributeName.VALUE, value, null);
-        }
-
-        /**
-          * (23) get String attribute Value
-          * @return the value of the attribute
-          */
-        public String getValue()
-        {
-            return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
-        }
+	/**
+	  * (23) get String attribute Value
+	  * @return the value of the attribute
+	  */
+	public String getValue()
+	{
+		return getAttribute(AttributeName.VALUE, null, JDFCoreConstants.EMPTYSTRING);
+	}
 
 }// end namespace JDF

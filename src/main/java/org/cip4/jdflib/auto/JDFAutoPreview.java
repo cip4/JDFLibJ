@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,7 +93,7 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
 *****************************************************************************
-class JDFAutoPreview : public JDFElement
+class JDFAutoPreview : public JDFResource
 
 *****************************************************************************
 */
@@ -103,17 +103,16 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "PNG");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -175,6 +174,17 @@ public abstract class JDFAutoPreview extends JDFResource
 	public String toString()
 	{
 		return " JDFAutoPreview[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
 	}
 
 	/**
@@ -411,8 +421,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	  */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, JDFCoreConstants.EMPTYSTRING);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 

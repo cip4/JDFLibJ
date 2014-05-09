@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,358 +89,346 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /**
-    *****************************************************************************
-    class JDFAutoStrap : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoStrap : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoStrap extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+	}
 
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoStrap
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStrap
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoStrap(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStrap
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoStrap
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoStrap(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoStrap
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoStrap
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoStrap(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoStrap[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Consumable);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoStrap[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Consumable;
+	}
 
+	/**
+	* Enumeration strings for Material
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Consumable);
-        return bRet;
-    }
+	public static class EnumMaterial extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumMaterial(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Consumable;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMaterial getEnum(String enumName)
+		{
+			return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMaterial getEnum(int enumValue)
+		{
+			return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for Material
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMaterial.class);
+		}
 
-        public static class EnumMaterial extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMaterial.class);
+		}
 
-            private EnumMaterial(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMaterial.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumMaterial getEnum(String enumName)
-            {
-                return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
-            }
+		public static final EnumMaterial AdhesiveTape = new EnumMaterial("AdhesiveTape");
+		public static final EnumMaterial Strap = new EnumMaterial("Strap");
+		public static final EnumMaterial String = new EnumMaterial("String");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumMaterial getEnum(int enumValue)
-            {
-                return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Material
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Material
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setMaterial(EnumMaterial enumVar)
+	{
+		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumMaterial.class);
-            }
+	/**
+	  * (9) get attribute Material
+	  * @return the value of the attribute
+	  */
+	public EnumMaterial getMaterial()
+	{
+		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumMaterial.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute StrapColor
+	--------------------------------------------------------------------- */
+	/**
+	  * (13) set attribute StrapColor
+	  * @param value the value to set the attribute to
+	  */
+	public void setStrapColor(EnumNamedColor value)
+	{
+		setAttribute(AttributeName.STRAPCOLOR, value == null ? null : value.getName(), null);
+	}
 
-            public static final EnumMaterial AdhesiveTape = new EnumMaterial("AdhesiveTape");
-            public static final EnumMaterial Strap = new EnumMaterial("Strap");
-            public static final EnumMaterial String = new EnumMaterial("String");
-        }      
+	/**
+	  * (19) get EnumNamedColor attribute StrapColor
+	  * @return EnumNamedColor the value of the attribute
+	  */
+	public EnumNamedColor getStrapColor()
+	{
+		String strAttrName = "";
+		EnumNamedColor nPlaceHolder = null;
+		strAttrName = getAttribute(AttributeName.STRAPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
+		nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
+		return nPlaceHolder;
+	}
 
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
 
+	/** (26) getCreateContact
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 */
+	public JDFContact getCreateContact(int iSkip)
+	{
+		return (JDFContact) getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Material
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute Material
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setMaterial(EnumMaterial enumVar)
-        {
-            setAttribute(AttributeName.MATERIAL, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/**
+	 * (27) const get element Contact
+	 * @param iSkip number of elements to skip
+	 * @return JDFContact the element
+	 * default is getContact(0)     */
+	public JDFContact getContact(int iSkip)
+	{
+		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+	}
 
-        /**
-          * (9) get attribute Material
-          * @return the value of the attribute
-          */
-        public EnumMaterial getMaterial()
-        {
-            return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
-        }
+	/**
+	 * Get all Contact from the current element
+	 * 
+	 * @return Collection<JDFContact>, null if none are available
+	 */
+	public Collection<JDFContact> getAllContact()
+	{
+		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute StrapColor
-        --------------------------------------------------------------------- */
-        /**
-          * (13) set attribute StrapColor
-          * @param value the value to set the attribute to
-          */
-        public void setStrapColor(EnumNamedColor value)
-        {
-            setAttribute(AttributeName.STRAPCOLOR, value==null ? null : value.getName(), null);
-        }
+		final Vector<JDFContact> v = new Vector<JDFContact>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFContact) vc.get(i));
+		}
 
-        /**
-          * (19) get EnumNamedColor attribute StrapColor
-          * @return EnumNamedColor the value of the attribute
-          */
-        public EnumNamedColor getStrapColor()
-        {
-            String strAttrName = "";
-            EnumNamedColor nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.STRAPCOLOR, null, JDFCoreConstants.EMPTYSTRING);
-            nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
-            return nPlaceHolder;
-        }
+		return v;
+	}
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (30) append element Contact
+	 * @return JDFContact the element
+	 */
+	@Override
+	public JDFContact appendContact()
+	{
+		return (JDFContact) appendElement(ElementName.CONTACT, null);
+	}
 
-    /** (26) getCreateContact
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     */
-    public JDFContact getCreateContact(int iSkip)
-    {
-        return (JDFContact)getCreateElement_KElement(ElementName.CONTACT, null, iSkip);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refContact(JDFContact refTarget)
+	{
+		refElement(refTarget);
+	}
 
-    /**
-     * (27) const get element Contact
-     * @param iSkip number of elements to skip
-     * @return JDFContact the element
-     * default is getContact(0)     */
-    public JDFContact getContact(int iSkip)
-    {
-        return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
-    }
+	/** (26) getCreateIdentificationField
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-    /**
-     * Get all Contact from the current element
-     * 
-     * @return Collection<JDFContact>, null if none are available
-     */
-    public Collection<JDFContact> getAllContact()
-    {
-        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
+	/**
+	 * (27) const get element IdentificationField
+	 * @param iSkip number of elements to skip
+	 * @return JDFIdentificationField the element
+	 * default is getIdentificationField(0)     */
+	@Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
+	{
+		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+	}
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFContact) vc.get(i));
-        }
+	/**
+	 * Get all IdentificationField from the current element
+	 * 
+	 * @return Collection<JDFIdentificationField>, null if none are available
+	 */
+	public Collection<JDFIdentificationField> getAllIdentificationField()
+	{
+		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
 
-        return v;
-    }
+		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFIdentificationField) vc.get(i));
+		}
 
-    /**
-     * (30) append element Contact
-     * @return JDFContact the element
-     */
-    public JDFContact appendContact()
-    {
-        return (JDFContact) appendElement(ElementName.CONTACT, null);
-    }
+		return v;
+	}
 
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refContact(JDFContact refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	 * (30) append element IdentificationField
+	 * @return JDFIdentificationField the element
+	 */
+	@Override
+	public JDFIdentificationField appendIdentificationField()
+	{
+		return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+	}
 
-    /** (26) getCreateIdentificationField
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
-
-    /**
-     * (27) const get element IdentificationField
-     * @param iSkip number of elements to skip
-     * @return JDFIdentificationField the element
-     * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
-    {
-        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
-    }
-
-    /**
-     * Get all IdentificationField from the current element
-     * 
-     * @return Collection<JDFIdentificationField>, null if none are available
-     */
-    public Collection<JDFIdentificationField> getAllIdentificationField()
-    {
-        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFIdentificationField) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element IdentificationField
-     * @return JDFIdentificationField the element
-     */
-    public JDFIdentificationField appendIdentificationField()
-    {
-        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
-    }
-
-    /**
-      * (31) create inter-resource link to refTarget
-      * @param refTarget the element that is referenced
-      */
-    public void refIdentificationField(JDFIdentificationField refTarget)
-    {
-        refElement(refTarget);
-    }
+	/**
+	  * (31) create inter-resource link to refTarget
+	  * @param refTarget the element that is referenced
+	  */
+	public void refIdentificationField(JDFIdentificationField refTarget)
+	{
+		refElement(refTarget);
+	}
 
 }// end namespace JDF

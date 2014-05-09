@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,348 +80,327 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
-    /**
-    *****************************************************************************
-    class JDFAutoTrimmingParams : public JDFResource
 
-    *****************************************************************************
-    */
+/**
+*****************************************************************************
+class JDFAutoTrimmingParams : public JDFResource
+
+*****************************************************************************
+*/
 
 public abstract class JDFAutoTrimmingParams extends JDFResource
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTrimCover.getEnum(0), "Both");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TRIMMINGOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTrimmingType.getEnum(0), null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumTrimCover.getEnum(0), "Both");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.HEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRIMMINGOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumTrimmingType.getEnum(0), null);
+	}
 
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoTrimmingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrimmingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoTrimmingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrimmingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrimmingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoTrimmingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoTrimmingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoTrimmingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoTrimmingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
+	/**
+	 * @return  the string representation
+	 */
+	@Override
+	public String toString()
+	{
+		return " JDFAutoTrimmingParams[  --> " + super.toString() + " ]";
+	}
 
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    /**
-     * @return  the string representation
-     */
-    @Override
-    public String toString()
-    {
-        return " JDFAutoTrimmingParams[  --> " + super.toString() + " ]";
-    }
+	/**
+	 * @return the resource Class
+	 */
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
+	/**
+	* Enumeration strings for TrimCover
+	*/
 
-    /**
-     * @return  true if ok
-     */
-    @Override
-    public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
+	public static class EnumTrimCover extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
+		private EnumTrimCover(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the resource Class
-     */
-    @Override
-    public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
-    }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTrimCover getEnum(String enumName)
+		{
+			return (EnumTrimCover) getEnum(EnumTrimCover.class, enumName);
+		}
 
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTrimCover getEnum(int enumValue)
+		{
+			return (EnumTrimCover) getEnum(EnumTrimCover.class, enumValue);
+		}
 
-        /**
-        * Enumeration strings for TrimCover
-        */
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTrimCover.class);
+		}
 
-        public static class EnumTrimCover extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTrimCover.class);
+		}
 
-            private EnumTrimCover(String name)
-            {
-                super(name, m_startValue++);
-            }
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTrimCover.class);
+		}
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTrimCover getEnum(String enumName)
-            {
-                return (EnumTrimCover) getEnum(EnumTrimCover.class, enumName);
-            }
+		public static final EnumTrimCover Front = new EnumTrimCover("Front");
+		public static final EnumTrimCover Back = new EnumTrimCover("Back");
+		public static final EnumTrimCover Both = new EnumTrimCover("Both");
+		public static final EnumTrimCover Neither = new EnumTrimCover("Neither");
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTrimCover getEnum(int enumValue)
-            {
-                return (EnumTrimCover) getEnum(EnumTrimCover.class, enumValue);
-            }
+	/**
+	* Enumeration strings for TrimmingType
+	*/
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTrimCover.class);
-            }
+	public static class EnumTrimmingType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTrimCover.class);
-            }
+		private EnumTrimmingType(String name)
+		{
+			super(name, m_startValue++);
+		}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTrimCover.class);
-            }
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumTrimmingType getEnum(String enumName)
+		{
+			return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumName);
+		}
 
-            public static final EnumTrimCover Front = new EnumTrimCover("Front");
-            public static final EnumTrimCover Back = new EnumTrimCover("Back");
-            public static final EnumTrimCover Both = new EnumTrimCover("Both");
-            public static final EnumTrimCover Neither = new EnumTrimCover("Neither");
-        }      
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumTrimmingType getEnum(int enumValue)
+		{
+			return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumValue);
+		}
 
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumTrimmingType.class);
+		}
 
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumTrimmingType.class);
+		}
 
-        /**
-        * Enumeration strings for TrimmingType
-        */
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumTrimmingType.class);
+		}
 
-        public static class EnumTrimmingType extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
+		public static final EnumTrimmingType Detailed = new EnumTrimmingType("Detailed");
+		public static final EnumTrimmingType SystemSpecified = new EnumTrimmingType("SystemSpecified");
+	}
 
-            private EnumTrimmingType(String name)
-            {
-                super(name, m_startValue++);
-            }
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
 
-    /**
-     * @param enumName the string to convert
-     * @return the enum
-     */
-            public static EnumTrimmingType getEnum(String enumName)
-            {
-                return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumName);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimCover
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TrimCover
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTrimCover(EnumTrimCover enumVar)
+	{
+		setAttribute(AttributeName.TRIMCOVER, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-    /**
-     * @param enumValue the integer to convert
-     * @return the enum
-     */
-            public static EnumTrimmingType getEnum(int enumValue)
-            {
-                return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumValue);
-            }
+	/**
+	  * (9) get attribute TrimCover
+	  * @return the value of the attribute
+	  */
+	public EnumTrimCover getTrimCover()
+	{
+		return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
+	}
 
-    /**
-     * @return the map of enums
-     */
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumTrimmingType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Width
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Width
+	  * @param value the value to set the attribute to
+	  */
+	public void setWidth(double value)
+	{
+		setAttribute(AttributeName.WIDTH, value, null);
+	}
 
-    /**
-     * @return the list of enums
-     */
-            public static List getEnumList()
-            {
-                return getEnumList(EnumTrimmingType.class);
-            }
+	/**
+	  * (17) get double attribute Width
+	  * @return double the value of the attribute
+	  */
+	public double getWidth()
+	{
+		return getRealAttribute(AttributeName.WIDTH, null, 0.0);
+	}
 
-    /**
-     * @return the iterator
-     */
-            public static Iterator iterator()
-            {
-                return iterator(EnumTrimmingType.class);
-            }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Height
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute Height
+	  * @param value the value to set the attribute to
+	  */
+	public void setHeight(double value)
+	{
+		setAttribute(AttributeName.HEIGHT, value, null);
+	}
 
-            public static final EnumTrimmingType Detailed = new EnumTrimmingType("Detailed");
-            public static final EnumTrimmingType SystemSpecified = new EnumTrimmingType("SystemSpecified");
-        }      
+	/**
+	  * (17) get double attribute Height
+	  * @return double the value of the attribute
+	  */
+	public double getHeight()
+	{
+		return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
+	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimmingOffset
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TrimmingOffset
+	  * @param value the value to set the attribute to
+	  */
+	public void setTrimmingOffset(double value)
+	{
+		setAttribute(AttributeName.TRIMMINGOFFSET, value, null);
+	}
 
+	/**
+	  * (17) get double attribute TrimmingOffset
+	  * @return double the value of the attribute
+	  */
+	public double getTrimmingOffset()
+	{
+		return getRealAttribute(AttributeName.TRIMMINGOFFSET, null, 0.0);
+	}
 
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrimCover
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TrimCover
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTrimCover(EnumTrimCover enumVar)
-        {
-            setAttribute(AttributeName.TRIMCOVER, enumVar==null ? null : enumVar.getName(), null);
-        }
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TrimmingType
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute TrimmingType
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setTrimmingType(EnumTrimmingType enumVar)
+	{
+		setAttribute(AttributeName.TRIMMINGTYPE, enumVar == null ? null : enumVar.getName(), null);
+	}
 
-        /**
-          * (9) get attribute TrimCover
-          * @return the value of the attribute
-          */
-        public EnumTrimCover getTrimCover()
-        {
-            return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Width
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Width
-          * @param value the value to set the attribute to
-          */
-        public void setWidth(double value)
-        {
-            setAttribute(AttributeName.WIDTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute Width
-          * @return double the value of the attribute
-          */
-        public double getWidth()
-        {
-            return getRealAttribute(AttributeName.WIDTH, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Height
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Height
-          * @param value the value to set the attribute to
-          */
-        public void setHeight(double value)
-        {
-            setAttribute(AttributeName.HEIGHT, value, null);
-        }
-
-        /**
-          * (17) get double attribute Height
-          * @return double the value of the attribute
-          */
-        public double getHeight()
-        {
-            return getRealAttribute(AttributeName.HEIGHT, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrimmingOffset
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrimmingOffset
-          * @param value the value to set the attribute to
-          */
-        public void setTrimmingOffset(double value)
-        {
-            setAttribute(AttributeName.TRIMMINGOFFSET, value, null);
-        }
-
-        /**
-          * (17) get double attribute TrimmingOffset
-          * @return double the value of the attribute
-          */
-        public double getTrimmingOffset()
-        {
-            return getRealAttribute(AttributeName.TRIMMINGOFFSET, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrimmingType
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute TrimmingType
-          * @param enumVar the enumVar to set the attribute to
-          */
-        public void setTrimmingType(EnumTrimmingType enumVar)
-        {
-            setAttribute(AttributeName.TRIMMINGTYPE, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute TrimmingType
-          * @return the value of the attribute
-          */
-        public EnumTrimmingType getTrimmingType()
-        {
-            return EnumTrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));
-        }
+	/**
+	  * (9) get attribute TrimmingType
+	  * @return the value of the attribute
+	  */
+	public EnumTrimmingType getTrimmingType()
+	{
+		return EnumTrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));
+	}
 
 }// end namespace JDF
