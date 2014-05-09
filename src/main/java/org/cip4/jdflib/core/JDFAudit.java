@@ -84,6 +84,7 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoAudit;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -96,41 +97,17 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * This class represents a JDF-Audit which handles individual Audit elements
  */
-public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
+public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 {
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.4a BLD 77";
+	final private static String m_libAgentVersion = "1.5 BLD 79";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
 	private static String m_strAgentVersion = m_libAgentVersion;
 	private static String m_strAuthor = null;
-
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHOR, 0x44443333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SPAWNID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ID, 0x33333311, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.REFID, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		// 1.4
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33331111, AttributeInfo.EnumAttributeType.shortString, null, null);
-
-	}
-
-	/**
-	 * @see org.cip4.jdflib.core.JDFElement#getTheAttributeInfo()
-	 */
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
@@ -376,15 +353,17 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	@Override
 	public int compare(final JDFAudit a1, final JDFAudit a2)
 	{
-		final JDFDate d1 = a1.getTimeStampDate();
-		final JDFDate d2 = a2.getTimeStampDate();
+		final JDFDate d1 = a1.getTimeStamp();
+		final JDFDate d2 = a2.getTimeStamp();
 		return ContainerUtil.compare(d1, d2);
 	}
 
 	/**
 	 * SetSeverity
 	 * @param s
+	 * @deprecated - only valid in the respective subclasses
 	 */
+	@Deprecated
 	public void setSeverity(final EnumSeverity s)
 	{
 		setAttribute(JDFConstants.SEVERITY, s.getName(), null);
@@ -393,7 +372,9 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	/**
 	 * GetSeverity
 	 * @return EnumSeverity
+	 * @deprecated - only valid in the respective subclasses
 	 */
+	@Deprecated
 	public EnumSeverity getSeverity()
 	{
 		return EnumSeverity.getEnum(getAttribute(JDFConstants.SEVERITY, null, null));
@@ -416,7 +397,9 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	/**
 	 * SetEndStatus
 	 * @param s
+	 * @deprecated - only valid in the respective subclasses
 	 */
+	@Deprecated
 	public void setEndStatus(final JDFElement.EnumNodeStatus s)
 	{
 		setAttribute(AttributeName.ENDSTATUS, s.getName(), null);
@@ -479,24 +462,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
-	 * Set attribute SpawnID
-	 * @param value
-	 */
-	public void setSpawnID(final String value)
-	{
-		setAttribute(AttributeName.SPAWNID, value, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
-	 * Set attribute refID
-	 * @param value
-	 */
-	public void setrefID(final String value)
-	{
-		setAttribute(AttributeName.REFID, value, null);
-	}
-
-	/**
 	 * Set attribute refID to the ID of previous
 	 * @param previous the previous audit that is referenced
 	 */
@@ -507,15 +472,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 			final String id = previous.appendAnchor(null); // ensure that previous has an id
 			setrefID(id);
 		}
-	}
-
-	/**
-	 * SetAuthor
-	 * @param author
-	 */
-	public void setAuthor(final String author)
-	{
-		setAttribute(AttributeName.AUTHOR, author, null);
 	}
 
 	/**
@@ -596,114 +552,14 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
-	 * GetTimeStamp
-	 * @deprecated use getTimeStampDate as the typed version
-	 * @return the String value of TimeStamp
-	 */
-	@Deprecated
-	public String getTimeStamp()
-	{
-		return getAttribute(AttributeName.TIMESTAMP, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
 	 * (12) get JDFDate attribute TimeStamp
 	 * @return JDFDate the value of the attribute
+	 * @deprecated - use getTimeStamp
 	 */
+	@Deprecated
 	public JDFDate getTimeStampDate()
 	{
-		final String date = getAttribute(AttributeName.TIMESTAMP, null, null);
-		return JDFDate.createDate(date);
-	}
-
-	/**
-	 * Get string attribute SpawnID
-	 * @return
-	 */
-	public String getSpawnID()
-	{
-		return getAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
-	 * Get string attribute refID
-	 * @return
-	 */
-	public String getrefID()
-	{
-		return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
-	 * Get string attribute Author
-	 * @return
-	 */
-	public String getAuthor()
-	{
-		return getAttribute(AttributeName.AUTHOR);
-	}
-
-	/**
-	 * Set attribute AgentName
-	 * @param value
-	 */
-	public void setAgentName(final String value)
-	{
-		setAttribute(AttributeName.AGENTNAME, value);
-	}
-
-	/**
-	 * Get string attribute QueueEntryID
-	 * @return
-	 */
-	public String getQueueEntryID()
-	{
-		return getAttribute(AttributeName.QUEUEENTRYID);
-	}
-
-	/**
-	 * Set attribute QueueEntryID
-	 * @param value
-	 */
-	public void setQueueEntryID(final String value)
-	{
-		setAttribute(AttributeName.QUEUEENTRYID, value);
-	}
-
-	/**
-	 * Get string attribute AgentName
-	 * @return
-	 */
-	public String getAgentName()
-	{
-		return getAttribute(AttributeName.AGENTNAME);
-	}
-
-	/**
-	 * Set attribute AgentVersion
-	 * @param value
-	 */
-	public void setAgentVersion(final String value)
-	{
-		setAttribute(AttributeName.AGENTVERSION, value);
-	}
-
-	/**
-	 * Get string attribute AgentVersion
-	 * @return
-	 */
-	public String getAgentVersion()
-	{
-		return getAttribute(AttributeName.AGENTVERSION);
-	}
-
-	/**
-	 * Set attribute TimeStamp
-	 * @param value
-	 */
-	public void setTimeStamp(final JDFDate value)
-	{
-		setAttributeNameTimeStamp(AttributeName.TIMESTAMP, value);
+		return getTimeStamp();
 	}
 
 	/**

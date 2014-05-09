@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -503,7 +503,6 @@ public class AttributeInfo
 	/**
 	 * Enumeration of valid attribute types
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumAttributeType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -705,7 +704,6 @@ public class AttributeInfo
 	/**
 	 * Enumeration of attribute validity values
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumAttributeValidity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -122,6 +122,10 @@ public final class AttributeName
 	public static final String ACTIONREFS = "ActionRefs";
 	/** */
 	public static final String ACTIVATION = "Activation";
+	/** */
+	public static final String ACTIVITYID = "ActivityID";
+	/** */
+	public static final String ACTIVITYNAME = "ActivityName";
 	/** */
 	public static final String ACTUAL = "Actual";
 	/** */
@@ -299,6 +303,8 @@ public final class AttributeName
 	/** */
 	public static final String AUTOMATED = "Automated";
 	/** */
+	public static final String AUTOMATION = "Automation";
+	/** */
 	public static final String AUTOPOSITIONEPSINFO = "AutoPositionEPSInfo";
 	/** */
 	public static final String AUTOROTATEPAGES = "AutoRotatePages";
@@ -313,6 +319,8 @@ public final class AttributeName
 	/** */
 	public static final String AVERAGESETUP = "AverageSetup";
 
+	/** */
+	public static final String BACKBRIGHTNESS = "BackBrightness";
 	/** */
 	public static final String BACKCOATINGDETAIL = "BackCoatingDetail";
 	/** */
@@ -331,6 +339,8 @@ public final class AttributeName
 	public static final String BACKPAGES = "BackPages";
 	/** */
 	public static final String BACKSIDE = "BackSide";
+	/** */
+	public static final String BACKSPREAD = "BackSpread";
 	/** */
 	public static final String BADFEEDQUALITY = "BadFeedQuality";
 	/** */
@@ -417,6 +427,14 @@ public final class AttributeName
 	public static final String BLEEDHEAD = "BleedHead";
 	/** */
 	public static final String BLEEDSPINE = "BleedSpine";
+	/** */
+	public static final String BLEEDBOTTOM = "BleedBottom";
+	/** */
+	public static final String BLEEDLEFT = "BleedLeft";
+	/** */
+	public static final String BLEEDRIGHT = "BleedRight";
+	/** */
+	public static final String BLEEDTOP = "BleedTop";
 	/** */
 	public static final String BLENDCOLORSPACE = "BlendColorSpace";
 	/** */
@@ -583,6 +601,8 @@ public final class AttributeName
 	/** */
 	public static final String CODEBLOCKSIZE = "CodeBlockSize";
 	/** */
+	public static final String COLLAPSEBLEEDS = "CollapseBleeds";
+	/** */
 	public static final String COLLATE = "Collate";
 	/** */
 	public static final String COLOR = "Color";
@@ -616,6 +636,8 @@ public final class AttributeName
 	public static final String COLORTRANSFORM = "ColorTransform";
 	/** */
 	public static final String COLORTYPE = "ColorType";
+	/** */
+	public static final String COLORTYPEDETAILS = "ColorTypeDetails";
 	/** */
 	public static final String COLUMNS = "Columns";
 	/** */
@@ -735,6 +757,8 @@ public final class AttributeName
 	/** */
 	public static final String COUNTRYCODE = "CountryCode";
 	/** */
+	public static final String COVERBOARDWIDTH = "CoverBoardWidth";
+	/** */
 	public static final String COVEROFFSET = "CoverOffset";
 	/** */
 	public static final String COVERTYPE = "CoverType";
@@ -852,6 +876,8 @@ public final class AttributeName
 	/** */
 	public static final String DESCRIPTIVENAME = "DescriptiveName";
 	/** */
+	public static final String DETAIL = "Detail";
+	/** */
 	public static final String DETECTBLEND = "DetectBlend";
 	/** */
 	public static final String DEVCAPREF = "DevCapRef";
@@ -859,6 +885,8 @@ public final class AttributeName
 	public static final String DEVCAPREFS = "DevCapRefs";
 	/** */
 	public static final String DEVCAPSREF = "DevCapsRef";
+	/** */
+	public static final String DEVICECLASS = "DeviceClass";
 	/** */
 	public static final String DEVICECONDITION = "DeviceCondition";
 	/** */
@@ -956,7 +984,11 @@ public final class AttributeName
 	/** */
 	public static final String DRAFTOK = "DraftOK";
 	/** */
+	public static final String DROPID = "DropID";
+	/** */
 	public static final String DRYING = "Drying";
+	/** */
+	public static final String DUEDATE = "DueDate";
 	/** */
 	public static final String DUELEVEL = "DueLevel";
 	/** */
@@ -1128,6 +1160,8 @@ public final class AttributeName
 	/** */
 	public static final String FILLMATERIAL = "FillMaterial";
 	/** */
+	public static final String FILLPRIORITY = "FillPriority";
+	/** */
 	public static final String FINISHEDPAGE = "FinishedPage";
 	/** */
 	public static final String FINISHEDPAGEORIENTATION = "FinishedPageOrientation";
@@ -1148,7 +1182,11 @@ public final class AttributeName
 	/** */
 	public static final String FITTOPAGE = "FitToPage";
 	/** */
+	public static final String FIXATION = "Fixation";
+	/** */
 	public static final String FIXEXPRESSION = "FixExpression";
+	/** */
+	public static final String FLATDIMENSIONS = "FlatDimensions";
 	/** */
 	public static final String FLATNESS = "Flatness";
 	/** */
@@ -1247,7 +1285,11 @@ public final class AttributeName
 	public static final String FRONTPAGES = "FrontPages";
 	/** */
 	public static final String FRONTSIDE = "FrontSide";
+	/** */
+	public static final String FRONTSPREAD = "FrontSpread";
 
+	/** */
+	public static final String GANGELEMENTID = "GangElementID";
 	/** */
 	public static final String GANGNAME = "GangName";
 	/** */
@@ -1284,6 +1326,8 @@ public final class AttributeName
 	public static final String GROSSWEIGHT = "GrossWeight";
 	/** */
 	public static final String GROUPBY = "GroupBy";
+	/** */
+	public static final String GROUPCODE = "GroupCode";
 	/** */
 	public static final String GUTTER = "Gutter";
 	/** */
@@ -1571,7 +1615,11 @@ public final class AttributeName
 	/** */
 	public static final String ISDEVICE = "IsDevice";
 	/** */
+	public static final String ISDOUBLEBYTEFONT = "IsDoubleByteFont";
+	/** */
 	public static final String ISFONTSCREENONLY = "IsFontScreenOnly";
+	/** */
+	public static final String ISOPAPERSUBSTRATE = "ISOPaperSubstrate";
 	/** */
 	public static final String ISPAGE = "IsPage";
 	/** */
@@ -1597,6 +1645,8 @@ public final class AttributeName
 	public static final String JDFINPUTURL = "JDFInputURL";
 	/** */
 	public static final String JDFOUTPUTURL = "JDFOutputURL";
+	/** */
+	public static final String JDFURL = "JDFURL";
 	/** */
 	public static final String JDFVERSIONS = "JDFVersions";
 	/** */
@@ -1641,7 +1691,13 @@ public final class AttributeName
 	/** */
 	public static final String KEYWORDS = "Keywords";
 	/** */
+	public static final String KNOCKOUTBLEED = "KnockoutBleed";
+	/** */
 	public static final String KNOCKOUTCMYKWHITE = "KnockOutCMYKWhite";
+	/** */
+	public static final String KNOCKOUTREFS = "KnockoutRefs";
+	/** */
+	public static final String KNOCKOUTSOURCE = "KnockoutSource";
 	/** */
 	public static final String KNOWNLOCALIZATIONS = "KnownLocalizations";
 
@@ -1761,6 +1817,8 @@ public final class AttributeName
 	public static final String LOTDETAILS = "LotDetails";
 	/** */
 	public static final String LOTID = "LotID";
+	/** */
+	public static final String LOWERRIBBONNAME = "LowerRibbonName";
 
 	/** */
 	public static final String MACROREFS = "MacroRefs";
@@ -1840,6 +1898,8 @@ public final class AttributeName
 	public static final String MAXORD = "MaxOrd";
 	/** */
 	public static final String MAXPERGROUP = "MaxPerGroup";
+	/** */
+	public static final String MAXQUANTITY = "MaxQuantity";
 	/** */
 	public static final String MAXRESOLUTION = "MaxResolution";
 	/** */
@@ -1955,7 +2015,11 @@ public final class AttributeName
 	/** */
 	public static final String MINLATESTATUS = "MinLateStatus";
 	/** */
+	public static final String MINLINEWIDTH = "MinLineWidth";
+	/** */
 	public static final String MINOCCURS = "MinOccurs";
+	/** */
+	public static final String MINQUANTITY = "MinQuantity";
 	/** */
 	public static final String MINRESOLUTION = "MinResolution";
 	/** */
@@ -2086,6 +2150,8 @@ public final class AttributeName
 	/** */
 	public static final String NUMBERVALUE = "NumberValue";
 	/** */
+	public static final String NUMCOLORS = "NumColors";
+	/** */
 	public static final String NUMRESOLUTIONS = "NumResolutions";
 	/** */
 	public static final String NUPSEPARATION = "NUpSeparation";
@@ -2119,11 +2185,15 @@ public final class AttributeName
 	/** */
 	public static final String OFFSETDIRECTION = "OffsetDirection";
 	/** */
+	public static final String OFFSETUNITS = "OffsetUnits";
+	/** */
 	public static final String OLDERTHAN = "OlderThan";
 	/** */
 	public static final String OLDTIME = "OldTime";
 	/** */
 	public static final String OLDVALUE = "OldValue";
+	/** */
+	public static final String ONESHEET = "OneSheet";
 	/** */
 	public static final String OPACITY = "Opacity";
 	/** */
@@ -2132,6 +2202,8 @@ public final class AttributeName
 	public static final String OPENING = "Opening";
 	/** */
 	public static final String OPERATION = "Operation";
+	/** */
+	public static final String OPERATIONDETAILS = "OperationDetails";
 	/** */
 	public static final String OPERATIONS = "Operations";
 	/** */
@@ -2234,9 +2306,13 @@ public final class AttributeName
 	/** */
 	public static final String PAGEDELIVERY = "PageDelivery";
 	/** */
+	public static final String PAGEDIMENSION = "PageDimension";
+	/** */
 	public static final String PAGEDISTRIBUTIONSCHEME = "PageDistributionScheme";
 	/** */
 	public static final String PAGEFORMAT = "PageFormat";
+	/** */
+	public static final String PAGEHASOPTIONALCONTENT = "PageHasOptionalContent";
 	/** */
 	public static final String PAGEHASUNKNOWNOBJECTS = "PageHasUnknownObjects";
 	/** */
@@ -2265,6 +2341,8 @@ public final class AttributeName
 	public static final String PAGEREFS = "PageRefs";
 	/** */
 	public static final String PAGES = "Pages";
+	/** */
+	public static final String PAGESCALINGFACTOR = "PageScalingFactor";
 	/** */
 	public static final String PAGESET = "PageSet";
 	/** */
@@ -2324,6 +2402,8 @@ public final class AttributeName
 	/** */
 	public static final String PDFXBLEEDBOXTOTRIMBOXOFFSET = "PDFXBleedBoxToTrimBoxOffset";
 	/** */
+	public static final String PDFXCHECK = "PDFXCheck";
+	/** */
 	public static final String PDFXCOMPLIANTPDFONLY = "PDFXCompliantPDFOnly";
 	/** */
 	public static final String PDFXNOTRIMBOXERROR = "PDFXNoTrimBoxError";
@@ -2341,6 +2421,8 @@ public final class AttributeName
 	public static final String PDFXTRIMBOXTOMEDIABOXOFFSET = "PDFXTrimBoxToMediaBoxOffset";
 	/** */
 	public static final String PDFXVERSION = "PDFXVersion";
+	/** */
+	public static final String PDLOBJECTTYPE = "PDLObjectType";
 	/** */
 	public static final String PDLTYPE = "PDLType";
 	/** */
@@ -2363,6 +2445,10 @@ public final class AttributeName
 	public static final String PHASESTARTTIME = "PhaseStartTime";
 	/** */
 	public static final String PHASEWASTE = "PhaseWaste";
+	/** */
+	public static final String PHONETICFIRSTNAME = "PhoneticFirstName";
+	/** */
+	public static final String PHONETICLASTNAME = "PhoneticLastName";
 	/** */
 	public static final String PHYSICALSECTION = "PhysicalSection";
 	/** */
@@ -2536,6 +2622,8 @@ public final class AttributeName
 	/** */
 	public static final String PRINTINGTYPE = "PrintingType";
 	/** */
+	public static final String PRINTPASS = "PrintPass";
+	/** */
 	public static final String PRINTPDFANNOTATIONS = "PrintPDFAnnotations";
 	/** */
 	public static final String PRINTQUALITY = "PrintQuality";
@@ -2559,6 +2647,8 @@ public final class AttributeName
 	public static final String PRODUCTIONPATHID = "ProductionPathID";
 	/** */
 	public static final String PRODUCTIONTYPE = "ProductionType";
+	/** */
+	public static final String PRODUCTPART = "ProductPart";
 	/** */
 	public static final String PRODUCTTYPE = "ProductType";
 	/** */
@@ -2928,6 +3018,8 @@ public final class AttributeName
 	/** */
 	public static final String SHEETCOLLATE = "SheetCollate";
 	/** */
+	public static final String SHEETCOUNT = "SheetCount";
+	/** */
 	public static final String SHEETCOUNTRESET = "SheetCountReset";
 	/** */
 	public static final String SHEETFORMAT = "SheetFormat";
@@ -3075,6 +3167,8 @@ public final class AttributeName
 	/** */
 	public static final String SPINE = "Spine";
 	/** */
+	public static final String SPINEBOARDWIDTH = "SpineBoardWidth";
+	/** */
 	public static final String SPINECOLOR = "SpineColor";
 	/** */
 	public static final String SPINECOLORDETAILS = "SpineColorDetails";
@@ -3088,6 +3182,8 @@ public final class AttributeName
 	public static final String SPOTFUNCTION = "SpotFunction";
 	/** */
 	public static final String SRGB = "sRGB";
+	/** */
+	public static final String STACKAMOUNT = "StackAmount";
 	/** */
 	public static final String STACKCOMPRESSION = "StackCompression";
 	/** */
@@ -3288,6 +3384,8 @@ public final class AttributeName
 	/** */
 	public static final String TIMESTAMP = "TimeStamp";
 	/** */
+	public static final String TINT = "Tint";
+	/** */
 	public static final String TITLE = "Title";
 	/** */
 	public static final String TO = "To";
@@ -3402,6 +3500,16 @@ public final class AttributeName
 	/** */
 	public static final String TRIMMINGTYPE = "TrimmingType";
 	/** */
+	public static final String TRIMBOTTOM = "TrimBottom";
+	/** */
+	public static final String TRIMBOX = "TrimBox";
+	/** */
+	public static final String TRIMLEFT = "TrimLeft";
+	/** */
+	public static final String TRIMRIGHT = "TrimRight";
+	/** */
+	public static final String TRIMTOP = "TrimTop";
+	/** */
 	public static final String TRIMSIZE = "TrimSize";
 	/** */
 	public static final String TRUE = "true";
@@ -3457,6 +3565,8 @@ public final class AttributeName
 	/** */
 	public static final String UPDATEMETHOD = "UpdateMethod";
 	/** */
+	public static final String UPPERRIBBONNAME = "UpperRibbonName";
+	/** */
 	public static final String URL = "URL";
 	/** */
 	public static final String URLSCHEMES = "URLSchemes";
@@ -3484,6 +3594,8 @@ public final class AttributeName
 	public static final String USERDISPLAY = "UserDisplay";
 	/** */
 	public static final String USERFILENAME = "UserFileName";
+	/** */
+	public static final String USERID = "UserID";
 	/** */
 	public static final String USERMEDIATYPE = "UserMediaType";
 	/** */
@@ -3548,6 +3660,8 @@ public final class AttributeName
 	public static final String WHITEISZERO = "WhiteIsZero";
 	/** */
 	public static final String WIDTH = "Width";
+	/** */
+	public static final String WINDINGRESULT = "WindingResult";
 	/** */
 	public static final String WIREBRAND = "WireBrand";
 	/** */

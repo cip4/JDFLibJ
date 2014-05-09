@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,6 +94,7 @@ public final class ElementName
 	}
 
 	/** */
+	public static final String ABORTQUEUEENTRYPARAMS = "AbortQueueEntryParams";
 	/** */
 	public static final String ACCEPTED = "Accepted";
 	/** */
@@ -102,6 +103,8 @@ public final class ElementName
 	public static final String ACTION = "Action";
 	/** */
 	public static final String ACTIONPOOL = "ActionPool";
+	/** */
+	public static final String ACTIVITY = "Activity";
 	/** */
 	public static final String ADDED = "Added";
 	/** */
@@ -217,6 +220,8 @@ public final class ElementName
 	public static final String BINDITEM = "BindItem";
 	/** */
 	public static final String BINDLIST = "BindList";
+	/** */
+	public static final String BLEED = "Bleed";
 	/** */
 	public static final String BLOCKPREPARATION = "BlockPreparation";
 	/** */
@@ -467,6 +472,8 @@ public final class ElementName
 	/** */
 	public static final String CUTBLOCK = "CutBlock";
 	/** */
+	public static final String CUTLINES = "CutLines";
+	/** */
 	public static final String CUTMARK = "CutMark";
 	/** */
 	public static final String CUTTING = "Cutting";
@@ -682,6 +689,12 @@ public final class ElementName
 	/** */
 	public static final String FILETYPERESULTSPOOL = "FileTypeResultsPool";
 	/** */
+	public static final String FILLCOLOR = "FillColor";
+
+	/** */
+	public static final String FILLMARK = "FillMark";
+
+	/** */
 	public static final String FILMTOPLATECOPYING = "FilmToPlateCopying";
 	/** */
 	public static final String FINISHEDDIMENSIONS = "FinishedDimensions";
@@ -749,6 +762,8 @@ public final class ElementName
 	/** */
 	public static final String GANGCMDFILTER = "GangCmdFilter";
 	/** */
+	public static final String GANGELEMENT = "GangElement";
+	/** */
 	public static final String GANGINFO = "GangInfo";
 	/** */
 	public static final String GANGQUFILTER = "GangQuFilter";
@@ -793,6 +808,8 @@ public final class ElementName
 	public static final String HEADBANDS = "HeadBands";
 	/** */
 	public static final String HEIGHT = "Height";
+	/** */
+	public static final String HOLDQUEUEENTRYPARAMS = "HoldQueueEntryParams";
 	/** */
 	public static final String HOLE = "Hole";
 	/** */
@@ -847,6 +864,10 @@ public final class ElementName
 	/** */
 	public static final String IMAGECOMPRESSIONPARAMS = "ImageCompressionParams";
 	/** */
+	public static final String IMAGEENHANCEMENTOP = "ImageEnhancementOp";
+	/** */
+	public static final String IMAGEENHANCEMENTPARAMS = "ImageEnhancementParams";
+	/** */
 	public static final String IMAGEREPLACEMENT = "ImageReplacement";
 	/** */
 	public static final String IMAGEREPLACEMENTPARAMS = "ImageReplacementParams";
@@ -899,7 +920,11 @@ public final class ElementName
 	/** */
 	public static final String INTERPRETING = "Interpreting";
 	/** */
+	public static final String INTERPRETINGDETAILS = "InterpretingDetails";
+	/** */
 	public static final String INTERPRETINGPARAMS = "InterpretingParams";
+	/** */
+	public static final String ISOPAPERSUBSTRATE = "ISOPaperSubstrate";
 	/** */
 	public static final String ISPRESENTEVALUATION = "IsPresentEvaluation";
 	/** */
@@ -1418,6 +1443,8 @@ public final class ElementName
 	/** */
 	public static final String REMOVELINK = "RemoveLink";
 	/** */
+	public static final String REMOVEQUEUEENTRYPARAMS = "RemoveQueueEntryParams";
+	/** */
 	public static final String RENDERING = "Rendering";
 	/** */
 	public static final String RENDERINGPARAMS = "RenderingParams";
@@ -1455,6 +1482,8 @@ public final class ElementName
 	public static final String RESOURCEQUPARAMS = "ResourceQuParams";
 	/** */
 	public static final String RESPONSE = "Response";
+	/** */
+	public static final String RESUMEQUEUEENTRYPARAMS = "ResumeQueueEntryParams";
 	/** */
 	public static final String RESUBMISSIONPARAMS = "ResubmissionParams";
 	/** */
@@ -1517,6 +1546,10 @@ public final class ElementName
 	/** */
 	public static final String SEPARATIONLIST = "SeparationList";
 	/** */
+	public static final String SEPARATIONLISTBACK = "SeparationListBack";
+	/** */
+	public static final String SEPARATIONLISTFRONT = "SeparationListFront";
+	/** */
 	public static final String SEPARATIONSPEC = "SeparationSpec";
 	/** */
 	public static final String SERVICELEVEL = "ServiceLevel";
@@ -1550,6 +1583,10 @@ public final class ElementName
 	public static final String SHAPETYPE = "ShapeType";
 	/** */
 	public static final String SHEET = "Sheet";
+	/** */
+	public static final String SHEETCONDITION = "SheetCondition";
+	/** */
+	public static final String SHEETOPTIMIZINGPARAMS = "SheetOptimizingParams";
 	/** */
 	public static final String SHIFTPOINT = "ShiftPoint";
 	/** */
@@ -1622,6 +1659,8 @@ public final class ElementName
 	/** */
 	public static final String STATION = "Station";
 	/** */
+	public static final String STATICBLOCKINGPARAMS = "StaticBlockingParams";
+	/** */
 	public static final String STATUSPOOL = "StatusPool";
 	/** */
 	public static final String STATUSQUPARAMS = "StatusQuParams";
@@ -1677,6 +1716,8 @@ public final class ElementName
 	public static final String SURFACE = "Surface";
 	/** */
 	public static final String SURPLUSHANDLING = "SurplusHandling";
+	/** */
+	public static final String SUSPENDQUEUEENTRYPARAMS = "SuspendQueueEntryParams";
 	/** */
 	public static final String SYSTEMTIMESET = "SystemTimeSet";
 
@@ -1813,6 +1854,8 @@ public final class ElementName
 	public static final String WEIGHT = "Weight";
 	/** */
 	public static final String WHEN = "when";
+	/** */
+	public static final String WINDINGPARAMS = "WindingParams";
 	/** */
 	public static final String WIRECOMBBINDING = "WireCombBinding";
 	/** */
