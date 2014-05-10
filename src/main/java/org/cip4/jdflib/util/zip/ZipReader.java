@@ -253,7 +253,7 @@ public class ZipReader
 			log.warn("snafu with entries");
 			return false;
 		}
-		String fileName = ze.getName();
+		String fileName = getEntryName(ze);
 		File file = new File(fileName);
 		File absoluteFile = FileUtil.getFileInDirectory(dir, file);
 		try
@@ -282,6 +282,19 @@ public class ZipReader
 	}
 
 	/**
+	 * 
+	 * 
+	 * @param ze
+	 * @return
+	 */
+	public String getEntryName(ZipEntry ze)
+	{
+		String fileName = ze.getName();
+		fileName = StringUtil.replaceChar(fileName, '\\', "/", 0);
+		return UrlUtil.cleanDots(fileName);
+	}
+
+	/**
 	 * get an entry by name - note that we need to buffer the entire file for this random access method
 	 * 
 	 * @param urlString the file path (case sensitive)
@@ -303,7 +316,7 @@ public class ZipReader
 
 		while (ze != null)
 		{
-			String name = UrlUtil.cleanDots(ze.getName());
+			String name = getEntryName(ze);
 			boolean matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
 			if (!matches && urlUnEscaped != null)
 			{
@@ -312,6 +325,18 @@ public class ZipReader
 			if (!matches && rootEntry != null && name.startsWith(rootEntry))
 			{
 				name = StringUtil.rightStr(name, -rootEntry.length());
+				if (name != null && name.length() > 0)
+				{
+					matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+					if (!matches && urlUnEscaped != null)
+					{
+						matches = caseSensitive ? urlUnEscaped.equals(name) : urlUnEscaped.equalsIgnoreCase(name);
+					}
+				}
+			}
+			if (!matches && !name.equals(StringUtil.token(name, -1, "/")))
+			{
+				name = StringUtil.token(name, -1, "/");
 				if (name != null && name.length() > 0)
 				{
 					matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
@@ -348,7 +373,7 @@ public class ZipReader
 
 		while (ze != null)
 		{
-			String name = ze.getName();
+			String name = getEntryName(ze);
 			boolean matches = caseSensitive ? StringUtil.matchesSimple(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
 			if (!matches && exprUnEscaped != null)
 			{
@@ -366,6 +391,19 @@ public class ZipReader
 					}
 				}
 			}
+			if (!matches && !name.equals(StringUtil.token(name, -1, "/")))
+			{
+				name = StringUtil.token(name, -1, "/");
+				if (name != null && name.length() > 0)
+				{
+					matches = caseSensitive ? StringUtil.matchesSimple(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+					if (!matches && exprUnEscaped != null)
+					{
+						matches = caseSensitive ? StringUtil.matchesSimple(name, exprUnEscaped) : StringUtil.matchesIgnoreCase(name, exprUnEscaped);
+					}
+				}
+			}
+
 			if (matches)
 			{
 				if (n >= iSkip)

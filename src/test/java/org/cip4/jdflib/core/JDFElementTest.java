@@ -709,6 +709,17 @@ public class JDFElementTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetVersion()
+	{
+		assertEquals(EnumVersion.getEnum("1.5"), EnumVersion.Version_1_5);
+		assertEquals(EnumVersion.getEnum("1.6"), EnumVersion.Version_1_6);
+		assertEquals(EnumVersion.getEnum("1.6 "), EnumVersion.Version_1_6);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testOrientationMap()
 	{
 		Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();

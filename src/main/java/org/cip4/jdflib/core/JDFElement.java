@@ -4935,8 +4935,30 @@ public class JDFElement extends KElement
 		 * @param enumName the name of the EnumVersion
 		 * @return the corresponding EnumVersion
 		 */
-		public static EnumVersion getEnum(final String enumName)
+		public static EnumVersion getEnum(String enumName)
 		{
+			enumName = StringUtil.normalize(enumName, true);
+			enumName = StringUtil.replaceChar(enumName, ' ', "", 0);
+			if ("1.9".equals(enumName))
+			{
+				return EnumVersion.Version_1_9;
+			}
+			if ("1.8".equals(enumName))
+			{
+				return EnumVersion.Version_1_8;
+			}
+			if ("1.7".equals(enumName))
+			{
+				return EnumVersion.Version_1_7;
+			}
+			if ("1.6".equals(enumName))
+			{
+				return EnumVersion.Version_1_6;
+			}
+			if ("1.5".equals(enumName))
+			{
+				return EnumVersion.Version_1_5;
+			}
 			if ("1.4".equals(enumName))
 			{
 				return EnumVersion.Version_1_4;
@@ -4961,7 +4983,7 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_0;
 			}
-			return EnumVersion.Version_1_4; // the default
+			return EnumVersion.Version_1_5; // the default
 		}
 
 		/**
