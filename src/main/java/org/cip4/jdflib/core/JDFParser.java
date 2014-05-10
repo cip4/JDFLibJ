@@ -370,8 +370,9 @@ public class JDFParser extends XMLParser
 	@Override
 	protected void setDocumentProperties(final KElement root, final DocumentXMLImpl memberDocument, final String namespaceURI)
 	{
-		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF) || XJDF20.rootName.equals(root.getLocalName());
-		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI))
+		boolean isXJDF = XJDF20.rootName.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
+		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
+		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI) && !isXJDF)
 		{
 			root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
 		}
