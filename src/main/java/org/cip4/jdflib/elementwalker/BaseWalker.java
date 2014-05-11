@@ -119,11 +119,20 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * 
 	 * @param factory
 	 */
-	public BaseWalker(final BaseWalkerFactory factory)
+	public BaseWalker()
 	{
 		super();
 		log = LogFactory.getLog(getClass());
 		depth = 0;
+	}
+
+	/**
+	 * 
+	 * @param factory
+	 */
+	public BaseWalker(final BaseWalkerFactory factory)
+	{
+		this();
 		addToFactory(factory);
 	}
 
@@ -142,7 +151,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * adds an element to a factory automagically
 	 * @param factory
 	 */
-	private void addToFactory(final BaseWalkerFactory factory)
+	void addToFactory(final BaseWalkerFactory factory)
 	{
 		final Class<BaseWalker> cBase = BaseWalker.class;
 		Class<?> c = getClass().getSuperclass();

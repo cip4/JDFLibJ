@@ -121,7 +121,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	{
 		CPUTimer ct = new CPUTimer(false);
 		JDFDoc d = new JDFParser().parseFile(sm_dirTestData + "bigWhite.jdf");
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + "bigWhite.txt"));
 			w.setAttribute(true);
@@ -236,6 +236,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 			d.write2File(sm_dirTestDataTemp + UrlUtil.newExtension(testFile, (i + ".new.jdf")), 0, true);
 			long n3 = System.currentTimeMillis();
 			System.out.println("write time: " + (n3 - n2));
+			r.close();
 		}
 	}
 }

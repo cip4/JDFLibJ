@@ -110,15 +110,15 @@ public class BaseElementWalker extends ElementWalker
 		{
 			final String name = parent.getSimpleName();
 			final Class<?>[] cs = parent.getDeclaredClasses();
-			for (Class<?> ci : cs)
+			for (Class<?> theClass : cs)
 			{
-				String s = ci.getName();
-				s = StringUtil.token(s, -1, ".");
-				if (s.startsWith(name + classPrefix))
+				String className = theClass.getName();
+				className = StringUtil.token(className, -1, ".");
+				if (className.startsWith(name + classPrefix))
 				{
 					try
 					{
-						final Constructor<?> con = ci.getDeclaredConstructor(new Class[] { parent });
+						final Constructor<?> con = theClass.getDeclaredConstructor(new Class[] { parent });
 						con.newInstance(new Object[] { this });
 					}
 					catch (final Throwable x)

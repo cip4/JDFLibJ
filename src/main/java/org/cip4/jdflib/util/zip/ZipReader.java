@@ -282,12 +282,12 @@ public class ZipReader
 	}
 
 	/**
-	 * 
+	 * retrieves the name and replaces any '\' with '/' and removes any spurious '.' or '..' in the path
 	 * 
 	 * @param ze
 	 * @return
 	 */
-	public String getEntryName(ZipEntry ze)
+	public static String getEntryName(ZipEntry ze)
 	{
 		String fileName = ze.getName();
 		fileName = StringUtil.replaceChar(fileName, '\\', "/", 0);
