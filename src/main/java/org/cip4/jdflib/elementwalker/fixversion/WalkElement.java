@@ -111,7 +111,7 @@ public class WalkElement extends BaseWalker
 
 	/**
 	 * fills this into the factory
-	 * @param fixVersion TODO
+	 * @param fixVersion 
 	 */
 	public void setParent(FixVersionImpl fixVersion)
 	{

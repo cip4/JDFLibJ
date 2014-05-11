@@ -249,7 +249,8 @@ public class FixVersionImpl extends PackageElementWalker
 	protected BaseWalker constructWalker(String name)
 	{
 		WalkElement constructWalker = (WalkElement) super.constructWalker(name);
-		constructWalker.setParent(this);
+		if (constructWalker != null)
+			constructWalker.setParent(this);
 		return constructWalker;
 	}
 }
