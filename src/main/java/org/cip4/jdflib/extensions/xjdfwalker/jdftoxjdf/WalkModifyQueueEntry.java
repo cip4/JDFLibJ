@@ -66,46 +66,71 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQueueEntryDef;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+ * walker for JMF mesaages
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkModifyQueueEntry extends WalkMessage
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkModifyQueueEntry()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#makeTypesafe(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	void makeTypesafe(JDFMessage m)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		String originalType = super.getMessageType(m);
+		JDFQueueEntryDef queueEntryDef = m.getQueueEntryDef(0);
+		String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
+		super.makeTypesafe(m);
+		KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
+		modifyParams.setAttribute(AttributeName.OPERATION, StringUtil.leftStr(originalType, -10)); //-10 = queueentry.size()
+		modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#getMessageType(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	String getMessageType(JDFMessage m)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return "ModifyQueueEntry";
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		return super.matches(toCheck) && isModifyQE(toCheck.getAttribute(AttributeName.TYPE));
+	}
+
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
+	boolean isModifyQE(String type)
+	{
+		return StringUtil.hasToken("AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
+	}
+
 }

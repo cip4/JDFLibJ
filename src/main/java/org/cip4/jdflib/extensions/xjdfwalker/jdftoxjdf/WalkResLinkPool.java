@@ -66,22 +66,64 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAncestorPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkResLinkPool extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkResLinkPool()
 	{
 		super();
+	}
+
+	/**
+	 * @param resLinkPool
+	 * @param xjdf
+	 * @return the created resource in this case just remove the pool
+	 */
+	@Override
+	public KElement walk(final KElement resLinkPool, final KElement xjdf)
+	{
+		getLinksFromAncestorPool(resLinkPool);
+		return xjdf;
+	}
+
+	/**
+	 * copy the closest ancestorpool link to here, if none exists
+	 * @param resLinkPool 
+	 */
+	private void getLinksFromAncestorPool(KElement resLinkPool)
+	{
+		KElement parent = resLinkPool.getParentNode_KElement();
+		if (!(parent instanceof JDFNode))
+			return;
+		JDFNode n = (JDFNode) parent;
+		JDFAncestorPool ap = n.getAncestorPool();
+		if (ap == null)
+			return;
+		String[] v = { ElementName.NODEINFO, ElementName.CUSTOMERINFO };
+		for (String s : v)
+		{
+			JDFResource ni = n.getResource(s, null, 0);
+			if (ni == null)
+			{
+				JDFResource resAnc = (JDFResource) ap.getAncestorElement(s, null, null);
+				n.linkResource(resAnc, EnumUsage.Input, null);
+			}
+		}
 	}
 
 	/**
@@ -92,20 +134,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFResourceLinkPool;
 	}
 }

@@ -66,22 +66,41 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkColor extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkColor()
 	{
 		super();
+	}
+
+	/**
+	 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFColor k = (JDFColor) super.walk(jdf, xjdf);
+		if (this.jdfToXJDF.bHTMLColor)
+		{
+			k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
+		}
+		k.setActualColorName(jdf.getAttribute("Separation", null, null));
+		return k;
 	}
 
 	/**
@@ -92,20 +111,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFColor;
 	}
 }

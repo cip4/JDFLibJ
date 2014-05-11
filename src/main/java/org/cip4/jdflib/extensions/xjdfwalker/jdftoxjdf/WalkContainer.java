@@ -66,20 +66,24 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFContainer;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * take a container/FileSpec(Ref) and convert it into a ContainerRef
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkContainer extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkContainer()
 	{
 		super();
 	}
@@ -92,20 +96,26 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFContainer;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final JDFContainer cont = (JDFContainer) jdf;
+		final JDFFileSpec fs = cont.getFileSpec();
+		if (fs != null)
 		{
-			return "MediaRef";
+			fs.makeRootResource(null, null, true);
+			final VElement v = this.jdfToXJDF.setResource(null, fs, this.jdfToXJDF.newRoot);
+			if (v != null && v.size() == 1)
+			{
+				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
+			}
 		}
-		return super.getRefName(val);
+		return null;
 	}
 }

@@ -443,7 +443,7 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.Status);
 		XJDF20 xjdf20 = new XJDF20();
 		e = xjdf20.makeNewJMF(jmf);
-		if (xjdf20.bAbstractMessage)
+		if (xjdf20.isAbstractMessage())
 			assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
 		else
 			assertEquals(e.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
@@ -452,7 +452,7 @@ public class XJDFTest extends JDFTestCaseBase
 	XJDF20 getJMFConverter()
 	{
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.bTypeSafeMessage = true;
+		xjdf20.setTypeSafeMessage(true);
 		return xjdf20;
 	}
 

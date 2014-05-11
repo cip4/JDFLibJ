@@ -66,20 +66,23 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkInlineResource extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkInlineResource()
 	{
 		super();
 	}
@@ -92,20 +95,22 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFEmployee;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		String descName = jdf.getAttribute(AttributeName.DESCRIPTIVENAME, null, null);
+		KElement e = super.walk(jdf, xjdf);
+		if (e != null)
 		{
-			return "MediaRef";
+			e.setAttribute(AttributeName.DESCRIPTIVENAME, descName);
 		}
-		return super.getRefName(val);
+		return e;
 	}
 }

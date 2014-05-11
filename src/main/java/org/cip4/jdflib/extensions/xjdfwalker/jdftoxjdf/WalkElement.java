@@ -66,46 +66,127 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFNameRange;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
+import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.w3c.dom.Node;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkElement extends BaseWalker
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
-	{
-		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return toCheck instanceof JDFStrippingParams;
-	}
+	protected JDFToXJDF jdfToXJDF;
+	boolean bMerge;
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 */
+	public WalkElement()
+	{
+		super();
+		bMerge = false;
+	}
+
+	/**
+	 * fills this into the factory
+	 * @param parent
+	 *  
+	 */
+	public void setParent(JDFToXJDF parent)
+	{
+		this.jdfToXJDF = parent;
+	}
+
+	/**
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), jdf.getNamespaceURI());
+
+		setAttributes(jdf, eNew);
+		eNew.setText(jdf.getText());
+		Node before = null;
+		for (int i = 0; true; i++)
 		{
-			return "MediaRef";
+			String xmlComment = jdf.getXMLComment(i);
+			if (xmlComment == null)
+				break;
+			Node comment = eNew.appendXMLComment(xmlComment, null);
+			if (before == null)
+			{
+				before = comment.getNextSibling();
+			}
+			else
+			{
+				eNew.insertBefore(comment, before);
+			}
 		}
-		return super.getRefName(val);
+		removeUnused(eNew);
+		return eNew;
 	}
+
+	protected void setAttributes(final KElement jdf, final KElement eNew)
+	{
+		JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap();
+		eNew.setAttributes(map);
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param jdf
+	 * @return 
+	 */
+	private JDFAttributeMap convertRanges(JDFElement jdf)
+	{
+		JDFAttributeMap map = jdf.getAttributeMap();
+		if (this.jdfToXJDF.isConvertTilde())
+		{
+			VString keys = map.getKeys();
+			for (String key : keys)
+			{
+				if (EnumAttributeType.isRange(jdf.getAtrType(key)))
+				{
+					JDFNameRangeList rl = JDFNameRangeList.createNameRangeList(map.get(key));
+					if (rl != null)
+					{
+						StringBuffer buf = new StringBuffer();
+						for (int i = 0; i < rl.size(); i++)
+						{
+							JDFNameRange r = (JDFNameRange) rl.at(i);
+							if (i > 0)
+								buf.append(" ");
+							buf.append(r.getLeft());
+							buf.append(" ");
+							buf.append(r.getRight());
+						}
+						map.put(key, buf.toString());
+					}
+				}
+			}
+		}
+		return map;
+	}
+
+	protected void removeUnused(final KElement newRootP)
+	{
+		newRootP.removeAttribute(AttributeName.XSITYPE);
+	}
+
 }

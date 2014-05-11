@@ -66,46 +66,154 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
+import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkDevcapElement extends WalkElement
 {
+
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkDevcapElement()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @param e
+	 * @return the created resource
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return trackElem;
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param path
+	 * @param old
+	 * @return
+	 */
+	protected String getXPathRoot(String path, String old)
+	{
+		if (path == null || "/".equals(path) || "".equals(path))
+			return path;
+		String rootPath = StringUtil.replaceToken(path, -1, "/", null);
+		return rootPath;
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * 
+	 * @param dc
+	 * @param name
+	 * @return
 	 */
-	@Override
-	protected String getRefName(final String val)
+	protected VString getXPathVector(JDFElement dc, String name)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		VString v = null;
+		if (dc instanceof JDFDevCap)
+			v = ((JDFDevCap) dc).getNamePathVector();
+		else if (dc instanceof JDFAbstractState)
+			v = ((JDFAbstractState) dc).getNamePathVector();
+		else if (dc instanceof JDFEvaluation)
 		{
-			return "MediaRef";
+			ICapabilityElement refTarget = ((JDFEvaluation) dc).getRefTarget();
+			if (refTarget != null)
+				v = refTarget.getNamePathVector();
+			else
+				v = null;
 		}
-		return super.getRefName(val);
+
+		if (v != null && v.size() > 0)
+		{
+			VString v2 = new VString();
+			for (String s : v)
+			{
+				s = modifyXPath(s);
+				v2.add(s);
+			}
+			v = v2;
+			v.unify();
+		}
+		return v;
+	}
+
+	public String modifyXPath(String s)
+	{
+		VString vs = StringUtil.tokenize(s, "/", false);
+		//					while (vs.size() > 0 && vs.elementAt(-1).equals(name))
+		//						vs.remove(vs.size() - 1);
+		for (int i = vs.size() - 2; i >= 0; i--)
+		{
+			if (vs.elementAt(i).equals(vs.elementAt(i + 1)))
+				vs.remove(i + 1);
+		}
+		// remove parents of JMF, if any
+		int posJMF = vs.indexOf("JMF");
+		while (posJMF-- > 0)
+			vs.remove(0);
+
+		if (vs.size() == 0)
+		{
+			s = "/";
+		}
+		else
+		{
+			if ("JDF".equals(vs.get(0)))
+				vs.set(0, JDFToXJDF.rootName);
+			if (vs.size() > 1 && ElementName.RESOURCEPOOL.equals(vs.get(1)))
+			{
+				String className = null;
+				if (vs.size() == 3)
+				{
+					String name = vs.get(2);
+					className = this.jdfToXJDF.getClassName(name);
+					if (className != null)
+					{
+						if ("Intent".equals(className))
+						{
+							vs.set(1, "ProductList/Product");
+						}
+						else
+						{
+							vs.set(1, className + "Set/" + className);
+						}
+					}
+				}
+				if (className == null)
+				{
+					vs.remove(1);
+					vs.remove(0);
+				}
+			}
+			s = StringUtil.setvString(vs, "/", "/", null);
+			if (!s.startsWith("/" + JDFToXJDF.rootName))
+				s = "/" + s;
+		}
+		return s;
+	}
+
+	@Override
+	public boolean matches(KElement e)
+	{
+		// we are abstract...
+		return false;
 	}
 }

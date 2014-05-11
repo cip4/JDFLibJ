@@ -66,20 +66,23 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
+import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkLayoutElement extends WalkInlineAllRes
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkLayoutElement()
 	{
 		super();
 	}
@@ -92,20 +95,30 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return (toCheck instanceof JDFLayoutElement);
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		KElement parent = jdf.getParentNode_KElement();
+		boolean bInRunList = parent instanceof JDFRunList;
+		if (bInRunList)
+			bMerge = this.jdfToXJDF.isMergeRunList();
+		else
+			bMerge = false;
+		KElement ret = super.walk(jdf, xjdf);
+		if (!bInRunList && this.jdfToXJDF.isMergeRunList())
 		{
-			return "MediaRef";
+			KElement retPar = ret.getDeepParent("ParameterSet", 0);
+			if (retPar != null)
+				retPar.setAttribute("Name", "RunList");
+			ret.renameElement("RunList", null);
 		}
-		return super.getRefName(val);
+		return ret;
 	}
 }

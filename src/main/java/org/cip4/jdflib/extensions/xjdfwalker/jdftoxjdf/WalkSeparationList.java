@@ -66,22 +66,49 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkSeparationList extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkSeparationList()
 	{
 		super();
+	}
+
+	/**
+	 * replace separationspec elements with their respective values
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFSeparationList je = (JDFSeparationList) jdf;
+		final String name = jdf.getLocalName();
+		final VString cols = je.getSeparations();
+		if (cols != null)
+		{
+			for (int i = 0; i < cols.size(); i++)
+			{
+				String col = cols.get(i);
+				cols.set(i, StringUtil.replaceChar(col, ' ', "_", 0));
+			}
+		}
+		xjdf.setAttribute(name, cols, null);
+		return null; // done
 	}
 
 	/**
@@ -92,20 +119,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFSeparationList;
 	}
 }

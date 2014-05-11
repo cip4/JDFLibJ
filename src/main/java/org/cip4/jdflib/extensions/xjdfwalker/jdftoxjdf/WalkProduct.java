@@ -66,22 +66,116 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.JDFComponent;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkProduct extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkProduct()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final KElement pList = "Product".equals(xjdf.getLocalName()) ? xjdf.getParentNode_KElement() : xjdf;
+		final JDFNode node = (JDFNode) jdf;
+		if (!EnumType.Product.equals(node.getEnumType()))
+		{
+			return null;
+		}
+		final KElement prod = pList.appendElement("Product");
+		prod.setAttributes(jdf);
+		prod.removeAttribute(AttributeName.TYPE);
+		prod.removeAttribute(AttributeName.ACTIVATION);
+		prod.removeAttribute(AttributeName.VERSION);
+		prod.removeAttribute(AttributeName.MAXVERSION);
+		prod.removeAttribute(AttributeName.ICSVERSIONS);
+		prod.removeAttribute(AttributeName.STATUS);
+		prod.removeAttribute(AttributeName.STATUSDETAILS);
+		prod.removeAttribute(AttributeName.XMLNS);
+		prod.removeAttribute(AttributeName.XSITYPE);
+		prod.removeAttribute(AttributeName.JOBID);
+		prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
+		prod.removeAttribute("xmlns:xsi");
+		calcChildren(node, prod);
+		readComponent(node, prod);
+		return prod;
+	}
+
+	/**
+	 * @param node
+	 * @param prod
+	 */
+	private void readComponent(final JDFNode node, final KElement prod)
+	{
+		final JDFResourceLink cOut = node.getLink(0, "ComponentLink", new JDFAttributeMap("Usage", "Output"), null);
+		if (cOut == null)
+			return;
+		this.jdfToXJDF.setAmountPool(cOut, prod, null);
+		prod.renameAttribute("AmountGood", "Amount", null, null);
+		prod.removeAttribute("AmountWaste");
+
+		JDFComponent component = (JDFComponent) cOut.getTarget();
+		prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
+		prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+	}
+
+	/**
+	 * @param node
+	 * @param prod 
+	 */
+	private void calcChildren(final JDFNode node, final KElement prod)
+	{
+		final VString kids = new VString();
+		final VElement vComp = node.getPredecessors(true, true);
+		if (vComp != null)
+		{
+			final int siz = vComp.size();
+			for (int i = 0; i < siz; i++)
+			{
+				final JDFNode nPre = (JDFNode) vComp.get(i);
+				if (EnumType.Product.equals(nPre.getEnumType()))
+				{
+					kids.add(nPre.getID());
+				}
+			}
+		}
+
+		if (kids.size() > 0)
+		{
+			for (int i = 0; i < kids.size(); i++)
+			{
+				final KElement sub = prod.appendElement("ChildProduct");
+				sub.setAttribute("ChildRef", kids.get(i), null);
+				// TODO add processusage from input / output resources
+			}
+		}
+		else
+		{
+			node.setAttribute("RootProduct", true, null);
+		}
 	}
 
 	/**
@@ -92,20 +186,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return this.jdfToXJDF.walkingProduct && toCheck instanceof JDFNode;
 	}
 }

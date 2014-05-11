@@ -66,46 +66,133 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ *  
+ * @author rainer prosi
+ * @date Feb 26, 2013
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkColorIntentResLink extends WalkResLink
 {
+
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkColorIntentResLink()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	VElement setResource(JDFResourceLink rl, JDFResource linkTarget, KElement xjdf)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		VElement v = super.setResource(rl, linkTarget, xjdf);
+		KElement e0 = null;
+		VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);
+		for (KElement e1 : v)
+		{
+			JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
+			KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
+
+			if (e0 == null)
+			{
+				e0 = colorIntent;
+			}
+			if (colorIntent == null)
+			{
+				if (part != null)
+				{
+					part.deleteNode();
+				}
+			}
+			else
+			{
+				if (part != null)
+				{
+					EnumSide side = part.getSide();
+					if (EnumSide.Front.equals(side) && e0 != colorIntent)
+					{
+						for (String att : frontBack)
+						{
+							String attVal = colorIntent.getAttribute(att, null, null);
+							if (attVal != null)
+							{
+								e0.setAttribute(att, attVal);
+							}
+						}
+					}
+					else if (EnumSide.Back.equals(side))
+					{
+						for (String att : frontBack)
+						{
+							String attVal = colorIntent.getAttribute(att, null, null);
+							if (attVal != null)
+							{
+								e0.setAttribute(att + "Back", attVal);
+							}
+						}
+					}
+					part.deleteNode();
+				}
+				else
+				{
+					for (String att : frontBack)
+					{
+						String attVal = colorIntent.getAttribute(att, null, null);
+						if (attVal != null)
+						{
+							if (e0 != colorIntent)
+							{
+								String attValBase = e0.getAttribute(att, null, null);
+								if (attValBase == null)
+								{
+									e0.setAttribute(att, attVal);
+								}
+							}
+							String attValBack = e0.getAttribute(att + "Back", null, null);
+							if (attValBack == null)
+							{
+								e0.setAttribute(att + "Back", attVal);
+							}
+						}
+					}
+				}
+			}
+		}
+		return v;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(KElement jdf, KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		KElement e = super.walk(jdf, xjdf);
+		return e;
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		return super.matches(toCheck) && "ColorIntentLink".equals(toCheck.getLocalName());
+	}
+
 }

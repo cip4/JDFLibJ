@@ -66,22 +66,89 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+ * walker for JMF mesaages
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkMessage extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkMessage()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @return the created message
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		JDFMessage m = (JDFMessage) jdf;
+		if (this.jdfToXJDF.bTypeSafeMessage)
+		{
+			makeTypesafe(m);
+		}
+		return super.walk(jdf, xjdf);
+	}
+
+	void makeTypesafe(JDFMessage m)
+	{
+		String type = getMessageType(m);
+		EnumFamily family = getNewFamily(m);
+		if (family == null)
+		{
+			log.error("cannot convert message with null family");
+		}
+		else
+		{
+			m.renameElement(family.getName() + type, null);
+		}
+	}
+
+	String getMessageType(JDFMessage m)
+	{
+		String type = m.getType();
+		return type;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param m
+	 * @return
+	 */
+	private EnumFamily getNewFamily(JDFMessage m)
+	{
+		EnumFamily family = m.getFamily();
+		if (this.jdfToXJDF.bAbstractMessage)
+		{
+			if (EnumFamily.Command.equals(family) || EnumFamily.Registration.equals(family))
+				family = EnumFamily.Query;
+			if (EnumFamily.Acknowledge.equals(family))
+				family = EnumFamily.Response;
+		}
+		return family;
+	}
+
+	@Override
+	protected void removeUnused(final KElement newRootP)
+	{
+		super.removeUnused(newRootP);
+		if (this.jdfToXJDF.bTypeSafeMessage)
+		{
+			newRootP.removeAttribute(AttributeName.TYPE);
+		}
 	}
 
 	/**
@@ -92,20 +159,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return (toCheck instanceof JDFMessage);
 	}
 }

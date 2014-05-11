@@ -66,22 +66,51 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * simply stop walking on these
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkEvaluation extends WalkDevcapElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkEvaluation()
 	{
 		super();
+	}
+
+	/**
+	 * @param e
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		JDFEvaluation dc = (JDFEvaluation) e;
+		VString v = getXPathVector(dc, null);
+		if (v != null)
+		{
+			for (String path : v)
+			{
+				KElement eval = trackElem.appendElement(e.getLocalName());
+				eval.setAttributes(e);
+				// TODO evaluate parent context elemenz
+				eval.setAttribute("XPath", StringUtil.token(path, -1, "/"));
+				eval.setAttribute("XPathRoot", StringUtil.replaceToken(path, -1, "/", null));
+				eval.removeAttribute(AttributeName.RREF);
+			}
+		}
+
+		return trackElem;
 	}
 
 	/**
@@ -92,20 +121,7 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFEvaluation;
 	}
 
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
-	}
 }

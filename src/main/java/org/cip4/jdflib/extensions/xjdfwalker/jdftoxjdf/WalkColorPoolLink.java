@@ -66,20 +66,26 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkColorPoolLink extends WalkResLink
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkColorPoolLink()
 	{
 		super();
 	}
@@ -92,20 +98,32 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFResourceLink && "ColorPoolLink".equals(toCheck.getLocalName());
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final JDFResourceLink rl = (JDFResourceLink) jdf;
+		final JDFResource r = rl.getLinkRoot();
+		if (r != null)
 		{
-			return "MediaRef";
+			final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+			for (int i = 0; i < v.size(); i++)
+			{
+				v.get(i).renameAttribute("Name", "Separation", null, null);
+			}
+			//				r.renameElement("Color", null);
+			KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
+			cNew.copyInto(r, true);
+			r.deleteNode();
+			cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			rl.renameElement("ColorLink", null);
 		}
-		return super.getRefName(val);
+		return super.walk(jdf, xjdf);
 	}
 }

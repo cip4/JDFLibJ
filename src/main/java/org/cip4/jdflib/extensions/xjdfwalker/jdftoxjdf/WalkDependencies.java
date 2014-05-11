@@ -66,20 +66,20 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFDependencies;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
- */
-public class WalkStrippingParams extends WalkResource
+public class WalkDependencies extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkDependencies()
 	{
 		super();
 	}
@@ -92,20 +92,33 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFDependencies;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final JDFDependencies dep = (JDFDependencies) jdf;
+		final VElement v = dep.getChildElementVector(ElementName.LAYOUTELEMENT, null);
+		if (v != null)
 		{
-			return "MediaRef";
+			for (int i = 0; i < v.size(); i++)
+			{
+				final JDFLayoutElement leDep = (JDFLayoutElement) v.get(i);
+				leDep.makeRootResource(null, null, true);
+				final VElement v2 = this.jdfToXJDF.setResource(null, leDep, this.jdfToXJDF.newRoot);
+				if (v2 != null)
+				{
+					for (int j = 0; j < v2.size(); j++)
+					{
+						xjdf.appendAttribute("Dependencies", v2.get(j).getAttribute("ID"), null, " ", true);
+					}
+				}
+			}
 		}
-		return super.getRefName(val);
+		return null;
 	}
 }

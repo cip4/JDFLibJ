@@ -66,22 +66,45 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkColorPoolRef extends WalkRefElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkColorPoolRef()
 	{
 		super();
+	}
+
+	/**
+	 * @param re
+	 */
+	@Override
+	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
+	{
+		final String attName = getRefName(re);
+		final VElement v = this.jdfToXJDF.setResource(null, re.getTarget(), this.jdfToXJDF.newRoot);
+		// we want a ref to the set rather than the standard ref to the list of elements
+		if (v != null && v.size() > 0)
+		{
+			final KElement ref = v.get(0).getParentNode_KElement();
+			xjdf.setAttribute(attName, ref.getAttribute("ID"));
+		}
+		re.deleteNode();
 	}
 
 	/**
@@ -92,20 +115,31 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFRefElement && "ColorPoolRef".equals(toCheck.getLocalName());
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param xjdf
+	 * @return true if must continue
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final JDFRefElement rl = (JDFRefElement) jdf;
+		final JDFResource r = rl.getTargetRoot();
+		if (r != null)
 		{
-			return "MediaRef";
+			final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+			for (int i = 0; i < v.size(); i++)
+			{
+				v.get(i).renameAttribute("Name", "Separation", null, null);
+			}
+			KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
+			cNew.copyInto(r, true);
+			r.deleteNode();
+			cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			rl.renameElement("ColorRef", null);
 		}
-		return super.getRefName(val);
+		return super.walk(jdf, xjdf);
 	}
 }

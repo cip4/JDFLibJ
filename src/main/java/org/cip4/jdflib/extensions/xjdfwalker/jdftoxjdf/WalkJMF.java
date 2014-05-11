@@ -66,22 +66,42 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+ * walker for JMF roots
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkJMF extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkJMF()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		if (this.jdfToXJDF.first.contains(jdf.getID()))
+		{
+			return null;
+		}
+		this.jdfToXJDF.first.add(jdf.getID());
+		final JDFJMF jmf = (JDFJMF) jdf;
+		setRootAttributes(jmf, xjdf);
+
+		return xjdf;
 	}
 
 	/**
@@ -92,20 +112,22 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return (toCheck instanceof JDFJMF);
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param jmf
+	 * @param newRootP
 	 */
-	@Override
-	protected String getRefName(final String val)
+	private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+		newRootP.setAttributes(jmf);
+		if (this.jdfToXJDF.isUpdateVersion())
 		{
-			return "MediaRef";
+			newRootP.setAttribute("Version", "2.0");
+			newRootP.setAttribute("MaxVersion", "2.0");
 		}
-		return super.getRefName(val);
+		removeUnused(newRootP);
 	}
 }

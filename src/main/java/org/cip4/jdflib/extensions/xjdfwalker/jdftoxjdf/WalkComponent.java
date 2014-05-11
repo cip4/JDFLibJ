@@ -66,22 +66,46 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkComponent extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkComponent()
 	{
 		super();
+	}
+
+	/**
+	 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFComponent k = (JDFComponent) super.walk(jdf, xjdf);
+		String comptype = k.getAttribute(AttributeName.COMPONENTTYPE);
+		comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
+		comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
+		k.setAttribute(AttributeName.COMPONENTTYPE, StringUtil.getNonEmpty(comptype));
+
+		String prodType = k.getAttribute(AttributeName.PRODUCTTYPE);
+		if ("Unknown".equals(prodType))
+			k.removeAttribute(AttributeName.PRODUCTTYPE);
+		return k;
 	}
 
 	/**
@@ -92,20 +116,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFComponent;
 	}
 }

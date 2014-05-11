@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -391,66 +392,6 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		public static final EnumPipePartIDKeys WebName = new EnumPipePartIDKeys("WebName");
 		public static final EnumPipePartIDKeys WebProduct = new EnumPipePartIDKeys("WebProduct");
 		public static final EnumPipePartIDKeys WebSetup = new EnumPipePartIDKeys("WebSetup");
-	}
-
-	/**
-	* Enumeration strings for Usage
-	*/
-
-	public static class EnumUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumUsage getEnum(String enumName)
-		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUsage getEnum(int enumValue)
-		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUsage.class);
-		}
-
-		public static final EnumUsage Input = new EnumUsage("Input");
-		public static final EnumUsage Output = new EnumUsage("Output");
 	}
 
 	/* ************************************************************************
@@ -976,27 +917,6 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		final String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
 		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
-	}
-
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
-	/**
-	  * (5) set attribute Usage
-	  * @param enumVar the enumVar to set the attribute to
-	  */
-	public void setUsage(EnumUsage enumVar)
-	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	  * (9) get attribute Usage
-	  * @return the value of the attribute
-	  */
-	public EnumUsage getUsage()
-	{
-		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
 	/* ---------------------------------------------------------------------

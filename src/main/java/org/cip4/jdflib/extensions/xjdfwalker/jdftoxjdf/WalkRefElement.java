@@ -66,22 +66,109 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkRefElement extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkRefElement()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource in this case just remove the pool
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFRefElement refElem = (JDFRefElement) jdf;
+		if (mustInline(refElem))
+		{
+			try
+			{
+				final JDFElement e = refElem.inlineRef();
+				this.jdfToXJDF.walkTree(e, xjdf);
+			}
+			catch (JDFException x)
+			{
+				//nop
+			}
+			return null;
+		}
+		else
+		{
+			makeRefAttribute(refElem, xjdf);
+			return null;
+		}
+	}
+
+	/**
+	 * @param re
+	 * @param xjdf 
+	 */
+	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
+	{
+		final JDFResource target = re.getTarget();
+		final JDFResourceLink rl = getLinkForRef(re, target);
+		final VElement v = this.jdfToXJDF.setResource(rl, target, getRefRoot(xjdf));
+		if (v != null)
+		{
+			final String attName = getRefName(re);
+			for (int i = 0; i < v.size(); i++)
+			{
+				final KElement ref = v.get(i);
+				xjdf.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
+			}
+		}
+		re.deleteNode();
+	}
+
+	/**
+	 * @param re
+	 * @param target
+	 * @return
+	 */
+	private JDFResourceLink getLinkForRef(final JDFRefElement re, final JDFResource target)
+	{
+		JDFResourceLink rl = null;
+		if (this.jdfToXJDF.oldRoot != null)
+		{
+			final JDFResourceLinkPool resourceLinkPool = this.jdfToXJDF.oldRoot.getResourceLinkPool();
+			rl = resourceLinkPool != null ? resourceLinkPool.getLink(target, null, null) : null;
+		}
+		return rl;
+	}
+
+	/**
+	 * @param xjdf
+	 * @return
+	 */
+	private KElement getRefRoot(final KElement xjdf)
+	{
+		KElement ret = null;
+		if (xjdf != null)
+		{
+			ret = xjdf.getDeepParent(ElementName.RESOURCEINFO, 0);
+		}
+		return ret == null ? this.jdfToXJDF.newRoot : ret;
 	}
 
 	/**
@@ -92,20 +179,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFRefElement;
 	}
 }

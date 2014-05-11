@@ -66,22 +66,87 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
+ * at this point only a dummy since we have a specific WalkResourceAudit child
+ * 
+ * TODO how should resource consumption be tracked?
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkResourceAudit extends WalkAudit
 {
+	private VJDFAttributeMap partMap = null;
+
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkResourceAudit()
 	{
 		super();
+	}
+
+	/**
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final KElement raNew = super.walk(jdf, xjdf);
+		final JDFResourceAudit ra = (JDFResourceAudit) jdf;
+		partMap = ra.getPartMapVector();
+		copyLinkValues(raNew, ra.getNewLink(), "NewRef");
+		copyLinkValues(raNew, ra.getOldLink(), "OldRef");
+
+		return null; // don't walk the links!
+	}
+
+	/**
+	 * @param raNew
+	 * @param rl
+	 * @param val
+	 */
+	protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
+	{
+		final JDFResource rlRoot = rl == null ? null : rl.getLinkRoot();
+		if (rlRoot != null && rl != null)
+		{
+			final VElement v = this.jdfToXJDF.setResource(null, rlRoot, this.jdfToXJDF.newRoot);
+			if (v != null)
+			{
+				for (final KElement kElem : v)
+				{
+					KElement resAmount = raNew.appendElement("ResourceAmount");
+					resAmount.setAttribute("Type", val);
+					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
+					if (partMap == null || partMap.size() == 0)
+					{
+						this.jdfToXJDF.setAmountPool(rl, resAmount, null);
+					}
+					else
+					{
+						for (int i = 0; i < partMap.size(); i++)
+						{
+							JDFAttributeMap partMap2 = partMap.get(i);
+							this.jdfToXJDF.setAmountPool(rl, resAmount, partMap2);
+							resAmount.appendElement("Part").setAttributes(partMap2);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -92,20 +157,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFResourceAudit;
 	}
 }

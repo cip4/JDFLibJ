@@ -100,7 +100,8 @@ public class WalkXJDFColorSet extends WalkSet
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkSet#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)

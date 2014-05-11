@@ -66,22 +66,56 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ *  
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkDevCap extends WalkDevcapElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkDevCap()
 	{
 		super();
+	}
+
+	/**
+	 * @param e
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		JDFDevCap dc = (JDFDevCap) e;
+		String name = dc.getName();
+		VString v = getXPathVector(dc, name);
+		for (String path : v)
+		{
+			name = StringUtil.token(path, -1, "/");
+			KElement eState = trackElem.getChildWithAttribute("ElementState", "XPath", null, name, 0, true);
+			if (eState == null)
+			{
+				eState = trackElem.appendElement("ElementState");
+
+				eState.setAttribute("XPathRoot", getXPathRoot(path, null));
+				eState.setAttribute("XPath", name);
+				eState.setAttributes(e);
+				eState.removeAttribute(AttributeName.DEVCAPREF);
+				eState.removeAttribute(AttributeName.NAME);
+				eState.removeAttribute(AttributeName.DEVCAPREFS);
+			}
+
+		}
+		return trackElem;
 	}
 
 	/**
@@ -92,20 +126,7 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFDevCap;
 	}
 
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
-	}
 }

@@ -66,20 +66,26 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.JDFBlockPreparationParams;
+import org.cip4.jdflib.resource.JDFCreasingParams;
+import org.cip4.jdflib.resource.JDFCuttingParams;
+import org.cip4.jdflib.resource.process.JDFColorControlStrip;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkInlineAllRes extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkInlineAllRes()
 	{
 		super();
 	}
@@ -92,20 +98,16 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return (toCheck instanceof JDFBlockPreparationParams) || (toCheck instanceof JDFColorControlStrip) || (toCheck instanceof JDFCuttingParams)
+				|| (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	protected boolean mustInline(final String refLocalName)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return true;
 	}
 }

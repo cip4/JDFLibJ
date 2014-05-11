@@ -66,22 +66,85 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.JDFResource;
 
+// //////////////////////////////////////////////////////////////////////////////
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkResource extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkResource()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFResource r = (JDFResource) jdf;
+		final KElement newResLeaf = super.walk(jdf, xjdf);
+
+		if (newResLeaf != null)
+		{
+			newResLeaf.removeAttribute(AttributeName.ID);
+			moveAttribsToBase(xjdf, newResLeaf);
+			removeDeprecatedResourceAttribs(r, newResLeaf);
+			removeDeprecatedResourceAttribs(r, xjdf);
+		}
+		return newResLeaf;
+	}
+
+	/**
+	 * @param xjdf
+	 * @param newResLeaf
+	 */
+	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
+	{
+		final String localName = xjdf.getLocalName();
+		final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
+		for (String attrib : this.jdfToXJDF.resAttribs)
+		{
+			if (newResLeaf.hasAttribute(attrib))
+			{
+				if (bRoot)
+				{
+					xjdf.moveAttribute(attrib, newResLeaf, null, null, null);
+				}
+				else
+				{
+					newResLeaf.removeAttribute(attrib);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param r
+	 * @param newResLeaf
+	 */
+	private void removeDeprecatedResourceAttribs(final JDFResource r, final KElement newResLeaf)
+	{
+		newResLeaf.removeAttributes(r.getPartIDKeys());
+		newResLeaf.removeAttribute(AttributeName.CLASS);
+		newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
+		newResLeaf.removeAttribute(AttributeName.LOCKED);
+		newResLeaf.removeAttribute(AttributeName.NOOP);
+		newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
+		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
+		newResLeaf.removeAttribute(AttributeName.PARTIDKEYS);
 	}
 
 	/**
@@ -92,20 +155,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFResource;
 	}
 }

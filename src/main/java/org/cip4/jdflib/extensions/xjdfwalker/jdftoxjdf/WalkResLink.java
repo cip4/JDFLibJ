@@ -66,56 +66,167 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkXJDFColorResource extends WalkXJDFResource
+public class WalkResLink extends WalkJDFElement
 {
+
 	/**
 	 * 
 	 */
-	public WalkXJDFColorResource()
+	public WalkResLink()
 	{
 		super();
 	}
 
 	/**
-	 * @param e
-	 * @param trackElem
-	 * @return
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource in this case just remove the pool
 	 */
 	@Override
-	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
-		final JDFResource r = (JDFResource) trackElem;
-		final String sep = part.getSeparation();
-		final KElement col = r.getChildWithAttribute("Color", "Name", null, sep, 0, true);
-		if (col != null)
+		final JDFResourceLink rl = (JDFResourceLink) jdf;
+		final JDFResource linkTarget = rl.getLinkRoot();
+		if (linkTarget == null)
 		{
-			return null; // been here already
+			return null;
 		}
-		final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
-		final JDFResourceLink rll = theNode.getLink(r, null);
-		if (rll != null)
+		// final boolean bCustomerInfo = linkTarget instanceof JDFCustomerInfo;
+		if (this.jdfToXJDF.walkingProduct)
 		{
-			rll.removeChildren(ElementName.PART, null, null);
+			// if (!bCustomerInfo && !EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+			if (!EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+			{
+				return null;
+			}
+			setResource(rl, linkTarget, xjdf);
 		}
-		rPart.renameElement(ElementName.COLOR, null);
-		rPart.renameAttribute(AttributeName.SEPARATION, AttributeName.NAME, null, null);
-		r.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, " ", -1);
-		return rPart;
+		else
+		{
+			// if (bCustomerInfo || EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+			if (EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+			{
+				return null;
+			}
+			setResource(rl, linkTarget, this.jdfToXJDF.newRoot);
+			if (!this.jdfToXJDF.isSingleNode())
+			{
+				setProcess(rl);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param rl
+	 * @param linkTarget
+	 * @param xjdf
+	 * @return 
+	 */
+	VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xjdf)
+	{
+		return this.jdfToXJDF.setResource(rl, linkTarget, xjdf);
+	}
+
+	/**
+	 * @param rl
+	 */
+	private void setProcess(JDFResourceLink rl)
+	{
+		if (rl == null)
+			return;
+
+		KElement process = getProcess(rl);
+		setLink(process, rl);
+	}
+
+	/**
+	 * @param process
+	 * @param rl
+	 */
+	private void setLink(KElement process, JDFResourceLink rl)
+	{
+		if (rl == null || process == null)
+			return;
+		EnumUsage usage = rl.getUsage();
+		if (usage == null)
+			return;
+		String attName = usage.getName();
+		if (attName != null)
+		{
+			process.appendAttribute(attName, rl.getrRef(), null, " ", true);
+		}
+	}
+
+	/**
+	 * @param rl
+	 * @return 
+	 */
+	private KElement getProcess(JDFResourceLink rl)
+	{
+		JDFNode parent = rl.getParentJDF();
+		if (parent == null || JDFConstants.PRODUCT.equals(parent.getType()))
+		{
+			// products are handled by productList
+			return null;
+		}
+		String jobPartID = getJobPartID(parent);
+		if (jobPartID == null)
+			return null;
+
+		KElement processList = this.jdfToXJDF.newRoot.getCreateElement("ProcessList", null, 0);
+		KElement process = processList.getChildWithAttribute("Process", AttributeName.JOBPARTID, null, jobPartID, 0, true);
+		if (process == null)
+		{
+			process = processList.appendElement("Process");
+			process.setAttribute(AttributeName.JOBPARTID, jobPartID);
+			JDFNode grandparent = parent.getParentJDF();
+
+			if (parent.hasAttribute(AttributeName.TYPES))
+			{
+				process.copyAttribute("Types", parent);
+			}
+			else
+			{
+				process.copyAttribute("Types", parent, "Type", null, null);
+			}
+
+			if (grandparent != null)
+			{
+				process.setAttribute("Parent", getJobPartID(grandparent));
+			}
+		}
+		return process;
+	}
+
+	/**
+	 * @param parent
+	 * @return
+	 */
+	private String getJobPartID(JDFNode parent)
+	{
+		String jobPartID = StringUtil.getNonEmpty(parent.getJobPartID(false));
+		if (jobPartID == null)
+			jobPartID = StringUtil.getNonEmpty(parent.getID());
+		return jobPartID;
 	}
 
 	/**
@@ -126,30 +237,6 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		final KElement parent = toCheck.getParentNode_KElement();
-		if (parent == null)
-		{
-			return false;
-		}
-
-		final boolean bL1 = parent.getLocalName().endsWith("Set");
-		return bL1 && super.matches(toCheck) && ElementName.COLOR.equals(parent.getAttribute(AttributeName.NAME));
+		return toCheck instanceof JDFResourceLink;
 	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		final KElement rPart = super.walk(e, trackElem);
-		if (rPart != null)
-		{
-			rPart.removeAttribute(AttributeName.STATUS);
-		}
-		return rPart;
-
-	}
-
 }

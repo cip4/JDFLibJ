@@ -66,20 +66,20 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFCompany;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkCompany extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkCompany()
 	{
 		super();
 	}
@@ -92,20 +92,17 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFCompany;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @param e
+	 * @return the created resource
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement e, KElement trackElem)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		e.renameAttribute("ProductID", "CompanyID", null, null);
+		return super.walk(e, trackElem);
 	}
 }

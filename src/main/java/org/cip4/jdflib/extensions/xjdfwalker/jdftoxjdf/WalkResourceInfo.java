@@ -66,22 +66,58 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkResourceInfo extends WalkJDFElement
 {
+
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkResourceInfo()
 	{
 		super();
+	}
+
+	/**
+	 * @param jdf
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFResourceInfo ri = (JDFResourceInfo) jdf;
+		final KElement eNew = xjdf.copyElement(jdf, null);
+		eNew.removeChildren(null, null, null);
+		final VElement vr = ((JDFResourceInfo) jdf).getChildElementVector(null, null);
+		int nRes = 0;
+		for (int i = 0; i < vr.size(); i++)
+		{
+			if (vr.get(i) instanceof JDFResource)
+			{
+				final JDFResource r = (JDFResource) vr.get(i);
+				if (nRes == 0)
+				{
+					this.jdfToXJDF.setResource(ri, r, eNew);
+				}
+				else
+				{
+					this.jdfToXJDF.setResource(null, r, eNew);
+				}
+				r.deleteNode();
+				nRes++;
+			}
+		}
+
+		return eNew;
 	}
 
 	/**
@@ -92,20 +128,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFResourceInfo;
 	}
 }

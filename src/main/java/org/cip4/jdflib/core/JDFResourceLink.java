@@ -81,13 +81,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoResourceLink;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
-import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.node.JDFNode;
@@ -104,8 +103,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFLot;
-import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -113,7 +110,7 @@ import org.cip4.jdflib.util.StringUtil;
  * 
  * way before 20.02.2009
  */
-public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
+public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolContainer
 {
 	/**
 	 * 
@@ -128,6 +125,95 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			v.add(AttributeName.COMBINEDPROCESSINDEX);
 		}
 		return v;
+	}
+
+	/**
+	* Enumeration strings for Usage
+	*/
+
+	public static class EnumUsage extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumUsage(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumUsage getEnum(String enumName)
+		{
+			return (EnumUsage) getEnum(EnumUsage.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumUsage getEnum(int enumValue)
+		{
+			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumUsage.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumUsage.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumUsage.class);
+		}
+
+		public static final EnumUsage Input = new EnumUsage("Input");
+		public static final EnumUsage Output = new EnumUsage("Output");
+
+		/**
+		 * @return the opposite usage for this
+		 */
+		public EnumUsage invert()
+		{
+			return Output.equals(this) ? Input : Output;
+		}
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Usage
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Usage
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setUsage(EnumUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Usage
+	  * @return the value of the attribute
+	  */
+	public EnumUsage getUsage()
+	{
+		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
 	/**
@@ -181,134 +267,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[15];
-	static
-	{
-		atrInfoTable_Abstract[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable_Abstract[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSTYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_Abstract[2] = new AtrInfoTable(AttributeName.DRAFTOK, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable_Abstract[3] = new AtrInfoTable(AttributeName.MINLATESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
-		atrInfoTable_Abstract[4] = new AtrInfoTable(AttributeName.MINSTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumResStatus.getEnum(0), null);
-		atrInfoTable_Abstract[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
-		atrInfoTable_Abstract[6] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_Abstract[7] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
-		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-	}
-
-	private static AtrInfoTable[] atrInfoTable_Physical = new AtrInfoTable[10];
-	static
-	{
-		atrInfoTable_Physical[1] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[9] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[8] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[3] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
-		atrInfoTable_Physical[4] = new AtrInfoTable(AttributeName.PIPEPAUSE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[5] = new AtrInfoTable(AttributeName.PIPERESUME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[6] = new AtrInfoTable(AttributeName.REMOTEPIPEENDPAUSE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[7] = new AtrInfoTable(AttributeName.REMOTEPIPEENDRESUME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable_Physical[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-	}
-
-	private static AtrInfoTable[] atrInfoTable_Implement = new AtrInfoTable[1];
-	static
-	{
-		atrInfoTable_Implement[0] = new AtrInfoTable(AttributeName.RECOMMENDATION, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-	}
-
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		AttributeInfo ai = null;
-		if (getLocalName().equals(ElementName.PARTAMOUNT))
-		{
-			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
-			ai = ai.updateAdd(atrInfoTable_Physical);
-		}
-		else if (isPhysical())
-		{
-			ai = AttributeInfo.fixedMap.get("LinkPhysical");
-			if (ai != null)
-				return ai;
-
-			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
-			ai = ai.updateAdd(atrInfoTable_Physical);
-			AttributeInfo.fixedMap.put("LinkPhysical", ai);
-		}
-		else if (isImplementation() || getLocalName().equals(ElementName.PARTAMOUNT))
-		{
-			ai = AttributeInfo.fixedMap.get("LinkImplement");
-			if (ai != null)
-				return ai;
-
-			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
-			ai.updateAdd(atrInfoTable_Implement);
-			AttributeInfo.fixedMap.put("LinkImplement", ai);
-		}
-		else
-		{
-			ai = AttributeInfo.fixedMap.get("LinkAbstract");
-			if (ai != null)
-				return ai;
-
-			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
-			AttributeInfo.fixedMap.put("LinkAbstract", ai);
-		}
-		return ai;
-	}
-
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666661);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333333);
-	}
-
-	private static ElemInfoTable[] physInfoTable = new ElemInfoTable[1];
-	static
-	{
-		physInfoTable[0] = new ElemInfoTable(ElementName.LOT, 0x33333111);
-	}
-
-	// //////////////////////////////////////////////////////////////
-
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		ElementInfo ai = null;
-		if (getLocalName().equals(ElementName.PARTAMOUNT))
-		{
-			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
-			ai = ai.updateAdd(physInfoTable);
-		}
-		else if (isPhysical())
-		{
-			ai = ElementInfo.fixedMap.get("LinkPhysical");
-			if (ai != null)
-				return ai;
-
-			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
-			ai = ai.updateAdd(physInfoTable);
-			ElementInfo.fixedMap.put("LinkPhysical", ai);
-		}
-		else
-		{
-			ai = ElementInfo.fixedMap.get("LinkAbstract");
-			if (ai != null)
-				return ai;
-
-			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
-			ElementInfo.fixedMap.put("LinkAbstract", ai);
-		}
-		return ai;
-	}
-
 	// //////////////////////////////////////////////////////////////
 
 	/**
@@ -345,198 +303,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	public JDFResourceLink(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration for Orientation
-	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-
-		private static int m_startValue = 0;
-
-		private EnumOrientation(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumOrientation getEnum(final String enumName)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumOrientation getEnum(final int enumValue)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrientation.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrientation.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrientation.class);
-		}
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
-
-		/**
-		 * 
-		 */
-		public static final EnumOrientation Matrix = new EnumOrientation("Matrix");
-	}
-
-	/**
-	 * Enumeration for attribute Usage
-	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-
-		private static int m_startValue = 0;
-
-		private EnumUsage(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumUsage getEnum(final String enumName)
-		{
-			if ("Input".equals(enumName))
-			{
-				return EnumUsage.Input;
-			}
-			else if ("Output".equals(enumName))
-			{
-				return EnumUsage.Output;
-			}
-			return null;
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumUsage getEnum(final int enumValue)
-		{
-			if (enumValue == 0)
-				return EnumUsage.Input;
-			else if (enumValue == 1)
-				return EnumUsage.Output;
-			else
-				return null;
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUsage.class);
-		}
-
-		/**
-		 * 
-		 */
-		public static final EnumUsage Input = new EnumUsage("Input");
-		/**
-		* 
-		*/
-		public static final EnumUsage Output = new EnumUsage("Output");
-
-		/**
-		 * @return the opposite usage for this
-		 */
-		public EnumUsage invert()
-		{
-			return Output.equals(this) ? Input : Output;
-		}
-
 	}
 
 	// **************************************** Methods
@@ -644,6 +410,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @return JDFResource
 	 */
+	@Override
 	public JDFResource getLinkRoot()
 	{
 		final JDFResource eLink = super.getLinkRoot(null);
@@ -1508,18 +1275,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAmountPool()
-	 * @return
-	*/
-	public JDFAmountPool getAmountPool()
-	{
-		return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, 0);
-	}
-
-	/**
 	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getCreateAmountPool()
 	 * @return
 	*/
+	@Override
 	public JDFAmountPool getCreateAmountPool()
 	{
 		if (this instanceof JDFPartAmount)
@@ -1532,6 +1291,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	/**
 	 * @return
 	 */
+	@Override
 	public JDFAmountPool appendAmountPool()
 	{
 		// ideally the method would be hidden in PartAmount
@@ -1548,30 +1308,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param n the index of the element
 	 * @return the nth Lot, null if it does not exist
 	 */
+	@Override
 	public JDFLot getLot(final int n)
 	{
 		return (JDFLot) getElement(ElementName.LOT, null, n);
-	}
-
-	/**
-	 * get the nTh Lot element
-	 * 
-	 * @param n the index of the element
-	 * @return the nth Lot, creates all Lots in case of n-1 does not exist
-	 */
-	public JDFLot getCreateLot(final int n)
-	{
-		return (JDFLot) getCreateElement_KElement(ElementName.LOT, null, n);
-	}
-
-	/**
-	 * append Lot element
-	 * 
-	 * @return the new Lot
-	 */
-	public JDFLot appendLot()
-	{
-		return (JDFLot) appendElement(ElementName.LOT, null);
 	}
 
 	/**
@@ -1890,27 +1630,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * set attribute ProcessUsage - this method is no longer deprecated since ICS documents may specify additional values that are not encoded in the enums
-	 * 
-	 * @param processUsage
-	 * 
-	 */
-	public void setProcessUsage(final String processUsage)
-	{
-		setAttribute(AttributeName.PROCESSUSAGE, processUsage, null);
-	}
-
-	/**
-	 * get attribute ProcessUsage
-	 * 
-	 * @return String
-	 */
-	public String getProcessUsage()
-	{
-		return getAttribute(AttributeName.PROCESSUSAGE, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
 	 * get attribute ProcessUsage
 	 * 
 	 * @return EnumProcessUsage
@@ -1931,40 +1650,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * set attribute Usage
-	 * 
-	 * @param value the value to set the attribute to
-	 */
-	public void setUsage(final EnumUsage value)
-	{
-		setAttribute(AttributeName.USAGE, value == null ? null : value.getName(), null);
-	}
-
-	/**
-	 * getUsage - get the usage of the ResourceLink in a JDF node. If no usage is available, default to the resource name.
-	 * 
-	 * @return EnumUsage
-	 */
-	public EnumUsage getUsage()
-	{
-		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
-	}
-
-	/**
-	 * set attribute MinStatus
-	 * 
-	 * @param value the value to set the attribute to
-	 */
-	public void setMinStatus(final JDFResource.EnumResStatus value)
-	{
-		setAttribute(AttributeName.MINSTATUS, value.getName(), null);
-	}
-
-	/**
 	 * getMinStatus - get the minimum status of the ResourceLink in a JDF node. If usage is input or not available, check DraftOK as well.
 	 * 
 	 * @return the status of the ResourceLink
 	 */
+	@Override
 	public JDFResource.EnumResStatus getMinStatus()
 	{
 		final EnumResStatus returnEnum;
@@ -1992,20 +1682,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * Method setUsage.
-	 * 
-	 * @param value
-	 */
-	public void setMinLateStatus(final JDFResource.EnumResStatus value)
-	{
-		setAttribute(AttributeName.MINLATESTATUS, value.getName(), null);
-	}
-
-	/**
 	 * get attribute MinLateStatus
 	 * 
 	 * @return EnumUsage
 	 */
+	@Override
 	public JDFResource.EnumResStatus getMinLateStatus()
 	{
 		if (!this.hasAttribute(AttributeName.MINLATESTATUS))
@@ -2035,22 +1716,12 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * Sets the value of PipePartIDKeys
-	 * 
-	 * @param keys vector of values to set
-	 */
-	public void setPipePartIDKeys(final Vector<? extends ValuedEnum> keys)
-	{
-		setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, keys, null);
-
-	}
-
-	/**
 	 * Gets a list of all valid pipe part keys for this resource
 	 * 
 	 * @return VString - list of all PipePartIDKeys
 	 * @deprecated
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	@Deprecated
 	public VString getPipePartIDKeys()
@@ -2100,6 +1771,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
+	@Override
 	public void setCombinedProcessIndex(JDFIntegerList value)
 	{
 		if (value != null && value.size() == 0)
@@ -2117,44 +1789,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	public void setCombinedProcessIndex(final int value)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, new JDFIntegerList(value), null);
-	}
-
-	/**
-	 * gets attribute CombinedProcessIndex
-	 * 
-	 * @return JDFIntegerList - attribute value, null if no CombinedProcessIndex is set or the format is illegal
-	 */
-	public JDFIntegerList getCombinedProcessIndex()
-	{
-		try
-		{
-			final String cpi = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-			return cpi == null ? null : new JDFIntegerList(cpi);
-		}
-		catch (final DataFormatException dfe)
-		{
-			return null;
-		}
-	}
-
-	/**
-	 * sets attribute CombinedProcessType
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setCombinedProcessType(final String value)
-	{
-		setAttribute(AttributeName.COMBINEDPROCESSTYPE, value);
-	}
-
-	/**
-	 * gets attribute CombinedProcessType
-	 * 
-	 * @return String - attribute value
-	 */
-	public String getCombinedProcessType()
-	{
-		return getAttribute(AttributeName.COMBINEDPROCESSTYPE);
 	}
 
 	/**
@@ -2210,6 +1844,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
+	@Override
 	public void setDraftOK(final boolean value)
 	{
 		final EnumVersion eVer = getVersion(true);
@@ -2233,6 +1868,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @return boolean - attribute value. Default is false
 	 */
+	@Override
 	public boolean getDraftOK()
 	{
 		if (hasAttribute(AttributeName.DRAFTOK))
@@ -2250,20 +1886,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * sets attribute PipeProtocol
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setPipeProtocol(final String value)
-	{
-		setAttribute(AttributeName.PIPEPROTOCOL, value);
-	}
-
-	/**
 	 * gets string attribute PipeProtocol
 	 * 
 	 * @return String - attribute value.
 	 */
+	@Override
 	public String getPipeProtocol()
 	{
 		String str = JDFConstants.EMPTYSTRING;
@@ -2283,20 +1910,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * sets attribute PipeURL
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setPipeURL(final String value)
-	{
-		setAttribute(AttributeName.PIPEURL, value, null);
-	}
-
-	/**
 	 * gets string attribute PipeURL
 	 * 
 	 * @return String - attribute value.
 	 */
+	@Override
 	public String getPipeURL()
 	{
 		String str = JDFConstants.EMPTYSTRING;
@@ -2313,298 +1931,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			str = getAttribute(AttributeName.PIPEURL);
 		}
 		return str;
-	}
-
-	/**
-	 * sets attribute rRef
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setrRef(final String value)
-	{
-		setAttribute(AttributeName.RREF, value, null);
-	}
-
-	/**
-	 * gets string attribute rRef
-	 * 
-	 * @return String - attribute value.
-	 */
-	public String getrRef()
-	{
-		return getAttribute(AttributeName.RREF);
-	}
-
-	/**
-	 * sets attribute rSubRef
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setrSubRef(final String value)
-	{
-		setAttribute(AttributeName.RSUBREF, value);
-	}
-
-	/**
-	 * gets string attribute rSubRef
-	 * 
-	 * @return String - attribute value.
-	 */
-	public String getrSubRef()
-	{
-		return getAttribute(AttributeName.RSUBREF);
-	}
-
-	/**
-	 * sets attribute PipePause
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setPipePause(final double value)
-	{
-		setAttribute(AttributeName.PIPEPAUSE, value, null);
-	}
-
-	/**
-	 * gets attribute PipePause
-	 * 
-	 * @return double - attribute value.
-	 */
-	public double getPipePause()
-	{
-		return getRealAttribute(AttributeName.PIPEPAUSE, null, 0.0);
-	}
-
-	/**
-	 * sets attribute PipeResume
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setPipeResume(final double value)
-	{
-		setAttribute(AttributeName.PIPERESUME, value, null);
-	}
-
-	/**
-	 * gets attribute PipeResume
-	 * 
-	 * @return double - attribute value.
-	 */
-	public double getPipeResume()
-	{
-		return getRealAttribute(AttributeName.PIPERESUME, null, 0.0);
-	}
-
-	/**
-	 * sets attribute Orientation
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setOrientation(final EnumOrientation value)
-	{
-		setAttribute(AttributeName.ORIENTATION, value.getName(), null);
-	}
-
-	/**
-	 * gets string attribute Orientation
-	 * 
-	 * @return EnumOrientation - attribute value
-	 */
-	public EnumOrientation getOrientation()
-	{
-		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-	}
-
-	/**
-	 * sets attribute RemotePipeEndPause
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setRemotePipeEndPause(final double value)
-	{
-		setAttribute(AttributeName.REMOTEPIPEENDPAUSE, value, null);
-	}
-
-	/**
-	 * gets attribute RemotePipeEndPause
-	 * 
-	 * @return double - attribute value.
-	 */
-	public double getRemotePipeEndPause()
-	{
-		return getRealAttribute(AttributeName.REMOTEPIPEENDPAUSE, null, 0.0);
-	}
-
-	/**
-	 * sets attribute RemotePipeEndResume
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setRemotePipeEndResume(final double value)
-	{
-		setAttribute(AttributeName.REMOTEPIPEENDRESUME, value, null);
-	}
-
-	/**
-	 * gets attribute RemotePipeEndResume
-	 * 
-	 * @return double - attribute value.
-	 */
-	public double getRemotePipeEndResume()
-	{
-		return getRealAttribute(AttributeName.REMOTEPIPEENDRESUME, null, 0.0);
-	}
-
-	/**
-	 * sets attribute Transformation(
-	 * 
-	 * @param value attribute value to set
-	 * @throws JDFException
-	 */
-	public void setTransformation(final JDFMatrix value)
-	{
-		setAttribute(AttributeName.TRANSFORMATION, value.toString());
-	}
-
-	/**
-	 * gets string attribute Transformation
-	 * 
-	 * @return JDFMatrix - attribute value
-	 * @throws JDFException if attribute has not a type JDFMatrix
-	 */
-	public JDFMatrix getTransformation()
-	{
-		try
-		{
-			return new JDFMatrix(getAttribute(AttributeName.TRANSFORMATION));
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("JDFResourceLink.getTransformation: not capable to create JDFMatrix");
-		}
-	}
-
-	/**
-	 * sets attribute Duration
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setDuration(final JDFDuration value)
-	{
-		JDFDuration valueLocal = value;
-
-		if (valueLocal == null)
-		{
-			valueLocal = new JDFDuration();
-		}
-
-		setAttribute(AttributeName.DURATION, valueLocal.getDurationISO());
-	}
-
-	/**
-	 * gets attribute Duration
-	 * 
-	 * @return JDFDuration - attribute value.
-	 * @throws JDFException if attribute has not a type JDFDuration
-	 */
-	public JDFDuration getDuration()
-	{
-		try
-		{
-			return new JDFDuration(getAttribute(AttributeName.DURATION));
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("JDFResourceLink.getDuration: not capable to create JDFDuration");
-		}
-	}
-
-	/**
-	 * sets attribute Recommendation
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setRecommendation(final boolean value)
-	{
-		setAttribute(AttributeName.RECOMMENDATION, value, null);
-	}
-
-	/**
-	 * gets attribute Recommendation
-	 * 
-	 * @return boolean - attribute value.
-	 */
-	public boolean getRecommendation()
-	{
-		return getBoolAttribute(AttributeName.RECOMMENDATION, null, false);
-	}
-
-	/**
-	 * sets attribute Start
-	 * 
-	 * @param value attribute value to set
-	 */
-	public void setStart(final JDFDate value)
-	{
-		JDFDate valueLocal = value;
-
-		if (valueLocal == null)
-		{
-			valueLocal = new JDFDate();
-		}
-		setAttribute(AttributeName.START, valueLocal.getDateTimeISO());
-	}
-
-	/**
-	 * gets attribute Start
-	 * 
-	 * @return JDFDate - attribute value
-	 * @throws JDFException if attribute has not a type JDFDate
-	 */
-	public JDFDate getStart()
-	{
-		try
-		{
-			return new JDFDate(getAttribute(AttributeName.START, null, (new JDFDate()).getDateTimeISO()));
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("JDFResourceLink.getStart: not capable to create JDFDate");
-		}
-	}
-
-	/**
-	 * sets attribute StartOffset
-	 * 
-	 * @param value - attribute value to set
-	 */
-	public void setStartOffset(final JDFDuration value)
-	{
-		JDFDuration valueLocal = value;
-
-		if (valueLocal == null)
-		{
-			valueLocal = new JDFDuration();
-		}
-		setAttribute(AttributeName.STARTOFFSET, valueLocal.getDurationISO());
-	}
-
-	/**
-	 * gets attribute StartOffset
-	 * 
-	 * @return JDFDuration - attribute value
-	 * @throws JDFException if attribute has not a type JDFDuration
-	 */
-	public JDFDuration getStartOffset()
-	{
-		try
-		{
-			return new JDFDuration(getAttribute(AttributeName.STARTOFFSET, null, (new JDFDuration()).getDurationISO()));
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("JDFResourceLink.getStartOffset: not capable to create JDFDuration");
-		}
 	}
 
 	/**

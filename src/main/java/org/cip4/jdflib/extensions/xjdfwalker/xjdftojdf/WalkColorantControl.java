@@ -97,7 +97,7 @@ public class WalkColorantControl extends WalkResource
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 *  org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)

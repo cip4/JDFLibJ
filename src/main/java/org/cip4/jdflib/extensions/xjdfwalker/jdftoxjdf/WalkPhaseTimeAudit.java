@@ -66,22 +66,73 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFPhaseTime;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
+ * at this point only a dummy since we have a specific WalkResourceAudit child
+ * 
+ * TODO how should resource consumption be tracked?
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkPhaseTimeAudit extends WalkAudit
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkPhaseTimeAudit()
 	{
 		super();
+	}
+
+	/**
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
+		final VElement vL = pt.getLinkVector();
+		final VElement phaseAmount = new VElement();
+		if (vL != null)
+		{
+			for (int i = 0; i < vL.size(); i++)
+			{
+				final JDFResourceLink rl = (JDFResourceLink) vL.get(i);
+				final VElement vR = this.jdfToXJDF.setResource(null, rl.getLinkRoot(), this.jdfToXJDF.newRoot);
+				final KElement pA = xjdf.appendElement("PhaseAmount");
+				for (int j = 0; j < vR.size(); j++)
+				{
+					pA.appendAttribute("rRef", vR.get(j).getAttribute(AttributeName.ID), null, " ", true);
+
+					this.jdfToXJDF.setAmountPool(rl, pA, null);
+					rl.deleteNode();
+					for (String extension : new String[] { "", "Good", "Waste" })
+					{
+						pA.removeAttribute(AttributeName.AMOUNT + extension);
+						pA.renameAttribute(AttributeName.ACTUALAMOUNT + extension, AttributeName.AMOUNT + extension, null, null);
+					}
+				}
+				phaseAmount.add(pA);
+			}
+		}
+		final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNode above...)
+		if (x2 != null)
+		{
+			for (int i = 0; i < phaseAmount.size(); i++)
+			{
+				x2.moveElement(phaseAmount.get(i), null);
+			}
+		}
+		return x2;
 	}
 
 	/**
@@ -92,20 +143,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFPhaseTime;
 	}
 }

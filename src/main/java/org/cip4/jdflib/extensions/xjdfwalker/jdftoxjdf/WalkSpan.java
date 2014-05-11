@@ -66,22 +66,81 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.span.JDFSpanBase;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkSpan extends WalkJDFElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkSpan()
 	{
 		super();
+	}
+
+	/**
+	 * depending on the value of bSpanAsAttribute either <br/>
+	 * 		invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+	 *      create an Attribute with the name of the span
+	 * @param xjdf
+	 * @return true if must continue
+	 */
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final KElement ret;
+		final JDFSpanBase span = (JDFSpanBase) jdf;
+
+		if (this.jdfToXJDF.isSpanAsAttribute())
+		{
+			ret = spanToAttribute(span, xjdf);
+		}
+		else
+		{
+			ret = invertSpan(span, xjdf);
+		}
+		return ret;
+	}
+
+	/**
+	 * @param span
+	 * @param xjdf
+	 * @return
+	 */
+	private KElement spanToAttribute(JDFSpanBase span, KElement xjdf)
+	{
+		String name = span.getLocalName();
+		String val = span.guessActual();
+		if (val != null)
+			xjdf.setAttribute(name, val);
+		return null;
+	}
+
+	/**
+	 * @param span
+	 * @param xjdf
+	 * @return
+	 */
+	private KElement invertSpan(final JDFSpanBase span, final KElement xjdf)
+	{
+		span.inlineRefElements(null, null, false);
+		org.cip4.jdflib.span.JDFSpanBase.EnumDataType dataType = span.getDataType();
+		if (dataType == null)
+			return null; // broken!
+		final KElement eNew = xjdf.appendElement(dataType.getName());
+		eNew.setAttributes(span);
+		eNew.removeAttribute(AttributeName.DATATYPE);
+		eNew.setAttribute(AttributeName.NAME, span.getLocalName());
+		return eNew;
 	}
 
 	/**
@@ -92,20 +151,6 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
-	}
-
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
+		return toCheck instanceof JDFSpanBase;
 	}
 }

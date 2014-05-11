@@ -66,22 +66,58 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+ * simply stop walking on these
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkState extends WalkDevcapElement
 {
 	/**
 	 * 
 	 */
-	public WalkStrippingParams()
+	public WalkState()
 	{
 		super();
+	}
+
+	/**
+	 * @param e
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		JDFAbstractState st = (JDFAbstractState) e;
+		VString v = getXPathVector(st, null);
+		String name = st.getName();
+		String stateName = st.getLocalName();
+		KElement eStateFirst = null;
+		for (String path : v)
+		{
+			KElement eState = trackElem.getChildWithAttribute(stateName, "XPath", null, "@" + name, 0, true);
+			if (eState == null)
+			{
+				eState = trackElem.appendElement(stateName);
+
+				String xPathRoot = getXPathRoot(path, null);
+				if (this.jdfToXJDF.resAttribs.contains(name) && xPathRoot.contains("Set/"))
+					xPathRoot = StringUtil.replaceToken(xPathRoot, -1, "/", null);
+				eState.setAttributes(e);
+				eState.setAttribute("XPathRoot", xPathRoot);
+				eState.setAttribute("XPath", "@" + name);
+				eState.removeAttribute("Name");
+			}
+			if (eStateFirst == null)
+				eStateFirst = eState;
+		}
+		return eStateFirst;
 	}
 
 	/**
@@ -92,20 +128,7 @@ public class WalkStrippingParams extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFStrippingParams;
+		return toCheck instanceof JDFAbstractState;
 	}
 
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
-	@Override
-	protected String getRefName(final String val)
-	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
-		{
-			return "MediaRef";
-		}
-		return super.getRefName(val);
-	}
 }
