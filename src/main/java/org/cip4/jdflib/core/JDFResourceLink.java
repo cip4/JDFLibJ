@@ -112,6 +112,18 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolContainer
 {
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
 	/**
 	 * 
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
