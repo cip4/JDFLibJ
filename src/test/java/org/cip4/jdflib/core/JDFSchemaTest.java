@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,7 +88,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -107,7 +106,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	public void testSchema()
 	{
 		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 	}
 
 	/**
@@ -123,8 +122,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.addResource(ElementName.TOOL, EnumUsage.Output);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assert.assertNotNull(d);
-		Assert.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -141,8 +140,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		pv.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assert.assertNotNull(d);
-		Assert.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -157,9 +156,9 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		for (File jdf : jdfs)
 		{
 			final JDFDoc d = p.parseFile(jdf);
-			Assert.assertNotNull(d);
+			assertNotNull(d);
 			log.info("Parsing: " + jdf.getName());
-			Assert.assertNull("schema error in: " + jdf.getName(), p.m_lastExcept);
+			assertNull("schema error in: " + jdf.getName(), p.m_lastExcept);
 		}
 	}
 
@@ -179,8 +178,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		idf.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assert.assertNotNull(d);
-		Assert.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -197,8 +196,8 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setTemplateVersion("1.0");
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
-		Assert.assertNotNull(d);
-		Assert.assertNull(p.m_lastExcept);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
 	}
 
 	/**
@@ -211,10 +210,10 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		super.setUp();
 		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
-		Assert.assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
+		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
 		p = new JDFParser();
 		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
-		Assert.assertTrue(jdfxsd.canRead());
+		assertTrue(jdfxsd.canRead());
 		p.setJDFSchemaLocation(jdfxsd);
 	}
 

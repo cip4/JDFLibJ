@@ -460,8 +460,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -526,8 +526,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDuration getDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -878,9 +878,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	{
 		JDFDate date = value;
 		if (date == null)
-		{
 			date = new JDFDate();
-		}
 		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
 	}
 
@@ -890,8 +888,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDate getStart()
 	{
-		final String str = getAttribute(AttributeName.START, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.START, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -914,9 +912,30 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDuration getStartOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Usage
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Usage
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setUsage(EnumUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Usage
+	  * @return the value of the attribute
+	  */
+	public EnumUsage getUsage()
+	{
+		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 
 	/* ---------------------------------------------------------------------
@@ -938,8 +957,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFMatrix getTransformation()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 

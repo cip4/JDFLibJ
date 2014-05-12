@@ -310,66 +310,6 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
 	}
 
-	/**
-	* Enumeration strings for Usage
-	*/
-
-	public static class EnumUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumUsage getEnum(String enumName)
-		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUsage getEnum(int enumValue)
-		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUsage.class);
-		}
-
-		public static final EnumUsage Input = new EnumUsage("Input");
-		public static final EnumUsage Output = new EnumUsage("Output");
-	}
-
 	/* ************************************************************************
 	 * Attribute getter / setter
 	 * ************************************************************************
@@ -624,8 +564,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public VString getUpdateIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
