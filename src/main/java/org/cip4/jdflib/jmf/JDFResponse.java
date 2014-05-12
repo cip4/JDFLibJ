@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -136,7 +136,7 @@ public class JDFResponse extends JDFAutoResponse
 	/**
 	 * inner class EnumClass
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static final class EnumError extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,9 +227,9 @@ public class JDFResponse extends JDFAutoResponse
 		return setErrorText(errorText, null);
 	}
 
-	/** (26) getCreateNotification
+	/** 
 	* 
-	* @param iSkip number of elements to skip
+	*  
 	* @return JDFNotification the element
 	*/
 	public JDFNotification getCreateNotification()
@@ -283,4 +283,14 @@ public class JDFResponse extends JDFAutoResponse
 		setAcknowledged(true);
 		return ack;
 	}
+
+	/**
+	 * legacy get first notification
+	 * @return 
+	 */
+	public JDFNotification getNotification()
+	{
+		return getNotification(0);
+	}
+
 }
