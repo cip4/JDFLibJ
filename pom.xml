@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.jdf</groupId>
 	<artifactId>JDFLibJ</artifactId>
-	<version>2.1.5.79</version>
+	<version>2.1.5.80-SNAPSHOT</version>
 	<name>JDFLibJ</name>
 	<description>CIP4 JDF Libary for JDF 1.x</description>
 	<parent>
@@ -17,9 +17,9 @@
 		<buildDirectory>${project.basedir}/target</buildDirectory>
 	</properties>
 	<scm>
-		<url>http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.5.79</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.5.79</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/tags/JDFLibJ-2.1.5.79</connection>
+		<url>http://svn.cip4.org/svnroot/trunk/JDFLibJ</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</connection>
 
 	</scm>
 	<developers>
