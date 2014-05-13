@@ -1581,7 +1581,15 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetLength()
+	{
+		KElement e = new XMLDoc("e", null).getRoot();
+		assertTrue(e.getLength() > 0);
+	}
 
 	/**
 	 * 

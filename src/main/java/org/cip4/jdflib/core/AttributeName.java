@@ -1750,7 +1750,7 @@ public final class AttributeName
 	/** */
 	public static final String LENGTH = "Length";
 	/** */
-	public static final String LENGTHJDF = "LengthJDF";
+	public static final String LENGTHJDF = LENGTH;
 	/** */
 	public static final String LENGTHOVERALL = "LengthOverall";
 	/** */
