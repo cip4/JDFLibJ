@@ -81,20 +81,20 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 
 /**
 *****************************************************************************
-class JDFAutoPerson : public JDFElement
+class JDFAutoPerson : public JDFResource
 
 *****************************************************************************
 */
 
-public abstract class JDFAutoPerson extends JDFElement
+public abstract class JDFAutoPerson extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -172,6 +172,17 @@ public abstract class JDFAutoPerson extends JDFElement
 	public String toString()
 	{
 		return " JDFAutoPerson[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
 	}
 
 	/* ************************************************************************
@@ -281,8 +292,8 @@ public abstract class JDFAutoPerson extends JDFElement
 	  */
 	public VString getLanguages()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

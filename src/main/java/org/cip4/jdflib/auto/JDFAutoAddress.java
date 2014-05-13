@@ -80,15 +80,16 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
 *****************************************************************************
-class JDFAutoAddress : public JDFElement
+class JDFAutoAddress : public JDFResource
 
 *****************************************************************************
 */
 
-public abstract class JDFAutoAddress extends JDFElement
+public abstract class JDFAutoAddress extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -163,6 +164,17 @@ public abstract class JDFAutoAddress extends JDFElement
 	public String toString()
 	{
 		return " JDFAutoAddress[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
 	}
 
 	/* ************************************************************************

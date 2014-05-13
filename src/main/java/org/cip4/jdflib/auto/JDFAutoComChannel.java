@@ -80,17 +80,17 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
 
 /**
 *****************************************************************************
-class JDFAutoComChannel : public JDFElement
+class JDFAutoComChannel : public JDFResource
 
 *****************************************************************************
 */
 
-public abstract class JDFAutoComChannel extends JDFElement
+public abstract class JDFAutoComChannel extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
@@ -150,6 +150,17 @@ public abstract class JDFAutoComChannel extends JDFElement
 	public String toString()
 	{
 		return " JDFAutoComChannel[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @return  true if ok
+	 */
+	@Override
+	public boolean init()
+	{
+		boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
 	}
 
 	/**
@@ -305,8 +316,8 @@ public abstract class JDFAutoComChannel extends JDFElement
 	  */
 	public VString getChannelUsage()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
