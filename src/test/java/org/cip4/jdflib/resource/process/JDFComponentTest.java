@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,8 +79,14 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
 import org.junit.Test;
+
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date May 15, 2014
+ */
 public class JDFComponentTest extends JDFTestCaseBase
 {
 	private JDFComponent c;
@@ -97,11 +103,13 @@ public class JDFComponentTest extends JDFTestCaseBase
 	public final void testSetDimensions()
 	{
 		c.setDimensions(new JDFXYPair(1, 2));
-		Assert.assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
+		assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
@@ -111,18 +119,32 @@ public class JDFComponentTest extends JDFTestCaseBase
 		c = (JDFComponent) root.addResource(ElementName.COMPONENT, EnumUsage.Input);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
-	@Test
+	/**
+	 * 	@Test
+	 *  
+	 */
 	public void testSetComponentTypeAuto()
 	{
 		c.setComponentType(null);
-		Assert.assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 	@Test
+	 *  
+	 */
+	public void testIsComponentType()
+	{
+		c.setComponentType(EnumComponentType.FinalProduct, null);
+		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		assertFalse(c.isComponentType(EnumComponentType.Web));
+		c.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
+		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		assertTrue(c.isComponentType(EnumComponentType.Sheet));
+		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		assertFalse(c.isComponentType(EnumComponentType.Web));
+	}
 
 	/**
 	 * 
@@ -133,9 +155,9 @@ public class JDFComponentTest extends JDFTestCaseBase
 		c.setComponentType(null);
 		JDFLayout lo = c.appendLayout();
 		JDFMedia m = lo.appendMedia();
-		Assert.assertEquals(m, c.getMedia());
+		assertEquals(m, c.getMedia());
 		lo.makeRootResource(null, null, true);
-		Assert.assertEquals(m, c.getMedia());
+		assertEquals(m, c.getMedia());
 	}
 
 	/**
@@ -146,41 +168,39 @@ public class JDFComponentTest extends JDFTestCaseBase
 	{
 		c.setComponentType(null);
 		JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
-		Assert.assertEquals(m, c.getMedia());
+		assertEquals(m, c.getMedia());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	@Test
+	/**
+	 * 	@Test
+	 *  
+	 */
 	public void testSetComponentType()
 	{
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
-		Assert.assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
-		Assert.assertEquals(c.getComponentType().size(), 2);
-		Assert.assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
+		assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		assertEquals(c.getComponentType().size(), 2);
+		assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 	@Override
+	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return c.toString();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	@Test
+	/**
+	 * 	@Test
+	 */
 	public void testComponentManifest()
 	{
 		root.getLink(c, null).setUsage(EnumUsage.Output);
 		// TODO complete
 
 		doc.write2File(sm_dirTestDataTemp + "ComponentManifest.jdf", 2, false);
-
 	}
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -184,6 +184,19 @@ public class JDFComponent extends JDFAutoComponent
 			v = null;
 		}
 		setComponentType(v);
+	}
+
+	/**
+	 * 
+	 * return true if this component contains typ
+	 * @param typ
+	 * @return
+	 */
+	public boolean isComponentType(EnumComponentType typ)
+	{
+		Vector<? extends ValuedEnum> v = getComponentType();
+		return (v != null && typ != null && v.contains(typ));
+
 	}
 
 	/**
