@@ -175,6 +175,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	* Enumeration strings for Context
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumContext extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,20 +228,35 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 			return iterator(EnumContext.class);
 		}
 
+		/**  */
 		public static final EnumContext Set = new EnumContext("Set");
+		/**  */
 		public static final EnumContext Document = new EnumContext("Document");
+		/**  */
 		public static final EnumContext SubDoc0 = new EnumContext("SubDoc0");
+		/**  */
 		public static final EnumContext SubDoc1 = new EnumContext("SubDoc1");
+		/**  */
 		public static final EnumContext SubDoc2 = new EnumContext("SubDoc2");
+		/**  */
 		public static final EnumContext SubDoc3 = new EnumContext("SubDoc3");
+		/**  */
 		public static final EnumContext SubDoc4 = new EnumContext("SubDoc4");
+		/**  */
 		public static final EnumContext SubDoc5 = new EnumContext("SubDoc5");
+		/**  */
 		public static final EnumContext SubDoc6 = new EnumContext("SubDoc6");
+		/**  */
 		public static final EnumContext SubDoc7 = new EnumContext("SubDoc7");
+		/**  */
 		public static final EnumContext SubDoc8 = new EnumContext("SubDoc8");
+		/**  */
 		public static final EnumContext SubDoc9 = new EnumContext("SubDoc9");
+		/**  */
 		public static final EnumContext PagePool = new EnumContext("PagePool");
+		/**  */
 		public static final EnumContext Page = new EnumContext("Page");
+		/**  */
 		public static final EnumContext Object = new EnumContext("Object");
 	}
 
@@ -248,6 +264,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	* Enumeration strings for DataType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDataType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -300,13 +317,21 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 			return iterator(EnumDataType.class);
 		}
 
+		/**  */
 		public static final EnumDataType string = new EnumDataType("string");
+		/**  */
 		public static final EnumDataType integer = new EnumDataType("integer");
+		/**  */
 		public static final EnumDataType double_ = new EnumDataType("double");
+		/**  */
 		public static final EnumDataType NMTOKEN = new EnumDataType("NMTOKEN");
+		/**  */
 		public static final EnumDataType boolean_ = new EnumDataType("boolean");
+		/**  */
 		public static final EnumDataType dateTime = new EnumDataType("dateTime");
+		/**  */
 		public static final EnumDataType duration = new EnumDataType("duration");
+		/**  */
 		public static final EnumDataType PartIDKeys = new EnumDataType("PartIDKeys");
 	}
 

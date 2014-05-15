@@ -213,6 +213,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for Drying
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDrying extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -265,10 +266,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumDrying.class);
 		}
 
+		/**  */
 		public static final EnumDrying UV = new EnumDrying("UV");
+		/**  */
 		public static final EnumDrying Heatset = new EnumDrying("Heatset");
+		/**  */
 		public static final EnumDrying IR = new EnumDrying("IR");
+		/**  */
 		public static final EnumDrying On = new EnumDrying("On");
+		/**  */
 		public static final EnumDrying Off = new EnumDrying("Off");
 	}
 
@@ -276,6 +282,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for FirstSurface
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFirstSurface extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -328,8 +335,11 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumFirstSurface.class);
 		}
 
+		/**  */
 		public static final EnumFirstSurface Either = new EnumFirstSurface("Either");
+		/**  */
 		public static final EnumFirstSurface Front = new EnumFirstSurface("Front");
+		/**  */
 		public static final EnumFirstSurface Back = new EnumFirstSurface("Back");
 	}
 
@@ -337,6 +347,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for FountainSolution
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFountainSolution extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -389,7 +400,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumFountainSolution.class);
 		}
 
+		/**  */
 		public static final EnumFountainSolution On = new EnumFountainSolution("On");
+		/**  */
 		public static final EnumFountainSolution Off = new EnumFountainSolution("Off");
 	}
 
@@ -397,6 +410,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for ModuleDrying
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumModuleDrying extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -449,10 +463,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumModuleDrying.class);
 		}
 
+		/**  */
 		public static final EnumModuleDrying UV = new EnumModuleDrying("UV");
+		/**  */
 		public static final EnumModuleDrying Heatset = new EnumModuleDrying("Heatset");
+		/**  */
 		public static final EnumModuleDrying IR = new EnumModuleDrying("IR");
+		/**  */
 		public static final EnumModuleDrying On = new EnumModuleDrying("On");
+		/**  */
 		public static final EnumModuleDrying Off = new EnumModuleDrying("Off");
 	}
 
@@ -460,6 +479,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for PrintingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -512,10 +532,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumPrintingType.class);
 		}
 
+		/**  */
 		public static final EnumPrintingType ContinuousFed = new EnumPrintingType("ContinuousFed");
+		/**  */
 		public static final EnumPrintingType SheetFed = new EnumPrintingType("SheetFed");
+		/**  */
 		public static final EnumPrintingType WebFed = new EnumPrintingType("WebFed");
+		/**  */
 		public static final EnumPrintingType WebMultiple = new EnumPrintingType("WebMultiple");
+		/**  */
 		public static final EnumPrintingType WebSingle = new EnumPrintingType("WebSingle");
 	}
 
@@ -523,6 +548,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for PrintingTechnology
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintingTechnology extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -575,9 +601,13 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumPrintingTechnology.class);
 		}
 
+		/**  */
 		public static final EnumPrintingTechnology Flexo = new EnumPrintingTechnology("Flexo");
+		/**  */
 		public static final EnumPrintingTechnology Gravure = new EnumPrintingTechnology("Gravure");
+		/**  */
 		public static final EnumPrintingTechnology Offset = new EnumPrintingTechnology("Offset");
+		/**  */
 		public static final EnumPrintingTechnology Screen = new EnumPrintingTechnology("Screen");
 	}
 
@@ -585,6 +615,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for SheetLay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -637,8 +668,11 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumSheetLay.class);
 		}
 
+		/**  */
 		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		/**  */
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		/**  */
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
 	}
 
@@ -646,6 +680,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	* Enumeration strings for WorkStyle
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWorkStyle extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -698,11 +733,17 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 			return iterator(EnumWorkStyle.class);
 		}
 
+		/**  */
 		public static final EnumWorkStyle Simplex = new EnumWorkStyle("Simplex");
+		/**  */
 		public static final EnumWorkStyle Perfecting = new EnumWorkStyle("Perfecting");
+		/**  */
 		public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
+		/**  */
 		public static final EnumWorkStyle WorkAndTurn = new EnumWorkStyle("WorkAndTurn");
+		/**  */
 		public static final EnumWorkStyle WorkAndTumble = new EnumWorkStyle("WorkAndTumble");
+		/**  */
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 

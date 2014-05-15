@@ -214,6 +214,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	  * (5) set attribute Usage
 	  * @param enumVar the enumVar to set the attribute to
 	  */
+	@Override
 	public void setUsage(EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -223,6 +224,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	  * (9) get attribute Usage
 	  * @return the value of the attribute
 	  */
+	@Override
 	public EnumUsage getUsage()
 	{
 		return EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
@@ -1725,27 +1727,6 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			vEnum.add(EnumPartIDKey.getEnum(keys.elementAt(i)));
 		}
 		setPipePartIDKeys(vEnum);
-	}
-
-	/**
-	 * Gets a list of all valid pipe part keys for this resource
-	 * 
-	 * @return VString - list of all PipePartIDKeys
-	 * @deprecated
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@Deprecated
-	public VString getPipePartIDKeys()
-	{
-		final VString vPipePartIDKeys = new VString();
-		final Vector v = getPipePartIDKeysEnum();
-		for (int i = 0; i < v.size(); i++)
-		{
-			vPipePartIDKeys.add(((EnumPartIDKey) v.elementAt(i)).getName());
-		}
-
-		return vPipePartIDKeys;
 	}
 
 	/**

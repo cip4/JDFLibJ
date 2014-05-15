@@ -179,6 +179,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	* Enumeration strings for FeederSynchronization
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFeederSynchronization extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,9 +232,13 @@ public abstract class JDFAutoFeeder extends JDFElement
 			return iterator(EnumFeederSynchronization.class);
 		}
 
+		/**  */
 		public static final EnumFeederSynchronization Alternate = new EnumFeederSynchronization("Alternate");
+		/**  */
 		public static final EnumFeederSynchronization Backup = new EnumFeederSynchronization("Backup");
+		/**  */
 		public static final EnumFeederSynchronization Chain = new EnumFeederSynchronization("Chain");
+		/**  */
 		public static final EnumFeederSynchronization Primary = new EnumFeederSynchronization("Primary");
 	}
 
@@ -241,6 +246,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	* Enumeration strings for Opening
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOpening extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -293,9 +299,13 @@ public abstract class JDFAutoFeeder extends JDFElement
 			return iterator(EnumOpening.class);
 		}
 
+		/**  */
 		public static final EnumOpening Back = new EnumOpening("Back");
+		/**  */
 		public static final EnumOpening Front = new EnumOpening("Front");
+		/**  */
 		public static final EnumOpening None = new EnumOpening("None");
+		/**  */
 		public static final EnumOpening Sucker = new EnumOpening("Sucker");
 	}
 

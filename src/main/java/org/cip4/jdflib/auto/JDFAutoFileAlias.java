@@ -173,6 +173,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	* Enumeration strings for Disposition
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDisposition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,8 +226,11 @@ public abstract class JDFAutoFileAlias extends JDFElement
 			return iterator(EnumDisposition.class);
 		}
 
+		/**  */
 		public static final EnumDisposition Unlink = new EnumDisposition("Unlink");
+		/**  */
 		public static final EnumDisposition Delete = new EnumDisposition("Delete");
+		/**  */
 		public static final EnumDisposition Retain = new EnumDisposition("Retain");
 	}
 

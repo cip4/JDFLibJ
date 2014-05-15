@@ -175,6 +175,7 @@ public abstract class JDFAutoAction extends JDFElement
 	* Enumeration strings for Severity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSeverity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,8 +228,11 @@ public abstract class JDFAutoAction extends JDFElement
 			return iterator(EnumSeverity.class);
 		}
 
+		/**  */
 		public static final EnumSeverity Error = new EnumSeverity("Error");
+		/**  */
 		public static final EnumSeverity Warning = new EnumSeverity("Warning");
+		/**  */
 		public static final EnumSeverity Information = new EnumSeverity("Information");
 	}
 

@@ -176,6 +176,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	* Enumeration strings for ListType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumListType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -228,19 +229,33 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 			return iterator(EnumListType.class);
 		}
 
+		/**  */
 		public static final EnumListType CompleteList = new EnumListType("CompleteList");
+		/**  */
 		public static final EnumListType CompleteOrderedList = new EnumListType("CompleteOrderedList");
+		/**  */
 		public static final EnumListType ContainedList = new EnumListType("ContainedList");
+		/**  */
 		public static final EnumListType List = new EnumListType("List");
+		/**  */
 		public static final EnumListType OrderedList = new EnumListType("OrderedList");
+		/**  */
 		public static final EnumListType OrderedRangeList = new EnumListType("OrderedRangeList");
+		/**  */
 		public static final EnumListType Range = new EnumListType("Range");
+		/**  */
 		public static final EnumListType RangeList = new EnumListType("RangeList");
+		/**  */
 		public static final EnumListType SingleValue = new EnumListType("SingleValue");
+		/**  */
 		public static final EnumListType Span = new EnumListType("Span");
+		/**  */
 		public static final EnumListType UniqueList = new EnumListType("UniqueList");
+		/**  */
 		public static final EnumListType UniqueRangeList = new EnumListType("UniqueRangeList");
+		/**  */
 		public static final EnumListType UniqueOrderedList = new EnumListType("UniqueOrderedList");
+		/**  */
 		public static final EnumListType UniqueOrderedRangeList = new EnumListType("UniqueOrderedRangeList");
 	}
 

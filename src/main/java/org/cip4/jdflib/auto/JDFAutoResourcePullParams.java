@@ -186,6 +186,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	* Enumeration strings for RepeatPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRepeatPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,8 +239,11 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 			return iterator(EnumRepeatPolicy.class);
 		}
 
+		/**  */
 		public static final EnumRepeatPolicy Complete = new EnumRepeatPolicy("Complete");
+		/**  */
 		public static final EnumRepeatPolicy CompleteOnly = new EnumRepeatPolicy("CompleteOnly");
+		/**  */
 		public static final EnumRepeatPolicy Fast = new EnumRepeatPolicy("Fast");
 	}
 

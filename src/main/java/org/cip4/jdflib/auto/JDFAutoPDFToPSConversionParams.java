@@ -208,6 +208,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeBaseFonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeBaseFonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -260,8 +261,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeBaseFonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeBaseFonts IncludeNever = new EnumIncludeBaseFonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeBaseFonts IncludeOncePerDoc = new EnumIncludeBaseFonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeBaseFonts IncludeOncePerPage = new EnumIncludeBaseFonts("IncludeOncePerPage");
 	}
 
@@ -269,6 +273,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeCIDFonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeCIDFonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -321,8 +326,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeCIDFonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeCIDFonts IncludeNever = new EnumIncludeCIDFonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeCIDFonts IncludeOncePerDoc = new EnumIncludeCIDFonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeCIDFonts IncludeOncePerPage = new EnumIncludeCIDFonts("IncludeOncePerPage");
 	}
 
@@ -330,6 +338,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeEmbeddedFonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeEmbeddedFonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -382,8 +391,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeEmbeddedFonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeEmbeddedFonts IncludeNever = new EnumIncludeEmbeddedFonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeEmbeddedFonts IncludeOncePerDoc = new EnumIncludeEmbeddedFonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeEmbeddedFonts IncludeOncePerPage = new EnumIncludeEmbeddedFonts("IncludeOncePerPage");
 	}
 
@@ -391,6 +403,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeOtherResources
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeOtherResources extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -443,8 +456,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeOtherResources.class);
 		}
 
+		/**  */
 		public static final EnumIncludeOtherResources IncludeNever = new EnumIncludeOtherResources("IncludeNever");
+		/**  */
 		public static final EnumIncludeOtherResources IncludeOncePerDoc = new EnumIncludeOtherResources("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeOtherResources IncludeOncePerPage = new EnumIncludeOtherResources("IncludeOncePerPage");
 	}
 
@@ -452,6 +468,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeProcSets
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeProcSets extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -504,8 +521,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeProcSets.class);
 		}
 
+		/**  */
 		public static final EnumIncludeProcSets IncludeNever = new EnumIncludeProcSets("IncludeNever");
+		/**  */
 		public static final EnumIncludeProcSets IncludeOncePerDoc = new EnumIncludeProcSets("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeProcSets IncludeOncePerPage = new EnumIncludeProcSets("IncludeOncePerPage");
 	}
 
@@ -513,6 +533,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeTrueTypeFonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeTrueTypeFonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -565,8 +586,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeTrueTypeFonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeTrueTypeFonts IncludeNever = new EnumIncludeTrueTypeFonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeTrueTypeFonts IncludeOncePerDoc = new EnumIncludeTrueTypeFonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeTrueTypeFonts IncludeOncePerPage = new EnumIncludeTrueTypeFonts("IncludeOncePerPage");
 	}
 
@@ -574,6 +598,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeType1Fonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeType1Fonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -626,8 +651,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeType1Fonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeType1Fonts IncludeNever = new EnumIncludeType1Fonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeType1Fonts IncludeOncePerDoc = new EnumIncludeType1Fonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeType1Fonts IncludeOncePerPage = new EnumIncludeType1Fonts("IncludeOncePerPage");
 	}
 
@@ -635,6 +663,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for IncludeType3Fonts
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeType3Fonts extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -687,8 +716,11 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumIncludeType3Fonts.class);
 		}
 
+		/**  */
 		public static final EnumIncludeType3Fonts IncludeNever = new EnumIncludeType3Fonts("IncludeNever");
+		/**  */
 		public static final EnumIncludeType3Fonts IncludeOncePerDoc = new EnumIncludeType3Fonts("IncludeOncePerDoc");
+		/**  */
 		public static final EnumIncludeType3Fonts IncludeOncePerPage = new EnumIncludeType3Fonts("IncludeOncePerPage");
 	}
 
@@ -696,6 +728,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	* Enumeration strings for OutputType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOutputType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -748,7 +781,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 			return iterator(EnumOutputType.class);
 		}
 
+		/**  */
 		public static final EnumOutputType PostScript = new EnumOutputType("PostScript");
+		/**  */
 		public static final EnumOutputType EPS = new EnumOutputType("EPS");
 	}
 

@@ -188,9 +188,156 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
+	* Enumeration strings for MinLateStatus
+	*/
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumMinLateStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumMinLateStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMinLateStatus getEnum(String enumName)
+		{
+			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMinLateStatus getEnum(int enumValue)
+		{
+			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMinLateStatus.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMinLateStatus.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMinLateStatus.class);
+		}
+
+		/**  */
+		public static final EnumMinLateStatus Incomplete = new EnumMinLateStatus("Incomplete");
+		/**  */
+		public static final EnumMinLateStatus Rejected = new EnumMinLateStatus("Rejected");
+		/**  */
+		public static final EnumMinLateStatus Unavailable = new EnumMinLateStatus("Unavailable");
+		/**  */
+		public static final EnumMinLateStatus InUse = new EnumMinLateStatus("InUse");
+		/**  */
+		public static final EnumMinLateStatus Draft = new EnumMinLateStatus("Draft");
+		/**  */
+		public static final EnumMinLateStatus Complete = new EnumMinLateStatus("Complete");
+		/**  */
+		public static final EnumMinLateStatus Available = new EnumMinLateStatus("Available");
+	}
+
+	/**
+	* Enumeration strings for MinStatus
+	*/
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumMinStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumMinStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMinStatus getEnum(String enumName)
+		{
+			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMinStatus getEnum(int enumValue)
+		{
+			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMinStatus.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMinStatus.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMinStatus.class);
+		}
+
+		/**  */
+		public static final EnumMinStatus Incomplete = new EnumMinStatus("Incomplete");
+		/**  */
+		public static final EnumMinStatus Rejected = new EnumMinStatus("Rejected");
+		/**  */
+		public static final EnumMinStatus Unavailable = new EnumMinStatus("Unavailable");
+		/**  */
+		public static final EnumMinStatus InUse = new EnumMinStatus("InUse");
+		/**  */
+		public static final EnumMinStatus Draft = new EnumMinStatus("Draft");
+		/**  */
+		public static final EnumMinStatus Complete = new EnumMinStatus("Complete");
+		/**  */
+		public static final EnumMinStatus Available = new EnumMinStatus("Available");
+	}
+
+	/**
 	* Enumeration strings for Orientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -243,13 +390,21 @@ public abstract class JDFAutoPartAmount extends JDFElement
 			return iterator(EnumOrientation.class);
 		}
 
+		/**  */
 		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		/**  */
 		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		/**  */
 		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		/**  */
 		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		/**  */
 		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		/**  */
 		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		/**  */
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 

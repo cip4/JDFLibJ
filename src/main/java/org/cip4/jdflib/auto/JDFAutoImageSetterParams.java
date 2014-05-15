@@ -210,6 +210,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	* Enumeration strings for MirrorAround
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorAround extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -262,9 +263,13 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 			return iterator(EnumMirrorAround.class);
 		}
 
+		/**  */
 		public static final EnumMirrorAround None = new EnumMirrorAround("None");
+		/**  */
 		public static final EnumMirrorAround FeedDirection = new EnumMirrorAround("FeedDirection");
+		/**  */
 		public static final EnumMirrorAround MediaWidth = new EnumMirrorAround("MediaWidth");
+		/**  */
 		public static final EnumMirrorAround Both = new EnumMirrorAround("Both");
 	}
 
@@ -272,6 +277,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	* Enumeration strings for Polarity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -324,7 +330,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 			return iterator(EnumPolarity.class);
 		}
 
+		/**  */
 		public static final EnumPolarity Positive = new EnumPolarity("Positive");
+		/**  */
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
 	}
 
@@ -332,6 +340,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -384,10 +393,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSidedBackFlipX = new EnumSides("OneSidedBackFlipX");
+		/**  */
 		public static final EnumSides OneSidedBackFlipY = new EnumSides("OneSidedBackFlipY");
+		/**  */
 		public static final EnumSides OneSidedFront = new EnumSides("OneSidedFront");
+		/**  */
 		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
+		/**  */
 		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
 	}
 
@@ -395,6 +409,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	* Enumeration strings for CenterAcross
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCenterAcross extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -447,9 +462,13 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 			return iterator(EnumCenterAcross.class);
 		}
 
+		/**  */
 		public static final EnumCenterAcross None = new EnumCenterAcross("None");
+		/**  */
 		public static final EnumCenterAcross FeedDirection = new EnumCenterAcross("FeedDirection");
+		/**  */
 		public static final EnumCenterAcross MediaWidth = new EnumCenterAcross("MediaWidth");
+		/**  */
 		public static final EnumCenterAcross Both = new EnumCenterAcross("Both");
 	}
 
@@ -457,6 +476,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	* Enumeration strings for SourceWorkStyle
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceWorkStyle extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -509,11 +529,17 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 			return iterator(EnumSourceWorkStyle.class);
 		}
 
+		/**  */
 		public static final EnumSourceWorkStyle Simplex = new EnumSourceWorkStyle("Simplex");
+		/**  */
 		public static final EnumSourceWorkStyle Perfecting = new EnumSourceWorkStyle("Perfecting");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndBack = new EnumSourceWorkStyle("WorkAndBack");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTurn = new EnumSourceWorkStyle("WorkAndTurn");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
 	}
 

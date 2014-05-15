@@ -198,6 +198,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	* Enumeration strings for StripMaterial
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStripMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -250,12 +251,19 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 			return iterator(EnumStripMaterial.class);
 		}
 
+		/**  */
 		public static final EnumStripMaterial Calico = new EnumStripMaterial("Calico");
+		/**  */
 		public static final EnumStripMaterial Cardboard = new EnumStripMaterial("Cardboard");
+		/**  */
 		public static final EnumStripMaterial CrepePaper = new EnumStripMaterial("CrepePaper");
+		/**  */
 		public static final EnumStripMaterial Gauze = new EnumStripMaterial("Gauze");
+		/**  */
 		public static final EnumStripMaterial Paper = new EnumStripMaterial("Paper");
+		/**  */
 		public static final EnumStripMaterial PaperlinedMules = new EnumStripMaterial("PaperlinedMules");
+		/**  */
 		public static final EnumStripMaterial Tape = new EnumStripMaterial("Tape");
 	}
 

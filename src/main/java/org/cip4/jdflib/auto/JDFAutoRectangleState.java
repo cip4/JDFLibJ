@@ -190,6 +190,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	* Enumeration strings for AllowedHWRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedHWRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -242,11 +243,17 @@ public abstract class JDFAutoRectangleState extends JDFResource
 			return iterator(EnumAllowedHWRelation.class);
 		}
 
+		/**  */
 		public static final EnumAllowedHWRelation gt = new EnumAllowedHWRelation("gt");
+		/**  */
 		public static final EnumAllowedHWRelation ge = new EnumAllowedHWRelation("ge");
+		/**  */
 		public static final EnumAllowedHWRelation eq = new EnumAllowedHWRelation("eq");
+		/**  */
 		public static final EnumAllowedHWRelation le = new EnumAllowedHWRelation("le");
+		/**  */
 		public static final EnumAllowedHWRelation lt = new EnumAllowedHWRelation("lt");
+		/**  */
 		public static final EnumAllowedHWRelation ne = new EnumAllowedHWRelation("ne");
 	}
 
@@ -254,6 +261,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	* Enumeration strings for PresentHWRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPresentHWRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -306,11 +314,17 @@ public abstract class JDFAutoRectangleState extends JDFResource
 			return iterator(EnumPresentHWRelation.class);
 		}
 
+		/**  */
 		public static final EnumPresentHWRelation gt = new EnumPresentHWRelation("gt");
+		/**  */
 		public static final EnumPresentHWRelation ge = new EnumPresentHWRelation("ge");
+		/**  */
 		public static final EnumPresentHWRelation eq = new EnumPresentHWRelation("eq");
+		/**  */
 		public static final EnumPresentHWRelation le = new EnumPresentHWRelation("le");
+		/**  */
 		public static final EnumPresentHWRelation lt = new EnumPresentHWRelation("lt");
+		/**  */
 		public static final EnumPresentHWRelation ne = new EnumPresentHWRelation("ne");
 	}
 

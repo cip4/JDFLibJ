@@ -153,6 +153,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	* Enumeration strings for Context
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumContext extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -205,20 +206,35 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 			return iterator(EnumContext.class);
 		}
 
+		/**  */
 		public static final EnumContext CollectIndex = new EnumContext("CollectIndex");
+		/**  */
 		public static final EnumContext DocIndex = new EnumContext("DocIndex");
+		/**  */
 		public static final EnumContext SetDocIndex = new EnumContext("SetDocIndex");
+		/**  */
 		public static final EnumContext SetIndex = new EnumContext("SetIndex");
+		/**  */
 		public static final EnumContext SheetIndex = new EnumContext("SheetIndex");
+		/**  */
 		public static final EnumContext SubDocIndex0 = new EnumContext("SubDocIndex0");
+		/**  */
 		public static final EnumContext SubDocIndex1 = new EnumContext("SubDocIndex1");
+		/**  */
 		public static final EnumContext SubDocIndex2 = new EnumContext("SubDocIndex2");
+		/**  */
 		public static final EnumContext SubDocIndex3 = new EnumContext("SubDocIndex3");
+		/**  */
 		public static final EnumContext SubDocIndex4 = new EnumContext("SubDocIndex4");
+		/**  */
 		public static final EnumContext SubDocIndex5 = new EnumContext("SubDocIndex5");
+		/**  */
 		public static final EnumContext SubDocIndex6 = new EnumContext("SubDocIndex6");
+		/**  */
 		public static final EnumContext SubDocIndex7 = new EnumContext("SubDocIndex7");
+		/**  */
 		public static final EnumContext SubDocIndex8 = new EnumContext("SubDocIndex8");
+		/**  */
 		public static final EnumContext SubDocIndex9 = new EnumContext("SubDocIndex9");
 	}
 

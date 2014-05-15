@@ -180,6 +180,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	* Enumeration strings for SourceObjects
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceObjects extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -232,11 +233,17 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 			return iterator(EnumSourceObjects.class);
 		}
 
+		/**  */
 		public static final EnumSourceObjects All = new EnumSourceObjects("All");
+		/**  */
 		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
+		/**  */
 		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
+		/**  */
 		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
+		/**  */
 		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
+		/**  */
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
@@ -252,7 +259,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	  * (5.2) set attribute SourceObjects
 	  * @param v vector of the enumeration values
 	  */
-	public void setSourceObjects(Vector v)
+	public void setSourceObjects(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -261,7 +268,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	  * (9.2) get SourceObjects attribute SourceObjects
 	  * @return Vector of the enumerations
 	  */
-	public Vector getSourceObjects()
+	public Vector<? extends ValuedEnum> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}

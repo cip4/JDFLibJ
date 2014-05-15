@@ -179,6 +179,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	* Enumeration strings for GangPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGangPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,8 +232,11 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 			return iterator(EnumGangPolicy.class);
 		}
 
+		/**  */
 		public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
+		/**  */
 		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
+		/**  */
 		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
 	}
 

@@ -156,6 +156,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	* Enumeration strings for CombinedMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCombinedMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -208,10 +209,15 @@ public abstract class JDFAutoJDFService extends JDFElement
 			return iterator(EnumCombinedMethod.class);
 		}
 
+		/**  */
 		public static final EnumCombinedMethod Combined = new EnumCombinedMethod("Combined");
+		/**  */
 		public static final EnumCombinedMethod CombinedProcessGroup = new EnumCombinedMethod("CombinedProcessGroup");
+		/**  */
 		public static final EnumCombinedMethod GrayBox = new EnumCombinedMethod("GrayBox");
+		/**  */
 		public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
+		/**  */
 		public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
 	}
 
@@ -219,6 +225,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	* Enumeration strings for TypeOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTypeOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -271,8 +278,11 @@ public abstract class JDFAutoJDFService extends JDFElement
 			return iterator(EnumTypeOrder.class);
 		}
 
+		/**  */
 		public static final EnumTypeOrder Fixed = new EnumTypeOrder("Fixed");
+		/**  */
 		public static final EnumTypeOrder Unordered = new EnumTypeOrder("Unordered");
+		/**  */
 		public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
 	}
 

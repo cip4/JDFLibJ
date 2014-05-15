@@ -164,6 +164,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	* Enumeration strings for PDFXTrapped
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPDFXTrapped extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -216,8 +217,11 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 			return iterator(EnumPDFXTrapped.class);
 		}
 
+		/**  */
 		public static final EnumPDFXTrapped Unknown = new EnumPDFXTrapped("Unknown");
+		/**  */
 		public static final EnumPDFXTrapped True = new EnumPDFXTrapped("True");
+		/**  */
 		public static final EnumPDFXTrapped False = new EnumPDFXTrapped("False");
 	}
 

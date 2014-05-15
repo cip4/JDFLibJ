@@ -167,6 +167,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	* Enumeration strings for TransferFunctionInfo
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTransferFunctionInfo extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -219,8 +220,11 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 			return iterator(EnumTransferFunctionInfo.class);
 		}
 
+		/**  */
 		public static final EnumTransferFunctionInfo Preserve = new EnumTransferFunctionInfo("Preserve");
+		/**  */
 		public static final EnumTransferFunctionInfo Remove = new EnumTransferFunctionInfo("Remove");
+		/**  */
 		public static final EnumTransferFunctionInfo Apply = new EnumTransferFunctionInfo("Apply");
 	}
 
@@ -228,6 +232,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	* Enumeration strings for UCRandBGInfo
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumUCRandBGInfo extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -280,7 +285,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 			return iterator(EnumUCRandBGInfo.class);
 		}
 
+		/**  */
 		public static final EnumUCRandBGInfo Preserve = new EnumUCRandBGInfo("Preserve");
+		/**  */
 		public static final EnumUCRandBGInfo Remove = new EnumUCRandBGInfo("Remove");
 	}
 

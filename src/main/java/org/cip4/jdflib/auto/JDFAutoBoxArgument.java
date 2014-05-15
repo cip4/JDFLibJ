@@ -155,6 +155,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	* Enumeration strings for Box
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBox extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,12 +208,19 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 			return iterator(EnumBox.class);
 		}
 
+		/**  */
 		public static final EnumBox ArtBox = new EnumBox("ArtBox");
+		/**  */
 		public static final EnumBox BleedBox = new EnumBox("BleedBox");
+		/**  */
 		public static final EnumBox CropBox = new EnumBox("CropBox");
+		/**  */
 		public static final EnumBox MarginsBox = new EnumBox("MarginsBox");
+		/**  */
 		public static final EnumBox MediaBox = new EnumBox("MediaBox");
+		/**  */
 		public static final EnumBox SlugBox = new EnumBox("SlugBox");
+		/**  */
 		public static final EnumBox TrimBox = new EnumBox("TrimBox");
 	}
 
@@ -220,6 +228,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	* Enumeration strings for MirrorMargins
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorMargins extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -272,7 +281,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 			return iterator(EnumMirrorMargins.class);
 		}
 
+		/**  */
 		public static final EnumMirrorMargins Vertical = new EnumMirrorMargins("Vertical");
+		/**  */
 		public static final EnumMirrorMargins Horizontal = new EnumMirrorMargins("Horizontal");
 	}
 

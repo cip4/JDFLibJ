@@ -172,6 +172,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	* Enumeration strings for DueLevel
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDueLevel extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,9 +225,13 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 			return iterator(EnumDueLevel.class);
 		}
 
+		/**  */
 		public static final EnumDueLevel Unknown = new EnumDueLevel("Unknown");
+		/**  */
 		public static final EnumDueLevel Trivial = new EnumDueLevel("Trivial");
+		/**  */
 		public static final EnumDueLevel Penalty = new EnumDueLevel("Penalty");
+		/**  */
 		public static final EnumDueLevel JobCancelled = new EnumDueLevel("JobCancelled");
 	}
 

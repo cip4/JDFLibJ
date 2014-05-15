@@ -223,6 +223,7 @@ public abstract class JDFAutoColor extends JDFResource
 	* Enumeration strings for MappingSelection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMappingSelection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -275,8 +276,11 @@ public abstract class JDFAutoColor extends JDFResource
 			return iterator(EnumMappingSelection.class);
 		}
 
+		/**  */
 		public static final EnumMappingSelection UsePDLValues = new EnumMappingSelection("UsePDLValues");
+		/**  */
 		public static final EnumMappingSelection UseLocalPrinterValues = new EnumMappingSelection("UseLocalPrinterValues");
+		/**  */
 		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
 	}
 
@@ -284,6 +288,7 @@ public abstract class JDFAutoColor extends JDFResource
 	* Enumeration strings for ColorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumColorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -336,10 +341,15 @@ public abstract class JDFAutoColor extends JDFResource
 			return iterator(EnumColorType.class);
 		}
 
+		/**  */
 		public static final EnumColorType DieLine = new EnumColorType("DieLine");
+		/**  */
 		public static final EnumColorType Normal = new EnumColorType("Normal");
+		/**  */
 		public static final EnumColorType Transparent = new EnumColorType("Transparent");
+		/**  */
 		public static final EnumColorType Opaque = new EnumColorType("Opaque");
+		/**  */
 		public static final EnumColorType OpaqueIgnore = new EnumColorType("OpaqueIgnore");
 	}
 

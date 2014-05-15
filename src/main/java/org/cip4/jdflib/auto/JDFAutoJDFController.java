@@ -154,6 +154,7 @@ public abstract class JDFAutoJDFController extends JDFElement
 	* Enumeration strings for URLType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumURLType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,10 +207,15 @@ public abstract class JDFAutoJDFController extends JDFElement
 			return iterator(EnumURLType.class);
 		}
 
+		/**  */
 		public static final EnumURLType JDFError = new EnumURLType("JDFError");
+		/**  */
 		public static final EnumURLType JDFInput = new EnumURLType("JDFInput");
+		/**  */
 		public static final EnumURLType JDFOutput = new EnumURLType("JDFOutput");
+		/**  */
 		public static final EnumURLType JMF = new EnumURLType("JMF");
+		/**  */
 		public static final EnumURLType SecureJMF = new EnumURLType("SecureJMF");
 	}
 

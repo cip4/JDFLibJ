@@ -182,6 +182,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	* Enumeration strings for Rotate
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRotate extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -234,9 +235,13 @@ public abstract class JDFAutoPageCell extends JDFElement
 			return iterator(EnumRotate.class);
 		}
 
+		/**  */
 		public static final EnumRotate Rotate0 = new EnumRotate("Rotate0");
+		/**  */
 		public static final EnumRotate Rotate90 = new EnumRotate("Rotate90");
+		/**  */
 		public static final EnumRotate Rotate180 = new EnumRotate("Rotate180");
+		/**  */
 		public static final EnumRotate Rotate270 = new EnumRotate("Rotate270");
 	}
 

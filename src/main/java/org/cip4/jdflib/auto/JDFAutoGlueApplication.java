@@ -188,6 +188,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	* Enumeration strings for GluingTechnique
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGluingTechnique extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -240,8 +241,11 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 			return iterator(EnumGluingTechnique.class);
 		}
 
+		/**  */
 		public static final EnumGluingTechnique SpineGluing = new EnumGluingTechnique("SpineGluing");
+		/**  */
 		public static final EnumGluingTechnique SideGluingFront = new EnumGluingTechnique("SideGluingFront");
+		/**  */
 		public static final EnumGluingTechnique SideGluingBack = new EnumGluingTechnique("SideGluingBack");
 	}
 

@@ -178,6 +178,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	* Enumeration strings for Anchor
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -230,14 +231,23 @@ public abstract class JDFAutoPositionObj extends JDFElement
 			return iterator(EnumAnchor.class);
 		}
 
+		/**  */
 		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+		/**  */
 		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+		/**  */
 		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+		/**  */
 		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+		/**  */
 		public static final EnumAnchor Center = new EnumAnchor("Center");
+		/**  */
 		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+		/**  */
 		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+		/**  */
 		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+		/**  */
 		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 
@@ -245,6 +255,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	* Enumeration strings for PositionPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPositionPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -297,7 +308,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 			return iterator(EnumPositionPolicy.class);
 		}
 
+		/**  */
 		public static final EnumPositionPolicy Exact = new EnumPositionPolicy("Exact");
+		/**  */
 		public static final EnumPositionPolicy Free = new EnumPositionPolicy("Free");
 	}
 
@@ -305,6 +318,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	* Enumeration strings for RotationPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRotationPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -357,7 +371,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 			return iterator(EnumRotationPolicy.class);
 		}
 
+		/**  */
 		public static final EnumRotationPolicy Exact = new EnumRotationPolicy("Exact");
+		/**  */
 		public static final EnumRotationPolicy Free = new EnumRotationPolicy("Free");
 	}
 
@@ -365,6 +381,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	* Enumeration strings for SizePolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSizePolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -417,7 +434,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 			return iterator(EnumSizePolicy.class);
 		}
 
+		/**  */
 		public static final EnumSizePolicy Exact = new EnumSizePolicy("Exact");
+		/**  */
 		public static final EnumSizePolicy Free = new EnumSizePolicy("Free");
 	}
 

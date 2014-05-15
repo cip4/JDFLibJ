@@ -193,6 +193,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	* Enumeration strings for DigitalDeliveryDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDigitalDeliveryDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -245,7 +246,9 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 			return iterator(EnumDigitalDeliveryDirection.class);
 		}
 
+		/**  */
 		public static final EnumDigitalDeliveryDirection Push = new EnumDigitalDeliveryDirection("Push");
+		/**  */
 		public static final EnumDigitalDeliveryDirection Pull = new EnumDigitalDeliveryDirection("Pull");
 	}
 

@@ -192,6 +192,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	* Enumeration strings for PreflightStatus
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreflightStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -244,9 +245,13 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 			return iterator(EnumPreflightStatus.class);
 		}
 
+		/**  */
 		public static final EnumPreflightStatus NotPerformed = new EnumPreflightStatus("NotPerformed");
+		/**  */
 		public static final EnumPreflightStatus WithErrors = new EnumPreflightStatus("WithErrors");
+		/**  */
 		public static final EnumPreflightStatus WithWarnings = new EnumPreflightStatus("WithWarnings");
+		/**  */
 		public static final EnumPreflightStatus WithoutErrors = new EnumPreflightStatus("WithoutErrors");
 	}
 

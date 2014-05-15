@@ -177,6 +177,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	* Enumeration strings for UpdateMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumUpdateMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -229,8 +230,11 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 			return iterator(EnumUpdateMethod.class);
 		}
 
+		/**  */
 		public static final EnumUpdateMethod Complete = new EnumUpdateMethod("Complete");
+		/**  */
 		public static final EnumUpdateMethod Incremental = new EnumUpdateMethod("Incremental");
+		/**  */
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
 	}
 

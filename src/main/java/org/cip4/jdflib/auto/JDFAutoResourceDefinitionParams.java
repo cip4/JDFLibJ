@@ -193,6 +193,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	* Enumeration strings for DefaultPriority
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDefaultPriority extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -245,7 +246,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 			return iterator(EnumDefaultPriority.class);
 		}
 
+		/**  */
 		public static final EnumDefaultPriority Application = new EnumDefaultPriority("Application");
+		/**  */
 		public static final EnumDefaultPriority DefaultJDF = new EnumDefaultPriority("DefaultJDF");
 	}
 

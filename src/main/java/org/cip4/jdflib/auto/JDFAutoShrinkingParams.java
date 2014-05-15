@@ -174,6 +174,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	* Enumeration strings for ShrinkingMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShrinkingMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -226,7 +227,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 			return iterator(EnumShrinkingMethod.class);
 		}
 
+		/**  */
 		public static final EnumShrinkingMethod ShrinkCool = new EnumShrinkingMethod("ShrinkCool");
+		/**  */
 		public static final EnumShrinkingMethod ShrinkHot = new EnumShrinkingMethod("ShrinkHot");
 	}
 

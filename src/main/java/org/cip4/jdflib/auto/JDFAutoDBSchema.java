@@ -171,6 +171,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	* Enumeration strings for DBSchemaType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDBSchemaType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,8 +224,11 @@ public abstract class JDFAutoDBSchema extends JDFResource
 			return iterator(EnumDBSchemaType.class);
 		}
 
+		/**  */
 		public static final EnumDBSchemaType CommaDelimited = new EnumDBSchemaType("CommaDelimited");
+		/**  */
 		public static final EnumDBSchemaType SQL = new EnumDBSchemaType("SQL");
+		/**  */
 		public static final EnumDBSchemaType XML = new EnumDBSchemaType("XML");
 	}
 

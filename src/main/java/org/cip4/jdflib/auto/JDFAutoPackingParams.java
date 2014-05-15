@@ -186,6 +186,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	* Enumeration strings for PalletWrapping
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPalletWrapping extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,8 +239,11 @@ public abstract class JDFAutoPackingParams extends JDFResource
 			return iterator(EnumPalletWrapping.class);
 		}
 
+		/**  */
 		public static final EnumPalletWrapping StretchWrap = new EnumPalletWrapping("StretchWrap");
+		/**  */
 		public static final EnumPalletWrapping Banding = new EnumPalletWrapping("Banding");
+		/**  */
 		public static final EnumPalletWrapping None = new EnumPalletWrapping("None");
 	}
 
@@ -247,6 +251,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	* Enumeration strings for PalletType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPalletType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -299,8 +304,11 @@ public abstract class JDFAutoPackingParams extends JDFResource
 			return iterator(EnumPalletType.class);
 		}
 
+		/**  */
 		public static final EnumPalletType PalletType_2Way = new EnumPalletType("2Way");
+		/**  */
 		public static final EnumPalletType PalletType_4Way = new EnumPalletType("4Way");
+		/**  */
 		public static final EnumPalletType Euro = new EnumPalletType("Euro");
 	}
 

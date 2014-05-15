@@ -157,6 +157,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	* Enumeration strings for TabEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTabEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -209,9 +210,13 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 			return iterator(EnumTabEdge.class);
 		}
 
+		/**  */
 		public static final EnumTabEdge Left = new EnumTabEdge("Left");
+		/**  */
 		public static final EnumTabEdge Rigth = new EnumTabEdge("Rigth");
+		/**  */
 		public static final EnumTabEdge Top = new EnumTabEdge("Top");
+		/**  */
 		public static final EnumTabEdge Bottom = new EnumTabEdge("Bottom");
 	}
 

@@ -154,6 +154,7 @@ public abstract class JDFAutoFold extends JDFElement
 	* Enumeration strings for From
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFrom extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,7 +207,9 @@ public abstract class JDFAutoFold extends JDFElement
 			return iterator(EnumFrom.class);
 		}
 
+		/**  */
 		public static final EnumFrom Front = new EnumFrom("Front");
+		/**  */
 		public static final EnumFrom Left = new EnumFrom("Left");
 	}
 
@@ -214,6 +217,7 @@ public abstract class JDFAutoFold extends JDFElement
 	* Enumeration strings for To
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTo extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -266,7 +270,9 @@ public abstract class JDFAutoFold extends JDFElement
 			return iterator(EnumTo.class);
 		}
 
+		/**  */
 		public static final EnumTo Up = new EnumTo("Up");
+		/**  */
 		public static final EnumTo Down = new EnumTo("Down");
 	}
 

@@ -203,6 +203,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	* Enumeration strings for PreStackMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreStackMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -255,8 +256,11 @@ public abstract class JDFAutoStackingParams extends JDFResource
 			return iterator(EnumPreStackMethod.class);
 		}
 
+		/**  */
 		public static final EnumPreStackMethod All = new EnumPreStackMethod("All");
+		/**  */
 		public static final EnumPreStackMethod First = new EnumPreStackMethod("First");
+		/**  */
 		public static final EnumPreStackMethod None = new EnumPreStackMethod("None");
 	}
 

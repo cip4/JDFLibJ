@@ -196,6 +196,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	* Enumeration strings for MarkUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMarkUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -248,8 +249,11 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 			return iterator(EnumMarkUsage.class);
 		}
 
+		/**  */
 		public static final EnumMarkUsage Color = new EnumMarkUsage("Color");
+		/**  */
 		public static final EnumMarkUsage PaperPath = new EnumMarkUsage("PaperPath");
+		/**  */
 		public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
 	}
 

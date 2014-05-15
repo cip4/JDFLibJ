@@ -172,6 +172,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	* Enumeration strings for HoleReferenceEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumHoleReferenceEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,10 +225,15 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 			return iterator(EnumHoleReferenceEdge.class);
 		}
 
+		/**  */
 		public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
+		/**  */
 		public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
+		/**  */
 		public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
+		/**  */
 		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
+		/**  */
 		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
 	}
 

@@ -211,6 +211,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	* Enumeration strings for ImageTrapPlacement
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumImageTrapPlacement extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -263,9 +264,13 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 			return iterator(EnumImageTrapPlacement.class);
 		}
 
+		/**  */
 		public static final EnumImageTrapPlacement Center = new EnumImageTrapPlacement("Center");
+		/**  */
 		public static final EnumImageTrapPlacement Choke = new EnumImageTrapPlacement("Choke");
+		/**  */
 		public static final EnumImageTrapPlacement Normal = new EnumImageTrapPlacement("Normal");
+		/**  */
 		public static final EnumImageTrapPlacement Spread = new EnumImageTrapPlacement("Spread");
 	}
 

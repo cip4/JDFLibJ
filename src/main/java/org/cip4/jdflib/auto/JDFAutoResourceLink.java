@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -136,7 +137,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		atrInfoTable[21] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable[22] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[23] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[24] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
+		atrInfoTable[24] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
 		atrInfoTable[25] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
 	}
 
@@ -202,9 +203,156 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	}
 
 	/**
+	* Enumeration strings for MinLateStatus
+	*/
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumMinLateStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumMinLateStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMinLateStatus getEnum(String enumName)
+		{
+			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMinLateStatus getEnum(int enumValue)
+		{
+			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMinLateStatus.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMinLateStatus.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMinLateStatus.class);
+		}
+
+		/**  */
+		public static final EnumMinLateStatus Incomplete = new EnumMinLateStatus("Incomplete");
+		/**  */
+		public static final EnumMinLateStatus Rejected = new EnumMinLateStatus("Rejected");
+		/**  */
+		public static final EnumMinLateStatus Unavailable = new EnumMinLateStatus("Unavailable");
+		/**  */
+		public static final EnumMinLateStatus InUse = new EnumMinLateStatus("InUse");
+		/**  */
+		public static final EnumMinLateStatus Draft = new EnumMinLateStatus("Draft");
+		/**  */
+		public static final EnumMinLateStatus Complete = new EnumMinLateStatus("Complete");
+		/**  */
+		public static final EnumMinLateStatus Available = new EnumMinLateStatus("Available");
+	}
+
+	/**
+	* Enumeration strings for MinStatus
+	*/
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumMinStatus extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumMinStatus(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumMinStatus getEnum(String enumName)
+		{
+			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumMinStatus getEnum(int enumValue)
+		{
+			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumMinStatus.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumMinStatus.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumMinStatus.class);
+		}
+
+		/**  */
+		public static final EnumMinStatus Incomplete = new EnumMinStatus("Incomplete");
+		/**  */
+		public static final EnumMinStatus Rejected = new EnumMinStatus("Rejected");
+		/**  */
+		public static final EnumMinStatus Unavailable = new EnumMinStatus("Unavailable");
+		/**  */
+		public static final EnumMinStatus InUse = new EnumMinStatus("InUse");
+		/**  */
+		public static final EnumMinStatus Draft = new EnumMinStatus("Draft");
+		/**  */
+		public static final EnumMinStatus Complete = new EnumMinStatus("Complete");
+		/**  */
+		public static final EnumMinStatus Available = new EnumMinStatus("Available");
+	}
+
+	/**
 	* Enumeration strings for Orientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -257,13 +405,21 @@ public abstract class JDFAutoResourceLink extends JDFElement
 			return iterator(EnumOrientation.class);
 		}
 
+		/**  */
 		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		/**  */
 		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		/**  */
 		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		/**  */
 		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		/**  */
 		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		/**  */
 		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		/**  */
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
@@ -271,6 +427,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	* Enumeration strings for PipePartIDKeys
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPipePartIDKeys extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -323,74 +480,143 @@ public abstract class JDFAutoResourceLink extends JDFElement
 			return iterator(EnumPipePartIDKeys.class);
 		}
 
+		/**  */
 		public static final EnumPipePartIDKeys BinderySignatureName = new EnumPipePartIDKeys("BinderySignatureName");
+		/**  */
 		public static final EnumPipePartIDKeys BinderySignaturePaginationIndex = new EnumPipePartIDKeys("BinderySignaturePaginationIndex");
+		/**  */
 		public static final EnumPipePartIDKeys BlockName = new EnumPipePartIDKeys("BlockName");
+		/**  */
 		public static final EnumPipePartIDKeys BundleItemIndex = new EnumPipePartIDKeys("BundleItemIndex");
+		/**  */
 		public static final EnumPipePartIDKeys CellIndex = new EnumPipePartIDKeys("CellIndex");
+		/**  */
 		public static final EnumPipePartIDKeys Condition = new EnumPipePartIDKeys("Condition");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit0 = new EnumPipePartIDKeys("DeliveryUnit0");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit1 = new EnumPipePartIDKeys("DeliveryUnit1");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit2 = new EnumPipePartIDKeys("DeliveryUnit2");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit3 = new EnumPipePartIDKeys("DeliveryUnit3");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit4 = new EnumPipePartIDKeys("DeliveryUnit4");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit5 = new EnumPipePartIDKeys("DeliveryUnit5");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit6 = new EnumPipePartIDKeys("DeliveryUnit6");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit7 = new EnumPipePartIDKeys("DeliveryUnit7");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit8 = new EnumPipePartIDKeys("DeliveryUnit8");
+		/**  */
 		public static final EnumPipePartIDKeys DeliveryUnit9 = new EnumPipePartIDKeys("DeliveryUnit9");
+		/**  */
 		public static final EnumPipePartIDKeys DocCopies = new EnumPipePartIDKeys("DocCopies");
+		/**  */
 		public static final EnumPipePartIDKeys DocIndex = new EnumPipePartIDKeys("DocIndex");
+		/**  */
 		public static final EnumPipePartIDKeys DocRunIndex = new EnumPipePartIDKeys("DocRunIndex");
+		/**  */
 		public static final EnumPipePartIDKeys DocSheetIndex = new EnumPipePartIDKeys("DocSheetIndex");
+		/**  */
 		public static final EnumPipePartIDKeys DocTags = new EnumPipePartIDKeys("DocTags");
+		/**  */
 		public static final EnumPipePartIDKeys Edition = new EnumPipePartIDKeys("Edition");
+		/**  */
 		public static final EnumPipePartIDKeys EditionVersion = new EnumPipePartIDKeys("EditionVersion");
+		/**  */
 		public static final EnumPipePartIDKeys FountainNumber = new EnumPipePartIDKeys("FountainNumber");
+		/**  */
 		public static final EnumPipePartIDKeys ItemNames = new EnumPipePartIDKeys("ItemNames");
+		/**  */
 		public static final EnumPipePartIDKeys LayerIDs = new EnumPipePartIDKeys("LayerIDs");
+		/**  */
 		public static final EnumPipePartIDKeys Location = new EnumPipePartIDKeys("Location");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata0 = new EnumPipePartIDKeys("Metadata0");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata1 = new EnumPipePartIDKeys("Metadata1");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata2 = new EnumPipePartIDKeys("Metadata2");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata3 = new EnumPipePartIDKeys("Metadata3");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata4 = new EnumPipePartIDKeys("Metadata4");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata5 = new EnumPipePartIDKeys("Metadata5");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata6 = new EnumPipePartIDKeys("Metadata6");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata7 = new EnumPipePartIDKeys("Metadata7");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata8 = new EnumPipePartIDKeys("Metadata8");
+		/**  */
 		public static final EnumPipePartIDKeys Metadata9 = new EnumPipePartIDKeys("Metadata9");
+		/**  */
 		public static final EnumPipePartIDKeys Option = new EnumPipePartIDKeys("Option");
+		/**  */
 		public static final EnumPipePartIDKeys PageNumber = new EnumPipePartIDKeys("PageNumber");
+		/**  */
 		public static final EnumPipePartIDKeys PageTags = new EnumPipePartIDKeys("PageTags");
+		/**  */
 		public static final EnumPipePartIDKeys PlateLayout = new EnumPipePartIDKeys("PlateLayout");
+		/**  */
 		public static final EnumPipePartIDKeys PartVersion = new EnumPipePartIDKeys("PartVersion");
+		/**  */
 		public static final EnumPipePartIDKeys PreflightRule = new EnumPipePartIDKeys("PreflightRule");
+		/**  */
 		public static final EnumPipePartIDKeys ProductPart = new EnumPipePartIDKeys("ProductPart");
+		/**  */
 		public static final EnumPipePartIDKeys PreviewType = new EnumPipePartIDKeys("PreviewType");
+		/**  */
 		public static final EnumPipePartIDKeys RibbonName = new EnumPipePartIDKeys("RibbonName");
+		/**  */
 		public static final EnumPipePartIDKeys Run = new EnumPipePartIDKeys("Run");
+		/**  */
 		public static final EnumPipePartIDKeys RunIndex = new EnumPipePartIDKeys("RunIndex");
+		/**  */
 		public static final EnumPipePartIDKeys RunPage = new EnumPipePartIDKeys("RunPage");
+		/**  */
 		public static final EnumPipePartIDKeys RunTags = new EnumPipePartIDKeys("RunTags");
+		/**  */
 		public static final EnumPipePartIDKeys RunSet = new EnumPipePartIDKeys("RunSet");
+		/**  */
 		public static final EnumPipePartIDKeys SectionIndex = new EnumPipePartIDKeys("SectionIndex");
+		/**  */
 		public static final EnumPipePartIDKeys Separation = new EnumPipePartIDKeys("Separation");
+		/**  */
 		public static final EnumPipePartIDKeys SetCopies = new EnumPipePartIDKeys("SetCopies");
+		/**  */
 		public static final EnumPipePartIDKeys SetDocIndex = new EnumPipePartIDKeys("SetDocIndex");
+		/**  */
 		public static final EnumPipePartIDKeys SetIndex = new EnumPipePartIDKeys("SetIndex");
+		/**  */
 		public static final EnumPipePartIDKeys SetRunIndex = new EnumPipePartIDKeys("SetRunIndex");
+		/**  */
 		public static final EnumPipePartIDKeys SetSheetIndex = new EnumPipePartIDKeys("SetSheetIndex");
+		/**  */
 		public static final EnumPipePartIDKeys SetTags = new EnumPipePartIDKeys("SetTags");
+		/**  */
 		public static final EnumPipePartIDKeys SheetIndex = new EnumPipePartIDKeys("SheetIndex");
+		/**  */
 		public static final EnumPipePartIDKeys SheetName = new EnumPipePartIDKeys("SheetName");
+		/**  */
 		public static final EnumPipePartIDKeys Side = new EnumPipePartIDKeys("Side");
+		/**  */
 		public static final EnumPipePartIDKeys SignatureName = new EnumPipePartIDKeys("SignatureName");
+		/**  */
 		public static final EnumPipePartIDKeys StationName = new EnumPipePartIDKeys("StationName");
+		/**  */
 		public static final EnumPipePartIDKeys SubRun = new EnumPipePartIDKeys("SubRun");
+		/**  */
 		public static final EnumPipePartIDKeys TileID = new EnumPipePartIDKeys("TileID");
+		/**  */
 		public static final EnumPipePartIDKeys WebName = new EnumPipePartIDKeys("WebName");
+		/**  */
 		public static final EnumPipePartIDKeys WebProduct = new EnumPipePartIDKeys("WebProduct");
+		/**  */
 		public static final EnumPipePartIDKeys WebSetup = new EnumPipePartIDKeys("WebSetup");
 	}
 
@@ -460,8 +686,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -526,8 +752,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDuration getDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.DURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -643,7 +869,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  * (5.2) set attribute PipePartIDKeys
 	  * @param v vector of the enumeration values
 	  */
-	public void setPipePartIDKeys(Vector v)
+	public void setPipePartIDKeys(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, v, null);
 	}
@@ -652,7 +878,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  * (9.2) get PipePartIDKeys attribute PipePartIDKeys
 	  * @return Vector of the enumerations
 	  */
-	public Vector getPipePartIDKeys()
+	public Vector<? extends ValuedEnum> getPipePartIDKeys()
 	{
 		return getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPipePartIDKeys.getEnum(0), false);
 	}
@@ -878,7 +1104,9 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	{
 		JDFDate date = value;
 		if (date == null)
+		{
 			date = new JDFDate();
+		}
 		setAttribute(AttributeName.START, date.getDateTimeISO(), null);
 	}
 
@@ -888,8 +1116,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -912,8 +1140,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFDuration getStartOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -957,8 +1185,8 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	  */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 

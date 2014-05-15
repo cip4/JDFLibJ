@@ -174,6 +174,7 @@ public abstract class JDFAutoValue extends JDFElement
 	* Enumeration strings for ValueUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumValueUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -226,7 +227,9 @@ public abstract class JDFAutoValue extends JDFElement
 			return iterator(EnumValueUsage.class);
 		}
 
+		/**  */
 		public static final EnumValueUsage Present = new EnumValueUsage("Present");
+		/**  */
 		public static final EnumValueUsage Allowed = new EnumValueUsage("Allowed");
 	}
 

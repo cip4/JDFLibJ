@@ -172,6 +172,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	* Enumeration strings for IconUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIconUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,12 +225,19 @@ public abstract class JDFAutoIcon extends JDFElement
 			return iterator(EnumIconUsage.class);
 		}
 
+		/**  */
 		public static final EnumIconUsage Unknown = new EnumIconUsage("Unknown");
+		/**  */
 		public static final EnumIconUsage Idle = new EnumIconUsage("Idle");
+		/**  */
 		public static final EnumIconUsage Down = new EnumIconUsage("Down");
+		/**  */
 		public static final EnumIconUsage Setup = new EnumIconUsage("Setup");
+		/**  */
 		public static final EnumIconUsage Running = new EnumIconUsage("Running");
+		/**  */
 		public static final EnumIconUsage Cleanup = new EnumIconUsage("Cleanup");
+		/**  */
 		public static final EnumIconUsage Stopped = new EnumIconUsage("Stopped");
 	}
 
@@ -290,7 +298,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	  * (5.2) set attribute IconUsage
 	  * @param v vector of the enumeration values
 	  */
-	public void setIconUsage(Vector v)
+	public void setIconUsage(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.ICONUSAGE, v, null);
 	}
@@ -299,7 +307,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	  * (9.2) get IconUsage attribute IconUsage
 	  * @return Vector of the enumerations
 	  */
-	public Vector getIconUsage()
+	public Vector<? extends ValuedEnum> getIconUsage()
 	{
 		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);
 	}

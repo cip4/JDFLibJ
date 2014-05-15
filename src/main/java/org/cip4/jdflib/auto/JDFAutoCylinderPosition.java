@@ -155,6 +155,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	* Enumeration strings for PlateType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPlateType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,7 +208,9 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 			return iterator(EnumPlateType.class);
 		}
 
+		/**  */
 		public static final EnumPlateType Content = new EnumPlateType("Content");
+		/**  */
 		public static final EnumPlateType Dummy = new EnumPlateType("Dummy");
 	}
 
@@ -215,6 +218,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	* Enumeration strings for PlateUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPlateUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -267,7 +271,9 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 			return iterator(EnumPlateUsage.class);
 		}
 
+		/**  */
 		public static final EnumPlateUsage Original = new EnumPlateUsage("Original");
+		/**  */
 		public static final EnumPlateUsage Reuse = new EnumPlateUsage("Reuse");
 	}
 

@@ -162,6 +162,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	* Enumeration strings for GlueType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGlueType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -214,8 +215,11 @@ public abstract class JDFAutoGlueLine extends JDFElement
 			return iterator(EnumGlueType.class);
 		}
 
+		/**  */
 		public static final EnumGlueType ColdGlue = new EnumGlueType("ColdGlue");
+		/**  */
 		public static final EnumGlueType Hotmelt = new EnumGlueType("Hotmelt");
+		/**  */
 		public static final EnumGlueType PUR = new EnumGlueType("PUR");
 	}
 

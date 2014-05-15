@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -509,6 +510,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		private final String jobPartID;
 		private final JDFDate olderThan;
 		private final JDFDate newerThan;
+		private final EnumActivation activation;
 		private VectorMap<String, JDFGeneralID> generalIDS;
 
 		protected QueueEntryMatcher()
@@ -518,6 +520,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			gangNames = getGangNames();
 			olderThan = getOlderThan();
 			newerThan = getNewerThan();
+			activation = getActivation();
 			if (gangNames.size() == 0)
 			{
 				gangNames = null;
@@ -571,6 +574,12 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				return false;
 			}
+			if (activation != null)
+			{
+				EnumActivation qeActivation = qe.getActivation();
+				if (!activation.equals(qeActivation) || qeActivation == null && activation.equals(EnumActivation.Active))
+					return false;
+			}
 
 			if (devIDs != null && !devIDs.contains(qe.getDeviceID()))
 			{
@@ -600,20 +609,26 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				JDFDate subTime = qe.getSubmissionTime();
 				if (subTime != null && newerThan.after(subTime))
+				{
 					return false;
+				}
 			}
 			if (olderThan != null)
 			{
 				JDFDate subTime = qe.getSubmissionTime();
 				if (subTime != null && olderThan.before(subTime))
+				{
 					return false;
+				}
 			}
 			// TODO define relationship of n-m overlap in filter and qe
 			if (generalIDS != null)
 			{
 				boolean b = matchesGeneralIDs(qe);
 				if (!b)
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -674,6 +689,24 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	public boolean matches(final JDFQueueEntry qe)
 	{
 		return new QueueEntryMatcher().matches(qe);
+	}
+
+	/**
+	  * (5) set attribute Activation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setActivation(EnumActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Activation
+	  * @return the value of the attribute
+	  */
+	public EnumActivation getActivation()
+	{
+		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
 	/**

@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
@@ -188,71 +189,10 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/**
-	* Enumeration strings for Activation
-	*/
-
-	public static class EnumActivation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumActivation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumActivation getEnum(String enumName)
-		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumActivation getEnum(int enumValue)
-		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumActivation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumActivation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumActivation.class);
-		}
-
-		public static final EnumActivation Held = new EnumActivation("Held");
-		public static final EnumActivation Active = new EnumActivation("Active");
-		public static final EnumActivation TestRun = new EnumActivation("TestRun");
-		public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
-	}
-
-	/**
 	* Enumeration strings for UpdateMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumUpdateMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -305,8 +245,11 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 			return iterator(EnumUpdateMethod.class);
 		}
 
+		/**  */
 		public static final EnumUpdateMethod Complete = new EnumUpdateMethod("Complete");
+		/**  */
 		public static final EnumUpdateMethod Incremental = new EnumUpdateMethod("Incremental");
+		/**  */
 		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
 	}
 
@@ -564,8 +507,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	  */
 	public VString getUpdateIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

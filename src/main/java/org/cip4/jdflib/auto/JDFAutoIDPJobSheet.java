@@ -178,6 +178,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	* Enumeration strings for SheetOccurrence
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetOccurrence extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -230,12 +231,19 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 			return iterator(EnumSheetOccurrence.class);
 		}
 
+		/**  */
 		public static final EnumSheetOccurrence Always = new EnumSheetOccurrence("Always");
+		/**  */
 		public static final EnumSheetOccurrence End = new EnumSheetOccurrence("End");
+		/**  */
 		public static final EnumSheetOccurrence OnError = new EnumSheetOccurrence("OnError");
+		/**  */
 		public static final EnumSheetOccurrence Slip = new EnumSheetOccurrence("Slip");
+		/**  */
 		public static final EnumSheetOccurrence Start = new EnumSheetOccurrence("Start");
+		/**  */
 		public static final EnumSheetOccurrence Both = new EnumSheetOccurrence("Both");
+		/**  */
 		public static final EnumSheetOccurrence None = new EnumSheetOccurrence("None");
 	}
 
@@ -243,6 +251,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	* Enumeration strings for SheetType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -295,9 +304,13 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 			return iterator(EnumSheetType.class);
 		}
 
+		/**  */
 		public static final EnumSheetType AccountingSheet = new EnumSheetType("AccountingSheet");
+		/**  */
 		public static final EnumSheetType ErrorSheet = new EnumSheetType("ErrorSheet");
+		/**  */
 		public static final EnumSheetType JobSheet = new EnumSheetType("JobSheet");
+		/**  */
 		public static final EnumSheetType SeparatorSheet = new EnumSheetType("SeparatorSheet");
 	}
 

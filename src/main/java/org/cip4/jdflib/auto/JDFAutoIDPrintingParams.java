@@ -210,6 +210,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	* Enumeration strings for PageDelivery
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPageDelivery extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -262,10 +263,15 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 			return iterator(EnumPageDelivery.class);
 		}
 
+		/**  */
 		public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
+		/**  */
 		public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
+		/**  */
 		public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
+		/**  */
 		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
+		/**  */
 		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
 	}
 
@@ -273,6 +279,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	* Enumeration strings for PrintQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -325,8 +332,11 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 			return iterator(EnumPrintQuality.class);
 		}
 
+		/**  */
 		public static final EnumPrintQuality High = new EnumPrintQuality("High");
+		/**  */
 		public static final EnumPrintQuality Normal = new EnumPrintQuality("Normal");
+		/**  */
 		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
 	}
 

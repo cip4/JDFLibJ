@@ -176,6 +176,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	* Enumeration strings for AcknowledgeType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAcknowledgeType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -228,8 +229,11 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 			return iterator(EnumAcknowledgeType.class);
 		}
 
+		/**  */
 		public static final EnumAcknowledgeType Received = new EnumAcknowledgeType("Received");
+		/**  */
 		public static final EnumAcknowledgeType Applied = new EnumAcknowledgeType("Applied");
+		/**  */
 		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
 	}
 
@@ -268,7 +272,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	  * (5.2) set attribute AcknowledgeType
 	  * @param v vector of the enumeration values
 	  */
-	public void setAcknowledgeType(Vector v)
+	public void setAcknowledgeType(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
 	}
@@ -277,7 +281,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	  * (9.2) get AcknowledgeType attribute AcknowledgeType
 	  * @return Vector of the enumerations
 	  */
-	public Vector getAcknowledgeType()
+	public Vector<? extends ValuedEnum> getAcknowledgeType()
 	{
 		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
 	}

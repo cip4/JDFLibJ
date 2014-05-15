@@ -190,6 +190,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	* Enumeration strings for Context
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumContext extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -242,9 +243,13 @@ public abstract class JDFAutoDevCaps extends JDFElement
 			return iterator(EnumContext.class);
 		}
 
+		/**  */
 		public static final EnumContext Resource = new EnumContext("Resource");
+		/**  */
 		public static final EnumContext Link = new EnumContext("Link");
+		/**  */
 		public static final EnumContext JMF = new EnumContext("JMF");
+		/**  */
 		public static final EnumContext Element = new EnumContext("Element");
 	}
 

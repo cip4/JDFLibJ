@@ -186,6 +186,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	* Enumeration strings for RenderingIntent
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRenderingIntent extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,10 +239,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 			return iterator(EnumRenderingIntent.class);
 		}
 
+		/**  */
 		public static final EnumRenderingIntent ColorSpaceDependent = new EnumRenderingIntent("ColorSpaceDependent");
+		/**  */
 		public static final EnumRenderingIntent Perceptual = new EnumRenderingIntent("Perceptual");
+		/**  */
 		public static final EnumRenderingIntent Saturation = new EnumRenderingIntent("Saturation");
+		/**  */
 		public static final EnumRenderingIntent RelativeColorimetric = new EnumRenderingIntent("RelativeColorimetric");
+		/**  */
 		public static final EnumRenderingIntent AbsoluteColorimetric = new EnumRenderingIntent("AbsoluteColorimetric");
 	}
 
@@ -249,6 +255,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	* Enumeration strings for SourceObjects
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceObjects extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -301,11 +308,17 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 			return iterator(EnumSourceObjects.class);
 		}
 
+		/**  */
 		public static final EnumSourceObjects All = new EnumSourceObjects("All");
+		/**  */
 		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
+		/**  */
 		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
+		/**  */
 		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
+		/**  */
 		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
+		/**  */
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
 	}
 
@@ -313,6 +326,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	* Enumeration strings for Operation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOperation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -365,10 +379,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 			return iterator(EnumOperation.class);
 		}
 
+		/**  */
 		public static final EnumOperation Convert = new EnumOperation("Convert");
+		/**  */
 		public static final EnumOperation Tag = new EnumOperation("Tag");
+		/**  */
 		public static final EnumOperation Untag = new EnumOperation("Untag");
+		/**  */
 		public static final EnumOperation Retag = new EnumOperation("Retag");
+		/**  */
 		public static final EnumOperation ConvertIgnore = new EnumOperation("ConvertIgnore");
 	}
 
@@ -376,6 +395,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	* Enumeration strings for SourceCS
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceCS extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -428,23 +448,41 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 			return iterator(EnumSourceCS.class);
 		}
 
+		/**  */
 		public static final EnumSourceCS CalGray = new EnumSourceCS("CalGray");
+		/**  */
 		public static final EnumSourceCS CalRGB = new EnumSourceCS("CalRGB");
+		/**  */
 		public static final EnumSourceCS Calibrated = new EnumSourceCS("Calibrated");
+		/**  */
 		public static final EnumSourceCS CIEBased = new EnumSourceCS("CIEBased");
+		/**  */
 		public static final EnumSourceCS CMYK = new EnumSourceCS("CMYK");
+		/**  */
 		public static final EnumSourceCS DeviceN = new EnumSourceCS("DeviceN");
+		/**  */
 		public static final EnumSourceCS DevIndep = new EnumSourceCS("DevIndep");
+		/**  */
 		public static final EnumSourceCS RGB = new EnumSourceCS("RGB");
+		/**  */
 		public static final EnumSourceCS Gray = new EnumSourceCS("Gray");
+		/**  */
 		public static final EnumSourceCS ICCBased = new EnumSourceCS("ICCBased");
+		/**  */
 		public static final EnumSourceCS ICCCMYK = new EnumSourceCS("ICCCMYK");
+		/**  */
 		public static final EnumSourceCS ICCGray = new EnumSourceCS("ICCGray");
+		/**  */
 		public static final EnumSourceCS ICCLAB = new EnumSourceCS("ICCLAB");
+		/**  */
 		public static final EnumSourceCS ICCRGB = new EnumSourceCS("ICCRGB");
+		/**  */
 		public static final EnumSourceCS Lab = new EnumSourceCS("Lab");
+		/**  */
 		public static final EnumSourceCS Separation = new EnumSourceCS("Separation");
+		/**  */
 		public static final EnumSourceCS YUV = new EnumSourceCS("YUV");
+		/**  */
 		public static final EnumSourceCS All = new EnumSourceCS("All");
 	}
 
@@ -452,6 +490,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	* Enumeration strings for SourceRenderingIntent
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceRenderingIntent extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -504,10 +543,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 			return iterator(EnumSourceRenderingIntent.class);
 		}
 
+		/**  */
 		public static final EnumSourceRenderingIntent ColorSpaceDependent = new EnumSourceRenderingIntent("ColorSpaceDependent");
+		/**  */
 		public static final EnumSourceRenderingIntent Perceptual = new EnumSourceRenderingIntent("Perceptual");
+		/**  */
 		public static final EnumSourceRenderingIntent Saturation = new EnumSourceRenderingIntent("Saturation");
+		/**  */
 		public static final EnumSourceRenderingIntent RelativeColorimetric = new EnumSourceRenderingIntent("RelativeColorimetric");
+		/**  */
 		public static final EnumSourceRenderingIntent AbsoluteColorimetric = new EnumSourceRenderingIntent("AbsoluteColorimetric");
 	}
 
@@ -607,7 +651,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	  * (5.2) set attribute SourceObjects
 	  * @param v vector of the enumeration values
 	  */
-	public void setSourceObjects(Vector v)
+	public void setSourceObjects(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -616,7 +660,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	  * (9.2) get SourceObjects attribute SourceObjects
 	  * @return Vector of the enumerations
 	  */
-	public Vector getSourceObjects()
+	public Vector<? extends ValuedEnum> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}

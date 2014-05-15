@@ -191,6 +191,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	* Enumeration strings for ChannelMode
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -243,7 +244,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 			return iterator(EnumChannelMode.class);
 		}
 
+		/**  */
 		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		/**  */
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 
@@ -251,6 +254,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	* Enumeration strings for JMFRole
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumJMFRole extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -303,7 +307,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 			return iterator(EnumJMFRole.class);
 		}
 
+		/**  */
 		public static final EnumJMFRole Receiver = new EnumJMFRole("Receiver");
+		/**  */
 		public static final EnumJMFRole Sender = new EnumJMFRole("Sender");
 	}
 

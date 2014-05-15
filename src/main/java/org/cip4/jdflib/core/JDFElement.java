@@ -6197,7 +6197,7 @@ public class JDFElement extends KElement
 			return "New Value";
 		JDFElement e = (JDFElement) ke;
 		// return the default if it exists
-		final JDFAttributeMap map = (e != null) ? null : e.getDefaultAttributeMap();
+		final JDFAttributeMap map = (e == null) ? null : e.getDefaultAttributeMap();
 		if (map != null && map.containsKey(attName))
 		{
 			return map.get(attName);

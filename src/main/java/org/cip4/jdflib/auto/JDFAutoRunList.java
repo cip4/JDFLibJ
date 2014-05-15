@@ -234,6 +234,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	* Enumeration strings for Automation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAutomation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -286,7 +287,9 @@ public abstract class JDFAutoRunList extends JDFResource
 			return iterator(EnumAutomation.class);
 		}
 
+		/**  */
 		public static final EnumAutomation Static = new EnumAutomation("Static");
+		/**  */
 		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
 	}
 
@@ -294,6 +297,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	* Enumeration strings for ComponentGranularity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumComponentGranularity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -346,10 +350,15 @@ public abstract class JDFAutoRunList extends JDFResource
 			return iterator(EnumComponentGranularity.class);
 		}
 
+		/**  */
 		public static final EnumComponentGranularity Page = new EnumComponentGranularity("Page");
+		/**  */
 		public static final EnumComponentGranularity Document = new EnumComponentGranularity("Document");
+		/**  */
 		public static final EnumComponentGranularity Set = new EnumComponentGranularity("Set");
+		/**  */
 		public static final EnumComponentGranularity All = new EnumComponentGranularity("All");
+		/**  */
 		public static final EnumComponentGranularity BundleItem = new EnumComponentGranularity("BundleItem");
 	}
 
@@ -357,6 +366,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	* Enumeration strings for SheetSides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -409,9 +419,13 @@ public abstract class JDFAutoRunList extends JDFResource
 			return iterator(EnumSheetSides.class);
 		}
 
+		/**  */
 		public static final EnumSheetSides Front = new EnumSheetSides("Front");
+		/**  */
 		public static final EnumSheetSides Back = new EnumSheetSides("Back");
+		/**  */
 		public static final EnumSheetSides FrontBack = new EnumSheetSides("FrontBack");
+		/**  */
 		public static final EnumSheetSides BackFront = new EnumSheetSides("BackFront");
 	}
 

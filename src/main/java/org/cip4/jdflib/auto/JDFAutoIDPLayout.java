@@ -179,6 +179,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	* Enumeration strings for FinishedPageOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFinishedPageOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,7 +232,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 			return iterator(EnumFinishedPageOrientation.class);
 		}
 
+		/**  */
 		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
+		/**  */
 		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
 	}
 
@@ -239,6 +242,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -291,8 +295,11 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSided = new EnumSides("OneSided");
+		/**  */
 		public static final EnumSides TwoSidedLongEdge = new EnumSides("TwoSidedLongEdge");
+		/**  */
 		public static final EnumSides TwoSidedShortEdge = new EnumSides("TwoSidedShortEdge");
 	}
 

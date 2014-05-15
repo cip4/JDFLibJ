@@ -168,6 +168,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	* Enumeration strings for FlushPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFlushPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -220,8 +221,11 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 			return iterator(EnumFlushPolicy.class);
 		}
 
+		/**  */
 		public static final EnumFlushPolicy Complete = new EnumFlushPolicy("Complete");
+		/**  */
 		public static final EnumFlushPolicy QueueEntry = new EnumFlushPolicy("QueueEntry");
+		/**  */
 		public static final EnumFlushPolicy Intermediate = new EnumFlushPolicy("Intermediate");
 	}
 

@@ -185,6 +185,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	* Enumeration strings for Class
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumClass extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -237,10 +238,15 @@ public abstract class JDFAutoNotification extends JDFAudit
 			return iterator(EnumClass.class);
 		}
 
+		/**  */
 		public static final EnumClass Event = new EnumClass("Event");
+		/**  */
 		public static final EnumClass Information = new EnumClass("Information");
+		/**  */
 		public static final EnumClass Warning = new EnumClass("Warning");
+		/**  */
 		public static final EnumClass Error = new EnumClass("Error");
+		/**  */
 		public static final EnumClass Fatal = new EnumClass("Fatal");
 	}
 

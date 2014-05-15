@@ -182,6 +182,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	* Enumeration strings for BlockType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBlockType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -234,9 +235,13 @@ public abstract class JDFAutoCutBlock extends JDFResource
 			return iterator(EnumBlockType.class);
 		}
 
+		/**  */
 		public static final EnumBlockType CutBlock = new EnumBlockType("CutBlock");
+		/**  */
 		public static final EnumBlockType SaveBlock = new EnumBlockType("SaveBlock");
+		/**  */
 		public static final EnumBlockType TempBlock = new EnumBlockType("TempBlock");
+		/**  */
 		public static final EnumBlockType MarkBlock = new EnumBlockType("MarkBlock");
 	}
 
@@ -244,6 +249,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	* Enumeration strings for BlockElementType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBlockElementType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -296,7 +302,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 			return iterator(EnumBlockElementType.class);
 		}
 
+		/**  */
 		public static final EnumBlockElementType CutElement = new EnumBlockElementType("CutElement");
+		/**  */
 		public static final EnumBlockElementType PunchElement = new EnumBlockElementType("PunchElement");
 	}
 

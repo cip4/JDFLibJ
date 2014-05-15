@@ -196,6 +196,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	* Enumeration strings for ICCProfileUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumICCProfileUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -248,7 +249,9 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 			return iterator(EnumICCProfileUsage.class);
 		}
 
+		/**  */
 		public static final EnumICCProfileUsage UsePDL = new EnumICCProfileUsage("UsePDL");
+		/**  */
 		public static final EnumICCProfileUsage UseSupplied = new EnumICCProfileUsage("UseSupplied");
 	}
 

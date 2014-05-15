@@ -221,6 +221,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	* Enumeration strings for BindingOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBindingOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -273,9 +274,13 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 			return iterator(EnumBindingOrder.class);
 		}
 
+		/**  */
 		public static final EnumBindingOrder Collecting = new EnumBindingOrder("Collecting");
+		/**  */
 		public static final EnumBindingOrder Gathering = new EnumBindingOrder("Gathering");
+		/**  */
 		public static final EnumBindingOrder List = new EnumBindingOrder("List");
+		/**  */
 		public static final EnumBindingOrder None = new EnumBindingOrder("None");
 	}
 

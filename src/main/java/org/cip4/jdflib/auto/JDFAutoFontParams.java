@@ -178,6 +178,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	* Enumeration strings for CannotEmbedFontPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCannotEmbedFontPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -230,8 +231,11 @@ public abstract class JDFAutoFontParams extends JDFResource
 			return iterator(EnumCannotEmbedFontPolicy.class);
 		}
 
+		/**  */
 		public static final EnumCannotEmbedFontPolicy Warning = new EnumCannotEmbedFontPolicy("Warning");
+		/**  */
 		public static final EnumCannotEmbedFontPolicy Error = new EnumCannotEmbedFontPolicy("Error");
+		/**  */
 		public static final EnumCannotEmbedFontPolicy OK = new EnumCannotEmbedFontPolicy("OK");
 	}
 

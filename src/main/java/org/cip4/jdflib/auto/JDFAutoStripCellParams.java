@@ -171,6 +171,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,8 +224,11 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSided = new EnumSides("OneSided");
+		/**  */
 		public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
+		/**  */
 		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
 	}
 
@@ -232,6 +236,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	* Enumeration strings for Mask
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMask extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -284,13 +289,21 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 			return iterator(EnumMask.class);
 		}
 
+		/**  */
 		public static final EnumMask None = new EnumMask("None");
+		/**  */
 		public static final EnumMask TrimBox = new EnumMask("TrimBox");
+		/**  */
 		public static final EnumMask BleedBox = new EnumMask("BleedBox");
+		/**  */
 		public static final EnumMask SourceTrimBox = new EnumMask("SourceTrimBox");
+		/**  */
 		public static final EnumMask SourceBleedBox = new EnumMask("SourceBleedBox");
+		/**  */
 		public static final EnumMask PDL = new EnumMask("PDL");
+		/**  */
 		public static final EnumMask DieCut = new EnumMask("DieCut");
+		/**  */
 		public static final EnumMask DieBleed = new EnumMask("DieBleed");
 	}
 

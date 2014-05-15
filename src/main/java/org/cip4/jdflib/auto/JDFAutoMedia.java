@@ -255,6 +255,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for HoleType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumHoleType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -307,40 +308,75 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumHoleType.class);
 		}
 
+		/**  */
 		public static final EnumHoleType None = new EnumHoleType("None");
+		/**  */
 		public static final EnumHoleType S1_generic = new EnumHoleType("S1-generic");
+		/**  */
 		public static final EnumHoleType S_generic = new EnumHoleType("S-generic");
+		/**  */
 		public static final EnumHoleType R2_generic = new EnumHoleType("R2-generic");
+		/**  */
 		public static final EnumHoleType R2m_DIN = new EnumHoleType("R2m-DIN");
+		/**  */
 		public static final EnumHoleType R2m_ISO = new EnumHoleType("R2m-ISO");
+		/**  */
 		public static final EnumHoleType R2m_MIB = new EnumHoleType("R2m-MIB");
+		/**  */
 		public static final EnumHoleType R2i_US_a = new EnumHoleType("R2i-US-a");
+		/**  */
 		public static final EnumHoleType R2i_US_b = new EnumHoleType("R2i-US-b");
+		/**  */
 		public static final EnumHoleType R3_generic = new EnumHoleType("R3-generic");
+		/**  */
 		public static final EnumHoleType R3i_US = new EnumHoleType("R3i-US");
+		/**  */
 		public static final EnumHoleType R4_generic = new EnumHoleType("R4-generic");
+		/**  */
 		public static final EnumHoleType R4m_DIN_A4 = new EnumHoleType("R4m-DIN-A4");
+		/**  */
 		public static final EnumHoleType R4m_DIN_A5 = new EnumHoleType("R4m-DIN-A5");
+		/**  */
 		public static final EnumHoleType R4m_swedish = new EnumHoleType("R4m-swedish");
+		/**  */
 		public static final EnumHoleType R4i_US = new EnumHoleType("R4i-US");
+		/**  */
 		public static final EnumHoleType R5_generic = new EnumHoleType("R5-generic");
+		/**  */
 		public static final EnumHoleType R5i_US_a = new EnumHoleType("R5i-US-a");
+		/**  */
 		public static final EnumHoleType R5i_US_b = new EnumHoleType("R5i-US-b");
+		/**  */
 		public static final EnumHoleType R5i_US_c = new EnumHoleType("R5i-US-c");
+		/**  */
 		public static final EnumHoleType R6_generic = new EnumHoleType("R6-generic");
+		/**  */
 		public static final EnumHoleType R6m_4h2s = new EnumHoleType("R6m-4h2s");
+		/**  */
 		public static final EnumHoleType R6m_DIN_A5 = new EnumHoleType("R6m-DIN-A5");
+		/**  */
 		public static final EnumHoleType R7_generic = new EnumHoleType("R7-generic");
+		/**  */
 		public static final EnumHoleType R7i_US_a = new EnumHoleType("R7i-US-a");
+		/**  */
 		public static final EnumHoleType R7i_US_b = new EnumHoleType("R7i-US-b");
+		/**  */
 		public static final EnumHoleType R7i_US_c = new EnumHoleType("R7i-US-c");
+		/**  */
 		public static final EnumHoleType R11m_7h4s = new EnumHoleType("R11m-7h4s");
+		/**  */
 		public static final EnumHoleType P16_9i_rect_0t = new EnumHoleType("P16_9i-rect-0t");
+		/**  */
 		public static final EnumHoleType P12m_rect_0t = new EnumHoleType("P12m-rect-0t");
+		/**  */
 		public static final EnumHoleType W2_1i_round_0t = new EnumHoleType("W2_1i-round-0t");
+		/**  */
 		public static final EnumHoleType W2_1i_square_0t = new EnumHoleType("W2_1i-square-0t");
+		/**  */
 		public static final EnumHoleType W3_1i_square_0t = new EnumHoleType("W3_1i-square-0t");
+		/**  */
 		public static final EnumHoleType C9_5m_round_0t = new EnumHoleType("C9.5m-round-0t");
+		/**  */
 		public static final EnumHoleType Explicit = new EnumHoleType("Explicit");
 	}
 
@@ -348,6 +384,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for MediaUnit
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMediaUnit extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -400,8 +437,11 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumMediaUnit.class);
 		}
 
+		/**  */
 		public static final EnumMediaUnit Continuous = new EnumMediaUnit("Continuous");
+		/**  */
 		public static final EnumMediaUnit Roll = new EnumMediaUnit("Roll");
+		/**  */
 		public static final EnumMediaUnit Sheet = new EnumMediaUnit("Sheet");
 	}
 
@@ -409,6 +449,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for BackCoatings
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBackCoatings extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -461,15 +502,25 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumBackCoatings.class);
 		}
 
+		/**  */
 		public static final EnumBackCoatings None = new EnumBackCoatings("None");
+		/**  */
 		public static final EnumBackCoatings Coated = new EnumBackCoatings("Coated");
+		/**  */
 		public static final EnumBackCoatings Glossy = new EnumBackCoatings("Glossy");
+		/**  */
 		public static final EnumBackCoatings HighGloss = new EnumBackCoatings("HighGloss");
+		/**  */
 		public static final EnumBackCoatings InkJet = new EnumBackCoatings("InkJet");
+		/**  */
 		public static final EnumBackCoatings Matte = new EnumBackCoatings("Matte");
+		/**  */
 		public static final EnumBackCoatings Polymer = new EnumBackCoatings("Polymer");
+		/**  */
 		public static final EnumBackCoatings Silver = new EnumBackCoatings("Silver");
+		/**  */
 		public static final EnumBackCoatings Satin = new EnumBackCoatings("Satin");
+		/**  */
 		public static final EnumBackCoatings Semigloss = new EnumBackCoatings("Semigloss");
 	}
 
@@ -477,6 +528,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for FluteDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFluteDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -529,9 +581,13 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumFluteDirection.class);
 		}
 
+		/**  */
 		public static final EnumFluteDirection LongEdge = new EnumFluteDirection("LongEdge");
+		/**  */
 		public static final EnumFluteDirection ShortEdge = new EnumFluteDirection("ShortEdge");
+		/**  */
 		public static final EnumFluteDirection XDirection = new EnumFluteDirection("XDirection");
+		/**  */
 		public static final EnumFluteDirection YDirection = new EnumFluteDirection("YDirection");
 	}
 
@@ -539,6 +595,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for FrontCoatings
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFrontCoatings extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -591,15 +648,25 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumFrontCoatings.class);
 		}
 
+		/**  */
 		public static final EnumFrontCoatings None = new EnumFrontCoatings("None");
+		/**  */
 		public static final EnumFrontCoatings Coated = new EnumFrontCoatings("Coated");
+		/**  */
 		public static final EnumFrontCoatings Glossy = new EnumFrontCoatings("Glossy");
+		/**  */
 		public static final EnumFrontCoatings HighGloss = new EnumFrontCoatings("HighGloss");
+		/**  */
 		public static final EnumFrontCoatings InkJet = new EnumFrontCoatings("InkJet");
+		/**  */
 		public static final EnumFrontCoatings Matte = new EnumFrontCoatings("Matte");
+		/**  */
 		public static final EnumFrontCoatings Polymer = new EnumFrontCoatings("Polymer");
+		/**  */
 		public static final EnumFrontCoatings Silver = new EnumFrontCoatings("Silver");
+		/**  */
 		public static final EnumFrontCoatings Satin = new EnumFrontCoatings("Satin");
+		/**  */
 		public static final EnumFrontCoatings Semigloss = new EnumFrontCoatings("Semigloss");
 	}
 
@@ -607,6 +674,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for GrainDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -659,9 +727,13 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumGrainDirection.class);
 		}
 
+		/**  */
 		public static final EnumGrainDirection LongEdge = new EnumGrainDirection("LongEdge");
+		/**  */
 		public static final EnumGrainDirection ShortEdge = new EnumGrainDirection("ShortEdge");
+		/**  */
 		public static final EnumGrainDirection XDirection = new EnumGrainDirection("XDirection");
+		/**  */
 		public static final EnumGrainDirection YDirection = new EnumGrainDirection("YDirection");
 	}
 
@@ -669,6 +741,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for ImagableSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumImagableSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -721,9 +794,13 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumImagableSide.class);
 		}
 
+		/**  */
 		public static final EnumImagableSide Front = new EnumImagableSide("Front");
+		/**  */
 		public static final EnumImagableSide Back = new EnumImagableSide("Back");
+		/**  */
 		public static final EnumImagableSide Both = new EnumImagableSide("Both");
+		/**  */
 		public static final EnumImagableSide Neither = new EnumImagableSide("Neither");
 	}
 
@@ -731,6 +808,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for ISOPaperSubstrate
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumISOPaperSubstrate extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -783,13 +861,21 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumISOPaperSubstrate.class);
 		}
 
+		/**  */
 		public static final EnumISOPaperSubstrate PS1 = new EnumISOPaperSubstrate("PS1");
+		/**  */
 		public static final EnumISOPaperSubstrate PS2 = new EnumISOPaperSubstrate("PS2");
+		/**  */
 		public static final EnumISOPaperSubstrate PS3 = new EnumISOPaperSubstrate("PS3");
+		/**  */
 		public static final EnumISOPaperSubstrate PS4 = new EnumISOPaperSubstrate("PS4");
+		/**  */
 		public static final EnumISOPaperSubstrate PS5 = new EnumISOPaperSubstrate("PS5");
+		/**  */
 		public static final EnumISOPaperSubstrate PS6 = new EnumISOPaperSubstrate("PS6");
+		/**  */
 		public static final EnumISOPaperSubstrate PS7 = new EnumISOPaperSubstrate("PS7");
+		/**  */
 		public static final EnumISOPaperSubstrate PS8 = new EnumISOPaperSubstrate("PS8");
 	}
 
@@ -797,6 +883,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for MediaType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMediaType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -849,23 +936,41 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumMediaType.class);
 		}
 
+		/**  */
 		public static final EnumMediaType CorrugatedBoard = new EnumMediaType("CorrugatedBoard");
+		/**  */
 		public static final EnumMediaType Disc = new EnumMediaType("Disc");
+		/**  */
 		public static final EnumMediaType EndBoard = new EnumMediaType("EndBoard");
+		/**  */
 		public static final EnumMediaType EmbossingFoil = new EnumMediaType("EmbossingFoil");
+		/**  */
 		public static final EnumMediaType Film = new EnumMediaType("Film");
+		/**  */
 		public static final EnumMediaType Foil = new EnumMediaType("Foil");
+		/**  */
 		public static final EnumMediaType GravureCylinder = new EnumMediaType("GravureCylinder");
+		/**  */
 		public static final EnumMediaType ImagingCylinder = new EnumMediaType("ImagingCylinder");
+		/**  */
 		public static final EnumMediaType LaminatingFoil = new EnumMediaType("LaminatingFoil");
+		/**  */
 		public static final EnumMediaType MountingTape = new EnumMediaType("MountingTape");
+		/**  */
 		public static final EnumMediaType Other = new EnumMediaType("Other");
+		/**  */
 		public static final EnumMediaType Paper = new EnumMediaType("Paper");
+		/**  */
 		public static final EnumMediaType Plate = new EnumMediaType("Plate");
+		/**  */
 		public static final EnumMediaType SelfAdhesive = new EnumMediaType("SelfAdhesive");
+		/**  */
 		public static final EnumMediaType Sleeve = new EnumMediaType("Sleeve");
+		/**  */
 		public static final EnumMediaType ShrinkFoil = new EnumMediaType("ShrinkFoil");
+		/**  */
 		public static final EnumMediaType Transparency = new EnumMediaType("Transparency");
+		/**  */
 		public static final EnumMediaType Unknown = new EnumMediaType("Unknown");
 	}
 
@@ -873,6 +978,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for Opacity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOpacity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -925,8 +1031,11 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumOpacity.class);
 		}
 
+		/**  */
 		public static final EnumOpacity Opaque = new EnumOpacity("Opaque");
+		/**  */
 		public static final EnumOpacity Translucent = new EnumOpacity("Translucent");
+		/**  */
 		public static final EnumOpacity Transparent = new EnumOpacity("Transparent");
 	}
 
@@ -934,6 +1043,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for PlateTechnology
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPlateTechnology extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -986,14 +1096,23 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumPlateTechnology.class);
 		}
 
+		/**  */
 		public static final EnumPlateTechnology FlexoAnalogSolvent = new EnumPlateTechnology("FlexoAnalogSolvent");
+		/**  */
 		public static final EnumPlateTechnology FlexoAnalogThermal = new EnumPlateTechnology("FlexoAnalogThermal");
+		/**  */
 		public static final EnumPlateTechnology FlexoDigitalSolvent = new EnumPlateTechnology("FlexoDigitalSolvent");
+		/**  */
 		public static final EnumPlateTechnology FlexoDigitalThermal = new EnumPlateTechnology("FlexoDigitalThermal");
+		/**  */
 		public static final EnumPlateTechnology FlexoDirectEngraving = new EnumPlateTechnology("FlexoDirectEngraving");
+		/**  */
 		public static final EnumPlateTechnology InkJet = new EnumPlateTechnology("InkJet");
+		/**  */
 		public static final EnumPlateTechnology Thermal = new EnumPlateTechnology("Thermal");
+		/**  */
 		public static final EnumPlateTechnology UV = new EnumPlateTechnology("UV");
+		/**  */
 		public static final EnumPlateTechnology Visible = new EnumPlateTechnology("Visible");
 	}
 
@@ -1001,6 +1120,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	* Enumeration strings for Polarity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1053,7 +1173,9 @@ public abstract class JDFAutoMedia extends JDFResource
 			return iterator(EnumPolarity.class);
 		}
 
+		/**  */
 		public static final EnumPolarity Positive = new EnumPolarity("Positive");
+		/**  */
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
 	}
 
@@ -1069,7 +1191,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	  * (5.2) set attribute HoleType
 	  * @param v vector of the enumeration values
 	  */
-	public void setHoleType(Vector v)
+	public void setHoleType(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
 	}
@@ -1078,7 +1200,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	  * (9.2) get HoleType attribute HoleType
 	  * @return Vector of the enumerations
 	  */
-	public Vector getHoleType()
+	public Vector<? extends ValuedEnum> getHoleType()
 	{
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, EnumHoleType.None, false);
 	}

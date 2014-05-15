@@ -173,6 +173,7 @@ public abstract class JDFAutoError extends JDFElement
 	* Enumeration strings for Resend
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumResend extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,7 +226,9 @@ public abstract class JDFAutoError extends JDFElement
 			return iterator(EnumResend.class);
 		}
 
+		/**  */
 		public static final EnumResend Required = new EnumResend("Required");
+		/**  */
 		public static final EnumResend Prohibited = new EnumResend("Prohibited");
 	}
 

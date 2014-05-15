@@ -172,6 +172,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	* Enumeration strings for Action
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAction extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,20 +225,35 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 			return iterator(EnumAction.class);
 		}
 
+		/**  */
 		public static final EnumAction LongFoldLeftToRight = new EnumAction("LongFoldLeftToRight");
+		/**  */
 		public static final EnumAction LongFoldRightToLeft = new EnumAction("LongFoldRightToLeft");
+		/**  */
 		public static final EnumAction LongPreFoldLeftToRight = new EnumAction("LongPreFoldLeftToRight");
+		/**  */
 		public static final EnumAction LongPreFoldRightToLeft = new EnumAction("LongPreFoldRightToLeft");
+		/**  */
 		public static final EnumAction FrontFoldComplete = new EnumAction("FrontFoldComplete");
+		/**  */
 		public static final EnumAction FrontFoldDiagonal = new EnumAction("FrontFoldDiagonal");
+		/**  */
 		public static final EnumAction FrontFoldCompleteDiagonal = new EnumAction("FrontFoldCompleteDiagonal");
+		/**  */
 		public static final EnumAction BackFoldComplete = new EnumAction("BackFoldComplete");
+		/**  */
 		public static final EnumAction BackFoldDiagonal = new EnumAction("BackFoldDiagonal");
+		/**  */
 		public static final EnumAction BackFoldCompleteDiagonal = new EnumAction("BackFoldCompleteDiagonal");
+		/**  */
 		public static final EnumAction ReverseFold = new EnumAction("ReverseFold");
+		/**  */
 		public static final EnumAction Milling = new EnumAction("Milling");
+		/**  */
 		public static final EnumAction Rotate90 = new EnumAction("Rotate90");
+		/**  */
 		public static final EnumAction Rotate180 = new EnumAction("Rotate180");
+		/**  */
 		public static final EnumAction Rotate270 = new EnumAction("Rotate270");
 	}
 

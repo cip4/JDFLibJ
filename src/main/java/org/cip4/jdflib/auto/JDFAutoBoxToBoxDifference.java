@@ -152,6 +152,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	* Enumeration strings for FromBox
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFromBox extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -204,12 +205,19 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 			return iterator(EnumFromBox.class);
 		}
 
+		/**  */
 		public static final EnumFromBox ArtBox = new EnumFromBox("ArtBox");
+		/**  */
 		public static final EnumFromBox BleedBox = new EnumFromBox("BleedBox");
+		/**  */
 		public static final EnumFromBox CropBox = new EnumFromBox("CropBox");
+		/**  */
 		public static final EnumFromBox MarginsBox = new EnumFromBox("MarginsBox");
+		/**  */
 		public static final EnumFromBox MediaBox = new EnumFromBox("MediaBox");
+		/**  */
 		public static final EnumFromBox SlugBox = new EnumFromBox("SlugBox");
+		/**  */
 		public static final EnumFromBox TrimBox = new EnumFromBox("TrimBox");
 	}
 
@@ -217,6 +225,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	* Enumeration strings for ToBox
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumToBox extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -269,12 +278,19 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 			return iterator(EnumToBox.class);
 		}
 
+		/**  */
 		public static final EnumToBox ArtBox = new EnumToBox("ArtBox");
+		/**  */
 		public static final EnumToBox BleedBox = new EnumToBox("BleedBox");
+		/**  */
 		public static final EnumToBox CropBox = new EnumToBox("CropBox");
+		/**  */
 		public static final EnumToBox MarginsBox = new EnumToBox("MarginsBox");
+		/**  */
 		public static final EnumToBox MediaBox = new EnumToBox("MediaBox");
+		/**  */
 		public static final EnumToBox SlugBox = new EnumToBox("SlugBox");
+		/**  */
 		public static final EnumToBox TrimBox = new EnumToBox("TrimBox");
 	}
 

@@ -176,6 +176,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	* Enumeration strings for BearerBars
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBearerBars extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -228,9 +229,13 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 			return iterator(EnumBearerBars.class);
 		}
 
+		/**  */
 		public static final EnumBearerBars None = new EnumBearerBars("None");
+		/**  */
 		public static final EnumBearerBars TopBottom = new EnumBearerBars("TopBottom");
+		/**  */
 		public static final EnumBearerBars Box = new EnumBearerBars("Box");
+		/**  */
 		public static final EnumBearerBars BoxHMarks = new EnumBearerBars("BoxHMarks");
 	}
 
@@ -238,6 +243,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	* Enumeration strings for Masking
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMasking extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -290,7 +296,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 			return iterator(EnumMasking.class);
 		}
 
+		/**  */
 		public static final EnumMasking None = new EnumMasking("None");
+		/**  */
 		public static final EnumMasking WhiteBox = new EnumMasking("WhiteBox");
 	}
 

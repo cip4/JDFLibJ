@@ -170,6 +170,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	* Enumeration strings for Type
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -222,7 +223,9 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 			return iterator(EnumType.class);
 		}
 
+		/**  */
 		public static final EnumType Folded = new EnumType("Folded");
+		/**  */
 		public static final EnumType Flat = new EnumType("Flat");
 	}
 

@@ -171,6 +171,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	* Enumeration strings for Restrictions
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRestrictions extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,8 +224,11 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 			return iterator(EnumRestrictions.class);
 		}
 
+		/**  */
 		public static final EnumRestrictions None = new EnumRestrictions("None");
+		/**  */
 		public static final EnumRestrictions WithinImposedSheetSet = new EnumRestrictions("WithinImposedSheetSet");
+		/**  */
 		public static final EnumRestrictions WithinLogicalStack = new EnumRestrictions("WithinLogicalStack");
 	}
 

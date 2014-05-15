@@ -206,6 +206,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	* Enumeration strings for FluteDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFluteDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -258,7 +259,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 			return iterator(EnumFluteDirection.class);
 		}
 
+		/**  */
 		public static final EnumFluteDirection XDirection = new EnumFluteDirection("XDirection");
+		/**  */
 		public static final EnumFluteDirection YDirection = new EnumFluteDirection("YDirection");
 	}
 
@@ -266,6 +269,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	* Enumeration strings for GrainDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -318,8 +322,11 @@ public abstract class JDFAutoShapeDef extends JDFResource
 			return iterator(EnumGrainDirection.class);
 		}
 
+		/**  */
 		public static final EnumGrainDirection XDirection = new EnumGrainDirection("XDirection");
+		/**  */
 		public static final EnumGrainDirection YDirection = new EnumGrainDirection("YDirection");
+		/**  */
 		public static final EnumGrainDirection Both = new EnumGrainDirection("Both");
 	}
 
@@ -327,6 +334,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	* Enumeration strings for MediaSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMediaSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -379,8 +387,11 @@ public abstract class JDFAutoShapeDef extends JDFResource
 			return iterator(EnumMediaSide.class);
 		}
 
+		/**  */
 		public static final EnumMediaSide Front = new EnumMediaSide("Front");
+		/**  */
 		public static final EnumMediaSide Back = new EnumMediaSide("Back");
+		/**  */
 		public static final EnumMediaSide Both = new EnumMediaSide("Both");
 	}
 

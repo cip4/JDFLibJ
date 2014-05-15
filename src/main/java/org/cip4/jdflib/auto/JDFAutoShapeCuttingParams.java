@@ -195,6 +195,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	* Enumeration strings for DeliveryMode
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeliveryMode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -247,8 +248,11 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 			return iterator(EnumDeliveryMode.class);
 		}
 
+		/**  */
 		public static final EnumDeliveryMode FullSheet = new EnumDeliveryMode("FullSheet");
+		/**  */
 		public static final EnumDeliveryMode RemoveGripperMargin = new EnumDeliveryMode("RemoveGripperMargin");
+		/**  */
 		public static final EnumDeliveryMode SeparateBlanks = new EnumDeliveryMode("SeparateBlanks");
 	}
 
@@ -256,6 +260,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	* Enumeration strings for SheetLay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -308,8 +313,11 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 			return iterator(EnumSheetLay.class);
 		}
 
+		/**  */
 		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		/**  */
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		/**  */
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
 	}
 

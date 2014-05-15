@@ -154,6 +154,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	* Enumeration strings for DataType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDataType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,13 +207,21 @@ public abstract class JDFAutoGeneralID extends JDFElement
 			return iterator(EnumDataType.class);
 		}
 
+		/**  */
 		public static final EnumDataType string = new EnumDataType("string");
+		/**  */
 		public static final EnumDataType integer = new EnumDataType("integer");
+		/**  */
 		public static final EnumDataType double_ = new EnumDataType("double");
+		/**  */
 		public static final EnumDataType NMTOKEN = new EnumDataType("NMTOKEN");
+		/**  */
 		public static final EnumDataType boolean_ = new EnumDataType("boolean");
+		/**  */
 		public static final EnumDataType dateTime = new EnumDataType("dateTime");
+		/**  */
 		public static final EnumDataType duration = new EnumDataType("duration");
+		/**  */
 		public static final EnumDataType NamedFeature = new EnumDataType("NamedFeature");
 	}
 

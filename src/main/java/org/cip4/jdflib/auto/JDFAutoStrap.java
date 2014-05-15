@@ -194,6 +194,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	* Enumeration strings for Material
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,8 +247,11 @@ public abstract class JDFAutoStrap extends JDFResource
 			return iterator(EnumMaterial.class);
 		}
 
+		/**  */
 		public static final EnumMaterial AdhesiveTape = new EnumMaterial("AdhesiveTape");
+		/**  */
 		public static final EnumMaterial Strap = new EnumMaterial("Strap");
+		/**  */
 		public static final EnumMaterial String = new EnumMaterial("String");
 	}
 

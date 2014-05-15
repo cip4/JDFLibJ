@@ -159,6 +159,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	* Enumeration strings for Packaging
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPackaging extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -211,7 +212,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 			return iterator(EnumPackaging.class);
 		}
 
+		/**  */
 		public static final EnumPackaging MIME = new EnumPackaging("MIME");
+		/**  */
 		public static final EnumPackaging None = new EnumPackaging("None");
 	}
 
@@ -290,7 +293,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	  * (5.2) set attribute Packaging
 	  * @param v vector of the enumeration values
 	  */
-	public void setPackaging(Vector v)
+	public void setPackaging(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
 	}
@@ -299,7 +302,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	  * (9.2) get Packaging attribute Packaging
 	  * @return Vector of the enumerations
 	  */
-	public Vector getPackaging()
+	public Vector<? extends ValuedEnum> getPackaging()
 	{
 		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
 	}

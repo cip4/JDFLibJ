@@ -196,6 +196,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	* Enumeration strings for AllowedXYRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedXYRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -248,11 +249,17 @@ public abstract class JDFAutoXYPairState extends JDFResource
 			return iterator(EnumAllowedXYRelation.class);
 		}
 
+		/**  */
 		public static final EnumAllowedXYRelation gt = new EnumAllowedXYRelation("gt");
+		/**  */
 		public static final EnumAllowedXYRelation ge = new EnumAllowedXYRelation("ge");
+		/**  */
 		public static final EnumAllowedXYRelation eq = new EnumAllowedXYRelation("eq");
+		/**  */
 		public static final EnumAllowedXYRelation le = new EnumAllowedXYRelation("le");
+		/**  */
 		public static final EnumAllowedXYRelation lt = new EnumAllowedXYRelation("lt");
+		/**  */
 		public static final EnumAllowedXYRelation ne = new EnumAllowedXYRelation("ne");
 	}
 
@@ -260,6 +267,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	* Enumeration strings for PresentXYRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPresentXYRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -312,11 +320,17 @@ public abstract class JDFAutoXYPairState extends JDFResource
 			return iterator(EnumPresentXYRelation.class);
 		}
 
+		/**  */
 		public static final EnumPresentXYRelation gt = new EnumPresentXYRelation("gt");
+		/**  */
 		public static final EnumPresentXYRelation ge = new EnumPresentXYRelation("ge");
+		/**  */
 		public static final EnumPresentXYRelation eq = new EnumPresentXYRelation("eq");
+		/**  */
 		public static final EnumPresentXYRelation le = new EnumPresentXYRelation("le");
+		/**  */
 		public static final EnumPresentXYRelation lt = new EnumPresentXYRelation("lt");
+		/**  */
 		public static final EnumPresentXYRelation ne = new EnumPresentXYRelation("ne");
 	}
 

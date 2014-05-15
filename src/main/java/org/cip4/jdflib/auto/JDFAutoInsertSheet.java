@@ -111,7 +111,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISWASTE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.USAGE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.USAGE, 0x44444443, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
 	@Override
@@ -200,6 +200,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	* Enumeration strings for SheetType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -252,11 +253,17 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 			return iterator(EnumSheetType.class);
 		}
 
+		/**  */
 		public static final EnumSheetType AccountingSheet = new EnumSheetType("AccountingSheet");
+		/**  */
 		public static final EnumSheetType ErrorSheet = new EnumSheetType("ErrorSheet");
+		/**  */
 		public static final EnumSheetType FillSheet = new EnumSheetType("FillSheet");
+		/**  */
 		public static final EnumSheetType InsertSheet = new EnumSheetType("InsertSheet");
+		/**  */
 		public static final EnumSheetType JobSheet = new EnumSheetType("JobSheet");
+		/**  */
 		public static final EnumSheetType SeparatorSheet = new EnumSheetType("SeparatorSheet");
 	}
 
@@ -264,6 +271,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	* Enumeration strings for SheetUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -316,17 +324,29 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 			return iterator(EnumSheetUsage.class);
 		}
 
+		/**  */
 		public static final EnumSheetUsage FillForceBack = new EnumSheetUsage("FillForceBack");
+		/**  */
 		public static final EnumSheetUsage FillForceFront = new EnumSheetUsage("FillForceFront");
+		/**  */
 		public static final EnumSheetUsage FillSheet = new EnumSheetUsage("FillSheet");
+		/**  */
 		public static final EnumSheetUsage FillSignature = new EnumSheetUsage("FillSignature");
+		/**  */
 		public static final EnumSheetUsage FillSurface = new EnumSheetUsage("FillSurface");
+		/**  */
 		public static final EnumSheetUsage Header = new EnumSheetUsage("Header");
+		/**  */
 		public static final EnumSheetUsage Interleaved = new EnumSheetUsage("Interleaved");
+		/**  */
 		public static final EnumSheetUsage InterleavedBefore = new EnumSheetUsage("InterleavedBefore");
+		/**  */
 		public static final EnumSheetUsage OnError = new EnumSheetUsage("OnError");
+		/**  */
 		public static final EnumSheetUsage Slip = new EnumSheetUsage("Slip");
+		/**  */
 		public static final EnumSheetUsage SlipCopy = new EnumSheetUsage("SlipCopy");
+		/**  */
 		public static final EnumSheetUsage Trailer = new EnumSheetUsage("Trailer");
 	}
 
@@ -334,6 +354,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	* Enumeration strings for IncludeInBundleItem
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeInBundleItem extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -386,9 +407,13 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 			return iterator(EnumIncludeInBundleItem.class);
 		}
 
+		/**  */
 		public static final EnumIncludeInBundleItem After = new EnumIncludeInBundleItem("After");
+		/**  */
 		public static final EnumIncludeInBundleItem Before = new EnumIncludeInBundleItem("Before");
+		/**  */
 		public static final EnumIncludeInBundleItem None = new EnumIncludeInBundleItem("None");
+		/**  */
 		public static final EnumIncludeInBundleItem New = new EnumIncludeInBundleItem("New");
 	}
 

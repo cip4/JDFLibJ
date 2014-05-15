@@ -175,6 +175,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	* Enumeration strings for VarnishArea
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumVarnishArea extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,7 +228,9 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 			return iterator(EnumVarnishArea.class);
 		}
 
+		/**  */
 		public static final EnumVarnishArea Full = new EnumVarnishArea("Full");
+		/**  */
 		public static final EnumVarnishArea Spot = new EnumVarnishArea("Spot");
 	}
 
@@ -235,6 +238,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	* Enumeration strings for VarnishMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumVarnishMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -287,8 +291,11 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 			return iterator(EnumVarnishMethod.class);
 		}
 
+		/**  */
 		public static final EnumVarnishMethod Blanket = new EnumVarnishMethod("Blanket");
+		/**  */
 		public static final EnumVarnishMethod Plate = new EnumVarnishMethod("Plate");
+		/**  */
 		public static final EnumVarnishMethod Method = new EnumVarnishMethod("Method");
 	}
 

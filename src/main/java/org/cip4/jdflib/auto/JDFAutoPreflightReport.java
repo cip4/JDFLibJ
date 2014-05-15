@@ -201,6 +201,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	* Enumeration strings for ErrorState
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumErrorState extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,7 +254,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 			return iterator(EnumErrorState.class);
 		}
 
+		/**  */
 		public static final EnumErrorState TestNotSupported = new EnumErrorState("TestNotSupported");
+		/**  */
 		public static final EnumErrorState TestWrongPDL = new EnumErrorState("TestWrongPDL");
 	}
 

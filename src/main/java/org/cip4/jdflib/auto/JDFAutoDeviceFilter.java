@@ -172,6 +172,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	* Enumeration strings for DeviceDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,12 +225,19 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 			return iterator(EnumDeviceDetails.class);
 		}
 
+		/**  */
 		public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
+		/**  */
 		public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
+		/**  */
 		public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
+		/**  */
 		public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
+		/**  */
 		public static final EnumDeviceDetails NamedFeature = new EnumDeviceDetails("NamedFeature");
+		/**  */
 		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
+		/**  */
 		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
 	}
 

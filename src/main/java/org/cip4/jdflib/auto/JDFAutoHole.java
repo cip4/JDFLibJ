@@ -174,6 +174,7 @@ public abstract class JDFAutoHole extends JDFResource
 	* Enumeration strings for Shape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -226,8 +227,11 @@ public abstract class JDFAutoHole extends JDFResource
 			return iterator(EnumShape.class);
 		}
 
+		/**  */
 		public static final EnumShape Eliptical = new EnumShape("Eliptical");
+		/**  */
 		public static final EnumShape Round = new EnumShape("Round");
+		/**  */
 		public static final EnumShape Rectangular = new EnumShape("Rectangular");
 	}
 

@@ -202,6 +202,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	* Enumeration strings for Ownership
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOwnership extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -254,7 +255,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 			return iterator(EnumOwnership.class);
 		}
 
+		/**  */
 		public static final EnumOwnership Origin = new EnumOwnership("Origin");
+		/**  */
 		public static final EnumOwnership Destination = new EnumOwnership("Destination");
 	}
 

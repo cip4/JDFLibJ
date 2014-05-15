@@ -203,6 +203,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	* Enumeration strings for CastingMaterial
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCastingMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -255,8 +256,11 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 			return iterator(EnumCastingMaterial.class);
 		}
 
+		/**  */
 		public static final EnumCastingMaterial Cotton = new EnumCastingMaterial("Cotton");
+		/**  */
 		public static final EnumCastingMaterial Nylon = new EnumCastingMaterial("Nylon");
+		/**  */
 		public static final EnumCastingMaterial Polyester = new EnumCastingMaterial("Polyester");
 	}
 
@@ -264,6 +268,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	* Enumeration strings for CoreMaterial
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCoreMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -316,8 +321,11 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 			return iterator(EnumCoreMaterial.class);
 		}
 
+		/**  */
 		public static final EnumCoreMaterial Cotton = new EnumCoreMaterial("Cotton");
+		/**  */
 		public static final EnumCoreMaterial Nylon = new EnumCoreMaterial("Nylon");
+		/**  */
 		public static final EnumCoreMaterial Polyester = new EnumCoreMaterial("Polyester");
 	}
 
@@ -325,6 +333,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	* Enumeration strings for SewingPattern
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSewingPattern extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -377,9 +386,13 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 			return iterator(EnumSewingPattern.class);
 		}
 
+		/**  */
 		public static final EnumSewingPattern Normal = new EnumSewingPattern("Normal");
+		/**  */
 		public static final EnumSewingPattern Staggered = new EnumSewingPattern("Staggered");
+		/**  */
 		public static final EnumSewingPattern CombinedStaggered = new EnumSewingPattern("CombinedStaggered");
+		/**  */
 		public static final EnumSewingPattern Side = new EnumSewingPattern("Side");
 	}
 

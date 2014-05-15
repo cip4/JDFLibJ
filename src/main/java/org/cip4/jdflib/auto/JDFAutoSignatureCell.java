@@ -163,6 +163,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	* Enumeration strings for BottleAxis
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBottleAxis extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -215,9 +216,13 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 			return iterator(EnumBottleAxis.class);
 		}
 
+		/**  */
 		public static final EnumBottleAxis SpineHead = new EnumBottleAxis("SpineHead");
+		/**  */
 		public static final EnumBottleAxis SpineFoot = new EnumBottleAxis("SpineFoot");
+		/**  */
 		public static final EnumBottleAxis FaceHead = new EnumBottleAxis("FaceHead");
+		/**  */
 		public static final EnumBottleAxis FaceFoot = new EnumBottleAxis("FaceFoot");
 	}
 
@@ -225,6 +230,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	* Enumeration strings for Orientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -277,9 +283,13 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 			return iterator(EnumOrientation.class);
 		}
 
+		/**  */
 		public static final EnumOrientation Up = new EnumOrientation("Up");
+		/**  */
 		public static final EnumOrientation Down = new EnumOrientation("Down");
+		/**  */
 		public static final EnumOrientation Left = new EnumOrientation("Left");
+		/**  */
 		public static final EnumOrientation Right = new EnumOrientation("Right");
 	}
 

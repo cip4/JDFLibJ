@@ -155,6 +155,7 @@ public abstract class JDFAutoChangedPath extends JDFElement
 	* Enumeration strings for Modification
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumModification extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,8 +208,11 @@ public abstract class JDFAutoChangedPath extends JDFElement
 			return iterator(EnumModification.class);
 		}
 
+		/**  */
 		public static final EnumModification Create = new EnumModification("Create");
+		/**  */
 		public static final EnumModification Delete = new EnumModification("Delete");
+		/**  */
 		public static final EnumModification Modify = new EnumModification("Modify");
 	}
 

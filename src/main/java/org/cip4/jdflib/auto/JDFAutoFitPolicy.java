@@ -156,6 +156,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	* Enumeration strings for GutterPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGutterPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -208,7 +209,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 			return iterator(EnumGutterPolicy.class);
 		}
 
+		/**  */
 		public static final EnumGutterPolicy Distribute = new EnumGutterPolicy("Distribute");
+		/**  */
 		public static final EnumGutterPolicy Fixed = new EnumGutterPolicy("Fixed");
 	}
 
@@ -216,6 +219,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	* Enumeration strings for RotatePolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRotatePolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -268,9 +272,13 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 			return iterator(EnumRotatePolicy.class);
 		}
 
+		/**  */
 		public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
+		/**  */
 		public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
+		/**  */
 		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
+		/**  */
 		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
 	}
 
@@ -278,6 +286,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	* Enumeration strings for SizePolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSizePolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -330,10 +339,15 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 			return iterator(EnumSizePolicy.class);
 		}
 
+		/**  */
 		public static final EnumSizePolicy ClipToMaxPage = new EnumSizePolicy("ClipToMaxPage");
+		/**  */
 		public static final EnumSizePolicy Abort = new EnumSizePolicy("Abort");
+		/**  */
 		public static final EnumSizePolicy FitToPage = new EnumSizePolicy("FitToPage");
+		/**  */
 		public static final EnumSizePolicy ReduceToFit = new EnumSizePolicy("ReduceToFit");
+		/**  */
 		public static final EnumSizePolicy Tile = new EnumSizePolicy("Tile");
 	}
 

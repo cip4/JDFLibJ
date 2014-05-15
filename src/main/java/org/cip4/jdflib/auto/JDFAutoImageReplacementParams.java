@@ -200,6 +200,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	* Enumeration strings for ImageReplacementStrategy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumImageReplacementStrategy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -252,9 +253,13 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 			return iterator(EnumImageReplacementStrategy.class);
 		}
 
+		/**  */
 		public static final EnumImageReplacementStrategy Omit = new EnumImageReplacementStrategy("Omit");
+		/**  */
 		public static final EnumImageReplacementStrategy Proxy = new EnumImageReplacementStrategy("Proxy");
+		/**  */
 		public static final EnumImageReplacementStrategy Replace = new EnumImageReplacementStrategy("Replace");
+		/**  */
 		public static final EnumImageReplacementStrategy AttemptReplacement = new EnumImageReplacementStrategy("AttemptReplacement");
 	}
 
@@ -262,6 +267,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	* Enumeration strings for ResolutionReductionStrategy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumResolutionReductionStrategy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -314,8 +320,11 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 			return iterator(EnumResolutionReductionStrategy.class);
 		}
 
+		/**  */
 		public static final EnumResolutionReductionStrategy Downsample = new EnumResolutionReductionStrategy("Downsample");
+		/**  */
 		public static final EnumResolutionReductionStrategy Subsample = new EnumResolutionReductionStrategy("Subsample");
+		/**  */
 		public static final EnumResolutionReductionStrategy Bicubic = new EnumResolutionReductionStrategy("Bicubic");
 	}
 

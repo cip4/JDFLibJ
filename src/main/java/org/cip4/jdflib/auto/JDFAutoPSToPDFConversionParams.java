@@ -207,6 +207,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	* Enumeration strings for Binding
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBinding extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -259,7 +260,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 			return iterator(EnumBinding.class);
 		}
 
+		/**  */
 		public static final EnumBinding Left = new EnumBinding("Left");
+		/**  */
 		public static final EnumBinding Right = new EnumBinding("Right");
 	}
 
@@ -267,6 +270,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	* Enumeration strings for AutoRotatePages
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAutoRotatePages extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -319,8 +323,11 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 			return iterator(EnumAutoRotatePages.class);
 		}
 
+		/**  */
 		public static final EnumAutoRotatePages None = new EnumAutoRotatePages("None");
+		/**  */
 		public static final EnumAutoRotatePages All = new EnumAutoRotatePages("All");
+		/**  */
 		public static final EnumAutoRotatePages PageByPage = new EnumAutoRotatePages("PageByPage");
 	}
 
@@ -328,6 +335,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	* Enumeration strings for DefaultRenderingIntent
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDefaultRenderingIntent extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -380,10 +388,15 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 			return iterator(EnumDefaultRenderingIntent.class);
 		}
 
+		/**  */
 		public static final EnumDefaultRenderingIntent Default = new EnumDefaultRenderingIntent("Default");
+		/**  */
 		public static final EnumDefaultRenderingIntent Perceptual = new EnumDefaultRenderingIntent("Perceptual");
+		/**  */
 		public static final EnumDefaultRenderingIntent Saturation = new EnumDefaultRenderingIntent("Saturation");
+		/**  */
 		public static final EnumDefaultRenderingIntent RelativeColorimetric = new EnumDefaultRenderingIntent("RelativeColorimetric");
+		/**  */
 		public static final EnumDefaultRenderingIntent AbsoluteColorimetric = new EnumDefaultRenderingIntent("AbsoluteColorimetric");
 	}
 

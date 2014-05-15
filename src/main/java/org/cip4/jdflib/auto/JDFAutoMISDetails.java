@@ -155,6 +155,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	* Enumeration strings for CostType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCostType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,7 +208,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 			return iterator(EnumCostType.class);
 		}
 
+		/**  */
 		public static final EnumCostType Chargeable = new EnumCostType("Chargeable");
+		/**  */
 		public static final EnumCostType NonChargeable = new EnumCostType("NonChargeable");
 	}
 
@@ -215,6 +218,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	* Enumeration strings for DeviceOperationMode
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceOperationMode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -267,8 +271,11 @@ public abstract class JDFAutoMISDetails extends JDFElement
 			return iterator(EnumDeviceOperationMode.class);
 		}
 
+		/**  */
 		public static final EnumDeviceOperationMode Productive = new EnumDeviceOperationMode("Productive");
+		/**  */
 		public static final EnumDeviceOperationMode NonProductive = new EnumDeviceOperationMode("NonProductive");
+		/**  */
 		public static final EnumDeviceOperationMode Maintenance = new EnumDeviceOperationMode("Maintenance");
 	}
 
@@ -276,6 +283,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	* Enumeration strings for WorkType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWorkType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -328,8 +336,11 @@ public abstract class JDFAutoMISDetails extends JDFElement
 			return iterator(EnumWorkType.class);
 		}
 
+		/**  */
 		public static final EnumWorkType Original = new EnumWorkType("Original");
+		/**  */
 		public static final EnumWorkType Alteration = new EnumWorkType("Alteration");
+		/**  */
 		public static final EnumWorkType Rework = new EnumWorkType("Rework");
 	}
 

@@ -175,6 +175,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	* Enumeration strings for QueueStatus
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumQueueStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,11 +228,17 @@ public abstract class JDFAutoQueue extends JDFElement
 			return iterator(EnumQueueStatus.class);
 		}
 
+		/**  */
 		public static final EnumQueueStatus Blocked = new EnumQueueStatus("Blocked");
+		/**  */
 		public static final EnumQueueStatus Closed = new EnumQueueStatus("Closed");
+		/**  */
 		public static final EnumQueueStatus Full = new EnumQueueStatus("Full");
+		/**  */
 		public static final EnumQueueStatus Running = new EnumQueueStatus("Running");
+		/**  */
 		public static final EnumQueueStatus Waiting = new EnumQueueStatus("Waiting");
+		/**  */
 		public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
 	}
 

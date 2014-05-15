@@ -152,6 +152,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	* Enumeration strings for ProductionType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProductionType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -204,7 +205,9 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 			return iterator(EnumProductionType.class);
 		}
 
+		/**  */
 		public static final EnumProductionType Collect = new EnumProductionType("Collect");
+		/**  */
 		public static final EnumProductionType NonCollect = new EnumProductionType("NonCollect");
 	}
 

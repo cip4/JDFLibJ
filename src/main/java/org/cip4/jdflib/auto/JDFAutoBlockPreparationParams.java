@@ -192,6 +192,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	* Enumeration strings for TightBacking
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTightBacking extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -244,9 +245,13 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 			return iterator(EnumTightBacking.class);
 		}
 
+		/**  */
 		public static final EnumTightBacking Flat = new EnumTightBacking("Flat");
+		/**  */
 		public static final EnumTightBacking Round = new EnumTightBacking("Round");
+		/**  */
 		public static final EnumTightBacking FlatBacked = new EnumTightBacking("FlatBacked");
+		/**  */
 		public static final EnumTightBacking RoundBacked = new EnumTightBacking("RoundBacked");
 	}
 

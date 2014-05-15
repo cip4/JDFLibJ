@@ -178,6 +178,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	* Enumeration strings for CoverType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCoverType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -230,7 +231,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 			return iterator(EnumCoverType.class);
 		}
 
+		/**  */
 		public static final EnumCoverType Front = new EnumCoverType("Front");
+		/**  */
 		public static final EnumCoverType Back = new EnumCoverType("Back");
 	}
 

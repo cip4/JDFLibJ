@@ -179,6 +179,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for DensityStandard
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDensityStandard extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,11 +232,17 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumDensityStandard.class);
 		}
 
+		/**  */
 		public static final EnumDensityStandard ANSIA = new EnumDensityStandard("ANSIA");
+		/**  */
 		public static final EnumDensityStandard ANSIE = new EnumDensityStandard("ANSIE");
+		/**  */
 		public static final EnumDensityStandard ANSII = new EnumDensityStandard("ANSII");
+		/**  */
 		public static final EnumDensityStandard ANSIT = new EnumDensityStandard("ANSIT");
+		/**  */
 		public static final EnumDensityStandard DIN16536 = new EnumDensityStandard("DIN16536");
+		/**  */
 		public static final EnumDensityStandard DIN16536NB = new EnumDensityStandard("DIN16536NB");
 	}
 
@@ -243,6 +250,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for Illumination
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIllumination extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -295,8 +303,11 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumIllumination.class);
 		}
 
+		/**  */
 		public static final EnumIllumination D50 = new EnumIllumination("D50");
+		/**  */
 		public static final EnumIllumination D65 = new EnumIllumination("D65");
+		/**  */
 		public static final EnumIllumination Unknown = new EnumIllumination("Unknown");
 	}
 
@@ -304,6 +315,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for InkState
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumInkState extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -356,8 +368,11 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumInkState.class);
 		}
 
+		/**  */
 		public static final EnumInkState Dry = new EnumInkState("Dry");
+		/**  */
 		public static final EnumInkState Wet = new EnumInkState("Wet");
+		/**  */
 		public static final EnumInkState NA = new EnumInkState("NA");
 	}
 
@@ -365,6 +380,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for MeasurementFilter
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMeasurementFilter extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -417,8 +433,11 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumMeasurementFilter.class);
 		}
 
+		/**  */
 		public static final EnumMeasurementFilter None = new EnumMeasurementFilter("None");
+		/**  */
 		public static final EnumMeasurementFilter Pol = new EnumMeasurementFilter("Pol");
+		/**  */
 		public static final EnumMeasurementFilter UV = new EnumMeasurementFilter("UV");
 	}
 
@@ -426,6 +445,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for SampleBacking
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSampleBacking extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -478,8 +498,11 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumSampleBacking.class);
 		}
 
+		/**  */
 		public static final EnumSampleBacking Black = new EnumSampleBacking("Black");
+		/**  */
 		public static final EnumSampleBacking White = new EnumSampleBacking("White");
+		/**  */
 		public static final EnumSampleBacking NA = new EnumSampleBacking("NA");
 	}
 
@@ -487,6 +510,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	* Enumeration strings for WhiteBase
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWhiteBase extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -539,7 +563,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 			return iterator(EnumWhiteBase.class);
 		}
 
+		/**  */
 		public static final EnumWhiteBase Absolute = new EnumWhiteBase("Absolute");
+		/**  */
 		public static final EnumWhiteBase Paper = new EnumWhiteBase("Paper");
 	}
 

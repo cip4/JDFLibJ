@@ -175,6 +175,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	* Enumeration strings for Orientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,13 +228,21 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 			return iterator(EnumOrientation.class);
 		}
 
+		/**  */
 		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
+		/**  */
 		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
+		/**  */
 		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
+		/**  */
 		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
+		/**  */
 		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
+		/**  */
 		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
+		/**  */
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
+		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
@@ -241,6 +250,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	* Enumeration strings for TransformationContext
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTransformationContext extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -293,8 +303,11 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 			return iterator(EnumTransformationContext.class);
 		}
 
+		/**  */
 		public static final EnumTransformationContext StackItem = new EnumTransformationContext("StackItem");
+		/**  */
 		public static final EnumTransformationContext Component = new EnumTransformationContext("Component");
+		/**  */
 		public static final EnumTransformationContext CollateItem = new EnumTransformationContext("CollateItem");
 	}
 

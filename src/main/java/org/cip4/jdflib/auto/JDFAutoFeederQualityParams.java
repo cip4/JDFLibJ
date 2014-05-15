@@ -156,6 +156,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	* Enumeration strings for IncorrectComponentQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumIncorrectComponentQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -208,10 +209,15 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 			return iterator(EnumIncorrectComponentQuality.class);
 		}
 
+		/**  */
 		public static final EnumIncorrectComponentQuality NotActive = new EnumIncorrectComponentQuality("NotActive");
+		/**  */
 		public static final EnumIncorrectComponentQuality Check = new EnumIncorrectComponentQuality("Check");
+		/**  */
 		public static final EnumIncorrectComponentQuality Waste = new EnumIncorrectComponentQuality("Waste");
+		/**  */
 		public static final EnumIncorrectComponentQuality StopNoWaste = new EnumIncorrectComponentQuality("StopNoWaste");
+		/**  */
 		public static final EnumIncorrectComponentQuality StopWaste = new EnumIncorrectComponentQuality("StopWaste");
 	}
 
@@ -219,6 +225,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	* Enumeration strings for DoubleFeedQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDoubleFeedQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -271,10 +278,15 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 			return iterator(EnumDoubleFeedQuality.class);
 		}
 
+		/**  */
 		public static final EnumDoubleFeedQuality NotActive = new EnumDoubleFeedQuality("NotActive");
+		/**  */
 		public static final EnumDoubleFeedQuality Check = new EnumDoubleFeedQuality("Check");
+		/**  */
 		public static final EnumDoubleFeedQuality Waste = new EnumDoubleFeedQuality("Waste");
+		/**  */
 		public static final EnumDoubleFeedQuality StopNoWaste = new EnumDoubleFeedQuality("StopNoWaste");
+		/**  */
 		public static final EnumDoubleFeedQuality StopWaste = new EnumDoubleFeedQuality("StopWaste");
 	}
 
@@ -282,6 +294,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	* Enumeration strings for BadFeedQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBadFeedQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -334,10 +347,15 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 			return iterator(EnumBadFeedQuality.class);
 		}
 
+		/**  */
 		public static final EnumBadFeedQuality NotActive = new EnumBadFeedQuality("NotActive");
+		/**  */
 		public static final EnumBadFeedQuality Check = new EnumBadFeedQuality("Check");
+		/**  */
 		public static final EnumBadFeedQuality Waste = new EnumBadFeedQuality("Waste");
+		/**  */
 		public static final EnumBadFeedQuality StopNoWaste = new EnumBadFeedQuality("StopNoWaste");
+		/**  */
 		public static final EnumBadFeedQuality StopWaste = new EnumBadFeedQuality("StopWaste");
 	}
 

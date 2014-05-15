@@ -198,6 +198,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	* Enumeration strings for ProofRenderingIntent
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProofRenderingIntent extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -250,9 +251,13 @@ public abstract class JDFAutoProofingParams extends JDFResource
 			return iterator(EnumProofRenderingIntent.class);
 		}
 
+		/**  */
 		public static final EnumProofRenderingIntent Saturation = new EnumProofRenderingIntent("Saturation");
+		/**  */
 		public static final EnumProofRenderingIntent Perceptual = new EnumProofRenderingIntent("Perceptual");
+		/**  */
 		public static final EnumProofRenderingIntent RelativeColorimetric = new EnumProofRenderingIntent("RelativeColorimetric");
+		/**  */
 		public static final EnumProofRenderingIntent AbsoluteColorimetric = new EnumProofRenderingIntent("AbsoluteColorimetric");
 	}
 
@@ -260,6 +265,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	* Enumeration strings for ProofType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProofType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -312,8 +318,11 @@ public abstract class JDFAutoProofingParams extends JDFResource
 			return iterator(EnumProofType.class);
 		}
 
+		/**  */
 		public static final EnumProofType None = new EnumProofType("None");
+		/**  */
 		public static final EnumProofType Page = new EnumProofType("Page");
+		/**  */
 		public static final EnumProofType Imposition = new EnumProofType("Imposition");
 	}
 
@@ -321,6 +330,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	* Enumeration strings for ColorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumColorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -373,8 +383,11 @@ public abstract class JDFAutoProofingParams extends JDFResource
 			return iterator(EnumColorType.class);
 		}
 
+		/**  */
 		public static final EnumColorType Monochrome = new EnumColorType("Monochrome");
+		/**  */
 		public static final EnumColorType BasicColor = new EnumColorType("BasicColor");
+		/**  */
 		public static final EnumColorType MatchedColor = new EnumColorType("MatchedColor");
 	}
 

@@ -184,6 +184,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFElement
 	* Enumeration strings for DensityStandard
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDensityStandard extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -236,11 +237,17 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFElement
 			return iterator(EnumDensityStandard.class);
 		}
 
+		/**  */
 		public static final EnumDensityStandard ANSIA = new EnumDensityStandard("ANSIA");
+		/**  */
 		public static final EnumDensityStandard ANSIE = new EnumDensityStandard("ANSIE");
+		/**  */
 		public static final EnumDensityStandard ANSII = new EnumDensityStandard("ANSII");
+		/**  */
 		public static final EnumDensityStandard ANSIT = new EnumDensityStandard("ANSIT");
+		/**  */
 		public static final EnumDensityStandard DIN16536 = new EnumDensityStandard("DIN16536");
+		/**  */
 		public static final EnumDensityStandard DIN16536NB = new EnumDensityStandard("DIN16536NB");
 	}
 

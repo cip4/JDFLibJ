@@ -80,8 +80,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit.EnumReason;

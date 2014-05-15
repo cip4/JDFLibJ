@@ -177,6 +177,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	* Enumeration strings for DeviceDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -229,11 +230,17 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 			return iterator(EnumDeviceDetails.class);
 		}
 
+		/**  */
 		public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
+		/**  */
 		public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
+		/**  */
 		public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
+		/**  */
 		public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
+		/**  */
 		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
+		/**  */
 		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
 	}
 
@@ -241,6 +248,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	* Enumeration strings for JobDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumJobDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -293,9 +301,13 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 			return iterator(EnumJobDetails.class);
 		}
 
+		/**  */
 		public static final EnumJobDetails None = new EnumJobDetails("None");
+		/**  */
 		public static final EnumJobDetails MIS = new EnumJobDetails("MIS");
+		/**  */
 		public static final EnumJobDetails Brief = new EnumJobDetails("Brief");
+		/**  */
 		public static final EnumJobDetails Full = new EnumJobDetails("Full");
 	}
 

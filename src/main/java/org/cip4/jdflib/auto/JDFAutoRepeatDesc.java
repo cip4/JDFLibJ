@@ -160,6 +160,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	* Enumeration strings for AllowedRotate
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedRotate extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -212,9 +213,13 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 			return iterator(EnumAllowedRotate.class);
 		}
 
+		/**  */
 		public static final EnumAllowedRotate None = new EnumAllowedRotate("None");
+		/**  */
 		public static final EnumAllowedRotate Grain = new EnumAllowedRotate("Grain");
+		/**  */
 		public static final EnumAllowedRotate MinorGrain = new EnumAllowedRotate("MinorGrain");
+		/**  */
 		public static final EnumAllowedRotate CrossGrain = new EnumAllowedRotate("CrossGrain");
 	}
 

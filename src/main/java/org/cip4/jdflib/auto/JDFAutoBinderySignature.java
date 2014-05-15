@@ -218,6 +218,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	* Enumeration strings for BinderySignatureType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBinderySignatureType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -270,8 +271,11 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 			return iterator(EnumBinderySignatureType.class);
 		}
 
+		/**  */
 		public static final EnumBinderySignatureType Die = new EnumBinderySignatureType("Die");
+		/**  */
 		public static final EnumBinderySignatureType Fold = new EnumBinderySignatureType("Fold");
+		/**  */
 		public static final EnumBinderySignatureType Grid = new EnumBinderySignatureType("Grid");
 	}
 
@@ -279,6 +283,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	* Enumeration strings for BindingEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBindingEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -331,10 +336,15 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 			return iterator(EnumBindingEdge.class);
 		}
 
+		/**  */
 		public static final EnumBindingEdge Left = new EnumBindingEdge("Left");
+		/**  */
 		public static final EnumBindingEdge Right = new EnumBindingEdge("Right");
+		/**  */
 		public static final EnumBindingEdge Top = new EnumBindingEdge("Top");
+		/**  */
 		public static final EnumBindingEdge Bottom = new EnumBindingEdge("Bottom");
+		/**  */
 		public static final EnumBindingEdge None = new EnumBindingEdge("None");
 	}
 
@@ -342,6 +352,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	* Enumeration strings for JogEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumJogEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -394,10 +405,15 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 			return iterator(EnumJogEdge.class);
 		}
 
+		/**  */
 		public static final EnumJogEdge Left = new EnumJogEdge("Left");
+		/**  */
 		public static final EnumJogEdge Right = new EnumJogEdge("Right");
+		/**  */
 		public static final EnumJogEdge Top = new EnumJogEdge("Top");
+		/**  */
 		public static final EnumJogEdge Bottom = new EnumJogEdge("Bottom");
+		/**  */
 		public static final EnumJogEdge None = new EnumJogEdge("None");
 	}
 
@@ -405,6 +421,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	* Enumeration strings for BindingOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBindingOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -457,13 +474,21 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 			return iterator(EnumBindingOrientation.class);
 		}
 
+		/**  */
 		public static final EnumBindingOrientation Rotate0 = new EnumBindingOrientation("Rotate0");
+		/**  */
 		public static final EnumBindingOrientation Rotate90 = new EnumBindingOrientation("Rotate90");
+		/**  */
 		public static final EnumBindingOrientation Rotate180 = new EnumBindingOrientation("Rotate180");
+		/**  */
 		public static final EnumBindingOrientation Rotate270 = new EnumBindingOrientation("Rotate270");
+		/**  */
 		public static final EnumBindingOrientation Flip0 = new EnumBindingOrientation("Flip0");
+		/**  */
 		public static final EnumBindingOrientation Flip90 = new EnumBindingOrientation("Flip90");
+		/**  */
 		public static final EnumBindingOrientation Flip180 = new EnumBindingOrientation("Flip180");
+		/**  */
 		public static final EnumBindingOrientation Flip270 = new EnumBindingOrientation("Flip270");
 	}
 
@@ -471,6 +496,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	* Enumeration strings for FoldLay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFoldLay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -523,13 +549,21 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 			return iterator(EnumFoldLay.class);
 		}
 
+		/**  */
 		public static final EnumFoldLay Rotate0 = new EnumFoldLay("Rotate0");
+		/**  */
 		public static final EnumFoldLay Rotate90 = new EnumFoldLay("Rotate90");
+		/**  */
 		public static final EnumFoldLay Rotate180 = new EnumFoldLay("Rotate180");
+		/**  */
 		public static final EnumFoldLay Rotate270 = new EnumFoldLay("Rotate270");
+		/**  */
 		public static final EnumFoldLay Flip0 = new EnumFoldLay("Flip0");
+		/**  */
 		public static final EnumFoldLay Flip90 = new EnumFoldLay("Flip90");
+		/**  */
 		public static final EnumFoldLay Flip180 = new EnumFoldLay("Flip180");
+		/**  */
 		public static final EnumFoldLay Flip270 = new EnumFoldLay("Flip270");
 	}
 

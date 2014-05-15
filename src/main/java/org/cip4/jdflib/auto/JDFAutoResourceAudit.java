@@ -177,6 +177,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	* Enumeration strings for Reason
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumReason extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -229,8 +230,11 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 			return iterator(EnumReason.class);
 		}
 
+		/**  */
 		public static final EnumReason OperatorInput = new EnumReason("OperatorInput");
+		/**  */
 		public static final EnumReason PlanChange = new EnumReason("PlanChange");
+		/**  */
 		public static final EnumReason ProcessResult = new EnumReason("ProcessResult");
 	}
 

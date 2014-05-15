@@ -209,6 +209,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	* Enumeration strings for Encoding
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumEncoding extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -261,11 +262,17 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 			return iterator(EnumEncoding.class);
 		}
 
+		/**  */
 		public static final EnumEncoding ASCII = new EnumEncoding("ASCII");
+		/**  */
 		public static final EnumEncoding Barcode = new EnumEncoding("Barcode");
+		/**  */
 		public static final EnumEncoding BarCode1D = new EnumEncoding("BarCode1D");
+		/**  */
 		public static final EnumEncoding BarCode2D = new EnumEncoding("BarCode2D");
+		/**  */
 		public static final EnumEncoding Braille = new EnumEncoding("Braille");
+		/**  */
 		public static final EnumEncoding RFID = new EnumEncoding("RFID");
 	}
 
@@ -273,6 +280,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	* Enumeration strings for Position
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPosition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -325,15 +333,25 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 			return iterator(EnumPosition.class);
 		}
 
+		/**  */
 		public static final EnumPosition Header = new EnumPosition("Header");
+		/**  */
 		public static final EnumPosition Trailer = new EnumPosition("Trailer");
+		/**  */
 		public static final EnumPosition Page = new EnumPosition("Page");
+		/**  */
 		public static final EnumPosition Top = new EnumPosition("Top");
+		/**  */
 		public static final EnumPosition Bottom = new EnumPosition("Bottom");
+		/**  */
 		public static final EnumPosition Left = new EnumPosition("Left");
+		/**  */
 		public static final EnumPosition Right = new EnumPosition("Right");
+		/**  */
 		public static final EnumPosition Front = new EnumPosition("Front");
+		/**  */
 		public static final EnumPosition Back = new EnumPosition("Back");
+		/**  */
 		public static final EnumPosition Any = new EnumPosition("Any");
 	}
 
@@ -341,6 +359,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	* Enumeration strings for Purpose
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPurpose extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -393,8 +412,11 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 			return iterator(EnumPurpose.class);
 		}
 
+		/**  */
 		public static final EnumPurpose Verification = new EnumPurpose("Verification");
+		/**  */
 		public static final EnumPurpose Separation = new EnumPurpose("Separation");
+		/**  */
 		public static final EnumPurpose Label = new EnumPurpose("Label");
 	}
 

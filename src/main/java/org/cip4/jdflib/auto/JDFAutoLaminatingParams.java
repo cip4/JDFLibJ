@@ -181,6 +181,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	* Enumeration strings for LaminatingMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumLaminatingMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -233,9 +234,13 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 			return iterator(EnumLaminatingMethod.class);
 		}
 
+		/**  */
 		public static final EnumLaminatingMethod CompoundFoil = new EnumLaminatingMethod("CompoundFoil");
+		/**  */
 		public static final EnumLaminatingMethod DispersionGlue = new EnumLaminatingMethod("DispersionGlue");
+		/**  */
 		public static final EnumLaminatingMethod Fusing = new EnumLaminatingMethod("Fusing");
+		/**  */
 		public static final EnumLaminatingMethod Unknown = new EnumLaminatingMethod("Unknown");
 	}
 

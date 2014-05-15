@@ -189,6 +189,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	* Enumeration strings for FolioCount
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFolioCount extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -241,7 +242,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 			return iterator(EnumFolioCount.class);
 		}
 
+		/**  */
 		public static final EnumFolioCount Booklet = new EnumFolioCount("Booklet");
+		/**  */
 		public static final EnumFolioCount Flat = new EnumFolioCount("Flat");
 	}
 
@@ -249,6 +252,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	* Enumeration strings for FinishedPageOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFinishedPageOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -301,7 +305,9 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 			return iterator(EnumFinishedPageOrientation.class);
 		}
 
+		/**  */
 		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
+		/**  */
 		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
 	}
 
@@ -309,6 +315,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	* Enumeration strings for RotatePolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRotatePolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -361,9 +368,13 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 			return iterator(EnumRotatePolicy.class);
 		}
 
+		/**  */
 		public static final EnumRotatePolicy NoRotate = new EnumRotatePolicy("NoRotate");
+		/**  */
 		public static final EnumRotatePolicy RotateOrthogonal = new EnumRotatePolicy("RotateOrthogonal");
+		/**  */
 		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
+		/**  */
 		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
 	}
 
@@ -371,6 +382,7 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -423,9 +435,13 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSided = new EnumSides("OneSided");
+		/**  */
 		public static final EnumSides OneSidedBack = new EnumSides("OneSidedBack");
+		/**  */
 		public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
+		/**  */
 		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
 	}
 

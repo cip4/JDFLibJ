@@ -235,6 +235,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	* Enumeration strings for ComponentType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumComponentType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -287,13 +288,21 @@ public abstract class JDFAutoComponent extends JDFResource
 			return iterator(EnumComponentType.class);
 		}
 
+		/**  */
 		public static final EnumComponentType Block = new EnumComponentType("Block");
+		/**  */
 		public static final EnumComponentType Other = new EnumComponentType("Other");
+		/**  */
 		public static final EnumComponentType Ribbon = new EnumComponentType("Ribbon");
+		/**  */
 		public static final EnumComponentType Sheet = new EnumComponentType("Sheet");
+		/**  */
 		public static final EnumComponentType Web = new EnumComponentType("Web");
+		/**  */
 		public static final EnumComponentType FinalProduct = new EnumComponentType("FinalProduct");
+		/**  */
 		public static final EnumComponentType PartialProduct = new EnumComponentType("PartialProduct");
+		/**  */
 		public static final EnumComponentType Proof = new EnumComponentType("Proof");
 	}
 
@@ -301,6 +310,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	* Enumeration strings for Automation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAutomation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -353,7 +363,9 @@ public abstract class JDFAutoComponent extends JDFResource
 			return iterator(EnumAutomation.class);
 		}
 
+		/**  */
 		public static final EnumAutomation Static = new EnumAutomation("Static");
+		/**  */
 		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
 	}
 
@@ -361,6 +373,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	* Enumeration strings for OverfoldSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOverfoldSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -413,7 +426,9 @@ public abstract class JDFAutoComponent extends JDFResource
 			return iterator(EnumOverfoldSide.class);
 		}
 
+		/**  */
 		public static final EnumOverfoldSide Front = new EnumOverfoldSide("Front");
+		/**  */
 		public static final EnumOverfoldSide Back = new EnumOverfoldSide("Back");
 	}
 
@@ -429,7 +444,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	  * (5.2) set attribute ComponentType
 	  * @param v vector of the enumeration values
 	  */
-	public void setComponentType(Vector v)
+	public void setComponentType(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.COMPONENTTYPE, v, null);
 	}
@@ -438,7 +453,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	  * (9.2) get ComponentType attribute ComponentType
 	  * @return Vector of the enumerations
 	  */
-	public Vector getComponentType()
+	public Vector<? extends ValuedEnum> getComponentType()
 	{
 		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EnumComponentType.getEnum(0), false);
 	}

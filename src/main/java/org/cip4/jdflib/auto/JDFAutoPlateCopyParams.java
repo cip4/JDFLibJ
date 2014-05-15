@@ -173,6 +173,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	* Enumeration strings for Diffusion
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDiffusion extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,7 +226,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 			return iterator(EnumDiffusion.class);
 		}
 
+		/**  */
 		public static final EnumDiffusion On = new EnumDiffusion("On");
+		/**  */
 		public static final EnumDiffusion Off = new EnumDiffusion("Off");
 	}
 

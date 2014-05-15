@@ -161,6 +161,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for Anchor
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -213,14 +214,23 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumAnchor.class);
 		}
 
+		/**  */
 		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+		/**  */
 		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+		/**  */
 		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+		/**  */
 		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+		/**  */
 		public static final EnumAnchor Center = new EnumAnchor("Center");
+		/**  */
 		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+		/**  */
 		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+		/**  */
 		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+		/**  */
 		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 
@@ -228,6 +238,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for HorizontalFitPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumHorizontalFitPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -280,10 +291,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumHorizontalFitPolicy.class);
 		}
 
+		/**  */
 		public static final EnumHorizontalFitPolicy NoRepeat = new EnumHorizontalFitPolicy("NoRepeat");
+		/**  */
 		public static final EnumHorizontalFitPolicy StretchToFit = new EnumHorizontalFitPolicy("StretchToFit");
+		/**  */
 		public static final EnumHorizontalFitPolicy UndistortedScaleToFit = new EnumHorizontalFitPolicy("UndistortedScaleToFit");
+		/**  */
 		public static final EnumHorizontalFitPolicy RepeatToFill = new EnumHorizontalFitPolicy("RepeatToFill");
+		/**  */
 		public static final EnumHorizontalFitPolicy RepeatUnclipped = new EnumHorizontalFitPolicy("RepeatUnclipped");
 	}
 
@@ -291,6 +307,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for MarkJustification
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMarkJustification extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -343,8 +360,11 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumMarkJustification.class);
 		}
 
+		/**  */
 		public static final EnumMarkJustification Left = new EnumMarkJustification("Left");
+		/**  */
 		public static final EnumMarkJustification Right = new EnumMarkJustification("Right");
+		/**  */
 		public static final EnumMarkJustification Center = new EnumMarkJustification("Center");
 	}
 
@@ -352,6 +372,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for MarkOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMarkOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -404,7 +425,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumMarkOrientation.class);
 		}
 
+		/**  */
 		public static final EnumMarkOrientation Vertical = new EnumMarkOrientation("Vertical");
+		/**  */
 		public static final EnumMarkOrientation Horizontal = new EnumMarkOrientation("Horizontal");
 	}
 
@@ -412,6 +435,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for MarkPosition
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMarkPosition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -464,9 +488,13 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumMarkPosition.class);
 		}
 
+		/**  */
 		public static final EnumMarkPosition Top = new EnumMarkPosition("Top");
+		/**  */
 		public static final EnumMarkPosition Bottom = new EnumMarkPosition("Bottom");
+		/**  */
 		public static final EnumMarkPosition Left = new EnumMarkPosition("Left");
+		/**  */
 		public static final EnumMarkPosition Right = new EnumMarkPosition("Right");
 	}
 
@@ -474,6 +502,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	* Enumeration strings for VerticalFitPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumVerticalFitPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -526,10 +555,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 			return iterator(EnumVerticalFitPolicy.class);
 		}
 
+		/**  */
 		public static final EnumVerticalFitPolicy NoRepeat = new EnumVerticalFitPolicy("NoRepeat");
+		/**  */
 		public static final EnumVerticalFitPolicy StretchToFit = new EnumVerticalFitPolicy("StretchToFit");
+		/**  */
 		public static final EnumVerticalFitPolicy UndistortedScaleToFit = new EnumVerticalFitPolicy("UndistortedScaleToFit");
+		/**  */
 		public static final EnumVerticalFitPolicy RepeatToFill = new EnumVerticalFitPolicy("RepeatToFill");
+		/**  */
 		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
 	}
 

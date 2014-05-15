@@ -192,6 +192,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	* Enumeration strings for ListPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumListPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -244,7 +245,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 			return iterator(EnumListPolicy.class);
 		}
 
+		/**  */
 		public static final EnumListPolicy All = new EnumListPolicy("All");
+		/**  */
 		public static final EnumListPolicy Available = new EnumListPolicy("Available");
 	}
 

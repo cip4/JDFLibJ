@@ -154,6 +154,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	* Enumeration strings for UserDisplay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumUserDisplay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,8 +207,11 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 			return iterator(EnumUserDisplay.class);
 		}
 
+		/**  */
 		public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
+		/**  */
 		public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
+		/**  */
 		public static final EnumUserDisplay Dependant = new EnumUserDisplay("Dependant");
 	}
 

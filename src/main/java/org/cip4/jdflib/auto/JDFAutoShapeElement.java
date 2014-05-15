@@ -201,6 +201,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	* Enumeration strings for CutType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCutType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,7 +254,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 			return iterator(EnumCutType.class);
 		}
 
+		/**  */
 		public static final EnumCutType Cut = new EnumCutType("Cut");
+		/**  */
 		public static final EnumCutType Perforate = new EnumCutType("Perforate");
 	}
 
@@ -261,6 +264,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	* Enumeration strings for ShapeType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShapeType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -313,9 +317,13 @@ public abstract class JDFAutoShapeElement extends JDFResource
 			return iterator(EnumShapeType.class);
 		}
 
+		/**  */
 		public static final EnumShapeType Rectangular = new EnumShapeType("Rectangular");
+		/**  */
 		public static final EnumShapeType Round = new EnumShapeType("Round");
+		/**  */
 		public static final EnumShapeType Path = new EnumShapeType("Path");
+		/**  */
 		public static final EnumShapeType RoundedRectangle = new EnumShapeType("RoundedRectangle");
 	}
 

@@ -173,6 +173,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	* Enumeration strings for Action
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAction extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,9 +226,13 @@ public abstract class JDFAutoNewComment extends JDFElement
 			return iterator(EnumAction.class);
 		}
 
+		/**  */
 		public static final EnumAction Add = new EnumAction("Add");
+		/**  */
 		public static final EnumAction Concat = new EnumAction("Concat");
+		/**  */
 		public static final EnumAction Replace = new EnumAction("Replace");
+		/**  */
 		public static final EnumAction Remove = new EnumAction("Remove");
 	}
 

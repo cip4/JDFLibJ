@@ -194,6 +194,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	* Enumeration strings for InsertLocation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumInsertLocation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,11 +247,17 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 			return iterator(EnumInsertLocation.class);
 		}
 
+		/**  */
 		public static final EnumInsertLocation Front = new EnumInsertLocation("Front");
+		/**  */
 		public static final EnumInsertLocation Back = new EnumInsertLocation("Back");
+		/**  */
 		public static final EnumInsertLocation OverfoldLeft = new EnumInsertLocation("OverfoldLeft");
+		/**  */
 		public static final EnumInsertLocation OverfoldRight = new EnumInsertLocation("OverfoldRight");
+		/**  */
 		public static final EnumInsertLocation Overfold = new EnumInsertLocation("Overfold");
+		/**  */
 		public static final EnumInsertLocation FinishedPage = new EnumInsertLocation("FinishedPage");
 	}
 
@@ -258,6 +265,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	* Enumeration strings for Method
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -310,7 +318,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 			return iterator(EnumMethod.class);
 		}
 
+		/**  */
 		public static final EnumMethod BlowIn = new EnumMethod("BlowIn");
+		/**  */
 		public static final EnumMethod BindIn = new EnumMethod("BindIn");
 	}
 

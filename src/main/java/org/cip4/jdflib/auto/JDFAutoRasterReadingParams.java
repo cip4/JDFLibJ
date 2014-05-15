@@ -200,6 +200,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	* Enumeration strings for MirrorAround
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorAround extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -252,9 +253,13 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 			return iterator(EnumMirrorAround.class);
 		}
 
+		/**  */
 		public static final EnumMirrorAround None = new EnumMirrorAround("None");
+		/**  */
 		public static final EnumMirrorAround FeedDirection = new EnumMirrorAround("FeedDirection");
+		/**  */
 		public static final EnumMirrorAround MediaWidth = new EnumMirrorAround("MediaWidth");
+		/**  */
 		public static final EnumMirrorAround Both = new EnumMirrorAround("Both");
 	}
 
@@ -262,6 +267,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	* Enumeration strings for Polarity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -314,7 +320,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 			return iterator(EnumPolarity.class);
 		}
 
+		/**  */
 		public static final EnumPolarity Positive = new EnumPolarity("Positive");
+		/**  */
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
 	}
 

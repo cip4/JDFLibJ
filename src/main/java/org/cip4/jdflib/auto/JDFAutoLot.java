@@ -155,6 +155,7 @@ public abstract class JDFAutoLot extends JDFElement
 	* Enumeration strings for Consumption
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumConsumption extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,7 +208,9 @@ public abstract class JDFAutoLot extends JDFElement
 			return iterator(EnumConsumption.class);
 		}
 
+		/**  */
 		public static final EnumConsumption Full = new EnumConsumption("Full");
+		/**  */
 		public static final EnumConsumption Partial = new EnumConsumption("Partial");
 	}
 

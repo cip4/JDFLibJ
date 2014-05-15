@@ -172,6 +172,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	* Enumeration strings for ApprovalState
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumApprovalState extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -224,8 +225,11 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 			return iterator(EnumApprovalState.class);
 		}
 
+		/**  */
 		public static final EnumApprovalState Approved = new EnumApprovalState("Approved");
+		/**  */
 		public static final EnumApprovalState ApprovedWithComment = new EnumApprovalState("ApprovedWithComment");
+		/**  */
 		public static final EnumApprovalState Rejected = new EnumApprovalState("Rejected");
 	}
 

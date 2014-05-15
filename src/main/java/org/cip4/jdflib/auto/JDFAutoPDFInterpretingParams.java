@@ -186,6 +186,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	* Enumeration strings for OCGDefault
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOCGDefault extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,8 +239,11 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 			return iterator(EnumOCGDefault.class);
 		}
 
+		/**  */
 		public static final EnumOCGDefault Exclude = new EnumOCGDefault("Exclude");
+		/**  */
 		public static final EnumOCGDefault FromPDF = new EnumOCGDefault("FromPDF");
+		/**  */
 		public static final EnumOCGDefault Include = new EnumOCGDefault("Include");
 	}
 
@@ -247,6 +251,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	* Enumeration strings for OCGProcess
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOCGProcess extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -299,8 +304,11 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 			return iterator(EnumOCGProcess.class);
 		}
 
+		/**  */
 		public static final EnumOCGProcess Export = new EnumOCGProcess("Export");
+		/**  */
 		public static final EnumOCGProcess Print = new EnumOCGProcess("Print");
+		/**  */
 		public static final EnumOCGProcess View = new EnumOCGProcess("View");
 	}
 

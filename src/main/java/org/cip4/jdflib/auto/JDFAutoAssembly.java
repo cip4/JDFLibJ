@@ -204,6 +204,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	* Enumeration strings for JogSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumJogSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -256,10 +257,15 @@ public abstract class JDFAutoAssembly extends JDFResource
 			return iterator(EnumJogSide.class);
 		}
 
+		/**  */
 		public static final EnumJogSide Left = new EnumJogSide("Left");
+		/**  */
 		public static final EnumJogSide Right = new EnumJogSide("Right");
+		/**  */
 		public static final EnumJogSide Top = new EnumJogSide("Top");
+		/**  */
 		public static final EnumJogSide Bottom = new EnumJogSide("Bottom");
+		/**  */
 		public static final EnumJogSide None = new EnumJogSide("None");
 	}
 
@@ -267,6 +273,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	* Enumeration strings for Order
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -319,9 +326,13 @@ public abstract class JDFAutoAssembly extends JDFResource
 			return iterator(EnumOrder.class);
 		}
 
+		/**  */
 		public static final EnumOrder Collecting = new EnumOrder("Collecting");
+		/**  */
 		public static final EnumOrder Gathering = new EnumOrder("Gathering");
+		/**  */
 		public static final EnumOrder None = new EnumOrder("None");
+		/**  */
 		public static final EnumOrder List = new EnumOrder("List");
 	}
 
@@ -329,6 +340,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	* Enumeration strings for BindingSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBindingSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -381,9 +393,13 @@ public abstract class JDFAutoAssembly extends JDFResource
 			return iterator(EnumBindingSide.class);
 		}
 
+		/**  */
 		public static final EnumBindingSide Left = new EnumBindingSide("Left");
+		/**  */
 		public static final EnumBindingSide Right = new EnumBindingSide("Right");
+		/**  */
 		public static final EnumBindingSide Top = new EnumBindingSide("Top");
+		/**  */
 		public static final EnumBindingSide Bottom = new EnumBindingSide("Bottom");
 	}
 

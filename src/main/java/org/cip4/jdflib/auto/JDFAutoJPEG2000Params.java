@@ -158,6 +158,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	* Enumeration strings for ProgressionOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProgressionOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -210,10 +211,15 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 			return iterator(EnumProgressionOrder.class);
 		}
 
+		/**  */
 		public static final EnumProgressionOrder LRCP = new EnumProgressionOrder("LRCP");
+		/**  */
 		public static final EnumProgressionOrder RLCP = new EnumProgressionOrder("RLCP");
+		/**  */
 		public static final EnumProgressionOrder RPCL = new EnumProgressionOrder("RPCL");
+		/**  */
 		public static final EnumProgressionOrder PCRL = new EnumProgressionOrder("PCRL");
+		/**  */
 		public static final EnumProgressionOrder CPRL = new EnumProgressionOrder("CPRL");
 	}
 

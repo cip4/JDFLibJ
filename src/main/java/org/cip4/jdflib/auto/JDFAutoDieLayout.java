@@ -204,6 +204,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	* Enumeration strings for DieSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDieSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -256,7 +257,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 			return iterator(EnumDieSide.class);
 		}
 
+		/**  */
 		public static final EnumDieSide Up = new EnumDieSide("Up");
+		/**  */
 		public static final EnumDieSide Down = new EnumDieSide("Down");
 	}
 
@@ -264,6 +267,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	* Enumeration strings for MediaSide
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMediaSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -316,8 +320,11 @@ public abstract class JDFAutoDieLayout extends JDFResource
 			return iterator(EnumMediaSide.class);
 		}
 
+		/**  */
 		public static final EnumMediaSide Front = new EnumMediaSide("Front");
+		/**  */
 		public static final EnumMediaSide Back = new EnumMediaSide("Back");
+		/**  */
 		public static final EnumMediaSide Both = new EnumMediaSide("Both");
 	}
 

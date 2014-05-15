@@ -185,6 +185,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	* Enumeration strings for StitchOrigin
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStitchOrigin extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -237,8 +238,11 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 			return iterator(EnumStitchOrigin.class);
 		}
 
+		/**  */
 		public static final EnumStitchOrigin TrimBoxCenter = new EnumStitchOrigin("TrimBoxCenter");
+		/**  */
 		public static final EnumStitchOrigin TrimBoxJogSide = new EnumStitchOrigin("TrimBoxJogSide");
+		/**  */
 		public static final EnumStitchOrigin UntrimmedJogSide = new EnumStitchOrigin("UntrimmedJogSide");
 	}
 
@@ -246,6 +250,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	* Enumeration strings for ReferenceEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumReferenceEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -298,9 +303,13 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 			return iterator(EnumReferenceEdge.class);
 		}
 
+		/**  */
 		public static final EnumReferenceEdge Top = new EnumReferenceEdge("Top");
+		/**  */
 		public static final EnumReferenceEdge Left = new EnumReferenceEdge("Left");
+		/**  */
 		public static final EnumReferenceEdge Right = new EnumReferenceEdge("Right");
+		/**  */
 		public static final EnumReferenceEdge Bottom = new EnumReferenceEdge("Bottom");
 	}
 
@@ -308,6 +317,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	* Enumeration strings for StapleShape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStapleShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -360,10 +370,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 			return iterator(EnumStapleShape.class);
 		}
 
+		/**  */
 		public static final EnumStapleShape Crown = new EnumStapleShape("Crown");
+		/**  */
 		public static final EnumStapleShape Overlap = new EnumStapleShape("Overlap");
+		/**  */
 		public static final EnumStapleShape Butted = new EnumStapleShape("Butted");
+		/**  */
 		public static final EnumStapleShape ClinchOut = new EnumStapleShape("ClinchOut");
+		/**  */
 		public static final EnumStapleShape Eyelet = new EnumStapleShape("Eyelet");
 	}
 
@@ -371,6 +386,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	* Enumeration strings for StitchType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStitchType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -423,8 +439,11 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 			return iterator(EnumStitchType.class);
 		}
 
+		/**  */
 		public static final EnumStitchType Saddle = new EnumStitchType("Saddle");
+		/**  */
 		public static final EnumStitchType Side = new EnumStitchType("Side");
+		/**  */
 		public static final EnumStitchType Corner = new EnumStitchType("Corner");
 	}
 
@@ -432,6 +451,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	* Enumeration strings for TightBacking
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTightBacking extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -484,7 +504,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 			return iterator(EnumTightBacking.class);
 		}
 
+		/**  */
 		public static final EnumTightBacking Flat = new EnumTightBacking("Flat");
+		/**  */
 		public static final EnumTightBacking Pressure = new EnumTightBacking("Pressure");
 	}
 

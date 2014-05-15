@@ -185,6 +185,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	* Enumeration strings for XYRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumXYRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -237,11 +238,17 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 			return iterator(EnumXYRelation.class);
 		}
 
+		/**  */
 		public static final EnumXYRelation gt = new EnumXYRelation("gt");
+		/**  */
 		public static final EnumXYRelation ge = new EnumXYRelation("ge");
+		/**  */
 		public static final EnumXYRelation eq = new EnumXYRelation("eq");
+		/**  */
 		public static final EnumXYRelation le = new EnumXYRelation("le");
+		/**  */
 		public static final EnumXYRelation lt = new EnumXYRelation("lt");
+		/**  */
 		public static final EnumXYRelation ne = new EnumXYRelation("ne");
 	}
 

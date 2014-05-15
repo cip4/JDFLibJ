@@ -155,6 +155,7 @@ public abstract class JDFAutoErrorData extends JDFElement
 	* Enumeration strings for ErrorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumErrorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,8 +208,11 @@ public abstract class JDFAutoErrorData extends JDFElement
 			return iterator(EnumErrorType.class);
 		}
 
+		/**  */
 		public static final EnumErrorType Invalid = new EnumErrorType("Invalid");
+		/**  */
 		public static final EnumErrorType Missing = new EnumErrorType("Missing");
+		/**  */
 		public static final EnumErrorType Unsupported = new EnumErrorType("Unsupported");
 	}
 

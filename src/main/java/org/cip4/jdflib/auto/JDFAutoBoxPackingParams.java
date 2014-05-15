@@ -183,6 +183,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	* Enumeration strings for ComponentOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumComponentOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -235,8 +236,11 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 			return iterator(EnumComponentOrientation.class);
 		}
 
+		/**  */
 		public static final EnumComponentOrientation XY = new EnumComponentOrientation("XY");
+		/**  */
 		public static final EnumComponentOrientation XZ = new EnumComponentOrientation("XZ");
+		/**  */
 		public static final EnumComponentOrientation YZ = new EnumComponentOrientation("YZ");
 	}
 

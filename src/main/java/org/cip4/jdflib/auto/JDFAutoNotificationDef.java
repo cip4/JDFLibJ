@@ -70,13 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -98,7 +96,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClass.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
@@ -151,69 +149,6 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 		return " JDFAutoNotificationDef[  --> " + super.toString() + " ]";
 	}
 
-	/**
-	* Enumeration strings for Classes
-	*/
-
-	public static class EnumClasses extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumClasses(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumClasses getEnum(String enumName)
-		{
-			return (EnumClasses) getEnum(EnumClasses.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumClasses getEnum(int enumValue)
-		{
-			return (EnumClasses) getEnum(EnumClasses.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumClasses.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumClasses.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumClasses.class);
-		}
-
-		public static final EnumClasses Event = new EnumClasses("Event");
-		public static final EnumClasses Information = new EnumClasses("Information");
-		public static final EnumClasses Warning = new EnumClasses("Warning");
-		public static final EnumClasses Error = new EnumClasses("Error");
-		public static final EnumClasses Fatal = new EnumClasses("Fatal");
-	}
-
 	/* ************************************************************************
 	 * Attribute getter / setter
 	 * ************************************************************************
@@ -226,7 +161,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	  * (5.2) set attribute Classes
 	  * @param v vector of the enumeration values
 	  */
-	public void setClasses(Vector v)
+	public void setClasses(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -235,9 +170,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	  * (9.2) get Classes attribute Classes
 	  * @return Vector of the enumerations
 	  */
-	public Vector getClasses()
+	public Vector<? extends ValuedEnum> getClasses()
 	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClasses.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);
 	}
 
 	/* ---------------------------------------------------------------------

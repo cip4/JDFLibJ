@@ -158,6 +158,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	* Enumeration strings for DispositionAction
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDispositionAction extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -210,7 +211,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 			return iterator(EnumDispositionAction.class);
 		}
 
+		/**  */
 		public static final EnumDispositionAction Delete = new EnumDispositionAction("Delete");
+		/**  */
 		public static final EnumDispositionAction Archive = new EnumDispositionAction("Archive");
 	}
 
@@ -218,6 +221,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	* Enumeration strings for DispositionUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDispositionUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -270,7 +274,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 			return iterator(EnumDispositionUsage.class);
 		}
 
+		/**  */
 		public static final EnumDispositionUsage Input = new EnumDispositionUsage("Input");
+		/**  */
 		public static final EnumDispositionUsage Output = new EnumDispositionUsage("Output");
 	}
 

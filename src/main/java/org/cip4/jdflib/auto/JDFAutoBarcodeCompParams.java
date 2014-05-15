@@ -152,6 +152,7 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	* Enumeration strings for CompensationProcess
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCompensationProcess extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -204,7 +205,9 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 			return iterator(EnumCompensationProcess.class);
 		}
 
+		/**  */
 		public static final EnumCompensationProcess Printing = new EnumCompensationProcess("Printing");
+		/**  */
 		public static final EnumCompensationProcess Platemaking = new EnumCompensationProcess("Platemaking");
 	}
 

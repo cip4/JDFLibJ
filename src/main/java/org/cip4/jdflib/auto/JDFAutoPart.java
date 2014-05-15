@@ -227,6 +227,7 @@ public abstract class JDFAutoPart extends JDFElement
 	* Enumeration strings for PreviewType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -279,10 +280,15 @@ public abstract class JDFAutoPart extends JDFElement
 			return iterator(EnumPreviewType.class);
 		}
 
+		/**  */
 		public static final EnumPreviewType Separation = new EnumPreviewType("Separation");
+		/**  */
 		public static final EnumPreviewType SeparatedThumbNail = new EnumPreviewType("SeparatedThumbNail");
+		/**  */
 		public static final EnumPreviewType SeparationRaw = new EnumPreviewType("SeparationRaw");
+		/**  */
 		public static final EnumPreviewType ThumbNail = new EnumPreviewType("ThumbNail");
+		/**  */
 		public static final EnumPreviewType Viewable = new EnumPreviewType("Viewable");
 	}
 
@@ -290,6 +296,7 @@ public abstract class JDFAutoPart extends JDFElement
 	* Enumeration strings for Side
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSide extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -342,7 +349,9 @@ public abstract class JDFAutoPart extends JDFElement
 			return iterator(EnumSide.class);
 		}
 
+		/**  */
 		public static final EnumSide Front = new EnumSide("Front");
+		/**  */
 		public static final EnumSide Back = new EnumSide("Back");
 	}
 

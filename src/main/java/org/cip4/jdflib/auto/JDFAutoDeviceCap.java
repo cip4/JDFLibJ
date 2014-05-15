@@ -197,6 +197,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	* Enumeration strings for CombinedMethod
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCombinedMethod extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -249,10 +250,15 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 			return iterator(EnumCombinedMethod.class);
 		}
 
+		/**  */
 		public static final EnumCombinedMethod Combined = new EnumCombinedMethod("Combined");
+		/**  */
 		public static final EnumCombinedMethod CombinedProcessGroup = new EnumCombinedMethod("CombinedProcessGroup");
+		/**  */
 		public static final EnumCombinedMethod GrayBox = new EnumCombinedMethod("GrayBox");
+		/**  */
 		public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
+		/**  */
 		public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
 	}
 
@@ -260,6 +266,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	* Enumeration strings for ExecutionPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumExecutionPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -312,8 +319,11 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 			return iterator(EnumExecutionPolicy.class);
 		}
 
+		/**  */
 		public static final EnumExecutionPolicy RootNode = new EnumExecutionPolicy("RootNode");
+		/**  */
 		public static final EnumExecutionPolicy FirstFound = new EnumExecutionPolicy("FirstFound");
+		/**  */
 		public static final EnumExecutionPolicy AllFound = new EnumExecutionPolicy("AllFound");
 	}
 
@@ -321,6 +331,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	* Enumeration strings for TypeOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTypeOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -373,8 +384,11 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 			return iterator(EnumTypeOrder.class);
 		}
 
+		/**  */
 		public static final EnumTypeOrder Fixed = new EnumTypeOrder("Fixed");
+		/**  */
 		public static final EnumTypeOrder Unordered = new EnumTypeOrder("Unordered");
+		/**  */
 		public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
 	}
 
@@ -390,7 +404,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	  * (5.2) set attribute CombinedMethod
 	  * @param v vector of the enumeration values
 	  */
-	public void setCombinedMethod(Vector v)
+	public void setCombinedMethod(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, v, null);
 	}
@@ -399,7 +413,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	  * (9.2) get CombinedMethod attribute CombinedMethod
 	  * @return Vector of the enumerations
 	  */
-	public Vector getCombinedMethod()
+	public Vector<? extends ValuedEnum> getCombinedMethod()
 	{
 		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
 	}

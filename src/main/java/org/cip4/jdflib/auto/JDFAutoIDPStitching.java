@@ -171,6 +171,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	* Enumeration strings for StitchingPosition
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStitchingPosition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,18 +224,31 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 			return iterator(EnumStitchingPosition.class);
 		}
 
+		/**  */
 		public static final EnumStitchingPosition None = new EnumStitchingPosition("None");
+		/**  */
 		public static final EnumStitchingPosition TopLeft = new EnumStitchingPosition("TopLeft");
+		/**  */
 		public static final EnumStitchingPosition BottomLeft = new EnumStitchingPosition("BottomLeft");
+		/**  */
 		public static final EnumStitchingPosition TopRight = new EnumStitchingPosition("TopRight");
+		/**  */
 		public static final EnumStitchingPosition BottomRight = new EnumStitchingPosition("BottomRight");
+		/**  */
 		public static final EnumStitchingPosition LeftEdge = new EnumStitchingPosition("LeftEdge");
+		/**  */
 		public static final EnumStitchingPosition TopEdge = new EnumStitchingPosition("TopEdge");
+		/**  */
 		public static final EnumStitchingPosition RightEdge = new EnumStitchingPosition("RightEdge");
+		/**  */
 		public static final EnumStitchingPosition BottomEdge = new EnumStitchingPosition("BottomEdge");
+		/**  */
 		public static final EnumStitchingPosition DualLeftEdge = new EnumStitchingPosition("DualLeftEdge");
+		/**  */
 		public static final EnumStitchingPosition DualTopEdge = new EnumStitchingPosition("DualTopEdge");
+		/**  */
 		public static final EnumStitchingPosition DualRightEdge = new EnumStitchingPosition("DualRightEdge");
+		/**  */
 		public static final EnumStitchingPosition DualBottomEdge = new EnumStitchingPosition("DualBottomEdge");
 	}
 
@@ -242,6 +256,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	* Enumeration strings for StitchingReferenceEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStitchingReferenceEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -294,9 +309,13 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 			return iterator(EnumStitchingReferenceEdge.class);
 		}
 
+		/**  */
 		public static final EnumStitchingReferenceEdge Bottom = new EnumStitchingReferenceEdge("Bottom");
+		/**  */
 		public static final EnumStitchingReferenceEdge Top = new EnumStitchingReferenceEdge("Top");
+		/**  */
 		public static final EnumStitchingReferenceEdge Left = new EnumStitchingReferenceEdge("Left");
+		/**  */
 		public static final EnumStitchingReferenceEdge Right = new EnumStitchingReferenceEdge("Right");
 	}
 

@@ -194,6 +194,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	* Enumeration strings for AspectRatio
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAspectRatio extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,10 +247,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 			return iterator(EnumAspectRatio.class);
 		}
 
+		/**  */
 		public static final EnumAspectRatio Ignore = new EnumAspectRatio("Ignore");
+		/**  */
 		public static final EnumAspectRatio CenterMax = new EnumAspectRatio("CenterMax");
+		/**  */
 		public static final EnumAspectRatio CenterMin = new EnumAspectRatio("CenterMin");
+		/**  */
 		public static final EnumAspectRatio Crop = new EnumAspectRatio("Crop");
+		/**  */
 		public static final EnumAspectRatio Expand = new EnumAspectRatio("Expand");
 	}
 
@@ -257,6 +263,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	* Enumeration strings for PreviewFileType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewFileType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -309,8 +316,11 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 			return iterator(EnumPreviewFileType.class);
 		}
 
+		/**  */
 		public static final EnumPreviewFileType PNG = new EnumPreviewFileType("PNG");
+		/**  */
 		public static final EnumPreviewFileType CIP3Multiple = new EnumPreviewFileType("CIP3Multiple");
+		/**  */
 		public static final EnumPreviewFileType CIP3Single = new EnumPreviewFileType("CIP3Single");
 	}
 
@@ -318,6 +328,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	* Enumeration strings for PreviewUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -370,10 +381,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 			return iterator(EnumPreviewUsage.class);
 		}
 
+		/**  */
 		public static final EnumPreviewUsage Separation = new EnumPreviewUsage("Separation");
+		/**  */
 		public static final EnumPreviewUsage SeparatedThumbNail = new EnumPreviewUsage("SeparatedThumbNail");
+		/**  */
 		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
+		/**  */
 		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
+		/**  */
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
 	}
 
@@ -381,6 +397,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	* Enumeration strings for Compensation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCompensation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -433,9 +450,13 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 			return iterator(EnumCompensation.class);
 		}
 
+		/**  */
 		public static final EnumCompensation None = new EnumCompensation("None");
+		/**  */
 		public static final EnumCompensation Film = new EnumCompensation("Film");
+		/**  */
 		public static final EnumCompensation Plate = new EnumCompensation("Plate");
+		/**  */
 		public static final EnumCompensation Press = new EnumCompensation("Press");
 	}
 

@@ -171,6 +171,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	* Enumeration strings for ApprovalRole
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumApprovalRole extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,9 +224,13 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 			return iterator(EnumApprovalRole.class);
 		}
 
+		/**  */
 		public static final EnumApprovalRole Approvinator = new EnumApprovalRole("Approvinator");
+		/**  */
 		public static final EnumApprovalRole Group = new EnumApprovalRole("Group");
+		/**  */
 		public static final EnumApprovalRole Informative = new EnumApprovalRole("Informative");
+		/**  */
 		public static final EnumApprovalRole Obligated = new EnumApprovalRole("Obligated");
 	}
 

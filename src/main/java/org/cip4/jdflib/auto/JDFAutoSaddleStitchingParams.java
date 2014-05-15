@@ -178,6 +178,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	* Enumeration strings for StapleShape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStapleShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -230,10 +231,15 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 			return iterator(EnumStapleShape.class);
 		}
 
+		/**  */
 		public static final EnumStapleShape Crown = new EnumStapleShape("Crown");
+		/**  */
 		public static final EnumStapleShape Overlap = new EnumStapleShape("Overlap");
+		/**  */
 		public static final EnumStapleShape Butted = new EnumStapleShape("Butted");
+		/**  */
 		public static final EnumStapleShape ClinchOut = new EnumStapleShape("ClinchOut");
+		/**  */
 		public static final EnumStapleShape Eyelet = new EnumStapleShape("Eyelet");
 	}
 

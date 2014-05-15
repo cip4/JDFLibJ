@@ -179,6 +179,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	* Enumeration strings for ChannelMode
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,7 +232,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 			return iterator(EnumChannelMode.class);
 		}
 
+		/**  */
 		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		/**  */
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 
@@ -239,6 +242,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	* Enumeration strings for RetryPolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRetryPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -291,7 +295,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 			return iterator(EnumRetryPolicy.class);
 		}
 
+		/**  */
 		public static final EnumRetryPolicy DiscardAtNextSignal = new EnumRetryPolicy("DiscardAtNextSignal");
+		/**  */
 		public static final EnumRetryPolicy RetryForever = new EnumRetryPolicy("RetryForever");
 	}
 

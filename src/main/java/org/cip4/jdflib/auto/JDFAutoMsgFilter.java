@@ -183,6 +183,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	* Enumeration strings for Family
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFamily extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -235,9 +236,13 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 			return iterator(EnumFamily.class);
 		}
 
+		/**  */
 		public static final EnumFamily Acknowledge = new EnumFamily("Acknowledge");
+		/**  */
 		public static final EnumFamily Response = new EnumFamily("Response");
+		/**  */
 		public static final EnumFamily Signal = new EnumFamily("Signal");
+		/**  */
 		public static final EnumFamily All = new EnumFamily("All");
 	}
 

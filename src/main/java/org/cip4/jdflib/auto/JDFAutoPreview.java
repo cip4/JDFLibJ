@@ -191,6 +191,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	* Enumeration strings for PreviewUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -243,10 +244,15 @@ public abstract class JDFAutoPreview extends JDFResource
 			return iterator(EnumPreviewUsage.class);
 		}
 
+		/**  */
 		public static final EnumPreviewUsage Separation = new EnumPreviewUsage("Separation");
+		/**  */
 		public static final EnumPreviewUsage SeparatedThumbNail = new EnumPreviewUsage("SeparatedThumbNail");
+		/**  */
 		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
+		/**  */
 		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
+		/**  */
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
 	}
 
@@ -254,6 +260,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	* Enumeration strings for Compensation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCompensation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -306,10 +313,15 @@ public abstract class JDFAutoPreview extends JDFResource
 			return iterator(EnumCompensation.class);
 		}
 
+		/**  */
 		public static final EnumCompensation Unknown = new EnumCompensation("Unknown");
+		/**  */
 		public static final EnumCompensation None = new EnumCompensation("None");
+		/**  */
 		public static final EnumCompensation Film = new EnumCompensation("Film");
+		/**  */
 		public static final EnumCompensation Plate = new EnumCompensation("Plate");
+		/**  */
 		public static final EnumCompensation Press = new EnumCompensation("Press");
 	}
 

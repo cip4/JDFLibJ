@@ -168,6 +168,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	* Enumeration strings for ShutDownType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShutDownType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -220,7 +221,9 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 			return iterator(EnumShutDownType.class);
 		}
 
+		/**  */
 		public static final EnumShutDownType StandBy = new EnumShutDownType("StandBy");
+		/**  */
 		public static final EnumShutDownType Full = new EnumShutDownType("Full");
 	}
 

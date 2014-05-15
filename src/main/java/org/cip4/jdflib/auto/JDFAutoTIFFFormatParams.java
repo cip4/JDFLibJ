@@ -179,6 +179,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	* Enumeration strings for ByteOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumByteOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,7 +232,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 			return iterator(EnumByteOrder.class);
 		}
 
+		/**  */
 		public static final EnumByteOrder II = new EnumByteOrder("II");
+		/**  */
 		public static final EnumByteOrder MM = new EnumByteOrder("MM");
 	}
 
@@ -239,6 +242,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	* Enumeration strings for Segmentation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSegmentation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -291,8 +295,11 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 			return iterator(EnumSegmentation.class);
 		}
 
+		/**  */
 		public static final EnumSegmentation SingleStrip = new EnumSegmentation("SingleStrip");
+		/**  */
 		public static final EnumSegmentation Stripped = new EnumSegmentation("Stripped");
+		/**  */
 		public static final EnumSegmentation Tiled = new EnumSegmentation("Tiled");
 	}
 

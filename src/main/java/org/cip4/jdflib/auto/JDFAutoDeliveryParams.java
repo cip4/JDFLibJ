@@ -204,6 +204,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	* Enumeration strings for Transfer
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTransfer extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -256,9 +257,13 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 			return iterator(EnumTransfer.class);
 		}
 
+		/**  */
 		public static final EnumTransfer BuyerToPrinterDeliver = new EnumTransfer("BuyerToPrinterDeliver");
+		/**  */
 		public static final EnumTransfer BuyerToPrinterPickup = new EnumTransfer("BuyerToPrinterPickup");
+		/**  */
 		public static final EnumTransfer PrinterToBuyerDeliver = new EnumTransfer("PrinterToBuyerDeliver");
+		/**  */
 		public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
 	}
 

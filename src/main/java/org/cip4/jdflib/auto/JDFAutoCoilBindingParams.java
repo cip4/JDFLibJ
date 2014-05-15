@@ -196,6 +196,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	* Enumeration strings for Material
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -248,10 +249,15 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 			return iterator(EnumMaterial.class);
 		}
 
+		/**  */
 		public static final EnumMaterial LaqueredSteel = new EnumMaterial("LaqueredSteel");
+		/**  */
 		public static final EnumMaterial NylonCoatedSteel = new EnumMaterial("NylonCoatedSteel");
+		/**  */
 		public static final EnumMaterial PVC = new EnumMaterial("PVC");
+		/**  */
 		public static final EnumMaterial TinnedSteel = new EnumMaterial("TinnedSteel");
+		/**  */
 		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
 	}
 

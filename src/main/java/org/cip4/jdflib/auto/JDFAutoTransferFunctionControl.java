@@ -188,6 +188,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	* Enumeration strings for TransferFunctionSource
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTransferFunctionSource extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -240,8 +241,11 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 			return iterator(EnumTransferFunctionSource.class);
 		}
 
+		/**  */
 		public static final EnumTransferFunctionSource Document = new EnumTransferFunctionSource("Document");
+		/**  */
 		public static final EnumTransferFunctionSource Device = new EnumTransferFunctionSource("Device");
+		/**  */
 		public static final EnumTransferFunctionSource Custom = new EnumTransferFunctionSource("Custom");
 	}
 

@@ -171,6 +171,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	* Enumeration strings for WrappingKind
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWrappingKind extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -223,7 +224,9 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 			return iterator(EnumWrappingKind.class);
 		}
 
+		/**  */
 		public static final EnumWrappingKind LooseWrap = new EnumWrappingKind("LooseWrap");
+		/**  */
 		public static final EnumWrappingKind ShrinkWrap = new EnumWrappingKind("ShrinkWrap");
 	}
 

@@ -212,6 +212,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	* Enumeration strings for ColorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumColorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -264,8 +265,11 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 			return iterator(EnumColorType.class);
 		}
 
+		/**  */
 		public static final EnumColorType Color = new EnumColorType("Color");
+		/**  */
 		public static final EnumColorType GrayScale = new EnumColorType("GrayScale");
+		/**  */
 		public static final EnumColorType Monochrome = new EnumColorType("Monochrome");
 	}
 
@@ -273,6 +277,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	* Enumeration strings for PlateType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPlateType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -325,7 +330,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 			return iterator(EnumPlateType.class);
 		}
 
+		/**  */
 		public static final EnumPlateType Exposed = new EnumPlateType("Exposed");
+		/**  */
 		public static final EnumPlateType Dummy = new EnumPlateType("Dummy");
 	}
 
@@ -333,6 +340,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	* Enumeration strings for ProofQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProofQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -385,9 +393,13 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 			return iterator(EnumProofQuality.class);
 		}
 
+		/**  */
 		public static final EnumProofQuality None = new EnumProofQuality("None");
+		/**  */
 		public static final EnumProofQuality Halftone = new EnumProofQuality("Halftone");
+		/**  */
 		public static final EnumProofQuality Contone = new EnumProofQuality("Contone");
+		/**  */
 		public static final EnumProofQuality Conceptual = new EnumProofQuality("Conceptual");
 	}
 
@@ -395,6 +407,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	* Enumeration strings for ProofType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumProofType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -447,8 +460,11 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 			return iterator(EnumProofType.class);
 		}
 
+		/**  */
 		public static final EnumProofType None = new EnumProofType("None");
+		/**  */
 		public static final EnumProofType Imposition = new EnumProofType("Imposition");
+		/**  */
 		public static final EnumProofType Page = new EnumProofType("Page");
 	}
 

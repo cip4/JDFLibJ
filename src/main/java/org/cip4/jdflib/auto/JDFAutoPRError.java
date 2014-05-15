@@ -153,6 +153,7 @@ public abstract class JDFAutoPRError extends JDFElement
 	* Enumeration strings for ErrorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumErrorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -205,7 +206,9 @@ public abstract class JDFAutoPRError extends JDFElement
 			return iterator(EnumErrorType.class);
 		}
 
+		/**  */
 		public static final EnumErrorType TestNotSupported = new EnumErrorType("TestNotSupported");
+		/**  */
 		public static final EnumErrorType TestWrongPDL = new EnumErrorType("TestWrongPDL");
 	}
 

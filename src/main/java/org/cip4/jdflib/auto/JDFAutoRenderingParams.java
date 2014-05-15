@@ -203,6 +203,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	* Enumeration strings for BandOrdering
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBandOrdering extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -255,7 +256,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 			return iterator(EnumBandOrdering.class);
 		}
 
+		/**  */
 		public static final EnumBandOrdering BandMajor = new EnumBandOrdering("BandMajor");
+		/**  */
 		public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
 	}
 

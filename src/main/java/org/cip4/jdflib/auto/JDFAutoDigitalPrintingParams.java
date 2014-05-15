@@ -214,6 +214,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for Collate
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCollate extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -266,10 +267,15 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumCollate.class);
 		}
 
+		/**  */
 		public static final EnumCollate None = new EnumCollate("None");
+		/**  */
 		public static final EnumCollate Sheet = new EnumCollate("Sheet");
+		/**  */
 		public static final EnumCollate SheetAndSet = new EnumCollate("SheetAndSet");
+		/**  */
 		public static final EnumCollate SheetSetAndJob = new EnumCollate("SheetSetAndJob");
+		/**  */
 		public static final EnumCollate SystemSpecified = new EnumCollate("SystemSpecified");
 	}
 
@@ -277,6 +283,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for PageDelivery
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPageDelivery extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -329,11 +336,17 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumPageDelivery.class);
 		}
 
+		/**  */
 		public static final EnumPageDelivery FanFold = new EnumPageDelivery("FanFold");
+		/**  */
 		public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
+		/**  */
 		public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
+		/**  */
 		public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
+		/**  */
 		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
+		/**  */
 		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
 	}
 
@@ -341,6 +354,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for PrintPass
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintPass extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -393,7 +407,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumPrintPass.class);
 		}
 
+		/**  */
 		public static final EnumPrintPass OneShot = new EnumPrintPass("OneShot");
+		/**  */
 		public static final EnumPrintPass MultiShot = new EnumPrintPass("MultiShot");
 	}
 
@@ -401,6 +417,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for PrintQuality
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintQuality extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -453,9 +470,13 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumPrintQuality.class);
 		}
 
+		/**  */
 		public static final EnumPrintQuality High = new EnumPrintQuality("High");
+		/**  */
 		public static final EnumPrintQuality Normal = new EnumPrintQuality("Normal");
+		/**  */
 		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
+		/**  */
 		public static final EnumPrintQuality SystemSpecified = new EnumPrintQuality("SystemSpecified");
 	}
 
@@ -463,6 +484,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for PrintingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPrintingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -515,9 +537,13 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumPrintingType.class);
 		}
 
+		/**  */
 		public static final EnumPrintingType SheetFed = new EnumPrintingType("SheetFed");
+		/**  */
 		public static final EnumPrintingType WebFed = new EnumPrintingType("WebFed");
+		/**  */
 		public static final EnumPrintingType ContinuousFed = new EnumPrintingType("ContinuousFed");
+		/**  */
 		public static final EnumPrintingType SystemSpecified = new EnumPrintingType("SystemSpecified");
 	}
 
@@ -525,6 +551,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for SheetLay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -577,9 +604,13 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumSheetLay.class);
 		}
 
+		/**  */
 		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		/**  */
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		/**  */
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
+		/**  */
 		public static final EnumSheetLay SystemSpecified = new EnumSheetLay("SystemSpecified");
 	}
 
@@ -587,6 +618,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -639,12 +671,19 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSidedBack = new EnumSides("OneSidedBack");
+		/**  */
 		public static final EnumSides OneSidedBackFlipX = new EnumSides("OneSidedBackFlipX");
+		/**  */
 		public static final EnumSides OneSidedBackFlipY = new EnumSides("OneSidedBackFlipY");
+		/**  */
 		public static final EnumSides OneSidedFront = new EnumSides("OneSidedFront");
+		/**  */
 		public static final EnumSides TwoSided = new EnumSides("TwoSided");
+		/**  */
 		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
+		/**  */
 		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
 	}
 

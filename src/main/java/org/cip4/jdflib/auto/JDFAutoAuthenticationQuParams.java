@@ -151,6 +151,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	* Enumeration strings for AuthenticationType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAuthenticationType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -203,7 +204,9 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 			return iterator(EnumAuthenticationType.class);
 		}
 
+		/**  */
 		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
+		/**  */
 		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
 	}
 

@@ -194,6 +194,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	* Enumeration strings for SheetLay
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,8 +247,11 @@ public abstract class JDFAutoMediaSource extends JDFResource
 			return iterator(EnumSheetLay.class);
 		}
 
+		/**  */
 		public static final EnumSheetLay Left = new EnumSheetLay("Left");
+		/**  */
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+		/**  */
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
 	}
 

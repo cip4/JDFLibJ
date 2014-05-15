@@ -78,6 +78,7 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -110,7 +111,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTERREFERENCE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumCenterReference.getEnum(0), "TrailingEdge");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumerations, JDFMedia.EnumHoleType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x22222221, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTENT, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -204,6 +205,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	* Enumeration strings for CenterReference
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCenterReference extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -256,7 +258,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 			return iterator(EnumCenterReference.class);
 		}
 
+		/**  */
 		public static final EnumCenterReference TrailingEdge = new EnumCenterReference("TrailingEdge");
+		/**  */
 		public static final EnumCenterReference RegistrationMark = new EnumCenterReference("RegistrationMark");
 	}
 
@@ -264,6 +268,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	* Enumeration strings for HoleReferenceEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumHoleReferenceEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -316,10 +321,15 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 			return iterator(EnumHoleReferenceEdge.class);
 		}
 
+		/**  */
 		public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
+		/**  */
 		public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
+		/**  */
 		public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
+		/**  */
 		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
+		/**  */
 		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
 	}
 
@@ -327,6 +337,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	* Enumeration strings for Shape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -379,8 +390,11 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 			return iterator(EnumShape.class);
 		}
 
+		/**  */
 		public static final EnumShape Eliptical = new EnumShape("Eliptical");
+		/**  */
 		public static final EnumShape Round = new EnumShape("Round");
+		/**  */
 		public static final EnumShape Rectangular = new EnumShape("Rectangular");
 	}
 
@@ -417,7 +431,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	  * (5.2) set attribute HoleType
 	  * @param v vector of the enumeration values
 	  */
-	public void setHoleType(Vector v)
+	public void setHoleType(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
 	}
@@ -426,7 +440,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	  * (9.2) get HoleType attribute HoleType
 	  * @return Vector of the enumerations
 	  */
-	public Vector getHoleType()
+	public Vector<? extends ValuedEnum> getHoleType()
 	{
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
 	}

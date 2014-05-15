@@ -175,6 +175,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	* Enumeration strings for Order
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,7 +228,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 			return iterator(EnumOrder.class);
 		}
 
+		/**  */
 		public static final EnumOrder Collecting = new EnumOrder("Collecting");
+		/**  */
 		public static final EnumOrder Gathering = new EnumOrder("Gathering");
 	}
 

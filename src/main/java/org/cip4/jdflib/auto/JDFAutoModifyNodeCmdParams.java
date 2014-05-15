@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -88,6 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFNewComment;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 
 /**
 *****************************************************************************
@@ -167,70 +164,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	public String toString()
 	{
 		return " JDFAutoModifyNodeCmdParams[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	* Enumeration strings for Activation
-	*/
-
-	public static class EnumActivation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumActivation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumActivation getEnum(String enumName)
-		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumActivation getEnum(int enumValue)
-		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumActivation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumActivation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumActivation.class);
-		}
-
-		public static final EnumActivation Inactive = new EnumActivation("Inactive");
-		public static final EnumActivation Informative = new EnumActivation("Informative");
-		public static final EnumActivation Held = new EnumActivation("Held");
-		public static final EnumActivation Active = new EnumActivation("Active");
-		public static final EnumActivation TestRun = new EnumActivation("TestRun");
-		public static final EnumActivation TestRunAndGo = new EnumActivation("TestRunAndGo");
 	}
 
 	/* ************************************************************************

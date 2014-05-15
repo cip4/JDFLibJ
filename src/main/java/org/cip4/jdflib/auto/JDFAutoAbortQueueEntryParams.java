@@ -168,6 +168,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	* Enumeration strings for EndStatus
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumEndStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -220,7 +221,9 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 			return iterator(EnumEndStatus.class);
 		}
 
+		/**  */
 		public static final EnumEndStatus Aborted = new EnumEndStatus("Aborted");
+		/**  */
 		public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
 	}
 

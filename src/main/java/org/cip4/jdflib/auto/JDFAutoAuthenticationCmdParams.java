@@ -175,6 +175,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	* Enumeration strings for AuthenticationType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAuthenticationType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,7 +228,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 			return iterator(EnumAuthenticationType.class);
 		}
 
+		/**  */
 		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
+		/**  */
 		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
 	}
 
@@ -235,6 +238,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	* Enumeration strings for Reason
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumReason extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -287,13 +291,21 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 			return iterator(EnumReason.class);
 		}
 
+		/**  */
 		public static final EnumReason InitiateConnection = new EnumReason("InitiateConnection");
+		/**  */
 		public static final EnumReason ClientCertificateExpired = new EnumReason("ClientCertificateExpired");
+		/**  */
 		public static final EnumReason ServerCertificateExpired = new EnumReason("ServerCertificateExpired");
+		/**  */
 		public static final EnumReason ClientHostnameMismatch = new EnumReason("ClientHostnameMismatch");
+		/**  */
 		public static final EnumReason ServerHostnameMismatch = new EnumReason("ServerHostnameMismatch");
+		/**  */
 		public static final EnumReason ClientCertificateRevoked = new EnumReason("ClientCertificateRevoked");
+		/**  */
 		public static final EnumReason ServerCertificateRevoked = new EnumReason("ServerCertificateRevoked");
+		/**  */
 		public static final EnumReason Other = new EnumReason("Other");
 	}
 

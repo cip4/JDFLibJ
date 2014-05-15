@@ -160,6 +160,7 @@ public abstract class JDFAutoCut extends JDFElement
 	* Enumeration strings for WorkingDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWorkingDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -212,7 +213,9 @@ public abstract class JDFAutoCut extends JDFElement
 			return iterator(EnumWorkingDirection.class);
 		}
 
+		/**  */
 		public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
+		/**  */
 		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
 	}
 

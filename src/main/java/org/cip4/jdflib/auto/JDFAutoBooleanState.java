@@ -186,6 +186,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	* Enumeration strings for AllowedValueList
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedValueList extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -244,6 +245,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	* Enumeration strings for PresentValueList
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPresentValueList extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -310,7 +312,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	  * (5.2) set attribute AllowedValueList
 	  * @param v vector of the enumeration values
 	  */
-	public void setAllowedValueList(Vector v)
+	public void setAllowedValueList(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, v, null);
 	}
@@ -319,7 +321,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	  * (9.2) get AllowedValueList attribute AllowedValueList
 	  * @return Vector of the enumerations
 	  */
-	public Vector getAllowedValueList()
+	public Vector<? extends ValuedEnum> getAllowedValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumAllowedValueList.getEnum(0), false);
 	}
@@ -373,7 +375,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	  * (5.2) set attribute PresentValueList
 	  * @param v vector of the enumeration values
 	  */
-	public void setPresentValueList(Vector v)
+	public void setPresentValueList(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.PRESENTVALUELIST, v, null);
 	}
@@ -382,7 +384,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	  * (9.2) get PresentValueList attribute PresentValueList
 	  * @return Vector of the enumerations
 	  */
-	public Vector getPresentValueList()
+	public Vector<? extends ValuedEnum> getPresentValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumPresentValueList.getEnum(0), false);
 	}

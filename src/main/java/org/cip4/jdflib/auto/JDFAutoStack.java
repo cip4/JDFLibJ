@@ -152,6 +152,7 @@ public abstract class JDFAutoStack extends JDFElement
 	* Enumeration strings for LogicalStackSequence
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumLogicalStackSequence extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -204,7 +205,9 @@ public abstract class JDFAutoStack extends JDFElement
 			return iterator(EnumLogicalStackSequence.class);
 		}
 
+		/**  */
 		public static final EnumLogicalStackSequence SheetIndex = new EnumLogicalStackSequence("SheetIndex");
+		/**  */
 		public static final EnumLogicalStackSequence DescendingSheetIndex = new EnumLogicalStackSequence("DescendingSheetIndex");
 	}
 

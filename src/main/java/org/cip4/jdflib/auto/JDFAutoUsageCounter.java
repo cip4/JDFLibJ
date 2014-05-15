@@ -175,6 +175,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	* Enumeration strings for Scope
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumScope extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,8 +228,11 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 			return iterator(EnumScope.class);
 		}
 
+		/**  */
 		public static final EnumScope Lifetime = new EnumScope("Lifetime");
+		/**  */
 		public static final EnumScope PowerOn = new EnumScope("PowerOn");
+		/**  */
 		public static final EnumScope Job = new EnumScope("Job");
 	}
 

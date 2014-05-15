@@ -154,6 +154,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	* Enumeration strings for Anchor
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,14 +207,23 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 			return iterator(EnumAnchor.class);
 		}
 
+		/**  */
 		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+		/**  */
 		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+		/**  */
 		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+		/**  */
 		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+		/**  */
 		public static final EnumAnchor Center = new EnumAnchor("Center");
+		/**  */
 		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+		/**  */
 		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+		/**  */
 		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+		/**  */
 		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 
@@ -221,6 +231,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	* Enumeration strings for AnchorType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAnchorType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -273,7 +284,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 			return iterator(EnumAnchorType.class);
 		}
 
+		/**  */
 		public static final EnumAnchorType Parent = new EnumAnchorType("Parent");
+		/**  */
 		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
 	}
 

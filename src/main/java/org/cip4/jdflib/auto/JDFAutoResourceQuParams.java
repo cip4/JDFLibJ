@@ -188,6 +188,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	* Enumeration strings for Context
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumContext extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -240,7 +241,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 			return iterator(EnumContext.class);
 		}
 
+		/**  */
 		public static final EnumContext Job = new EnumContext("Job");
+		/**  */
 		public static final EnumContext Global = new EnumContext("Global");
 	}
 
@@ -248,6 +251,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	* Enumeration strings for LotDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumLotDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -300,8 +304,11 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 			return iterator(EnumLotDetails.class);
 		}
 
+		/**  */
 		public static final EnumLotDetails Brief = new EnumLotDetails("Brief");
+		/**  */
 		public static final EnumLotDetails Full = new EnumLotDetails("Full");
+		/**  */
 		public static final EnumLotDetails Amount = new EnumLotDetails("Amount");
 	}
 
@@ -309,6 +316,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	* Enumeration strings for ResourceDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumResourceDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -361,7 +369,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 			return iterator(EnumResourceDetails.class);
 		}
 
+		/**  */
 		public static final EnumResourceDetails Brief = new EnumResourceDetails("Brief");
+		/**  */
 		public static final EnumResourceDetails Full = new EnumResourceDetails("Full");
 	}
 
@@ -377,7 +387,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	  * (5.2) set attribute Classes
 	  * @param v vector of the enumeration values
 	  */
-	public void setClasses(Vector v)
+	public void setClasses(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -386,7 +396,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	  * (9.2) get Classes attribute Classes
 	  * @return Vector of the enumerations
 	  */
-	public Vector getClasses()
+	public Vector<? extends ValuedEnum> getClasses()
 	{
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
 	}

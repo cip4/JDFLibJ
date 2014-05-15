@@ -183,6 +183,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	* Enumeration strings for Direction
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -235,9 +236,13 @@ public abstract class JDFAutoEmboss extends JDFElement
 			return iterator(EnumDirection.class);
 		}
 
+		/**  */
 		public static final EnumDirection Both = new EnumDirection("Both");
+		/**  */
 		public static final EnumDirection Flat = new EnumDirection("Flat");
+		/**  */
 		public static final EnumDirection Raised = new EnumDirection("Raised");
+		/**  */
 		public static final EnumDirection Depressed = new EnumDirection("Depressed");
 	}
 
@@ -245,6 +250,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	* Enumeration strings for EdgeShape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumEdgeShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -297,7 +303,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 			return iterator(EnumEdgeShape.class);
 		}
 
+		/**  */
 		public static final EnumEdgeShape Beveled = new EnumEdgeShape("Beveled");
+		/**  */
 		public static final EnumEdgeShape Rounded = new EnumEdgeShape("Rounded");
 	}
 
@@ -305,6 +313,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	* Enumeration strings for EmbossingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumEmbossingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -357,11 +366,17 @@ public abstract class JDFAutoEmboss extends JDFElement
 			return iterator(EnumEmbossingType.class);
 		}
 
+		/**  */
 		public static final EnumEmbossingType BlindEmbossing = new EnumEmbossingType("BlindEmbossing");
+		/**  */
 		public static final EnumEmbossingType Braille = new EnumEmbossingType("Braille");
+		/**  */
 		public static final EnumEmbossingType EmbossedFinish = new EnumEmbossingType("EmbossedFinish");
+		/**  */
 		public static final EnumEmbossingType FoilEmbossing = new EnumEmbossingType("FoilEmbossing");
+		/**  */
 		public static final EnumEmbossingType FoilStamping = new EnumEmbossingType("FoilStamping");
+		/**  */
 		public static final EnumEmbossingType RegisteredEmbossing = new EnumEmbossingType("RegisteredEmbossing");
 	}
 
@@ -369,6 +384,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	* Enumeration strings for Level
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumLevel extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -421,8 +437,11 @@ public abstract class JDFAutoEmboss extends JDFElement
 			return iterator(EnumLevel.class);
 		}
 
+		/**  */
 		public static final EnumLevel SingleLevel = new EnumLevel("SingleLevel");
+		/**  */
 		public static final EnumLevel MultiLevel = new EnumLevel("MultiLevel");
+		/**  */
 		public static final EnumLevel Sculpted = new EnumLevel("Sculpted");
 	}
 

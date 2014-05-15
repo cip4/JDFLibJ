@@ -173,6 +173,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	* Enumeration strings for StrappingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStrappingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,9 +226,13 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 			return iterator(EnumStrappingType.class);
 		}
 
+		/**  */
 		public static final EnumStrappingType Single = new EnumStrappingType("Single");
+		/**  */
 		public static final EnumStrappingType Double = new EnumStrappingType("Double");
+		/**  */
 		public static final EnumStrappingType Cross = new EnumStrappingType("Cross");
+		/**  */
 		public static final EnumStrappingType DoubleCross = new EnumStrappingType("DoubleCross");
 	}
 

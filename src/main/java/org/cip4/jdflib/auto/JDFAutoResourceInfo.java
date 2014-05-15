@@ -201,6 +201,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	* Enumeration strings for CommandResult
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCommandResult extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,10 +254,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 			return iterator(EnumCommandResult.class);
 		}
 
+		/**  */
 		public static final EnumCommandResult Rejected = new EnumCommandResult("Rejected");
+		/**  */
 		public static final EnumCommandResult Removed = new EnumCommandResult("Removed");
+		/**  */
 		public static final EnumCommandResult New = new EnumCommandResult("New");
+		/**  */
 		public static final EnumCommandResult Merged = new EnumCommandResult("Merged");
+		/**  */
 		public static final EnumCommandResult Replaced = new EnumCommandResult("Replaced");
 	}
 
@@ -264,6 +270,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	* Enumeration strings for Level
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumLevel extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -316,8 +323,11 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 			return iterator(EnumLevel.class);
 		}
 
+		/**  */
 		public static final EnumLevel Empty = new EnumLevel("Empty");
+		/**  */
 		public static final EnumLevel Low = new EnumLevel("Low");
+		/**  */
 		public static final EnumLevel OK = new EnumLevel("OK");
 	}
 
@@ -325,6 +335,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	* Enumeration strings for Orientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -377,9 +388,13 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 			return iterator(EnumOrientation.class);
 		}
 
+		/**  */
 		public static final EnumOrientation Up = new EnumOrientation("Up");
+		/**  */
 		public static final EnumOrientation Down = new EnumOrientation("Down");
+		/**  */
 		public static final EnumOrientation Left = new EnumOrientation("Left");
+		/**  */
 		public static final EnumOrientation Right = new EnumOrientation("Right");
 	}
 

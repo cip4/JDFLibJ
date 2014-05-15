@@ -186,6 +186,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	* Enumeration strings for PreviewUsages
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewUsages extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,12 +239,19 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 			return iterator(EnumPreviewUsages.class);
 		}
 
+		/**  */
 		public static final EnumPreviewUsages PreviewUsages_3D = new EnumPreviewUsages("3D");
+		/**  */
 		public static final EnumPreviewUsages Animation = new EnumPreviewUsages("Animation");
+		/**  */
 		public static final EnumPreviewUsages Separation = new EnumPreviewUsages("Separation");
+		/**  */
 		public static final EnumPreviewUsages SeparationRaw = new EnumPreviewUsages("SeparationRaw");
+		/**  */
 		public static final EnumPreviewUsages SeparatedThumbNail = new EnumPreviewUsages("SeparatedThumbNail");
+		/**  */
 		public static final EnumPreviewUsages ThumbNail = new EnumPreviewUsages("ThumbNail");
+		/**  */
 		public static final EnumPreviewUsages Viewable = new EnumPreviewUsages("Viewable");
 	}
 
@@ -251,6 +259,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	* Enumeration strings for QueueEntryDetails
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumQueueEntryDetails extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -303,9 +312,13 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 			return iterator(EnumQueueEntryDetails.class);
 		}
 
+		/**  */
 		public static final EnumQueueEntryDetails None = new EnumQueueEntryDetails("None");
+		/**  */
 		public static final EnumQueueEntryDetails Brief = new EnumQueueEntryDetails("Brief");
+		/**  */
 		public static final EnumQueueEntryDetails JobPhase = new EnumQueueEntryDetails("JobPhase");
+		/**  */
 		public static final EnumQueueEntryDetails JDF = new EnumQueueEntryDetails("JDF");
 	}
 
@@ -313,6 +326,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	* Enumeration strings for StatusList
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumStatusList extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -365,13 +379,21 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 			return iterator(EnumStatusList.class);
 		}
 
+		/**  */
 		public static final EnumStatusList Running = new EnumStatusList("Running");
+		/**  */
 		public static final EnumStatusList Waiting = new EnumStatusList("Waiting");
+		/**  */
 		public static final EnumStatusList Held = new EnumStatusList("Held");
+		/**  */
 		public static final EnumStatusList Removed = new EnumStatusList("Removed");
+		/**  */
 		public static final EnumStatusList Suspended = new EnumStatusList("Suspended");
+		/**  */
 		public static final EnumStatusList PendingReturn = new EnumStatusList("PendingReturn");
+		/**  */
 		public static final EnumStatusList Completed = new EnumStatusList("Completed");
+		/**  */
 		public static final EnumStatusList Aborted = new EnumStatusList("Aborted");
 	}
 
@@ -379,6 +401,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	* Enumeration strings for UpdateGranularity
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumUpdateGranularity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -431,7 +454,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 			return iterator(EnumUpdateGranularity.class);
 		}
 
+		/**  */
 		public static final EnumUpdateGranularity All = new EnumUpdateGranularity("All");
+		/**  */
 		public static final EnumUpdateGranularity ChangesOnly = new EnumUpdateGranularity("ChangesOnly");
 	}
 
@@ -562,7 +587,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	  * (5.2) set attribute PreviewUsages
 	  * @param v vector of the enumeration values
 	  */
-	public void setPreviewUsages(Vector v)
+	public void setPreviewUsages(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.PREVIEWUSAGES, v, null);
 	}
@@ -571,7 +596,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	  * (9.2) get PreviewUsages attribute PreviewUsages
 	  * @return Vector of the enumerations
 	  */
-	public Vector getPreviewUsages()
+	public Vector<? extends ValuedEnum> getPreviewUsages()
 	{
 		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.Separation, false);
 	}
@@ -632,7 +657,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	  * (5.2) set attribute StatusList
 	  * @param v vector of the enumeration values
 	  */
-	public void setStatusList(Vector v)
+	public void setStatusList(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.STATUSLIST, v, null);
 	}
@@ -641,7 +666,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	  * (9.2) get StatusList attribute StatusList
 	  * @return Vector of the enumerations
 	  */
-	public Vector getStatusList()
+	public Vector<? extends ValuedEnum> getStatusList()
 	{
 		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumStatusList.getEnum(0), false);
 	}

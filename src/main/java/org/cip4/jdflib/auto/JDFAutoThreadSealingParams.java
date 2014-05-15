@@ -177,6 +177,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	* Enumeration strings for ThreadMaterial
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumThreadMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -229,8 +230,11 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 			return iterator(EnumThreadMaterial.class);
 		}
 
+		/**  */
 		public static final EnumThreadMaterial Cotton = new EnumThreadMaterial("Cotton");
+		/**  */
 		public static final EnumThreadMaterial Nylon = new EnumThreadMaterial("Nylon");
+		/**  */
 		public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
 	}
 

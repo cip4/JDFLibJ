@@ -194,6 +194,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	* Enumeration strings for ImageDownsampleType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumImageDownsampleType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,8 +247,11 @@ public abstract class JDFAutoImageCompression extends JDFElement
 			return iterator(EnumImageDownsampleType.class);
 		}
 
+		/**  */
 		public static final EnumImageDownsampleType Average = new EnumImageDownsampleType("Average");
+		/**  */
 		public static final EnumImageDownsampleType Bicubic = new EnumImageDownsampleType("Bicubic");
+		/**  */
 		public static final EnumImageDownsampleType Subsample = new EnumImageDownsampleType("Subsample");
 	}
 
@@ -255,6 +259,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	* Enumeration strings for ImageType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumImageType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -307,9 +312,13 @@ public abstract class JDFAutoImageCompression extends JDFElement
 			return iterator(EnumImageType.class);
 		}
 
+		/**  */
 		public static final EnumImageType All = new EnumImageType("All");
+		/**  */
 		public static final EnumImageType Color = new EnumImageType("Color");
+		/**  */
 		public static final EnumImageType Grayscale = new EnumImageType("Grayscale");
+		/**  */
 		public static final EnumImageType Monochrome = new EnumImageType("Monochrome");
 	}
 

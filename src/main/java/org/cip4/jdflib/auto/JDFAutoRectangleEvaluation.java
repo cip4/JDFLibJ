@@ -185,6 +185,7 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 	* Enumeration strings for HWRelation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumHWRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -237,11 +238,17 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 			return iterator(EnumHWRelation.class);
 		}
 
+		/**  */
 		public static final EnumHWRelation gt = new EnumHWRelation("gt");
+		/**  */
 		public static final EnumHWRelation ge = new EnumHWRelation("ge");
+		/**  */
 		public static final EnumHWRelation eq = new EnumHWRelation("eq");
+		/**  */
 		public static final EnumHWRelation le = new EnumHWRelation("le");
+		/**  */
 		public static final EnumHWRelation lt = new EnumHWRelation("lt");
+		/**  */
 		public static final EnumHWRelation ne = new EnumHWRelation("ne");
 	}
 

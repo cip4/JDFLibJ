@@ -180,6 +180,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	* Enumeration strings for OffsetDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOffsetDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -232,11 +233,17 @@ public abstract class JDFAutoDisjointing extends JDFElement
 			return iterator(EnumOffsetDirection.class);
 		}
 
+		/**  */
 		public static final EnumOffsetDirection Alternate = new EnumOffsetDirection("Alternate");
+		/**  */
 		public static final EnumOffsetDirection Left = new EnumOffsetDirection("Left");
+		/**  */
 		public static final EnumOffsetDirection None = new EnumOffsetDirection("None");
+		/**  */
 		public static final EnumOffsetDirection Right = new EnumOffsetDirection("Right");
+		/**  */
 		public static final EnumOffsetDirection Straight = new EnumOffsetDirection("Straight");
+		/**  */
 		public static final EnumOffsetDirection SystemSpecified = new EnumOffsetDirection("SystemSpecified");
 	}
 

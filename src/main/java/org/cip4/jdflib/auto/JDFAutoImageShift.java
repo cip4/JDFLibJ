@@ -155,6 +155,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	* Enumeration strings for PositionX
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPositionX extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -207,10 +208,15 @@ public abstract class JDFAutoImageShift extends JDFElement
 			return iterator(EnumPositionX.class);
 		}
 
+		/**  */
 		public static final EnumPositionX Left = new EnumPositionX("Left");
+		/**  */
 		public static final EnumPositionX Right = new EnumPositionX("Right");
+		/**  */
 		public static final EnumPositionX Center = new EnumPositionX("Center");
+		/**  */
 		public static final EnumPositionX Spine = new EnumPositionX("Spine");
+		/**  */
 		public static final EnumPositionX None = new EnumPositionX("None");
 	}
 
@@ -218,6 +224,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	* Enumeration strings for PositionY
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPositionY extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -270,10 +277,15 @@ public abstract class JDFAutoImageShift extends JDFElement
 			return iterator(EnumPositionY.class);
 		}
 
+		/**  */
 		public static final EnumPositionY Bottom = new EnumPositionY("Bottom");
+		/**  */
 		public static final EnumPositionY Top = new EnumPositionY("Top");
+		/**  */
 		public static final EnumPositionY Center = new EnumPositionY("Center");
+		/**  */
 		public static final EnumPositionY Spine = new EnumPositionY("Spine");
+		/**  */
 		public static final EnumPositionY None = new EnumPositionY("None");
 	}
 

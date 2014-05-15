@@ -154,6 +154,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	* Enumeration strings for URLTypes
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumURLTypes extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -206,10 +207,15 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 			return iterator(EnumURLTypes.class);
 		}
 
+		/**  */
 		public static final EnumURLTypes JDFError = new EnumURLTypes("JDFError");
+		/**  */
 		public static final EnumURLTypes JDFInput = new EnumURLTypes("JDFInput");
+		/**  */
 		public static final EnumURLTypes JDFOutput = new EnumURLTypes("JDFOutput");
+		/**  */
 		public static final EnumURLTypes JMF = new EnumURLTypes("JMF");
+		/**  */
 		public static final EnumURLTypes SecureJMF = new EnumURLTypes("SecureJMF");
 	}
 
@@ -246,7 +252,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	  * (5.2) set attribute URLTypes
 	  * @param v vector of the enumeration values
 	  */
-	public void setURLTypes(Vector v)
+	public void setURLTypes(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.URLTYPES, v, null);
 	}
@@ -255,7 +261,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	  * (9.2) get URLTypes attribute URLTypes
 	  * @return Vector of the enumerations
 	  */
-	public Vector getURLTypes()
+	public Vector<? extends ValuedEnum> getURLTypes()
 	{
 		return getEnumerationsAttribute(AttributeName.URLTYPES, null, EnumURLTypes.getEnum(0), false);
 	}

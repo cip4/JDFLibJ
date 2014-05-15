@@ -201,6 +201,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	* Enumeration strings for RingSystem
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRingSystem extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,8 +254,11 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 			return iterator(EnumRingSystem.class);
 		}
 
+		/**  */
 		public static final EnumRingSystem RingSystem_2HoleEuro = new EnumRingSystem("2HoleEuro");
+		/**  */
 		public static final EnumRingSystem RingSystem_3HoleUS = new EnumRingSystem("3HoleUS");
+		/**  */
 		public static final EnumRingSystem RingSystem_4HoleEuro = new EnumRingSystem("4HoleEuro");
 	}
 

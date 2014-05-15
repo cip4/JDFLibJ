@@ -201,6 +201,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	* Enumeration strings for OutputColorSpace
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOutputColorSpace extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,9 +254,13 @@ public abstract class JDFAutoScanParams extends JDFResource
 			return iterator(EnumOutputColorSpace.class);
 		}
 
+		/**  */
 		public static final EnumOutputColorSpace LAB = new EnumOutputColorSpace("LAB");
+		/**  */
 		public static final EnumOutputColorSpace RGB = new EnumOutputColorSpace("RGB");
+		/**  */
 		public static final EnumOutputColorSpace CMYK = new EnumOutputColorSpace("CMYK");
+		/**  */
 		public static final EnumOutputColorSpace GrayScale = new EnumOutputColorSpace("GrayScale");
 	}
 
@@ -263,6 +268,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	* Enumeration strings for CompressionFilter
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumCompressionFilter extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -315,10 +321,15 @@ public abstract class JDFAutoScanParams extends JDFResource
 			return iterator(EnumCompressionFilter.class);
 		}
 
+		/**  */
 		public static final EnumCompressionFilter CCITTFaxEncode = new EnumCompressionFilter("CCITTFaxEncode");
+		/**  */
 		public static final EnumCompressionFilter DCTEncode = new EnumCompressionFilter("DCTEncode");
+		/**  */
 		public static final EnumCompressionFilter FlateEncode = new EnumCompressionFilter("FlateEncode");
+		/**  */
 		public static final EnumCompressionFilter WaveletEncode = new EnumCompressionFilter("WaveletEncode");
+		/**  */
 		public static final EnumCompressionFilter JBIG2Encode = new EnumCompressionFilter("JBIG2Encode");
 	}
 
@@ -326,6 +337,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	* Enumeration strings for Mounting
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMounting extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -378,9 +390,13 @@ public abstract class JDFAutoScanParams extends JDFResource
 			return iterator(EnumMounting.class);
 		}
 
+		/**  */
 		public static final EnumMounting Unfixed = new EnumMounting("Unfixed");
+		/**  */
 		public static final EnumMounting Fixed = new EnumMounting("Fixed");
+		/**  */
 		public static final EnumMounting Wet = new EnumMounting("Wet");
+		/**  */
 		public static final EnumMounting Registered = new EnumMounting("Registered");
 	}
 

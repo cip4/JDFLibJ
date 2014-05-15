@@ -175,6 +175,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	* Enumeration strings for TrimCover
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTrimCover extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,9 +228,13 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 			return iterator(EnumTrimCover.class);
 		}
 
+		/**  */
 		public static final EnumTrimCover Front = new EnumTrimCover("Front");
+		/**  */
 		public static final EnumTrimCover Back = new EnumTrimCover("Back");
+		/**  */
 		public static final EnumTrimCover Both = new EnumTrimCover("Both");
+		/**  */
 		public static final EnumTrimCover Neither = new EnumTrimCover("Neither");
 	}
 
@@ -237,6 +242,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	* Enumeration strings for TrimmingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTrimmingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -289,7 +295,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 			return iterator(EnumTrimmingType.class);
 		}
 
+		/**  */
 		public static final EnumTrimmingType Detailed = new EnumTrimmingType("Detailed");
+		/**  */
 		public static final EnumTrimmingType SystemSpecified = new EnumTrimmingType("SystemSpecified");
 	}
 

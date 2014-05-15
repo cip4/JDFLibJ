@@ -194,6 +194,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	* Enumeration strings for Type
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,38 +247,71 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 			return iterator(EnumType.class);
 		}
 
+		/**  */
 		public static final EnumType R2_generic = new EnumType("R2-generic");
+		/**  */
 		public static final EnumType S1_generic = new EnumType("S1-generic");
+		/**  */
 		public static final EnumType S_generic = new EnumType("S-generic");
+		/**  */
 		public static final EnumType R2m_DIN = new EnumType("R2m-DIN");
+		/**  */
 		public static final EnumType R2m_ISO = new EnumType("R2m-ISO");
+		/**  */
 		public static final EnumType R2m_MIB = new EnumType("R2m-MIB");
+		/**  */
 		public static final EnumType R2i_US_a = new EnumType("R2i-US-a");
+		/**  */
 		public static final EnumType R2i_US_b = new EnumType("R2i-US-b");
+		/**  */
 		public static final EnumType R3_generic = new EnumType("R3-generic");
+		/**  */
 		public static final EnumType R3i_US = new EnumType("R3i-US");
+		/**  */
 		public static final EnumType R4_generic = new EnumType("R4-generic");
+		/**  */
 		public static final EnumType R4m_DIN_A4 = new EnumType("R4m-DIN-A4");
+		/**  */
 		public static final EnumType R4m_DIN_A5 = new EnumType("R4m-DIN-A5");
+		/**  */
 		public static final EnumType R4m_swedish = new EnumType("R4m-swedish");
+		/**  */
 		public static final EnumType R4i_US = new EnumType("R4i-US");
+		/**  */
 		public static final EnumType R5_generic = new EnumType("R5-generic");
+		/**  */
 		public static final EnumType R5i_US_a = new EnumType("R5i-US-a");
+		/**  */
 		public static final EnumType R5i_US_b = new EnumType("R5i-US-b");
+		/**  */
 		public static final EnumType R5i_US_c = new EnumType("R5i-US-c");
+		/**  */
 		public static final EnumType R6_generic = new EnumType("R6-generic");
+		/**  */
 		public static final EnumType R6m_4h2s = new EnumType("R6m-4h2s");
+		/**  */
 		public static final EnumType R6m_DIN_A5 = new EnumType("R6m-DIN-A5");
+		/**  */
 		public static final EnumType R7_generic = new EnumType("R7-generic");
+		/**  */
 		public static final EnumType R7i_US_a = new EnumType("R7i-US-a");
+		/**  */
 		public static final EnumType R7i_US_b = new EnumType("R7i-US-b");
+		/**  */
 		public static final EnumType R7i_US_c = new EnumType("R7i-US-c");
+		/**  */
 		public static final EnumType R11m_7h4s = new EnumType("R11m-7h4s");
+		/**  */
 		public static final EnumType P16_9i_rect_0t = new EnumType("P16_9i-rect-0t");
+		/**  */
 		public static final EnumType P12m_rect_0t = new EnumType("P12m-rect-0t");
+		/**  */
 		public static final EnumType W2_1i_round_0t = new EnumType("W2_1i-round-0t");
+		/**  */
 		public static final EnumType W2_1i_square_0t = new EnumType("W2_1i-square-0t");
+		/**  */
 		public static final EnumType W3_1i_square_0t = new EnumType("W3_1i-square-0t");
+		/**  */
 		public static final EnumType C9_5m_round_0t = new EnumType("C9.5m-round-0t");
 	}
 

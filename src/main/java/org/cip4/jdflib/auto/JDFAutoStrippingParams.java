@@ -217,6 +217,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	* Enumeration strings for WorkStyle
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumWorkStyle extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -269,11 +270,17 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 			return iterator(EnumWorkStyle.class);
 		}
 
+		/**  */
 		public static final EnumWorkStyle Simplex = new EnumWorkStyle("Simplex");
+		/**  */
 		public static final EnumWorkStyle Perfecting = new EnumWorkStyle("Perfecting");
+		/**  */
 		public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
+		/**  */
 		public static final EnumWorkStyle WorkAndTurn = new EnumWorkStyle("WorkAndTurn");
+		/**  */
 		public static final EnumWorkStyle WorkAndTumble = new EnumWorkStyle("WorkAndTumble");
+		/**  */
 		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
 	}
 

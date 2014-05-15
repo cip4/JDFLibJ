@@ -230,6 +230,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	* Enumeration strings for OrdReset
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOrdReset extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -282,8 +283,11 @@ public abstract class JDFAutoLayout extends JDFResource
 			return iterator(EnumOrdReset.class);
 		}
 
+		/**  */
 		public static final EnumOrdReset Continue = new EnumOrdReset("Continue");
+		/**  */
 		public static final EnumOrdReset PagePool = new EnumOrdReset("PagePool");
+		/**  */
 		public static final EnumOrdReset PagePoolList = new EnumOrdReset("PagePoolList");
 	}
 
@@ -291,6 +295,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	* Enumeration strings for SheetCountReset
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSheetCountReset extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -343,8 +348,11 @@ public abstract class JDFAutoLayout extends JDFResource
 			return iterator(EnumSheetCountReset.class);
 		}
 
+		/**  */
 		public static final EnumSheetCountReset Continue = new EnumSheetCountReset("Continue");
+		/**  */
 		public static final EnumSheetCountReset PagePool = new EnumSheetCountReset("PagePool");
+		/**  */
 		public static final EnumSheetCountReset PagePoolList = new EnumSheetCountReset("PagePoolList");
 	}
 
@@ -352,6 +360,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	* Enumeration strings for BaseOrdReset
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBaseOrdReset extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -404,7 +413,9 @@ public abstract class JDFAutoLayout extends JDFResource
 			return iterator(EnumBaseOrdReset.class);
 		}
 
+		/**  */
 		public static final EnumBaseOrdReset PagePool = new EnumBaseOrdReset("PagePool");
+		/**  */
 		public static final EnumBaseOrdReset PagePoolList = new EnumBaseOrdReset("PagePoolList");
 	}
 
@@ -412,6 +423,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	* Enumeration strings for SourceWorkStyle
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceWorkStyle extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -464,11 +476,17 @@ public abstract class JDFAutoLayout extends JDFResource
 			return iterator(EnumSourceWorkStyle.class);
 		}
 
+		/**  */
 		public static final EnumSourceWorkStyle Simplex = new EnumSourceWorkStyle("Simplex");
+		/**  */
 		public static final EnumSourceWorkStyle Perfecting = new EnumSourceWorkStyle("Perfecting");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndBack = new EnumSourceWorkStyle("WorkAndBack");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTurn = new EnumSourceWorkStyle("WorkAndTurn");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
+		/**  */
 		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
 	}
 
@@ -476,6 +494,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	* Enumeration strings for TemplateType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumTemplateType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -528,7 +547,9 @@ public abstract class JDFAutoLayout extends JDFResource
 			return iterator(EnumTemplateType.class);
 		}
 
+		/**  */
 		public static final EnumTemplateType Normal = new EnumTemplateType("Normal");
+		/**  */
 		public static final EnumTemplateType ConditionalSheets = new EnumTemplateType("ConditionalSheets");
 	}
 

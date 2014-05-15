@@ -153,6 +153,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	* Enumeration strings for SetSplitBy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSetSplitBy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -205,8 +206,11 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 			return iterator(EnumSetSplitBy.class);
 		}
 
+		/**  */
 		public static final EnumSetSplitBy Page = new EnumSetSplitBy("Page");
+		/**  */
 		public static final EnumSetSplitBy Document = new EnumSetSplitBy("Document");
+		/**  */
 		public static final EnumSetSplitBy RunList = new EnumSetSplitBy("RunList");
 	}
 

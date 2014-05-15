@@ -205,6 +205,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	* Enumeration strings for BandOrdering
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBandOrdering extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -257,7 +258,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 			return iterator(EnumBandOrdering.class);
 		}
 
+		/**  */
 		public static final EnumBandOrdering BandMajor = new EnumBandOrdering("BandMajor");
+		/**  */
 		public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
 	}
 
@@ -265,6 +268,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	* Enumeration strings for ElementType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumElementType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -317,20 +321,35 @@ public abstract class JDFAutoByteMap extends JDFResource
 			return iterator(EnumElementType.class);
 		}
 
+		/**  */
 		public static final EnumElementType Auxiliary = new EnumElementType("Auxiliary");
+		/**  */
 		public static final EnumElementType Barcode = new EnumElementType("Barcode");
+		/**  */
 		public static final EnumElementType Composed = new EnumElementType("Composed");
+		/**  */
 		public static final EnumElementType Document = new EnumElementType("Document");
+		/**  */
 		public static final EnumElementType Graphic = new EnumElementType("Graphic");
+		/**  */
 		public static final EnumElementType IdentificationField = new EnumElementType("IdentificationField");
+		/**  */
 		public static final EnumElementType Image = new EnumElementType("Image");
+		/**  */
 		public static final EnumElementType MultiDocument = new EnumElementType("MultiDocument");
+		/**  */
 		public static final EnumElementType MultiSet = new EnumElementType("MultiSet");
+		/**  */
 		public static final EnumElementType Page = new EnumElementType("Page");
+		/**  */
 		public static final EnumElementType Reservation = new EnumElementType("Reservation");
+		/**  */
 		public static final EnumElementType Surface = new EnumElementType("Surface");
+		/**  */
 		public static final EnumElementType Text = new EnumElementType("Text");
+		/**  */
 		public static final EnumElementType Tile = new EnumElementType("Tile");
+		/**  */
 		public static final EnumElementType Unknown = new EnumElementType("Unknown");
 	}
 

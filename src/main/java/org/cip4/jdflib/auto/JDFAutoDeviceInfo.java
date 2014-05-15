@@ -78,6 +78,7 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -193,6 +194,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	* Enumeration strings for DeviceCondition
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceCondition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -245,77 +247,21 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 			return iterator(EnumDeviceCondition.class);
 		}
 
+		/**  */
 		public static final EnumDeviceCondition OK = new EnumDeviceCondition("OK");
+		/**  */
 		public static final EnumDeviceCondition NeedsAttention = new EnumDeviceCondition("NeedsAttention");
+		/**  */
 		public static final EnumDeviceCondition Failure = new EnumDeviceCondition("Failure");
+		/**  */
 		public static final EnumDeviceCondition OffLine = new EnumDeviceCondition("OffLine");
-	}
-
-	/**
-	* Enumeration strings for DeviceOperationMode
-	*/
-
-	public static class EnumDeviceOperationMode extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumDeviceOperationMode(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceOperationMode getEnum(String enumName)
-		{
-			return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceOperationMode getEnum(int enumValue)
-		{
-			return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceOperationMode.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceOperationMode.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceOperationMode.class);
-		}
-
-		public static final EnumDeviceOperationMode Productive = new EnumDeviceOperationMode("Productive");
-		public static final EnumDeviceOperationMode NonProductive = new EnumDeviceOperationMode("NonProductive");
-		public static final EnumDeviceOperationMode Maintenance = new EnumDeviceOperationMode("Maintenance");
 	}
 
 	/**
 	* Enumeration strings for DeviceStatus
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -368,12 +314,19 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 			return iterator(EnumDeviceStatus.class);
 		}
 
+		/**  */
 		public static final EnumDeviceStatus Unknown = new EnumDeviceStatus("Unknown");
+		/**  */
 		public static final EnumDeviceStatus Idle = new EnumDeviceStatus("Idle");
+		/**  */
 		public static final EnumDeviceStatus Down = new EnumDeviceStatus("Down");
+		/**  */
 		public static final EnumDeviceStatus Setup = new EnumDeviceStatus("Setup");
+		/**  */
 		public static final EnumDeviceStatus Running = new EnumDeviceStatus("Running");
+		/**  */
 		public static final EnumDeviceStatus Cleanup = new EnumDeviceStatus("Cleanup");
+		/**  */
 		public static final EnumDeviceStatus Stopped = new EnumDeviceStatus("Stopped");
 	}
 

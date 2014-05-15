@@ -158,7 +158,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -167,6 +167,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	* Enumeration strings for ChannelType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumChannelType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -219,14 +220,23 @@ public abstract class JDFAutoComChannel extends JDFResource
 			return iterator(EnumChannelType.class);
 		}
 
+		/**  */
 		public static final EnumChannelType ComputerName = new EnumChannelType("ComputerName");
+		/**  */
 		public static final EnumChannelType Email = new EnumChannelType("Email");
+		/**  */
 		public static final EnumChannelType Fax = new EnumChannelType("Fax");
+		/**  */
 		public static final EnumChannelType InstantMessaging = new EnumChannelType("InstantMessaging");
+		/**  */
 		public static final EnumChannelType JMF = new EnumChannelType("JMF");
+		/**  */
 		public static final EnumChannelType Mobile = new EnumChannelType("Mobile");
+		/**  */
 		public static final EnumChannelType Phone = new EnumChannelType("Phone");
+		/**  */
 		public static final EnumChannelType PrivateDirectory = new EnumChannelType("PrivateDirectory");
+		/**  */
 		public static final EnumChannelType WWW = new EnumChannelType("WWW");
 	}
 
@@ -316,8 +326,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	  */
 	public VString getChannelUsage()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

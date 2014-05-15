@@ -222,6 +222,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	* Enumeration strings for Type
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -274,7 +275,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 			return iterator(EnumType.class);
 		}
 
+		/**  */
 		public static final EnumType Content = new EnumType("Content");
+		/**  */
 		public static final EnumType Mark = new EnumType("Mark");
 	}
 
@@ -282,6 +285,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	* Enumeration strings for Anchor
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -334,14 +338,23 @@ public abstract class JDFAutoMarkObject extends JDFElement
 			return iterator(EnumAnchor.class);
 		}
 
+		/**  */
 		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+		/**  */
 		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+		/**  */
 		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+		/**  */
 		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+		/**  */
 		public static final EnumAnchor Center = new EnumAnchor("Center");
+		/**  */
 		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+		/**  */
 		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+		/**  */
 		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+		/**  */
 		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 

@@ -232,6 +232,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	* Enumeration strings for FinishingOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFinishingOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -284,9 +285,13 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 			return iterator(EnumFinishingOrder.class);
 		}
 
+		/**  */
 		public static final EnumFinishingOrder FoldGather = new EnumFinishingOrder("FoldGather");
+		/**  */
 		public static final EnumFinishingOrder FoldCollect = new EnumFinishingOrder("FoldCollect");
+		/**  */
 		public static final EnumFinishingOrder Gather = new EnumFinishingOrder("Gather");
+		/**  */
 		public static final EnumFinishingOrder GatherFold = new EnumFinishingOrder("GatherFold");
 	}
 
@@ -294,6 +299,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	* Enumeration strings for FoldCatalogOrientation
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumFoldCatalogOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -346,13 +352,21 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 			return iterator(EnumFoldCatalogOrientation.class);
 		}
 
+		/**  */
 		public static final EnumFoldCatalogOrientation Rotate0 = new EnumFoldCatalogOrientation("Rotate0");
+		/**  */
 		public static final EnumFoldCatalogOrientation Rotate90 = new EnumFoldCatalogOrientation("Rotate90");
+		/**  */
 		public static final EnumFoldCatalogOrientation Rotate180 = new EnumFoldCatalogOrientation("Rotate180");
+		/**  */
 		public static final EnumFoldCatalogOrientation Rotate270 = new EnumFoldCatalogOrientation("Rotate270");
+		/**  */
 		public static final EnumFoldCatalogOrientation Flip0 = new EnumFoldCatalogOrientation("Flip0");
+		/**  */
 		public static final EnumFoldCatalogOrientation Flip90 = new EnumFoldCatalogOrientation("Flip90");
+		/**  */
 		public static final EnumFoldCatalogOrientation Flip180 = new EnumFoldCatalogOrientation("Flip180");
+		/**  */
 		public static final EnumFoldCatalogOrientation Flip270 = new EnumFoldCatalogOrientation("Flip270");
 	}
 
@@ -360,6 +374,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	* Enumeration strings for Rotate
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumRotate extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -412,9 +427,13 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 			return iterator(EnumRotate.class);
 		}
 
+		/**  */
 		public static final EnumRotate Rotate0 = new EnumRotate("Rotate0");
+		/**  */
 		public static final EnumRotate Rotate90 = new EnumRotate("Rotate90");
+		/**  */
 		public static final EnumRotate Rotate180 = new EnumRotate("Rotate180");
+		/**  */
 		public static final EnumRotate Rotate270 = new EnumRotate("Rotate270");
 	}
 
@@ -422,6 +441,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	* Enumeration strings for Sides
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -474,10 +494,15 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 			return iterator(EnumSides.class);
 		}
 
+		/**  */
 		public static final EnumSides OneSidedBackFlipX = new EnumSides("OneSidedBackFlipX");
+		/**  */
 		public static final EnumSides OneSidedBackFlipY = new EnumSides("OneSidedBackFlipY");
+		/**  */
 		public static final EnumSides OneSidedFront = new EnumSides("OneSidedFront");
+		/**  */
 		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
+		/**  */
 		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
 	}
 
@@ -485,6 +510,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	* Enumeration strings for BindingEdge
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBindingEdge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -537,10 +563,15 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 			return iterator(EnumBindingEdge.class);
 		}
 
+		/**  */
 		public static final EnumBindingEdge Left = new EnumBindingEdge("Left");
+		/**  */
 		public static final EnumBindingEdge Right = new EnumBindingEdge("Right");
+		/**  */
 		public static final EnumBindingEdge Top = new EnumBindingEdge("Top");
+		/**  */
 		public static final EnumBindingEdge Bottom = new EnumBindingEdge("Bottom");
+		/**  */
 		public static final EnumBindingEdge None = new EnumBindingEdge("None");
 	}
 

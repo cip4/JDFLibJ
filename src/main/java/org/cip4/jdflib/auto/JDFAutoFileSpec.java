@@ -220,6 +220,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	* Enumeration strings for Disposition
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumDisposition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -272,8 +273,11 @@ public abstract class JDFAutoFileSpec extends JDFResource
 			return iterator(EnumDisposition.class);
 		}
 
+		/**  */
 		public static final EnumDisposition Unlink = new EnumDisposition("Unlink");
+		/**  */
 		public static final EnumDisposition Delete = new EnumDisposition("Delete");
+		/**  */
 		public static final EnumDisposition Retain = new EnumDisposition("Retain");
 	}
 
@@ -281,6 +285,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	* Enumeration strings for OverwritePolicy
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumOverwritePolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -333,11 +338,17 @@ public abstract class JDFAutoFileSpec extends JDFResource
 			return iterator(EnumOverwritePolicy.class);
 		}
 
+		/**  */
 		public static final EnumOverwritePolicy Overwrite = new EnumOverwritePolicy("Overwrite");
+		/**  */
 		public static final EnumOverwritePolicy RenameNew = new EnumOverwritePolicy("RenameNew");
+		/**  */
 		public static final EnumOverwritePolicy RenameOld = new EnumOverwritePolicy("RenameOld");
+		/**  */
 		public static final EnumOverwritePolicy NewVersion = new EnumOverwritePolicy("NewVersion");
+		/**  */
 		public static final EnumOverwritePolicy OperatorIntervention = new EnumOverwritePolicy("OperatorIntervention");
+		/**  */
 		public static final EnumOverwritePolicy Abort = new EnumOverwritePolicy("Abort");
 	}
 
@@ -345,6 +356,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	* Enumeration strings for PageOrder
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPageOrder extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -397,7 +409,9 @@ public abstract class JDFAutoFileSpec extends JDFResource
 			return iterator(EnumPageOrder.class);
 		}
 
+		/**  */
 		public static final EnumPageOrder Ascending = new EnumPageOrder("Ascending");
+		/**  */
 		public static final EnumPageOrder Descending = new EnumPageOrder("Descending");
 	}
 

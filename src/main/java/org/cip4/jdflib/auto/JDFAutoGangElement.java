@@ -200,6 +200,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	* Enumeration strings for GrainDirection
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -252,11 +253,17 @@ public abstract class JDFAutoGangElement extends JDFElement
 			return iterator(EnumGrainDirection.class);
 		}
 
+		/**  */
 		public static final EnumGrainDirection Any = new EnumGrainDirection("Any");
+		/**  */
 		public static final EnumGrainDirection ShortEdge = new EnumGrainDirection("ShortEdge");
+		/**  */
 		public static final EnumGrainDirection LongEdge = new EnumGrainDirection("LongEdge");
+		/**  */
 		public static final EnumGrainDirection SameDirection = new EnumGrainDirection("SameDirection");
+		/**  */
 		public static final EnumGrainDirection XDirection = new EnumGrainDirection("XDirection");
+		/**  */
 		public static final EnumGrainDirection YDirection = new EnumGrainDirection("YDirection");
 	}
 

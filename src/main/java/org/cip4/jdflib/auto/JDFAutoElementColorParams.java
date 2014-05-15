@@ -201,6 +201,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	* Enumeration strings for ICCOutputProfileUsage
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumICCOutputProfileUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -253,8 +254,11 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 			return iterator(EnumICCOutputProfileUsage.class);
 		}
 
+		/**  */
 		public static final EnumICCOutputProfileUsage PDLActual = new EnumICCOutputProfileUsage("PDLActual");
+		/**  */
 		public static final EnumICCOutputProfileUsage PDLReference = new EnumICCOutputProfileUsage("PDLReference");
+		/**  */
 		public static final EnumICCOutputProfileUsage IgnorePDL = new EnumICCOutputProfileUsage("IgnorePDL");
 	}
 

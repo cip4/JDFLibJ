@@ -194,6 +194,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	* Enumeration strings for Position
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPosition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -246,11 +247,17 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 			return iterator(EnumPosition.class);
 		}
 
+		/**  */
 		public static final EnumPosition Top = new EnumPosition("Top");
+		/**  */
 		public static final EnumPosition Bottom = new EnumPosition("Bottom");
+		/**  */
 		public static final EnumPosition Left = new EnumPosition("Left");
+		/**  */
 		public static final EnumPosition Right = new EnumPosition("Right");
+		/**  */
 		public static final EnumPosition Front = new EnumPosition("Front");
+		/**  */
 		public static final EnumPosition Back = new EnumPosition("Back");
 	}
 

@@ -173,6 +173,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	* Enumeration strings for KnockoutSource
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumKnockoutSource extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -225,9 +226,13 @@ public abstract class JDFAutoFillMark extends JDFElement
 			return iterator(EnumKnockoutSource.class);
 		}
 
+		/**  */
 		public static final EnumKnockoutSource ClipPath = new EnumKnockoutSource("ClipPath");
+		/**  */
 		public static final EnumKnockoutSource SourceClipPath = new EnumKnockoutSource("SourceClipPath");
+		/**  */
 		public static final EnumKnockoutSource TrimClipPath = new EnumKnockoutSource("TrimClipPath");
+		/**  */
 		public static final EnumKnockoutSource TrimBox = new EnumKnockoutSource("TrimBox");
 	}
 

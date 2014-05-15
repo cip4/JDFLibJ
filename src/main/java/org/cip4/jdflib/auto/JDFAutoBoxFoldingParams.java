@@ -197,6 +197,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	* Enumeration strings for BoxFoldingType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBoxFoldingType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -249,16 +250,27 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 			return iterator(EnumBoxFoldingType.class);
 		}
 
+		/**  */
 		public static final EnumBoxFoldingType Type00 = new EnumBoxFoldingType("Type00");
+		/**  */
 		public static final EnumBoxFoldingType Type01 = new EnumBoxFoldingType("Type01");
+		/**  */
 		public static final EnumBoxFoldingType Type02 = new EnumBoxFoldingType("Type02");
+		/**  */
 		public static final EnumBoxFoldingType Type03 = new EnumBoxFoldingType("Type03");
+		/**  */
 		public static final EnumBoxFoldingType Type04 = new EnumBoxFoldingType("Type04");
+		/**  */
 		public static final EnumBoxFoldingType Type10 = new EnumBoxFoldingType("Type10");
+		/**  */
 		public static final EnumBoxFoldingType Type11 = new EnumBoxFoldingType("Type11");
+		/**  */
 		public static final EnumBoxFoldingType Type12 = new EnumBoxFoldingType("Type12");
+		/**  */
 		public static final EnumBoxFoldingType Type13 = new EnumBoxFoldingType("Type13");
+		/**  */
 		public static final EnumBoxFoldingType Type15 = new EnumBoxFoldingType("Type15");
+		/**  */
 		public static final EnumBoxFoldingType Type20 = new EnumBoxFoldingType("Type20");
 	}
 

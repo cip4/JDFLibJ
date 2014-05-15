@@ -157,6 +157,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	* Enumeration strings for ChannelMode
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -209,7 +210,9 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 			return iterator(EnumChannelMode.class);
 		}
 
+		/**  */
 		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+		/**  */
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
 	}
 

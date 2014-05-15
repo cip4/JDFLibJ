@@ -179,6 +179,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	* Enumeration strings for EndStatus
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumEndStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -231,10 +232,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 			return iterator(EnumEndStatus.class);
 		}
 
+		/**  */
 		public static final EnumEndStatus Aborted = new EnumEndStatus("Aborted");
+		/**  */
 		public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
+		/**  */
 		public static final EnumEndStatus FailedTestRun = new EnumEndStatus("FailedTestRun");
+		/**  */
 		public static final EnumEndStatus Ready = new EnumEndStatus("Ready");
+		/**  */
 		public static final EnumEndStatus Stopped = new EnumEndStatus("Stopped");
 	}
 

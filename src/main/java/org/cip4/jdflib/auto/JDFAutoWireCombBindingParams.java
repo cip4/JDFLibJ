@@ -197,6 +197,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	* Enumeration strings for Shape
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumShape extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -249,7 +250,9 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 			return iterator(EnumShape.class);
 		}
 
+		/**  */
 		public static final EnumShape Single = new EnumShape("Single");
+		/**  */
 		public static final EnumShape Twin = new EnumShape("Twin");
 	}
 
@@ -257,6 +260,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	* Enumeration strings for Material
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMaterial extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -309,8 +313,11 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 			return iterator(EnumMaterial.class);
 		}
 
+		/**  */
 		public static final EnumMaterial LaqueredSteel = new EnumMaterial("LaqueredSteel");
+		/**  */
 		public static final EnumMaterial TinnedSteel = new EnumMaterial("TinnedSteel");
+		/**  */
 		public static final EnumMaterial ZincsSteel = new EnumMaterial("ZincsSteel");
 	}
 

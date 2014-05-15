@@ -195,6 +195,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	* Enumeration strings for Position
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumPosition extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -247,14 +248,23 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 			return iterator(EnumPosition.class);
 		}
 
+		/**  */
 		public static final EnumPosition TopLeft = new EnumPosition("TopLeft");
+		/**  */
 		public static final EnumPosition TopCenter = new EnumPosition("TopCenter");
+		/**  */
 		public static final EnumPosition TopRight = new EnumPosition("TopRight");
+		/**  */
 		public static final EnumPosition CenterLeft = new EnumPosition("CenterLeft");
+		/**  */
 		public static final EnumPosition Center = new EnumPosition("Center");
+		/**  */
 		public static final EnumPosition CenterRight = new EnumPosition("CenterRight");
+		/**  */
 		public static final EnumPosition BottomLeft = new EnumPosition("BottomLeft");
+		/**  */
 		public static final EnumPosition BottomCenter = new EnumPosition("BottomCenter");
+		/**  */
 		public static final EnumPosition BottomRight = new EnumPosition("BottomRight");
 	}
 

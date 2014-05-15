@@ -198,6 +198,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	* Enumeration strings for BundleType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumBundleType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -250,18 +251,31 @@ public abstract class JDFAutoBundle extends JDFResource
 			return iterator(EnumBundleType.class);
 		}
 
+		/**  */
 		public static final EnumBundleType BoundSet = new EnumBundleType("BoundSet");
+		/**  */
 		public static final EnumBundleType Box = new EnumBundleType("Box");
+		/**  */
 		public static final EnumBundleType Carton = new EnumBundleType("Carton");
+		/**  */
 		public static final EnumBundleType CollectedStack = new EnumBundleType("CollectedStack");
+		/**  */
 		public static final EnumBundleType CompensatedStack = new EnumBundleType("CompensatedStack");
+		/**  */
 		public static final EnumBundleType Pallet = new EnumBundleType("Pallet");
+		/**  */
 		public static final EnumBundleType Roll = new EnumBundleType("Roll");
+		/**  */
 		public static final EnumBundleType Sheet = new EnumBundleType("Sheet");
+		/**  */
 		public static final EnumBundleType SheetStream = new EnumBundleType("SheetStream");
+		/**  */
 		public static final EnumBundleType Stack = new EnumBundleType("Stack");
+		/**  */
 		public static final EnumBundleType StrappedStack = new EnumBundleType("StrappedStack");
+		/**  */
 		public static final EnumBundleType StrappedCompensatedStack = new EnumBundleType("StrappedCompensatedStack");
+		/**  */
 		public static final EnumBundleType WrappedBundle = new EnumBundleType("WrappedBundle");
 	}
 

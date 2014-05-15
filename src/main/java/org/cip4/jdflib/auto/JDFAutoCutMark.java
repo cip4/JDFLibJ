@@ -195,6 +195,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	* Enumeration strings for MarkType
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumMarkType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -247,14 +248,23 @@ public abstract class JDFAutoCutMark extends JDFResource
 			return iterator(EnumMarkType.class);
 		}
 
+		/**  */
 		public static final EnumMarkType CrossCutMark = new EnumMarkType("CrossCutMark");
+		/**  */
 		public static final EnumMarkType TopVerticalCutMark = new EnumMarkType("TopVerticalCutMark");
+		/**  */
 		public static final EnumMarkType BottomVerticalCutMark = new EnumMarkType("BottomVerticalCutMark");
+		/**  */
 		public static final EnumMarkType LeftHorizontalCutMark = new EnumMarkType("LeftHorizontalCutMark");
+		/**  */
 		public static final EnumMarkType RightHorizontalCutMark = new EnumMarkType("RightHorizontalCutMark");
+		/**  */
 		public static final EnumMarkType LowerLeftCutMark = new EnumMarkType("LowerLeftCutMark");
+		/**  */
 		public static final EnumMarkType UpperLeftCutMark = new EnumMarkType("UpperLeftCutMark");
+		/**  */
 		public static final EnumMarkType LowerRightCutMark = new EnumMarkType("LowerRightCutMark");
+		/**  */
 		public static final EnumMarkType UpperRightCutMark = new EnumMarkType("UpperRightCutMark");
 	}
 

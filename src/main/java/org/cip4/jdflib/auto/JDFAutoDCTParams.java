@@ -160,6 +160,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	* Enumeration strings for SourceCSs
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumSourceCSs extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -212,23 +213,41 @@ public abstract class JDFAutoDCTParams extends JDFElement
 			return iterator(EnumSourceCSs.class);
 		}
 
+		/**  */
 		public static final EnumSourceCSs CalGray = new EnumSourceCSs("CalGray");
+		/**  */
 		public static final EnumSourceCSs CalRGB = new EnumSourceCSs("CalRGB");
+		/**  */
 		public static final EnumSourceCSs Calibrated = new EnumSourceCSs("Calibrated");
+		/**  */
 		public static final EnumSourceCSs CIEBased = new EnumSourceCSs("CIEBased");
+		/**  */
 		public static final EnumSourceCSs CMYK = new EnumSourceCSs("CMYK");
+		/**  */
 		public static final EnumSourceCSs DeviceN = new EnumSourceCSs("DeviceN");
+		/**  */
 		public static final EnumSourceCSs DevIndep = new EnumSourceCSs("DevIndep");
+		/**  */
 		public static final EnumSourceCSs RGB = new EnumSourceCSs("RGB");
+		/**  */
 		public static final EnumSourceCSs Gray = new EnumSourceCSs("Gray");
+		/**  */
 		public static final EnumSourceCSs ICCBased = new EnumSourceCSs("ICCBased");
+		/**  */
 		public static final EnumSourceCSs ICCCMYK = new EnumSourceCSs("ICCCMYK");
+		/**  */
 		public static final EnumSourceCSs ICCGray = new EnumSourceCSs("ICCGray");
+		/**  */
 		public static final EnumSourceCSs ICCLAB = new EnumSourceCSs("ICCLAB");
+		/**  */
 		public static final EnumSourceCSs ICCRGB = new EnumSourceCSs("ICCRGB");
+		/**  */
 		public static final EnumSourceCSs Lab = new EnumSourceCSs("Lab");
+		/**  */
 		public static final EnumSourceCSs Separation = new EnumSourceCSs("Separation");
+		/**  */
 		public static final EnumSourceCSs YUV = new EnumSourceCSs("YUV");
+		/**  */
 		public static final EnumSourceCSs All = new EnumSourceCSs("All");
 	}
 
@@ -236,6 +255,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	* Enumeration strings for ColorTransform
 	*/
 
+	@SuppressWarnings("rawtypes")
 	public static class EnumColorTransform extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -288,8 +308,11 @@ public abstract class JDFAutoDCTParams extends JDFElement
 			return iterator(EnumColorTransform.class);
 		}
 
+		/**  */
 		public static final EnumColorTransform YUV = new EnumColorTransform("YUV");
+		/**  */
 		public static final EnumColorTransform None = new EnumColorTransform("None");
+		/**  */
 		public static final EnumColorTransform Automatic = new EnumColorTransform("Automatic");
 	}
 
@@ -305,7 +328,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	  * (5.2) set attribute SourceCSs
 	  * @param v vector of the enumeration values
 	  */
-	public void setSourceCSs(Vector v)
+	public void setSourceCSs(Vector<? extends ValuedEnum> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCECSS, v, null);
 	}
@@ -314,7 +337,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	  * (9.2) get SourceCSs attribute SourceCSs
 	  * @return Vector of the enumerations
 	  */
-	public Vector getSourceCSs()
+	public Vector<? extends ValuedEnum> getSourceCSs()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
 	}
