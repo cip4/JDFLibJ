@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JDFDate;
@@ -105,7 +106,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -118,6 +119,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
 	}
 
 	@Override
@@ -690,6 +692,27 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	public EnumUpdateGranularity getUpdateGranularity()
 	{
 		return EnumUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Activation
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Activation
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setActivation(EnumActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Activation
+	  * @return the value of the attribute
+	  */
+	public EnumActivation getActivation()
+	{
+		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 	}
 
 	/* ***********************************************************************

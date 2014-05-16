@@ -81,10 +81,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -115,6 +115,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
+	 * @throws Exception 
 	 * 
 	 */
 	@Test
@@ -158,8 +159,8 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 		filter.copy(newQueue, oldQueue, resp);
 		System.out.println("Result:\n" + resp.toXML());
-		Assert.assertEquals(newQueue.getQueueEntryVector().size(), 5);
-		Assert.assertNotNull(resp.getQueue(0));
+		assertEquals(newQueue.getQueueEntryVector().size(), 5);
+		assertNotNull(resp.getQueue(0));
 	}
 
 	/**
@@ -179,32 +180,32 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		JDFQueue copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
 		JDFQueue matchedQueue = filter.apply(copyMatch, copy);
-		Assert.assertNull("identical queue should cancel", matchedQueue);
+		assertNull("identical queue should cancel", matchedQueue);
 		theQueue.setQueueStatus(EnumQueueStatus.Held);
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
 		matchedQueue = filter.apply(copyMatch, copy);
-		Assert.assertEquals(EnumQueueStatus.Held, matchedQueue.getQueueStatus());
-		Assert.assertNull(matchedQueue.getQueueEntry(0));
+		assertEquals(EnumQueueStatus.Held, matchedQueue.getQueueStatus());
+		assertNull(matchedQueue.getQueueEntry(0));
 		final JDFQueueEntry addedQE = theQueue.appendQueueEntry();
 		addedQE.setQueueEntryID("qe_test");
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
 		matchedQueue = filter.apply(copyMatch, copy);
-		Assert.assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "qe_test");
-		Assert.assertNull(matchedQueue.getQueueEntry(1));
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "qe_test");
+		assertNull(matchedQueue.getQueueEntry(1));
 		addedQE.deleteNode();
 		theQueue.getQueueEntry("q1").setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
 		matchedQueue = filter.apply(copyMatch, copy);
-		Assert.assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
-		Assert.assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Aborted);
-		Assert.assertNull(matchedQueue.getQueueEntry(1));
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Aborted);
+		assertNull(matchedQueue.getQueueEntry(1));
 
 		theQueue.getQueueEntry("q1").deleteNode();
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
 		matchedQueue = filter.apply(copyMatch, copy);
-		Assert.assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
-		Assert.assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
-		Assert.assertNull(matchedQueue.getQueueEntry(1));
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
+		assertNull(matchedQueue.getQueueEntry(1));
 	}
 
 	/**
@@ -223,17 +224,17 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 
 		JDFQueue matchedQueue = filter.copy(theQueue, copy, null);
-		Assert.assertNull("identical queue should cancel", matchedQueue.getQueueEntry(0));
+		assertNull("identical queue should cancel", matchedQueue.getQueueEntry(0));
 		JDFQueueEntry qe = copy.appendQueueEntry();
 		qe.setQueueEntryID("q11");
 		matchedQueue = filter.copy(theQueue, copy, null);
-		Assert.assertEquals("got removed entry", matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
+		assertEquals("got removed entry", matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
 		qe = theQueue.appendQueueEntry();
 		qe.setQueueEntryID("q10");
 		qe = theQueue.appendQueueEntry();
 		qe.setQueueEntryID("q11");
 		matchedQueue = filter.copy(theQueue, copy, null);
-		Assert.assertEquals("got new entry", matchedQueue.getQueueEntry(0).getQueueEntryID(), "q10");
+		assertEquals("got new entry", matchedQueue.getQueueEntry(0).getQueueEntryID(), "q10");
 	}
 
 	/**
@@ -248,9 +249,9 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setStatusList(vs);
 
 		Vector<EnumQueueEntryStatus> statusList = filter.getStatusList();
-		Assert.assertTrue(statusList.contains(EnumQueueEntryStatus.Completed));
-		Assert.assertTrue(statusList.contains(EnumQueueEntryStatus.Aborted));
-		Assert.assertFalse(statusList.contains(EnumQueueEntryStatus.Running));
+		assertTrue(statusList.contains(EnumQueueEntryStatus.Completed));
+		assertTrue(statusList.contains(EnumQueueEntryStatus.Aborted));
+		assertFalse(statusList.contains(EnumQueueEntryStatus.Running));
 	}
 
 	/**
@@ -261,7 +262,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	{
 		NodeIdentifier ni = new NodeIdentifier("j1", "p1", null);
 		filter.setIdentifier(ni);
-		Assert.assertEquals(filter.getIdentifier(), ni);
+		assertEquals(filter.getIdentifier(), ni);
 	}
 
 	/**
@@ -276,17 +277,17 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		final JDFQueueEntry qe2 = theQueue.appendQueueEntry();
 		qe2.setGeneralID("ProductThing", "a2");
 		filter.setGeneralID("ProductThing", "a1");
-		Assert.assertTrue(filter.matches(qe1));
-		Assert.assertFalse(filter.matches(qe2));
+		assertTrue(filter.matches(qe1));
+		assertFalse(filter.matches(qe2));
 		filter.appendGeneralID("ProductThing", "a2");
-		Assert.assertTrue(filter.matches(qe1));
-		Assert.assertTrue(filter.matches(qe2));
+		assertTrue(filter.matches(qe1));
+		assertTrue(filter.matches(qe2));
 		filter.setGeneralID("ProductThing", "a0");
-		Assert.assertFalse(filter.matches(qe1));
-		Assert.assertFalse(filter.matches(qe2));
+		assertFalse(filter.matches(qe1));
+		assertFalse(filter.matches(qe2));
 		filter.setGeneralID("ProductThing", "a(.)?");
-		Assert.assertTrue(filter.matches(qe1));
-		Assert.assertTrue(filter.matches(qe2));
+		assertTrue(filter.matches(qe1));
+		assertTrue(filter.matches(qe2));
 
 	}
 
@@ -297,42 +298,42 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	public void testMatches() throws Exception
 	{
 		final JDFQueueEntry qe = theQueue.appendQueueEntry();
-		Assert.assertTrue("both empty ", filter.matches(qe));
+		assertTrue("both empty ", filter.matches(qe));
 		qe.setDeviceID("d1");
 		qe.setQueueEntryID("qe1");
 
 		filter.appendDevice("qe1");
-		Assert.assertFalse("no device ", filter.matches(qe));
+		assertFalse("no device ", filter.matches(qe));
 		filter.appendDevice("d1");
-		Assert.assertTrue(" device ", filter.matches(qe));
+		assertTrue(" device ", filter.matches(qe));
 
 		filter.appendQueueEntryDef("qe2");
-		Assert.assertFalse("no qentryID ", filter.matches(qe));
+		assertFalse("no qentryID ", filter.matches(qe));
 		filter.appendQueueEntryDef("qe1");
-		Assert.assertTrue("qentryID ", filter.matches(qe));
+		assertTrue("qentryID ", filter.matches(qe));
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
-		Assert.assertFalse("details=none never matches ", filter.matches(qe));
+		assertFalse("details=none never matches ", filter.matches(qe));
 
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief); // undo none for additional tests
 
 		qe.setJobID("jID");
-		Assert.assertTrue("jobID ", filter.matches(qe));
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobID("jID");
-		Assert.assertTrue("jobID ", filter.matches(qe));
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobID("j(.)*");
-		Assert.assertTrue("jobID ", filter.matches(qe));
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobID("jID2");
-		Assert.assertFalse("jobID ", filter.matches(qe));
+		assertFalse("jobID ", filter.matches(qe));
 		filter.setJobID("jID");
 
 		qe.setJobPartID("part");
-		Assert.assertTrue("jobPartID ", filter.matches(qe));
+		assertTrue("jobPartID ", filter.matches(qe));
 		filter.setJobPartID("part");
-		Assert.assertTrue("jobID ", filter.matches(qe));
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobPartID("par(.)*");
-		Assert.assertTrue("jobID ", filter.matches(qe));
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobPartID("part2");
-		Assert.assertFalse("jobID ", filter.matches(qe));
+		assertFalse("jobID ", filter.matches(qe));
 		filter.setJobPartID("part");
 
 		JDFDate d = new JDFDate();
@@ -340,16 +341,16 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		JDFDate d2 = d.clone();
 		d2.addOffset(200, 0, 0, 0);
 		filter.setOlderThan(d2);
-		Assert.assertTrue("older ", filter.matches(qe));
+		assertTrue("older ", filter.matches(qe));
 		filter.setOlderThan(null);
 		filter.setNewerThan(d2);
-		Assert.assertFalse("newer ", filter.matches(qe));
+		assertFalse("newer ", filter.matches(qe));
 		d2.addOffset(0, -10, 0, 0);
 		filter.setNewerThan(d2);
-		Assert.assertTrue("newer ", filter.matches(qe));
+		assertTrue("newer ", filter.matches(qe));
 		filter.setOlderThan(d2);
 		filter.setNewerThan(null);
-		Assert.assertFalse("older ", filter.matches(qe));
+		assertFalse("older ", filter.matches(qe));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -369,10 +370,10 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 		filter.setMaxEntries(10);
 		filter.apply(theQueue, null);
-		Assert.assertEquals(10, theQueue.numEntries(null));
+		assertEquals(10, theQueue.numEntries(null));
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
 		filter.apply(theQueue, null);
-		Assert.assertEquals(0, theQueue.numEntries(null));
+		assertEquals(0, theQueue.numEntries(null));
 	}
 
 	/**
@@ -383,10 +384,10 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	{
 		filter.appendQueueEntryDef("qe1");
 		filter.appendQueueEntryDef("qe2");
-		Assert.assertEquals(filter.getQueueEntryDefSet().size(), 2);
-		Assert.assertTrue(filter.getQueueEntryDefSet().contains("qe1"));
-		Assert.assertTrue(filter.getQueueEntryDefSet().contains("qe2"));
-		Assert.assertFalse(filter.getQueueEntryDefSet().contains("qe3"));
+		assertEquals(filter.getQueueEntryDefSet().size(), 2);
+		assertTrue(filter.getQueueEntryDefSet().contains("qe1"));
+		assertTrue(filter.getQueueEntryDefSet().contains("qe2"));
+		assertFalse(filter.getQueueEntryDefSet().contains("qe3"));
 	}
 
 	/**
@@ -397,10 +398,10 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	{
 		filter.appendDevice("qe1");
 		filter.appendDevice("qe2");
-		Assert.assertEquals(filter.getDeviceIDSet().size(), 2);
-		Assert.assertTrue(filter.getDeviceIDSet().contains("qe1"));
-		Assert.assertTrue(filter.getDeviceIDSet().contains("qe2"));
-		Assert.assertFalse(filter.getDeviceIDSet().contains("qe3"));
+		assertEquals(filter.getDeviceIDSet().size(), 2);
+		assertTrue(filter.getDeviceIDSet().contains("qe1"));
+		assertTrue(filter.getDeviceIDSet().contains("qe2"));
+		assertFalse(filter.getDeviceIDSet().contains("qe3"));
 	}
 
 	/**
@@ -425,7 +426,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		final long l1 = System.currentTimeMillis();
 		filter.apply(theQueue, q2);
 		final long l2 = System.currentTimeMillis();
-		Assert.assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
+		assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
 	}
 
 	/**
@@ -451,16 +452,57 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		final long l1 = System.currentTimeMillis();
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		final long l2 = System.currentTimeMillis();
-		Assert.assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
-		Assert.assertEquals(qCopy.numEntries(null), 1);
-		Assert.assertTrue(qCopy.getQueueEntry(0).isEqual(queueEntryNew));
+		assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
+		assertEquals(qCopy.numEntries(null), 1);
+		assertTrue(qCopy.getQueueEntry(0).isEqual(queueEntryNew));
 
 		filter.setMaxEntries(0);
 		JDFQueue copy = filter.copy(theQueue, null, null);
-		Assert.assertNull(copy.getQueueEntry(0));
+		assertNull(copy.getQueueEntry(0));
 		filter.setMaxEntries(100);
 		copy = filter.copy(theQueue, null, null);
-		Assert.assertEquals(copy.numChildElements(ElementName.QUEUEENTRY, null), 100);
+		assertEquals(copy.numChildElements(ElementName.QUEUEENTRY, null), 100);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCopyToActivation()
+	{
+		for (int test = 0; test < 6; test++)
+		{
+			theQueue.setAutomated(false);
+			for (int i = 0; i < 1200; i++)
+			{
+				final JDFQueueEntry qe = theQueue.getCreateQueueEntry(i);
+				qe.setPriority((i * 317) % 99);
+				qe.setQueueEntryID("q" + i);
+				qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+				if (test == 1 || test == 2)
+					qe.setActivation(EnumActivation.Active);
+				if (test > 3 && i % 3 == 0)
+					qe.setActivation(EnumActivation.Inactive);
+			}
+			if (test > 0)
+				filter.setActivation(EnumActivation.Active);
+			if (test == 3 || test == 5)
+				filter.setActivation(EnumActivation.Inactive);
+
+			final long l1 = System.currentTimeMillis();
+			JDFQueue qCopy = filter.copy(theQueue, null, null);
+			final long l2 = System.currentTimeMillis();
+			assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
+			if (test < 3)
+				assertEquals(qCopy.numEntries(null), theQueue.numEntries(null));
+			if (test == 3)
+				assertEquals(qCopy.numEntries(null), 0);
+			if (test == 4)
+				assertEquals(qCopy.numEntries(null), 800);
+			if (test == 5)
+				assertEquals(qCopy.numEntries(null), 400);
+
+		}
 	}
 
 	/**
@@ -487,17 +529,17 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		queueEntryLast.getJobPhase(0).setStatusDetails("other");
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
-		Assert.assertEquals("we modified statusdetails, and are not ignoring job phase", qCopy.numEntries(null), 1);
-		Assert.assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
+		assertEquals("we modified statusdetails, and are not ignoring job phase", qCopy.numEntries(null), 1);
+		assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
 
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
 		qCopy = filter.copy(theQueue, qLast, null);
-		Assert.assertEquals("we modified statusdetails, but are ignoring job phase", qCopy.numEntries(null), 0);
+		assertEquals("we modified statusdetails, but are ignoring job phase", qCopy.numEntries(null), 0);
 
 		queueEntryLast.setPriority(100);
 		qCopy = filter.copy(theQueue, qLast, null);
-		Assert.assertEquals("we changed priority...", qCopy.numEntries(null), 1);
-		Assert.assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
+		assertEquals("we changed priority...", qCopy.numEntries(null), 1);
+		assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
 
 	}
 
@@ -542,16 +584,16 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JDF);
 		JDFQueue q2 = filter.copy(theQueue, null, null);
 		JDFQueueEntry qe2 = q2.getQueueEntry(0);
-		Assert.assertNotNull(qe2.getJobPhase(0).getNode());
+		assertNotNull(qe2.getJobPhase(0).getNode());
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		q2 = filter.copy(theQueue, null, null);
 		qe2 = q2.getQueueEntry(0);
-		Assert.assertNotNull(qe2.getJobPhase(0));
-		Assert.assertNull(qe2.getJobPhase(0).getNode());
+		assertNotNull(qe2.getJobPhase(0));
+		assertNull(qe2.getJobPhase(0).getNode());
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
 		q2 = filter.copy(theQueue, null, null);
 		qe2 = q2.getQueueEntry(0);
-		Assert.assertNull(qe2.getJobPhase(0));
+		assertNull(qe2.getJobPhase(0));
 
 	}
 }
