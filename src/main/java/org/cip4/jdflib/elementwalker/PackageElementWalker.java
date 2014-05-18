@@ -139,15 +139,24 @@ public class PackageElementWalker extends ElementWalker
 	private void constructWorkersJar(File jarFile)
 	{
 		ZipReader zr = new ZipReader(jarFile);
-		String packageName = getClass().getPackage().getName();
-		for (int i = 0; true; i++)
+		Class<? extends PackageElementWalker> currentClass = getClass();
+		while (currentClass != null)
 		{
-			ZipEntry ze = zr.getMatchingEntry(WALK_CLASS, i);
-			if (ze == null)
-				break;
-			String name = ZipReader.getEntryName(ze);
-			name = packageName + "." + StringUtil.token(name, -1, "/");
-			constructWalker(name);
+			String packageName = currentClass.getPackage().getName();
+			for (int i = 0; true; i++)
+			{
+				ZipEntry ze = zr.getMatchingEntry(WALK_CLASS, i);
+				if (ze == null)
+					break;
+				String name = ZipReader.getEntryName(ze);
+				String className = packageName + "." + StringUtil.token(name, -1, "/");
+				String pathName = StringUtil.replaceChar(name, '/', ".", 0);
+				if (pathName.equals(packageName + "." + className))
+				{
+					constructWalker(name);
+				}
+			}
+			currentClass = getParentClass(currentClass);
 		}
 	}
 
@@ -174,12 +183,24 @@ public class PackageElementWalker extends ElementWalker
 					constructWalker(name);
 				}
 			}
-			Class<?> nextClass = currentClass.getSuperclass();
-			if (PackageElementWalker.class.isAssignableFrom(nextClass))
-				currentClass = (Class<? extends PackageElementWalker>) nextClass;
-			else
-				currentClass = null;
+			currentClass = getParentClass(currentClass);
 		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param currentClass
+	 * @return
+	 */
+	private Class<? extends PackageElementWalker> getParentClass(Class<? extends PackageElementWalker> currentClass)
+	{
+		Class<?> nextClass = currentClass.getSuperclass();
+		if (PackageElementWalker.class.isAssignableFrom(nextClass))
+			currentClass = (Class<? extends PackageElementWalker>) nextClass;
+		else
+			currentClass = null;
+		return currentClass;
 	}
 
 	/**
