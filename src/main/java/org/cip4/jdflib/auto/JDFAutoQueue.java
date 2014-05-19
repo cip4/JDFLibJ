@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.resource.JDFDevice;
 
@@ -342,19 +340,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 */
 	public Collection<JDFDevice> getAllDevice()
 	{
-		final VElement vc = getChildElementVector(ElementName.DEVICE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDevice> v = new Vector<JDFDevice>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDevice) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFDevice.class, false, 0);
 	}
 
 	/**
@@ -393,19 +379,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 */
 	public Collection<JDFQueueEntry> getAllQueueEntry()
 	{
-		final VElement vc = getChildElementVector(ElementName.QUEUEENTRY, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFQueueEntry) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFQueueEntry.class, false, 0);
 	}
 
 	/**

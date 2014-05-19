@@ -256,6 +256,20 @@ public class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * check that entries with backslash are correctly handled
+	 *  
+	 */
+	@Test
+	public void testgetNextMatchingEntryBackslash()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "backslash.zip");
+		r.buffer();
+		assertNotNull(r.getNextMatchingEntry("?.jmf"));
+		assertNotNull(r.getNextMatchingEntry("?.jmf"));
+		assertNull(r.getNextMatchingEntry("?.jmf"));
+	}
+
+	/**
 	 * 
 	 *  
 	 */

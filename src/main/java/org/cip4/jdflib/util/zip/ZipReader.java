@@ -365,8 +365,29 @@ public class ZipReader
 	public ZipEntry getMatchingEntry(String expr, int iSkip)
 	{
 		buffer();
-		ZipEntry ze = getNextEntry();
+		ZipEntry ze = getNextMatchingEntry(expr);
 		int n = 0;
+
+		while (ze != null)
+		{
+			if (n >= iSkip)
+				return ze;
+			else
+				n++;
+			ze = getNextMatchingEntry(expr);
+		}
+		return null;
+	}
+
+	/**
+	 * get the next entry by expression - note that we need to buffer the entire file for this random access method
+	 * 
+	 * @param expr the regexp to match - simplified regexp is accepted
+	 * @return
+	 */
+	public ZipEntry getNextMatchingEntry(String expr)
+	{
+		ZipEntry ze = getNextEntry();
 		String exprUnEscaped = UrlUtil.unEscape(expr);
 		if (expr.equals(exprUnEscaped))
 			exprUnEscaped = null;
@@ -406,10 +427,7 @@ public class ZipReader
 
 			if (matches)
 			{
-				if (n >= iSkip)
-					return ze;
-				else
-					n++;
+				return ze;
 			}
 
 			ze = getNextEntry();

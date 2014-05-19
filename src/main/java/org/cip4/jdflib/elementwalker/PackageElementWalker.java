@@ -143,17 +143,22 @@ public class PackageElementWalker extends ElementWalker
 		while (currentClass != null)
 		{
 			String packageName = currentClass.getPackage().getName();
-			for (int i = 0; true; i++)
+			String packagePath = StringUtil.replaceChar(packageName, '.', "/", 0);
+			String classExpr = packagePath + "/" + WALK_CLASS;
+			zr.buffer();
+			while (true)
 			{
-				ZipEntry ze = zr.getMatchingEntry(WALK_CLASS, i);
+				ZipEntry ze = zr.getNextMatchingEntry(classExpr);
 				if (ze == null)
 					break;
 				String name = ZipReader.getEntryName(ze);
-				String className = packageName + "." + StringUtil.token(name, -1, "/");
-				String pathName = StringUtil.replaceChar(name, '/', ".", 0);
-				if (pathName.equals(packageName + "." + className))
+				String className = StringUtil.token(name, -1, "/");
+				String zipPackageName = StringUtil.leftStr(name, -1 - className.length());
+				if (packagePath.equals(zipPackageName))
 				{
-					constructWalker(name);
+					String fullClassName = packageName + "." + UrlUtil.newExtension(className, null);
+					log.info("constructing " + fullClassName);
+					constructWalker(fullClassName);
 				}
 			}
 			currentClass = getParentClass(currentClass);
