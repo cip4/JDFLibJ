@@ -64,27 +64,20 @@
 				<include name="Version.rtf" />
 			</fileset>
 		</copy>
-		<!-- Update version number in readme -->
-		<replace file="${dist.dir}/Readme.txt">
-			<replacefilter token="@build.number@" value="${build.number}" />
-			<replacefilter token="@build.timestamp@" value="${DSTAMP}" />
-			<replacefilter token="@jdf.version@" value="${jdf.version}" />
-			<replacefilter token="@jdflib.version@" value="${major.version}.${minor.version}.${build.number}" />
-		</replace>
 	</target>
 
 	<target name="compile" depends="-init" description="Compiles the JDFLibJ source code.">
 		<echo>Compiling...</echo>
-		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
+		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.6" source="1.6" failonerror="false">
 			<src path="${jdflib.src.dir}" />
 			<classpath refid="project.class.path" />
 			<include name="**/*.java" />
 		</javac>
 	</target>
 	
-	<target name="compileApps" depends="compile" description="Compiles the JDFLibJ source code.">
+	<target name="compileApps" depends="compile" description="Compiles the JDFLibJ Apps source code.">
 		<echo>Compiling...</echo>
-		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
+		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.6" source="1.6" failonerror="false">
 			<src path="${apps.src.dir}" />
 			<classpath refid="project.class.path" />
 			<include name="**/*.java" />
@@ -96,7 +89,7 @@
 		<delete dir="${dist.dir}" />
 	</target>
 
-	<target name="jar" depends="compile, compileApps,  buildnumber" description="Builds a JAR archive containing the JDFLibJ binaries.">
+	<target name="jar" depends="compile,  buildnumber" description="Builds a JAR archive containing the JDFLibJ binaries.">
 		<jar destfile="${dist.dir}/${base.filename}.jar" basedir="${bin.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="org.cip4.jdflib.CheckJDF" />
@@ -192,9 +185,6 @@
 		<echo message="Building ${base.filename}-src.zip" />
 		<zip destfile="${dist.dir}/${base.filename}-src.zip">
 			<zipfileset dir="${jdflib.src.dir}" prefix="src">
-				<include name="**/*.java" />
-			</zipfileset>
-			<zipfileset dir="${apps.src.dir}" prefix="apps">
 				<include name="**/*.java" />
 			</zipfileset>
 			<zipfileset dir="${test.src.dir}" prefix="test">

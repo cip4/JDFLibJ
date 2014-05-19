@@ -73,14 +73,15 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.security.CodeSource;
+import java.util.Vector;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.VectorMap;
 import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
@@ -99,7 +100,7 @@ public class PackageElementWalker extends ElementWalker
 	private static final String WALK_CLASS = "Walk*.class";
 	//	private static final String WALK_CLASS = "*.class";
 	final protected Log log;
-	static VString classes = null;
+	static VectorMap<Class<?>, String> classes = null;
 
 	/**
 	 * @param _theFactory
@@ -109,6 +110,8 @@ public class PackageElementWalker extends ElementWalker
 		super(_theFactory);
 		Class<? extends PackageElementWalker> myClass = getClass();
 		log = LogFactory.getLog(myClass);
+		if (classes == null)
+			classes = new VectorMap<Class<?>, String>();
 		constructWalkers();
 	}
 
@@ -123,13 +126,12 @@ public class PackageElementWalker extends ElementWalker
 		CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
 		URL packsrc = codesrc.getLocation();
 		File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
-		if (classes != null)
+		if (classes.get(parent) != null)
 		{
-			constructWorkersVClass();
+			constructWorkersVClass(classes.get(parent));
 		}
 		else
 		{
-			classes = new VString();
 			if (f.isDirectory())
 			{
 				constructWorkersDir(f);
@@ -142,11 +144,12 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
+	 * @param classVector 
 	 *  
 	 */
-	private void constructWorkersVClass()
+	private void constructWorkersVClass(Vector<String> classVector)
 	{
-		for (String classConst : classes)
+		for (String classConst : classVector)
 		{
 			constructWalker(classConst);
 		}
@@ -161,6 +164,7 @@ public class PackageElementWalker extends ElementWalker
 	{
 		ZipReader zr = new ZipReader(jarFile);
 		Class<? extends PackageElementWalker> currentClass = getClass();
+		Class<? extends PackageElementWalker> baseClass = currentClass;
 		while (currentClass != null)
 		{
 			String packageName = currentClass.getPackage().getName();
@@ -180,7 +184,7 @@ public class PackageElementWalker extends ElementWalker
 					String fullClassName = packageName + "." + UrlUtil.newExtension(className, null);
 					log.info("constructing " + fullClassName);
 					constructWalker(fullClassName);
-					classes.add(name);
+					classes.putOne(baseClass, name);
 				}
 			}
 			currentClass = getParentClass(currentClass);
@@ -194,6 +198,7 @@ public class PackageElementWalker extends ElementWalker
 	private void constructWorkersDir(File dir)
 	{
 		Class<? extends PackageElementWalker> currentClass = getClass();
+		Class<? extends PackageElementWalker> baseClass = currentClass;
 		while (currentClass != null)
 		{
 			String packageName = currentClass.getPackage().getName();
@@ -208,7 +213,7 @@ public class PackageElementWalker extends ElementWalker
 					name = UrlUtil.prefix(name);
 					name = packageName + "." + name;
 					constructWalker(name);
-					classes.add(name);
+					classes.putOne(baseClass, name);
 				}
 			}
 			currentClass = getParentClass(currentClass);
