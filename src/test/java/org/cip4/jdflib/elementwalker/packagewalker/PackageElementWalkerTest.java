@@ -104,4 +104,19 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 		assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
 	}
 
+	/**
+	 * test that the package classes are actually implemented
+	 *  
+	 */
+	@Test
+	public void testFoo2()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			PackageTestWalker w = new PackageTestWalker();
+			BaseWalkerFactory factory = w.getFactory();
+			assertNotNull(factory);
+			assertEquals(WalkFoo.class, factory.getWalker(new XMLDoc("D", null).getRoot()).getClass());
+		}
+	}
 }

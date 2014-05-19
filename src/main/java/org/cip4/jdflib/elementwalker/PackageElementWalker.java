@@ -77,6 +77,7 @@ import java.util.zip.ZipEntry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -98,6 +99,7 @@ public class PackageElementWalker extends ElementWalker
 	private static final String WALK_CLASS = "Walk*.class";
 	//	private static final String WALK_CLASS = "*.class";
 	final protected Log log;
+	static VString classes = null;
 
 	/**
 	 * @param _theFactory
@@ -121,13 +123,32 @@ public class PackageElementWalker extends ElementWalker
 		CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
 		URL packsrc = codesrc.getLocation();
 		File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
-		if (f.isDirectory())
+		if (classes != null)
 		{
-			constructWorkersDir(f);
+			constructWorkersVClass();
 		}
 		else
 		{
-			constructWorkersJar(f);
+			classes = new VString();
+			if (f.isDirectory())
+			{
+				constructWorkersDir(f);
+			}
+			else
+			{
+				constructWorkersJar(f);
+			}
+		}
+	}
+
+	/**
+	 *  
+	 */
+	private void constructWorkersVClass()
+	{
+		for (String classConst : classes)
+		{
+			constructWalker(classConst);
 		}
 
 	}
@@ -159,6 +180,7 @@ public class PackageElementWalker extends ElementWalker
 					String fullClassName = packageName + "." + UrlUtil.newExtension(className, null);
 					log.info("constructing " + fullClassName);
 					constructWalker(fullClassName);
+					classes.add(name);
 				}
 			}
 			currentClass = getParentClass(currentClass);
@@ -186,6 +208,7 @@ public class PackageElementWalker extends ElementWalker
 					name = UrlUtil.prefix(name);
 					name = packageName + "." + name;
 					constructWalker(name);
+					classes.add(name);
 				}
 			}
 			currentClass = getParentClass(currentClass);

@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -248,30 +249,26 @@ public class FixVersionTest extends JDFTestCaseBase
 		String author = crea.getAuthor();
 		assertNotNull(author);
 
-		// TODO @Rainer (2013-03-10) - not compatible to Linux
-		//		n.fixVersion(EnumVersion.Version_1_1);
-		//		author = crea.getAuthor();
-		//		assertEquals(StringUtil.token(author, 1, "_|_"), agent);
-		//		assertTrue(author.startsWith(agent));
-		//		String agent2 = crea.getAgentName();
-		//		assertEquals(agent2, "");
-		//
-		//		n.fixVersion(EnumVersion.Version_1_3);
-		//		author = crea.getAuthor();
-		//		assertEquals(author.indexOf("_|_"), -1);
-		//		agent2 = crea.getAgentName();
-		//		assertEquals(agent, agent2);
-		//
-		//		n.fixVersion(EnumVersion.Version_1_2);
-		//		author = crea.getAuthor();
-		//		assertEquals(author.indexOf("_|_"), -1);
-		//		agent2 = crea.getAgentName();
-		//		assertEquals(agent, agent2);
+		n.fixVersion(EnumVersion.Version_1_1);
+		author = crea.getAuthor();
+		assertEquals(StringUtil.token(author, 1, "_|_"), agent);
+		assertTrue(author.startsWith(agent));
+		String agent2 = crea.getAgentName();
+		assertEquals(agent2, "");
+
+		n.fixVersion(EnumVersion.Version_1_3);
+		author = crea.getAuthor();
+		assertEquals(author.indexOf("_|_"), -1);
+		agent2 = crea.getAgentName();
+		assertEquals(agent, agent2);
+
+		n.fixVersion(EnumVersion.Version_1_2);
+		author = crea.getAuthor();
+		assertEquals(author.indexOf("_|_"), -1);
+		agent2 = crea.getAgentName();
+		assertEquals(agent, agent2);
 
 	}
-
-	// //////////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 
@@ -286,6 +283,23 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
 		assertTrue(m.fixVersion(EnumVersion.Version_1_3));
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMultiConstruct()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		for (int i = 0; i < 4; i++)
+		{
+			ct.start();
+			FixVersion v = new FixVersion(EnumVersion.Version_1_3);
+			assertNotNull(v);
+			log.info(ct.toXML());
+			ct.stop();
+		}
 	}
 
 	/**
