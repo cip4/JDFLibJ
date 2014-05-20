@@ -69,8 +69,10 @@
 package org.cip4.jdflib.elementwalker.packagewalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.elementwalker.FixVersion;
 import org.junit.Test;
 
 /**
@@ -89,6 +91,19 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 	{
 		PackageTestWalker w = new PackageTestWalker();
 		assertNotNull(w);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testMultiConstruct()
+	{
+		FixVersion v = new FixVersion(EnumVersion.Version_1_1);
+		FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
+		assertNotNull(v2);
+		assertNotNull(v);
 	}
 
 	/**

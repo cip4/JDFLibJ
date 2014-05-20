@@ -122,23 +122,27 @@ public class PackageElementWalker extends ElementWalker
 	 */
 	private void constructWalkers()
 	{
-		Class<?> parent = getClass();
-		CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
-		URL packsrc = codesrc.getLocation();
-		File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
-		if (classes.get(parent) != null)
+		// we don't want any nasty race conditions where we construct from incomplete class name vectors
+		synchronized (classes)
 		{
-			constructWorkersVClass(classes.get(parent));
-		}
-		else
-		{
-			if (f.isDirectory())
+			Class<?> parent = getClass();
+			CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
+			URL packsrc = codesrc.getLocation();
+			File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
+			if (classes.get(parent) != null)
 			{
-				constructWorkersDir(f);
+				constructWorkersVClass(classes.get(parent));
 			}
 			else
 			{
-				constructWorkersJar(f);
+				if (f.isDirectory())
+				{
+					constructWorkersDir(f);
+				}
+				else
+				{
+					constructWorkersJar(f);
+				}
 			}
 		}
 	}
@@ -226,6 +230,7 @@ public class PackageElementWalker extends ElementWalker
 	 * @param currentClass
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private Class<? extends PackageElementWalker> getParentClass(Class<? extends PackageElementWalker> currentClass)
 	{
 		Class<?> nextClass = currentClass.getSuperclass();
