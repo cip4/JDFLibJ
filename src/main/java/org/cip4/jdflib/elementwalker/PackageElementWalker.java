@@ -157,7 +157,6 @@ public class PackageElementWalker extends ElementWalker
 		{
 			constructWalker(classConst);
 		}
-
 	}
 
 	/**
@@ -255,7 +254,7 @@ public class PackageElementWalker extends ElementWalker
 			final Constructor<?> con = newClass.getConstructor();
 			BaseWalker w = (BaseWalker) con.newInstance();
 			w.addToFactory(getFactory());
-			log.info("constructed class: " + name);
+			log.info("constructed class: " + name + " Depth=" + w.getDepth());
 			return w;
 		}
 		catch (Throwable e)
