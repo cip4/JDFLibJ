@@ -179,15 +179,16 @@ public class PackageElementWalker extends ElementWalker
 				ZipEntry ze = zr.getNextMatchingEntry(classExpr);
 				if (ze == null)
 					break;
-				String name = ZipReader.getEntryName(ze);
-				String className = StringUtil.token(name, -1, "/");
-				String zipPackageName = StringUtil.leftStr(name, -1 - className.length());
+				String entryName = ZipReader.getEntryName(ze);
+				String className = StringUtil.token(entryName, -1, "/");
+				String zipPackageName = StringUtil.leftStr(entryName, -1 - className.length());
 				if (packagePath.equals(zipPackageName))
 				{
-					String fullClassName = packageName + "." + UrlUtil.newExtension(className, null);
-					log.info("constructing " + fullClassName);
-					constructWalker(fullClassName);
-					classes.putOne(baseClass, fullClassName);
+					String name = packageName + "." + UrlUtil.newExtension(className, null);
+					log.info("constructing " + name);
+					BaseWalker w = constructWalker(name);
+					log.info("constructed class: " + name + " Depth=" + w.getDepth());
+					classes.putOne(baseClass, name);
 				}
 			}
 			currentClass = getParentClass(currentClass);
@@ -215,7 +216,8 @@ public class PackageElementWalker extends ElementWalker
 					String name = f.getName();
 					name = UrlUtil.prefix(name);
 					name = packageName + "." + name;
-					constructWalker(name);
+					BaseWalker w = constructWalker(name);
+					log.info("constructed class: " + name + " Depth=" + w.getDepth());
 					classes.putOne(baseClass, name);
 				}
 			}
@@ -254,7 +256,6 @@ public class PackageElementWalker extends ElementWalker
 			final Constructor<?> con = newClass.getConstructor();
 			BaseWalker w = (BaseWalker) con.newInstance();
 			w.addToFactory(getFactory());
-			log.info("constructed class: " + name + " Depth=" + w.getDepth());
 			return w;
 		}
 		catch (Throwable e)

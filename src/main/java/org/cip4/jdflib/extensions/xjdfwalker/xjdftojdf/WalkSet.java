@@ -140,7 +140,8 @@ public class WalkSet extends WalkXElement
 			final String name = h.getName();
 			if (name != null)
 			{
-				r = root.addResource(name, null);
+				String nsURI = StringUtil.getNonEmpty(e.getNamespaceURI());
+				r = root.addResource(name, null, null, null, null, nsURI, null);
 				r.removeAttribute(AttributeName.STATUS); // don't want the default
 			}
 		}
