@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -161,6 +161,25 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.addNS("xxx", "blah.com");
 		ensure.walk(root);
 		assertEquals(root.toXML().indexOf("xxx:ccc"), -1);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEnsureNSMapToDefault()
+	{
+		XMLDoc d = new XMLDoc("foo:foo", "foo.com");
+		KElement root = d.getRoot();
+		KElement e = root.appendElement("bar:bar", "foo.com");
+		e.appendElement("gg:gg", "foo.com");
+		root.appendElement("ccc");
+
+		EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS(null, "foo.com");
+		ensure.walk(root);
+		assertEquals(root.toXML().indexOf("bar:"), -1);
+		assertEquals(root.toXML().indexOf("gg:"), -1);
 	}
 
 	/**

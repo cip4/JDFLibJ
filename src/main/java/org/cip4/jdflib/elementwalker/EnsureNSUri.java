@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,12 +153,6 @@ public class EnsureNSUri extends BaseElementWalker
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return (BaseWalkerFactory) theFactory;
-	}
-
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 * 
@@ -295,7 +289,7 @@ public class EnsureNSUri extends BaseElementWalker
 			{
 				String newPrefix = nsMap.getKey(uri);
 				String newURI = nsMap.get(prefix);
-				if (newURI == null && StringUtil.getNonEmpty(newPrefix) != null && !ContainerUtil.equals(prefix, newPrefix))
+				if (newURI == null && newPrefix != null && !ContainerUtil.equals(prefix, newPrefix))
 				{
 					addAlias(prefix, newPrefix);
 					s2 = newPrefix;

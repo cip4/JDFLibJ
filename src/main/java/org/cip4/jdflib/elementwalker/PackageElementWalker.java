@@ -188,7 +188,7 @@ public class PackageElementWalker extends ElementWalker
 					String fullClassName = packageName + "." + UrlUtil.newExtension(className, null);
 					log.info("constructing " + fullClassName);
 					constructWalker(fullClassName);
-					classes.putOne(baseClass, name);
+					classes.putOne(baseClass, fullClassName);
 				}
 			}
 			currentClass = getParentClass(currentClass);
@@ -255,6 +255,7 @@ public class PackageElementWalker extends ElementWalker
 			final Constructor<?> con = newClass.getConstructor();
 			BaseWalker w = (BaseWalker) con.newInstance();
 			w.addToFactory(getFactory());
+			log.info("constructed class: " + name);
 			return w;
 		}
 		catch (Throwable e)
@@ -267,7 +268,8 @@ public class PackageElementWalker extends ElementWalker
 	/**
 	 * @return the factory for this worker
 	 */
-	protected BaseWalkerFactory getFactory()
+	@Override
+	public BaseWalkerFactory getFactory()
 	{
 		return (BaseWalkerFactory) theFactory;
 	}

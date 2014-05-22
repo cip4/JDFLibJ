@@ -140,12 +140,6 @@ public class RemoveEmpty extends BaseElementWalker
 		zappElements = keep;
 	}
 
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return (BaseWalkerFactory) theFactory;
-	}
-
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 * 

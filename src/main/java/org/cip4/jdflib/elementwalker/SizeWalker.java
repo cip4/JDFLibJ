@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -169,6 +169,7 @@ public class SizeWalker extends BaseElementWalker
 		/**
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
+		@Override
 		public int compareTo(final Sizes o)
 		{
 			return total - o.total;
@@ -225,12 +226,6 @@ public class SizeWalker extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		outTxt = xpathOutput;
 		writer = new PrintWriter(outTxt);
-	}
-
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return (BaseWalkerFactory) theFactory;
 	}
 
 }

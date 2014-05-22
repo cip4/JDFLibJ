@@ -134,7 +134,8 @@ public class BaseElementWalker extends ElementWalker
 	/**
 	 * @return the factory for this worker
 	 */
-	protected BaseWalkerFactory getFactory()
+	@Override
+	public BaseWalkerFactory getFactory()
 	{
 		return (BaseWalkerFactory) theFactory;
 	}

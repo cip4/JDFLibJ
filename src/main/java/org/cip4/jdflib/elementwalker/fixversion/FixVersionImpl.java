@@ -169,12 +169,6 @@ public class FixVersionImpl extends PackageElementWalker
 		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;
 	}
 
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return (BaseWalkerFactory) theFactory;
-	}
-
 	/**
 	 * @param layoutPrepToStripping the bLayoutPrepToStripping to set
 	 */

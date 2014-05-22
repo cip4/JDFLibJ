@@ -72,7 +72,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date May 10, 2014
  */
@@ -86,14 +86,4 @@ public class PackageTestWalker extends PackageElementWalker
 	{
 		super(new BaseWalkerFactory());
 	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.PackageElementWalker#getFactory()
-	 */
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return super.getFactory();
-	}
-
 }

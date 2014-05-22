@@ -248,12 +248,6 @@ public class XPathWalker extends BaseElementWalker
 		pathsFound = null;
 	}
 
-	@Override
-	protected BaseWalkerFactory getFactory()
-	{
-		return (BaseWalkerFactory) theFactory;
-	}
-
 	/**
 	 * the link and ref walker
 	 * 

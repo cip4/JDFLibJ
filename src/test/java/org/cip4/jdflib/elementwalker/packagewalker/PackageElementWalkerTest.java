@@ -69,10 +69,16 @@
 package org.cip4.jdflib.elementwalker.packagewalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.node.JDFNode;
 import org.junit.Test;
 
 /**
@@ -104,6 +110,24 @@ public class PackageElementWalkerTest extends JDFTestCaseBase
 		FixVersion v2 = new FixVersion(EnumVersion.Version_1_1);
 		assertNotNull(v2);
 		assertNotNull(v);
+		assertEquals(v.getFactory().getBaseWalkers().size(), v2.getFactory().getBaseWalkers().size());
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testMultiConstructJDF()
+	{
+		JDFDoc d = creatXMDoc();
+		JDFNode n = d.getJDFRoot();
+		XJDF20 conv = new XJDF20();
+		KElement xjdf = conv.convert(n);
+		XJDFToJDFConverter c2 = new XJDFToJDFConverter(null);
+		JDFDoc d2 = c2.convert(xjdf);
+		JDFNode n2 = d2.getJDFRoot();
+		assertNotNull(n2.getResource(ElementName.EXPOSEDMEDIA, null, 0));
 	}
 
 	/**
