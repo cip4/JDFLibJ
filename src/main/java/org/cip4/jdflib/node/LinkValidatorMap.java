@@ -223,13 +223,11 @@ public class LinkValidatorMap
 		mapPut(EnumType.Trapping.getName(), ",ColorantControl,RunList,TrappingDetails,FontPolicy", ",i?,o_ i_,i_,i?");
 
 		// ----- press -----
-		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media"
-				+ ",PrintCondition,Sheet,TransferCurvePool",
-		// link info
-		",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
+		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media,PrintCondition,Sheet,TransferCurvePool", ",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
 		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool", ",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
 		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams,TransferFunctionControl", ",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
 		mapPut(EnumType.Varnishing.getName(), ",Component,ExposedMedia,Ink,Media,VarnishingParams", ",i? o_,o*,i?,i?,i?");
+
 		// ----- postpress ----
 		mapPut(EnumType.AdhesiveBinding.getName(), ",AdhesiveBindingParams,Component", ",i_,o_ i?Cover i_BookBlock");
 		mapPut(EnumType.BlockPreparation.getName(), ",Component,BlockPreparationParams", ",o_ i_,i_");
@@ -280,8 +278,11 @@ public class LinkValidatorMap
 		mapPut(EnumType.ThreadSewing.getName(), ",Component,ThreadSewingParams", ",o_ i_,i_");
 		mapPut(EnumType.Trimming.getName(), ",Component,TrimmingParams", ",o_ i_,i_");
 		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath,StrippingParams,WebInlineFinishingParams", ",i?,o_ i_,i?,i?,i?");
+		mapPut(EnumType.Winding.getName(), ",Component,Media,WindingParams", ",i_ o_,i? i?Core,i?");
 		mapPut(EnumType.WireCombBinding.getName(), ",Component,WireCombBindingParams", ",o_ i_,i_");
 		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media", ",o_ i_,i_,i?");
+
+		// Prepress gray boxes
 		mapPut(EnumType.PrepressPreparation.getName(), ",RunList,*", ",i_Document o_Document,i* o*");
 		mapPut(EnumType.ImpositionPreparation.getName(), ",Layout,RunList,*", ",o_,i?Document o?Document o_Marks,,i* o*");
 		mapPut(EnumType.RIPing.getName(), ",InterpretingParams,RenderingParams,RunList,*", ",i?,i?,o_ i_Document i?Marks,i* o*");

@@ -863,6 +863,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/** * */
 		public static final EnumType WebInlineFinishing = new EnumType(JDFConstants.TYPE_WEBINLINEFINISHING);
 		/** * */
+		public static final EnumType Winding = new EnumType("Winding");
+		/** * */
 		public static final EnumType WireCombBinding = new EnumType(JDFConstants.TYPE_WIRECOMBBINDING);
 		/** * */
 		public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
@@ -2032,6 +2034,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public static final EnumProcessUsage Cylinder = new EnumProcessUsage("Cylinder");
 		/** * */
 		public static final EnumProcessUsage Good = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_GOOD);
+		/** * */
+		public static final EnumProcessUsage Core = new EnumProcessUsage("Core");
 		/** * */
 		public static final EnumProcessUsage Cover = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_COVER);
 		/** * */
