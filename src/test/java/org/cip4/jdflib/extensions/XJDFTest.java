@@ -834,8 +834,8 @@ public class XJDFTest extends JDFTestCaseBase
 		JDFAuditPool ap = (JDFAuditPool) e.getElement(ElementName.AUDITPOOL);
 		assertNotNull(ap);
 		JDFResourceAudit raNew = (JDFResourceAudit) ap.getAudit(0, EnumAuditType.ResourceAudit, null, null);
-		assertEquals(raNew.getElement("ResourceAmount").getAttribute("ActualAmountGood"), "4200");
-		assertEquals(raNew.getElement("ResourceAmount").getAttribute("ActualAmountWaste"), "300");
+		assertEquals(raNew.getXPathAttribute("ResourceAmount/AmountPool/PartAmount[1]/@ActualAmount", null), "4200");
+		assertEquals(raNew.getXPathAttribute("ResourceAmount/AmountPool/PartAmount[2]/@ActualAmount", null), "300");
 	}
 
 	/**
