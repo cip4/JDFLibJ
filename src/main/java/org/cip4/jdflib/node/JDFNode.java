@@ -119,7 +119,6 @@
 package org.cip4.jdflib.node;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -353,27 +352,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
-
-	/**
-	 * Member Variablen
-	 */
-	private static HashMap<String, String[]> m_LinkNamesMap = new HashMap<String, String[]>();
-	private static HashMap<String, String[]> m_LinkInfoMap = new HashMap<String, String[]>();
-
-	private static final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY,// APPROVALSUCCESS
-			JDFConstants.INPUT_ZEROTOONE, // CUSTOMERINFO
-			JDFConstants.INPUT_ZEROTOINFINITY, // DEVICE
-			JDFConstants.INPUT_ZEROTOINFINITY, // EMPLOYEE
-			JDFConstants.INPUT_ZEROTOINFINITY, // MISCCONSUMABLE
-			JDFConstants.INPUT_ZEROTOONE, // NODEINFO
-			JDFConstants.INPUT_ZEROTOINFINITY, // PREFLIGHTREPORT
-			JDFConstants.INPUT_ZEROTOINFINITY, // PREVIEW
-			JDFConstants.INPUT_ZEROTOINFINITY, // TOOL
-			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
-	};
-
-	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
-			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private static final long serialVersionUID = 1L;
 	private static final Log nLog = LogFactory.getLog(JDFElement.class);
@@ -718,6 +696,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public static final EnumType FilmToPlateCopying = new EnumType(JDFConstants.TYPE_FILMTOPLATECOPYING);
 		/** * */
 		public static final EnumType FormatConversion = new EnumType(JDFConstants.TYPE_FORMATCONVERSION);
+		/** * */
+		public static final EnumType ImageEnhancement = new EnumType("ImageEnhancement");
 		/** * */
 		public static final EnumType ImageReplacement = new EnumType(JDFConstants.TYPE_IMAGEREPLACEMENT);
 		/** * */
@@ -1193,513 +1173,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/** @deprecated use EnumType.xxx */
 	@Deprecated
 	public static final EnumType Type_Wrapping = EnumType.Wrapping;
-
-	/**
-	 * add entries to a HashMap
-	 * 
-	 * @param key key for the new entry
-	 * @param addon
-	 * @param mMaps
-	 * @param hm HashMap to add the new entry to
-	 */
-	private static void nameMapPut(final String key, final String addon, final String[] mMaps, final HashMap<String, String[]> hm)
-	{
-		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
-		final String[] v = new String[mMaps.length + vs.size()];
-		int i = 0;
-		for (; i < mMaps.length; i++)
-		{
-			v[i] = mMaps[i];
-		}
-		for (i = 0; i < vs.size(); i++)
-		{
-			v[i + mMaps.length] = vs.stringAt(i);
-		}
-		hm.put(key, v);
-	}
-
-	/**
-	 * add new entries to m_strGenericLinkNames and m_GenericLinkInfo
-	 * 
-	 * @param key key for the new entry
-	 * @param nameAddon value of the new entry in m_strGenericLinkNames
-	 * @param linkAddon value of the new entry in m_GenericLinkInfo
-	 */
-	private static void mapPut(final String key, final String nameAddon, final String linkAddon)
-	{
-		nameMapPut(key, nameAddon, m_strGenericLinkNames, m_LinkNamesMap);
-		nameMapPut(key, linkAddon, m_GenericLinkInfo, m_LinkInfoMap);
-	}
-
-	// Note: This MUST be behind the enum declaration because the enums are used
-	static
-	{
-		mapPut(EnumType.Product.getName(), ",Component,ArtDeliveryIntent,BindingIntent,ColorIntent,DeliveryIntent,EmbossingIntent,FoldingIntent,"
-				+ "HoleMakingIntent,InsertingIntent,LaminatingIntent,LayoutIntent,MediaIntent,NumberingIntent,"
-				+ "PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent"
-		// links
-		, ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
-
-		mapPut(EnumType.ProcessGroup.getName(), ",*",
-		// links
-		",i* o*");
-
-		mapPut(EnumType.Combined.getName(), ",",
-		// links
-		",");
-
-		// ----- general -----
-		mapPut(EnumType.Approval.getName(), ",*,ApprovalSuccess,ApprovalParams",
-		// links
-		",o*Rejected o*Accepted i*,o_,i_");
-
-		mapPut(EnumType.Buffer.getName(), ",*,BufferParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Combine.getName(), ",*",
-		// links
-		",o_ i+");
-
-		mapPut(EnumType.Delivery.getName(), ",*,DeliveryParams",
-		// links
-		",o+ i?,i_");
-
-		mapPut(EnumType.ManualLabor.getName(), ",*,ManualLaborParams",
-		// links
-		",o* i*,i_");
-
-		mapPut(EnumType.Ordering.getName(), ",*,OrderingParams",
-		// links
-		",o+,i_");
-
-		mapPut(EnumType.Packing.getName(), ",*,PackingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.QualityControl.getName(), ",*,QualityControlResult,QualityControlParams",
-		// links
-		",o_ i_,o_,i_");
-
-		mapPut(EnumType.ResourceDefinition.getName(), ",*,ResourceDefinitionParams",
-		// links
-		",o+ i*,i?");
-
-		mapPut(EnumType.Split.getName(), ",*",
-		// links
-		",o+ i_");
-
-		mapPut(EnumType.Verification.getName(), ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
-		// links
-		",o? i?,o? i?,o?,i_,i*,i?");
-
-		// ----- prepress -----
-		mapPut(EnumType.AssetListCreation.getName(), ",AssetListCreationParams,RunList",
-		// links
-		",i_,i_ o_");
-
-		mapPut(EnumType.Bending.getName(), ",BendingParams,ExposedMedia,Media",
-		// links
-		",i_,i? o_,i?");
-
-		mapPut(EnumType.ColorCorrection.getName(), ",ColorantControl,ColorCorrectionParams,RunList",
-		// links
-		",i?,i_,o_ i_");
-
-		mapPut(EnumType.ColorSpaceConversion.getName(), ",ColorantControl,ColorSpaceConversionParams,RunList",
-		// links
-		",i?,i_,o_ i_");
-
-		mapPut(EnumType.ContactCopying.getName(), ",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
-		// links
-		",i_,i?,o_ i+,i_,i?");
-
-		mapPut(EnumType.ContoneCalibration.getName(), ",RunList,ScreeningParams,TransferFunctionControl",
-		// links
-		",o_ i_,i?,i?");
-
-		mapPut(EnumType.CylinderLayoutPreparation.getName(), ",CylinderLayoutPreparationParams,Layout,RunList,CylinderLayout",
-		// links
-		",i?,i_,i_,o_");
-
-		mapPut(EnumType.DBDocTemplateLayout.getName(), ",DBRules,DBSchema,LayoutElement",
-		// links
-		",i_,i_,o* i*");
-
-		mapPut(EnumType.DBTemplateMerging.getName(), ",DBMergeParams,DBSelection,LayoutElement,RunList",
-		// links
-		",i_,i_,i*,o_");
-
-		mapPut(EnumType.DieDesign.getName(), ",DieLayout",
-		// links
-		",i_ o+");
-
-		mapPut(EnumType.DieLayoutProduction.getName(), ",DieLayout,DieLayoutProductionParams",
-		// links
-		",i+ o+,i_");
-
-		mapPut(EnumType.DigitalDelivery.getName(), ",DigitalDeliveryParams,RunList",
-		// links
-		",i_,o+ i*");
-
-		mapPut(EnumType.FilmToPlateCopying.getName(), ",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
-		// links
-		",i?,o_ i_,i_,i_");
-
-		mapPut(EnumType.FormatConversion.getName(), ",FormatConversionParams,RunList",
-		// links
-		",i_,o_ i_");
-
-		mapPut(EnumType.ImageReplacement.getName(), ",ImageCompressionParams,ImageReplacementParams,RunList",
-		// links
-		",i?,i_,o_ i_");
-
-		mapPut(EnumType.ImageSetting.getName(), ",ColorantControl,DevelopingParams,ImageSetterParams,Media,RunList,TransferCurvePool,ExposedMedia",
-		// links
-		",i?,i?,i?,i?,i_,i?,o_ i?");
-
-		mapPut(EnumType.Imposition.getName(), ",Layout,RunList",
-		// links
-		",i_,o_ i?Marks i_Document");
-
-		mapPut(EnumType.InkZoneCalculation.getName(), ",InkZoneCalculationParams,InkZoneProfile,Layout,TransferCurvePool,Sheet,Preview",
-		// links
-		",i?,o_,i?,i?,i?,i_");
-
-		mapPut(EnumType.Interpreting.getName(), ",ColorantControl,FontPolicy,InterpretedPDLData,InterpretingParams,PDLResourceAlias,RunList",
-		// links
-		",i?,i?,o?,i_,i*,o? i_");
-
-		mapPut(EnumType.LayoutElementProduction.getName(), ",LayoutElement,RunList,LayoutElementProductionParams",
-		// links
-		",o? i*,i* o?,i?");
-
-		mapPut(EnumType.LayoutPreparation.getName(), ",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
-		// links
-		",i_,o?Marks i?Marks i?Document,o_,o?");
-
-		mapPut(EnumType.PageAssigning.getName(), ",PageAssignParams,RunList",
-		// links
-		",i_,o_ i+");
-
-		mapPut(EnumType.PDFToPSConversion.getName(), ",PDFToPSConversionParams,RunList",
-		// links
-		",i_,o_ i_");
-
-		mapPut(EnumType.PDLCreation.getName(), ",ImageCompressionParams,PDLCreationParams,RunList",
-		// links
-		",i?,i?,o_ i_");
-
-		mapPut(EnumType.Preflight.getName(), ",PreflightParams,PreflightReportRulePool,RunList,PreflightReport",
-		// links
-		",i_,i_,i_,o_");
-
-		mapPut(EnumType.PreviewGeneration.getName(), ",ColorantControl,ExposedMedia,PreviewGenerationParams,RunList,TransferCurvePool,Preview",
-		// links
-		",i?,i?,i_,i?,i?,o_ i?");
-
-		mapPut(EnumType.Proofing.getName(), ",ColorantControl,ColorSpaceConversionParams,ExposedMedia,Layout,Media,ProofingParams,RunList",
-		// links
-		",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
-
-		mapPut(EnumType.PSToPDFConversion.getName(), ",FontParams,ImageCompressionParams,PSToPDFConversionParams,RunList",
-		// links
-		",i?,i?,i?,o_ i_");
-
-		mapPut(EnumType.RasterReading.getName(), ",RasterReadingParams,RunList",
-		// links
-		",i?,o_ i_");
-
-		mapPut(EnumType.Rendering.getName(), ",InterpretedPDLData,Media,RenderingParams,RunList",
-		// links
-		",i?,i?,i?,o_ i?");
-
-		mapPut(EnumType.Scanning.getName(), ",ExposedMedia,ScanParams,RunList",
-		// links
-		",i_,i_,o_");
-
-		mapPut(EnumType.Screening.getName(), ",RunList,ScreeningParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Separation.getName(), ",ColorantControl,RunList,SeparationControlParams",
-		// links
-		",i?,o_ i_,i_");
-
-		mapPut(EnumType.SoftProofing.getName(), ",ColorantControl,ColorSpaceConversionParams,Layout,ProofingParams,RunList",
-		// links
-		",i?,i?,i?,i_,i?Marks i_Document");
-
-		mapPut(EnumType.Stripping.getName(), ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
-		// links
-		",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
-
-		mapPut(EnumType.Tiling.getName(), ",RunList,Tile",
-		// links
-		",o_ i?Marks i_Surface,i_");
-
-		mapPut(EnumType.Trapping.getName(), ",ColorantControl,RunList,TrappingDetails,FontPolicy",
-		// links
-		",i?,o_ i_,i_,i?");
-
-		// ----- press -----
-		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media"
-				+ ",PrintCondition,Sheet,TransferCurvePool",
-		// link info
-		",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
-
-		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool",
-		// links
-		",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
-
-		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams"
-				+ ",TransferFunctionControl",
-		// links
-		",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
-
-		mapPut(EnumType.Varnishing.getName(), ",Component,ExposedMedia,Ink,Media,VarnishingParams",
-		// links
-		",i? o_,o*,i?,i?,i?");
-
-		// ----- postpress -----
-		mapPut(EnumType.AdhesiveBinding.getName(), ",AdhesiveBindingParams,Component",
-		// links
-		",i_,o_ i?Cover i_BookBlock");
-
-		mapPut(EnumType.BlockPreparation.getName(), ",Component,BlockPreparationParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.BoxFolding.getName(), ",Component,BoxFoldingParams",
-		// links
-		",o_ i*Application i_,i_");
-
-		mapPut(EnumType.BoxPacking.getName(), ",Component,BoxPackingParams",
-		// links
-		",o_ i?Box i_,i_");
-
-		mapPut(EnumType.Bundling.getName(), ",Component,BundlingParams,Media",
-		// links
-		",o_ i_,i_,i?");
-
-		mapPut(EnumType.CaseMaking.getName(), ",Component,CaseMakingParams,Media",
-		// links
-		",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
-
-		mapPut(EnumType.CasingIn.getName(), ",Component,CasingInParams",
-		// links
-		",o_ i_Case i_,i_");
-
-		mapPut(EnumType.ChannelBinding.getName(), ",ChannelBindingParams,Component",
-		// links
-		",i_,o_ i?Cover i_BookBlock");
-
-		mapPut(EnumType.CoilBinding.getName(), ",CoilBindingParams,Component",
-		// links
-		",i_,o_ i_");
-
-		mapPut(EnumType.Collecting.getName(), ",CollectingParams,Component,DBRules,DBSelection,IdentificationField,Assembly",
-		// links
-		",i?,o_ i+,i*,i?,i?,i?");
-
-		mapPut(EnumType.CoverApplication.getName(), ",Component,CoverApplicationParams",
-		// links
-		",o_ i_Cover i_,i_");
-
-		mapPut(EnumType.Creasing.getName(), ",CreasingParams,Component",
-		// links
-		",i_,o_ i_");
-
-		mapPut(EnumType.Cutting.getName(), ",Component,CutBlock,CutMark,CuttingParams,Media",
-		// links
-		",o* i?,i*,i*,i_,o* i?");
-
-		mapPut(EnumType.Dividing.getName(), ",Component,DividingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Embossing.getName(), ",Component,EmbossingParams,Media,Tool",
-		// links
-		",o_ i_,i_,i?,i?");
-
-		mapPut(EnumType.EndSheetGluing.getName(), ",Component,EndSheetGluingParams",
-		// links
-		",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
-
-		mapPut(EnumType.Feeding.getName(), ",Component,FeedingParams,Media",
-		// links
-		",o* i*,i_,o* i*");
-
-		mapPut(EnumType.Folding.getName(), ",Component,FoldingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Gathering.getName(), ",Assembly,Component,DBRules,DBSelection,GatheringParams,IdentificationField",
-		// links
-		",i?,o_ i+,i*,i?,i_,i?");
-
-		mapPut(EnumType.Gluing.getName(), ",Component,GluingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.HeadBandApplication.getName(), ",Component,HeadBandApplicationParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.HoleMaking.getName(), ",Component,HoleMakingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Inserting.getName(), ",Component,DBRules,DBSelection,IdentificationField,InsertingParams",
-		// links
-		",o_ i_Child i?Mother i?,i?,i?,i?,i_");
-
-		mapPut(EnumType.Jacketing.getName(), ",Component,JacketingParams",
-		// links
-		",o_ i_Jacket i_Book,i_");
-
-		mapPut(EnumType.Labeling.getName(), ",Component,LabelingParams",
-		// links
-		",o_ i?Label i_,i_");
-
-		mapPut(EnumType.Laminating.getName(), ",Component,LaminatingParams,Media",
-		// links
-		",o_ i_,i_,i?");
-
-		mapPut(EnumType.LongitudinalRibbonOperations.getName(), ",Component,LongitudinalRibbonOperationParams",
-		// links
-		",o+ i_,i_");
-
-		mapPut(EnumType.Numbering.getName(), ",Component,NumberingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Palletizing.getName(), ",Component,PalletizingParams,Pallet",
-		// links
-		",o_ i_,i_,i_");
-
-		mapPut(EnumType.Perforating.getName(), ",PerforatingParams,Component",
-		// links
-		",i_,o_ i_");
-
-		mapPut(EnumType.PlasticCombBinding.getName(), ",Component,PlasticCombBindingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.PrintRolling.getName(), ",Component,PrintRollingParams,RollStand",
-		// links
-		",o_ i_,i?,i?");
-
-		mapPut(EnumType.RingBinding.getName(), ",Component,RingBindingParams",
-		// links
-		",o_ i?RingBinder i_BookBlock,i_");
-
-		mapPut(EnumType.SaddleStitching.getName(), ",Component,SaddleStitchingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.ShapeCutting.getName(), ",Component,ShapeCuttingParams,Tool",
-		// links
-		",o+ i_,i?,i*");
-		mapPut(EnumType.ShapeDefProduction.getName(), ",LayoutElement,ShapeDefProductionParams,ShapeDef",
-		// links
-		",i?,i_,o+");
-
-		mapPut(EnumType.Shrinking.getName(), ",Component,ShrinkingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.SideSewing.getName(), ",Component,SideSewingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.SpinePreparation.getName(), ",Component,SpinePreparationParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.SpineTaping.getName(), ",Component,SpineTapingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Stacking.getName(), ",Component,StackingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.StaticBlocking.getName(), ",Component,StaticBlockingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Stitching.getName(), ",Component,StitchingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Strapping.getName(), ",Component,StrappingParams,Strap",
-		// links
-		",o_ i_,i_,i?");
-
-		mapPut(EnumType.StripBinding.getName(), ",Component,StripBindingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.ThreadSealing.getName(), ",Component,ThreadSealingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.ThreadSewing.getName(), ",Component,ThreadSewingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Trimming.getName(), ",Component,TrimmingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath,StrippingParams,WebInlineFinishingParams",
-		// links
-		",i?,o_ i_,i?,i?,i?");
-
-		mapPut(EnumType.WireCombBinding.getName(), ",Component,WireCombBindingParams",
-		// links
-		",o_ i_,i_");
-
-		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media",
-		// links
-		",o_ i_,i_,i?");
-
-		mapPut(EnumType.PrepressPreparation.getName(), ",RunList,*",
-		// links
-		",i_Document o_Document,i* o*");
-
-		mapPut(EnumType.ImpositionPreparation.getName(), ",Layout,RunList,*",
-		// links
-		",o_,i?Document o?Document o_Marks,,i* o*");
-		mapPut(EnumType.RIPing.getName(), ",InterpretingParams,RenderingParams,RunList,*",
-		// links
-		",i?,i?,o_ i_Document i?Marks,i* o*");
-
-		mapPut(EnumType.PlateSetting.getName(), ",*,ExposedMedia,Preview",
-		// links
-		",i* o*,o_,o*");
-		mapPut(EnumType.PlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
-		// links
-		",i* o*,i_Document i?Marks,o_,o*,i_");
-		mapPut(EnumType.ProofAndPlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
-		// links
-		",i* o*,i_Document i?Marks,o+,o*,i_");
-		mapPut(EnumType.ImpositionProofing.getName(), ",*,RunList,ExposedMedia,Media",
-		// links
-		",i* o*,i_Document i?Marks,o+,i_");
-		mapPut(EnumType.PageProofing.getName(), ",*,RunList,ExposedMedia,Media",
-		// links
-		",i* o*,i_Document i?Marks,o+,i_");
-
-		mapPut(EnumType.PageSoftProofing.getName(), ",*,RunList",
-		// links
-		",i* o*,i_Document i?Marks");
-		mapPut(EnumType.ProofImaging.getName(), ",InterpretingParams,RenderingParams,RunList,*",
-		// links
-		",i?,i?,i? i?Document i?Marks,i* o*");
-
-	}
 
 	/**
 	 * 
@@ -2342,12 +1815,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				boolean bAddCPI = false;
 				final EnumType t = EnumType.getEnum(types.stringAt(i));
-				final String[] typeLinkNames = typeLinkNames(t);
+				final String[] typeLinkNames = LinkValidatorMap.getLinkValidator().typeLinkNames(t);
 				if (typeLinkNames != null && (ArrayUtils.contains(typeLinkNames, resName) || ArrayUtils.contains(typeLinkNames, JDFConstants.STAR)))
 				{
 					// if we already added a cpi, but this is an exchange resource, only set cpi for the last one
 					int iPos = getResPos(resName, typeLinkNames);
-					final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos], " ", false);
+					final VString typeInfo = StringUtil.tokenize(LinkValidatorMap.getLinkValidator().typeLinkInfo(t)[iPos], " ", false);
 					boolean bMatchUsage = false;
 					String inOut = null;
 					if (usage != null)
@@ -2412,7 +1885,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			int iPosLast = getResPos(resName, typeLinkNamesLast);
 			// the i* i?pu ... list of this
 			// the o* i?pu ... list of the previous type
-			final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast], " ", false);
+			final VString typeInfoLast = StringUtil.tokenize(LinkValidatorMap.getLinkValidator().typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast], " ", false);
 			boolean bOut = false;
 
 			for (int ii = 0; ii < typeInfoLast.size(); ii++)
@@ -2771,79 +2244,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString linkNames()
 	{
-		final EnumType typ = EnumType.getEnum(getType());
-		if (typ == null)
-		{
-			return null;
-		}
-
-		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && hasAttribute(AttributeName.TYPES)))
-		{
-			final VString v = new VString(m_strGenericLinkNames);
-			VString vTypes = getTypes();
-			vTypes = expandGrayBoxTypes(vTypes);
-			if (vTypes == null)
-			{
-				return null;
-			}
-
-			final int size = vTypes.size();
-			for (int i = 0; i < size; i++)
-			{
-				final EnumType t = EnumType.getEnum(vTypes.stringAt(i));
-				final String[] typeLinkNames = typeLinkNames(t);
-				if (typeLinkNames == null)
-				{
-					return null; // bail out - it's open anyhow
-				}
-				for (int j = m_strGenericLinkNames.length; j < typeLinkNames.length; j++)
-				{
-					v.add(typeLinkNames[j]);
-				}
-			}
-			return v;
-		}
-
-		// sinmple single type
-		final String[] typeLinkNames = typeLinkNames(typ);
-		if (typeLinkNames == null)
-		{
-			return null; // bail out - it's open anyhow
-		}
-		return new VString(typeLinkNames);
-	}
-
-	/**
-	 * Expand abstract types that are only valid in gray boxes to the respective explicit types
-	 * 
-	 * @param types
-	 * @return 
-	 */
-	private VString expandGrayBoxTypes(final VString types)
-	{
-		if (types == null)
-		{
-			return null;
-		}
-		final VString vNew = new VString();
-		for (int i = 0; i < types.size(); i++)
-		{
-			final String typ = types.stringAt(i);
-			// if(typ.equals("RIPing"))
-			// {
-			// vNew.add(EnumType.Imposition.getName());
-			// vNew.add(EnumType.Interpreting.getName());
-			// vNew.add(EnumType.ColorSpaceConversion.getName());
-			// vNew.add(EnumType.Trapping.getName());
-			// vNew.add(EnumType.Rendering.getName());
-			// vNew.add(EnumType.Screening.getName());
-			// }
-			// else
-			// {
-			vNew.add(typ);
-			// }
-		}
-		return vNew;
+		return new LinkValidator(this).linkNames();
 	}
 
 	/**
@@ -2853,147 +2254,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString linkInfo()
 	{
-		final EnumType typ = EnumType.getEnum(getType());
-		if (typ == null)
-		{
-			return null;
-		}
-		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && hasAttribute(AttributeName.TYPES)))
-		{
-
-			final VString vLinkInfo = new VString(m_GenericLinkInfo);
-			final VString vNames = new VString(m_strGenericLinkNames);
-
-			VString vTypes = getTypes();
-			vTypes = expandGrayBoxTypes(vTypes);
-			if (vTypes == null)
-			{
-				return null;
-			}
-			int i = 0;
-			for (i = 0; i < vTypes.size(); i++)
-			{
-				final EnumType t = EnumType.getEnum(vTypes.elementAt(i));
-				if (t == null)
-				{
-					return null;
-				}
-
-				final String[] typeLinkInfo = typeLinkInfo(t);
-				final String[] typeLinkNames = typeLinkNames(t);
-				if (typeLinkInfo == null || typeLinkNames == null)
-				{
-					return null;
-				}
-
-				for (int j = m_GenericLinkInfo.length; j < typeLinkInfo.length; j++)
-				{
-					vLinkInfo.add(typeLinkInfo[j]);
-					vNames.add(typeLinkNames[j]);
-				}
-			}
-
-			// make the intermediate links optional
-			final int s = vLinkInfo.size();
-			// loop over all links
-			for (i = 0; i < s; i++)
-			{
-				final VString typeList = StringUtil.tokenize(vLinkInfo.elementAt(i), JDFConstants.BLANK, false);
-				for (int iTyp = 0; iTyp < typeList.size(); iTyp++)
-				{
-					String strTyp = typeList.elementAt(iTyp);
-					if (strTyp.charAt(0) == 'o')
-					{
-						final String linkName = vNames.elementAt(i);
-						// loop over all links behind this one in types
-						for (int j = i + 1; j < s; j++)
-						{
-							if (vNames.elementAt(j).equals(linkName))
-							{ // if the names match, they should fit
-								boolean bGotOne = false;
-
-								final VString typeList2 = StringUtil.tokenize(vLinkInfo.elementAt(j), JDFConstants.BLANK, false);
-
-								for (int iTyp2 = 0; iTyp2 < typeList2.size(); iTyp2++)
-								{
-									String typ2 = typeList2.elementAt(iTyp2);
-									if (typ2.charAt(0) == 'i')
-									{
-										bGotOne = true;
-										// make them optional
-										if (typ2.charAt(1) == '_')
-										{
-											final char[] c_typ2 = typ2.toCharArray();
-											c_typ2[1] = '?';
-											typ2 = new String(c_typ2);
-										}
-										else if (typ2.charAt(1) == '+')
-										{
-											final char[] c_typ2 = typ2.toCharArray();
-											c_typ2[1] = '*';
-											typ2 = new String(c_typ2);
-										}
-										typeList2.set(iTyp2, typ2);
-									}
-								}
-								if (bGotOne)
-								{
-									// replace input link entry
-									vLinkInfo.set(j, StringUtil.setvString(typeList2, JDFConstants.BLANK, null, null));
-									if (strTyp.charAt(1) == '_')
-									{
-										final char[] c_strTyp = strTyp.toCharArray();
-										c_strTyp[1] = '?';
-										strTyp = new String(c_strTyp);
-									}
-									else if (strTyp.charAt(1) == '+')
-									{
-										final char[] c_strTyp = strTyp.toCharArray();
-										c_strTyp[1] = '*';
-										strTyp = new String(c_strTyp);
-									}
-									typeList.set(iTyp, strTyp);
-								}
-							}
-						}
-					}
-				}
-				vLinkInfo.set(i, StringUtil.setvString(typeList, JDFConstants.BLANK, null, null));
-			}
-			return vLinkInfo;
-		}
-		return new VString(typeLinkInfo(typ));
+		return new LinkValidator(this).linkInfo();
 	}
 
 	// ////////////////////////////////////////////////////////////////////
-	/**
-	 * definition of resource link names in the JDF namespace
-	 * @param typeNum 
-	 * 
-	 * @return String list of resource names that may be linked
-	 */
-	protected static String[] typeLinkNames(final EnumType typeNum)
-	{
-		if (typeNum == null)
-		{
-			return null;
-		}
-		return m_LinkNamesMap.get(typeNum.getName());
-	}
-
-	// ////////////////////////////////////////////////////////////////////
-
-	/**
-	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for a given EnumType
-	 * 
-	 * @param typeNum EnumType to get LinkInfo for
-	 * @return String list of resource information usages that may be linked for this EnumType
-	 */
-	protected static String[] typeLinkInfo(final EnumType typeNum)
-	{
-		final String[] strValueOfEnum = m_LinkInfoMap.get(typeNum.getName());
-		return (strValueOfEnum == null) ? m_GenericLinkInfo : strValueOfEnum;
-	}
 
 	// --------------------------------------------------------------------------
 
@@ -4627,33 +3891,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
 	{
-		final VString vElem = new VString();
-		final Vector<Integer> foundSingleLinks = new Vector<Integer>();
-		final Vector<Integer> foundSingleLinks2 = new Vector<Integer>();
-
-		final JDFResourceLinkPool linkPool = getResourceLinkPool();
-		if (linkPool != null)
-		{
-			final VElement vLinks = linkPool.getPoolChildren(null, null, null);
-			if (vLinks != null)
-			{
-				for (int i = vLinks.size() - 1; i >= 0; i--)
-				{
-					final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-					if (!isValidLink(level, rl, foundSingleLinks, foundSingleLinks2))
-					{
-						vElem.appendUnique(rl.getLinkedResourceName());
-					}
-				}
-			}
-		}
-
-		if (EnumValidationLevel.isRequired(level))
-		{
-			vElem.appendUnique(getMissingLinkVector(nMax));
-		}
-
-		return vElem;
+		return new LinkValidator(this).getInvalidLinks(level, nMax);
 	}
 
 	/**
@@ -5682,126 +4920,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for one index
-	 * 
-	 * @param namIndex index of the named list, if<0 tokenize all
-	 * @return list of resource process usages that may be linked
-	 */
-	private VString vLinkInfo(final int namIndex)
-	{
-		int namIndexLocal = namIndex;
-
-		final VString vRet = new VString();
-		final VString linkInfo = linkInfo();
-
-		if (namIndexLocal < 0)
-		{
-			// tokenize retains order
-			return new VString(linkInfo);
-		}
-
-		final VString linkNames = linkNames();
-
-		final String strName = linkNames.stringAt(namIndexLocal);
-
-		while (namIndexLocal >= 0)
-		{
-			final String kToken = linkInfo.stringAt(namIndexLocal);
-			final VString vToken = StringUtil.tokenize(kToken, JDFConstants.BLANK, false);
-
-			vRet.addAll(vToken);
-			namIndexLocal = linkNames.indexOf(strName, ++namIndexLocal);
-		}
-
-		return vRet.isEmpty() ? null : vRet;
-	}
-
-	/**
-	 * Get the index in Linknames of the ResourceLink described by rl
-	 * 
-	 * @param rl
-	 * @param nOccur for looping over combined nodes
-	 * @return -1 if it does not fit
-	 */
-	private int[] getMatchingNamIndex(final JDFResourceLink rl, final int nOccur)
-	{
-		final int[] ret = new int[2];
-		ret[0] = ret[1] = -1;
-		if (rl == null)
-		{
-			return ret;
-		}
-
-		// 311002 KM added nOccur for looping over combined nodes
-		// TBD evaluate CombinedProcessIndex when generating nOccur
-		final VString linkNames = linkNames();
-		if (linkNames == null)
-		{
-			return ret;
-		}
-
-		int namIndex = linkNames.indexOf(rl.getLinkedResourceName());
-
-		// int namIndex = vName.index((new
-		// KString(rl.getNodeName())).leftStr(-4), nOccur);
-		// 120802 rp add check for *
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-		}
-
-		if (namIndex < 0)
-		{
-			return ret;
-		}
-
-		final VString vIndex = vLinkInfo(namIndex);
-		if (vIndex == null)
-		{
-			return ret;
-		}
-
-		int iLoop = 0;
-		for (int i = 0; i < vIndex.size(); i++)
-		{
-
-			final String typ = vIndex.elementAt(i);
-
-			if (typ.charAt(0) == 'i' && !JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
-			{
-				continue;
-			}
-			if (typ.charAt(0) == 'o' && !JDFResourceLink.EnumUsage.Output.equals(rl.getUsage()))
-			{
-				continue;
-			}
-			if (typ.length() > 2)
-			{ // processusage is specified
-				if (!StringUtil.rightStr(typ, -2).equals(rl.getProcessUsage()))
-				{
-					continue;
-				}
-			}
-			else
-			{ // no processusage is specified
-				if (rl.hasAttribute(AttributeName.PROCESSUSAGE))
-				{
-					continue;
-				}
-
-			}
-			if (iLoop++ < nOccur)
-			{
-				continue;
-			}
-			ret[0] = namIndex;
-			ret[1] = i;
-			return ret;
-		}
-		return ret;
-	}
-
-	/**
 	 * Check existence of attribute Type
 	 * 
 	 * @return boolean - true if attribute Type exists
@@ -5839,36 +4957,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString getInsertLinkVector(final int nMax)
 	{
-		final VString names = linkNames();
-		final VString vInsert = new VString();
-		for (int i = 0; i < names.size(); i++)
-		{
-			final VString types = vLinkInfo(i);
-			for (int j = 0; j < types.size(); j++)
-			{
-				final EnumProcessUsage pu = getEnumProcessUsage(types.elementAt(j), 0);
-				if ((types.elementAt(j)).charAt(1) == '?' || (types.elementAt(j)).charAt(1) == '_')
-				{
-					// 110602 added
-					if (getMatchingLink(names.elementAt(i), pu, 0) != null)
-					{
-						continue; // skip existing links with maxOccurs=1
-					}
-				}
-
-				String s = names.elementAt(i) + "Link";
-				if (pu != null)
-				{
-					s += JDFConstants.COLON + pu.getName();
-				}
-				vInsert.add(s);
-				if (vInsert.size() >= nMax)
-				{
-					break;
-				}
-			}
-		}
-		return vInsert;
+		return new LinkValidator(this).getInsertLinkVector(nMax);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -5988,18 +5077,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * definition of the length of LinkNames, LinkInfo for generic JDF nodes
-	 * 
-	 * @return int - length of the generic () link string functions,
-	 * @deprecated use m_strGenericLinkNames.length;
-	 */
-	@Deprecated
-	public int getGenericLinksLength()
-	{
-		return m_strGenericLinkNames.length;
-	}
-
-	/**
 	 * isValidLink check whether an index is legal for this class
 	 * 
 	 * @param level the checking level
@@ -6010,87 +5087,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl, Vector<Integer> doneNameList, Vector<Integer> doneIndexList)
 	{
-
-		if (rl == null)
-		{
-			return false;
-		}
-
-		if (!isInJDFNameSpaceStatic(rl))
-		{
-			return true;
-		}
-
-		// allow call with initial null
-		if (doneIndexList == null)
-		{
-			doneIndexList = new Vector<Integer>();
-		}
-		if (doneNameList == null)
-		{
-			doneNameList = new Vector<Integer>();
-		}
-
-		int nOccur = 0;
-		int iIndex;
-		int namIndex;
-
-		// loop over all potential occurrences
-		while (true)
-		{
-			// on the C++ side the following two methods are represented with
-			// a method getMatchingIndex(rl, iIndex, nOccur) that
-			// has 3 parameters, one of them is a reference(!) at iIndex
-			final int[] ii = getMatchingNamIndex(rl, nOccur);
-			namIndex = ii[0];
-			iIndex = ii[1];
-
-			// not found -> check whether this node is known yet
-			if (namIndex < 0)
-			{
-				final EnumType enumType = getEnumType();
-				if (enumType == null || enumType.equals(EnumType.ProcessGroup) || (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
-				{
-					return true;
-				}
-				return false;
-			}
-
-			// loop over all completed occurrences with maxOccurs=1
-			// if they have already been found, search for next occurrence
-			boolean bTryNext = false;
-			final int dns = doneNameList.size();
-
-			for (int i = 0; i < dns; i++)
-			{
-				if ((doneNameList.elementAt(i)).intValue() == namIndex && (doneIndexList.elementAt(i)).intValue() == iIndex)
-				{
-					nOccur++; // this one is gone, try next
-					bTryNext = true;
-					break; // 
-				}
-			}
-
-			if (!bTryNext) // we got here and the link is potentially valid
-			{
-				break;
-			}
-		}
-
-		final boolean isValid = true; // rl.isValid(level);
-
-		// TODO remove line wchar_t card=vLinkInfo(namIndex)[iIndex][1];
-		final VString vCard = vLinkInfo(namIndex);
-		final String str = vCard.stringAt(iIndex);
-		final char card = str.charAt(1);
-
-		if (isValid && ((card == '_') || (card == '?')))
-		{
-			doneNameList.addElement(Integer.valueOf(namIndex));
-			doneIndexList.addElement(Integer.valueOf(iIndex));
-		}
-
-		return isValid;
+		return new LinkValidator(this).isValidLink(level, rl, doneNameList, doneIndexList);
 	}
 
 	/**
@@ -6117,101 +5114,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VElement getMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
 	{
-		VElement vE = null;
-
-		final JDFResourceLinkPool rlp = getResourceLinkPool();
-		if (rlp == null)
-		{
-			return null;
-		}
-
-		final VString linkNames = linkNames();
-		if (linkNames == null)
-		{
-			return rlp.getInOutLinks(null, bLink, resName, null);
-		}
-
-		int namIndex = linkNames.indexOf(resName);
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-			if (namIndex < 0)
-			{
-				return null;
-			}
-		}
-
-		final VString vInfo = vLinkInfo(namIndex);
-
-		if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
-		{
-			final String pu = processUsage.getName();
-			for (int i = 0; i < vInfo.size(); i++)
-			{
-				if ((vInfo.elementAt(i)).endsWith(pu))
-				{
-					final boolean bInput = (vInfo.elementAt(i)).charAt(0) == 'i';
-					// 240502 RP bug fix by Komori
-					vE = rlp.getInOutLinks(bInput ? EnumUsage.Input : EnumUsage.Output, bLink, resName, processUsage);
-					break;
-				}
-			}
-		}
-		else
-		{
-			if (processUsage == null)
-			{
-				String linkName = null;
-				if (resName != null && !resName.endsWith("Link"))
-				{
-					linkName = resName + "Link";
-				}
-				vE = rlp.getPoolChildren(linkName, null, null);
-				if (!bLink)
-				{
-					vE = JDFResourceLinkPool.resourceVector(vE, resName);
-				}
-			}
-			else if (processUsage == EnumProcessUsage.AnyInput)
-			{
-				vE = rlp.getInOutLinks(EnumUsage.Input, bLink, resName, null);
-				// 170205 RP remove internal pipes from all inputs
-				// TODO ideally we would check if they are connected, but this
-				// is a sufficient 98% solution
-				if (bLink && vE != null)
-				{
-					final Iterator<KElement> vEIterator = vE.iterator();
-					while (vEIterator.hasNext())
-					{
-						final JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
-						if (rl.getPipeProtocol().equals(JDFConstants.INTERNAL))
-						{
-							vEIterator.remove();
-						}
-					}
-				}
-			}
-			else if (processUsage == EnumProcessUsage.AnyOutput)
-			{
-				vE = rlp.getInOutLinks(false ? EnumUsage.Input : EnumUsage.Output, bLink, resName, null);
-				// 170205 RP remove internal pipes from all outputs
-				// TODO ideally we would check if they are connected, but this
-				// is a sufficient 98% solution
-				if (bLink && vE != null)
-				{
-					final Iterator<KElement> vEIterator = vE.iterator();
-					while (vEIterator.hasNext())
-					{
-						final JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
-						if (JDFConstants.INTERNAL.equals(rl.getPipeProtocol()))
-						{
-							vEIterator.remove();
-						}
-					}
-				}
-			}
-		}
-		return vE;
+		return new LinkValidator(this).getMatchingLinks(resName, bLink, processUsage);
 	}
 
 	/**
@@ -6223,70 +5126,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString getMissingLinkVector(final int nMax)
 	{
-		final VString names = linkNames();
-		if (names == null)
-		{
-			return null;
-		}
-
-		if (getType().equals(EnumType.ProcessGroup.getName()))
-		{ // TODO fix processgroup with Types and gray box category entries
-			return null;
-		}
-
-		final VString vMissing = new VString();
-		final int nameSize = names.size();
-		for (int i = 0; i < nameSize; i++)
-		{
-			final String nam = names.stringAt(i);
-			boolean namDone = false;
-			for (int k = 0; k < i; k++)
-			{
-				if (names.stringAt(k).equals(nam))
-				{
-					namDone = true;
-					break;
-				}
-			}
-
-			if (namDone)
-			{
-				continue; // already tested this name - vLinkInfo collects all
-				// data
-			}
-
-			final VString types = vLinkInfo(i);
-			if (types != null)
-			{
-				final Iterator<String> typesIterator = types.iterator();
-				while (typesIterator.hasNext())
-				{
-					final String typesAt = typesIterator.next();
-					if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
-					{
-						// 110602 added
-						final EnumProcessUsage pu = getEnumProcessUsage(typesAt, 0);
-						if (getMatchingLink(names.elementAt(i), pu, 0) == null)
-						{
-							String s = names.elementAt(i) + "Link";
-
-							if (pu != null)
-							{
-								s += JDFConstants.COLON + pu.getName();
-							}
-
-							vMissing.addElement(s);
-							if (vMissing.size() >= nMax)
-							{
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return vMissing;
+		return new LinkValidator(this).getMissingLinkVector(nMax);
 	}
 
 	/**
@@ -6360,14 +5200,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLink getMatchingLink(final String resName, final EnumProcessUsage processUsage, final int pos)
 	{
-		JDFResourceLink rl = null;
+		return new LinkValidator(this).getMatchingLink(resName, processUsage, pos);
+	}
 
-		final VElement vE = getMatchingLinks(resName, true, processUsage);
-		if (vE != null && vE.size() > pos)
-		{
-			rl = (JDFResourceLink) vE.elementAt(pos);
-		}
-		return rl;
+	/**
+	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes for for a JDF with the given type also
+	 * creates the matching resource link in this
+	 * 
+	 * @param resName the name of the resource to add
+	 * @param usage the Usage of the resourcelink of the resource to add: <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
+	 * 
+	 * @return JDFResource the newly created resource
+	 */
+	public JDFResource appendMatchingResource(final String resName, final EnumUsage usage)
+	{
+		EnumProcessUsage processUsage = null;
+		if (EnumUsage.Input.equals(usage))
+			processUsage = EnumProcessUsage.AnyInput;
+		else if (EnumUsage.Output.equals(usage))
+			processUsage = EnumProcessUsage.AnyOutput;
+		return new LinkValidator(this).appendMatchingResource(resName, processUsage, null);
 	}
 
 	/**
@@ -6384,140 +5236,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFNode resourceRoot)
 	{
-		// TODO check comment for processUsage
-		final VString vtyp = getMatchType(resName, processUsage);
-		if (vtyp == null) // anything goes
-		{
-			final boolean bInput = !EnumProcessUsage.AnyOutput.equals(processUsage);
-			final JDFResource r = addResource(resName, null, bInput, resourceRoot, true, null);
-			final JDFResourceLink rl = getLink(r, null);
-			if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
-			{
-				rl.setProcessUsage(processUsage);
-			}
-			return r;
-		}
-
-		int nFound = 0;
-		String foundTyp = null;
-		boolean foundMulti = false;
-		int iInputFound = 0; // 1 is in, 2 is out
-
-		for (int i = 0; i < vtyp.size(); i++)
-		{
-			final String typ = vtyp.elementAt(i);
-			final boolean bInput = typ.charAt(0) == 'i';
-
-			if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
-			{
-				if (numMatchingLinks(resName, false, processUsage) > nFound)
-				{
-					nFound++; // TODO need to fix this, it is only a 90%
-					// solution
-					continue;
-				}
-			}
-			if (foundTyp == null)
-			{
-				foundTyp = typ;
-				iInputFound = bInput ? 1 : 2;
-
-			}
-			else if (!typ.equals(foundTyp))
-			{
-				foundMulti = true;
-				if ((bInput ? 1 : 2) != iInputFound)
-				{
-					iInputFound = 0; // we could have either in or out - cannot
-					// link
-					break;
-				}
-			}
-		}
-		if (foundTyp == null)
-		{
-			// should only get here it the link alreay exists
-			throw new JDFException("JDFNode.appendMatchingResource already exists");
-		}
-
-		final JDFResource r = addResource(resName, null, true, resourceRoot, false, null);
-		if (iInputFound > 0)
-		{
-			final JDFResourceLink rl = linkResource(r, iInputFound == 1 ? EnumUsage.Input : EnumUsage.Output, null);
-			if (!foundMulti && foundTyp.length() > 2)
-			{
-				rl.setProcessUsage(EnumProcessUsage.getEnum(foundTyp.substring(2)));
-			}
-		}
-
-		return r;
-	}
-
-	/**
-	 * get the matching types for a given resource
-	 * 
-	 * @param resName
-	 * @param processUsage
-	 * @return null if anything goes, an empty list if nothing goes, else the list of valid entries
-	 */
-	private VString getMatchType(final String resName, final EnumProcessUsage processUsage)
-	{
-		final VString vRet = new VString();
-		final VString linkNames = linkNames();
-		if (linkNames == null)
-		{
-			return null;
-		}
-
-		int namIndex = linkNames.indexOf(resName);
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-		}
-		if (namIndex < 0)
-		{
-			throw new JDFException("JDFNode.appendMatchingResource invalid resName: " + resName);
-		}
-
-		final VString vInfo = vLinkInfo(namIndex);
-		if (vInfo == null)
-		{
-			return null;
-		}
-
-		if ((processUsage == null))
-		{
-			return vInfo; // no filtering required
-		}
-
-		String infoTemp = null;
-		final String pu = processUsage.getName();
-
-		for (int i = 0; i < vInfo.size(); i++)
-		{
-			infoTemp = vInfo.elementAt(i);
-
-			if (processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
-			{
-				if (infoTemp.endsWith(pu))
-				{
-					vRet.add(infoTemp);
-				}
-			}
-			else
-			{
-				if (processUsage.getValue() == EnumProcessUsage.AnyInput.getValue() && infoTemp.charAt(0) == 'i')
-				{
-					vRet.add(infoTemp);
-				}
-				else if (processUsage.getValue() == EnumProcessUsage.AnyOutput.getValue() && infoTemp.charAt(0) == 'o')
-				{
-					vRet.add(infoTemp);
-				}
-			}
-		}
-
-		return vRet;
+		return new LinkValidator(this).appendMatchingResource(resName, processUsage, resourceRoot);
 	}
 
 	/**
@@ -6602,36 +5321,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
-		final String resName = resource.getLocalName();
-		final VString vtyp = getMatchType(resName, processUsage);
-
-		if (vtyp != null)
-		{
-			final Iterator<String> vtypIterator = vtyp.iterator();
-			while (vtypIterator.hasNext())
-			{
-				final String typ = vtypIterator.next();
-				if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
-				{
-					if (numMatchingLinks(resName, false, processUsage) > 0)
-					{
-						continue; // not this one...
-					}
-				}
-
-				JDFResourceLink rl = linkResource(resource, typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output, null);
-				if (typ.length() > 2)
-				{
-					rl.setProcessUsage(EnumProcessUsage.getEnum(typ.substring(2)));
-				}
-
-				rl.setPartMap(partMap);
-				return rl;
-			}
-		}
-
-		// should only get here it the link alreay exists
-		throw new JDFException("JDFNode.LinkMatchingResource already exists");
+		return new LinkValidator(this).linkMatchingResource(resource, processUsage, partMap);
 	}
 
 	/**
@@ -6646,13 +5336,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public int numMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
 	{
-		int iNumMatchingLinks = 0;
-		final VElement v = getMatchingLinks(resName, bLink, processUsage);
-		if (v != null)
-		{
-			iNumMatchingLinks = v.size();
-		}
-		return iNumMatchingLinks;
+		return new LinkValidator(this).numMatchingLinks(resName, bLink, processUsage);
 	}
 
 	/*

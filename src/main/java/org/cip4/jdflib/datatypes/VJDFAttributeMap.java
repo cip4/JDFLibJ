@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -139,7 +139,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	public VJDFAttributeMap(JDFAttributeMap moreMap)
 	{
 		this();
-		add(moreMap);
+		if (moreMap != null)
+			add(moreMap);
 	}
 
 	/**
@@ -457,7 +458,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the same keys and values as a entry in this
 	 * vector
 	 */
-	@SuppressWarnings("unchecked")
 	@Deprecated
 	public boolean hasEntryWithEqualKeyValuePairs(final JDFAttributeMap attmap)
 	{
@@ -519,7 +519,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @param vKeys
 	 * @deprecated use reduceMap
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Deprecated
 	public void reduceKey(final Vector vKeys)
 	{

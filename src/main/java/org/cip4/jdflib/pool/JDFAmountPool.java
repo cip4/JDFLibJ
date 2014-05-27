@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -567,12 +567,9 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				poolParent.setAttribute(attrib, value, nameSpaceURI);
 				return;
 			}
-			poolParent.removeAttribute(attrib, nameSpaceURI); // either in the
-			// pool or the
-			// link, not both
+			poolParent.removeAttribute(attrib, nameSpaceURI); // either in the pool or the link, not both
 			final JDFAmountPool ap = poolParent.getCreateAmountPool();
-			final JDFPartAmount pa0 = ap.getCreatePartAmount(vPart);
-			pa0.setAttribute(attrib, value, nameSpaceURI);
+			ap.setPartAttribute(attrib, value, nameSpaceURI, vPart);
 		}
 
 		/**
@@ -599,17 +596,69 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			{
 				throw new JDFException("JDFResourceLink.setAmountPoolAttribute: calling method on PartAmount object");
 			}
-			final VJDFAttributeMap v = new VJDFAttributeMap();
-			v.add(mPart);
+			final VJDFAttributeMap v = new VJDFAttributeMap(mPart);
 			setAmountPoolAttribute(poolParent, attrib, value, nameSpaceURI, v);
 		}
 
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ////////////
-
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * set an attribute in the appropriate PartAmount
+	 *  
+	 * @param attrib
+	 * @param value
+	 * @param nameSpaceURI
+	 * @param vPart
+	 */
+	public void setPartAttribute(final String attrib, final String value, final String nameSpaceURI, final VJDFAttributeMap vPart)
+	{
+		final JDFPartAmount pa0 = getCreatePartAmount(vPart);
+		pa0.setAttribute(attrib, value, nameSpaceURI);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param attrib
+	 * @param nameSpaceURI
+	 * @param part
+	 * @return
+	 */
+	public String getPartAttribute(final String attrib, final String nameSpaceURI, final JDFAttributeMap part)
+	{
+		final JDFPartAmount pa0 = part == null ? getPartAmount(part) : getMatchingPartAmount(part);
+		return pa0 == null ? null : pa0.getAttribute(attrib, nameSpaceURI, null);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param attrib
+	 * @param nameSpaceURI
+	 * @param vPart
+	 * @return
+	 */
+	public String getPartAttribute(final String attrib, final String nameSpaceURI, final VJDFAttributeMap vPart)
+	{
+		final JDFPartAmount pa0 = getPartAmount(vPart);
+		return pa0 == null ? null : pa0.getAttribute(attrib, nameSpaceURI, null);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param attrib
+	 * @param value
+	 * @param nameSpaceURI
+	 * @param part
+	 */
+	public void setPartAttribute(final String attrib, final String value, final String nameSpaceURI, final JDFAttributeMap part)
+	{
+		final JDFPartAmount pa0 = getCreatePartAmount(part);
+		pa0.setAttribute(attrib, value, nameSpaceURI);
+	}
 
 	/**
 	 * Constructor for JDFAmountPool
@@ -674,15 +723,16 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * @param mPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
-	public JDFPartAmount getMatchingPartAmount(final JDFAttributeMap mPart)
+	public JDFPartAmount getMatchingPartAmount(JDFAttributeMap mPart)
 	{
-		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
-		for (int i = vPartAmount.size() - 1; i >= 0; i--)
+		if (mPart != null && mPart.size() == 0)
+			mPart = null;
+		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		for (JDFPartAmount partAmount : vPartAmount)
 		{
-			final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
-			if (vMapPart.contains(mPart))
+			if (vMapPart == null && mPart == null || mPart != null && vMapPart.contains(mPart))
 			{
 				return partAmount; // exact match
 			}
@@ -696,15 +746,16 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * @param mPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
-	public JDFPartAmount getPartAmount(final JDFAttributeMap mPart)
+	public JDFPartAmount getPartAmount(JDFAttributeMap mPart)
 	{
-		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
-		for (int i = vPartAmount.size() - 1; i >= 0; i--)
+		if (mPart != null && mPart.size() == 0)
+			mPart = null;
+		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		for (JDFPartAmount partAmount : vPartAmount)
 		{
-			final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
-			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
+			final VJDFAttributeMap vMapPart = partAmount == null ? null : partAmount.getPartMapVector();
 
-			if (vMapPart != null && vMapPart.size() == 1 && vMapPart.elementAt(0).equals(mPart))
+			if (vMapPart != null && vMapPart.size() == 1 && vMapPart.elementAt(0).equals(mPart) || vMapPart == null && mPart == null)
 			{
 				return partAmount; // exact match
 			}
@@ -718,12 +769,14 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * @param vPart filter for the part to set the status
 	 * @return the PartAmount that fits
 	 */
-	public JDFPartAmount getPartAmount(final VJDFAttributeMap vPart)
+	public JDFPartAmount getPartAmount(VJDFAttributeMap vPart)
 	{
-		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
-		for (int i = vPartAmount.size() - 1; i >= 0; i--)
+		if (vPart != null && vPart.size() == 1 && vPart.get(0).isEmpty())
+			vPart = null;
+
+		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		for (JDFPartAmount partAmount : vPartAmount)
 		{
-			final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
 
 			if (ContainerUtil.equals(vMapPart, vPart))
@@ -741,15 +794,15 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * @param iSkip the iSkip'th element to get
 	 * @return the PartAmount that fits
 	 */
-	public JDFPartAmount getPartAmount(final JDFAttributeMap mPart, final int iSkip)
+	public JDFPartAmount getPartAmount(JDFAttributeMap mPart, final int iSkip)
 	{
-		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
 		int n = 0;
-		for (int i = vPartAmount.size() - 1; i >= 0; i--)
+		if (mPart != null && mPart.size() == 0)
+			mPart = null;
+		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
+		for (JDFPartAmount partAmount : vPartAmount)
 		{
-			final JDFPartAmount partAmount = (JDFPartAmount) vPartAmount.elementAt(i);
 			final VJDFAttributeMap vMapPart = partAmount.getPartMapVector();
-
 			if (vMapPart.subMap(mPart) && ++n > iSkip)
 			{
 				return partAmount; // exact match
@@ -914,19 +967,17 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 */
 	public VElement getMatchingPartAmountVector(final JDFAttributeMap mPart)
 	{
-		final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
+		final Vector<JDFPartAmount> vPartAmount = getChildrenByClass(JDFPartAmount.class, true, 0);
 		final int size = vPartAmount.size();
 		if (size == 0)
 		{
 			return null;
 		}
-		if (mPart == null)
-			return vPartAmount;
 
 		final VElement vPA = new VElement();
 		for (int i = 0; i < size; i++)
 		{
-			final JDFPartAmount ps = (JDFPartAmount) vPartAmount.elementAt(i);
+			final JDFPartAmount ps = vPartAmount.elementAt(i);
 			final VJDFAttributeMap mm = ps.getPartMapVector();
 			if (mm != null)
 			{

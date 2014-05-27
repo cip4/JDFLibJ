@@ -66,107 +66,70 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.node;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFPart;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.core.JDFCustomerInfo;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFImageEnhancementParams;
+import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFSheetOptimizingParams;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ *  
+ * @author rainer prosi
+ * @date May 27, 2014
  */
-public class WalkXJDFResource extends WalkXElement
+public class LinkValidatorTest extends JDFTestCaseBase
 {
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+	}
+
 	/**
 	 * 
+	 *  
 	 */
-	public WalkXJDFResource()
+	public void testImageCompression()
 	{
-		super();
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ImageEnhancement);
+		JDFImageEnhancementParams iep = (JDFImageEnhancementParams) n.appendMatchingResource(ElementName.IMAGEENHANCEMENTPARAMS, EnumUsage.Input);
+		assertNotNull(iep);
+		JDFCustomerInfo ci = (JDFCustomerInfo) n.appendMatchingResource(ElementName.CUSTOMERINFO, EnumUsage.Input);
+		assertNotNull(ci);
+		JDFRunList rli = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList rlo = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumUsage.Output);
+		assertNotSame(rli, rlo);
 	}
 
 	/**
-	 * @param e
-	 * @return the created resource
+	 * 
+	 *  
 	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public void testSheetOptimizing()
 	{
-		final JDFNode theNode = parent.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : parent.currentJDFNode;
-		final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
-		JDFAttributeMap partmap = null;
-		final JDFResource newPartition;
-		if (part != null)
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.SheetOptimizing);
+		JDFSheetOptimizingParams sop = (JDFSheetOptimizingParams) n.appendMatchingResource(ElementName.SHEETOPTIMIZINGPARAMS, EnumUsage.Input);
+		assertNotNull(sop);
+		for (int i = 0; i < 3; i++)
 		{
-			newPartition = createPartition(e, trackElem, part);
-			partmap = part.getPartMap();
+			n.appendMatchingResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		}
-		else if (e.getPreviousSiblingElement(e.getNodeName(), null) != null)
-		{
-			newPartition = theNode.getJDFRoot().addResource(trackElem.getLocalName(), null);
-			newPartition.copyAttribute("ID", e);
-		}
-		else
-		{
-			newPartition = (JDFResource) trackElem;
-		}
-		if (newPartition == null)
-		{
-			return null;
-		}
-
-		final JDFAttributeMap map = e.getAttributeMap();
-		map.remove(AttributeName.ID);
-		map.remove(AttributeName.PARTIDKEYS);
-		final JDFResourceLink rl = theNode.getLink(newPartition, null);
-		KElement ap = e.getElement(ElementName.AMOUNTPOOL);
-		if (ap != null)
-		{
-			parent.walkTree(ap, rl);
-			ap.deleteNode();
-		}
-		parent.moveAmountsToLink(partmap, map, rl);
-		newPartition.setAttributes(map);
-
-		return newPartition;
-	}
-
-	/**
-	 * @param e
-	 * @param trackElem
-	 * @param part
-	 * @return
-	 */
-	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
-	{
-		final JDFNode theNode = parent.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : parent.currentJDFNode;
-		final JDFResource r = (JDFResource) trackElem;
-		final JDFAttributeMap partMap = part.getPartMap();
-		final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());
-		final JDFResourceLink rll = theNode.getLink(r, null);
-		final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
-		if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
-		{
-			rll.moveElement(part, null);
-		}
-		return rPart;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return super.matches(toCheck) && parent.isXResource(toCheck);
+		JDFCustomerInfo ci = (JDFCustomerInfo) n.appendMatchingResource(ElementName.CUSTOMERINFO, EnumUsage.Input);
+		assertNotNull(ci);
+		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumUsage.Output);
+		assertNotNull(sp);
 	}
 }

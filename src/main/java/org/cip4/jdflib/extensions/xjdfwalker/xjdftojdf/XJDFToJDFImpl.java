@@ -617,7 +617,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @param map
 	 * @param a
 	 */
-	protected void moveToLink(final JDFResourceLink rl, final JDFAttributeMap partmap, final JDFAttributeMap map, final String a)
+	private void moveToLink(final JDFResourceLink rl, final JDFAttributeMap partmap, final JDFAttributeMap map, final String a)
 	{
 		if (map == null || map.isEmpty())
 		{

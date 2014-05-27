@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -81,8 +82,9 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
-import org.junit.Assert;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
+
 /**
  * @author rainer prosi
  * @date Dec 10, 2012
@@ -90,10 +92,11 @@ import org.junit.Test;
 public class XJDFToJDFConverterTest extends JDFTestCaseBase
 {
 	/**
-	 * @return 
+	 *  
 	 *  
 	 */
-	public JDFNode testCompany()
+	@Test
+	public void testCompany()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		KElement e = new XMLDoc("XJDF", null).getRoot();
@@ -102,11 +105,33 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		c.setAttribute("Usage", "Input");
 		c.appendElement("Parameter").appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
 		final JDFDoc d = xCon.convert(e);
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
-		Assert.assertEquals(contact.getCompany().getProductID(), "company_id");
-		return root;
+		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testAmountPool()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
+		PartitionHelper ph = sh.getCreatePartition(null, true);
+		ph.setAmount(33, null, true);
+		KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFMedia m = (JDFMedia) root.getResource("Media", EnumUsage.Input, 0);
+		assertNotNull(m);
+		JDFResourceLink rl = root.getLink(m, null);
+		assertNotNull(rl.getAmountPool());
+		assertNull(m.getElement("AmuntPool"));
 	}
 
 	/**
@@ -123,7 +148,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		PartitionHelper ph = sh.getCreatePartition(0, true);
 		ph.getResource().setAttribute(AttributeName.CONTACTTYPES, EnumContactType.Customer.getName());
 		final JDFDoc d = xCon.convert(e);
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 	}
 
 }

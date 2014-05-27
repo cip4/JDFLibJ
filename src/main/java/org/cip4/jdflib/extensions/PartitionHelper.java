@@ -70,13 +70,13 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.pool.JDFAmountPool;
-import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
@@ -164,7 +164,9 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	 */
 	public void setAmount(double amount, JDFAttributeMap moreMap, boolean bGood)
 	{
-		AmountPoolHelper.setAmountPoolAttribute(this, "Amount" + (bGood ? "Good" : "Waste"), StringUtil.formatDouble(amount), null, new VJDFAttributeMap(moreMap));
+		final JDFAmountPool ap = getCreateAmountPool();
+		final JDFPartAmount pa0 = ap.getCreatePartAmount(new VJDFAttributeMap(moreMap));
+		pa0.setAttribute("Amount" + (bGood ? "Good" : "Waste"), StringUtil.formatDouble(amount), null);
 	}
 
 	/**

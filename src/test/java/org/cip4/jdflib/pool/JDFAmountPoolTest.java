@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,8 +84,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool.AmountMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author RP
  * 
@@ -137,12 +137,12 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		final JDFAttributeMap testMap = new JDFAttributeMap(EnumPartIDKey.Condition, "Good");
 		v.add(testMap);
 		final JDFAmountPool aplocal = rl.getAmountPool();
-		Assert.assertEquals("15 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 15);
+		assertEquals("15 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 15);
 		aplocal.reducePartAmounts(v);
-		Assert.assertEquals("5 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 5);
+		assertEquals("5 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 5);
 		testMap.put("SheetName", "Sheet3");
 		aplocal.reducePartAmounts(v);
-		Assert.assertEquals("1 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 1);
+		assertEquals("1 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 1);
 	} // /////////////////////////////////////////////////////
 
 	/**
@@ -170,10 +170,34 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 			rl.setActualAmount(50 + i, map2);
 
 			map2.put("Condition", "Good");
-			Assert.assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
+			assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
 			map2.put("Condition", "Waste");
-			Assert.assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
+			assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
 		}
+	}
+
+	/**
+	 * Method .
+	 * 
+	 */
+	@Test
+	public void testSetPartAmount()
+	{
+		ap.setPartAttribute("Foo", "Bar", null, (JDFAttributeMap) null);
+		assertEquals(ap.getPartAttribute("Foo", null, (JDFAttributeMap) null), "Bar");
+		ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
+		ap.setPartAttribute("Foo", "Bar", null, new JDFAttributeMap());
+		assertEquals(ap.getPartAttribute("Foo", null, (JDFAttributeMap) null), "Bar");
+		ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
+		ap.setPartAttribute("Foo", "Bar", null, new JDFAttributeMap());
+		assertEquals(ap.getPartAttribute("Foo", null, new JDFAttributeMap()), "Bar");
+		assertEquals(ap.getPartAttribute("Foo", null, new VJDFAttributeMap(new JDFAttributeMap())), "Bar");
+		ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
+		ap.setPartAttribute("Foo", "Bar", null, new JDFAttributeMap("Run", "R1"));
+		ap.setPartAttribute("Foo", "Bar2", null, new JDFAttributeMap());
+		assertEquals(ap.getPartAttribute("Foo", null, new JDFAttributeMap("Run", "R1")), "Bar");
+		assertEquals(ap.getPartAttribute("Foo", null, new VJDFAttributeMap(new JDFAttributeMap("Run", "R1"))), "Bar");
+		assertEquals(ap.getPartAttribute("Foo", null, (JDFAttributeMap) null), "Bar2");
 	}
 
 	/**
@@ -204,11 +228,11 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 				rl.setActualAmount(50 + i, map2);
 
 				map2.put("Condition", "Good");
-				Assert.assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
+				assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
 				map2.put("Condition", "Waste");
-				Assert.assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
+				assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
 			}
-			Assert.assertEquals(rl.getAmount(map), 500.0 + i, 0.01);
+			assertEquals(rl.getAmount(map), 500.0 + i, 0.01);
 		}
 	}
 
@@ -234,18 +258,17 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		xmLink.setAmount(1, mPart);
 
 		final JDFAmountPool aplocal = xmLink.getAmountPool();
-		Assert.assertNotNull(aplocal);
+		assertNotNull(aplocal);
 		mPart.remove("Condition");
 
 		VElement v = aplocal.getMatchingPartAmountVector(mPart);
-		Assert.assertEquals(v.size(), 2);
+		assertEquals(v.size(), 2);
 		mPart.put("Side", "Moebius");
 		v = aplocal.getMatchingPartAmountVector(mPart);
-		Assert.assertNull("there certainly is no moebius side ...", v);
+		assertNull("there certainly is no moebius side ...", v);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
@@ -282,13 +305,13 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		vMap.add(map2);
 		final JDFAmountPool aplocal = rl.appendAmountPool();
 		final JDFPartAmount pa = aplocal.appendPartAmount(vMap);
-		Assert.assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
+		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
 		rl.setActualAmount(42, map);
 		rl.setActualAmount(21, map2);
-		Assert.assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
-		Assert.assertEquals(rl.getActualAmount(map), 42., 0.);
-		Assert.assertEquals(rl.getActualAmount(mapSig), 21., 0.);
-		Assert.assertEquals(pa, aplocal.getPartAmount(vMap));
+		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
+		assertEquals(rl.getActualAmount(map), 42., 0.);
+		assertEquals(rl.getActualAmount(mapSig), 21., 0.);
+		assertEquals(pa, aplocal.getPartAmount(vMap));
 	}
 
 	/**
@@ -305,13 +328,13 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		vMap.add(map2);
 
 		final JDFPartAmount pa1 = ap.getCreatePartAmount(map);
-		Assert.assertEquals(pa1.getPartMap(), map);
+		assertEquals(pa1.getPartMap(), map);
 		final JDFPartAmount pa3 = ap.getCreatePartAmount(vMap);
-		Assert.assertEquals(pa3.getPartMapVector(), vMap);
+		assertEquals(pa3.getPartMapVector(), vMap);
 		final JDFPartAmount pa4 = ap.getCreatePartAmount(vMap);
-		Assert.assertEquals(pa3, pa4);
+		assertEquals(pa3, pa4);
 		final JDFPartAmount pa2 = ap.getCreatePartAmount(map2);
-		Assert.assertEquals(pa2.getPartMap(), map2);
+		assertEquals(pa2.getPartMap(), map2);
 	}
 
 	/**
@@ -336,14 +359,14 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 			}
 		}
 		AmountMap am = ap.getAmountMap(new VString("Separation", null));
-		Assert.assertEquals(am.size(), 2);
-		Assert.assertEquals(am.getAmountDouble(map, "Amount"), 50 * 99 * 10., 0.);
+		assertEquals(am.size(), 2);
+		assertEquals(am.getAmountDouble(map, "Amount"), 50 * 99 * 10., 0.);
 
 		am = ap.getAmountMap(new VString("SheetName Separation", null));
-		Assert.assertEquals(am.size(), 200);
-		Assert.assertEquals(am.getAmountDouble(map, "Amount"), -1.0, 0.);
+		assertEquals(am.size(), 200);
+		assertEquals(am.getAmountDouble(map, "Amount"), -1.0, 0.);
 		map.put("SheetName", "Sheet12");
-		Assert.assertEquals("10 signatures * 12", am.getAmountDouble(map, "Amount"), 10 * 12.0, 0.);
+		assertEquals("10 signatures * 12", am.getAmountDouble(map, "Amount"), 10 * 12.0, 0.);
 	}
 
 	/**
@@ -355,7 +378,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	{
 		ap.appendPartAmount();
 		final AmountMap am = ap.getAmountMap(null);
-		Assert.assertEquals(am.size(), 1);
+		assertEquals(am.size(), 1);
 	}
 
 	/**
@@ -372,15 +395,15 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 
 		final JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();
 		ap = rl.appendAmountPool();
-		Assert.assertNull(ap.getPartAmount(vMap));
-		Assert.assertNull(ap.getPartAmount(map));
-		Assert.assertNull(ap.getPartAmount(2));
-		Assert.assertNull(ap.getPartAmount(0));
+		assertNull(ap.getPartAmount(vMap));
+		assertNull(ap.getPartAmount(map));
+		assertNull(ap.getPartAmount(2));
+		assertNull(ap.getPartAmount(0));
 
 		final JDFPartAmount pa = ap.appendPartAmount();
-		Assert.assertNull(ap.getPartAmount(vMap));
-		Assert.assertNull(ap.getPartAmount(map));
-		Assert.assertNull(ap.getPartAmount(2));
-		Assert.assertEquals(pa, ap.getPartAmount(0));
+		assertNull(ap.getPartAmount(vMap));
+		assertNull(ap.getPartAmount(map));
+		assertNull(ap.getPartAmount(2));
+		assertEquals(pa, ap.getPartAmount(0));
 	}
 }

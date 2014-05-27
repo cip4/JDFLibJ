@@ -72,7 +72,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -84,7 +83,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -171,12 +169,39 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	final String m_spawnInfo = "SpawnInfo";
+	/**
+	 * 
+	 */
+	final public static VString amountAttribs = new VString("Amount,ActualAmount,MinAmount,MaxAmount", ",");
 	private boolean trackAudits;
 	protected VString resAttribs;
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
 	protected boolean walkingProduct = false;
 	protected Set<String> first = new HashSet<String>();
+	/**
+	 * if true merge stripping and layout
+	 */
+	private boolean bExplicitWaste = false;
+
+	/**
+	 * Getter for bExplicitWaste attribute.
+	 * @return the bExplicitWaste
+	 */
+	public boolean isExplicitWaste()
+	{
+		return bExplicitWaste;
+	}
+
+	/**
+	 * Setter for bExplicitWaste attribute. if true PartAmount has explicit amounts for good and waste rather than partitions
+	 * @param bExplicitWaste the bExplicitWaste to set
+	 */
+	public void setExplicitWaste(boolean bExplicitWaste)
+	{
+		this.bExplicitWaste = bExplicitWaste;
+	}
+
 	/**
 	 * if true merge stripping and layout
 	 */
@@ -492,6 +517,13 @@ public class JDFToXJDF extends PackageElementWalker
 		}
 	}
 
+	/**
+	 * 
+	 *  
+	 * @param rl
+	 * @param newLeaf
+	 * @param partMap
+	 */
 	void setAmountPool(final JDFElement rl, final KElement newLeaf, final JDFAttributeMap partMap)
 	{
 		if (rl == null)
@@ -501,59 +533,26 @@ public class JDFToXJDF extends PackageElementWalker
 		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
 		if (ap == null)
 		{
-			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
+			JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(amountAttribs);
+			if (amounts.size() > 0)
 			{
-				newLeaf.setAttribute(AttributeName.AMOUNT + "Good", rl.getAttribute(AttributeName.AMOUNT, null, null));
-				newLeaf.setAttribute(AttributeName.ACTUALAMOUNT + "Good", rl.getAttribute(AttributeName.ACTUALAMOUNT, null, null));
-				newLeaf.setAttribute(AttributeName.MAXAMOUNT + "Good", rl.getAttribute(AttributeName.MAXAMOUNT, null, null));
+				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
+				for (String key : amounts.keySet())
+				{
+					ap.setPartAttribute(key, amounts.get(key), null, partMap);
+					rl.removeAttribute(key);
+				}
 			}
 		}
 		else
 		{
 			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
-			if (vPartAmounts != null)
+			if (vPartAmounts != null && vPartAmounts.size() > 0)
 			{
-				for (int i = 0; i < vPartAmounts.size(); i++)
+				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
+				for (KElement pa : vPartAmounts)
 				{
-					JDFPartAmount pa = (JDFPartAmount) vPartAmounts.item(i);
-					final JDFAttributeMap map = pa.getPartMap();
-					if (partMap != null)
-					{
-						map.removeKeys(partMap.keySet());
-					}
-					if (map.isEmpty()) // no further subdevision - simply blast into leaf
-					{
-						newLeaf.setAttribute(AttributeName.AMOUNT + "Good", pa.getAttribute(AttributeName.AMOUNT, null, null));
-						newLeaf.setAttribute(AttributeName.ACTUALAMOUNT + "Good", pa.getAttribute(AttributeName.ACTUALAMOUNT, null, null));
-						newLeaf.setAttribute(AttributeName.MAXAMOUNT + "Good", pa.getAttribute(AttributeName.MAXAMOUNT, null, null));
-					}
-					else if (map.size() == 1 && map.containsKey(AttributeName.CONDITION))
-					{
-						final JDFAttributeMap attMap = pa.getAttributeMap();
-						final Iterator<String> it = attMap.getKeyIterator();
-						final String condition = map.get(AttributeName.CONDITION);
-						while (it.hasNext())
-						{
-							final String key = it.next();
-							if (key.indexOf(AttributeName.AMOUNT) >= 0)
-							{
-								// TODO rethink AmountGood, AmountWaste
-								newLeaf.setAttribute(key + condition, attMap.get(key));
-							}
-							else
-							{
-								newLeaf.setAttribute(key, attMap.get(key));
-							}
-						}
-					}
-					else
-					// retain ap
-					{
-						// TODO special handling for virtual parts
-						final KElement amountPool = newLeaf.getCreateElement("AmountPool");
-						pa = (JDFPartAmount) amountPool.copyElement(pa, null);
-						pa.setPartMap(map);
-					}
+					ap.copyElement(pa, null);
 				}
 			}
 		}
