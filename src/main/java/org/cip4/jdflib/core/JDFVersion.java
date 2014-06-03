@@ -1,4 +1,10 @@
+/**
+ *
+ * Copyright (c) 2001-2014 flyeralarm GmbH, All Rights Reserved.
+ */
 package org.cip4.jdflib.core;
+
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -11,22 +17,37 @@ public class JDFVersion {
     /**
      * The maven ArtifactID of the library.
      */
-    public final static String LIB_ARTIFACT_ID = getBuildProp("artifactId");
+    public final static String LIB_ARTIFACT_ID = getBuildProp("lib.artifactId");
 
     /**
      * The name of the JDF Library.
      */
-    public final static String LIB_NAME = getBuildProp("name");
+    public final static String LIB_NAME = getBuildProp("lib.name");
 
     /**
      * The version of the JDF Library.
      */
-    public final static String LIB_VERSION = getBuildProp("version");
+    public final static String LIB_VERSION = getBuildProp("lib.version");
 
     /**
      * The build date of the JDF Library.
      */
-    public final static String LIB_RELEASE_DATE = getBuildProp("release.date");
+    public final static String LIB_RELEASE_DATE = getBuildProp("lib.release.date");
+
+    /**
+     * The major version number of the JDF Library.
+     */
+    public final static String LIB_MAJOR_VERSION = getMajorVersion(LIB_VERSION);
+
+    /**
+     * The minor version number of the JDF Library.
+     */
+    public final static String LIB_MINOR_VERSION = getMinorVersion(LIB_VERSION);;
+
+    /**
+     * The current JDF Version.
+     */
+    public final static String JDF_VERSION = getBuildProp("jdf.version");
 
     private static final String RES_BUILD_PROPS = "/org/cip4/jdflib/build.properties";
 
@@ -55,7 +76,34 @@ public class JDFVersion {
             }
         }
 
-        String value = props.getProperty(key);
-        return value;
+        return props.getProperty(key);
+    }
+
+    /**
+     * Generates and returns the major version number from the maven version number.
+     * @return The major version number as String.
+     */
+    private static String getMajorVersion(String mvnVersion) {
+
+        // extract pure version
+        String version = StringUtils.substringBefore(mvnVersion, "-");
+
+        // extract major version
+        int i = version.lastIndexOf(".");
+        return version.substring(0, i);
+    }
+
+    /**
+     * Generates and returns the minor version number from the maven version number.
+     * @return The major version number as String.
+     */
+    private static String getMinorVersion(String mvnVersion) {
+
+        // extract pure version
+        String version = StringUtils.substringBefore(mvnVersion, "-");
+
+        // extract major version
+        int i = version.lastIndexOf(".");
+        return version.substring(i + 1);
     }
 }
