@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -184,37 +184,43 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 
 		boolean bAuto = theQueue.isAutomated();
 		if (bAuto)
+		{
 			theQueue.setAutomated(false);
-
+		}
 		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
 		if (qe == null) // can't accept
 		{
 			resp.setReturnCode(112); //  
 			theQueue.copyToResponse(resp, filter, null);
-			return resp;
 		}
-
-		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY, AttributeName.ACTIVATION };
-		for (String copyAtt : copyAtts)
+		else
 		{
-			if (hasAttribute(copyAtt))
+			final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY,
+					AttributeName.ACTIVATION };
+			for (String copyAtt : copyAtts)
 			{
-				qe.copyAttribute(copyAtt, this, null, null, null);
+				if (hasAttribute(copyAtt))
+				{
+					qe.copyAttribute(copyAtt, this, null, null, null);
+				}
 			}
-		}
 
+			if (bAuto)
+			{
+				theQueue.sortChild(qe);
+			}
+
+			JDFDoc ownerDocumentResp = resp.getOwnerDocument_JDFElement();
+			boolean b = ownerDocumentResp.getInitOnCreate();
+			ownerDocumentResp.setInitOnCreate(false);
+			theQueue.copyToResponse(resp, filter, null);
+			resp.copyElement(qe, null);
+			ownerDocumentResp.setInitOnCreate(b);
+		}
 		if (bAuto)
 		{
-			theQueue.sortChild(qe);
 			theQueue.setAutomated(true);
 		}
-
-		JDFDoc ownerDocumentResp = resp.getOwnerDocument_JDFElement();
-		boolean b = ownerDocumentResp.getInitOnCreate();
-		ownerDocumentResp.setInitOnCreate(false);
-		theQueue.copyToResponse(resp, filter, null);
-		resp.copyElement(qe, null);
-		ownerDocumentResp.setInitOnCreate(b);
 		return resp;
 	}
 
