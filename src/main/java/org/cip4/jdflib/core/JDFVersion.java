@@ -7,6 +7,7 @@ package org.cip4.jdflib.core;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -70,9 +71,12 @@ public class JDFVersion {
             props = new Properties();
 
             try {
-                props.load(JDFVersion.class.getResourceAsStream(RES_BUILD_PROPS));
+                InputStream is = JDFVersion.class.getResourceAsStream(RES_BUILD_PROPS);
+                props.load(is);
             } catch (IOException e) {
-                throw new AssertionError(e);
+
+                props = null;
+                return null;
             }
         }
 
