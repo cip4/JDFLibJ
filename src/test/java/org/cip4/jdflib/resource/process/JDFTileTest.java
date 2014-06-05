@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,17 +76,23 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFMarkObject;
-import org.junit.Assert;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFTool;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
  */
@@ -94,7 +100,7 @@ public class JDFTileTest extends JDFTestCaseBase
 {
 
 	/**
-	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * Test method 
 	 */
 	@Test
 	public final void testMarkObject()
@@ -105,7 +111,7 @@ public class JDFTileTest extends JDFTestCaseBase
 		root.setType(EnumType.Tiling);
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.TILE, null, null);
-		Assert.assertTrue(kElem instanceof JDFTile);
+		assertTrue(kElem instanceof JDFTile);
 		final JDFTile tile = ((JDFTile) kElem);
 		try
 		{
@@ -114,19 +120,67 @@ public class JDFTileTest extends JDFTestCaseBase
 			final JDFMarkObject m = tile.appendMarkObject();
 			m.setOrd(0);
 			m.setCTM(new JDFMatrix("1.2 0 0 1.4 1 444."));
-			Assert.assertTrue(m.isValid(EnumValidationLevel.Complete));
+			assertTrue(m.isValid(EnumValidationLevel.Complete));
 			final JDFMarkObject m2 = tile.appendMarkObject();
 			m2.setOrd(0);
 			m2.setCTM(new JDFMatrix("1.234 0 0 1.4 1 444."));
-			Assert.assertTrue(m2.isValid(EnumValidationLevel.Complete));
-			Assert.assertEquals(m2, tile.getMarkObject(1));
-			Assert.assertEquals(m2, tile.getCreateMarkObject(1));
-			Assert.assertTrue(tile.isValid(EnumValidationLevel.Complete));
+			assertTrue(m2.isValid(EnumValidationLevel.Complete));
+			assertEquals(m2, tile.getMarkObject(1));
+			assertEquals(m2, tile.getCreateMarkObject(1));
+			assertTrue(tile.isValid(EnumValidationLevel.Complete));
 		}
 		catch (final DataFormatException e)
 		{
-			Assert.fail("bad unit matrix");
+			fail("bad unit matrix");
 		}
+	}
 
+	/**
+	 * 
+	 *  
+	 */
+	public void testPartition()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setVersion(EnumVersion.Version_1_4);
+		root.setType(EnumType.Tiling);
+		JDFTile tile = (JDFTile) root.appendMatchingResource(ElementName.TILE, EnumUsage.Input);
+		tile.appendMedia();
+		tile.setClipBox(new JDFRectangle(11, 1, 1, 1));
+		tile.setCTM(JDFMatrix.unitMatrix);
+		for (int i = 0; i < 16; i++)
+		{
+			JDFTile partTile = (JDFTile) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
+			assertNotNull(partTile);
+			partTile.appendMarkObject().setCTM(JDFMatrix.unitMatrix);
+		}
+		String string = root.getOwnerDocument_JDFElement().write2String(2);
+		JDFParser jdfParser = new JDFParser();
+		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
+		JDFDoc d = jdfParser.parseString(string);
+		assertEquals(d.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
+		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	* 
+	*  
+	*/
+	public void testPartitionTool()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setVersion(EnumVersion.Version_1_4);
+		root.setType(EnumType.Tiling);
+		JDFTool tile = (JDFTool) root.appendMatchingResource(ElementName.TOOL, EnumUsage.Input);
+		for (int i = 0; i < 16; i++)
+		{
+			JDFTool partTile = (JDFTool) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
+			assertNotNull(partTile);
+		}
+		String string = root.getOwnerDocument_JDFElement().write2String(2);
+		JDFParser jdfParser = new JDFParser();
+		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
+		JDFDoc d = jdfParser.parseString(string);
+		assertEquals(d.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 	}
 }
