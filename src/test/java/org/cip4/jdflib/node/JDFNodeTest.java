@@ -140,6 +140,16 @@ import org.junit.Test;
  */
 public class JDFNodeTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 *  
+	 */
+	public void testgetLinkedResourceVector()
+	{
+		JDFNode n = creatXMDoc().getJDFRoot();
+		assertNull(n.getLinkedResourceVector(EnumUsage.Output, ElementName.EXPOSEDMEDIA, null, true));
+		assertEquals(n.getLinkedResourceVector(EnumUsage.Input, ElementName.EXPOSEDMEDIA, null, true).size(), 8);
+	}
 
 	/**
 	 * performance test

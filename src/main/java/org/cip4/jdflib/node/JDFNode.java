@@ -4429,6 +4429,46 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * 
+	 * get the vector of all resouce leaves linked to a resource
+	 * @param usage
+	 * @param resName
+	 * @param procUsage
+	 * @param expandLeaves if true expand to the lowest leaves
+	 * @return
+	 */
+	public VElement getLinkedResourceVector(EnumUsage usage, String resName, EnumProcessUsage procUsage, boolean expandLeaves)
+	{
+		JDFResourceLinkPool p = getResourceLinkPool();
+		VElement vLinks = p == null ? null : p.getInOutLinks(usage, true, resName, procUsage);
+		if (vLinks == null || vLinks.size() == 0)
+			return null;
+		VElement v = new VElement();
+		for (KElement e : vLinks)
+		{
+			JDFResourceLink rl = (JDFResourceLink) e;
+			VElement vRes = rl.getTargetVector(0);
+			if (vRes != null)
+			{
+				if (expandLeaves)
+				{
+					for (KElement r : vRes)
+					{
+						JDFResource res = (JDFResource) r;
+						v.addAll(res.getLeaves(false));
+					}
+				}
+				else
+				{
+					v.addAll(vRes);
+				}
+			}
+		}
+		v.unify();
+		return v.size() == 0 ? null : v;
+	}
+
+	/**
 	 * getRoot - this function returns the root of the JDF document
 	 * 
 	 * @return JDFNode - the root node of the document
