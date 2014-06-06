@@ -16200,7 +16200,7 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-          <xs:element name="MarkObject"/>
+          <xs:element ref="jdf:MarkObject" minOccurs="0"/>
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
           <xs:element ref="jdf:MediaRef" minOccurs="0"/>
           <xs:element name="MediaSource" type="jdf:MediaSource_re" minOccurs="0"/>
@@ -16218,6 +16218,7 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+          <xs:element ref="jdf:MarkObject" minOccurs="0"/>
           <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
           <xs:element ref="jdf:MediaRef" minOccurs="0"/>
           <xs:element name="MediaSource" type="jdf:MediaSource_re" minOccurs="0"/>
@@ -16234,6 +16235,7 @@
           <xs:sequence minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="jdf:GenericElements" minOccurs="0"/>
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
+            <xs:element ref="jdf:MarkObject" minOccurs="0"/>
             <xs:element name="Media" type="jdf:Media_re" minOccurs="0"/>
             <xs:element ref="jdf:MediaRef" minOccurs="0"/>
             <xs:element name="MediaSource" type="jdf:MediaSource_re" minOccurs="0"/>
