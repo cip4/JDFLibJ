@@ -6762,7 +6762,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * 
 	 * @deprecated
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public boolean removeCompleted()
 	{

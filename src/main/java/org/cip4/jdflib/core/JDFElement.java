@@ -105,6 +105,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -2117,12 +2118,11 @@ public class JDFElement extends KElement
 				final EnumValidationLevel valDown = (level == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
 
 				final VElement v = getChildElementVector(null, null, null, true, 0, false);
-				final int size = v.size();
-				for (int i = 0; i < size; i++)
+				for (KElement e : v)
 				{
-					if (v.elementAt(i) instanceof JDFRefElement)
+					if (e instanceof JDFRefElement)
 					{
-						final JDFResource res = ((JDFRefElement) v.elementAt(i)).getTarget();
+						final JDFResource res = ((JDFRefElement) e).getTarget();
 						if (!res.isValid(valDown))
 						{
 							return false;
@@ -2132,7 +2132,7 @@ public class JDFElement extends KElement
 			}
 			return true;
 		}
-		catch (final JDFException e)
+		catch (final JDFException x)
 		{
 			// snafu --> it probably isn't valid...
 			return false;
@@ -3752,13 +3752,11 @@ public class JDFElement extends KElement
 		if (bIgnorePrivate && !isInJDFNameSpaceStatic(this))
 			return vBad;
 
-		int i = 0;
 		int num = 0;
 		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 
-		for (i = 0; i < v.size(); i++)
+		for (KElement e : v)
 		{
-			final KElement e = v.elementAt(i);
 			if ((e instanceof JDFElement) && !((JDFElement) e).isValid(level))
 			{
 				vBad.add(e.getLocalName());
@@ -5590,9 +5588,24 @@ public class JDFElement extends KElement
 	 */
 	public JDFGeneralID appendGeneralID(final String idUsage, final String idValue)
 	{
+		return appendGeneralID(idUsage, idValue, null);
+	}
+
+	/**
+	 * append a GeneralID with idValue, duplicate entries are retained
+	 * generalID elements are always placed first and new GeneralID elements are appended at the end of the list
+	 * 
+	 * @param idUsage the IDUsage attribute of the generalID
+	 * @param idValue the IDValue attribute of the generalID
+	 * @param namedfeature the datatype - may be null
+	 * @return the newly created GeneralID
+	 */
+	public JDFGeneralID appendGeneralID(final String idUsage, final String idValue, EnumDataType namedfeature)
+	{
 		final JDFGeneralID gid = appendGeneralID();
 		gid.setIDValue(idValue);
 		gid.setIDUsage(idUsage);
+		gid.setDataType(namedfeature);
 		return gid;
 	}
 

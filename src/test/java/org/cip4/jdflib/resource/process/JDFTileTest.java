@@ -142,24 +142,25 @@ public class JDFTileTest extends JDFTestCaseBase
 	public void testPartition()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
-		root.setVersion(EnumVersion.Version_1_4);
+		root.setVersion(EnumVersion.Version_1_5);
 		root.setType(EnumType.Tiling);
 		JDFTile tile = (JDFTile) root.appendMatchingResource(ElementName.TILE, EnumUsage.Input);
 		tile.appendMedia();
+		tile.appendMarkObject().setCTM(JDFMatrix.unitMatrix);
 		tile.setClipBox(new JDFRectangle(11, 1, 1, 1));
 		tile.setCTM(JDFMatrix.unitMatrix);
+		tile.setTrimBox(new JDFRectangle(11, 1, 1, 1));
 		for (int i = 0; i < 16; i++)
 		{
 			JDFTile partTile = (JDFTile) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
 			assertNotNull(partTile);
 			partTile.appendMarkObject().setCTM(JDFMatrix.unitMatrix);
+			partTile.appendMedia();
+			partTile.setClipBox(new JDFRectangle(11, 1, 1, 1));
+			partTile.setCTM(JDFMatrix.unitMatrix);
+			partTile.setTrimBox(new JDFRectangle(11, 1, 1, 1));
 		}
-		String string = root.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser jdfParser = new JDFParser();
-		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
-		JDFDoc d = jdfParser.parseString(string);
-		assertEquals(d.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
-		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
+		checkSchema(root, EnumValidationLevel.Incomplete);
 	}
 
 	/**

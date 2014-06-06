@@ -82,8 +82,10 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -154,6 +156,27 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	}
 
+	/**
+	 * 
+	 * check a node against the schema
+	 * @param root
+	 * @param level 
+	 */
+	protected void checkSchema(JDFElement root, EnumValidationLevel level)
+	{
+		String string = root.getOwnerDocument_JDFElement().write2String(2);
+		JDFParser jdfParser = new JDFParser();
+		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
+		JDFDoc doc = jdfParser.parseString(string);
+		assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
+		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
+	}
+
+	/**
+	 * 
+	 * create a doc with exposedmedia for tests
+	 * @return
+	 */
 	protected static JDFDoc creatXMDoc()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");

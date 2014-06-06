@@ -756,29 +756,39 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 * default: SetPhase(status, null,null,null)
 	 */
-	public JDFPhaseTime setPhase(final EnumNodeStatus status, String statusDetails, final VJDFAttributeMap vmParts, final VElement employees)
+	public JDFPhaseTime setPhase(EnumNodeStatus status, String statusDetails, final VJDFAttributeMap vmParts, final VElement employees)
 	{
-		JDFPhaseTime pt = getLastPhase(vmParts, null);
+		JDFPhaseTime lastPhaseTime = getLastPhase(vmParts, null);
 		statusDetails = StringUtil.getNonEmpty(statusDetails);
+		if (status == null && lastPhaseTime != null)
+			status = lastPhaseTime.getStatus();
+		if (statusDetails == null && lastPhaseTime != null)
+			statusDetails = StringUtil.getNonEmpty(lastPhaseTime.getStatusDetails());
+
 		boolean bChanged = false;
-		final VElement ptEmployees = pt == null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
-		if (pt == null)
+
+		final VElement ptEmployees = lastPhaseTime == null ? new VElement() : lastPhaseTime.getChildElementVector(ElementName.EMPLOYEE, null);
+		if (lastPhaseTime == null)
 		{
 			bChanged = true;
 		}
-		else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
-				|| !ptEmployees.isEqual(employees))
+		else if (!ContainerUtil.equals(lastPhaseTime.getStatus(), status)
+				|| !ContainerUtil.equals(statusDetails, lastPhaseTime.getAttribute(AttributeName.STATUSDETAILS, null, null)) || !ptEmployees.isEqual(employees))
 		{
-			pt.setEnd(new JDFDate());
+			lastPhaseTime.setEnd(new JDFDate());
 			bChanged = true;
 		}
 		if (bChanged)
 		{
-			pt = addPhaseTime(status, null, vmParts);
-			pt.setStatusDetails(statusDetails);
-			pt.copyElements(employees, null);
+			JDFPhaseTime thisPhaseTime = addPhaseTime(status, null, vmParts);
+			thisPhaseTime.setStatusDetails(statusDetails);
+			thisPhaseTime.copyElements(employees, null);
+			return thisPhaseTime;
 		}
-		return pt;
+		else
+		{
+			return lastPhaseTime;
+		}
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,10 +74,14 @@
 package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -93,10 +97,24 @@ public class JDFGeneralIDTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFGeneralID gid1 = n.appendGeneralID("foo", "bar");
 		JDFGeneralID gid2 = n.appendGeneralID("foo", "bar");
-		Assert.assertTrue(gid1.matches(gid2));
-		Assert.assertTrue(gid1.matches("bar"));
+		assertTrue(gid1.matches(gid2));
+		assertTrue(gid1.matches("bar"));
 		gid2.setIDValue("notBar");
-		Assert.assertFalse(gid1.matches(gid2));
-		Assert.assertFalse(gid1.matches("notBar"));
+		assertFalse(gid1.matches(gid2));
+		assertFalse(gid1.matches("notBar"));
 	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testDataType()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setVersion(EnumVersion.Version_1_4);
+		root.setType(EnumType.Tiling);
+		JDFGeneralID gid = root.appendGeneralID("Foo", "Bar", EnumDataType.NamedFeature);
+		checkSchema(gid, EnumValidationLevel.Incomplete);
+	}
+
 }
