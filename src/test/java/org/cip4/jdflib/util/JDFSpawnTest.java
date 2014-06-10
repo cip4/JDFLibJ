@@ -1088,7 +1088,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode nS1 = spawn.spawn();
 			assertNotNull(nS1);
 			final JDFComponent c = (JDFComponent) nS1.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-			assertNotNull(c);
 			final JDFResourceLink rl = nS1.getLink(0, ElementName.COMPONENT, null, null);
 			assertNotNull(rl);
 			if (loop == 0)
@@ -1098,6 +1097,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			else
 			{
 				assertEquals("EN", rl.getTarget().getPartMap().get("PartVersion"));
+				assertEquals(rl.getTarget(), c);
 			}
 		}
 	}
@@ -1199,7 +1199,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final JDFNode nS1 = spawn.spawn();
 				assertNotNull(nS1);
 				final JDFComponent c = (JDFComponent) nS1.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-				assertNotNull(c);
 				final JDFResourceLink rl = nS1.getLink(0, ElementName.COMPONENT, null, null);
 				assertNotNull(rl);
 				if (loop == 0)
@@ -1210,6 +1209,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				{
 					assertEquals((loop1 == 0) ? "EN EN" : "EN EN DE DE", rl.getTarget().getPartMap().get("PartVersion"));
 					assertEquals(-1, rl.getLinkRoot().toXML().indexOf("FR FR"));
+					assertEquals(rl.getTarget(), c);
 				}
 			}
 		}
@@ -1560,7 +1560,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	{
 		for (int i = 1; i < 2; i++)
 		{
-			for (int ii = 1; ii < 2; ii++) // spawnidentical = true / false
+			for (int ii = 0; ii < 2; ii++) // spawnidentical = true / false
 			{
 				JDFNode n = new JDFDoc("JDF").getJDFRoot();
 				final JDFNode root = n;
@@ -1606,7 +1606,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				for (int j = 0; j < 2; j++)
 				{
 					final String resName = (j == 0 ? "Exposed" : "") + ElementName.MEDIA;
-					final JDFResource rS = spawnedNode.getResource(resName, null, 0);
+					final JDFResource rS = spawnedNode.getResourceRoot(resName, null, 0);
 					final JDFResource rs2 = rS.getPartition(map, null);
 					if (ii == 0)
 					{
@@ -1748,7 +1748,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					assertNotSame(spawnID, "");
 					spawnedNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, vPartMap);
 
-					final JDFComponent spawnedROComponent = (JDFComponent) spawnedNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+					JDFComponent spawnedROComponent = (JDFComponent) spawnedNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+					spawnedROComponent = (JDFComponent) spawnedROComponent.getResourceRoot();
 					assertNotNull(spawnedROComponent);
 					assertNotNull(spawnedROComponent.getPartition(map, EnumPartUsage.Explicit));
 					final JDFAttributeMap map2 = new JDFAttributeMap();
@@ -3316,7 +3317,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		final JDFNode spawned = sp.spawn();
 
-		final JDFRunList rlS = (JDFRunList) spawned.getResource(ElementName.RUNLIST, null, 0);
+		final JDFRunList rlS = (JDFRunList) spawned.getResourceRoot(ElementName.RUNLIST, null, 0);
 		// why??? assertTrue(rlS.toString().indexOf("Cyan")>0);
 		map.put(AttributeName.SEPARATION, "Magenta");
 		rlS.getCreatePartition(map, pik);

@@ -2195,8 +2195,29 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ResourceDefinition);
 		final JDFResource ns = n.addResource("foo:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, "www.foo.com", null);
-		assertEquals("qualified names", ns, n.getResource("foo:bar", EnumUsage.Output, null, 0, "www.foo.com"));
-		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, 0, "www.foo.com"));
+		assertEquals("qualified names", ns, n.getResource("foo:bar", EnumUsage.Output, null, "www.foo.com", 0));
+		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, "www.foo.com", 0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetResourceRoot()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		JDFResource r = n.getResourceRoot(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
+		assertNull(r);
+		r = n.getResourceRoot(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, -1);
+		assertNull(r);
+		final JDFResource rAdd = n.addResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+		assertNotNull(rAdd);
+		r = n.getResourceRoot(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(r, rAdd);
+		r = n.getResourceRoot(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, -1);
+		assertEquals(r, rAdd);
 	}
 
 	/**

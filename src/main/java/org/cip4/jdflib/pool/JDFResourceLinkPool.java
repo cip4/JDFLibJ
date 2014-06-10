@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -306,7 +307,7 @@ public class JDFResourceLinkPool extends JDFPool
 	@Deprecated
 	public VElement getInOutLinks(final boolean bInOut, final boolean bLink, final String resName, final String resProcUsage)
 	{
-		return getInOutLinksExtended(bInOut ? EnumUsage.Input : EnumUsage.Output, bLink, resName, resProcUsage);
+		return getInOutLinksExtended(bInOut ? EnumUsage.Input : EnumUsage.Output, bLink, resName, resProcUsage, null, true);
 	}
 
 	/**
@@ -323,7 +324,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public VElement getInOutLinks(final EnumUsage usage, final boolean bLink, final String resName, final EnumProcessUsage procUsage)
 	{
-		return getInOutLinksExtended(usage, bLink, resName, procUsage == null ? null : procUsage.getName());
+		return getInOutLinksExtended(usage, bLink, resName, procUsage == null ? null : procUsage.getName(), null, true);
 	}
 
 	/**
@@ -333,44 +334,68 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @param usage what kind of links you want to have (input, output). If null all are selected.
 	 * @param bLink if true, return the resource links. if false return the resources
-	 * @param resName name of the resource to get ( * for all)
+	 * @param resName name of the resource to get ( * or null for all)
 	 * @param procUsage process usage of the resource to get
+	 * @param namespaceURI 
+	 * @param bAll 
 	 * 
 	 * @return VElement - Vector with the found resource links
 	 */
-	public VElement getInOutLinksExtended(final EnumUsage usage, final boolean bLink, final String resName, final String procUsage)
+	public VElement getInOutLinksExtended(final EnumUsage usage, final boolean bLink, final String resName, String procUsage, String namespaceURI, boolean bAll)
 	{
 		final JDFAttributeMap mA = (usage != null) ? new JDFAttributeMap(AttributeName.USAGE, usage.getName()) : null;
+		if (isWildCard(procUsage))
+			procUsage = null;
 
-		VElement v = getPoolChildren(null, mA, null);
-		if (v != null)
+		int loop1 = procUsage == null ? (bAll ? 1 : 0) : 1;
+		VElement v0 = getPoolChildren(null, mA, null);
+		for (int procUsageLoop = loop1; procUsageLoop < 2; procUsageLoop++)
 		{
-			for (int i = v.size() - 1; i >= 0; i--)
+			VElement v = new VElement();
+			if (v0 == null || v0.size() == 0)
+				return v0;
+
+			v.addAll(v0);
+
+			if (v != null)
 			{
-				final JDFResourceLink li = (JDFResourceLink) v.elementAt(i);
-				if (!isWildCard(resName))
+				for (int i = v.size() - 1; i >= 0; i--)
 				{
-					if (!li.getLinkedResourceName().equals(resName))
+					final JDFResourceLink li = (JDFResourceLink) v.elementAt(i);
+					if (!isWildCard(resName))
+					{
+						String linkedResourceName = li.getLinkedResourceName();
+						boolean fitsNamespace = li.getNamespaceURI().equals(namespaceURI);
+						fitsNamespace = fitsNamespace || (isWildCard(namespaceURI) && isInJDFNameSpaceStatic(li));
+
+						if (!linkedResourceName.equals(resName) && (!fitsNamespace || fitsNamespace && !xmlnsLocalName(linkedResourceName).equals(resName)))
+						{
+							v.removeElementAt(i);
+							continue;
+						}
+					}
+
+					String linkProcessUsage = StringUtil.getNonEmpty(li.getProcessUsage());
+					if ((procUsage != null && !procUsage.equals(linkProcessUsage)) || (procUsage == null && linkProcessUsage != null && procUsageLoop == 0))
 					{
 						v.removeElementAt(i);
 						continue;
 					}
 				}
-
-				if (!isWildCard(procUsage) && !procUsage.equals(li.getProcessUsage()))
-				{
-					v.removeElementAt(i);
-					continue;
-				}
+			}
+			if (v.size() > 0 || procUsageLoop == 1)
+			{
+				v0 = v;
+				break;
 			}
 		}
 
 		if (!bLink)
 		{
-			v = resourceVector(v, resName);
+			v0 = resourceVector(v0, null);
 		}
 
-		return v;
+		return v0;
 	}
 
 	/**
@@ -391,9 +416,9 @@ public class JDFResourceLinkPool extends JDFPool
 		final VElement v = new VElement();
 		final boolean bResTypeWildcard = isWildCard(resType);
 
-		for (int i = 0; i < linkVector.size(); i++)
+		for (KElement e : linkVector)
 		{
-			final JDFResourceLink l = (JDFResourceLink) linkVector.elementAt(i);
+			final JDFResourceLink l = (JDFResourceLink) e;
 
 			// 120803 rp follow parts of resource links
 			if (bResTypeWildcard || (l.getLinkedResourceName().equals(resType)))
