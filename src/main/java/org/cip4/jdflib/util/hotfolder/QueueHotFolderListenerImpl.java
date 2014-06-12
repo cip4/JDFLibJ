@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -124,6 +124,7 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 * @param hotFile
 	 */
+	@Override
 	public boolean hotFile(final File hotFile)
 	{
 		final String stringURL = UrlUtil.fileToUrl(hotFile, false);
@@ -135,8 +136,7 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		newCommand.appendAnchor(null);
 		final EnumType cType = newCommand.getEnumType();
 		final JDFDoc jdfDoc = JDFDoc.parseFile(hotFile.getPath());
-
-		final JDFNode jdfRoot = jdfDoc.getJDFRoot();
+		final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
 
 		log.info("generating queue command: " + queueCommand.getType());
 		if (EnumType.ReturnQueueEntry.equals(cType))
