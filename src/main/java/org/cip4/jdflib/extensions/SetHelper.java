@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -87,11 +88,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	public static final String PARAMETER = "Parameter";
-	/**
-	 * 
-	 */
-	public static final String RESOURCE = "Resource";
+	public static final String SET = "Set";
 
 	/**
 	 * @param set the set to help on
@@ -242,7 +239,7 @@ public class SetHelper extends BaseXJDFHelper
 		partitionHelper.cleanUp();
 		if (partMap != null && partMap.size() > 0)
 		{
-			JDFPart part = (JDFPart) newPart.appendElement("Part");
+			JDFPart part = (JDFPart) newPart.appendElement(ElementName.PART);
 			updatePartitions(partMap);
 			part.setPartMap(partMap);
 		}
@@ -286,6 +283,7 @@ public class SetHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
+	@Override
 	public void cleanUp()
 	{
 		if (!theElement.hasAttribute("Name"))
@@ -372,6 +370,16 @@ public class SetHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	public EnumUsage getUsage()
+	{
+		return EnumUsage.getEnum(theElement.getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/**
 	 * @see java.lang.Object#toString()
 	 * @return
 	*/
@@ -379,6 +387,26 @@ public class SetHelper extends BaseXJDFHelper
 	public String toString()
 	{
 		return "SetHelper: " + theElement;
+	}
+
+	/**
+	 * get a partition by id
+	 * @param id
+	 * @return
+	 */
+	public PartitionHelper getPartition(String id)
+	{
+		if (id == null)
+			return null;
+		String partitionName = getPartitionName();
+		KElement e = theElement.getFirstChildElement(partitionName, null);
+		while (e != null)
+		{
+			if (id.equals(e.getID()))
+				return new PartitionHelper(e);
+			e = e.getNextSiblingElement(partitionName, null);
+		}
+		return null;
 	}
 
 }

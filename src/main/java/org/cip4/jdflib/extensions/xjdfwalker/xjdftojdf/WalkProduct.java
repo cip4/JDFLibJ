@@ -108,7 +108,7 @@ public class WalkProduct extends WalkXElement
 			{
 				theNode = tmp;
 			}
-			else if (theNode != parent.currentJDFNode && !parent.firstproductInList)
+			else if (theNode != xjdfToJDFImpl.currentJDFNode && !xjdfToJDFImpl.firstproductInList)
 			{
 				theNode = theNode.addProduct();
 			}
@@ -119,9 +119,9 @@ public class WalkProduct extends WalkXElement
 		}
 		else
 		{
-			theNode = parent.createProductRoot();
+			theNode = xjdfToJDFImpl.createProductRoot();
 		}
-		parent.firstproductInList = false;
+		xjdfToJDFImpl.firstproductInList = false;
 		copyToNode(e, theNode);
 		fixComponent(theNode, e);
 		return theNode;

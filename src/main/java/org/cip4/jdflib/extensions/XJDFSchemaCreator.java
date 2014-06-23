@@ -1767,7 +1767,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			ignoreNames = new VString("Audit RefElement AttributeMap Element ResourceLink ResourceLinkPool ResourcePool AncestorPool Ancestor Spawned Merged" + " "
 					+ "BusinessInfo Identical Doc DocumentBuilder Exception PartStatus PartAmount AmountPool PlaceHolder Node BindItem" + " "
-					+ "DevCap DevCaps DevCapPool DisplayGroupPool FeaturePool" + " " + "CreateLink CreateResource NewComment UpdateJDFCmdParams MoveResource Sheet Surface", null).getSet();
+					+ "DevCap DevCaps DevCapPool DisplayGroupPool FeaturePool CreateLink CreateResource NewComment UpdateJDFCmdParams MoveResource Sheet Surface", null).getSet();
 
 			ignoreNames.add("TargetRoute");
 			ignoreNames.add("Route");

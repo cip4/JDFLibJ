@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,17 +68,16 @@
  */
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class SetHelperTest extends TestCase
+public class SetHelperTest extends JDFTestCaseBase
 {
 	KElement root = null;
 
@@ -89,7 +88,7 @@ public class SetHelperTest extends TestCase
 	public void testGetName()
 	{
 		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
-		Assert.assertEquals(sh.getName(), "Media");
+		assertEquals(sh.getName(), "Media");
 	}
 
 	/**
@@ -99,11 +98,24 @@ public class SetHelperTest extends TestCase
 	public void testGetPartition()
 	{
 		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
-		Assert.assertEquals(sh.getName(), "Media");
-		Assert.assertNull(sh.getPartition(1));
-		Assert.assertNotNull(sh.getCreatePartition(1, true));
-		Assert.assertNotNull(sh.getPartition(-1));
-		Assert.assertNull(sh.getPartition(-3));
+		assertEquals(sh.getName(), "Media");
+		assertNull(sh.getPartition(1));
+		assertNotNull(sh.getCreatePartition(1, true));
+		assertNotNull(sh.getPartition(-1));
+		assertNull(sh.getPartition(-3));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetPartitionByID()
+	{
+		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		assertNull(sh.getPartition("fooo"));
+		assertNotNull(sh.getCreatePartition(1, true));
+		String id = sh.getPartition(0).getID();
+		assertEquals(sh.getPartition(0), sh.getPartition(id));
 	}
 
 	/**
@@ -113,11 +125,11 @@ public class SetHelperTest extends TestCase
 	public void testGetCreatePartition()
 	{
 		SetHelper sh = new XJDFHelper(root).getCreateParameterSet("FoldingParams", EnumUsage.Input);
-		Assert.assertEquals(sh.getName(), "FoldingParams");
-		Assert.assertNotNull(sh.getCreatePartition(0, false));
-		Assert.assertNotNull(sh.getPartition(-1));
-		Assert.assertNull(sh.getCreatePartition(0, false).getResource());
-		Assert.assertNotNull(sh.getCreatePartition(0, true).getResource());
+		assertEquals(sh.getName(), "FoldingParams");
+		assertNotNull(sh.getCreatePartition(0, false));
+		assertNotNull(sh.getPartition(-1));
+		assertNull(sh.getCreatePartition(0, false).getResource());
+		assertNotNull(sh.getCreatePartition(0, true).getResource());
 	}
 
 	/**
@@ -129,7 +141,7 @@ public class SetHelperTest extends TestCase
 		KElement element = root.getElement("ResourceSet");
 		SetHelper sh = new SetHelper(element);
 		sh.cleanUp();
-		Assert.assertEquals(element.getAttribute("Name"), "Media");
+		assertEquals(element.getAttribute("Name"), "Media");
 	}
 
 	/**
@@ -142,5 +154,6 @@ public class SetHelperTest extends TestCase
 		root = d.getRoot();
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		new XJDFHelper(root).cleanUp();
 	}
 }

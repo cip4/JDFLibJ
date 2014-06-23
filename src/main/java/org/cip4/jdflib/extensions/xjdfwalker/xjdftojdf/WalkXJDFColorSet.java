@@ -70,9 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
@@ -106,14 +104,19 @@ public class WalkXJDFColorSet extends WalkSet
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final JDFNode theNode = (JDFNode) trackElem;
 		final KElement k2 = super.walk(e, trackElem);
-		final JDFResource r = (JDFResource) k2;
-		final JDFResourceLink rl = theNode.getLink(r, null);
-		if (rl != null)
-			rl.renameElement("ColorPoolLink", null);
-		r.renameElement(ElementName.COLORPOOL, null);
-		r.removeAttribute(AttributeName.PARTIDKEYS);
+		final JDFResource colorResource = (JDFResource) k2;
+
+		colorResource.removeAttribute(AttributeName.PARTIDKEYS);
 		return k2;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkSet#getJDFResName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getJDFResName(KElement e)
+	{
+		return ElementName.COLORPOOL;
 	}
 }

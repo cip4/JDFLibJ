@@ -91,18 +91,18 @@ public class WalkProductList extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		e.deleteNode();
-		final boolean bFirst = parent.foundProductList;
-		parent.foundProductList = true;
+		final boolean bFirst = xjdfToJDFImpl.foundProductList;
+		xjdfToJDFImpl.foundProductList = true;
 		// only convert products in the first pass
 		// TODO rethink product conversion switch
-		if (parent.createProduct && !parent.foundProduct && e.numChildElements("Product", null) > 1)
+		if (xjdfToJDFImpl.createProduct && !xjdfToJDFImpl.foundProduct && e.numChildElements("Product", null) > 1)
 		{
-			parent.createProductRoot();
+			xjdfToJDFImpl.createProductRoot();
 		}
-		KElement theReturn = parent.currentJDFNode;
-		if (!"Product".equals(parent.currentJDFNode.getType()))
-			theReturn = parent.jdfDoc.getJDFRoot();
-		return parent.createProduct && !bFirst ? theReturn : null;
+		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
+		if (!"Product".equals(xjdfToJDFImpl.currentJDFNode.getType()))
+			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
+		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
 	}
 
 	/**

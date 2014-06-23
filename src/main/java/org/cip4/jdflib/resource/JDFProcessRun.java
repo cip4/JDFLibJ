@@ -84,7 +84,6 @@ package org.cip4.jdflib.resource;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoProcessRun;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -159,7 +158,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * @param seconds the value to set
 	 * @throws JDFException
 	 */
-	public void setDurationSeconds(final int seconds) throws JDFException
+	public void setDurationSeconds(final long seconds) throws JDFException
 	{
 		if (seconds < 0)
 		{
@@ -167,16 +166,16 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		}
 		final JDFDuration d = new JDFDuration();
 		d.setDuration(seconds);
-		setAttribute("Duration", d.getDurationISO(), JDFConstants.EMPTYSTRING);
+		setAttribute("Duration", d.getDurationISO());
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * get the duration in seconds
 	 * 
-	 * @return int: the duration value in seconds, 0 if duration does not exist
+	 * @return  the duration value in seconds, 0 if duration does not exist
 	 */
-	public int getDurationSeconds()
+	public long getDurationSeconds()
 	{
 		final JDFDuration d = getDuration();
 		if (d == null)
@@ -331,10 +330,10 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param seconds duration to add in seconds
 	 */
-	public void addDuration(final int seconds)
+	public void addDuration(final long seconds)
 	{
 		final JDFDuration dur = getDuration();
-		final int l = dur == null ? 0 : dur.getDuration();
+		final long l = dur == null ? 0 : dur.getDuration();
 		setDurationSeconds(l + seconds);
 	}
 

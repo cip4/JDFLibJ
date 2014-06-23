@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,17 +68,16 @@
  */
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Dec 23, 2012
  */
-public class BaseXJDFHelperTest extends TestCase
+public class BaseXJDFHelperTest extends JDFTestCaseBase
 {
 	private XJDFHelper theHelper;
 
@@ -102,6 +101,27 @@ public class BaseXJDFHelperTest extends TestCase
 	public void testSetXPath()
 	{
 		theHelper.setTypes("Product");
-		Assert.assertEquals("Product", theHelper.getTypes().get(0));
+		assertEquals("Product", theHelper.getTypes().get(0));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testEquals()
+	{
+		assertEquals(theHelper, theHelper);
+		assertEquals(theHelper, new XJDFHelper(theHelper.getRoot()));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testHash()
+	{
+		assertEquals(theHelper.hashCode(), new XJDFHelper(theHelper.getRoot()).hashCode());
 	}
 }

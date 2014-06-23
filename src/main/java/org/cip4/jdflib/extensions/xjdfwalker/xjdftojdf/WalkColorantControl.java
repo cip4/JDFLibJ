@@ -103,9 +103,9 @@ public class WalkColorantControl extends WalkResource
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		final KElement rPart = super.walk(e, trackElem);
-		parent.createSeparationList(rPart, ElementName.COLORANTPARAMS);
-		parent.createSeparationList(rPart, ElementName.COLORANTORDER);
-		parent.createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
+		xjdfToJDFImpl.createSeparationList(rPart, ElementName.COLORANTPARAMS);
+		xjdfToJDFImpl.createSeparationList(rPart, ElementName.COLORANTORDER);
+		xjdfToJDFImpl.createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
 		return rPart;
 	}
 }

@@ -107,13 +107,13 @@ public class WalkPhaseTimeAudit extends WalkAudit
 			for (int i = 0; i < vL.size(); i++)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) vL.get(i);
-				final VElement vR = this.jdfToXJDF.setResource(null, rl.getLinkRoot(), this.jdfToXJDF.newRoot);
+				final VElement vR = jdfToXJDF.setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
 				final KElement pA = xjdf.appendElement("PhaseAmount");
 				for (int j = 0; j < vR.size(); j++)
 				{
 					pA.appendAttribute("rRef", vR.get(j).getAttribute(AttributeName.ID), null, " ", true);
 
-					this.jdfToXJDF.setAmountPool(rl, pA, null);
+					jdfToXJDF.setAmountPool(rl, pA, null);
 					rl.deleteNode();
 					for (String extension : new String[] { "", "Good", "Waste" })
 					{

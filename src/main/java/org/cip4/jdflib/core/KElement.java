@@ -2099,18 +2099,18 @@ public class KElement extends ElementNSImpl implements Element
 	 * performance enhanced function to access multiple elements e.g. by ID get a HashMap of key= attribute value, object=element
 	 * @param elementName the names of the elements, wildcard if null
 	 * @param elementNS the namespace URI of the elements, any if null
-	 * @param JDFCoreConstants the attribute name - MUST not be null
+	 * @param attName the attribute name - MUST not be null
 	 * @return a hashmap of the matching elements
 	 */
-	public HashMap<String, KElement> getElementHashMap(final String elementName, final String elementNS, final String JDFCoreConstants)
+	public HashMap<String, KElement> getElementHashMap(final String elementName, final String elementNS, final String attName)
 	{
 		final HashMap<String, KElement> m = new HashMap<String, KElement>();
-		final VElement v = getChildElementVector_KElement(elementName, elementNS, new JDFAttributeMap(JDFCoreConstants, (String) null), true, 0);
+		final VElement v = getChildElementVector_KElement(elementName, elementNS, new JDFAttributeMap(attName, (String) null), true, 0);
 		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
 			final KElement e = v.elementAt(i);
-			m.put(e.getAttribute(JDFCoreConstants), e);
+			m.put(e.getAttribute(attName), e);
 		}
 		return m;
 	}

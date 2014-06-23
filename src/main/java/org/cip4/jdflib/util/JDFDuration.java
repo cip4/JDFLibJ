@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,21 +68,12 @@
  *  
  * 
  */
-/**
- * ==========================================================================
- * class JDFDate extends Date
- * 
- * JDFDate additionally stores the timezone offset of the original date, 
- * so that after mDate = new JDFDate("1999-09-26T11:43:10+03:00") the following
- * equation holds: mDate.dateTimeISO() == "1999-09-26T11:43:10+03:00"
- * independent of the default timezone
- * ==========================================================================
- * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2003. ALL RIGHTS RESERVED 
- **/
 
 package org.cip4.jdflib.util;
 
 import java.util.zip.DataFormatException;
+
+import org.cip4.jdflib.core.JDFConstants;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -91,7 +82,7 @@ import java.util.zip.DataFormatException;
  */
 public class JDFDuration implements Comparable<JDFDuration>
 {
-	private double m_lDuration = 0; // in seconds
+	private double m_lDuration; // in seconds
 
 	// private static final String REGEX_DURATION_RESTRICTED is a
 	// RegularExpression
@@ -157,7 +148,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 			{
 				//assume days
 				double d = StringUtil.parseDouble(duration, 0);
-				return new JDFDuration(d * 24 * 60 * 60);
+				return d == Double.MAX_VALUE ? new JDFDuration(Long.MAX_VALUE) : new JDFDuration(d * 24 * 60 * 60);
 			}
 			else
 			{
@@ -207,6 +198,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	{
 		if (start == null || end == null)
 		{
+			m_lDuration = 0;
 			return;
 		}
 		m_lDuration = (end.getTimeInMillis() - start.getTimeInMillis()) / 1000.;
@@ -225,9 +217,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with 's'
 	 * 
-	 * @param s duration in seconds s may be fractional
+	 * @param s duration in seconds s 
 	 */
-	public JDFDuration(final int s)
+	public JDFDuration(final long s)
 	{
 		m_lDuration = s;
 	}
@@ -242,6 +234,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	public JDFDuration(final String strDuration) throws DataFormatException
 	{
+		m_lDuration = 0;
 		init(strDuration);
 	}
 
@@ -307,6 +300,10 @@ public class JDFDuration implements Comparable<JDFDuration>
 		if (m_lDuration == 0)
 		{
 			return "PT00M";
+		}
+		else if (m_lDuration >= Long.MAX_VALUE)
+		{
+			return JDFConstants.POSINF;
 		}
 
 		int temp = Math.abs((int) m_lDuration);
@@ -525,7 +522,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	public void setDuration(final long seconds)
 	{
-		m_lDuration = seconds;
+		m_lDuration = seconds == Integer.MAX_VALUE ? Long.MAX_VALUE : seconds;
 	}
 
 	/**
@@ -545,9 +542,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * @return duration in seconds; '0' default
 	 *
 	 */
-	public int getDuration()
+	public long getDuration()
 	{
-		return (int) m_lDuration;
+		return (long) m_lDuration;
 	}
 
 	/**

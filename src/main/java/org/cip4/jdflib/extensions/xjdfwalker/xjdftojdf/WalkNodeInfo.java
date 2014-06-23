@@ -106,14 +106,14 @@ public class WalkNodeInfo extends WalkResource
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final JDFNode theNode = parent.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : parent.currentJDFNode;
+		final JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFNodeInfo ni = (JDFNodeInfo) trackElem;
 		final JDFAttributeMap partmap = ni.getPartMap();
 
 		final JDFAttributeMap map = e.getAttributeMap();
 		final JDFAttributeMap map2 = map.clone();
 		final JDFResourceLink rl = theNode.getLink(ni, null);
-		parent.moveAmountsToLink(partmap, map, rl);
+		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
 		map2.removeKeys(map.getKeys());
 		e.removeAttributes(map2.getKeys());
 

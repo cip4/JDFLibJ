@@ -87,7 +87,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class WalkXElement extends BaseWalker
 {
 
-	protected XJDFToJDFImpl parent;
+	protected XJDFToJDFImpl xjdfToJDFImpl;
 
 	/**
 	 *  
@@ -96,7 +96,7 @@ public class WalkXElement extends BaseWalker
 	public WalkXElement()
 	{
 		super();
-		parent = null;
+		xjdfToJDFImpl = null;
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class WalkXElement extends BaseWalker
 	 */
 	public void setParent(XJDFToJDFImpl xjdftojdf)
 	{
-		parent = xjdftojdf;
+		xjdfToJDFImpl = xjdftojdf;
 	}
 
 	/**
@@ -116,9 +116,8 @@ public class WalkXElement extends BaseWalker
 	public KElement walk(final KElement e, KElement trackElem)
 	{
 		final VElement v = trackElem.getChildElementVector(null, null);
-		for (int i = 0; i < v.size(); i++)
+		for (KElement kk : v)
 		{
-			final KElement kk = v.get(i);
 			if (e.isEqual(kk))
 			{
 				return null;
@@ -127,21 +126,21 @@ public class WalkXElement extends BaseWalker
 		cleanRefs(e, trackElem);
 
 		// dirty, dirty but needed in case of inherited inline resources
-		if (parent.isXResourceElement(e))
+		if (xjdfToJDFImpl.isXResourceElement(e))
 		{
 			trackElem.setAttributes(e);
 		}
 		else
 		{
 			final KElement e2 = trackElem.copyElement(e, null);
-			parent.convertUnits(e2);
-			parent.convertTilde(e2);
+			xjdfToJDFImpl.convertUnits(e2);
+			xjdfToJDFImpl.convertTilde(e2);
 			fixNamespace(e2);
 			e2.removeChildren(null, null, null); // will be copied later
 			trackElem = e2;
 		}
-		parent.convertUnits(trackElem);
-		parent.convertTilde(trackElem);
+		xjdfToJDFImpl.convertUnits(trackElem);
+		xjdfToJDFImpl.convertTilde(trackElem);
 		return trackElem;
 	}
 
@@ -182,14 +181,12 @@ public class WalkXElement extends BaseWalker
 		final VString keys = map.getKeys();
 		if (keys != null)
 		{
-			final int keySize = keys.size();
-			for (int i = 0; i < keySize; i++)
+			for (String key : keys)
 			{
-				final String val = keys.get(i);
-				if ((val.endsWith("Ref") || val.endsWith("Refs")) && !val.equals("rRef"))
+				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef"))
 				{
-					final String values = map.get(val);
-					cleanRef(e, trackElem, val, values);
+					final String values = map.get(key);
+					cleanRef(e, trackElem, key, values);
 				}
 			}
 		}
@@ -200,7 +197,7 @@ public class WalkXElement extends BaseWalker
 		final VString vValues = StringUtil.tokenize(values, null, false);
 		for (final String value : vValues)
 		{
-			final IDPart p = parent.idMap.get(value);
+			final IDPart p = xjdfToJDFImpl.idMap.get(value);
 			if (p != null)
 			{
 				final String refName = getRefName(val);

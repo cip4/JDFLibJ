@@ -94,7 +94,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.node.JDFNode;
@@ -317,7 +317,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	public boolean canConvert(final KElement xjdf)
 	{
-		return xjdf == null ? false : XJDF20.rootName.equals(xjdf.getLocalName());
+		return xjdf == null ? false : XJDFHelper.XJDF.equals(xjdf.getLocalName());
 	}
 
 	/**

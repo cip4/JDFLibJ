@@ -103,6 +103,6 @@ public class WalkResource extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		// test on grandparent
-		return super.matches(toCheck) && parent.isXResourceElement(toCheck);
+		return super.matches(toCheck) && xjdfToJDFImpl.isXResourceElement(toCheck);
 	}
 }

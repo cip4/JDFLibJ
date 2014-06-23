@@ -157,6 +157,17 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	}
 
 	/**
+	 * @return the parent set
+	 */
+	public SetHelper getSet()
+	{
+		KElement parent = theElement.getParentNode_KElement();
+		if (parent != null && parent.getNodeName().equals(theElement.getNodeName() + "Set"))
+			return new SetHelper(parent);
+		return null;
+	}
+
+	/**
 	 * 
 	 * @param amount
 	 * @param moreMap

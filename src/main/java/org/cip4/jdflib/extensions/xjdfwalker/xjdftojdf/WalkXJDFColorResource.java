@@ -76,9 +76,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorPool;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * @author Rainer Prosi, Heidelberger Druckmaschinen 
+ * 
+ * walker for the colorSet - this gets translated back to a colorpool
  */
 public class WalkXJDFColorResource extends WalkXJDFResource
 {
@@ -99,22 +103,20 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 	{
 		final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
-		final JDFResource r = (JDFResource) trackElem;
+		final JDFColorPool colorPool = (JDFColorPool) trackElem;
 		final String sep = part.getSeparation();
-		final KElement col = r.getChildWithAttribute("Color", "Name", null, sep, 0, true);
+		final KElement col = colorPool.getChildWithAttribute("Color", "Name", null, sep, 0, true);
 		if (col != null)
 		{
 			return null; // been here already
 		}
-		final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
-		final JDFResourceLink rll = theNode.getLink(r, null);
+		final JDFColor rPart = colorPool.appendColorWithName(sep, null);
+		final JDFResourceLink rll = theNode.getLink(colorPool, null);
 		if (rll != null)
 		{
 			rll.removeChildren(ElementName.PART, null, null);
 		}
-		rPart.renameElement(ElementName.COLOR, null);
-		rPart.renameAttribute(AttributeName.SEPARATION, AttributeName.NAME, null, null);
-		r.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, " ", -1);
+		colorPool.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, " ", -1);
 		return rPart;
 	}
 

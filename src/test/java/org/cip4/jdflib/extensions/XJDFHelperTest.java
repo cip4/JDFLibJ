@@ -98,6 +98,18 @@ public class XJDFHelperTest extends TestCase
 	 * 
 	 */
 	@Test
+	public void testGetSetByID()
+	{
+		SetHelper rlSet = theHelper.appendSet("Parameter", "RunList", null);
+		theHelper.cleanUp();
+		assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
 	public void testGetPartition()
 	{
 		KElement rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true).getResource();
@@ -105,6 +117,19 @@ public class XJDFHelperTest extends TestCase
 		assertNull(theHelper.getResource("RunList", 0, 1));
 		assertNull(theHelper.getResource("RunList", 1, 1));
 		assertNull(theHelper.getResource("RunList", 1, 0));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testGetPartitionByID()
+	{
+		PartitionHelper rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true);
+		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
+		theHelper.cleanUp();
+		assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);
 	}
 
 	/**
@@ -127,7 +152,7 @@ public class XJDFHelperTest extends TestCase
 	@Test
 	public void testFactory()
 	{
-		XMLDoc d = new XMLDoc(XJDF20.rootName, null);
+		XMLDoc d = new XMLDoc(XJDFHelper.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d));
 		d = new XMLDoc("abc", null);
 		assertNull(XJDFHelper.getHelper(d));
@@ -140,7 +165,7 @@ public class XJDFHelperTest extends TestCase
 	@Test
 	public void testFactoryElem()
 	{
-		XMLDoc d = new XMLDoc(XJDF20.rootName, null);
+		XMLDoc d = new XMLDoc(XJDFHelper.XJDF, null);
 		assertNotNull(XJDFHelper.getHelper(d.getRoot()));
 		d = new XMLDoc("abc", null);
 		assertNull(XJDFHelper.getHelper(d.getRoot()));

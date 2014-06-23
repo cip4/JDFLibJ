@@ -104,7 +104,7 @@ public class WalkIgnore extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		boolean matches = super.matches(toCheck);
-		matches = matches && (toCheck instanceof JDFPart) && parent.isXResource(toCheck.getParentNode_KElement());
+		matches = matches && (toCheck instanceof JDFPart) && xjdfToJDFImpl.isXResource(toCheck.getParentNode_KElement());
 		matches = matches || "ChildProduct".equals(toCheck.getLocalName());
 		matches = matches || "ProcessList".equals(toCheck.getLocalName());
 		matches = matches || "Dependent".equals(toCheck.getLocalName());

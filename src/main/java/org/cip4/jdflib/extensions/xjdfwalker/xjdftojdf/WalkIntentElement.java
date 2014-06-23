@@ -115,7 +115,7 @@ public class WalkIntentElement extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		parent.attributesToSpan(e);
+		xjdfToJDFImpl.attributesToSpan(e);
 		return super.walk(e, trackElem);
 	}
 

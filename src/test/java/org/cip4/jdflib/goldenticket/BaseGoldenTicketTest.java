@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,9 +72,11 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
+import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -117,15 +119,48 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 	public static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
 	{
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
-		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		goldenTicket.makeReadyAll();
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", 2);
-		Assert.assertTrue(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		assertTrue(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		goldenTicket.executeAll(null);
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Worker_" + templateName + ".jdf", 2);
-		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * create 9 files - jdf xjdf and round trip based on a gt
+	 * 
+	 * @param goldenTicket the ticket to write
+	 * @param templateName the file name root of the 3 files
+	 */
+	public static void write9GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
+	{
+		writeRoundTrip(goldenTicket, "GoldenTicket_Manager_", templateName);
+
+		goldenTicket.bExpandGrayBox = false;
+		goldenTicket.makeReadyAll();
+		writeRoundTrip(goldenTicket, "GoldenTicket_MakeReady_", templateName);
+
+		goldenTicket.executeAll(null);
+		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName);
+	}
+
+	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName)
+	{
+		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);
+		assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+
+		XJDF20 xjdfConv = new XJDF20();
+		KElement xjdfRoot = xjdfConv.convert(goldenTicket.getNode());
+		xjdfRoot.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf", 2, false);
+
+		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		converted.write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf.jdf", 2, false);
+		assertTrue(converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
 	}
 
 }

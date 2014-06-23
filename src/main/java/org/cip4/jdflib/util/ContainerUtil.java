@@ -220,16 +220,14 @@ public class ContainerUtil
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching <a>
 	 */
-	public static <a> IMatches getMatch(final Collection<? extends IMatches> c, final a obj, final int iSkip)
+	public static <a> IMatches getMatch(final Collection<? extends IMatches> c, final a obj, int iSkip)
 	{
-		int iSkipLocal = iSkip;
-
 		if (c == null)
 		{
 			return null;
 		}
 
-		if (iSkipLocal < 0)
+		if (iSkip < 0)
 		{
 			final Vector<IMatches> v = getMatches(c, obj);
 			if (v == null)
@@ -237,20 +235,18 @@ public class ContainerUtil
 				return null;
 			}
 
-			iSkipLocal = v.size() + iSkipLocal;
-			if (iSkipLocal < 0)
+			iSkip = v.size() + iSkip;
+			if (iSkip < 0)
 			{
 				return null;
 			}
 
-			return v.get(iSkipLocal);
+			return v.get(iSkip);
 		}
 
-		final Iterator<? extends IMatches> it = c.iterator();
-		while (it.hasNext())
+		for (IMatches m : c)
 		{
-			final IMatches m = it.next();
-			if (m.matches(obj) && iSkipLocal-- <= 0)
+			if (m.matches(obj) && iSkip-- <= 0)
 			{
 				return m;
 			}
@@ -272,11 +268,9 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Iterator<? extends IMatches> it = c.iterator();
 		final Vector<IMatches> v = new Vector<IMatches>();
-		while (it.hasNext())
+		for (IMatches m : c)
 		{
-			final IMatches m = it.next();
 			if (m.matches(obj))
 			{
 				v.add(m);

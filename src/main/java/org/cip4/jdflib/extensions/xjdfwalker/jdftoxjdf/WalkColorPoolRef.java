@@ -125,8 +125,8 @@ public class WalkColorPoolRef extends WalkRefElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		final JDFRefElement rl = (JDFRefElement) jdf;
-		final JDFResource r = rl.getTargetRoot();
+		final JDFRefElement refElem = (JDFRefElement) jdf;
+		final JDFResource r = refElem.getTargetRoot();
 		if (r != null)
 		{
 			final VElement v = r.getChildElementVector(ElementName.COLOR, null);
@@ -138,7 +138,7 @@ public class WalkColorPoolRef extends WalkRefElement
 			cNew.copyInto(r, true);
 			r.deleteNode();
 			cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
-			rl.renameElement("ColorRef", null);
+			refElem.renameElement("ColorRef", null);
 		}
 		return super.walk(jdf, xjdf);
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,6 +67,9 @@
  *
  */package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
@@ -74,13 +77,40 @@ import org.cip4.jdflib.extensions.XJDFHelper;
  */
 public class XJDFBaseGoldenTicket
 {
+	protected int baseICSLevel;
+	protected EnumVersion theVersion;
+
 	/**
 	 * 
+	 * @param parent
 	 */
-	public XJDFBaseGoldenTicket()
+	public XJDFBaseGoldenTicket(XJDFBaseGoldenTicket parent)
 	{
-		super();
 		helper = new XJDFHelper(null, null, null);
+		this.baseICSLevel = parent.baseICSLevel;
+		this.theVersion = parent.theVersion;
+	}
+
+	/**
+	 * @return
+	 */
+	public VString getICSVersions()
+	{
+		final String icsTag = "Base_L" + baseICSLevel + "-" + theVersion.getName();
+		return new VString(icsTag, null);
+	}
+
+	/**
+	 * 
+	 * @param baseICSLevel
+	 * @param jdfVersion
+	 */
+	public XJDFBaseGoldenTicket(int baseICSLevel, EnumVersion jdfVersion)
+	{
+		this.baseICSLevel = baseICSLevel;
+		this.theVersion = jdfVersion;
+		helper = new XJDFHelper(null, null, null);
+		helper.getRoot().setAttribute(AttributeName.ICSVERSIONS, getICSVersions(), null);
 	}
 
 	XJDFHelper helper;

@@ -81,7 +81,7 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.SkipInputStream;
@@ -370,7 +370,7 @@ public class JDFParser extends XMLParser
 	@Override
 	protected void setDocumentProperties(final KElement root, final DocumentXMLImpl memberDocument, final String namespaceURI)
 	{
-		boolean isXJDF = XJDF20.rootName.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
+		boolean isXJDF = XJDFHelper.XJDF.equals(root.getLocalName()) || JDFElement.getSchemaURL(2, 0).equals(root.getNamespaceURI());
 		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
 		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI) && !isXJDF)
 		{

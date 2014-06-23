@@ -693,6 +693,8 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(JDFElement.getSchemaURL(), "http://www.CIP4.org/JDFSchema_1_1");
 		assertEquals(JDFElement.getSchemaURL(1, 3), "http://www.CIP4.org/JDFSchema_1_1");
 		assertEquals(JDFElement.getSchemaURL(2, 0), "http://www.CIP4.org/JDFSchema_2_0");
+		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_2_0), "http://www.CIP4.org/JDFSchema_2_0");
+		assertEquals(JDFElement.getSchemaURL(EnumVersion.Version_1_2), "http://www.CIP4.org/JDFSchema_1_1");
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ package org.cip4.jdflib.datatypes;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.Test;
@@ -265,6 +266,30 @@ public class JDFDurationTest extends TestCase
 	public final void testGetDuration()
 	{
 		assertEquals(JDFDuration.createDuration("P1000D").getDuration() * 1000l, 1000l * 1000l * 60l * 60l * 24l);
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public final void testGetDurationINF()
+	{
+		assertEquals(JDFDuration.createDuration("INF").getDuration(), Integer.MAX_VALUE);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public final void testSetDurationInf()
+	{
+		final JDFDuration duration = new JDFDuration();
+		duration.setDuration(Double.MAX_VALUE);
+		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		duration.setDuration(Long.MAX_VALUE);
+		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		duration.setDuration(Integer.MAX_VALUE);
+		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
 	}
 
 	/**

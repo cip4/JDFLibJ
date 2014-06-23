@@ -72,6 +72,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
@@ -177,7 +178,7 @@ public class WalkDevcapElement extends WalkElement
 		else
 		{
 			if ("JDF".equals(vs.get(0)))
-				vs.set(0, JDFToXJDF.rootName);
+				vs.set(0, XJDFHelper.XJDF);
 			if (vs.size() > 1 && ElementName.RESOURCEPOOL.equals(vs.get(1)))
 			{
 				String className = null;
@@ -204,7 +205,7 @@ public class WalkDevcapElement extends WalkElement
 				}
 			}
 			s = StringUtil.setvString(vs, "/", "/", null);
-			if (!s.startsWith("/" + JDFToXJDF.rootName))
+			if (!s.startsWith("/" + XJDFHelper.XJDF))
 				s = "/" + s;
 		}
 		return s;

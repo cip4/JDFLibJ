@@ -66,108 +66,56 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Collection;
+
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.pool.JDFAmountPool;
 
 /**
- *  
- * @author rainerprosi
- * @date Feb 17, 2012
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public abstract class BaseXJDFHelper
+public class WalkAmountPool extends WalkJDFElement
 {
-	protected final Log log;
-
-	protected BaseXJDFHelper()
+	/**
+	 * 
+	 */
+	public WalkAmountPool()
 	{
 		super();
-		log = LogFactory.getLog(getClass());
 	}
 
 	/**
-	 *  
-	 * @param xpath
-	 * @return
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	public String getXPathValue(String xpath)
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		return theElement == null ? null : theElement.getXPathAttribute(xpath, null);
+		return toCheck instanceof JDFAmountPool;
 	}
 
 	/**
-	 * 
-	 *  
-	 * @param xpath
-	 * @param value
+	 * @param xjdf
+	 * @return true if must continue
 	 */
-	public void setXPathValue(String xpath, String value)
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if (theElement != null)
+		JDFAmountPool newAP = (JDFAmountPool) super.walk(jdf, xjdf);
+		if (jdfToXJDF.isExplicitWaste())
 		{
-			theElement.setXPathAttribute(xpath, value);
+			Collection<JDFPartAmount> v = newAP.getAllPartAmount();
+			for (JDFPartAmount pa : v)
+			{
+				// TODO copy stuff 
+			}
 		}
+		return newAP;
 	}
-
-	/**
-	 * 
-	 *generic cleanup routine
-	 */
-	public abstract void cleanUp();
-
-	protected KElement theElement;
-
-	/**
-	 * 
-	 * @return the xjdf root element
-	 */
-	public KElement getRoot()
-	{
-		return theElement;
-	}
-
-	/**
-	 * get the ID from the generic Parameter or Resource element
-	 * @return the ID , may be null in case this is connected to a null element
-	 */
-	public String getID()
-	{
-		return getXPathValue("@ID");
-	}
-
-	/**
-	 * equals and hash are based on the xml element that this helper represents
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 42;
-		result = prime * result + ((theElement == null) ? 0 : theElement.hashCode());
-		return result;
-	}
-
-	/**
-	 * equals and hash are based on the xml element that this helper represents
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseXJDFHelper other = (BaseXJDFHelper) obj;
-		return ContainerUtil.equals(theElement, other.theElement);
-	}
-
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,13 +72,14 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -107,10 +108,11 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		JDFNode n = idpGoldenTicket.getNode();
 		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
-		Assert.assertNotNull(rl);
+		assertNotNull(rl);
 		JDFRunList leaf = (JDFRunList) rl.getLeaves(false).elementAt(0);
 		JDFFileSpec fs = leaf.getLayoutElement().getFileSpec();
-		Assert.assertEquals(fs.getURL(), UrlUtil.normalize(idpGoldenTicket.m_pdfFile));
+		assertEquals(fs.getURL(), UrlUtil.normalize(idpGoldenTicket.m_pdfFile));
+		assertTrue(n.isValid(EnumValidationLevel.Complete));
 	}
 
 	/** 
@@ -127,10 +129,10 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 
 		idpGoldenTicket.assign(null);
 		final JDFNode node = idpGoldenTicket.getNode();
-		Assert.assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("MIS_L1-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("IDP_L1-1.4"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.5"));
+		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.5"));
 
 		idpGoldenTicket.good = 10;
 		idpGoldenTicket.waste = 0;

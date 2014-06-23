@@ -95,7 +95,7 @@ public class WalkSpan extends WalkXElement
 	{
 		final KElement eNew = trackElem.appendElement(e.getAttribute("Name"));
 		eNew.setAttributes(e);
-		parent.convertUnits(eNew);
+		xjdfToJDFImpl.convertUnits(eNew);
 		eNew.removeAttribute(AttributeName.NAME);
 		eNew.setAttribute(AttributeName.DATATYPE, e.getLocalName());
 		return eNew;

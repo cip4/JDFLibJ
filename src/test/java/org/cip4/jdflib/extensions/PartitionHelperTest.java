@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,16 +68,15 @@
  */
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelperTest extends TestCase
+public class PartitionHelperTest extends JDFTestCaseBase
 {
 	/**
 	 * 
@@ -91,7 +90,22 @@ public class PartitionHelperTest extends TestCase
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assert.assertEquals(ph.getResource(), m);
+		assertEquals(ph.getResource(), m);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetSet()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.getCreateXPathElement("Resource/Part");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertEquals(ph.getSet(), new SetHelper(set));
 	}
 
 	/**
@@ -106,8 +120,8 @@ public class PartitionHelperTest extends TestCase
 		root.getCreateXPathElement("ResourceSet/Resource/Part");
 		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
-		Assert.assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
+		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
 		ph.cleanUp();
-		Assert.assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute("ID", null, null));
+		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute("ID", null, null));
 	}
 }

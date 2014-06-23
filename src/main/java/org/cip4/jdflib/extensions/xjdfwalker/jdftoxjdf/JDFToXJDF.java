@@ -96,6 +96,7 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.extensions.PostXJDFWalker;
 import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -151,7 +152,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * the root node name
 	 */
-	public final static String rootName = "XJDF";
+	public final static String rootName = XJDFHelper.XJDF;
 	/**
 	 * the root JMF name
 	 */
@@ -359,7 +360,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void prepareNewDoc(boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : rootName);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : XJDFHelper.XJDF);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL());
@@ -454,7 +455,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public static String getExtension()
 	{
-		return rootName.toLowerCase();
+		return XJDFHelper.XJDF.toLowerCase();
 	}
 
 	/**
@@ -492,7 +493,7 @@ public class JDFToXJDF extends PackageElementWalker
 				}
 				try
 				{
-					nam += "." + rootName;
+					nam += "." + XJDFHelper.XJDF;
 					final ZipEntry ze = new ZipEntry(nam);
 					zos.putNextEntry(ze);
 					final KElement newRootL = makeNewJDF(n, null);

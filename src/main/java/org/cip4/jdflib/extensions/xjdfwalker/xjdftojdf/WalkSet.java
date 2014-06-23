@@ -74,7 +74,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -106,10 +106,9 @@ public class WalkSet extends WalkXElement
 		final JDFNode root = parentNode.getJDFRoot();
 		EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 		final String id = e.getAttribute(AttributeName.ID, null, null);
-		if (inOut == null && parent.isHeuristicLink() && "ParameterSet".equals(e.getLocalName()))
+		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && "ParameterSet".equals(e.getLocalName()))
 		{
-			final SetHelper h = new SetHelper(e);
-			final String name = h.getName();
+			final String name = getJDFResName(e);
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name))
 			{
 				inOut = EnumUsage.Input;
@@ -136,8 +135,7 @@ public class WalkSet extends WalkXElement
 		}
 		if (r == null)
 		{
-			final SetHelper h = new SetHelper(e);
-			final String name = h.getName();
+			final String name = getJDFResName(e);
 			if (name != null)
 			{
 				String nsURI = StringUtil.getNonEmpty(e.getNamespaceURI());
@@ -180,6 +178,13 @@ public class WalkSet extends WalkXElement
 		return r;
 	}
 
+	protected String getJDFResName(final KElement e)
+	{
+		final SetHelper h = new SetHelper(e);
+		final String name = h.getName();
+		return name;
+	}
+
 	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 * @param toCheck
@@ -189,7 +194,7 @@ public class WalkSet extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		final KElement parent = toCheck.getParentNode_KElement();
-		final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDF20.rootName) || parent.getLocalName().equals("Product"));
+		final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDFHelper.XJDF) || parent.getLocalName().equals("Product"));
 		final String localName = toCheck.getLocalName();
 		return bL1 && super.matches(toCheck) && localName.endsWith("Set")
 				&& (toCheck.hasAttribute(AttributeName.NAME) || toCheck.getElement(StringUtil.leftStr(localName, -3)) != null);

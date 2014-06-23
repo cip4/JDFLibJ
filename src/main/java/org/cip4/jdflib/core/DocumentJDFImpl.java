@@ -86,7 +86,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.xerces.dom.ParentNode;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1079,7 +1079,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
 		}
 
-		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDF20.rootName.equals(localPart) || ElementName.JMF.equals(localPart)))
+		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFHelper.XJDF.equals(localPart) || ElementName.JMF.equals(localPart)))
 		{
 			bInJDFJMF = true;
 		}

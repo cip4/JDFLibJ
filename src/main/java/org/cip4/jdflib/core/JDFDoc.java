@@ -85,6 +85,7 @@ import java.net.URL;
 
 import javax.mail.BodyPart;
 
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
@@ -184,6 +185,19 @@ public class JDFDoc extends XMLDoc
 	public JDFDoc(final String strDocType)
 	{
 		super(strDocType, JDFElement.getSchemaURL());
+		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
+		((DocumentJDFImpl) m_doc).bKElementOnly = false;
+	}
+
+	/**
+	 * constructor - create the kind of JDF you need
+	 * 
+	 * @param strDocType - ElementName.JDF, ElementName.JMF, "Config" ...
+	 * @param version 
+	 */
+	public JDFDoc(final String strDocType, EnumVersion version)
+	{
+		super(strDocType, JDFElement.getSchemaURL(version));
 		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
 		((DocumentJDFImpl) m_doc).bKElementOnly = false;
 	}

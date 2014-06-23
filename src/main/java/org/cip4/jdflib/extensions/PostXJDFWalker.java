@@ -478,7 +478,7 @@ public class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
 				SetHelper artDelResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
@@ -526,7 +526,7 @@ public class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
 				SetHelper delResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = delResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
@@ -711,7 +711,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals(XJDF20.rootName);
+			return toCheck.getLocalName().equals(XJDFHelper.XJDF);
 		}
 
 		/**

@@ -207,13 +207,13 @@ public class WalkColorIntent extends WalkIntentResource
 	 */
 	private void evaluateColorsUsed(final KElement e)
 	{
-		JDFSeparationList sl = parent.createSeparationList(e, "ColorsUsed");
+		JDFSeparationList sl = xjdfToJDFImpl.createSeparationList(e, "ColorsUsed");
 		if (e.hasAttribute("ColorsUsedBack"))
 		{
 			if (sl != null)
 				sl = (JDFSeparationList) sl.deleteNode();
 			e.renameAttribute("ColorsUsedBack", "ColorsUsed", null, null);
-			JDFSeparationList slBack = parent.createSeparationList(e, "ColorsUsed");
+			JDFSeparationList slBack = xjdfToJDFImpl.createSeparationList(e, "ColorsUsed");
 			slBack.renameElement("ColorsUsedBack", null);
 			if (sl != null)
 				e.moveElement(sl, slBack);
@@ -227,7 +227,7 @@ public class WalkColorIntent extends WalkIntentResource
 		{
 			String frontVal = e.getAttribute(front, null, null);
 			e.renameAttribute(back, front, null, null);
-			KElement span = parent.attributeToSpan(e, front);
+			KElement span = xjdfToJDFImpl.attributeToSpan(e, front);
 			span.renameElement(back, null);
 			e.setAttribute(front, frontVal);
 		}

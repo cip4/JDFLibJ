@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -103,6 +104,10 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
+	public static final String XJDF = "XJDF";
+	/**
+	 * 
+	 */
 	public static final String PARAMETER = "Parameter";
 
 	/**
@@ -116,20 +121,22 @@ public class XJDFHelper extends BaseXJDFHelper
 		if (doc == null)
 			return null;
 		KElement root = doc.getRoot();
-		return root.getLocalName().equals(XJDF20.rootName) ? new XJDFHelper(root) : null;
+		return root.getLocalName().equals(XJDFHelper.XJDF) ? new XJDFHelper(root) : null;
 	}
 
 	/**
-	 * factory to create a helper from a doc
+	 * factory to create a helper from an element
 	 *  
-	 * @param root the xmldoc to parse
+	 * @param root the element to parse if not ann XJDF - search in ancestors
 	 * @return the helper
 	 */
 	public static XJDFHelper getHelper(KElement root)
 	{
 		if (root == null)
 			return null;
-		return root.getLocalName().equals(XJDF20.rootName) ? new XJDFHelper(root) : null;
+		if (!root.getLocalName().equals(XJDFHelper.XJDF))
+			root = root.getDeepParent(XJDFHelper.XJDF, 0);
+		return (root != null) ? new XJDFHelper(root) : null;
 	}
 
 	/**
@@ -182,7 +189,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	private void newXJDF()
 	{
-		JDFDoc doc = new JDFDoc(XJDF20.rootName);
+		JDFDoc doc = new JDFDoc(XJDFHelper.XJDF, EnumVersion.Version_2_0);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
 		JDFAuditPool ap = (JDFAuditPool) theElement.getCreateElement(ElementName.AUDITPOOL);
@@ -198,11 +205,83 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
-			if (e.getLocalName().endsWith("Set"))
+			if (isSet(e))
 				v.add(new SetHelper(e));
 			e = e.getNextSiblingElement();
 		}
 		return v.size() == 0 ? null : v;
+	}
+
+	/**
+	 * @param id 
+	 * @return the  parameterset and resourceset with ID=iD
+	 */
+	public SetHelper getSet(String id)
+	{
+		if (id == null)
+			return null;
+		KElement e = theElement.getFirstChildElement();
+		while (e != null)
+		{
+			if (id.equals(e.getID()) && isSet(e))
+				return new SetHelper(e);
+			e = e.getNextSiblingElement();
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param id 
+	 * @return the  parameterset and resourceset with a child partiton with ID=iD
+	 */
+	public SetHelper getSetForPartition(String id)
+	{
+		PartitionHelper ph = getPartition(id);
+		if (ph != null)
+		{
+			return ph.getSet();
+		}
+		else
+		{
+			return getSet(id);
+		}
+	}
+
+	/**
+	 * @param id 
+	 * @return the  parameterset and resourceset with ID=iD
+	 */
+	public PartitionHelper getPartition(String id)
+	{
+		if (id == null)
+			return null;
+		KElement e = theElement.getFirstChildElement();
+		while (e != null)
+		{
+			if (isSet(e))
+			{
+				PartitionHelper ph = new SetHelper(e).getPartition(id);
+				if (ph != null)
+				{
+					return ph;
+				}
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * is the element a set?
+	 * @param e
+	 * @return
+	 */
+	public boolean isSet(KElement e)
+	{
+		String localName = e.getLocalName();
+		return (RESOURCE + SetHelper.SET).equals(localName) || (PARAMETER + SetHelper.SET).equals(localName);
 	}
 
 	/**
@@ -312,7 +391,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e2 = null;
 		while (e != null)
 		{
-			if (e.getLocalName().endsWith("Set") && (name == null || name.equals(e.getAttribute("Name", null, null))))
+			if (isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null))))
 			{
 				if (n++ == iSkip)
 				{
@@ -478,5 +557,17 @@ public class XJDFHelper extends BaseXJDFHelper
 	public VString getTypes()
 	{
 		return VString.getVString(getXPathValue("@Types"), null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
+	 */
+	@Override
+	public void cleanUp()
+	{
+		Vector<SetHelper> v = getSets();
+		for (SetHelper sh : v)
+			sh.cleanUp();
+
 	}
 }

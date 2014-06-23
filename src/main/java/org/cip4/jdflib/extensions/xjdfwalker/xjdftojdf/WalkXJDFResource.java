@@ -99,7 +99,7 @@ public class WalkXJDFResource extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final JDFNode theNode = parent.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : parent.currentJDFNode;
+		final JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
 		JDFAttributeMap partmap = null;
 		final JDFResource newPartition;
@@ -129,10 +129,10 @@ public class WalkXJDFResource extends WalkXElement
 		KElement ap = e.getElement(ElementName.AMOUNTPOOL);
 		if (ap != null)
 		{
-			parent.walkTree(ap, rl);
+			xjdfToJDFImpl.walkTree(ap, rl);
 			ap.deleteNode();
 		}
-		parent.moveAmountsToLink(partmap, map, rl);
+		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
 		newPartition.setAttributes(map);
 
 		return newPartition;
@@ -146,7 +146,7 @@ public class WalkXJDFResource extends WalkXElement
 	 */
 	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 	{
-		final JDFNode theNode = parent.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : parent.currentJDFNode;
+		final JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFResource r = (JDFResource) trackElem;
 		final JDFAttributeMap partMap = part.getPartMap();
 		final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());
@@ -167,6 +167,6 @@ public class WalkXJDFResource extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && parent.isXResource(toCheck);
+		return super.matches(toCheck) && xjdfToJDFImpl.isXResource(toCheck);
 	}
 }

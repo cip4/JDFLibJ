@@ -80,6 +80,13 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.Test;
+
+/**
+ *  
+ *  
+ * @author rainer prosi
+ * @date Jun 21, 2014
+ */
 public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 {
 	String agentName;
@@ -109,9 +116,10 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 		BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_ContentCreation");
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-
+	/**
+	 * 
+	 *  
+	 */
 	@Test
 	public void testMISPreImpositionPreparation()
 	{
@@ -146,7 +154,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	/**
 	 * the big thing
 	 * 
-	 * @throws Exception
+	 *  
 	 */
 	@Test
 	public void testMIPreComplex()
@@ -203,12 +211,9 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
 	 */
 	@Override
 	public void setUp() throws Exception
@@ -232,12 +237,9 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#tearDown()
 	 */
 	@Override
 	public void tearDown() throws Exception

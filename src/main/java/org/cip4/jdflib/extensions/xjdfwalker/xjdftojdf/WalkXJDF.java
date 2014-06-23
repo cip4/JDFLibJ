@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
@@ -97,13 +97,13 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		parent.currentJDFNode = (JDFNode) trackElem;
-		parent.currentJDFNode.setAttributes(e);
-		parent.currentJDFNode.setVersion(parent.getVersion());
-		parent.currentJDFNode.setStatus(EnumNodeStatus.Part);
+		xjdfToJDFImpl.currentJDFNode = (JDFNode) trackElem;
+		xjdfToJDFImpl.currentJDFNode.setAttributes(e);
+		xjdfToJDFImpl.currentJDFNode.setVersion(xjdfToJDFImpl.getVersion());
+		xjdfToJDFImpl.currentJDFNode.setStatus(EnumNodeStatus.Part);
 		removeInheritedJobID();
 		setTypes();
-		return parent.currentJDFNode;
+		return xjdfToJDFImpl.currentJDFNode;
 	}
 
 	/**
@@ -111,20 +111,20 @@ public class WalkXJDF extends WalkXElement
 	 */
 	private void setTypes()
 	{
-		String t = parent.currentJDFNode.getAttribute("Types", null, null);
+		String t = xjdfToJDFImpl.currentJDFNode.getAttribute("Types", null, null);
 		if ("Product".equals(t))
 		{
-			parent.currentJDFNode.setType(EnumType.Product);
-			parent.currentJDFNode.removeAttribute("Types");
-			parent.foundProduct = parent.createProduct = true;
+			xjdfToJDFImpl.currentJDFNode.setType(EnumType.Product);
+			xjdfToJDFImpl.currentJDFNode.removeAttribute("Types");
+			xjdfToJDFImpl.foundProduct = xjdfToJDFImpl.createProduct = true;
 		}
 		else if (StringUtil.tokenize(t, null, false).size() == 1)
 		{
-			parent.currentJDFNode.setType(t.trim(), false);
+			xjdfToJDFImpl.currentJDFNode.setType(t.trim(), false);
 		}
 		else
 		{
-			parent.currentJDFNode.setType(EnumType.ProcessGroup);
+			xjdfToJDFImpl.currentJDFNode.setType(EnumType.ProcessGroup);
 		}
 	}
 
@@ -133,14 +133,14 @@ public class WalkXJDF extends WalkXElement
 	 */
 	private void removeInheritedJobID()
 	{
-		final JDFNode parentNode = parent.currentJDFNode.getParentJDF();
+		final JDFNode parentNode = xjdfToJDFImpl.currentJDFNode.getParentJDF();
 		if (parentNode != null)
 		{
 			final String jobID = StringUtil.getNonEmpty(parentNode.getJobID(true));
-			final String myJobID = StringUtil.getNonEmpty(parent.currentJDFNode.getJobID(false));
+			final String myJobID = StringUtil.getNonEmpty(xjdfToJDFImpl.currentJDFNode.getJobID(false));
 			if (myJobID != null && myJobID.equals(jobID))
 			{
-				parent.currentJDFNode.removeAttribute(AttributeName.JOBID);
+				xjdfToJDFImpl.currentJDFNode.removeAttribute(AttributeName.JOBID);
 			}
 		}
 	}
@@ -153,6 +153,6 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && XJDF20.rootName.equals(toCheck.getLocalName());
+		return super.matches(toCheck) && XJDFHelper.XJDF.equals(toCheck.getLocalName());
 	}
 }

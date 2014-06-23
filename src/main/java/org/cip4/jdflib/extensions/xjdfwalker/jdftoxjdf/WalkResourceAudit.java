@@ -72,8 +72,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 
@@ -87,7 +85,6 @@ import org.cip4.jdflib.resource.JDFResourceAudit;
  */
 public class WalkResourceAudit extends WalkAudit
 {
-	private VJDFAttributeMap partMap = null;
 
 	/**
 	 * 
@@ -106,11 +103,10 @@ public class WalkResourceAudit extends WalkAudit
 	{
 		final KElement raNew = super.walk(jdf, xjdf);
 		final JDFResourceAudit ra = (JDFResourceAudit) jdf;
-		partMap = ra.getPartMapVector();
 		copyLinkValues(raNew, ra.getNewLink(), "NewRef");
 		copyLinkValues(raNew, ra.getOldLink(), "OldRef");
 
-		return null; // don't walk the links!
+		return raNew; // don't walk the links!
 	}
 
 	/**
@@ -131,21 +127,10 @@ public class WalkResourceAudit extends WalkAudit
 					KElement resAmount = raNew.appendElement("ResourceAmount");
 					resAmount.setAttribute("Type", val);
 					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
-					if (partMap == null || partMap.size() == 0)
-					{
-						this.jdfToXJDF.setAmountPool(rl, resAmount, null);
-					}
-					else
-					{
-						for (int i = 0; i < partMap.size(); i++)
-						{
-							JDFAttributeMap partMap2 = partMap.get(i);
-							this.jdfToXJDF.setAmountPool(rl, resAmount, partMap2);
-							resAmount.appendElement("Part").setAttributes(partMap2);
-						}
-					}
+					jdfToXJDF.walkTree(rl.getAmountPool(), resAmount);
 				}
 			}
+			rl.deleteNode();
 		}
 	}
 

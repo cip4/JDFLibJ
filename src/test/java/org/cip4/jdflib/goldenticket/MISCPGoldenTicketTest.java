@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,8 +84,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
@@ -117,11 +117,11 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
-		Assert.assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.4"));
-		Assert.assertTrue(node.isValid(EnumValidationLevel.Complete));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
@@ -129,11 +129,11 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.makeReadyAll();
 		node = cpGoldenTicket.getNode();
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
-		Assert.assertTrue(node.getICSVersions(false).contains("Base_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("JMF_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("MIS_L2-1.4"));
-		Assert.assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.4"));
-		Assert.assertTrue(node.isValid(EnumValidationLevel.Complete));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.5"));
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.assign(null);
 		VJDFAttributeMap mapSingle = new VJDFAttributeMap();
@@ -216,7 +216,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		map.put(EnumPartIDKey.Side, "Front");
 		dev.getCreatePartition(map, null).setAttribute("DeviceID", "FrontSidePress");
 
-		write3GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
+		write9GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -268,8 +268,8 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
-		VString vICS = new VString("Base_L2-1.4,MIS_L1-1.4,MISCPS_L1-1.4", ",");
-		Assert.assertEquals(cpGoldenTicket.getICSVersions(), vICS);
+		VString vICS = new VString("Base_L2-1.5,MIS_L1-1.5,MISCPS_L1-1.5", ",");
+		assertEquals(cpGoldenTicket.getICSVersions(), vICS);
 	}
 
 	/**
@@ -304,12 +304,9 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		write3GTFiles(cpGoldenTicket, "sameInk");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicketTest#setUp()
 	 */
 	@Override
 	public void setUp() throws Exception

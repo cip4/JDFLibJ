@@ -4784,9 +4784,7 @@ public class JDFElement extends KElement
 
 		if (ret == null)
 		{
-
-			// start with the first jdf node parent of this so that nod is
-			// initialized
+			// start with the first jdf node parent of this so that nod is initialized
 			JDFNode nod = (JDFNode) getDeepParent(ElementName.JDF, 0);
 			if (nod != null) // we are in a JDF, not in a JMF
 			{
@@ -6354,5 +6352,20 @@ public class JDFElement extends KElement
 	{
 		URLReader r = new URLReader(url, getOwnerDocument_JDFElement());
 		return r.getURLInputStream();
+	}
+
+	/**
+	* get the schemaURL based on a version
+	 * @param version
+	 * @return
+	 */
+	public static String getSchemaURL(EnumVersion version)
+	{
+		if (EnumUtil.aLessThanB(version, EnumVersion.Version_2_0))
+			return getSchemaURL(1, 1);
+		else if (EnumVersion.Version_2_0.equals(version))
+			return getSchemaURL(2, 0);
+		else
+			return null;
 	}
 }
