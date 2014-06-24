@@ -274,7 +274,7 @@ public class JDFDurationTest extends TestCase
 	@Test
 	public final void testGetDurationINF()
 	{
-		assertEquals(JDFDuration.createDuration("INF").getDuration(), Integer.MAX_VALUE);
+		assertEquals(JDFDuration.createDuration("INF").getDuration(), Long.MAX_VALUE);
 	}
 
 	/**

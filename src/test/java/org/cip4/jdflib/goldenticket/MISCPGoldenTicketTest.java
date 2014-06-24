@@ -178,7 +178,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.waste = 90;
 		cpGoldenTicket.bExpandGrayBox = bExpandGB;
 
-		BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
+		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
 	}
 
 	////////////////////////////////////////////////////////////////////////////
