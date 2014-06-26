@@ -130,8 +130,8 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFMedia m = (JDFMedia) root.getResource("Media", EnumUsage.Input, 0);
 		assertNotNull(m);
 		JDFResourceLink rl = root.getLink(m, null);
-		assertNotNull(rl.getAmountPool());
-		assertNull(m.getElement("AmuntPool"));
+		assertNull(rl.getAmountPool());
+		assertNull(m.getElement("AmountPool"));
 	}
 
 	/**
