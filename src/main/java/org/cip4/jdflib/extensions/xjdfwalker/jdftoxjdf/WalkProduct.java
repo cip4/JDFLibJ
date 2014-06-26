@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -83,6 +84,11 @@ import org.cip4.jdflib.resource.process.JDFComponent;
  */
 public class WalkProduct extends WalkJDFElement
 {
+	/**
+	 * 
+	 */
+	static final String SKIP_CONVERT = "SkipConvert";
+
 	/**
 	 * 
 	 */
@@ -105,6 +111,7 @@ public class WalkProduct extends WalkJDFElement
 		{
 			return null;
 		}
+
 		final KElement prod = pList.appendElement("Product");
 		prod.setAttributes(jdf);
 		prod.removeAttribute(AttributeName.TYPE);
@@ -130,16 +137,30 @@ public class WalkProduct extends WalkJDFElement
 	 */
 	private void readComponent(final JDFNode node, final KElement prod)
 	{
-		final JDFResourceLink cOut = node.getLink(0, "ComponentLink", new JDFAttributeMap("Usage", "Output"), null);
-		if (cOut == null)
+		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap("Usage", "Output"), null);
+		if (cOutLink == null)
 			return;
-		this.jdfToXJDF.setAmountPool(cOut, prod, null);
+		cOutLink.setAttribute(SKIP_CONVERT, true, null);
+		int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+		if (amount > 0)
+			prod.setAttribute(AttributeName.AMOUNT, amount, null);
 		prod.renameAttribute("AmountGood", "Amount", null, null);
 		prod.removeAttribute("AmountWaste");
 
-		JDFComponent component = (JDFComponent) cOut.getTarget();
-		prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
-		prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+		JDFComponent component = (JDFComponent) cOutLink.getTarget();
+		if (component != null)
+		{
+			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
+			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+		}
+		final VElement cInLinks = node.getResourceLinks(ElementName.COMPONENT, new JDFAttributeMap("Usage", "Input"), null);
+		if (cInLinks != null)
+		{
+			for (KElement e : cInLinks)
+			{
+				e.setAttribute(SKIP_CONVERT, true, null);
+			}
+		}
 	}
 
 	/**
@@ -152,10 +173,9 @@ public class WalkProduct extends WalkJDFElement
 		final VElement vComp = node.getPredecessors(true, true);
 		if (vComp != null)
 		{
-			final int siz = vComp.size();
-			for (int i = 0; i < siz; i++)
+			for (KElement e : vComp)
 			{
-				final JDFNode nPre = (JDFNode) vComp.get(i);
+				final JDFNode nPre = (JDFNode) e;
 				if (EnumType.Product.equals(nPre.getEnumType()))
 				{
 					kids.add(nPre.getID());
@@ -163,19 +183,14 @@ public class WalkProduct extends WalkJDFElement
 			}
 		}
 
-		if (kids.size() > 0)
+		for (String kid : kids)
 		{
-			for (int i = 0; i < kids.size(); i++)
-			{
-				final KElement sub = prod.appendElement("ChildProduct");
-				sub.setAttribute("ChildRef", kids.get(i), null);
-				// TODO add processusage from input / output resources
-			}
+			final KElement sub = prod.appendElement("ChildProduct");
+			sub.setAttribute("ChildRef", kid, null);
+			// TODO add processusage from input / output resources
 		}
-		else
-		{
-			node.setAttribute("RootProduct", true, null);
-		}
+
+		node.setAttribute("RootProduct", true, null);
 	}
 
 	/**
@@ -186,6 +201,6 @@ public class WalkProduct extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return this.jdfToXJDF.walkingProduct && toCheck instanceof JDFNode;
+		return jdfToXJDF.walkingProduct && toCheck instanceof JDFNode;
 	}
 }

@@ -149,20 +149,29 @@ public class ProductGoldenTicket extends MISGoldenTicket
 			theNode.setDescriptiveName("Product Golden Ticket Example Job - version: " + JDFAudit.software());
 		}
 		theNode.setType(EnumType.Product);
+		JDFComponent out = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		if (theNode.isJDFRoot())
+		{
+			out.setComponentType(EnumComponentType.FinalProduct, null);
+		}
+		else
+		{
+			out.setComponentType(EnumComponentType.PartialProduct, null);
+		}
 
 		super.init();
 	}
 
 	/**
-	 * @param node 
+	 * @param childNode 
 	 * @param li 
 	 * @param productType 
 	 * @return 
 	 *  
 	 */
-	protected JDFComponent initOutputComponent(final JDFNode node, final JDFLayoutIntent li, final String productType)
+	protected JDFComponent initOutputComponent(final JDFNode childNode, final JDFLayoutIntent li, final String productType)
 	{
-		final JDFComponent outComp = (JDFComponent) node.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		final JDFComponent outComp = (JDFComponent) childNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		if (productType == null)
 		{
 			outComp.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
@@ -177,10 +186,10 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		theNode.getResource(ElementName.LAYOUTINTENT, null, 0);
 		final JDFShape s = li.getFinishedDimensions().getActual();
 		outComp.setDimensions(s);
-		if (theNode != node)
+		if (theNode != childNode)
 		{
 			theNode.getResourcePool().moveElement(outComp, null);
-			theNode.linkResource(outComp, EnumUsage.Output, null);
+			theNode.linkResource(outComp, EnumUsage.Input, null);
 		}
 		return outComp;
 

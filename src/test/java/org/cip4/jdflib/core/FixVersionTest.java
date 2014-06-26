@@ -72,9 +72,11 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.goldenticket.IDPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -347,6 +349,24 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(t.fixVersion(EnumVersion.Version_1_3));
 		assertEquals(t.getToolID(), "");
 		assertEquals(t.getProductID(), "toolID");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testLayoutPrep()
+	{
+		IDPGoldenTicket idpGoldenTicket = new IDPGoldenTicket(1);
+
+		idpGoldenTicket.assign(null);
+		final JDFNode node = idpGoldenTicket.getNode();
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		FixVersion fix = new FixVersion(EnumVersion.Version_1_5);
+		fix.setLayoutPrepToStripping(true);
+		fix.walkTree(node, null);
+		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "FixLayoutPrep.jdf", 2, false);
+		assertTrue(node.isValid(EnumValidationLevel.Complete));
 	}
 
 	/**

@@ -66,78 +66,49 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
  * 
- * walker for PhaseAmount
+ * move deliveryintent to product
+ * TODO move to deliveryparams for complex cases
+ * 
+ * @author rainer prosi
+ * @date Jun 24, 2014
  */
-public class WalkXJDFAuditAmount extends WalkXElement
+public class WalkDeliveryIntentResLink extends WalkResLink
 {
+
 	/**
 	 * 
 	 */
-	public WalkXJDFAuditAmount()
+	public WalkDeliveryIntentResLink()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * currently we simply skip it
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public KElement walk(KElement jdf, KElement xjdf)
 	{
-		String localName = toCheck.getLocalName();
-		return "PhaseAmount".equals(localName) || "ResourceAmount".equals(localName);
+		return null;
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public boolean matches(KElement toCheck)
 	{
-		final KElement amountCopy = super.walk(e, trackElem);
-		if (amountCopy != null)
-		{
-			String id = e.getAttribute(AttributeName.RREF);
-			if (StringUtil.getNonEmpty(id) != null)
-			{
-				XJDFHelper h = XJDFHelper.getHelper(e);
-				SetHelper sh = h.getSetForPartition(id);
-				PartitionHelper ph = h.getPartition(id);
-				if (sh != null)
-				{
-					KElement amountParent = amountCopy.getParentNode_KElement();
-					JDFResourceLink rl = (JDFResourceLink) amountParent.insertBefore(sh.getName() + "Link", amountCopy, null);
-					rl.setrRef(sh.getID());
-					rl.setUsage(sh.getUsage());
-					if (ph != null)
-					{
-						VJDFAttributeMap partMapVector = ph.getPartMapVector();
-						partMapVector.remove(new JDFAttributeMap());
-						rl.setPartMapVector(partMapVector);
-					}
-					amountCopy.deleteNode();
-					return rl;
-				}
-			}
-		}
-		return amountCopy;
+		return super.matches(toCheck) && "DeliveryIntentLink".equals(toCheck.getLocalName());
 	}
+
 }

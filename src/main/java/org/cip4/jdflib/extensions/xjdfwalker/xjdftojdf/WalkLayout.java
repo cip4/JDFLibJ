@@ -68,8 +68,18 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Iterator;
+
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements
@@ -94,5 +104,93 @@ public class WalkLayout extends WalkStrippingParams
 	public boolean matches(final KElement toCheck)
 	{
 		return toCheck instanceof JDFLayout;
+	}
+
+	/**
+	 * split a RunList into a RunList and a RunList/LayoutElement
+	 * @param e
+	 * @param trackElem 
+	 */
+	private void splitLayout(final KElement e, KElement trackElem)
+	{
+		final JDFStrippingParams stripParams = (JDFStrippingParams) e.appendElement(ElementName.STRIPPINGPARAMS);
+		boolean foundSome = moveToStripping(e, stripParams);
+		if (foundSome)
+		{
+			createStrippingPartition(stripParams, (JDFLayout) trackElem);
+		}
+		stripParams.deleteNode();
+	}
+
+	private boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
+	{
+		final VString vAtt = stripParams.knownAttributes();
+		final JDFAttributeMap map = e.getAttributeMap();
+		final Iterator<String> it = map.getKeyIterator();
+		boolean foundSome = false;
+		while (it.hasNext())
+		{
+			final String s = it.next();
+			if (vAtt.contains(s))
+			{
+				stripParams.setAttribute(s, map.get(s));
+				e.removeAttribute(s);
+				foundSome = true;
+			}
+		}
+		final VString stripKnown = stripParams.knownElements();
+		final VElement vMyElm = e.getChildElementVector_KElement(null, null, null, true, 0);
+		for (KElement myElm : vMyElm)
+		{
+			String localName = myElm.getLocalName();
+			if (stripKnown.contains(localName) || localName.endsWith("Ref") && stripKnown.contains(StringUtil.leftStr(localName, -3)))
+			{
+				stripParams.moveElement(myElm, null);
+				foundSome = true;
+			}
+		}
+		return foundSome;
+	}
+
+	/**
+	 *  
+	 * @param stripParams 
+	 * @param trackLayout 
+	 */
+	private void createStrippingPartition(JDFStrippingParams stripParams, JDFLayout trackLayout)
+	{
+		JDFNode node = trackLayout.getParentJDF();
+		if (node == null)
+		{
+			log.error("whazzup - not in xjdf root???");
+		}
+		else
+		{
+			JDFAttributeMap partMap = trackLayout.getPartMap();
+			JDFStrippingParams spExist = (JDFStrippingParams) node.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, sp.getPartIDKeys());
+			if (part == sp)
+			{
+				stripParams.copyInto(part, false);
+			}
+			xjdfToJDFImpl.walkTree(stripParams, part.getParentNode_KElement());
+			if (spExist == null)
+			{
+				sp.deleteNode();
+			}
+		}
+
+	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement e, KElement trackElem)
+	{
+		KElement walk = super.walk(e, trackElem);
+		splitLayout(e, trackElem);
+		return walk;
 	}
 }

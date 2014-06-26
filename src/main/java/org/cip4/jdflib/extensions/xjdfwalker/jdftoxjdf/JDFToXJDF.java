@@ -95,6 +95,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.extensions.PostXJDFWalker;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -291,7 +292,7 @@ public class JDFToXJDF extends PackageElementWalker
 		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 		if (trackAudits)
 			root.getCreateAuditPool().addCreated("XJDF Converter", null);
-		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
+		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);
 
@@ -307,11 +308,13 @@ public class JDFToXJDF extends PackageElementWalker
 		loopNodes(oldRoot);
 
 		walkingProduct = true;
-		final KElement productList = newRoot.appendElement("ProductList");
+		KElement beforeElem = newRoot.getElement(ElementName.AUDITPOOL);
+		beforeElem = beforeElem == null ? null : beforeElem.getNextSiblingElement();
+		final KElement productList = newRoot.insertBefore(ProductHelper.PRODUCTLIST, beforeElem, null);
 
 		prepareRoot(root);
 		walkTree(root, productList);
-		if (productList.getElement("Product") == null)
+		if (productList.getElement(ProductHelper.PRODUCT) == null)
 		{
 			productList.deleteNode();
 		}
@@ -323,6 +326,10 @@ public class JDFToXJDF extends PackageElementWalker
 		return newRoot;
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	private void postWalk()
 	{
 		PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
@@ -360,7 +367,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void prepareNewDoc(boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : XJDFHelper.XJDF);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : XJDFHelper.XJDF, EnumVersion.Version_2_0);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL());

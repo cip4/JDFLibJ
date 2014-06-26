@@ -69,11 +69,15 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
@@ -119,7 +123,7 @@ public class WalkResourceAudit extends WalkAudit
 		final JDFResource rlRoot = rl == null ? null : rl.getLinkRoot();
 		if (rlRoot != null && rl != null)
 		{
-			final VElement v = this.jdfToXJDF.setResource(null, rlRoot, this.jdfToXJDF.newRoot);
+			final VElement v = jdfToXJDF.setResource(null, rlRoot, jdfToXJDF.newRoot);
 			if (v != null)
 			{
 				for (final KElement kElem : v)
@@ -127,7 +131,23 @@ public class WalkResourceAudit extends WalkAudit
 					KElement resAmount = raNew.appendElement("ResourceAmount");
 					resAmount.setAttribute("Type", val);
 					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
-					jdfToXJDF.walkTree(rl.getAmountPool(), resAmount);
+					JDFAmountPool amountPool = rl.getAmountPool();
+					if (amountPool != null)
+					{
+						jdfToXJDF.walkTree(amountPool, resAmount);
+					}
+					else
+					{
+						JDFAmountPool ap = (JDFAmountPool) resAmount.appendElement(ElementName.AMOUNTPOOL);
+						if (rl.getAmount() != 0)
+						{
+							ap.setPartAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(rl.getAmount(), 0), null, (JDFAttributeMap) null);
+						}
+						if (rl.getActualAmount() != 0)
+						{
+							ap.setPartAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(rl.getActualAmount(), 0), null, (JDFAttributeMap) null);
+						}
+					}
 				}
 			}
 			rl.deleteNode();

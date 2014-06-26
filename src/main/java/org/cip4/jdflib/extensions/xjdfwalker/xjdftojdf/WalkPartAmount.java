@@ -69,26 +69,20 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
- * 
- * walker for PhaseAmount
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkXJDFAuditAmount extends WalkXElement
+public class WalkPartAmount extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkXJDFAuditAmount()
+	public WalkPartAmount()
 	{
 		super();
 	}
@@ -101,43 +95,29 @@ public class WalkXJDFAuditAmount extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
-		return "PhaseAmount".equals(localName) || "ResourceAmount".equals(localName);
+		return toCheck instanceof JDFPartAmount;
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @param e
+	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public KElement walk(final KElement e, KElement trackElem)
 	{
-		final KElement amountCopy = super.walk(e, trackElem);
-		if (amountCopy != null)
+		if (e.getElement(ElementName.PART) == null)
 		{
-			String id = e.getAttribute(AttributeName.RREF);
-			if (StringUtil.getNonEmpty(id) != null)
+			KElement parent = trackElem.getParentNode_KElement();
+			if (parent instanceof JDFResourceLink)
 			{
-				XJDFHelper h = XJDFHelper.getHelper(e);
-				SetHelper sh = h.getSetForPartition(id);
-				PartitionHelper ph = h.getPartition(id);
-				if (sh != null)
-				{
-					KElement amountParent = amountCopy.getParentNode_KElement();
-					JDFResourceLink rl = (JDFResourceLink) amountParent.insertBefore(sh.getName() + "Link", amountCopy, null);
-					rl.setrRef(sh.getID());
-					rl.setUsage(sh.getUsage());
-					if (ph != null)
-					{
-						VJDFAttributeMap partMapVector = ph.getPartMapVector();
-						partMapVector.remove(new JDFAttributeMap());
-						rl.setPartMapVector(partMapVector);
-					}
-					amountCopy.deleteNode();
-					return rl;
-				}
+				JDFResourceLink rl = (JDFResourceLink) parent;
+				rl.copyAttribute(AttributeName.AMOUNT, e);
+				rl.copyAttribute(AttributeName.ACTUALAMOUNT, e);
+				rl.copyAttribute(AttributeName.MAXAMOUNT, e);
+				trackElem.deleteNode();
+				return null;
 			}
 		}
-		return amountCopy;
+		return super.walk(e, trackElem);
 	}
 }

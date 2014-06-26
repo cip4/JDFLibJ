@@ -108,6 +108,7 @@ import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.JDFSpawned;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFBufferParams;
@@ -452,6 +453,65 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		m.mergeJDF(s1);
 		rl = root.getLink(comp, null);
 		assertEquals(rl.getAmountPool().numChildElements(ElementName.PARTAMOUNT, null), 4);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSpawnMulti10()
+	{
+		final JDFDoc dRoot = new JDFDoc("JDF");
+		final JDFNode nRoot = dRoot.getJDFRoot();
+		final JDFCustomerInfo ci = nRoot.appendCustomerInfo();
+		final JDFNodeInfo ni = nRoot.appendNodeInfo();
+		ni.setNodeStatus(EnumNodeStatus.Waiting);
+		nRoot.setStatus(EnumNodeStatus.Part);
+		ci.setCustomerProjectID("foo");
+
+		nRoot.setType("Product", true);
+		JDFNode n2 = nRoot.addProduct();
+		for (int i = 0; i < 10; i++)
+		{
+			n2 = nRoot.getJobPart(new NodeIdentifier(n2));
+			JDFSpawn sp = new JDFSpawn(n2);
+			JDFNode n3 = sp.spawn();
+			JDFMerge m = new JDFMerge(nRoot);
+			m.mergeJDF(n3);
+		}
+		assertEquals(n2.numChildNodes(KElement.COMMENT_NODE, true), 0);
+		dRoot.write2File(sm_dirTestDataTemp + "spawn10.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSpawnMulti10Part()
+	{
+		final JDFDoc dRoot = new JDFDoc("JDF");
+		final JDFNode nRoot = dRoot.getJDFRoot();
+		final JDFCustomerInfo ci = nRoot.appendCustomerInfo();
+		final JDFNodeInfo ni = nRoot.appendNodeInfo();
+		ni.setNodeStatus(EnumNodeStatus.Waiting);
+		nRoot.setStatus(EnumNodeStatus.Part);
+		ci.setCustomerProjectID("foo");
+
+		nRoot.setType("Product", true);
+		JDFNode n2 = nRoot.addProduct();
+		for (int i = 0; i < 10; i++)
+		{
+			n2 = nRoot.getJobPart(new NodeIdentifier(n2));
+			JDFSpawn sp = new JDFSpawn(n2);
+			sp.vSpawnParts = new VJDFAttributeMap();
+			sp.vSpawnParts.add(new JDFAttributeMap("SheetName", "S1"));
+			sp.vRWResources_in = new VString("NodeInfo", " ");
+			JDFNode n3 = sp.spawn();
+			JDFMerge m = new JDFMerge(nRoot);
+			m.mergeJDF(n3);
+		}
+		assertEquals(n2.numChildNodes(KElement.COMMENT_NODE, true), 0);
+		dRoot.write2File(sm_dirTestDataTemp + "spawn10Part.jdf", 2, false);
 	}
 
 	/**
@@ -2186,7 +2246,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode spawnedNode = spawn.spawn(sm_dirTestData + fileNameIn + ".jdf", null, null, null, false, true, true, true);
 			v2.add(spawnedNode);
 			nEvent += spawnedNode.getChildrenByTagName("Notification", "", new JDFAttributeMap(), false, false, 0).size();
-			nComment += spawnedNode.numChildNodes(Node.COMMENT_NODE);
+			nComment += spawnedNode.numChildNodes(Node.COMMENT_NODE, false);
 		}
 		for (int i = 0; i < v2.size(); i++)
 		{
@@ -2200,7 +2260,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFNode spawnNode = (JDFNode) v.elementAt(i);
-			copyComments += spawnNode.numChildNodes(Node.COMMENT_NODE);
+			copyComments += spawnNode.numChildNodes(Node.COMMENT_NODE, false);
 		}
 
 		assertEquals(nComment, copyComments);

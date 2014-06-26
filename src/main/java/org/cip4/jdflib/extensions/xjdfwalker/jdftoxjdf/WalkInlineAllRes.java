@@ -103,7 +103,8 @@ public class WalkInlineAllRes extends WalkResource
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#mustInline(java.lang.String)
 	 */
 	@Override
 	protected boolean mustInline(final String refLocalName)

@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
 
 /**
@@ -149,8 +150,17 @@ public class WalkProduct extends WalkXElement
 		if (c == null)
 		{
 			c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
-			final EnumComponentType partialFinal = new ProductHelper(xjdfProduct).isRootProduct() ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
+			boolean isRootProduct = new ProductHelper(xjdfProduct).isRootProduct();
+			final EnumComponentType partialFinal = isRootProduct ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
 			c.setComponentType(partialFinal, null);
+			if (!isRootProduct)
+			{
+				JDFNode parent = theNode.getParentJDF();
+				if (parent != null && EnumType.Product.equals(parent.getEnumType()))
+				{
+					parent.ensureLink(c, EnumUsage.Input, null);
+				}
+			}
 		}
 		AttributeInfo info = c.getAttributeInfo();
 		VString cKnown = info.knownAttribs();

@@ -135,13 +135,13 @@ public class WalkRunList extends WalkResource
 					e.removeAttribute(s);
 				}
 			}
-			final VString vElm = loe.knownElements();
+			final VString knownLayouteElems = loe.knownElements();
 			final VElement vMyElm = e.getChildElementVector(null, null);
-			for (int i = 0; i < vMyElm.size(); i++)
+			for (KElement myElm : vMyElm)
 			{
-				if (vElm.contains(vMyElm.get(i).getLocalName()))
+				if (knownLayouteElems.contains(myElm.getLocalName()))
 				{
-					loe.moveElement(vMyElm.get(i), null);
+					loe.moveElement(myElm, null);
 				}
 			}
 		}

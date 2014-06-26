@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,7 +85,7 @@ public class NarrowWebTest extends BaseGoldenTicketTest
 	@Test
 	public void testNarrowAll()
 	{
-		final NarrowWebGoldenTicket gt = new NarrowWebGoldenTicket(1, EnumVersion.Version_1_4, 1);
+		final NarrowWebGoldenTicket gt = new NarrowWebGoldenTicket(1, EnumVersion.Version_1_5, 1);
 		gt.bEmboss = true;
 		gt.bLaminate = true;
 		gt.bShapeCut = true;

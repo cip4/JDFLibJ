@@ -1487,6 +1487,67 @@ public class XMLDoc
 
 	}
 
+	/**
+	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
+	 * @param nodeType the DOM node type to get <blockquote>
+	 * - copy from KElement - 
+	 * 
+	 * <ul>
+	 * <li>ELEMENT_NODE = 1
+	 * <li>ATTRIBUTE_NODE = 2
+	 * <li>TEXT_NODE = 3
+	 * <li>CDATA_SECTION_NODE = 4
+	 * <li>ENTITY_REFERENCE_NODE = 5
+	 * <li>ENTITY_NODE = 6
+	 * <li>PROCESSING_INSTRUCTION_NODE = 7
+	 * <li>COMMENT_NODE = 8
+	 * <li>DOCUMENT_NODE = 9
+	 * <li>DOCUMENT_TYPE_NODE = 10
+	 * <li>DOCUMENT_FRAGMENT_NODE = 11
+	 * <li>NOTATION_NODE = 12
+	 * <li>XML_DECL_NODE = 13 </blockquote>
+	 * </ul>
+	 * @param iPos the index of the node with default 0 for the first occurance
+	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
+	 */
+	protected Node getChildNode(final int nodeType, final int iPos)
+	{
+		Node retNode = null;
+		Node node = getFirstChild();
+		int i = 0;
+
+		// iPos + 1 because we need to stop after the iPos
+		// turn and i will then be iPos + 1
+		while ((node != null) && (i != iPos + 1))
+		{
+			if (node.getNodeType() == nodeType)
+			{
+				if (i++ == iPos)
+				{
+					retNode = node;
+				}
+			}
+			node = node.getNextSibling();
+		}
+		return retNode;
+	}
+
+	/**
+	 * gets of 'this' the text of the i-th child XMLComment. <code><!-- this is a XMLComment --></code> would return <code>this is a XMLComment</code>
+	 * 
+	 * @return String text document XMLComment, null if i is higher then the number of child nodes
+	 */
+	public String getXMLComment()
+	{
+		final Node n = getChildNode(Node.COMMENT_NODE, 0);
+		return (n == null) ? null : n.getNodeValue();
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
 	protected XMLParser getXMLParser()
 	{
 		return new XMLParser();

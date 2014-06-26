@@ -80,6 +80,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -2410,12 +2411,12 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			return true;
 		}
-		if (numChildNodes(0) != kElem.numChildNodes(0))
+		if (numChildNodes(0, false) != kElem.numChildNodes(0, false))
 		{
 			return false;
 		}
 		// performance: count attributes and compare
-		if (numChildNodes(ATTRIBUTE_NODE) != kElem.numChildNodes(ATTRIBUTE_NODE))
+		if (numChildNodes(ATTRIBUTE_NODE, false) != kElem.numChildNodes(ATTRIBUTE_NODE, false))
 		{
 			return false;
 		}
@@ -2739,7 +2740,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * Removes all attributes spezified in attribs. If attribs is empty, all attributes are removed
 	 * @param attribs list of attributes to remove, if null, remove all
 	 */
-	public void removeAttributes(final VString attribs)
+	public void removeAttributes(final Collection<String> attribs)
 	{
 		if (attribs == null)
 		{
@@ -4661,8 +4662,37 @@ public class KElement extends ElementNSImpl implements Element
 	 * <li>XML_DECL_NODE = 13 </blockquote>
 	 * </ul>
 	 * @return number of child nodes with "nodeType"
+	 * @deprecated use 2-parameter version numChildNodes(nodeType, false); 
 	 */
+	@Deprecated
 	public int numChildNodes(final int nodeType)
+	{
+		return numChildNodes(nodeType, false);
+	}
+
+	/**
+	 * count the number of child nodes of DOM nodeType nodeType (0=count all)
+	 * @param nodeType DOM nodeType <blockquote>
+	 * <ul>
+	 * <li>count all = 0
+	 * <li>ELEMENT_NODE = 1
+	 * <li>ATTRIBUTE_NODE = 2
+	 * <li>TEXT_NODE = 3
+	 * <li>CDATA_SECTION_NODE = 4
+	 * <li>ENTITY_REFERENCE_NODE = 5
+	 * <li>ENTITY_NODE = 6
+	 * <li>PROCESSING_INSTRUCTION_NODE = 7
+	 * <li>COMMENT_NODE = 8
+	 * <li>DOCUMENT_NODE = 9
+	 * <li>DOCUMENT_TYPE_NODE = 10
+	 * <li>DOCUMENT_FRAGMENT_NODE = 11
+	 * <li>NOTATION_NODE = 12
+	 * <li>XML_DECL_NODE = 13 </blockquote>
+	 * </ul>
+	 * @param bRecurse 
+	 * @return number of child nodes with "nodeType"
+	 */
+	public int numChildNodes(final int nodeType, boolean bRecurse)
 	{
 		int i = 0;
 		Node n = getFirstChild();
@@ -4671,6 +4701,10 @@ public class KElement extends ElementNSImpl implements Element
 			if (nodeType == 0 || n.getNodeType() == nodeType)
 			{
 				i++;
+			}
+			if (bRecurse && nodeType == ELEMENT_NODE)
+			{
+				i += ((KElement) n).numChildNodes(nodeType, bRecurse);
 			}
 			n = n.getNextSibling();
 		}

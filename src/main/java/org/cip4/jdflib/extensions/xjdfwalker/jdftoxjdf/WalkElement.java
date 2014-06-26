@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -77,6 +78,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.w3c.dom.Node;
 
 /**
@@ -118,7 +120,10 @@ public class WalkElement extends BaseWalker
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), jdf.getNamespaceURI());
+		String nsURI = jdf.getNamespaceURI();
+		if (JDFConstants.JDFNAMESPACE.equals(nsURI))
+			nsURI = XJDF20.getSchemaURL();
+		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), nsURI);
 
 		setAttributes(jdf, eNew);
 		eNew.setText(jdf.getText());

@@ -96,10 +96,6 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
-	public static final String PRODUCT = "Product";
-	/**
-	 * 
-	 */
 	public static final String RESOURCE = "Resource";
 	/**
 	 * 
@@ -127,7 +123,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * factory to create a helper from an element
 	 *  
-	 * @param root the element to parse if not ann XJDF - search in ancestors
+	 * @param root the element to parse if not an XJDF - search in ancestors of element
 	 * @return the helper
 	 */
 	public static XJDFHelper getHelper(KElement root)
@@ -488,7 +484,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	public ProductHelper appendProduct()
 	{
-		KElement product = theElement.getCreateElement("ProductList").appendElement(PRODUCT);
+		KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
 		return new ProductHelper(product);
 	}
 
@@ -567,7 +563,9 @@ public class XJDFHelper extends BaseXJDFHelper
 	{
 		Vector<SetHelper> v = getSets();
 		for (SetHelper sh : v)
+		{
 			sh.cleanUp();
-
+		}
 	}
+
 }

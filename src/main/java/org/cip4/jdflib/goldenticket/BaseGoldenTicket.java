@@ -753,6 +753,16 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * gets the current state of the node
+	 * 
+	 * @return the theNode
+	 */
+	public JDFNode getExpandedNode()
+	{
+		return theExpandedNode;
+	}
+
+	/**
 	 * 
 	 * @see java.lang.Object#toString()
 	 */

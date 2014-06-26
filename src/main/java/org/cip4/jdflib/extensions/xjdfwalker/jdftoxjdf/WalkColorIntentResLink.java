@@ -95,7 +95,8 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	VElement setResource(JDFResourceLink rl, JDFResource linkTarget, KElement xjdf)
@@ -177,7 +178,8 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(KElement jdf, KElement xjdf)
@@ -187,7 +189,8 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public boolean matches(KElement toCheck)

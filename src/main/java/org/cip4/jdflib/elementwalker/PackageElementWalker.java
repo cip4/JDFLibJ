@@ -185,9 +185,9 @@ public class PackageElementWalker extends ElementWalker
 				if (packagePath.equals(zipPackageName))
 				{
 					String name = packageName + "." + UrlUtil.newExtension(className, null);
-					log.info("constructing " + name);
+					log.debug("constructing " + name);
 					BaseWalker w = constructWalker(name);
-					log.info("constructed class: " + name + " Depth=" + w.getDepth());
+					log.debug("constructed class: " + name + " Depth=" + w.getDepth());
 					classes.putOne(baseClass, name);
 				}
 			}
@@ -217,7 +217,7 @@ public class PackageElementWalker extends ElementWalker
 					name = UrlUtil.prefix(name);
 					name = packageName + "." + name;
 					BaseWalker w = constructWalker(name);
-					log.info("constructed class: " + name + " Depth=" + w.getDepth());
+					log.debug("constructed class: " + name + " Depth=" + w.getDepth());
 					classes.putOne(baseClass, name);
 				}
 			}

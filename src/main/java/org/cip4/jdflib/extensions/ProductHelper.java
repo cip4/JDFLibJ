@@ -83,6 +83,14 @@ public class ProductHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
+	public static final String PRODUCT = "Product";
+	/**
+	 * 
+	 */
+	public static final String PRODUCTLIST = PRODUCT + "List";
+	/**
+	 * 
+	 */
 	public static boolean partitionProducts = false;
 	/**
 	 * root products attribute name

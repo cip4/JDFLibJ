@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.junit.Test;
@@ -103,6 +104,20 @@ public class XJDFHelperTest extends TestCase
 		SetHelper rlSet = theHelper.appendSet("Parameter", "RunList", null);
 		theHelper.cleanUp();
 		assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetXJDF()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.getCreateXPathElement("Resource/Part");
+		assertEquals(XJDFHelper.getHelper(set), new XJDFHelper(root));
 	}
 
 	/**

@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.pool.JDFResourcePool;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -90,7 +91,8 @@ public class WalkResource extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, KElement trackElem)
 	{
-		e.removeAttribute("Class");
+		if (!(trackElem instanceof JDFResourcePool))
+			e.removeAttribute("Class");
 		return super.walk(e, trackElem);
 	}
 

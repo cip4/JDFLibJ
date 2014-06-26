@@ -198,6 +198,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertTrue(n3.getPredecessors(true, false).contains(n2));
 		assertTrue(n2.getPredecessors(false, true).contains(n3));
 		assertTrue(n2.getPredecessors(false, false).contains(n3));
+		assertFalse(n2.getPredecessors(false, false).contains(n2));
+		assertFalse(n2.getPredecessors(true, false).contains(n2));
+		assertFalse(n3.getPredecessors(false, false).contains(n3));
+		assertFalse(n3.getPredecessors(true, false).contains(n3));
 		n3.linkResource(r, EnumUsage.Output, null);
 		// used to dead loop here after in=out...
 		n3.getPredecessors(false, true);

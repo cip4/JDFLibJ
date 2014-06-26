@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ package org.cip4.jdflib.resource;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -87,6 +88,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.junit.Test;
+
 /**
  * all kinds of fun tests around Stripping also some tests for automated layout
  * 
@@ -119,7 +121,19 @@ public class JDFStrippingTest extends JDFTestCaseBase
 		sp.refBinderySignature(bs);
 	}
 
-	// /////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testPositionValid()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Stripping);
+		JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		sp.appendPosition();
+		assertTrue(sp.isValid(EnumValidationLevel.Incomplete));
+	}
 
 	/**
 	 * test how foldouts are generated

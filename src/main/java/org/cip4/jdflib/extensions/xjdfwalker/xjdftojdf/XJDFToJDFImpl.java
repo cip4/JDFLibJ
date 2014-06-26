@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
@@ -619,7 +620,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	private void moveToLink(final JDFResourceLink rl, final JDFAttributeMap partmap, final JDFAttributeMap map, final String a)
 	{
-		if (map == null || map.isEmpty())
+		if (map == null || map.isEmpty() || rl == null)
 		{
 			return; // nop
 		}
@@ -630,10 +631,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			pm.put("Condition", gw);
 			if (map.get(a + gw) != null)
 			{
-				if (rl != null)
-				{
-					rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
-				}
+				rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
 				map.remove(a + gw);
 			}
 		}
@@ -646,9 +644,20 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	protected void moveAmountsToLink(final JDFAttributeMap partmap, final JDFAttributeMap map, final JDFResourceLink rl)
 	{
-		moveToLink(rl, partmap, map, AttributeName.AMOUNT);
-		moveToLink(rl, partmap, map, AttributeName.ACTUALAMOUNT);
-		moveToLink(rl, partmap, map, AttributeName.MAXAMOUNT);
+		if (rl != null)
+		{
+			moveToLink(rl, partmap, map, AttributeName.AMOUNT);
+			moveToLink(rl, partmap, map, AttributeName.ACTUALAMOUNT);
+			moveToLink(rl, partmap, map, AttributeName.MAXAMOUNT);
+			if (partmap == null && rl.getXPathElement("AmountPool/PartAmount/Part") == null && rl.getAmountPool() != null)
+			{
+				JDFPartAmount pa = rl.getAmountPool().getPartAmount(0);
+				rl.copyAttribute(AttributeName.AMOUNT, pa);
+				rl.copyAttribute(AttributeName.ACTUALAMOUNT, pa);
+				rl.copyAttribute(AttributeName.MAXAMOUNT, pa);
+				rl.getAmountPool().deleteNode();
+			}
+		}
 	}
 
 	/**

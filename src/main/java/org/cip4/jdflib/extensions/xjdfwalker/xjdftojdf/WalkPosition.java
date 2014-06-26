@@ -68,27 +68,27 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen 
- * 
- * walker for PhaseAmount
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkXJDFAuditAmount extends WalkXElement
+public class WalkPosition extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkXJDFAuditAmount()
+	public WalkPosition()
 	{
 		super();
 	}
@@ -101,43 +101,73 @@ public class WalkXJDFAuditAmount extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		String localName = toCheck.getLocalName();
-		return "PhaseAmount".equals(localName) || "ResourceAmount".equals(localName);
+		return toCheck instanceof JDFPosition;
+	}
+
+	/**
+	 * @param e
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(final KElement e, KElement trackElem)
+	{
+		JDFStrippingParams stripParams = (trackElem instanceof JDFStrippingParams) ? (JDFStrippingParams) trackElem : null;
+		doCells(e, stripParams);
+		KElement walk = super.walk(e, trackElem);
+		moveBSRef(e, stripParams);
+		return walk;
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * move BinderySig ref one down
+	 * @param e
+	 * @param stripParams
 	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	private void moveBSRef(final KElement e, JDFStrippingParams stripParams)
 	{
-		final KElement amountCopy = super.walk(e, trackElem);
-		if (amountCopy != null)
+		if (stripParams != null)
 		{
-			String id = e.getAttribute(AttributeName.RREF);
-			if (StringUtil.getNonEmpty(id) != null)
+			KElement bsRef = e.getElement(ElementName.BINDERYSIGNATURE + "Ref");
+			if (bsRef != null)
 			{
-				XJDFHelper h = XJDFHelper.getHelper(e);
-				SetHelper sh = h.getSetForPartition(id);
-				PartitionHelper ph = h.getPartition(id);
-				if (sh != null)
+				stripParams.moveElement(bsRef, null);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 *split SignatureCells and StripCellParams appropriately
+	 * @param e
+	 * @param stripParams
+	 */
+	private void doCells(final KElement e, JDFStrippingParams stripParams)
+	{
+		if (stripParams != null && stripParams.getStripCellParams() == null)
+		{
+			String id = StringUtil.getNonEmpty(e.getAttribute(ElementName.BINDERYSIGNATURE + "Ref", null, null));
+			XJDFHelper xh = XJDFHelper.getHelper(e);
+			if (xh != null)
+			{
+				PartitionHelper bsh = xh.getPartition(id);
+				VElement vSigCell = bsh == null ? null : bsh.getResource().getChildElementVector(ElementName.SIGNATURECELL, null);
+				if (vSigCell != null)
 				{
-					KElement amountParent = amountCopy.getParentNode_KElement();
-					JDFResourceLink rl = (JDFResourceLink) amountParent.insertBefore(sh.getName() + "Link", amountCopy, null);
-					rl.setrRef(sh.getID());
-					rl.setUsage(sh.getUsage());
-					if (ph != null)
+					for (KElement sigCell : vSigCell)
 					{
-						VJDFAttributeMap partMapVector = ph.getPartMapVector();
-						partMapVector.remove(new JDFAttributeMap());
-						rl.setPartMapVector(partMapVector);
+						JDFStripCellParams stripCell = stripParams.appendStripCellParams();
+						VString stripCellKnown = stripCell.knownAttributes();
+						JDFAttributeMap sigCelMap = sigCell.getAttributeMap();
+						sigCelMap.reduceMap(stripCellKnown);
+						if (sigCelMap.size() > 0)
+						{
+							stripCell.setAttributes(sigCelMap);
+							sigCell.removeAttributes(sigCelMap.keySet());
+						}
 					}
-					amountCopy.deleteNode();
-					return rl;
 				}
 			}
 		}
-		return amountCopy;
 	}
 }

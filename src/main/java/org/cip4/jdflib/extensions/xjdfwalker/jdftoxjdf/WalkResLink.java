@@ -104,14 +104,14 @@ public class WalkResLink extends WalkJDFElement
 	{
 		final JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource linkTarget = rl.getLinkRoot();
-		if (linkTarget == null)
+		// we do not explicitly call out components for products
+		if (linkTarget == null || rl.getBoolAttribute(WalkProduct.SKIP_CONVERT, null, false))
 		{
 			return null;
 		}
-		// final boolean bCustomerInfo = linkTarget instanceof JDFCustomerInfo;
-		if (this.jdfToXJDF.walkingProduct)
+
+		if (jdfToXJDF.walkingProduct)
 		{
-			// if (!bCustomerInfo && !EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
 			if (!EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
 			{
 				return null;
@@ -125,8 +125,8 @@ public class WalkResLink extends WalkJDFElement
 			{
 				return null;
 			}
-			setResource(rl, linkTarget, this.jdfToXJDF.newRoot);
-			if (!this.jdfToXJDF.isSingleNode())
+			setResource(rl, linkTarget, jdfToXJDF.newRoot);
+			if (!jdfToXJDF.isSingleNode())
 			{
 				setProcess(rl);
 			}
@@ -144,7 +144,7 @@ public class WalkResLink extends WalkJDFElement
 	 */
 	VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xjdf)
 	{
-		return this.jdfToXJDF.setResource(rl, linkTarget, xjdf);
+		return jdfToXJDF.setResource(rl, linkTarget, xjdf);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class WalkResLink extends WalkJDFElement
 		if (jobPartID == null)
 			return null;
 
-		KElement processList = this.jdfToXJDF.newRoot.getCreateElement("ProcessList", null, 0);
+		KElement processList = jdfToXJDF.newRoot.getCreateElement("ProcessList", null, 0);
 		KElement process = processList.getChildWithAttribute("Process", AttributeName.JOBPARTID, null, jobPartID, 0, true);
 		if (process == null)
 		{

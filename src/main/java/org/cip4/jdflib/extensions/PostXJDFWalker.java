@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -88,6 +89,8 @@ import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 
@@ -167,11 +170,9 @@ public class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param stripCellParams
-		 * @param dummy
-		 * @return
-		*/
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
 		@Override
 		public KElement walk(KElement stripCellParams, KElement dummy)
 		{
@@ -213,11 +214,9 @@ public class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param strippingParams
-		 * @param dummy
-		 * @return
-		*/
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
 		@Override
 		public KElement walk(KElement strippingParams, KElement dummy)
 		{
@@ -251,7 +250,9 @@ public class PostXJDFWalker extends BaseElementWalker
 			String bsName = map.remove(AttributeName.BINDERYSIGNATURENAME);
 			String cellIndex = map.remove(AttributeName.CELLINDEX);
 			PartitionHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
-			KElement layoutPartition = layoutPartitionH.getResource();
+			JDFLayout layoutPartition = (JDFLayout) layoutPartitionH.getResource();
+			ensureLayoutPositions(strippingParams, layoutPartition);
+
 			JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
 			VElement childElementVector = strippingParams.getChildElementVector(ElementName.SIGNATURECELL, null);
 			if (childElementVector != null)
@@ -268,17 +269,44 @@ public class PostXJDFWalker extends BaseElementWalker
 			}
 			else
 			{
-				JDFBinderySignature bs = (JDFBinderySignature) strippingParams.getElement(ElementName.BINDERYSIGNATURE);
+				String bsID = strippingParams.getAttribute(ElementName.BINDERYSIGNATURE + "Ref", null, null);
+				PartitionHelper bsHelper = XJDFHelper.getHelper(layoutPartition).getPartition(bsID);
+				JDFBinderySignature bs = (bsHelper == null) ? null : (JDFBinderySignature) bsHelper.getResource();
 				if (bs != null)
 				{
 					bs.setBinderySignatureName(bsName);
-					bs.moveElements(strippingParams.getChildElementVector(ElementName.POSITION, null), null);
 					moveStripCells(bs, childElementVector);
 					moveBSFromStripping(bs, strippingParams);
+					VElement positions = layoutPartition.getChildElementVector(ElementName.POSITION, null);
+					for (KElement position : positions)
+					{
+						position.setAttribute(ElementName.BINDERYSIGNATURE + "Ref", bsID);
+					}
+					strippingParams.removeAttribute(ElementName.BINDERYSIGNATURE + "Ref");
 				}
 				layoutPartition.copyInto(strippingParams, false);
 			}
 			return map;
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param strippingParams
+		 * @param layoutPartition
+		 */
+		private void ensureLayoutPositions(JDFStrippingParams strippingParams, JDFLayout layoutPartition)
+		{
+			VElement positions = strippingParams.getChildElementVector(ElementName.POSITION, null);
+			if (positions != null && positions.size() > 0)
+			{
+				layoutPartition.moveElements(positions, null);
+			}
+			else
+			{
+				JDFPosition newPos = (JDFPosition) layoutPartition.appendElement(ElementName.POSITION);
+				newPos.setRelativeBox(new JDFRectangle(0, 0, 1, 1));
+			}
 		}
 
 		/**
@@ -316,7 +344,9 @@ public class PostXJDFWalker extends BaseElementWalker
 				if (vbsCell != null)
 				{
 					for (JDFSignatureCell bsCell : vbsCell)
+					{
 						bsCell.mergeElement(sigCell, false);
+					}
 				}
 				sigCell.deleteNode();
 			}

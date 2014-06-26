@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.HashSet;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -214,27 +216,64 @@ public class WalkJDFElement extends WalkElement
 		return mustInline(re.getRefLocalName());
 	}
 
+	private final static HashSet<String> inlineSet = new HashSet<String>();
+
 	/**
 	 * @param refLocalName
 	 * @return true if must inline refLocalName
 	 */
 	protected boolean mustInline(final String refLocalName)
 	{
-		return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.BARCODECOMPPARAMS.equals(refLocalName) || ElementName.BARCODEREPROPARAMS.equals(refLocalName)
-				|| ElementName.COMCHANNEL.equals(refLocalName) || ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
-				|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName)
-				|| ElementName.PERSON.equals(refLocalName) || ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName)
-				|| ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName) || ElementName.GLUEAPPLICATION.equals(refLocalName)
-				|| ElementName.CIELABMEASURINGFIELD.equals(refLocalName) || ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName)
-				|| ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName) || ElementName.ELEMENTCOLORPARAMS.equals(refLocalName)
-				|| ElementName.CUT.equals(refLocalName) || ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName)
-				|| ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName)
-				|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
-				|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
-				|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
-				|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName) || ElementName.LAYERLIST.equals(refLocalName)
-				|| ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName) || ElementName.MARKOBJECT.equals(refLocalName)
-				|| ElementName.FILESPEC.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName) || ElementName.BINDERYSIGNATURE.equals(refLocalName);
+		if (inlineSet.isEmpty())
+		{
+			synchronized (inlineSet)
+			{
+				inlineSet.add(ElementName.OBJECTRESOLUTION);
+				inlineSet.add(ElementName.BARCODECOMPPARAMS);
+				inlineSet.add(ElementName.BARCODEREPROPARAMS);
+				inlineSet.add(ElementName.COMCHANNEL);
+				inlineSet.add(ElementName.INTERPRETEDPDLDATA);
+				inlineSet.add(ElementName.BYTEMAP);
+				inlineSet.add(ElementName.ADDRESS);
+				inlineSet.add(ElementName.COSTCENTER);
+				inlineSet.add(ElementName.COMPANY);
+				inlineSet.add(ElementName.PERSON);
+				inlineSet.add(ElementName.DEVICE);
+				inlineSet.add(ElementName.DEVICENSPACE);
+				inlineSet.add(ElementName.COLORANTALIAS);
+				inlineSet.add(ElementName.GLUELINE);
+				inlineSet.add(ElementName.GLUEAPPLICATION);
+				inlineSet.add(ElementName.CIELABMEASURINGFIELD);
+				inlineSet.add(ElementName.REGISTERMARK);
+				inlineSet.add(ElementName.FITPOLICY);
+				inlineSet.add(ElementName.CUTBLOCK);
+				inlineSet.add(ElementName.EMPLOYEE);
+				inlineSet.add(ElementName.ELEMENTCOLORPARAMS);
+				inlineSet.add(ElementName.CUT);
+				inlineSet.add(ElementName.PDLRESOURCEALIAS);
+				inlineSet.add(ElementName.HOLELIST);
+				inlineSet.add(ElementName.HOLE);
+				inlineSet.add(ElementName.MISDETAILS);
+				inlineSet.add(ElementName.HOLELINE);
+				inlineSet.add(ElementName.JOBFIELD);
+				inlineSet.add(ElementName.AUTOMATEDOVERPRINTPARAMS);
+				inlineSet.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
+				inlineSet.add(ElementName.PRODUCTIONPATH);
+				inlineSet.add(ElementName.SHAPE);
+				inlineSet.add(ElementName.SCAVENGERAREA);
+				inlineSet.add(ElementName.TRAPREGION);
+				inlineSet.add(ElementName.TRANSFERCURVE);
+				inlineSet.add(ElementName.COLORCONTROLSTRIP);
+				inlineSet.add(ElementName.LAYERLIST);
+				inlineSet.add(ElementName.PAGECONDITION);
+				inlineSet.add(ElementName.CONTENTOBJECT);
+				inlineSet.add(ElementName.MARKOBJECT);
+				inlineSet.add(ElementName.LAYERDETAILS);
+				inlineSet.add(ElementName.FILESPEC);
+				inlineSet.add(ElementName.IDENTIFICATIONFIELD);
+			}
+		}
+		return inlineSet.contains(refLocalName);
 	}
 
 	/**

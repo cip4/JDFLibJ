@@ -140,7 +140,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.EXTERNALIMPOSITIONTEMPLATE, 0x66666111);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIA, 0x33333311);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.POSITION, 0x44443333);
+		elemInfoTable[4] = new ElemInfoTable(ElementName.POSITION, 0x33333311);
 		elemInfoTable[5] = new ElemInfoTable(ElementName.STRIPCELLPARAMS, 0x66666611);
 		elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333111);
 	}

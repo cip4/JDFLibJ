@@ -75,6 +75,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeValidity;
@@ -252,13 +253,12 @@ public class ElementInfo
 	private VString conformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2, EnumElementValidity elemValidity3, EnumElementValidity elemValidity4)
 	{
 		VString matchingElements = new VString();
-		Iterator<String> iter = elementInfoTable.keySet().iterator();
+		Set<String> keySet = elementInfoTable.keySet();
 
 		long l2 = JDFVersions.getTheMask(version);
 		long v2 = JDFVersions.getTheOffset(version);
-		while (iter.hasNext())
+		for (String theKey : keySet)
 		{
-			final String theKey = iter.next();
 			final ElemInfo ei = elementInfoTable.get(theKey);
 			long eiValStatus = ei.getElemValidityStatus() & l2;
 			if (eiValStatus == ((long) elemValidity1.getValue() << v2))

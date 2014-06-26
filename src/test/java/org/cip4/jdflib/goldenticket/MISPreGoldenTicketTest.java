@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,19 +101,19 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	public void testMISPreContentCreation()
 	{
-		final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, EnumVersion.Version_1_4, 2, 2, vMap);
+		final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, EnumVersion.Version_1_5, 2, 2, vMap);
 		goldenTicket.nCols[0] = goldenTicket.nCols[1] = 4;
 		goldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
 		goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_CONTENTCREATION);
 
-		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_4, 0, 0);
+		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
 		pgt.assign(null);
 		pgt.createHDCity();
 		final JDFNode node = pgt.getNode();
 		final JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
 
 		goldenTicket.assign(nodePre);
-		BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_ContentCreation");
+		BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_ContentCreation");
 	}
 
 	/**

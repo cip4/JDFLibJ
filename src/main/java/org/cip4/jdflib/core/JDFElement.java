@@ -2098,8 +2098,7 @@ public class JDFElement extends KElement
 	 */
 	public boolean isValid_JDFElement(final EnumValidationLevel level)
 	{
-		// there is no explicit extension type --> these are always assumed
-		// valid
+		// there is no explicit extension type --> these are always assumed valid
 		final Class<? extends JDFElement> class1 = this.getClass();
 		if (class1 == JDFElement.class || class1 == JDFResource.class)
 		{
@@ -2108,7 +2107,8 @@ public class JDFElement extends KElement
 
 		try
 		{
-			if (getInvalidAttributes(level, true, 1).size() > 0 || getInvalidElements(level, true, 1).size() > 0)
+			boolean hasInvalidAtts = getInvalidAttributes(level, true, 1).size() > 0;
+			if (hasInvalidAtts || getInvalidElements(level, true, 1).size() > 0)
 			{
 				return false;
 			}
@@ -3760,6 +3760,7 @@ public class JDFElement extends KElement
 			if ((e instanceof JDFElement) && !((JDFElement) e).isValid(level))
 			{
 				vBad.add(e.getLocalName());
+				jLog.warn(e.getLocalName());
 				if (++num >= nMax)
 				{
 					return vBad;
@@ -3770,6 +3771,14 @@ public class JDFElement extends KElement
 		if (EnumValidationLevel.isRequired(level) && !isIncomplete())
 		{
 			vBad.appendUnique(new VString(getMissingElements(nMax)));
+		}
+		if ((nMax <= 0 || vBad.size() < nMax) && !EnumValidationLevel.isNoWarn(level))
+		{
+			vBad.appendUnique(new VString(getDeprecatedElements(nMax)));
+			if (nMax <= 0 || vBad.size() < nMax)
+			{
+				vBad.appendUnique(new VString(getPrereleaseElements(nMax)));
+			}
 		}
 
 		vBad.appendUnique(new VString(getUnknownElements(bIgnorePrivate, nMax)));

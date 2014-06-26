@@ -116,7 +116,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
-		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Manager_MISCPS_1_GB.jdf", 2);
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB");
 		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
@@ -125,10 +125,10 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
-		cpGoldenTicket.execute(null, true, true);
 		cpGoldenTicket.makeReadyAll();
+		cpGoldenTicket.execute(null, true, true);
 		node = cpGoldenTicket.getNode();
-		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB.jdf", 2);
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB");
 		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.5"));
@@ -143,7 +143,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		map.put(EnumPartIDKey.Side, "Back");
 		cpGoldenTicket.schedule(mapSingle, 8, 2);
 
-		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Manager_MISCPS_1_GB_FrontBack.jdf", 2);
+		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "MISCPS_1_GB_FrontBack");
 		map.put(EnumPartIDKey.Side, "Front");
 		cpGoldenTicket.execute(mapSingle, false, true);
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xB.jdf", 2);
@@ -246,7 +246,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
 		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
 
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
+		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
 		pgt.assign(null);
 		pgt.createHDCity();
 		JDFNode node = pgt.getNode();

@@ -72,9 +72,9 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.elementwalker.StrippingConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
-import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

@@ -97,7 +97,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	public void testIDPSimple()
 	{
-		write3GTFiles(idpGoldenTicket, "IDP_Simple");
+		write9GTFiles(idpGoldenTicket, "IDP_Simple");
 	}
 
 	/**
