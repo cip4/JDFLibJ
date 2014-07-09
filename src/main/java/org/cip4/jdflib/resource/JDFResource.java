@@ -3267,6 +3267,28 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * 
+	 * @see org.cip4.jdflib.core.KElement#getChildrenByClass(java.lang.Class, boolean, int)
+	 */
+	@Override
+	public <a extends KElement> Vector<a> getChildrenByClass(Class<a> clazz, boolean bRecurse, int nMax)
+	{
+		Vector<a> v = super.getChildrenByClass(clazz, bRecurse, nMax);
+
+		KElement ke = this;
+		if (v.size() == 0)
+		{
+			final String nodeName = getNodeName();
+			ke = ke.getParentNode_KElement();
+			if (ke != null && ke.getNodeName().equals(nodeName))
+			{
+				v = ke.getChildrenByClass(clazz, false, nMax);
+			}
+		}
+		return v;
+	}
+
+	/**
 	 * Get the Attribute Map of the actual element also following inheritance
 	 * 
 	 * @return JDFAttributeMap the attribute map of the actual element

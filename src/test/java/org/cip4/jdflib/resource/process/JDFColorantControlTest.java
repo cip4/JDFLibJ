@@ -284,7 +284,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
-		assertNull(col);
+		assertEquals(col.size(), 0);
 		final JDFColorantAlias a1 = colControl.appendColorantAlias();
 		final JDFColorantAlias a2 = colControl.appendColorantAlias();
 		col = cBlatt.getAllColorantAlias();
