@@ -2012,6 +2012,13 @@
 	<xs:simpleType name="eIntentPriority_">
 		<xs:restriction base="jdftyp:EnumerationBaseType"/>
 	</xs:simpleType>
+	<xs:simpleType name="eInternalColorModel_">
+		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="Basic"/>
+			<xs:enumeration value="Enhanced"/>
+			<xs:enumeration value="Explicit"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="eJogSide_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="Left"/>
@@ -2099,6 +2106,13 @@
 			<xs:enumeration value="Amount"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="eMappingSelection_">
+		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="UsePDLValues"/>
+			<xs:enumeration value="UseLocalPrinterValues"/>
+			<xs:enumeration value="UseProcessColorValues"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="eMarkActivationContext_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="CollectIndex"/>
@@ -2125,13 +2139,6 @@
 			<xs:enumeration value="CellPair"/>
 			<xs:enumeration value="Sheet"/>
 			<xs:enumeration value="Tile"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="eMappingSelection_">
-		<xs:restriction base="jdftyp:EnumerationBaseType">
-			<xs:enumeration value="UsePDLValues"/>
-			<xs:enumeration value="UseLocalPrinterValues"/>
-			<xs:enumeration value="UseProcessColorValues"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="eMarkJustification_">

@@ -1603,6 +1603,8 @@ public final class AttributeName
 	/** */
 	public static final String INTERLEAVING = "Interleaving";
 	/** */
+	public static final String INTERNALCOLORMODEL = "InternalColorModel";
+	/** */
 	public static final String IPPJOBPRIORITY = "IPPJobPriority";
 	/** */
 	public static final String IPPVERSION = "IPPVersion";

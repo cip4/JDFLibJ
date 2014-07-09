@@ -163,8 +163,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected void checkSchema(JDFElement root, EnumValidationLevel level)
 	{
 		String string = root.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser jdfParser = new JDFParser();
-		jdfParser.setSchemaLocation(JDFElement.getSchemaURL(), sm_dirTestSchema + "JDF.xsd");
+		JDFParser jdfParser = getSchemaParser();
 		JDFDoc doc = jdfParser.parseString(string);
 		assertEquals(doc.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
@@ -377,6 +376,15 @@ public abstract class JDFTestCaseBase extends TestCase
 	public boolean isTestNetwork()
 	{
 		return bTestNetwork;
+	}
+
+	protected JDFParser getSchemaParser()
+	{
+		JDFParser parser = new JDFParser();
+		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
+		assertTrue(jdfxsd.canRead());
+		parser.setJDFSchemaLocation(jdfxsd);
+		return parser;
 	}
 
 }

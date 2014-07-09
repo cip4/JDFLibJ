@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,9 +70,12 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumInternalColorModel;
+import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumMappingSelection;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -83,14 +86,16 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -112,16 +117,16 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFColorantAlias ca = colControl.appendColorantAlias();
 		ca.setXMLComment("ColorantAlias that maps the predefined separation Black");
 		ca.setReplacementColorantName("Green");
-		Assert.assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
-		Assert.assertFalse(ca.isValid(EnumValidationLevel.Complete));
+		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
+		assertFalse(ca.isValid(EnumValidationLevel.Complete));
 		final VString vAlias = new VString("Gr�n gr�n", null);
 		ca.setSeparations(vAlias);
-		Assert.assertTrue(ca.isValid(EnumValidationLevel.Complete));
+		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		byte[] b = vAlias.stringAt(0).getBytes();
 		String rawNames = StringUtil.setHexBinaryBytes(b, -1) + " ";
 		b = vAlias.stringAt(1).getBytes();
 		rawNames += StringUtil.setHexBinaryBytes(b, -1);
-		Assert.assertTrue(ca.isValid(EnumValidationLevel.Complete));
+		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		ca.setAttribute("RawNames", rawNames);
 
 		d.write2File(sm_dirTestDataTemp + "ColorantAlias.jdf", 2, false);
@@ -145,7 +150,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		co.setXMLComment("Color that maps the predefined separation Black\n"
 				+ "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
-		Assert.assertTrue(co.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");
 
 		co = colPool.appendColorWithName("Yellow", null);
@@ -170,11 +175,11 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFColorantAlias ca = colControl.appendColorantAlias();
 		ca.setXMLComment("ColorantAlias that maps the additional representation (noir) to the predefined separation Black");
 		ca.setReplacementColorantName("Black");
-		Assert.assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
-		Assert.assertFalse(ca.isValid(EnumValidationLevel.Complete));
+		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
+		assertFalse(ca.isValid(EnumValidationLevel.Complete));
 		final VString vAlias = new VString("noir schw�rz", null);
 		ca.setSeparations(vAlias);
-		Assert.assertTrue(ca.isValid(EnumValidationLevel.Complete));
+		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		byte[] b = vAlias.stringAt(0).getBytes();
 		String rawNames = StringUtil.setHexBinaryBytes(b, -1) + " ";
 		b = vAlias.stringAt(1).getBytes();
@@ -194,27 +199,27 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
-		Assert.assertTrue(kElem instanceof JDFColorantControl);
+		assertTrue(kElem instanceof JDFColorantControl);
 		final JDFColorantControl cc = ((JDFColorantControl) kElem);
 		final JDFSeparationList co = cc.appendColorantOrder();
 		final VString seps = StringUtil.tokenize("Cyan Magenta Yellow Black", " ", false);
 
 		co.setSeparations(seps);
-		Assert.assertEquals(co.getSeparations(), seps);
+		assertEquals(co.getSeparations(), seps);
 		final VElement vSepSpec = co.getChildElementVector(ElementName.SEPARATIONSPEC, null, null, true, 0, true);
-		Assert.assertEquals(vSepSpec.size(), seps.size());
+		assertEquals(vSepSpec.size(), seps.size());
 		for (int i = 0; i < vSepSpec.size(); i++)
 		{
-			Assert.assertFalse(vSepSpec.item(i).hasAttribute(AttributeName.CLASS));
-			Assert.assertFalse(vSepSpec.item(i) instanceof JDFResource);
+			assertFalse(vSepSpec.item(i).hasAttribute(AttributeName.CLASS));
+			assertFalse(vSepSpec.item(i) instanceof JDFResource);
 		}
 
-		Assert.assertEquals(co.getSeparation(0), "Cyan");
+		assertEquals(co.getSeparation(0), "Cyan");
 		co.removeSeparation("Magenta");
-		Assert.assertEquals(co.getSeparation(0), "Cyan");
-		Assert.assertEquals(co.getSeparation(1), "Yellow");
-		Assert.assertEquals(co.getSeparation(2), "Black");
-		Assert.assertNull(co.getSeparation(3));
+		assertEquals(co.getSeparation(0), "Cyan");
+		assertEquals(co.getSeparation(1), "Yellow");
+		assertEquals(co.getSeparation(2), "Black");
+		assertNull(co.getSeparation(3));
 	}
 
 	/**
@@ -228,14 +233,14 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
-		Assert.assertTrue(kElem instanceof JDFColorantControl);
+		assertTrue(kElem instanceof JDFColorantControl);
 		final JDFColorantControl cc = ((JDFColorantControl) kElem);
 		cc.setProcessColorModel("DeviceCMYK");
-		Assert.assertTrue(cc.getSeparations().contains("Cyan"));
+		assertTrue(cc.getSeparations().contains("Cyan"));
 		cc.appendColorantParams().appendSeparation("Snarf Blue");
-		Assert.assertTrue(cc.getSeparations().contains("Snarf Blue"));
+		assertTrue(cc.getSeparations().contains("Snarf Blue"));
 		cc.setProcessColorModel("DeviceN");
-		Assert.assertTrue(cc.getSeparations().contains("Snarf Blue"));
+		assertTrue(cc.getSeparations().contains("Snarf Blue"));
 	}
 
 	/**
@@ -249,14 +254,14 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		final JDFResourcePool resPool = root.getCreateResourcePool();
 		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
-		Assert.assertTrue(kElem instanceof JDFColorantControl);
+		assertTrue(kElem instanceof JDFColorantControl);
 		final JDFColorantControl cc = ((JDFColorantControl) kElem);
 		cc.setProcessColorModel("DeviceCMYK");
-		Assert.assertTrue(cc.getAllSeparations().contains("Cyan"));
+		assertTrue(cc.getAllSeparations().contains("Cyan"));
 		cc.appendColorantParams().appendSeparation("Snarf Blue");
-		Assert.assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
+		assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
 		cc.setProcessColorModel("DeviceN");
-		Assert.assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
+		assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -267,7 +272,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	public void testColorantParams()
 	{
-		Assert.assertTrue(colParams.isValid(EnumValidationLevel.RecursiveComplete));
+		assertTrue(colParams.isValid(EnumValidationLevel.RecursiveComplete));
 	}
 
 	/**
@@ -279,17 +284,17 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		Collection<JDFColorantAlias> col = cBlatt.getAllColorantAlias();
-		Assert.assertNull(col);
+		assertNull(col);
 		final JDFColorantAlias a1 = colControl.appendColorantAlias();
 		final JDFColorantAlias a2 = colControl.appendColorantAlias();
 		col = cBlatt.getAllColorantAlias();
-		Assert.assertEquals(col.size(), 2);
-		Assert.assertTrue(col.contains(a1));
-		Assert.assertTrue(col.contains(a2));
+		assertEquals(col.size(), 2);
+		assertTrue(col.contains(a1));
+		assertTrue(col.contains(a2));
 		final JDFColorantAlias a3 = cBlatt.appendColorantAlias();
 		col = cBlatt.getAllColorantAlias();
-		Assert.assertEquals(col.size(), 1);
-		Assert.assertTrue(col.contains(a3));
+		assertEquals(col.size(), 1);
+		assertTrue(col.contains(a3));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -303,13 +308,13 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFColorantAlias a2 = colControl.appendColorantAlias();
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		VElement col = cBlatt.getChildElementVector(ElementName.COLORANTALIAS, null);
-		Assert.assertEquals(col.size(), 2);
-		Assert.assertTrue(col.contains(a1));
-		Assert.assertTrue(col.contains(a2));
+		assertEquals(col.size(), 2);
+		assertTrue(col.contains(a1));
+		assertTrue(col.contains(a2));
 		final JDFColorantAlias a3 = cBlatt.appendColorantAlias();
 		col = cBlatt.getChildElementVector(ElementName.COLORANTALIAS, null);
-		Assert.assertEquals(col.size(), 1);
-		Assert.assertTrue(col.contains(a3));
+		assertEquals(col.size(), 1);
+		assertTrue(col.contains(a3));
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -321,14 +326,14 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	public void testGetDeviceColorantOrderSeparations()
 	{
 		colParams.appendSeparation("Black");
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations(), colControl.getSeparations());
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 4);
+		assertEquals(colControl.getDeviceColorantOrderSeparations(), colControl.getSeparations());
+		assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 4);
 		colParams.appendSeparation("Green");
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations(), colControl.getSeparations());
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 5);
+		assertEquals(colControl.getDeviceColorantOrderSeparations(), colControl.getSeparations());
+		assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 5);
 		colControl.appendColorantOrder().appendSeparation("Green");
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 1);
-		Assert.assertEquals(colControl.getDeviceColorantOrderSeparations().stringAt(0), "Green");
+		assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 1);
+		assertEquals(colControl.getDeviceColorantOrderSeparations().stringAt(0), "Green");
 	}
 
 	// //////////////////////////////////////////////////////////////////////
@@ -340,11 +345,35 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	public void testGetColorantOrderSeparations()
 	{
 		colParams.appendSeparation("Black");
-		Assert.assertEquals(colControl.getColorantOrderSeparations(), colControl.getSeparations());
-		Assert.assertEquals(colControl.getColorantOrderSeparations().size(), 4);
+		assertEquals(colControl.getColorantOrderSeparations(), colControl.getSeparations());
+		assertEquals(colControl.getColorantOrderSeparations().size(), 4);
 		colParams.appendSeparation("Green");
-		Assert.assertEquals(colControl.getColorantOrderSeparations(), colControl.getSeparations());
-		Assert.assertEquals(colControl.getColorantOrderSeparations().size(), 5);
+		assertEquals(colControl.getColorantOrderSeparations(), colControl.getSeparations());
+		assertEquals(colControl.getColorantOrderSeparations().size(), 5);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMappingSelection()
+	{
+		colControl.setMappingSelection(EnumMappingSelection.UseLocalPrinterValues);
+		assertEquals(colControl.getMappingSelection(), EnumMappingSelection.UseLocalPrinterValues);
+		checkSchema(colControl, EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * 
+	 */
+	@Test
+	public void testInternalColorModel() throws SAXException, IOException
+	{
+		colControl.setInternalColorModel(EnumInternalColorModel.Enhanced);
+		assertEquals(colControl.getInternalColorModel(), EnumInternalColorModel.Enhanced);
+		checkSchema(colControl, EnumValidationLevel.Incomplete);
 	}
 
 	/**
@@ -357,6 +386,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		KElement.setLongID(false);
 		d = new JDFDoc(ElementName.JDF);
 		elem = d.getJDFRoot();
+		elem.setType(EnumType.AdhesiveBinding);
 		final JDFResourcePool rpool = elem.appendResourcePool();
 		colControl = (JDFColorantControl) rpool.appendResource(ElementName.COLORANTCONTROL, EnumResourceClass.Parameter, null);
 		colControl.setProcessColorModel("DeviceCMYK");

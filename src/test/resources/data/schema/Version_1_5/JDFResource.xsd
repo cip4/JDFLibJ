@@ -1916,6 +1916,8 @@
         <!-- Version Path="ColorantAliasRef" First="1.2"/ -->
         <!-- Version Path="DeviceNSpaceRef" First="1.2"/ -->
         <Version Path="DeviceNSpaceRef" Last="1.5"/>
+        <Version Path="@InternalColorModel" First="1.5"/>
+        <Version Path="@MappingSelection" First="1.5"/>
         <Constraint Path="ColorantAlias" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ColorantAliasRef" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ColorantConvertProcess" minOccurs="0" maxOccurs="1"/>
@@ -1936,6 +1938,8 @@
   <xs:element name="ColorantControlRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef"/>
   <xs:element name="ColorantControlLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink"/>
   <xs:attributeGroup name="ColorantControlAttribs_c">
+    <xs:attribute name="InternalColorModel" type="jdftyp:eInternalColorModel_" use="optional"/>
+    <xs:attribute name="MappingSelection" type="jdftyp:eMappingSelection_" use="optional"/>
     <xs:attribute name="ProcessColorModel" type="jdftyp:NMTOKEN" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="ColorantControlAttribs_u">

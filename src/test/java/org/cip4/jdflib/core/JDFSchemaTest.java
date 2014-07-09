@@ -211,10 +211,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
-		p = new JDFParser();
-		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
-		assertTrue(jdfxsd.canRead());
-		p.setJDFSchemaLocation(jdfxsd);
+		p = getSchemaParser();
 	}
 
 	/**
