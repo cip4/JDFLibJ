@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -131,6 +132,29 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(m);
 		JDFResourceLink rl = root.getLink(m, null);
 		assertNull(rl.getAmountPool());
+		assertNull(m.getElement("AmountPool"));
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testAmountPoolPart()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		SetHelper sh = xjdf.getCreateResourceSet("Media", EnumUsage.Input);
+		PartitionHelper ph = sh.getCreatePartition(new JDFAttributeMap("SheetName", "S1"), true);
+		ph.setAmount(33, new JDFAttributeMap("SheetName", "S1"), true);
+		KElement e = xjdf.getRoot();
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFMedia m = (JDFMedia) root.getResource("Media", EnumUsage.Input, 0);
+		assertNotNull(m);
+		JDFResourceLink rl = root.getLink(m, null);
+		assertNotNull(rl.getAmountPool());
 		assertNull(m.getElement("AmountPool"));
 	}
 
