@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -93,11 +93,11 @@ import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -116,7 +116,7 @@ public class JDFDocTest extends JDFTestCaseBase
 		KElement root = d.getRoot();
 		root.setAttribute("xmlns:FOO", "www.foo.com");
 		final KElement e = (KElement) d.createElement("FOO:bar");
-		Assert.assertNull(e.getNamespaceURI());
+		assertNull(e.getNamespaceURI());
 	}
 
 	/**
@@ -127,29 +127,29 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("test");
 		final KElement e = doc.getRoot();
-		Assert.assertFalse(e.isDirty());
-		Assert.assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
 		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
-		Assert.assertFalse(e.isDirty());
-		Assert.assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
 		e.setAttribute("foo", "bar");
-		Assert.assertTrue(e.isDirty());
-		Assert.assertTrue(doc.isDirty(null));
+		assertTrue(e.isDirty());
+		assertTrue(doc.isDirty(null));
 		doc.clearDirtyIDs();
-		Assert.assertFalse(doc.isDirty(null));
-		Assert.assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
 		KElement e2 = e.appendElement("foobar");
-		Assert.assertTrue(e.isDirty());
-		Assert.assertTrue(doc.isDirty(null));
-		Assert.assertTrue(e2.isDirty());
+		assertTrue(e.isDirty());
+		assertTrue(doc.isDirty(null));
+		assertTrue(e2.isDirty());
 		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.XPath);
 		doc.clearDirtyIDs();
-		Assert.assertFalse(doc.isDirty(null));
-		Assert.assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
 		e2 = e.appendElement("foobar");
-		Assert.assertTrue(doc.isDirty(null));
-		Assert.assertTrue(e.isDirty());
-		Assert.assertTrue(e2.isDirty());
+		assertTrue(doc.isDirty(null));
+		assertTrue(e.isDirty());
+		assertTrue(e2.isDirty());
 	}
 
 	/**
@@ -163,14 +163,14 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
 
-		Assert.assertTrue(xmlFile + ": Parse Error", jdfDoc != null);
+		assertTrue(xmlFile + ": Parse Error", jdfDoc != null);
 		if (jdfDoc == null)
 		{
 			return; // soothe findbugs ;)
 		}
 
-		Assert.assertNotNull("jdf root", jdfDoc.getJDFRoot());
-		Assert.assertNull("no jmf root", jdfDoc.getJMFRoot());
+		assertNotNull("jdf root", jdfDoc.getJDFRoot());
+		assertNull("no jmf root", jdfDoc.getJMFRoot());
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class JDFDocTest extends JDFTestCaseBase
 		for (int i = 0; i < 10000; i++)
 		{
 			JDFDoc doc = new JDFDoc("JDF");
-			Assert.assertNotNull(doc);
+			assertNotNull(doc);
 		}
 	}
 
@@ -197,10 +197,10 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFDoc d2 = d.clone();
 		final KElement e1 = d.getRoot();
 		final KElement e2 = d2.getRoot();
-		Assert.assertNotSame(e1, e2);
-		Assert.assertEquals(e2.getOwnerDocument(), d2.getMemberDocument());
+		assertNotSame(e1, e2);
+		assertEquals(e2.getOwnerDocument(), d2.getMemberDocument());
 		e1.appendElement("foo");
-		Assert.assertNull(e2.getElement("foo"));
+		assertNull(e2.getElement("foo"));
 	}
 
 	/**
@@ -213,10 +213,10 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFNode node = d1.getJDFRoot();
 		node.appendAncestorPool();
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
-		Assert.assertNotNull(root);
+		assertNotNull(root);
 		final JDFNode root2 = root.getOwnerDocument_JDFElement().clone().getJDFRoot();
-		Assert.assertNotNull(root2);
-		Assert.assertNotSame(root, root2);
+		assertNotNull(root2);
+		assertNotSame(root, root2);
 	}
 
 	/**
@@ -227,14 +227,14 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc d1 = new XMLDoc("JDF", null);
 		KElement root = d1.getRoot();
-		Assert.assertFalse(root instanceof JDFNode);
+		assertFalse(root instanceof JDFNode);
 		JDFDoc d = new JDFDoc(d1);
 		JDFNode n = d.getJDFRoot();
-		Assert.assertNotNull(n);
+		assertNotNull(n);
 
 		XMLDoc d2 = new XMLDoc(d);
 		root = d2.getRoot();
-		Assert.assertTrue(root instanceof JDFNode);
+		assertTrue(root instanceof JDFNode);
 	}
 
 	/**
@@ -246,18 +246,18 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode root = d.getJDFRoot();
 		final JDFResource r = root.addResource("Media", EnumUsage.Input);
-		Assert.assertNotNull(r);
+		assertNotNull(r);
 		final JDFDoc d2 = d.clone();
 		final KElement e1 = d.getRoot();
 		final KElement e2 = d2.getRoot();
-		Assert.assertNotSame(e1, e2);
+		assertNotSame(e1, e2);
 		e1.appendElement("foo");
-		Assert.assertNull(e2.getElement("foo"));
-		Assert.assertNotNull(e2.getChildByTagName("Media", null, 0, null, false, false));
+		assertNull(e2.getElement("foo"));
+		assertNotNull(e2.getChildByTagName("Media", null, 0, null, false, false));
 		final NodeList nl = d.getElementsByTagName("Media");
 		final NodeList nl2 = d2.getElementsByTagName("Media");
-		Assert.assertEquals(nl.getLength(), 1);
-		Assert.assertEquals(nl2.getLength(), 1);
+		assertEquals(nl.getLength(), 1);
+		assertEquals(nl2.getLength(), 1);
 	}
 
 	/**
@@ -273,9 +273,9 @@ public class JDFDocTest extends JDFTestCaseBase
 		final String s = doc.write2String(0);
 		final JDFParser p = new JDFParser();
 		final JDFDoc d = p.parseString(s);
-		Assert.assertNotNull(d.getJDFRoot());
-		Assert.assertNotNull(d.getRoot());
-		Assert.assertNotSame(d.getRoot(), d.getJDFRoot());
+		assertNotNull(d.getJDFRoot());
+		assertNotNull(d.getRoot());
+		assertNotSame(d.getRoot(), d.getJDFRoot());
 
 	}
 
@@ -292,9 +292,9 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 
 		doc = p.parseString(foo);
-		Assert.assertNull(doc);
+		assertNull(doc);
 		doc = new JDFDoc("JDF");
-		Assert.assertNotNull(doc.getNodeName());
+		assertNotNull(doc.getNodeName());
 	}
 
 	/**
@@ -306,9 +306,9 @@ public class JDFDocTest extends JDFTestCaseBase
 		JDFDoc.registerCustomClass("Foo123", JDFRunList.class.getName());
 		JDFResourcePool resourcePool = new JDFDoc("JDF").getJDFRoot().getCreateResourcePool();
 		KElement e = resourcePool.appendElement("Foo123");
-		Assert.assertTrue(e instanceof JDFRunList);
+		assertTrue(e instanceof JDFRunList);
 		KElement e2 = resourcePool.appendElement("WWW:Foo123", "WWW.com");
-		Assert.assertFalse(e2 instanceof JDFRunList);
+		assertFalse(e2 instanceof JDFRunList);
 	}
 
 	/**
@@ -330,11 +330,11 @@ public class JDFDocTest extends JDFTestCaseBase
 	public void testGetContentType()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
-		Assert.assertEquals(d.getContentType(), "application/vnd.cip4-jdf+xml");
+		assertEquals(d.getContentType(), "application/vnd.cip4-jdf+xml");
 		final JDFDoc dm = new JDFDoc("JMF");
-		Assert.assertEquals(dm.getContentType(), "application/vnd.cip4-jmf+xml");
+		assertEquals(dm.getContentType(), "application/vnd.cip4-jmf+xml");
 		final JDFDoc db = new JDFDoc("JMF_");
-		Assert.assertEquals(db.getContentType(), "text/xml");
+		assertEquals(db.getContentType(), "text/xml");
 	}
 
 	/**
@@ -347,17 +347,17 @@ public class JDFDocTest extends JDFTestCaseBase
 		{
 			final JDFDoc doc = new JDFDoc("JDF");
 			final JDFNode n = (JDFNode) doc.getRoot();
-			Assert.assertFalse("no schema - no default", n.hasAttribute(AttributeName.TEMPLATE));
+			assertFalse("no schema - no default", n.hasAttribute(AttributeName.TEMPLATE));
 			final String s = doc.write2String(2);
 			final JDFParser parser = new JDFParser();
 			final JDFDoc docNoSchema = parser.parseString(s);
 			final JDFNode as2 = (JDFNode) docNoSchema.getRoot();
-			Assert.assertFalse("no schema - no default", as2.hasAttribute(AttributeName.TEMPLATE));
+			assertFalse("no schema - no default", as2.hasAttribute(AttributeName.TEMPLATE));
 			parser.setJDFSchemaLocation(UrlUtil.urlToFile(sm_dirTestSchema + File.separator + "JDF.xsd"));
 			final JDFDoc docSchema = parser.parseString(s);
 			final JDFNode as3 = (JDFNode) docSchema.getRoot();
-			Assert.assertTrue("schema parse - default is set", as3.hasAttribute(AttributeName.TEMPLATE));
-			Assert.assertFalse("schema parse - default is set", as3.getTemplate());
+			assertTrue("schema parse - default is set", as3.hasAttribute(AttributeName.TEMPLATE));
+			assertFalse("schema parse - default is set", as3.getTemplate());
 		}
 	}
 
@@ -369,13 +369,13 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc("foo:bar");
 		final String s = doc.write2String(2);
-		Assert.assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 		final XMLDoc doc2 = new XMLDoc("abc", null);
 		String s2 = doc2.write2String(2);
-		Assert.assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) < 0);
+		assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) < 0);
 		doc2.getRoot().copyElement(doc.getRoot(), null);
 		s2 = doc2.write2String(2);
-		Assert.assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 
 	}
 
@@ -387,16 +387,39 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc("foo:bar");
 		String s = doc.write2String(2);
-		Assert.assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 		KElement root = doc.getRoot();
 		root.setAttribute("xmlns:foo", "www.foo.com");
-		Assert.assertEquals(root.getNamespaceURI(), "www.foo.com");
+		assertEquals(root.getNamespaceURI(), "www.foo.com");
 		doc = new JDFDoc("bar");
 		s = doc.write2String(2);
-		Assert.assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 		root = doc.getRoot();
 		root.setAttribute("xmlns", "www.foo.com");
-		Assert.assertEquals(root.getNamespaceURI(), "www.foo.com");
+		assertEquals(root.getNamespaceURI(), "www.foo.com");
+	}
+
+	/**
+	 * tests the correct handling of the namespaceuri when a namespace attribute is set
+	 */
+	@Test
+	public void testCreateElement()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFNode e = (JDFNode) doc.createElement("JDF");
+		root.insertBefore(e, null);
+	}
+
+	/**
+	 * tests the correct handling of the namespaceuri when a namespace attribute is set
+	 */
+	@Test
+	public void testCreateElementNull()
+	{
+		JDFDoc doc = new JDFDoc();
+		JDFNode e = (JDFNode) doc.createElement("JDF");
+		doc.insertBefore(e, null);
 	}
 
 	/**
@@ -409,7 +432,7 @@ public class JDFDocTest extends JDFTestCaseBase
 		doc.setInitOnCreate(false);
 		doc.setRoot("JDF", null);
 		JDFNode n = doc.getJDFRoot();
-		Assert.assertNull(n.getAuditPool());
+		assertNull(n.getAuditPool());
 	}
 
 	/**
@@ -422,12 +445,12 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		DOMParser domParser = new DOMParser();
 		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
-		Assert.assertNotNull(domParser.getDocument());
+		assertNotNull(domParser.getDocument());
 		JDFDoc d = new JDFDoc(domParser.getDocument());
-		Assert.assertNotNull(d);
-		Assert.assertNotNull(d.getRoot());
-		Assert.assertEquals(d.getRoot().getAttribute("ID"), "1");
-		Assert.assertTrue(d.getRoot().getXPathElement("/JDF/AuditPool/Created") instanceof JDFCreated);
+		assertNotNull(d);
+		assertNotNull(d.getRoot());
+		assertEquals(d.getRoot().getAttribute("ID"), "1");
+		assertTrue(d.getRoot().getXPathElement("/JDF/AuditPool/Created") instanceof JDFCreated);
 	}
 
 	/**
@@ -530,15 +553,15 @@ public class JDFDocTest extends JDFTestCaseBase
 		String foo = "wehflkh";
 		final JDFParser p = new JDFParser();
 		doc = p.parseString(foo);
-		Assert.assertNull(doc);
+		assertNull(doc);
 		foo = "<xxx><yyy><zzz></yyy></xxx>";
 		doc = p.parseString(foo);
-		Assert.assertNull(doc);
+		assertNull(doc);
 
 		doc = p.parseFile(sm_dirTestData + "corrupt.jdf");
-		Assert.assertNull(doc);
+		assertNull(doc);
 		doc = new JDFDoc("JDF");
-		Assert.assertNotNull(doc.getNodeName());
+		assertNotNull(doc.getNodeName());
 	}
 
 	/**
@@ -553,7 +576,7 @@ public class JDFDocTest extends JDFTestCaseBase
 
 		jmfIn.appendMessageElement(JDFMessage.EnumFamily.Response, null);
 		final String s = inMessageDoc.write2String(0);
-		Assert.assertNotNull(s);
+		assertNotNull(s);
 	}
 
 }

@@ -618,7 +618,9 @@ public class JDFDoc extends XMLDoc
 		if (elem instanceof KElement)
 		{
 			if (((DocumentJDFImpl) m_doc).bInitOnCreate)
+			{
 				((KElement) elem).init();
+			}
 		}
 		return elem;
 	}
