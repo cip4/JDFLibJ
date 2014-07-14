@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,8 @@ import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
+import java.util.Vector;
 
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -111,6 +113,35 @@ public class ProxyUtil
 			uri = null;
 		}
 		return uri;
+	}
+
+	/**
+	 * 
+	 * @param use, if true use the system proxy properties
+	 */
+	public static void setUseSystemDefault(boolean use)
+	{
+		System.setProperty("java.net.useSystemProxies", "" + use);
+	}
+
+	/**
+	 * same as ProxySelector.getDefault() but always ensure that local is first in the list
+	 * @param uri
+	 * @return
+	 */
+	public static List<Proxy> getProxiesWithLocal(URI uri)
+	{
+		ProxySelector selector = ProxySelector.getDefault();
+		List<Proxy> list = selector.select(uri);
+		// make sure local is first in list - this is certainly faster
+		if (!list.contains(Proxy.NO_PROXY))
+		{
+			List<Proxy> list2 = new Vector<Proxy>();
+			list2.add(Proxy.NO_PROXY);
+			list2.addAll(list);
+			list = list2;
+		}
+		return list;
 	}
 
 	/**

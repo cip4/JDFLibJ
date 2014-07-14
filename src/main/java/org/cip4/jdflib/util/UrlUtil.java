@@ -86,12 +86,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
-import java.util.Vector;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -1618,16 +1616,7 @@ public class UrlUtil
 				if (uri == null) // redundant but makes compiler happy
 					return null;
 
-				ProxySelector selector = ProxySelector.getDefault();
-				List<Proxy> list = selector.select(uri);
-				// make sure local is first in list - this is certainly faster
-				if (!list.contains(Proxy.NO_PROXY))
-				{
-					List<Proxy> list2 = new Vector<Proxy>();
-					list2.add(Proxy.NO_PROXY);
-					list2.addAll(list);
-					list = list2;
-				}
+				List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
 
 				for (Proxy proxy : list)
 				{

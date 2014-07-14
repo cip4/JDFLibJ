@@ -159,7 +159,7 @@ public class WalkLayout extends WalkStrippingParams
 	 */
 	private void createStrippingPartition(JDFStrippingParams stripParams, JDFLayout trackLayout)
 	{
-		JDFNode node = trackLayout.getParentJDF();
+		JDFNode node = xjdfToJDFImpl.currentJDFNode;
 		if (node == null)
 		{
 			log.error("whazzup - not in xjdf root???");
@@ -167,18 +167,12 @@ public class WalkLayout extends WalkStrippingParams
 		else
 		{
 			JDFAttributeMap partMap = trackLayout.getPartMap();
-			JDFStrippingParams spExist = (JDFStrippingParams) node.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 			JDFStrippingParams sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-			JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, sp.getPartIDKeys());
-			if (part == sp)
-			{
-				stripParams.copyInto(part, false);
-			}
-			xjdfToJDFImpl.walkTree(stripParams, part.getParentNode_KElement());
-			if (spExist == null)
-			{
-				sp.deleteNode();
-			}
+			JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
+			KElement foo = part.appendElement("foo");
+			xjdfToJDFImpl.walkTree(stripParams, foo);
+			part.copyInto(foo.getElement(ElementName.STRIPPINGPARAMS), false);
+			foo.deleteNode();
 		}
 
 	}
@@ -189,8 +183,8 @@ public class WalkLayout extends WalkStrippingParams
 	@Override
 	public KElement walk(KElement e, KElement trackElem)
 	{
-		KElement walk = super.walk(e, trackElem);
 		splitLayout(e, trackElem);
+		KElement walk = super.walk(e, trackElem);
 		return walk;
 	}
 }

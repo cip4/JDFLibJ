@@ -86,6 +86,14 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 {
 
 	/**
+	 * 
+	 */
+	public BaseGoldenTicketTest()
+	{
+		super();
+	}
+
+	/**
 	 *  
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */

@@ -72,6 +72,9 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
 /**
@@ -101,35 +104,53 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	{
 		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
 		final VElement vL = pt.getLinkVector();
-		final VElement phaseAmount = new VElement();
+		final VElement phaseAmounts = new VElement();
+		VJDFAttributeMap partsPhaseTime = pt.getPartMapVector();
 		if (vL != null)
 		{
-			for (int i = 0; i < vL.size(); i++)
+			for (KElement e : vL)
 			{
-				final JDFResourceLink rl = (JDFResourceLink) vL.get(i);
-				final VElement vR = jdfToXJDF.setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
-				final KElement pA = xjdf.appendElement("PhaseAmount");
-				for (int j = 0; j < vR.size(); j++)
+				final JDFResourceLink rl = (JDFResourceLink) e;
+				VJDFAttributeMap partsResLink = rl.getPartMapVector();
+				if (partsResLink == null)
 				{
-					pA.appendAttribute("rRef", vR.get(j).getAttribute(AttributeName.ID), null, " ", true);
-
-					jdfToXJDF.setAmountPool(rl, pA, null);
-					rl.deleteNode();
-					for (String extension : new String[] { "", "Good", "Waste" })
+					if (partsPhaseTime != null)
 					{
-						pA.removeAttribute(AttributeName.AMOUNT + extension);
-						pA.renameAttribute(AttributeName.ACTUALAMOUNT + extension, AttributeName.AMOUNT + extension, null, null);
+						partsResLink = partsPhaseTime.clone();
+					}
+					else
+					{
+						partsResLink = new VJDFAttributeMap((JDFAttributeMap) null);
 					}
 				}
-				phaseAmount.add(pA);
+
+				final VElement vR = jdfToXJDF.setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
+				final KElement phaseAmount = xjdf.appendElement("PhaseAmount");
+				JDFAttributeMap commonMap = partsResLink.getCommonMap();
+				for (KElement res : vR)
+				{
+					VJDFAttributeMap resParts = new PartitionHelper(res).getPartMapVector();
+					if (resParts.overlapsMap(partsResLink))
+					{
+						phaseAmount.appendAttribute("rRef", res.getAttribute(AttributeName.ID), null, " ", true);
+						jdfToXJDF.setAmountPool(rl, phaseAmount, commonMap);
+						for (String extension : new String[] { "", "Good", "Waste" })
+						{
+							phaseAmount.removeAttribute(AttributeName.AMOUNT + extension);
+							phaseAmount.renameAttribute(AttributeName.ACTUALAMOUNT + extension, AttributeName.AMOUNT + extension, null, null);
+						}
+					}
+				}
+				rl.deleteNode();
+				phaseAmounts.add(phaseAmount);
 			}
 		}
 		final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNode above...)
 		if (x2 != null)
 		{
-			for (int i = 0; i < phaseAmount.size(); i++)
+			for (int i = 0; i < phaseAmounts.size(); i++)
 			{
-				x2.moveElement(phaseAmount.get(i), null);
+				x2.moveElement(phaseAmounts.get(i), null);
 			}
 		}
 		return x2;

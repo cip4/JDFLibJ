@@ -147,7 +147,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 			}
 
 			goldenTicket.assign(nodePre);
-			BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""));
+			BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""));
 		}
 	}
 
@@ -205,7 +205,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 					pgt.addKid(goldenTicket4);
 				}
 
-				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
+				BaseGoldenTicketTest.write9GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
 						+ (bExpand ? "Expand" : ""));
 			}
 		}

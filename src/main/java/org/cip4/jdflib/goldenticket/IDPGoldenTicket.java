@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -140,7 +141,17 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	 */
 	public IDPGoldenTicket(final int _icsLevel)
 	{
-		super(1, null, 2);
+		this(_icsLevel, null);
+	}
+
+	/**
+	 * create a BaseGoldenTicket
+	 * @param _icsLevel the level to init to (1,2 or 3)
+	 * @param version
+	 */
+	public IDPGoldenTicket(final int _icsLevel, EnumVersion version)
+	{
+		super(1, version, 2);
 		grayBox = false;
 		bUsageCounter = true;
 		icsLevel = _icsLevel;

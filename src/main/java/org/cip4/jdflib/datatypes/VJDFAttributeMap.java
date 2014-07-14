@@ -581,6 +581,45 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
+	 * return the map that is common to all elements of this. All keys exist and have the same value
+	 * 
+	 * @return the vector of all keys
+	 */
+	public JDFAttributeMap getCommonMap()
+	{
+		JDFAttributeMap newMap = new JDFAttributeMap();
+
+		if (size() == 0)
+			return null;
+		else if (size() == 1)
+			return get(0);
+		JDFAttributeMap map0 = get(0);
+		VString keys = map0.getKeys();
+		for (String key : keys)
+		{
+			String val0 = map0.get(key);
+			if (val0 != null)
+			{
+				for (JDFAttributeMap map : this)
+				{
+					String val = map.get(key);
+					if (!val0.equals(val))
+					{
+						val0 = null;
+						break;
+					}
+				}
+				if (val0 != null)
+				{
+					newMap.put(key, val0);
+				}
+			}
+		}
+
+		return newMap;
+	}
+
+	/**
 	 * 
 	 * @param map map to append
 	 */
@@ -653,7 +692,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		if (map == null)
 			return;
-		Set<JDFAttributeMap> set = ContainerUtil.toHashSet(map.getVector());
+		Set<JDFAttributeMap> set = ContainerUtil.toHashSet(this);
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
 			JDFAttributeMap attributeMap = get(i);

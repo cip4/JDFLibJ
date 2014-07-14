@@ -8027,21 +8027,20 @@ public class JDFResource extends JDFElement
 	 * @return boolean - true, if 'this' is valid
 	 */
 	@Override
-	public boolean isValid(final EnumValidationLevel level)
+	public boolean isValid(EnumValidationLevel level)
 	{
-		EnumValidationLevel levelLocal = level;
 
 		final boolean bRet = true;
 
 		// it is supposed to be incomplete -> don't check for completeness
-		levelLocal = incompleteLevel(levelLocal, false);
+		level = incompleteLevel(level, false);
 
 		final boolean bLeaf = isLeaf();
 		final EnumPartUsage partUsage = getResourceRoot().getPartUsage();
 		final boolean bForceIncomplete = !(partUsage == EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
 		if (bLeaf)
 		{
-			if (!super.isValid(levelLocal))
+			if (!super.isValid(level))
 			{
 				return false;
 			}
@@ -8056,15 +8055,15 @@ public class JDFResource extends JDFElement
 		}
 		else
 		{
-			if (this.getInvalidAttributes(incompleteLevel(levelLocal, bForceIncomplete), true, 1).size() > 0)
+			if (getInvalidAttributes(incompleteLevel(level, bForceIncomplete), true, 1).size() > 0)
 			{
 				return false;
 			}
-			// final VElement v = getLeaves(false);
+
 			final VElement v = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				if (!((JDFResource) v.elementAt(i)).isValid(levelLocal))
+				if (!((JDFResource) e).isValid(level))
 				{
 					return false;
 				}
@@ -8086,12 +8085,11 @@ public class JDFResource extends JDFElement
 					return false;
 				}
 			}
-			// if partusage=implicit, the root must also be complete and valid
-			// by itself
+			// if partusage=implicit, the root must also be complete and valid by itself
 		}
 		else if (!bLeaf && !bForceIncomplete)
 		{
-			if (!super.isValid(levelLocal))
+			if (!super.isValid(level))
 			{
 				return false;
 			}

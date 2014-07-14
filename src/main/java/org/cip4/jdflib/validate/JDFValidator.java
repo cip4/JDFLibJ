@@ -376,6 +376,7 @@ public class JDFValidator
 			{
 				printResource((JDFResource) kElement, indent, testElement);
 			}
+
 			if (!bPrintNameSpace && !bTypo && xmlParent != null && testElement != null && !testElement.hasChildElements())
 			{
 				testElement.deleteNode();
