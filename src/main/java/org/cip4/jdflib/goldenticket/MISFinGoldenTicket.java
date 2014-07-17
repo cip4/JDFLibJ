@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,8 +70,10 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.auto.JDFAutoBlockPreparationParams.EnumTightBacking;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -83,12 +85,15 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFBlockPreparationParams;
+import org.cip4.jdflib.resource.JDFCasingInParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFCollectingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
 
@@ -97,6 +102,10 @@ import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
  */
 public class MISFinGoldenTicket extends MISGoldenTicket
 {
+	/**
+	 * 
+	 */
+	public static final String MISFIN = "MISFin";
 	/**
 	 * 
 	 */
@@ -184,9 +193,10 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		initTrimming();
 		initCollecting();
 		initStitching();
+		initBlockPreparation();
+		initCasingIn();
 		initInputComponent();
 		initOutputComponent();
-
 	}
 
 	/**
@@ -205,6 +215,31 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	/**
 	 * 
 	 */
+	private void initBlockPreparation()
+	{
+		if (theNode.getTypes().contains("BlockPreparation"))
+		{
+			final JDFBlockPreparationParams bpp = (JDFBlockPreparationParams) theNode.getCreateResource(ElementName.BLOCKPREPARATIONPARAMS, EnumUsage.Input, 0);
+			bpp.setTightBacking(EnumTightBacking.FlatBacked);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void initCasingIn()
+	{
+		if (theNode.getTypes().contains("CasingIn"))
+		{
+			final JDFCasingInParams cip = (JDFCasingInParams) theNode.getCreateResource(ElementName.CASINGINPARAMS, EnumUsage.Input, 0);
+			JDFGlueApplication glue = cip.appendGlueApplication();
+			glue.setGluingTechnique(EnumGluingTechnique.SpineGluing);
+		}
+	}
+
+	/**
+	 * 
+	 */
 	private void initStitching()
 	{
 		if (theNode.getTypes().contains("Stitching"))
@@ -213,7 +248,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			sp.setStapleShape(org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape.Butted);
 			sp.setStitchWidth(36);
 		}
-
 	}
 
 	/**
@@ -288,7 +322,14 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		if (outComp == null)
 		{
 			outComp = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-			outComp.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
+			if (MISFIN_HARDCOVERFIN.equals(category) || MISFIN_SOFTCOVERFIN.equals(category) || MISFIN_STITCHFIN.equals(category))
+			{
+				outComp.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Block);
+			}
+			else
+			{
+				outComp.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+			}
 			outComp.setProductType("Unknown");
 		}
 		else

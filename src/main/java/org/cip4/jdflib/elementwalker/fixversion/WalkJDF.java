@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
@@ -111,11 +112,11 @@ public class WalkJDF extends WalkElement
 	public KElement walk(final KElement e1, final KElement trackElem)
 	{
 		final JDFNode n = (JDFNode) e1;
-		if (this.fixVersion.version != null)
+		if (fixVersion.version != null)
 		{
-			n.setVersion(this.fixVersion.version);
-			n.setMaxVersion(this.fixVersion.version);
-			n.fixNiCi(this.fixVersion.version);
+			n.setVersion(fixVersion.version);
+			n.setMaxVersion(fixVersion.version);
+			n.fixNiCi(fixVersion.version);
 			fixNamedFeatures(n, trackElem);
 		}
 
@@ -143,7 +144,7 @@ public class WalkJDF extends WalkElement
 	 */
 	private void fixNamedFeatures(JDFNode n, KElement trackElem)
 	{
-		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, this.fixVersion.version))
+		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
 		{
 			VString v = n.getNamedFeatures();
 			if (v != null)
@@ -152,8 +153,7 @@ public class WalkJDF extends WalkElement
 				{
 					String key = v.get(i * 2);
 					String val = v.get(i * 2 + 1);
-					//TODO use typesafe when we have schema
-					n.appendGeneralID(key, val).setAttribute("DataType", "NamedFeature");
+					n.appendGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
 				}
 			}
 			n.removeAttribute(AttributeName.NAMEDFEATURES);

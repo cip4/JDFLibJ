@@ -131,6 +131,23 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testCasingIn()
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.CasingIn);
+		n.addResource(ElementName.CASINGINPARAMS, EnumUsage.Input);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
 	public void testPreviewResource()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
