@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,11 +71,10 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.net.ProxyUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Dec 3, 2010
  */
@@ -88,17 +87,11 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testToString()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		ProxyUtil.setProxy("proxy", 8080, null, null);
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assert.assertNotNull(writeToURL);
-		Assert.assertTrue(writeToURL.toString().contains("<not buffered>"));
+		assertNotNull(writeToURL);
+		assertTrue(writeToURL.toString().contains("<not buffered>"));
 		writeToURL.buffer();
-		Assert.assertFalse(writeToURL.toString().contains("<not buffered>"));
+		assertFalse(writeToURL.toString().contains("<not buffered>"));
 	}
 
 	/**
@@ -107,16 +100,10 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testBuffer()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		ProxyUtil.setProxy("proxy", 8080, null, null);
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
-		Assert.assertNotNull(writeToURL);
+		assertNotNull(writeToURL);
 		writeToURL.buffer();
-		Assert.assertTrue(writeToURL.toString().contains(new ByteArrayIOStream(writeToURL.getResponseStream()).toString()));
+		assertTrue(writeToURL.toString().contains(new ByteArrayIOStream(writeToURL.getResponseStream()).toString()));
 	}
 
 	/**
@@ -127,7 +114,7 @@ public class UrlPartTest extends JDFTestCaseBase
 	public void testFile() throws Exception
 	{
 		UrlPart p = new UrlPart(new File("Test.xml"));
-		Assert.assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
+		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
 	}
 
 }

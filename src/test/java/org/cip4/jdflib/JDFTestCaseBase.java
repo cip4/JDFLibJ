@@ -101,6 +101,8 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.logging.LogConfigurator;
+import org.cip4.jdflib.util.net.ProxyUtil;
+import org.cip4.jdflib.util.net.UrlCheck;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -120,20 +122,13 @@ public abstract class JDFTestCaseBase extends TestCase
 	{
 		super();
 		LogConfigurator.configureLog(null, null);
-		setTestNetwork(false);
-
-		// setTestNetwork(new UrlCheck("http://www.example.com").pingRC(1000) == 200);
-	}
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public JDFTestCaseBase(String name)
-	{
-		super(name);
-		LogConfigurator.configureLog(null, null);
-		setTestNetwork(false);
+		//setTestNetwork(false);
+		ProxyUtil.setUseSystemDefault(true);
+		if (!netWorkChecked)
+		{
+			setTestNetwork(new UrlCheck("http://www.example.com").pingRC(1000) == 200);
+			netWorkChecked = true;
+		}
 	}
 
 	static protected final String sm_dirTestData = getTestDataDir();
@@ -252,7 +247,8 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected String senderID;
 	protected long mem;
 	protected Log log;
-	private boolean bTestNetwork;
+	private static boolean netWorkChecked = false;
+	private static boolean bTestNetwork;
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**

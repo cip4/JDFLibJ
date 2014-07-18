@@ -76,14 +76,13 @@
  */
 package org.cip4.jdflib.util.net;
 
-import java.io.InputStream;
+import java.net.ProxySelector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ByteArrayIOStream;
-import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -93,26 +92,23 @@ import org.junit.Test;
  */
 public class ProxyUtilTest extends JDFTestCaseBase
 {
+	ProxySelector defaultSel;
+
 	/**
 	 * @throws Exception is snafu
 	 */
 	@Test
 	public void testSetProxyString() throws Exception
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
 		ProxyUtil.setProxy(null);
-		String proxyURL = "http://proxy:8080";
+		String proxyURL = "http://proxy:8082";
 		ProxyUtil.setProxy(proxyURL);
 		UrlPart p = null;
 		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-		Assert.assertNotNull(p);
+		assertNotNull(p);
 		ProxyUtil.setProxy(null);
 		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-		Assert.assertNull(p);
+		assertNull(p);
 	}
 
 	/**
@@ -130,49 +126,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 		}
 		catch (Exception x)
 		{
-			Assert.fail(x.toString());
-		}
-	}
-
-	/**
-	 * @throws Exception if snafu
-	 */
-	@Test
-	public void testSetProxyWrite() throws Exception
-	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		String proxy = "proxy.ceu.corp.heidelberg.com";
-		int proxyPort = 8080;
-		//UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
-		UrlPart p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-		if (p == null) // we are in the environment where the proxy is correctly set up
-		{
-			log.warn("no connection to proxy or no tomcat running!");
-		}
-		else
-		{
-			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-			ByteArrayIOStream ios = new ByteArrayIOStream(p.getResponseStream());
-			Assert.assertEquals(p.getResponseCode(), 200, 0);
-			Assert.assertNotNull(ios);
-			ProxyUtil.setProxy(proxy, proxyPort, null, null);
-			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-			ios = new ByteArrayIOStream(p.getResponseStream());
-			Assert.assertEquals(p.getResponseCode(), 200, 0);
-			p = UrlUtil.writeToURL("http://www.google.de:80", null, UrlUtil.GET, null, null);
-			Assert.assertEquals(p.getResponseCode(), 200, 0);
-			InputStream responseStream = p.getResponseStream();
-			Assert.assertNotNull(responseStream);
-			ios = new ByteArrayIOStream(p.getResponseStream());
-			Assert.assertEquals(StringUtil.token(p.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
-
-			ProxyUtil.setProxy(null, 0, null, null);
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			Assert.assertNull(p);
+			fail(x.toString());
 		}
 	}
 
@@ -182,30 +136,23 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURL()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		ProxyUtil.setProxy("http://proxy", 8080, null, null);
-		Assert.assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testWriteToURLSystemCall()
+	@Override
+	@Before
+	protected void setUp() throws Exception
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		System.setProperty("http.proxyPort", "8080");
-		System.setProperty("http.proxyHost", "proxy.ceu.corp.heidelberg.com");
-		System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
-		Assert.assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		defaultSel = ProxySelector.getDefault();
+		super.setUp();
+	}
+
+	@Override
+	@After
+	protected void tearDown() throws Exception
+	{
+		super.tearDown();
+		ProxySelector.setDefault(defaultSel);
 	}
 
 }

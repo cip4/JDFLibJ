@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,11 +88,6 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPing()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
 		assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
 	}
 
@@ -103,11 +98,6 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRC()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
 		assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
 	}
 
@@ -118,11 +108,6 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRCGet()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
 		assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
 	}
 
@@ -134,29 +119,18 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRCPost()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
-		ProxyUtil.setProxy("Proxy:8082");
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
-		assertEquals(200, urlCheck.pingRC(5555));
+		assertTrue("Google does not accept post... ", urlCheck.pingRC(5555) > 200);
 	}
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * 
 	 */
 	@Test
 	public void testGetPingRC()
 	{
-		if (!isTestNetwork())
-		{
-			log.info("skipping network test");
-			return;
-		}
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(1000);

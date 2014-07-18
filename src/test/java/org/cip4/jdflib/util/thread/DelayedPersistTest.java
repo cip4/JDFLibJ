@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -104,6 +104,38 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testRun()
+	{
+		file.delete();
+		assertFalse(file.exists());
+		DelayedPersist.getDelayedPersist().queueRunnable(new TestRun(), 1555);
+		assertFalse(file.exists());
+		ThreadUtil.sleep(2000);
+		DelayedPersist.getDelayedPersist().queueRunnable(new TestRun(), 1555);
+		ThreadUtil.sleep(2000);
+		assertTrue(file.exists());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testRunPersist()
+	{
+		file.delete();
+		assertFalse(file.exists());
+		DelayedPersist.getDelayedPersist().queueRunnable(new TestRunPersist(), 1555);
+		assertFalse(file.exists());
+		ThreadUtil.sleep(2000);
+		DelayedPersist.getDelayedPersist().queue(new TestRunPersist(), 1555);
+		ThreadUtil.sleep(2000);
+		assertTrue(file.exists());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testShutdown()
 	{
 		file.delete();
@@ -122,6 +154,52 @@ public class DelayedPersistTest extends JDFTestCaseBase
 	 */
 	public class TestPersist implements IPersistable
 	{
+
+		/**
+		 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
+		 * @return
+		 */
+		@Override
+		public boolean persist()
+		{
+			return FileUtil.createNewFile(file);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class TestRun implements Runnable
+	{
+
+		/**
+		 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
+		 * @return
+		 */
+		@Override
+		public void run()
+		{
+			FileUtil.createNewFile(file);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class TestRunPersist implements Runnable, IPersistable
+	{
+
+		/**
+		 * @see org.cip4.jdflib.util.thread.IPersistable#persist()
+		 * @return
+		 */
+		@Override
+		public void run()
+		{
+			FileUtil.createNewFile(file);
+		}
 
 		/**
 		 * @see org.cip4.jdflib.util.thread.IPersistable#persist()

@@ -88,6 +88,8 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class ProxyUtil
 {
+	private static final String USE_SYSTEM_PROXIES = "java.net.useSystemProxies";
+
 	/**
 	 * get the uri of the host with protocol and port for proxy selection
 	 * @param url
@@ -121,7 +123,17 @@ public class ProxyUtil
 	 */
 	public static void setUseSystemDefault(boolean use)
 	{
-		System.setProperty("java.net.useSystemProxies", "" + use);
+		System.setProperty(USE_SYSTEM_PROXIES, "" + use);
+	}
+
+	/**
+	 * 
+	 * @param use, if true use the system proxy properties
+	 */
+	public static boolean isUseSystemDefault(boolean use)
+	{
+		String def = System.getProperty(USE_SYSTEM_PROXIES);
+		return StringUtil.parseBoolean(def, false);
 	}
 
 	/**

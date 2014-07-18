@@ -79,6 +79,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -93,6 +94,7 @@ public class NetPollTest extends JDFTestCaseBase
 		 * 
 		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails, java.lang.String)
 		 */
+		@Override
 		public PollResult handlePoll(IPollDetails result, String url)
 		{
 			n++;
@@ -141,7 +143,6 @@ public class NetPollTest extends JDFTestCaseBase
 	@Test
 	public void testGoogle()
 	{
-		ProxyUtil.setProxy("proxy", 8080, null, null);
 		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
 		p.start();
 		ThreadUtil.sleep(3333);

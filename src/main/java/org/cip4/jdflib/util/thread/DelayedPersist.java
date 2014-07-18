@@ -81,6 +81,8 @@ import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * class to persist stuff later
+ * 
+ * either an IPersistable or Runnable may be queued
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class DelayedPersist extends Thread
@@ -90,6 +92,65 @@ public class DelayedPersist extends Thread
 	private static DelayedPersist theDelayed = null;
 	private MyMutex waitMutex;
 	private final Log log;
+
+	private static class RunnablePersist implements IPersistable
+	{
+		/**
+		 * 
+		 * @param runner
+		 */
+		RunnablePersist(Runnable runner)
+		{
+			super();
+			this.runner = runner;
+		}
+
+		private final Runnable runner;
+
+		@Override
+		public boolean persist()
+		{
+			if (runner == null)
+			{
+				return false;
+			}
+			else
+			{
+				runner.run();
+				return true;
+			}
+		}
+
+		@Override
+		public String toString()
+		{
+			return "RunablePersist [runner=" + runner + "]";
+		}
+
+		@Override
+		public int hashCode()
+		{
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((runner == null) ? 0 : runner.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj)
+		{
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			RunnablePersist other = (RunnablePersist) obj;
+
+			return ContainerUtil.equals(other, this);
+		}
+
+	}
 
 	/**
 	 * 
@@ -147,6 +208,16 @@ public class DelayedPersist extends Thread
 			log.info("finished waiting for persist of delayed persist");
 		}
 		theDelayed = null;
+	}
+
+	/**
+	 * 
+	 * @param persistable the thing to send off
+	 * @param deltaTime max wait time in milliseconds - if<=null persist immediately
+	 */
+	public void queueRunnable(Runnable r, long deltaTime)
+	{
+		queue(new RunnablePersist(r), deltaTime);
 	}
 
 	/**

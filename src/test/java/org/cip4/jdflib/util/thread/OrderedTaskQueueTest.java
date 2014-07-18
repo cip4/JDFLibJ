@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.util.thread;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.junit.After;
 import org.junit.Test;
 
 /**
@@ -260,5 +261,13 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		assertTrue(q.queue(new WaitRunner(1)));
 		OrderedTaskQueue.shutDownAll();
 		assertFalse(q.queue(new WaitRunner(2)));
+	}
+
+	@Override
+	@After
+	protected void tearDown() throws Exception
+	{
+		super.tearDown();
+		OrderedTaskQueue.shutDownAll();
 	}
 }
