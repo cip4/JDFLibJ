@@ -897,7 +897,7 @@ public class UrlUtil
 
 		try
 		{
-			if (isCID(urlString) || isHttp(urlString))
+			if (isCID(urlString) || isHttp(urlString) || isHttps(urlString))
 			{
 				url = new URL(urlString);
 			}

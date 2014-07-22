@@ -402,8 +402,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		if (File.separator.equals("\\"))
 		{
-			// test for an existing directory (a trailing slash is appended by
-			// StringToURL)
+			// test for an existing directory (a trailing slash is appended by StringToURL)
 			assertTrue(UrlUtil.stringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 			assertTrue(UrlUtil.stringToURL("File:/c:/temp/").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 			assertTrue(UrlUtil.stringToURL("c:\\temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
@@ -427,6 +426,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.stringToURL("\\\\a\\b c\\d.txt"), new URL("file://a/b%20c/d.txt"));
 		assertEquals(UrlUtil.stringToURL("http://foo/%20.txt"), new URL("http://foo/%20.txt"));
 		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
+		assertEquals(UrlUtil.stringToURL("https://foo"), new URL("https://foo"));
 		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 	}

@@ -139,6 +139,17 @@ public class ProxyUtilTest extends JDFTestCaseBase
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testWriteToURLSecure()
+	{
+		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNotNull(part);
+		part.buffer();
+	}
+
 	@Override
 	@Before
 	protected void setUp() throws Exception
