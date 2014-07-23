@@ -1048,6 +1048,35 @@ public class StringUtil
 	}
 
 	/**
+	 * return the Levenschtein ditance where null is treated as ""
+	 *  
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @param normalize if true, normalize strings prior to calculating
+	 * @param ignoreCase if true, ignore case strings when calculating
+	 * @return the Levenschtein distance
+	 */
+	public static int getDistance(String s1, String s2, boolean normalize, boolean ignoreCase)
+	{
+		if (s1 == null)
+			s1 = JDFConstants.EMPTYSTRING;
+		if (s2 == null)
+			s2 = JDFConstants.EMPTYSTRING;
+		if (ignoreCase)
+		{
+			s1 = s1.toLowerCase();
+			s2 = s2.toLowerCase();
+		}
+		if (normalize)
+		{
+			s1 = normalize(s1, false);
+			s2 = normalize(s2, false);
+		}
+		return StringUtils.getLevenshteinDistance(s1, s2);
+	}
+
+	/**
 	 * return null if s==null or s=="", else s<br/>
 	 * used e.g. to zapp "" strings
 	 * 

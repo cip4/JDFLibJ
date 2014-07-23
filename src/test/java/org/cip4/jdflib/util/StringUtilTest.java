@@ -76,6 +76,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -140,19 +141,20 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// TODO @Stefan @Test
-	// public void testGetRelativePath() {
-	// File f = new File("./a");
-	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
-	// f = new File("../a.b");
-	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
-	// f = new File("./../a b/b");
-	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
-	// f = new File("a/b/c");
-	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
-	// f = new File("a/b/c");
-	// assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
-	// }
+	@Test
+	public void testGetRelativePath()
+	{
+		File f = new File("./a");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a");
+		f = new File("../a.b");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a.b");
+		f = new File("./../a b/b");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "../a b/b");
+		f = new File("a/b/c");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, null), '\\', "/", 0), "a/b/c");
+		f = new File("a/b/c");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativePath(f, f), '\\', "/", 0), ".");
+	}
 
 	/**
 	 * test for getDefaultNull
@@ -163,6 +165,20 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertNull(StringUtil.getDefaultNull("", ""));
 		assertNull(StringUtil.getDefaultNull(null, ""));
 		assertEquals("a", StringUtil.getDefaultNull("a", ""));
+	}
+
+	/**
+	 * test for getDefaultNull
+	 */
+	@Test
+	public void testGetDistance()
+	{
+		assertEquals(StringUtil.getDistance("", null, false, false), 0);
+		assertEquals(StringUtil.getDistance("a", "A", false, true), 0);
+		assertEquals(StringUtil.getDistance("a", "AA", false, true), 1);
+		assertEquals(StringUtil.getDistance("a  b", "a B", true, true), 0);
+		assertEquals(StringUtil.getDistance("hallo", "hllo", true, true), 1);
+		assertEquals(StringUtil.getDistance("hasso", "haßo", true, true), 2);
 	}
 
 	/**
