@@ -269,7 +269,6 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(author.indexOf("_|_"), -1);
 		agent2 = crea.getAgentName();
 		assertEquals(agent, agent2);
-
 	}
 
 	/**
