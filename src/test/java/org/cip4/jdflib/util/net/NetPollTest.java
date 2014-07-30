@@ -97,7 +97,7 @@ public class NetPollTest extends JDFTestCaseBase
 		public PollResult handlePoll(IPollDetails result, String url)
 		{
 			n++;
-			assertNotNull(result);
+			assertNotNull("cannot access url: " + url, result);
 			assertEquals(result.getResponseCode(), 200, 0);
 			InputStream responseStream = result.getResponseStream();
 			assertNotNull(responseStream);
@@ -111,24 +111,10 @@ public class NetPollTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testDump()
-	{
-		NetPoll p = new NetPoll("http://localhost:8080/httpdump", new WebPoller());
-		p.addURL("http://localhost:8080/httpdump/a1");
-		p.addURL("http://localhost:8080/httpdump/a2");
-		p.start();
-		ThreadUtil.sleep(3333);
-		p.stop();
-	}
-
-	/**
-	 * 
-	 */
-	@Test
 	public void testMulti()
 	{
 		VString v = new VString("http://www.google.de", null);
-		v.add("http://www.example.co");
+		v.add("http://www.example.com");
 		NetPoll p = new NetPoll(v, new WebPoller());
 		p.start();
 		ThreadUtil.sleep(3333);
