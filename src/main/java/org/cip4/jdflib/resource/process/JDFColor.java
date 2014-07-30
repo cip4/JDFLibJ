@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,7 +148,14 @@ public class JDFColor extends JDFAutoColor
 	{
 		final String rawName = StringUtil.setHexBinaryBytes(cName, -1);
 		setRawName(rawName);
-		setName(new String(cName));
+		try
+		{
+			setName(new String(cName));
+		}
+		catch (Exception x)
+		{
+			// nop - we ignore it if the encoding is snafu
+		}
 	}
 
 	/**

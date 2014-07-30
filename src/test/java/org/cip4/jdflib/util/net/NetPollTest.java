@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,7 +77,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -98,12 +97,12 @@ public class NetPollTest extends JDFTestCaseBase
 		public PollResult handlePoll(IPollDetails result, String url)
 		{
 			n++;
-			Assert.assertNotNull(result);
-			Assert.assertEquals(result.getResponseCode(), 200, 0);
+			assertNotNull(result);
+			assertEquals(result.getResponseCode(), 200, 0);
 			InputStream responseStream = result.getResponseStream();
-			Assert.assertNotNull(responseStream);
+			assertNotNull(responseStream);
 			System.out.println(result);
-			Assert.assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
+			assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
 			return n % 2 == 0 ? PollResult.idle : PollResult.success;
 		}
 	}
@@ -128,9 +127,8 @@ public class NetPollTest extends JDFTestCaseBase
 	@Test
 	public void testMulti()
 	{
-		VString v = new VString("http://localhost:8080/httpdump", null);
-		v.add("http://localhost:8080/httpdump/a1");
-		v.add("http://localhost:8080/httpdump/a2");
+		VString v = new VString("http://www.google.de", null);
+		v.add("http://www.example.co");
 		NetPoll p = new NetPoll(v, new WebPoller());
 		p.start();
 		ThreadUtil.sleep(3333);

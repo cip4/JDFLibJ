@@ -102,7 +102,14 @@ public class JDFColorTest extends JDFTestCaseBase
 
 		c.set8BitNames(b);
 		assertNotSame("", c.getRawName());
+		assertNotSame("", c.getName());
 		assertNotNull(cp.toXML());
+		assertNotNull("crap chars are parseable", new XMLParser().parseString(cp.toXML()));
+
+		final JDFColor c2 = cp.appendColor();
+		c2.set8BitNames(new byte[] { (byte) 233 });
+		assertNotSame("", c2.getRawName());
+		assertNotSame("", c2.getName());
 		assertNotNull("crap chars are parseable", new XMLParser().parseString(cp.toXML()));
 	}
 
