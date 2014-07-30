@@ -161,6 +161,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 * 
 	 * before June 3, 2009
 	 */
+	@SuppressWarnings("rawtypes")
 	public static class EnumAuditType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -256,6 +257,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 * 
 	 * July 20, 2009
 	 */
+	@SuppressWarnings("rawtypes")
 	public static final class EnumSeverity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
