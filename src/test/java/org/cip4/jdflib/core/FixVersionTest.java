@@ -245,6 +245,8 @@ public class FixVersionTest extends JDFTestCaseBase
 		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
 		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
+		crea.setAgentName("Agent");
+		crea.setAgentVersion("V1");
 		final String agent = crea.getAgentName();
 		crea.setAuthor(agent);
 		assertNotNull(agent);

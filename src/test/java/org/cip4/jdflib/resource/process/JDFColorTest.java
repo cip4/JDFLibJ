@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,11 +75,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -94,12 +95,27 @@ public class JDFColorTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSet8BitNames()
+	{
+		final JDFColor c = cp.appendColor();
+		final byte[] b = { (byte) 0xb8, (byte) 0xde, (byte) 0xd8, (byte) 0xb0, (byte) 0xdd };
+
+		c.set8BitNames(b);
+		assertNotSame("", c.getRawName());
+		assertNotNull(cp.toXML());
+		assertNotNull("crap chars are parseable", new XMLParser().parseString(cp.toXML()));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testSetRawName()
 	{
 		final JDFColor c = cp.appendColor();
 		final byte[] b = "grün".getBytes();
 		c.set8BitNames(b);
-		Assert.assertEquals(c.get8BitName(), "grün");
+		assertEquals(c.get8BitName(), "grün");
 	}
 
 	/**
@@ -112,13 +128,13 @@ public class JDFColorTest extends JDFTestCaseBase
 		final JDFColor c1 = cp.appendColorWithName("a2", null);
 		final JDFColor c2 = cp.appendColor();
 		c2.setName("a");
-		Assert.assertTrue(c2.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
-		Assert.assertFalse(c1.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
-		Assert.assertFalse(c.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		assertTrue(c2.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		assertFalse(c1.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		assertFalse(c.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
 		final JDFColor c3 = cp.appendColor();
 		c3.setName("aa");
 		c3.set8BitNames("a".getBytes());
-		Assert.assertTrue(c3.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("RawName"));
+		assertTrue(c3.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("RawName"));
 
 	}
 
@@ -130,11 +146,11 @@ public class JDFColorTest extends JDFTestCaseBase
 	{
 		final JDFColor c = cp.appendColor();
 		c.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
-		Assert.assertEquals(c.getHTMLColor(), "#000000");
+		assertEquals(c.getHTMLColor(), "#000000");
 		c.setCMYK(new JDFCMYKColor(1, 1, 1, 1));
-		Assert.assertEquals(c.getHTMLColor(), "#000000");
+		assertEquals(c.getHTMLColor(), "#000000");
 		c.setCMYK(new JDFCMYKColor(0, 0, 0, 0));
-		Assert.assertEquals(c.getHTMLColor(), "#ffffff");
+		assertEquals(c.getHTMLColor(), "#ffffff");
 	}
 
 	@Override
