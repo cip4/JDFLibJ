@@ -146,6 +146,27 @@ public class JDFColorPoolTest extends TestCase
 	}
 
 	/**
+	 * Method testIncludesAttribute.
+	 * 
+	 * 
+	 */
+	@Test
+	public void testAppendColorWithName()
+	{
+		assertNotNull("grün", cp.appendColorWithName("Orange", "grün"));
+		assertNotNull("grün", cp.getCreateColorWithName("Orange", null));
+		try
+		{
+			cp.appendColorWithName("Orange", "grün");
+			fail("highlander");
+		}
+		catch (JDFException x)
+		{
+			// nop
+		}
+	}
+
+	/**
 	 * 
 	 */
 	@Test

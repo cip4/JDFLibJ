@@ -346,7 +346,8 @@ public class JDFColorPool extends JDFAutoColorPool
 			col = appendColor();
 			if (rawName != null)
 			{
-				col.set8BitNames(rawName.getBytes());
+				final String rawNameBytes = StringUtil.setHexBinaryBytes(rawName.getBytes(), -1);
+				col.setRawName(rawNameBytes);
 			}
 			col.setName(colorName);
 		}
@@ -385,7 +386,10 @@ public class JDFColorPool extends JDFAutoColorPool
 		{
 			col = appendColor();
 			if (rawName != null)
-				col.set8BitNames(rawName.getBytes());
+			{
+				final String rawNameBytes = StringUtil.setHexBinaryBytes(rawName.getBytes(), -1);
+				col.setRawName(rawNameBytes);
+			}
 			col.setName(colorName);
 		}
 		else

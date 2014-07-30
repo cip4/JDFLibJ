@@ -200,9 +200,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		@Override
 		public void runMyThread()
 		{
-			System.out.println("parsing " + sm_dirTestData + "bigwhite.jdf" + iLoop);
+			System.out.println("parsing " + sm_dirTestData + "bigwhite.jdf " + iLoop);
 			XMLDoc d = XMLDoc.parseFile(sm_dirTestData + "bigwhite.jdf");
-			assertNotNull("parsed " + sm_dirTestData + "bigwhite.jdf" + iLoop, d);
+			assertNotNull("parsed " + sm_dirTestData + "bigwhite.jdf " + iLoop, d);
 		}
 	}
 
