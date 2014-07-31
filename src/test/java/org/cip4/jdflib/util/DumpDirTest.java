@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,8 +74,8 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * general utilities for containers and objects
  * 
@@ -96,15 +96,16 @@ public class DumpDirTest extends JDFTestCaseBase
 		ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 1000; i++)
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
-
+		bis.close();
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
-		Assert.assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
 		System.gc();
+		ThreadUtil.sleep(1234);
 		long mem2 = rt.totalMemory() - rt.freeMemory();
-		Assert.assertEquals(mem2, mem, 1000000);
+		assertEquals(mem2, mem, 1000000);
 	}
 
 	/**
@@ -123,9 +124,13 @@ public class DumpDirTest extends JDFTestCaseBase
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
-		Assert.assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
 		System.gc();
+		bis.close();
+		System.gc();
+
+		ThreadUtil.sleep(1234);
 		long mem2 = rt.totalMemory() - rt.freeMemory();
-		Assert.assertEquals(mem2, mem, 1000000);
+		assertEquals(mem2, mem, 1000000);
 	}
 }
