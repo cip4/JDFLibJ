@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,9 @@ package org.cip4.jdflib.extensions;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.junit.Test;
@@ -92,6 +94,23 @@ public class XJDFHelperTest extends TestCase
 	{
 		KElement rlSet = theHelper.appendSet("Parameter", "RunList", null).getSet();
 		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testGetSetProcessUsage()
+	{
+		SetHelper seta = theHelper.getCreateParameterSet(ElementName.NODEINFO, EnumUsage.Input);
+		seta.setProcessUsage("a");
+		SetHelper setb = theHelper.appendParameter(ElementName.NODEINFO, EnumUsage.Input);
+		setb.setProcessUsage("b");
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, "a"), seta);
+		assertEquals(theHelper.getSet(ElementName.NODEINFO, "b"), setb);
+		assertNull(theHelper.getSet(ElementName.NODEINFO, "c"));
+		assertNull(theHelper.getSet(ElementName.NODEINFO, null));
 	}
 
 	/**

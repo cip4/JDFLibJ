@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -398,6 +399,27 @@ public class XJDFHelper extends BaseXJDFHelper
 			e = e.getNextSiblingElement();
 		}
 		return e2 == null ? null : new SetHelper(e2);
+	}
+
+	/**
+	 * @param name 
+	 * @param processUsage
+	 *  
+	 * @return the SetHelper for the vector of parametersets and resourcesets
+	 */
+	public SetHelper getSet(String name, String processUsage)
+	{
+		KElement e = theElement.getFirstChildElement();
+		while (e != null)
+		{
+			if (isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null)))
+					&& ContainerUtil.equals(StringUtil.getNonEmpty(processUsage), e.getAttribute(AttributeName.PROCESSUSAGE, null, null)))
+			{
+				return new SetHelper(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
 	}
 
 	/**
