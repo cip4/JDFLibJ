@@ -6,21 +6,29 @@
 	<version>2.1.5.80-SNAPSHOT</version>
 	<name>CIP4 JDF Writer Java</name>
 	<description>CIP4 JDF Library for JDF 1.x</description>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<buildDirectory>${project.basedir}/target</buildDirectory>
 	</properties>
-	<scm>
-		<url>http://svn.cip4.org/svnroot/trunk/JDFLibJ</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/JDFLibJ</connection>
-	</scm>
+    <scm>
+        <url>https://stash.cip4.org/scm/lib/jdflibj.git</url>
+        <developerConnection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</developerConnection>
+        <connection>scm:svn:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
+    </scm>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://jira.cip4.org/browse/JDFLIBJ</url>
+    </issueManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 	<developers>
 		<developer>
 			<id>r.prosi</id>
@@ -37,17 +45,7 @@
 			<email>s.meissner@flyeralarm.de</email>
 		</developer>
 	</developers>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-			</plugin>
-		</plugins>
-	</reporting>
 	<build>
-		<directory>${buildDirectory}</directory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -98,6 +96,23 @@
 		          </execution>
 		        </executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.4</version>
+            </plugin>
 		</plugins>
 	</build>
 	<dependencies>
