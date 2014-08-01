@@ -96,16 +96,20 @@ public class DumpDirTest extends JDFTestCaseBase
 		ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 1000; i++)
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
-		bis.close();
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
-		System.gc();
-		ThreadUtil.sleep(1234);
+		bis.close();
+		for (int i = 0; i < 10; i++)
+		{
+			System.gc();
+			ThreadUtil.sleep(123);
+		}
 		long mem2 = rt.totalMemory() - rt.freeMemory();
-		assertEquals(mem2, mem, 1000000);
+		if (mem2 > mem)
+			assertEquals(mem2, mem, 1000000);
 	}
 
 	/**
@@ -125,12 +129,14 @@ public class DumpDirTest extends JDFTestCaseBase
 		for (int i = 0; i < 1000; i++)
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
-		System.gc();
 		bis.close();
-		System.gc();
-
-		ThreadUtil.sleep(1234);
+		for (int i = 0; i < 10; i++)
+		{
+			System.gc();
+			ThreadUtil.sleep(123);
+		}
 		long mem2 = rt.totalMemory() - rt.freeMemory();
-		assertEquals(mem2, mem, 1000000);
+		if (mem2 > mem)
+			assertEquals(mem2, mem, 1000000);
 	}
 }

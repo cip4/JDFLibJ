@@ -109,7 +109,9 @@ public class SetHelper extends BaseXJDFHelper
 		for (PartitionHelper ph : v)
 		{
 			if (ph.matches(map))
+			{
 				return ph;
+			}
 		}
 		return null;
 	}
@@ -377,6 +379,26 @@ public class SetHelper extends BaseXJDFHelper
 	public EnumUsage getUsage()
 	{
 		return EnumUsage.getEnum(theElement.getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	public String getProcessUsage()
+	{
+		return theElement.getAttribute(AttributeName.PROCESSUSAGE, null, null);
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	public void setProcessUsage(String processUsage)
+	{
+		theElement.setAttribute(AttributeName.PROCESSUSAGE, processUsage, null);
 	}
 
 	/**
