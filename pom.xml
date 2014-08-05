@@ -7,6 +7,7 @@
 	<name>CIP4 JDF Writer Java</name>
 	<description>CIP4 JDF Library for JDF 1.x</description>
 	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
