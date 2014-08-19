@@ -343,11 +343,11 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			{
 				final VElement nodes = root.getvJDFNode(null, null, false);
 				final VString xTypes = StringUtil.tokenize(xjdf.getAttribute(AttributeName.TYPES), null, false);
-				for (int i = 0; i < nodes.size(); i++)
+				for (KElement e : nodes)
 				{
-					final JDFNode n2 = (JDFNode) nodes.get(i);
+					final JDFNode n2 = (JDFNode) e;
 					final VString vtypes = n2.getAllTypes();
-					if (vtypes.containsAll(xTypes))
+					if (vtypes != null && xTypes != null && vtypes.containsAll(xTypes))
 					{
 						return n2;
 					}
