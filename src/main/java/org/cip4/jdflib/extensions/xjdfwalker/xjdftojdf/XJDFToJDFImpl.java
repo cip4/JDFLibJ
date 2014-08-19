@@ -246,6 +246,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		prepareRoot();
 		xjdf = reparse(xjdf);
 		xjdf.setAttribute(AttributeName.VERSION, version.getName());
+		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
 		final JDFNode theNode = findNode(xjdf, true);
 		if (theNode == null)
 		{
