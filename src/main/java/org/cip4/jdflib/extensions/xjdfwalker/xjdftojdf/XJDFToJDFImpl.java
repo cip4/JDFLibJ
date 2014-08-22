@@ -444,6 +444,8 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 		parent.moveAttribute(AttributeName.JOBID, oldParent);
 		parent.moveAttribute(AttributeName.VERSION, oldParent);
+		parent.moveAttribute(AttributeName.MAXVERSION, oldParent);
+		parent.moveAttribute(AttributeName.COMMENTURL, oldParent);
 		parent.setJobPartID("rootPart");
 		parent.moveElement(oldParent.getResourcePool(), null);
 
