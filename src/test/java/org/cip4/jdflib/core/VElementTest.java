@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,8 +77,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -96,13 +96,13 @@ public class VElementTest extends JDFTestCaseBase
 		final KElement e = d.getRoot();
 		final VElement v = new VElement();
 		v.addAll((VElement) null);
-		Assert.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v.add(e);
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v.addAll(v);
-		Assert.assertEquals(v.size(), 2);
+		assertEquals(v.size(), 2);
 		v.addAll(v);
-		Assert.assertEquals(v.size(), 4);
+		assertEquals(v.size(), 4);
 
 	}
 
@@ -116,18 +116,18 @@ public class VElementTest extends JDFTestCaseBase
 		final KElement e = d.getRoot();
 		final VElement v = new VElement();
 		v.addAll((VElement) null);
-		Assert.assertEquals(v.size(), 0);
+		assertEquals(v.size(), 0);
 		v.add(e);
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		KElement[] k = new KElement[4];
 		k[0] = e;
 		k[1] = e.appendElement("b");
 		k[2] = e.appendElement("c");
 
 		v.addAll((JDFJMF[]) null);
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		v.addAll(k);
-		Assert.assertEquals("null 4the element is ignored...", v.size(), 4);
+		assertEquals("null 4the element is ignored...", v.size(), 4);
 	}
 
 	/**
@@ -158,10 +158,10 @@ public class VElementTest extends JDFTestCaseBase
 		final KElement e1 = r.appendElement("e1");
 		v.add(r);
 		v.add(e1);
-		Assert.assertEquals(v.get(0), r);
-		Assert.assertEquals(v.get(-1), e1);
-		Assert.assertEquals(v.get(-2), r);
-		Assert.assertNull(v.get(2));
+		assertEquals(v.get(0), r);
+		assertEquals(v.get(-1), e1);
+		assertEquals(v.get(-2), r);
+		assertNull(v.get(2));
 	}
 
 	/**
@@ -176,9 +176,9 @@ public class VElementTest extends JDFTestCaseBase
 		final KElement e1 = r.appendElement("e1");
 		v.add(r);
 		v.add(e1);
-		Assert.assertEquals(v.item(-1), e1);
-		Assert.assertEquals(v.item(-2), r);
-		Assert.assertNull(v.item(2));
+		assertEquals(v.item(-1), e1);
+		assertEquals(v.item(-2), r);
+		assertNull(v.item(2));
 	}
 
 	/**
@@ -193,9 +193,62 @@ public class VElementTest extends JDFTestCaseBase
 		final KElement e1 = r.appendElement("e1");
 		v.add(r);
 		v.add(e1);
-		Assert.assertEquals(v.elementAt(-1), e1);
-		Assert.assertEquals(v.elementAt(-2), r);
-		Assert.assertNull(v.elementAt(2));
+		assertEquals(v.elementAt(-1), e1);
+		assertEquals(v.elementAt(-2), r);
+		assertNull(v.elementAt(2));
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testRemoveElements()
+	{
+		final VElement v = new VElement();
+		final VElement v2 = new VElement();
+		final XMLDoc d = new XMLDoc("e", null);
+		final KElement r = d.getRoot();
+		for (int i = 0; i < 2222; i++)
+		{
+			for (int j = 1; j < 4; j++)
+			{
+				final KElement e1 = r.appendElement("e" + j);
+				v.add(e1);
+			}
+			final KElement e2 = r.appendElement("e2");
+			v2.add(e2);
+		}
+		v.removeElements(null);
+		assertEquals(v.size(), 6666);
+		v.removeElements(v2);
+		assertEquals(v.size(), 4444);
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testRemoveElement()
+	{
+		final VElement v = new VElement();
+		final XMLDoc d = new XMLDoc("e", null);
+		final KElement r = d.getRoot();
+		for (int i = 0; i < 2222; i++)
+		{
+			for (int j = 1; j < 4; j++)
+			{
+				final KElement e1 = r.appendElement("e" + j);
+				v.add(e1);
+			}
+		}
+		final KElement e2 = r.appendElement("e2");
+
+		v.removeElements(null, 100);
+		assertEquals(v.size(), 6666);
+		v.removeElements(e2, 100);
+		assertEquals(v.size(), 6566);
+		v.removeElements(e2, 10000);
+		assertEquals(v.size(), 4444);
 	}
 
 	/**
@@ -212,18 +265,18 @@ public class VElementTest extends JDFTestCaseBase
 		v.appendUnique(e1);
 		e1 = e.appendElement("e1");
 		e1.setAttribute("a", "b");
-		Assert.assertTrue("containsElement", v.containsElement(e1));
-		Assert.assertFalse("contains", v.contains(e1));
+		assertTrue("containsElement", v.containsElement(e1));
+		assertFalse("contains", v.contains(e1));
 		e1.setText("foo");
-		Assert.assertFalse("containsElement", v.containsElement(e1));
+		assertFalse("containsElement", v.containsElement(e1));
 		v.appendUnique(e1);
-		Assert.assertEquals("size", v.size(), 2);
+		assertEquals("size", v.size(), 2);
 		e1 = e.appendElement("e1");
 		e1.setAttribute("a", "b");
 		e1.setText("foo");
-		Assert.assertTrue("containsElement", v.containsElement(e1));
+		assertTrue("containsElement", v.containsElement(e1));
 		e1.setText("bar");
-		Assert.assertFalse("containsElement", v.containsElement(e1));
+		assertFalse("containsElement", v.containsElement(e1));
 
 	}
 
@@ -239,9 +292,9 @@ public class VElementTest extends JDFTestCaseBase
 		e.appendElement("b:a2", "b");
 		final VElement v = e.getChildElementVector(null, null, null, true, 0, true);
 		VString s = v.getElementNameVector(false);
-		Assert.assertEquals(s, new VString("a1 b:a2", " "));
+		assertEquals(s, new VString("a1 b:a2", " "));
 		s = v.getElementNameVector(true);
-		Assert.assertEquals(s, new VString("a1 a2", " "));
+		assertEquals(s, new VString("a1 a2", " "));
 	}
 
 	// ///////////////////////////////////////////
@@ -262,11 +315,11 @@ public class VElementTest extends JDFTestCaseBase
 		e1 = e.appendElement("e1");
 		e1.setAttribute("a", "b");
 		v.add(e1);
-		Assert.assertEquals(v.size(), 3);
+		assertEquals(v.size(), 3);
 		v.unify();
-		Assert.assertEquals(v.size(), 2);
+		assertEquals(v.size(), 2);
 		v.unifyElement();
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 	}
 
 	/**
@@ -291,9 +344,9 @@ public class VElementTest extends JDFTestCaseBase
 			v.add(e3);
 		}
 		v.unify();
-		Assert.assertEquals(v.size(), 300);
+		assertEquals(v.size(), 300);
 		v.unifyElement();
-		Assert.assertEquals(v.size(), 3);
+		assertEquals(v.size(), 3);
 	}
 
 	/**
@@ -316,10 +369,10 @@ public class VElementTest extends JDFTestCaseBase
 		}
 		System.out.println("t00: " + (System.currentTimeMillis() - t00));
 		v.unify();
-		Assert.assertEquals(v.size(), 1000);
+		assertEquals(v.size(), 1000);
 		long t0 = System.currentTimeMillis();
 		v.unifyElement();
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.size(), 1);
 		System.out.println("t: " + (System.currentTimeMillis() - t0));
 	}
 
@@ -341,7 +394,7 @@ public class VElementTest extends JDFTestCaseBase
 		v.add(e1);
 		v.add(e2);
 		v.sort();
-		Assert.assertEquals(v.get(0), e2);
+		assertEquals(v.get(0), e2);
 	}
 
 	// ///////////////////////////////////////////
@@ -366,11 +419,11 @@ public class VElementTest extends JDFTestCaseBase
 		v.add(e1);
 		v.add(e2);
 		final VElement v2 = new VElement(v);
-		Assert.assertTrue(v.isEqual(v2));
+		assertTrue(v.isEqual(v2));
 		v2.set(1, e3);
-		Assert.assertTrue(v.isEqual(v2));
+		assertTrue(v.isEqual(v2));
 		v2.set(1, e4);
-		Assert.assertFalse(v.isEqual(v2));
+		assertFalse(v.isEqual(v2));
 	}
 
 	/**
@@ -394,10 +447,10 @@ public class VElementTest extends JDFTestCaseBase
 		final VElement v = new VElement();
 		v.add(e1);
 		v.add(e2);
-		Assert.assertEquals(v.index(e1), 0);
-		Assert.assertEquals(v.index(e4), -1);
+		assertEquals(v.index(e1), 0);
+		assertEquals(v.index(e4), -1);
 		v.add(e3);
-		Assert.assertEquals("test for equivalent ID aqttribute", v.index(e4), 2);
+		assertEquals("test for equivalent ID aqttribute", v.index(e4), 2);
 	}
 
 }

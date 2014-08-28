@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -289,10 +289,9 @@ public class VElement extends Vector<KElement>
 	 */
 	public boolean containsElement(final KElement elem)
 	{
-		final int size = size();
-		for (int i = 0; i < size; i++)
+		for (int i = size() - 1; i >= 0; i--)
 		{
-			if (elem.isEqual(elementAt(i)))
+			if (elem.isEqual(super.elementAt(i)))
 			{
 				return true;
 			}
@@ -442,9 +441,14 @@ public class VElement extends Vector<KElement>
 	 */
 	public void removeElements(final VElement v)
 	{
+		if (v == null)
+		{
+			return;
+		}
+
 		for (int i = size() - 1; i >= 0; i--)
 		{
-			if (v.containsElement(elementAt(i)))
+			if (v.containsElement(super.elementAt(i)))
 			{
 				removeElementAt(i);
 			}
@@ -454,20 +458,25 @@ public class VElement extends Vector<KElement>
 	/**
 	 * RemoveElements
 	 * 
-	 * @param e the element to remove
+	 * @param testElem the element to remove
 	 * @param nMax maximum number of dulicate elements to remove
 	 * 
 	 * @default RemoveElements(e, 0)
+	 *  
 	 */
-	public void removeElements(final KElement e, final int nMax)
+	public void removeElements(final KElement testElem, final int nMax)
 	{
+		if (testElem == null)
+		{
+			return;
+		}
 		int j = 0;
 
-		for (int i = size() - 1; i >= 0; i--)
+		for (int i = 0; i - j < size(); i++)
 		{
-			if (e == elementAt(i))
+			if (testElem.isEqual(elementAt(i - j)))
 			{
-				removeElementAt(i);
+				removeElementAt(i - j);
 
 				if (++j == nMax)
 				{

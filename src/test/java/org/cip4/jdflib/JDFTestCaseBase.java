@@ -70,6 +70,7 @@
 package org.cip4.jdflib;
 
 import java.io.File;
+import java.net.URL;
 
 import junit.framework.TestCase;
 
@@ -141,8 +142,14 @@ public abstract class JDFTestCaseBase extends TestCase
 
 		String path = "test" + File.separator + "data";
 		File dataFile = new File(path);
-		if (!dataFile.isDirectory()) // legacy - pre maven file structure support
-			path = JDFTestCaseBase.class.getResource("/data").getPath();
+		if (!dataFile.isDirectory())
+		{ // legacy - pre maven file structure support
+			URL resource = JDFTestCaseBase.class.getResource("/data");
+			if (resource != null)
+			{
+				path = resource.getPath();
+			}
+		}
 		path = FilenameUtils.normalize(path) + File.separator;
 
 		return path;
