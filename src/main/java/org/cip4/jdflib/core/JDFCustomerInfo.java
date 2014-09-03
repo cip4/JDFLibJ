@@ -84,10 +84,12 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCustomerInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
 /**
@@ -97,7 +99,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  */
 
-public class JDFCustomerInfo extends JDFAutoCustomerInfo
+public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -338,4 +340,31 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		return c;
 	}
 
+	@Override
+	public boolean matches(Object subset)
+	{
+		boolean matches = false;
+		if (subset instanceof String)
+		{
+			String subString = StringUtil.normalize((String) subset, true);
+			matches = subString == null ? false : subString.equalsIgnoreCase(getCustomerID());
+		}
+		else if (subset instanceof JDFCustomerInfo)
+		{
+			JDFCustomerInfo ci = (JDFCustomerInfo) subset;
+			String customerID = StringUtil.normalize(getCustomerID(), true);
+			String othercustomerID = StringUtil.normalize(ci.getCustomerID(), true);
+			if (customerID != null && othercustomerID != null)
+			{
+				matches = customerID.equals(othercustomerID);
+			}
+			else
+			{
+				JDFContact contact = getContactWithContactType(EnumContactType.Customer.getName(), 0);
+
+				matches = contact == null ? false : contact.matches(ci.getContactWithContactType(EnumContactType.Customer.getName(), 0));
+			}
+		}
+		return matches;
+	}
 }

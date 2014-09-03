@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,7 +90,11 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -99,7 +103,7 @@ import org.w3c.dom.DOMException;
  * @author rainer prosi
  * @date way before Jan 31, 2012
  */
-public class JDFContact extends JDFAutoContact
+public class JDFContact extends JDFAutoContact implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -338,6 +342,42 @@ public class JDFContact extends JDFAutoContact
 			p.setFamilyName(familyName);
 		}
 		return p;
+	}
+
+	/**
+	 * checks a match
+	 * if subset is a String, then we check userID (ignoring case)
+	 * if subset is a JDFContact, we do heuristic matching of the person, company and address
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	@Override
+	public boolean matches(Object subset)
+	{
+		boolean matches = false;
+		if (subset instanceof String)
+		{
+			String subString = StringUtil.normalize((String) subset, true);
+			matches = subString == null ? false : subString.equalsIgnoreCase(getUserID());
+		}
+		else if (subset instanceof JDFContact)
+		{
+			JDFContact other = (JDFContact) subset;
+			String userID = StringUtil.normalize(getUserID(), true);
+			String otherUserID = StringUtil.normalize(other.getUserID(), true);
+			if (userID != null && otherUserID != null)
+			{
+				matches = userID.equals(otherUserID);
+			}
+			else
+			{
+				matches = hasChildElement(ElementName.ADDRESS, null) || hasChildElement(ElementName.COMPANY, null) || hasChildElement(ElementName.PERSON, null);
+				matches = matches && ContainerUtil.matchesExisting(getAddress(), other.getAddress());
+				matches = matches && ContainerUtil.matchesExisting(getCompany(), other.getCompany());
+				matches = matches && ContainerUtil.matchesExisting(getPerson(), other.getPerson());
+
+			}
+		}
+		return matches;
 	}
 
 }

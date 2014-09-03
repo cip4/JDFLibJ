@@ -173,12 +173,16 @@ public class StringUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetDistance()
 	{
-		assertEquals(StringUtil.getDistance("", null, false, false), 0);
-		assertEquals(StringUtil.getDistance("a", "A", false, true), 0);
-		assertEquals(StringUtil.getDistance("a", "AA", false, true), 1);
-		assertEquals(StringUtil.getDistance("a  b", "a B", true, true), 0);
-		assertEquals(StringUtil.getDistance("hallo", "hllo", true, true), 1);
-		assertEquals(StringUtil.getDistance("hasso", "haßo", true, true), 2);
+		assertEquals(StringUtil.getDistance("", null, false, false, false), 0);
+		assertEquals(StringUtil.getDistance("", "A", false, true, true), 0);
+		assertEquals(StringUtil.getDistance(null, "A", false, true, true), 0);
+		assertEquals(StringUtil.getDistance("a", null, false, true, true), 0);
+		assertEquals(StringUtil.getDistance("a", "", false, true, true), 0);
+		assertEquals(StringUtil.getDistance("a", "A", false, true, false), 0);
+		assertEquals(StringUtil.getDistance("a", "AA", false, true, false), 1);
+		assertEquals(StringUtil.getDistance("a  b", "a B", true, true, false), 0);
+		assertEquals(StringUtil.getDistance("hallo", "hllo", true, true, false), 1);
+		assertEquals(StringUtil.getDistance("hasso", "haßo", true, true, false), 2);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -196,5 +196,27 @@ public class JDFPersonTest extends JDFTestCaseBase
 		super.setUp();
 		final JDFDoc d = new JDFDoc("Person");
 		person = (JDFPerson) d.getRoot();
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMatches()
+	{
+		JDFDoc doc = new JDFDoc("Person");
+		JDFPerson c = (JDFPerson) doc.getRoot();
+		JDFPerson c2 = (JDFPerson) new JDFDoc("Person").getRoot();
+		assertTrue(c.matches(c2));
+		c.setFirstName("foo");
+		assertTrue(c.matches(c2));
+		c2.setFirstName("Foo");
+		assertTrue(c.matches(c));
+		assertTrue(c.matches("foo"));
+		c2.setFamilyName("bar");
+		assertTrue(c.matches(c2));
+		c.setFamilyName("bar");
+		assertTrue(c.matches("foo bar"));
 	}
 }

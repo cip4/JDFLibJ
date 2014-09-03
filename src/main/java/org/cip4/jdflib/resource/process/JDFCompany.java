@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,8 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCompany;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -88,7 +90,7 @@ import org.w3c.dom.DOMException;
  * @author rainer prosi
  * @date June 9, 2011
  */
-public class JDFCompany extends JDFAutoCompany
+public class JDFCompany extends JDFAutoCompany implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -140,5 +142,26 @@ public class JDFCompany extends JDFAutoCompany
 	public String toString()
 	{
 		return "JDFCompany[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * checks whether the organization names match
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	@Override
+	public boolean matches(Object subset)
+	{
+		boolean matches = false;
+		if (subset instanceof String)
+		{
+			matches = StringUtil.getDistance(getOrganizationName(), (String) subset, true, true, true) <= 2;
+		}
+		else if (subset instanceof JDFCompany)
+		{
+			JDFCompany other = (JDFCompany) subset;
+			matches = matches(other.getOrganizationName());
+		}
+		return matches;
 	}
 }

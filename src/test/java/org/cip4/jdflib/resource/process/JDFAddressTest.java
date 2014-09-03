@@ -72,12 +72,8 @@ package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.pool.JDFResourcePool;
 import org.junit.Test;
 
 /**
@@ -89,21 +85,40 @@ import org.junit.Test;
 public class JDFAddressTest extends JDFTestCaseBase
 {
 	/**
-	 * tests the separationlist class
+	 * tests the JDFAddress class
 	 * 
 	 */
 	@Test
 	public final void testExtendedAddress()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode root = doc.getJDFRoot();
-		JDFResourcePool resPool = root.getCreateResourcePool();
-		JDFContact contact = (JDFContact) resPool.appendResource(ElementName.CONTACT, null, null);
-
-		KElement kElem = contact.appendPerson().appendAddress();
-		assertTrue(kElem instanceof JDFAddress);
-		JDFAddress ad = (JDFAddress) kElem;
+		JDFDoc doc = new JDFDoc("Address");
+		JDFAddress ad = (JDFAddress) doc.getRoot();
 		JDFComment c = (JDFComment) ad.appendExtendedAddress();
 		assertFalse(c.hasAttribute(AttributeName.ID));
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMatches()
+	{
+		JDFDoc doc = new JDFDoc("Address");
+		JDFAddress ad = (JDFAddress) doc.getRoot();
+		JDFAddress ad2 = (JDFAddress) new JDFDoc("Address").getRoot();
+		assertTrue(ad.matches(ad));
+		ad.setCity("cc1");
+		ad2.setCity("cc2");
+		assertTrue(ad.matches(ad2));
+		ad.setCountryCode("DE");
+		assertTrue(ad.matches(ad2));
+		ad2.setCountryCode("de");
+		assertTrue(ad.matches(ad2));
+		ad2.setCountryCode("dd");
+		assertFalse(ad.matches(ad2));
+		ad2.setCountryCode("de");
+		ad2.setCity("abcde");
+		assertFalse(ad.matches(ad2));
 	}
 }

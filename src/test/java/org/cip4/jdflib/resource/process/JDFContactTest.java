@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  *  
@@ -159,5 +160,31 @@ public class JDFContactTest extends JDFTestCaseBase
 		co.setPerson("foo", null);
 		Assert.assertEquals(co.getPerson().getFirstName(), "foo");
 		Assert.assertEquals(co.getPerson().getFamilyName(), "");
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMatches()
+	{
+		JDFDoc doc = new JDFDoc("Contact");
+		JDFContact c = (JDFContact) doc.getRoot();
+		JDFContact c2 = (JDFContact) new JDFDoc("Contact").getRoot();
+		assertFalse(c.matches(c2));
+		JDFPerson p = c.appendPerson();
+		JDFPerson p2 = c2.appendPerson();
+		assertTrue(c.matches(c2));
+		p.setFirstName("foo");
+		assertTrue(c.matches(c2));
+		p2.setFirstName("Foo");
+		assertTrue(c.matches(c));
+		p2.setFamilyName("bar");
+		assertTrue(c.matches(c2));
+		p.setFamilyName("bar");
+
+		c.setUserID("foo");
+		assertTrue(c.matches("foo"));
 	}
 }

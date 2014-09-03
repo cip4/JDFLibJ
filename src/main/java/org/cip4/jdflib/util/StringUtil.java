@@ -1055,14 +1055,20 @@ public class StringUtil
 	 * @param s2
 	 * @param normalize if true, normalize strings prior to calculating
 	 * @param ignoreCase if true, ignore case strings when calculating
-	 * @return the Levenschtein distance
+	 * @param ignoreEmpty if true, the result is 0 if one of the two strings is null or ""
+	 * @return the Levenshtein distance
 	 */
-	public static int getDistance(String s1, String s2, boolean normalize, boolean ignoreCase)
+	public static int getDistance(String s1, String s2, boolean normalize, boolean ignoreCase, boolean ignoreEmpty)
 	{
 		if (s1 == null)
 			s1 = JDFConstants.EMPTYSTRING;
 		if (s2 == null)
 			s2 = JDFConstants.EMPTYSTRING;
+		if (ignoreEmpty && (JDFConstants.EMPTYSTRING.equals(s1) || JDFConstants.EMPTYSTRING.equals(s2)))
+		{
+			return 0;
+		}
+
 		if (ignoreCase)
 		{
 			s1 = s1.toLowerCase();

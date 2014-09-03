@@ -160,6 +160,26 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMatchesExisting()
+	{
+		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs.setCostCenterID("CS");
+		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs2.setCostCenterID("CS");
+		assertTrue(ContainerUtil.matchesExisting(cs, cs2));
+		assertTrue(ContainerUtil.matchesExisting(cs, "CS"));
+		assertTrue(ContainerUtil.matchesExisting(null, null));
+		assertTrue(ContainerUtil.matchesExisting(cs, null));
+		assertTrue(ContainerUtil.matchesExisting(null, "CS2"));
+		cs2.setCostCenterID("CS2");
+		assertFalse(ContainerUtil.matchesExisting(cs, cs2));
+		assertFalse(ContainerUtil.matchesExisting(cs, "CS2"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAddAll()
 	{
 		final VString v1 = new VString("a b c", null);

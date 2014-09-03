@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,8 +82,9 @@ package org.cip4.jdflib.resource.process;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPerson;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -92,7 +93,7 @@ import org.w3c.dom.DOMException;
  * 
  * before July 6, 2009
  */
-public class JDFPerson extends JDFAutoPerson
+public class JDFPerson extends JDFAutoPerson implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -205,18 +206,6 @@ public class JDFPerson extends JDFAutoPerson
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	public KElement clone()
-	{
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
 	/**
 	 * get first + last name if descname does not exist
 	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
@@ -253,5 +242,31 @@ public class JDFPerson extends JDFAutoPerson
 		}
 		return s;
 	}
-} // class JDFPerson
-// ==========================================================================
+
+	/**
+	 * checks firstname, familyname, aditionalNames and address
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	@Override
+	public boolean matches(Object subset)
+	{
+		boolean matches = false;
+		if (subset instanceof String)
+		{
+			matches = StringUtil.getDistance(getDescriptiveName(), (String) subset, true, true, true) <= 2;
+		}
+		else if (subset instanceof JDFPerson)
+		{
+			JDFPerson other = (JDFPerson) subset;
+			if (StringUtil.getDistance(getFamilyName(), other.getFamilyName(), true, true, true) > 1)
+				return false;
+			if (StringUtil.getDistance(getFirstName(), other.getFirstName(), true, true, true) > 1)
+				return false;
+			if (StringUtil.getDistance(getAdditionalNames(), other.getAdditionalNames(), true, true, true) > 1)
+				return false;
+			matches = ContainerUtil.matchesExisting(getAddress(0), other.getAddress(0));
+		}
+		return matches;
+	}
+}

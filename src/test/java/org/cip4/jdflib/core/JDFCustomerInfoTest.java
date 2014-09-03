@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,8 +80,11 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.resource.process.JDFPerson;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -213,4 +216,38 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		Assert.assertNotNull(info.getContact(0));
 	}
 
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMatches()
+	{
+		JDFDoc doc = new JDFDoc("CustomerInfo");
+		JDFCustomerInfo ci = (JDFCustomerInfo) doc.getRoot();
+		JDFCustomerInfo ci2 = (JDFCustomerInfo) new JDFDoc("CustomerInfo").getRoot();
+		assertFalse(ci.matches(ci2));
+		ci.setCustomerID("cid1");
+		ci2.setCustomerID("cid2");
+		assertFalse(ci.matches(ci2));
+		ci2.setCustomerID("cid1");
+		assertTrue(ci.matches(ci2));
+		ci.setCustomerID(null);
+		ci2.setCustomerID("");
+		JDFContact c = ci.appendContact(EnumContactType.Customer);
+		JDFContact c2 = ci2.appendContact(EnumContactType.Customer);
+		JDFPerson p = c.appendPerson();
+		JDFPerson p2 = c2.appendPerson();
+		assertTrue(c.matches(c2));
+		p.setFirstName("foo");
+		assertTrue(c.matches(c2));
+		p2.setFirstName("Foo");
+		assertTrue(c.matches(c));
+		p2.setFamilyName("bar");
+		assertTrue(c.matches(c2));
+		p.setFamilyName("bar");
+
+		c.setUserID("foo");
+		assertTrue(c.matches("foo"));
+	}
 }

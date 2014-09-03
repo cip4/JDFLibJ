@@ -448,7 +448,7 @@ public class ContainerUtil
 	 * return true if a matches b or both are null
 	 * @param a Object to compare
 	 * @param b Object to compare
-	 * @return boolean true if a equals b or both are null
+	 * @return boolean true if a matches b or both are null
 	 */
 	public static boolean matches(final IMatches a, final Object b)
 	{
@@ -459,6 +459,21 @@ public class ContainerUtil
 		if (b == null)
 		{
 			return false;
+		}
+		return a.matches(b);
+	}
+
+	/**
+	 * return true if a matches b or one of a or b is null
+	 * @param a Object to compare
+	 * @param b Object to compare
+	 * @return boolean true if a matches b or both are null
+	 */
+	public static boolean matchesExisting(final IMatches a, final Object b)
+	{
+		if (a == null || b == null)
+		{
+			return true;
 		}
 		return a.matches(b);
 	}
