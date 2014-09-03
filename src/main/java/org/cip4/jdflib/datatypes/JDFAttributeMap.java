@@ -222,8 +222,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param key unique key of the pair to add. Must not be "" or null.
 	 * @param value value of the pair to add. MAY be "" or null.
 	 * 
-	 * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
-	 * true if the new Key was inserted
+	 * @return the previous value of oldkey, if any
 	 * <p>
 	 * NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
 	 */
@@ -235,8 +234,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		{
 			return null;
 		}
-		// put key value to hashmap. The map returns null if the key was new
-		// or an object (the old value) if the value was replaced
+		// put key value to hashmap. The map returns null if the key was new or an object (the old value) if the value was replaced
 		return super.put(key, value);
 	}
 
@@ -566,6 +564,24 @@ public class JDFAttributeMap extends HashMap<String, String>
 		}
 
 		return super.remove(key);
+	}
+
+	/**
+	 * rename a key to the new value. newKey is only replaced if oldkey exists
+	 * 
+	 * @param oldKey
+	 * @param newKey
+	 * @return the previous value of oldkey
+	 */
+	public String renameKey(String oldKey, String newKey)
+	{
+		String val = get(oldKey);
+		String ret = null;
+		if (val != null)
+		{
+			ret = put(newKey, val);
+		}
+		return ret;
 	}
 
 	/**

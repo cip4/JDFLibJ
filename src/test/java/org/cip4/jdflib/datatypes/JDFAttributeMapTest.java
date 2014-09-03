@@ -399,8 +399,23 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		m1.removeKeys(keys);
 		assertEquals(m1, m2);
 	}
-	// /////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testRenameKey()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		assertEquals(m1.renameKey("a1", "a3"), null);
+		assertEquals(m1.get("a3"), "v1");
+		assertEquals(m1.renameKey("a4", "a5"), null);
+		assertEquals(m1.get("a5"), null);
+		assertEquals(m1.renameKey("a4", "a2"), null);
+		assertEquals(m1.get("a2"), "v2");
+		assertEquals(m1.renameKey("a3", "a2"), "v2");
+		assertEquals(m1.get("a2"), "v1");
+	}
 
 }
