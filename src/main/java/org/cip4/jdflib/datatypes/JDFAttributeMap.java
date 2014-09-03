@@ -575,7 +575,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String renameKey(String oldKey, String newKey)
 	{
-		String val = get(oldKey);
+		String val = remove(oldKey);
 		String ret = null;
 		if (val != null)
 		{

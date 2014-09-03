@@ -416,6 +416,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("a2"), "v2");
 		assertEquals(m1.renameKey("a3", "a2"), "v2");
 		assertEquals(m1.get("a2"), "v1");
+		assertEquals(m1.get("a3"), null);
 	}
 
 }
