@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,12 +88,14 @@ import org.cip4.jdflib.auto.JDFAutoMedia;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFMedia extends JDFAutoMedia
+public class JDFMedia extends JDFAutoMedia implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -252,5 +254,42 @@ public class JDFMedia extends JDFAutoMedia
 			return 2; // matte
 
 		return frontGrade;
+	}
+
+	@Override
+	public boolean matches(Object subset)
+	{
+		boolean matches = false;
+		if (subset instanceof String)
+		{
+			String subString = StringUtil.normalize((String) subset, true);
+			matches = subString == null ? false : subString.equalsIgnoreCase(getProductID());
+		}
+		else if (subset instanceof JDFMedia)
+		{
+			JDFMedia other = (JDFMedia) subset;
+			String productID = StringUtil.normalize(getProductID(), true);
+			String otherProductID = StringUtil.normalize(other.getProductID(), true);
+			if (productID != null && otherProductID != null)
+			{
+				matches = matches(otherProductID);
+			}
+			else
+			{
+				matches = StringUtil.getDistance(getBrand(), other.getBrand(), true, true, true) == 0;
+				matches = matches && StringUtil.getDistance(getMediaQuality(), other.getMediaQuality(), true, true, true) == 0;
+				matches = matches
+						&& StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
+				matches = matches && getGrade() == 0 || other.getGrade() == 0 || other.getGrade() == getGrade();
+				matches = matches && getBackGrade() == 0 || other.getBackGrade() == 0 || other.getBackGrade() == getBackGrade();
+				if (matches)
+				{
+					JDFXYPair dim = getDimension();
+					JDFXYPair otherDim = other.getDimension();
+					matches = dim == null || otherDim == null || dim.matches(otherDim, 5);
+				}
+			}
+		}
+		return matches;
 	}
 }

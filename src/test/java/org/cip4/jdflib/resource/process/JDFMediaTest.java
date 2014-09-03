@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,8 +88,8 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -117,31 +117,31 @@ public class JDFMediaTest extends TestCase
 		JDFNode root = doc.getJDFRoot();
 		JDFResourcePool resPool = root.getCreateResourcePool();
 		KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
-		Assert.assertTrue(kElem instanceof JDFMedia);
+		assertTrue(kElem instanceof JDFMedia);
 		JDFMedia media = ((JDFMedia) kElem);
-		Assert.assertNull(media.getDimensionCM());
-		Assert.assertNull(media.getDimensionInch());
+		assertNull(media.getDimensionCM());
+		assertNull(media.getDimensionInch());
 		media.setDimensionCM(new JDFXYPair(2.54, 2.54));
 
 		JDFXYPair result = media.getDimension();
-		Assert.assertEquals(new JDFXYPair(72, 72), result);
+		assertEquals(new JDFXYPair(72, 72), result);
 
 		result = media.getDimensionCM();
-		Assert.assertEquals(new JDFXYPair(2.54, 2.54), result);
+		assertEquals(new JDFXYPair(2.54, 2.54), result);
 
 		result = media.getDimensionInch();
-		Assert.assertEquals(new JDFXYPair(1, 1), result);
+		assertEquals(new JDFXYPair(1, 1), result);
 
 		media.setDimensionInch(new JDFXYPair(1, 1));
 
 		result = media.getDimension();
-		Assert.assertEquals(new JDFXYPair(72, 72), result);
+		assertEquals(new JDFXYPair(72, 72), result);
 
 		result = media.getDimensionCM();
-		Assert.assertEquals(new JDFXYPair(2.54, 2.54), result);
+		assertEquals(new JDFXYPair(2.54, 2.54), result);
 
 		result = media.getDimensionInch();
-		Assert.assertEquals(new JDFXYPair(1, 1), result);
+		assertEquals(new JDFXYPair(1, 1), result);
 	}
 
 	// //////////////////////////////////////////////////////////////////
@@ -155,15 +155,15 @@ public class JDFMediaTest extends TestCase
 		JDFMedia m = (JDFMedia) new JDFDoc("Media").getRoot();
 		m.setThicknessFromWeight(true, false);
 		m.setMediaType(EnumMediaType.Paper);
-		Assert.assertFalse(m.hasAttribute(AttributeName.THICKNESS));
+		assertFalse(m.hasAttribute(AttributeName.THICKNESS));
 		m.setWeight(80.);
 		m.setThicknessFromWeight(true, false);
-		Assert.assertEquals(m.getThickness(), 100., 1.);
+		assertEquals(m.getThickness(), 100., 1.);
 		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Run, "r1");
 		m2.setWeight(40.);
 		m.setThicknessFromWeight(true, true);
-		Assert.assertEquals(m2.getThickness(), 50., 1.);
-		Assert.assertEquals(m.getThickness(), 100., 1.);
+		assertEquals(m2.getThickness(), 50., 1.);
+		assertEquals(m.getThickness(), 100., 1.);
 	}
 
 	// //////////////////////////////////////////////////////////////////
@@ -176,13 +176,13 @@ public class JDFMediaTest extends TestCase
 	{
 		JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setGrade(5);
-		Assert.assertEquals(m.getBackGrade(), 5, 0);
+		assertEquals(m.getBackGrade(), 5, 0);
 		m.setGrade(1);
-		Assert.assertEquals(m.getBackGrade(), 1, 0);
+		assertEquals(m.getBackGrade(), 1, 0);
 		m.setBackCoatings(EnumBackCoatings.Matte);
-		Assert.assertEquals(m.getBackGrade(), 2, 0);
+		assertEquals(m.getBackGrade(), 2, 0);
 		m.setBackCoatings(EnumBackCoatings.None);
-		Assert.assertEquals(m.getBackGrade(), 4, 0);
+		assertEquals(m.getBackGrade(), 4, 0);
 	}
 
 	/**
@@ -197,32 +197,60 @@ public class JDFMediaTest extends TestCase
 
 		// check HoleType for JDFMedia
 		KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
-		Assert.assertTrue(kElem instanceof JDFMedia);
+		assertTrue(kElem instanceof JDFMedia);
 		JDFMedia media = ((JDFMedia) kElem);
 
 		Vector<EnumHoleType> v = new Vector<EnumHoleType>();
 		v.addElement(EnumHoleType.None);
 		v.addElement(EnumHoleType.C9_5m_round_0t);
-		Assert.assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
+		assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
 
 		media.setHoleType(v);
-		Assert.assertEquals(media.getHoleType(), v);
-		Assert.assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-		Assert.assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
+		assertEquals(media.getHoleType(), v);
+		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
+		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
 
 		// overwrite HoleType low level to check if conversion of DOT and HYPHEN
 		// to UNDERSCORE was successful
 		media.setAttribute(AttributeName.HOLETYPE, "C9.5m-round-0t");
-		Assert.assertEquals((media.getHoleType().elementAt(0)), EnumHoleType.C9_5m_round_0t);
+		assertEquals((media.getHoleType().elementAt(0)), EnumHoleType.C9_5m_round_0t);
 
 		// now check the same with JDFHoleMakingParams
 		kElem = resPool.appendResource(ElementName.HOLEMAKINGPARAMS, EnumResourceClass.Consumable, null);
-		Assert.assertTrue(kElem instanceof JDFHoleMakingParams);
+		assertTrue(kElem instanceof JDFHoleMakingParams);
 		JDFHoleMakingParams holeMakingParams = ((JDFHoleMakingParams) kElem);
 
 		holeMakingParams.setHoleType(v);
-		Assert.assertEquals(holeMakingParams.getHoleType(), v);
-		Assert.assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-		Assert.assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
+		assertEquals(holeMakingParams.getHoleType(), v);
+		assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
+		assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
+	}
+
+	/**
+	 *  
+	 * 
+	 */
+	@Test
+	public final void testMatches()
+	{
+		JDFDoc doc = new JDFDoc("Media");
+		JDFMedia m = (JDFMedia) doc.getRoot();
+		JDFMedia m2 = (JDFMedia) new JDFDoc("Media").getRoot();
+		assertTrue(m.matches(m2));
+		m.setGrade(4);
+		m2.setGrade(4);
+		assertTrue(m.matches(m2));
+		m2.setGrade(5);
+		assertFalse(m.matches(m2));
+		m.setGrade(5);
+		assertTrue(m.matches(m2));
+		m.setDimensionCM(new JDFXYPair(10, 20));
+		m2.setDimensionCM(new JDFXYPair(10.1, 20));
+		assertTrue(m.matches(m2));
+		m2.setDimensionCM(new JDFXYPair(100.1, 20));
+		assertFalse(m.matches(m2));
+
+		m.setProductID("foo");
+		assertTrue(m.matches("foo"));
 	}
 }
