@@ -182,15 +182,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * Setter for bConvertTilde attribute.
-	 * @param bConvertTilde the bConvertTilde to set
-	 */
-	public void setbConvertTilde(boolean bConvertTilde)
-	{
-		this.bConvertTilde = bConvertTilde;
-	}
-
-	/**
 	 * 
 	 */
 	boolean convertUnits;
@@ -377,15 +368,17 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				return bReturn;
 			}
 
-			final KElement parent2 = parent.getParentNode_KElement();
-			if (parent2 == null)
+			final KElement grandParent = parent.getParentNode_KElement();
+			if (grandParent == null)
 			{
 				return bReturn;
 			}
 
-			final String parentName = parent2.getLocalName();
-			boolean bL1 = parentName.endsWith("Set") && toCheck.getLocalName().equals(KElement.xmlnsLocalName(parent2.getAttribute("Name")));
-			bL1 = bL1 || parentName.equals("Product") && toCheck.getLocalName().equals(KElement.xmlnsLocalName(parent.getAttribute("Name")));
+			final String grandParentName = grandParent.getLocalName();
+			final String parentName = parent.getLocalName();
+			boolean bL1 = grandParentName.endsWith("Set") && parentName.equals(StringUtil.leftStr(grandParentName, -3))
+					&& toCheck.getLocalName().equals(KElement.xmlnsLocalName(grandParent.getAttribute("Name")));
+			bL1 = bL1 || grandParentName.equals("Product") && toCheck.getLocalName().equals(KElement.xmlnsLocalName(parent.getAttribute("Name")));
 			bReturn = bL1;
 		}
 

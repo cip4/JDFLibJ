@@ -1817,12 +1817,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				boolean bAddCPI = false;
 				final EnumType t = EnumType.getEnum(types.stringAt(i));
-				final String[] typeLinkNames = LinkValidatorMap.getLinkValidator().typeLinkNames(t);
+				final String[] typeLinkNames = LinkValidatorMap.getLinkValidatorMap().typeLinkNames(t);
 				if (typeLinkNames != null && (ArrayUtils.contains(typeLinkNames, resName) || ArrayUtils.contains(typeLinkNames, JDFConstants.STAR)))
 				{
 					// if we already added a cpi, but this is an exchange resource, only set cpi for the last one
 					int iPos = getResPos(resName, typeLinkNames);
-					final VString typeInfo = StringUtil.tokenize(LinkValidatorMap.getLinkValidator().typeLinkInfo(t)[iPos], " ", false);
+					Vector<LinkInfo> typeLinkInfo = LinkValidatorMap.getLinkValidatorMap().typeLinkInfo(t);
+					LinkInfo linkInfo = typeLinkInfo.get(iPos);
+					final VString typeInfo = linkInfo.getVString();
 					boolean bMatchUsage = false;
 					String inOut = null;
 					if (usage != null)
@@ -1887,7 +1889,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			int iPosLast = getResPos(resName, typeLinkNamesLast);
 			// the i* i?pu ... list of this
 			// the o* i?pu ... list of the previous type
-			final VString typeInfoLast = StringUtil.tokenize(LinkValidatorMap.getLinkValidator().typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast], " ", false);
+			Vector<LinkInfo> typeLinkInfo = LinkValidatorMap.getLinkValidatorMap().typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)));
+			LinkInfo linkInfo = typeLinkInfo.get(iPosLast);
+			final VString typeInfoLast = linkInfo.getVString();
 			boolean bOut = false;
 
 			for (int ii = 0; ii < typeInfoLast.size(); ii++)
@@ -2259,7 +2263,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString linkInfo()
 	{
-		return new LinkValidator(this).linkInfo();
+		Vector<LinkInfo> linkInfos = new LinkValidator(this).linkInfo();
+		VString v = new VString();
+		if (linkInfos != null)
+		{
+			for (LinkInfo linkInfo : linkInfos)
+			{
+				v.add(linkInfo.getString());
+			}
+		}
+		return v;
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -2944,8 +2957,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage) && resClass != null
-				&& ((resClass.equals(JDFResource.EnumResourceClass.Parameter)) || (resClass.equals(JDFResource.EnumResourceClass.Consumable))))
+		if (EnumUsage.Input.equals(usage)
+				&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
 		}
@@ -6227,7 +6240,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return null;
 		}
-		final String types = getAttribute(AttributeName.TYPES, null, null);
+		final String types = StringUtil.getNonEmpty(getAttribute(AttributeName.TYPES, null, null));
 		return types == null ? null : new VString(types, null);
 	}
 

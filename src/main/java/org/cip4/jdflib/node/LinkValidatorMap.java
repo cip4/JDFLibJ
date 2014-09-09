@@ -69,12 +69,14 @@
 package org.cip4.jdflib.node;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 /**
  *implementation of the link validation routines
@@ -85,10 +87,10 @@ public class LinkValidatorMap
 {
 	private static LinkValidatorMap theLinkValidator = null;
 	/**
-	 * Member Variablen
+	 * Member Variables
 	 */
 	private final HashMap<String, String[]> m_LinkNamesMap = new HashMap<String, String[]>();
-	private final HashMap<String, String[]> m_LinkInfoMap = new HashMap<String, String[]>();
+	private final VectorMap<String, LinkInfo> m_LinkInfoMap = new VectorMap<String, LinkInfo>();
 
 	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY,// APPROVALSUCCESS
 			JDFConstants.INPUT_ZEROTOONE, // CUSTOMERINFO
@@ -106,11 +108,11 @@ public class LinkValidatorMap
 			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	/**
-	 * 
+	 * get the singleton validator map
 	 *    
 	 * @return
 	 */
-	static LinkValidatorMap getLinkValidator()
+	public static LinkValidatorMap getLinkValidatorMap()
 	{
 		if (theLinkValidator == null)
 			theLinkValidator = new LinkValidatorMap();
@@ -123,9 +125,9 @@ public class LinkValidatorMap
 	 * @param key key for the new entry
 	 * @param addon
 	 * @param mMaps
-	 * @param hm HashMap to add the new entry to
+	 *  
 	 */
-	private void nameMapPut(final String key, final String addon, final String[] mMaps, final HashMap<String, String[]> hm)
+	private void nameMapPut(final String key, final String addon, final String[] mMaps)
 	{
 		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
 		final String[] v = new String[mMaps.length + vs.size()];
@@ -137,7 +139,25 @@ public class LinkValidatorMap
 		{
 			v[i + mMaps.length] = vs.stringAt(i);
 		}
-		hm.put(key, v);
+		m_LinkNamesMap.put(key, v);
+	}
+
+	/**
+	 * add entries to a HashMap
+	 * 
+	 * @param key key for the new entry
+	 * @param addon
+	 * @param mMaps
+	 * 
+	 */
+	private void infoMapPut(final String key, final String addon, final String[] mMaps)
+	{
+		for (String s : mMaps)
+			m_LinkInfoMap.putOne(key, new LinkInfo(s));
+
+		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
+		for (String s : vs)
+			m_LinkInfoMap.putOne(key, new LinkInfo(s));
 	}
 
 	/**
@@ -149,8 +169,8 @@ public class LinkValidatorMap
 	 */
 	private void mapPut(final String key, final String nameAddon, final String linkAddon)
 	{
-		nameMapPut(key, nameAddon, m_strGenericLinkNames, m_LinkNamesMap);
-		nameMapPut(key, linkAddon, m_GenericLinkInfo, m_LinkInfoMap);
+		nameMapPut(key, nameAddon, m_strGenericLinkNames);
+		infoMapPut(key, linkAddon, m_GenericLinkInfo);
 	}
 
 	/**
@@ -322,21 +342,40 @@ public class LinkValidatorMap
 	}
 
 	/**
-	 * Getter for m_LinkInfoMap attribute.
+	 * get the map of resource name to LinkInfo for a given type( types combination
 	 * @return the m_LinkInfoMap
 	 */
-	HashMap<String, String[]> getLinkInfoMap()
+	public HashMap<String, LinkInfo> getLinkInfoMap(final EnumType typ, VString vTypes)
 	{
-		return m_LinkInfoMap;
+		VString names = getLinkNames(typ, vTypes);
+		Vector<LinkInfo> infos = getLinkInfo(typ, vTypes);
+		if (infos == null || names == null || infos.size() != names.size())
+		{
+			return null;
+		}
+		HashMap<String, LinkInfo> ret = new HashMap<String, LinkInfo>();
+		int i = 0;
+		for (String name : names)
+		{
+			ret.put(name, infos.get(i));
+			i++;
+		}
+		return ret;
 	}
 
 	/**
 	 * Getter for m_GenericLinkInfo attribute.
 	 * @return the m_GenericLinkInfo
 	 */
-	String[] getGenericLinkInfo()
+	Vector<LinkInfo> getGenericLinkInfo()
 	{
-		return m_GenericLinkInfo;
+		Vector<LinkInfo> vLinkInfo = new Vector<LinkInfo>();
+		for (String s : m_GenericLinkInfo)
+		{
+			vLinkInfo.add(new LinkInfo(s));
+		}
+
+		return vLinkInfo;
 	}
 
 	/**
@@ -354,10 +393,180 @@ public class LinkValidatorMap
 	 * @param typeNum EnumType to get LinkInfo for
 	 * @return String list of resource information usages that may be linked for this EnumType
 	 */
-	String[] typeLinkInfo(final EnumType typeNum)
+	Vector<LinkInfo> typeLinkInfo(final EnumType typeNum)
 	{
-		final String[] strValueOfEnum = m_LinkInfoMap.get(typeNum.getName());
-		return (strValueOfEnum == null) ? m_GenericLinkInfo : strValueOfEnum;
+		final Vector<LinkInfo> info = m_LinkInfoMap.get(typeNum.getName());
+		return (info == null) ? getGenericLinkInfo() : info;
 	}
 
+	/**
+	 * 
+	 * @param typ
+	 * @param vTypes
+	 * @return
+	 */
+	public Vector<LinkInfo> getLinkInfo(final EnumType typ, VString vTypes)
+	{
+		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && vTypes != null))
+		{
+			final Vector<LinkInfo> vLinkInfo = getGenericLinkInfo();
+			final VString vNames = new VString(getGenericLinkNames());
+
+			if (vTypes == null)
+			{
+				return null;
+			}
+
+			for (String s : vTypes)
+			{
+				final EnumType t = EnumType.getEnum(s);
+				if (t != null)
+				{
+
+					final Vector<LinkInfo> typeLinkInfo = typeLinkInfo(t);
+					final String[] typeLinkNames = typeLinkNames(t);
+					if (typeLinkInfo == null || typeLinkNames == null)
+					{
+						return null;
+					}
+
+					for (int j = getGenericLinkInfo().size(); j < typeLinkInfo.size(); j++)
+					{
+						vLinkInfo.add(typeLinkInfo.get(j));
+						vNames.add(typeLinkNames[j]);
+					}
+				}
+			}
+
+			// make the intermediate links optional
+			final int s = vLinkInfo.size();
+			// loop over all links
+			for (int i = 0; i < s; i++)
+			{
+				final LinkInfo info = processLinkInfo(vLinkInfo, vNames, s, i);
+				vLinkInfo.set(i, info);
+			}
+			return vLinkInfo;
+		}
+		else
+		{
+			return typeLinkInfo(typ);
+		}
+	}
+
+	/**
+	 * 
+	 * @param typ
+	 * @param vTypes
+	 * @return
+	 */
+	public VString getLinkNames(final EnumType typ, VString vTypes)
+	{
+		VString v = new VString(getGenericLinkNames());
+		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && vTypes != null))
+		{
+			if (vTypes == null)
+			{
+				return null;
+			}
+
+			final int size = vTypes.size();
+			for (int i = 0; i < size; i++)
+			{
+				final EnumType t = EnumType.getEnum(vTypes.stringAt(i));
+				final String[] typeLinkNames = typeLinkNames(t);
+				if (typeLinkNames == null)
+				{
+					return null; // bail out - it's open anyhow
+				}
+				for (int j = getGenericLinkNames().length; j < typeLinkNames.length; j++)
+				{
+					v.add(typeLinkNames[j]);
+				}
+			}
+			return v;
+		}
+
+		// sinmple single type
+		final String[] typeLinkNames = typeLinkNames(typ);
+		if (typeLinkNames == null)
+		{
+			return null; // bail out - it's open anyhow
+		}
+		return new VString(typeLinkNames);
+	}
+
+	/**
+	 * 
+	 * @param vLinkInfo
+	 * @param vNames
+	 * @param s
+	 * @param i
+	 * @return
+	 */
+	private LinkInfo processLinkInfo(final Vector<LinkInfo> vLinkInfo, final VString vNames, final int s, int i)
+	{
+		final VString typeList = vLinkInfo.elementAt(i).getVString();
+		int typeSize = typeList.size();
+		for (int iTyp = 0; iTyp < typeSize; iTyp++)
+		{
+			String strTyp = typeList.elementAt(iTyp);
+			if (strTyp.charAt(0) == 'o')
+			{
+				final String linkName = vNames.elementAt(i);
+				// loop over all links behind this one in types
+				for (int j = i + 1; j < s; j++)
+				{
+					if (vNames.elementAt(j).equals(linkName))
+					{ // if the names match, they should fit
+						boolean bGotOne = false;
+
+						final VString typeList2 = vLinkInfo.elementAt(j).getVString();
+
+						for (int iTyp2 = 0; iTyp2 < typeList2.size(); iTyp2++)
+						{
+							String typ2 = typeList2.elementAt(iTyp2);
+							if (typ2.charAt(0) == 'i')
+							{
+								bGotOne = true;
+								// make them optional
+								if (typ2.charAt(1) == '_')
+								{
+									final char[] c_typ2 = typ2.toCharArray();
+									c_typ2[1] = '?';
+									typ2 = new String(c_typ2);
+								}
+								else if (typ2.charAt(1) == '+')
+								{
+									final char[] c_typ2 = typ2.toCharArray();
+									c_typ2[1] = '*';
+									typ2 = new String(c_typ2);
+								}
+								typeList2.set(iTyp2, typ2);
+							}
+						}
+						if (bGotOne)
+						{
+							// replace input link entry
+							vLinkInfo.set(j, new LinkInfo(typeList2));
+							if (strTyp.charAt(1) == '_')
+							{
+								final char[] c_strTyp = strTyp.toCharArray();
+								c_strTyp[1] = '?';
+								strTyp = new String(c_strTyp);
+							}
+							else if (strTyp.charAt(1) == '+')
+							{
+								final char[] c_strTyp = strTyp.toCharArray();
+								c_strTyp[1] = '*';
+								strTyp = new String(c_strTyp);
+							}
+							typeList.set(iTyp, strTyp);
+						}
+					}
+				}
+			}
+		}
+		return new LinkInfo(typeList);
+	}
 }

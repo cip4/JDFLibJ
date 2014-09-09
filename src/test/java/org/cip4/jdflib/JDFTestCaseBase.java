@@ -139,21 +139,19 @@ public abstract class JDFTestCaseBase extends TestCase
 
 	private static String getTestDataDir()
 	{
-
-		String path = "test" + File.separator + "data";
-		File dataFile = new File(path);
-		if (!dataFile.isDirectory())
-		{ // legacy - pre maven file structure support
-			URL resource = JDFTestCaseBase.class.getResource("/data");
-			if (resource != null)
-			{
-				path = resource.getPath();
-			}
+		String path = null;
+		URL resource = JDFTestCaseBase.class.getResource("/data");
+		if (resource != null)
+		{
+			path = resource.getPath();
+		}
+		if (path == null)
+		{
+			// legacy - pre maven file structure support
+			path = "test" + File.separator + "data";
 		}
 		path = FilenameUtils.normalize(path) + File.separator;
-
 		return path;
-
 	}
 
 	/**

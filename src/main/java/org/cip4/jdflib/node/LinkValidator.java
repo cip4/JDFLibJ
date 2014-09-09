@@ -104,7 +104,7 @@ public class LinkValidator
 	LinkValidator(JDFNode n)
 	{
 		this.node = n;
-		validatorMap = LinkValidatorMap.getLinkValidator();
+		validatorMap = LinkValidatorMap.getLinkValidatorMap();
 	}
 
 	/**
@@ -115,43 +115,12 @@ public class LinkValidator
 	VString linkNames()
 	{
 		final EnumType typ = EnumType.getEnum(node.getType());
+		VString vTypes = node.getTypes();
 		if (typ == null)
 		{
 			return null;
 		}
-		VString v = new VString(validatorMap.getGenericLinkNames());
-		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && node.hasAttribute(AttributeName.TYPES)))
-		{
-			VString vTypes = node.getTypes();
-			if (vTypes == null)
-			{
-				return null;
-			}
-
-			final int size = vTypes.size();
-			for (int i = 0; i < size; i++)
-			{
-				final EnumType t = EnumType.getEnum(vTypes.stringAt(i));
-				final String[] typeLinkNames = validatorMap.typeLinkNames(t);
-				if (typeLinkNames == null)
-				{
-					return null; // bail out - it's open anyhow
-				}
-				for (int j = validatorMap.getGenericLinkNames().length; j < typeLinkNames.length; j++)
-				{
-					v.add(typeLinkNames[j]);
-				}
-			}
-			return v;
-		}
-
-		// sinmple single type
-		final String[] typeLinkNames = validatorMap.typeLinkNames(typ);
-		if (typeLinkNames == null)
-		{
-			return null; // bail out - it's open anyhow
-		}
-		return new VString(typeLinkNames);
+		return validatorMap.getLinkNames(typ, vTypes);
 	}
 
 	/**
@@ -159,117 +128,16 @@ public class LinkValidator
 	 * 
 	 * @return String list of resource information usages that may be linked
 	 */
-	VString linkInfo()
+	Vector<LinkInfo> linkInfo()
 	{
 		final EnumType typ = EnumType.getEnum(node.getType());
+		VString vTypes = node.getTypes();
 		if (typ == null)
 		{
 			return null;
 		}
-		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && node.hasAttribute(AttributeName.TYPES)))
-		{
 
-			final VString vLinkInfo = new VString(validatorMap.getGenericLinkInfo());
-			final VString vNames = new VString(validatorMap.getGenericLinkNames());
-
-			VString vTypes = node.getTypes();
-			if (vTypes == null)
-			{
-				return null;
-			}
-			int i = 0;
-			for (i = 0; i < vTypes.size(); i++)
-			{
-				final EnumType t = EnumType.getEnum(vTypes.elementAt(i));
-				if (t == null)
-				{
-					return null;
-				}
-
-				final String[] typeLinkInfo = validatorMap.typeLinkInfo(t);
-				final String[] typeLinkNames = validatorMap.typeLinkNames(t);
-				if (typeLinkInfo == null || typeLinkNames == null)
-				{
-					return null;
-				}
-
-				for (int j = validatorMap.getGenericLinkInfo().length; j < typeLinkInfo.length; j++)
-				{
-					vLinkInfo.add(typeLinkInfo[j]);
-					vNames.add(typeLinkNames[j]);
-				}
-			}
-
-			// make the intermediate links optional
-			final int s = vLinkInfo.size();
-			// loop over all links
-			for (i = 0; i < s; i++)
-			{
-				final VString typeList = StringUtil.tokenize(vLinkInfo.elementAt(i), JDFConstants.BLANK, false);
-				for (int iTyp = 0; iTyp < typeList.size(); iTyp++)
-				{
-					String strTyp = typeList.elementAt(iTyp);
-					if (strTyp.charAt(0) == 'o')
-					{
-						final String linkName = vNames.elementAt(i);
-						// loop over all links behind this one in types
-						for (int j = i + 1; j < s; j++)
-						{
-							if (vNames.elementAt(j).equals(linkName))
-							{ // if the names match, they should fit
-								boolean bGotOne = false;
-
-								final VString typeList2 = StringUtil.tokenize(vLinkInfo.elementAt(j), JDFConstants.BLANK, false);
-
-								for (int iTyp2 = 0; iTyp2 < typeList2.size(); iTyp2++)
-								{
-									String typ2 = typeList2.elementAt(iTyp2);
-									if (typ2.charAt(0) == 'i')
-									{
-										bGotOne = true;
-										// make them optional
-										if (typ2.charAt(1) == '_')
-										{
-											final char[] c_typ2 = typ2.toCharArray();
-											c_typ2[1] = '?';
-											typ2 = new String(c_typ2);
-										}
-										else if (typ2.charAt(1) == '+')
-										{
-											final char[] c_typ2 = typ2.toCharArray();
-											c_typ2[1] = '*';
-											typ2 = new String(c_typ2);
-										}
-										typeList2.set(iTyp2, typ2);
-									}
-								}
-								if (bGotOne)
-								{
-									// replace input link entry
-									vLinkInfo.set(j, StringUtil.setvString(typeList2, JDFConstants.BLANK, null, null));
-									if (strTyp.charAt(1) == '_')
-									{
-										final char[] c_strTyp = strTyp.toCharArray();
-										c_strTyp[1] = '?';
-										strTyp = new String(c_strTyp);
-									}
-									else if (strTyp.charAt(1) == '+')
-									{
-										final char[] c_strTyp = strTyp.toCharArray();
-										c_strTyp[1] = '*';
-										strTyp = new String(c_strTyp);
-									}
-									typeList.set(iTyp, strTyp);
-								}
-							}
-						}
-					}
-				}
-				vLinkInfo.set(i, StringUtil.setvString(typeList, JDFConstants.BLANK, null, null));
-			}
-			return vLinkInfo;
-		}
-		return new VString(validatorMap.typeLinkInfo(typ));
+		return validatorMap.getLinkInfo(typ, vTypes);
 	}
 
 	/**
@@ -446,12 +314,20 @@ public class LinkValidator
 	VString vLinkInfo(int namIndex)
 	{
 		final VString vRet = new VString();
-		final VString linkInfo = linkInfo();
+		final Vector<LinkInfo> linkInfo = linkInfo();
+		if (linkInfo == null)
+		{
+			return null;
+		}
 
 		if (namIndex < 0)
 		{
-			// tokenize retains order
-			return new VString(linkInfo);
+			VString v = new VString();
+			for (LinkInfo li : linkInfo)
+			{
+				v.add(li.getString());
+			}
+			return v;
 		}
 
 		final VString linkNames = linkNames();
@@ -459,8 +335,8 @@ public class LinkValidator
 
 		while (namIndex >= 0)
 		{
-			final String kToken = linkInfo.stringAt(namIndex);
-			final VString vToken = StringUtil.tokenize(kToken, JDFConstants.BLANK, false);
+			final LinkInfo kToken = linkInfo.get(namIndex);
+			final VString vToken = kToken.getVString();
 
 			vRet.addAll(vToken);
 			namIndex = linkNames.indexOf(strName, ++namIndex);
@@ -633,8 +509,7 @@ public class LinkValidator
 			{
 				vE = rlp.getInOutLinks(EnumUsage.Input, bLink, resName, null);
 				// 170205 RP remove internal pipes from all inputs
-				// TODO ideally we would check if they are connected, but this
-				// is a sufficient 98% solution
+				// TODO ideally we would check if they are connected, but this is a sufficient 98% solution
 				if (bLink && vE != null)
 				{
 					final Iterator<KElement> vEIterator = vE.iterator();

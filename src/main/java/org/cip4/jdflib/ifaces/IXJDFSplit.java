@@ -23,7 +23,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +33,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +57,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
+ * originally based on software
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -65,77 +65,26 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-/**
- * 
- */
-package org.cip4.jdflib.extensions.xjdfwalker;
+package org.cip4.jdflib.ifaces;
 
 import java.util.Collection;
 
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
-import org.cip4.jdflib.ifaces.IXJDFSplit;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * interface to split XJDF into multiple workstep or device related XJDF
  * 
+ * @author rainer prosi
+ *
  */
-public class XJDFToJDFConverter extends XJDFToJDFImpl
+public interface IXJDFSplit
 {
-	protected IXJDFSplit splitter;
-
-	/**
-	 * @param template the jdfdoc to fill this into
-	 * 
-	 */
-	public XJDFToJDFConverter(final JDFDoc template)
-	{
-		super(template);
-		splitter = null;
-	}
-
-	/**
-	 * convert using splitter if appropriate
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl#convert(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public JDFDoc convert(KElement xjdf)
-	{
-		if (splitter != null)
-		{
-			Collection<XJDFHelper> vSplit = splitter.splitXJDF(new XJDFHelper(xjdf));
-			if (vSplit == null || vSplit.size() == 0)
-			{
-				log.error("no xjdf elements returned by splitter");
-				return null;
-			}
-			else
-			{
-				JDFDoc d = null;
-				for (XJDFHelper h : vSplit)
-				{
-					d = super.convert(h.getRoot());
-				}
-				return d;
-			}
-		}
-		else
-		{
-			return super.convert(xjdf);
-		}
-	}
-
 	/**
 	 * 
-	 * @param splitter
+	 * @param root the main or root XJDF to split
+	 * @return
 	 */
-	public void setSplitter(IXJDFSplit splitter)
-	{
-		this.splitter = splitter;
-	}
-
+	public Collection<XJDFHelper> splitXJDF(XJDFHelper root);
 }
