@@ -3116,17 +3116,17 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		root.setType(EnumType.ConventionalPrinting);
 		VString vs = root.getMissingLinkVector(999);
-		assertTrue(vs.contains(ElementName.CONVENTIONALPRINTINGPARAMS + "Link:AnyInput"));
-		assertTrue(vs.contains(ElementName.COMPONENT + "Link:AnyOutput"));
+		assertTrue(vs.toString(), vs.contains(ElementName.CONVENTIONALPRINTINGPARAMS + "Link:AnyInput"));
+		assertTrue(vs.toString(), vs.contains(ElementName.COMPONENT + "Link:AnyOutput"));
 
 		final VString vsc = new VString();
 		vsc.add(EnumType.InkZoneCalculation);
 		vsc.add(EnumType.ConventionalPrinting);
 		root.setCombined(vsc);
 		vs = root.getMissingLinkVector(999);
-		assertTrue(vs.contains(ElementName.PREVIEW + "Link:AnyInput"));
-		assertTrue(vs.contains(ElementName.CONVENTIONALPRINTINGPARAMS + "Link:AnyInput"));
-		assertTrue(vs.contains(ElementName.COMPONENT + "Link:AnyOutput"));
+		assertTrue(vs.toString(), vs.contains(ElementName.PREVIEW + "Link:AnyInput"));
+		assertTrue(vs.toString(), vs.contains(ElementName.CONVENTIONALPRINTINGPARAMS + "Link:AnyInput"));
+		assertTrue(vs.toString(), vs.contains(ElementName.COMPONENT + "Link:AnyOutput"));
 	}
 
 	// ////////////////////////////////////////////////////////////
