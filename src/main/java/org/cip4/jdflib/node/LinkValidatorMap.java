@@ -396,7 +396,16 @@ public class LinkValidatorMap
 	Vector<LinkInfo> typeLinkInfo(final EnumType typeNum)
 	{
 		final Vector<LinkInfo> info = m_LinkInfoMap.get(typeNum.getName());
-		return (info == null) ? getGenericLinkInfo() : info;
+		if (info == null)
+		{
+			return getGenericLinkInfo();
+		}
+		else
+		{
+			Vector<LinkInfo> vLinkInfo = new Vector<LinkInfo>();
+			vLinkInfo.addAll(info);
+			return vLinkInfo;
+		}
 	}
 
 	/**

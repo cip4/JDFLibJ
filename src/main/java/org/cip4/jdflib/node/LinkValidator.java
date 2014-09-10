@@ -589,10 +589,8 @@ public class LinkValidator
 			final VString types = vLinkInfo(i);
 			if (types != null)
 			{
-				final Iterator<String> typesIterator = types.iterator();
-				while (typesIterator.hasNext())
+				for (String typesAt : types)
 				{
-					final String typesAt = typesIterator.next();
 					if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
 					{
 						// 110602 added

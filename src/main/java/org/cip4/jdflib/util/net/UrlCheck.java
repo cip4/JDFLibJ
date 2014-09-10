@@ -109,7 +109,7 @@ public class UrlCheck
 		protected UrlPart handle()
 		{
 			UrlPart p = UrlUtil.writeToURL(url, stream, method, null, null);
-			if (p != null)
+			if (p != null && buffer)
 				p.buffer();
 			return p;
 		}
@@ -119,6 +119,7 @@ public class UrlCheck
 	private final String url;
 	private UrlWait wait;
 	private InputStream stream;
+	private boolean buffer;
 
 	/**
 	 * 
@@ -140,6 +141,7 @@ public class UrlCheck
 		wait = null;
 		this.method = method;
 		stream = null;
+		buffer = false;
 	}
 
 	/**
@@ -213,11 +215,21 @@ public class UrlCheck
 	}
 
 	/**
+	 * 
+	 * @param buffer
+	 */
+	public void setBuffer(boolean buffer)
+	{
+		this.buffer = buffer;
+	}
+
+	/**
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "UrlCheck [method=" + method + ", url=" + url + ", wait=" + wait + "]";
+		return "UrlCheck [method=" + method + ", url=" + url + ", wait=" + wait + ", buffer=" + buffer + "]";
 	}
 }

@@ -71,6 +71,7 @@ package org.cip4.jdflib.util.net;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.Test;
 
@@ -89,6 +90,19 @@ public class UrlCheckTest extends JDFTestCaseBase
 	public void testPing()
 	{
 		assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testBuffer()
+	{
+		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
+		urlCheck.setBuffer(true);
+		UrlPart ping = urlCheck.ping(5555);
+		assertNotNull(ping.getResponseStream());
 	}
 
 	/**
