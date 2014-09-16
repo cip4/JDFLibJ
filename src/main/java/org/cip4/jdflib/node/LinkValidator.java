@@ -449,10 +449,10 @@ public class LinkValidator
 	 */
 	JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
-		JDFResourceLink rl = node.getLink(resource, null);
-		boolean exists = rl != null;
 		final String resName = resource.getLocalName();
 		EnumUsage usage = extractUsage(resName, processUsage);
+		JDFResourceLink rl = node.getLink(resource, usage);
+		boolean exists = rl != null;
 		String sProcessUsage = extractProcessUsage(processUsage);
 		if (rl == null)
 		{
