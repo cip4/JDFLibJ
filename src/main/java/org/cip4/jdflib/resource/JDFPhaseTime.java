@@ -359,8 +359,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		{
 			final JDFModulePhase modulePhase = getCreateModulePhase(i);
 			v.add(modulePhase);
-			modulePhase.setModuleID(moduleIDs.stringAt(i));
-			modulePhase.setModuleType(moduleTypes.stringAt(i));
+			modulePhase.setModuleID(moduleIDs.get(i));
+			modulePhase.setModuleType(moduleTypes.get(i));
 		}
 		return v;
 	}

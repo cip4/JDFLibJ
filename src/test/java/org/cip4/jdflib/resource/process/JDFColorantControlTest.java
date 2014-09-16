@@ -122,9 +122,9 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final VString vAlias = new VString("Gr�n gr�n", null);
 		ca.setSeparations(vAlias);
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
-		byte[] b = vAlias.stringAt(0).getBytes();
+		byte[] b = vAlias.get(0).getBytes();
 		String rawNames = StringUtil.setHexBinaryBytes(b, -1) + " ";
-		b = vAlias.stringAt(1).getBytes();
+		b = vAlias.get(1).getBytes();
 		rawNames += StringUtil.setHexBinaryBytes(b, -1);
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		ca.setAttribute("RawNames", rawNames);
@@ -180,9 +180,9 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		final VString vAlias = new VString("noir schw�rz", null);
 		ca.setSeparations(vAlias);
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
-		byte[] b = vAlias.stringAt(0).getBytes();
+		byte[] b = vAlias.get(0).getBytes();
 		String rawNames = StringUtil.setHexBinaryBytes(b, -1) + " ";
-		b = vAlias.stringAt(1).getBytes();
+		b = vAlias.get(1).getBytes();
 		rawNames += StringUtil.setHexBinaryBytes(b, -1);
 		ca.setAttribute("RawNames", rawNames);
 		d.write2File(sm_dirTestDataTemp + "ActualColorName_with_CA.jdf", 2, false);
@@ -333,7 +333,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 5);
 		colControl.appendColorantOrder().appendSeparation("Green");
 		assertEquals(colControl.getDeviceColorantOrderSeparations().size(), 1);
-		assertEquals(colControl.getDeviceColorantOrderSeparations().stringAt(0), "Green");
+		assertEquals(colControl.getDeviceColorantOrderSeparations().get(0), "Green");
 	}
 
 	// //////////////////////////////////////////////////////////////////////

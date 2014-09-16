@@ -267,7 +267,7 @@ public class FileUtil
 				m_extension = new HashSet<String>();
 				for (int i = 0; i < list.size(); i++)
 				{
-					String st = list.stringAt(i);
+					String st = list.get(i);
 					if (st.startsWith("."))
 					{
 						st = st.substring(1);

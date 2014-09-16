@@ -2139,7 +2139,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			assertNull(xmRoot.getSpawnIDs(false));
 			final VString spawnIDs = xm.getSpawnIDs(false);
 			final String spawnID = spawnedNode.getSpawnID(false);
-			assertEquals(spawnIDs.stringAt(0), spawnID);
+			assertEquals(spawnIDs.get(0), spawnID);
 
 			final JDFAttributeMap mapNew1 = new JDFAttributeMap();
 			mapNew1.put("SignatureName", "Sig1");

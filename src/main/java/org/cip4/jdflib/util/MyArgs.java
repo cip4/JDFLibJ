@@ -297,7 +297,7 @@ public class MyArgs
 		{
 			return null;
 		}
-		return m_onlyArgs.stringAt(m);
+		return m_onlyArgs.get(m);
 	}
 
 	// ......................................................................
@@ -469,7 +469,7 @@ public class MyArgs
 		usageTable += "\n.\n.\n.usage: ";
 		if (m_argV.size() > 0)
 		{
-			usageTable += m_argV.stringAt(0);
+			usageTable += m_argV.get(0);
 		}
 
 		if (m_switchParameterString != null)

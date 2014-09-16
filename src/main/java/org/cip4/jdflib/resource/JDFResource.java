@@ -343,7 +343,7 @@ public class JDFResource extends JDFElement
 			final int siz = partIDKeys.size();
 			for (int i = 0; i < siz; i++)
 			{
-				final String partIDKey = partIDKeys.stringAt(i);
+				final String partIDKey = partIDKeys.get(i);
 				for (int j = 0; j < atrInfoTable_PartIDKeys.length; j++)
 				{
 					final AtrInfoTable keyTable = atrInfoTable_PartIDKeys[j];
@@ -2058,7 +2058,7 @@ public class JDFResource extends JDFElement
 			{
 				if (partIDKeys != null)
 				{
-					final String parentPart = partIDKeys.stringAt(posOfType - 1);
+					final String parentPart = partIDKeys.get(posOfType - 1);
 					if (!hasAttribute_KElement(parentPart, null, false))
 					{
 						throw new JDFException("addPartion: adding inconsistent partition  ID=" + getID() + "- parent must have partIDKey: " + parentPart);
@@ -3489,7 +3489,7 @@ public class JDFResource extends JDFElement
 				for (int j = 0; j < size; j++)
 				{
 					final JDFResource p = (JDFResource) vLeaves.elementAt(i);
-					v.add(p.addPartition(partType, values.stringAt(j)));
+					v.add(p.addPartition(partType, values.get(j)));
 				}
 			}
 		}
@@ -3688,7 +3688,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
-		final String s = keys.stringAt(n);
+		final String s = keys.get(n);
 		return hasAttribute_KElement(s, null, false) ? s : null;
 	}
 
@@ -3708,7 +3708,7 @@ public class JDFResource extends JDFElement
 		{
 			for (int i = 0; i < v.size(); i++)
 			{
-				removeAttribute(v.stringAt(i));
+				removeAttribute(v.get(i));
 			}
 		}
 		removeAttribute(AttributeName.LOCKED);
@@ -3913,7 +3913,7 @@ public class JDFResource extends JDFElement
 		KElement rLocal = this;
 		for (int i = ids.size() - 1; i >= 0; i--)
 		{
-			final String attName = ids.stringAt(i);
+			final String attName = ids.get(i);
 			final String s = rLocal.getAttribute_KElement(attName, null, null);
 			if (s != null)
 			{
@@ -4193,7 +4193,7 @@ public class JDFResource extends JDFElement
 				final int attSize = atts.size();
 				for (j = 0; j < attSize; j++)
 				{
-					final String aj = atts.stringAt(j);
+					final String aj = atts.get(j);
 					if (!parts.contains(aj))
 					{
 						leaf.setAttribute(aj, leaf.getAttribute(aj, null, null), null);
@@ -4234,7 +4234,7 @@ public class JDFResource extends JDFElement
 						int j;
 						for (j = 0; j < atts.size(); j++)
 						{
-							final String aj = atts.stringAt(j);
+							final String aj = atts.get(j);
 							if (!parts.contains(aj))
 							{
 								r.removeAttribute(aj, null);
@@ -4313,7 +4313,7 @@ public class JDFResource extends JDFElement
 			final int localSize = localLeaves.size();
 			for (int j = 0; j < atts.size(); j++)
 			{
-				final String att = atts.stringAt(j);
+				final String att = atts.get(j);
 				// reduce lower stuff
 				if ((!bCollapseToNode) && (!parent.hasAttribute_KElement(att, null, false)))
 				{
@@ -5355,7 +5355,7 @@ public class JDFResource extends JDFElement
 			// end)
 			for (int i = nPartKeys - 1; i >= 0 && strPartIDKey == null; i--)
 			{
-				final String str = vsPartKeys.stringAt(i);
+				final String str = vsPartKeys.get(i);
 
 				if (amPartMap.containsKey(str))
 				{
@@ -8138,7 +8138,7 @@ public class JDFResource extends JDFElement
 			String currentPartition = null;
 			for (int i = 0; i < size; i++)
 			{
-				final String keyName = partIDKeys.stringAt(i);
+				final String keyName = partIDKeys.get(i);
 				final EnumPartIDKey nxt = EnumPartIDKey.getEnum(keyName);
 				if (!consistentPartIDKeys(nxt, root, partIDKeys))
 				{

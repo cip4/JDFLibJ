@@ -285,7 +285,7 @@ public class WalkElement extends BaseWalker
 				final VString vvalues = new VString(value, " ");
 				for (int i = 0; i < vvalues.size(); i++)
 				{
-					String s = vvalues.stringAt(i);
+					String s = vvalues.get(i);
 					if (s.length() > 0 && StringUtils.isNumeric(s.substring(0, 1)))
 					{
 						s = "_" + s;

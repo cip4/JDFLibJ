@@ -75,8 +75,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.VectorMap;
 
 /**
  *implementation of the link validation routines
@@ -89,8 +89,7 @@ public class LinkValidatorMap
 	/**
 	 * Member Variables
 	 */
-	private final HashMap<String, String[]> m_LinkNamesMap = new HashMap<String, String[]>();
-	private final VectorMap<String, LinkInfo> m_LinkInfoMap = new VectorMap<String, LinkInfo>();
+	private final HashMap<String, LinkInfoMap> m_LinkInfoMap = new HashMap<String, LinkInfoMap>();
 
 	private final String[] m_GenericLinkInfo = { JDFConstants.INPUT_ZEROTOINFINITY,// APPROVALSUCCESS
 			JDFConstants.INPUT_ZEROTOONE, // CUSTOMERINFO
@@ -104,7 +103,7 @@ public class LinkValidatorMap
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private final String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
+	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
 			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	/**
@@ -120,47 +119,6 @@ public class LinkValidatorMap
 	}
 
 	/**
-	 * add entries to a HashMap
-	 * 
-	 * @param key key for the new entry
-	 * @param addon
-	 * @param mMaps
-	 *  
-	 */
-	private void nameMapPut(final String key, final String addon, final String[] mMaps)
-	{
-		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
-		final String[] v = new String[mMaps.length + vs.size()];
-		for (int i = 0; i < mMaps.length; i++)
-		{
-			v[i] = mMaps[i];
-		}
-		for (int i = 0; i < vs.size(); i++)
-		{
-			v[i + mMaps.length] = vs.stringAt(i);
-		}
-		m_LinkNamesMap.put(key, v);
-	}
-
-	/**
-	 * add entries to a HashMap
-	 * 
-	 * @param key key for the new entry
-	 * @param addon
-	 * @param mMaps
-	 * 
-	 */
-	private void infoMapPut(final String key, final String addon, final String[] mMaps)
-	{
-		for (String s : mMaps)
-			m_LinkInfoMap.putOne(key, new LinkInfo(s));
-
-		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
-		for (String s : vs)
-			m_LinkInfoMap.putOne(key, new LinkInfo(s));
-	}
-
-	/**
 	 * add new entries to m_strGenericLinkNames and m_GenericLinkInfo
 	 * 
 	 * @param key key for the new entry
@@ -169,8 +127,28 @@ public class LinkValidatorMap
 	 */
 	private void mapPut(final String key, final String nameAddon, final String linkAddon)
 	{
-		nameMapPut(key, nameAddon, m_strGenericLinkNames);
-		infoMapPut(key, linkAddon, m_GenericLinkInfo);
+		LinkInfoMap newMap = new LinkInfoMap();
+		int genericPos = 0;
+		for (String name : m_GenericLinkNames)
+		{
+			LinkInfo li = new LinkInfo(m_GenericLinkInfo[genericPos]);
+			newMap.put(name, li);
+		}
+
+		final VString vNames = StringUtil.tokenize(nameAddon, JDFConstants.COMMA, false);
+		final VString vInfos = StringUtil.tokenize(linkAddon, JDFConstants.COMMA, false);
+		if (vNames != null && vInfos != null && vNames.size() == vInfos.size())
+		{
+			int pos = 0;
+			for (String name : vNames)
+			{
+				LinkInfo li = new LinkInfo(vInfos.get(pos));
+				newMap.put(name, li);
+				pos++;
+			}
+		}
+
+		m_LinkInfoMap.put(key, newMap);
 	}
 
 	/**
@@ -186,8 +164,9 @@ public class LinkValidatorMap
 	{
 		mapPut(EnumType.Product.getName(), ",Component,ArtDeliveryIntent,BindingIntent,ColorIntent,DeliveryIntent,EmbossingIntent,FoldingIntent,HoleMakingIntent,InsertingIntent,LaminatingIntent,"
 				+ "LayoutIntent,MediaIntent,NumberingIntent,PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent", ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
+		mapPut("*", "", "");
 		mapPut(EnumType.ProcessGroup.getName(), ",*", ",i* o*");
-		mapPut(EnumType.Combined.getName(), ",", ",");
+		mapPut(EnumType.Combined.getName(), "", "");
 
 		// ----- general -----
 		mapPut(EnumType.Approval.getName(), ",*,ApprovalSuccess,ApprovalParams", ",o*Rejected o*Accepted i*,o_,i_");
@@ -319,93 +298,45 @@ public class LinkValidatorMap
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * definition of resource link names in the JDF namespace
-	 * @param typeNum 
+	 * @param typ 
 	 * 
 	 * @return String list of resource names that may be linked
 	 */
-	String[] typeLinkNames(final EnumType typeNum)
+	Vector<String> typeLinkNames(final EnumType typ)
 	{
-		if (typeNum == null)
+		if (typ == null)
 		{
 			return null;
 		}
-		return m_LinkNamesMap.get(typeNum.getName());
-	}
-
-	/**
-	 * Getter for m_LinkNamesMap attribute.
-	 * @return the m_LinkNamesMap
-	 */
-	HashMap<String, String[]> getLinkNamesMap()
-	{
-		return m_LinkNamesMap;
-	}
-
-	/**
-	 * get the map of resource name to LinkInfo for a given type( types combination
-	 * @return the m_LinkInfoMap
-	 */
-	public HashMap<String, LinkInfo> getLinkInfoMap(final EnumType typ, VString vTypes)
-	{
-		VString names = getLinkNames(typ, vTypes);
-		Vector<LinkInfo> infos = getLinkInfo(typ, vTypes);
-		if (infos == null || names == null || infos.size() != names.size())
-		{
-			return null;
-		}
-		HashMap<String, LinkInfo> ret = new HashMap<String, LinkInfo>();
-		int i = 0;
-		for (String name : names)
-		{
-			ret.put(name, infos.get(i));
-			i++;
-		}
-		return ret;
-	}
-
-	/**
-	 * Getter for m_GenericLinkInfo attribute.
-	 * @return the m_GenericLinkInfo
-	 */
-	Vector<LinkInfo> getGenericLinkInfo()
-	{
-		Vector<LinkInfo> vLinkInfo = new Vector<LinkInfo>();
-		for (String s : m_GenericLinkInfo)
-		{
-			vLinkInfo.add(new LinkInfo(s));
-		}
-
-		return vLinkInfo;
+		LinkInfoMap map = m_LinkInfoMap.get(typ.getName());
+		return ContainerUtil.getKeyVector(map);
 	}
 
 	/**
 	 * Getter for m_strGenericLinkNames attribute.
 	 * @return the m_strGenericLinkNames
 	 */
-	String[] getGenericLinkNames()
+	VString getGenericLinkNames()
 	{
-		return m_strGenericLinkNames;
+		return new VString(m_GenericLinkNames);
 	}
 
 	/**
 	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace for a given EnumType
 	 * 
 	 * @param typeNum EnumType to get LinkInfo for
+	 * @param addStar if true, also get the generic map
 	 * @return String list of resource information usages that may be linked for this EnumType
 	 */
-	Vector<LinkInfo> typeLinkInfo(final EnumType typeNum)
+	LinkInfoMap getTypeMap(final EnumType typeNum, boolean addStar)
 	{
-		final Vector<LinkInfo> info = m_LinkInfoMap.get(typeNum.getName());
-		if (info == null)
+		LinkInfoMap info = typeNum == null ? null : m_LinkInfoMap.get(typeNum.getName());
+		if (info == null && addStar)
 		{
-			return getGenericLinkInfo();
+			info = m_LinkInfoMap.get("*");
 		}
-		else
-		{
-			Vector<LinkInfo> vLinkInfo = new Vector<LinkInfo>();
-			vLinkInfo.addAll(info);
-			return vLinkInfo;
-		}
+
+		return new LinkInfoMap(info);
 	}
 
 	/**
@@ -414,52 +345,32 @@ public class LinkValidatorMap
 	 * @param vTypes
 	 * @return
 	 */
-	public Vector<LinkInfo> getLinkInfo(final EnumType typ, VString vTypes)
+	public LinkInfoMap getLinkInfoMap(final EnumType typ, VString vTypes)
 	{
+		if (typ == null)
+			return getTypeMap(EnumType.ProcessGroup, false);
+
 		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && vTypes != null))
 		{
-			final Vector<LinkInfo> vLinkInfo = getGenericLinkInfo();
-			final VString vNames = new VString(getGenericLinkNames());
-
 			if (vTypes == null)
 			{
 				return null;
 			}
+			final LinkInfoMap ret = new LinkInfoMap(m_LinkInfoMap.get("*"));
 
 			for (String s : vTypes)
 			{
-				final EnumType t = EnumType.getEnum(s);
-				if (t != null)
-				{
-
-					final Vector<LinkInfo> typeLinkInfo = typeLinkInfo(t);
-					final String[] typeLinkNames = typeLinkNames(t);
-					if (typeLinkInfo == null || typeLinkNames == null)
-					{
-						return null;
-					}
-
-					for (int j = getGenericLinkInfo().size(); j < typeLinkInfo.size(); j++)
-					{
-						vLinkInfo.add(typeLinkInfo.get(j));
-						vNames.add(typeLinkNames[j]);
-					}
-				}
+				EnumType t = EnumType.getEnum(s);
+				if (t == null)
+					t = EnumType.ProcessGroup;
+				final LinkInfoMap typeLinkInfo = getTypeMap(t, false);
+				ret.merge(typeLinkInfo);
 			}
-
-			// make the intermediate links optional
-			final int s = vLinkInfo.size();
-			// loop over all links
-			for (int i = 0; i < s; i++)
-			{
-				final LinkInfo info = processLinkInfo(vLinkInfo, vNames, s, i);
-				vLinkInfo.set(i, info);
-			}
-			return vLinkInfo;
+			return ret;
 		}
 		else
 		{
-			return typeLinkInfo(typ);
+			return getTypeMap(typ, true);
 		}
 	}
 
@@ -471,111 +382,14 @@ public class LinkValidatorMap
 	 */
 	public VString getLinkNames(final EnumType typ, VString vTypes)
 	{
-		VString v = new VString(getGenericLinkNames());
-		if (typ.equals(EnumType.Combined) || (typ == EnumType.ProcessGroup && vTypes != null))
-		{
-			if (vTypes == null)
-			{
-				return null;
-			}
-
-			final int size = vTypes.size();
-			for (int i = 0; i < size; i++)
-			{
-				final EnumType t = EnumType.getEnum(vTypes.stringAt(i));
-				final String[] typeLinkNames = typeLinkNames(t);
-				if (typeLinkNames == null)
-				{
-					return null; // bail out - it's open anyhow
-				}
-				for (int j = getGenericLinkNames().length; j < typeLinkNames.length; j++)
-				{
-					v.add(typeLinkNames[j]);
-				}
-			}
-			return v;
-		}
-
-		// sinmple single type
-		final String[] typeLinkNames = typeLinkNames(typ);
-		if (typeLinkNames == null)
-		{
-			return null; // bail out - it's open anyhow
-		}
-		return new VString(typeLinkNames);
+		LinkInfoMap map = getLinkInfoMap(typ, vTypes);
+		return new VString(ContainerUtil.getKeyVector(map));
 	}
 
-	/**
-	 * 
-	 * @param vLinkInfo
-	 * @param vNames
-	 * @param s
-	 * @param i
-	 * @return
-	 */
-	private LinkInfo processLinkInfo(final Vector<LinkInfo> vLinkInfo, final VString vNames, final int s, int i)
+	@Override
+	public String toString()
 	{
-		final VString typeList = vLinkInfo.elementAt(i).getVString();
-		int typeSize = typeList.size();
-		for (int iTyp = 0; iTyp < typeSize; iTyp++)
-		{
-			String strTyp = typeList.elementAt(iTyp);
-			if (strTyp.charAt(0) == 'o')
-			{
-				final String linkName = vNames.elementAt(i);
-				// loop over all links behind this one in types
-				for (int j = i + 1; j < s; j++)
-				{
-					if (vNames.elementAt(j).equals(linkName))
-					{ // if the names match, they should fit
-						boolean bGotOne = false;
-
-						final VString typeList2 = vLinkInfo.elementAt(j).getVString();
-
-						for (int iTyp2 = 0; iTyp2 < typeList2.size(); iTyp2++)
-						{
-							String typ2 = typeList2.elementAt(iTyp2);
-							if (typ2.charAt(0) == 'i')
-							{
-								bGotOne = true;
-								// make them optional
-								if (typ2.charAt(1) == '_')
-								{
-									final char[] c_typ2 = typ2.toCharArray();
-									c_typ2[1] = '?';
-									typ2 = new String(c_typ2);
-								}
-								else if (typ2.charAt(1) == '+')
-								{
-									final char[] c_typ2 = typ2.toCharArray();
-									c_typ2[1] = '*';
-									typ2 = new String(c_typ2);
-								}
-								typeList2.set(iTyp2, typ2);
-							}
-						}
-						if (bGotOne)
-						{
-							// replace input link entry
-							vLinkInfo.set(j, new LinkInfo(typeList2));
-							if (strTyp.charAt(1) == '_')
-							{
-								final char[] c_strTyp = strTyp.toCharArray();
-								c_strTyp[1] = '?';
-								strTyp = new String(c_strTyp);
-							}
-							else if (strTyp.charAt(1) == '+')
-							{
-								final char[] c_strTyp = strTyp.toCharArray();
-								c_strTyp[1] = '*';
-								strTyp = new String(c_strTyp);
-							}
-							typeList.set(iTyp, strTyp);
-						}
-					}
-				}
-			}
-		}
-		return new LinkInfo(typeList);
+		return "LinkValidatorMap [m_LinkInfoMap=" + m_LinkInfoMap + "]";
 	}
+
 }

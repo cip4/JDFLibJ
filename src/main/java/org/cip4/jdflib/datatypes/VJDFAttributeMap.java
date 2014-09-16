@@ -241,7 +241,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			for (int v = 0; v < vsValueSize; v++)
 			{
 				final JDFAttributeMap mapNew = new JDFAttributeMap(map);
-				mapNew.put(strKey, vsValues.stringAt(v));
+				mapNew.put(strKey, vsValues.get(v));
 				vec.add(mapNew);
 			}
 		}

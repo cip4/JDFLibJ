@@ -66,156 +66,125 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker.fixversion;
+package org.cip4.jdflib.node;
 
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFAudit;
+import java.util.HashMap;
+import java.util.Vector;
+
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ContainerUtil;
 
-/**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 7, 2009
- */
-public class WalkAudit extends WalkElement
+public class LinkInfoMap extends HashMap<String, LinkInfo>
 {
-	/**
-	 * 
-	 */
-	public WalkAudit()
+
+	public LinkInfoMap()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if matches
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return (toCheck instanceof JDFAudit);
-	}
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 * copy ctor
+	 * @param info
 	 */
-	@Override
-	public KElement walk(final KElement e1, final KElement trackElem)
+	public LinkInfoMap(LinkInfoMap info)
 	{
-		final JDFAudit audit = (JDFAudit) e1;
-		if (this.fixVersion.version != null)
+		Vector<String> keys = ContainerUtil.getKeyVector(info);
+		if (keys != null)
 		{
-			fixID(audit);
-			final String author = audit.getAuthor();
-			if (this.fixVersion.lessThanVersion(EnumVersion.Version_1_2))
+			for (String key : keys)
 			{
-				mergeAuthor(audit, author);
+				put(key, new LinkInfo(info.get(key)));
 			}
-			else if (author.length() > 0) // version>=1.2 and has author
-			{
-				splitAuthor(audit, author);
-			}
-			authorToEmployee(audit);
 		}
-		return super.walk(e1, trackElem);
 	}
 
 	/**
-	 * @param audit
+	 * 
+	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
 	 */
-	private void fixID(final JDFAudit audit)
+	@Override
+	public LinkInfo put(String key, LinkInfo value)
 	{
-		if (this.fixVersion.lessThanVersion(EnumVersion.Version_1_3))
+		LinkInfo old = get(key);
+		if (old != null)
 		{
-			audit.removeAttribute(AttributeName.ID);
+			old.merge(value);
+			return old;
+		}
+		return super.put(key, value);
+	}
+
+	/**
+	 * 
+	 * @param typeLinkInfo
+	 */
+	void merge(LinkInfoMap typeLinkInfo)
+	{
+		if (typeLinkInfo != null)
+		{
+			Vector<String> resNames = ContainerUtil.getKeyVector(typeLinkInfo);
+			if (resNames != null)
+			{
+				for (String resName : resNames)
+				{
+					LinkInfo li = get(resName);
+					LinkInfo li2 = typeLinkInfo.get(resName);
+					if (li != null && li2 != null)
+					{
+						if (li.hasOutput(null) && li2.hasInput(null))
+						{
+							li.makeOptional(false, true);
+							li2 = new LinkInfo(li2);
+							li2.makeOptional(true, false);
+						}
+						li.merge(li2);
+					}
+					else if (li2 != null)
+					{
+						put(resName, new LinkInfo(li2));
+					}
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param resName
+	 * @return
+	 */
+	public boolean knows(String resName)
+	{
+		return getStar(resName) != null;
+	}
+
+	/**
+	 * also checks for "*"
+	 * @see java.util.HashMap#get(java.lang.Object)
+	 */
+	public LinkInfo getStar(String key)
+	{
+		LinkInfo li = super.get(key);
+		LinkInfo li2 = super.get(JDFConstants.STAR);
+		if (li == null)
+		{
+			if (li2 != null)
+			{
+				li = new LinkInfo(li2);
+			}
 		}
 		else
 		{
-			audit.appendAnchor(null);
+			li = new LinkInfo(li);
+			li.merge(li2);
 		}
+		return li;
 	}
 
-	/**
-	 * @param audit
-	 * @param author
-	 */
-	private void mergeAuthor(final JDFAudit audit, String author)
-	{
-		String tmp = audit.getAgentName();
-		boolean b = false;
-		if (tmp.length() != 0)
-		{
-			author += "_|_" + tmp;
-			b = true;
-		}
-		tmp = audit.getAgentVersion();
-		if (tmp.length() != 0)
-		{
-			if (!b)
-			{
-				author += "_|_ ";
-			}
-
-			author += "_|_" + tmp;
-			b = true;
-		}
-		audit.removeAttribute(AttributeName.AGENTNAME);
-		audit.removeAttribute(AttributeName.AGENTVERSION);
-		if (b)
-		{
-			audit.setAuthor(author);
-		}
-	}
-
-	/**
-	 * @param audit
-	 * @param author
-	 */
-	private void splitAuthor(final JDFAudit audit, final String author)
-	{
-		final VString tokens = StringUtil.tokenize(author, "_|_", false);
-		if (tokens.size() == 3)
-		{ // it was previously fixed
-			String tmp = tokens.get(0);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
-			{
-				audit.setAuthor(tmp);
-			}
-			tmp = tokens.get(1);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
-			{
-				audit.setAgentName(tmp);
-			}
-			tmp = tokens.get(2);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
-			{
-				audit.setAgentVersion(tmp);
-			}
-		}
-	}
-
-	/**
-	 * @param audit
-	 */
-	private void authorToEmployee(final JDFAudit audit)
-	{
-		if (!this.fixVersion.lessThanVersion(EnumVersion.Version_1_4))
-		{
-			final String finalAuthor = StringUtil.getNonEmpty(audit.getAuthor());
-			if (finalAuthor != null && !audit.hasChildElement(ElementName.EMPLOYEE, null))
-			{
-				audit.appendEmployee().setDescriptiveName(finalAuthor);
-			}
-			audit.removeAttribute(AttributeName.AUTHOR);
-		}
-	}
 }

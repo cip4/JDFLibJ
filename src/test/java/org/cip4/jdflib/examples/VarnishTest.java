@@ -73,7 +73,7 @@ public class VarnishTest extends JDFTestCaseBase
 
 		for (int i = 0; i < vSeparations.size(); i++)
 		{
-			final String sep = vSeparations.stringAt(i);
+			final String sep = vSeparations.get(i);
 			ink.addPartition(EnumPartIDKey.Separation, sep);
 			if (!sep.equals("PreVarnish") && !sep.equals("Varnish2"))
 			{

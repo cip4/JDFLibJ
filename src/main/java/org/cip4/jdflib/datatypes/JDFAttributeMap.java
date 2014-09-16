@@ -182,7 +182,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		final int size = vsKeys.size();
 		for (int k = 0; k < size; k++)
 		{
-			final String strKey = vsKeys.stringAt(k);
+			final String strKey = vsKeys.get(k);
 			final String strValue = this.get(strKey);
 			sb.append(k == 0 ? "" : sep).append("(").append(strKey).append(" = ").append(strValue).append(")");
 		}

@@ -106,7 +106,7 @@ public class JDFIntegerList extends JDFNumList
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
-				final String s = v.stringAt(i);
+				final String s = v.get(i);
 				if (!StringUtil.isInteger(s))
 				{
 					return false;

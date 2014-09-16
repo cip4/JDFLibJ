@@ -404,7 +404,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		for (int i = 0; i < v.size(); i++)
 		{
 			setUp();
-			final String testType = v.stringAt(i);
+			final String testType = v.get(i);
 			final JDFAuditPool ap = n.getCreateAuditPool();
 			ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"
 					+ "- note that phases may now arbitrarily overlap\n"

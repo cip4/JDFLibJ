@@ -404,12 +404,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			{
 				for (int i = 0; i < vPath.size(); i++)
 				{
-					String path = vPath.stringAt(i);
+					String path = vPath.get(i);
 					VString tokens = StringUtil.tokenize(path, "/", false);
-					if (tokens.size() == 3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
+					if (tokens.size() == 3 && tokens.get(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
-						tokens.set(2, tokens.stringAt(2) + "Link");
+						tokens.set(2, tokens.get(2) + "Link");
 						vPath.set(i, StringUtil.setvString(tokens, "/", null, null));
 					}
 				}
@@ -432,12 +432,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			{
 				for (int i = 0; i < vPath.size(); i++)
 				{
-					String path = vPath.stringAt(i);
+					String path = vPath.get(i);
 					VString tokens = StringUtil.tokenize(path, "/", false);
-					if (tokens.size() == 3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
+					if (tokens.size() == 3 && tokens.get(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
-						String link = tokens.stringAt(2) + "Link";
+						String link = tokens.get(2) + "Link";
 						EnumUsage lu = dc.getLinkUsage();
 						if (lu != null)
 							link += "[@Usage=\"" + lu.getName() + "\"]";
@@ -477,7 +477,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		{
 			for (int i = 0; i < vPath.size(); i++)
 			{
-				String xPath = vPath.stringAt(i);
+				String xPath = vPath.get(i);
 				int slash = xPath.length();
 				String finalS = null;
 				do

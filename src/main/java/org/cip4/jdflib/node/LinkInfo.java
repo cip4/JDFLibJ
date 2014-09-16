@@ -68,23 +68,34 @@
  */
 package org.cip4.jdflib.node;
 
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author rainer prosi
  *
  */
-public class LinkInfo
+class LinkInfo
 {
 	/**
 	 * 
 	 * @param info
 	 */
-	LinkInfo(VString info)
+	LinkInfo(LinkInfo info)
 	{
 		super();
-		this.theInfo = info;
+		theInfo = new VString(info.getVString());
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int size()
+	{
+		return theInfo == null ? 0 : theInfo.size();
 	}
 
 	/**
@@ -94,7 +105,17 @@ public class LinkInfo
 	LinkInfo(String info)
 	{
 		super();
-		this.theInfo = new VString(info, " ");
+		theInfo = new VString(info, " ");
+	}
+
+	/**
+	 * 
+	 * @param info
+	 */
+	LinkInfo(VString info)
+	{
+		super();
+		theInfo = new VString(info);
 	}
 
 	private final VString theInfo;
@@ -126,4 +147,312 @@ public class LinkInfo
 	{
 		return "LinkInfo " + theInfo;
 	}
+
+	/**
+	 * merge two LinkInfos into one
+	 * @param value
+	 */
+	public void merge(LinkInfo value)
+	{
+		if (value != null)
+		{
+			theInfo.addAll(value.getVString());
+		}
+	}
+
+	/**
+	 * 
+	 * @param processUsage
+	 * @return
+	 */
+	public boolean hasInput(String processUsage)
+	{
+		for (String s : theInfo)
+		{
+			if (s.startsWith("i") && (processUsage == null || processUsage.equals(StringUtil.rightStr(s, -2))))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean matchesUsage(int iPos, EnumUsage usage)
+	{
+		if (EnumUsage.Input.equals(usage))
+			return isInput(iPos);
+		if (EnumUsage.Output.equals(usage))
+			return isOutput(iPos);
+		return theInfo.get(iPos) != null;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isInput(int iPos)
+	{
+		String s = theInfo.get(iPos);
+		return s != null && s.startsWith("i");
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isSingle(int iPos)
+	{
+		String s = get2(iPos);
+		if (s != null)
+		{
+			s = s.substring(1);
+			return "?".equals(s) || "_".equals(s);
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isOutput(int iPos)
+	{
+		String s = theInfo.get(iPos);
+		return s != null && s.startsWith("o");
+	}
+
+	/**
+	 * get the process usage resource that matches the typesafe link described by i
+	 * 
+	 *  
+	 * @param iPos the index of the pu to find
+	 * @return the enumerated process usage of this checked link
+	 *  
+	 *  
+	 */
+	public String getProcessUsage(final int iPos)
+	{
+		String pu = getPU(iPos);
+
+		if (pu.length() > 0)
+		{
+			return pu;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * get the process usage resource that matches the typesafe link described by i
+	 * 
+	 *  
+	 * @param iPos the index of the pu to find
+	 * @return the enumerated process usage of this checked link
+	 *  
+	 *  
+	 */
+	public EnumProcessUsage getEnumProcessUsage(final int iPos)
+	{
+		String pu = getPU(iPos);
+
+		if (pu.length() > 0)
+		{
+			return EnumProcessUsage.getEnum(pu);
+		}
+		else if (isInput(iPos))
+		{
+			return EnumProcessUsage.AnyInput;
+		}
+		else if (isOutput(iPos))
+		{
+			return EnumProcessUsage.AnyOutput;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param processUsage
+	 * @return
+	 */
+	public boolean hasOutput(String processUsage)
+	{
+		for (String s : theInfo)
+		{
+			if (s.startsWith("o") && (processUsage == null || processUsage.equals(StringUtil.rightStr(s, -2))))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param processUsage
+	 * @return
+	 */
+	public EnumUsage getUsage(String processUsage)
+	{
+		boolean bInput = hasInput(processUsage);
+		boolean bOutput = hasOutput(processUsage);
+		if (bInput ^ bOutput)
+			return bInput ? EnumUsage.Input : EnumUsage.Output;
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param bIn
+	 * @param bOut
+	 */
+	public void makeOptional(boolean bIn, boolean bOut)
+	{
+		for (int i = 0; i < theInfo.size(); i++)
+		{
+			String s = get2(i);
+
+			if (bOut && s.startsWith("o"))
+			{
+				if ("o_".equals(s))
+				{
+					theInfo.set(i, "o?" + getPU(i));
+				}
+				else if ("o+".equals(s))
+				{
+					theInfo.set(i, "o*" + getPU(i));
+				}
+			}
+			else if (bIn && s.startsWith("i"))
+			{
+				if ("i_".equals(s))
+				{
+					theInfo.set(i, "i?" + getPU(i));
+				}
+				else if ("i+".equals(s))
+				{
+					theInfo.set(i, "i*" + getPU(i));
+				}
+			}
+		}
+	}
+
+	private String getPU(int i)
+	{
+		String strWork = theInfo.get(i);
+
+		return strWork.length() == 2 ? "" : strWork.substring(2);
+	}
+
+	/**
+	 * 
+	 * @param usage
+	 * @return
+	 */
+	public boolean isRequired(EnumUsage usage)
+	{
+		for (int i = 0; i < theInfo.size(); i++)
+		{
+			if (matchesUsage(i, usage) && isRequired(i))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param usage
+	 * @return
+	 */
+	public int maxAllowed(EnumUsage usage)
+	{
+		int n = 0;
+		for (int i = 0; i < theInfo.size(); i++)
+		{
+			if (matchesUsage(i, usage))
+			{
+				int nn = maxAllowed(i);
+				if (nn == Integer.MAX_VALUE)
+					return nn;
+				n += nn;
+			}
+		}
+		return n;
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
+	public int maxAllowed(int i)
+	{
+		String s = StringUtil.rightStr(get2(i), 1);
+		if (s == null)
+			return 0;
+		if ("+".equals(s) || "*".equals(s))
+			return Integer.MAX_VALUE;
+		if ("_".equals(s) || "?".equals(s))
+			return 1;
+		return 0;
+	}
+
+	/**
+	 * 
+	 * @param bInput
+	 * @param bOutput
+	 * @param i
+	 * @return
+	 */
+	public boolean isRequired(int i)
+	{
+		String s = get2(i);
+		if ("i_".equals(s) || "i+".equals(s))
+			return true;
+		if ("o_".equals(s) || "o+".equals(s))
+			return true;
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
+	private String get2(int i)
+	{
+		return StringUtil.leftStr(theInfo.get(i), 2);
+	}
+
+	/**
+	 * 
+	 * @param procU
+	 * @return
+	 */
+	public boolean hasProcessUsage(String procU)
+	{
+		if (procU == null)
+			return theInfo.size() > 0;
+
+		for (String s : theInfo)
+		{
+			if (procU.equals(StringUtil.rightStr(s, -2)))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

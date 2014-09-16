@@ -5223,7 +5223,7 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				return false;
 			}
-			final String pathAt = v.stringAt(i);
+			final String pathAt = v.get(i);
 			if (!e.matchesPathName(pathAt))
 			{
 				return false;

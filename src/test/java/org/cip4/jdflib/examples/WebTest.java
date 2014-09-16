@@ -77,7 +77,7 @@ public class WebTest extends JDFTestCaseBase
 		}
 		for (int j = 0; j < vSep.size(); j++)
 		{
-			final KElement sepShift = los.addPartition(EnumPartIDKey.Separation, vSep.stringAt(j));
+			final KElement sepShift = los.addPartition(EnumPartIDKey.Separation, vSep.get(j));
 			for (int i = 0; i < 16; i += 2)
 			{
 

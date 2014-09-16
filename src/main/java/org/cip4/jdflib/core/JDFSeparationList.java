@@ -180,7 +180,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 		for (int i = 0; i < vSeps.size(); i++)
 		{
-			appendSeparation(vSeps.stringAt(i));
+			appendSeparation(vSeps.get(i));
 		}
 	}
 

@@ -708,6 +708,20 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
+	* 
+	*/
+	@Test
+	public void testCombinedProcessIndexGeneric()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setCombined(new VString("ManualLabor", null));
+		final JDFResource r = n.addResource("Component", EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final JDFIntegerList cpi = rl.getCombinedProcessIndex();
+		assertTrue(cpi.contains(0));
+	}
+
+	/**
 	 * 
 	 */
 	@Test
@@ -2131,11 +2145,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 		JDFResourceLink rl = n.getLink(r, null);
 		assertNotNull("rl 1", rl);
 		r = n.appendMatchingResource("FnarfParams", null, null);
+		assertNotNull("r fnarf", r);
 		rl = n.getLink(r, null);
-		assertNotNull("rl fnarf", rl);
-		rl = n.getMatchingLink("FnarfParams", null, 0);
-		assertNotNull("rl fnarf", rl);
-		assertEquals(n.numMatchingLinks("FnarfParams", true, null), 1);
+		assertNull("rl fnarf", rl);
+		assertEquals(n.numMatchingLinks("FnarfParams", true, null), 0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -2149,7 +2162,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ResourceDefinition);
-		final JDFResource r = n.appendMatchingResource("foo", null, null);
+		final JDFResource r = n.appendMatchingResource("foo", EnumProcessUsage.AnyInput, null);
 		assertNotNull(r);
 		assertEquals(r.getNodeName(), "foo");
 	}
@@ -2307,15 +2320,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull("rl 2", rl);
 		assertEquals("rl usage", rl.getUsage(), EnumUsage.Input);
 
-		try
-		{
-			r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
-			fail("exception 3");
-		}
-		catch (final JDFException e)
-		{
-			// nop
-		}
+		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
+		assertNull("exception 3", r);
 
 		r = n.appendMatchingResource(ElementName.COMPONENT, null, null);
 		assertNotNull("comp 1", r);
@@ -2564,11 +2570,11 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
 		root.setType("fnarf", false);
-		assertEquals(root.getAllTypes().stringAt(0), "fnarf");
+		assertEquals(root.getAllTypes().get(0), "fnarf");
 		assertEquals(root.getAllTypes().size(), 1);
 
 		root.setType("Product", false);
-		assertEquals(root.getAllTypes().stringAt(0), "Product");
+		assertEquals(root.getAllTypes().get(0), "Product");
 		assertEquals(root.getAllTypes().size(), 1);
 
 		root.setType("ProcessGroup", false);

@@ -1569,14 +1569,14 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				VString idRefs = getDevCapRefs();
 				for (int i = 0; i < idRefs.size(); i++)
 				{
-					JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
+					JDFDevCap devCap = devCapPool.getDevCap(idRefs.get(i));
 					if (devCap != null)
 					{
 						vDevCap.appendUnique(devCap);
 					}
 					else
 					{
-						throw new JDFException("JDFDevCap.getDevCapVector: Attribute DevCapRefs refers to the non-existent DevCap: " + idRefs.stringAt(i));
+						throw new JDFException("JDFDevCap.getDevCapVector: Attribute DevCapRefs refers to the non-existent DevCap: " + idRefs.get(i));
 					}
 				}
 			}
@@ -1947,11 +1947,11 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			JDFElement je = (JDFElement) e;
 			VString missAts = je.getMissingAttributes(9999999);
 			for (int i = 0; i < missAts.size(); i++)
-				missMap.put(missAts.stringAt(i), "Attribute");
+				missMap.put(missAts.get(i), "Attribute");
 			missAts = je.getMissingElements(99999);
 			for (int i = 0; i < missAts.size(); i++)
 			{
-				final String stringAt = missAts.stringAt(i);
+				final String stringAt = missAts.get(i);
 				if (stringAt.endsWith("Span"))
 					missMap.put(stringAt, "Span");
 			}
@@ -2212,7 +2212,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 		VString paths = getNamePathVector(bRecurse);
 		if (paths == null || paths.size() < 1)
 			return null;
-		return paths.stringAt(0);
+		return paths.get(0);
 
 	}
 
@@ -2521,7 +2521,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				VString valList = ns.getAllowedValueList();
 				if (valList != null)
 				{
-					map = new JDFAttributeMap(AttributeName.TYPE, valList.stringAt(0));
+					map = new JDFAttributeMap(AttributeName.TYPE, valList.get(0));
 				}
 			}
 		}
@@ -2648,7 +2648,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			VString idRefs = getDevCapRefs();
 			for (int i = 0; i < idRefs.size(); i++)
 			{
-				JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
+				JDFDevCap devCap = devCapPool.getDevCap(idRefs.get(i));
 				if (devCap == null)
 				{
 					vs.add(AttributeName.DEVCAPREFS);

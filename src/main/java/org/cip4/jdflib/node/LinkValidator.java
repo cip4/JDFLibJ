@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.node;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -75,7 +76,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -86,6 +86,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -97,6 +98,7 @@ public class LinkValidator
 {
 	private final JDFNode node;
 	private final LinkValidatorMap validatorMap;
+	private LinkInfoMap theMap;
 
 	/**
 	 * 
@@ -105,6 +107,7 @@ public class LinkValidator
 	{
 		this.node = n;
 		validatorMap = LinkValidatorMap.getLinkValidatorMap();
+		theMap = null;
 	}
 
 	/**
@@ -116,10 +119,6 @@ public class LinkValidator
 	{
 		final EnumType typ = EnumType.getEnum(node.getType());
 		VString vTypes = node.getTypes();
-		if (typ == null)
-		{
-			return null;
-		}
 		return validatorMap.getLinkNames(typ, vTypes);
 	}
 
@@ -128,101 +127,15 @@ public class LinkValidator
 	 * 
 	 * @return String list of resource information usages that may be linked
 	 */
-	Vector<LinkInfo> linkInfo()
+	LinkInfoMap getLinkInfoMap()
 	{
-		final EnumType typ = EnumType.getEnum(node.getType());
-		VString vTypes = node.getTypes();
-		if (typ == null)
+		if (theMap == null)
 		{
-			return null;
+			final EnumType typ = EnumType.getEnum(node.getType());
+			VString vTypes = node.getTypes();
+			theMap = validatorMap.getLinkInfoMap(typ, vTypes);
 		}
-
-		return validatorMap.getLinkInfo(typ, vTypes);
-	}
-
-	/**
-	 * Get the index in Linknames of the ResourceLink described by rl
-	 * 
-	 * @param rl
-	 * @param nOccur for looping over combined nodes
-	 * @return -1 if it does not fit
-	 */
-	private int[] getMatchingNamIndex(final JDFResourceLink rl, final int nOccur)
-	{
-		final int[] ret = new int[2];
-		ret[0] = ret[1] = -1;
-		if (rl == null)
-		{
-			return ret;
-		}
-
-		// 311002 KM added nOccur for looping over combined nodes
-		// TBD evaluate CombinedProcessIndex when generating nOccur
-		final VString linkNames = linkNames();
-		if (linkNames == null)
-		{
-			return ret;
-		}
-
-		int namIndex = linkNames.indexOf(rl.getLinkedResourceName());
-
-		// int namIndex = vName.index((new
-		// KString(rl.getNodeName())).leftStr(-4), nOccur);
-		// 120802 rp add check for *
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-		}
-
-		if (namIndex < 0)
-		{
-			return ret;
-		}
-
-		final VString vIndex = vLinkInfo(namIndex);
-		if (vIndex == null)
-		{
-			return ret;
-		}
-
-		int iLoop = 0;
-		for (int i = 0; i < vIndex.size(); i++)
-		{
-
-			final String typ = vIndex.elementAt(i);
-
-			if (typ.charAt(0) == 'i' && !JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
-			{
-				continue;
-			}
-			if (typ.charAt(0) == 'o' && !JDFResourceLink.EnumUsage.Output.equals(rl.getUsage()))
-			{
-				continue;
-			}
-			if (typ.length() > 2)
-			{ // processusage is specified
-				if (!StringUtil.rightStr(typ, -2).equals(rl.getProcessUsage()))
-				{
-					continue;
-				}
-			}
-			else
-			{ // no processusage is specified
-				if (rl.hasAttribute(AttributeName.PROCESSUSAGE))
-				{
-					continue;
-				}
-
-			}
-			if (iLoop++ < nOccur)
-			{
-				continue;
-			}
-			ret[0] = namIndex;
-			ret[1] = i;
-			return ret;
-		}
-		return ret;
+		return theMap;
 	}
 
 	/**
@@ -237,22 +150,17 @@ public class LinkValidator
 	VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
 	{
 		final VString vElem = new VString();
-		final Vector<Integer> foundSingleLinks = new Vector<Integer>();
-		final Vector<Integer> foundSingleLinks2 = new Vector<Integer>();
 
 		final JDFResourceLinkPool linkPool = node.getResourceLinkPool();
-		if (linkPool != null)
+		final VElement vLinks = linkPool == null ? null : linkPool.getPoolChildren(null, null, null);
+		if (vLinks != null)
 		{
-			final VElement vLinks = linkPool.getPoolChildren(null, null, null);
-			if (vLinks != null)
+			for (KElement link : vLinks)
 			{
-				for (int i = vLinks.size() - 1; i >= 0; i--)
+				final JDFResourceLink rl = (JDFResourceLink) link;
+				if (!isValidLink(level, rl))
 				{
-					final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-					if (!isValidLink(level, rl, foundSingleLinks, foundSingleLinks2))
-					{
-						vElem.appendUnique(rl.getLinkedResourceName());
-					}
+					vElem.appendUnique(rl.getLinkedResourceName());
 				}
 			}
 		}
@@ -273,24 +181,26 @@ public class LinkValidator
 	 */
 	VString getInsertLinkVector(final int nMax)
 	{
-		final VString names = linkNames();
+		LinkInfoMap map = getLinkInfoMap();
 		final VString vInsert = new VString();
-		for (int i = 0; i < names.size(); i++)
+		Vector<String> resNames = ContainerUtil.getKeyVector(map);
+		for (String resName : resNames)
 		{
-			final VString types = vLinkInfo(i);
-			for (int j = 0; j < types.size(); j++)
+			LinkInfo li = map.get(resName);
+
+			for (int j = 0; j < li.size(); j++)
 			{
-				final EnumProcessUsage pu = node.getEnumProcessUsage(types.elementAt(j), 0);
-				if ((types.elementAt(j)).charAt(1) == '?' || (types.elementAt(j)).charAt(1) == '_')
+				final EnumProcessUsage pu = li.getEnumProcessUsage(j);
+				if (li.isSingle(j))
 				{
 					// 110602 added
-					if (getMatchingLink(names.elementAt(i), pu, 0) != null)
+					if (getMatchingLink(resName, pu, 0) != null)
 					{
 						continue; // skip existing links with maxOccurs=1
 					}
 				}
 
-				String s = names.elementAt(i) + "Link";
+				String s = resName + "Link";
 				if (pu != null)
 				{
 					s += JDFConstants.COLON + pu.getName();
@@ -311,38 +221,32 @@ public class LinkValidator
 	 * @param namIndex index of the named list, if<0 tokenize all
 	 * @return list of resource process usages that may be linked
 	 */
-	VString vLinkInfo(int namIndex)
+	VString vLinkInfo(String name)
 	{
-		final VString vRet = new VString();
-		final Vector<LinkInfo> linkInfo = linkInfo();
-		if (linkInfo == null)
+		final LinkInfoMap linkInfoMap = getLinkInfoMap();
+		if (linkInfoMap == null)
 		{
 			return null;
 		}
-
-		if (namIndex < 0)
+		Collection<LinkInfo> linkInfos = linkInfoMap.values();
+		VString v = new VString();
+		if (name == null)
 		{
-			VString v = new VString();
-			for (LinkInfo li : linkInfo)
+			for (LinkInfo li : linkInfos)
 			{
 				v.add(li.getString());
 			}
-			return v;
 		}
-
-		final VString linkNames = linkNames();
-		final String strName = linkNames.stringAt(namIndex);
-
-		while (namIndex >= 0)
+		else
 		{
-			final LinkInfo kToken = linkInfo.get(namIndex);
-			final VString vToken = kToken.getVString();
 
-			vRet.addAll(vToken);
-			namIndex = linkNames.indexOf(strName, ++namIndex);
+			final LinkInfo kToken = linkInfoMap.get(name);
+			if (kToken != null)
+			{
+				v.add(kToken.getString());
+			}
 		}
-
-		return vRet.isEmpty() ? null : vRet;
+		return v.size() == 0 ? null : v;
 	}
 
 	/**
@@ -350,14 +254,12 @@ public class LinkValidator
 	 * 
 	 * @param level the checking level
 	 * @param rl the JDFResourceLink to check
-	 * @param doneNameList Vector of Integer
-	 * @param doneIndexList Vector of Integer
 	 * @return true if valid
 	 */
-	boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl, Vector<Integer> doneNameList, Vector<Integer> doneIndexList)
+	boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl)
 	{
-
-		if (rl == null)
+		EnumUsage usage = rl == null ? null : rl.getUsage();
+		if (usage == null)
 		{
 			return false;
 		}
@@ -367,76 +269,26 @@ public class LinkValidator
 			return true;
 		}
 
-		// allow call with initial null
-		if (doneIndexList == null)
+		String nam = rl.getLinkedResourceName();
+		LinkInfo li = getLinkInfo(nam, true);
+		if (li == null)
 		{
-			doneIndexList = new Vector<Integer>();
+			return false;
 		}
-		if (doneNameList == null)
+		int maxAllowed = li.maxAllowed(usage);
+		if (maxAllowed < Integer.MAX_VALUE)
 		{
-			doneNameList = new Vector<Integer>();
-		}
-
-		int nOccur = 0;
-		int iIndex;
-		int namIndex;
-
-		// loop over all potential occurrences
-		while (true)
-		{
-			// on the C++ side the following two methods are represented with
-			// a method getMatchingIndex(rl, iIndex, nOccur) that
-			// has 3 parameters, one of them is a reference(!) at iIndex
-			final int[] ii = getMatchingNamIndex(rl, nOccur);
-			namIndex = ii[0];
-			iIndex = ii[1];
-
-			// not found -> check whether this node is known yet
-			if (namIndex < 0)
+			JDFAttributeMap uMap = usage == null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);
+			VElement vExist = node.getResourceLinks(nam, uMap, null);
+			if (vExist != null && vExist.size() > maxAllowed)
 			{
-				final EnumType enumType = node.getEnumType();
-				if (enumType == null || enumType.equals(EnumType.ProcessGroup) || (enumType.equals(EnumType.Combined) && node.getEnumTypes() == null))
-				{
-					return true;
-				}
 				return false;
 			}
-
-			// loop over all completed occurrences with maxOccurs=1
-			// if they have already been found, search for next occurrence
-			boolean bTryNext = false;
-			final int dns = doneNameList.size();
-
-			for (int i = 0; i < dns; i++)
-			{
-				if ((doneNameList.elementAt(i)).intValue() == namIndex && (doneIndexList.elementAt(i)).intValue() == iIndex)
-				{
-					nOccur++; // this one is gone, try next
-					bTryNext = true;
-					break; // 
-				}
-			}
-
-			if (!bTryNext) // we got here and the link is potentially valid
-			{
-				break;
-			}
 		}
-
-		final boolean isValid = true; // rl.isValid(level);
-
-		// TODO remove line wchar_t card=vLinkInfo(namIndex)[iIndex][1];
-		final VString vCard = vLinkInfo(namIndex);
-		final String str = vCard.stringAt(iIndex);
-		final char card = str.charAt(1);
-
-		if (isValid && ((card == '_') || (card == '?')))
-		{
-			doneNameList.addElement(Integer.valueOf(namIndex));
-			doneIndexList.addElement(Integer.valueOf(iIndex));
-		}
-
-		return isValid;
+		String procU = StringUtil.getNonEmpty(rl.getProcessUsage());
+		if (!li.hasProcessUsage(procU))
+			procU = null;
+		return usage.isInput() ? li.hasInput(procU) : li.hasOutput(procU);
 	}
 
 	/**
@@ -458,36 +310,23 @@ public class LinkValidator
 			return null;
 		}
 
-		final VString linkNames = linkNames();
-		if (linkNames == null)
+		final LinkInfoMap map = getLinkInfoMap();
+		if (map == null)
 		{
 			return rlp.getInOutLinks(null, bLink, resName, null);
 		}
 
-		int namIndex = linkNames.indexOf(resName);
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-			if (namIndex < 0)
-			{
-				return null;
-			}
-		}
-
-		final VString vInfo = vLinkInfo(namIndex);
+		LinkInfo li = map.getStar(resName);
+		if (li == null)
+			return null;
 
 		if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
 		{
-			final String pu = processUsage.getName();
-			for (int i = 0; i < vInfo.size(); i++)
+			boolean pu = li.hasProcessUsage(processUsage.getName());
+			if (pu)
 			{
-				if ((vInfo.elementAt(i)).endsWith(pu))
-				{
-					final boolean bInput = (vInfo.elementAt(i)).charAt(0) == 'i';
-					// 240502 RP bug fix by Komori
-					vE = rlp.getInOutLinks(bInput ? EnumUsage.Input : EnumUsage.Output, bLink, resName, processUsage);
-					break;
-				}
+				EnumUsage usage = li.getUsage(processUsage.getName());
+				vE = rlp.getInOutLinks(usage, bLink, resName, processUsage);
 			}
 		}
 		else
@@ -554,8 +393,8 @@ public class LinkValidator
 	 */
 	VString getMissingLinkVector(final int nMax)
 	{
-		final VString names = linkNames();
-		if (names == null)
+		final LinkInfoMap liMap = getLinkInfoMap();
+		if (liMap == null)
 		{
 			return null;
 		}
@@ -566,39 +405,20 @@ public class LinkValidator
 		}
 
 		final VString vMissing = new VString();
-		final int nameSize = names.size();
-		for (int i = 0; i < nameSize; i++)
+		Vector<String> names = ContainerUtil.getKeyVector(liMap);
+		for (String nam : names)
 		{
-			final String nam = names.stringAt(i);
-			boolean namDone = false;
-			for (int k = 0; k < i; k++)
+			LinkInfo li = liMap.get(nam);
+			if (li.isRequired(null))
 			{
-				if (names.stringAt(k).equals(nam))
+				for (int i = 0; i < li.size(); i++)
 				{
-					namDone = true;
-					break;
-				}
-			}
-
-			if (namDone)
-			{
-				continue; // already tested this name - vLinkInfo collects all
-				// data
-			}
-
-			final VString types = vLinkInfo(i);
-			if (types != null)
-			{
-				for (String typesAt : types)
-				{
-					if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
+					if (li.isRequired(i))
 					{
-						// 110602 added
-						final EnumProcessUsage pu = node.getEnumProcessUsage(typesAt, 0);
-						if (getMatchingLink(names.elementAt(i), pu, 0) == null)
+						final EnumProcessUsage pu = li.getEnumProcessUsage(i);
+						if (getMatchingLink(nam, pu, 0) == null)
 						{
-							String s = names.elementAt(i) + "Link";
-
+							String s = nam + "Link";
 							if (pu != null)
 							{
 								s += JDFConstants.COLON + pu.getName();
@@ -614,75 +434,7 @@ public class LinkValidator
 				}
 			}
 		}
-
 		return vMissing;
-	}
-
-	/**
-	 * get the matching types for a given resource
-	 * 
-	 * @param resName
-	 * @param processUsage
-	 * @return null if anything goes, an empty list if nothing goes, else the list of valid entries
-	 */
-	private VString getMatchType(final String resName, final EnumProcessUsage processUsage)
-	{
-		final VString vRet = new VString();
-		final VString linkNames = linkNames();
-		if (linkNames == null)
-		{
-			return null;
-		}
-
-		int namIndex = linkNames.indexOf(resName);
-		if (namIndex < 0)
-		{
-			namIndex = linkNames.indexOf(JDFConstants.STAR);
-		}
-		if (namIndex < 0)
-		{
-			throw new JDFException("JDFNode.appendMatchingResource invalid resName: " + resName);
-		}
-
-		final VString vInfo = vLinkInfo(namIndex);
-		if (vInfo == null)
-		{
-			return null;
-		}
-
-		if ((processUsage == null))
-		{
-			return vInfo; // no filtering required
-		}
-
-		String infoTemp = null;
-		final String pu = processUsage.getName();
-
-		for (int i = 0; i < vInfo.size(); i++)
-		{
-			infoTemp = vInfo.elementAt(i);
-
-			if (processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
-			{
-				if (infoTemp.endsWith(pu))
-				{
-					vRet.add(infoTemp);
-				}
-			}
-			else
-			{
-				if (processUsage.getValue() == EnumProcessUsage.AnyInput.getValue() && infoTemp.charAt(0) == 'i')
-				{
-					vRet.add(infoTemp);
-				}
-				else if (processUsage.getValue() == EnumProcessUsage.AnyOutput.getValue() && infoTemp.charAt(0) == 'o')
-				{
-					vRet.add(infoTemp);
-				}
-			}
-		}
-
-		return vRet;
 	}
 
 	/**
@@ -697,36 +449,86 @@ public class LinkValidator
 	 */
 	JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
+		JDFResourceLink rl = node.getLink(resource, null);
+		boolean exists = rl != null;
 		final String resName = resource.getLocalName();
-		final VString vtyp = getMatchType(resName, processUsage);
-
-		if (vtyp != null)
+		EnumUsage usage = extractUsage(resName, processUsage);
+		String sProcessUsage = extractProcessUsage(processUsage);
+		if (rl == null)
 		{
-			final Iterator<String> vtypIterator = vtyp.iterator();
-			while (vtypIterator.hasNext())
-			{
-				final String typ = vtypIterator.next();
-				if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
-				{
-					if (numMatchingLinks(resName, false, processUsage) > 0)
-					{
-						continue; // not this one...
-					}
-				}
-
-				JDFResourceLink rl = node.linkResource(resource, typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output, null);
-				if (typ.length() > 2)
-				{
-					rl.setProcessUsage(EnumProcessUsage.getEnum(typ.substring(2)));
-				}
-
+			rl = node.ensureLink(resource, usage, null);
+		}
+		if (rl != null && !exists && !isValidLink(EnumValidationLevel.Complete, rl))
+		{
+			rl.deleteNode();
+			rl = null;
+		}
+		else if (rl != null)
+		{
+			if (partMap != null)
 				rl.setPartMap(partMap);
-				return rl;
+			if (sProcessUsage != null)
+				rl.setProcessUsage(sProcessUsage);
+		}
+		return rl;
+	}
+
+	/**
+	 * 
+	 * @param processUsage
+	 * @return
+	 */
+	private String extractProcessUsage(EnumProcessUsage processUsage)
+	{
+		if (processUsage == null)
+			return null;
+		if (EnumProcessUsage.AnyInput.equals(processUsage) || EnumProcessUsage.AnyOutput.equals(processUsage))
+			return null;
+		return processUsage.getName();
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param processUsage
+	 * @return
+	 */
+	private EnumUsage extractUsage(String name, EnumProcessUsage processUsage)
+	{
+		if (EnumProcessUsage.AnyInput.equals(processUsage))
+			return EnumUsage.Input;
+		if (EnumProcessUsage.AnyOutput.equals(processUsage))
+			return EnumUsage.Output;
+
+		for (int i = 0; i < 2; i++)
+		{
+			LinkInfo info = getLinkInfo(name, i == 1);
+			if (info != null && info.size() > 0)
+			{
+				EnumUsage ret = null;
+				if (processUsage != null)
+				{
+					ret = info.getUsage(processUsage.getName());
+				}
+				if (ret == null)
+				{
+					ret = info.getUsage(null);
+				}
+				if (ret != null)
+				{
+					return ret;
+				}
 			}
 		}
+		return null;
+	}
 
-		// should only get here it the link alreay exists
-		throw new JDFException("JDFNode.LinkMatchingResource already exists");
+	private LinkInfo getLinkInfo(String name, boolean checkStar)
+	{
+		LinkInfoMap map = getLinkInfoMap();
+		if (map == null)
+			return null;
+		return checkStar ? map.getStar(name) : map.get(name);
 	}
 
 	/**
@@ -777,74 +579,46 @@ public class LinkValidator
 	 * 
 	 * @return JDFResource the newly created resource
 	 */
-	JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFNode resourceRoot)
+	JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, JDFNode resourceRoot)
 	{
-		// TODO check comment for processUsage
-		final VString vtyp = getMatchType(resName, processUsage);
-		if (vtyp == null) // anything goes
+		if (resourceRoot == null)
+			resourceRoot = node;
+		JDFResource r = resourceRoot.addResource(resName, null);
+		JDFResourceLink rl = linkMatchingResource(r, processUsage, null);
+		if (rl == null)
 		{
-			final boolean bInput = !EnumProcessUsage.AnyOutput.equals(processUsage);
-			final JDFResource r = node.addResource(resName, null, (bInput ? EnumUsage.Input : EnumUsage.Output), null, resourceRoot, null, null);
-			final JDFResourceLink rl = node.getLink(r, null);
-			if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
+			EnumUsage usage = extractUsage(resName, processUsage);
+			boolean mustZapp = usage != null;
+			if (!mustZapp)
 			{
-				rl.setProcessUsage(processUsage);
-			}
-			return r;
-		}
-
-		int nFound = 0;
-		String foundTyp = null;
-		boolean foundMulti = false;
-		int iInputFound = 0; // 1 is in, 2 is out
-
-		for (int i = 0; i < vtyp.size(); i++)
-		{
-			final String typ = vtyp.elementAt(i);
-			final boolean bInput = typ.charAt(0) == 'i';
-
-			if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
-			{
-				if (numMatchingLinks(resName, false, processUsage) > nFound)
+				LinkInfo li = getLinkInfo(resName, true);
+				mustZapp = li == null || li.size() == 0;
+				if (!mustZapp)
 				{
-					nFound++; // TODO need to fix this, it is only a 90%
-					// solution
-					continue;
+					int maxAllowed = li.maxAllowed(null);
+					if (maxAllowed < Integer.MAX_VALUE)
+					{
+						VElement resourceLinks = node.getResourceLinks(resName, null, null);
+						mustZapp = resourceLinks != null && resourceLinks.size() >= maxAllowed;
+					}
 				}
 			}
-			if (foundTyp == null)
+			if (mustZapp)
 			{
-				foundTyp = typ;
-				iInputFound = bInput ? 1 : 2;
-
-			}
-			else if (!typ.equals(foundTyp))
-			{
-				foundMulti = true;
-				if ((bInput ? 1 : 2) != iInputFound)
-				{
-					iInputFound = 0; // we could have either in or out - cannot
-					// link
-					break;
-				}
+				r.deleteNode();
+				r = null;
 			}
 		}
-		if (foundTyp == null)
-		{
-			// should only get here it the link alreay exists
-			throw new JDFException("JDFNode.appendMatchingResource already exists");
-		}
-
-		final JDFResource r = node.addResource(resName, null, null, null, resourceRoot, null, null);
-		if (iInputFound > 0)
-		{
-			final JDFResourceLink rl = node.linkResource(r, iInputFound == 1 ? EnumUsage.Input : EnumUsage.Output, null);
-			if (!foundMulti && foundTyp.length() > 2)
-			{
-				rl.setProcessUsage(EnumProcessUsage.getEnum(foundTyp.substring(2)));
-			}
-		}
-
 		return r;
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "LinkValidator " + node.getTypesString() + " [theMap=" + getLinkInfoMap() + "]";
 	}
 }

@@ -689,31 +689,31 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Ancestor", 0, false);
 			final VString v = dc.getNamePathVector(true);
 			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.stringAt(0), "JDF/AncestorPool/Ancestor");
+			Assert.assertEquals(v.get(0), "JDF/AncestorPool/Ancestor");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Layout", 0, false);
 			final VString v = dc.getNamePathVector(true);
 			Assert.assertTrue(v.size() > 1);
-			Assert.assertEquals(v.stringAt(0), "JDF/ResourcePool/Layout");
+			Assert.assertEquals(v.get(0), "JDF/ResourcePool/Layout");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_LayoutLink", 0, false);
 			final VString v = dc.getNamePathVector(true);
 			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.stringAt(0), "JDF/ResourceLinkPool/LayoutLink");
+			Assert.assertEquals(v.get(0), "JDF/ResourceLinkPool/LayoutLink");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_Created", 0, false);
 			final VString v = dc.getNamePathVector(true);
 			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.stringAt(0), "JDF/AuditPool/Created");
+			Assert.assertEquals(v.get(0), "JDF/AuditPool/Created");
 		}
 		{
 			final JDFDevCap dc = (JDFDevCap) devicecap.getChildWithAttribute(null, AttributeName.ID, null, "dc_JDF", 0, false);
 			final VString v = dc.getNamePathVector(true);
 			Assert.assertEquals(v.size(), 1);
-			Assert.assertEquals(v.stringAt(0), "JDF");
+			Assert.assertEquals(v.get(0), "JDF");
 		}
 	}
 

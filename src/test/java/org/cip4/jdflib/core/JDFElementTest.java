@@ -987,9 +987,8 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFParser p2 = new JDFParser();
 		p2.m_SchemaLocation = sm_dirTestSchema + "JDF.xsd";
 
-		for (int i = 0; i < fList.length; i++)
+		for (final File file : fList)
 		{
-			final File file = fList[i];
 			// skip directories in CVS environments
 			if (file.isDirectory())
 			{

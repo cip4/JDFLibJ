@@ -418,7 +418,7 @@ public class UrlUtil
 		}
 		for (int i = 0; i < siz; i++)
 		{
-			if (vCwd.stringAt(0).equals(vPath.stringAt(0)))
+			if (vCwd.get(0).equals(vPath.get(0)))
 			{
 				vCwd.remove(0);
 				vPath.remove(0);
@@ -1487,18 +1487,18 @@ public class UrlUtil
 		final VString vs = StringUtil.tokenize(url, "/", false);
 		for (int i = vs.size() - 1; i > 0; i--)
 		{
-			if (vs.stringAt(i).equals("") || vs.stringAt(i).equals("."))
+			if (vs.get(i).equals("") || vs.get(i).equals("."))
 			{
 				vs.remove(i);
 			}
 		}
 		for (int i = vs.size() - 1; i > 0; i--)
 		{
-			if (vs.stringAt(i).equals(".."))
+			if (vs.get(i).equals(".."))
 			{
 				for (int j = i - 1; j >= 0; j--)
 				{
-					if (!vs.stringAt(j).equals(".."))
+					if (!vs.get(j).equals(".."))
 					{
 						vs.remove(i--);
 						vs.remove(j);

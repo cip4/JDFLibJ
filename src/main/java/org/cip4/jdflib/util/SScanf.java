@@ -108,14 +108,14 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 		String firstChar = "%";
 		if (siz > 1 && !format.startsWith("%"))
 		{
-			vFmt.set(1, vFmt.stringAt(0) + "%" + vFmt.stringAt(1));
+			vFmt.set(1, vFmt.get(0) + "%" + vFmt.get(1));
 			vFmt.remove(0);
 			siz--;
 			firstChar = "";
 		}
 		for (int i = 0; i < siz; i++)
 		{
-			String fmtString = vFmt.stringAt(i);
+			String fmtString = vFmt.get(i);
 			fmtString = StringUtil.replaceString(fmtString, "__comma__��-eher selten", "%%");
 			vFmt.set(i, firstChar + fmtString);
 			firstChar = "%";
@@ -189,7 +189,7 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	{
 		if (!hasNext())
 			return null;
-		String fmtString = vFmt.stringAt(pos++);
+		String fmtString = vFmt.get(pos++);
 		ScanfFormat fmt = new ScanfFormat(fmtString);
 		try
 		{

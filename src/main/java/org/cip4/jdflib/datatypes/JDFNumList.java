@@ -223,7 +223,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 				int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
 				for (int i = 0; i < size; i++)
 				{
-					final String s = v.stringAt(i);
+					final String s = v.get(i);
 					if (bInteger)
 					{
 						int theInt = StringUtil.parseInt(s, minValue);
@@ -521,7 +521,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
-				final String s = v.stringAt(i);
+				final String s = v.get(i);
 				if (!StringUtil.isNumber(s))
 				{
 					return false;

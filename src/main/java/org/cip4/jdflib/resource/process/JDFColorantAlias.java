@@ -220,7 +220,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 
 		for (int i = 0; i < vSeps.size(); i++)
 		{
-			appendSeparation(vSeps.stringAt(i));
+			appendSeparation(vSeps.get(i));
 		}
 	}
 

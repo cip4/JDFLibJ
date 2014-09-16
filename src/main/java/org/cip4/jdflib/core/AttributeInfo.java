@@ -945,7 +945,7 @@ public class AttributeInfo
 					VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
 					for (int i = 0; i < vs.size(); i++)
 					{
-						ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.stringAt(i));
+						ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
 						// there was an invalid token
 						if (ve == null)
 							return false;

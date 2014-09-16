@@ -413,7 +413,7 @@ public class JDFElement extends KElement
 		}
 		for (int i = 0; i < vReqKeys.size() && vMissing.size() < nMax; i++)
 		{
-			final String req = vReqKeys.stringAt(i);
+			final String req = vReqKeys.get(i);
 			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!req.equals(JDFConstants.XMLNS) || super.getNamespaceURI() == null))
 			{
 				vMissing.addElement(prefix + req);
@@ -869,7 +869,7 @@ public class JDFElement extends KElement
 		// attributes
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
-			final String key = v.stringAt(i);
+			final String key = v.get(i);
 			if (ai != null && getAttribute(key).equals(ai.getAttributeDefault(key)))
 			{
 				v.remove(i);
@@ -4005,7 +4005,7 @@ public class JDFElement extends KElement
 		// 080502 RP was vAllowed,size - oops
 		for (int i = 0; i < vs.size(); i++)
 		{
-			final int enumIndex = vAllowed.index(vs.stringAt(i));
+			final int enumIndex = vAllowed.index(vs.get(i));
 			if (enumIndex >= 0)
 			{
 				ret.addElement(Integer.valueOf(enumIndex));
@@ -6151,7 +6151,7 @@ public class JDFElement extends KElement
 				return false;
 			}
 			final String locName = e.getLocalName();
-			if (!e.matchesPathName(v.stringAt(i)))
+			if (!e.matchesPathName(v.get(i)))
 			{
 				if (bFollowRefs && eLast != null && locName.equals(ElementName.RESOURCEPOOL))
 				{ // now look for a refelement that points at this
@@ -6161,10 +6161,10 @@ public class JDFElement extends KElement
 						final VElement vRefs = r.getLinks(r.getRefString(), null);
 						if (vRefs != null)
 						{
-							String subPath = v.stringAt(0);
+							String subPath = v.get(0);
 							for (int k = 1; k <= i + 1; k++)
 							{
-								subPath += "/" + v.stringAt(k);
+								subPath += "/" + v.get(k);
 							}
 							subPath += "Ref";
 							for (int j = 0; j < vRefs.size(); j++)

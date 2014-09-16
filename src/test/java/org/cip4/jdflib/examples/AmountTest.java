@@ -182,7 +182,7 @@ public class AmountTest extends JDFTestCaseBase
 
 			for (int i = 0; i < vs.size(); i++)
 			{
-				String sheet = vs.stringAt(i);
+				String sheet = vs.get(i);
 				VJDFAttributeMap vmP = new VJDFAttributeMap();
 				vmP.add(new JDFAttributeMap(EnumPartIDKey.SheetName, sheet));
 				StatusCounter stUtil = new StatusCounter(n, vmP, vRL);

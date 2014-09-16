@@ -362,7 +362,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		final int ncols = getNCols();
 		for (int j = 0; j < ncols; j++)
 		{
-			final JDFInk inkp = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
+			final JDFInk inkp = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, cols.get(j));
 			inkp.setInkName(inks.elementAt(j));
 			if ((cols.get(j).toLowerCase().indexOf("varnish") >= 0) || (inks.get(j).toLowerCase().indexOf("varnish") >= 0))
 			{
@@ -416,7 +416,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 				{
 					for (int j = 0; j < getNCols(); j++)
 					{
-						part.put(EnumPartIDKey.Separation, cols.stringAt(j));
+						part.put(EnumPartIDKey.Separation, cols.get(j));
 						final JDFPreview sepPreview = (JDFPreview) previewPartition.getCreatePartition(part, partIDKeys);
 						preparePreview(sepPreview);
 					}
@@ -497,9 +497,9 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		final JDFColorPool cp = cc.getCreateColorPool();
 		for (int i = 0; i < getNCols(); i++)
 		{
-			final String name = cols.stringAt(i);
+			final String name = cols.get(i);
 			final JDFColor c = cp.getCreateColorWithName(name, null);
-			c.setActualColorName(colsActual.stringAt(i));
+			c.setActualColorName(colsActual.get(i));
 		}
 	}
 

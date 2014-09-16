@@ -314,7 +314,7 @@ public class KElementTest extends JDFTestCaseBase
 		e1.setXPathAttribute("./e2[3]/e3/@ID", "i2");
 		assertNull(e1.getMultipleIDs("ID"));
 		e1.setXPathAttribute("./e2[4]/e3/@ID", "i1");
-		assertEquals(e1.getMultipleIDs("ID").stringAt(0), "i1");
+		assertEquals(e1.getMultipleIDs("ID").get(0), "i1");
 		assertEquals(e1.getMultipleIDs("ID").size(), 1);
 		e1.setAttribute("ID", "i2");
 		assertEquals(e1.getMultipleIDs("ID").size(), 2);
@@ -3495,7 +3495,7 @@ public class KElementTest extends JDFTestCaseBase
 		final VString v = new VString("a . - . -- . -->.<!--", ".");
 		for (int i = 0; i < v.size(); i++)
 		{
-			String s = v.stringAt(i);
+			String s = v.get(i);
 			e.appendXMLComment(s, null);
 			d.write2File(sm_dirTestDataTemp + "xmlComment.jdf", 2, false);
 			final XMLDoc d2 = new JDFParser().parseFile(sm_dirTestDataTemp + "xmlComment.jdf");

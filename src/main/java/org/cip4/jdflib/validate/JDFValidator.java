@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -656,7 +656,7 @@ public class JDFValidator
 
 			for (j = 0; j < swapElem.size(); j++)
 			{
-				final String swEl = swapElem.stringAt(j);
+				final String swEl = swapElem.get(j);
 				sysOut.println(indent(indent + 2) + "Attribute is written as Element: " + swEl);
 			}
 
@@ -669,7 +669,7 @@ public class JDFValidator
 			{
 				for (j = 0; j < missingElements.size(); j++)
 				{
-					final String missEl = missingElements.stringAt(j);
+					final String missEl = missingElements.get(j);
 					sysOut.println(indent(indent + 2) + "Missing Element: " + missEl);
 
 					if (testElement != null)
@@ -687,7 +687,7 @@ public class JDFValidator
 			}
 			for (j = 0; j < unknownElements.size(); j++)
 			{
-				sysOut.println(indent(indent + 2) + "Unknown Element: " + unknownElements.stringAt(j));
+				sysOut.println(indent(indent + 2) + "Unknown Element: " + unknownElements.get(j));
 			}
 			if (testElement != null && unknownElements.size() > 0)
 			{
@@ -822,7 +822,7 @@ public class JDFValidator
 
 		for (j = 0; j < elementVector.size(); j++)
 		{
-			final String invalidElem = elementVector.stringAt(j);
+			final String invalidElem = elementVector.get(j);
 			if (part.numChildElements(invalidElem, "") > 1)
 			{
 				sysOut.println(indent(indent + 2) + whatType + " Element " + potRef + invalidElem);
@@ -980,7 +980,7 @@ public class JDFValidator
 					for (j = size2 - 1; j >= 0; j--)
 					{
 						final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(j);
-						if (!n.isValidLink(level, rl, null, null))
+						if (!n.isValidLink(level, rl))
 						{
 							vBadResourceLinks.add(rl);
 						}
@@ -1031,13 +1031,13 @@ public class JDFValidator
 				if (sepPool != null)
 				{
 					final KElement sep = sepPool.appendElement("Separation");
-					sep.setAttribute("SeparationName", vSeparations2.stringAt(i));
+					sep.setAttribute("SeparationName", vSeparations2.get(i));
 				}
 			}
 		}
 		for (i = 0; i < vSeparations.size(); i++)
 		{
-			final String sep = vSeparations.stringAt(i);
+			final String sep = vSeparations.get(i);
 			sysOut.println("Warning: Separation Name not in ColorPool: " + sep);
 			if (sepPool != null)
 			{
@@ -1048,7 +1048,7 @@ public class JDFValidator
 		}
 		for (i = 0; i < vColorPoolSeparations.size(); i++)
 		{
-			final String sep = vColorPoolSeparations.stringAt(i);
+			final String sep = vColorPoolSeparations.get(i);
 			sysOut.println("Warning: Unreferenced Separation Name    : " + sep);
 			if (sepPool != null)
 			{
@@ -1131,7 +1131,7 @@ public class JDFValidator
 
 		for (j = 0; j < privateElements.size(); j++)
 		{
-			sysOut.println(indent(indent + 2) + "Private Element:       " + privateElements.stringAt(j));
+			sysOut.println(indent(indent + 2) + "Private Element:       " + privateElements.get(j));
 
 		}
 	}
@@ -1235,7 +1235,7 @@ public class JDFValidator
 					{
 						for (int i = 0; i < vs.size(); i++)
 						{
-							final String t = vs.stringAt(i);
+							final String t = vs.get(i);
 							if (EnumType.getEnum(t) == null)
 							{
 								if (ArrayUtils.contains(aGBList, t))
@@ -1313,7 +1313,7 @@ public class JDFValidator
 			final int size = vLinks.size();
 			for (int i = 0; i < size; i++)
 			{
-				final String missResLink = vLinks.stringAt(0);
+				final String missResLink = vLinks.get(0);
 				if (testElement != null)
 				{
 					final KElement e = testElement.appendElement("TestElement");
@@ -1562,7 +1562,7 @@ public class JDFValidator
 						else
 						{
 							final JDFNode n = rl.getParentJDF();
-							if (!n.isValidLink(level, rl, null, null))
+							if (!n.isValidLink(level, rl))
 							{
 								boolean foundMissing = false;
 								if (!rl.hasAttribute(AttributeName.PROCESSUSAGE))
@@ -1920,7 +1920,7 @@ public class JDFValidator
 		inOutputLoop = true;
 		for (int arg = 0; arg < allFiles.size(); arg++)
 		{
-			String xmlFile = allFiles.stringAt(arg);
+			String xmlFile = allFiles.get(arg);
 			final VString vFiles = new VString();
 			final File argFile = new File(xmlFile);
 			if (argFile.isDirectory())
@@ -2606,7 +2606,7 @@ public class JDFValidator
 				sysOut.println("Multiple ID elements:\n");
 				for (int i = 0; i < vMultiID.size(); i++)
 				{
-					final String id = vMultiID.stringAt(i);
+					final String id = vMultiID.get(i);
 					final VElement v = root.getChildrenByTagName(null, null, new JDFAttributeMap("ID", id), false, true, 0);
 					if (id.equals(root.getAttribute("ID")))
 					{

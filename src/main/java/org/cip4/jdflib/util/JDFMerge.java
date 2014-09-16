@@ -814,7 +814,7 @@ public class JDFMerge
 			for (int i = 0; i < spawnIDs.size(); i++) // check for multiple rw spawns
 			{
 
-				final String resSpawnID = spawnIDs.stringAt(i);
+				final String resSpawnID = spawnIDs.get(i);
 				final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
 				if (spawnedAudit != null)
 				{

@@ -54,11 +54,11 @@ public class RIPTest extends JDFTestCaseBase
 	{
 		testAuditsImageSetting();
 		statCounter.setActiveNode(null, null, null);
-		String sheet = vsSheet.stringAt(1);
+		String sheet = vsSheet.get(1);
 		VJDFAttributeMap vmP = new VJDFAttributeMap();
 		final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 		attributeMap.put("SignatureName", "Sig1");
-		attributeMap.put("Separation", vsCMYK.stringAt(3));
+		attributeMap.put("Separation", vsCMYK.get(3));
 		attributeMap.put("Side", "Front");
 
 		vmP.add(attributeMap);
@@ -149,7 +149,7 @@ public class RIPTest extends JDFTestCaseBase
 
 		for (int i = 0; i < vsSheet.size(); i++)
 		{
-			String sheet = vsSheet.stringAt(i);
+			String sheet = vsSheet.get(i);
 			VJDFAttributeMap vmP = new VJDFAttributeMap();
 			final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 			attributeMap.put("SignatureName", "Sig1");

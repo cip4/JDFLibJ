@@ -729,7 +729,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		final VString dcTypes = getTypes();
 		for (int i = 0; i < typesNode.size(); i++)
 		{
-			final String type = typesNode.stringAt(i);
+			final String type = typesNode.get(i);
 			if (!dcTypes.contains(type))
 			{
 				return false;

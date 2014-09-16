@@ -126,7 +126,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1808,36 +1807,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 */
 		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink, final VString types)
 		{
+			if (resourceLink == null)
+				return;
+
 			final JDFIntegerList cpi = new JDFIntegerList();
 			final String resName = jdfResource.getLocalName();
 			final int typSize = types.size();
-			int lastGot = -2; // not -1!!!
-			String typeLinkNamesLast[] = null;
+			LinkInfo linkInfoLast = null;
 			for (int i = 0; i < typSize; i++)
 			{
 				boolean bAddCPI = false;
-				final EnumType t = EnumType.getEnum(types.stringAt(i));
-				final String[] typeLinkNames = LinkValidatorMap.getLinkValidatorMap().typeLinkNames(t);
-				if (typeLinkNames != null && (ArrayUtils.contains(typeLinkNames, resName) || ArrayUtils.contains(typeLinkNames, JDFConstants.STAR)))
+				final EnumType typ = EnumType.getEnum(types.get(i));
+				LinkInfoMap linkInfoMap = LinkValidatorMap.getLinkValidatorMap().getTypeMap(typ, true);
+				LinkInfo linkInfo = linkInfoMap == null ? null : linkInfoMap.getStar(resName);
+				if (linkInfo != null)
 				{
 					// if we already added a cpi, but this is an exchange resource, only set cpi for the last one
-					int iPos = getResPos(resName, typeLinkNames);
-					Vector<LinkInfo> typeLinkInfo = LinkValidatorMap.getLinkValidatorMap().typeLinkInfo(t);
-					LinkInfo linkInfo = typeLinkInfo.get(iPos);
-					final VString typeInfo = linkInfo.getVString();
 					boolean bMatchUsage = false;
-					String inOut = null;
-					if (usage != null)
-					{
-						inOut = usage == EnumUsage.Input ? "i" : "o";
-					}
 
-					for (int ti = 0; ti < typeInfo.size(); ti++)
+					for (int ti = 0; ti < linkInfo.size(); ti++)
 					{
-						final String sti = typeInfo.stringAt(ti);
-						if (inOut == null || sti.startsWith(inOut))
+						if (linkInfo.matchesUsage(ti, usage))
 						{
-							if (processUsage == null || processUsage.getName().equals(sti.substring(2)))
+							if (processUsage == null || processUsage.getName().equals(linkInfo.getProcessUsage(ti)))
 							{
 								bMatchUsage = true;
 								bAddCPI = true;
@@ -1845,16 +1837,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 							}
 						}
 					}
-					if (bMatchUsage && lastGot == i - 1)
+					if (bMatchUsage && linkInfoLast != null)
 					{
-						bAddCPI = cleanCombinedProcessIndex(usage, types, cpi, resName, lastGot, typeLinkNamesLast, bAddCPI, typeInfo);
+						bAddCPI = cleanCombinedProcessIndex(usage, linkInfo, cpi, resName, linkInfoLast, bAddCPI);
 					}
 					if (bAddCPI)
 					{
 						cpi.add(i);
 					}
-					lastGot = i;
-					typeLinkNamesLast = typeLinkNames;
+					linkInfoLast = linkInfo;
+				}
+				else
+				{
+					linkInfoLast = null;
 				}
 			}
 			if (cpi.size() > 0)
@@ -1863,82 +1858,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 		}
 
-		private static int getResPos(final String resName, final String[] typeLinkNames)
+		private static boolean cleanCombinedProcessIndex(EnumUsage usage, LinkInfo linkInfo, JDFIntegerList cpi, String resName, LinkInfo linkInfoLast, boolean bAddCPI)
 		{
-			int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
-			if (iPos < 0)
-				iPos = ArrayUtils.indexOf(typeLinkNames, JDFConstants.STAR);
-			return iPos;
-		}
+			boolean bOut = linkInfoLast.hasOutput(null);
+			if (!bOut)
+				return bAddCPI;
 
-		/**
-		 * remove any duplicate combinedprocessusages
-		 * 
-		 * @param usage
-		 * @param types
-		 * @param cpi
-		 * @param resName
-		 * @param lastGot
-		 * @param typeLinkNamesLast
-		 * @param bAddCPI
-		 * @param typeInfo
-		 * @return boolean
-		 */
-		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot, final String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
-		{
-			int iPosLast = getResPos(resName, typeLinkNamesLast);
-			// the i* i?pu ... list of this
-			// the o* i?pu ... list of the previous type
-			Vector<LinkInfo> typeLinkInfo = LinkValidatorMap.getLinkValidatorMap().typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)));
-			LinkInfo linkInfo = typeLinkInfo.get(iPosLast);
-			final VString typeInfoLast = linkInfo.getVString();
-			boolean bOut = false;
+			boolean bIn = linkInfo.hasInput(null);
+			bOut = linkInfo.hasOutput(null);
 
-			for (int ii = 0; ii < typeInfoLast.size(); ii++)
-			{
-				if (typeInfoLast.stringAt(ii).startsWith("o"))
+			if (bIn && bOut)
+			{ // remove the last output if we found a pass through
+				if (EnumUsage.Input.equals(usage))
 				{
-					bOut = true; // we found a matching output
-					break;
-				}
-			}
-
-			if (bOut)
-			{
-				boolean bIn = false;
-				bOut = false;
-				for (int ii = 0; ii < typeInfo.size(); ii++)
-				{
-					if (!bIn && typeInfo.stringAt(ii).startsWith("i"))
-					{
-						bIn = true; // after finding a matching output in last, we find an input here
-					}
-
-					if (!bOut && typeInfo.stringAt(ii).startsWith("o"))
-					{
-						bOut = true; // after finding a matching output in last, we find an input here
-					}
-				}
-
-				if (bIn && bOut)
-				{ // remove the last output if we found a pass through
-					if (EnumUsage.Input.equals(usage))
-					{
-						bAddCPI = false;
-					}
-					else
-					{
-						cpi.removeElementAt(-1);
-						bAddCPI = true;
-					}
+					bAddCPI = false;
 				}
 				else
 				{
-					// not continuous - reset
+					cpi.removeElementAt(-1);
 					bAddCPI = true;
 				}
 			}
-
+			else
+			{
+				// not continuous - reset
+				bAddCPI = true;
+			}
 			return bAddCPI;
 		}
 	}
@@ -2260,19 +2205,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * definition of resource link usage, cardinality and ProcessUsage in the JDF namespace
 	 * 
 	 * @return String list of resource information usages that may be linked
+	 * @deprecated
 	 */
+	@Deprecated
 	public VString linkInfo()
 	{
-		Vector<LinkInfo> linkInfos = new LinkValidator(this).linkInfo();
+		LinkInfoMap linkInfos = new LinkValidator(this).getLinkInfoMap();
 		VString v = new VString();
 		if (linkInfos != null)
 		{
-			for (LinkInfo linkInfo : linkInfos)
+			for (LinkInfo linkInfo : linkInfos.values())
 			{
 				v.add(linkInfo.getString());
 			}
 		}
 		return v;
+	}
+
+	public LinkInfoMap getLinkInfoMap()
+	{
+		return new LinkValidator(this).getLinkInfoMap();
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -3028,7 +2980,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLink linkResource(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
-		if (jdfResource == null)
+		if (jdfResource == null || usage == null)
 		{
 			return null;
 		}
@@ -3037,7 +2989,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
 		final VString types = getTypes();
 		// generate
-		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
+		if (resourceLink != null && types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
 		{
 			CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
 		}
@@ -5041,7 +4993,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param i the index of the pu to find
 	 * @return the enumerated process usage of this checked link
 	 * @default getEnumProcessUsage(info, 0)
+	 * @deprecated
 	 */
+	@Deprecated
 	public EnumProcessUsage getEnumProcessUsage(final String info, final int i)
 	{
 		final String iToken = StringUtil.token(info, i, JDFConstants.BLANK);
@@ -5157,9 +5111,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param doneIndexList Vector of Integer
 	 * @return true if valid
 	 */
-	public boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl, Vector<Integer> doneNameList, Vector<Integer> doneIndexList)
+	public boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl)
 	{
-		return new LinkValidator(this).isValidLink(level, rl, doneNameList, doneIndexList);
+		return new LinkValidator(this).isValidLink(level, rl);
 	}
 
 	/**
@@ -6612,7 +6566,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				// get the rightmost last 4 numerical characters as seed for
 				// UniqueID()
 
-				String strID = jdfElem.getAttribute(vIDNames.stringAt(j), null, null);
+				String strID = jdfElem.getAttribute(vIDNames.get(j), null, null);
 				if (strID != null)
 				{
 					if (strID.length() > 7)

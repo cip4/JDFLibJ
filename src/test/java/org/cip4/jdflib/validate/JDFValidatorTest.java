@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,8 +81,8 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -104,8 +104,8 @@ public class JDFValidatorTest extends JDFTestCaseBase
 		final JDFResourceLink rl = ra.addNewOldLink(true, media, EnumUsage.Input);
 		rl.setActualAmount(42, null);
 		validator.setWarning(false);
-		Assert.assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
-		Assert.assertTrue(node.isValid(EnumValidationLevel.Incomplete));
+		assertNotNull(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0));
+		assertTrue(node.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -136,8 +136,8 @@ public class JDFValidatorTest extends JDFTestCaseBase
 	{
 		JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
 		JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
-		Assert.assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
-		Assert.assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+		assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 }

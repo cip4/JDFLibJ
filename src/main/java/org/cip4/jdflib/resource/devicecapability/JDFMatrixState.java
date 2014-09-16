@@ -495,7 +495,7 @@ public class JDFMatrixState extends JDFAbstractState
 			VString v = new VString();
 			v.ensureCapacity(6);
 			for (int j = 0; j < 6; j++)
-				v.add(vs.stringAt(i + j));
+				v.add(vs.get(i + j));
 
 			try
 			{

@@ -433,7 +433,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				VString v = StringUtil.tokenize(dcr, " ", false);
 				for (int i = 0; i < v.size(); i++)
 				{
-					String s = v.stringAt(i);
+					String s = v.get(i);
 					final KElement dcre = dcp.getChildWithAttribute(ElementName.DEVCAP, AttributeName.ID, null, s, 0, true);
 					vDevCap.appendUnique(dcre);
 				}
@@ -901,7 +901,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 							for (int k = 0; k < keys.size(); k++)
 							{
 								String sk = "PartKey" + k;
-								final String key = keys.stringAt(k);
+								final String key = keys.get(k);
 								if (key.equals("RunIndex"))
 									sk = "0~-1";
 								keyMap.put(key, sk);
@@ -1163,7 +1163,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			VString idRefs = getDevCapRef();
 			for (int i = 0; i < idRefs.size(); i++)
 			{
-				JDFDevCap devCap = devCapPool.getDevCap(idRefs.stringAt(i));
+				JDFDevCap devCap = devCapPool.getDevCap(idRefs.get(i));
 				if (devCap == null)
 				{
 					vs.add(AttributeName.DEVCAPREF);

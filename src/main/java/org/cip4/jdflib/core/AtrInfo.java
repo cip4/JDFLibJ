@@ -154,7 +154,7 @@ public class AtrInfo
 				final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
 				for (int i = 0; i < vSmall.size(); i++)
 				{
-					if (!StringUtil.hasToken(bigAtt, vSmall.stringAt(i), JDFConstants.BLANK, 0))
+					if (!StringUtil.hasToken(bigAtt, vSmall.get(i), JDFConstants.BLANK, 0))
 					{
 						return false;
 					}

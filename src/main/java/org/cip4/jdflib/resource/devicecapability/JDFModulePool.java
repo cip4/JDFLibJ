@@ -159,7 +159,7 @@ public class JDFModulePool extends JDFAutoModulePool
 		JDFDeviceCap.EnumAvailability minAvail = JDFDeviceCap.EnumAvailability.Installed;
 		for (int i = 0; i < vModuleRefs.size(); i++)
 		{
-			JDFModuleCap mc = (JDFModuleCap) m.get(vModuleRefs.stringAt(i));
+			JDFModuleCap mc = (JDFModuleCap) m.get(vModuleRefs.get(i));
 			if (mc == null)
 				return null;
 			EnumAvailability a = mc.getAvailability();

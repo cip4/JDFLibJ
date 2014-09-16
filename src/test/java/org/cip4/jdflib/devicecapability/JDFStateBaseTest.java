@@ -244,7 +244,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		}
 		for (int z = 0; z < matrixList.size(); z++)
 		{
-			JDFMatrix matrix3 = new JDFMatrix(matrixList.stringAt(z));
+			JDFMatrix matrix3 = new JDFMatrix(matrixList.get(z));
 			matrix3.getA();
 		}
 
@@ -301,7 +301,7 @@ public class JDFStateBaseTest extends JDFTestCaseBase
 		JDFBooleanState b = deviceCap.getBooleanState("Template");
 		VString v = b.getNamePathVector(true);
 		Assert.assertEquals(v.size(), 1);
-		Assert.assertEquals(v.stringAt(0), "JDF/@Template");
+		Assert.assertEquals(v.get(0), "JDF/@Template");
 	}
 
 	/**

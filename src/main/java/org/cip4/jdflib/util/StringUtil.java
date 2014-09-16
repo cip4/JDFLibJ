@@ -300,7 +300,7 @@ public class StringUtil
 		final Object[] vObj = new Object[vTemplate.size()];
 		for (int i = 0; i < vObj.length; i++)
 		{
-			final String s = vTemplate.stringAt(i);
+			final String s = vTemplate.get(i);
 			if (isInteger(s))
 			{
 				vObj[i] = new Integer(parseInt(s, 0));
@@ -346,12 +346,12 @@ public class StringUtil
 		}
 
 		// tokenize does not return an empty token if we start with %
-		String s = bStart ? "" : tokens.stringAt(0);
+		String s = bStart ? "" : tokens.get(0);
 
 		for (int i = nStart; i < tokens.size(); i++)
 		{
 			final PrintfFormat f = new PrintfFormat("");
-			f.set("%" + tokens.stringAt(i));
+			f.set("%" + tokens.get(i));
 			final Object ob = objects[i - nStart];
 			if (ob instanceof String)
 			{
@@ -790,7 +790,7 @@ public class StringUtil
 
 			if (index < v.size())
 			{
-				return v.stringAt(index);
+				return v.get(index);
 			}
 
 			return null;
@@ -1255,7 +1255,7 @@ public class StringUtil
 		}
 		for (int i = 0; i < s; i++)
 		{
-			if ((bID && !StringUtil.isID(vs.stringAt(i))) || !StringUtil.isNMTOKEN(vs.stringAt(i)))
+			if ((bID && !StringUtil.isID(vs.get(i))) || !StringUtil.isNMTOKEN(vs.get(i)))
 			{
 				return false;
 			}
@@ -2539,7 +2539,7 @@ public class StringUtil
 		{
 			for (int i = 0; i < vS.size(); i++)
 			{
-				String s = vS.stringAt(i);
+				String s = vS.get(i);
 				s += appendString;
 				vS.setElementAt(s, i);
 			}

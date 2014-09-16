@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -202,14 +202,12 @@ public class VString extends Vector<String>
 	/**
 	 * @param index the index which may be negative to count backwards
 	 * @return the string at index
+	 * @deprecated - simply use get
 	 */
+	@Deprecated
 	public String stringAt(int index)
 	{
-		if (index < 0)
-		{
-			index += size();
-		}
-		return super.elementAt(index);
+		return get(index);
 	}
 
 	/**
@@ -237,7 +235,7 @@ public class VString extends Vector<String>
 		{
 			index += size();
 		}
-		return super.get(index);
+		return index >= 0 && index < size() ? super.get(index) : null;
 	}
 
 	/**

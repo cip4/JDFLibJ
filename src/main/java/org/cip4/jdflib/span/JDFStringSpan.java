@@ -295,7 +295,7 @@ public class JDFStringSpan extends JDFSpanBase
 		final int size = s.size();
 		for (int i = 0; i < size; i++)
 		{
-			appendTextElement(elementName, s.stringAt(i));
+			appendTextElement(elementName, s.get(i));
 		}
 	}
 

@@ -659,7 +659,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
 				for (int j = 0; j < ncols; j++)
 				{
-					pvp.getCreatePartition(EnumPartIDKey.Separation, cols.stringAt(j), partIDKeys);
+					pvp.getCreatePartition(EnumPartIDKey.Separation, cols.get(j), partIDKeys);
 					pvp.setResStatus(EnumResStatus.Incomplete, false);
 				}
 			}

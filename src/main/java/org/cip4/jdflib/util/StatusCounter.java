@@ -760,7 +760,7 @@ public class StatusCounter
 		}
 
 		final JDFAuditPool ap = m_Node.getCreateAuditPool();
-		final JDFPhaseTime lastPhase = ap.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.stringAt(0));
+		final JDFPhaseTime lastPhase = ap.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.get(0));
 		final EnumNodeStatus ns = lastPhase != null ? lastPhase.getStatus() : EnumNodeStatus.Waiting;
 		final String nodeStatusDetails = lastPhase != null ? lastPhase.getStatusDetails() : statusDetails;
 		return setPhase(ns, nodeStatusDetails, status, statusDetails);
@@ -847,7 +847,7 @@ public class StatusCounter
 
 		final JDFAuditPool auditPool = m_Node.getCreateAuditPool();
 		// TODO rethink when to send 2 phases
-		final JDFPhaseTime lastPhase = auditPool.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.stringAt(0));
+		final JDFPhaseTime lastPhase = auditPool.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.get(0));
 		JDFPhaseTime nextPhase = lastPhase;
 		final boolean bEnd = EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
 		boolean bChanged = bEnd || lastPhase == null; // no previous audit or over and out

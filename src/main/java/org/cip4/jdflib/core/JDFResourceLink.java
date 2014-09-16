@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -204,6 +204,14 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		public EnumUsage invert()
 		{
 			return Output.equals(this) ? Input : Output;
+		}
+
+		/**
+		 * @return true if I am input
+		 */
+		public boolean isInput()
+		{
+			return Input.equals(this);
 		}
 	}
 
@@ -1397,7 +1405,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		for (int j = 0; j < attribs.size(); j++)
 		{
-			final String attribName = attribs.stringAt(j);
+			final String attribName = attribs.get(j);
 			if (hasAttribute(attribName))
 			{
 				final String att = getAttribute(attribName, null, null);
@@ -1811,7 +1819,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 				final int index = intArray[i];
 				if (index < size)
 				{
-					vs.add(vTypes.stringAt(index));
+					vs.add(vTypes.get(index));
 				}
 			}
 		}

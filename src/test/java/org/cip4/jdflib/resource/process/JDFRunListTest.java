@@ -708,7 +708,7 @@ public class JDFRunListTest extends JDFTestCaseBase {
 		final VString v1 = new VString("Cyan Magenta Yello Black", " ");
 		final VString v2 = new VString();
 		for (int i = 0; i < v1.size(); i++) {
-			v2.add("File://device/dir/" + v1.stringAt(i) + ".tif");
+			v2.add("File://device/dir/" + v1.get(i) + ".tif");
 		}
 		final JDFRunList rl2 = rl.addSepRun(v2, v1, 0, 0, false);
 		Assert.assertTrue(rl2.isValid(EnumValidationLevel.Complete));

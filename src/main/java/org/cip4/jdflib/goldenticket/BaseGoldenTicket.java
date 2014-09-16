@@ -896,11 +896,11 @@ public class BaseGoldenTicket
 		cc.refColorPool(cp);
 		for (int i = 4; i < getNCols(); i++)
 		{
-			cc.getCreateColorantParams().appendSeparation(cols.stringAt(i));
+			cc.getCreateColorantParams().appendSeparation(cols.get(i));
 		}
 		for (int i = 0; i < getNCols(); i++)
 		{
-			final String name = cols.stringAt(i);
+			final String name = cols.get(i);
 			final JDFColor c = cp.getCreateColorWithName(name, null);
 			if (i == 0)
 			{
@@ -940,7 +940,7 @@ public class BaseGoldenTicket
 				final VString colsP = new VString();
 				for (int iii = 0; iii < nCols[ii]; iii++)
 				{
-					colsP.add(cols.stringAt(iii));
+					colsP.add(cols.get(iii));
 				}
 				final JDFSeparationList co = ccP.getCreateColorantOrder();
 				co.setSeparations(colsP);
@@ -1120,7 +1120,7 @@ public class BaseGoldenTicket
 
 				for (int j = 0; j < ncols; j++)
 				{
-					part.put(EnumPartIDKey.Separation, cols.stringAt(j));
+					part.put(EnumPartIDKey.Separation, cols.get(j));
 					xmp.getCreatePartition(part, partIDKeys);
 				}
 			}

@@ -1705,7 +1705,7 @@ public class XMLDoc
 		final int indexOfNS = strings.indexOf(nsURI);
 		if (indexOfNS >= 0 && indexOfNS < strings.size() - 1)
 		{
-			schemaloc = strings.stringAt(indexOfNS + 1);
+			schemaloc = strings.get(indexOfNS + 1);
 		}
 		else
 		{

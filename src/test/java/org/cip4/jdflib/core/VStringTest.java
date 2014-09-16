@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,8 +77,8 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -96,7 +96,7 @@ public class VStringTest extends TestCase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.appendUnique("c");
-		Assert.assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 
 	}
 
@@ -111,10 +111,12 @@ public class VStringTest extends TestCase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assert.assertEquals("a", v.get(0));
-		Assert.assertEquals("c", v.get(3));
-		Assert.assertEquals("c", v.get(-2));
-		Assert.assertEquals("b", v.get(-3));
+		assertEquals("a", v.get(0));
+		assertEquals("c", v.get(3));
+		assertEquals("c", v.get(-2));
+		assertEquals("b", v.get(-3));
+		assertNull("b", v.get(-6));
+		assertNull("b", v.get(7));
 	}
 
 	/**
@@ -128,10 +130,10 @@ public class VStringTest extends TestCase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		Assert.assertEquals("a", v.elementAt(0));
-		Assert.assertEquals("c", v.elementAt(3));
-		Assert.assertEquals("c", v.elementAt(-2));
-		Assert.assertEquals("b", v.elementAt(-3));
+		assertEquals("a", v.elementAt(0));
+		assertEquals("c", v.elementAt(3));
+		assertEquals("c", v.elementAt(-2));
+		assertEquals("b", v.elementAt(-3));
 	}
 
 	/**
@@ -142,9 +144,9 @@ public class VStringTest extends TestCase
 	public void testRemove() throws Exception
 	{
 		final VString v = new VString("a b c", null);
-		Assert.assertEquals(v.remove(-1), "c");
-		Assert.assertEquals(v.remove(-1), "b");
-		Assert.assertEquals(v.size(), 1);
+		assertEquals(v.remove(-1), "c");
+		assertEquals(v.remove(-1), "b");
+		assertEquals(v.size(), 1);
 	}
 
 	/**
@@ -160,14 +162,14 @@ public class VStringTest extends TestCase
 		v.add("c");
 		VString v2 = new VString(v);
 		v2.removeStrings((String) null, 2);
-		Assert.assertEquals(v2, v);
+		assertEquals(v2, v);
 		v2 = new VString(v);
 		v2.removeStrings("c", 1);
-		Assert.assertEquals(v2.size(), 3);
-		Assert.assertTrue(v2.contains("c"));
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings("c", 0);
-		Assert.assertFalse(v2.contains("c"));
+		assertFalse(v2.contains("c"));
 	}
 
 	/**
@@ -183,17 +185,17 @@ public class VStringTest extends TestCase
 		v.add("c");
 		VString v2 = new VString(v);
 		v2.removeStrings((VString) null, 2);
-		Assert.assertEquals(v2, v);
+		assertEquals(v2, v);
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a c", null), 1);
-		Assert.assertEquals(v2.size(), 3);
-		Assert.assertTrue(v2.contains("c"));
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a c", null), 0);
-		Assert.assertFalse(v2.contains("c"));
+		assertFalse(v2.contains("c"));
 		v2 = new VString(v);
 		v2.removeStrings(new VString("a b c", null), 0);
-		Assert.assertEquals(v2.size(), 0);
+		assertEquals(v2.size(), 0);
 	}
 
 	/**
@@ -207,12 +209,12 @@ public class VStringTest extends TestCase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.appendUnique("c");
-		Assert.assertFalse(v.containsAny(null));
-		Assert.assertFalse(v.containsAny(new VString("d e", " ")));
-		Assert.assertTrue(v.containsAny(new VString("b e", " ")));
-		Assert.assertTrue(v.containsAny(new VString("e b", " ")));
-		Assert.assertTrue(v.containsAny(new VString("g c h", " ")));
-		Assert.assertTrue(v.containsAny(v));
+		assertFalse(v.containsAny(null));
+		assertFalse(v.containsAny(new VString("d e", " ")));
+		assertTrue(v.containsAny(new VString("b e", " ")));
+		assertTrue(v.containsAny(new VString("e b", " ")));
+		assertTrue(v.containsAny(new VString("g c h", " ")));
+		assertTrue(v.containsAny(v));
 
 	}
 
@@ -227,7 +229,7 @@ public class VStringTest extends TestCase
 		v.add("c");
 		v.add("b");
 		v.sort();
-		Assert.assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 	}
 
 	/**
@@ -240,7 +242,7 @@ public class VStringTest extends TestCase
 		v.add((String) null);
 		v.add("b");
 		v.add("c");
-		Assert.assertEquals("b c", StringUtil.setvString(v, " ", null, null), "b c");
+		assertEquals("b c", StringUtil.setvString(v, " ", null, null), "b c");
 	}
 
 	/**
@@ -254,8 +256,8 @@ public class VStringTest extends TestCase
 		v.add("c");
 		v.add("b");
 		final Set<?> s = v.getSet();
-		Assert.assertEquals(v.size(), s.size());
-		Assert.assertTrue(s.contains("c"));
+		assertEquals(v.size(), s.size());
+		assertTrue(s.contains("c"));
 
 	}
 
@@ -280,9 +282,9 @@ public class VStringTest extends TestCase
 		w.add("d");
 
 		v.unify();
-		Assert.assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 		v.appendUnique(w);
-		Assert.assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
+		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
 
 	}
 
@@ -304,10 +306,10 @@ public class VStringTest extends TestCase
 		h.add("d");
 
 		v.unify();
-		Assert.assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 		v.addAll(h);
 		v.unify();
-		Assert.assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
+		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
 
 	}
 
@@ -318,9 +320,9 @@ public class VStringTest extends TestCase
 	public void testConstructEmpty()
 	{
 		VString v = new VString("a,b,c, ,", ",");
-		Assert.assertEquals(v.get(-1), " ");
+		assertEquals(v.get(-1), " ");
 		v = new VString("a,b,c,,", ",");
-		Assert.assertEquals("double tokens are ignored", v.get(-1), "c");
+		assertEquals("double tokens are ignored", v.get(-1), "c");
 	}
 
 	/**
@@ -329,9 +331,9 @@ public class VStringTest extends TestCase
 	@Test
 	public void testFactory()
 	{
-		Assert.assertNull(VString.getVString(null, null));
-		Assert.assertNull(VString.getVString("", null));
-		Assert.assertEquals(VString.getVString("a", null).get(0), "a");
+		assertNull(VString.getVString(null, null));
+		assertNull(VString.getVString("", null));
+		assertEquals(VString.getVString("a", null).get(0), "a");
 	}
 
 	/**
@@ -342,7 +344,7 @@ public class VStringTest extends TestCase
 	{
 		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
-		Assert.assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
+		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
 	}
 
 	/**
@@ -358,7 +360,7 @@ public class VStringTest extends TestCase
 		v.add("c");
 		v.add("e");
 		v.setElementAt("d", 3);
-		Assert.assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
+		assertEquals("a b c d e", StringUtil.setvString(v, " ", null, null));
 
 	}
 

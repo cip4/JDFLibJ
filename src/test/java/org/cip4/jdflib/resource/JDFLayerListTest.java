@@ -312,7 +312,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 
 		for (int i = 0; i < layers.size(); i++)
 		{
-			ll.appendLayerDetails().setName(layers.stringAt(i));
+			ll.appendLayerDetails().setName(layers.get(i));
 		}
 
 		JDFRunList rlOutDe = (JDFRunList) rlOut.addPartition(EnumPartIDKey.PartVersion, "De");

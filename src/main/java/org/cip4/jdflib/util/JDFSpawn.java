@@ -1411,7 +1411,7 @@ public class JDFSpawn
 			final JDFAttributeMap map = vSpawnParts.elementAt(i);
 			for (int j = 0; j < ks; j++)
 			{
-				final String key = keys.stringAt(j);
+				final String key = keys.get(j);
 				final String linkValue = map.get(key);
 				if (linkValue != null && !JDFPart.matchesPart(key, testMap.get(key), linkValue, false))
 				{
