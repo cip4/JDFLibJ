@@ -68,49 +68,40 @@
  */
 package org.cip4.jdflib.node;
 
-import java.util.HashMap;
+import junit.framework.TestCase;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
 
-public class LinkValidatorMapTest extends JDFTestCaseBase
+public class LinkInfoTest extends TestCase
 {
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testGetLinkNames()
+	public void testEquals()
 	{
-		VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
-		assertTrue(linkInfo.contains("ConventionalPrintingParams"));
-		assertTrue(linkInfo.contains("Preview"));
-		assertTrue(linkInfo.contains("Media"));
-		assertTrue(linkInfo.contains("Component"));
+		LinkInfo li = new LinkInfo("i_");
+		LinkInfo li2 = new LinkInfo("i_");
+		assertEquals(li, li2);
+		LinkInfo li3 = new LinkInfo(li);
+		assertEquals(li, li3);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testGetLinkInfo()
+	public void testGetStar()
 	{
-		VString linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkNames(EnumType.ConventionalPrinting, null);
-		LinkInfoMap linkNames = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
-		assertEquals(linkInfo.size(), linkNames.size());
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testGetLinkInfoMap()
-	{
-		HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
-		LinkInfo cp = linkInfo.get("ConventionalPrintingParams");
-		assertTrue(cp.getVString().contains("i_"));
+		LinkInfoMap linkInfoMap = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.ConventionalPrinting, null);
+		LinkInfo cp = linkInfoMap.get(ElementName.CONVENTIONALPRINTINGPARAMS);
+		LinkInfo cpStar = linkInfoMap.getStar(ElementName.CONVENTIONALPRINTINGPARAMS);
+		assertEquals(cp, cpStar);
+		assertFalse(cp.hasOutput(null));
+		assertTrue(cp.hasInput(null));
 	}
 
 }

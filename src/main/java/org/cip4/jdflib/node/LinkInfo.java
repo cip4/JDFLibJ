@@ -71,6 +71,7 @@ package org.cip4.jdflib.node;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -79,6 +80,36 @@ import org.cip4.jdflib.util.StringUtil;
  */
 class LinkInfo
 {
+	/**
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((theInfo == null) ? 0 : theInfo.hashCode());
+		return result;
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LinkInfo other = (LinkInfo) obj;
+		return ContainerUtil.equals(other.theInfo, theInfo);
+	}
+
 	/**
 	 * 
 	 * @param info
@@ -93,7 +124,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public int size()
+	int size()
 	{
 		return theInfo == null ? 0 : theInfo.size();
 	}
@@ -124,7 +155,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public VString getVString()
+	VString getVString()
 	{
 		return theInfo;
 	}
@@ -133,7 +164,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public String getString()
+	String getString()
 	{
 		return StringUtil.setvString(theInfo);
 	}
@@ -152,7 +183,7 @@ class LinkInfo
 	 * merge two LinkInfos into one
 	 * @param value
 	 */
-	public void merge(LinkInfo value)
+	void merge(LinkInfo value)
 	{
 		if (value != null)
 		{
@@ -165,7 +196,7 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	public boolean hasInput(String processUsage)
+	boolean hasInput(String processUsage)
 	{
 		for (String s : theInfo)
 		{
@@ -181,7 +212,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public boolean matchesUsage(int iPos, EnumUsage usage)
+	boolean matchesUsage(int iPos, EnumUsage usage)
 	{
 		if (EnumUsage.Input.equals(usage))
 			return isInput(iPos);
@@ -194,7 +225,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public boolean isInput(int iPos)
+	boolean isInput(int iPos)
 	{
 		String s = theInfo.get(iPos);
 		return s != null && s.startsWith("i");
@@ -204,7 +235,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public boolean isSingle(int iPos)
+	boolean isSingle(int iPos)
 	{
 		String s = get2(iPos);
 		if (s != null)
@@ -219,7 +250,7 @@ class LinkInfo
 	 * 
 	 * @return
 	 */
-	public boolean isOutput(int iPos)
+	boolean isOutput(int iPos)
 	{
 		String s = theInfo.get(iPos);
 		return s != null && s.startsWith("o");
@@ -234,7 +265,7 @@ class LinkInfo
 	 *  
 	 *  
 	 */
-	public String getProcessUsage(final int iPos)
+	String getProcessUsage(final int iPos)
 	{
 		String pu = getPU(iPos);
 
@@ -257,7 +288,7 @@ class LinkInfo
 	 *  
 	 *  
 	 */
-	public EnumProcessUsage getEnumProcessUsage(final int iPos)
+	EnumProcessUsage getEnumProcessUsage(final int iPos)
 	{
 		String pu = getPU(iPos);
 
@@ -284,7 +315,7 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	public boolean hasOutput(String processUsage)
+	boolean hasOutput(String processUsage)
 	{
 		for (String s : theInfo)
 		{
@@ -301,7 +332,7 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	public EnumUsage getUsage(String processUsage)
+	EnumUsage getUsage(String processUsage)
 	{
 		boolean bInput = hasInput(processUsage);
 		boolean bOutput = hasOutput(processUsage);
@@ -315,7 +346,7 @@ class LinkInfo
 	 * @param bIn
 	 * @param bOut
 	 */
-	public void makeOptional(boolean bIn, boolean bOut)
+	void makeOptional(boolean bIn, boolean bOut)
 	{
 		for (int i = 0; i < theInfo.size(); i++)
 		{
@@ -358,7 +389,7 @@ class LinkInfo
 	 * @param usage
 	 * @return
 	 */
-	public boolean isRequired(EnumUsage usage)
+	boolean isRequired(EnumUsage usage)
 	{
 		for (int i = 0; i < theInfo.size(); i++)
 		{
@@ -375,7 +406,7 @@ class LinkInfo
 	 * @param usage
 	 * @return
 	 */
-	public int maxAllowed(EnumUsage usage)
+	int maxAllowed(EnumUsage usage)
 	{
 		int n = 0;
 		for (int i = 0; i < theInfo.size(); i++)
@@ -396,7 +427,7 @@ class LinkInfo
 	 * @param i
 	 * @return
 	 */
-	public int maxAllowed(int i)
+	int maxAllowed(int i)
 	{
 		String s = StringUtil.rightStr(get2(i), 1);
 		if (s == null)
@@ -415,7 +446,7 @@ class LinkInfo
 	 * @param i
 	 * @return
 	 */
-	public boolean isRequired(int i)
+	boolean isRequired(int i)
 	{
 		String s = get2(i);
 		if ("i_".equals(s) || "i+".equals(s))
@@ -440,7 +471,7 @@ class LinkInfo
 	 * @param procU
 	 * @return
 	 */
-	public boolean hasProcessUsage(String procU)
+	boolean hasProcessUsage(String procU)
 	{
 		if (procU == null)
 			return theInfo.size() > 0;

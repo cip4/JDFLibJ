@@ -74,10 +74,18 @@ import java.util.Vector;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 
-public class LinkInfoMap extends HashMap<String, LinkInfo>
+/**
+ * 
+ * @author rainer prosi
+ *
+ */
+class LinkInfoMap extends HashMap<String, LinkInfo>
 {
 
-	public LinkInfoMap()
+	/**
+	 * 
+	 */
+	LinkInfoMap()
 	{
 		super();
 	}
@@ -91,7 +99,7 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	 * copy ctor
 	 * @param info
 	 */
-	public LinkInfoMap(LinkInfoMap info)
+	LinkInfoMap(LinkInfoMap info)
 	{
 		Vector<String> keys = ContainerUtil.getKeyVector(info);
 		if (keys != null)
@@ -155,20 +163,10 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	}
 
 	/**
-	 * 
-	 * @param resName
-	 * @return
-	 */
-	public boolean knows(String resName)
-	{
-		return getStar(resName) != null;
-	}
-
-	/**
 	 * also checks for "*"
 	 * @see java.util.HashMap#get(java.lang.Object)
 	 */
-	public LinkInfo getStar(String key)
+	LinkInfo getStar(String key)
 	{
 		LinkInfo li = super.get(key);
 		LinkInfo li2 = super.get(JDFConstants.STAR);
