@@ -109,7 +109,8 @@ public class WalkSet extends WalkXElement
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && "ParameterSet".equals(e.getLocalName()))
 		{
 			final String name = getJDFResName(e);
-			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name))
+			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COLORPOOL.equals(name)
+					&& parentNode.isValidLink(name, EnumUsage.Input, StringUtil.getNonEmpty(e.getAttribute(AttributeName.PROCESSUSAGE, null, null))))
 			{
 				inOut = EnumUsage.Input;
 			}

@@ -5103,7 +5103,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * isValidLink check whether an index is legal for this class
+	 * isValidLink check whether an resLink is legal for this class
 	 * 
 	 * @param level the checking level
 	 * @param rl the JDFResourceLink to check
@@ -5114,6 +5114,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl)
 	{
 		return new LinkValidator(this).isValidLink(level, rl);
+	}
+
+	/**
+	 * isValidLink check whether an resLink is legal for this class
+	 * 
+	 * @param resName
+	 * @param usage
+	 * @param processUsage
+	 * @return true if valis
+	 */
+	public boolean isValidLink(String resName, EnumUsage usage, String processUsage)
+	{
+		return new LinkValidator(this).isValidLink(resName, usage, processUsage);
 	}
 
 	/**

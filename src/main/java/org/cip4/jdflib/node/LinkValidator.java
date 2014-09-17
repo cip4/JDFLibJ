@@ -270,6 +270,19 @@ public class LinkValidator
 		}
 
 		String nam = rl.getLinkedResourceName();
+		String procU = StringUtil.getNonEmpty(rl.getProcessUsage());
+		return isValidLink(nam, usage, procU);
+	}
+
+	/**
+	 * 
+	 * @param nam
+	 * @param usage
+	 * @param procU
+	 * @return
+	 */
+	boolean isValidLink(String nam, EnumUsage usage, String procU)
+	{
 		LinkInfo li = getLinkInfo(nam, true);
 		if (li == null)
 		{
@@ -285,10 +298,9 @@ public class LinkValidator
 				return false;
 			}
 		}
-		String procU = StringUtil.getNonEmpty(rl.getProcessUsage());
 		if (!li.hasProcessUsage(procU))
 			procU = null;
-		return usage.isInput() ? li.hasInput(procU) : li.hasOutput(procU);
+		return usage == null || usage.isInput() ? li.hasInput(procU) : li.hasOutput(procU);
 	}
 
 	/**
