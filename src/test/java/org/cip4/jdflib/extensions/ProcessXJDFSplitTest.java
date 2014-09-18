@@ -66,127 +66,57 @@
  *  
  * 
  */
-package org.cip4.jdflib.node;
+package org.cip4.jdflib.extensions;
 
-import java.util.HashMap;
-import java.util.Vector;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.junit.Test;
 
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.util.ContainerUtil;
-
-/**
- * 
- * @author rainer prosi
- *
- */
-public class LinkInfoMap extends HashMap<String, LinkInfo>
+public class ProcessXJDFSplitTest extends JDFTestCaseBase
 {
 
-	/**
-	 * 
-	 */
-	LinkInfoMap()
+	@Test
+	public void testSplit()
 	{
-		super();
-	}
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("ImageSetting PreviewGeneration ConventionalPrinting Cutting Folding");
+		SetHelper s = h.appendResource("Media", EnumUsage.Input);
+		PartitionHelper p = s.appendPartition(null, true);
+		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+		s = h.appendResource("ExposedMedia", null);
+		p = s.appendPartition(null, true);
 
-	/**
-	 * copy ctor
-	 * @param info
-	 */
-	LinkInfoMap(LinkInfoMap info)
-	{
-		Vector<String> keys = ContainerUtil.getKeyVector(info);
-		if (keys != null)
-		{
-			for (String key : keys)
-			{
-				put(key, new LinkInfo(info.get(key)));
-			}
-		}
-	}
+		s = h.appendResource("PreviewGenerationParams", EnumUsage.Input);
+		p = s.appendPartition(null, true);
 
-	/**
-	 * 
-	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
-	 */
-	@Override
-	public LinkInfo put(String key, LinkInfo value)
-	{
-		LinkInfo old = get(key);
-		if (old != null)
-		{
-			old.merge(value);
-			return old;
-		}
-		return super.put(key, value);
-	}
+		s = h.appendResource("Preview", null);
+		p = s.appendPartition(null, true);
 
-	/**
-	 * 
-	 * @param typeLinkInfo
-	 */
-	void merge(LinkInfoMap typeLinkInfo)
-	{
-		if (typeLinkInfo != null)
-		{
-			Vector<String> resNames = ContainerUtil.getKeyVector(typeLinkInfo);
-			if (resNames != null)
-			{
-				for (String resName : resNames)
-				{
-					LinkInfo li = get(resName);
-					LinkInfo li2 = typeLinkInfo.get(resName);
+		s = h.appendResource("ConventionalPrintingParams", EnumUsage.Input);
+		p = s.appendPartition(null, true);
 
-					if (li != null && li2 != null)
-					{
-						if (!LinkValidatorMap.getLinkValidatorMap().getGenericLinkNames().contains(resName) || !li.equals(li2))
-						{
-							if (li.hasOutput(null) && li2.hasInput(null))
-							{
-								li.makeOptional(false, true);
-								li2 = new LinkInfo(li2);
-								li2.makeOptional(true, false);
-							}
-							li.merge(li2);
-						}
-					}
-					else if (li2 != null)
-					{
-						put(resName, new LinkInfo(li2));
-					}
-				}
-			}
-		}
+		s = h.appendResource("CuttingParams", EnumUsage.Input);
+		p = s.appendPartition(null, true);
 
-	}
+		s = h.appendResource("FoldingParams", EnumUsage.Input);
+		p = s.appendPartition(null, true);
 
-	/**
-	 * also checks for "*"
-	 * @see java.util.HashMap#get(java.lang.Object)
-	 */
-	public LinkInfo getStar(String key)
-	{
-		LinkInfo li = super.get(key);
-		LinkInfo li2 = super.get(JDFConstants.STAR);
-		if (li == null)
-		{
-			if (li2 != null)
-			{
-				li = new LinkInfo(li2);
-			}
-		}
-		else
-		{
-			li = new LinkInfo(li);
-			li.merge(li2);
-		}
-		return li;
+		s = h.appendResource("Component", EnumUsage.Output);
+		p = s.appendPartition(null, true);
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		splitter.addGroup(new VString("ImageSetting PreviewGeneration", null));
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h.getRoot());
+		d.write2File(sm_dirTestDataTemp + "splitxjdf.jdf", 2, false);
 	}
 
 }

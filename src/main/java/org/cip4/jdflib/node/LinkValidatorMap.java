@@ -69,6 +69,7 @@
 package org.cip4.jdflib.node;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.ElementName;
@@ -105,6 +106,8 @@ public class LinkValidatorMap
 
 	private final String[] m_GenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
 			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+
+	private HashSet<String> nameSet = null;
 
 	/**
 	 * get the singleton validator map
@@ -316,9 +319,14 @@ public class LinkValidatorMap
 	 * Getter for m_strGenericLinkNames attribute.
 	 * @return the m_strGenericLinkNames
 	 */
-	VString getGenericLinkNames()
+	HashSet<String> getGenericLinkNames()
 	{
-		return new VString(m_GenericLinkNames);
+		if (nameSet == null)
+		{
+			nameSet = new HashSet<String>();
+			nameSet.addAll(new VString(m_GenericLinkNames));
+		}
+		return nameSet;
 	}
 
 	/**

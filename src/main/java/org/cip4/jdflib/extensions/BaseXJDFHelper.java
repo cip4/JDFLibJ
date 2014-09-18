@@ -130,12 +130,47 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public KElement deleteNode()
+	{
+		KElement ret = theElement;
+		if (theElement != null)
+		{
+			theElement.deleteNode();
+			theElement = null;
+		}
+		return ret;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isEqual(BaseXJDFHelper other)
+	{
+		if (theElement == null)
+			return other == null || other.theElement == null;
+		return theElement.isEqual(other.theElement);
+	}
+
+	/**
 	 * get the ID from the generic Parameter or Resource element
 	 * @return the ID , may be null in case this is connected to a null element
 	 */
 	public String getID()
 	{
 		return getXPathValue("@ID");
+	}
+
+	/**
+	 * 
+	 * @param newID
+	 */
+	public void setID(String newID)
+	{
+		setXPathValue("@ID", newID);
 	}
 
 	/**

@@ -76,6 +76,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.SetHelper.EnumFamily;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
 
 /**
@@ -94,6 +96,40 @@ public class XJDFHelperTest extends TestCase
 	{
 		KElement rlSet = theHelper.appendSet("Parameter", "RunList", null).getSet();
 		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testGetSets()
+	{
+		SetHelper rlSet = theHelper.appendSet("Parameter", "RunList", EnumUsage.Input);
+		SetHelper rlSet2 = theHelper.appendSet("Resource", "Media", EnumUsage.Output);
+
+		assertEquals(rlSet, theHelper.getSets(EnumFamily.Parameter, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, null).get(0));
+		assertEquals(rlSet, theHelper.getSets(EnumFamily.Parameter, EnumUsage.Input).get(0));
+		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, EnumUsage.Output).get(0));
+		assertEquals(rlSet, theHelper.getSets(null, EnumUsage.Input).get(0));
+		assertEquals(1, theHelper.getSets(null, EnumUsage.Input).size());
+		assertEquals(rlSet2, theHelper.getSets(null, EnumUsage.Output).get(0));
+		assertNull(theHelper.getSets(EnumFamily.Parameter, EnumUsage.Output));
+		assertNull(theHelper.getSets(EnumFamily.Resource, EnumUsage.Input));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testGetTyp()
+	{
+		theHelper.setTypes("ConventionalPrinting");
+		assertEquals(theHelper.getType(), EnumType.ConventionalPrinting);
+		theHelper.setTypes("PreviewGeneration ConventionalPrinting");
+		assertEquals(theHelper.getType(), EnumType.ProcessGroup);
 	}
 
 	/**
@@ -141,6 +177,30 @@ public class XJDFHelperTest extends TestCase
 
 	/**
 	 * 
+	 */
+	@Test
+	public void testJobPartID()
+	{
+		theHelper = new XJDFHelper("j", "p", null);
+		assertEquals("p", theHelper.getJobPartID());
+		theHelper.setJobPartID("p2");
+		assertEquals("p2", theHelper.getJobPartID());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJobID()
+	{
+		theHelper = new XJDFHelper("j", "p", null);
+		assertEquals("j", theHelper.getJobID());
+		theHelper.setJobID("j2");
+		assertEquals("j2", theHelper.getJobID());
+	}
+
+	/**
+	 * 
 	 * 
 	 */
 	@Test
@@ -177,6 +237,19 @@ public class XJDFHelperTest extends TestCase
 		KElement root = theHelper.getRoot();
 		assertNotNull(theHelper.getSet("NodeInfo", 0));
 		assertNotNull(root);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testClone()
+	{
+		XJDFHelper clone = theHelper.clone();
+		theHelper.appendSet("Parameter", ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		assertNotNull(theHelper.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
+		assertNull(clone.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
 	}
 
 	/**

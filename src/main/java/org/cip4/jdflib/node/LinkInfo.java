@@ -78,7 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author rainer prosi
  *
  */
-class LinkInfo
+public class LinkInfo
 {
 	/**
 	 * 
@@ -187,7 +187,48 @@ class LinkInfo
 	{
 		if (value != null)
 		{
-			theInfo.addAll(value.getVString());
+			for (int i = 0; i < value.size(); i++)
+			{
+				boolean needAdd = value.getProcessUsage(i) != null;
+				if (!needAdd)
+				{
+					EnumUsage u = value.isInput(i) ? EnumUsage.Input : EnumUsage.Output;
+					needAdd = maxAllowed(u) < Integer.MAX_VALUE;
+					if (!needAdd)
+					{
+						needAdd = value.isRequired(i) && !isRequired(u);
+					}
+				}
+				if (needAdd)
+				{
+					add(value.theInfo.get(i));
+				}
+			}
+		}
+	}
+
+	private void add(String s)
+	{
+		if ((s.equals("i*") || s.equals("i?")) && theInfo.contains("i*"))
+		{
+
+		}
+		else if ((s.equals("o*") || s.equals("o?")) && theInfo.contains("o*"))
+		{
+		}
+		else if ((s.equals("i+") || s.equals("i_")) && theInfo.contains("i*"))
+		{
+			theInfo.remove("i*");
+			theInfo.add("i+");
+		}
+		else if ((s.equals("o+") || s.equals("o_")) && theInfo.contains("o*"))
+		{
+			theInfo.remove("o*");
+			theInfo.add("o+");
+		}
+		else
+		{
+			theInfo.add(s);
 		}
 	}
 
@@ -196,7 +237,7 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	boolean hasInput(String processUsage)
+	public boolean hasInput(String processUsage)
 	{
 		for (String s : theInfo)
 		{
@@ -315,7 +356,7 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	boolean hasOutput(String processUsage)
+	public boolean hasOutput(String processUsage)
 	{
 		for (String s : theInfo)
 		{
@@ -332,13 +373,33 @@ class LinkInfo
 	 * @param processUsage
 	 * @return
 	 */
-	EnumUsage getUsage(String processUsage)
+	public EnumUsage getUsage(String processUsage)
 	{
 		boolean bInput = hasInput(processUsage);
 		boolean bOutput = hasOutput(processUsage);
 		if (bInput ^ bOutput)
 			return bInput ? EnumUsage.Input : EnumUsage.Output;
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param usage
+	 * @param procU
+	 * @param nLink
+	 * @return
+	 */
+	public boolean isValidLink(EnumUsage usage, String procU, int nLink)
+	{
+
+		int maxAllowed = maxAllowed(usage);
+		if (nLink > maxAllowed)
+		{
+			return false;
+		}
+		if (!hasProcessUsage(procU))
+			procU = null;
+		return usage == null || usage.isInput() ? hasInput(procU) : hasOutput(procU);
 	}
 
 	/**
@@ -389,7 +450,7 @@ class LinkInfo
 	 * @param usage
 	 * @return
 	 */
-	boolean isRequired(EnumUsage usage)
+	public boolean isRequired(EnumUsage usage)
 	{
 		for (int i = 0; i < theInfo.size(); i++)
 		{
@@ -406,7 +467,7 @@ class LinkInfo
 	 * @param usage
 	 * @return
 	 */
-	int maxAllowed(EnumUsage usage)
+	public int maxAllowed(EnumUsage usage)
 	{
 		int n = 0;
 		for (int i = 0; i < theInfo.size(); i++)
@@ -471,7 +532,7 @@ class LinkInfo
 	 * @param procU
 	 * @return
 	 */
-	boolean hasProcessUsage(String procU)
+	public boolean hasProcessUsage(String procU)
 	{
 		if (procU == null)
 			return theInfo.size() > 0;

@@ -71,6 +71,7 @@ package org.cip4.jdflib.node;
 import java.util.HashMap;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.Test;
@@ -113,4 +114,19 @@ public class LinkValidatorMapTest extends JDFTestCaseBase
 		assertTrue(cp.getVString().contains("i_"));
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetLinkInfoMapPerformance()
+	{
+		VString v = new VString(new String[] { JDFConstants.COLORSPACECONVERSION, JDFConstants.SCREENING, JDFConstants.INTERPRETING, JDFConstants.RENDERING,
+				JDFConstants.IMPOSITION, JDFConstants.IMAGESETTING, JDFConstants.CONVENTIONALPRINTING, JDFConstants.FOLDING, JDFConstants.CUTTING });
+		for (int i = 0; i < 1000; i++)
+		{
+			HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Combined, v);
+			LinkInfo cp = linkInfo.get("ConventionalPrintingParams");
+			assertTrue(cp.getVString().contains("i_"));
+		}
+	}
 }

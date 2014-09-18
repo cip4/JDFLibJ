@@ -84,6 +84,8 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.SetHelper.EnumFamily;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -198,12 +200,29 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	public Vector<SetHelper> getSets()
 	{
+		return getSets(null, null);
+	}
+
+	/**
+	 * 
+	 * @param family
+	 * @param usage
+	 * @return the vector of parametersets and resourcesets
+	 */
+	public Vector<SetHelper> getSets(EnumFamily family, EnumUsage usage)
+	{
 		Vector<SetHelper> v = new Vector<SetHelper>();
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
 			if (isSet(e))
-				v.add(new SetHelper(e));
+			{
+				SetHelper set = new SetHelper(e);
+				if ((family == null || set.getFamily().equals(family)) && (usage == null || usage.equals(set.getUsage())))
+				{
+					v.add(set);
+				}
+			}
 			e = e.getNextSiblingElement();
 		}
 		return v.size() == 0 ? null : v;
@@ -425,7 +444,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * @param family 
 	 * @param name 
-	 * @param usage TODO
+	 * @param usage 
 	 * @return a new set element
 	 */
 	public SetHelper appendSet(String family, String name, EnumUsage usage)
@@ -578,6 +597,21 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * 
+	 * @return types the vector of types
+	 */
+	public EnumType getType()
+	{
+		VString types = VString.getVString(getXPathValue("@Types"), null);
+		EnumType typ = null;
+		if (types != null && types.size() == 1)
+		{
+			typ = EnumType.getEnum(types.get(0));
+		}
+		return typ == null ? EnumType.ProcessGroup : typ;
+	}
+
+	/**
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
@@ -588,6 +622,44 @@ public class XJDFHelper extends BaseXJDFHelper
 		{
 			sh.cleanUp();
 		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Override
+	public XJDFHelper clone()
+	{
+		KElement k = (theElement == null) ? null : theElement.cloneNewDoc();
+		return new XJDFHelper(k);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getJobPartID()
+	{
+		return getXPathValue("@" + AttributeName.JOBPARTID);
+	}
+
+	/**
+	 * 
+	 * @param jobPartID
+	 */
+	public void setJobPartID(String jobPartID)
+	{
+		setXPathValue("@" + AttributeName.JOBPARTID, jobPartID);
+	}
+
+	/**
+	 * 
+	 * @param jobID
+	 */
+	public void setJobID(String jobID)
+	{
+		setXPathValue("@" + AttributeName.JOBID, jobID);
 	}
 
 }

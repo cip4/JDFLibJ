@@ -120,6 +120,20 @@ public class BaseXJDFHelperTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testDeleteNode()
+	{
+		assertEquals(theHelper, theHelper);
+		assertNotNull(theHelper.getRoot());
+		theHelper.deleteNode();
+		assertEquals(theHelper, theHelper);
+		assertNull(theHelper.getRoot());
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
 	public void testHash()
 	{
 		assertEquals(theHelper.hashCode(), new XJDFHelper(theHelper.getRoot()).hashCode());

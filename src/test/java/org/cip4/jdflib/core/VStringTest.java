@@ -208,7 +208,7 @@ public class VStringTest extends TestCase
 		v.appendUnique("a");
 		v.appendUnique("b");
 		v.appendUnique("c");
-		v.appendUnique("c");
+		v.add("c");
 		assertFalse(v.containsAny(null));
 		assertFalse(v.containsAny(new VString("d e", " ")));
 		assertTrue(v.containsAny(new VString("b e", " ")));
@@ -216,6 +216,25 @@ public class VStringTest extends TestCase
 		assertTrue(v.containsAny(new VString("g c h", " ")));
 		assertTrue(v.containsAny(v));
 
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetOverlapping()
+	{
+		final VString v = new VString();
+		v.appendUnique("a");
+		v.appendUnique("b");
+		v.appendUnique("c");
+		v.add("c");
+		assertNull(v.getOverlapping(null));
+		assertNull(v.getOverlapping(new VString("d e", " ")));
+		assertEquals(new VString("b", null), v.getOverlapping(new VString("b e", " ")));
+		assertEquals(new VString("c c", null), v.getOverlapping(new VString("c", " ")));
+		assertEquals(new VString("b c c", null), v.getOverlapping(new VString("b c c c", " ")));
+		assertEquals(v, v.getOverlapping(v));
 	}
 
 	/**

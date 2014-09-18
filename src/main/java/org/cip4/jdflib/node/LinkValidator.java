@@ -275,35 +275,6 @@ public class LinkValidator
 	}
 
 	/**
-	 * 
-	 * @param nam
-	 * @param usage
-	 * @param procU
-	 * @return
-	 */
-	boolean isValidLink(String nam, EnumUsage usage, String procU)
-	{
-		LinkInfo li = getLinkInfo(nam, true);
-		if (li == null)
-		{
-			return false;
-		}
-		int maxAllowed = li.maxAllowed(usage);
-		if (maxAllowed < Integer.MAX_VALUE)
-		{
-			JDFAttributeMap uMap = usage == null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);
-			VElement vExist = node.getResourceLinks(nam, uMap, null);
-			if (vExist != null && vExist.size() > maxAllowed)
-			{
-				return false;
-			}
-		}
-		if (!li.hasProcessUsage(procU))
-			procU = null;
-		return usage == null || usage.isInput() ? li.hasInput(procU) : li.hasOutput(procU);
-	}
-
-	/**
 	 * get the links that match the typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec,
 	 * then the links are ignored
 	 * 
@@ -632,5 +603,24 @@ public class LinkValidator
 	public String toString()
 	{
 		return "LinkValidator " + node.getTypesString() + " [theMap=" + getLinkInfoMap() + "]";
+	}
+
+	/**
+	 * 
+	 * @param resName
+	 * @param usage
+	 * @param processUsage
+	 * @return
+	 */
+	boolean isValidLink(String resName, EnumUsage usage, String processUsage)
+	{
+		LinkInfo li = getLinkInfo(resName, true);
+		if (li == null)
+		{
+			return false;
+		}
+		JDFAttributeMap uMap = usage == null ? null : new JDFAttributeMap(AttributeName.USAGE, usage);
+		VElement vExist = node.getResourceLinks(resName, uMap, null);
+		return li.isValidLink(usage, processUsage, vExist == null ? 0 : vExist.size());
 	}
 }

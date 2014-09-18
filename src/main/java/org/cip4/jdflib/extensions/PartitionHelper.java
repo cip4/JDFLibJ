@@ -229,6 +229,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	/**
 	 * generic cleanup stuff
 	 */
+	@Override
 	public void cleanUp()
 	{
 		if (!theElement.hasAttribute("ID"))

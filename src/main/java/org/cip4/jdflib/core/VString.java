@@ -557,24 +557,46 @@ public class VString extends Vector<String>
 	/**
 	 * checks whether at least one of a given vector of strings is contained in <code>this</code>
 	 * 
-	 * @param other the VSTring of values to test
+	 * @param others the VSTring of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
-	public boolean containsAny(final VString other)
+	public boolean containsAny(final VString others)
 	{
-		if (other == null)
+		if (others == null)
 		{
 			return false;
 		}
-		final int size = other.size();
-		for (int i = 0; i < size; i++)
+		for (String other : others)
 		{
-			if (contains(other.elementAt(i)))
+			if (contains(other))
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * vector  of strings that is contained in <code>this</code>
+	 * 
+	 * @param others the VString of values to test
+	 * @return true if at least one String in other is in <code>this</code>
+	 */
+	public VString getOverlapping(final VString others)
+	{
+		if (others == null)
+		{
+			return null;
+		}
+		VString ret = new VString();
+		for (String s : this)
+		{
+			if (others.contains(s))
+			{
+				ret.add(s);
+			}
+		}
+		return ret.size() > 0 ? ret : null;
 	}
 
 	/**

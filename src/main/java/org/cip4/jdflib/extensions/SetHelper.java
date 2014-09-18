@@ -90,6 +90,11 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public static final String SET = "Set";
 
+	public enum EnumFamily
+	{
+		Parameter, Resource
+	};
+
 	/**
 	 * @param set the set to help on
 	 */
@@ -431,4 +436,37 @@ public class SetHelper extends BaseXJDFHelper
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public EnumFamily getFamily()
+	{
+		if (theElement == null)
+			return null;
+		String name = theElement.getLocalName();
+		name = StringUtil.leftStr(name, -3);
+		return EnumFamily.valueOf(name);
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setID(java.lang.String)
+	 */
+	@Override
+	public void setID(String newID)
+	{
+		String oldID = getID();
+		super.setID(newID);
+		Vector<PartitionHelper> parts = getPartitions();
+		if (parts != null)
+		{
+			for (PartitionHelper part : parts)
+			{
+				String partID = part.getID();
+				partID = StringUtil.replaceString(partID, oldID, newID);
+				part.setID(newID);
+			}
+		}
+	}
 }
