@@ -107,6 +107,10 @@ public class XJDFHelper extends BaseXJDFHelper
 	/**
 	 * 
 	 */
+	public static final String XJMF = "XJMF";
+	/**
+	 * 
+	 */
 	public static final String PARAMETER = "Parameter";
 
 	/**

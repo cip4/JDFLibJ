@@ -2107,11 +2107,13 @@ public class JDFElement extends KElement
 
 		try
 		{
-			boolean hasInvalidAtts = getInvalidAttributes(level, true, 1).size() > 0;
-			if (hasInvalidAtts || getInvalidElements(level, true, 1).size() > 0)
-			{
+			VString invalidAttributes = getInvalidAttributes(level, true, 1);
+			if (invalidAttributes.size() > 0)
 				return false;
-			}
+
+			VString invalidElements = getInvalidElements(level, true, 1);
+			if (invalidElements.size() > 0)
+				return false;
 
 			if (EnumValidationLevel.isRecursive(level))
 			{

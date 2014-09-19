@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -119,6 +119,7 @@ public class JDFMessage extends JDFAutoMessage
 {
 	private static final long serialVersionUID = 1L;
 	private static boolean strictValidation = true;
+	private static VString families = null;
 
 	/**
 	 * if true, all typesafe calls are strictly validated
@@ -249,6 +250,25 @@ public class JDFMessage extends JDFAutoMessage
 		public static List<EnumFamily> getEnumList()
 		{
 			return getEnumList(EnumFamily.class);
+		}
+
+		/**
+		 * @return
+		 */
+		public static VString getFamilies()
+		{
+			if (families == null)
+			{
+				families = new VString();
+				List<EnumFamily> enumList = getEnumList(EnumFamily.class);
+
+				for (EnumFamily f : enumList)
+				{
+					families.add(f.getName());
+				}
+				families.sort();
+			}
+			return families;
 		}
 
 		/**

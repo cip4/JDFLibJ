@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Iterator;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -171,7 +172,10 @@ public class WalkLayout extends WalkStrippingParams
 			JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
 			KElement foo = part.appendElement("foo");
 			xjdfToJDFImpl.walkTree(stripParams, foo);
-			part.copyInto(foo.getElement(ElementName.STRIPPINGPARAMS), false);
+			KElement tmpStripParams = foo.getElement(ElementName.STRIPPINGPARAMS);
+			tmpStripParams.removeAttribute(AttributeName.CLASS);
+			tmpStripParams.removeAttribute(AttributeName.ID);
+			part.copyInto(tmpStripParams, false);
 			foo.deleteNode();
 		}
 

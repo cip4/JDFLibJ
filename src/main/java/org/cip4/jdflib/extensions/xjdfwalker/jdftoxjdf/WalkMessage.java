@@ -131,7 +131,7 @@ public class WalkMessage extends WalkJDFElement
 	private EnumFamily getNewFamily(JDFMessage m)
 	{
 		EnumFamily family = m.getFamily();
-		if (this.jdfToXJDF.bAbstractMessage)
+		if (jdfToXJDF.bAbstractMessage)
 		{
 			if (EnumFamily.Command.equals(family) || EnumFamily.Registration.equals(family))
 				family = EnumFamily.Query;

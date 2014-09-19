@@ -995,6 +995,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	private Node m_ParentNode = null;
 
 	private static final String jdfNSURI = JDFElement.getSchemaURL();
+	private static final String xjdfNSURI = JDFElement.getSchemaURL(2, 0);
 	private static final String jdfNSURIPrefix = StringUtil.leftStr(JDFElement.getSchemaURL(), -3);
 
 	/**
@@ -1079,10 +1080,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
 		}
 
-		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFHelper.XJDF.equals(localPart) || ElementName.JMF.equals(localPart)))
-		{
-			bInJDFJMF = true;
-		}
+		bInJDFJMF = bInJDFJMF || jdfNSURI.equals(namespaceURI) || xjdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDFHelper.XJDF.equals(localPart)
+				|| XJDFHelper.XJMF.equals(localPart) || ElementName.JMF.equals(localPart);
 
 		DocumentData theData = data;
 		synchronized (theData.sm_hashCtorElementNS)

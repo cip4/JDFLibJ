@@ -72,6 +72,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -80,6 +81,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
@@ -173,6 +175,22 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		ph.getResource().setAttribute(AttributeName.CONTACTTYPES, EnumContactType.Customer.getName());
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	@Test
+	public void testXJMFKnownMessages()
+	{
+		KElement root = new JDFDoc(XJDFHelper.XJMF).getRoot();
+		root.appendElement("QueryKnownMessages");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(root);
+		JDFJMF jmfRoot = d.getJMFRoot();
+		assertNotNull(jmfRoot);
+		assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
 	}
 
 }

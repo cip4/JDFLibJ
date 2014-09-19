@@ -235,7 +235,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * set to define one type for query, command and registration
 	 */
-	boolean bAbstractMessage = true;
+	boolean bAbstractMessage = false;
 
 	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
@@ -367,7 +367,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void prepareNewDoc(boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : XJDFHelper.XJDF, EnumVersion.Version_2_0);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? (bTypeSafeMessage ? XJDFHelper.XJMF : rootJMF) : XJDFHelper.XJDF, EnumVersion.Version_2_0);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL());
@@ -852,6 +852,8 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * Setter for bTypeSafeMessage attribute.
+	 * also switches the JMF Root element name to XJMF
+	 * 
 	 * @param bTypeSafeMessage the bTypeSafeMessage to set
 	 */
 	public void setTypeSafeMessage(boolean bTypeSafeMessage)

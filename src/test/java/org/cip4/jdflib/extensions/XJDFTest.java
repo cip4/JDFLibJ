@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -443,12 +443,16 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.Status);
 		XJDF20 xjdf20 = new XJDF20();
 		e = xjdf20.makeNewJMF(jmf);
-		if (xjdf20.isAbstractMessage())
+		if (xjdf20.isTypeSafeMessage())
 			assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
 		else
 			assertEquals(e.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	XJDF20 getJMFConverter()
 	{
 		XJDF20 xjdf20 = new XJDF20();
@@ -488,8 +492,13 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.HoldQueueEntry);
 		final JDFQueueEntryDef qed = jmf.getCreateCommand(0).appendQueueEntryDef();
 		qed.setQueueEntryID("QEID");
-		e = getJMFConverter().makeNewJMF(jmf);
-		assertEquals(e.getXPathAttribute("QueryModifyQueueEntry/ModifyQueueEntryParams/@Operation", null), "Hold");
+		XJDF20 jmfConverter = getJMFConverter();
+		e = jmfConverter.makeNewJMF(jmf);
+		if (jmfConverter.isAbstractMessage())
+			assertEquals(e.getXPathAttribute("QueryModifyQueueEntry/ModifyQueueEntryParams/@Operation", null), "Hold");
+		else
+			assertEquals(e.getXPathAttribute("CommandModifyQueueEntry/ModifyQueueEntryParams/@Operation", null), "Hold");
+
 	}
 
 	/**

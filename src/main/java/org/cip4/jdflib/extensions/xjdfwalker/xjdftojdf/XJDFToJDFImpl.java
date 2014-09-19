@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -188,7 +189,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	/**
 	 * 
 	 */
-	private EnumVersion version = EnumVersion.Version_1_4;
+	private EnumVersion version;
 	private boolean bConvertTilde;
 	private boolean heuristicLink;
 
@@ -208,6 +209,11 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		bConvertTilde = false;
 		convertUnits = false;
 		heuristicLink = true;
+		JDFNode n = template == null ? null : template.getJDFRoot();
+		if (n != null)
+			version = n.getVersion(true);
+		if (version == null)
+			version = JDFAudit.getDefaultJDFVersion();
 	}
 
 	/**
@@ -229,26 +235,34 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		{
 			return null;
 		}
+		String docType = xjdf.getLocalName();
+		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
 		if (jdfDoc == null)
 		{
-			jdfDoc = new JDFDoc("JDF");
+			String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
+			jdfDoc = new JDFDoc(strDocType);
 			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
 		}
-		prepareRoot();
 		xjdf = reparse(xjdf);
 		xjdf.setAttribute(AttributeName.VERSION, version.getName());
 		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
-		final JDFNode theNode = findNode(xjdf, true);
-		if (theNode == null)
+		if (isJMF)
 		{
-			return null;
+			idMap = new IDFinder().getMap(xjdf);
+			walkTree(xjdf, jdfDoc.getRoot());
 		}
-
-		idMap = new IDFinder().getMap(xjdf);
-		walkTree(xjdf, theNode);
-
-		new PostConverter(this, theNode).postConvert();
-
+		else
+		{
+			prepareRoot();
+			final JDFNode theNode = findNode(xjdf, true);
+			if (theNode == null)
+			{
+				return null;
+			}
+			idMap = new IDFinder().getMap(xjdf);
+			walkTree(xjdf, theNode);
+			new PostConverter(this, theNode).postConvert();
+		}
 		return jdfDoc;
 	}
 

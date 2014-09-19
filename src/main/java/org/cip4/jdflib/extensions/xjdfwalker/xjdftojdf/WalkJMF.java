@@ -69,164 +69,49 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.elementwalker.BaseWalker;
-import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
+ * walker for the JMF or XJMF root
  */
-public class WalkXElement extends BaseWalker
+public class WalkJMF extends WalkXElement
 {
-
-	protected XJDFToJDFImpl xjdfToJDFImpl;
-
 	/**
-	 *  
-	 *  
+	 * 
 	 */
-	public WalkXElement()
+	public WalkJMF()
 	{
 		super();
-		xjdfToJDFImpl = null;
 	}
 
-	/**
-	 * fills this into the factory
-	 * @param xjdftojdf 
-	 */
-	public void setParent(XJDFToJDFImpl xjdftojdf)
-	{
-		xjdfToJDFImpl = xjdftojdf;
-	}
-
+	// ///////////////////////////////////////////////////////////////////////////////
 	/**
 	 * @param e
-	 * @return element to continue with if must continue
+	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement e, KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final VElement v = trackElem.getChildElementVector(null, null);
-		for (KElement kk : v)
-		{
-			if (e.isEqual(kk))
-			{
-				return null;
-			}
-		}
-		cleanRefs(e, trackElem);
-
-		// dirty, dirty but needed in case of inherited inline resources
-		if (xjdfToJDFImpl.isXResourceElement(e))
-		{
-			trackElem.setAttributes(e);
-		}
-		else
-		{
-			final KElement e2 = trackElem.copyElement(e, null);
-			xjdfToJDFImpl.convertUnits(e2);
-			xjdfToJDFImpl.convertTilde(e2);
-			fixNamespace(e2);
-			e2.removeChildren(null, null, null); // will be copied later
-			trackElem = e2;
-		}
-		xjdfToJDFImpl.convertUnits(trackElem);
-		xjdfToJDFImpl.convertTilde(trackElem);
-		if (trackElem instanceof JDFElement)
-		{
-			((JDFElement) trackElem).init();
-		}
+		xjdfToJDFImpl.currentJDFNode = null;
+		KElement dummy = super.walk(e, trackElem);
+		trackElem.setAttributes(dummy);
+		dummy.deleteNode();
 		return trackElem;
 	}
 
 	/**
-	 * move namespace to 1.1 for all 2.x values
-	 * @param e2
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	private void fixNamespace(KElement e2)
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		String namespace = e2.getNamespaceURI();
-		if (JDFElement.getSchemaURL(2, 0).equals(StringUtil.leftStr(namespace, -1) + 0))
-		{
-			e2.setNamespaceURI(JDFElement.getSchemaURL(1, 1));
-		}
+		String localName = toCheck.getLocalName();
+		return super.matches(toCheck) && (ElementName.JMF.equals(localName) || XJDFHelper.XJMF.equals(localName));
 	}
 
-	/**
-	 * @param val
-	 * @return
-	 */
-	protected String getRefName(final String val)
-	{
-		final String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
-		return refName;
-	}
-
-	/**
-	 * @param e
-	 * @param trackElem
-	 */
-	protected void cleanRefs(final KElement e, final KElement trackElem)
-	{
-		final JDFAttributeMap map = e.getAttributeMap();
-		if (map == null)
-		{
-			return;
-		}
-		final VString keys = map.getKeys();
-		if (keys != null)
-		{
-			for (String key : keys)
-			{
-				if ((key.endsWith("Ref") || key.endsWith("Refs")) && !key.equals("rRef"))
-				{
-					final String values = map.get(key);
-					cleanRef(e, trackElem, key, values);
-				}
-			}
-		}
-	}
-
-	protected void cleanRef(final KElement e, final KElement trackElem, final String val, final String values)
-	{
-		final VString vValues = StringUtil.tokenize(values, null, false);
-		for (final String value : vValues)
-		{
-			final IDPart p = xjdfToJDFImpl.idMap.get(value);
-			if (p != null)
-			{
-				final String refName = getRefName(val);
-				if (refName != null)
-				{
-					final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
-					final KElement ref = e.appendElement(refName);
-					ref.setAttribute("rRef", p.getID());
-
-					final VJDFAttributeMap vpartmap = p.getPartMap();
-					if (vpartmap != null)
-					{
-						for (int j = 0; j < vpartmap.size(); j++)
-						{
-							ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
-						}
-					}
-					// we've been here already
-					if (ref.isEqual(refOld))
-					{
-						ref.deleteNode();
-					}
-				}
-				e.removeAttribute(val);
-			}
-		}
-	}
 }
