@@ -105,7 +105,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	@Override
 	public JDFDoc convert(KElement xjdf)
 	{
-		if (splitter != null)
+		if (needSplit(xjdf))
 		{
 			Collection<XJDFHelper> vSplit = splitter.splitXJDF(new XJDFHelper(xjdf));
 			if (vSplit == null || vSplit.size() == 0)
@@ -127,6 +127,16 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 		{
 			return super.convert(xjdf);
 		}
+	}
+
+	/**
+	 * 
+	 * @param xjdf
+	 * @return
+	 */
+	protected boolean needSplit(KElement xjdf)
+	{
+		return splitter != null && xjdf != null && XJDFHelper.XJDF.equals(xjdf.getLocalName());
 	}
 
 	/**
