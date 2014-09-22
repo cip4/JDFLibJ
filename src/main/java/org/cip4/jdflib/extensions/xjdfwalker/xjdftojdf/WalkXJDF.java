@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
@@ -100,6 +101,7 @@ public class WalkXJDF extends WalkXElement
 		xjdfToJDFImpl.currentJDFNode = (JDFNode) trackElem;
 		xjdfToJDFImpl.currentJDFNode.setAttributes(e);
 		xjdfToJDFImpl.currentJDFNode.setVersion(xjdfToJDFImpl.getVersion());
+		xjdfToJDFImpl.currentJDFNode.setMaxVersion(EnumVersion.Version_2_0);
 		xjdfToJDFImpl.currentJDFNode.setStatus(EnumNodeStatus.Part);
 		removeInheritedJobID();
 		setTypes();

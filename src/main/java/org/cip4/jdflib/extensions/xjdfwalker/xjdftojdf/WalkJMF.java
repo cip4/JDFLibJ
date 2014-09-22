@@ -69,8 +69,10 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -98,6 +100,9 @@ public class WalkJMF extends WalkXElement
 		xjdfToJDFImpl.currentJDFNode = null;
 		KElement dummy = super.walk(e, trackElem);
 		trackElem.setAttributes(dummy);
+		((JDFJMF) trackElem).setVersion(xjdfToJDFImpl.getVersion());
+		((JDFJMF) trackElem).setMaxVersion(EnumVersion.Version_2_0);
+
 		dummy.deleteNode();
 		return trackElem;
 	}
