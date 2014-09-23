@@ -289,6 +289,7 @@ public class BaseGoldenTicket
 		partIDKeys = new VString(parent.partIDKeys);
 		workStyle = parent.workStyle;
 		paperProductID = parent.paperProductID;
+		icsLevel = parent.icsLevel;
 
 		KElement.setLongID(false);
 		parent.addKid(this);

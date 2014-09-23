@@ -75,6 +75,7 @@ import java.util.Map;
 
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -100,6 +101,7 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -125,6 +127,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	protected int jmfICSLevel;
 	protected Map<String, VString> catMap = new HashMap<String, VString>();
 	protected String category = null;
+	protected boolean bUsageCounter;
+
 	/**
 	 * seconds ago that this started
 	 */
@@ -174,6 +178,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	public MISGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int jmfLevel)
 	{
 		super(2, jdfVersion); // mis always requires base 2
+		bUsageCounter = false;
 		misICSLevel = _icsLevel;
 		jmfICSLevel = jmfLevel;
 		fillCatMaps();
@@ -185,6 +190,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	public MISGoldenTicket(final MISGoldenTicket parent)
 	{
 		super(parent); // mis always requires base 2
+		bUsageCounter = false;
 		misICSLevel = parent.misICSLevel;
 		jmfICSLevel = parent.jmfICSLevel;
 		getNIFromParent = parent.getNIFromParent;
@@ -199,7 +205,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	@Override
 	public void assign(final JDFNode node)
 	{
-
 		super.assign(node);
 		if (jmfICSLevel > 0)
 		{
@@ -266,7 +271,19 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		c.setText(StringUtil.getRandomString());
 
 		super.execute(vNodeMap, bOutAvail, bFirst);
+	}
 
+	/**
+	 * @return 
+	 * 
+	 */
+	protected JDFUsageCounter initUsageCounter()
+	{
+		if (!bUsageCounter)
+			return null;
+		JDFUsageCounter usageCounter = (JDFUsageCounter) theNode.getCreateResource(ElementName.USAGECOUNTER, EnumUsage.Input, 0);
+		usageCounter.setScope(EnumScope.Job);
+		return usageCounter;
 	}
 
 	/**
@@ -299,6 +316,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		}
 		initNodeInfo();
 		initCustomerInfo();
+		initUsageCounter();
 	}
 
 	/**

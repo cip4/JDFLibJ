@@ -89,14 +89,14 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 /**
  * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
  */
-public class IDPGoldenTicket extends MISGoldenTicket
+public class WideFormatGoldenTicket extends MISGoldenTicket
 {
 
 	/**
 	 * @param previous
 	 * @param _vparts
 	 */
-	public IDPGoldenTicket(final IDPGoldenTicket previous, final VJDFAttributeMap _vparts)
+	public WideFormatGoldenTicket(final WideFormatGoldenTicket previous, final VJDFAttributeMap _vparts)
 	{
 		super(previous.misICSLevel, previous.theVersion, previous.jmfICSLevel);
 		grayBox = false;
@@ -107,7 +107,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		workStyle = previous.workStyle;
 		thePreviousNode = previous.theNode;
 		theParentNode = previous.theParentNode;
-		bUsageCounter = true;
+		bUsageCounter = icsLevel == 3;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	protected void fillCatMaps()
 	{
 		super.fillCatMaps();
-		catMap.put("IDP.DigitalPrinting", new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
+		catMap.put("IDP.DigitalPrinting", new VString("Interpreting Rendering DigitalPrinting", null));
 		setCategory("IDP.DigitalPrinting");
 	}
 
@@ -125,18 +125,18 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	 * create a BaseGoldenTicket
 	 * @param parent
 	 */
-	public IDPGoldenTicket(final MISGoldenTicket parent)
+	public WideFormatGoldenTicket(final MISGoldenTicket parent)
 	{
 		super(parent);
 		grayBox = false;
-		bUsageCounter = true;
+		bUsageCounter = icsLevel == 3;
 	}
 
 	/**
 	 * create a BaseGoldenTicket
 	 * @param _icsLevel the level to init to (1,2 or 3)
 	 */
-	public IDPGoldenTicket(final int _icsLevel)
+	public WideFormatGoldenTicket(final int _icsLevel)
 	{
 		this(_icsLevel, null);
 	}
@@ -146,12 +146,12 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param version
 	 */
-	public IDPGoldenTicket(final int _icsLevel, EnumVersion version)
+	public WideFormatGoldenTicket(final int _icsLevel, EnumVersion version)
 	{
 		super(1, version, 2);
 		grayBox = false;
-		bUsageCounter = true;
 		icsLevel = _icsLevel;
+		bUsageCounter = _icsLevel == 3;
 	}
 
 	/**
@@ -164,13 +164,14 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
 		{
-			theNode.setDescriptiveName("IDP Golden Ticket Example Job - version: " + JDFAudit.software());
+			theNode.setDescriptiveName("Wide Format Golden Ticket Example Job - version: " + JDFAudit.software());
 		}
 		super.init();
 		setActivePart(vParts, true);
 		initDocumentRunList();
 		initOutputComponent();
 		initInterpretingParams();
+		initUsageCounter();
 		JDFMedia m = initPaperMedia();
 		initDigitalPrintingParams(m);
 		initLayoutPrep();
@@ -213,14 +214,14 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	 * simulate execution of this node the internal node will be modified to reflect the execution
 	 */
 	@Override
-	public void execute(VJDFAttributeMap parts, final boolean outputAvailable, final boolean bFirst)
+	public void execute(final VJDFAttributeMap parts, final boolean outputAvailable, final boolean bFirst)
 	{
 		setActivePart(null, bFirst);
 		super.execute(null, outputAvailable, bFirst);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * 
 	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initDocumentRunList()
 	 */
@@ -233,11 +234,15 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		return rl;
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initPaperMedia()
+	 */
 	@Override
 	protected JDFMedia initPaperMedia()
 	{
 		super.initPaperMedia();
-		paperMedia.setDimensionInch(new JDFXYPair(8.5, 11));
+		paperMedia.setDimensionCM(new JDFXYPair(42, 0));
 		return paperMedia;
 	}
 
