@@ -2943,7 +2943,46 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		}
 		jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
 
-	} // /////////////////////////////////////////////////////////////////////
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMergeVersion()
+	{
+
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Product);
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		comp.setPartUsage(EnumPartUsage.Sparse);
+		JDFResource comps = comp.addPartition(EnumPartIDKey.SheetName, "S1");
+		partMap.put("PartVersion", "En De");
+		comps.addPartition(EnumPartIDKey.PartVersion, "En De");
+		comps.addPartition(EnumPartIDKey.PartVersion, "Fr De");
+		comps.addPartition(EnumPartIDKey.PartVersion, "En");
+		comps.addPartition(EnumPartIDKey.PartVersion, "De");
+		comps.addPartition(EnumPartIDKey.PartVersion, "Fr");
+		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		n2.linkResource(comp, EnumUsage.Output, null);
+
+		JDFSpawn spawn = new JDFSpawn(n2);
+		spawn.vSpawnParts = new VJDFAttributeMap(partMap);
+		spawn.vRWResources_in = new VString("Output", null);
+		JDFNode nSpawned = spawn.spawn();
+		JDFResource rspawned = nSpawned.getResource(ElementName.COMPONENT, null, 0).getResourceRoot();
+		VElement vLeaves = rspawned.getLeaves(false);
+		vLeaves.get(1).deleteNode();
+
+		JDFMerge m = new JDFMerge(n2);
+		JDFNode nMerged = m.mergeJDF(nSpawned);
+		assertTrue(nMerged.toXML().indexOf(AttributeName.SPAWNSTATUS) < 0);
+		assertTrue(n.toXML().indexOf(AttributeName.SPAWNSTATUS) < 0);
+
+	}
 
 	/**
 	 * 

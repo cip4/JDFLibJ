@@ -616,12 +616,10 @@ public class JDFMerge
 
 		if (poolOverWrite != null)
 		{
-			final VElement resOverWrite = poolOverWrite.getPoolChildren(null, null, null);
-
-			final int size = resOverWrite.size();
-			for (int i = 0; i < size; i++)
+			final VElement vResOverWrite = poolOverWrite.getPoolChildren(null, null, null);
+			for (KElement res : vResOverWrite)
 			{
-				final JDFResource res1 = (JDFResource) resOverWrite.elementAt(i);
+				final JDFResource res1 = (JDFResource) res;
 				mergeLocalResource(amountPolicy, poolToMerge, res1);
 			}
 		}
@@ -791,6 +789,8 @@ public class JDFMerge
 			leafRes.setSpawnIDs(spawnIDs);
 			calcSpawnStatus(leafRes, true);
 		}
+		cleanupSpawn(res1);
+
 	}
 
 	private void calcSpawnStatus(final JDFResource leafRes, final boolean bLocal)
@@ -811,10 +811,8 @@ public class JDFMerge
 		{
 			boolean bWrite = bLocal;
 
-			for (int i = 0; i < spawnIDs.size(); i++) // check for multiple rw spawns
+			for (String resSpawnID : spawnIDs) // check for multiple rw spawns
 			{
-
-				final String resSpawnID = spawnIDs.get(i);
 				final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
 				if (spawnedAudit != null)
 				{
@@ -828,8 +826,7 @@ public class JDFMerge
 				// clean up spurious spawnids of spawns that were initiated off line
 				{
 					final String mainSpawnID = leafRes.getJDFRoot().getSpawnID(true);
-					if (KElement.isWildCard(mainSpawnID)) // only remove unknown
-					// spawnids in a real main ticket
+					if (KElement.isWildCard(mainSpawnID)) // only remove unknown spawnids in a real main ticket
 					// Spawned spawnids may be specified in a spawn ancestor
 					{
 						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
@@ -1227,9 +1224,10 @@ public class JDFMerge
 		}
 
 		final VString partIDKeys = mainRes.getPartIDKeys();
-		for (int i = 0; i < allLeaves.size(); i++)
+
+		for (KElement leaf : allLeaves)
 		{
-			final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
+			final JDFResource thisResNode = (JDFResource) leaf;
 			JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
 			final JDFResource mergeResNode = resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
 
@@ -1261,7 +1259,7 @@ public class JDFMerge
 				{
 					thisResNode.setSpawnIDs(vSpawnIDs);
 					// one of the spawnstatus elements was rw, must also be valid here
-					if (mergeResNode.getSpawnStatus() == EnumSpawnStatus.SpawnedRW)
+					if (EnumSpawnStatus.SpawnedRW.equals(mergeResNode.getSpawnStatus()))
 					{
 						thisResNode.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
 					}
@@ -1278,10 +1276,8 @@ public class JDFMerge
 	private void mergeRWResources()
 	{
 		// merge rw resources
-		final Iterator<String> it = vsRW.iterator();
-		while (it.hasNext())
+		for (String s : vsRW)
 		{
-			final String s = it.next();
 			JDFResource oldRes = overWriteNode.getLinkRoot(s);
 			if (oldRes == null) // also check in tree below
 			{
@@ -1320,12 +1316,13 @@ public class JDFMerge
 				}
 
 				final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
-				for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
+				for (KElement leaf : oldResLeafsSpawned)
 				{
-					final JDFResource leafRes = (JDFResource) oldResLeafsSpawned.elementAt(leaf);
+					final JDFResource leafRes = (JDFResource) leaf;
 					leafRes.removeFromSpawnIDs(spawnID);
 					calcSpawnStatus(leafRes, false);
 				}
+				cleanupSpawn(oldRes);
 			}
 		}
 	}
@@ -1422,6 +1419,14 @@ public class JDFMerge
 			final JDFResource oldRes = (JDFResource) overWriteNode.getTarget(ro, AttributeName.ID);
 			if (oldRes == null || newRes == null)
 			{
+				if (oldRes == null)
+				{
+					log.warn("Could not find Resource ID=" + ro + " in main JDF");
+				}
+				if (newRes == null)
+				{
+					log.warn("Could not find Resource ID=" + ro + " in sub JDF");
+				}
 				continue; // snafu, lets just ignore the rest and limp along
 			}
 
@@ -1435,6 +1440,7 @@ public class JDFMerge
 				leafRes.removeFromSpawnIDs(spawnID);
 				calcSpawnStatus(leafRes, false);
 			}
+			cleanupSpawn(oldRes);
 
 			if (!newRes.getParentJDF().getID().equals(oldRes.getParentJDF().getID()))
 			{
@@ -1445,6 +1451,23 @@ public class JDFMerge
 			{
 				// replace the ro in the tomerge node with a clean copy of the ro resource from main
 				newRes.replaceElement(oldRes);
+			}
+		}
+	}
+
+	/**
+	 * in case we screwed up somewhere...
+	 * @param oldRes the resource to clean up
+	 */
+	private void cleanupSpawn(JDFResource oldRes)
+	{
+		VElement v = oldRes.getLeaves(true);
+		for (KElement e : v)
+		{
+			JDFResource r = (JDFResource) e;
+			if (!r.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false))
+			{
+				removeSpawnAttributes(r);
 			}
 		}
 	}
