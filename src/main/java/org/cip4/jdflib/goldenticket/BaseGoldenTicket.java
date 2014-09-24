@@ -887,7 +887,7 @@ public class BaseGoldenTicket
 		JDFColorPool cp = (JDFColorPool) theNode.getJDFRoot().getChildByTagName(ElementName.COLORPOOL, null, 0, null, false, false);
 		if (cp == null)
 		{
-			cp = (JDFColorPool) theNode.getCreateResource(ElementName.COLORPOOL, EnumUsage.Input, 0);
+			cp = (JDFColorPool) theNode.getCreateResource(ElementName.COLORPOOL, null, 0);
 			if (theParentNode != null)
 			{
 				theParentNode.getCreateResourcePool().moveElement(cp, null);

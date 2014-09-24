@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -108,12 +106,12 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22211111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.MIMETYPE, 0x33311111, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
 	@Override
@@ -268,27 +266,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 
 	/* ---------------------------------------------------------------------
-	Methods for Attribute MimeType
-	--------------------------------------------------------------------- */
-	/**
-	  * (36) set attribute MimeType
-	  * @param value the value to set the attribute to
-	  */
-	public void setMimeType(String value)
-	{
-		setAttribute(AttributeName.MIMETYPE, value, null);
-	}
-
-	/**
-	  * (23) get String attribute MimeType
-	  * @return the value of the attribute
-	  */
-	public String getMimeType()
-	{
-		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
-	}
-
-	/* ---------------------------------------------------------------------
 	Methods for Attribute BandHeight
 	--------------------------------------------------------------------- */
 	/**
@@ -393,6 +370,27 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 		return getBoolAttribute(AttributeName.INTERLEAVED, null, false);
 	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute MimeType
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute MimeType
+	  * @param value the value to set the attribute to
+	  */
+	public void setMimeType(String value)
+	{
+		setAttribute(AttributeName.MIMETYPE, value, null);
+	}
+
+	/**
+	  * (23) get String attribute MimeType
+	  * @return the value of the attribute
+	  */
+	public String getMimeType()
+	{
+		return getAttribute(AttributeName.MIMETYPE, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
 	/* ***********************************************************************
 	 * Element getter / setter
 	 * ***********************************************************************
@@ -453,19 +451,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 */
 	public Collection<JDFObjectResolution> getAllObjectResolution()
 	{
-		final VElement vc = getChildElementVector(ElementName.OBJECTRESOLUTION, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFObjectResolution) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFObjectResolution.class, false, 0);
 	}
 
 	/**

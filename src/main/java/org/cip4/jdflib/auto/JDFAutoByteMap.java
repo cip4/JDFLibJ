@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,7 +84,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFBand;
 import org.cip4.jdflib.resource.JDFResource;
@@ -127,7 +125,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BAND, 0x22222222);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BAND, 0x33333333);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.PIXELCOLORANT, 0x33333333);
@@ -561,19 +559,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public Collection<JDFBand> getAllBand()
 	{
-		final VElement vc = getChildElementVector(ElementName.BAND, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFBand> v = new Vector<JDFBand>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFBand) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFBand.class, false, 0);
 	}
 
 	/**
@@ -649,19 +635,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public Collection<JDFFileSpec> getAllFileSpec()
 	{
-		final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFFileSpec) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFFileSpec.class, false, 0);
 	}
 
 	/**
@@ -709,19 +683,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 */
 	public Collection<JDFPixelColorant> getAllPixelColorant()
 	{
-		final VElement vc = getChildElementVector(ElementName.PIXELCOLORANT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPixelColorant> v = new Vector<JDFPixelColorant>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPixelColorant) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPixelColorant.class, false, 0);
 	}
 
 	/**

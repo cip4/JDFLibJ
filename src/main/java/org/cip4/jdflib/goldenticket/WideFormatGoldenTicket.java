@@ -70,21 +70,31 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoFitPolicy;
+import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
-import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFTile;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.resource.process.prepress.JDFRenderingParams;
 
 /**
  * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
@@ -117,8 +127,8 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	protected void fillCatMaps()
 	{
 		super.fillCatMaps();
-		catMap.put("IDP.DigitalPrinting", new VString("Interpreting Rendering DigitalPrinting", null));
-		setCategory("IDP.DigitalPrinting");
+		catMap.put("DPW.WideFormat", new VString("Interpreting ColorSpaceConversion Rendering Tiling DigitalPrinting", null));
+		setCategory("DPW.WideFormat");
 	}
 
 	/**
@@ -160,7 +170,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	@Override
 	public void init()
 	{
-		final String icsTag = "IDP_L" + icsLevel + "-" + theVersion.getName();
+		final String icsTag = "DPW_L" + icsLevel + "-" + theVersion.getName();
 		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
 		{
@@ -171,20 +181,27 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 		initDocumentRunList();
 		initOutputComponent();
 		initInterpretingParams();
+		initRenderingParams();
 		initUsageCounter();
-		JDFMedia m = initPaperMedia();
-		initDigitalPrintingParams(m);
-		initLayoutPrep();
+		initTile();
+		initPaperMedia();
+		initDigitalPrintingParams(null);
+		initColorantControl();
+		initColorspaceConversion();
 	}
 
-	/**
-	 * TODO Please insert comment!
-	 */
-	private JDFLayoutPreparationParams initLayoutPrep()
+	private void initColorspaceConversion()
 	{
-		JDFLayoutPreparationParams layPP = (JDFLayoutPreparationParams) theNode.getCreateResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
-		layPP.setSides(JDFLayoutPreparationParams.EnumSides.TwoSidedFlipY);
-		return layPP;
+		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) theNode.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0);
+
+	}
+
+	private JDFTile initTile()
+	{
+		JDFTile tile = (JDFTile) theNode.getCreateResource(ElementName.TILE, EnumUsage.Input, 0);
+		tile.setCTM(JDFMatrix.unitMatrix);
+		tile.setClipBox(new JDFRectangle(0, 0, 444, 666));
+		return tile;
 	}
 
 	/**
@@ -193,7 +210,21 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	 */
 	private JDFInterpretingParams initInterpretingParams()
 	{
-		return (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
+		JDFInterpretingParams interpretingParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
+		JDFFitPolicy fitPolicy = interpretingParams.appendFitPolicy();
+		fitPolicy.setRotatePolicy(JDFAutoFitPolicy.EnumRotatePolicy.NoRotate);
+		fitPolicy.setSizePolicy(EnumSizePolicy.ClipToMaxPage);
+		return interpretingParams;
+	}
+
+	/**
+	 * @return 
+	 * 
+	 */
+	private JDFRenderingParams initRenderingParams()
+	{
+		JDFRenderingParams renderingParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
+		return renderingParams;
 	}
 
 	/**
@@ -204,7 +235,8 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	private JDFDigitalPrintingParams initDigitalPrintingParams(JDFMedia m)
 	{
 		JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
-		digiParams.setSides(EnumSides.TwoSidedFlipY);
+		digiParams.setSides(EnumSides.OneSidedFront);
+		digiParams.setPageDelivery(JDFAutoDigitalPrintingParams.EnumPageDelivery.SameOrderFaceUp);
 		if (m != null)
 			digiParams.refElement(m);
 		return digiParams;
@@ -243,6 +275,12 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	{
 		super.initPaperMedia();
 		paperMedia.setDimensionCM(new JDFXYPair(42, 0));
+		paperMedia.setBackCoatings(EnumBackCoatings.None);
+		paperMedia.setFrontCoatings(EnumFrontCoatings.HighGloss);
+		paperMedia.setPrintingTechnology("Latex");
+		paperMedia.setUnit("m2");
+		paperMedia.setMediaTypeDetails("Backlit");
+		theNode.ensureLink(paperMedia, EnumUsage.Input, null);
 		return paperMedia;
 	}
 

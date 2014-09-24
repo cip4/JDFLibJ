@@ -74,7 +74,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
-import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -88,11 +87,6 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFQuery;
-import org.cip4.jdflib.jmf.JDFStatusQuParams;
-import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -133,26 +127,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * seconds ago that this started
 	 */
 	public int preStart = 600;
-	/**
-	 * true if subscriptions should be in nodeinfo
-	 */
-	private boolean bNodeInfoSubscription = false;
-
-	/**
-	 * @return the bNodeInfoSubscription
-	 */
-	public boolean isNodeInfoSubscription()
-	{
-		return bNodeInfoSubscription;
-	}
-
-	/**
-	 * @param nodeInfoSubscription the bNodeInfoSubscription to set
-	 */
-	public void setNodeInfoSubscription(final boolean nodeInfoSubscription)
-	{
-		bNodeInfoSubscription = nodeInfoSubscription;
-	}
 
 	/**
 	 * seconds this was active
@@ -233,31 +207,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
 				ni.setTargetRoute(returnURL);
 			}
 
-			if (bNodeInfoSubscription && (jmfICSLevel >= 1 && misICSLevel >= 2 || misURL != null))
-			{
-				addJMFSubscriptions(ni);
-			}
 			schedule(null, scheduleHours, scheduleDuration);
 		}
 		return ni;
-	}
-
-	/**
-	 * @param ni
-	 */
-	private void addJMFSubscriptions(final JDFNodeInfo ni)
-	{
-		final JDFJMF jmf = ni.appendJMF();
-		jmf.setSenderID("MISGTSender");
-		final JDFQuery q = jmf.appendQuery(EnumType.Status);
-		q.setID(q.getID() + System.currentTimeMillis() % 100000);
-		final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
-		statusQuParams.setJobID(theNode.getJobID(true));
-		statusQuParams.setJobPartID(theNode.getJobPartID(false));
-		statusQuParams.setJobDetails(EnumJobDetails.Brief);
-		final JDFSubscription subscription = q.appendSubscription();
-		subscription.setRepeatTime(15);
-		subscription.setURL(misURL == null ? "http://MIS.printer.com/JMFSignal" : misURL);
 	}
 
 	/**
