@@ -94,9 +94,9 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 		super.setUp();
 		JDFAudit.setStaticAgentName("JDF Wide Format golden ticket generator");
 		theTicket = new WideFormatGoldenTicket(1);
-
 		theTicket.assign(null);
 		final JDFNode node = theTicket.getNode();
+
 		assertTrue(node.getICSVersions(false).contains("Base_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.5"));
 		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.5"));
@@ -106,10 +106,24 @@ public class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 		theTicket.waste = 0;
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testSimple()
 	{
 		write9GTFiles(theTicket, "DPW_Simple");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testL3()
+	{
+		theTicket = new WideFormatGoldenTicket(3);
+		theTicket.assign(null);
+		write9GTFiles(theTicket, "DPW_L3");
 	}
 
 }
