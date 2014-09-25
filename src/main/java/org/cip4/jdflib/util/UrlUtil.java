@@ -797,11 +797,13 @@ public class UrlUtil
 	 * adds a parameter to a given url using either ? or &
 	 * @param baseUrl the base url - already escaped and ready to go
 	 * @param key the key to add - NOT escaped
-	 * @param val the value to add - NOT escaped
+	 * @param val the value to add - NOT escaped - if null nothing is set
 	 * @return the escaped new url
 	 */
 	public static String addParameter(String baseUrl, String key, String val)
 	{
+		if (StringUtil.getNonEmpty(baseUrl) == null || StringUtil.getNonEmpty(key) == null || StringUtil.getNonEmpty(val) == null)
+			return baseUrl;
 		int posQMark = baseUrl.indexOf("?");
 		String flag = posQMark >= 0 ? "&" : "?";
 		StringBuffer buf = new StringBuffer(baseUrl);

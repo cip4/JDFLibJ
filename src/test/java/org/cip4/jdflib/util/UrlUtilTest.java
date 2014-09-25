@@ -206,6 +206,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testAddParameter()
 	{
 		assertEquals("a?b=c", UrlUtil.addParameter("a", "b", "c"));
+		assertEquals("a", UrlUtil.addParameter("a", "", "c"));
+		assertEquals("a", UrlUtil.addParameter("a", "a", null));
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
 		assertEquals("a?b=http%3a%2f%2fwww.example.com", UrlUtil.addParameter("a", "b", "http://www.example.com"));
