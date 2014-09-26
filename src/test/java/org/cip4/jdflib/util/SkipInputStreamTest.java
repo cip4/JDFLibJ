@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,8 +74,8 @@ package org.cip4.jdflib.util;
 import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -93,13 +93,37 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	public void testRead() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false);
-		Assert.assertEquals(pis.read(), 'a');
-		Assert.assertEquals(pis.read(), 'b');
-		Assert.assertEquals(pis.read(), 'c');
-		Assert.assertEquals(pis.read(), '1');
-		Assert.assertEquals(pis.read(), '2');
-		Assert.assertEquals(pis.read(), '3');
-		Assert.assertEquals(pis.read(), -1);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+		pis.close();
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public void testReadToNextTag() throws Exception
+	{
+		final SkipInputStream pis = new SkipInputStream("ab", new ByteArrayInputStream("123ab456abababc123".getBytes()), false);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), '4');
+		assertTrue(pis.readToNextTag());
+		assertEquals(pis.read(), 'a');
+		assertTrue(pis.readToNextTag());
+		assertTrue(pis.readToNextTag());
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertFalse(pis.readToNextTag());
+		assertEquals(pis.read(), -1);
+		pis.close();
 	}
 
 	/**
@@ -109,16 +133,17 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	public void testNull() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream(null, new ByteArrayInputStream("123abc123".getBytes()), false);
-		Assert.assertEquals(pis.read(), '1');
-		Assert.assertEquals(pis.read(), '2');
-		Assert.assertEquals(pis.read(), '3');
-		Assert.assertEquals(pis.read(), 'a');
-		Assert.assertEquals(pis.read(), 'b');
-		Assert.assertEquals(pis.read(), 'c');
-		Assert.assertEquals(pis.read(), '1');
-		Assert.assertEquals(pis.read(), '2');
-		Assert.assertEquals(pis.read(), '3');
-		Assert.assertEquals(pis.read(), -1);
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+		pis.close();
 	}
 
 	/**
@@ -128,7 +153,8 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	public void testReadshort() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false, 2);
-		Assert.assertEquals(pis.read(), -1);
+		assertEquals(pis.read(), -1);
+		pis.close();
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -140,13 +166,14 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 	public void testIgnoreCase() throws Exception
 	{
 		final SkipInputStream pis = new SkipInputStream("ABC", new ByteArrayInputStream("123ab456abc123".getBytes()), true);
-		Assert.assertEquals(pis.read(), 'a');
-		Assert.assertEquals(pis.read(), 'b');
-		Assert.assertEquals(pis.read(), 'c');
-		Assert.assertEquals(pis.read(), '1');
-		Assert.assertEquals(pis.read(), '2');
-		Assert.assertEquals(pis.read(), '3');
-		Assert.assertEquals(pis.read(), -1);
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+		pis.close();
 	}
 
 }

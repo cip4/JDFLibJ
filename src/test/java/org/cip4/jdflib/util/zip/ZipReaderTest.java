@@ -74,6 +74,7 @@ import java.io.InputStream;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
@@ -165,6 +166,39 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetEntry()
 	{
 		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/BarcodeDetails.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetStream() throws IOException
+	{
+		ByteArrayIOStream crap = new ByteArrayIOStream();
+		for (int i = 0; i < 22; i++)
+		{
+			crap.write('P');
+			crap.write('K');
+			crap.write(3);
+			crap.write(4);
+			for (int j = 0; j < 33333; j++)
+			{
+				crap.write(j % 256);
+			}
+		}
+
+		InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "schema.zip"));
+		IOUtils.copy(is, crap);
+		ZipReader r = ZipReader.getZipReader(crap.getInputStream());
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
 		assertNotNull(e);
 		e = r.getEntry("schema/BarcodeDetails.jdf");

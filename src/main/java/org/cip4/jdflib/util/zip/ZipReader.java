@@ -84,7 +84,9 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -96,7 +98,7 @@ import org.cip4.jdflib.util.UrlUtil;
 public class ZipReader
 {
 	final InputStream is;
-	ByteArrayIOStream bos;
+	ByteArrayIOInputStream bios;
 	ZipInputStream zis;
 	final Log log;
 	ZipEntry currentEntry;
@@ -151,7 +153,7 @@ public class ZipReader
 		log = LogFactory.getLog(getClass());
 		is = inStream;
 		zis = new ZipInputStream(is);
-		bos = null;
+		bios = null;
 		caseSensitive = true;
 	}
 
@@ -292,6 +294,43 @@ public class ZipReader
 		String fileName = ze.getName();
 		fileName = StringUtil.replaceChar(fileName, '\\', "/", 0);
 		return UrlUtil.cleanDots(fileName);
+	}
+
+	/**
+	 * get a zip reader that searches itself for a valid zip header
+	 * @param is
+	 */
+	public static ZipReader getZipReader(InputStream is)
+	{
+		ByteArrayIOInputStream bios = ByteArrayIOStream.getBufferedInputStream(is);
+		SkipInputStream sis = new SkipInputStream("PK\03\04", bios, false);
+		boolean nextAvailable = true;
+		sis.mark(10000000);
+		while (nextAvailable)
+		{
+			try
+			{
+				ZipReader newReader = new ZipReader(sis);
+				newReader.buffer();
+				ZipEntry nextEntry = newReader.getNextEntry();
+				if (nextEntry != null && StringUtil.getNonEmpty(getEntryName(nextEntry)) != null)
+					return newReader;
+			}
+			catch (Exception x)
+			{
+				// next
+			}
+			try
+			{
+				sis.reset();
+			}
+			catch (IOException e)
+			{
+			}
+			nextAvailable = sis.readToNextTag();
+			sis.mark(10000000);
+		}
+		return null;
 	}
 
 	/**
@@ -483,9 +522,9 @@ public class ZipReader
 	 */
 	public void buffer()
 	{
-		if (bos == null)
+		if (bios == null)
 		{
-			bos = new ByteArrayIOStream(is);
+			bios = ByteArrayIOStream.getBufferedInputStream(is);
 		}
 		reset();
 	}
@@ -495,9 +534,9 @@ public class ZipReader
 	 */
 	private void reset()
 	{
-		if (bos != null)
+		if (bios != null)
 		{
-			zis = new ZipInputStream(bos.getInputStream());
+			zis = new ZipInputStream(bios.getNewStream());
 		}
 	}
 

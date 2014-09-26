@@ -126,15 +126,16 @@ public class PackageElementWalker extends ElementWalker
 		synchronized (classes)
 		{
 			Class<?> parent = getClass();
-			CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
-			URL packsrc = codesrc.getLocation();
-			File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
 			if (classes.get(parent) != null)
 			{
 				constructWorkersVClass(classes.get(parent));
 			}
 			else
 			{
+				CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
+				URL packsrc = codesrc.getLocation();
+				log.info("Constructing walkers for package URL: " + packsrc.toExternalForm());
+				File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
 				if (f.isDirectory())
 				{
 					constructWorkersDir(f);
@@ -183,11 +184,11 @@ public class PackageElementWalker extends ElementWalker
 				String entryName = ZipReader.getEntryName(ze);
 				String className = StringUtil.token(entryName, -1, "/");
 				String zipPackageName = StringUtil.leftStr(entryName, -1 - className.length());
-				log.info("checking " + packagePath + " - " + zipPackageName);
+				//				log.info("checking " + packagePath + " - " + zipPackageName);
 				if (packagePath.equals(zipPackageName))
 				{
 					String name = packageName + "." + UrlUtil.newExtension(className, null);
-					log.info("constructing " + name);
+					log.debug("constructing " + name);
 					BaseWalker w = constructWalker(name);
 					log.info("constructed class: " + name + " Depth=" + w.getDepth());
 					classes.putOne(baseClass, name);
