@@ -168,6 +168,7 @@ public class PackageElementWalker extends ElementWalker
 		ZipReader zr = new ZipReader(jarFile);
 		Class<? extends PackageElementWalker> currentClass = getClass();
 		Class<? extends PackageElementWalker> baseClass = currentClass;
+		log.info("constructing from jar: " + jarFile);
 		while (currentClass != null)
 		{
 			String packageName = currentClass.getPackage().getName();
@@ -182,12 +183,13 @@ public class PackageElementWalker extends ElementWalker
 				String entryName = ZipReader.getEntryName(ze);
 				String className = StringUtil.token(entryName, -1, "/");
 				String zipPackageName = StringUtil.leftStr(entryName, -1 - className.length());
+				log.info("checking " + packagePath + " - " + zipPackageName);
 				if (packagePath.equals(zipPackageName))
 				{
 					String name = packageName + "." + UrlUtil.newExtension(className, null);
-					log.debug("constructing " + name);
+					log.info("constructing " + name);
 					BaseWalker w = constructWalker(name);
-					log.debug("constructed class: " + name + " Depth=" + w.getDepth());
+					log.info("constructed class: " + name + " Depth=" + w.getDepth());
 					classes.putOne(baseClass, name);
 				}
 			}
@@ -206,8 +208,8 @@ public class PackageElementWalker extends ElementWalker
 		while (currentClass != null)
 		{
 			String packageName = currentClass.getPackage().getName();
-			String packagePath = StringUtil.replaceChar(packageName, '.', "/", 0);
-			packagePath = dir.getAbsolutePath() + "/" + packagePath;
+			String packagePath = StringUtil.replaceChar(packageName, '.', File.separator, 0);
+			packagePath = dir.getAbsolutePath() + File.separator + packagePath;
 			File[] classFiles = FileUtil.listFilesWithExpression(new File(packagePath), WALK_CLASS);
 			if (classFiles != null)
 			{
