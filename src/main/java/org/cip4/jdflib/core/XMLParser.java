@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,7 +77,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -300,17 +299,7 @@ public class XMLParser extends DOMParser
 
 		if (d == null && m_searchStream)
 		{
-			try
-			{
-				bis.reset();
-			}
-			catch (final IOException x)
-			{
-				bis.allowClose = true;
-				bis.close();
-				log.error("Error parsing stream", x);
-				return null;
-			}
+			bis.reset();
 
 			inSource = new InputSource(new XMLReaderStream(true, bis));
 			d = parseInputSource(inSource);

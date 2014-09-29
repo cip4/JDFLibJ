@@ -184,13 +184,13 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetStream() throws IOException
 	{
 		ByteArrayIOStream crap = new ByteArrayIOStream();
-		for (int i = 0; i < 22; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			crap.write('P');
 			crap.write('K');
 			crap.write(3);
 			crap.write(4);
-			for (int j = 0; j < 33333; j++)
+			for (int j = 0; j < 3333; j++)
 			{
 				crap.write(j % 256);
 			}
@@ -198,6 +198,11 @@ public class ZipReaderTest extends JDFTestCaseBase
 
 		InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "schema.zip"));
 		IOUtils.copy(is, crap);
+		for (int j = 0; j < 333; j++)
+		{
+			crap.write(j % 256);
+		}
+
 		ZipReader r = ZipReader.getZipReader(crap.getInputStream());
 		ZipEntry e = r.getEntry("schema/Conditions.jdf");
 		assertNotNull(e);
@@ -206,6 +211,49 @@ public class ZipReaderTest extends JDFTestCaseBase
 		e = r.getEntry("schema/Conditions.jdf");
 		assertNotNull(e);
 
+	}
+
+	/**
+	 * @throws IOException 
+	 * write 3 zipfiles with some chunks of crap added in and see if we can unpack them
+	 *  
+	 */
+	@Test
+	public void testGetStreams() throws IOException
+	{
+		ByteArrayIOStream crap = new ByteArrayIOStream();
+		for (int k = 0; k < 3; k++)
+		{
+			for (int i = 0; i < 1; i++)
+			{
+				crap.write('P');
+				crap.write('K');
+				crap.write(3);
+				crap.write(4);
+				for (int j = 0; j < 3333; j++)
+				{
+					crap.write(j % 256);
+				}
+			}
+			InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "schema.zip"));
+			IOUtils.copy(is, crap);
+			for (int j = 0; j < 3333; j++)
+			{
+				crap.write(j % 256);
+			}
+		}
+		Vector<ZipReader> v = ZipReader.getZipReaders(crap.getInputStream(), -1);
+		assertEquals(v.size(), 3);
+		for (int k = 0; k < 3; k++)
+		{
+			ZipReader r = v.get(k);
+			ZipEntry e = r.getEntry("schema/Conditions.jdf");
+			assertNotNull(e);
+			e = r.getEntry("schema/BarcodeDetails.jdf");
+			assertNotNull(e);
+			e = r.getEntry("schema/Conditions.jdf");
+			assertNotNull(e);
+		}
 	}
 
 	/**

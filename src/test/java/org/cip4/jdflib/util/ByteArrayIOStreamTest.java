@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,26 +83,51 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * Jul 16, 2009
  */
-public class ByteArrayIOStreamTest extends JDFTestCaseBase {
+public class ByteArrayIOStreamTest extends JDFTestCaseBase
+{
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
 	@Test
-	public void testSize() {
+	public void testSize()
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
-		for (int i = 0; i < 12345; i++) {
+		for (int i = 0; i < 12345; i++)
+		{
 			ios.write(i);
-			Assert.assertEquals(ios.size(), 1 + i);
+			assertEquals(ios.size(), 1 + i);
 		}
+		ios.close();
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testTell()
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
+		for (int i = 0; i < 12345; i++)
+		{
+			ios.write(i);
+		}
+		ByteArrayIOInputStream in = ios.getInputStream();
+		assertEquals(0, in.tell());
+		in.seek(-1);
+		assertTrue(in.read() >= 0);
+		assertTrue(in.read() < 0);
+		in.seek(42);
+		assertEquals(42, in.tell());
+		ios.close();
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -110,13 +135,15 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testConstructStream() {
+	public void testConstructStream()
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		for (int i = 0; i < 1234567; i++) {
+		for (int i = 0; i < 1234567; i++)
+		{
 			ios.write(i);
 		}
 		final ByteArrayIOStream ios2 = new ByteArrayIOStream(ios.getInputStream());
-		Assert.assertEquals(ios.toString(), ios2.toString());
+		assertEquals(ios.toString(), ios2.toString());
 	}
 
 	/**
@@ -124,19 +151,22 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testConstructFile() throws IOException {
+	public void testConstructFile() throws IOException
+	{
 		final File f = new File(sm_dirTestDataTemp + "bios.fil");
 		f.delete();
 		f.createNewFile();
 		final FileOutputStream fos = new FileOutputStream(f);
-		for (int i = 0; i < 20000; i++) {
+		for (int i = 0; i < 20000; i++)
+		{
 			fos.write(i % 256);
 		}
 		fos.close();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(f);
 		final InputStream is = ios.getInputStream();
-		for (int i = 0; i < 20000; i++) {
-			Assert.assertEquals(is.read(), i % 256);
+		for (int i = 0; i < 20000; i++)
+		{
+			assertEquals(is.read(), i % 256);
 		}
 	}
 
@@ -145,47 +175,52 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase {
 	 * 
 	 */
 	@Test
-	public void testConstructBadFile() throws IOException {
+	public void testConstructBadFile() throws IOException
+	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
 		f.delete();
 		ByteArrayIOStream ios = new ByteArrayIOStream(f);
 		InputStream is = ios.getInputStream();
-		Assert.assertEquals(is.available(), 0);
+		assertEquals(is.available(), 0);
 		// now null
 		f = null;
 		ios = new ByteArrayIOStream(f);
 		is = ios.getInputStream();
-		Assert.assertEquals(is.available(), 0);
+		assertEquals(is.available(), 0);
 	}
 
 	/**
 	 * 
 	 */
 	@Test
-	public void testConstructBuf() {
+	public void testConstructBuf()
+	{
 		final byte[] b = "abc".getBytes();
 		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
 
-		Assert.assertEquals(ios.getInputStream().available(), 3);
+		assertEquals(ios.getInputStream().available(), 3);
 	}
 
 	/**
 	 * @throws Exception
 	 */
 	@Test
-	public void testInRead() throws Exception {
+	public void testInRead() throws Exception
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		for (int i = 0; i < 200000; i++) {
+		for (int i = 0; i < 200000; i++)
+		{
 			ios.write(i);
 		}
 		final InputStream is = ios.getInputStream();
 		int n = 0;
 		int i;
-		while ((i = is.read()) >= 0) {
-			Assert.assertEquals("" + n, i, n % 256);
+		while ((i = is.read()) >= 0)
+		{
+			assertEquals("" + n, i, n % 256);
 			n++;
 		}
-		Assert.assertEquals(n, 200000);
+		assertEquals(n, 200000);
 
 	}
 
@@ -193,66 +228,75 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase {
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti() throws Exception {
+	public void testInReadMulti() throws Exception
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 50000; i++)
+		{
 			ios.write(i);
 		}
 		final InputStream is = ios.getInputStream();
 		final InputStream is2 = ios.getInputStream();
 		int n = 0;
 		int i;
-		while ((i = is.read()) >= 0) {
+		while ((i = is.read()) >= 0)
+		{
 			final int jj = is2.read();
-			Assert.assertEquals("" + n, i, n % 256);
-			Assert.assertEquals(jj, i);
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assert.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 	}
 
 	/**
 	 * @throws Exception
 	 */
 	@Test
-	public void testInReadMulti2() throws Exception {
+	public void testInReadMulti2() throws Exception
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 50000; i++)
+		{
 			ios.write(i);
 		}
 		final ByteArrayIOInputStream is = ios.getInputStream();
 		final InputStream is2 = is.getNewStream();
 		int n = 0;
 		int i;
-		while ((i = is.read()) >= 0) {
+		while ((i = is.read()) >= 0)
+		{
 			final int jj = is2.read();
-			Assert.assertEquals("" + n, i, n % 256);
-			Assert.assertEquals(jj, i);
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assert.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 	}
 
 	/**
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetBufferedInputStream() throws Exception {
+	public void testGetBufferedInputStream() throws Exception
+	{
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 50000; i++)
+		{
 			ios.write(i);
 		}
 		final ByteArrayIOInputStream is = ios.getInputStream();
 		final InputStream is2 = ByteArrayIOStream.getBufferedInputStream(is);
 		int n = 0;
 		int i;
-		while ((i = is.read()) >= 0) {
+		while ((i = is.read()) >= 0)
+		{
 			final int jj = is2.read();
-			Assert.assertEquals("" + n, i, n % 256);
-			Assert.assertEquals(jj, i);
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
 			n++;
 		}
-		Assert.assertEquals(n, 50000);
+		assertEquals(n, 50000);
 	}
 
 }

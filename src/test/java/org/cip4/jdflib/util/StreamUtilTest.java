@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,8 +72,8 @@ import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  *  
  * @author rainer prosi
@@ -92,6 +92,7 @@ public class StreamUtilTest extends JDFTestCaseBase
 		ByteArrayIOStream bos = new ByteArrayIOStream();
 		bos.write("foooo\nbar\nbar2".getBytes());
 		VString vs = StreamUtil.getLines(bos.getInputStream());
-		Assert.assertEquals(3, vs.size(), 0);
+		assertEquals(3, vs.size());
+		bos.close();
 	}
 }

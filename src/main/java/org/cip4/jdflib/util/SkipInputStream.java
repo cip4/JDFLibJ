@@ -79,9 +79,10 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
  * stream class that allows allows skipping until a certain tag is found
@@ -89,11 +90,11 @@ import java.io.InputStream;
  * @author prosirai
  * 
  */
-public class SkipInputStream extends BufferedInputStream
+public class SkipInputStream extends ByteArrayIOInputStream
 {
 	long deltaPos;
 	private final int searchSize;
-	private final long maxPreread;
+	private long maxPreread;
 	private final boolean ignoreCase;
 	private final String searchTag;
 	private boolean found = false;
@@ -132,7 +133,10 @@ public class SkipInputStream extends BufferedInputStream
 		mark(searchSize + 10);
 		try
 		{
-			readToTag();
+			if (maxPreRead != 0)
+			{
+				readToTag();
+			}
 		}
 		catch (final IOException x)
 		{
@@ -191,7 +195,7 @@ public class SkipInputStream extends BufferedInputStream
 	 * @see java.io.BufferedInputStream#read()
 	 */
 	@Override
-	public synchronized int read() throws IOException
+	public synchronized int read()
 	{
 		deltaPos++;
 		return found ? super.read() : -1;
@@ -203,6 +207,7 @@ public class SkipInputStream extends BufferedInputStream
 	 */
 	public boolean readToNextTag()
 	{
+		maxPreread = -1;
 		if (StringUtil.getNonEmpty(searchTag) == null)
 		{
 			return false;
@@ -235,17 +240,24 @@ public class SkipInputStream extends BufferedInputStream
 		return "SkipInputStream " + found + " " + searchSize + " " + super.toString();
 	}
 
+	/**
+	 * 
+	 * @see java.io.ByteArrayInputStream#reset()
+	 */
 	@Override
-	public synchronized void reset() throws IOException
+	public synchronized void reset()
 	{
-		markpos = myMark;
+		mark = myMark;
 		super.reset();
 	}
 
+	/**
+	 * 
+	 * @see java.io.ByteArrayInputStream#mark(int)
+	 */
 	@Override
 	public synchronized void mark(int readlimit)
 	{
-		marklimit = readlimit;
 		myMark = pos;
 	}
 

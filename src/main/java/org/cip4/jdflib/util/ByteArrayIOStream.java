@@ -125,15 +125,66 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 */
 	public static class ByteArrayIOInputStream extends ByteArrayInputStream
 	{
+		/**
+		 * 
+		 * @param pos
+		 */
+		public void seek(int pos)
+		{
+			if (pos < 0)
+			{
+				pos = count + pos;
+			}
+			if (pos < 0)
+				pos = 0;
+			if (pos > count)
+				pos = count;
+			this.pos = pos;
+		}
+
+		/**
+		 * 
+		 * @return
+		 */
+		public int tell()
+		{
+			return pos;
+		}
+
+		/**
+		 * 
+		 * @param buf
+		 * @param offset
+		 * @param length
+		 */
+		public ByteArrayIOInputStream(byte[] buf, int offset, int length)
+		{
+			super(buf, offset, length);
+		}
 
 		/**
 		 * @param buf
 		 * @param count
 		 *  
 		 */
-		ByteArrayIOInputStream(byte[] buf, int count)
+		protected ByteArrayIOInputStream(byte[] buf, int count)
 		{
 			super(buf, 0, count);
+		}
+
+		/**
+		 * creates an input output stream class from any stream
+		 * if is alraedy is a buffered inputstream, no copy is made
+		 * 
+		 * @param is the inputstream to buffer
+		 */
+		protected ByteArrayIOInputStream(final InputStream is)
+		{
+			super(new byte[1]);
+			ByteArrayIOStream bos = new ByteArrayIOStream(is);
+			buf = bos.getBuf();
+			count = bos.count;
+			bos.close();
 		}
 
 		/**
@@ -143,7 +194,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		 */
 		public ByteArrayIOInputStream getNewStream()
 		{
-			return new ByteArrayIOInputStream(buf, count);
+			return new ByteArrayIOInputStream(buf, pos, count);
 		}
 
 		/**

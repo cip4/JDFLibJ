@@ -302,10 +302,22 @@ public class ZipReader
 	 */
 	public static ZipReader getZipReader(InputStream is)
 	{
+		Vector<ZipReader> v = getZipReaders(is, 1);
+		return v != null && v.size() == 1 ? v.get(0) : null;
+	}
+
+	/**
+	 * get a zip reader that searches itself for a valid zip header
+	 * @param is
+	 */
+	public static Vector<ZipReader> getZipReaders(InputStream is, int max)
+	{
 		ByteArrayIOInputStream bios = ByteArrayIOStream.getBufferedInputStream(is);
 		SkipInputStream sis = new SkipInputStream("PK\03\04", bios, false);
 		boolean nextAvailable = true;
 		sis.mark(10000000);
+		Vector<ZipReader> v = new Vector<ZipReader>();
+		int n = 0;
 		while (nextAvailable)
 		{
 			try
@@ -314,23 +326,33 @@ public class ZipReader
 				newReader.buffer();
 				ZipEntry nextEntry = newReader.getNextEntry();
 				if (nextEntry != null && StringUtil.getNonEmpty(getEntryName(nextEntry)) != null)
-					return newReader;
+				{
+					v.add(newReader);
+					if (++n == max)
+					{
+						break;
+					}
+					SkipInputStream sis2 = new SkipInputStream("PK\05\06", bios, false, 0);
+					sis2.seek(sis.tell());
+					boolean foundEnd = sis2.readToNextTag();
+					if (foundEnd)
+					{
+						sis.seek(sis2.tell());
+					}
+					sis2.close();
+					sis.mark(10000000);
+					continue;
+				}
 			}
 			catch (Exception x)
 			{
 				// next
 			}
-			try
-			{
-				sis.reset();
-			}
-			catch (IOException e)
-			{
-			}
+			sis.reset();
 			nextAvailable = sis.readToNextTag();
 			sis.mark(10000000);
 		}
-		return null;
+		return v.size() == 0 ? null : v;
 	}
 
 	/**
@@ -536,6 +558,7 @@ public class ZipReader
 	{
 		if (bios != null)
 		{
+			bios.reset();
 			zis = new ZipInputStream(bios.getNewStream());
 		}
 	}

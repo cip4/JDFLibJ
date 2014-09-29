@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,8 +69,8 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  *  
  * @author rainer prosi
@@ -89,7 +89,7 @@ public class XMLParserTest extends JDFTestCaseBase
 		String xml = d.toXML();
 		System.out.print(xml);
 		XMLParser p = new XMLParser();
-		Assert.assertNull(p.parseString(xml));
+		assertNull(p.parseString(xml));
 	}
 
 	/**
@@ -101,9 +101,28 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		XMLParser p = new XMLParser();
 		XMLDoc d = p.parseString("<foo a=\"SchuÌˆtz_Teil5_bel\"/>");
-		Assert.assertNotNull(d);
+		assertNotNull(d);
 		String s = d.write2String(2);
 		XMLDoc d2 = p.parseString(s);
-		Assert.assertNotNull(d2);
+		assertNotNull(d2);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testSkip()
+	{
+		XMLParser p = new XMLParser();
+		boolean b = XMLParser.m_searchStream;
+		XMLParser.m_searchStream = true;
+		XMLDoc d = p.parseString("aaaabbb  ss<?xml version='1.0' encoding='utf-8' ?>\n<foo />");
+		XMLParser.m_searchStream = b;
+
+		assertNotNull(d);
+		String s = d.write2String(2);
+		XMLDoc d2 = p.parseString(s);
+		assertNotNull(d2);
 	}
 }

@@ -221,6 +221,7 @@ public class MimeReader extends MimeHelper
 	public XMLDoc getXMLDoc(final InputStream stream, final int index)
 	{
 		ByteArrayIOInputStream bis = ByteArrayIOStream.getBufferedInputStream(stream);
+		bis.mark(42);
 		final Multipart mp = getMultiPart(bis);
 		if (mp != null)
 		{
@@ -234,7 +235,7 @@ public class MimeReader extends MimeHelper
 		// not a mime - try direct xml
 		if (index == 0)
 		{
-
+			bis.reset();
 			bis = bis.getNewStream();
 			return XMLDoc.parseStream(bis);
 		}
