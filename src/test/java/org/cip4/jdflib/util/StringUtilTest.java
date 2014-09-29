@@ -750,6 +750,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
 		assertEquals(StringUtil.substring("abbcc", -2, -2), "");
 		assertEquals(StringUtil.substring("abbcc", -3, 0), "bcc");
+		assertEquals(StringUtil.substring("abbcc", 2, -1), "bc");
 		assertNull(StringUtil.substring("abbcc", 0, -6));
 		assertNull(StringUtil.substring(null, 0, -5));
 		assertNull(StringUtil.substring("abc", 0, -55));

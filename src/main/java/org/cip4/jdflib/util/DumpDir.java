@@ -236,10 +236,16 @@ public class DumpDir
 		{
 			try
 			{
-				IOUtils.copy(is, fs);
+				if (is != null)
+				{
+					IOUtils.copy(is, fs);
+				}
 				fs.flush();
 				fs.close();
-				is.reset();
+				if (is != null && is.markSupported())
+				{
+					is.reset();
+				}
 			}
 			catch (final IOException x)
 			{
