@@ -77,9 +77,17 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
+/**
+ * 
+ * @author rainerprosi
+ *
+ */
 public class ProcessXJDFSplitTest extends JDFTestCaseBase
 {
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testSplit()
 	{
@@ -119,4 +127,24 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		d.write2File(sm_dirTestDataTemp + "splitxjdf.jdf", 2, false);
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testSplitNullTypes()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes((String) null);
+		SetHelper s = h.appendResource("Media", EnumUsage.Input);
+		PartitionHelper p = s.appendPartition(null, true);
+		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
+
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		splitter.addGroup(new VString("ImageSetting PreviewGeneration", null));
+		c.setSplitter(splitter);
+
+		JDFDoc d = c.convert(h.getRoot());
+		d.write2File(sm_dirTestDataTemp + "splitxjdfNull.jdf", 2, false);
+	}
 }

@@ -28,9 +28,9 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	public Collection<XJDFHelper> splitXJDF(XJDFHelper root)
 	{
 		Vector<VString> newTypes = splitTypes(root);
+		Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
 		if (newTypes != null)
 		{
-			Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
 			for (VString types : newTypes)
 			{
 				XJDFHelper h = root.clone();
@@ -40,12 +40,12 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 				ret.add(h);
 			}
 			consolidateExchangeResources(ret);
-			return ret;
 		}
 		else
 		{
-			return null;
+			ret.add(root);
 		}
+		return ret;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	{
 		Vector<VString> ret = new Vector<VString>();
 		VString types = root.getTypes();
-		while (types.size() > 0)
+		while (types != null && types.size() > 0)
 		{
 			String first = types.get(0);
 			VString overlap = null;
@@ -80,7 +80,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 			ret.add(overlap);
 			types.removeAll(overlap);
 		}
-		return ret;
+		return ret.size() == 0 ? null : ret;
 	}
 
 	/**
