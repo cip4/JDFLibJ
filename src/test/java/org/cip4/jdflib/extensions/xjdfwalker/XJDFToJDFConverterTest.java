@@ -79,10 +79,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -135,6 +138,26 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFResourceLink rl = root.getLink(m, null);
 		assertNull(rl.getAmountPool());
 		assertNull(m.getElement("AmountPool"));
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testOverage()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper xjdf = new XJDFHelper("j1", null, null);
+		ProductHelper ph = xjdf.appendProduct();
+		ph.setAmount(400);
+		ph.setXPathValue("@MaxAmount", "600");
+		ph.setXPathValue("@MinAmount", "300");
+		JDFDoc d = xCon.convert(xjdf.getRoot());
+		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		assertEquals(JDFIntentResource.guessActual(di, "Overage"), "50");
+		assertEquals(JDFIntentResource.guessActual(di, "Underage"), "25");
 	}
 
 	/**

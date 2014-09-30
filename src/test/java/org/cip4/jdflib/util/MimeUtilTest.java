@@ -381,6 +381,18 @@ public class MimeUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	* @throws Exception
+	*/
+	@Test
+	public void testGetJDFDocFromRawStream() throws Exception
+	{
+		final MimeReader mr = new MimeReader();
+		String xml = "<xml />";
+		assertNotNull(mr.getXMLDoc(new ByteArrayIOStream(xml.getBytes()).getInputStream(), 0));
+		assertNotNull(mr.getXMLDoc(new ByteArrayIOStream(new FileInputStream(new File(sm_dirTestData + File.separator + "matsch.jdf"))).getInputStream(), 0));
+	}
+
+	/**
 	 * test for mjd creation
 	 * @throws Exception
 	 */

@@ -79,7 +79,9 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -95,16 +97,16 @@ public class WalkProduct extends WalkXElement
 	}
 
 	/**
-	 * @param e
+	 * @param xjdfProduct
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement e, KElement trackElem)
+	public KElement walk(final KElement xjdfProduct, KElement trackElem)
 	{
 		JDFNode theNode = (JDFNode) trackElem;
 		if ("Product".equals(theNode.getType()))
 		{
-			JDFNode tmp = theNode.getRoot().getChildJDFNode(e.getAttribute(AttributeName.ID), false);
+			JDFNode tmp = theNode.getRoot().getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
 			if (tmp != null)
 			{
 				theNode = tmp;
@@ -123,8 +125,27 @@ public class WalkProduct extends WalkXElement
 			theNode = xjdfToJDFImpl.createProductRoot();
 		}
 		xjdfToJDFImpl.firstproductInList = false;
-		copyToNode(e, theNode);
-		fixComponent(theNode, e);
+		copyToNode(xjdfProduct, theNode);
+		JDFComponent c = fixComponent(theNode, xjdfProduct);
+
+		JDFResourceLink rlc = theNode.getLink(c, EnumUsage.Output);
+		double overage = rlc.getMaxAmount();
+		double underage = rlc.getMinAmount();
+		double amount = StringUtil.parseDouble(xjdfProduct.getAttribute(AttributeName.AMOUNT, null, null), -1000.);
+		if (amount > 0 && (overage > 0 || underage > 0))
+		{
+			JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+			if (overage > 0)
+			{
+				di.appendOverage().setActual(100.0 * (overage - amount) / amount);
+			}
+			if (overage > 0)
+			{
+				di.appendUnderage().setActual(100.0 * (amount - underage) / amount);
+			}
+			di.appendDropIntent().appendDropItemIntent().setAmount((int) amount);
+			di.refElement(c);
+		}
 		return theNode;
 	}
 
@@ -144,7 +165,7 @@ public class WalkProduct extends WalkXElement
 	 * @param theNode
 	 * @param xjdfProduct
 	 */
-	private void fixComponent(final JDFNode theNode, final KElement xjdfProduct)
+	private JDFComponent fixComponent(final JDFNode theNode, final KElement xjdfProduct)
 	{
 		JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		if (c == null)
@@ -179,7 +200,10 @@ public class WalkProduct extends WalkXElement
 		if (rl != null)
 		{
 			rl.moveAttribute(AttributeName.AMOUNT, theNode);
+			rl.moveAttribute(AttributeName.MINAMOUNT, theNode);
+			rl.moveAttribute(AttributeName.MAXAMOUNT, theNode);
 		}
+		return c;
 	}
 
 	/**

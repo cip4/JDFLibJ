@@ -235,8 +235,7 @@ public class MimeReader extends MimeHelper
 		// not a mime - try direct xml
 		if (index == 0)
 		{
-			bis.reset();
-			bis = bis.getNewStream();
+			bis.seek(0);
 			return XMLDoc.parseStream(bis);
 		}
 		else
