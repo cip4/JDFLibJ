@@ -84,7 +84,6 @@ import org.apache.xerces.xni.XNIException;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
@@ -97,46 +96,6 @@ import org.xml.sax.SAXNotSupportedException;
  */
 public class JDFParser extends XMLParser
 {
-	/**
-	 * simple search stream that will find a valid xml wherever it starts
-	 * 
-	 * @author prosirai
-	 * 
-	 */
-	private class XMLReaderStream extends SkipInputStream
-	{
-		protected boolean allowClose = false;
-
-		/**
-		 * @param searchXML
-		 * @param stream
-		 */
-		public XMLReaderStream(final boolean searchXML, final InputStream stream)
-		{
-			super(searchXML ? "<?xml" : null, stream, searchXML, 10000);
-		}
-
-		/**
-		 * the parser closes on error - something we do not want especially for the underlying stream
-		 * 
-		 */
-		@Override
-		public void close()
-		{
-			try
-			{
-				if (allowClose)
-				{
-					super.close();
-				}
-			}
-			catch (final Exception x)
-			{
-				// nop
-			}
-		}
-
-	}
 
 	/**
 	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated JDF instances

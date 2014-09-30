@@ -73,10 +73,12 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -87,6 +89,7 @@ import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -108,8 +111,6 @@ public class XMLParser extends DOMParser
 	 */
 	private class XMLReaderStream extends SkipInputStream
 	{
-		protected boolean allowClose = false;
-
 		/**
 		 * @param searchXML
 		 * @param stream
@@ -118,27 +119,6 @@ public class XMLParser extends DOMParser
 		{
 			super(searchXML ? "<?xml" : null, stream, searchXML, 10000);
 		}
-
-		/**
-		 * the parser closes on error - something we do not want especially for the underlying stream
-		 * 
-		 */
-		@Override
-		public void close()
-		{
-			try
-			{
-				if (allowClose)
-				{
-					super.close();
-				}
-			}
-			catch (final Exception x)
-			{
-				log.error("Error closing reader stream", x);
-			}
-		}
-
 	}
 
 	/**
@@ -291,21 +271,37 @@ public class XMLParser extends DOMParser
 		{
 			return null;
 		}
-		final XMLReaderStream bis = new XMLReaderStream(false, inStream);
-		bis.mark(0);
-
-		InputSource inSource = new InputSource(bis);
-		XMLDoc d = parseInputSource(inSource);
-
-		if (d == null && m_searchStream)
+		XMLDoc d = null;
+		if (m_searchStream)
 		{
-			bis.reset();
+			final XMLReaderStream bis = new XMLReaderStream(false, inStream);
+			bis.mark(0);
 
-			inSource = new InputSource(new XMLReaderStream(true, bis));
+			InputSource inSource = new InputSource(bis);
+			d = parseInputSource(inSource);
+
+			if (d == null && m_searchStream)
+			{
+				bis.reset();
+
+				inSource = new InputSource(new XMLReaderStream(true, bis));
+				d = parseInputSource(inSource);
+			}
+		}
+		else
+		{
+			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream : new BufferedInputStream(inStream);
+			InputSource inSource = new InputSource(bis);
 			d = parseInputSource(inSource);
 		}
-		bis.allowClose = true;
-		bis.close();
+		try
+		{
+			inStream.close();
+		}
+		catch (IOException x)
+		{
+			//NOP
+		}
 		return d;
 	}
 
