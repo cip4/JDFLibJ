@@ -123,6 +123,7 @@ public class JDFToXJDF extends PackageElementWalker
 	public JDFToXJDF()
 	{
 		super(new BaseWalkerFactory());
+		wantProduct = true;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		trackAudits = true;
 		init();
@@ -247,6 +248,29 @@ public class JDFToXJDF extends PackageElementWalker
 	boolean bIntentPartition = false;
 
 	/**
+	 *  if true, we want a productList from the kids
+	 */
+	boolean wantProduct;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isWantProduct()
+	{
+		return wantProduct;
+	}
+
+	/**
+	 * 
+	 * @param wantProduct
+	 */
+	public void setWantProduct(boolean wantProduct)
+	{
+		this.wantProduct = wantProduct;
+	}
+
+	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
 	boolean bHTMLColor = false;
@@ -262,9 +286,13 @@ public class JDFToXJDF extends PackageElementWalker
 	public KElement convert(final KElement root)
 	{
 		if (root instanceof JDFJMF)
+		{
 			return makeNewJMF((JDFJMF) root);
+		}
 		if (root instanceof JDFNode)
+		{
 			return makeNewJDF((JDFNode) root, null);
+		}
 		return null;
 	}
 
@@ -307,23 +335,35 @@ public class JDFToXJDF extends PackageElementWalker
 
 		loopNodes(oldRoot);
 
-		walkingProduct = true;
-		KElement beforeElem = newRoot.getElement(ElementName.AUDITPOOL);
-		beforeElem = beforeElem == null ? null : beforeElem.getNextSiblingElement();
-		final KElement productList = newRoot.insertBefore(ProductHelper.PRODUCTLIST, beforeElem, null);
-
 		prepareRoot(root);
-		walkTree(root, productList);
-		if (productList.getElement(ProductHelper.PRODUCT) == null)
-		{
-			productList.deleteNode();
-		}
-		walkingProduct = false;
+		createProducts(root);
 
 		postWalk();
 		newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
 
 		return newRoot;
+	}
+
+	/**
+	 * 
+	 * @param root
+	 */
+	private void createProducts(final JDFNode root)
+	{
+		if (wantProduct)
+		{
+			walkingProduct = true;
+			KElement beforeElem = newRoot.getElement(ElementName.AUDITPOOL);
+			beforeElem = beforeElem == null ? null : beforeElem.getNextSiblingElement();
+			final KElement productList = newRoot.insertBefore(ProductHelper.PRODUCTLIST, beforeElem, null);
+
+			walkTree(root, productList);
+			if (productList.getElement(ProductHelper.PRODUCT) == null)
+			{
+				productList.deleteNode();
+			}
+			walkingProduct = false;
+		}
 	}
 
 	/**
