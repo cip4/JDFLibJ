@@ -80,6 +80,7 @@ import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -128,6 +129,19 @@ public class WalkProduct extends WalkXElement
 		copyToNode(xjdfProduct, theNode);
 		JDFComponent c = fixComponent(theNode, xjdfProduct);
 
+		updateDeliveryIntent(xjdfProduct, theNode, c);
+		return theNode;
+	}
+
+	/**
+	 * merge minamount and maxamount into deliveryintent
+	 * 
+	 * @param xjdfProduct
+	 * @param theNode
+	 * @param c
+	 */
+	private void updateDeliveryIntent(final KElement xjdfProduct, JDFNode theNode, JDFComponent c)
+	{
 		JDFResourceLink rlc = theNode.getLink(c, EnumUsage.Output);
 		double overage = rlc.getMaxAmount();
 		double underage = rlc.getMinAmount();
@@ -139,14 +153,14 @@ public class WalkProduct extends WalkXElement
 			{
 				di.appendOverage().setActual(100.0 * (overage - amount) / amount);
 			}
-			if (overage > 0)
+			if (underage > 0)
 			{
 				di.appendUnderage().setActual(100.0 * (amount - underage) / amount);
 			}
-			di.appendDropIntent().appendDropItemIntent().setAmount((int) amount);
-			di.refElement(c);
+			final JDFDropItemIntent dropItemIntent = di.appendDropIntent().appendDropItemIntent();
+			dropItemIntent.setAmount((int) amount);
+			dropItemIntent.refElement(c);
 		}
-		return theNode;
 	}
 
 	/**

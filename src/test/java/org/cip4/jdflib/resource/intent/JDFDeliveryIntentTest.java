@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,10 +73,12 @@ package org.cip4.jdflib.resource.intent;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -93,7 +95,38 @@ public class JDFDeliveryIntentTest extends JDFTestCaseBase
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		JDFNumberSpan ns = di.appendOverage();
-		Assert.assertNotNull(ns);
+		assertNotNull(ns);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetDropItemForComponent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFDropIntent drop = di.appendDropIntent();
+		assertNull(drop.getDropItemWithComponent(c));
+		JDFDropItemIntent dropItemIntent = drop.appendDropItemIntent();
+		dropItemIntent.refComponent(c);
+		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCreateDropItemForComponent()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFDropIntent drop = di.appendDropIntent();
+		assertNull(drop.getDropItemWithComponent(c));
+		JDFDropItemIntent dropItemIntent = drop.getCreateDropItemWithComponent(c);
+		assertEquals(dropItemIntent, drop.getDropItemWithComponent(c));
 	}
 
 	/**
