@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,8 +71,8 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -97,10 +97,10 @@ public class ProductHelperTest extends JDFTestCaseBase
 		ph.setChild(phCover, 1);
 		ProductHelper phBody = new ProductHelper(body);
 		ph.setChild(phBody, 1);
-		Assert.assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
-		Assert.assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
-		Assert.assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
-		Assert.assertNull(ph.getChild("Body", 1));
+		assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
+		assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
+		assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
+		assertNull(ph.getChild("Body", 1));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class ProductHelperTest extends JDFTestCaseBase
 		KElement product = productList.appendElement("Product");
 		ProductHelper ph = new ProductHelper(product);
 		ph.setRoot();
-		Assert.assertEquals("true", product.getAttribute("IsRoot", null, null));
+		assertEquals("true", product.getAttribute("IsRoot", null, null));
 	}
 
 	/**
@@ -129,13 +129,56 @@ public class ProductHelperTest extends JDFTestCaseBase
 		KElement productList = root.appendElement("ProductList");
 		KElement product = productList.appendElement("Product");
 		ProductHelper ph = new ProductHelper(product);
-		Assert.assertTrue(ph.isRootProduct());
+		assertTrue(ph.isRootProduct());
 		KElement product2 = productList.appendElement("Product");
 		ProductHelper ph2 = new ProductHelper(product2);
-		Assert.assertFalse(ph2.isRootProduct());
+		assertFalse(ph2.isRootProduct());
 		ph2.setRoot();
-		Assert.assertTrue(ph2.isRootProduct());
-		Assert.assertFalse(ph.isRootProduct());
-
+		assertTrue(ph2.isRootProduct());
+		assertFalse(ph.isRootProduct());
 	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAmount()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		KElement productList = root.appendElement("ProductList");
+		KElement product = productList.appendElement("Product");
+		ProductHelper ph = new ProductHelper(product);
+		ph.setAmount(42);
+		assertEquals(ph.getAmount(), 42);
+		assertEquals(ph.getMinAmount(), 42);
+		assertEquals(ph.getMaxAmount(), 42);
+		ph.setMaxAmount(84);
+		assertEquals(ph.getAmount(), 42);
+		assertEquals(ph.getMinAmount(), 42);
+		assertEquals(ph.getMaxAmount(), 84);
+		ph.setMinAmount(21);
+		assertEquals(ph.getAmount(), 42);
+		assertEquals(ph.getMinAmount(), 21);
+		assertEquals(ph.getMaxAmount(), 84);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testOverProduction()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		KElement productList = root.appendElement("ProductList");
+		KElement product = productList.appendElement("Product");
+		ProductHelper ph = new ProductHelper(product);
+		assertEquals(ph.getOverproduction(), 0.0);
+		ph.setAmount(42);
+		assertEquals(ph.getOverproduction(), 0.0);
+		ph.setMaxAmount(84);
+		assertEquals(ph.getOverproduction(), 100.0);
+	}
+
 }

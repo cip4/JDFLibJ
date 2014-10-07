@@ -168,6 +168,50 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @return amount the amount to get
+	 */
+	public int getMaxAmount()
+	{
+		int a = theElement.getIntAttribute(AttributeName.MAXAMOUNT, null, -4242);
+		return a == -4242 ? getAmount() : a;
+	}
+
+	/**
+	 * @return overproduction in %
+	 */
+	public double getOverproduction()
+	{
+		int a1 = getAmount();
+		int max = getMaxAmount();
+		return a1 > 0 ? (100.0 * (max - a1)) / a1 : 0;
+	}
+
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setMaxAmount(int amount)
+	{
+		theElement.setAttribute(AttributeName.MAXAMOUNT, amount, null);
+	}
+
+	/**
+	 * @return amount the minamount to get, if not set default to Amount
+	 */
+	public int getMinAmount()
+	{
+		int a = theElement.getIntAttribute(AttributeName.MINAMOUNT, null, -4242);
+		return a == -4242 ? getAmount() : a;
+	}
+
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setMinAmount(int amount)
+	{
+		theElement.setAttribute(AttributeName.MINAMOUNT, amount, null);
+	}
+
+	/**
 	 * @param phCover
 	 * @param amount 
 	 */
