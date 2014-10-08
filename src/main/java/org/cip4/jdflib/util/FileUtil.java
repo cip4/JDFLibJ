@@ -985,6 +985,9 @@ public class FileUtil
 	 */
 	public static BufferedOutputStream getBufferedOutputStream(File file, boolean append)
 	{
+		if (file == null)
+			return null;
+
 		FileOutputStream fos;
 		try
 		{
