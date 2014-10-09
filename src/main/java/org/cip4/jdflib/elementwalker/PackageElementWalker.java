@@ -166,7 +166,11 @@ public class PackageElementWalker extends ElementWalker
 	 */
 	private void constructWorkersJar(File jarFile)
 	{
-		ZipReader zr = new ZipReader(jarFile);
+		ZipReader zr = ZipReader.getZipReader(jarFile);
+		if (zr == null)
+		{
+			log.error("Could not unpack zip file: " + jarFile);
+		}
 		Class<? extends PackageElementWalker> currentClass = getClass();
 		Class<? extends PackageElementWalker> baseClass = currentClass;
 		log.info("constructing from jar: " + jarFile);

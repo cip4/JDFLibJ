@@ -312,6 +312,8 @@ public class ZipReader
 	 */
 	public static Vector<ZipReader> getZipReaders(InputStream is, int max)
 	{
+		if (is == null)
+			return null;
 		ByteArrayIOInputStream bios = ByteArrayIOStream.getBufferedInputStream(is);
 		SkipInputStream sis = new SkipInputStream("PK\03\04", bios, false);
 		boolean nextAvailable = true;
@@ -570,5 +572,15 @@ public class ZipReader
 	public String toString()
 	{
 		return "ZipReader root=" + rootEntry;
+	}
+
+	/**
+	 * 
+	 * @param jarFile
+	 * @return
+	 */
+	public static ZipReader getZipReader(File jarFile)
+	{
+		return getZipReader(FileUtil.getBufferedInputStream(jarFile));
 	}
 }
