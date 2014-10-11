@@ -710,8 +710,22 @@ public class StringUtil
 	 * @param index index of the token to replace
 	 * if<0 return from end (e.g. -1 is the last token)
 	 * @param delim the delimiter
+	 * 
+	 * @return the modified string, null if last token was removed
+	 */
+	public static String removeToken(final String strWork, int index, String delim)
+	{
+		return getNonEmpty(replaceToken(strWork, index, delim, null));
+	}
+
+	/**
+	 * replace a token in a string
+	 * @param strWork the String to work on
+	 * @param index index of the token to replace
+	 * if<0 return from end (e.g. -1 is the last token)
+	 * @param delim the delimiter
 	 * @param newToken the new token, if null said token is removed
-	 * @return the modified string
+	 * @return the modified string - never null
 	 */
 	public static String replaceToken(final String strWork, int index, String delim, String newToken)
 	{
@@ -742,7 +756,7 @@ public class StringUtil
 			v2.remove(i);
 			if (i > 0)
 				v2.remove(i - 1);
-			else if (i < v2.size() - 1)
+			else if (i < v2.size())
 				v2.remove(i);
 		}
 		else

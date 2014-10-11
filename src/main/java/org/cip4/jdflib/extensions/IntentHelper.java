@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -170,12 +171,22 @@ public class IntentHelper extends BaseXJDFHelper
 
 	/**
 	 * get the span attribute - initially try attribute, else Element/@Actual
-	 * @param spanName
+	 * @param spanPath
 	 * @return 
 	 */
-	public String getSpan(final String spanName)
+	public String getSpan(final String spanPath)
 	{
-		final KElement resource = getResource();
+		KElement resource = getResource();
+		String elem = StringUtil.removeToken(spanPath, -1, "/");
+		if (elem != null)
+		{
+			resource = resource.getXPathElement(elem);
+		}
+		if (resource == null)
+		{
+			return null;
+		}
+		String spanName = StringUtil.token(spanPath, -1, "/");
 		String s = resource.getAttribute(spanName, null, null);
 		if (s == null)
 		{
@@ -187,15 +198,25 @@ public class IntentHelper extends BaseXJDFHelper
 	/**
 	 * set the span in a subelement
 	 * @param resource
-	 * @param att
+	 * @param spanPath
 	 * @param val
 	 * @param dataType
 	 */
-	public void setSpan(final KElement resource, final String att, final String val, String dataType)
+	public void setSpan(KElement resource, final String spanPath, final String val, String dataType)
 	{
+		String elem = StringUtil.removeToken(spanPath, -1, "/");
+		if (elem != null)
+		{
+			resource = resource.getCreateXPathElement(elem);
+		}
+		if (resource == null)
+		{
+			return;
+		}
+		String spanName = StringUtil.token(spanPath, -1, "/");
 		if (bSpanAsAttribute || dataType == null)
 		{
-			resource.setAttribute(att, val);
+			resource.setAttribute(spanName, val);
 		}
 		else
 		{
@@ -204,7 +225,7 @@ public class IntentHelper extends BaseXJDFHelper
 				dataType += "Span";
 			}
 			final KElement span = resource.getCreateElement(dataType);
-			span.setAttribute("Name", att);
+			span.setAttribute("Name", spanName);
 			span.setAttribute("Actual", val);
 		}
 	}

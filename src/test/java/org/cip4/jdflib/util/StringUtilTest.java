@@ -1073,6 +1073,21 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testRemoveToken()
+	{
+		assertEquals(StringUtil.removeToken("a/b/c", 0, "/"), "b/c");
+		assertEquals(StringUtil.removeToken("a/b/c", -1, "/"), "a/b");
+		assertEquals(StringUtil.removeToken("a/b/c", -2, "/"), "a/c");
+		assertNull(StringUtil.removeToken("a/", -1, "/"));
+		assertEquals(StringUtil.removeToken("/a/", -1, "/"), "/");
+		assertNull(StringUtil.removeToken("a", -1, "/"));
+		assertNull(StringUtil.removeToken("/a", -1, "/"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAddToken()
 	{
 		assertNull(StringUtil.addToken(null, "/", null));
