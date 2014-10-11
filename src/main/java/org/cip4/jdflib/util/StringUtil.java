@@ -1030,12 +1030,12 @@ public class StringUtil
 
 	/**
 	 * 
-	 * normalize a string by stripping and converting whitespace to a single blank
+	 * normalize a string by stripping and converting any internal whitespace to a single blank
 	 * @param strWork the input
-	 * @param ignorecase if true return all lower case
-	 * @return the output
+	 * @param toLower if true return all lower case
+	 * @return the output; null if all characters were removed
 	 */
-	public static String normalize(String strWork, boolean ignorecase)
+	public static String normalize(String strWork, boolean toLower)
 	{
 		if (strWork == null)
 			return null;
@@ -1043,7 +1043,7 @@ public class StringUtil
 		if (getNonEmpty(strWork) == null)
 			return null;
 		strWork = strWork.replaceAll("\\s+", " ");
-		if (ignorecase)
+		if (toLower)
 			strWork = strWork.toLowerCase();
 		return strWork;
 	}

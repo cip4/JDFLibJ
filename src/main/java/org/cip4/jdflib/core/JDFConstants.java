@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1307,25 +1307,25 @@ public abstract class JDFConstants extends JDFCoreConstants
 	/** * */
 	public static final String SEPARATION_UNKNOWN = "Unknown";
 	/** * */
-	public static final String SEPARATION_CYAN = "cyan";
+	public static final String SEPARATION_CYAN = "Cyan";
 	/** * */
-	public static final String SEPARATION_MAGENTA = "magenta";
+	public static final String SEPARATION_MAGENTA = "Magenta";
 	/** * */
-	public static final String SEPARATION_YELLOW = "yellow";
+	public static final String SEPARATION_YELLOW = "Yellow";
 	/** * */
-	public static final String SEPARATION_BLACK = "black";
+	public static final String SEPARATION_BLACK = "Black";
 	/** * */
-	public static final String SEPARATION_RED = "red";
+	public static final String SEPARATION_RED = "Red";
 	/** * */
-	public static final String SEPARATION_GREEN = "green";
+	public static final String SEPARATION_GREEN = "Green";
 	/** * */
-	public static final String SEPARATION_BLUE = "blue";
+	public static final String SEPARATION_BLUE = "Blue";
 	/** * */
-	public static final String SEPARATION_ORANGE = "orange";
+	public static final String SEPARATION_ORANGE = "Orange";
 	/** * */
-	public static final String SEPARATION_SPOT = "spot";
+	public static final String SEPARATION_SPOT = "Spot";
 	/** * */
-	public static final String SEPARATION_VARNISH = "varnish";
+	public static final String SEPARATION_VARNISH = "Varnish";
 
 	/** * */
 	public static final String FITSVALUE_UNKNOWN = "Unknown";

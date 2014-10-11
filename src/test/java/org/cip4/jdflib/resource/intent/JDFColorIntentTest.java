@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,9 +73,10 @@ package org.cip4.jdflib.resource.intent;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -90,6 +91,35 @@ public class JDFColorIntentTest extends JDFTestCaseBase
 	{
 		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		JDFStringSpan ns = ci.appendColorICCStandard();
-		Assert.assertNotNull(ns);
+		assertNotNull(ns);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNColors()
+	{
+		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
+		ci.appendColorsUsed().setCMYK();
+		assertEquals(ci.getNumColors(), 4);
+		ci.setNumColors(4);
+		assertEquals(ci.getNumColors(), 4);
+		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
+		assertEquals(ci.getNumColors(), 5);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNumVarnish()
+	{
+		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
+		ci.appendColorsUsed().setCMYK();
+		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
+		assertEquals(ci.getNumVarnish(), 0);
+		ci.getColorsUsed().setSeparations(new VString("Spot1 DullVarnish Aqueous", null));
+		assertEquals(ci.getNumVarnish(), 2);
 	}
 }

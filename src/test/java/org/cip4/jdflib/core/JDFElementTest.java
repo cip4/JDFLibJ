@@ -82,6 +82,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
+import org.cip4.jdflib.core.JDFElement.EnumSeparation;
 import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -432,6 +433,15 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFJMF jmf = doc.getJMFRoot();
 		assertEquals(jmf.getVersion(true), EnumVersion.Version_1_2);
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testEnumSeparation()
+	{
+		assertEquals(EnumSeparation.Cyan.getName(), "Cyan");
+		assertNotNull(EnumSeparation.getEnumMap());
 	}
 
 	/**

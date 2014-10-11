@@ -1377,7 +1377,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return a map of all orientation enums
 		 */
-		public static Map getEnumMap()
+		public static Map<EnumSeparation, String> getEnumMap()
 		{
 			return getEnumMap(EnumSeparation.class);
 		}
@@ -1385,7 +1385,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return a list of all orientation enums
 		 */
-		public static List getEnumList()
+		public static List<EnumSeparation> getEnumList()
 		{
 			return getEnumList(EnumSeparation.class);
 		}
@@ -1393,7 +1393,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return an iterator over the enum objects
 		 */
-		public static Iterator iterator()
+		public static Iterator<EnumSeparation> iterator()
 		{
 			return iterator(EnumSeparation.class);
 		}

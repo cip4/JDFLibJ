@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,7 +83,10 @@ package org.cip4.jdflib.resource.intent;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorIntent;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFColorIntent extends JDFAutoColorIntent
@@ -136,16 +139,65 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	}
 
 	/**
-	 * returns the number of colors defined inColorsUsed
+	 * returns the number of colors defined in ColorsUsed
 	 * 
 	 * @return
 	 */
+	@Override
 	public int getNumColors()
+	{
+		int n = super.getNumColors();
+		JDFSeparationList sl = getColorsUsed();
+		if (sl == null)
+			return n;
+		VString vSep = sl.getSeparations();
+		if (n >= 1)
+			vSep.remove(JDFConstants.SEPARATION_BLACK);
+		if (n == 4)
+		{
+			vSep.remove(JDFConstants.SEPARATION_CYAN);
+			vSep.remove(JDFConstants.SEPARATION_MAGENTA);
+			vSep.remove(JDFConstants.SEPARATION_YELLOW);
+		}
+		return n + vSep.size();
+	}
+
+	/**
+	 * returns the number of varnishes defined in ColorsUsed
+	 * 
+	 * @return
+	 */
+	public int getNumVarnish()
 	{
 		JDFSeparationList sl = getColorsUsed();
 		if (sl == null)
 			return 0;
-		return sl.getSeparations().size();
+		VString seps = sl.getSeparations();
+		int n = 0;
+		for (String sep : seps)
+		{
+			if (isVarnish(sep))
+			{
+				n++;
+			}
+		}
+		return n;
 	}
-} // class JDFIDPLayout
-// ==========================================================================
+
+	/**
+	 * returns the number of colors defined in ColorsUsed
+	 * 
+	 * @return true if the color is a varnish
+	 */
+	public static boolean isVarnish(String color)
+	{
+		color = StringUtil.normalize(color, true);
+		if (color == null)
+			return false;
+		if (color.indexOf("varnish") >= 0)
+			return true;
+		if ("aqueous".equals(color) || "bronzing".equals(color))
+			return true;
+		return false;
+	}
+}

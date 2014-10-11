@@ -170,6 +170,16 @@ public class IntentHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @param att
+	 * @param val
+	 *
+	 */
+	public void setSpan(final String att, final String val)
+	{
+		setSpan(att, val, null);
+	}
+
+	/**
 	 * get the span attribute - initially try attribute, else Element/@Actual
 	 * @param spanPath
 	 * @return 
