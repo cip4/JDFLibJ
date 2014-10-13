@@ -111,16 +111,16 @@ public class NumberFormatter
 	public String formatInt(final int i, int length)
 	{
 		final Integer[] ad = { new Integer(i) };
+		String s;
 		if (length > 0)
 		{
-			String s = StringUtil.sprintf("%0" + length + "i", ad);
-			return s;
+			s = StringUtil.sprintf("%0" + length + "i", ad);
 		}
 		else
 		{
-			return StringUtil.sprintf("%i", ad);
+			s = StringUtil.sprintf("%i", ad);
 		}
-
+		return s;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class NumberFormatter
 	 * 
 	 * @param d the double to format
 	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
-	 * @return the formatted string that represents d TBD handle exp format
+	 * @return the formatted string that represents d TBD handle exp format, null if NaN
 	 */
 	public String formatDouble(final double d, int precision)
 	{
@@ -148,7 +148,15 @@ public class NumberFormatter
 			{
 				final Double[] ad = { Double.valueOf(d) };
 				String ss = StringUtil.sprintf("%." + precision + "f", ad);
-				s = zappTrailing(ss);
+				ss = zappTrailing(ss);
+				if ("nan".equals(ss))
+				{
+					s = null;
+				}
+				else
+				{
+					s = ss;
+				}
 			}
 			else if (d > 0)
 			{

@@ -13,6 +13,7 @@
  */
 package org.cip4.jdflib.cformat;
 
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -515,7 +516,7 @@ public class PrintfFormat
 		}
 		else
 		{
-			System.out.print("f = " + type);
+			LogFactory.getLog(getClass()).error("f = " + type);
 			throw new java.lang.IllegalArgumentException();
 		}
 
