@@ -394,6 +394,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse(UrlUtil.isXMLType("foobar+xml "));
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsZIPType()
+	{
+		assertFalse(UrlUtil.isZIPType("text/xml"));
+		assertTrue(UrlUtil.isZIPType("application/zip"));
+		assertTrue(UrlUtil.isZIPType("application/foobar+zip; "));
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**

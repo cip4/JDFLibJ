@@ -1831,16 +1831,13 @@ public class UrlUtil
 		if (contentType == null)
 			return false;
 
-		String lower = contentType.toLowerCase().trim();
+		String lower = StringUtil.normalize(contentType, true);
 		while (lower.endsWith(";"))
 			lower = StringUtil.leftStr(lower, -1);
 
 		if (TEXT_XML.equals(lower) || APPLICATION_XML.equals(lower))
 			return true;
-		if ((lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml"))
-			return true;
-
-		return false;
+		return (lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml");
 	}
 
 	/**
@@ -1850,16 +1847,12 @@ public class UrlUtil
 	 */
 	public static boolean isZIPType(String contentType)
 	{
+		String lower = StringUtil.normalize(contentType, true);
 		if (contentType == null)
 			return false;
-
-		String lower = contentType.toLowerCase().trim();
 		while (lower.endsWith(";"))
 			lower = StringUtil.leftStr(lower, -1);
-
-		if (APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower))
-			return true;
-		return false;
+		return APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower) || lower.endsWith("+zip");
 	}
 
 	/**

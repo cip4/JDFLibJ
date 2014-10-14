@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,6 +94,7 @@ public class UrlPart implements IPollDetails
 	 * 
 	 * @return the response code
 	 */
+	@Override
 	public int getResponseCode()
 	{
 		return rc;
@@ -176,6 +177,7 @@ public class UrlPart implements IPollDetails
 	/**
 	 * @return the contentType
 	 */
+	@Override
 	public String getContentType()
 	{
 		return contentType;
@@ -194,6 +196,7 @@ public class UrlPart implements IPollDetails
 	 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
 	 * @return the response stream
 	*/
+	@Override
 	public InputStream getResponseStream()
 	{
 		return bufferStream == null ? inStream : bufferStream.getInputStream();
@@ -242,5 +245,15 @@ public class UrlPart implements IPollDetails
 	public HttpURLConnection getConnection()
 	{
 		return connection;
+	}
+
+	/**
+	 * we are polling
+	 * @see org.cip4.jdflib.util.net.IPollDetails#isPush()
+	 */
+	@Override
+	public boolean isPush()
+	{
+		return false;
 	}
 }
