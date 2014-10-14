@@ -1040,6 +1040,7 @@ public class KElementTest extends JDFTestCaseBase
 		final XMLDoc doc = new XMLDoc("Test", null);
 		final KElement root = doc.getRoot();
 		final KElement a = root.appendElement("a");
+		assertEquals(root.moveElement(a, a), a);
 		final KElement b = root.appendElement("b");
 		final KElement c = b.appendElement("c");
 		final KElement c2 = b.removeChild("c", null, 0);

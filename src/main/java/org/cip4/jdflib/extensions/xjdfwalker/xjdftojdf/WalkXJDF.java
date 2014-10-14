@@ -104,21 +104,22 @@ public class WalkXJDF extends WalkXElement
 		xjdfToJDFImpl.currentJDFNode.setMaxVersion(EnumVersion.Version_2_0);
 		xjdfToJDFImpl.currentJDFNode.setStatus(EnumNodeStatus.Part);
 		removeInheritedJobID();
-		setTypes();
+		setType();
 		return xjdfToJDFImpl.currentJDFNode;
 	}
 
 	/**
 	 * 
 	 */
-	private void setTypes()
+	private void setType()
 	{
 		String t = xjdfToJDFImpl.currentJDFNode.getAttribute("Types", null, null);
-		if ("Product".equals(t))
+		if ("Product".equals(t) || StringUtil.getNonEmpty(t) == null)
 		{
 			xjdfToJDFImpl.currentJDFNode.setType(EnumType.Product);
 			xjdfToJDFImpl.currentJDFNode.removeAttribute("Types");
-			xjdfToJDFImpl.foundProduct = xjdfToJDFImpl.createProduct = true;
+			xjdfToJDFImpl.foundProduct = true;
+			xjdfToJDFImpl.createProduct = true;
 		}
 		else if (StringUtil.tokenize(t, null, false).size() == 1)
 		{

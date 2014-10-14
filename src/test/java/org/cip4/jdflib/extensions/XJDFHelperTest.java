@@ -99,6 +99,30 @@ public class XJDFHelperTest extends TestCase
 	}
 
 	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testNumProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j", "root", null);
+		assertEquals(h.numProductHelpers(true), 0);
+		assertEquals(h.numProductHelpers(false), 0);
+		ProductHelper cover = h.appendProduct();
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 1);
+		ProductHelper body = h.appendProduct();
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 2);
+		ProductHelper book = h.appendProduct();
+		book.setRoot();
+		book.setChild(cover, 1);
+		book.setChild(body, 1);
+		assertEquals(h.numProductHelpers(true), 1);
+		assertEquals(h.numProductHelpers(false), 3);
+	}
+
+	/**
 	 * 
 	 * 
 	 */

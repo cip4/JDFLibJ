@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -75,6 +76,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -152,6 +154,10 @@ public class WalkProduct extends WalkJDFElement
 		{
 			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
 			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+			if (component.isComponentType(EnumComponentType.FinalProduct))
+			{
+				new ProductHelper(prod).setRoot();
+			}
 		}
 		final VElement cInLinks = node.getResourceLinks(ElementName.COMPONENT, new JDFAttributeMap("Usage", "Input"), null);
 		if (cInLinks != null)

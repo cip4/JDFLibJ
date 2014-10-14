@@ -216,4 +216,46 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertTrue(jmfRoot.isValid(EnumValidationLevel.Complete));
 	}
 
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testBackwardProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j", "root", null);
+		ProductHelper cover = h.appendProduct();
+		ProductHelper body = h.appendProduct();
+		ProductHelper book = h.appendProduct();
+		book.setRoot();
+		book.setChild(cover, 1);
+		book.setChild(body, 1);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(h);
+		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testMultiBackwardProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j", "root", null);
+		for (int i = 0; i < 2; i++)
+		{
+			ProductHelper cover = h.appendProduct();
+			ProductHelper body = h.appendProduct();
+			ProductHelper book = h.appendProduct();
+			book.setRoot();
+			book.setChild(cover, 1);
+			book.setChild(body, 1);
+		}
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(h);
+		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
+		d.write2File(sm_dirTestDataTemp + "backproduct.jdf", 2, false);
+	}
+
 }

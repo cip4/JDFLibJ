@@ -130,6 +130,18 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	}
 
 	/**
+	 * convenience method
+	 * 
+	 * @param helper
+	 * @return 
+	 */
+	public JDFDoc convert(XJDFHelper helper)
+	{
+		KElement e = helper == null ? null : helper.getRoot();
+		return convert(e);
+	}
+
+	/**
 	 * 
 	 * @param xjdf
 	 * @return

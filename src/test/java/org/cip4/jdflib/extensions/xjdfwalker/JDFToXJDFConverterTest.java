@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
@@ -101,4 +102,33 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjdf = conv.convert(n);
 		assertNotNull(new XJDFHelper(xjdf).getSet("Media", 0));
 	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testMultiBackwardProduct()
+	{
+		XJDFHelper h = new XJDFHelper("j", "root", null);
+		for (int i = 0; i < 2; i++)
+		{
+			ProductHelper cover = h.appendProduct();
+			ProductHelper body = h.appendProduct();
+			ProductHelper book = h.appendProduct();
+			book.setRoot();
+			book.setChild(cover, 1);
+			book.setChild(body, 1);
+		}
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(h);
+		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement newRoot = conv.convert(d.getJDFRoot());
+		XJDFHelper h2 = new XJDFHelper(newRoot);
+		assertEquals(h2.numProductHelpers(true), 2);
+		assertEquals(h2.numProductHelpers(false), 6);
+	}
+
 }

@@ -112,7 +112,7 @@ public class WalkProduct extends WalkXElement
 			{
 				theNode = tmp;
 			}
-			else if (theNode != xjdfToJDFImpl.currentJDFNode && !xjdfToJDFImpl.firstproductInList)
+			else if (!xjdfToJDFImpl.firstproductInList)
 			{
 				theNode = theNode.addProduct();
 			}

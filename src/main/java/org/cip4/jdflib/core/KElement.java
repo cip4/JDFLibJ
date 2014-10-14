@@ -2972,10 +2972,11 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement moveElement(final KElement src, final KElement beforeChild)
 	{
-		KElement kRet = null;
-
 		if (src != null)
 		{
+			if (src == beforeChild)
+				return src; // nop
+
 			if (src.isAncestor(this))
 			{
 				return null; // snafu when moving a to b in a/b
@@ -2999,15 +3000,15 @@ public class KElement extends ElementNSImpl implements Element
 
 			if (beforeChild == null)
 			{
-				kRet = (KElement) appendChild(srcElement);
+				return (KElement) appendChild(srcElement);
 			}
 			else
 			{
-				kRet = (KElement) insertBefore(srcElement, beforeChild);
+				return (KElement) insertBefore(srcElement, beforeChild);
 			}
 		}
 
-		return kRet;
+		return null;
 	}
 
 	protected void clearTargets()

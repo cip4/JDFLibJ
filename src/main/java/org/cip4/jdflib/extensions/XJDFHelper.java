@@ -337,6 +337,17 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * 
+	 * @param rootOnly
+	 * @return
+	 */
+	public int numProductHelpers(boolean rootOnly)
+	{
+		Vector<ProductHelper> v = rootOnly ? getRootProductHelpers() : getProductHelpers();
+		return v == null ? 0 : v.size();
+	}
+
+	/**
+	 * 
 	 * @return the xjdf root element
 	 */
 	public Vector<ProductHelper> getRootProductHelpers()

@@ -362,6 +362,15 @@ public class JDFToXJDF extends PackageElementWalker
 			{
 				productList.deleteNode();
 			}
+			else
+			{
+				XJDFHelper xjdfHelper = new XJDFHelper(productList.getParentNode_KElement());
+				int nRoot = xjdfHelper.numProductHelpers(true);
+				if (nRoot > 1 && !xjdfHelper.getProductHelpers().get(0).isRootProduct())
+				{
+					xjdfHelper.getProductHelpers().get(0).deleteNode();
+				}
+			}
 			walkingProduct = false;
 		}
 	}

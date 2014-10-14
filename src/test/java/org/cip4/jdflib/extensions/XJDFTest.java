@@ -1103,7 +1103,7 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
-		assertEquals(root.getComment(0).getText(), "bar");
+		assertEquals(root.getComment(1).getText(), "bar");
 	}
 
 	/**

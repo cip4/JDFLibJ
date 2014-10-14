@@ -68,7 +68,12 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -90,18 +95,33 @@ public class WalkProductList extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		e.deleteNode();
 		final boolean bFirst = xjdfToJDFImpl.foundProductList;
 		xjdfToJDFImpl.foundProductList = true;
+		KElement eXJDF = e.getParentNode_KElement();
+		XJDFHelper h = new XJDFHelper(eXJDF);
 		// only convert products in the first pass
 		// TODO rethink product conversion switch
-		if (xjdfToJDFImpl.createProduct && !xjdfToJDFImpl.foundProduct && e.numChildElements("Product", null) > 1)
+		int numProductHelpers = h.numProductHelpers(true);
+		if (xjdfToJDFImpl.createProduct && (!xjdfToJDFImpl.foundProduct || numProductHelpers > 1))
 		{
-			xjdfToJDFImpl.createProductRoot();
+			if (!EnumType.Product.equals(xjdfToJDFImpl.currentJDFNode.getEnumType()))
+				xjdfToJDFImpl.createProductRoot();
+			xjdfToJDFImpl.firstproductInList = numProductHelpers <= 1;
 		}
+		Vector<ProductHelper> vRoot = h.getRootProductHelpers();
+		if (vRoot != null)
+		{
+			KElement eProd0 = e.getElement("Product");
+			for (ProductHelper phRoot : vRoot)
+			{
+				e.moveElement(phRoot.getRoot(), eProd0);
+			}
+		}
+
 		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
 		if (!"Product".equals(xjdfToJDFImpl.currentJDFNode.getType()))
 			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
+		e.deleteNode();
 		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
 	}
 
