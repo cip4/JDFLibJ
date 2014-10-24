@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,7 +75,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -161,10 +160,10 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
-		Assert.assertTrue(file.exists());
+		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
-		Assert.assertFalse(file.exists());
-		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		assertFalse(file.exists());
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 	}
 
 	/**
@@ -178,12 +177,12 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
-		Assert.assertTrue(file.exists());
+		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
-		Assert.assertTrue(file.exists());
+		assertTrue(file.exists());
 		hf.addListener(new CountListener(), ".txt");
 		ThreadUtil.sleep(2000);
-		Assert.assertFalse(file.exists());
+		assertFalse(file.exists());
 	}
 
 	/**
@@ -210,26 +209,25 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 		ThreadUtil.sleep(2000);
-		Assert.assertEquals(ok.listFiles().length, 2, 1);
-		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 1);
-		Assert.assertEquals(error.listFiles().length, 2, 1);
+		assertEquals(ok.listFiles().length, 2, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 2, 1);
 		for (int i = 0; i < 4; i++)
 		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
 		ThreadUtil.sleep(1000);
-		Assert.assertEquals(ok.listFiles().length, 4, 1);
-		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(ok.listFiles().length, 4, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
 		for (int i = 0; i < 100; i++)
 		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		ThreadUtil.sleep(1000);
-		Assert.assertEquals(ok.listFiles().length, 42, 13);
-		Assert.assertEquals(tmpHFDir.listFiles().length, 0, 0);
-		Assert.assertEquals(error.listFiles().length, 42, 13);
-
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 42, 13);
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
+		assertEquals(error.listFiles().length, 42, 13);
 	}
 }
