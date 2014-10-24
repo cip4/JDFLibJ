@@ -98,7 +98,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ImageSetting);
 		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
-		xm.appendMedia();
+		xm.appendMedia().setMediaSetCount(42);
 		KElement xjdf = conv.convert(n);
 		assertNotNull(new XJDFHelper(xjdf).getSet("Media", 0));
 	}
