@@ -93,6 +93,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * some generic postprocessing that is better done on the XJDF such as merging stripping and Layout
@@ -660,6 +661,128 @@ public class PostXJDFWalker extends BaseElementWalker
 			if (xjdf.getFirstChild() == null && xjdf.getAttributeMap().size() == 0)
 			{
 				xjdf.deleteNode();
+				return null;
+			}
+			return ret;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkResource extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkResource()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "Resource".equals(toCheck.getLocalName()) || "Parameter".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement ret = super.walk(xjdf, dummy);
+			xjdf.eraseEmptyNodes(true);
+			KElement set = xjdf.getParentNode_KElement();
+			String name = set == null ? null : StringUtil.getNonEmpty(set.getAttribute(AttributeName.NAME));
+			if (name == null)
+			{
+				return null;
+			}
+			KElement realRes = xjdf.getElement(name);
+			if (realRes != null)
+				return ret;
+			KElement aPool = xjdf.getElement(ElementName.AMOUNTPOOL);
+			if (aPool != null)
+				return ret;
+			KElement comment = xjdf.getElement(ElementName.COMMENT);
+			if (comment != null)
+				return ret;
+			JDFAttributeMap map = xjdf.getAttributeMap();
+			map.remove(AttributeName.ID);
+			map.remove(AttributeName.STATUS);
+			if (map.size() == 0)
+			{
+				xjdf.deleteNode();
+				return null;
+			}
+			return ret;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkResourceSet extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkResourceSet()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "ResourceSet".equals(toCheck.getLocalName()) || "ParameterSet".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param set
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement set, KElement dummy)
+		{
+			KElement ret = super.walk(set, dummy);
+			set.eraseEmptyNodes(true);
+			KElement res = set.getElement(StringUtil.leftStr(set.getLocalName(), -3));
+			if (res != null)
+				return ret;
+			KElement comment = set.getElement(ElementName.COMMENT);
+			if (comment != null)
+				return ret;
+			JDFAttributeMap map = set.getAttributeMap();
+			map.remove(AttributeName.ID);
+			map.remove(AttributeName.NAME);
+			map.remove(AttributeName.PROCESSUSAGE);
+			map.remove(AttributeName.USAGE);
+			map.remove(AttributeName.COMBINEDPROCESSINDEX);
+			if (map.size() == 0)
+			{
+				set.deleteNode();
 				return null;
 			}
 			return ret;
