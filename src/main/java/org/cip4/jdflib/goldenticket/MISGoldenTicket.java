@@ -70,9 +70,6 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
@@ -119,8 +116,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 
 	protected int misICSLevel;
 	protected int jmfICSLevel;
-	protected Map<String, VString> catMap = new HashMap<String, VString>();
-	protected String category = null;
 	protected boolean bUsageCounter;
 
 	/**
@@ -145,17 +140,16 @@ public class MISGoldenTicket extends BaseGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
-	 * @param _icsLevel the level to init to (1,2 or 3)
+	 * @param misLevel the mis level to init to ( 1,2 or 3) 
 	 * @param jdfVersion the version to generate a golden ticket for
 	 * @param jmfLevel level of jmf ICS to support
 	 */
-	public MISGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int jmfLevel)
+	public MISGoldenTicket(final int misLevel, final EnumVersion jdfVersion, final int jmfLevel)
 	{
 		super(2, jdfVersion); // mis always requires base 2
 		bUsageCounter = false;
-		misICSLevel = _icsLevel;
+		misICSLevel = misLevel;
 		jmfICSLevel = jmfLevel;
-		fillCatMaps();
 	}
 
 	/**
@@ -169,8 +163,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		jmfICSLevel = parent.jmfICSLevel;
 		getNIFromParent = parent.getNIFromParent;
 		duration = parent.duration;
-		category = parent.category;
-		fillCatMaps();
 	}
 
 	/**
@@ -256,15 +248,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		{
 			theNode.setJobID("Job" + KElement.uniqueID(0));
 		}
-		final VString types = getTypes();
-		if (types != null)
+		if (grayBox)
 		{
-			theNode.setCategory(getCategory());
-			theNode.setCombined(types);
-			if (grayBox)
-			{
-				theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
-			}
+			theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
 		}
 		initNodeInfo();
 		initCustomerInfo();
@@ -354,48 +340,10 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	}
 
 	/**
-	 * @return
-	 */
-	public String getCategory()
-	{
-		return category;
-	}
-
-	/**
-	 * @param _category
-	 */
-	public void setCategory(final String _category)
-	{
-		category = _category;
-	}
-
-	/**
-	 * get the correct Types from category
-	 * @return
-	 */
-	public VString getTypes()
-	{
-		if (category == null)
-		{
-			return null;
-		}
-		return catMap.get(category);
-	}
-
-	/**
 	 * @param _grayBox the grayBox to set
 	 */
 	public void setGrayBox(final boolean _grayBox)
 	{
 		this.grayBox = _grayBox;
-	}
-
-	/**
-	 * 
-	 */
-	protected void fillCatMaps()
-	{
-		// nop
-
 	}
 }

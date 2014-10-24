@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -134,6 +136,8 @@ public class BaseGoldenTicket
 	protected JDFNode theExpandedNode = null;
 	protected JDFNode thePreviousNode = null;
 	protected JDFNode theParentNode = null;
+	protected String category;
+	protected Map<String, VString> catMap = new HashMap<String, VString>();
 	/**
 	 * 
 	 */
@@ -256,6 +260,8 @@ public class BaseGoldenTicket
 	 */
 	public BaseGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
 	{
+		category = null;
+		fillCatMaps();
 		paperProductID = "paperID";
 		baseICSLevel = pIcsLevel;
 		theVersion = jdfVersion == null ? EnumVersion.Version_1_5 : jdfVersion;
@@ -271,6 +277,8 @@ public class BaseGoldenTicket
 	 */
 	public BaseGoldenTicket(final BaseGoldenTicket parent)
 	{
+		category = parent.category;
+		fillCatMaps();
 		baseICSLevel = parent.baseICSLevel;
 		theVersion = parent.theVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
@@ -702,6 +710,13 @@ public class BaseGoldenTicket
 		{
 			theNode.setCommentURL(UrlUtil.stringToURL("http://www.example.com").toExternalForm());
 		}
+		final VString types = getTypes();
+		if (types != null)
+		{
+			theNode.setCategory(getCategory());
+			theNode.setCombined(types);
+		}
+
 	}
 
 	/**
@@ -1279,7 +1294,43 @@ public class BaseGoldenTicket
 			outComp.setDimensions(inMedia.getDimension());
 		}
 		return outComp;
+	}
 
+	/**
+	 * 
+	 */
+	protected void fillCatMaps()
+	{
+		// nop
+	}
+
+	/**
+	 * get the correct Types from category
+	 * @return
+	 */
+	public VString getTypes()
+	{
+		if (category == null)
+		{
+			return null;
+		}
+		return catMap.get(category);
+	}
+
+	/**
+	 * @return
+	 */
+	public String getCategory()
+	{
+		return category;
+	}
+
+	/**
+	 * @param _category
+	 */
+	public void setCategory(final String _category)
+	{
+		category = _category;
 	}
 
 }
