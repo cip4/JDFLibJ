@@ -463,6 +463,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	private void initOutputLayout()
 	{
 		final JDFLayout lo = (JDFLayout) theNode.getCreateResource(ElementName.LAYOUT, EnumUsage.Output, 0);
+		lo.setDescriptiveName("Conduit Layout");
 		lo.setResStatus(EnumResStatus.Unavailable, false);
 		final VString vSigSheetSide = new VString("SignatureName SheetName Side", null);
 		lo.setPartIDKeys(vSigSheetSide);
@@ -493,6 +494,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	{
 		final JDFRunList rl = (JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Output, 0);
 		rl.setResStatus(EnumResStatus.Unavailable, false);
+		rl.setDescriptiveName("Marks RunList");
 		return rl;
 	}
 

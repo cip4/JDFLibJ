@@ -426,7 +426,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkStrippingSet extends WalkElement
+	protected class WalkStrippingSet extends WalkResourceSet
 	{
 		/**
 		 * 

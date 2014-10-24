@@ -874,8 +874,10 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
 		n.getLink(cp, null).setCombinedProcessIndex(3);
 		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.setProcessColorModel("CMYK");
 		n.getLink(cc, null).setCombinedProcessIndex(2);
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		m.setMediaColorNameDetails("Pink");
 		n.getLink(m, null).setCombinedProcessIndex(1);
 		e = new XJDF20().makeNewJDF(n, null);
 		assertEquals(e.getXPathElement("ParameterSet[@Name=\"Color\"]"), e.getXPathElement("ParameterSet[@Name=\"ColorantControl\"]").getNextSiblingElement());
@@ -1360,11 +1362,11 @@ public class XJDFTest extends JDFTestCaseBase
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
 		xm0.setPlateType(EnumPlateType.Dummy);
-		final JDFResource m = n.addResource("Media", EnumUsage.Input);
+		final JDFMedia m = (JDFMedia) n.addResource("Media", EnumUsage.Input);
+		m.setMediaType(EnumMediaType.Plate);
 		r.refElement(m);
 		final KElement out = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Input", out.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Usage", null), "Input");
-
 	}
 
 	/**
