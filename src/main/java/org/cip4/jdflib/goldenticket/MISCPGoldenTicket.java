@@ -158,8 +158,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		super(_misLevel, jdfVersion, _jmfLevel);
 		icsLevel = _icsLevel;
 		vParts = vPartMap;
-		grayBox = isGrayBox;
 		setup();
+		grayBox = isGrayBox;
 	}
 
 	@Override

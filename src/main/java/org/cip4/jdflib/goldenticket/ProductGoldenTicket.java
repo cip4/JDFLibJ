@@ -126,6 +126,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		cols.set(4, "Blue"); // want hd blue here
 		icsLevel = _icsLevel;
 		devID = null;
+		grayBox = false;
 	}
 
 	/**

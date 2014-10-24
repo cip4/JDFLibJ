@@ -630,7 +630,6 @@ public class BaseGoldenTicket
 		initJDF();
 		initAuditPool(theNode);
 		initDevice(null);
-
 	}
 
 	/**

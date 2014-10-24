@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFComChannel;
@@ -236,6 +237,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	@Override
 	public void init()
 	{
+		super.init();
 		if (misICSLevel < 0)
 		{
 			return;
@@ -250,7 +252,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		}
 		if (grayBox)
 		{
-			theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
+			theNode.setType(JDFNode.EnumType.ProcessGroup);
 		}
 		initNodeInfo();
 		initCustomerInfo();
@@ -345,5 +347,15 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	public void setGrayBox(final boolean _grayBox)
 	{
 		this.grayBox = _grayBox;
+	}
+
+	@Override
+	protected void initJDF()
+	{
+		super.initJDF();
+		if (grayBox)
+		{
+			theNode.setType(EnumType.ProcessGroup);
+		}
 	}
 }
