@@ -203,7 +203,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	private JDFDigitalPrintingParams initDigitalPrintingParams(JDFMedia m)
 	{
 		JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
-		digiParams.setSides(EnumSides.TwoSidedFlipY);
+		digiParams.setSides(EnumSides.TwoSided);
 		if (m != null)
 			digiParams.refElement(m);
 		return digiParams;
