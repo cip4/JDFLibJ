@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,6 +72,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumAutomation;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.ElementName;
@@ -145,7 +146,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 
 		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
 		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
-		c.setAttribute("Automation", "Dynamic");
+		c.setAutomation(EnumAutomation.Dynamic);
 		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
 		idp.ensureLink(c, EnumUsage.Output, null);
 		JDFComponent cover = (JDFComponent) c.addPartition(EnumPartIDKey.DocTags, "Cover");

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,7 +102,7 @@ public class JMFPipeTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JMFBuilderFactory.setSenderID(null, "SenderID");
+		JMFBuilderFactory.setSenderID(null, "ManagerID");
 	}
 
 	/**
