@@ -86,7 +86,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
@@ -237,7 +236,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -963,15 +962,21 @@ public abstract class JDFAutoMedia extends JDFResource
 		/**  */
 		public static final EnumMediaType Plate = new EnumMediaType("Plate");
 		/**  */
+		public static final EnumMediaType Screen = new EnumMediaType("Screen");
+		/**  */
 		public static final EnumMediaType SelfAdhesive = new EnumMediaType("SelfAdhesive");
 		/**  */
 		public static final EnumMediaType Sleeve = new EnumMediaType("Sleeve");
 		/**  */
 		public static final EnumMediaType ShrinkFoil = new EnumMediaType("ShrinkFoil");
 		/**  */
+		public static final EnumMediaType Textile = new EnumMediaType("Textile");
+		/**  */
 		public static final EnumMediaType Transparency = new EnumMediaType("Transparency");
 		/**  */
 		public static final EnumMediaType Unknown = new EnumMediaType("Unknown");
+		/**  */
+		public static final EnumMediaType Vinyl = new EnumMediaType("Vinyl");
 	}
 
 	/**
@@ -1455,8 +1460,8 @@ public abstract class JDFAutoMedia extends JDFResource
 	  */
 	public JDFXYPair getDimension()
 	{
-		final String strAttrName = getAttribute(AttributeName.DIMENSION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DIMENSION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1710,8 +1715,8 @@ public abstract class JDFAutoMedia extends JDFResource
 	  */
 	public JDFLabColor getLabColorValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.LABCOLORVALUE, null, null);
-		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LABCOLORVALUE, null, null);
+		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2095,8 +2100,8 @@ public abstract class JDFAutoMedia extends JDFResource
 	  */
 	public JDFXYPair getShrinkIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHRINKINDEX, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHRINKINDEX, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2409,19 +2414,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public Collection<JDFTabDimensions> getAllTabDimensions()
 	{
-		final VElement vc = getChildElementVector(ElementName.TABDIMENSIONS, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFTabDimensions> v = new Vector<JDFTabDimensions>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFTabDimensions) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFTabDimensions.class, false, 0);
 	}
 
 	/**
@@ -2460,19 +2453,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public Collection<JDFContact> getAllContact()
 	{
-		final VElement vc = getChildElementVector(ElementName.CONTACT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFContact> v = new Vector<JDFContact>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFContact) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFContact.class, false, 0);
 	}
 
 	/**
@@ -2523,19 +2504,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 */
 	public Collection<JDFIdentificationField> getAllIdentificationField()
 	{
-		final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFIdentificationField) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFIdentificationField.class, false, 0);
 	}
 
 	/**

@@ -186,6 +186,18 @@ public class JDFMediaTest extends TestCase
 	}
 
 	/**
+	 * 1.5 enums...
+	 */
+	@Test
+	public final void testMediaType()
+	{
+		JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		m.setMediaType(EnumMediaType.Vinyl);
+		assertEquals(m.getMediaType(), EnumMediaType.Vinyl);
+		assertEquals(m.getMediaType().getName(), "Vinyl");
+	}
+
+	/**
 	 * 
 	 */
 	@Test

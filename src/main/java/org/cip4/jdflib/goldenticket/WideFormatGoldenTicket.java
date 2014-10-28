@@ -72,6 +72,7 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -289,6 +290,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 		paperMedia.setDimensionCM(new JDFXYPair(200, 0));
 		paperMedia.setPrintingTechnology("Latex");
 		paperMedia.setUnit("m2");
+		paperMedia.setMediaType(EnumMediaType.Vinyl);
 		paperMedia.setMediaTypeDetails("Backlit");
 		paperMedia.setDescriptiveName("the vinyl to print on");
 		paperMedia.removeAttribute(AttributeName.WEIGHT);
