@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,8 +78,8 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.util.MemorySpy.MemScope;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -93,7 +93,7 @@ public class MemorySpyTest extends TestCase
 	public void testToString()
 	{
 		MemorySpy ms = new MemorySpy();
-		Assert.assertNotNull(ms.toString());
+		assertNotNull(ms.toString());
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class MemorySpyTest extends TestCase
 	{
 		MemorySpy ms = new MemorySpy();
 		String summary = ms.getSummary();
-		Assert.assertNotNull(summary);
+		assertNotNull(summary);
 	}
 
 	/**
@@ -115,7 +115,18 @@ public class MemorySpyTest extends TestCase
 	{
 		MemorySpy ms = new MemorySpy();
 		Map<String, Long> summary = ms.getSizeMap();
-		Assert.assertNotNull(summary);
+		assertNotNull(summary);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCurrentMem()
+	{
+		MemorySpy ms = new MemorySpy();
+		long summary = ms.getCurrentMem();
+		assertTrue(summary < Runtime.getRuntime().maxMemory());
 	}
 
 	/**
@@ -127,8 +138,8 @@ public class MemorySpyTest extends TestCase
 		MemorySpy ms = new MemorySpy();
 		long l = ms.getHeapUsed(MemScope.current);
 		byte[] b = new byte[10000000];
-		Assert.assertNotNull(b);
+		assertNotNull(b);
 		long l2 = ms.getHeapUsed(MemScope.commit);
-		Assert.assertTrue(l2 - l > 5000000);
+		assertTrue(l2 - l > 5000000);
 	}
 }

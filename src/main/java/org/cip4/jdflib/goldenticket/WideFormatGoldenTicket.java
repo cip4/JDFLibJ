@@ -72,10 +72,6 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
-import org.cip4.jdflib.auto.JDFAutoFitPolicy;
-import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -87,13 +83,15 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
-import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFTile;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.resource.process.prepress.JDFRenderingParams;
 
 /**
@@ -188,6 +186,23 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 		initDigitalPrintingParams(null);
 		initColorantControl();
 		initColorspaceConversion();
+		initInk();
+	}
+
+	/**
+	 * 
+	 */
+	protected void initInk()
+	{
+		JDFInk ink = (JDFInk) theNode.getCreateResource(ElementName.INK, EnumUsage.Input, 0);
+		ink.setUnit("l");
+		ink.setFamily("InkJet");
+		for (String col : cols)
+		{
+			JDFInk sep = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, col);
+			sep.setInkName("Inkjet " + col);
+		}
+
 	}
 
 	private void initColorspaceConversion()
@@ -211,9 +226,6 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	private JDFInterpretingParams initInterpretingParams()
 	{
 		JDFInterpretingParams interpretingParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
-		JDFFitPolicy fitPolicy = interpretingParams.appendFitPolicy();
-		fitPolicy.setRotatePolicy(JDFAutoFitPolicy.EnumRotatePolicy.NoRotate);
-		fitPolicy.setSizePolicy(EnumSizePolicy.ClipToMaxPage);
 		return interpretingParams;
 	}
 
@@ -261,7 +273,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	protected JDFRunList initDocumentRunList()
 	{
 		final JDFRunList rl = super.initDocumentRunList();
-		theNode.getLink(rl, EnumUsage.Input).setProcessUsage((EnumProcessUsage) null);
+		theNode.getLink(rl, EnumUsage.Input).setProcessUsage(EnumProcessUsage.Document);
 
 		return rl;
 	}
@@ -274,14 +286,43 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	protected JDFMedia initPaperMedia()
 	{
 		super.initPaperMedia();
-		paperMedia.setDimensionCM(new JDFXYPair(42, 0));
-		paperMedia.setBackCoatings(EnumBackCoatings.None);
-		paperMedia.setFrontCoatings(EnumFrontCoatings.HighGloss);
+		paperMedia.setDimensionCM(new JDFXYPair(200, 0));
 		paperMedia.setPrintingTechnology("Latex");
 		paperMedia.setUnit("m2");
 		paperMedia.setMediaTypeDetails("Backlit");
+		paperMedia.setDescriptiveName("the vinyl to print on");
+		paperMedia.removeAttribute(AttributeName.WEIGHT);
 		theNode.ensureLink(paperMedia, EnumUsage.Input, null);
 		return paperMedia;
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.goldenticket.MISGoldenTicket#initJDF()
+	 */
+	@Override
+	protected void initJDF()
+	{
+		super.initJDF();
+		theNode.setGeneralID("preset", "acrylprinting");
+	}
+
+	@Override
+	protected JDFComponent initOutputComponent()
+	{
+		JDFComponent comp = super.initOutputComponent();
+		comp.setDescriptiveName("The wide format ouput component");
+		return comp;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Override
+	protected VString getCols()
+	{
+		return new VString("Black,Cyan,Magenta,Yellow,White", ",");
 	}
 
 }

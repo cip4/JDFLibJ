@@ -113,6 +113,7 @@ public class WalkXJDFAuditAmount extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		final KElement amountCopy = super.walk(e, trackElem);
+		KElement ret = null;
 		if (amountCopy != null)
 		{
 			String id = e.getAttribute(AttributeName.RREF);
@@ -133,11 +134,11 @@ public class WalkXJDFAuditAmount extends WalkXElement
 						partMapVector.remove(new JDFAttributeMap());
 						rl.setPartMapVector(partMapVector);
 					}
-					amountCopy.deleteNode();
-					return rl;
+					ret = rl;
 				}
 			}
+			amountCopy.deleteNode();
 		}
-		return amountCopy;
+		return ret;
 	}
 }

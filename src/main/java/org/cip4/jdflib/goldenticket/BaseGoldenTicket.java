@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
+import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -162,7 +163,17 @@ public class BaseGoldenTicket
 	/**
 	 * the list of separation names
 	 */
-	public VString cols = new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4", ",");
+	public VString cols = getCols();
+
+	/**
+	 * 
+	 * @return
+	 */
+	protected VString getCols()
+	{
+		return new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4", ",");
+	}
+
 	/**
 	 * 
 	 */
@@ -178,7 +189,7 @@ public class BaseGoldenTicket
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 *  
 	 * @param n
 	 * @return
 	 */
@@ -898,6 +909,41 @@ public class BaseGoldenTicket
 		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0) : ccLink.getTarget());
 		cc.setResStatus(EnumResStatus.Available, false);
 
+		JDFColorPool cp = initColorPool();
+
+		cc.refColorPool(cp);
+		for (int i = 4; i < getNCols(); i++)
+		{
+			cc.getCreateColorantParams().appendSeparation(cols.get(i));
+		}
+		cc.setProcessColorModel("DeviceCMYK");
+		if (nCols[0] != nCols[1])
+		{
+			for (int ii = 0; ii < 2; ii++)
+			{
+				final JDFColorantControl ccP = (JDFColorantControl) cc.addPartition(EnumPartIDKey.Side, ii == 0 ? "Front" : "Back");
+				final VString colsP = new VString();
+				for (int iii = 0; iii < nCols[ii]; iii++)
+				{
+					colsP.add(cols.get(iii));
+				}
+				final JDFSeparationList co = ccP.getCreateColorantOrder();
+				co.setSeparations(colsP);
+			}
+		}
+		else
+		{
+			final JDFSeparationList co = cc.getCreateColorantOrder();
+			co.setSeparations(cols);
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	protected JDFColorPool initColorPool()
+	{
 		JDFColorPool cp = (JDFColorPool) theNode.getJDFRoot().getChildByTagName(ElementName.COLORPOOL, null, 0, null, false, false);
 		if (cp == null)
 		{
@@ -906,12 +952,6 @@ public class BaseGoldenTicket
 			{
 				theParentNode.getCreateResourcePool().moveElement(cp, null);
 			}
-		}
-
-		cc.refColorPool(cp);
-		for (int i = 4; i < getNCols(); i++)
-		{
-			cc.getCreateColorantParams().appendSeparation(cols.get(i));
 		}
 		for (int i = 0; i < getNCols(); i++)
 		{
@@ -945,27 +985,13 @@ public class BaseGoldenTicket
 			{
 				c.setCMYK(new JDFCMYKColor(0.3, 0.7, 0.1, 0));
 			}
-		}
-		cc.setProcessColorModel("DeviceCMYK");
-		if (nCols[0] != nCols[1])
-		{
-			for (int ii = 0; ii < 2; ii++)
+			if ("White".equalsIgnoreCase(c.getName()))
 			{
-				final JDFColorantControl ccP = (JDFColorantControl) cc.addPartition(EnumPartIDKey.Side, ii == 0 ? "Front" : "Back");
-				final VString colsP = new VString();
-				for (int iii = 0; iii < nCols[ii]; iii++)
-				{
-					colsP.add(cols.get(iii));
-				}
-				final JDFSeparationList co = ccP.getCreateColorantOrder();
-				co.setSeparations(colsP);
+				c.setCMYK(new JDFCMYKColor(0, 0, 0, 0));
+				c.setLab(new JDFLabColor(100, 0, 0));
 			}
 		}
-		else
-		{
-			final JDFSeparationList co = cc.getCreateColorantOrder();
-			co.setSeparations(cols);
-		}
+		return cp;
 	}
 
 	/**

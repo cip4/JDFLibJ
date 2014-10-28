@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -234,6 +234,16 @@ public class MemorySpy
 		for (String s : map.keySet())
 			b.append("Mem ").append(s).append(": ").append(map.get(s) / 1000 / 1000.).append("\n");
 		return b.toString();
+	}
+
+	/**
+	 * get the currently used memory
+	 * @return the used memory
+	 */
+	public long getCurrentMem()
+	{
+		final Runtime rt = Runtime.getRuntime();
+		return rt.totalMemory() - rt.freeMemory();
 	}
 
 	/**
