@@ -76,7 +76,11 @@
  */
 package org.cip4.jdflib.util.net;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.ProxySelector;
+import java.net.URI;
+import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.UrlPart;
@@ -138,10 +142,41 @@ public class ProxyUtilTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSystemProxy() throws Exception
+	{
+		ProxyUtil.setUseSystemDefault(true);
+		String[] v = new String[] { "http://www.yahoo.com", "https://www.google.com", "http://localhost" };
+		for (String s : v)
+		{
+			List<Proxy> l = ProxySelector.getDefault().select(new URI(s));
+
+			for (Proxy proxy : l)
+			{
+				log.info("proxy type : " + s + " " + proxy.type());
+				InetSocketAddress addr = (InetSocketAddress) proxy.address();
+				if (addr == null)
+				{
+					log.info("No Proxy");
+				}
+				else
+				{
+					log.info("proxy hostname : " + addr.getHostName());
+					log.info("proxy port : " + addr.getPort());
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
 	 */
 	@Test
 	public void testWriteToURL()
 	{
+		ProxyUtil.setUseSystemDefault(true);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
@@ -151,6 +186,7 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLSecure()
 	{
+		ProxyUtil.setUseSystemDefault(true);
 		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(part);
 		part.buffer();
