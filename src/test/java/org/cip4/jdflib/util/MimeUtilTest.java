@@ -189,9 +189,14 @@ public class MimeUtilTest extends JDFTestCaseBase
 		n.setType(EnumType.ColorSpaceConversion);
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
-		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
+		String unc = sm_dirTestData + File.separator + "test.icc";
+		fs0.setURL(StringUtil.uncToUrl(unc, true));
 		final JDFFileSpec fs1 = cscp.appendColorSpaceConversionOp().appendSourceProfile();
-		fs1.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "4% von test äöüß€.icc", true));
+		String unc2 = sm_dirTestDataTemp + File.separator + "4% von test äöüß€.icc";
+		String uncToUrl = StringUtil.uncToUrl(unc2, true);
+		if (!new File(unc2).exists())
+			FileUtil.copyFile(new File(unc), new File(unc2));
+		fs1.setURL(uncToUrl);
 		return n;
 	}
 

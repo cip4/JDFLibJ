@@ -235,6 +235,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		{
 			return null;
 		}
+		xjdf = xjdf.cloneNewDoc();
 		String docType = xjdf.getLocalName();
 		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
 		if (jdfDoc == null)
