@@ -363,7 +363,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
 		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_*");
-		assertTrue(dirs.length > 3);
+		assertTrue(dirs.length > 0);
 		int nCheck = 0;
 		for (int i = 0; i < dirs.length; i++)
 		{
@@ -379,7 +379,7 @@ public class JDFParserTest extends JDFTestCaseBase
 			assertNotNull("oops in" + jdfxsd, p.parseString(s));
 			nCheck++;
 		}
-		assertTrue(nCheck >= 3);
+		assertTrue(nCheck >= 1);
 	}
 
 	/**

@@ -145,7 +145,7 @@ public abstract class JDFTestCaseBase extends TestCase
 		{
 			path = resource.getPath();
 		}
-		if (path == null)
+		if (path == null || StringUtil.hasToken(path, "cmpINFRA_CommonParsers", "/", 0))
 		{
 			// legacy - pre maven file structure support
 			path = "test" + File.separator + "data";
