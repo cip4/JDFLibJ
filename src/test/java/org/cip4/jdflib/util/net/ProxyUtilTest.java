@@ -159,7 +159,14 @@ public class ProxyUtilTest extends JDFTestCaseBase
 				InetSocketAddress addr = (InetSocketAddress) proxy.address();
 				if (addr == null)
 				{
-					log.info("No Proxy");
+					if (s.contains("localhost"))
+					{
+						log.info("No Proxy for " + s);
+					}
+					else
+					{
+						log.warn("No Proxy for external host " + s);
+					}
 				}
 				else
 				{
