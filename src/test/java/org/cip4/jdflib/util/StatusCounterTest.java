@@ -304,7 +304,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 			sc.getDocJMFNotification(true);
 			sc.getDocJMFResource();
 		}
-		assertEquals(mem, getCurrentMem(), 100000);
+		long dif = getCurrentMem() - mem;
+		dif = Math.max(dif, 0);
+		assertEquals(dif, 0, 200000);
 	}
 
 	/**
@@ -318,7 +320,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		for (int i = 0; i < 10000; i++)
 		{
 			if (i % 1000 == 0)
-				System.out.println(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
+				log.info(i + " " + getCurrentMem() + " " + (getCurrentMem() / (i + 1)));
 			v.add(sc.getDocJMFPhaseTime().getRoot());
 		}
 	}
