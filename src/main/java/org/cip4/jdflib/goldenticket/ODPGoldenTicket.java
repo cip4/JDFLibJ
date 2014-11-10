@@ -170,6 +170,7 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 	private JDFRenderingParams initRenderingParams()
 	{
 		JDFRenderingParams rendParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
+		rendParams.appendObjectResolution().setResolution(new JDFXYPair(600, 600));
 		return rendParams;
 	}
 

@@ -903,7 +903,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAttribute(final String key, final String value, final String nameSpaceURI, String sep, final boolean bUnique)
 	{
-		if (value == null)
+		if (StringUtil.getNonEmpty(value) == null)
 		{
 			return getAttribute(key, nameSpaceURI, null);
 		}

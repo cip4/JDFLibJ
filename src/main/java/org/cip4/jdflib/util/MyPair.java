@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -104,7 +104,7 @@ public class MyPair<aData, bData>
 	@Override
 	public String toString()
 	{
-		return "Pair: " + a + "," + b;
+		return "MyPair: " + a + "," + b;
 	}
 
 	/**
@@ -122,11 +122,52 @@ public class MyPair<aData, bData>
 	}
 
 	/**
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode()
 	{
-		return HashUtil.hashCode(a == null ? null : a.hashCode(), b);
+		final int prime = 31;
+		int result = prime + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((b == null) ? 0 : b.hashCode());
+		return result;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public aData getA()
+	{
+		return a;
+	}
+
+	/**
+	 * 
+	 * @param a
+	 */
+	public void setA(aData a)
+	{
+		this.a = a;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public bData getB()
+	{
+		return b;
+	}
+
+	/**
+	 * 
+	 * @param b
+	 */
+	public void setB(bData b)
+	{
+		this.b = b;
+	}
+
 }

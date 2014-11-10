@@ -10,18 +10,26 @@
 
 package org.cip4.jdflib.resource.process.prepress;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.auto.JDFAutoRenderingParams;
+import org.cip4.jdflib.resource.process.JDFObjectResolution;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ * @author rainer prosi
+ *
+ */
 public class JDFRenderingParams extends JDFAutoRenderingParams
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor for JDFRenderingParams
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -31,10 +39,9 @@ public class JDFRenderingParams extends JDFAutoRenderingParams
 	}
 
 	/**
-	 * Constructor for JDFRenderingParams
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -44,12 +51,12 @@ public class JDFRenderingParams extends JDFAutoRenderingParams
 	}
 
 	/**
+	 *
 	 * Constructor for JDFRenderingParams
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
 	 */
 	public JDFRenderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -61,6 +68,22 @@ public class JDFRenderingParams extends JDFAutoRenderingParams
 	public String toString()
 	{
 		return "JDFRenderingParams[  --> " + super.toString() + " ]";
+	}
+
+	public JDFObjectResolution getObjectResolution(EnumSourceObjects sourceObject, String objectTag)
+	{
+		Vector<JDFObjectResolution> v = getChildrenByClass(JDFObjectResolution.class, false, -1);
+		if (v != null)
+		{
+			for (JDFObjectResolution or : v)
+			{
+				if (or.matches(sourceObject, objectTag))
+				{
+					return or;
+				}
+			}
+		}
+		return null;
 	}
 } // class JDFIDPLayout
 // ==========================================================================
