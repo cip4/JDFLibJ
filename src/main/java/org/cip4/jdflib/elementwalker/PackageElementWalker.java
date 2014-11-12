@@ -224,7 +224,14 @@ public class PackageElementWalker extends ElementWalker
 					name = UrlUtil.prefix(name);
 					name = packageName + "." + name;
 					BaseWalker w = constructWalker(name);
-					log.debug("constructed class: " + name + " Depth=" + w.getDepth());
+					if (w != null)
+					{
+						log.debug("constructed class: " + name + " Depth=" + w.getDepth());
+					}
+					else
+					{
+						log.warn("could not construct class: " + name);
+					}
 					classes.putOne(baseClass, name);
 				}
 			}
