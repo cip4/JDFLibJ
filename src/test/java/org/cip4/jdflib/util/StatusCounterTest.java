@@ -306,7 +306,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		}
 		long dif = getCurrentMem() - mem;
 		dif = Math.max(dif, 0);
-		assertEquals(dif, 0, 200000);
+		assertEquals(dif, 0, 500000);
 	}
 
 	/**

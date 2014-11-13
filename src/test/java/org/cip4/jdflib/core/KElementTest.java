@@ -202,7 +202,9 @@ public class KElementTest extends JDFTestCaseBase
 		{
 			k.appendElement("DOA").deleteNode();
 		}
-		assertEquals(getCurrentMem(), mem, 200000);
+		long currentMem = getCurrentMem();
+		if (currentMem > mem)
+			assertEquals(currentMem, mem, 200000);
 	}
 
 	/**
@@ -222,7 +224,9 @@ public class KElementTest extends JDFTestCaseBase
 			}
 			k.moveElement(d2.appendElement("kid"), null);
 		}
-		assertEquals(getCurrentMem(), mem, 100 * 50000); // allow 100 per element
+		long currentMem = getCurrentMem();
+		if (currentMem > mem)
+			assertEquals(currentMem, mem, 100 * 50000); // allow 100 per element
 	}
 
 	/**

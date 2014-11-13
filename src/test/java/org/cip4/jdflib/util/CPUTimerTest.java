@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,9 +76,9 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -101,7 +101,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 		{
 			Math.sin(i);
 		}
-		Assert.assertTrue(t.getTotalCPUTime() > 0);
+		assertTrue(t.getTotalCPUTime() > 0);
 	}
 
 	/**
@@ -116,8 +116,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 			t.toXML();
 		}
 		t.stop();
-		System.out.print(t.toXML());
-		Assert.assertTrue(t.getTotalCPUTime() > 0);
+		assertTrue(t.getTotalCPUTime() > 0);
 	}
 
 	/**
@@ -128,13 +127,11 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testGetSummary() throws InterruptedException
 	{
 		t.start();
-		Assert.assertNotNull(t.getSingleSummary());
+		assertNotNull(t.getSingleSummary());
 		t.stop();
-		System.out.print(t.getSingleSummary());
-		System.out.println("TotalCPUTime: " + t.getTotalCPUTime());
-		System.out.println("t.getTotalCPUTime() > 0 " + (t.getTotalCPUTime() > 0));
-		// TODO @Rainer (2013-03-10) - Not compatible to Linux
-		// Assert.assertTrue(t.getTotalCPUTime() > 0);
+		log.info(t.getSingleSummary());
+		log.info("TotalCPUTime: " + t.getTotalCPUTime());
+		log.info("t.getTotalCPUTime() > 0 " + (t.getTotalCPUTime() > 0));
 	}
 
 	/**
@@ -152,9 +149,9 @@ public class CPUTimerTest extends JDFTestCaseBase
 			}
 			t.stop();
 		}
-		Assert.assertTrue(t.getTotalCPUTime() > 0);
-		Assert.assertEquals(t.getTotalCPUTime() / 1000, t.getAverageCPUTime());
-		Assert.assertEquals(t.getTotalRealTime() / 1000, t.getAverageRealTime());
+		assertTrue(t.getTotalCPUTime() > 0);
+		assertEquals(t.getTotalCPUTime() / 1000, t.getAverageCPUTime());
+		assertEquals(t.getTotalRealTime() / 1000, t.getAverageRealTime());
 	}
 
 	/**
@@ -164,12 +161,12 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testGetCurrentTimer()
 	{
 		CPUTimer ct0 = fac.getCurrentTimer(null);
-		Assert.assertNull(ct0);
+		assertNull(ct0);
 		ct0 = fac.getCreateCurrentTimer(null);
-		Assert.assertNotNull(ct0);
+		assertNotNull(ct0);
 		CPUTimer ct1 = fac.getCreateCurrentTimer("1");
-		Assert.assertNotNull(ct1);
-		Assert.assertNotSame(ct0, ct1);
+		assertNotNull(ct1);
+		assertNotSame(ct0, ct1);
 	}
 
 	/**
@@ -178,8 +175,8 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testGetFactory()
 	{
-		Assert.assertNotNull(CPUTimer.getFactory());
-		Assert.assertEquals(fac, CPUTimer.getFactory());
+		assertNotNull(CPUTimer.getFactory());
+		assertEquals(fac, CPUTimer.getFactory());
 	}
 
 	/**
@@ -203,11 +200,10 @@ public class CPUTimerTest extends JDFTestCaseBase
 			t1.stop();
 
 		}
-		System.out.print(t.toXML());
-		Assert.assertTrue(t.getTotalCPUTime() > 0);
-		Assert.assertEquals(t.getNumStarts(), 5);
-		Assert.assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 100);
-		Assert.assertEquals(t.getTotalRealTime(), l, l / 100);
+		assertTrue(t.getTotalCPUTime() > 0);
+		assertEquals(t.getNumStarts(), 5);
+		assertEquals(t.getTotalCPUTime(), lCPU, lCPU / 100);
+		assertEquals(t.getTotalRealTime(), l, l / 100);
 
 	}
 
@@ -217,19 +213,19 @@ public class CPUTimerTest extends JDFTestCaseBase
 	@Test
 	public void testAverage()
 	{
-		Assert.assertEquals(0, t.getAverageRealTime());
-		Assert.assertEquals(0, t.getAverageCPUTime());
-		Assert.assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
-		Assert.assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
+		assertEquals(0, t.getAverageRealTime());
+		assertEquals(0, t.getAverageCPUTime());
+		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
+		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
 
 		t.start();
 		for (int ii = 0; ii < 50000000; ii++)
 		{
 			Math.sin(ii);
 		}
-		Assert.assertTrue(t.getTotalCPUTime() > 0);
-		Assert.assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / 100);
-		Assert.assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / 100);
+		assertTrue(t.getTotalCPUTime() > 0);
+		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / 100);
+		assertEquals(t.getTotalRealTime(), t.getAverageRealTime(), t.getAverageRealTime() / 100);
 	}
 
 	/**
