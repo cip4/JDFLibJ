@@ -454,6 +454,8 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetExeEntries()
 	{
 		InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"));
+		if (is == null)
+			is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
 		Vector<ZipReader> v = ZipReader.getZipReaders(is, -1);
 		assertTrue(v.size() > 0);
 		for (ZipReader zr : v)
@@ -474,6 +476,8 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetZipReaderFile()
 	{
 		ZipReader zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4 JDFEditor 2.4-SNAPSHOT.exe"));
+		if (zr == null)
+			zr = ZipReader.getZipReader(new File(sm_dirTestData + "CIP4_JDFEditor_2.4-SNAPSHOT.exe"));
 		Vector<ZipEntry> vze = zr.getEntries();
 		assertTrue(vze.size() > 42);
 	}

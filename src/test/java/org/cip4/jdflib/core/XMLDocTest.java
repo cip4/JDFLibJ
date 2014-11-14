@@ -965,7 +965,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("doc", null);
 		final URL url = UrlUtil.stringToURL("http://localhost:8010/httpdump/testXMLDoc?nodump=true");
 		HttpURLConnection uc = d.write2HTTPURL(url, null, null);
-		if (uc != null)
+		if (uc != null && uc.getResponseCode() == 200)
 		{
 			final long t = System.nanoTime();
 			long t1 = t;

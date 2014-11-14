@@ -381,13 +381,11 @@ public class UrlUtil
 	 * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated from user.dir
 	 * @return
 	 */
-	public static String getRelativePath(final File f, final File fCWD)
+	public static String getRelativePath(final File f, File fCWD)
 	{
-		File fCWDLocal = fCWD;
-
-		if (fCWDLocal == null)
+		if (fCWD == null)
 		{
-			fCWDLocal = new File(System.getProperty("user.dir"));
+			fCWD = new File(System.getProperty("user.dir"));
 		}
 
 		String cPath = null;
@@ -396,7 +394,7 @@ public class UrlUtil
 		{
 			cPath = f.getCanonicalPath();
 			// just in case...
-			cwd = fCWDLocal.getCanonicalPath();
+			cwd = fCWD.getCanonicalPath();
 			if (cPath.charAt(0) != cwd.charAt(0))
 			{
 				return null; // incompatible abs paths
@@ -407,8 +405,8 @@ public class UrlUtil
 		{
 			return null;
 		}
-		final VString vCwd = StringUtil.tokenize(cwd, File.separator, false);
-		final VString vPath = StringUtil.tokenize(cPath, File.separator, false);
+		final VString vCwd = StringUtil.tokenize(cwd, "/\\", false);
+		final VString vPath = StringUtil.tokenize(cPath, "/\\", false);
 
 		int lenPath = vPath.size();
 		int siz = vCwd.size();
