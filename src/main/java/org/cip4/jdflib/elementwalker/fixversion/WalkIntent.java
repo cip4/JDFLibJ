@@ -66,39 +66,45 @@
  *  
  * 
  */
-package org.cip4.jdflib.core;
+package org.cip4.jdflib.elementwalker.fixversion;
 
-import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
 
 /**
- * test for {@link JDFSeparationList}
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * @author rainer prosi
- * @date Mar 6, 2012
+ * June 7, 2009
  */
-public class JDFSeparationListTest extends JDFTestCaseBase
+public class WalkIntent extends WalkResource
 {
 	/**
 	 * 
-	 * TODO Please insert comment!
 	 */
-	public void testUnify()
+	public WalkIntent()
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
-		sl.setSeparations(new VString("a b b c", null));
-		assertEquals(sl.unify(), new VString("a b c", null));
-		assertEquals(sl.getSeparations(), new VString("a b c", null));
+		super();
 	}
 
 	/**
-	 * 
-	 * TODO Please insert comment!
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if matches
 	 */
-	public void testRemoveSeparations()
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
-		sl.setSeparations(new VString("a b c", null));
-		sl.removeSeparations(new VString("a c", null));
-		assertEquals(sl.getSeparations(), new VString("b", null));
+		return (toCheck instanceof JDFIntentResource);
+	}
+
+	/**
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 */
+	@Override
+	public KElement walk(final KElement e1, final KElement trackElem)
+	{
+		return super.walk(e1, trackElem);
 	}
 }

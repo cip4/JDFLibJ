@@ -1233,7 +1233,7 @@ public class XJDFTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public void testFromXJDFColorIntent()
+	public void testFromXJDFColorIntentLegacy()
 	{
 		for (int i = 0; i < 3; i += 2)
 		{
@@ -1245,7 +1245,7 @@ public class XJDFTest extends JDFTestCaseBase
 			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@CoatingsBack", "GlossVarnish");
 			if (i != 0)
 			{
-				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsed", "Spot1 Black Spot");
+				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsed", "Spot1 Spot");
 				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsedBack", "Spot2 Spot");
 			}
 			final JDFDoc d = xCon.convert(e);
@@ -1255,8 +1255,16 @@ public class XJDFTest extends JDFTestCaseBase
 			JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
 			JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
 			assertNull(ci.getColorsUsed());
-			assertEquals(cib.getColorsUsed().getSeparations().size(), 1 + i);
-			assertEquals(cif.getColorsUsed().getSeparations().size(), 4 + i);
+			if (i > 0)
+			{
+				assertEquals(cib.getColorsUsed().getSeparations().size(), i);
+				assertEquals(cif.getColorsUsed().getSeparations().size(), i);
+			}
+			else
+			{
+				assertNull(cif.getColorsUsed());
+				assertNull(cib.getColorsUsed());
+			}
 			assertEquals(cif.getCoatings().getActual(), "DullVarnish");
 		}
 	}
@@ -1280,7 +1288,7 @@ public class XJDFTest extends JDFTestCaseBase
 		assertNull(cif);
 		assertNull(cib);
 		assertNull(ci.getElement("ColorsUsedBack"));
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		assertEquals(ci.getNumColors(), 4);
 	}
 
 	/**
@@ -1301,7 +1309,7 @@ public class XJDFTest extends JDFTestCaseBase
 		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
 		assertNull(ci.getColorsUsed());
 		assertNull(cib);
-		assertEquals(cif.getColorsUsed().getSeparations().size(), 4);
+		assertEquals(cif.getNumColors(), 4);
 	}
 
 	/**

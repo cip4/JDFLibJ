@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFTool;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
@@ -331,6 +332,24 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertTrue(new FixVersion(EnumVersion.Version_1_4).convert(n));
 		assertEquals(n.getAttribute(AttributeName.NAMEDFEATURES, null, null), "a b");
 		assertNull(n.getGeneralID(null, 0));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNumColors()
+	{
+		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		ci.setNumColors(4);
+		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
+		assertTrue(converted);
+		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		converted = new FixVersion(EnumVersion.Version_1_5).convert(ci);
+		assertTrue(converted);
+		assertEquals(ci.getNumColors(), 4);
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
 	}
 
 	// //////////////////////////////////////////////////////////////////////

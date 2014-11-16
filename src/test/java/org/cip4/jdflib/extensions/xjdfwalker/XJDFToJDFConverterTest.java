@@ -84,6 +84,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -256,6 +257,46 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFDoc d = xCon.convert(h);
 		assertEquals(d.getJDFRoot().getJobPartID(true), "root");
 		d.write2File(sm_dirTestDataTemp + "backproduct.jdf", 2, false);
+	}
+
+	/**
+	 *  
+	 */
+	@Test
+	public void testFromXJDFColorIntentSurfaceColor()
+	{
+		for (int i = 0; i < 3; i += 2)
+		{
+			final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+			KElement e = new XMLDoc("XJDF", null).getRoot();
+			e.setAttribute("Types", "Product");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/1");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/SurfaceColor[@Surface=\"Front\"]/@Coatings", "DullVarnish");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/SurfaceColor[@Surface=\"Back\"]/@Coatings", "GlossVarnish");
+			if (i != 0)
+			{
+				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/SurfaceColor[@Surface=\"Front\"]/@ColorsUsed", "Spot1 Spot");
+				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/SurfaceColor[@Surface=\"Back\"]/@ColorsUsed", "Spot2 Spot");
+			}
+			final JDFDoc d = xCon.convert(e);
+			assertNotNull(d);
+			JDFNode root = d.getJDFRoot();
+			JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+			JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
+			JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+			assertNull(ci.getColorsUsed());
+			if (i > 0)
+			{
+				assertEquals(cib.getColorsUsed().getSeparations().size(), i);
+				assertEquals(cif.getColorsUsed().getSeparations().size(), i);
+			}
+			else
+			{
+				assertNull(cif.getColorsUsed());
+				assertNull(cib.getColorsUsed());
+			}
+			assertEquals(cif.getCoatings().getActual(), "DullVarnish");
+		}
 	}
 
 }

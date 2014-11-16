@@ -69,11 +69,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -102,79 +104,66 @@ public class WalkColorIntentResLink extends WalkResLink
 	VElement setResource(JDFResourceLink rl, JDFResource linkTarget, KElement xjdf)
 	{
 		VElement v = super.setResource(rl, linkTarget, xjdf);
-		KElement e0 = null;
 		VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);
+		KElement thecolorIntent = null;
 		for (KElement e1 : v)
 		{
 			JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
 			KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
+			if (thecolorIntent == null)
+				thecolorIntent = colorIntent;
 
-			if (e0 == null)
+			EnumSide side = part == null ? null : part.getSide();
+			String surface = side == null ? "Both" : side.getName();
+			if (thecolorIntent != null)
 			{
-				e0 = colorIntent;
-			}
-			if (colorIntent == null)
-			{
+				KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute("SurfaceColor", "Surface", null, surface, 0);
+				fixNumColors(surfaceColor, colorIntent);
 				if (part != null)
 				{
 					part.deleteNode();
 				}
-			}
-			else
-			{
-				if (part != null)
+				for (String att : frontBack)
 				{
-					EnumSide side = part.getSide();
-					if (EnumSide.Front.equals(side) && e0 != colorIntent)
+					String attVal = colorIntent.getAttribute(att, null, null);
+					if (attVal != null)
 					{
-						for (String att : frontBack)
-						{
-							String attVal = colorIntent.getAttribute(att, null, null);
-							if (attVal != null)
-							{
-								e0.setAttribute(att, attVal);
-							}
-						}
-					}
-					else if (EnumSide.Back.equals(side))
-					{
-						for (String att : frontBack)
-						{
-							String attVal = colorIntent.getAttribute(att, null, null);
-							if (attVal != null)
-							{
-								e0.setAttribute(att + "Back", attVal);
-							}
-						}
-					}
-					part.deleteNode();
-				}
-				else
-				{
-					for (String att : frontBack)
-					{
-						String attVal = colorIntent.getAttribute(att, null, null);
-						if (attVal != null)
-						{
-							if (e0 != colorIntent)
-							{
-								String attValBase = e0.getAttribute(att, null, null);
-								if (attValBase == null)
-								{
-									e0.setAttribute(att, attVal);
-								}
-							}
-							String attValBack = e0.getAttribute(att + "Back", null, null);
-							if (attValBack == null)
-							{
-								e0.setAttribute(att + "Back", attVal);
-							}
-						}
+						surfaceColor.setAttribute(att, attVal);
+						thecolorIntent.removeAttribute(att);
 					}
 				}
 			}
 		}
 		return v;
+	}
+
+	/**
+	 * move numColors to an xypair
+	 * @param surfaceColor
+	 * @param colorIntent
+	 */
+	private void fixNumColors(KElement surfaceColor, KElement colorIntent)
+	{
+		int nCols = colorIntent.getIntAttribute(AttributeName.NUMCOLORS, null, -1);
+		if (nCols >= 0)
+		{
+			KElement parentCI = surfaceColor.getParentNode_KElement();
+			JDFXYPair xy = JDFXYPair.createXYPair(parentCI.getAttribute(AttributeName.NUMCOLORS));
+			if (xy == null)
+			{
+				xy = new JDFXYPair(0, 0);
+			}
+			String surface = surfaceColor.getAttribute("Surface");
+			if ("Both".equals(surface) || "Front".equals(surface))
+			{
+				xy.setX(nCols);
+			}
+			if ("Both".equals(surface) || "Back".equals(surface))
+			{
+				xy.setY(nCols);
+			}
+			parentCI.setAttribute(AttributeName.NUMCOLORS, xy.toString());
+		}
 	}
 
 	/**

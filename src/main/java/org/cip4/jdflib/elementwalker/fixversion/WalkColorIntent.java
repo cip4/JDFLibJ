@@ -66,39 +66,109 @@
  *  
  * 
  */
-package org.cip4.jdflib.core;
+package org.cip4.jdflib.elementwalker.fixversion;
 
-import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 
 /**
- * test for {@link JDFSeparationList}
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * @author rainer prosi
- * @date Mar 6, 2012
+ * June 7, 2009
  */
-public class JDFSeparationListTest extends JDFTestCaseBase
+public class WalkColorIntent extends WalkResource
 {
 	/**
 	 * 
-	 * TODO Please insert comment!
 	 */
-	public void testUnify()
+	public WalkColorIntent()
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
-		sl.setSeparations(new VString("a b b c", null));
-		assertEquals(sl.unify(), new VString("a b c", null));
-		assertEquals(sl.getSeparations(), new VString("a b c", null));
+		super();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if matches
+	 */
+	@Override
+	public boolean matches(final KElement toCheck)
+	{
+		return (toCheck instanceof JDFColorIntent);
+	}
+
+	/**
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 */
+	@Override
+	public KElement walk(final KElement e1, final KElement trackElem)
+	{
+		processNumColors(e1);
+		return super.walk(e1, trackElem);
 	}
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * @param e1
 	 */
-	public void testRemoveSeparations()
+	private void processNumColors(final KElement e1)
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
-		sl.setSeparations(new VString("a b c", null));
-		sl.removeSeparations(new VString("a c", null));
-		assertEquals(sl.getSeparations(), new VString("b", null));
+		JDFColorIntent ci = (JDFColorIntent) e1;
+		if (fixVersion.lessThanVersion(EnumVersion.Version_1_5))
+		{
+			removeNumColors(ci);
+		}
+		else
+		{
+			extractNumColors(ci);
+		}
+	}
+
+	/**
+	 * 
+	 * @param ci
+	 */
+	private void extractNumColors(JDFColorIntent ci)
+	{
+		JDFSeparationList colorsUsed = ci.getColorsUsed();
+		VString colors = colorsUsed == null ? null : colorsUsed.getSeparations();
+		if (colors != null)
+		{
+			if (colors.containsAll(JDFSeparationList.SEPARATIONS_CMYK))
+			{
+				ci.setNumColors(4);
+				colorsUsed.removeSeparations(JDFSeparationList.SEPARATIONS_CMYK);
+			}
+			else if (colors.contains(JDFConstants.SEPARATION_BLACK))
+			{
+				ci.setNumColors(1);
+				colorsUsed.removeSeparation(JDFConstants.SEPARATION_BLACK);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param ci
+	 */
+	private void removeNumColors(JDFColorIntent ci)
+	{
+		int nc = ci.getNumColors();
+		if (nc == 1)
+		{
+			ci.getCreateColorsUsed().appendSeparation(JDFConstants.SEPARATION_BLACK);
+		}
+		if (nc == 4)
+		{
+			ci.getCreateColorsUsed().appendSeparations(JDFSeparationList.SEPARATIONS_CMYK);
+		}
+		ci.removeAttribute(AttributeName.NUMCOLORS);
 	}
 }

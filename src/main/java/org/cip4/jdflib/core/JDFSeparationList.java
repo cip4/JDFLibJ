@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
  */
 public class JDFSeparationList extends JDFAutoSeparationList
 {
+	public static final VString SEPARATIONS_CMYK = new VString("Cyan Magenta Yellow Black", null);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -191,7 +192,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 */
 	public void setCMYK()
 	{
-		setSeparations(new VString("Cyan Magenta Yellow Black", null));
+		setSeparations(SEPARATIONS_CMYK);
 	}
 
 	/**
@@ -215,7 +216,9 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		VString vs = getSeparations();
 		final int index = vs.index(sep);
 		if (index >= 0)
+		{
 			getSeparationSpec(index).deleteNode();
+		}
 		return index;
 	}
 
@@ -229,7 +232,9 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	{
 		JDFSeparationSpec ss = getSeparationSpec(iSkip);
 		if (ss == null)
+		{
 			return null;
+		}
 		return ss.getName();
 	}
 
@@ -246,5 +251,21 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		if (v.size() != l)
 			setSeparations(v);
 		return v;
+	}
+
+	/**
+	 * 
+	 * @param seps
+	 */
+	public void removeSeparations(VString seps)
+	{
+		if (seps != null)
+		{
+			for (String sep : seps)
+			{
+				removeSeparation(sep);
+			}
+		}
+
 	}
 }

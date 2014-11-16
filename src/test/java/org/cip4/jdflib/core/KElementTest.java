@@ -2866,7 +2866,24 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(root.getChildWithAttribute(null, "ID", null, "id22", 0, true));
 		bar3.moveElement(bar22, null);
 		assertNull(root2.getChildWithAttribute(null, "ID", null, "id22", 0, true));
+	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCreateChildWithAttribute()
+	{
+		final XMLDoc doc = new XMLDoc("Foo", null);
+		final KElement root = doc.getRoot();
+		assertEquals(root.getChildElementArray().length, 0);
+		root.appendElement("bar:bar", "www.bar.com");
+		KElement bar2 = root.getChildWithAttribute("bar2", "foo", null, "1", 0, true);
+		assertNull(bar2);
+		bar2 = root.getCreateChildWithAttribute("bar2", "foo", null, "1", 0);
+		assertNotNull(bar2);
+		final KElement bar3 = root.getCreateChildWithAttribute("bar2", "foo", null, "1", 0);
+		assertEquals(bar2, bar3);
 	}
 
 	/**

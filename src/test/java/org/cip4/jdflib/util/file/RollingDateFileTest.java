@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,10 +69,10 @@
 package org.cip4.jdflib.util.file;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
- * TODO Please insert comment!
+ *  
  * @author rainer prosi
  * @date Mar 18, 2012
  */
@@ -88,7 +88,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	public void testGetFileNameInt()
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
-		Assert.assertEquals(rdf.getNewFileName(t), "Date.120318.txt");
+		assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class RollingDateFileTest extends JDFTestCaseBase
 	{
 		long t = 1332096687756l; // System.currentTimeMillis();
 		rdf.setFormat("yyyy");
-		Assert.assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
+		assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
 	}
 
 	/**

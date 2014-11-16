@@ -73,11 +73,14 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.junit.Test;
 
@@ -101,6 +104,31 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xm.appendMedia().setMediaSetCount(42);
 		KElement xjdf = conv.convert(n);
 		assertNotNull(new XJDFHelper(xjdf).getSet("Media", 0));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testColorIntent()
+	{
+		JDFToXJDF conv = new JDFToXJDF();
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		JDFColorIntent cif = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Front");
+		cif.appendColorsUsed().setCMYK();
+		cif.appendCoatings().setActual("Varnish");
+		JDFColorIntent cib = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Back");
+		cib.appendCoatings().setActual("Mess");
+		cib.setNumColors(1);
+		KElement xjdf = conv.convert(n);
+		ProductHelper ph = new XJDFHelper(xjdf).getProductHelpers().get(0);
+		assertNotNull(ph);
+		IntentHelper ih = ph.getIntent("ColorIntent");
+		KElement e = ih.getResource();
+		assertEquals(e.getChildElementVector("SurfaceColor", null).size(), 2);
 	}
 
 	/**

@@ -7690,9 +7690,9 @@ public class JDFResource extends JDFElement
 	{
 		if (bCleanLeaves)
 		{
-			this.removeAttributeFromLeaves(AttributeName.STATUS, null);
+			removeAttributeFromLeaves(AttributeName.STATUS, null);
 		}
-		setAttribute(AttributeName.STATUS, value.getName(), null);
+		setAttribute(AttributeName.STATUS, value == null ? null : value.getName(), null);
 	}
 
 	/**

@@ -68,11 +68,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -240,49 +242,30 @@ public class WalkColorIntent extends WalkIntentResource
 	private void evaluateNumColors(final KElement e, final KElement trackElem)
 	{
 		JDFXYPair xyp = JDFXYPair.createXYPair(e.getAttribute("NumColors", null, null));
+		e.removeAttribute(AttributeName.NUMCOLORS);
 		if (xyp != null)
 		{
-			double[] list = xyp.getDoubleList();
-			e.removeAttribute("NumColors");
-			for (int i = list.length - 1; i >= 0; i--)
+			int front = (int) xyp.getX();
+			int back = (int) xyp.getY();
+			if (front == back)
 			{
-				int n = (int) (list[i] + 0.5);
-				VString v = getDefaultSeparations(n);
-				KElement cuf = null;
-				if (i == 1)
+				trackElem.setAttribute(AttributeName.NUMCOLORS, front, null);
+			}
+			else
+			{
+				JDFColorIntent ci = (JDFColorIntent) trackElem;
+				if (front > 0)
 				{
-					cuf = e.getElement(ElementName.COLORSUSED);
-					if (cuf != null)
-					{
-						cuf.renameElement(ElementName.COLORSUSED + "Front", null);
-					}
-					KElement cub = e.getElement(ElementName.COLORSUSED + "Back");
-					if (cub != null)
-					{
-						cub.renameElement(ElementName.COLORSUSED, null);
-					}
+					JDFColorIntent cif = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Front"), null);
+					cif.setNumColors(front);
 				}
-				JDFSeparationList newElem = ((JDFSeparationList) e.getCreateElement(ElementName.COLORSUSED));
-				newElem.appendSeparations(v);
-				newElem.unify();
-				if (i == 1)
+				if (back > 0)
 				{
-					newElem.renameElement(ElementName.COLORSUSED + "Back", null);
-					if (cuf != null)
-					{
-						cuf.renameElement(ElementName.COLORSUSED, null);
-					}
+					JDFColorIntent cib = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Back"), null);
+					cib.setNumColors(back);
 				}
 			}
 		}
-	}
-
-	private VString getDefaultSeparations(int n)
-	{
-		VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
-		while (v.size() > n)
-			v.remove(n);
-		return v;
 	}
 
 	/**

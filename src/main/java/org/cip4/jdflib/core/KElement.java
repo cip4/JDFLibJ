@@ -3548,6 +3548,28 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * GetChildWithAttribute - Get a child with matching attributes; craete it if it does not exist
+	 * <p>
+	 * default: getChildWithAttribute(nodeName, attName, null,attValue, 0, true)
+	 * @param nodeName name of the child node to search for
+	 * @param attName attribute name to search for
+	 * @param nameSpaceURI namespace to search for
+	 * @param attVal the attribute value to search for, Wildcard supported ( <code>null</code>)
+	 * @param index if more then one child meets the condition, you can specify the one to return via an index
+	 * @return KElement the element which matches the above conditions
+	 */
+	public KElement getCreateChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, final int index)
+	{
+		KElement e = getChildWithAttribute(nodeName, attName, nameSpaceURI, attVal, index, true);
+		if (e == null)
+		{
+			e = appendElement(nodeName, nameSpaceURI);
+			e.setAttribute(attName, attVal);
+		}
+		return e;
+	}
+
+	/**
 	 * Checks whether the current element has a child element NodeName
 	 * <p>
 	 * default: hasChildElement(String nodeName, null)
@@ -5610,5 +5632,4 @@ public class KElement extends ElementNSImpl implements Element
 	{
 		return write2File(UrlUtil.urlToFile(filename));
 	}
-
 }
