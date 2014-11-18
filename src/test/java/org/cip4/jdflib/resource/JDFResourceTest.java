@@ -149,7 +149,8 @@ import org.junit.Test;
 public class JDFResourceTest extends JDFTestCaseBase
 {
 
-	private boolean b;
+	private boolean bAgent;
+	private boolean bSubElem;
 
 	/**
 	 * 
@@ -2296,6 +2297,21 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testSubelementClass()
+	{
+		boolean b = JDFResource.getAutoSubElementClass();
+		JDFResource.setAutoSubElementClass(true);
+		KElement k = new JDFDoc("JDF").getJDFRoot().appendResourcePool().appendElement(ElementName.RUNLIST).appendElement(ElementName.LAYOUTELEMENT);
+		assertEquals(((JDFResource) k).getResourceClass(), EnumResourceClass.Parameter);
+		JDFResource.setAutoSubElementClass(false);
+		KElement k2 = new JDFDoc("JDF").getJDFRoot().appendResourcePool().appendElement(ElementName.RUNLIST).appendElement(ElementName.LAYOUTELEMENT);
+		assertNull(((JDFResource) k2).getResourceClass());
+		JDFResource.setAutoSubElementClass(b);
+	}
+
+	/**
 	 * test clonePartitions method
 	 */
 	@Test
@@ -2984,7 +3000,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	public void tearDown() throws Exception
 	{
 		super.tearDown();
-		JDFResource.setAutoAgent(b);
+		JDFResource.setAutoAgent(bAgent);
+		JDFResource.setAutoSubElementClass(bSubElem);
 		JDFResource.setUnpartitiondImplicit(false);
 	}
 
@@ -2997,7 +3014,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		b = JDFResource.getAutoAgent();
-
+		bAgent = JDFResource.getAutoAgent();
+		bSubElem = JDFResource.getAutoSubElementClass();
 	}
 }

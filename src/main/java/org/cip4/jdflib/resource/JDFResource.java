@@ -134,6 +134,7 @@ public class JDFResource extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
 	private static boolean autoAgent = false;
+	private static boolean autoSubElementClass = true;
 	private static boolean bUnpartitiondImplicit = false;
 	private static final Log rLog = LogFactory.getLog(JDFResource.class);
 
@@ -6939,11 +6940,10 @@ public class JDFResource extends JDFElement
 	{
 		if (value == null)
 		{
-			// what a stupid thing to set it to - Ciao
-			throw new JDFException("JDFResource.SetResourceClass: Invalid class value ");
+			removeAttribute(AttributeName.CLASS, null);
 		}
 		// only set class for the root
-		if (isResourceRootRoot() || isResourceElement())
+		if (isResourceRootRoot() || (autoSubElementClass && isResourceElement()))
 		{
 			setAttribute(AttributeName.CLASS, value.getName(), null);
 		}
@@ -8244,6 +8244,25 @@ public class JDFResource extends JDFElement
 			return true;
 		}
 		return getLocalName().equals(namedResLink);
+	}
+
+	/**
+	 * if true, subelements are initialized with a class attribute
+	 * @return
+	 */
+	public static boolean getAutoSubElementClass()
+	{
+		return autoSubElementClass;
+	}
+
+	/**
+	 * if true, subelements are initialized with a class attribute
+
+	 * @param autoSubElementClass
+	 */
+	public static void setAutoSubElementClass(boolean autoSubElementClass)
+	{
+		JDFResource.autoSubElementClass = autoSubElementClass;
 	}
 
 }
