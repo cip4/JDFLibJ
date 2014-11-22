@@ -447,6 +447,16 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testEnumVersion()
+	{
+		assertTrue(EnumVersion.Version_2_0.isXJDF());
+		assertFalse(EnumVersion.Version_1_0.isXJDF());
+		assertFalse(EnumVersion.Version_1_9.isXJDF());
+	}
+
+	/**
+	 * 
+	 */
 	@Test
 	public void testEvaluateXY()
 	{

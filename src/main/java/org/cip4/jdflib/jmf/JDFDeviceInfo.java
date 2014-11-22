@@ -186,16 +186,13 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * @param value : the value to set the attribute to or null
 	 */
 	@Override
-	public void setIdleStartTime(final JDFDate value)
+	public void setIdleStartTime(JDFDate value)
 	{
-		JDFDate valueLocal = value;
-
-		if (valueLocal == null)
+		if (value == null)
 		{
-			valueLocal = new JDFDate();
+			value = new JDFDate();
 		}
-
-		setAttribute(AttributeName.IDLESTARTTIME, valueLocal.getDateTimeISO(), null);
+		setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
 	}
 
 	/**
@@ -334,16 +331,16 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		{
 			return false;
 		}
-		boolean bGood = true;
-		for (int i = 0; i < numEmployees && bGood; i++)
+		boolean bSame = true;
+		for (int i = 0; i < numEmployees && bSame; i++)
 		{
 			final JDFEmployee employee = lastInfo.getEmployee(i);
 			if (employee != null)
 			{
-				bGood = bGood && getEmployee(i).matches(employee);
+				bSame = bSame && getEmployee(i).matches(employee);
 			}
 		}
-		if (!bGood)
+		if (!bSame)
 		{
 			return false;
 		}
@@ -352,12 +349,12 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		{
 			return false;
 		}
-		bGood = numJobPhases == 0;
+		bSame = numJobPhases == 0;
 		for (int i = 0; i < numJobPhases; i++)
 		{
-			bGood = bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
+			bSame = bSame || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
 		}
-		if (bGood)
+		if (bSame)
 		{
 			VString ignore = new VString(new String[] { ElementName.PART, ElementName.EMPLOYEE, ElementName.JOBPHASE });
 			VElement childrenIgnoreList = getChildrenIgnoreList(ignore, true, null);
@@ -381,7 +378,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			}
 		}
 
-		return bGood;
+		return bSame;
 	}
 
 	/**
@@ -423,5 +420,4 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			copyElement(device, null);
 		}
 	}
-
 }

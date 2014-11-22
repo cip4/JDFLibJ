@@ -146,15 +146,13 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	@Test
 	public void testProductCreatePostCards()
 	{
-
-		final ProductGoldenTicket pgtlocal = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
-		pgtlocal.assign(null);
-		pgtlocal.createPostCards();
-		final JDFNode node = pgtlocal.getNode();
+		pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
+		pgt.assign(null);
+		pgt.createPostCards();
+		final JDFNode node = pgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "postcard.jdf", 2, false);
 		node.setJobID("6913");
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
-
+		write9GTFiles(pgt, "postcards");
 	}
 
 	/**
@@ -171,8 +169,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6914");
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "adressBook.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
-
+		write9GTFiles(pgt, "adressBook");
 	}
 
 	/**
@@ -188,8 +185,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		pgt.createWatches();
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6915");
-		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "watches.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		write9GTFiles(pgt, "watches");
 	}
 
 	/**
@@ -221,8 +217,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		pgt.createHarley();
 		final JDFNode node = pgt.getNode();
 		node.setJobID("6916");
-		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "harley.jdf", 2, false);
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		write9GTFiles(pgt, "harley");
 	}
 
 	/**
@@ -239,7 +234,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 		final JDFNode node = pgt.getNode();
 		node.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "HDCity.jdf", 2, false);
 		node.setJobID("6917");
-		assertTrue(node.isValid(EnumValidationLevel.Complete));
+		write9GTFiles(pgt, "hdcity");
 	}
 
 	/**

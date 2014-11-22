@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.StringUtil;
@@ -103,14 +104,42 @@ public class WalkJDF extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if (this.jdfToXJDF.first.contains(jdf.getID()) || this.jdfToXJDF.isSingleNode() && this.jdfToXJDF.first.size() > 0)
+		if (jdfToXJDF.first.contains(jdf.getID()) || jdfToXJDF.isSingleNode() && jdfToXJDF.first.size() > 0)
 		{
 			return null;
 		}
-		this.jdfToXJDF.first.add(jdf.getID());
 		final JDFNode node = (JDFNode) jdf;
-		setRootAttributes(node, xjdf);
-		return xjdf;
+		boolean matchesID = matchesRootID(node);
+		if (matchesID)
+		{
+			setRootAttributes(node, xjdf);
+			jdfToXJDF.first.add(jdf.getID());
+			return xjdf;
+		}
+		else
+		{
+			JDFNode nodeKid = node.getChildJDFNode(jdfToXJDF.rootID, false);
+			if (nodeKid != null)
+			{
+				jdfToXJDF.walkTree(nodeKid, xjdf);
+			}
+			return null;
+		}
+	}
+
+	private boolean matchesRootID(final JDFNode node)
+	{
+		boolean matchesID = node.getID().equals(jdfToXJDF.rootID);
+		if (!matchesID && !jdfToXJDF.isSingleNode())
+		{
+			JDFNode parent = node.getParentJDF();
+			while (parent != null && !matchesID)
+			{
+				matchesID = parent.getID().equals(jdfToXJDF.rootID);
+				parent = parent.getParentJDF();
+			}
+		}
+		return matchesID;
 	}
 
 	/**
@@ -121,15 +150,20 @@ public class WalkJDF extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !this.jdfToXJDF.walkingProduct && (toCheck instanceof JDFNode);
+		return (toCheck instanceof JDFNode);
 	}
 
 	/**
 	 * @param node
 	 * @param newRootP
 	 */
-	private void setRootAttributes(final JDFNode node, final KElement newRootP)
+	void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
+		if (EnumType.Product.equals(node.getEnumType()) && node.getParentJDF() != null)
+		{
+			// me be sub product
+			return;
+		}
 		newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
@@ -147,7 +181,7 @@ public class WalkJDF extends WalkJDFElement
 
 		removeUnused(newRootP);
 
-		if (this.jdfToXJDF.isUpdateVersion())
+		if (jdfToXJDF.isUpdateVersion())
 		{
 			newRootP.setAttribute("Version", "2.0");
 			newRootP.setAttribute("MaxVersion", "2.0");
@@ -221,9 +255,9 @@ public class WalkJDF extends WalkJDFElement
 	 */
 	private void updateSpawnInfo(final JDFNode node, final KElement newRootP)
 	{
-		if (this.jdfToXJDF.m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
+		if (jdfToXJDF.m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
 		{
-			final KElement spawnInfo = newRootP.appendElement(this.jdfToXJDF.m_spawnInfo, "www.cip4.org/SpawnInfo");
+			final KElement spawnInfo = newRootP.appendElement(jdfToXJDF.m_spawnInfo, "www.cip4.org/SpawnInfo");
 			spawnInfo.moveAttribute(AttributeName.SPAWNID, newRootP, null, null, null);
 			final JDFAncestorPool ancestorPool = node.getAncestorPool();
 			if (ancestorPool != null)

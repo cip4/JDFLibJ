@@ -76,8 +76,10 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -104,34 +106,48 @@ public class WalkResLink extends WalkJDFElement
 	{
 		final JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource linkTarget = rl.getLinkRoot();
+		JDFNode n = rl.getParentJDF();
 		// we do not explicitly call out components for products
-		if (linkTarget == null || rl.getBoolAttribute(WalkProduct.SKIP_CONVERT, null, false))
+		if (linkTarget == null)
 		{
 			return null;
 		}
 
-		if (jdfToXJDF.walkingProduct)
+		if (EnumType.Product.equals(n.getEnumType()))
 		{
-			if (!EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+			if (linkTarget instanceof JDFComponent)
 			{
 				return null;
 			}
-			setResource(rl, linkTarget, xjdf);
+			if (isProductResource(linkTarget))
+			{
+				KElement product = xjdf.getElement("ProductList").getElement("Product", null, -1);
+				setResource(rl, linkTarget, product);
+			}
+			else
+			{
+				setResource(rl, linkTarget, xjdf);
+			}
 		}
 		else
 		{
-			// if (bCustomerInfo || EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
-			if (EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
-			{
-				return null;
-			}
-			setResource(rl, linkTarget, jdfToXJDF.newRoot);
 			if (!jdfToXJDF.isSingleNode())
 			{
 				setProcess(rl);
 			}
+			setResource(rl, linkTarget, xjdf);
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param linkTarget
+	 * @return
+	 */
+	private boolean isProductResource(final JDFResource linkTarget)
+	{
+		return EnumResourceClass.Intent.equals(linkTarget.getResourceClass());
 	}
 
 	/**

@@ -95,11 +95,7 @@ public class WalkAuditPool extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if (this.jdfToXJDF.walkingProduct)
-		{
-			return null;
-		}
-		else if (this.jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
+		if (this.jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
 		{
 			return this.jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
 		}

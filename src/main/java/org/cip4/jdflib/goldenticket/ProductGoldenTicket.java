@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -260,9 +260,24 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * @param node 
+	 * @param quality
+	 * @return 
+	 * 
+	 */
+	protected JDFMediaIntent initMediaIntent(final JDFNode node, final String quality)
+	{
+		final JDFMediaIntent mi = (JDFMediaIntent) node.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		mi.getCreateMediaQuality().setActual(quality);
+		mi.setResStatus(EnumResStatus.Available, false);
+		mi.preferredToActual();
+		return mi;
+	}
+
+	/**
+	 * @param node 
 	 * @param gsm 
 	 * @param coating 
-	 * @param brand TODO
+	 * @param brand 
 	 * @return 
 	 * 
 	 */
@@ -361,6 +376,20 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		theNode.setDescriptiveName("7.5.1   Postcards 4c/4c");
 		initMediaIntent(theNode, 300, EnumSpanCoatings.Coated, null);
 		final JDFLayoutIntent li = initLayoutIntent(theNode, 14.8, 10.5, 16, 2);
+		initColorIntent(theNode, 4, 4, null);
+		initOutputComponent(theNode, li, null);
+		initDeliveryIntent(5000);
+	}
+
+	/**
+	 * 
+	 */
+	public void createFlyer()
+	{
+		initCustomerInfo(null, null, "Acme", "Acme A4 Flyer");
+		theNode.setDescriptiveName("7.5.1   Flyer 4c/4c");
+		initMediaIntent(theNode, "FSC Coated130");
+		final JDFLayoutIntent li = initLayoutIntent(theNode, 21, 29, 4, 2);
 		initColorIntent(theNode, 4, 4, null);
 		initOutputComponent(theNode, li, null);
 		initDeliveryIntent(5000);

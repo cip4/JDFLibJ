@@ -4040,11 +4040,11 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public VElement getChildrenIgnoreList(final VString nodeNames, final boolean bDirect, VElement v)
 	{
-		KElement kElem = getFirstChildElement();
 		if (v == null)
 		{
 			v = new VElement();
 		}
+		KElement kElem = getFirstChildElement();
 		while (kElem != null)
 		{
 			if (!nodeNames.contains(kElem.getLocalName()) && !nodeNames.contains(kElem.getNodeName()))
@@ -4079,12 +4079,6 @@ public class KElement extends ElementNSImpl implements Element
 
 		return appendElement(elementName, nameSpaceURI);
 	}
-
-	// ************************** end of methods needed in JDFAutoxxx
-	// ***********
-	// //////////////////////////////////////////////////////////////////////////
-	// ************************** start of methods needed in misc/testNew
-	// *******
 
 	/**
 	 * Gets the XPath full tree representation of 'this'

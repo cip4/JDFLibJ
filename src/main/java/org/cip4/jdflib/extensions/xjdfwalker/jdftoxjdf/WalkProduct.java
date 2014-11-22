@@ -84,12 +84,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkProduct extends WalkJDFElement
+public class WalkProduct extends WalkJDF
 {
-	/**
-	 * 
-	 */
-	static final String SKIP_CONVERT = "SkipConvert";
 
 	/**
 	 * 
@@ -101,72 +97,40 @@ public class WalkProduct extends WalkJDFElement
 
 	/**
 	 * @param jdf
-	 * @param xjdf
 	 * @return the created resource
 	 */
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		final KElement pList = "Product".equals(xjdf.getLocalName()) ? xjdf.getParentNode_KElement() : xjdf;
 		final JDFNode node = (JDFNode) jdf;
-		if (!EnumType.Product.equals(node.getEnumType()))
-		{
-			return null;
-		}
-
-		final KElement prod = pList.appendElement("Product");
-		prod.setAttributes(jdf);
-		prod.removeAttribute(AttributeName.TYPE);
-		prod.removeAttribute(AttributeName.ACTIVATION);
-		prod.removeAttribute(AttributeName.VERSION);
-		prod.removeAttribute(AttributeName.MAXVERSION);
-		prod.removeAttribute(AttributeName.ICSVERSIONS);
-		prod.removeAttribute(AttributeName.STATUS);
-		prod.removeAttribute(AttributeName.STATUSDETAILS);
-		prod.removeAttribute(AttributeName.XMLNS);
-		prod.removeAttribute(AttributeName.XSITYPE);
-		prod.removeAttribute(AttributeName.JOBID);
-		prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
-		prod.removeAttribute("xmlns:xsi");
-		calcChildren(node, prod);
-		readComponent(node, prod);
-		return prod;
+		setRootAttributes(node, xjdf);
+		walkProduct(jdf, xjdf);
+		return xjdf;
 	}
 
 	/**
-	 * @param node
-	 * @param prod
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
-	private void readComponent(final JDFNode node, final KElement prod)
+	@Override
+	public boolean matches(final KElement toCheck)
 	{
-		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap("Usage", "Output"), null);
-		if (cOutLink == null)
-			return;
-		cOutLink.setAttribute(SKIP_CONVERT, true, null);
-		int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
-		if (amount > 0)
-			prod.setAttribute(AttributeName.AMOUNT, amount, null);
-		prod.renameAttribute("AmountGood", "Amount", null, null);
-		prod.removeAttribute("AmountWaste");
+		return super.matches(toCheck) && EnumType.Product.equals(((JDFNode) toCheck).getEnumType());
+	}
 
-		JDFComponent component = (JDFComponent) cOutLink.getTarget();
-		if (component != null)
-		{
-			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
-			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
-			if (component.isComponentType(EnumComponentType.FinalProduct))
-			{
-				new ProductHelper(prod).setRoot();
-			}
-		}
-		final VElement cInLinks = node.getResourceLinks(ElementName.COMPONENT, new JDFAttributeMap("Usage", "Input"), null);
-		if (cInLinks != null)
-		{
-			for (KElement e : cInLinks)
-			{
-				e.setAttribute(SKIP_CONVERT, true, null);
-			}
-		}
+	/**
+	 * @param newRootP
+	 */
+	@Override
+	protected void removeUnused(final KElement newRootP)
+	{
+		// status is set only in the NodeInfo
+		newRootP.removeAttribute(AttributeName.STATUS);
+		newRootP.removeAttribute(AttributeName.STATUSDETAILS);
+		newRootP.removeAttribute(AttributeName.ACTIVATION);
+		newRootP.removeAttribute(AttributeName.TEMPLATE);
+		super.removeUnused(newRootP);
 	}
 
 	/**
@@ -200,13 +164,68 @@ public class WalkProduct extends WalkJDFElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * @param node
+	 * @param prod
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	private boolean readComponent(final JDFNode node, final KElement prod)
 	{
-		return jdfToXJDF.walkingProduct && toCheck instanceof JDFNode;
+		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap("Usage", "Output"), null);
+		if (cOutLink == null)
+			return false;
+		int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+		if (amount > 0)
+		{
+			prod.setAttribute(AttributeName.AMOUNT, amount, null);
+		}
+		prod.renameAttribute("AmountGood", "Amount", null, null);
+		prod.removeAttribute("AmountWaste");
+
+		JDFComponent component = (JDFComponent) cOutLink.getTarget();
+		if (component != null)
+		{
+			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
+			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+			if (component.isComponentType(EnumComponentType.FinalProduct))
+			{
+				new ProductHelper(prod).setRoot();
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @param jdf
+	 * @param xjdf
+	 * @return the created resource
+	 */
+	private KElement walkProduct(final KElement jdf, final KElement xjdf)
+	{
+		final JDFNode node = (JDFNode) jdf;
+		final KElement pList = xjdf.getCreateElement(ProductHelper.PRODUCTLIST);
+
+		final KElement prod = pList.appendElement("Product");
+		if (readComponent(node, prod))
+		{
+			prod.setAttributes(jdf);
+			prod.removeAttribute(AttributeName.TYPE);
+			prod.removeAttribute(AttributeName.ACTIVATION);
+			prod.removeAttribute(AttributeName.VERSION);
+			prod.removeAttribute(AttributeName.MAXVERSION);
+			prod.removeAttribute(AttributeName.ICSVERSIONS);
+			prod.removeAttribute(AttributeName.STATUS);
+			prod.removeAttribute(AttributeName.STATUSDETAILS);
+			prod.removeAttribute(AttributeName.XMLNS);
+			prod.removeAttribute(AttributeName.XSITYPE);
+			prod.removeAttribute(AttributeName.JOBID);
+			prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
+			prod.removeAttribute("xmlns:xsi");
+			calcChildren(node, prod);
+			return prod;
+		}
+		else
+		{
+			prod.deleteNode();
+			return xjdf;
+		}
 	}
 }

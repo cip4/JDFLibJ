@@ -877,8 +877,19 @@ public class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
 			reorderSets((JDFElement) xjdf);
+			reorderProductList(xjdf);
 			super.walk(xjdf, dummy);
 			return xjdf;
+		}
+
+		protected void reorderProductList(KElement xjdf)
+		{
+			KElement productList = xjdf.getElement(ProductHelper.PRODUCTLIST);
+			KElement auditPool = xjdf.getElement(ElementName.AUDITPOOL);
+			if (productList != null && auditPool != null)
+			{
+				xjdf.moveElement(productList, auditPool);
+			}
 		}
 
 		/**
@@ -928,6 +939,54 @@ public class PostXJDFWalker extends BaseElementWalker
 				j++;
 			}
 			//TODO treat outputs backwards...
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkProductList extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkProductList()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return ProductHelper.PRODUCTLIST.equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement firstProduct = xjdf.getElement(ProductHelper.PRODUCT);
+			if (firstProduct == null)
+			{
+				xjdf.deleteNode();
+				return null;
+			}
+			else
+			{
+				return super.walk(xjdf, dummy);
+			}
 		}
 	}
 }

@@ -219,16 +219,12 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		write9GTFiles(cpGoldenTicket, "MISCPS_4_1Poster");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
 	/**
 	 * 
 	 */
 	@Test
 	public void testMISCPProductGrayBoxBrochure()
 	{
-
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		for (int i = 0; i < 5; i++)
 		{
@@ -258,6 +254,42 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 
 		cpGoldenTicket.partsAtOnce = 2;
 		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductGrayBox");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMISCPProductBrochure()
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (int i = 0; i < 5; i++)
+		{
+			String sheetName = i == 0 ? "Cover" : "Body" + i;
+			JDFAttributeMap map = new JDFAttributeMap();
+			map.put(EnumPartIDKey.SignatureName, "Sig1");
+			map.put(EnumPartIDKey.SheetName, sheetName);
+			map.put(EnumPartIDKey.Side, "Front");
+			vMap.add(new JDFAttributeMap(map));
+			map.put(EnumPartIDKey.Side, "Back");
+			vMap.add(new JDFAttributeMap(map));
+		}
+
+		ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_5, 0, 0);
+		pgt.assign(null);
+		pgt.createFlyer();
+
+		MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 2, true, vMap);
+		cpGoldenTicket.setParent(pgt);
+		cpGoldenTicket.nCols[0] = cpGoldenTicket.nCols[1] = 6;
+		cpGoldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
+
+		cpGoldenTicket.assign(null);
+		cpGoldenTicket.good = 1000;
+		cpGoldenTicket.waste = 90;
+
+		cpGoldenTicket.partsAtOnce = 2;
+		BaseGoldenTicketTest.write9GTFiles(cpGoldenTicket, "MISCPS_ProductFlyer");
 	}
 
 	/**

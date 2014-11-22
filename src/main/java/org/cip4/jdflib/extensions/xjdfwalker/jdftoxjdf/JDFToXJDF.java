@@ -95,7 +95,6 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.extensions.PostXJDFWalker;
-import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -124,6 +123,7 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		super(new BaseWalkerFactory());
 		wantProduct = true;
+		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		trackAudits = true;
 		init();
@@ -180,7 +180,6 @@ public class JDFToXJDF extends PackageElementWalker
 	protected VString resAttribs;
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
-	protected boolean walkingProduct = false;
 	protected Set<String> first = new HashSet<String>();
 	/**
 	 * if true merge stripping and layout
@@ -278,6 +277,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 * if true tildes are retained as range delimitors
 	 */
 	private boolean bConvertTilde = false;
+	String rootID;
 
 	/**
 	 * @param root the jdf or jmf to transform
@@ -318,6 +318,7 @@ public class JDFToXJDF extends PackageElementWalker
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
 		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
+		rootID = node.getID();
 		if (trackAudits)
 			root.getCreateAuditPool().addCreated("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
@@ -330,49 +331,16 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			oldRoot = root;
 		}
-		walkingProduct = false;
 		prepareNewDoc(false);
 
-		loopNodes(oldRoot);
+		loopNodes(root);
 
 		prepareRoot(root);
-		createProducts(root);
 
 		postWalk();
 		newRoot.getOwnerDocument_KElement().copyMeta(node.getOwnerDocument_KElement());
 
 		return newRoot;
-	}
-
-	/**
-	 * 
-	 * @param root
-	 */
-	private void createProducts(final JDFNode root)
-	{
-		if (wantProduct)
-		{
-			walkingProduct = true;
-			KElement beforeElem = newRoot.getElement(ElementName.AUDITPOOL);
-			beforeElem = beforeElem == null ? null : beforeElem.getNextSiblingElement();
-			final KElement productList = newRoot.insertBefore(ProductHelper.PRODUCTLIST, beforeElem, null);
-
-			walkTree(root, productList);
-			if (productList.getElement(ProductHelper.PRODUCT) == null)
-			{
-				productList.deleteNode();
-			}
-			else
-			{
-				XJDFHelper xjdfHelper = new XJDFHelper(productList.getParentNode_KElement());
-				int nRoot = xjdfHelper.numProductHelpers(true);
-				if (nRoot > 1 && !xjdfHelper.getProductHelpers().get(0).isRootProduct())
-				{
-					xjdfHelper.getProductHelpers().get(0).deleteNode();
-				}
-			}
-			walkingProduct = false;
-		}
 	}
 
 	/**
@@ -708,7 +676,7 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final VElement v = new VElement();
 		final String className = getClassName(linkTarget);
-		if (className == null)
+		if (className == null || xRoot == null)
 		{
 			return null;
 		}

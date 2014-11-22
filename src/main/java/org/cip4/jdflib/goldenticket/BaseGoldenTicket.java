@@ -633,6 +633,15 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * 
+	 * @param bProduct
+	 */
+	public void setParent(ProductGoldenTicket parent)
+	{
+		theParentNode = parent == null ? null : parent.theNode;
+	}
+
+	/**
 	 * initializes this node to a given ICS version
 	 * 
 	 */

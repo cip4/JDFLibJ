@@ -116,6 +116,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Product);
+		n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		JDFColorIntent cif = (JDFColorIntent) ci.addPartition(EnumPartIDKey.Side, "Front");
 		cif.appendColorsUsed().setCMYK();

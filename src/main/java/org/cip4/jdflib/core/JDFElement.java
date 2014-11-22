@@ -5046,6 +5046,16 @@ public class JDFElement extends KElement
 		}
 
 		/**
+		 * 
+		 * @param jdfVersion
+		 * @return
+		 */
+		public boolean isXJDF()
+		{
+			return !EnumUtil.aLessThanB(this, EnumVersion.Version_2_0);
+		}
+
+		/**
 		 * @ deprecated EnumVersion.Unknown - don't use EnumVersion.Unknown, it can't be deprecated because of bit operations in eg. AtrInfo.getFirstVersion()
 		 */
 		/** * */
