@@ -123,12 +123,14 @@ public abstract class JDFTestCaseBase extends TestCase
 	{
 		super();
 		LogConfigurator.configureLog(null, null);
-		//setTestNetwork(false);
+		if (!StringUtil.parseBoolean(System.getProperty("jdf.testnetwork"), true))
+		{
+			setTestNetwork(false);
+		}
 		ProxyUtil.setUseSystemDefault(true);
 		if (!netWorkChecked)
 		{
 			setTestNetwork(new UrlCheck("http://www.example.com").pingRC(1000) == 200);
-			netWorkChecked = true;
 		}
 	}
 
@@ -367,7 +369,8 @@ public abstract class JDFTestCaseBase extends TestCase
 	 */
 	public void setTestNetwork(boolean bTestNetwork)
 	{
-		this.bTestNetwork = bTestNetwork;
+		JDFTestCaseBase.bTestNetwork = bTestNetwork;
+		netWorkChecked = true;
 	}
 
 	/**

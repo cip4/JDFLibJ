@@ -183,6 +183,8 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURL()
 	{
+		if (!isTestNetwork())
+			return;
 		ProxyUtil.setUseSystemDefault(true);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
@@ -193,6 +195,8 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLSecure()
 	{
+		if (!isTestNetwork())
+			return;
 		ProxyUtil.setUseSystemDefault(true);
 		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(part);

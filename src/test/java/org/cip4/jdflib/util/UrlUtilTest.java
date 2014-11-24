@@ -105,7 +105,6 @@ import org.junit.Test;
  */
 public class UrlUtilTest extends JDFTestCaseBase
 {
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -230,6 +229,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURL()
 	{
+		if (!isTestNetwork())
+			return;
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
@@ -239,6 +240,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLPost()
 	{
+		if (!isTestNetwork())
+			return;
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null));
 	}
 
@@ -248,6 +251,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLClose()
 	{
+		if (!isTestNetwork())
+			return;
 		HTTPDetails det = new HTTPDetails();
 		det.setbKeepAlive(false);
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
