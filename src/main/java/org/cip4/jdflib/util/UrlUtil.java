@@ -435,8 +435,9 @@ public class UrlUtil
 			prefix += "/..";
 		}
 
-		final String s = lenPath == 0 ? prefix : StringUtil.setvString(vPath, File.separator, prefix + File.separator, null);
-		return cleanDots(s);
+		String s = lenPath == 0 ? prefix : StringUtil.setvString(vPath, "/", prefix + "/", null);
+		s = cleanDots(s);
+		return StringUtil.replaceString(s, "/", File.separator);
 	}
 
 	/**

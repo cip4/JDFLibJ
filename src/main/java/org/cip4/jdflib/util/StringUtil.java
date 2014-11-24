@@ -951,6 +951,9 @@ public class StringUtil
 		 */
 		public String replaceString(final String toReplace, final String replaceBy)
 		{
+			if (toReplace.equals(replaceBy))
+				return strWork;
+
 			if (replaceBy != null && replaceBy.contains(toReplace))
 				reRead = false;
 
