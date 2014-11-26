@@ -223,6 +223,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		foundProduct = false;
 		foundProductList = false;
+		firstproductInList = true;
 	}
 
 	/**
