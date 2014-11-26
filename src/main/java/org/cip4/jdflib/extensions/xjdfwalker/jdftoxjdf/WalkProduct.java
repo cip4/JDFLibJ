@@ -116,7 +116,7 @@ public class WalkProduct extends WalkJDF
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && EnumType.Product.equals(((JDFNode) toCheck).getEnumType());
+		return super.matches(toCheck) && jdfToXJDF.wantProduct && EnumType.Product.equals(((JDFNode) toCheck).getEnumType());
 	}
 
 	/**

@@ -264,6 +264,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testWriteToURLNull()
 	{
+		if (!isTestNetwork())
+			return;
 		assertNull(UrlUtil.writeToURL(null, null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
@@ -643,8 +645,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
@@ -677,14 +677,11 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetRelativeURI()
 	{
-		if (File.separator.equals("\\"))
-		{ // on windows
-			File f = new File("./a b");
-			assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "./a%20b");
-			f = new File("../a.ß");
-			assertEquals("escaped utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f");
-			assertEquals("unescaped but utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ß")));
-		}
+		File f = new File("./a b");
+		assertEquals(StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "a%20b");
+		f = new File("../a.ß");
+		assertEquals("escaped utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "../a.%c3%9f");
+		assertEquals("unescaped but utf8", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), new String(StringUtil.getUTF8Bytes("../a.ß")));
 	}
 
 	/**
@@ -707,21 +704,16 @@ public class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	public void testGetRelativeURL()
 	{
-		if (File.separator.equals("\\"))
-		{ // on windows
-			File file = new File("c:\\a\\b\\c.txt");
-			final File cwd = new File("c:\\a\\b1");
-			assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "../b/c.txt");
-			file = new File("c:\\a\\b1\\c.txt");
-			assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "./c.txt");
-			file = new File("a\\..\\b\\c.txt");
-			assertEquals(UrlUtil.getRelativeURL(file, null, true), "./b/c.txt");
-			file = cwd;
-			assertEquals(UrlUtil.getRelativeURL(file, cwd, true), ".");
-		}
+		File file = new File("c:\\a\\b\\c.txt");
+		final File cwd = new File("c:\\a\\b1");
+		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "../b/c.txt");
+		file = new File("c:\\a\\b1\\c.txt");
+		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "c.txt");
+		file = new File("a\\..\\b\\c.txt");
+		assertEquals(UrlUtil.getRelativeURL(file, null, true), "b/c.txt");
+		file = cwd;
+		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), ".");
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 

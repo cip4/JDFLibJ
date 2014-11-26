@@ -87,6 +87,8 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testToString()
 	{
+		if (!isTestNetwork())
+			return;
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		assertTrue(writeToURL.toString().contains("<not buffered>"));
@@ -100,10 +102,14 @@ public class UrlPartTest extends JDFTestCaseBase
 	@Test
 	public void testBuffer()
 	{
+		if (!isTestNetwork())
+			return;
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
-		assertTrue(writeToURL.toString().contains(new ByteArrayIOStream(writeToURL.getResponseStream()).toString()));
+		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
+		assertTrue(writeToURL.toString().contains(byteArrayIOStream.toString()));
+		byteArrayIOStream.close();
 	}
 
 	/**

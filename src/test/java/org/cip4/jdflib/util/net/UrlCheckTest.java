@@ -89,6 +89,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPing()
 	{
+		if (!isTestNetwork())
+			return;
 		assertNotNull(new UrlCheck("http://www.google.com").ping(5555));
 	}
 
@@ -99,6 +101,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testBuffer()
 	{
+		if (!isTestNetwork())
+			return;
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
 		urlCheck.setBuffer(true);
 		UrlPart ping = urlCheck.ping(5555);
@@ -112,6 +116,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRC()
 	{
+		if (!isTestNetwork())
+			return;
 		assertEquals(200, new UrlCheck("http://www.google.com").pingRC(5555));
 	}
 
@@ -122,6 +128,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRCGet()
 	{
+		if (!isTestNetwork())
+			return;
 		assertEquals(200, new UrlCheck("http://www.google.com", UrlUtil.GET).pingRC(5555));
 	}
 
@@ -133,6 +141,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testPingRCPost()
 	{
+		if (!isTestNetwork())
+			return;
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com", UrlUtil.POST);
 		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
 		assertTrue("Google does not accept post... ", urlCheck.pingRC(5555) > 200);
@@ -145,6 +155,8 @@ public class UrlCheckTest extends JDFTestCaseBase
 	@Test
 	public void testGetPingRC()
 	{
+		if (!isTestNetwork())
+			return;
 		UrlCheck urlCheck = new UrlCheck("http://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(1000);

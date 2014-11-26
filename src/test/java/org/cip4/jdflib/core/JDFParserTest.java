@@ -138,7 +138,6 @@ public class JDFParserTest extends JDFTestCaseBase
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 1819514227719688245L;
 
 		@Override
 		public String getDocumentClass()
@@ -177,7 +176,7 @@ public class JDFParserTest extends JDFTestCaseBase
 			new JDFParser().parseString(s);
 		}
 		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 1000000);
+		assertTrue(getCurrentMem() - mem < 2000000);
 		System.out.println("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -401,7 +400,6 @@ public class JDFParserTest extends JDFTestCaseBase
 	@Override
 	public void tearDown() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.tearDown();
 		JDFParser.m_searchStream = bSearch;
 	}

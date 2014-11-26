@@ -115,7 +115,7 @@ public class WalkResLink extends WalkJDFElement
 
 		if (EnumType.Product.equals(n.getEnumType()))
 		{
-			if (linkTarget instanceof JDFComponent)
+			if (linkTarget instanceof JDFComponent || !jdfToXJDF.wantProduct)
 			{
 				return null;
 			}

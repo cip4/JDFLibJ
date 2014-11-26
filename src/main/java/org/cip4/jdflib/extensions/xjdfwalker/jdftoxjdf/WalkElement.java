@@ -147,9 +147,33 @@ public class WalkElement extends BaseWalker
 		return eNew;
 	}
 
+	/**
+	 * 
+	 * @param jdf
+	 * @param eNew
+	 */
 	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
 		JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap();
+		if (map != null)
+		{
+			for (String key : map.keySet())
+			{
+				String prefix = KElement.xmlnsPrefix(key);
+				if (prefix != null)
+				{
+					String uri = eNew.getNamespaceURIFromPrefix(prefix);
+					if (uri == null)
+					{
+						uri = jdf.getNamespaceURIFromPrefix(prefix);
+						if (uri != null)
+						{
+							eNew.addNameSpace(prefix, uri);
+						}
+					}
+				}
+			}
+		}
 		eNew.setAttributes(map);
 	}
 

@@ -103,22 +103,25 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 */
 	public void testSetProxyString() throws Exception
 	{
-		ProxyUtil.setProxy(null);
-		String proxyURL = "http://proxy:8082";
-		UrlPart p = null;
-		int i = 0;
-		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-		if (p != null)
-			i++;
-		ProxyUtil.setProxy(proxyURL);
-		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-		if (p != null)
-			i++;
-		ProxyUtil.setProxy(null);
-		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-		if (p != null)
-			i++;
-		assertTrue(i > 0);
+		if (isTestNetwork())
+		{
+			ProxyUtil.setProxy(null);
+			String proxyURL = "http://proxy:8082";
+			UrlPart p = null;
+			int i = 0;
+			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+			if (p != null)
+				i++;
+			ProxyUtil.setProxy(proxyURL);
+			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+			if (p != null)
+				i++;
+			ProxyUtil.setProxy(null);
+			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+			if (p != null)
+				i++;
+			assertTrue(i > 0);
+		}
 	}
 
 	/**
@@ -127,16 +130,19 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testSetProxy() throws Exception
 	{
-		try
+		if (isTestNetwork())
 		{
-			ProxyUtil.setProxy(null, 0, null, null);
-			ProxyUtil.setProxy("dummy", 0, null, null);
-			ProxyUtil.setProxy("dummy", 880, "a", null);
-			ProxyUtil.setProxy("dummy", 80, "a", "b");
-		}
-		catch (Exception x)
-		{
-			fail(x.toString());
+			try
+			{
+				ProxyUtil.setProxy(null, 0, null, null);
+				ProxyUtil.setProxy("dummy", 0, null, null);
+				ProxyUtil.setProxy("dummy", 880, "a", null);
+				ProxyUtil.setProxy("dummy", 80, "a", "b");
+			}
+			catch (Exception x)
+			{
+				fail(x.toString());
+			}
 		}
 	}
 
@@ -147,31 +153,34 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	@Test
 	public void testSystemProxy() throws Exception
 	{
-		ProxyUtil.setUseSystemDefault(true);
-		String[] v = new String[] { "http://www.yahoo.com", "https://www.google.com", "http://localhost" };
-		for (String s : v)
+		if (isTestNetwork())
 		{
-			List<Proxy> l = ProxySelector.getDefault().select(new URI(s));
-
-			for (Proxy proxy : l)
+			ProxyUtil.setUseSystemDefault(true);
+			String[] v = new String[] { "http://www.yahoo.com", "https://www.google.com", "http://localhost" };
+			for (String s : v)
 			{
-				log.info("proxy type : " + s + " " + proxy.type());
-				InetSocketAddress addr = (InetSocketAddress) proxy.address();
-				if (addr == null)
+				List<Proxy> l = ProxySelector.getDefault().select(new URI(s));
+
+				for (Proxy proxy : l)
 				{
-					if (s.contains("localhost"))
+					log.info("proxy type : " + s + " " + proxy.type());
+					InetSocketAddress addr = (InetSocketAddress) proxy.address();
+					if (addr == null)
 					{
-						log.info("No Proxy for " + s);
+						if (s.contains("localhost"))
+						{
+							log.info("No Proxy for " + s);
+						}
+						else
+						{
+							log.warn("No Proxy for external host " + s);
+						}
 					}
 					else
 					{
-						log.warn("No Proxy for external host " + s);
+						log.info("proxy hostname : " + addr.getHostName());
+						log.info("proxy port : " + addr.getPort());
 					}
-				}
-				else
-				{
-					log.info("proxy hostname : " + addr.getHostName());
-					log.info("proxy port : " + addr.getPort());
 				}
 			}
 		}

@@ -1031,12 +1031,14 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				return JDFCoreConstants.XMLNSURI;
 			}
-			DocumentXMLImpl DocumentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
+			DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
 			if (bcache)
 			{
-				strNamespaceURI = DocumentXMLImpl.getNamespaceURIFromPrefix(prefix);
+				strNamespaceURI = documentXMLImpl.getNamespaceURIFromPrefix(prefix);
 				if (strNamespaceURI != null)
+				{
 					return strNamespaceURI;
+				}
 			}
 			final String elementPrefix = getPrefix();
 			if (prefix.equals(elementPrefix))
@@ -1046,7 +1048,7 @@ public class KElement extends ElementNSImpl implements Element
 				strNamespaceURI = getNamespaceURI();
 				if (strNamespaceURI != null)
 				{
-					DocumentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
+					documentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 					return strNamespaceURI;
 				}
 			}
@@ -1058,7 +1060,7 @@ public class KElement extends ElementNSImpl implements Element
 			// found a decent URI
 			if (strNamespaceURI != null)
 			{
-				DocumentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
+				documentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 				return strNamespaceURI;
 			}
 
@@ -1075,7 +1077,7 @@ public class KElement extends ElementNSImpl implements Element
 						strNamespaceURI = ati.getNamespaceURI();
 						if (strNamespaceURI != null)
 						{
-							DocumentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
+							documentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 							return strNamespaceURI;
 						}
 					}
