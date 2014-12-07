@@ -333,7 +333,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(n);
 		cpGoldenTicket.good = 3000;
 		cpGoldenTicket.waste = 200;
-		write3GTFiles(cpGoldenTicket, "sameInk");
+		write9GTFiles(cpGoldenTicket, "sameInk");
 	}
 
 	/**

@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,8 +76,15 @@ package org.cip4.jdflib.core;
  * @author MatternK
  * @See EnumElementValidity below for current list of validity value
  * 
- * 0 Unknown UNKNOWN); 1 None NONE); 2 Required REQUIRED); 3 Optional OPTIONAL); 4 Deprecated DEPRECATED); 5 SingleRequired SINGLEREQUIRED); 6 SingleOptional
- * SINGLEOPTIONAL); 7 SingleDeprecated SINGLEDEPRECATED); 8 Dummy DUMMY);
+ * 0 Unknown UNKNOWN); 
+ * 1 None NONE); 
+ * 2 Required REQUIRED);
+ * 3 Optional OPTIONAL); 
+ * 4 Deprecated DEPRECATED); 
+ * 5 SingleRequired SINGLEREQUIRED); 
+ * 6 SingleOptional SINGLEOPTIONAL); 
+ * 7 SingleDeprecated SINGLEDEPRECATED); 
+ * 8 Dummy DUMMY);
  */
 public class ElemInfoTable
 {

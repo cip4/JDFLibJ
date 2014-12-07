@@ -108,7 +108,7 @@ public class WalkLayoutElement extends WalkInlineAllRes
 		KElement parent = jdf.getParentNode_KElement();
 		boolean bInRunList = parent instanceof JDFRunList;
 		if (bInRunList)
-			bMerge = this.jdfToXJDF.isMergeRunList();
+			bMerge = jdfToXJDF.isMergeRunList();
 		else
 			bMerge = false;
 		KElement ret = super.walk(jdf, xjdf);

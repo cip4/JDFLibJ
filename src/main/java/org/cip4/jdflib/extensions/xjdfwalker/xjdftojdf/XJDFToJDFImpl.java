@@ -230,7 +230,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 * @param xjdf
 	 * @return the converted jdf
 	 */
-	public JDFDoc convert(KElement xjdf)
+	protected JDFDoc convert(KElement xjdf)
 	{
 		if (xjdf == null)
 		{

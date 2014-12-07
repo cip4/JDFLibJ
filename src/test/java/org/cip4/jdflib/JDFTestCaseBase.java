@@ -91,6 +91,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -318,6 +320,28 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
+	 * write convert and unconvert
+	 * 
+	 * @param root the jdf node or jmf root
+	 * @param fileBase the filename without extension
+	 */
+	protected static void writeRoundTrip(final JDFElement root, String fileBase)
+	{
+		root.write2File(sm_dirTestDataTemp + fileBase + ".jdf");
+		assertTrue(fileBase + ".jdf", root.isValid(EnumValidationLevel.Complete));
+
+		XJDF20 xjdfConv = new XJDF20();
+		KElement xjdfRoot = xjdfConv.convert(root);
+		xjdfRoot.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + fileBase + ".xjdf", 2, false);
+		//TODO add xjdf schem validation here
+
+		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
+		JDFDoc converted = jdfConverter.convert(xjdfRoot);
+		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
+		assertTrue(fileBase + ".xjdf.jdf", converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
 	 * create a standard customerInfo
 	 * @param doc the doc to preparein
 	 * @return the new customerInfo
@@ -341,6 +365,11 @@ public abstract class JDFTestCaseBase extends TestCase
 		return info;
 	}
 
+	/**
+	 * 
+	 * @param doc
+	 * @return
+	 */
 	protected JDFNodeInfo prepareNodeInfo(final JDFDoc doc)
 	{
 		final JDFNode n = doc.getJDFRoot();

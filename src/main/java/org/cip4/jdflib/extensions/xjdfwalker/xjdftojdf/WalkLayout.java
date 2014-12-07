@@ -108,7 +108,7 @@ public class WalkLayout extends WalkStrippingParams
 	}
 
 	/**
-	 * split a RunList into a RunList and a RunList/LayoutElement
+	 * split a Layout into a Layout and a StrippingParams
 	 * @param e
 	 * @param trackElem 
 	 */

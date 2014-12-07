@@ -128,13 +128,12 @@ public class WalkRefElement extends WalkJDFElement
 	{
 		final JDFResource target = re.getTarget();
 		final JDFResourceLink rl = getLinkForRef(re, target);
-		final VElement v = this.jdfToXJDF.setResource(rl, target, getRefRoot(xjdf));
+		final VElement v = jdfToXJDF.setResource(rl, target, getRefRoot(xjdf));
 		if (v != null)
 		{
 			final String attName = getRefName(re);
-			for (int i = 0; i < v.size(); i++)
+			for (KElement ref : v)
 			{
-				final KElement ref = v.get(i);
 				xjdf.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
 			}
 		}

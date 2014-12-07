@@ -90,7 +90,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * 
  *  
- * @author rainerprosi
+ * @author rainer prosi
  * @date Feb 26, 2013
  */
 class PostConverter
@@ -102,8 +102,8 @@ class PostConverter
 	private final JDFNode theNode;
 
 	/**
+	 * @param xjdfToJDFImpl 
 	 * @param theNode
-	 * @param xjdfToJDFImpl TODO
 	 */
 	public PostConverter(XJDFToJDFImpl xjdfToJDFImpl, JDFNode theNode)
 	{
@@ -223,7 +223,7 @@ class PostConverter
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 *  
 	 * @param root 
 	 */
 	private void fixDependencies(JDFNode root)
@@ -239,7 +239,7 @@ class PostConverter
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 *  
 	 * @param dep
 	 */
 	private void fixOneDependencies(JDFDependencies dep)
@@ -259,12 +259,20 @@ class PostConverter
 				VElement vR = root.getLeaves(true);
 				VElement v2 = root.getLinksAndRefs(true, false);
 				if (v2 != null)
+				{
 					for (KElement rl2 : v2)
+					{
 						rl2.renameElement("LayoutElementLink", null);
+					}
+				}
 				v2 = root.getLinksAndRefs(false, true);
 				if (v2 != null)
+				{
 					for (KElement rl2 : v2)
+					{
 						rl2.renameElement("LayoutElementRef", null);
+					}
+				}
 				for (KElement r : vR)
 				{
 					JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;

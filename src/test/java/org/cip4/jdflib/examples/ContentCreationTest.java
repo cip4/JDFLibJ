@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,25 +75,33 @@ import java.io.File;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
+import org.cip4.jdflib.auto.JDFAutoPositionObj.EnumAnchor;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
 import org.cip4.jdflib.resource.process.JDFContentData;
 import org.cip4.jdflib.resource.process.JDFContentList;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
+import org.cip4.jdflib.resource.process.JDFPositionObj;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StatusCounter;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -119,22 +127,24 @@ public class ContentCreationTest extends PreflightTest
 		JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
 		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL", null);
 
+		/*
 		JDFContentList cl = (JDFContentList) lep.appendElement(ElementName.CONTENTLIST);
 		cl = (JDFContentList) cl.makeRootResource(null, null, true);
 		cl.setXMLComment("this is an optional metadatapool for the content");
-
+		*/
+		JDFContentList cl = null;
 		JDFLayoutElementPart lePart = addLayoutElementPart(lep, cl);
-		KElement positionObj = lePart.appendElement("PositionObject");
-		positionObj.setAttribute("PageRange", "0");
-		setNextAnchor(positionObj, null, "LowLeft", "0 0", null, "Parent", 0);
-		positionObj.setAttribute("Anchor", "LowLeft");
+		JDFPositionObj positionObj = lePart.appendPositionObj();
+		positionObj.setPageRange(new JDFIntegerRangeList(new JDFIntegerRange(0)));
+		setNextAnchor(positionObj, null, "BottomLeft", "0 0", null, "Parent", 0);
+		positionObj.setAttribute("Anchor", "BottomLeft");
 		positionObj.setAttribute("PositionPolicy", "Exact");
 		final JDFLayoutElement bkg = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		bkg.setMimeURL("bkg.pdf");
 
 		lep.appendXMLComment("This is a \"roughly placed\" reservation in the middle of the page", null);
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
 		// TODO discuss individual positions
 		setNextAnchor(positionObj, null, "Center", null, null, "Parent", 0);
@@ -148,7 +158,7 @@ public class ContentCreationTest extends PreflightTest
 
 		lep.appendXMLComment("This is a \"roughly placed\" reservation 36 points below the previous image;\n NextPosition points from Anchor on this to NextAnchor on next,\n i.e. a positive vector specifies that next is shifted in the positive direction in the parent (in this case page) coordinate system", null);
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
 		positionObj.setAttribute("Anchor", "TopCenter");
 		positionObj.setAttribute("PositionPolicy", "Free");
@@ -160,26 +170,26 @@ public class ContentCreationTest extends PreflightTest
 
 		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed", null);
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
 		setNextAnchor(positionObj, null, "BottomLeft", "2 3", null, "Parent", 0);
-		positionObj.setAttribute("Anchor", "LowLeft");
+		positionObj.setAnchor(EnumAnchor.BottomLeft);
 		positionObj.setAttribute("PositionPolicy", "Exact");
-		lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
+		addBarcode(lePart);
 
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "0");
 		setNextAnchor(positionObj, null, "TopRight", null, null, "Parent", 0);
 		positionObj.setAttribute("Anchor", "TopRight");
 		positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified", null);
 		positionObj.setAttribute("PositionPolicy", "Exact");
-		lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
+		addBarcode(lePart);
 		lep.appendXMLComment("This is a \"roughly placed\"  container for marks\nThe anchor at top left is defined in the !Unrotated! orientation.\n It is placed at the left (=0.0) bottom(=0.0) position of the page.\nThe text flows bottom to top (=Rotate 90 = counterclockwise)\n do we need margins?", null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		String idParent = lePart.appendAnchor(null);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "1");
 		positionObj.setAttribute("Anchor", "TopLeft");
 		positionObj.setAttribute("PositionPolicy", "Free");
@@ -188,20 +198,20 @@ public class ContentCreationTest extends PreflightTest
 
 		lePart = addLayoutElementPart(lep, cl);
 		id = lePart.appendAnchor(null);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("Anchor", "BottomLeft");
 		setNextAnchor(positionObj, idParent, "BottomLeft", "0 0", null, "Parent", 0);
-		lePart.appendBarcodeProductionParams().appendXMLComment("barcode details here", null);
+		addBarcode(lePart);
 		lep.appendXMLComment("This is a disclaimer text inside the previous container\nThe anchor at top left is defined in the !Unrotated! orientation.\n The barcode and text are justified with their top margins and spaced by 72 points\n which corresponds to the left of the page because the container is rotated 90�\n"
 				+ "AbsoluteSize specifies the size of the object in points", null);
 
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		setNextAnchor(positionObj, id, "TopRight", "-72 0", null, "Sibling", 0);
 
 		positionObj.setAttribute("Anchor", "TopLeft");
 		// positionObj.setAttribute("ParentRef", idParent);
-		positionObj.setAttribute("AbsoluteSize", "300 200");
+		positionObj.setSize(new JDFXYPair(200, 300));
 		JDFLayoutElement text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		text.setElementType(EnumElementType.Text);
 		text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
@@ -209,7 +219,7 @@ public class ContentCreationTest extends PreflightTest
 				+ "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
 
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "1 ~ 2");
 		positionObj.setAttribute("RelativeSize", "0.8 0.5");
 		text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
@@ -220,7 +230,7 @@ public class ContentCreationTest extends PreflightTest
 		lep.appendXMLComment("This is another \"VERY roughly placed\" piece of text somewhere on pages 2-3; the text source is the JDF", null);
 
 		lePart = addLayoutElementPart(lep, cl);
-		positionObj = lePart.appendElement("PositionObject");
+		positionObj = lePart.appendPositionObj();
 		positionObj.setAttribute("PageRange", "1 ~ 2");
 		text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		text.setElementType(EnumElementType.Text);
@@ -229,9 +239,29 @@ public class ContentCreationTest extends PreflightTest
 		textSrc.setName("TextInput");
 		textSrc.setText("Laurum Ipsum Blah blah blah!\n btw. this is unformatted plain text and nothing else!");
 
+		//TODO fix back conversion		writeRoundTrip(n, "LayoutPositionObj");
 		d.write2File(sm_dirTestDataTemp + File.separator + "LayoutPositionObj.jdf", 2, false);
 	}
 
+	/**
+	 * 
+	 * @param lePart
+	 */
+	private void addBarcode(JDFLayoutElementPart lePart)
+	{
+		JDFBarcodeProductionParams barcodeProductionParams = lePart.appendBarcodeProductionParams();
+		JDFIdentificationField identificationField = barcodeProductionParams.appendIdentificationField();
+		identificationField.setEncoding(EnumEncoding.Barcode);
+		identificationField.setEncodingDetails("EAN");
+		barcodeProductionParams.setXMLComment("barcode details here");
+	}
+
+	/**
+	 * 
+	 * @param lep
+	 * @param cl
+	 * @return
+	 */
 	private JDFLayoutElementPart addLayoutElementPart(JDFLayoutElementProductionParams lep, JDFContentList cl)
 	{
 		JDFLayoutElementPart lePart = lep.appendLayoutElementPart();
@@ -246,8 +276,11 @@ public class ContentCreationTest extends PreflightTest
 	 */
 	private JDFContentData addMetaData(JDFContentList cl, JDFLayoutElementPart lePart)
 	{
+		if (cl == null)
+			return null;
+
 		JDFContentData cd = cl.appendContentData();
-		lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
+		//		lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
 		return cd;
 	}
 

@@ -156,6 +156,12 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		writeRoundTrip(goldenTicket, "GoldenTicket_Worker_", templateName);
 	}
 
+	/**
+	 * 
+	 * @param goldenTicket
+	 * @param gtType
+	 * @param templateName
+	 */
 	protected static void writeRoundTrip(final BaseGoldenTicket goldenTicket, String gtType, final String templateName)
 	{
 		goldenTicket.write2File(sm_dirTestDataTemp + gtType + templateName + ".jdf", 2);

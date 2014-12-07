@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -65,6 +65,7 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
 import org.cip4.jdflib.core.ElementName;
@@ -83,7 +84,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -140,6 +140,7 @@ import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * some simple examples
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -183,14 +184,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			action = "DoAll";
 		}
 
-		String strDocType = action.endsWith("Message") ? ElementName.JMF // 1 =
-		// JMF
-		// document
-		// root
+		String strDocType = action.endsWith("Message") ? ElementName.JMF // 1 = JMF document root
 		: ElementName.JDF; // 0 = JDF document root
 
-		// use JDFExampleDoc as a container that holds the various example
-		// routines
+		// use JDFExampleDoc as a container that holds the various example routines
 		doExample(strDocType, action, args.parameter('i'), args.parameter('o'));
 	}
 
@@ -296,9 +293,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		{
 			// remove whitespace only nodes before writing
 			root.eraseEmptyNodes(true);
-			// remove any existing output file prior to overwriting
-			// #dm# remove(outFile);
-			// write the output file
+			//			writeRoundTrip((JDFElement) m_doc.getRoot(), UrlUtil.newExtension(outFile, null));
 			m_doc.write2File(sm_dirTestDataTemp + outFile, 0, true);
 		}
 		else
@@ -311,13 +306,6 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		return iReturn;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
 	/**
 	 * Example 0: call all other examples
 	 */
@@ -325,7 +313,6 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	{
 		doExample(ElementName.JDF, "CreateSimple", "", "Simple.jdf");
 		doExample(ElementName.JDF, "CreateRIP", "", "RIP.jdf");
-		doExample(ElementName.JDF, "Reprint", "RIP.jdf", "Reprint.jdf");
 		doExample(ElementName.JDF, "CreateBrochure", "", "Brochure.jdf");
 		doExample(ElementName.JDF, "ParseNodes", "Brochure.jdf", "");
 		doExample(ElementName.JDF, "DoRunList", "", "RunList.jdf");
@@ -334,6 +321,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		doExample(ElementName.JDF, "CreateImposition", "", "Impose.jdf");
 		doExample(ElementName.JDF, "CreateDigitalPrinting", "", "DigitalPrinting.jdf");
 		doExample(ElementName.JDF, "CreateNarrowWeb", "", "NarrowWeb.jdf");
+		doExample(ElementName.JDF, "Reprint", "RIP.jdf", "Reprint.jdf");
 
 		doExample(ElementName.JMF, "ProcessMessage", "", "ProcessMessage.jdf");
 
@@ -342,12 +330,6 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 	// the actual examples start here
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
 	/**
 	 * Example 1: create an incomplete product node for a simple 8.5 * 11
 	 * brochure from scratch
@@ -361,16 +343,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// Add an intent resource
 		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
-		// set the type attribute
-		try
-		{
-			layoutIntent.setPageNumber(new JDFIntegerRangeList("4"));
-		}
-		catch (DataFormatException e)
-		{
-			// nop is ok
-		}
-
+		JDFComponent c = (JDFComponent) productNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
 		// set some span elements in the intent resource
 		JDFIntegerSpan pages = layoutIntent.appendPages();
 		pages.setPreferred(16);
@@ -401,7 +375,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		productNode.setJobPartID("Part1");
 		// define the complete output component (false -> Usage=output
 		JDFComponent compBrochure = (JDFComponent) productNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
-		Vector vComType = new Vector();
+		Vector<EnumComponentType> vComType = new Vector<EnumComponentType>();
 		vComType.add(JDFComponent.EnumComponentType.FinalProduct);
 		compBrochure.setComponentType(vComType);
 		compBrochure.setDescriptiveName("complete 16-page Brochure");
@@ -422,7 +396,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		compCover.setDescriptiveName("Cover Component");
 
-		vComType = new Vector();
+		vComType = new Vector<EnumComponentType>();
 		vComType.add(JDFComponent.EnumComponentType.PartialProduct);
 		compCover.setComponentType(vComType);
 
@@ -458,7 +432,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		compInsert.setDescriptiveName("Insert Component");
 
-		vComType = new Vector();
+		vComType = new Vector<EnumComponentType>();
 		vComType.add(JDFComponent.EnumComponentType.PartialProduct);
 		compInsert.setComponentType(vComType);
 		productNode.linkMatchingResource(compInsert, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
@@ -501,7 +475,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// set up the root process
 		JDFNode root = (JDFNode) m_doc.getRoot();
 		// get a vector of all JDF nodes
-		Vector vNode = root.getvJDFNode(null, null, false);
+		VElement vNode = root.getvJDFNode(null, null, false);
 		// print summary
 		System.out.println("ParseNodes found " + vNode.size() + " Nodes");
 		// loop over all nodes and print
@@ -662,12 +636,12 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			System.out.println("the following attributes are inValid: ");
 
 			// get the vector of invalid attributes
-			Vector vInvalidAttributes = rl.getInvalidAttributes(EnumValidationLevel.Complete, true, 9999999);
+			VString vInvalidAttributes = rl.getInvalidAttributes(EnumValidationLevel.Complete, true, 9999999);
 
 			// print out the details
 			for (int i = 0; i < vInvalidAttributes.size(); i++)
 			{
-				System.out.println("key: " + vInvalidAttributes.elementAt(i) + " value: " + rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
+				System.out.println("key: " + vInvalidAttributes.elementAt(i) + " value: " + rl.getAttribute(vInvalidAttributes.elementAt(i), "", ""));
 			}
 
 			System.out.println("end DoValid");
@@ -788,8 +762,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		ripNode.setTypes(vTypes);
 
 		// now append the various resources
-		// cast to the individual node types and append the appropriate
-		// resources
+		// cast to the individual node types and append the appropriate resources
 		ripNode.appendMatchingResource(ElementName.INTERPRETINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		JDFRunList inRunList = (JDFRunList) ripNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, null);
@@ -811,6 +784,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		// set up the expose output media
 		JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput, null);
+		exposedMedia.appendMedia();
 
 		// set up one partition / page
 		VElement vExposedMediaPages = exposedMedia.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 1 2 3", null));

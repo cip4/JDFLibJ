@@ -105,28 +105,27 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	@Override
 	public JDFDoc convert(KElement xjdf)
 	{
+		JDFDoc d = null;
 		if (needSplit(xjdf))
 		{
 			Collection<XJDFHelper> vSplit = splitter.splitXJDF(new XJDFHelper(xjdf));
 			if (vSplit == null || vSplit.size() == 0)
 			{
 				log.error("no xjdf elements returned by splitter");
-				return null;
 			}
 			else
 			{
-				JDFDoc d = null;
 				for (XJDFHelper h : vSplit)
 				{
 					d = super.convert(h.getRoot());
 				}
-				return d;
 			}
 		}
 		else
 		{
-			return super.convert(xjdf);
+			d = super.convert(xjdf);
 		}
+		return d;
 	}
 
 	/**

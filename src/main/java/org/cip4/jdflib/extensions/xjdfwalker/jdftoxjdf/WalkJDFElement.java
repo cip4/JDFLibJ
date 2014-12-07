@@ -204,7 +204,12 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected String getRefName(final JDFRefElement re)
 	{
-		return re.getLocalName();
+		String name = re.getLocalName();
+		if (jdfToXJDF.isMergeRunList() && "LayoutElementRef".equals(name))
+		{
+			name = "RunListRef";
+		}
+		return name;
 	}
 
 	/**
