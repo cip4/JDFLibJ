@@ -81,14 +81,14 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.intent.JDFBindingIntent;
+import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.junit.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class JDFSpanBaseTest extends JDFTestCaseBase
+public class JDFSpanTest extends JDFTestCaseBase
 {
 
 	/**
@@ -97,17 +97,12 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testGuessRange() throws DataFormatException
+	public void testBindTypeNone()
 	{
-		JDFDoc doc = new JDFDoc("LayoutIntent");
-		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
-		JDFIntegerSpan is = e.appendPages();
-		assertNull(is.guessActual());
-		is.setRange(new JDFIntegerRangeList("3 ~ 5 8"));
-		assertEquals("5", is.guessActual());
-		is.setPreferred(7);
-		assertEquals("7", is.guessActual());
-		is.setActual(9);
-		assertEquals("9", is.guessActual());
+		JDFDoc doc = new JDFDoc("BindingIntent");
+		JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
+		JDFSpanBindingType bindingType = e.appendBindingType();
+		bindingType.setActual(EnumSpanBindingType.None);
+		assertEquals(bindingType.getActual(), EnumSpanBindingType.None);
 	}
 }
