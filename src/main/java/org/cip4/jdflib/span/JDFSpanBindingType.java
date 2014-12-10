@@ -188,9 +188,6 @@ public class JDFSpanBindingType extends JDFEnumerationSpan
 		public static final EnumSpanBindingType WireComb = new EnumSpanBindingType("WireComb");
 	}
 
-	// **************************************** Methods
-	// *********************************************
-
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
 	 * 
