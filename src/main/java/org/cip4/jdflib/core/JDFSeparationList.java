@@ -179,9 +179,25 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		if (vSeps == null)
 			return;
 
-		for (int i = 0; i < vSeps.size(); i++)
+		for (String sep : vSeps)
 		{
-			appendSeparation(vSeps.get(i));
+			appendSeparation(sep);
+		}
+	}
+
+	/**
+	 * ensure all separation names in the SeparationSpec elements without removing any prior elements
+	 * 
+	 * @param vSeps the vector of separation names to append
+	 */
+	public void ensureSeparations(VString vSeps)
+	{
+		if (vSeps == null)
+			return;
+
+		for (String sep : vSeps)
+		{
+			getCreateSeparation(sep);
 		}
 	}
 
@@ -196,13 +212,41 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
+	 * append a separationspec with a given name to this if it does not yet exist
+	 * 
+	 * @param sep the separation name
+	 */
+	public JDFSeparationSpec getCreateSeparation(String sep)
+	{
+		JDFSeparationSpec separationSpec = getSeparationSpec(sep);
+		if (separationSpec == null)
+		{
+			separationSpec = appendSeparationSpec();
+			separationSpec.setName(sep);
+		}
+		return separationSpec;
+	}
+
+	/**
 	 * append a separationspec with a given name to this
 	 * 
 	 * @param sep the separation name
 	 */
-	public void appendSeparation(String sep)
+	public JDFSeparationSpec appendSeparation(String sep)
 	{
-		appendSeparationSpec().setName(sep);
+		JDFSeparationSpec separationSpec = appendSeparationSpec();
+		separationSpec.setName(sep);
+		return separationSpec;
+	}
+
+	/**
+	 * get the separationSpec for a given separartion
+	 * @param sep
+	 * @return
+	 */
+	public JDFSeparationSpec getSeparationSpec(String sep)
+	{
+		return (JDFSeparationSpec) getChildWithAttribute(ElementName.SEPARATIONSPEC, AttributeName.NAME, null, sep, 0, true);
 	}
 
 	/**

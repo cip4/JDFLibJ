@@ -163,11 +163,11 @@ public class WalkColorIntent extends WalkResource
 		int nc = ci.getNumColors();
 		if (nc == 1)
 		{
-			ci.getCreateColorsUsed().appendSeparation(JDFConstants.SEPARATION_BLACK);
+			ci.getCreateColorsUsed().getCreateSeparation(JDFConstants.SEPARATION_BLACK);
 		}
 		if (nc == 4)
 		{
-			ci.getCreateColorsUsed().appendSeparations(JDFSeparationList.SEPARATIONS_CMYK);
+			ci.getCreateColorsUsed().ensureSeparations(JDFSeparationList.SEPARATIONS_CMYK);
 		}
 		ci.removeAttribute(AttributeName.NUMCOLORS);
 	}
