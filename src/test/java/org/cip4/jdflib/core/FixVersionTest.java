@@ -352,7 +352,24 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
 	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testNumColorsDouble()
+	{
+		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		ci.setNumColors(4);
+		ci.getCreateColorsUsed().setCMYK();
+		boolean converted = new FixVersion(EnumVersion.Version_1_4).convert(ci);
+		assertTrue(converted);
+		assertNull(ci.getAttribute(AttributeName.NUMCOLORS, null, null));
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		converted = new FixVersion(EnumVersion.Version_1_5).convert(ci);
+		assertTrue(converted);
+		assertEquals(ci.getNumColors(), 4);
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 0);
+	}
 
 	/**
 	 * 
