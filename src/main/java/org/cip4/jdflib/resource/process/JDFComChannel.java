@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -294,7 +294,7 @@ public class JDFComChannel extends JDFAutoComChannel
 	public String getPhoneNumber(final boolean stripNonNumerical)
 	{
 		final EnumChannelType channelType = getChannelType();
-		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType))
+		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType) && !EnumChannelType.Mobile.equals(channelType))
 		{
 			return null;
 		}
@@ -342,7 +342,7 @@ public class JDFComChannel extends JDFAutoComChannel
 	{
 		if (channelType == null)
 			channelType = getChannelType();
-		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType))
+		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType) && !EnumChannelType.Mobile.equals(channelType))
 		{
 			throw new IllegalArgumentException("illegal channelType: " + channelType);
 		}
@@ -365,6 +365,27 @@ public class JDFComChannel extends JDFAutoComChannel
 		}
 
 		setLocator(phone);
+	}
+
+	/**
+	 * update to mobile
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoComChannel#getChannelType()
+	 */
+	@Override
+	public EnumChannelType getChannelType()
+	{
+		EnumChannelType channelType = super.getChannelType();
+		if (EnumChannelType.Phone.equals(channelType))
+		{
+			String ctd = getChannelTypeDetails();
+			ctd = StringUtil.normalize(ctd, true);
+			if ("mobile".equals(ctd))
+			{
+				channelType = EnumChannelType.Mobile;
+			}
+		}
+		return channelType;
 	}
 
 }

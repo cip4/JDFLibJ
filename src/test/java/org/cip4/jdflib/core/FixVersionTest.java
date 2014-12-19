@@ -71,6 +71,7 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -96,6 +97,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
+import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
@@ -317,6 +319,21 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
 		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
 		assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testChannelType()
+	{
+		final JDFComChannel c = (JDFComChannel) new JDFDoc("ComChannel").getRoot();
+		c.setChannelType(EnumChannelType.Mobile);
+		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(c));
+		assertEquals(c.getChannelTypeDetails(), "Mobile");
+		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Phone");
+		assertTrue(new FixVersion(EnumVersion.Version_1_5).convert(c));
+		assertEquals(c.getAttribute(AttributeName.CHANNELTYPE), "Mobile");
 	}
 
 	/**
