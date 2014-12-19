@@ -215,7 +215,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertTrue(c.matches(c));
 		assertTrue(c.matches("foo"));
 		c2.setFamilyName("bar");
-		assertTrue(c.matches(c2));
+		assertFalse(c.matches(c2));
 		c.setFamilyName("bar");
 		assertTrue(c.matches("foo bar"));
 	}

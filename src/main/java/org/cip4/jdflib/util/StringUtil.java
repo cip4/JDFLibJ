@@ -1095,6 +1095,10 @@ public class StringUtil
 		{
 			s1 = normalize(s1, false);
 			s2 = normalize(s2, false);
+			if (s1 == null)
+				s1 = JDFConstants.EMPTYSTRING;
+			if (s2 == null)
+				s2 = JDFConstants.EMPTYSTRING;
 		}
 		return StringUtils.getLevenshteinDistance(s1, s2);
 	}

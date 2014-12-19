@@ -259,11 +259,15 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 		else if (subset instanceof JDFPerson)
 		{
 			JDFPerson other = (JDFPerson) subset;
-			if (StringUtil.getDistance(getFamilyName(), other.getFamilyName(), true, true, true) > 1)
+			if (StringUtil.getDistance(getFamilyName(), other.getFamilyName(), true, true, false) > 0)
 				return false;
 			if (StringUtil.getDistance(getFirstName(), other.getFirstName(), true, true, true) > 1)
 				return false;
 			if (StringUtil.getDistance(getAdditionalNames(), other.getAdditionalNames(), true, true, true) > 1)
+				return false;
+			if (StringUtil.getDistance(getNameSuffix(), other.getNameSuffix(), true, true, true) > 1)
+				return false;
+			if (StringUtil.getDistance(getNamePrefix(), other.getNamePrefix(), true, true, true) > 1)
 				return false;
 			matches = ContainerUtil.matchesExisting(getAddress(0), other.getAddress(0));
 		}
