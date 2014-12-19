@@ -181,7 +181,7 @@ public class JDFContactTest extends JDFTestCaseBase
 		p2.setFirstName("Foo");
 		assertTrue(c.matches(c));
 		p2.setFamilyName("bar");
-		assertTrue(c.matches(c2));
+		assertFalse(c.matches(c2));
 		p.setFamilyName("bar");
 
 		c.setUserID("foo");
