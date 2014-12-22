@@ -79,8 +79,6 @@
 
 package org.cip4.jdflib.jmf;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -99,7 +97,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
 //----------------------------------
@@ -179,42 +176,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	public int getJobCount()
 	{
 		return getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, 0).size();
-	}
-
-	/**
-	 * (11) set attribute IdleStartTime
-	 * @param value : the value to set the attribute to or null
-	 */
-	@Override
-	public void setIdleStartTime(JDFDate value)
-	{
-		if (value == null)
-		{
-			value = new JDFDate();
-		}
-		setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
-	}
-
-	/**
-	 * (12) get JDFDate attribute IdleStartTime
-	 * @return JDFDate the value of the attribute
-	 */
-	@Override
-	public JDFDate getIdleStartTime()
-	{
-		final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
-		if (str != null)
-		{
-			try
-			{
-				return new JDFDate(str);
-			}
-			catch (final DataFormatException dfe)
-			{
-				// nop
-			}
-		}
-		return null;
 	}
 
 	/**

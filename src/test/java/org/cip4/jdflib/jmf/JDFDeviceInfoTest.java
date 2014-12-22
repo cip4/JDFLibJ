@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,6 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -118,11 +117,11 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = (JDFJMF) new JDFDoc("JMF").getRoot();
 		jmf.setSenderID("S1");
 		di = jmf.appendSignal(EnumType.Status).appendDeviceInfo();
-		Assert.assertEquals(jmf.getSenderID(), di.getDeviceID());
+		assertEquals(jmf.getSenderID(), di.getDeviceID());
 		di.appendDevice().setDeviceID("dd");
-		Assert.assertEquals(di.getDeviceID(), "dd");
+		assertEquals(di.getDeviceID(), "dd");
 		di.setDeviceID("da");
-		Assert.assertEquals(di.getDeviceID(), "da");
+		assertEquals(di.getDeviceID(), "da");
 	}
 
 	/**
@@ -135,9 +134,9 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		jmf.setSenderID("S1");
 		di = jmf.appendSignal(EnumType.Status).appendDeviceInfo();
 		di.appendDevice().setDescriptiveName("dd");
-		Assert.assertEquals(di.getDescriptiveName(), "dd");
+		assertEquals(di.getDescriptiveName(), "dd");
 		di.setDescriptiveName("da");
-		Assert.assertEquals(di.getDescriptiveName(), "da");
+		assertEquals(di.getDescriptiveName(), "da");
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -149,7 +148,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	public void testNullDeviceStatus()
 	{
 		di.setDeviceStatus(null);
-		Assert.assertNotNull("got here!", di);
+		assertNotNull("got here!", di);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -179,11 +178,11 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);
-		Assert.assertTrue(di2.mergeLastPhase(di));
-		Assert.assertEquals(jp2.getPhaseStartTime(), d1);
-		Assert.assertEquals(jp2.getPhaseWaste(), 130., 0.);
-		Assert.assertEquals(jp2.getPhaseAmount(), 500., 0.);
-		Assert.assertEquals(jp2.getAmount(), 500., 0.);
+		assertTrue(di2.mergeLastPhase(di));
+		assertEquals(jp2.getPhaseStartTime(), d1);
+		assertEquals(jp2.getPhaseWaste(), 130., 0.);
+		assertEquals(jp2.getPhaseAmount(), 500., 0.);
+		assertEquals(jp2.getAmount(), 500., 0.);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -225,20 +224,32 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		final JDFDeviceInfo di2 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 
-		Assert.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 		di1.appendEmployee().setPersonalID("p1");
-		Assert.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p1");
-		Assert.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 
 		di1.appendJobPhase();
-		Assert.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendJobPhase();
-		Assert.assertTrue(di1.isSamePhase(di2, false));
+		assertTrue(di1.isSamePhase(di2, false));
 
 		di1.appendEmployee().setPersonalID("p2");
-		Assert.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p3");
-		Assert.assertFalse(di1.isSamePhase(di2, false));
+		assertFalse(di1.isSamePhase(di2, false));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetIdleStartTime()
+	{
+		final JDFDeviceInfo di1 = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		assertNull(di1.getIdleStartTime());
+		di1.setIdleStartTime(null);
+		assertNotNull(di1.getIdleStartTime());
 	}
 }

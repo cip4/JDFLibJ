@@ -71,7 +71,6 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -82,7 +81,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFIconList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -794,19 +792,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public Collection<JDFDeviceCap> getAllDeviceCap()
 	{
-		final VElement vc = getChildElementVector(ElementName.DEVICECAP, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFDeviceCap> v = new Vector<JDFDeviceCap>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFDeviceCap) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFDeviceCap.class, false, 0);
 	}
 
 	/**
@@ -873,19 +859,7 @@ public abstract class JDFAutoDevice extends JDFResource
 	 */
 	public Collection<JDFModule> getAllModule()
 	{
-		final VElement vc = getChildElementVector(ElementName.MODULE, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFModule> v = new Vector<JDFModule>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFModule) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFModule.class, false, 0);
 	}
 
 	/**

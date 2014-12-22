@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,24 +69,23 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.Collection;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.EnumUtil;
-
-//----------------------------------
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * < July 6, 2009
  */
-public class JDFDeviceFilter extends JDFAutoDeviceFilter// JDFResource
+public class JDFDeviceFilter extends JDFAutoDeviceFilter
 {
 	private static final long serialVersionUID = 1L;
 
@@ -139,22 +138,26 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter// JDFResource
 
 	/**
 	 * apply this filter to a devicelist
-	 * @param dl
+	 * @param deviceList
 	 */
-	public void applyTo(final JDFDeviceList dl)
+	public void applyTo(final JDFDeviceList deviceList)
 	{
-		if (dl == null)
+		if (deviceList == null)
 		{
 			return;
 		}
-		final VElement v = dl.getChildElementVector(ElementName.DEVICEINFO, null);
+		final Collection<JDFDeviceInfo> v = deviceList.getAllDeviceInfo();
 		if (v == null)
 		{
 			return;
 		}
-		for (int i = 0; i < v.size(); i++)
+		for (JDFDeviceInfo di : v)
 		{
-			applyTo((JDFDeviceInfo) v.get(i));
+			JDFDeviceInfo di2 = applyTo(di);
+			if (di2 == null)
+			{
+				deviceList.removeChild(di);
+			}
 		}
 	}
 
@@ -162,36 +165,37 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter// JDFResource
 	 * apply this filter to a device element, potentially deleting it
 	 * @param deviceInfo
 	 */
-	private void applyTo(final JDFDeviceInfo deviceInfo)
+	private JDFDeviceInfo applyTo(final JDFDeviceInfo deviceInfo)
 	{
-		if (deviceInfo == null)
+		if (deviceInfo != null)
 		{
-			return;
+			final EnumDeviceDetails det = getDeviceDetails();
+			if (EnumUtil.aLessThanB(det, EnumDeviceDetails.Capability))
+			{
+				JDFDevice dev = deviceInfo.getDevice();
+				if (dev != null)
+				{
+					dev.removeChildren(ElementName.DEVICECAP, null, null);
+				}
+			}
+			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
+			{
+				deviceInfo.removeChildren(ElementName.MODULESTATUS, null, null);
+			}
+			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
+			{
+				deviceInfo.removeChildren(ElementName.DEVICE, null, null);
+			}
+			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.None))
+			{
+				final JDFAttributeMap map = new JDFAttributeMap();
+				map.putNotNull(AttributeName.DEVICEID, deviceInfo.getDeviceID());
+				map.putNotNull(AttributeName.DEVICESTATUS, deviceInfo.getDeviceStatus());
+				map.putNotNull(AttributeName.DESCRIPTIVENAME, deviceInfo.getDescriptiveName());
+				deviceInfo.removeAttributes(null);
+				deviceInfo.setAttributes(map);
+			}
 		}
-		final EnumDeviceDetails det = getDeviceDetails();
-		if (EnumUtil.aLessThanB(det, EnumDeviceDetails.Capability))
-		{
-			JDFDevice dev = deviceInfo.getDevice();
-			if (dev != null)
-				dev.removeChildren(ElementName.DEVICECAP, null, null);
-		}
-		if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
-		{
-			deviceInfo.removeChildren(ElementName.MODULESTATUS, null, null);
-		}
-		if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
-		{
-			deviceInfo.removeChildren(ElementName.DEVICE, null, null);
-		}
-		if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.None))
-		{
-			final JDFAttributeMap map = new JDFAttributeMap();
-			map.putNotNull(AttributeName.DEVICEID, deviceInfo.getDeviceID());
-			map.putNotNull(AttributeName.DEVICESTATUS, deviceInfo.getDeviceStatus());
-			map.putNotNull(AttributeName.DESCRIPTIVENAME, deviceInfo.getDescriptiveName());
-			deviceInfo.removeAttributes(null);
-			deviceInfo.setAttributes(map);
-		}
-
+		return deviceInfo;
 	}
 }
