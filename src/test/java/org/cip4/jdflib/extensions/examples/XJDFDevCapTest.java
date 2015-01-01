@@ -92,7 +92,7 @@ public class XJDFDevCapTest extends JDFTestCaseBase
 	{
 		JDFTestPool pool = (JDFTestPool) new JDFDoc("TestPool").getRoot();
 		JDFTest t = pool.appendTest();
-		t.setDescriptiveName("Transparencies caanot print duplex");
+		t.setDescriptiveName("Transparencies cannot print duplex");
 		JDFand a = (JDFand) t.appendTerm(EnumTerm.and);
 		JDFStringState ss1 = (JDFStringState) a.appendElement(ElementName.STRINGSTATE);
 		ss1.setAttribute(AttributeName.XPATH, "/XJDF/ResourceSet/Resource/Media/@MediaType");
