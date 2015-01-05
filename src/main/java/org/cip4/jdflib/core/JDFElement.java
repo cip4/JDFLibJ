@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -487,7 +487,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Comma separated list of all optional element names; KElement is generic, therefore the list is empty
+	 * list of all optional element names; KElement is generic, therefore the list is empty
 	 * @return VString the comma separated list of optional element names
 	 */
 	public VString optionalElements()
@@ -496,7 +496,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * comma separated list of all unique Elements that may occur at most once; KElement is generic, therefore the list is empty
+	 * list of all unique Elements that may occur at most once; KElement is generic, therefore the list is empty
 	 * @return String the comma separated list of required element names
 	 */
 	public VString uniqueElements()
