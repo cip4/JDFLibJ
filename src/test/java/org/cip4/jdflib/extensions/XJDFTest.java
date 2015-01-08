@@ -272,6 +272,7 @@ public class XJDFTest extends JDFTestCaseBase
 		nConv = (JDFNode) nConv.getvJDFNode(EnumType.ProcessGroup.getName(), null, true).get(0);
 		assertNotNull(nConv);
 		JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
+		assertNotNull(xm);
 		final JDFResourceLink rl = nConv.getLink(xm, null);
 		assertNotNull(rl);
 		xm = (JDFExposedMedia) rl.getTarget();
@@ -522,8 +523,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
 		nP.setType(EnumType.Product);
 		nP.setDescriptiveName("desc");
-		nP.addResource("LayoutIntent", EnumUsage.Input);
-		nP.addResource("BindingIntent", EnumUsage.Input);
+		nP.addResource("LayoutIntent", EnumUsage.Input).setDescriptiveName("layout");
+		nP.addResource("BindingIntent", EnumUsage.Input).setDescriptiveName("binding");
 		n = (JDFNode) nP.copyElement(n, null);
 		final JDFResource c = n.addResource("Component", EnumUsage.Output);
 		nP.linkResource(c, EnumUsage.Output, null);

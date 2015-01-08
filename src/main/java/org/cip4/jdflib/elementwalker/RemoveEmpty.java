@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,10 @@ package org.cip4.jdflib.elementwalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -102,6 +105,7 @@ public class RemoveEmpty extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		zappElements = true;
 		part = (JDFPart) new JDFDoc("Part").getRoot();
+		part.appendElement("foo");
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -166,22 +170,8 @@ public class RemoveEmpty extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			JDFAttributeMap map = e1.getAttributeMap();
-			VString allKeys = map.getKeys();
-			VString ok = new VString();
-			VString dummy = zappElements ? getDummyAttributes() : null;
-			for (String key : allKeys)
-			{
-				if (StringUtil.getNonEmpty(map.get(key)) == null)
-				{
-					e1.removeAttribute(key);
-				}
-				else if (zappElements && !dummy.contains(key))
-				{
-					ok.add(key);
-				}
-			}
-			if (zappElements && e1.numChildElements_KElement(null, null) == 0 && e1.getText() == null && ok.size() == 0)
+			boolean hasGood = walkAttributes(e1);
+			if (zappElements && e1.numChildElements_KElement(null, null) == 0 && e1.getText() == null && !hasGood)
 			{
 				e1.deleteNode();
 				return null;
@@ -190,6 +180,31 @@ public class RemoveEmpty extends BaseElementWalker
 			{
 				return e1;
 			}
+		}
+
+		/**
+		 * 
+		 * @param e1
+		 * @return true if something good was inside
+		 */
+		protected boolean walkAttributes(final KElement e1)
+		{
+			JDFAttributeMap map = e1.getAttributeMap();
+			VString allKeys = map.getKeys();
+			boolean hasGood = false;
+			VString dummy = zappElements ? getDummyAttributes() : null;
+			for (String key : allKeys)
+			{
+				if (StringUtil.getNonEmpty(map.get(key)) == null)
+				{
+					e1.removeAttribute(key);
+				}
+				else if (zappElements && !hasGood && !dummy.contains(key))
+				{
+					hasGood = true;
+				}
+			}
+			return hasGood;
 		}
 
 		/**
@@ -320,7 +335,12 @@ public class RemoveEmpty extends BaseElementWalker
 			v.add(AttributeName.STATUS);
 			v.add(AttributeName.PARTIDKEYS);
 			v.add(AttributeName.PARTUSAGE);
-			v.appendUnique(part.knownAttributes());
+			VString partAttribs = part.knownAttributes();
+			JDFElement foo = (JDFElement) part.getElement("foo");
+			VString fooAttribs = foo.knownAttributes();
+			partAttribs.removeStrings(fooAttribs, 0);
+
+			v.appendUnique(partAttribs);
 			return v;
 		}
 
@@ -333,6 +353,52 @@ public class RemoveEmpty extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFResource;
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(KElement e1, KElement trackElem)
+		{
+			boolean hasGood = false;
+			if (zappElements)
+			{
+				hasGood = walkAttributes(e1);
+				JDFResource r = (JDFResource) e1;
+				if (!hasGood && r.getLinksAndRefs(false, true) != null)
+				{
+					hasGood = true;
+				}
+				if (!hasGood)
+				{
+					VElement links = r.getLinksAndRefs(true, false);
+					if (links != null)
+					{
+						for (KElement e : links)
+						{
+							JDFResourceLink rl = (JDFResourceLink) e;
+							removEmptyElement(rl);
+							if (rl.getAmountPool() != null || rl.getPart(0) != null)
+							{
+								hasGood = true;
+								break;
+							}
+							JDFAttributeMap map = rl.getAttributeMap();
+							map.removeKeys(super.getDummyAttributes());
+							map.remove(AttributeName.RREF);
+							map.remove(AttributeName.USAGE);
+							if (!map.isEmpty())
+							{
+								hasGood = true;
+								break;
+							}
+						}
+					}
+				}
+			}
+			return hasGood ? e1 : super.walk(e1, trackElem);
 		}
 	}
 

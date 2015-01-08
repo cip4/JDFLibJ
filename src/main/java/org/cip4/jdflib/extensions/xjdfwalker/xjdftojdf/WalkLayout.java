@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -185,10 +185,10 @@ public class WalkLayout extends WalkStrippingParams
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public KElement walk(KElement xjdfLayout, KElement jdfLayout)
 	{
-		splitLayout(e, trackElem);
-		KElement walk = super.walk(e, trackElem);
+		splitLayout(xjdfLayout, jdfLayout);
+		KElement walk = super.walk(xjdfLayout, jdfLayout);
 		return walk;
 	}
 }

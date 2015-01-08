@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -588,6 +588,23 @@ public class JDFDateTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testGetFormattedDateTimeBad() throws Exception
+	{
+		try
+		{
+			new JDFDate().getFormattedDateTime("abc");
+			fail("Illegal");
+		}
+		catch (IllegalArgumentException x)
+		{
+			//NOP
+		}
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public void testGetFormattedDateTime() throws Exception
 	{
 		final String dateString = "2008-11-19T20:00:11.300+00:00";
@@ -596,10 +613,8 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals("11", date.getFormattedDateTime("MM"));
 		assertEquals("Nov", date.getFormattedDateTime("MMM"));
 		assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
-		assertEquals("300", date.getFormattedDateTime("SSS")); // test for
-		// milliseconds
-		assertEquals("300", date.getFormattedDateTime("S")); // test for
-		// milliseconds
+		assertEquals("300", date.getFormattedDateTime("SSS")); // test for  milliseconds
+		assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
 		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));

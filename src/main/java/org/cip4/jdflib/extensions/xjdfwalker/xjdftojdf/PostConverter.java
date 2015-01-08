@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
+import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -131,6 +132,8 @@ class PostConverter
 		EnsureNSUri fixNS = new EnsureNSUri();
 		fixNS.addNS(null, JDFElement.getSchemaURL());
 		fixNS.walk(root);
+		RemoveEmpty re = new RemoveEmpty();
+		re.removEmpty(root);
 	}
 
 	/**

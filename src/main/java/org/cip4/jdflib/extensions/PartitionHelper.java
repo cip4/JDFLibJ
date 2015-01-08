@@ -177,7 +177,8 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	{
 		final JDFAmountPool ap = getCreateAmountPool();
 		final JDFPartAmount pa0 = ap.getCreatePartAmount(new VJDFAttributeMap(moreMap));
-		pa0.setAttribute("Amount" + (bGood ? "Good" : "Waste"), StringUtil.formatDouble(amount), null);
+		//		pa0.setAttribute("Amount" + (bGood ? "Good" : "Waste"), StringUtil.formatDouble(amount), null);
+		pa0.setAttribute("Amount" + (bGood ? "" : ""), StringUtil.formatDouble(amount), null);
 	}
 
 	/**
