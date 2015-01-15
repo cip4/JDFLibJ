@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,8 +80,6 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -136,7 +134,6 @@ public class JDFResource extends JDFElement
 	private static boolean autoAgent = false;
 	private static boolean autoSubElementClass = true;
 	private static boolean bUnpartitiondImplicit = false;
-	private static final Log rLog = LogFactory.getLog(JDFResource.class);
 
 	private static HashSet<String> validParentNodeNameSet = null;
 	private static HashSet<String> validRootParentNodeNameSet = null;
@@ -451,7 +448,7 @@ public class JDFResource extends JDFElement
 	 * The original Resource Amount is ignored</li>
 	 * <li><b>AmountMerge_UpdateLink - </b>calculates the Resource Amount based on the difference of previous and current resource link amounts</li>
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static final class EnumAmountMerge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -3840,7 +3837,7 @@ public class JDFResource extends JDFElement
 	 * @param vParts
 	 * @deprecated [BLD009] not in C++ anymore, not used internally here
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public void reduceParts(final Vector vParts)
 	{

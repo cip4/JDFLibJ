@@ -2972,29 +2972,32 @@ public class JDFElement extends KElement
 	public void inlineRefElements(final String nodeName, final String nameSpaceURI, final boolean bDirect)
 	{
 		VElement v = getRefElements();
-		int i;
-		int vSize = v.size();
-		for (i = 0; i < vSize; i++)
+		for (KElement e : v)
 		{
-			final JDFRefElement re = (JDFRefElement) v.elementAt(i);
+			final JDFRefElement re = (JDFRefElement) e;
 			// it fits - inline it
 			if (re.fitsName(nodeName, nameSpaceURI))
 			{
-				re.inlineRef();
+				try
+				{
+					re.inlineRef();
+				}
+				catch (JDFException x)
+				{
+					re.deleteNode();
+				}
 			}
 		}
 
 		// now loop over all (!) children, to see if any descendants match
 		if (!bDirect)
 		{
-			v = this.getChildElementVector_KElement(null, null, null, true, 0);
-			vSize = v.size();
-			for (i = 0; i < vSize; i++)
+			v = getChildElementVector_KElement(null, null, null, true, 0);
+			for (KElement e : v)
 			{
-				if (v.elementAt(i) instanceof JDFElement)
+				if (e instanceof JDFElement)
 				{
-					final JDFElement e = (JDFElement) v.elementAt(i);
-					e.inlineRefElements(nodeName, nameSpaceURI, bDirect);
+					((JDFElement) e).inlineRefElements(nodeName, nameSpaceURI, bDirect);
 				}
 			}
 		}
