@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -155,9 +155,9 @@ public class JDFValidator
 	VString vSeparations = new VString();
 	VString vSeparations2 = new VString();
 	VString vColorPoolSeparations = new VString();
-	protected XMLDoc pOut = new XMLDoc("CheckOutput", null);
+	protected XMLDoc pOut = new XMLDoc("CheckOutput", "http://www.cip4.org/validate");
 	// list of gray boxes that are ignored when checking types for extensions
-	static String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation",
+	static final String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation",
 			"ImpositionPreparation", "ProofImaging" };
 
 	JDFDoc theDoc = null;
@@ -293,8 +293,6 @@ public class JDFValidator
 
 	private void printBad(final KElement kElement, final int indent, final KElement xmlParent, final boolean bIsNodeRoot)
 	{
-		int i, j;
-
 		final String id = kElement.getAttribute(AttributeName.ID, null, "");
 		final String pref = kElement.getPrefix();
 		final String elmName = kElement.getNodeName();
@@ -319,8 +317,7 @@ public class JDFValidator
 			final JDFNode node = (JDFNode) kElement;
 			printNode(node, indent, testElement);
 
-			if (bIsNodeRoot) // this will be executed only once - test of the
-			// whole Node
+			if (bIsNodeRoot) // this will be executed only once - test of the whole Node
 			{
 				printNodeRoot(node, xmlParent);
 			}
@@ -561,12 +558,9 @@ public class JDFValidator
 
 			final VString swapAtt = new VString();
 			VString vTmp = jdfElement.knownElements();
-			// compare missing elements with unknown attributes to find elem <->
-			// attrib swaps
-			final int unknownSize = unknownAttributes.size();
-			for (j = 0; j < unknownSize; j++)
+			// compare missing elements with unknown attributes to find elem <->  attrib swaps
+			for (String unknownAttr : unknownAttributes)
 			{
-				final String unknownAttr = unknownAttributes.elementAt(j);
 				if (vTmp.contains(unknownAttr))
 				{
 					swapAtt.appendUnique(unknownAttr);
@@ -577,9 +571,8 @@ public class JDFValidator
 			// attrib swaps
 			final VString swapElem = new VString();
 			vTmp = jdfElement.knownAttributes();
-			for (j = 0; j < unknownElements.size(); j++)
+			for (String unknownElem : unknownElements)
 			{
-				final String unknownElem = unknownElements.elementAt(j);
 				if (vTmp.contains(unknownElem))
 				{
 					swapElem.appendUnique(unknownElem);
@@ -654,9 +647,8 @@ public class JDFValidator
 			printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes, "Missing", "Missing Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt, "Swap", "Element written as Attribute");
 
-			for (j = 0; j < swapElem.size(); j++)
+			for (String swEl : swapElem)
 			{
-				final String swEl = swapElem.get(j);
 				sysOut.println(indent(indent + 2) + "Attribute is written as Element: " + swEl);
 			}
 
@@ -667,9 +659,8 @@ public class JDFValidator
 
 			if (printMissElms)
 			{
-				for (j = 0; j < missingElements.size(); j++)
+				for (String missEl : missingElements)
 				{
-					final String missEl = missingElements.get(j);
 					sysOut.println(indent(indent + 2) + "Missing Element: " + missEl);
 
 					if (testElement != null)
@@ -685,9 +676,9 @@ public class JDFValidator
 					testElement.setAttribute("MissingElements", StringUtil.setvString(missingElements, JDFConstants.BLANK, null, null));
 				}
 			}
-			for (j = 0; j < unknownElements.size(); j++)
+			for (String elem : unknownElements)
 			{
-				sysOut.println(indent(indent + 2) + "Unknown Element: " + unknownElements.get(j));
+				sysOut.println(indent(indent + 2) + "Unknown Element: " + elem);
 			}
 			if (testElement != null && unknownElements.size() > 0)
 			{
@@ -706,9 +697,9 @@ public class JDFValidator
 				if (!res.isLeaf())
 				{ // handle partitioned resources
 					final VElement vr = res.getLeaves(false);
-					for (j = 0; j < vr.size(); j++)
+					for (KElement leaf : vr)
 					{
-						printBad(vr.elementAt(j), indent + 2, testElement, false);
+						printBad(leaf, indent + 2, testElement, false);
 					}
 				}
 			}
@@ -716,9 +707,9 @@ public class JDFValidator
 
 		// recurse through all child elements :
 		final VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
-		for (i = 0; i < ve.size(); i++)
+		for (KElement e : ve)
 		{
-			printBad(ve.elementAt(i), indent + 2, testElement, false);
+			printBad(e, indent + 2, testElement, false);
 		}
 	}
 
