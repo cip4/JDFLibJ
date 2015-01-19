@@ -155,7 +155,8 @@ public class JDFValidator
 	VString vSeparations = new VString();
 	VString vSeparations2 = new VString();
 	VString vColorPoolSeparations = new VString();
-	protected XMLDoc pOut = new XMLDoc("CheckOutput", "http://www.cip4.org/validate");
+	//	protected XMLDoc pOut = new XMLDoc("CheckOutput", "http://www.cip4.org/validate");
+	protected XMLDoc pOut;
 	// list of gray boxes that are ignored when checking types for extensions
 	static final String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation",
 			"ImpositionPreparation", "ProofImaging" };
@@ -198,6 +199,9 @@ public class JDFValidator
 	public JDFValidator()
 	{
 		super();
+		pOut = new XMLDoc("CheckOutput", null);
+		pOut.getMemberDocument().setIgnoreNSDefault(true);
+		pOut.getMemberDocument().setStrictNSCheck(false);
 		pOut.getRoot().setAttribute("Version", version);
 	}
 

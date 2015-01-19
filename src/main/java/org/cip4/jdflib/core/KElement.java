@@ -1007,7 +1007,7 @@ public class KElement extends ElementNSImpl implements Element
 			final String elementPrefix = getPrefix();
 			if (elementPrefix == null)
 			{
-				strNamespaceURI = getNamespaceURI();
+				strNamespaceURI = super.getNamespaceURI();
 				if (strNamespaceURI != null)
 				{
 					return strNamespaceURI;
@@ -1037,7 +1037,7 @@ public class KElement extends ElementNSImpl implements Element
 				strNamespaceURI = documentXMLImpl.getNamespaceURIFromPrefix(prefix);
 				if (strNamespaceURI != null)
 				{
-					return strNamespaceURI;
+					return StringUtil.getNonEmpty(strNamespaceURI);
 				}
 			}
 			final String elementPrefix = getPrefix();
@@ -1083,17 +1083,19 @@ public class KElement extends ElementNSImpl implements Element
 					}
 				}
 			}
-
-			// nothing found, recurse into parent element and try again
-			final KElement e = getParentNode_KElement();
-			if (e != null)
-			{
-				return e.getNamespaceURIFromPrefix(prefix, bcache);
-			}
 		}
 
-		// we reached the document root and didn't find anything --> punt and
-		// return an empty string
+		// nothing found, recurse into parent element and try again
+		final KElement e = getParentNode_KElement();
+		if (e != null)
+		{
+			return e.getNamespaceURIFromPrefix(prefix, bcache);
+		}
+
+		// we reached the document root and didn't find anything --> punt and return an empty string		
+		DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
+		if (prefix == null)
+			documentXMLImpl.setNamespaceURIFromPrefix(JDFConstants.COLON, "");
 		return null;
 	}
 
