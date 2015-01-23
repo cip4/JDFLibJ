@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,7 @@ public class TimeSweeper implements Sweeper
 {
 	protected Log log;
 	protected long t0;
+	protected long nSweep;
 	private long interval;
 	private Runnable runner;
 
@@ -92,6 +93,7 @@ public class TimeSweeper implements Sweeper
 		super();
 		log = LogFactory.getLog(getClass());
 		t0 = -1;
+		nSweep = 0;
 		setInterval(interval);
 		runner = null;
 	}
@@ -160,7 +162,16 @@ public class TimeSweeper implements Sweeper
 	{
 		if (runner != null)
 		{
+			nSweep++;
+			if (nSweep < 10 || nSweep % 1000 == 0)
+			{
+				log.info(getClass().getSimpleName() + " Start sweeping# " + nSweep);
+			}
 			runner.run();
+			if (nSweep < 10 || nSweep % 1000 == 0)
+			{
+				log.info(getClass().getSimpleName() + " Completed sweeping# " + nSweep);
+			}
 		}
 		return runner != null;
 	}
