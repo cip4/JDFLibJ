@@ -70,6 +70,7 @@ package org.cip4.jdflib.util.thread;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  *class that sweeps at a regular interval - useful in case multiple sweepers with differing timing requirements are run
@@ -183,7 +184,7 @@ public class TimeSweeper implements Sweeper
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + " interval=" + interval;
+		return getClass().getSimpleName() + " interval=" + interval + " nSweep: " + nSweep + " t0: " + new JDFDate(t0).getDateTimeISO();
 	}
 
 }
