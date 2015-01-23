@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,7 +81,7 @@ import org.junit.Test;
  */
 public class RegularJanitorTest extends JDFTestCaseBase
 {
-	static class Runner implements Runnable
+	class Runner implements Runnable
 	{
 		int i = 0;
 
@@ -96,7 +96,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		}
 	}
 
-	static class Runner2 implements Runnable
+	class Runner2 implements Runnable
 	{
 		int i = 0;
 
@@ -111,7 +111,19 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		}
 	}
 
-	static class CSweeper implements Sweeper
+	class Runner3 implements Runnable
+	{
+
+		/**
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void run()
+		{
+		}
+	}
+
+	class CSweeper implements Sweeper
 	{
 		/**
 		 * @see org.cip4.jdflib.util.thread.Sweeper#sweep()
@@ -160,6 +172,23 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		janitor.startSweep(10);
 		ThreadUtil.sleep(811);
 		assertEquals(runner.i, 0);
+	}
+
+	/**
+	*  
+	*/
+	@Test
+	public void testHasSweeper()
+	{
+		RegularJanitor janitor = RegularJanitor.getJanitor();
+		janitor.addSweeper(new TimeSweeper(42, new Runner()), true);
+		assertTrue(janitor.hasSweeper(new Runner()));
+		assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner())));
+		janitor.addSweeper(new TimeSweeper(42, new Runner2()), true);
+		assertTrue(janitor.hasSweeper(new Runner2()));
+		assertTrue(janitor.hasSweeper(new TimeSweeper(42, new Runner2())));
+		assertFalse(janitor.hasSweeper(new Runner3()));
+		assertFalse(janitor.hasSweeper(new TimeSweeper(42, new Runner3())));
 	}
 
 	/**
