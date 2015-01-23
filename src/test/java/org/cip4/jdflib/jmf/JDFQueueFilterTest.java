@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -547,18 +549,54 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testCopyToDeltaSubset()
+	{
+		theQueue.setAutomated(false);
+		HashSet<String> set = new HashSet<String>();
+		for (int i = 0; i < 1200; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.appendJobPhase().setStatusDetails("aa" + i);
+			if (i % 13 == 0)
+				set.add("q" + i);
+		}
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		filter.setQueueEntrieDefs(set);
+
+		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		for (int i = 0; i < 1200; i++)
+		{
+			final JDFQueueEntry qe = qLast.getQueueEntry(i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum((i + 1) % 7 + 1));
+		}
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
+		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1200 / 13);
+		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
+		assertTrue(ms.equals(set));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testCopyToDeltaPerformance()
 	{
 		theQueue.setAutomated(true);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		CPUTimer ct = new CPUTimer(false);
-		for (int i = 0; i < 12000; i++)
+		for (int i = 0; i < 20000; i++)
 		{
-			final JDFQueue qLast = i < 11000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+			final JDFQueue qLast = i < 19000 ? null : (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			if (i > 11000)
+			if (i == 19000)
+				log.info("startup");
+			if (i > 19000)
 			{
 				ct.start();
 				JDFQueue qCopy = filter.copy(theQueue, qLast, null);

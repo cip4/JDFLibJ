@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -374,6 +374,25 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	private static final long serialVersionUID = 1L;
+	Set<String> queueEntrieDefs;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Set<String> getQueueEntrieDefs()
+	{
+		return queueEntrieDefs;
+	}
+
+	/**
+	 * 
+	 * @param queueEntrieDefs
+	 */
+	public void setQueueEntrieDefs(Set<String> queueEntrieDefs)
+	{
+		this.queueEntrieDefs = queueEntrieDefs;
+	}
 
 	/**
 	 * Constructor for JDFQueueFilter
@@ -384,6 +403,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
+		queueEntrieDefs = null;
 	}
 
 	/**
@@ -396,6 +416,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+		queueEntrieDefs = null;
 	}
 
 	/**
@@ -409,10 +430,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+		queueEntrieDefs = null;
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 * 
@@ -695,6 +715,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	  * (5) set attribute Activation
 	  * @param enumVar the enumVar to set the attribute to
 	  */
+	@Override
 	public void setActivation(EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
@@ -704,6 +725,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	  * (9) get attribute Activation
 	  * @return the value of the attribute
 	  */
+	@Override
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -728,23 +750,25 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 */
 	public Set<String> getQueueEntryDefSet()
 	{
+		if (queueEntrieDefs != null)
+		{
+			return queueEntrieDefs;
+		}
 		HashSet<String> set = null;
 
-		final VElement v = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
-		if (v != null)
+		final Vector<JDFQueueEntryDef> v = getChildrenByClass(JDFQueueEntryDef.class, false, 0);
+		if (v != null && v.size() > 0)
 		{
-			final int siz = v.size();
-			set = siz == 0 ? null : new HashSet<String>();
-			for (int i = 0; i < siz; i++)
+			set = new HashSet<String>();
+			for (JDFQueueEntryDef qed : v)
 			{
-				final String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
+				final String qeid = qed.getQueueEntryID();
 				if (!isWildCard(qeid))
 				{
 					set.add(qeid);
 				}
 			}
 		}
-
 		return set != null && set.size() > 0 ? set : null;
 	}
 
