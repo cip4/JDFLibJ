@@ -209,10 +209,14 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				while (qeIt.hasNext())
 				{
 					final String qeID = qeIt.next();
-					final JDFQueueEntry qe = (JDFQueueEntry) copyQueue.copyElement(lastMap.get(qeID), qeFirst);
-					qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
-					qe.removeAttribute(AttributeName.STATUSDETAILS);
-					qe.removeChildren(ElementName.JOBPHASE, null, null);
+					JDFQueueEntry removedQE = lastMap.get(qeID);
+					if (qeMatch.matches(removedQE))
+					{
+						final JDFQueueEntry qe = (JDFQueueEntry) copyQueue.copyElement(removedQE, qeFirst);
+						qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
+						qe.removeAttribute(AttributeName.STATUSDETAILS);
+						qe.removeChildren(ElementName.JOBPHASE, null, null);
+					}
 				}
 			}
 		}

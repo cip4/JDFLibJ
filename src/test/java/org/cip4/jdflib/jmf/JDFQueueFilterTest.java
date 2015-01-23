@@ -577,6 +577,44 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1200 / 13);
 		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
 		assertTrue(ms.equals(set));
+		filter.setQueueEntrieDefs(new HashSet<String>());
+		qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals(qCopy.getQueueEntryVector().size(), 0);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCopyToDeltaSubsetRemove()
+	{
+		theQueue.setAutomated(false);
+		HashSet<String> set = new HashSet<String>();
+		for (int i = 0; i < 1200; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.appendJobPhase().setStatusDetails("aa" + i);
+			if (i % 13 == 0)
+				set.add("q" + i);
+		}
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		filter.setQueueEntrieDefs(set);
+
+		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		for (int i = 0; i < 1000; i++)
+		{
+			theQueue.getQueueEntry(0).deleteNode();
+		}
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
+		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1000 / 13);
+		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
+		filter.setQueueEntrieDefs(new HashSet<String>());
+		qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals(qCopy.getQueueEntryVector().size(), 0);
 	}
 
 	/**
