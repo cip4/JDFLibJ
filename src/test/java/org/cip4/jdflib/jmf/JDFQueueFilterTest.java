@@ -612,6 +612,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		assertEquals(qCopy.getQueueEntryVector().size() - 1, 1000 / 13);
 		Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
+		assertTrue(set.containsAll(ms));
 		filter.setQueueEntrieDefs(new HashSet<String>());
 		qCopy = filter.copy(theQueue, qLast, null);
 		assertEquals(qCopy.getQueueEntryVector().size(), 0);
@@ -632,6 +633,40 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
+			if (i == 19000)
+				log.info("startup");
+			if (i > 19000)
+			{
+				ct.start();
+				JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+				assertEquals("test " + i, qCopy.getQueueEntryVector().size(), 1);
+				assertEquals("test " + i, qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i);
+				if ((i % 100) == 0)
+					log.info(ct.toString());
+				ct.stop();
+			}
+		}
+		log.info(ct.toString());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCopyToDeltaPerformance2()
+	{
+		theQueue.setAutomated(true);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		CPUTimer ct = new CPUTimer(false);
+		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		JDFQueueEntry qeLast = qLast.appendQueueEntry();
+		for (int i = 0; i < 20000; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qeLast.setQueueEntryID("q" + i);
+			filter.getCreateQueueEntryDef(0).setQueueEntryID("q" + i);
 			if (i == 19000)
 				log.info("startup");
 			if (i > 19000)

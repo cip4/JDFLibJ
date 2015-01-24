@@ -349,17 +349,16 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 */
 		protected JDFQueue copyTo(KElement parent)
 		{
-			final int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
 			JDFQueue newQueue = (JDFQueue) (parent == null ? new JDFDoc(ElementName.QUEUE).getRoot() : parent.appendElement(ElementName.QUEUE));
 			newQueue.setAttributes(theQueue);
-			JDFQueueEntry qe = (JDFQueueEntry) theQueue.getFirstChildElement(ElementName.QUEUEENTRY, null);
-			int n = 0;
-			while (n < maxEntries && qe != null)
+			Set<String> s = getQueueEntryDefSet();
+			if (s == null)
 			{
-				JDFQueueEntry qeNew = copyTo(newQueue, qe);
-				if (qeNew != null)
-					n++;
-				qe = qe.getNextQueueEntry();
+				copyAll(newQueue);
+			}
+			else
+			{
+				copySet(newQueue, s);
 			}
 			addRemoved(newQueue);
 			final int numEntries = newQueue.numEntries(null);
@@ -375,19 +374,40 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			return newQueue;
 		}
 
+		private void copySet(JDFQueue newQueue, Set<String> s)
+		{
+			int n = 0;
+			int maxEntries = getMaxEntries();
+			if (maxEntries == 0)
+				maxEntries = -1;
+			for (String qeid : s)
+			{
+				JDFQueueEntry qe = theQueue.getQueueEntry(qeid);
+				JDFQueueEntry qeNew = copyTo(newQueue, qe);
+				if (qeNew != null)
+					n++;
+				if (n == maxEntries)
+					break;
+			}
+		}
+
+		private void copyAll(JDFQueue newQueue)
+		{
+			int n = 0;
+			JDFQueueEntry qe = (JDFQueueEntry) theQueue.getFirstChildElement(ElementName.QUEUEENTRY, null);
+			final int maxEntries = getMaxEntries();
+			while (n < maxEntries && qe != null)
+			{
+				JDFQueueEntry qeNew = copyTo(newQueue, qe);
+				if (qeNew != null)
+					n++;
+				qe = qe.getNextQueueEntry();
+			}
+		}
 	}
 
 	private static final long serialVersionUID = 1L;
 	Set<String> queueEntrieDefs;
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Set<String> getQueueEntrieDefs()
-	{
-		return queueEntrieDefs;
-	}
 
 	/**
 	 * 
@@ -870,5 +890,15 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		setJobID(ni.getJobID());
 		setJobPartID(ni.getJobPartID());
 		setPartMapVector(ni.getPartMapVector());
+	}
+
+	/**
+	 * just a different default...
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#getMaxEntries()
+	 */
+	@Override
+	public int getMaxEntries()
+	{
+		return getIntAttribute(AttributeName.MAXENTRIES, null, Integer.MAX_VALUE);
 	}
 }
