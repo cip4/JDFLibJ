@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -177,7 +177,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			sep = "";
 		}
 		final StringBuffer sb = new StringBuffer();
-		final VString vsKeys = this.getKeys();
+		final VString vsKeys = getKeys();
 		vsKeys.sort();
 		final int size = vsKeys.size();
 		for (int k = 0; k < size; k++)
@@ -186,7 +186,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 			final String strValue = this.get(strKey);
 			sb.append(k == 0 ? "" : sep).append("(").append(strKey).append(" = ").append(strValue).append(")");
 		}
-		return (sb.toString());
+		return sb.toString();
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	@Override
 	public String toString()
 	{
-		return "JDFAttributeMap: {" + showKeys(JDFCoreConstants.BLANK) + " ";
+		return "JDFAttributeMap: {" + showKeys(JDFCoreConstants.BLANK) + " }";
 	}
 
 	/**
@@ -765,12 +765,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public VString getKeys()
 	{
-		final Iterator<String> it = getKeyIterator();
 		final VString thisKeys = new VString();
-		while (it.hasNext())
-		{
-			thisKeys.add(it.next());
-		}
+		thisKeys.addAll(keySet());
 		return thisKeys;
 	}
 
