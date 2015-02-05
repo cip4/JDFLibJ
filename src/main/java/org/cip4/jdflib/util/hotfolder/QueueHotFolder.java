@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -107,7 +107,7 @@ public class QueueHotFolder extends StorageHotFolder
 	@Override
 	public String toString()
 	{
-		return "QueueHotFolder: " + hf;
+		return "QueueHotFolder: " + hf + "Listener: " + getQueueListener();
 	}
 
 	/**

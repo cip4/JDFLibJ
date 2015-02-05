@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -668,7 +668,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * Method overlapMap.
+	 * Method overlapMap. removes all non-overlapping maps from this
 	 * 
 	 * @param map the map to check against
 	 */
@@ -676,11 +676,51 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	{
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
-			if (!this.elementAt(i).overlapMap(map))
+			if (!elementAt(i).overlapMap(map))
 			{
-				this.removeElementAt(i);
+				removeElementAt(i);
 			}
 		}
+	}
+
+	/**
+	 * Method overlapMap. get a copy of this with all overlapping maps the maps are NOT cloned
+	 * 
+	 * @param map the map to check against
+	 * @return a new VJDFAttributemap with the overlapping entries of this - never null
+	 */
+	public VJDFAttributeMap getOverlapMaps(final JDFAttributeMap map)
+	{
+		VJDFAttributeMap newV = new VJDFAttributeMap();
+		for (JDFAttributeMap m : this)
+		{
+			if (m.overlapMap(map))
+			{
+				newV.add(m);
+			}
+		}
+		return newV;
+	}
+
+	/**
+	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT cloned
+	 * 
+	 * @param key the key to match
+	 * @param regExp the simplified regexp
+	 * @param ignoreCase duh...
+	 * @return a new VJDFAttributemap with the matching entries of this - never null (may be safely daisy-chained)
+	 */
+	public VJDFAttributeMap getMatchingMaps(String key, String regExp, boolean ignoreCase)
+	{
+		VJDFAttributeMap newV = new VJDFAttributeMap();
+		for (JDFAttributeMap m : this)
+		{
+			if (m.matches(key, regExp, ignoreCase))
+			{
+				newV.add(m);
+			}
+		}
+		return newV;
 	}
 
 	/**
@@ -906,6 +946,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * @see java.lang.Object#clone()
+	 * also clones the underlying maps
 	 * @return
 	*/
 	@Override

@@ -366,6 +366,20 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
+	 * checks whether this attributemap matches a regexp
+	 * 
+	 * @param key the key to match
+	 * @param regExp the simplified regexp
+	 * @param ignoreCase duh...
+	 * @return true if the value matches the regexp
+	 */
+	public boolean matches(String key, String regExp, boolean ignoreCase)
+	{
+		String myVal = get(key);
+		return ignoreCase ? StringUtil.matchesIgnoreCase(myVal, regExp) : StringUtil.matchesSimple(myVal, regExp);
+	}
+
+	/**
 	 * overlapMap - identical keys must have the same values in both maps i.e submap is either a superset or a subset of this
 	 * 
 	 * @param subMap the map to compare with <code>this</this>

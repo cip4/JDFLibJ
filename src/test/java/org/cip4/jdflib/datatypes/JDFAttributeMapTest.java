@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -313,8 +313,6 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////
-
 	/**
 	 * 
 	 */
@@ -345,7 +343,19 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertTrue(m1.overlapMap((JDFAttributeMap) null));
 	}
 
-	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testMatches()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		assertTrue(m1.matches("a1", "v?", false));
+		assertTrue(m1.matches("a1", "v1", false));
+		assertTrue(m1.matches("a1", "V*", true));
+		assertFalse(m1.matches("a1", "v", false));
+	}
 
 	/**
 	 * @deprecated

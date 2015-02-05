@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,5 +128,14 @@ public class ThreadFilter
 		if (nSkip < 0 || nSkip >= threads.size())
 			return null;
 		return threads.get(nSkip);
+	}
+
+	/**
+	 * 
+	 * @return the total number of available threads
+	 */
+	public int numThreads()
+	{
+		return Thread.activeCount();
 	}
 }

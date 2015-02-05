@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -183,6 +183,51 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		final VJDFAttributeMap vAnd = v.getAndMaps(new JDFAttributeMap("a1", "v1"));
 		assertEquals(vAnd.size(), 1);
 		assertEquals(vAnd.get(0), new JDFAttributeMap("a1", "v1"));
+	}
+
+	/**
+	 * tests OvelapsMap for individual maps
+	 */
+	@Test
+	public void testGetOverLapMaps()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a3", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		VJDFAttributeMap vOverlap = v.getOverlapMaps(new JDFAttributeMap("a1", "v1"));
+		assertEquals(vOverlap.size(), 2);
+		assertEquals(vOverlap.get(0).size(), 2);
+		vOverlap = v.getOverlapMaps(new JDFAttributeMap("a2", "v3"));
+		assertEquals(vOverlap.size(), 0);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testgetMatchingMaps()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a3", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		VJDFAttributeMap vMatch = v.getMatchingMaps("a1", "v?", false);
+		assertEquals(vMatch.size(), 2);
+		vMatch = v.getMatchingMaps("a3", "v?", false);
+		assertEquals(vMatch.size(), 1);
+		assertEquals(vMatch.get(0), m2);
+		vMatch = v.getMatchingMaps("a3", "V?", true);
+		assertEquals(vMatch.size(), 1);
+		assertEquals(vMatch.get(0), m2);
+		vMatch = v.getMatchingMaps("a4", "V?", true);
+		assertEquals(vMatch.size(), 0);
 	}
 
 	/**
