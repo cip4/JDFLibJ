@@ -190,27 +190,25 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * @param strKey the attribute to get values from
-	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of maps
+	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of values
 	 * @return the Vector of all values
 	 */
 	public VString getPartValues(final String strKey, final boolean bUnique)
 	{
 		final VString vsPartValues = new VString();
 
-		final int size = size();
-		for (int i = 0; i < size; i++)
+		for (JDFAttributeMap map : this)
 		{
-			final JDFAttributeMap map = elementAt(i);
 			final String strValue = map.get(strKey);
-
 			if (strValue != null)
 			{
 				vsPartValues.add(strValue);
 			}
-
+		}
+		if (bUnique)
+		{
 			vsPartValues.unify();
 		}
-
 		return vsPartValues;
 	}
 

@@ -206,6 +206,25 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	* tests OvelapsMap for individual maps
+	*/
+	@Test
+	public void testGetPartValues()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a3", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		VString vals = v.getPartValues("a1", true);
+		assertEquals(vals.size(), 1);
+		vals = v.getPartValues("a1", false);
+		assertEquals(vals.size(), 2);
+	}
+
+	/**
 	 * 
 	 */
 	@Test

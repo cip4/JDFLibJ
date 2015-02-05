@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -381,17 +381,20 @@ public class ZipReaderTest extends JDFTestCaseBase
 		System.gc();
 		ThreadUtil.sleep(10);
 		long heap0 = ms.getHeapUsed(MemScope.current);
-		log.info(ms.getSummary());
+		log.info("testGetBigEntryMemLeak #1 " + ms.getSummary());
 		ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
 		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
 		assertNotNull(e);
-		log.info(ms.getSummary());
+		log.info("testGetBigEntryMemLeak #2 " + ms.getSummary());
 		e = null;
 		r = null;
 		System.gc();
 		ThreadUtil.sleep(10);
+		System.gc();
+		ThreadUtil.sleep(10);
 		log.info(ms.getSummary());
 		long heapUsed = ms.getHeapUsed(MemScope.current) - heap0;
+		log.info("testGetBigEntryMemLeak #3 " + heapUsed + " " + ms.getSummary());
 		assertTrue(heapUsed < 10000000);
 	}
 
