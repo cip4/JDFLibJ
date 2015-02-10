@@ -720,6 +720,17 @@ public class JDFDateTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testToString() throws DataFormatException
+	{
+		JDFDate date = new JDFDate("2015-02-26T11:43:10+03:00");
+		assertTrue(date.toString().endsWith("2015-02-26T11:43:10+03:00]"));
+	}
+
+	/**
+	 * @throws DataFormatException
+	 * 
+	 */
+	@Test
 	public void testTimeZone() throws DataFormatException
 	{
 		final TimeZone t = TimeZone.getDefault();
@@ -744,7 +755,9 @@ public class JDFDateTest extends JDFTestCaseBase
 		}
 
 		if (PlatformUtil.isWindows())
+		{
 			assertTrue(bSummer);
+		}
 	}
 
 	/**
