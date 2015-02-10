@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -241,7 +241,32 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(am.get("foo:bar"), "foobar");
 		am = xm2.getAttributeMap();
 		assertEquals(am.get("foo:bar"), "foobar");
+	}
 
+	/**
+	* test the the generalized partition matching
+	*/
+	@Test
+	public void testGetAttributeMap_KElement()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
+		final JDFExposedMedia xm = (JDFExposedMedia) root.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		xm.setResolution(new JDFXYPair(300, 300));
+		xm.setPolarity(true);
+		xm.setProofType(JDFExposedMedia.EnumProofType.Page);
+
+		final JDFMedia m = xm.appendMedia();
+		m.setDimension(new JDFXYPair(200, 300));
+		final JDFExposedMedia xm2 = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFAttributeMap xm2Map = xm2.getAttributeMap();
+		xm2Map.remove(EnumPartIDKey.SheetName);
+		assertEquals(xm.getAttributeMap_KElement(), xm2Map);
+		xm.setAttribute("foo:bar", "foobar", "www.foo.com");
+		JDFAttributeMap am = xm.getAttributeMap_KElement();
+		assertEquals(am.get("foo:bar"), "foobar");
+		am = xm2.getAttributeMap_KElement();
+		assertNull("No inheritence", am.get("foo:bar"));
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,6 +101,25 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 */
 	private static final long serialVersionUID = -2180413692846276265L;
 	private boolean bUnique;
+
+	/**
+	 * 
+	 * @param map
+	 */
+	public void fillInvertedMap(Map<vectorObject, key> map)
+	{
+		if (map != null)
+		{
+			for (vectorObject k : map.keySet())
+			{
+				key k2 = map.get(k);
+				if (k2 != null)
+				{
+					putOne(k2, k);
+				}
+			}
+		}
+	}
 
 	/**
 	 * null constructor

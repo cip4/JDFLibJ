@@ -71,6 +71,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -127,6 +128,31 @@ public class VectorMapTest extends JDFTestCaseBase
 		Assert.assertEquals(m.getIndex("a", "c"), 1);
 		Assert.assertEquals(m.getIndex("a", "d"), -1);
 		Assert.assertEquals(m.getIndex("c", "c"), -2);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testFillInvertedMap()
+	{
+		VectorMap<String, Integer> vm = new VectorMap<String, Integer>();
+		Map<Integer, String> mis = new HashMap<Integer, String>();
+		for (int i = 0; i < 100; i++)
+		{
+			mis.put(Integer.valueOf(i), "" + (i % 10));
+		}
+		vm.fillInvertedMap(mis);
+		assertEquals(vm.size(), 10);
+		for (int i = 0; i < 10; i++)
+		{
+			Vector<Integer> vector = vm.get("" + i);
+			assertEquals(vector.size(), 10);
+			for (int j = 0; j < 10; j++)
+			{
+				assertEquals(i + j * 10, vector.get(j).intValue());
+			}
+		}
 	}
 
 	/**

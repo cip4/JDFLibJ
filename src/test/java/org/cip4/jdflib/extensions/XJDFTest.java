@@ -314,7 +314,7 @@ public class XJDFTest extends JDFTestCaseBase
 		assertNotNull(rlSet);
 		KElement rl2 = rlSet.getXPathElement("Parameter/RunList");
 		assertNotNull(rl2);
-		assertEquals("0 ~ 2", rl2.getAttribute(AttributeName.PAGES));
+		assertEquals("0 2", rl2.getAttribute(AttributeName.PAGES));
 		assertNull(rl2.getElement("LayoutElement"));
 
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);

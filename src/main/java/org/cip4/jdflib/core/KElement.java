@@ -1292,6 +1292,15 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public JDFAttributeMap getAttributeMap()
 	{
+		return getAttributeMap_KElement();
+	}
+
+	/**
+	 * Get the Attribute Map of the actual element
+	 * @return JDFAttributeMap the attribute map of the actual element
+	 */
+	public JDFAttributeMap getAttributeMap_KElement()
+	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 		final NamedNodeMap nm = getAttributes();
 		if (nm != null)

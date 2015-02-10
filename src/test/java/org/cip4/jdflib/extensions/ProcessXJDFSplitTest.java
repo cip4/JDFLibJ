@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,15 +71,18 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
 /**
  * 
- * @author rainerprosi
+ * @author rainer prosi
  *
  */
 public class ProcessXJDFSplitTest extends JDFTestCaseBase
@@ -125,6 +128,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		JDFDoc d = c.convert(h.getRoot());
 		d.write2File(sm_dirTestDataTemp + "splitxjdf.jdf", 2, false);
+		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 
 	/**
@@ -146,5 +150,23 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		JDFDoc d = c.convert(h.getRoot());
 		d.write2File(sm_dirTestDataTemp + "splitxjdfNull.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSplitFromFile()
+	{
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		splitter.addGroup(new VString("ImageSetting PreviewGeneration", null));
+		c.setSplitter(splitter);
+
+		KElement root = XMLDoc.parseFile("/data/w2p/FlyerAlarm/29694232 types.ptk").getRoot();
+		KElement xjdf = root.getChildByTagName(XJDF20.rootName, null, 0, null, false, true);
+		JDFDoc d = c.convert(xjdf);
+		d.write2File(sm_dirTestDataTemp + "splitxjdfFile.jdf", 2, false);
+		assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
 }

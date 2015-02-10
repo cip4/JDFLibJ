@@ -561,7 +561,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * inner class EnumType: Enumeration for accessing typesafe node types
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1417,8 +1416,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 								else
 								{
 									int nFound = -1;
-									for (int k = 0; k <= index; k++) // count
-									// occurences of this process type in front of and including this
+									for (int k = 0; k <= index; k++) // count occurences of this process type in front of and including this
 									{
 										final EnumType cpiTypeCount = vTypes.elementAt(k);
 										if (cpiTypeCount.equals(type))
@@ -1939,6 +1937,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/**
 		 * @return
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Iterator iterator()
 		{
 			return iterator(EnumProcessUsage.class);
