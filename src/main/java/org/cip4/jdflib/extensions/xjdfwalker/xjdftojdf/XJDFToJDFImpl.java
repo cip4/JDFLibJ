@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -120,6 +120,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	boolean foundProduct;
 	boolean foundProductList;
 	JDFNode currentJDFNode;
+	KElement xjdf;
 	/**
 	 * if true, create the product, else ignore it
 	 */
@@ -191,6 +192,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	private EnumVersion version;
 	private boolean bConvertTilde;
+	private boolean typeLinks;
 	private boolean heuristicLink;
 
 	/**
@@ -206,14 +208,20 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		jdfDoc = template == null ? null : template.clone();
 		idMap = null;
 		foundProduct = false;
-		bConvertTilde = false;
+		bConvertTilde = true;
 		convertUnits = false;
+		typeLinks = false;
 		heuristicLink = true;
+		version = getVersion(template);
+	}
+
+	private EnumVersion getVersion(final JDFDoc template)
+	{
 		JDFNode n = template == null ? null : template.getJDFRoot();
-		if (n != null)
-			version = n.getVersion(true);
-		if (version == null)
-			version = JDFAudit.getDefaultJDFVersion();
+		EnumVersion v = (n != null) ? n.getVersion(true) : null;
+		if (v == null)
+			v = JDFAudit.getDefaultJDFVersion();
+		return v;
 	}
 
 	/**
@@ -227,16 +235,16 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * @param xjdf
+	 * @param _xjdf
 	 * @return the converted jdf
 	 */
-	protected JDFDoc convert(KElement xjdf)
+	protected JDFDoc convert(KElement _xjdf)
 	{
-		if (xjdf == null)
+		if (_xjdf == null)
 		{
 			return null;
 		}
-		xjdf = xjdf.cloneNewDoc();
+		xjdf = _xjdf.cloneNewDoc();
 		String docType = xjdf.getLocalName();
 		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
 		if (jdfDoc == null)
@@ -522,7 +530,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 						}
 						String newVal = nrl.getString(0);
 						if (!val.equals(newVal))
+						{
 							e2.setAttribute(key, newVal);
+						}
 					}
 				}
 			}
@@ -682,20 +692,38 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * Setter for heuristicLink attribute.
-	 * @param heuristicLink the heuristicLink to set
+	 * Setter for typeLinks attribute. if true, we will only create links that are appropriate for the respective type or types
+	 * @param heuristicLink the typeLinks to set
 	 */
-	public void setHeuristicLink(boolean heuristicLink)
+	public void setTypeLinks(boolean typeLinks)
 	{
-		this.heuristicLink = heuristicLink;
+		this.typeLinks = typeLinks;
 	}
 
 	/**
-	 * Getter for heuristicLink attribute.
-	 * @return the heuristicLink
+	 * Getter for typeLinks attribute.
+	 * @return the typeLinks
+	 */
+	public boolean isTypeLinks()
+	{
+		return typeLinks;
+	}
+
+	/**
+	 * 
+	 * @return
 	 */
 	public boolean isHeuristicLink()
 	{
 		return heuristicLink;
+	}
+
+	/**
+	 * if true, we will find a @Usage for sets with no Usage using fuzzy heuristics
+	 * @param heuristicLink
+	 */
+	public void setHeuristicLink(boolean heuristicLink)
+	{
+		this.heuristicLink = heuristicLink;
 	}
 }

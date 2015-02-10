@@ -121,7 +121,8 @@ class PostConverter
 	{
 		JDFNode root;
 		root = theNode.getJDFRoot();
-		if ("Product".equals(root.getType()))
+		String type = StringUtil.getNonEmpty(root.getType());
+		if (type == null || "Product".equals(type))
 		{
 			xjdfToJDFImpl.mergeProductLinks(theNode, root);
 		}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -613,7 +613,7 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * 
-	 * @return types the vector of types
+	 * @return the implied JDF/@Type - if only one type in @Types, then we use said @Types, else ProcessGroup
 	 */
 	public EnumType getType()
 	{
@@ -641,7 +641,7 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * 
-	 * @return
+	 * @return a clone of this; any underlying documents or elements are also cloned
 	 */
 	@Override
 	public XJDFHelper clone()

@@ -118,6 +118,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 				for (XJDFHelper h : vSplit)
 				{
 					d = super.convert(h.getRoot());
+					setCreateProduct(false);
 				}
 			}
 		}

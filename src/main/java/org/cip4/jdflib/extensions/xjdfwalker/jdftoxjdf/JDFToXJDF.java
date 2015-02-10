@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -274,9 +274,9 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	boolean bHTMLColor = false;
 	/**
-	 * if true tildes are retained as range delimitors
+	 * if false tildes are retained as range delimitors
 	 */
-	private boolean bConvertTilde = false;
+	private boolean bConvertTilde = true;
 	String rootID;
 
 	/**
@@ -951,7 +951,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * Getter for bConvertTilde attribute.
+	 * Getter for bConvertTilde attribute. if true, we zapp tilde
 	 * @return the bConvertTilde
 	 */
 	public boolean isConvertTilde()

@@ -112,12 +112,39 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 			Vector<SetHelper> sets = xjdf.getSets();
 			if (sets != null)
 			{
+				VString types = xjdf.getTypes();
 				for (SetHelper set : sets)
 				{
+					set = matchesType(set, types);
 					fixInOutLink(set, map);
 				}
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param set the set to keep or zapp
+	 * @param types from the xjdf root
+	 * @return null if deleted or no further processing is required
+	 */
+	protected SetHelper matchesType(SetHelper set, VString types)
+	{
+		if (set != null && types != null)
+		{
+			String processUsage = set.getProcessUsage();
+			VString allUsages = StringUtil.tokenize(processUsage, " ", false);
+			if (allUsages != null && allUsages.size() > 0)
+			{
+				if (!allUsages.containsAny(types))
+				{
+					set.deleteNode();
+				}
+				// we still flag null but do not delete to avoid further processing in case we found an explicit match
+				set = null;
+			}
+		}
+		return set;
 	}
 
 	/**
@@ -140,7 +167,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	 */
 	protected void fixInOutLink(SetHelper set, LinkInfoMap map)
 	{
-		if (map == null)
+		if (map == null || set == null)
 		{
 			return;
 		}

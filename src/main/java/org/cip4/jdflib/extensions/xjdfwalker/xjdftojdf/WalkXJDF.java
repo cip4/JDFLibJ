@@ -92,18 +92,18 @@ public class WalkXJDF extends WalkXElement
 
 	// ///////////////////////////////////////////////////////////////////////////////
 	/**
-	 * @param e
+	 * @param xjdf
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		xjdfToJDFImpl.currentJDFNode = (JDFNode) trackElem;
-		xjdfToJDFImpl.currentJDFNode.setAttributes(e);
+		xjdfToJDFImpl.currentJDFNode = (JDFNode) jdf;
+		xjdfToJDFImpl.currentJDFNode.setAttributes(xjdf);
 		xjdfToJDFImpl.currentJDFNode.setVersion(xjdfToJDFImpl.getVersion());
 		xjdfToJDFImpl.currentJDFNode.setMaxVersion(EnumVersion.Version_2_0);
 		xjdfToJDFImpl.currentJDFNode.setStatus(EnumNodeStatus.Part);
-		removeInheritedJobID();
+		updateJobID();
 		setType();
 		return xjdfToJDFImpl.currentJDFNode;
 	}
@@ -134,7 +134,7 @@ public class WalkXJDF extends WalkXElement
 	/**
 	 *  
 	 */
-	private void removeInheritedJobID()
+	private void updateJobID()
 	{
 		final JDFNode parentNode = xjdfToJDFImpl.currentJDFNode.getParentJDF();
 		if (parentNode != null)
@@ -145,6 +145,10 @@ public class WalkXJDF extends WalkXElement
 			{
 				xjdfToJDFImpl.currentJDFNode.removeAttribute(AttributeName.JOBID);
 			}
+		}
+		else
+		{
+			xjdfToJDFImpl.currentJDFNode.appendAnchor(null);
 		}
 	}
 

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -113,6 +114,7 @@ public class WalkSurfaceColor extends WalkXElement
 		{
 			Vector<String> keys = ContainerUtil.getKeyVector(map);
 			keys.remove("Surface");
+			VString spans = ci.knownElements();
 			for (String key : keys)
 			{
 				ci.copyAttribute(key, surfaceColor);
@@ -120,7 +122,7 @@ public class WalkSurfaceColor extends WalkXElement
 				{
 					xjdfToJDFImpl.createSeparationList(ci, key);
 				}
-				else
+				else if (spans.contains(key))
 				{
 					xjdfToJDFImpl.attributeToSpan(ci, key);
 				}
