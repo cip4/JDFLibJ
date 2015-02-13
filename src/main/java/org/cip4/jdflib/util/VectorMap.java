@@ -103,11 +103,13 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	private boolean bUnique;
 
 	/**
-	 * 
+	 * fill this with the values in map by switching key and value
 	 * @param map
 	 */
 	public void fillInvertedMap(Map<vectorObject, key> map)
 	{
+		boolean keepUnique = bUnique; // performance - we cannot be not unique so need not check
+		setUnique(false);
 		if (map != null)
 		{
 			for (vectorObject k : map.keySet())
@@ -119,6 +121,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 				}
 			}
 		}
+		setUnique(keepUnique);
 	}
 
 	/**

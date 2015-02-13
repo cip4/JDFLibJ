@@ -336,6 +336,24 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
+	* get the Root product by index
+	* - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
+	* 
+	* @param iProduct the index of root products 
+	* @return the product, null if no matching product exists
+	*/
+	public ProductHelper getCreateRootProduct(int iProduct)
+	{
+		ProductHelper productHelper = getRootProduct(iProduct);
+		if (productHelper == null)
+		{
+			productHelper = appendProduct();
+			productHelper.setRoot();
+		}
+		return productHelper;
+	}
+
+	/**
 	 * 
 	 * @param rootOnly
 	 * @return
