@@ -81,6 +81,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.SetHelper;
 
 /**
  * @author Rainer Prosi finds all ids
@@ -278,9 +279,7 @@ public class IDFinder extends BaseElementWalker
 			{
 				return false;
 			}
-			String localName = toCheck.getLocalName();
-			return (localName.equals("ResourceSet") || localName.equals("ParameterSet"));
+			return SetHelper.isSet(toCheck);
 		}
-
 	}
 }

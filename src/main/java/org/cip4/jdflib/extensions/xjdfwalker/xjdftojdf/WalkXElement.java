@@ -161,6 +161,10 @@ public class WalkXElement extends BaseWalker
 		if (JDFElement.getSchemaURL(2, 0).equals(StringUtil.leftStr(namespace, -1) + 0))
 		{
 			e2.setNamespaceURI(JDFElement.getSchemaURL(1, 1));
+			if (StringUtil.getNonEmpty(e2.getPrefix()) != null)
+			{
+				e2.setPrefix(null);
+			}
 		}
 	}
 

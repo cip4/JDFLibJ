@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -113,7 +114,7 @@ public class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * if false, all deliveryintents and artdeliveryintents are converted to the respective process resources
 	 */
-	public boolean bDeliveryIntent = true;
+	public boolean bDeliveryIntent = false;
 
 	/**
 	 * 
@@ -141,7 +142,40 @@ public class PostXJDFWalker extends BaseElementWalker
 				xjdf.setNamespaceURI(XJDF20.getSchemaURL());
 			return xjdf;
 		}
+	}
 
+	/**
+	 * class that ensures that we do not have signaturename partitions 
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkPart extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkPart()
+		{
+			super();
+		}
+
+		/**
+		 * @param part
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement part, final KElement dummy)
+		{
+			part.removeAttribute(AttributeName.SIGNATURENAME);
+			return super.walk(part, dummy);
+		}
+
+		@Override
+		public boolean matches(KElement e)
+		{
+			return (e instanceof JDFPart);
+		}
 	}
 
 	/**
@@ -444,7 +478,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals("ParameterSet") && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return toCheck.getLocalName().equals(SetHelper.PARAMETER_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -542,7 +576,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && ElementName.DELIVERYINTENT.equals(toCheck.getAttribute("Name"));
+			return !bDeliveryIntent && (super.matches(toCheck) && ElementName.DELIVERYINTENT.equals(toCheck.getAttribute("Name")));
 		}
 
 		/**
@@ -754,7 +788,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return "ResourceSet".equals(toCheck.getLocalName()) || "ParameterSet".equals(toCheck.getLocalName());
+			return SetHelper.isSet(toCheck);
 		}
 
 		/**

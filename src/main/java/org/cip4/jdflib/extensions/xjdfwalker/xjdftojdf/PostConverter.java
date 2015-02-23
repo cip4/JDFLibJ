@@ -106,7 +106,7 @@ class PostConverter
 	 * @param xjdfToJDFImpl 
 	 * @param theNode
 	 */
-	public PostConverter(XJDFToJDFImpl xjdfToJDFImpl, JDFNode theNode)
+	PostConverter(XJDFToJDFImpl xjdfToJDFImpl, JDFNode theNode)
 	{
 		super();
 		this.xjdfToJDFImpl = xjdfToJDFImpl;
@@ -119,8 +119,7 @@ class PostConverter
 	 */
 	void postConvert()
 	{
-		JDFNode root;
-		root = theNode.getJDFRoot();
+		JDFNode root = theNode.getJDFRoot();
 		String type = StringUtil.getNonEmpty(root.getType());
 		if (type == null || "Product".equals(type))
 		{
@@ -174,22 +173,22 @@ class PostConverter
 
 	/**
 	 *  
-	 * @param theNode
-	 * @param rr
+	 *  
+	 * @param eRoot
 	 */
-	private void cleanResource(KElement rr)
+	private void cleanResource(KElement eRoot)
 	{
-		final JDFResource r = (JDFResource) rr;
-		if (r != null)
+		final JDFResource resRoot = (JDFResource) eRoot;
+		if (resRoot != null)
 		{
-			final EnumResStatus s = r.getStatusFromLeaves(false);
+			final EnumResStatus s = resRoot.getStatusFromLeaves(false);
 			if (s != null)
 			{
-				r.setResStatus(s, false);
+				resRoot.setResStatus(s, false);
 			}
-			if (ElementName.COLORPOOL.equals(r.getLocalName()))
+			if (ElementName.COLORPOOL.equals(resRoot.getLocalName()))
 			{
-				cleanColorPool(r);
+				cleanColorPool(resRoot);
 			}
 		}
 	}

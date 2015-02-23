@@ -219,7 +219,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
-			if (isSet(e))
+			if (SetHelper.isSet(e))
 			{
 				SetHelper set = new SetHelper(e);
 				if ((family == null || set.getFamily().equals(family)) && (usage == null || usage.equals(set.getUsage())))
@@ -243,7 +243,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
-			if (id.equals(e.getID()) && isSet(e))
+			if (id.equals(e.getID()) && SetHelper.isSet(e))
 				return new SetHelper(e);
 			e = e.getNextSiblingElement();
 		}
@@ -279,7 +279,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
-			if (isSet(e))
+			if (SetHelper.isSet(e))
 			{
 				PartitionHelper ph = new SetHelper(e).getPartition(id);
 				if (ph != null)
@@ -297,11 +297,12 @@ public class XJDFHelper extends BaseXJDFHelper
 	 * is the element a set?
 	 * @param e
 	 * @return
+	 * @deprecated use SetHelper.isSet
 	 */
+	@Deprecated
 	public boolean isSet(KElement e)
 	{
-		String localName = e.getLocalName();
-		return (RESOURCE + SetHelper.SET).equals(localName) || (PARAMETER + SetHelper.SET).equals(localName);
+		return SetHelper.isSet(e);
 	}
 
 	/**
@@ -386,16 +387,19 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @return
+	 * the vector of product helpers; null if no ProductList or no ProductList/Product
+	 * 
+	 * @return the vector of product helpers
 	 */
 	public Vector<ProductHelper> getProductHelpers()
 	{
 		if (theElement == null)
 			return null;
-		KElement productList = theElement.getElement("ProductList");
-		VElement products = productList == null ? null : productList.getChildElementVector("Product", null);
+		KElement productList = theElement.getElement(ProductHelper.PRODUCTLIST);
+		VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
 		if (products == null || products.size() == 0)
 			return null;
+
 		Vector<ProductHelper> vph = new Vector<ProductHelper>();
 		for (KElement e : products)
 		{
@@ -440,7 +444,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e2 = null;
 		while (e != null)
 		{
-			if (isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null))))
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute(AttributeName.NAME, null, null))))
 			{
 				if (n++ == iSkip)
 				{
@@ -464,7 +468,7 @@ public class XJDFHelper extends BaseXJDFHelper
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
-			if (isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null)))
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null)))
 					&& ContainerUtil.equals(StringUtil.getNonEmpty(processUsage), e.getAttribute(AttributeName.PROCESSUSAGE, null, null)))
 			{
 				return new SetHelper(e);
@@ -559,6 +563,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	public ProductHelper appendProduct()
 	{
 		KElement product = theElement.getCreateElement(ProductHelper.PRODUCTLIST).appendElement(ProductHelper.PRODUCT);
+		reorder();
 		return new ProductHelper(product);
 	}
 
@@ -693,6 +698,32 @@ public class XJDFHelper extends BaseXJDFHelper
 	public void setJobID(String jobID)
 	{
 		setXPathValue("@" + AttributeName.JOBID, jobID);
+	}
+
+	/**
+	 * ensure we always have auditpool and productlist first
+	 * 
+	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#reorder()
+	 */
+	@Override
+	public void reorder()
+	{
+		KElement pl = theElement.getElement(ProductHelper.PRODUCTLIST);
+		KElement ap = theElement.getElement(ElementName.AUDITPOOL);
+		if (pl != null)
+		{
+			KElement f = theElement.getFirstChildElement();
+			if (f == ap)
+			{
+				f = f.getNextSiblingElement();
+			}
+			theElement.moveElement(pl, f);
+		}
+		if (ap != null)
+		{
+			KElement f = theElement.getFirstChildElement();
+			theElement.moveElement(ap, f);
+		}
 	}
 
 }

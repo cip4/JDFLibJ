@@ -96,6 +96,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
@@ -256,6 +257,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		xjdf = reparse(xjdf);
 		xjdf.setAttribute(AttributeName.VERSION, version.getName());
 		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
+		new XJDFHelper(xjdf).reorder();
 		if (isJMF)
 		{
 			idMap = new IDFinder().getMap(xjdf);
@@ -415,16 +417,15 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	boolean isXResource(final KElement toCheck)
 	{
-		final KElement parent = toCheck.getParentNode_KElement();
-		if (parent == null)
+		final KElement set = toCheck.getParentNode_KElement();
+		if (set == null)
 		{
 			return false;
 		}
 
-		String localName = parent.getLocalName();
-		boolean b = localName.endsWith("Set");
-		b = b && toCheck.getLocalName().equals(StringUtil.leftStr(localName, -3));
-		return b && parent.hasAttribute(AttributeName.NAME);
+		String setName = SetHelper.getSetName(set);
+		boolean b = setName != null && toCheck.getLocalName().equals(setName);
+		return b && set.hasAttribute(AttributeName.NAME);
 	}
 
 	/**
@@ -545,6 +546,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	 */
 	void mergeProductLinks(final JDFNode theNode, final JDFNode parent)
 	{
+		if (theNode == parent)
+			return;
+
 		mergeProductLink(theNode, parent, ElementName.CUSTOMERINFO, EnumUsage.Input);
 		mergeProductLink(theNode, parent, ElementName.NODEINFO, EnumUsage.Input);
 		final JDFResource r = parent.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);

@@ -689,17 +689,18 @@ public class JDFToXJDF extends PackageElementWalker
 			resourceSet = xRoot.appendElement(className + "Set");
 			resourceSet.setAttribute("ID", linkTarget.getID());
 		}
+
 		// TODO what if he have resources used as in and out in the same node?
 		setSetAttributes(resourceSet, rl, linkTarget);
 		int nLeaves = resourceSet.numChildElements(className, null);
 		final VElement vRes = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
-		for (int j = 0; j < vRes.size(); j++)
+		for (KElement e : vRes)
 		{
-			final JDFResource r = (JDFResource) vRes.elementAt(j);
+			final JDFResource r = (JDFResource) e;
 			final VElement vLeaves = r.getLeaves(false);
-			for (int k = 0; k < vLeaves.size(); k++)
+			for (KElement eLeaf : vLeaves)
 			{
-				final JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
+				final JDFResource leaf = (JDFResource) eLeaf;
 				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
 				final int nn = resourceSet.numChildElements(className, null);
 				if (nn > nLeaves)

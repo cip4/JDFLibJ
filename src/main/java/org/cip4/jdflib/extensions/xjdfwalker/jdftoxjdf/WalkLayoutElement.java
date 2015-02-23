@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
@@ -114,7 +115,7 @@ public class WalkLayoutElement extends WalkInlineAllRes
 		KElement ret = super.walk(jdf, xjdf);
 		if (!bInRunList && this.jdfToXJDF.isMergeRunList())
 		{
-			KElement retPar = ret.getDeepParent("ParameterSet", 0);
+			KElement retPar = ret.getDeepParent(SetHelper.PARAMETER_SET, 0);
 			if (retPar != null)
 				retPar.setAttribute("Name", "RunList");
 			ret.renameElement("RunList", null);

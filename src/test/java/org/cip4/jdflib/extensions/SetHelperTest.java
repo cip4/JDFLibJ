@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,8 +87,20 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetName()
 	{
-		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsSet()
+	{
+		assertTrue(SetHelper.isSet(root.getElement(SetHelper.RESOURCE_SET)));
+		assertTrue(SetHelper.isSet("ResourceSet"));
+		assertFalse(SetHelper.isSet("ResourceSet_"));
+		assertFalse(SetHelper.isSet("Media"));
 	}
 
 	/**
@@ -97,7 +109,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartition()
 	{
-		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertEquals(sh.getName(), "Media");
 		assertNull(sh.getPartition(1));
 		assertNotNull(sh.getCreatePartition(1, true));
@@ -111,7 +123,7 @@ public class SetHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionByID()
 	{
-		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		SetHelper sh = new SetHelper(root.getElement(SetHelper.RESOURCE_SET));
 		assertNull(sh.getPartition("fooo"));
 		assertNotNull(sh.getCreatePartition(1, true));
 		String id = sh.getPartition(0).getID();

@@ -115,8 +115,8 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 				VString types = xjdf.getTypes();
 				for (SetHelper set : sets)
 				{
-					set = matchesType(set, types);
-					fixInOutLink(set, map);
+					SetHelper set2 = matchesType(set, types);
+					fixInOutLink(set2, map);
 				}
 			}
 		}

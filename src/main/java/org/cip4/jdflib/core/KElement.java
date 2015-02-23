@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1288,7 +1288,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Get the Attribute Map of the actual element
-	 * @return JDFAttributeMap the attribute map of the actual element
+	 * @return JDFAttributeMap the attribute map of the actual element - never null
 	 */
 	public JDFAttributeMap getAttributeMap()
 	{
@@ -2988,8 +2988,9 @@ public class KElement extends ElementNSImpl implements Element
 		if (src != null)
 		{
 			if (src == beforeChild)
+			{
 				return src; // nop
-
+			}
 			if (src.isAncestor(this))
 			{
 				return null; // snafu when moving a to b in a/b

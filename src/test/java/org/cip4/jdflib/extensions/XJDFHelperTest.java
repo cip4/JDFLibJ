@@ -317,6 +317,17 @@ public class XJDFHelperTest extends TestCase
 		assertNotNull(theHelper.getRootProductHelpers().get(0));
 	}
 
+	public void testReorder()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		theHelper.reorder();
+		theHelper.getCreateParameterSet("foo", null);
+		theHelper.appendProduct().setRoot();
+		KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
+		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);
+		assertEquals(theHelper.getRootProduct(0).getRoot().getParentNode_KElement().getPreviousSiblingElement(), ap);
+	}
+
 	/**
 	 * 
 	 * 

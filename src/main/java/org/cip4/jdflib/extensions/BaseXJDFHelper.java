@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,7 +75,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  *  
- * @author rainerprosi
+ * @author rainer prosi
  * @date Feb 17, 2012
  */
 public abstract class BaseXJDFHelper
@@ -96,6 +96,14 @@ public abstract class BaseXJDFHelper
 	public String getXPathValue(String xpath)
 	{
 		return theElement == null ? null : theElement.getXPathAttribute(xpath, null);
+	}
+
+	/**
+	 * reorder elements in their canonical order - usually nop
+	 */
+	public void reorder()
+	{
+		return;
 	}
 
 	/**

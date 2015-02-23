@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,29 +88,29 @@ public class WalkResourceInfo extends WalkJDFElement
 	}
 
 	/**
-	 * @param jdf
+	 * @param resInfo
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(final KElement resInfo, final KElement xjdf)
 	{
-		final JDFResourceInfo ri = (JDFResourceInfo) jdf;
-		final KElement eNew = xjdf.copyElement(jdf, null);
+		final JDFResourceInfo ri = (JDFResourceInfo) resInfo;
+		final KElement eNew = xjdf.copyElement(resInfo, null);
 		eNew.removeChildren(null, null, null);
-		final VElement vr = ((JDFResourceInfo) jdf).getChildElementVector(null, null);
+		final VElement vr = ri.getChildElementVector(null, null);
 		int nRes = 0;
-		for (int i = 0; i < vr.size(); i++)
+		for (KElement e : vr)
 		{
-			if (vr.get(i) instanceof JDFResource)
+			if (e instanceof JDFResource)
 			{
-				final JDFResource r = (JDFResource) vr.get(i);
+				final JDFResource r = (JDFResource) e;
 				if (nRes == 0)
 				{
-					this.jdfToXJDF.setResource(ri, r, eNew);
+					jdfToXJDF.setResource(ri, r, eNew);
 				}
 				else
 				{
-					this.jdfToXJDF.setResource(null, r, eNew);
+					jdfToXJDF.setResource(null, r, eNew);
 				}
 				r.deleteNode();
 				nRes++;

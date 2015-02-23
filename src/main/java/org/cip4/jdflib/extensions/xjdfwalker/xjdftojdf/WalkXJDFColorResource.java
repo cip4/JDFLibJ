@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,7 +102,7 @@ public class WalkXJDFColorResource extends WalkXJDFResource
 	@Override
 	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 	{
-		final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
+		JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
 		final JDFColorPool colorPool = (JDFColorPool) trackElem;
 		final String sep = part.getSeparation();
 		final KElement col = colorPool.getChildWithAttribute("Color", "Name", null, sep, 0, true);

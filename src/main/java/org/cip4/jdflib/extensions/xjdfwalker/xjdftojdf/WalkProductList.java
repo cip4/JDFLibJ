@@ -109,9 +109,9 @@ public class WalkProductList extends WalkXElement
 			xjdfToJDFImpl.firstproductInList = numProductHelpers <= 1;
 		}
 		Vector<ProductHelper> vRoot = h.getRootProductHelpers();
-		if (vRoot != null)
+		if (vRoot != null && !vRoot.isEmpty())
 		{
-			KElement eProd0 = e.getElement("Product");
+			KElement eProd0 = vRoot.get(vRoot.size() - 1).getRoot();
 			for (ProductHelper phRoot : vRoot)
 			{
 				e.moveElement(phRoot.getRoot(), eProd0);

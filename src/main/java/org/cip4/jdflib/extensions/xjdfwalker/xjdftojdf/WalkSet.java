@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -106,7 +106,7 @@ public class WalkSet extends WalkXElement
 		final JDFNode root = parentNode.getJDFRoot();
 		EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 		final String id = e.getAttribute(AttributeName.ID, null, null);
-		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && "ParameterSet".equals(e.getLocalName()))
+		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && SetHelper.PARAMETER_SET.equals(e.getLocalName()))
 		{
 			final String name = getJDFResName(e);
 			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COLORPOOL.equals(name)
@@ -117,14 +117,14 @@ public class WalkSet extends WalkXElement
 		}
 
 		JDFResource r = null;
-		final KElement idElem = root.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
+		final KElement idElem = root.getCreateResourcePool().getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		if (idElem instanceof JDFResource)
 		{
 			r = (JDFResource) idElem;
 		}
 		else
 		{
-			r = (JDFResource) root.getChildWithAttribute(null, "ID", null, id, 0, false);
+			r = (JDFResource) root.getChildWithAttribute(null, AttributeName.ID, null, id, 0, false);
 			if (r != null)
 			{
 				final JDFResourcePool rp = root.getCreateResourcePool();

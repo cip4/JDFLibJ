@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,12 +96,43 @@ public class SetHelper extends BaseXJDFHelper
 	};
 
 	/**
+	 * 
+	 */
+	public static final String PARAMETER_SET = EnumFamily.Parameter.name() + "Set";
+	/**
+	 * 
+	 */
+	public static final String RESOURCE_SET = EnumFamily.Resource.name() + "Set";
+
+	/**
 	 * @param set the set to help on
 	 */
 	public SetHelper(KElement set)
 	{
 		super();
 		this.theElement = set;
+	}
+
+	/**
+	 * 
+	 * is the element a set?
+	 * @param e
+	 * @return
+	 */
+	public static boolean isSet(KElement e)
+	{
+		String localName = e == null ? null : e.getLocalName();
+		return isSet(localName);
+	}
+
+	/**
+	 * is the element name a set?
+	 * @param localName
+	 * @return
+	 */
+	public static boolean isSet(String localName)
+	{
+		return RESOURCE_SET.equals(localName) || PARAMETER_SET.equals(localName);
 	}
 
 	/**
@@ -341,8 +372,28 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public String getPartitionName()
 	{
-		String name = StringUtil.leftStr(theElement.getLocalName(), -3);
+		String name = getSetName(theElement.getLocalName());
 		return name;
+	}
+
+	/**
+	 * 
+	 * @param e the element to test
+	 * @return
+	 */
+	public static String getSetName(KElement e)
+	{
+		return e == null ? null : getSetName(e.getLocalName());
+	}
+
+	/**
+	 * 
+	 * @param setName the name of the set element
+	 * @return
+	 */
+	public static String getSetName(String setName)
+	{
+		return isSet(setName) ? StringUtil.leftStr(setName, -3) : null;
 	}
 
 	/**

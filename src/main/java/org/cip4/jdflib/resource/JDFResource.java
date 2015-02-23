@@ -935,6 +935,10 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
+		public static final EnumPartIDKey BinderySignaturePaginationIndex = new EnumPartIDKey("BinderySignaturePaginationIndex");
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey BlockName = new EnumPartIDKey(JDFConstants.PARTIDKEY_BLOCKNAME);
 		/**
 		 * 
@@ -1003,6 +1007,10 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
+		public static final EnumPartIDKey ProductPart = new EnumPartIDKey("ProductPart");
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RibbonName = new EnumPartIDKey(JDFConstants.PARTIDKEY_RIBBONNAME);
 		/**
 		 * 
@@ -1023,11 +1031,19 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
+		public static final EnumPartIDKey RunPageRange = new EnumPartIDKey("RunPageRange");
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Separation = new EnumPartIDKey(JDFConstants.PARTIDKEY_SEPARATION);
 		/**
 		 * 
 		 */
 		public static final EnumPartIDKey SectionIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SECTIONINDEX);
+		/**
+		 * 
+		 */
+		public static final EnumPartIDKey SetCopies = new EnumPartIDKey("SetCopies");
 		/**
 		 * 
 		 */
@@ -1843,10 +1859,8 @@ public class JDFResource extends JDFElement
 
 			// check whether we are already ok
 			int iMore = 0;
-			final Iterator<String> it = localPartMap.getKeyIterator();
-			while (it.hasNext())
+			for (String key : localPartMap.keySet())
 			{
-				final String key = it.next();
 				if (!vPartIDKeys.contains(key))
 				{
 					iMore++;
@@ -1884,9 +1898,8 @@ public class JDFResource extends JDFElement
 			boolean creating = false;
 			JDFResource leaf = JDFResource.this;
 			// create all partitions
-			for (int k = 0; k < vPartIDKeys.size(); k++)
+			for (String key : vPartIDKeys)
 			{
-				final String key = vPartIDKeys.elementAt(k);
 				final EnumPartIDKey enumKey = EnumPartIDKey.getEnum(key);
 				final String value = localPartMap.get(key);
 

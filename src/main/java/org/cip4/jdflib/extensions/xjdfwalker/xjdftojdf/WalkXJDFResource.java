@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,12 +72,14 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -93,40 +95,61 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * @param e
+	 * @param xjdfRes
 	 * @return the created resource
 	 */
 	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
+	public KElement walk(final KElement xjdfRes, final KElement jdfResource)
 	{
-		final JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
-		final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
+		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfResource).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
+		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
 		JDFAttributeMap partmap = null;
 		final JDFResource newPartition;
+		JDFNode partialProductNode = null;
 		if (part != null)
 		{
-			newPartition = createPartition(e, trackElem, part);
+			newPartition = createPartition(xjdfRes, jdfResource, part);
 			partmap = part.getPartMap();
+
+			String productPart = partmap == null ? null : StringUtil.getNonEmpty(partmap.get(AttributeName.PRODUCTPART));
+			partialProductNode = productPart == null ? null : theNode.getChildJDFNode(productPart, false);
 		}
-		else if (e.getPreviousSiblingElement(e.getNodeName(), null) != null)
+		else if (xjdfRes.getPreviousSiblingElement(xjdfRes.getNodeName(), null) != null)
 		{
-			newPartition = theNode.getJDFRoot().addResource(trackElem.getLocalName(), null);
-			newPartition.copyAttribute("ID", e);
+			newPartition = theNode.getJDFRoot().addResource(jdfResource.getLocalName(), null);
+			newPartition.copyAttribute("ID", xjdfRes);
 		}
 		else
 		{
-			newPartition = (JDFResource) trackElem;
+			newPartition = (JDFResource) jdfResource;
 		}
 		if (newPartition == null)
 		{
 			return null;
 		}
 
-		final JDFAttributeMap map = e.getAttributeMap();
+		final JDFAttributeMap map = xjdfRes.getAttributeMap();
 		map.remove(AttributeName.ID);
 		map.remove(AttributeName.PARTIDKEYS);
-		final JDFResourceLink rl = theNode.getLink(newPartition, null);
-		KElement ap = e.getElement(ElementName.AMOUNTPOOL);
+
+		JDFResourceLink rl = theNode.getLink(newPartition, null);
+		JDFResourceLink rlpart = null;
+		if (partialProductNode != null)
+		{
+			rlpart = partialProductNode.getLink(newPartition, null);
+			EnumUsage newUsage = rl == null ? null : rl.getUsage();
+			if (rlpart == null && newUsage != null)
+			{
+				rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
+			}
+			if (rlpart != null)
+			{
+				rl = rlpart;
+			}
+
+		}
+
+		KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
 		if (ap != null)
 		{
 			xjdfToJDFImpl.walkTree(ap, rl);
@@ -139,24 +162,48 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 * @param e
-	 * @param trackElem
+	 * @param theNode
+	 * @param xjdfRes
+	 * @param jdfRes
 	 * @param part
 	 * @return
 	 */
-	protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
+	protected JDFResource createPartition(final KElement xjdfRes, final KElement jdfRes, final JDFPart part)
 	{
-		final JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
-		final JDFResource r = (JDFResource) trackElem;
-		final JDFAttributeMap partMap = part.getPartMap();
+		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfRes).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
+		final JDFResource r = (JDFResource) jdfRes;
+		final JDFAttributeMap partMap = getPartMap(part);
 		final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());
 		final JDFResourceLink rll = theNode.getLink(r, null);
 		final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
 		if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
 		{
-			rll.moveElement(part, null);
+			rll.appendPart().setPartMap(partMap);
+			part.deleteNode();
 		}
 		return rPart;
+	}
+
+	/**
+	 * 
+	 * @param part
+	 * @return
+	 */
+	JDFAttributeMap getPartMap(final JDFPart part)
+	{
+		final JDFAttributeMap p = part.getPartMap();
+		if (p != null)
+		{
+			String sheetName = p.get(AttributeName.SHEETNAME);
+			String signatureName = p.get(AttributeName.SIGNATURENAME);
+			if (StringUtil.getNonEmpty(sheetName) != null && StringUtil.getNonEmpty(signatureName) == null)
+			{
+				signatureName = "Sig_" + sheetName;
+				p.put(AttributeName.SIGNATURENAME, signatureName);
+				part.setSignatureName(signatureName);
+			}
+		}
+		return p;
 	}
 
 	/**

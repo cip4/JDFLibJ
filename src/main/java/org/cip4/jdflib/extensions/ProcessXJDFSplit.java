@@ -172,7 +172,8 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		if (types == null)
 			types = new VString();
 		types.remove("Product");
-		if (root.getProductHelpers() != null)
+		Vector<ProductHelper> productHelpers = root.getProductHelpers();
+		if (productHelpers != null)
 		{
 			types.insertElementAt("Product", 0);
 		}
@@ -190,5 +191,15 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 			groups.add(group);
 			ContainerUtil.unify(groups);
 		}
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ProcessXJDFSplit [groups=" + groups + "]";
 	}
 }

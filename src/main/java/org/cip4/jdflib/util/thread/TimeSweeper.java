@@ -83,7 +83,7 @@ public class TimeSweeper implements Sweeper
 	protected long t0;
 	protected long nSweep;
 	private long interval;
-	private Runnable runner;
+	protected Runnable runner;
 
 	/**
 	 * @param interval the time interval in seconds
@@ -96,7 +96,7 @@ public class TimeSweeper implements Sweeper
 		t0 = -1;
 		nSweep = 0;
 		setInterval(interval);
-		runner = null;
+		runner = (Runnable) ((this instanceof Runnable) ? this : null);
 	}
 
 	/**
