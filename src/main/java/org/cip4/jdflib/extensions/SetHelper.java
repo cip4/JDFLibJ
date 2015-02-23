@@ -393,7 +393,7 @@ public class SetHelper extends BaseXJDFHelper
 	 */
 	public static String getSetName(String setName)
 	{
-		return isSet(setName) ? StringUtil.leftStr(setName, -3) : null;
+		return (isSet(setName) || "IntentSet".equals(setName)) ? StringUtil.leftStr(setName, -3) : null;
 	}
 
 	/**

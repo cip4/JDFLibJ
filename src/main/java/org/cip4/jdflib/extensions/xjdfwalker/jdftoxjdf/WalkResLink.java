@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
@@ -115,13 +116,13 @@ public class WalkResLink extends WalkJDFElement
 
 		if (EnumType.Product.equals(n.getEnumType()))
 		{
-			if (linkTarget instanceof JDFComponent || !jdfToXJDF.wantProduct)
+			if (linkTarget instanceof JDFComponent || (!jdfToXJDF.wantProduct && !matchesRootID(n)))
 			{
 				return null;
 			}
 			if (isProductResource(linkTarget))
 			{
-				KElement product = xjdf.getElement("ProductList").getElement("Product", null, -1);
+				KElement product = xjdf.getCreateElement(ProductHelper.PRODUCTLIST).getCreateElement(ProductHelper.PRODUCT, null, -1);
 				setResource(rl, linkTarget, product);
 			}
 			else

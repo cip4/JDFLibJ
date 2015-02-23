@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -127,6 +127,26 @@ public class WalkJDFElement extends WalkElement
 				}
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
+	protected boolean matchesRootID(final JDFNode node)
+	{
+		boolean matchesID = node.getID().equals(jdfToXJDF.rootID);
+		if (!matchesID && !jdfToXJDF.isSingleNode())
+		{
+			JDFNode parent = node.getParentJDF();
+			while (parent != null && !matchesID)
+			{
+				matchesID = parent.getID().equals(jdfToXJDF.rootID);
+				parent = parent.getParentJDF();
+			}
+		}
+		return matchesID;
 	}
 
 	/**

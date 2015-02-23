@@ -127,21 +127,6 @@ public class WalkJDF extends WalkJDFElement
 		}
 	}
 
-	private boolean matchesRootID(final JDFNode node)
-	{
-		boolean matchesID = node.getID().equals(jdfToXJDF.rootID);
-		if (!matchesID && !jdfToXJDF.isSingleNode())
-		{
-			JDFNode parent = node.getParentJDF();
-			while (parent != null && !matchesID)
-			{
-				matchesID = parent.getID().equals(jdfToXJDF.rootID);
-				parent = parent.getParentJDF();
-			}
-		}
-		return matchesID;
-	}
-
 	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 * @param toCheck
@@ -159,7 +144,7 @@ public class WalkJDF extends WalkJDFElement
 	 */
 	void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
-		if (EnumType.Product.equals(node.getEnumType()) && node.getParentJDF() != null)
+		if (EnumType.Product.equals(node.getEnumType()) && node.getParentJDF() != null && !jdfToXJDF.first.isEmpty())
 		{
 			// me be sub product
 			return;
