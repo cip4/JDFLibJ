@@ -675,10 +675,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			KElement parent = toCheck.getParentNode_KElement();
-			if (parent == null)
-				return false;
-			return "Resource".equals(parent.getLocalName()) || "Parameter".equals(parent.getLocalName());
+			return PartitionHelper.isResourceElement(toCheck);
 		}
 
 		/**
@@ -846,7 +843,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return "Intent".equals(toCheck.getLocalName());
+			return IntentHelper.INTENT.equals(toCheck.getLocalName());
 		}
 
 		/**
