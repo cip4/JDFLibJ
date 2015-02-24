@@ -105,7 +105,7 @@ public class WalkProduct extends WalkXElement
 	public KElement walk(final KElement xjdfProduct, KElement trackElem)
 	{
 		JDFNode theNode = (JDFNode) trackElem;
-		if ("Product".equals(theNode.getType()))
+		if (ProductHelper.PRODUCT.equals(theNode.getType()))
 		{
 			JDFNode tmp = theNode.getRoot().getChildJDFNode(xjdfProduct.getAttribute(AttributeName.ID), false);
 			if (tmp != null)

@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.pool.JDFResourcePool;
 
 /**
@@ -105,6 +106,6 @@ public class WalkResource extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		// test on grandparent
-		return super.matches(toCheck) && xjdfToJDFImpl.isXResourceElement(toCheck);
+		return super.matches(toCheck) && PartitionHelper.isResourceElement(toCheck);
 	}
 }

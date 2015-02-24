@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,8 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public static boolean bSpanAsAttribute = true;
 
+	public static final String INTENT = "Intent";
+
 	/**
 	 * @param intent
 	 */
@@ -94,6 +96,21 @@ public class IntentHelper extends BaseXJDFHelper
 		super();
 		theElement = intent;
 		theElement.appendAnchor(null);
+	}
+
+	/**
+	 * 
+	 * @param toCheck
+	 */
+	public static boolean isIntentResource(KElement toCheck)
+	{
+		if (toCheck == null)
+			return false;
+		KElement parent = toCheck.getParentNode_KElement();
+		if (parent == null)
+			return false;
+
+		return (INTENT.equals(parent.getLocalName())) ? new IntentHelper(parent).getResource() == toCheck : false;
 	}
 
 	/**
@@ -119,6 +136,31 @@ public class IntentHelper extends BaseXJDFHelper
 	 * @return the detailed intent resource
 	 */
 	public KElement getResource()
+	{
+		String name = theElement.getAttribute("Name", null, null);
+		if (name != null)
+		{
+			return theElement.getElement(name);
+		}
+		else
+		{
+			KElement e = theElement.getFirstChildElement();
+			while (e != null)
+			{
+				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
+				{
+					return e;
+				}
+				e = e.getNextSiblingElement();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @return the detailed intent resource
+	 */
+	public KElement getCreateResource()
 	{
 		String name = theElement.getAttribute("Name", null, null);
 		if (name != null)
@@ -165,7 +207,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public void setSpan(final String att, final String val, final String dataType)
 	{
-		final KElement resource = getResource();
+		final KElement resource = getCreateResource();
 		setSpan(resource, att, val, dataType);
 	}
 
@@ -187,6 +229,8 @@ public class IntentHelper extends BaseXJDFHelper
 	public String getSpan(final String spanPath)
 	{
 		KElement resource = getResource();
+		if (resource == null)
+			return null;
 		String elem = StringUtil.removeToken(spanPath, -1, "/");
 		if (elem != null)
 		{

@@ -96,7 +96,7 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
-import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
@@ -376,56 +376,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			n = root.addProcessGroup(new VString(xjdf.getAttribute(AttributeName.TYPES), null));
 		}
 		return n;
-	}
-
-	/**
-	 * @param toCheck
-	 * @return
-	 */
-	boolean isXResourceElement(final KElement toCheck)
-	{
-		boolean bReturn = false;
-
-		if (toCheck != null)
-		{
-			final KElement parent = toCheck.getParentNode_KElement();
-			if (parent == null)
-			{
-				return bReturn;
-			}
-
-			final KElement grandParent = parent.getParentNode_KElement();
-			if (grandParent == null)
-			{
-				return bReturn;
-			}
-
-			final String grandParentName = grandParent.getLocalName();
-			final String parentName = parent.getLocalName();
-			boolean bL1 = grandParentName.endsWith("Set") && parentName.equals(StringUtil.leftStr(grandParentName, -3))
-					&& toCheck.getLocalName().equals(KElement.xmlnsLocalName(grandParent.getAttribute("Name")));
-			bL1 = bL1 || grandParentName.equals("Product") && toCheck.getLocalName().equals(KElement.xmlnsLocalName(parent.getAttribute("Name")));
-			bReturn = bL1;
-		}
-
-		return bReturn;
-	}
-
-	/**
-	 * @param toCheck
-	 * @return
-	 */
-	boolean isXResource(final KElement toCheck)
-	{
-		final KElement set = toCheck.getParentNode_KElement();
-		if (set == null)
-		{
-			return false;
-		}
-
-		String setName = SetHelper.getSetName(set);
-		boolean b = setName != null && toCheck.getLocalName().equals(setName);
-		return b && set.hasAttribute(AttributeName.NAME);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 
@@ -107,5 +108,19 @@ public class IntentHelperTest extends TestCase
 		intentHelper.setSpan("b/a", "43");
 		assertEquals(intentHelper.getSpan("a"), "42");
 		assertEquals(intentHelper.getSpan("b/a"), "43");
+	}
+
+	/**
+	 * 
+	 */
+	public void testIsIntent()
+	{
+		KElement intent = new JDFDoc("Intent").getRoot();
+		intent.setAttribute("Name", "foo");
+		KElement foo = intent.appendElement("foo");
+		KElement c = intent.appendElement(ElementName.COMMENT);
+		assertTrue(IntentHelper.isIntentResource(foo));
+		assertFalse(IntentHelper.isIntentResource(intent));
+		assertFalse(IntentHelper.isIntentResource(c));
 	}
 }

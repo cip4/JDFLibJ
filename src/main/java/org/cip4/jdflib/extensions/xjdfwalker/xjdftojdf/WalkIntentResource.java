@@ -69,7 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.extensions.IntentHelper;
 
 /**
  * 
@@ -106,6 +106,6 @@ public class WalkIntentResource extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && (toCheck instanceof JDFIntentResource);
+		return IntentHelper.isIntentResource(toCheck);
 	}
 }

@@ -76,6 +76,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -126,7 +128,7 @@ public class WalkXElement extends BaseWalker
 		cleanRefs(e, trackElem);
 
 		// dirty, dirty but needed in case of inherited inline resources
-		if (xjdfToJDFImpl.isXResourceElement(e))
+		if (PartitionHelper.isResourceElement(e) || IntentHelper.isIntentResource(e))
 		{
 			trackElem.setAttributes(e);
 		}

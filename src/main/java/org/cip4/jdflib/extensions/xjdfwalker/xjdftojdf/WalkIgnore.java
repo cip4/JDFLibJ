@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
@@ -104,7 +105,7 @@ public class WalkIgnore extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		boolean matches = super.matches(toCheck);
-		matches = matches && (toCheck instanceof JDFPart) && xjdfToJDFImpl.isXResource(toCheck.getParentNode_KElement());
+		matches = matches && (toCheck instanceof JDFPart) && PartitionHelper.isAsset(toCheck.getParentNode_KElement());
 		matches = matches || "ChildProduct".equals(toCheck.getLocalName());
 		matches = matches || "ProcessList".equals(toCheck.getLocalName());
 		matches = matches || "Dependent".equals(toCheck.getLocalName());

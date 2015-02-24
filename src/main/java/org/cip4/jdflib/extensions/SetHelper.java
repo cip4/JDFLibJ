@@ -378,8 +378,8 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * 
-	 * @param e the element to test
-	 * @return
+	 * @param e the element to test 
+	 * @return  then asset type name (Parameter, Resource etc)
 	 */
 	public static String getSetName(KElement e)
 	{
@@ -388,8 +388,8 @@ public class SetHelper extends BaseXJDFHelper
 
 	/**
 	 * 
-	 * @param setName the name of the set element
-	 * @return
+	 * @param setName the name of the set element 
+	 * @return then asset type name (Parameter, Resource etc)
 	 */
 	public static String getSetName(String setName)
 	{

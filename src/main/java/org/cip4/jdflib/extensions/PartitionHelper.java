@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,6 +94,31 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	{
 		super();
 		this.theElement = partition;
+	}
+
+	/**
+	 * @param toCheck
+	 * @return trure if toCheck is an asset (Resource, Paramenter...)
+	 */
+	public static boolean isAsset(final KElement toCheck)
+	{
+		if (toCheck == null)
+			return false;
+		final KElement parent = toCheck.getParentNode_KElement();
+		String setName = SetHelper.getSetName(parent);
+		return toCheck.getLocalName().equals(setName);
+	}
+
+	/**
+	 * @param toCheck
+	 * @return true if toCheck is an explicit resource element (Media, RunList, ...)
+	 */
+	public static boolean isResourceElement(final KElement toCheck)
+	{
+		if (toCheck == null)
+			return false;
+		final KElement parent = toCheck.getParentNode_KElement();
+		return PartitionHelper.isAsset(parent) && new PartitionHelper(parent).getResource() == toCheck;
 	}
 
 	/**

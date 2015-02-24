@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,6 +106,44 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		set.getCreateXPathElement("Resource/Part");
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getSet(), new SetHelper(set));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsAsset()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.setAttribute("Name", "Media");
+		KElement p = set.getCreateXPathElement("Resource/Part");
+		KElement m = set.getCreateXPathElement("Resource/Media");
+		KElement res = root.getXPathElement("ResourceSet/Resource");
+		assertTrue(PartitionHelper.isAsset(res));
+		assertFalse(PartitionHelper.isAsset(m));
+		assertFalse(PartitionHelper.isAsset(p));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testisResourceElement()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.setAttribute("Name", "Media");
+		KElement p = set.getCreateXPathElement("Resource/Part");
+		KElement m = set.getCreateXPathElement("Resource/Media");
+		KElement res = root.getXPathElement("ResourceSet/Resource");
+		assertFalse(PartitionHelper.isResourceElement(res));
+		assertTrue(PartitionHelper.isResourceElement(m));
+		assertFalse(PartitionHelper.isResourceElement(p));
 	}
 
 	/**
