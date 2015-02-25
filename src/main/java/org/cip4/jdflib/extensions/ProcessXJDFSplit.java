@@ -65,7 +65,8 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
- */package org.cip4.jdflib.extensions;
+ */
+package org.cip4.jdflib.extensions;
 
 import java.util.Collection;
 import java.util.Vector;

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -165,7 +165,7 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	final Vector<TaskRunner> queue;
-	boolean stop;
+	int idle;
 	final Log log;
 	MyMutex mutex;
 	int done;
@@ -186,11 +186,12 @@ public class OrderedTaskQueue extends Thread
 		synchronized (theMap)
 		{
 			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
-			if (orderedTaskQueue == null || orderedTaskQueue.stop)
+			if (orderedTaskQueue == null)
 			{
 				orderedTaskQueue = new OrderedTaskQueue(name);
 				theMap.put(name, orderedTaskQueue);
 			}
+			orderedTaskQueue.idle = 0;
 			return orderedTaskQueue;
 		}
 	}
@@ -209,6 +210,7 @@ public class OrderedTaskQueue extends Thread
 		done = 0;
 		sumQueue = 0;
 		sumRun = 0;
+		idle = 0;
 		start();
 	}
 
@@ -239,7 +241,7 @@ public class OrderedTaskQueue extends Thread
 	public void shutDown()
 	{
 		log.info("shutting down ordered queue");
-		stop = true;
+		idle = -1;
 		theMap.remove(getName());
 	}
 
@@ -289,7 +291,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	public boolean queue(Runnable task)
 	{
-		if (stop)
+		if (idle < 0)
 		{
 			log.error("cannot queue task in stopped queue");
 			return false;
@@ -308,7 +310,7 @@ public class OrderedTaskQueue extends Thread
 	@Override
 	public void run()
 	{
-		log.info("starting queue persist loop");
+		log.info("starting ordered task queue loop");
 		while (true)
 		{
 			try
@@ -319,12 +321,16 @@ public class OrderedTaskQueue extends Thread
 			{
 				log.error("whazzup queueing ordered task ", e);
 			}
-			if (stop)
+			if (idle < 0)
 			{
 				log.info("end of ordered task loop");
 				ThreadUtil.notifyAll(mutex);
 				mutex = null;
 				break;
+			}
+			if (idle++ > 42)
+			{
+				shutDown();
 			}
 			if (!ThreadUtil.wait(mutex, 1000000))
 			{
@@ -338,7 +344,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	private void runTasks()
 	{
-		while (!stop)
+		while (idle >= 0)
 		{
 			currentRunning = getFirstTask();
 
@@ -362,6 +368,7 @@ public class OrderedTaskQueue extends Thread
 	 */
 	void runTask(TaskRunner r)
 	{
+		idle = 0;
 		r.run();
 	}
 
@@ -389,7 +396,7 @@ public class OrderedTaskQueue extends Thread
 	@Override
 	public String toString()
 	{
-		return "OrderedTaskQueue " + getName() + " " + stop + " queue: " + queue;
+		return "OrderedTaskQueue " + getName() + " " + idle + " queue: " + queue;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,9 +87,31 @@ public class XMLParserTest extends JDFTestCaseBase
 	{
 		XMLDoc d = new XMLDoc("a*", null);
 		String xml = d.toXML();
-		System.out.print(xml);
 		XMLParser p = new XMLParser();
 		assertNull(p.parseString(xml));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testFatalError()
+	{
+		String xml = "<a>aaa</b>";
+		XMLParser p = new XMLParser();
+		assertNull(p.parseString(xml));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testFatalErrorFile()
+	{
+		XMLParser p = new XMLParser();
+		assertNull(p.parseFile(sm_dirTestData + "corrupt.jdf"));
 	}
 
 	/**

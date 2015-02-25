@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -129,7 +129,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		synchronized (theMap)
 		{
 			OrderedTaskQueue orderedTaskQueue = theMap.get(name);
-			if (!(orderedTaskQueue instanceof MultiTaskQueue) || orderedTaskQueue.stop)
+			if (!(orderedTaskQueue instanceof MultiTaskQueue))
 			{
 				orderedTaskQueue = new MultiTaskQueue(name);
 				theMap.put(name, orderedTaskQueue);
@@ -255,7 +255,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	@Override
 	public String toString()
 	{
-		return "MultiTaskQueue " + getName() + " " + stop + " queue: " + queue;
+		return "MultiTaskQueue " + getName() + " " + idle + " queue: " + queue;
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,7 +79,9 @@ package org.cip4.jdflib.core;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.util.StringUtil;
 import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
 /**
@@ -90,6 +92,7 @@ public class XMLErrorHandler implements ErrorHandler
 
 	private final KElement root;
 	XMLParser parser;
+	InputSource src;
 	private final Log log;
 
 	/**
@@ -101,6 +104,7 @@ public class XMLErrorHandler implements ErrorHandler
 		XMLDoc xmlOutput = new XMLDoc("SchemaValidationOutput", null);
 		root = xmlOutput.getRoot();
 		log = LogFactory.getLog(getClass());
+		src = null;
 	}
 
 	/**
@@ -110,7 +114,7 @@ public class XMLErrorHandler implements ErrorHandler
 	@Override
 	public void warning(final SAXParseException exception)
 	{
-		String warn = exception.getMessage();
+		String warn = getErrorMsg(exception);
 		KElement kEl = root.appendElement("Warning");
 		kEl.setAttribute("Message", warn);
 		parser.m_lastExcept = exception;
@@ -124,8 +128,7 @@ public class XMLErrorHandler implements ErrorHandler
 	@Override
 	public void error(final SAXParseException exception)
 	{
-		// print out all parser errors except undefined variables for non-JDF stuff
-		String er = exception.getMessage();
+		String er = getErrorMsg(exception);
 		parser.m_lastExcept = exception;
 		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
 		{
@@ -142,12 +145,28 @@ public class XMLErrorHandler implements ErrorHandler
 	@Override
 	public void fatalError(final SAXParseException exception)
 	{
-		String er = exception.getMessage();
+		String er = getErrorMsg(exception);
 		KElement kEl = root.appendElement("FatalError");
 		kEl.setAttribute("Message", er);
 		parser.m_lastExcept = exception;
 		log.fatal(er);
 		throw new JDFException("Fatal error in the Parser:" + er);
+	}
+
+	/**
+	 * 
+	 * @param exception
+	 * @return
+	 */
+	private String getErrorMsg(final SAXParseException exception)
+	{
+		String er = exception.getMessage();
+		if (src != null)
+		{
+			String sysID = StringUtil.getNonEmpty(src.getSystemId());
+			er += " src=" + sysID;
+		}
+		return er;
 	}
 
 	/**
@@ -204,7 +223,7 @@ public class XMLErrorHandler implements ErrorHandler
 	@Override
 	public String toString()
 	{
-		return "XMLErrorHandler: " + root;
+		return "XMLErrorHandler: " + root + " input= " + src;
 	}
 
 	/**
@@ -214,5 +233,14 @@ public class XMLErrorHandler implements ErrorHandler
 	public void setParser(XMLParser parser)
 	{
 		this.parser = parser;
+	}
+
+	/**
+	 * 
+	 * @param inSource
+	 */
+	public void setInputSource(InputSource inSource)
+	{
+		src = inSource;
 	}
 }

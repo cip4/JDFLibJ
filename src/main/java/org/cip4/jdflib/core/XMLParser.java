@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -129,6 +129,7 @@ public class XMLParser extends DOMParser
 	 * 
 	 */
 	protected String m_SchemaLocation = null;
+	String inputID;
 
 	/**
 	 * @return the class name
@@ -166,6 +167,7 @@ public class XMLParser extends DOMParser
 	{
 		super();
 		log = LogFactory.getLog(getClass());
+		inputID = null;
 	}
 
 	/**
@@ -185,6 +187,7 @@ public class XMLParser extends DOMParser
 	{
 		this();
 		m_eraseEmpty = parser.m_eraseEmpty;
+		inputID = parser.inputID;
 		initParser(m_SchemaLocation, (XMLErrorHandler) parser.getErrorHandler());
 	}
 
@@ -210,6 +213,7 @@ public class XMLParser extends DOMParser
 		{
 			return null;
 		}
+		inputID = file.getAbsolutePath();
 
 		XMLDoc doc = null;
 		if (file.canRead())
@@ -246,6 +250,9 @@ public class XMLParser extends DOMParser
 			log.error("cannot parse null string");
 			return null;
 		}
+		if (inputID == null)
+			inputID = "String";
+
 		ByteArrayInputStream is;
 		try
 		{
@@ -271,6 +278,8 @@ public class XMLParser extends DOMParser
 		{
 			return null;
 		}
+		if (inputID == null)
+			inputID = "Stream";
 		XMLDoc d = null;
 		if (m_searchStream)
 		{
@@ -327,7 +336,12 @@ public class XMLParser extends DOMParser
 		XMLDoc jdfDoc = null;
 		if (inSource != null)
 		{
+			if (StringUtil.getNonEmpty(inSource.getSystemId()) == null)
+			{
+				inSource.setSystemId(inputID);
+			}
 			initParser(m_SchemaLocation, m_ErrorHandler);
+			m_ErrorHandler.setInputSource(inSource);
 			jdfDoc = runParser(inSource, m_eraseEmpty);
 		}
 
@@ -341,7 +355,7 @@ public class XMLParser extends DOMParser
 	protected void initParser(final String schemaLocation, final XMLErrorHandler errorHandler)
 	{
 		m_SchemaLocation = schemaLocation;
-		m_ErrorHandler = errorHandler;
+		this.setErrorHandler(errorHandler);
 
 		try
 		{
@@ -361,7 +375,6 @@ public class XMLParser extends DOMParser
 			this.setFeature("http://apache.org/xml/features/dom/defer-node-expansion", false);
 			this.setFeature("http://xml.org/sax/features/namespaces", true);
 
-			this.setErrorHandler(errorHandler);
 		}
 		catch (final SAXNotRecognizedException e)
 		{
@@ -430,6 +443,7 @@ public class XMLParser extends DOMParser
 			setDocumentProperties(root, memberDocument, namespaceURI);
 			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
 		}
+		inputID = null;
 		return doc;
 	}
 
@@ -488,6 +502,15 @@ public class XMLParser extends DOMParser
 	public String toString()
 	{
 		return "XMLParser: " + m_SchemaLocation + " " + m_ErrorHandler;
+	}
+
+	/**
+	 * set the input id attribute for error logging
+	 * @param inputID
+	 */
+	public void setInputID(String inputID)
+	{
+		this.inputID = inputID;
 	}
 
 }
