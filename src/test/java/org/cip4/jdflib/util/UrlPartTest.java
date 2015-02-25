@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,6 +94,19 @@ public class UrlPartTest extends JDFTestCaseBase
 		assertTrue(writeToURL.toString().contains("<not buffered>"));
 		writeToURL.buffer();
 		assertFalse(writeToURL.toString().contains("<not buffered>"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetXMLDoc()
+	{
+		if (!isTestNetwork())
+			return;
+		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertNotNull(writeToURL);
+		assertNull(writeToURL.getXMLDoc());
 	}
 
 	/**

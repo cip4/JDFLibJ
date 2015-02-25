@@ -134,7 +134,7 @@ public class XMLErrorHandler implements ErrorHandler
 		{
 			KElement kEl = root.appendElement("Error");
 			kEl.setAttribute("Message", er);
-			log.error(er);
+			log.error("Parser error: " + er);
 		}
 	}
 
@@ -150,7 +150,7 @@ public class XMLErrorHandler implements ErrorHandler
 		kEl.setAttribute("Message", er);
 		parser.m_lastExcept = exception;
 		log.fatal(er);
-		throw new JDFException("Fatal error in the Parser:" + er);
+		throw new JDFException("Fatal error in the Parser: " + er);
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -110,7 +110,7 @@ public class UrlPart implements IPollDetails
 		this.connection = connection;
 		contentType = connection.getContentType();
 		contentLength = connection.getContentLength();
-
+		url = UrlUtil.urlToString(connection.getURL());
 		try
 		{
 			inStream = connection.getInputStream();
@@ -136,6 +136,7 @@ public class UrlPart implements IPollDetails
 		contentType = part.getContentType();
 		connection = null;
 		bufferStream = null;
+		url = part.getFileName();
 		rc = 200;
 	}
 
@@ -151,11 +152,14 @@ public class UrlPart implements IPollDetails
 		{
 			contentLength = 0;
 			contentType = null;
+			url = null;
 		}
 		else
 		{
+
 			contentLength = f.length();
 			contentType = UrlUtil.getMimeTypeFromURL(f.getName());
+			url = f.getAbsolutePath();
 		}
 
 		connection = null;
@@ -207,6 +211,7 @@ public class UrlPart implements IPollDetails
 	 */
 	public long contentLength;
 	private final HttpURLConnection connection;
+	private final String url;
 
 	/**
 	 * returns an xmldoc corresponding to this part
@@ -215,6 +220,7 @@ public class UrlPart implements IPollDetails
 	public XMLDoc getXMLDoc()
 	{
 		final XMLParser p = new XMLParser();
+		p.setInputID(url);
 		final XMLDoc d = p.parseStream(getResponseStream());
 		return d;
 	}
@@ -236,7 +242,7 @@ public class UrlPart implements IPollDetails
 	@Override
 	public String toString()
 	{
-		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + "\n" + ((bufferStream == null) ? " <not buffered>" : bufferStream);
+		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + "URL=" + url + "\n" + ((bufferStream == null) ? " <not buffered>" : bufferStream);
 	}
 
 	/**
