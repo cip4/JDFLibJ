@@ -466,7 +466,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
-	public void testMatches()
+	public void testMatchesSimple()
 	{
 		assertFalse(StringUtil.matchesSimple(null, "(.+ )*(BB)( .+)*"));
 		assertTrue(StringUtil.matchesSimple("a bb c", "(.+ )*(bb)( .+)*"));
@@ -533,6 +533,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matchesSimple("a b", "a b"));
 		assertTrue(StringUtil.matchesSimple("abc123ä", "abc123ä"));
 		assertTrue(StringUtil.matchesSimple("GangBrochureA4", "(Gang)?Bro(.)*"));
+
 	}
 
 	/**
@@ -604,6 +605,11 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
 		assertTrue(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*"));
 		assertFalse(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*5"));
+
+		assertTrue(StringUtil.matches("GangBrochureA4 (1 3~6)", "(.)*\\(([\\d\\s~])+\\)"));
+		assertFalse(StringUtil.matches("GangBrochureA4 (1 3~6", "(.)*\\(([\\d\\s~])+\\)"));
+		assertFalse(StringUtil.matches("GangBrochureA4", "(.)*\\(([\\d\\s~])+\\)"));
+
 	}
 
 	/**
