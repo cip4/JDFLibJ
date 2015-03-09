@@ -100,7 +100,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentName("a1");
-		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("a");
+		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("aname");
 		assertEquals(b2.getAgentName(), "a1");
 		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentName(), "a1");
 	}
@@ -114,7 +114,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	{
 		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentVersion("a1");
-		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("a");
+		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("av");
 		assertEquals(b2.getAgentVersion(), "a1");
 		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentVersion(), "a1");
 	}
