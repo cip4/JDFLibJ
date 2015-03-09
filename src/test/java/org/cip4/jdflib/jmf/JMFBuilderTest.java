@@ -224,7 +224,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		assertEquals(jmf.getSenderID(), "fooBar");
 		b.setSenderID(null);
 		jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		assertEquals(jmf.getSenderID(), "");
 	}
 
 }
