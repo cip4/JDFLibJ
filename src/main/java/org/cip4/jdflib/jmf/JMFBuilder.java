@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -88,6 +89,7 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFMilestone;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * factory for creating JMF messages
@@ -100,6 +102,8 @@ public class JMFBuilder
 {
 	private String acknowledgeURL;
 	private String senderID;
+	private String agentName;
+	private String agentVersion;
 
 	/**
 	 * @return the acknowledgeURL
@@ -124,6 +128,8 @@ public class JMFBuilder
 	{
 		super();
 		acknowledgeURL = null;
+		agentName = JDFAudit.getStaticAgentName();
+		agentVersion = JDFAudit.getStaticAgentVersion();
 		senderID = JDFJMF.getTheSenderID();
 	}
 
@@ -228,8 +234,9 @@ public class JMFBuilder
 				q.setAcknowledgeURL(acknowledgeURL);
 			}
 		}
-		if (senderID != null)
-			jmf.setSenderID(senderID);
+		jmf.setSenderID(senderID);
+		jmf.setAgentName(agentName);
+		jmf.setAgentVersion(agentVersion);
 		return jmf;
 	}
 
@@ -721,6 +728,8 @@ public class JMFBuilder
 		JMFBuilder bNew = new JMFBuilder();
 		bNew.setAcknowledgeURL(getAcknowledgeURL());
 		bNew.setSenderID(getSenderID());
+		bNew.setAgentName(getAgentName());
+		bNew.setAgentVersion(getAgentVersion());
 		return bNew;
 	}
 
@@ -731,6 +740,43 @@ public class JMFBuilder
 	@Override
 	public String toString()
 	{
-		return "JMFBuilder: " + senderID + " AcknowledgeURL:" + acknowledgeURL;
+		return "JMFBuilder [acknowledgeURL=" + acknowledgeURL + ", senderID=" + senderID + ", agentName=" + agentName + ", agentVersion=" + agentVersion + "]";
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getAgentName()
+	{
+		return agentName;
+	}
+
+	/**
+	 * 
+	 * @param agentName
+	 */
+	public void setAgentName(String agentName)
+	{
+		this.agentName = StringUtil.getNonEmpty(agentName);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getAgentVersion()
+	{
+		return agentVersion;
+	}
+
+	/**
+	 * 
+	 * @param agentVersion
+	 */
+	public void setAgentVersion(String agentVersion)
+	{
+		this.agentVersion = StringUtil.getNonEmpty(agentVersion);
+	}
+
 }

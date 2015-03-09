@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,8 +69,10 @@
 package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.Test;
+
 /**
  *  
  * @author rainer prosi
@@ -86,7 +88,35 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	public void testSenderID()
 	{
 		JMFBuilderFactory.setSenderID(getClass(), "s1");
-		Assert.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getSenderID(), "s1");
+		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getSenderID(), "s1");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testAgentName()
+	{
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		b.setAgentName("a1");
+		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("a");
+		assertEquals(b2.getAgentName(), "a1");
+		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentName(), "a1");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testAgentVersion()
+	{
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		b.setAgentVersion("a1");
+		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("a");
+		assertEquals(b2.getAgentVersion(), "a1");
+		assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentVersion(), "a1");
 	}
 
 	/**
@@ -97,7 +127,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	public void testAcknowledgeURL()
 	{
 		JMFBuilderFactory.setAcknowledgeURL(getClass(), "a1");
-		Assert.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getAcknowledgeURL(), "a1");
+		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()).getAcknowledgeURL(), "a1");
 	}
 
 	/**
@@ -107,7 +137,7 @@ public class JMFBuilderFactoryTest extends JDFTestCaseBase
 	@Test
 	public void testSame()
 	{
-		Assert.assertNotNull(JMFBuilderFactory.getJMFBuilder(getClass()));
-		Assert.assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()), JMFBuilderFactory.getJMFBuilder(getClass()));
+		assertNotNull(JMFBuilderFactory.getJMFBuilder(getClass()));
+		assertEquals(JMFBuilderFactory.getJMFBuilder(getClass()), JMFBuilderFactory.getJMFBuilder(getClass()));
 	}
 }

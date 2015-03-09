@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,7 +96,7 @@ public class JMFBuilderFactory
 	}
 
 	/**
-	 * set a senderID for agiven key value
+	 * set a senderID for a given key value
 	 * @param key the key for the map retrieval
 	 * @param senderID the senderID to set
 	 */
@@ -120,6 +120,8 @@ public class JMFBuilderFactory
 
 	/**
 	 * get a JMFBuilder, create it if it has not yet been stored in the map
+	 * new builders are cloned from the null builder, if one exists
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -127,10 +129,19 @@ public class JMFBuilderFactory
 	{
 		if (key == null)
 			key = JMFBuilderFactory.class;
+
 		JMFBuilder b = theBuilders.get(key);
 		if (b == null)
 		{
-			b = new JMFBuilder();
+			b = theBuilders.get(JMFBuilderFactory.class);
+			if (b != null)
+			{
+				b = b.clone();
+			}
+			else
+			{
+				b = new JMFBuilder();
+			}
 			theBuilders.put(key, b);
 		}
 		return b;
@@ -143,5 +154,11 @@ public class JMFBuilderFactory
 	{
 		super();
 		theBuilders = new HashMap<Object, JMFBuilder>();
+	}
+
+	@Override
+	public String toString()
+	{
+		return "JMFBuilderFactory [theBuilders=" + theBuilders + "]";
 	}
 }
