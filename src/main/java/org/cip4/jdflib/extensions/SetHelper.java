@@ -93,7 +93,7 @@ public class SetHelper extends BaseXJDFHelper
 	public enum EnumFamily
 	{
 		Parameter, Resource
-	};
+	}
 
 	/**
 	 * 
