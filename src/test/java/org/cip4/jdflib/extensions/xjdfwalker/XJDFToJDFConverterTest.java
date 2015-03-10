@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
 
@@ -138,6 +139,25 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		assertEquals(sp.getExternalImpositionTemplate().getFileSpec(0).getURL(), "file://foo.xml");
 		assertNull("Layout is zapped", root.getResource(ElementName.LAYOUT, EnumUsage.Input, 0));
+	}
+
+	/**
+	 * check that signame gets automagically inserted below sheetname
+	 */
+	@Test
+	public void testSignatureName()
+	{
+		XJDFHelper h = new XJDFHelper("j1", null, null);
+		SetHelper lh = h.appendParameter(ElementName.LAYOUT, EnumUsage.Input);
+		PartitionHelper ph = lh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
+		ph.setAttribute(AttributeName.DESCRIPTIVENAME, "d1", null);
+		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		JDFDoc docJDF = c.convert(h);
+		JDFNode jdf = docJDF.getJDFRoot();
+		JDFLayout lo = (JDFLayout) jdf.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+		assertNotNull(lo);
+		assertEquals(lo.getPartIDKeys().get(0), AttributeName.SIGNATURENAME);
+
 	}
 
 	/**

@@ -96,7 +96,6 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
-import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
@@ -245,23 +244,10 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		{
 			return null;
 		}
-		xjdf = _xjdf.cloneNewDoc();
-		String docType = xjdf.getLocalName();
-		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
-		if (jdfDoc == null)
-		{
-			String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
-			jdfDoc = new JDFDoc(strDocType);
-			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
-		}
-		xjdf = reparse(xjdf);
-		xjdf.setAttribute(AttributeName.VERSION, version.getName());
-		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
-		new XJDFHelper(xjdf).reorder();
+		boolean isJMF = prepareConvert(_xjdf);
 		if (isJMF)
 		{
-			idMap = new IDFinder().getMap(xjdf);
-			walkTree(xjdf, jdfDoc.getRoot());
+			convertXJMF();
 		}
 		else
 		{
@@ -276,6 +262,38 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			new PostConverter(this, theNode).postConvert();
 		}
 		return jdfDoc;
+	}
+
+	/**
+	 * 
+	 */
+	private void convertXJMF()
+	{
+		idMap = new IDFinder().getMap(xjdf);
+		walkTree(xjdf, jdfDoc.getRoot());
+	}
+
+	/**
+	 * 
+	 * @param _xjdf
+	 * @return
+	 */
+	private boolean prepareConvert(KElement _xjdf)
+	{
+		xjdf = _xjdf.cloneNewDoc();
+		String docType = xjdf.getLocalName();
+		boolean isJMF = ElementName.JMF.equals(docType) || XJDFHelper.XJMF.equals(docType);
+		if (jdfDoc == null)
+		{
+			String strDocType = isJMF ? ElementName.JMF : ElementName.JDF;
+			jdfDoc = new JDFDoc(strDocType);
+			jdfDoc.copyMeta(xjdf.getOwnerDocument_KElement());
+		}
+		xjdf = reparse(xjdf);
+		xjdf.setAttribute(AttributeName.VERSION, version.getName());
+		xjdf.setAttribute(AttributeName.MAXVERSION, version.getName());
+		new XJDFHelper(xjdf).reorder();
+		return isJMF;
 	}
 
 	/**

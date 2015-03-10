@@ -104,7 +104,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	{
 		Vector<VString> newTypes = splitTypes(root);
 		Vector<XJDFHelper> ret = new Vector<XJDFHelper>();
-		if (newTypes != null)
+		if (newTypes != null && newTypes.size() > 0)
 		{
 			for (VString types : newTypes)
 			{
@@ -130,12 +130,18 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	/**
 	 * 
 	 * @param root
-	 * @return
+	 * 
+	 * @return the list of types to split into, null is a flag for no split
 	 */
 	protected Vector<VString> splitTypes(XJDFHelper root)
 	{
 		Vector<VString> ret = new Vector<VString>();
 		VString types = calcTypes(root);
+		if (types == null || types.size() <= 1)
+		{
+			// only one element - no need to split
+			return null;
+		}
 		while (types.size() > 0)
 		{
 			String first = types.get(0);

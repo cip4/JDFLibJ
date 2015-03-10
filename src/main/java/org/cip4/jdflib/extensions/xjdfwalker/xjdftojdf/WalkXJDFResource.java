@@ -186,8 +186,10 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
+	 * ensure that we always have a SIGNATURENAME partition in case we have a SHEETNAME
 	 * 
-	 * @param part
+	 * @param part the partmap
+	 * 
 	 * @return
 	 */
 	JDFAttributeMap getPartMap(final JDFPart part)

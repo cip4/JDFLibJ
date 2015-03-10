@@ -315,7 +315,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	@Override
 	public void setAttribute(String attrib, String value, String nameSpaceURI)
 	{
-		throw new IllegalArgumentException();
+		getRoot().setAttribute(attrib, value, nameSpaceURI);
 	}
 
 	/**
