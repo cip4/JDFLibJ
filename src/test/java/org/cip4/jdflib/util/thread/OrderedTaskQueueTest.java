@@ -151,7 +151,10 @@ public class OrderedTaskQueueTest extends JDFTestCaseBase
 		OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("multi", 3);
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, 1000));
-		ThreadUtil.sleep(10);
+
+		while (q.size() > 7)
+			ThreadUtil.sleep(10);
+
 		assertEquals(q.size(), 7);
 		q.interruptCurrent(1);
 		ThreadUtil.sleep(10);
