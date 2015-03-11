@@ -14,7 +14,7 @@
     <scm>
         <url>https://stash.cip4.org/scm/lib/jdflibj.git</url>
         <developerConnection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</developerConnection>
-        <connection>scm:svn:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
+        <connection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
     </scm>
     <issueManagement>
         <system>JIRA</system>
