@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.jdf</groupId>
 	<artifactId>JDFLibJ</artifactId>
-	<version>2.1.5.80-SNAPSHOT</version>
+	<version>2.1.5.83-SNAPSHOT</version>
 	<name>CIP4 JDF Writer Java</name>
 	<description>CIP4 JDF Library for JDF 1.x</description>
 	<properties>
@@ -14,7 +14,7 @@
     <scm>
         <url>https://stash.cip4.org/scm/lib/jdflibj.git</url>
         <developerConnection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</developerConnection>
-        <connection>scm:svn:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
+        <connection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
     </scm>
     <issueManagement>
         <system>JIRA</system>
@@ -68,19 +68,16 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.13</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
-					<inputEncoding>UTF-8</inputEncoding>
-					<outputEncoding>UTF-8</outputEncoding>
 					<argLine>-Xmx2048M -Dfile.encoding=UTF-8</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
 				<configuration>
 	                <mavenExecutorId>forked-path</mavenExecutorId>
 	                <useReleaseProfile>false</useReleaseProfile>
-	                <arguments>${arguments} -Psonatype-oss-release</arguments>
 	            </configuration>
 			</plugin>
             <plugin>
