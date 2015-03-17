@@ -87,7 +87,6 @@ import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
-import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.w3c.dom.DOMException;
 
 /**
@@ -153,14 +152,14 @@ public class JDFDrop extends JDFAutoDrop
 	 */
 	public void setFromArtDelivery(JDFArtDelivery ad)
 	{
+		if (ad == null)
+			return;
+
+		JDFIntentResource.copyActualToProcess(ad, this, AttributeName.TRANSFER, null);
+		JDFIntentResource.copyActualToProcess(ad, this, ElementName.ARTDELIVERYDATE, AttributeName.REQUIRED);
+
 		JDFDropItem dropItem = appendDropItem();
 		dropItem.setFromArtDelivery(ad);
-		JDFSpanTransfer transferElem = ad.getTransfer();
-		String transfer = transferElem == null ? null : transferElem.guessActual();
-		setAttribute(AttributeName.TRANSFER, transfer);
-
-		String date = JDFIntentResource.guessActual(ad, ElementName.ARTDELIVERYDATE);
-		setAttribute(AttributeName.REQUIRED, date);
 	}
 
 	/**
@@ -179,5 +178,15 @@ public class JDFDrop extends JDFAutoDrop
 		JDFIntentResource.copyActualToProcess(di, this, AttributeName.EARLIEST, null);
 		JDFIntentResource.copyActualToProcess(di, this, AttributeName.REQUIRED, null);
 		//TODO more
+	}
+
+	/**
+	 * 
+	 * @return true if we are an artDeliveryintent rather than a delivery
+	 */
+	public boolean isArtDeliveryIntent()
+	{
+		EnumTransfer transfer = getTransfer();
+		return EnumTransfer.BuyerToPrinterDeliver.equals(transfer) || EnumTransfer.BuyerToPrinterPickup.equals(transfer);
 	}
 }

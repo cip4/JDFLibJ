@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -3285,7 +3285,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		map.put("Run", "Run_100303_102859963_000349");
 		JDFNode n2s = root;
 		CPUTimer ct = new CPUTimer(true);
-		for (int i = 1; i < 100; i++)
+		for (int i = 1; i < 42; i++)
 		{
 			JDFSpawn sp = new JDFSpawn(n2s);
 			VJDFAttributeMap v = new VJDFAttributeMap();
@@ -3298,7 +3298,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			ct.start();
 			root = n2s;
 			n2s = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
-			System.out.println(i + " " + ct);
+			log.info("loop  " + i + ct);
 			ct.stop();
 			if (i == 7)
 			{
@@ -3332,7 +3332,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			JDFNode node = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
 			nodes.add(node);
 			if ((i % 100) == 99)
-				System.out.println(i + " " + ct.toString());
+				log.info(i + " " + ct.toString());
 			ct.stop();
 		}
 		ct = new CPUTimer(false);
@@ -3343,7 +3343,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			m.mergeJDF((JDFNode) nodes.get(i), null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
 			nodes.setElementAt(null, i);
 			if ((i % 100) == 99)
-				System.out.println(i + " " + ct.toString());
+				log.info(i + " " + ct.toString());
 			ct.stop();
 		}
 		root.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "sm_many.jdf", 0, true);
@@ -3368,7 +3368,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			ct.start();
 			JDFMerge m = new JDFMerge(clone);
 			m.mergeJDF(cloneSub, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
-			System.out.println(i + " " + ct.toString());
+			log.info(i + " " + ct.toString());
 			ct.stop();
 		}
 	}
@@ -3440,7 +3440,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// ////////////////////////////////////////////////////////
 	@Test
 	public void testSpawnSheetNeedsSide()
 	{
@@ -3492,8 +3491,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			}
 			else
 			{
-				// this one is bad because there is no hook to link prefix and
-				// ns at time of attribute setting
+				// this one is bad because there is no hook to link prefix and ns at time of attribute setting
 				// 100121 - added fix for this one too
 				r.setAttribute("foo:bar", "test");
 				node.setAttribute("xmlns:foo", "fooNS");

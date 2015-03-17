@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFDrop;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -598,6 +599,82 @@ public class PostXJDFWalker extends BaseElementWalker
 				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));
 			}
 			return intent;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkDeliveryParams extends WalkResourceElement
+	{
+		/**
+		 * 
+		 */
+		public WalkDeliveryParams()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFDeliveryParams;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement delParams = super.walk(xjdf, dummy);
+			if (delParams != null)
+			{
+				Vector<JDFDrop> vDrop = delParams.getChildrenByClass(JDFDrop.class, false, 0);
+				int size = vDrop == null ? 0 : vDrop.size();
+				KElement param = delParams.getParentNode_KElement();
+				KElement set = param == null ? null : param.getParentNode_KElement();
+				if (set != null)
+				{
+					PartitionHelper ph = new PartitionHelper(param);
+					SetHelper sh = new SetHelper(set);
+					JDFAttributeMap partMap = ph.getPartMap();
+					partMap.put(ElementName.DROP, "DROP_0");
+					ph.setPartMap(partMap);
+
+					delParams.removeChildren(ElementName.DROP, null, null);
+					for (int j = 0; j < size; j++)
+					{
+						int i = (j + 1) % size;
+						partMap.put(ElementName.DROP, "DROP_" + i);
+						KElement newDrop;
+						PartitionHelper newParam;
+						if (i != 0)
+						{
+							newParam = sh.getCreatePartition(partMap, true);
+							newDrop = newParam.getResource();
+							newDrop.copyInto(delParams, false);
+						}
+						else
+						{
+							newDrop = delParams;
+							newParam = ph;
+						}
+						newDrop.copyInto(vDrop.get(i), false);
+					}
+				}
+			}
+			return delParams;
 		}
 	}
 

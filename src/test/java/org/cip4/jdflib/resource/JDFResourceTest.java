@@ -471,6 +471,41 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(n.addResource(ElementName.MEDIA, null).isPhysical());
 		assertTrue(n.addResource(ElementName.COMPONENT, null).isPhysical());
 		assertFalse(n.addResource(ElementName.PLACEHOLDERRESOURCE, null).isPhysical());
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
+		JDFMedia media = xm.appendMedia();
+		media.removeAttribute(AttributeName.CLASS);
+		media.setBrand("b1");
+		assertTrue(media.isPhysical());
+		assertFalse(media.isParameter());
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testIsParameter()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		assertTrue(n.addResource(ElementName.STRAPPINGPARAMS, null).isParameter());
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
+		JDFMedia media = xm.appendMedia();
+		media.removeAttribute(AttributeName.CLASS);
+		media.setBrand("b1");
+		assertFalse(media.isParameter());
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testInvalidAttributes()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null);
+		JDFMedia media = xm.appendMedia();
+		media.removeAttribute(AttributeName.CLASS);
+		media.setBrand("b1");
+		assertFalse(media.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Brand"));
 	}
 
 	/**

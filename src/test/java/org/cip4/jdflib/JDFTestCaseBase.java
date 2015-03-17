@@ -106,6 +106,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.logging.LogConfigurator;
 import org.cip4.jdflib.util.net.ProxyUtil;
 import org.cip4.jdflib.util.net.UrlCheck;
+import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -137,7 +138,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	static protected final String sm_dirTestData = getTestDataDir();
-	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_5;
+	static protected final EnumVersion defaultVersion = JDFElement.getDefaultJDFVersion();
 	static protected final String sm_dirTestSchema = sm_dirTestData + "schema" + File.separator + "Version_1_5" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
 
@@ -292,6 +293,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	}
 
 	/**
+	 *  general cleanup after each test
 	 *  
 	 * @see junit.framework.TestCase#tearDown()
 	 */
@@ -300,12 +302,13 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected void tearDown() throws Exception
 	{
 		KElement.setLongID(true);
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
+		JDFElement.setDefaultJDFVersion(defaultVersion);
 		JDFAudit.setStaticAgentName(agentName);
 		JDFAudit.setStaticAgentVersion(agentVersion);
 		JDFAudit.setStaticAuthor(author);
 		JDFNodeInfo.setDefaultWorkStepID(false);
 		DocumentJDFImpl.setStaticStrictNSCheck(true);
+		RegularJanitor.feierabend();
 	}
 
 	/**

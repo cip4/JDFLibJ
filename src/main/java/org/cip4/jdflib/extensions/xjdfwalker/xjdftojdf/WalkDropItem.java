@@ -66,49 +66,46 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 
 /**
- * 
- * move deliveryintent to product
- * TODO move to deliveryparams for complex cases
- * 
- * @author rainer prosi
- * @date Jun 24, 2014
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDeliveryIntentResLink extends WalkResLink
+public class WalkDropItem extends WalkXElement
 {
-
 	/**
 	 * 
 	 */
-	public WalkDeliveryIntentResLink()
+	public WalkDropItem()
 	{
 		super();
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 * 
-	 * currently we simply skip it
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+	 * @param toCheck
+	 * @return true if it matches
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public boolean matches(final KElement toCheck)
 	{
-		return null;
+		return toCheck instanceof JDFDropItem;
 	}
 
 	/**
 	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	protected String getRefName(final String val)
 	{
-		return super.matches(toCheck) && "DeliveryIntentLink".equals(toCheck.getLocalName());
+		if ("ProductRef".equals(val))
+		{
+			return "ComponentRef";
+		}
+		return super.getRefName(val);
 	}
-
 }

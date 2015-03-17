@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
+import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.Test;
@@ -201,6 +202,23 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(di);
 		assertEquals(JDFIntentResource.guessActual(di, "Overage"), "50");
 		assertEquals(JDFIntentResource.guessActual(di, "Underage"), "25");
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testDeliveryIntent()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest().testDeliveryIntent();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		assertNull(dp);
+		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		assertNotNull(di.getDropIntent(1));
 	}
 
 	/**

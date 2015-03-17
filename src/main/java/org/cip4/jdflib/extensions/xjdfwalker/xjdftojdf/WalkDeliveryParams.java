@@ -66,24 +66,28 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+
+import java.util.Iterator;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.process.JDFContainer;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * take a container/FileSpec(Ref) and convert it into a ContainerRef
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements
+ * TODO unmerge stripping and binderysignature and signaturecell see WalkRunList
  */
-public class WalkContainer extends WalkJDFElement
+public class WalkDeliveryParams extends WalkStrippingParams
 {
 	/**
 	 * 
 	 */
-	public WalkContainer()
+	public WalkDeliveryParams()
 	{
 		super();
 	}
@@ -96,26 +100,51 @@ public class WalkContainer extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFContainer;
+		return toCheck instanceof JDFDeliveryParams;
+	}
+
+	private boolean moveToDrop(final KElement xjdfDeliveryParams, final KElement jdfDeliveryParams)
+	{
+		JDFDrop drop = ((JDFDeliveryParams) xjdfDeliveryParams).appendDrop();
+		final VString vAtt = drop.knownAttributes();
+		final JDFAttributeMap map = xjdfDeliveryParams.getAttributeMap();
+		final Iterator<String> it = map.getKeyIterator();
+		boolean foundSome = false;
+		while (it.hasNext())
+		{
+			final String s = it.next();
+			if (vAtt.contains(s))
+			{
+				drop.setAttribute(s, map.get(s));
+				xjdfDeliveryParams.removeAttribute(s);
+				foundSome = true;
+			}
+		}
+		final VString dropKnown = drop.knownElements();
+		final VElement vMyElm = xjdfDeliveryParams.getChildElementVector_KElement(null, null, null, true, 0);
+		for (KElement myElm : vMyElm)
+		{
+			String localName = myElm.getLocalName();
+			if (dropKnown.contains(localName) || localName.endsWith("Ref") && dropKnown.contains(StringUtil.leftStr(localName, -3)))
+			{
+				drop.moveElement(myElm, null);
+				foundSome = true;
+			}
+		}
+		if (!foundSome)
+			drop.deleteNode();
+		return foundSome;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement xjdfDelParams, KElement jdfDelParams)
 	{
-		final JDFContainer cont = (JDFContainer) jdf;
-		final JDFFileSpec fileSpec = cont.getFileSpec();
-		if (fileSpec != null)
-		{
-			fileSpec.makeRootResource(null, null, true);
-			final VElement v = setResource(null, fileSpec, jdfToXJDF.newRoot);
-			if (v != null && v.size() == 1)
-			{
-				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
-			}
-		}
-		return null;
+		moveToDrop(xjdfDelParams, jdfDelParams);
+		KElement walk = super.walk(xjdfDelParams, jdfDelParams);
+		return walk;
 	}
+
 }

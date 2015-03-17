@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,8 +76,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.span.JDFSpanTransfer;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
@@ -90,13 +90,13 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 	public void testGuessActualStatic()
 	{
 		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
-		Assert.assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
+		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
 		JDFSpanTransfer transfer = di.appendTransfer();
-		Assert.assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
+		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
 		transfer.setPreferred(EnumTransfer.BuyerToPrinterDeliver);
-		Assert.assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.getName());
+		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.getName());
 		transfer.setActual(EnumTransfer.BuyerToPrinterPickup);
-		Assert.assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterPickup.getName());
+		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterPickup.getName());
 	}
 
 	/**
@@ -109,12 +109,26 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
 		JDFSpanTransfer transfer = di.appendTransfer();
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
-		Assert.assertNull(dp.getTransfer());
+		assertNull(dp.getTransfer());
 		transfer.setPreferred(EnumTransfer.BuyerToPrinterDeliver);
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
-		Assert.assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterDeliver.getName());
+		assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterDeliver.getName());
 		transfer.setActual(EnumTransfer.BuyerToPrinterPickup);
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
-		Assert.assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterPickup.getName());
+		assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterPickup.getName());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCopyProcessStatic()
+	{
+		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
+		dp.setTransfer(EnumTransfer.BuyerToPrinterDeliver);
+		assertNull(di.getTransfer());
+		JDFIntentResource.copyProcessToActual(dp, di, null, AttributeName.TRANSFER);
+		assertEquals(EnumTransfer.BuyerToPrinterDeliver.getName(), di.getTransfer().getActual().getName());
 	}
 }

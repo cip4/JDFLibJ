@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,12 +75,19 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.junit.Test;
 
@@ -104,6 +111,34 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xm.appendMedia().setMediaSetCount(42);
 		KElement xjdf = conv.convert(n);
 		assertNotNull(new XJDFHelper(xjdf).getSet("Media", 0));
+	}
+
+	/**
+	*
+	 */
+	@Test
+	public KElement testDeliveryIntent()
+	{
+		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		JDFDeliveryIntent di = (JDFDeliveryIntent) nP.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		final JDFComponent c = (JDFComponent) nP.addResource("Component", EnumUsage.Output);
+		nP.getLink(c, null).setAmount(66);
+		JDFDropItemIntent dropItemIntent = di.appendDropIntent().appendDropItemIntent();
+		dropItemIntent.refComponent(c);
+		dropItemIntent.setAmount(42);
+		JDFDropItemIntent dropItemIntent2 = di.appendDropIntent().appendDropItemIntent();
+		dropItemIntent2.refComponent(c);
+		dropItemIntent2.setAmount(63);
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		KElement xjdf = xjdf20.makeNewJDF(nP, null);
+		xjdf.write2File(sm_dirTestDataTemp + "delTest2.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/DeliveryParams/DropItem/@Amount", null), "42");
+		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter[2]/DeliveryParams/DropItem/@Amount", null), "63");
+		return xjdf;
 	}
 
 	/**
@@ -158,6 +193,32 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		XJDFHelper h2 = new XJDFHelper(newRoot);
 		assertEquals(h2.numProductHelpers(true), 2);
 		assertEquals(h2.numProductHelpers(false), 6);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPipeJMF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/PipeParams/@Operation", null), "PipeClose");
+		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
+		xjmf = conv.makeNewJMF(jmfResp);
+		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	protected void tearDown() throws Exception
+	{
+		XJMFTypeMap.shutDown();
+		super.tearDown();
 	}
 
 }

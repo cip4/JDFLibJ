@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.junit.Test;
 
 /**
@@ -161,5 +162,20 @@ public class PartitionHelperTest extends JDFTestCaseBase
 		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
 		ph.cleanUp();
 		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute("ID", null, null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testSetPartMap()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		JDFAttributeMap map = new JDFAttributeMap("Drop", "D1");
+		ph.setPartMap(map);
+		assertEquals(ph.getPartMap(), map);
 	}
 }

@@ -2268,7 +2268,9 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isQuantity()
 	{
-		final EnumResourceClass c = getResourceClass();
+		EnumResourceClass c = getValidClass();
+		if (c == null)
+			c = getResourceClass();
 		return c.equals(EnumResourceClass.Quantity) || c.equals(EnumResourceClass.Consumable);
 	}
 
@@ -2279,7 +2281,10 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isParameter()
 	{
-		return EnumResourceClass.Parameter.equals(getResourceClass());
+		EnumResourceClass c = getValidClass();
+		if (c == null)
+			c = getResourceClass();
+		return EnumResourceClass.Parameter.equals(c);
 	}
 
 	/**
@@ -2322,8 +2327,9 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isPhysical()
 	{
-		final EnumResourceClass c = getResourceClass();
-
+		EnumResourceClass c = getValidClass();
+		if (c == null)
+			c = getResourceClass();
 		return EnumResourceClass.Consumable.equals(c) || EnumResourceClass.Quantity.equals(c) || EnumResourceClass.Handling.equals(c);
 	}
 

@@ -124,7 +124,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 					}
 				}
 
-				final VElement vR = jdfToXJDF.setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
+				final VElement vR = setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
 				final KElement phaseAmount = xjdf.appendElement("PhaseAmount");
 				JDFAttributeMap commonMap = partsResLink.getCommonMap();
 				for (KElement res : vR)
@@ -133,7 +133,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 					if (resParts.overlapsMap(partsResLink))
 					{
 						phaseAmount.appendAttribute("rRef", res.getAttribute(AttributeName.ID), null, " ", true);
-						jdfToXJDF.setAmountPool(rl, phaseAmount, commonMap);
+						setAmountPool(rl, phaseAmount, commonMap);
 						for (String extension : new String[] { "", "Good", "Waste" })
 						{
 							phaseAmount.removeAttribute(AttributeName.AMOUNT + extension);

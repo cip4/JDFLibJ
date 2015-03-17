@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -102,9 +102,12 @@ public class WalkMessage extends WalkJDFElement
 		return super.walk(jdf, xjdf);
 	}
 
+	/**
+	 * 
+	 * @param m
+	 */
 	void makeTypesafe(JDFMessage m)
 	{
-		String type = getMessageType(m);
 		EnumFamily family = getNewFamily(m);
 		if (family == null)
 		{
@@ -112,10 +115,26 @@ public class WalkMessage extends WalkJDFElement
 		}
 		else
 		{
-			m.renameElement(family.getName() + type, null);
+			String type = getMessageType(m);
+			m.renameElement(getFamilyName(family) + type, null);
 		}
 	}
 
+	/**
+	 * 
+	 * @param family
+	 * @return
+	 */
+	String getFamilyName(EnumFamily family)
+	{
+		return family.getName();
+	}
+
+	/**
+	 * 
+	 * @param m
+	 * @return
+	 */
 	String getMessageType(JDFMessage m)
 	{
 		String type = m.getType();
@@ -141,6 +160,10 @@ public class WalkMessage extends WalkJDFElement
 		return family;
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 */
 	@Override
 	protected void removeUnused(final KElement newRootP)
 	{

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -358,6 +359,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	public void testMappingSelection()
 	{
+		elem.setVersion(EnumVersion.Version_1_5);
 		colControl.setMappingSelection(EnumMappingSelection.UseLocalPrinterValues);
 		assertEquals(colControl.getMappingSelection(), EnumMappingSelection.UseLocalPrinterValues);
 		checkSchema(colControl, EnumValidationLevel.Incomplete);
@@ -371,6 +373,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	public void testInternalColorModel() throws SAXException, IOException
 	{
+		elem.setVersion(EnumVersion.Version_1_5);
 		colControl.setInternalColorModel(EnumInternalColorModel.Enhanced);
 		assertEquals(colControl.getInternalColorModel(), EnumInternalColorModel.Enhanced);
 		checkSchema(colControl, EnumValidationLevel.Incomplete);

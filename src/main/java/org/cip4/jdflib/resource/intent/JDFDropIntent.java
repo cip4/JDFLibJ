@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFDrop;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanSurplusHandling;
 import org.cip4.jdflib.span.JDFSpanTransfer;
@@ -326,6 +328,25 @@ public class JDFDropIntent extends JDFAutoDropIntent
 			di.refComponent(c);
 		}
 		return di;
+	}
+
+	/**
+	 * 
+	 * @param dropIntent
+	 */
+	public void setFromDrop(JDFDrop drop)
+	{
+		Vector<JDFDropItem> vdi = drop.getChildrenByClass(JDFDropItem.class, false, 0);
+		for (JDFDropItem dropItem : vdi)
+		{
+			JDFDropItemIntent dropItemIntent = appendDropItemIntent();
+			dropItemIntent.setFromDropItem(dropItem);
+		}
+
+		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.METHOD);
+		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.EARLIEST);
+		JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.REQUIRED);
+		//TODO more
 	}
 
 } // class JDFIDPLayout

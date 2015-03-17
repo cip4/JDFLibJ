@@ -77,9 +77,11 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
@@ -189,6 +191,7 @@ public class WalkProduct extends WalkJDF
 			{
 				new ProductHelper(prod).setRoot();
 			}
+			jdfToXJDF.putComponentProduct(component.getID(), prod.getID());
 		}
 		return true;
 	}
@@ -201,11 +204,11 @@ public class WalkProduct extends WalkJDF
 	private KElement walkProduct(final KElement jdf, final KElement xjdf)
 	{
 		final JDFNode node = (JDFNode) jdf;
-		final KElement pList = xjdf.getCreateElement(ProductHelper.PRODUCTLIST);
 
-		final KElement prod = pList.appendElement("Product");
+		final KElement prod = new XJDFHelper(xjdf).appendProduct().getProduct();
 		if (readComponent(node, prod))
 		{
+			String id = StringUtil.getNonEmpty(prod.getID());
 			prod.setAttributes(jdf);
 			prod.removeAttribute(AttributeName.TYPE);
 			prod.removeAttribute(AttributeName.ACTIVATION);
@@ -219,6 +222,8 @@ public class WalkProduct extends WalkJDF
 			prod.removeAttribute(AttributeName.JOBID);
 			prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
 			prod.removeAttribute("xmlns:xsi");
+			if (id != null)
+				prod.setID(id);
 			calcChildren(node, prod);
 			return prod;
 		}

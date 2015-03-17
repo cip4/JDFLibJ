@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -97,7 +97,7 @@ public class WalkColorPoolRef extends WalkRefElement
 	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
 		final String attName = getRefName(re);
-		final VElement v = this.jdfToXJDF.setResource(null, re.getTarget(), this.jdfToXJDF.newRoot);
+		final VElement v = setResource(null, re.getTarget(), jdfToXJDF.newRoot);
 		// we want a ref to the set rather than the standard ref to the list of elements
 		if (v != null && v.size() > 0)
 		{
@@ -126,18 +126,18 @@ public class WalkColorPoolRef extends WalkRefElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFRefElement refElem = (JDFRefElement) jdf;
-		final JDFResource r = refElem.getTargetRoot();
-		if (r != null)
+		final JDFResource colorPool = refElem.getTargetRoot();
+		if (colorPool != null)
 		{
-			final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+			final VElement v = colorPool.getChildElementVector(ElementName.COLOR, null);
 			for (int i = 0; i < v.size(); i++)
 			{
 				v.get(i).renameAttribute("Name", "Separation", null, null);
 			}
-			KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
-			cNew.copyInto(r, true);
-			r.deleteNode();
-			cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			KElement newColorRes = colorPool.getParentNode_KElement().appendElement(ElementName.COLOR);
+			newColorRes.copyInto(colorPool, true);
+			colorPool.deleteNode();
+			newColorRes.setAttribute(AttributeName.PARTIDKEYS, "Separation");
 			refElem.renameElement("ColorRef", null);
 		}
 		return super.walk(jdf, xjdf);

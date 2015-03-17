@@ -106,11 +106,11 @@ public class WalkResourceInfo extends WalkJDFElement
 				final JDFResource r = (JDFResource) e;
 				if (nRes == 0)
 				{
-					jdfToXJDF.setResource(ri, r, eNew);
+					setResource(ri, r, eNew);
 				}
 				else
 				{
-					jdfToXJDF.setResource(null, r, eNew);
+					setResource(null, r, eNew);
 				}
 				r.deleteNode();
 				nRes++;

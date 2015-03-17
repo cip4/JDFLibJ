@@ -73,8 +73,10 @@ import java.util.Vector;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
@@ -83,6 +85,9 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -125,6 +130,7 @@ class PostConverter
 		{
 			xjdfToJDFImpl.mergeProductLinks(theNode, root);
 		}
+		fixDelivery();
 		cleanResources();
 		fixDependencies(root);
 		new UnLinkFinder().eraseUnlinked(root);
@@ -134,6 +140,31 @@ class PostConverter
 		fixNS.walk(root);
 		RemoveEmpty re = new RemoveEmpty();
 		re.removEmpty(root);
+	}
+
+	/**
+	 * move stuff from delivery params to deliveryintent and or artdeliveryintent
+	 */
+	private void fixDelivery()
+	{
+		JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		VString allTypes = theNode.getAllTypes();
+		if (dp != null && allTypes.contains("Product"))
+		{
+			boolean keepDI = theNode.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0) != null;
+			JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+			keepDI = di.setFromDeliveryParams(dp) || keepDI;
+			if (!keepDI)
+				di.deleteNode();
+
+			boolean keepADI = theNode.getResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0) != null;
+			JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) theNode.getCreateResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0);
+			keepADI = adi.setFromDeliveryParams(dp) || keepADI;
+			if (!keepADI)
+				adi.deleteNode();
+
+			dp.deleteNode();
+		}
 	}
 
 	/**
@@ -290,5 +321,11 @@ class PostConverter
 			}
 		}
 
+	}
+
+	@Override
+	public String toString()
+	{
+		return "PostConverter [theNode=" + theNode + "]";
 	}
 }

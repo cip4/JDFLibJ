@@ -140,6 +140,26 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 	}
 
 	/**
+	 * convenience to get the partmap of the first (and typically only) part element
+	 * @return one non-null part element that may be empty
+	 */
+	public JDFAttributeMap getPartMap()
+	{
+		JDFPart part = (JDFPart) theElement.getElement(ElementName.PART);
+		return part == null ? new JDFAttributeMap() : part.getAttributeMap();
+	}
+
+	/**
+	 * 
+	 * @param map the partmap to set the part element
+	 */
+	public void setPartMap(JDFAttributeMap map)
+	{
+		JDFPart part = (JDFPart) theElement.getCreateElement(ElementName.PART);
+		part.setAttributes(map);
+	}
+
+	/**
 	 * @param map
 	 * @return
 	 */

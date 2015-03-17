@@ -6296,7 +6296,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public VString getAllTypes()
 	{
-		VString vs = null;
+		VString vs = new VString();
 		final String myType = getType();
 		if (myType.equals(JDFConstants.PRODUCT))
 		{
@@ -6317,28 +6317,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				final VString allTypes = node.getAllTypes();
 				if (allTypes != null)
 				{
-					if (vs == null)
-					{
-						vs = allTypes;
-					}
-					else
-					{
-						vs.addAll(allTypes);
-					}
+					vs.addAll(allTypes);
 				}
 			}
 			if (vsTypes != null) // grey box or simple type
 			{
-				if (vs != null)
-				{
-					vs.addAll(vsTypes);
-				}
-				else
-				{
-					vs = vsTypes;// __Lena__ May contain GrayBoxes
-				}
+				vs.addAll(vsTypes);
 			}
-
 		}
 		else
 		{

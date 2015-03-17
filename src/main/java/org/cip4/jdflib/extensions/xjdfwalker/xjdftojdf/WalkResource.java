@@ -108,4 +108,5 @@ public class WalkResource extends WalkXElement
 		// test on grandparent
 		return super.matches(toCheck) && PartitionHelper.isResourceElement(toCheck);
 	}
+
 }

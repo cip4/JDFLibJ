@@ -191,4 +191,19 @@ public class WalkLayout extends WalkStrippingParams
 		KElement walk = super.walk(xjdfLayout, jdfLayout);
 		return walk;
 	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 */
+	@Override
+	protected String getRefName(final String val)
+	{
+		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		{
+			return "MediaRef";
+		}
+		return super.getRefName(val);
+	}
+
 }

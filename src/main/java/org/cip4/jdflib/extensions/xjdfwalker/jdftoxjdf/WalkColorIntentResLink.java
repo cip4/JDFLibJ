@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -101,7 +101,7 @@ public class WalkColorIntentResLink extends WalkResLink
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	VElement setResource(JDFResourceLink rl, JDFResource linkTarget, KElement xjdf)
+	protected VElement setResource(JDFElement rl, JDFResource linkTarget, KElement xjdf)
 	{
 		VElement v = super.setResource(rl, linkTarget, xjdf);
 		VString frontBack = new VString("ColorsUsed Coatings ColorStandard Coverage", null);

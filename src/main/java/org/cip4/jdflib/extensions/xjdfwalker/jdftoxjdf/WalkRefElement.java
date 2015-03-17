@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -111,13 +112,28 @@ public class WalkRefElement extends WalkJDFElement
 			{
 				//nop
 			}
-			return null;
+		}
+		else if (isProduct(refElem))
+		{
+			refProduct(refElem, xjdf);
 		}
 		else
 		{
 			makeRefAttribute(refElem, xjdf);
-			return null;
 		}
+		return null;
+	}
+
+	private void refProduct(JDFRefElement refElem, KElement xjdf)
+	{
+		final String attName = ProductHelper.PRODUCT + "Ref";
+		final String id = jdfToXJDF.getProduct(refElem.getrRef());
+		xjdf.appendAttribute(attName, id, null, " ", true);
+	}
+
+	private boolean isProduct(JDFRefElement refElem)
+	{
+		return jdfToXJDF.getProduct(refElem.getrRef()) != null;
 	}
 
 	/**
@@ -128,13 +144,13 @@ public class WalkRefElement extends WalkJDFElement
 	{
 		final JDFResource target = re.getTarget();
 		final JDFResourceLink rl = getLinkForRef(re, target);
-		final VElement v = jdfToXJDF.setResource(rl, target, getRefRoot(xjdf));
+		final VElement v = setResource(rl, target, getRefRoot(xjdf));
 		if (v != null)
 		{
 			final String attName = getRefName(re);
 			for (KElement ref : v)
 			{
-				xjdf.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
+				xjdf.appendAttribute(attName, ref.getID(), null, " ", true);
 			}
 		}
 		re.deleteNode();

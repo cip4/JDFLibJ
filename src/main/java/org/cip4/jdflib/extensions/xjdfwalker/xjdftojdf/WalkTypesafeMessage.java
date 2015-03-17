@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,7 +90,6 @@ public class WalkTypesafeMessage extends WalkXElement
 		super();
 	}
 
-	// ///////////////////////////////////////////////////////////////////////////////
 	/**
 	 * @param e
 	 * @return true if must continue
@@ -98,18 +97,31 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		String localName = e.getLocalName();
+		String messageName = e.getLocalName();
 		List<String> families = EnumFamily.getFamilies();
 		for (String family : families)
 		{
-			if (localName.startsWith(family))
+			if (messageName.startsWith(family))
 			{
-				String type = StringUtil.rightStr(localName, -family.length());
+				String type = getMessageType(e, messageName, family);
 				e.renameElement(family, null);
 				e.setAttribute(AttributeName.TYPE, type);
 			}
 		}
 		return super.walk(e, trackElem);
+	}
+
+	/**
+	 * 
+	 * @param e the element - needed for subclasses
+	 * @param messageName
+	 * @param family
+	 * @return
+	 */
+	String getMessageType(KElement e, String messageName, String family)
+	{
+		String type = StringUtil.rightStr(messageName, -family.length());
+		return type;
 	}
 
 	/**

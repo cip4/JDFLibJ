@@ -69,11 +69,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
@@ -84,7 +86,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkDevcapElement extends WalkElement
+public class WalkDevcapElement extends WalkJDFElement
 {
 
 	/**
@@ -156,6 +158,27 @@ public class WalkDevcapElement extends WalkElement
 		return v;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param name
+	 * @return
+	 */
+	protected String getClassName(final String name)
+	{
+		if (name == null)
+			return null;
+		KElement e = new JDFDoc(name).getRoot();
+
+		String className = (e instanceof JDFResource) ? jdfToXJDF.getClassName((JDFResource) e) : null;
+		return className;
+	}
+
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public String modifyXPath(String s)
 	{
 		VString vs = StringUtil.tokenize(s, "/", false);
@@ -185,7 +208,7 @@ public class WalkDevcapElement extends WalkElement
 				if (vs.size() == 3)
 				{
 					String name = vs.get(2);
-					className = this.jdfToXJDF.getClassName(name);
+					className = getClassName(name);
 					if (className != null)
 					{
 						if ("Intent".equals(className))

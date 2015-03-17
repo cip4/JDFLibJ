@@ -69,8 +69,12 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -99,9 +103,15 @@ public class WalkModifyQueueEntry extends WalkMessage
 		JDFQueueEntryDef queueEntryDef = m.getQueueEntryDef(0);
 		String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
 		super.makeTypesafe(m);
-		KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
-		modifyParams.setAttribute(AttributeName.OPERATION, StringUtil.leftStr(originalType, -10)); //-10 = queueentry.size()
-		modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
+		if ((m instanceof JDFQuery) || (m instanceof JDFCommand))
+		{
+			String id = m.getID();
+			XJMFTypeMap.getMap().put(id, originalType);
+			KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
+			modifyParams.setAttribute(AttributeName.OPERATION, StringUtil.leftStr(originalType, -10)); //-10 = queueentry.size()
+			modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
+			m.removeChild(ElementName.QUEUEENTRYDEF, null, 0);
+		}
 	}
 
 	/**
@@ -120,7 +130,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 	@Override
 	public boolean matches(KElement toCheck)
 	{
-		return super.matches(toCheck) && isModifyQE(toCheck.getAttribute(AttributeName.TYPE));
+		return super.matches(toCheck) && isPipeControl(toCheck.getAttribute(AttributeName.TYPE));
 	}
 
 	/**
@@ -128,7 +138,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 	 * @param type
 	 * @return
 	 */
-	boolean isModifyQE(String type)
+	boolean isPipeControl(String type)
 	{
 		return StringUtil.hasToken("AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
 	}

@@ -73,11 +73,16 @@ import java.util.HashSet;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -115,9 +120,8 @@ public class WalkJDFElement extends WalkElement
 	private void makeRefElements(final JDFElement je)
 	{
 		final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
-		for (int i = 0; i < v.size(); i++)
+		for (KElement e : v)
 		{
-			final KElement e = v.get(i);
 			if (e instanceof JDFResource)
 			{
 				final JDFResource r = (JDFResource) e;
@@ -185,21 +189,21 @@ public class WalkJDFElement extends WalkElement
 	private JDFResource removeDuplicateRefs(JDFResource r, final JDFResourcePool prevPool)
 	{
 		final JDFAttributeMap m = r.getAttributeMap();
-		m.remove("ID");
-		final VElement prevs = prevPool.getChildrenByTagName(r.getNodeName(), null, m, true, true, 0);
+		m.remove(AttributeName.ID);
+		final VElement prevs = prevPool.getChildrenByTagName(jdfToXJDF.getSetName(r), null, m, true, true, 0);
 		if (prevs != null)
 		{
-			for (int j = 0; j < prevs.size(); j++)
+			for (KElement e : prevs)
 			{
-				final JDFResource prev = (JDFResource) prevs.get(j);
+				final JDFResource prev = (JDFResource) e;
 				if (r == prev)
 				{
 					continue;
 				}
 				final String pid = prev.getID();
 				final String rid = r.getID();
-				prev.removeAttribute("ID"); // for comparing
-				r.removeAttribute("ID");
+				prev.removeAttribute(AttributeName.ID); // for comparing
+				r.removeAttribute(AttributeName.ID);
 				if (r.isEqual(prev)) // found duplicate - remove and ref the original
 				{
 					r.deleteNode();
@@ -322,4 +326,180 @@ public class WalkJDFElement extends WalkElement
 		newRootP.removeAttribute(AttributeName.SPAWNID);
 		super.removeUnused(newRootP);
 	}
+
+	/**
+	 * @param rl the refelement or reslink
+	 * @param linkTarget
+	 * @param xRoot
+	 * @return the vector of partitions
+	 */
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
+	{
+		final String className = jdfToXJDF.getClassName(linkTarget);
+		if (className == null || xRoot == null)
+		{
+			return null;
+		}
+		linkTarget.expand(false);
+
+		final String resID = linkTarget.getID();
+		KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
+		if (resourceSet == null)
+		{
+			resourceSet = xRoot.appendElement(className + SetHelper.SET);
+			resourceSet.setID(linkTarget.getID());
+		}
+
+		// TODO what if we have resources used as in and out in the same node?
+		setSetAttributes(resourceSet, rl, linkTarget);
+		int nLeaves = resourceSet.numChildElements(className, null);
+		final VElement vRes = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
+
+		final VElement v = new VElement();
+		for (KElement e : vRes)
+		{
+			final JDFResource r = (JDFResource) e;
+			final VElement vLeaves = r.getLeaves(false);
+			for (KElement eLeaf : vLeaves)
+			{
+				final JDFResource leaf = (JDFResource) eLeaf;
+				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
+				final int nn = resourceSet.numChildElements(className, null);
+				if (nn > nLeaves)
+				{
+					nLeaves = nn;
+					jdfToXJDF.walkTree(leaf, newBaseRes);
+				}
+				v.add(newBaseRes);
+			}
+		}
+		return v;
+	}
+
+	/**
+	 * @param rl 
+	 * @param r 
+	 * @param xjdfSet 
+	 * @return 
+	 * 
+	 */
+	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
+	{
+		final JDFAttributeMap map = r.getPartMap();
+		SetHelper sh = new SetHelper(xjdfSet);
+		KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
+		setLeafAttributes(r, rl, newLeaf);
+		return newLeaf;
+	}
+
+	/**
+	 * @param leaf
+	 * @param rl 
+	 * @param newLeaf
+	 */
+	protected void setLeafAttributes(final JDFResource leaf, final JDFElement rl, final KElement newLeaf)
+	{
+		final JDFAttributeMap partMap = leaf.getPartMap();
+		// JDFAttributeMap attMap=leaf.getAttributeMap();
+		// attMap.remove("ID");
+		setAmountPool(rl, newLeaf, partMap);
+
+		// retain spawn information
+		if (jdfToXJDF.bRetainSpawnInfo && leaf.hasAttribute(AttributeName.SPAWNIDS))
+		{
+			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(jdfToXJDF.m_spawnInfo, null, 0);
+			final KElement spawnID = spawnInfo.appendElement("SpawnID");
+			spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
+			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
+			spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
+		}
+	}
+
+	/**
+	 * 
+	 *  
+	 * @param rl
+	 * @param newLeaf
+	 * @param partMap
+	 */
+	protected void setAmountPool(final JDFElement rl, final KElement newLeaf, final JDFAttributeMap partMap)
+	{
+		if (rl == null)
+		{
+			return;
+		}
+		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
+		if (ap == null)
+		{
+			JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(JDFToXJDF.amountAttribs);
+			if (amounts.size() > 0)
+			{
+				ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
+				for (String key : amounts.keySet())
+				{
+					ap.setPartAttribute(key, amounts.get(key), null, partMap);
+					rl.removeAttribute(key);
+				}
+			}
+		}
+		else
+		{
+			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
+			if (vPartAmounts != null && vPartAmounts.size() > 0)
+			{
+				ap = (JDFAmountPool) newLeaf.getCreateElement(ElementName.AMOUNTPOOL);
+				for (KElement e : vPartAmounts)
+				{
+					JDFPartAmount pa = (JDFPartAmount) e;
+					JDFPartAmount paNew = ap.getCreatePartAmount(pa.getPartMapVector());
+					paNew.setAttributes(pa);
+				}
+			}
+		}
+	}
+
+	/**
+	 * set the attributes of the set based on the resource and resourcelink
+	 * 
+	 * @param resourceSet
+	 * @param rl
+	 * @param linkRoot
+	 */
+	protected void setSetAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
+	{
+		resourceSet.setAttribute("Name", jdfToXJDF.getSetName(linkRoot));
+		resourceSet.setAttributes(rl);
+		//TODO orientation + coordinate system stuff
+		resourceSet.removeAttribute(AttributeName.RREF);
+		resourceSet.removeAttribute(AttributeName.RSUBREF);
+		resourceSet.removeAttribute(AttributeName.AMOUNT);
+		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
+		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
+		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+
+		if (rl instanceof JDFResourceLink)
+		{
+			final JDFResourceLink resLink = (JDFResourceLink) rl;
+			final JDFNode rootIn = resLink.getJDFRoot();
+
+			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, AttributeName.ID, null, resLink.getrRef(), 0, false);
+			if (resInRoot != null)
+			{
+				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+				if (vCreators != null)
+				{
+					final int size = vCreators.size();
+					for (int i = 0; i < size; i++)
+					{
+						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
+						final KElement dependent = resourceSet.appendElement("Dependent");
+						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+					}
+				}
+			}
+		}
+	}
+
 }

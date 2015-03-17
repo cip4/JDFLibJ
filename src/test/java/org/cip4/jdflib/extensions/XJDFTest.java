@@ -445,9 +445,13 @@ public class XJDFTest extends JDFTestCaseBase
 		XJDF20 xjdf20 = new XJDF20();
 		e = xjdf20.makeNewJMF(jmf);
 		if (xjdf20.isTypeSafeMessage())
+		{
 			assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
+		}
 		else
+		{
 			assertEquals(e.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
+		}
 	}
 
 	/**

@@ -68,24 +68,34 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.process.JDFContainer;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 
 /**
- * take a container/FileSpec(Ref) and convert it into a ContainerRef
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkContainer extends WalkJDFElement
+public class WalkDeliveryIntent extends WalkResource
 {
 	/**
 	 * 
 	 */
-	public WalkContainer()
+	public WalkDeliveryIntent()
 	{
 		super();
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#isProductResource(org.cip4.jdflib.resource.JDFResource)
+	 */
+	@Override
+	protected boolean isProductResource(JDFResource linkTarget)
+	{
+		return false;
 	}
 
 	/**
@@ -96,26 +106,27 @@ public class WalkContainer extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFContainer;
+		return toCheck instanceof JDFDeliveryIntent;
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#getClassName(org.cip4.jdflib.resource.JDFResource)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	protected String getClassName(JDFResource r)
 	{
-		final JDFContainer cont = (JDFContainer) jdf;
-		final JDFFileSpec fileSpec = cont.getFileSpec();
-		if (fileSpec != null)
-		{
-			fileSpec.makeRootResource(null, null, true);
-			final VElement v = setResource(null, fileSpec, jdfToXJDF.newRoot);
-			if (v != null && v.size() == 1)
-			{
-				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
-			}
-		}
-		return null;
+		return "Parameter";
 	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getXJDFName(KElement jdf)
+	{
+		return ElementName.DELIVERYPARAMS;
+	}
+
 }

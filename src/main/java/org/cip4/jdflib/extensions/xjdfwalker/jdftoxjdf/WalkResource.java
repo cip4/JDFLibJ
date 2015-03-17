@@ -69,8 +69,10 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
 // //////////////////////////////////////////////////////////////////////////////
 /**
@@ -148,6 +150,49 @@ public class WalkResource extends WalkJDFElement
 	}
 
 	/**
+	 * 
+	 *  
+	 * @param r
+	 * @return
+	 */
+	protected String getClassName(final JDFResource r)
+	{
+		if (r == null)
+		{
+			return null;
+		}
+
+		EnumResourceClass resourceClass = r.getResourceClass();
+		if (resourceClass == null)
+		{
+			KElement r2 = new JDFDoc(r.getLocalName()).getRoot();
+			if (r2 instanceof JDFResource)
+			{
+				r2.init();
+				resourceClass = ((JDFResource) r2).getResourceClass();
+			}
+		}
+		if (resourceClass == null)
+		{
+			return "Parameter"; // assume parameter if unknown 3rd party stuff
+		}
+		String className = "Resource";
+		if (resourceClass.equals(EnumResourceClass.Parameter))
+		{
+			className = resourceClass.getName();
+		}
+		else if (resourceClass.equals(EnumResourceClass.Intent))
+		{
+			className = resourceClass.getName();
+		}
+		else if (resourceClass.equals(EnumResourceClass.PlaceHolder))
+		{
+			return null;
+		}
+		return className;
+	}
+
+	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 * @param toCheck
 	 * @return true if it matches
@@ -157,4 +202,15 @@ public class WalkResource extends WalkJDFElement
 	{
 		return toCheck instanceof JDFResource;
 	}
+
+	/**
+	 * 
+	 * @param linkTarget
+	 * @return
+	 */
+	protected boolean isProductResource(final JDFResource linkTarget)
+	{
+		return EnumResourceClass.Intent.equals(linkTarget.getResourceClass());
+	}
+
 }

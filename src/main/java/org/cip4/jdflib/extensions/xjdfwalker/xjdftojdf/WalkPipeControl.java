@@ -1,8 +1,9 @@
-/**
+/*
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ *
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +11,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,21 +19,21 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -44,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -54,68 +55,65 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software restartProcesses()
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.process.JDFContainer;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
 
-/**
- * take a container/FileSpec(Ref) and convert it into a ContainerRef
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkContainer extends WalkJDFElement
+public class WalkPipeControl extends WalkTypesafeMessage
 {
+
 	/**
 	 * 
 	 */
-	public WalkContainer()
+	public WalkPipeControl()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public boolean matches(KElement toCheck)
 	{
-		return toCheck instanceof JDFContainer;
+		String localName = toCheck.getLocalName();
+		return localName.endsWith("PipeControl") && super.matches(toCheck);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	String getMessageType(KElement e, String messageName, String family)
 	{
-		final JDFContainer cont = (JDFContainer) jdf;
-		final JDFFileSpec fileSpec = cont.getFileSpec();
-		if (fileSpec != null)
+		String operation = e.getXPathAttribute("PipeParams/@Operation", null);
+		if (operation == null)
 		{
-			fileSpec.makeRootResource(null, null, true);
-			final VElement v = setResource(null, fileSpec, jdfToXJDF.newRoot);
-			if (v != null && v.size() == 1)
+			String refID = e.getAttribute(AttributeName.REFID, null, null);
+			if (refID != null)
 			{
-				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
+				operation = XJMFTypeMap.getMap().remove(refID);
+				if (operation == null)
+				{
+					operation = super.getMessageType(e, messageName, family);
+				}
 			}
 		}
-		return null;
+		return operation;
 	}
 }

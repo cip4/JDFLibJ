@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,54 +68,73 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.process.JDFContainer;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
+import org.cip4.jdflib.jmf.JDFCommand;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * take a container/FileSpec(Ref) and convert it into a ContainerRef
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+ * walker for JMF mesaages
  */
-public class WalkContainer extends WalkJDFElement
+public class WalkPipeControl extends WalkMessage
 {
 	/**
 	 * 
 	 */
-	public WalkContainer()
+	public WalkPipeControl()
 	{
 		super();
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#makeTypesafe(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	void makeTypesafe(JDFMessage m)
 	{
-		return toCheck instanceof JDFContainer;
+		String originalType = super.getMessageType(m);
+		super.makeTypesafe(m);
+		if (m instanceof JDFCommand)
+		{
+			KElement pipeParams = m.getCreateElement(ElementName.PIPEPARAMS, null, 0);
+			pipeParams.setAttribute(AttributeName.OPERATION, originalType);
+			String id = m.getID();
+			XJMFTypeMap.getMap().put(id, originalType);
+		}
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#getMessageType(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	String getMessageType(JDFMessage m)
 	{
-		final JDFContainer cont = (JDFContainer) jdf;
-		final JDFFileSpec fileSpec = cont.getFileSpec();
-		if (fileSpec != null)
-		{
-			fileSpec.makeRootResource(null, null, true);
-			final VElement v = setResource(null, fileSpec, jdfToXJDF.newRoot);
-			if (v != null && v.size() == 1)
-			{
-				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
-			}
-		}
-		return null;
+		return "PipeControl";
 	}
+
+	/**
+	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public boolean matches(KElement toCheck)
+	{
+		return super.matches(toCheck) && isPipeControl(toCheck.getAttribute(AttributeName.TYPE));
+	}
+
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
+	private boolean isPipeControl(String type)
+	{
+		return type.startsWith("Pipe") && StringUtil.hasToken("PipePush,PipePull,PipeClose,PipePause", type, ",", 0);
+	}
+
 }

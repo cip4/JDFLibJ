@@ -123,7 +123,8 @@ public class WalkElement extends BaseWalker
 		String nsURI = jdf.getNamespaceURI();
 		if (JDFConstants.JDFNAMESPACE.equals(nsURI))
 			nsURI = XJDF20.getSchemaURL();
-		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), nsURI);
+		String nodeName = getXJDFName(jdf);
+		final KElement eNew = bMerge ? xjdf : xjdf.appendElement(nodeName, nsURI);
 
 		setAttributes(jdf, eNew);
 		eNew.setText(jdf.getText());
@@ -145,6 +146,16 @@ public class WalkElement extends BaseWalker
 		}
 		removeUnused(eNew);
 		return eNew;
+	}
+
+	/**
+	 * the new name
+	 * @param jdf
+	 * @return
+	 */
+	protected String getXJDFName(final KElement jdf)
+	{
+		return jdf.getNodeName();
 	}
 
 	/**

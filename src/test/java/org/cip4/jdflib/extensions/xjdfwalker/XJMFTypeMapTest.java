@@ -66,56 +66,86 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker;
 
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.process.JDFContainer;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JMFBuilder;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.junit.Test;
 
-/**
- * take a container/FileSpec(Ref) and convert it into a ContainerRef
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
- */
-public class WalkContainer extends WalkJDFElement
+public class XJMFTypeMapTest extends JDFTestCaseBase
 {
+
 	/**
 	 * 
 	 */
-	public WalkContainer()
+	@Test
+	public void testModifyQE()
 	{
-		super();
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.buildHoldQueueEntry("q1");
+		JDFToXJDF c = new JDFToXJDF();
+		KElement xjmf = c.convert(jmf);
+		assertEquals(xjmf.getLocalName(), XJDFHelper.XJMF);
+		KElement command = xjmf.getElement("CommandModifyQueueEntry");
+		assertNotNull(command);
+		assertEquals(command.getElement("ModifyQueueEntryParams").getAttribute(AttributeName.OPERATION), "Hold");
+		KElement xjmfResp = new XMLDoc(XJDFHelper.XJMF, null).getRoot();
+		KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
+		response.appendAnchor(null);
+		response.copyAttribute(AttributeName.REFID, command, AttributeName.ID, null, null);
+		assertEquals(1, XJMFTypeMap.getMap().size());
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc newDoc = xc.convert(xjmfResp);
+		JDFJMF newJMF = newDoc.getJMFRoot();
+		assertEquals(newJMF.getResponse(0).getType(), "HoldQueueEntry");
+		assertEquals(0, XJMFTypeMap.getMap().size());
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
+	 * 
 	 */
-	@Override
-	public boolean matches(final KElement toCheck)
+	@Test
+	public void testPipePush()
 	{
-		return toCheck instanceof JDFContainer;
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.createJMF(EnumFamily.Command, EnumType.PipePush);
+		JDFToXJDF c = new JDFToXJDF();
+		KElement xjmf = c.convert(jmf);
+		assertEquals(xjmf.getLocalName(), XJDFHelper.XJMF);
+		KElement command = xjmf.getElement("CommandPipeControl");
+		assertNotNull(command);
+		assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "PipePush");
+		KElement xjmfResp = new XMLDoc(XJDFHelper.XJMF, null).getRoot();
+		KElement response = xjmfResp.appendElement("ResponsePipeControl");
+		response.appendAnchor(null);
+		response.copyAttribute(AttributeName.REFID, command, AttributeName.ID, null, null);
+		assertEquals(1, XJMFTypeMap.getMap().size());
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc newDoc = xc.convert(xjmfResp);
+		JDFJMF newJMF = newDoc.getJMFRoot();
+		assertEquals(newJMF.getResponse(0).getType(), "PipePush");
+		assertEquals(0, XJMFTypeMap.getMap().size());
 	}
 
 	/**
-	 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	protected void tearDown() throws Exception
 	{
-		final JDFContainer cont = (JDFContainer) jdf;
-		final JDFFileSpec fileSpec = cont.getFileSpec();
-		if (fileSpec != null)
-		{
-			fileSpec.makeRootResource(null, null, true);
-			final VElement v = setResource(null, fileSpec, jdfToXJDF.newRoot);
-			if (v != null && v.size() == 1)
-			{
-				xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
-			}
-		}
-		return null;
+		XJMFTypeMap.shutDown();
+		super.tearDown();
 	}
+
 }

@@ -81,6 +81,7 @@ package org.cip4.jdflib.resource.process;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropItem;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.w3c.dom.DOMException;
@@ -152,14 +153,19 @@ public class JDFDropItem extends JDFAutoDropItem
 	}
 
 	/**
-	 * TODO Please insert comment!
-	 * @param dii
+	 * 
+	 * @param dropItemIntent
 	 */
-	public void setFromDropItemIntent(JDFDropItemIntent dii)
+	public void setFromDropItemIntent(JDFDropItemIntent dropItemIntent)
 	{
-		if (dii == null)
+		if (dropItemIntent == null)
 			return;
-		copyAttribute(AttributeName.AMOUNT, dii);
-		// TODO continue
+		copyAttribute(AttributeName.AMOUNT, dropItemIntent);
+		KElement e = dropItemIntent.getFirstChildElement();
+		while (e != null)
+		{
+			copyElement(e, null);
+			e = e.getNextSiblingElement();
+		}
 	}
 }

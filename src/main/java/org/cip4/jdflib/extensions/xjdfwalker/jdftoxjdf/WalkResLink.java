@@ -74,12 +74,10 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -108,19 +106,19 @@ public class WalkResLink extends WalkJDFElement
 		final JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource linkTarget = rl.getLinkRoot();
 		JDFNode n = rl.getParentJDF();
-		// we do not explicitly call out components for products
 		if (linkTarget == null)
 		{
 			return null;
 		}
 
+		// we do not explicitly call out components for products
 		if (EnumType.Product.equals(n.getEnumType()))
 		{
-			if (linkTarget instanceof JDFComponent || (!jdfToXJDF.wantProduct && !matchesRootID(n)))
+			if ((linkTarget instanceof JDFComponent) || (!jdfToXJDF.wantProduct && !matchesRootID(n)))
 			{
 				return null;
 			}
-			if (isProductResource(linkTarget))
+			if (jdfToXJDF.isProductResource(linkTarget))
 			{
 				KElement product = xjdf.getCreateElement(ProductHelper.PRODUCTLIST).getCreateElement(ProductHelper.PRODUCT, null, -1);
 				setResource(rl, linkTarget, product);
@@ -139,29 +137,6 @@ public class WalkResLink extends WalkJDFElement
 			setResource(rl, linkTarget, xjdf);
 		}
 		return null;
-	}
-
-	/**
-	 * 
-	 * @param linkTarget
-	 * @return
-	 */
-	private boolean isProductResource(final JDFResource linkTarget)
-	{
-		return EnumResourceClass.Intent.equals(linkTarget.getResourceClass());
-	}
-
-	/**
-	 * 
-	 *  
-	 * @param rl
-	 * @param linkTarget
-	 * @param xjdf
-	 * @return 
-	 */
-	VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xjdf)
-	{
-		return jdfToXJDF.setResource(rl, linkTarget, xjdf);
 	}
 
 	/**

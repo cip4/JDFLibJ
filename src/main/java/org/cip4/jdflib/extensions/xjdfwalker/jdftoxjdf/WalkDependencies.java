@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,16 +105,16 @@ public class WalkDependencies extends WalkJDFElement
 		final VElement v = dep.getChildElementVector(ElementName.LAYOUTELEMENT, null);
 		if (v != null)
 		{
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				final JDFLayoutElement leDep = (JDFLayoutElement) v.get(i);
+				final JDFLayoutElement leDep = (JDFLayoutElement) e;
 				leDep.makeRootResource(null, null, true);
-				final VElement v2 = this.jdfToXJDF.setResource(null, leDep, this.jdfToXJDF.newRoot);
+				final VElement v2 = setResource(null, leDep, jdfToXJDF.newRoot);
 				if (v2 != null)
 				{
-					for (int j = 0; j < v2.size(); j++)
+					for (KElement leaf : v2)
 					{
-						xjdf.appendAttribute("Dependencies", v2.get(j).getAttribute("ID"), null, " ", true);
+						xjdf.appendAttribute("Dependencies", leaf.getID(), null, " ", true);
 					}
 				}
 			}

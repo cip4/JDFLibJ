@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -175,7 +175,7 @@ public abstract class BaseGoldenTicketTest extends JDFTestCaseBase
 		XJDFToJDFConverter jdfConverter = new XJDFToJDFConverter(null);
 		JDFDoc converted = jdfConverter.convert(xjdfRoot);
 		converted.write2File(sm_dirTestDataTemp + gtType + templateName + ".xjdf.jdf", 2, false);
-		assertTrue(gtType + templateName + ".jdf.xjdf", converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
+		assertTrue(gtType + templateName + ".xjdf.jdf", converted.getJDFRoot().isValid(EnumValidationLevel.Complete));
 	}
 
 }

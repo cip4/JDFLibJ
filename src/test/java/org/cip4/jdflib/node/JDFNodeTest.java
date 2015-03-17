@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2578,7 +2578,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(root.getAllTypes().size(), 1);
 
 		root.setType("ProcessGroup", false);
-		assertNull(root.getAllTypes());
+		assertTrue(root.getAllTypes().isEmpty());
 
 		final VString types = new VString();
 		types.add("foo");
@@ -2589,7 +2589,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		root.appendElement("JDF").setAttribute("Type", "fooBar2");
 		final VString types2 = new VString(types);
 		types2.insertElementAt("fooBar2", 0);
-		// assertEquals(root.getAllTypes(),types2);
+		assertEquals(root.getAllTypes(), types2);
 
 		root.removeAttribute("Types");
 

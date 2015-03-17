@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,9 +79,12 @@ package org.cip4.jdflib.resource.intent;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoArtDelivery;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanArtHandling;
 import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
@@ -291,5 +294,23 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 			return super.getContact(iSkip);
 		}
 		return getParentArtDeliveryIntent().getContact();
+	}
+
+	/**
+	 * 
+	 * @param dropItem
+	 */
+	public void setFromDropItem(JDFDropItem dropItem)
+	{
+		if (dropItem == null)
+			return;
+
+		copyAttribute(AttributeName.AMOUNT, dropItem);
+		KElement e = dropItem.getFirstChildElement();
+		while (e != null)
+		{
+			copyElement(e, null);
+			e = e.getNextSiblingElement();
+		}
 	}
 }

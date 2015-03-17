@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -153,7 +153,9 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	{
 		if (adi == null)
 			return;
+
 		Vector<JDFArtDelivery> v = adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
+
 		copyElements(adi.getChildElementVector(ElementName.CONTACT, null), null);
 		for (JDFArtDelivery ad : v)
 		{
@@ -163,7 +165,7 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 * @param delIntent
 	 */
 	public void setFromDeliveryIntent(JDFDeliveryIntent delIntent)

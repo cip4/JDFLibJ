@@ -155,7 +155,7 @@ public class RegularJanitorTest extends JDFTestCaseBase
 		Runner runner = new Runner();
 		janitor.addSweeper(new TimeSweeper(1, runner), true);
 		janitor.startSweep(1);
-		ThreadUtil.sleep(4811);
+		ThreadUtil.sleep(5811);
 		assertTrue(runner.i >= 3);
 	}
 

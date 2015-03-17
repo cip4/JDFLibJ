@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -183,12 +183,39 @@ public class JDFIntentResource extends JDFResource
 	{
 		if (intentRoot == null || processRoot == null)
 			return;
+
+		if (StringUtil.getNonEmpty(attName) == null)
+			attName = spanName;
+		else if (StringUtil.getNonEmpty(spanName) == null)
+			spanName = attName;
+
 		String val = guessActual(intentRoot, spanName);
 		if (val == null)
 			return;
+		processRoot.setAttribute(attName, val);
+
+	}
+
+	/**
+	 * get the best match actual value from any element that may contain spans
+	 * @param processRoot the parent process element
+	 * @param intentRoot the parent intent element
+	 * @param attName the target attribute element name, if null identical to spanName
+	 * @param spanName the span element name
+	 * 
+	 */
+	public static void copyProcessToActual(JDFElement processRoot, JDFElement intentRoot, String attName, String spanName)
+	{
+		if (intentRoot == null || processRoot == null)
+			return;
 		if (StringUtil.getNonEmpty(attName) == null)
 			attName = spanName;
-		processRoot.setAttribute(attName, val);
+		else if (StringUtil.getNonEmpty(spanName) == null)
+			spanName = attName;
+		String val = StringUtil.getNonEmpty(processRoot.getAttribute(attName));
+		if (val == null)
+			return;
+		intentRoot.appendElement(spanName).setAttribute(AttributeName.ACTUAL, val);
 
 	}
 

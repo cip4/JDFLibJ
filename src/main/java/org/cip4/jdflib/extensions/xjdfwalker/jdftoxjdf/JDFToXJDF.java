@@ -77,13 +77,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -93,13 +91,12 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.extensions.PostXJDFWalker;
-import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -143,6 +140,31 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * 
+	 *  
+	 * @param r
+	 * @return
+	 */
+	protected String getClassName(final JDFResource r)
+	{
+		WalkResource w = getWalker(r);
+		return (w == null) ? null : w.getClassName(r);
+	}
+
+	/**
+	 * 
+	 * @param r
+	 * @return
+	 */
+	protected WalkResource getWalker(JDFResource r)
+	{
+		if (r == null)
+			return null;
+		IWalker walker = theFactory.getWalker(r);
+		return (walker instanceof WalkResource) ? (WalkResource) walker : null;
+	}
+
+	/**
+	 * 
 	 * if true, add a modified audit
 	 * @param trackAudits
 	 */
@@ -152,7 +174,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * the root node name
+	 * the root node name if NOT typesafe
 	 */
 	public final static String rootName = XJDFHelper.XJDF;
 	/**
@@ -250,6 +272,8 @@ public class JDFToXJDF extends PackageElementWalker
 	 *  if true, we want a productList from the kids
 	 */
 	boolean wantProduct;
+
+	private JDFAttributeMap componentProductMap;
 
 	/**
 	 * 
@@ -396,12 +420,33 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private void init()
 	{
+		componentProductMap = new JDFAttributeMap();
 		resAttribs = generateResourceAttributes();
 	}
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * @param compID
+	 * @param productID
+	 */
+	protected void putComponentProduct(String compID, String productID)
+	{
+		componentProductMap.put(compID, productID);
+	}
+
+	/**
+	 * 
+	 * @param compID
+	 * @return
+	 */
+	protected String getProduct(String compID)
+	{
+		return componentProductMap.get(compID);
+	}
+
+	/**
+	 * 
+	 *  
 	 * @return
 	 */
 	protected VString generateResourceAttributes()
@@ -417,60 +462,6 @@ public class JDFToXJDF extends PackageElementWalker
 		resAttribs.appendUnique(intRes.knownAttributes());
 		resAttribs.appendUnique(part.knownAttributes());
 		return resAttribs;
-	}
-
-	/**
-	 * 
-	 * TODO Please insert comment!
-	 * @param name
-	 * @return
-	 */
-	public String getClassName(final String name)
-	{
-		if (name == null)
-			return null;
-		KElement e = new JDFDoc(name).getRoot();
-
-		String className = (e instanceof JDFResource) ? getClassName((JDFResource) e) : null;
-		return className;
-	}
-
-	/**
-	 * 
-	 * TODO Please insert comment!
-	 * @param r
-	 * @return
-	 */
-	String getClassName(final JDFResource r)
-	{
-		if (r == null)
-		{
-			return null;
-		}
-		EnumResourceClass resourceClass = r.getResourceClass();
-		if (resourceClass == null)
-		{
-			KElement r2 = new JDFDoc(r.getLocalName()).getRoot();
-			if (r2 instanceof JDFResource)
-			{
-				r2.init();
-				resourceClass = ((JDFResource) r2).getResourceClass();
-			}
-		}
-		if (resourceClass == null)
-		{
-			return "Parameter"; // assume parameter if unknown 3rd party stuff
-		}
-		String className = "Resource";
-		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
-		{
-			className = resourceClass.getName();
-		}
-		if (resourceClass.equals(EnumResourceClass.PlaceHolder))
-		{
-			return null;
-		}
-		return className;
 	}
 
 	/**
@@ -540,178 +531,6 @@ public class JDFToXJDF extends PackageElementWalker
 		{
 			log.error("oops: ", x);
 		}
-	}
-
-	/**
-	 * 
-	 *  
-	 * @param rl
-	 * @param newLeaf
-	 * @param partMap
-	 */
-	void setAmountPool(final JDFElement rl, final KElement newLeaf, final JDFAttributeMap partMap)
-	{
-		if (rl == null)
-		{
-			return;
-		}
-		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
-		if (ap == null)
-		{
-			JDFAttributeMap amounts = rl.getAttributeMap().reduceMap(amountAttribs);
-			if (amounts.size() > 0)
-			{
-				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
-				for (String key : amounts.keySet())
-				{
-					ap.setPartAttribute(key, amounts.get(key), null, partMap);
-					rl.removeAttribute(key);
-				}
-			}
-		}
-		else
-		{
-			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
-			if (vPartAmounts != null && vPartAmounts.size() > 0)
-			{
-				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
-				for (KElement pa : vPartAmounts)
-				{
-					ap.copyElement(pa, null);
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param rl 
-	 * @param r 
-	 * @param xjdfSet 
-	 * @return 
-	 * 
-	 */
-	private KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
-	{
-		final JDFAttributeMap map = r.getPartMap();
-		SetHelper sh = new SetHelper(xjdfSet);
-		KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
-		setLeafAttributes(r, rl, newLeaf);
-		return newLeaf;
-	}
-
-	/**
-	 * @param leaf
-	 * @param rl 
-	 * @param newLeaf
-	 */
-	private void setLeafAttributes(final JDFResource leaf, final JDFElement rl, final KElement newLeaf)
-	{
-		final JDFAttributeMap partMap = leaf.getPartMap();
-		// JDFAttributeMap attMap=leaf.getAttributeMap();
-		// attMap.remove("ID");
-		setAmountPool(rl, newLeaf, partMap);
-
-		// retain spawn information
-		if (bRetainSpawnInfo && leaf.hasAttribute(AttributeName.SPAWNIDS))
-		{
-			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
-			final KElement spawnID = spawnInfo.appendElement("SpawnID");
-			spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
-			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
-			spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
-		}
-	}
-
-	/**
-	 * set the attributes of the set based on the resource and resourcelink
-	 * 
-	 * @param resourceSet
-	 * @param rl
-	 * @param linkRoot
-	 */
-	private void setSetAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
-	{
-		resourceSet.setAttribute("Name", linkRoot.getNodeName());
-		resourceSet.setAttributes(rl);
-		//TODO orientation + coordinate system stuff
-		resourceSet.removeAttribute(AttributeName.RREF);
-		resourceSet.removeAttribute(AttributeName.RSUBREF);
-		resourceSet.removeAttribute(AttributeName.AMOUNT);
-		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
-		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
-		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
-
-		if (rl instanceof JDFResourceLink)
-		{
-			final JDFResourceLink resLink = (JDFResourceLink) rl;
-			final JDFNode rootIn = resLink.getJDFRoot();
-
-			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, "ID", null, resLink.getrRef(), 0, false);
-			if (resInRoot != null)
-			{
-				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-				if (vCreators != null)
-				{
-					final int size = vCreators.size();
-					for (int i = 0; i < size; i++)
-					{
-						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-						final KElement dependent = resourceSet.appendElement("Dependent");
-						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param rl
-	 * @param linkTarget
-	 * @param xRoot
-	 * @return the vector of partitions
-	 */
-	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
-	{
-		final VElement v = new VElement();
-		final String className = getClassName(linkTarget);
-		if (className == null || xRoot == null)
-		{
-			return null;
-		}
-		linkTarget.expand(false);
-		final String resID = linkTarget.getAttribute("ID");
-
-		KElement resourceSet = xRoot.getChildWithAttribute(className + "Set", "ID", null, resID, 0, true);
-		if (resourceSet == null)
-		{
-			resourceSet = xRoot.appendElement(className + "Set");
-			resourceSet.setAttribute("ID", linkTarget.getID());
-		}
-
-		// TODO what if he have resources used as in and out in the same node?
-		setSetAttributes(resourceSet, rl, linkTarget);
-		int nLeaves = resourceSet.numChildElements(className, null);
-		final VElement vRes = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
-		for (KElement e : vRes)
-		{
-			final JDFResource r = (JDFResource) e;
-			final VElement vLeaves = r.getLeaves(false);
-			for (KElement eLeaf : vLeaves)
-			{
-				final JDFResource leaf = (JDFResource) eLeaf;
-				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
-				final int nn = resourceSet.numChildElements(className, null);
-				if (nn > nLeaves)
-				{
-					nLeaves = nn;
-					walkTree(leaf, newBaseRes);
-				}
-				v.add(newBaseRes);
-			}
-		}
-		return v;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////
@@ -969,4 +788,25 @@ public class JDFToXJDF extends PackageElementWalker
 		this.bConvertTilde = bConvertTilde;
 	}
 
+	/**
+	 * 
+	 * @param r
+	 * @return
+	 */
+	protected String getSetName(JDFResource r)
+	{
+		WalkResource w = getWalker(r);
+		return (w == null) ? null : w.getXJDFName(r);
+	}
+
+	/**
+	 * 
+	 * @param linkTarget
+	 * @return
+	 */
+	protected boolean isProductResource(final JDFResource linkTarget)
+	{
+		WalkResource w = getWalker(linkTarget);
+		return w.isProductResource(linkTarget);
+	}
 }
