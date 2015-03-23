@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,8 +90,9 @@ public class UnitParser
 	}
 
 	/**
-	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace is ignored
-	 * @param val the string to convert
+	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units
+	 * the unit case is ignored
+	 * @param val the string to convert 
 	 * @return the converted unit string
 	 */
 	public String extractUnits(String val)
@@ -102,7 +103,8 @@ public class UnitParser
 		}
 
 		final VString v = StringUtil.tokenize(val, " ", false);
-		boolean bGood = true;
+		final VString keep = new VString(v);
+		boolean oneGood = false;
 		int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
@@ -123,6 +125,21 @@ public class UnitParser
 				factor = 72.;
 				tmp = StringUtil.leftStr(tmp, -2);
 			}
+
+			if (factor > 0 && i > 0 && tmp == null && StringUtil.isNumber(keep.get(i - 1)))
+			{
+				if (i < 2 || !"\"".equals(v.get(i - 2)))
+				{
+					tmp = v.get(i - 1);
+					v.setElementAt("\"", i - 1);
+				}
+				else
+				{
+					// we have something like "10 mm mm"" - bail out
+					oneGood = false;
+					break;
+				}
+			}
 			if (!StringUtil.isNumber(tmp))
 			{
 				factor = 0;
@@ -136,19 +153,21 @@ public class UnitParser
 				}
 				else
 				{
+					oneGood = true;
 					double dbl = StringUtil.parseDouble(tmp, -1) * factor;
 					v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
 				}
 			}
 			else
 			{
-				bGood = false;
+				oneGood = false;
 				break;
 			}
 		}
-		if (bGood)
+		if (oneGood)
 		{
 			val = StringUtil.setvString(v, " ", null, null);
+			val = StringUtil.replaceString(val, "\" ", "");
 		}
 		return val;
 	}

@@ -98,8 +98,10 @@ import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * some generic postprocessing that is better done on the XJDF such as merging stripping and Layout
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * some generic postprocessing that is better done on the XJDF after JDF to XJDF Conversion 
+ * such as merging stripping and Layout
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class PostXJDFWalker extends BaseElementWalker
 {

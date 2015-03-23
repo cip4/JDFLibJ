@@ -133,7 +133,7 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 		if (set != null && types != null)
 		{
 			String processUsage = set.getProcessUsage();
-			VString allUsages = StringUtil.tokenize(processUsage, " ", false);
+			VString allUsages = StringUtil.tokenize(processUsage, null, false);
 			if (allUsages != null && allUsages.size() > 0)
 			{
 				if (!allUsages.containsAny(types))

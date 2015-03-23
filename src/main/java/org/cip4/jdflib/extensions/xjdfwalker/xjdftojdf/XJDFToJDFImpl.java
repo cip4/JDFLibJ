@@ -445,13 +445,13 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 * @param e2
+	 * @param element
 	 */
-	protected void convertUnits(final KElement e2)
+	protected void convertUnits(final KElement element)
 	{
 		if (convertUnits)
 		{
-			final JDFAttributeMap map = e2.getAttributeMap();
+			final JDFAttributeMap map = element.getAttributeMap();
 			final Iterator<String> keyIt = map.getKeyIterator();
 			final UnitParser up = new UnitParser();
 			while (keyIt.hasNext())
@@ -461,14 +461,16 @@ public class XJDFToJDFImpl extends PackageElementWalker
 				final String newVal = up.extractUnits(val);
 				if (!val.equals(newVal))
 				{
-					e2.setAttribute(key, newVal);
+					element.setAttribute(key, newVal);
 				}
 				//update dates in case they were specified in milliseconds
-				if ((e2 instanceof JDFElement) && EnumAttributeType.dateTime.equals(((JDFElement) e2).getAttributeInfo().getAttributeType(key)))
+				if ((element instanceof JDFElement) && EnumAttributeType.dateTime.equals(((JDFElement) element).getAttributeInfo().getAttributeType(key)))
 				{
 					JDFDate d = JDFDate.createDate(val);
 					if (d != null && !val.equals(d.getDateTimeISO()))
-						e2.setAttribute(key, d.getDateTimeISO());
+					{
+						element.setAttribute(key, d.getDateTimeISO());
+					}
 				}
 			}
 		}

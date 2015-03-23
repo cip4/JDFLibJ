@@ -9,7 +9,7 @@
         CommentURL="docs/2969423207-doc.pdf"
         DescriptiveName="FA-SIG-2969423207" ICSVersions="W2P_FA-0.6"
         ID="XJDF_VTFWFDTK" JobID="2969423207" ProjectID="29694232"
-        Types="ConventionalPrinting" Version="2.0">
+        Version="2.0">
         <xjdf:AuditPool>
           <xjdf:Created AgentName="FLYERALARM AutoPattern"
             AgentVersion="v2.3.1-3-g92e7710" TimeStamp="2015-02-05T12:46:45+01:00"/>

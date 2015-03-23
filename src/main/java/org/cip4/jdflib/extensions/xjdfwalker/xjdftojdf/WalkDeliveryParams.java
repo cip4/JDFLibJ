@@ -82,7 +82,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements
  * TODO unmerge stripping and binderysignature and signaturecell see WalkRunList
  */
-public class WalkDeliveryParams extends WalkStrippingParams
+public class WalkDeliveryParams extends WalkResource
 {
 	/**
 	 * 
@@ -103,6 +103,12 @@ public class WalkDeliveryParams extends WalkStrippingParams
 		return toCheck instanceof JDFDeliveryParams;
 	}
 
+	/**
+	 * 
+	 * @param xjdfDeliveryParams
+	 * @param jdfDeliveryParams
+	 * @return
+	 */
 	private boolean moveToDrop(final KElement xjdfDeliveryParams, final KElement jdfDeliveryParams)
 	{
 		JDFDrop drop = ((JDFDeliveryParams) xjdfDeliveryParams).appendDrop();

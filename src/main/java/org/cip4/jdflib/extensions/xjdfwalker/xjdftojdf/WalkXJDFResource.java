@@ -118,7 +118,7 @@ public class WalkXJDFResource extends WalkXElement
 		else if (xjdfRes.getPreviousSiblingElement(xjdfRes.getNodeName(), null) != null)
 		{
 			newPartition = theNode.getJDFRoot().addResource(jdfResource.getLocalName(), null);
-			newPartition.copyAttribute("ID", xjdfRes);
+			newPartition.copyAttribute(AttributeName.ID, xjdfRes);
 		}
 		else
 		{

@@ -70,14 +70,17 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.elementwalker.UnLinkFinder;
@@ -91,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -131,15 +135,71 @@ class PostConverter
 			xjdfToJDFImpl.mergeProductLinks(theNode, root);
 		}
 		fixDelivery();
-		cleanResources();
-		fixDependencies(root);
+		new GangCleaner().cleanGangLinks();
+		new ResourceCleaner().cleanResources();
+		new DependencyCleaner().fixDependencies(root);
+
 		new UnLinkFinder().eraseUnlinked(root);
-		this.xjdfToJDFImpl.firstConvert = false;
+		xjdfToJDFImpl.firstConvert = false;
+
 		EnsureNSUri fixNS = new EnsureNSUri();
 		fixNS.addNS(null, JDFElement.getSchemaURL());
 		fixNS.walk(root);
+
 		RemoveEmpty re = new RemoveEmpty();
 		re.removEmpty(root);
+	}
+
+	private class GangCleaner
+	{
+		void cleanGangLinks()
+		{
+			JDFNode n = theNode;
+			while (n != null)
+			{
+				VElement links = theNode.getResourceLinks(ElementName.NODEINFO, null, null);
+				links = (VElement) ContainerUtil.addAll(links, theNode.getResourceLinks(ElementName.CUSTOMERINFO, null, null));
+				if (links != null)
+				{
+					for (KElement e : links)
+					{
+						cleanGangLink(e);
+					}
+				}
+				n = n.getParentJDF();
+			}
+		}
+
+		/**
+		 * 
+		 * @param e
+		 */
+		private void cleanGangLink(KElement e)
+		{
+			JDFResourceLink link = (JDFResourceLink) e;
+			VJDFAttributeMap linkMaps = link.getPartMapVector();
+			if (linkMaps != null)
+			{
+				linkMaps.reduceMap(new VString(AttributeName.PRODUCTPART, null));
+				if (!linkMaps.isEmpty())
+				{
+					boolean mustZapp = true;
+					for (JDFAttributeMap map : linkMaps)
+					{
+						String val = map.get(AttributeName.PRODUCTPART);
+						if (theNode.getID().equals(val))
+						{
+							mustZapp = false;
+							break;
+						}
+					}
+					if (mustZapp)
+					{
+						link.deleteNode();
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -167,160 +227,163 @@ class PostConverter
 		}
 	}
 
-	/**
-	 * @param theNode
-	 */
-	private void cleanResources()
+	private class ResourceCleaner
 	{
-		VElement vRes = collectResources();
-		if (vRes != null)
+		/**
+		 * @param theNode
+		 */
+		void cleanResources()
 		{
-			for (KElement rr : vRes)
+			VElement vRes = collectResources();
+			if (vRes != null)
 			{
-				cleanResource(rr);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 *  
-	 * @param theNode
-	 * @return
-	 */
-	private VElement collectResources()
-	{
-		JDFNode n = theNode;
-		VElement vRes = new VElement();
-		while (n != null)
-		{
-			JDFResourcePool rp = n.getResourcePool();
-			final VElement v = rp == null ? null : rp.getPoolChildren(null, null, null);
-			vRes.addAll(v);
-			n = n.getParentJDF();
-		}
-		return vRes;
-	}
-
-	/**
-	 *  
-	 *  
-	 * @param eRoot
-	 */
-	private void cleanResource(KElement eRoot)
-	{
-		final JDFResource resRoot = (JDFResource) eRoot;
-		if (resRoot != null)
-		{
-			final EnumResStatus s = resRoot.getStatusFromLeaves(false);
-			if (s != null)
-			{
-				resRoot.setResStatus(s, false);
-			}
-			if (ElementName.COLORPOOL.equals(resRoot.getLocalName()))
-			{
-				cleanColorPool(resRoot);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 *  
-	 * @param theNode
-	 * @param r
-	 */
-	private void cleanColorPool(final JDFResource r)
-	{
-		String id = r.getID();
-		if (StringUtil.getNonEmpty(id) != null)
-		{
-			VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
-			if (v != null)
-			{
-				for (KElement e : v)
+				for (KElement rr : vRes)
 				{
-					String name = e.getLocalName();
-					if ("ColorRef".equals(name))
+					cleanResource(rr);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param theNode
+		 * @return
+		 */
+		private VElement collectResources()
+		{
+			JDFNode n = theNode;
+			VElement vRes = new VElement();
+			while (n != null)
+			{
+				JDFResourcePool rp = n.getResourcePool();
+				final VElement v = rp == null ? null : rp.getPoolChildren(null, null, null);
+				vRes.addAll(v);
+				n = n.getParentJDF();
+			}
+			return vRes;
+		}
+
+		/**
+		 *  
+		 *  
+		 * @param eRoot
+		 */
+		private void cleanResource(KElement eRoot)
+		{
+			final JDFResource resRoot = (JDFResource) eRoot;
+			if (resRoot != null)
+			{
+				final EnumResStatus s = resRoot.getStatusFromLeaves(false);
+				if (s != null)
+				{
+					resRoot.setResStatus(s, false);
+				}
+				if (ElementName.COLORPOOL.equals(resRoot.getLocalName()))
+				{
+					cleanColorPool(resRoot);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param theNode
+		 * @param r
+		 */
+		private void cleanColorPool(final JDFResource r)
+		{
+			String id = r.getID();
+			if (StringUtil.getNonEmpty(id) != null)
+			{
+				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
+				if (v != null)
+				{
+					for (KElement e : v)
 					{
-						name = StringUtil.leftStr(e.getNodeName(), -3) + "PoolRef";
-						e.renameElement(name, null);
-					}
-					else if ("ColorLink".equals(name))
-					{
-						name = StringUtil.leftStr(e.getNodeName(), -4) + "PoolLink";
-						e.renameElement(name, null);
+						String name = e.getLocalName();
+						if ("ColorRef".equals(name))
+						{
+							e.renameElement("ColorPoolRef", null);
+						}
+						else if ("ColorLink".equals(name))
+						{
+							e.renameElement("ColorPoolLink", null);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	/**
-	 *  
-	 * @param root 
-	 */
-	private void fixDependencies(JDFNode root)
+	private class DependencyCleaner
 	{
-		Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
-		if (vDep == null)
-			return;
-		for (JDFDependencies dep : vDep)
+		/**
+		 *  
+		 * @param root 
+		 */
+		private void fixDependencies(JDFNode root)
 		{
-			fixOneDependencies(dep);
+			Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
+			if (vDep == null)
+				return;
+			for (JDFDependencies dep : vDep)
+			{
+				fixOneDependencies(dep);
+			}
+
 		}
 
-	}
-
-	/**
-	 *  
-	 * @param dep
-	 */
-	private void fixOneDependencies(JDFDependencies dep)
-	{
-		if (dep == null)
-			return;
-		VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
-		if (v == null)
-			return;
-		for (KElement e : v)
+		/**
+		 *  
+		 * @param dep
+		 */
+		private void fixOneDependencies(JDFDependencies dep)
 		{
-			JDFRefElement rl = (JDFRefElement) e;
-			rl.renameElement("LayoutElementRef", null);
-			JDFResource root = rl.getTargetRoot();
-			if (root != null)
+			if (dep == null)
+				return;
+			VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
+			if (v == null)
+				return;
+			for (KElement e : v)
 			{
-				VElement vR = root.getLeaves(true);
-				VElement v2 = root.getLinksAndRefs(true, false);
-				if (v2 != null)
+				JDFRefElement rl = (JDFRefElement) e;
+				rl.renameElement("LayoutElementRef", null);
+				JDFResource root = rl.getTargetRoot();
+				if (root != null)
 				{
-					for (KElement rl2 : v2)
+					VElement vR = root.getLeaves(true);
+					VElement v2 = root.getLinksAndRefs(true, false);
+					if (v2 != null)
 					{
-						rl2.renameElement("LayoutElementLink", null);
+						for (KElement rl2 : v2)
+						{
+							rl2.renameElement("LayoutElementLink", null);
+						}
 					}
-				}
-				v2 = root.getLinksAndRefs(false, true);
-				if (v2 != null)
-				{
-					for (KElement rl2 : v2)
+					v2 = root.getLinksAndRefs(false, true);
+					if (v2 != null)
 					{
-						rl2.renameElement("LayoutElementRef", null);
+						for (KElement rl2 : v2)
+						{
+							rl2.renameElement("LayoutElementRef", null);
+						}
 					}
-				}
-				for (KElement r : vR)
-				{
-					JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
-					if (loe != null)
+					for (KElement r : vR)
 					{
-						r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
-						r.setAttributes(loe);
-						loe.deleteNode();
+						JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
+						if (loe != null)
+						{
+							r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
+							r.setAttributes(loe);
+							loe.deleteNode();
+						}
+						r.renameElement(ElementName.LAYOUTELEMENT, null);
 					}
-					r.renameElement(ElementName.LAYOUTELEMENT, null);
 				}
 			}
 		}
-
 	}
 
 	@Override

@@ -172,7 +172,7 @@ public class WalkProduct extends WalkXElement
 	 */
 	private void copyToNode(final KElement e, JDFNode theNode)
 	{
-		VString ignore = new VString("IsRoot ID", null);
+		VString ignore = new VString("IsRoot", null);
 		theNode.setAttributes(e, ignore);
 	}
 
@@ -185,9 +185,7 @@ public class WalkProduct extends WalkXElement
 		JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		if (c == null)
 		{
-			c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, null);
-			c.copyAttribute(AttributeName.ID, xjdfProduct);
-			theNode.ensureLink(c, EnumUsage.Output, null);
+			c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
 			xjdfToJDFImpl.idMap.put(c.getID(), new IDFinder().new IDPart(c.getID(), null));
 			boolean isRootProduct = new ProductHelper(xjdfProduct).isRootProduct();
 			final EnumComponentType partialFinal = isRootProduct ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;

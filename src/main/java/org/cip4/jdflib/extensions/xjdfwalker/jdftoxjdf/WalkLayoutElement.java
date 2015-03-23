@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
@@ -113,12 +115,12 @@ public class WalkLayoutElement extends WalkInlineAllRes
 		else
 			bMerge = false;
 		KElement ret = super.walk(jdf, xjdf);
-		if (!bInRunList && this.jdfToXJDF.isMergeRunList())
+		if (!bInRunList && jdfToXJDF.isMergeRunList())
 		{
 			KElement retPar = ret.getDeepParent(SetHelper.PARAMETER_SET, 0);
 			if (retPar != null)
-				retPar.setAttribute("Name", "RunList");
-			ret.renameElement("RunList", null);
+				retPar.setAttribute(AttributeName.NAME, ElementName.RUNLIST);
+			ret.renameElement(ElementName.RUNLIST, null);
 		}
 		return ret;
 	}

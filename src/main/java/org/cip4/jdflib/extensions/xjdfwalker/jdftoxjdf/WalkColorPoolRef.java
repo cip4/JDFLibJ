@@ -102,7 +102,7 @@ public class WalkColorPoolRef extends WalkRefElement
 		if (v != null && v.size() > 0)
 		{
 			final KElement ref = v.get(0).getParentNode_KElement();
-			xjdf.setAttribute(attName, ref.getAttribute("ID"));
+			xjdf.setAttribute(attName, ref.getID());
 		}
 		re.deleteNode();
 	}

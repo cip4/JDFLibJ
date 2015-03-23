@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,14 +101,41 @@ public class UnitParserTest extends JDFTestCaseBase
 		assertEquals(unitParser.extractUnits("123"), "123");
 		assertEquals(unitParser.extractUnits("0.4"), "0.4");
 		assertEquals(unitParser.extractUnits("0.1cm"), "2.8346");
+		assertEquals(unitParser.extractUnits("0.1 cm"), "2.8346");
 		assertEquals(unitParser.extractUnits("0.cm"), "0");
 		assertEquals(unitParser.extractUnits("-00"), "-00");
 		assertEquals(unitParser.extractUnits("abc def"), "abc def");
 		assertEquals(unitParser.extractUnits("abc cm mm"), "abc cm mm");
 		assertEquals(unitParser.extractUnits("10cm 10mm"), "283.4646 28.3465");
 		assertEquals(unitParser.extractUnits("10in 10mm"), "720 28.3465");
+		assertEquals(unitParser.extractUnits("10 in 10 mm"), "720 28.3465");
 		assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
 		assertEquals(unitParser.extractUnits("007 11in"), "007 792");
+		assertEquals(unitParser.extractUnits("007 0011in"), "007 792");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testBlanks()
+	{
+		assertEquals(unitParser.extractUnits("0.1 cm"), "2.8346");
+		assertEquals(unitParser.extractUnits("10 cm 10  mm"), "283.4646 28.3465");
+		assertEquals(unitParser.extractUnits("10 in 10 mm"), "720 28.3465");
+		assertEquals(unitParser.extractUnits("10 in mm"), "10 in mm");
+		assertEquals(unitParser.extractUnits("10in mm"), "10in mm");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testCase()
+	{
+		assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
+		assertEquals(unitParser.extractUnits("10Cm 10  mm"), "283.4646 28.3465");
+		assertEquals(unitParser.extractUnits("10 In 10 MM"), "720 28.3465");
 	}
 
 	/**

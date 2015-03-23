@@ -68,7 +68,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDropItem;
 
 /**
@@ -107,5 +111,19 @@ public class WalkDropItem extends WalkXElement
 			return "ComponentRef";
 		}
 		return super.getRefName(val);
+	}
+
+	@Override
+	protected void cleanRef(KElement e, KElement trackElem, String val, String values)
+	{
+		if ("ProductRef".equals(val))
+		{
+			JDFNode n = xjdfToJDFImpl.currentJDFNode.getRoot().getChildJDFNode(values, false);
+			JDFComponent c = (JDFComponent) (n == null ? null : n.getResource(ElementName.COMPONENT, EnumUsage.Output, 0));
+			if (c != null)
+				values = c.getID();
+
+		}
+		super.cleanRef(e, trackElem, val, values);
 	}
 }

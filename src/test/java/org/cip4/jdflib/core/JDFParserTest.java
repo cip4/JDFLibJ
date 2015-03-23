@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -160,7 +160,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		{
 			new JDFParser().parseString(s);
 		}
-		System.out.println("new  p: " + (System.nanoTime() - l1) / 1000000);
+		log.info("new  p: " + (System.nanoTime() - l1) / 1000000);
 	}
 
 	/**
@@ -175,9 +175,9 @@ public class JDFParserTest extends JDFTestCaseBase
 		{
 			new JDFParser().parseString(s);
 		}
-		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		log.info("mem new:   " + getCurrentMem() + " " + mem);
 		assertTrue(getCurrentMem() - mem < 2000000);
-		System.out.println("new:   " + (System.nanoTime() - l1) / 1000000);
+		log.info("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final long l1 = System.currentTimeMillis();
 		final JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
 		assertNotNull(d);
-		System.out.println("big parse:   " + (System.currentTimeMillis() - l1) / 1000.000);
+		log.info("big parse:   " + (System.currentTimeMillis() - l1) / 1000.000);
 	}
 
 	/**
@@ -317,9 +317,9 @@ public class JDFParserTest extends JDFTestCaseBase
 		{
 			p.parseString(s);
 		}
-		System.out.println("mem reuse:   " + getCurrentMem() + " " + mem);
-		assertTrue(getCurrentMem() - mem < 1000000);
-		System.out.println("reuse: " + (System.nanoTime() - l1) / 1000000);
+		log.info("mem reuse:   " + getCurrentMem() + " " + mem);
+		assertTrue(getCurrentMem() - mem < 2000000);
+		log.info("reuse: " + (System.nanoTime() - l1) / 1000000);
 	}
 
 	/**
@@ -335,7 +335,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		{
 			assertNotNull(new JDFParser().parseString(s2));
 		}
-		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		log.info("mem new:   " + getCurrentMem() + " " + mem);
 		assertTrue(getCurrentMem() - mem < 1000000);
 		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));

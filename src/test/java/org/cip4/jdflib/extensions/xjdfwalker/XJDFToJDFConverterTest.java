@@ -218,7 +218,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNull(dp);
 		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
-		assertNotNull(di.getDropIntent(1));
+		assertNotNull("The ProductRef was not translated", di.getDropIntent(1).getDropItemIntent(0).getComponent());
 	}
 
 	/**

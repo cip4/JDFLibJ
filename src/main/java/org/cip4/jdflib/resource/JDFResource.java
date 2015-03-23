@@ -1007,7 +1007,7 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
-		public static final EnumPartIDKey ProductPart = new EnumPartIDKey("ProductPart");
+		public static final EnumPartIDKey ProductPart = new EnumPartIDKey(AttributeName.PRODUCTPART);
 		/**
 		 * 
 		 */
@@ -1031,7 +1031,7 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
-		public static final EnumPartIDKey RunPageRange = new EnumPartIDKey("RunPageRange");
+		public static final EnumPartIDKey RunPageRange = new EnumPartIDKey(AttributeName.RUNPAGERANGE);
 		/**
 		 * 
 		 */
@@ -1043,7 +1043,7 @@ public class JDFResource extends JDFElement
 		/**
 		 * 
 		 */
-		public static final EnumPartIDKey SetCopies = new EnumPartIDKey("SetCopies");
+		public static final EnumPartIDKey SetCopies = new EnumPartIDKey(AttributeName.SETCOPIES);
 		/**
 		 * 
 		 */
