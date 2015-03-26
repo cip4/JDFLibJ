@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.jdf</groupId>
 	<artifactId>JDFLibJ</artifactId>
-	<version>2.1.5.83-SNAPSHOT</version>
+	<version>2.1.5.83</version>
 	<name>CIP4 JDF Writer Java</name>
 	<description>CIP4 JDF Library for JDF 1.x</description>
 	<properties>
