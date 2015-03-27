@@ -22,7 +22,6 @@
         <url>https://stash.cip4.org/scm/lib/jdflibj.git</url>
         <developerConnection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</developerConnection>
         <connection>scm:git:https://stash.cip4.org/scm/lib/jdflibj.git</connection>
-      <tag>JDFLibJ-2.1.5.83</tag>
     </scm>
     <issueManagement>
         <system>JIRA</system>
