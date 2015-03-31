@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1726,7 +1726,8 @@ public class UrlUtil
 	}
 
 	/**
-	 * physically store the file at the location specified in dir and also modify this to reflect the new location
+	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
+	 * 
 	 * @param parent the parent element, trypically a filespec or preview
 	 * @param dir the directory to move to. dir is created if it does not exist. 
 	 * If dir exists and dir is not a directory, the call fails and null is returned
