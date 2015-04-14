@@ -68,61 +68,65 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.Vector;
-
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.ProductHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
+import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class WalkProductList extends WalkXElement
+public class WalkLayoutIntent extends WalkIntentResource
 {
+
 	/**
 	 * 
+	 * 
 	 */
-	public WalkProductList()
+	public WalkLayoutIntent()
 	{
 		super();
 	}
 
 	/**
 	 * @param e
-	 * @return the root, else null if we are in a second pass
+	 * @return the created resource
 	 */
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		final boolean bFirst = xjdfToJDFImpl.foundProductList;
-		xjdfToJDFImpl.foundProductList = true;
-		KElement eXJDF = e.getParentNode_KElement();
-		XJDFHelper h = new XJDFHelper(eXJDF);
-		// only convert products in the first pass
-		// TODO rethink product conversion switch
-		int numProductHelpers = h.numProductHelpers(true);
-		if (xjdfToJDFImpl.createProduct && (!xjdfToJDFImpl.foundProduct || numProductHelpers > 1))
-		{
-			if (!EnumType.Product.equals(xjdfToJDFImpl.currentJDFNode.getEnumType()))
-				xjdfToJDFImpl.createProductRoot();
-			xjdfToJDFImpl.firstproductInList = numProductHelpers <= 1;
-		}
-		Vector<ProductHelper> vRoot = h.getRootProductHelpers();
-		Vector<ProductHelper> vOther = h.getProductHelpers();
-		if(vRoot!=null && vOther!=null){
-			vOther.removeAll(vRoot);
-			for (ProductHelper ph : vOther)
-			{
-				e.moveElement(ph.getRoot(), null);
-			}
-		}
+		fixPrintedPages(e);
+		KElement ret = super.walk(e, trackElem);
+		return ret;
+	}
 
-		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
-		if (!"Product".equals(xjdfToJDFImpl.currentJDFNode.getType()))
-			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
-		e.deleteNode();
-		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
+	/**
+	 * 
+	 * @param e
+	 */
+	private void fixPrintedPages(KElement e) {
+		int printedPages=StringUtil.parseInt(e.getAttribute("PrintedPages", null, null), -1);
+		if(printedPages>=0){
+			int pages=StringUtil.parseInt(e.getAttribute(AttributeName.PAGES, null, null), -1);
+			if(pages<0){
+				EnumSides sides=EnumSides.getEnum(e.getAttribute(AttributeName.SIDES));
+				if(sides!=null){
+					int factor=(int)Math.PI-JDFLayoutIntent.getSideVector(sides).size();
+					e.setAttribute(AttributeName.PAGES, printedPages*factor,null);
+				}
+			}			
+		}	
 	}
 
 	/**
@@ -133,6 +137,6 @@ public class WalkProductList extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && ProductHelper.PRODUCTLIST.equals(toCheck.getLocalName());
+		return toCheck instanceof JDFLayoutIntent;
 	}
 }

@@ -66,73 +66,23 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.resource.intent;
 
-import java.util.Vector;
-
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.ProductHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+ * @author rainer prosi
+ *
  */
-public class WalkProductList extends WalkXElement
-{
+public class JDFLayoutIntentTest extends JDFTestCaseBase {
 	/**
-	 * 
-	 */
-	public WalkProductList()
-	{
-		super();
-	}
-
-	/**
-	 * @param e
-	 * @return the root, else null if we are in a second pass
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		final boolean bFirst = xjdfToJDFImpl.foundProductList;
-		xjdfToJDFImpl.foundProductList = true;
-		KElement eXJDF = e.getParentNode_KElement();
-		XJDFHelper h = new XJDFHelper(eXJDF);
-		// only convert products in the first pass
-		// TODO rethink product conversion switch
-		int numProductHelpers = h.numProductHelpers(true);
-		if (xjdfToJDFImpl.createProduct && (!xjdfToJDFImpl.foundProduct || numProductHelpers > 1))
-		{
-			if (!EnumType.Product.equals(xjdfToJDFImpl.currentJDFNode.getEnumType()))
-				xjdfToJDFImpl.createProductRoot();
-			xjdfToJDFImpl.firstproductInList = numProductHelpers <= 1;
-		}
-		Vector<ProductHelper> vRoot = h.getRootProductHelpers();
-		Vector<ProductHelper> vOther = h.getProductHelpers();
-		if(vRoot!=null && vOther!=null){
-			vOther.removeAll(vRoot);
-			for (ProductHelper ph : vOther)
-			{
-				e.moveElement(ph.getRoot(), null);
-			}
-		}
-
-		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
-		if (!"Product".equals(xjdfToJDFImpl.currentJDFNode.getType()))
-			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
-		e.deleteNode();
-		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return super.matches(toCheck) && ProductHelper.PRODUCTLIST.equals(toCheck.getLocalName());
+ * 
+ */
+	public void testGetSideVectorStatic() {
+		assertNull(JDFLayoutIntent.getSideVector(null));
+		assertEquals("Front",JDFLayoutIntent.getSideVector(EnumSides.OneSided).get(0));
+		assertEquals(2,JDFLayoutIntent.getSideVector(EnumSides.TwoSidedHeadToFoot).size());
 	}
 }

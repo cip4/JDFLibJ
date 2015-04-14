@@ -69,9 +69,11 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -88,6 +90,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
@@ -119,6 +122,24 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFNode root = d.getJDFRoot();
 		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+	/**
+	 *  
+	 *  
+	 */
+	@Test
+	public void testPrintedPages()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		KElement e = new XMLDoc("XJDF", null).getRoot();
+		KElement c =  e.getCreateXPathElement("ProductList/Product/Intent[@Name=\"LayoutIntent\"]/LayoutIntent");
+		c.setAttribute("Sides", EnumSides.OneSided.getName(),null);
+		c.setAttribute("PrintedPages", "21");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFLayoutIntent loi = (JDFLayoutIntent) root.getResource(ElementName.LAYOUTINTENT, EnumUsage.Input, 0);
+		assertEquals(loi.getPages().getActual(),42);
 	}
 
 	/**
@@ -161,6 +182,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	}
 
+	
 	/**
 	*  
 	*  

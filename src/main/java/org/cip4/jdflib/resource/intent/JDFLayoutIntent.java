@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -153,13 +153,22 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	public VString getSideVector()
 	{
 		EnumSides sides = getSides();
+		return getSideVector(sides);
+	}
+
+	/**
+	 * 
+	 * @param sides
+	 * @return
+	 */
+	public static VString getSideVector(EnumSides sides) {
 		if (sides == null)
 			return null;
 		VString v = new VString();
+		if (!EnumSides.OneSidedBack.equals(sides))
+			v.add(EnumSide.Front.getName());
 		if (!EnumSides.OneSided.equals(sides))
 			v.add(EnumSide.Back.getName());
-		else if (!EnumSides.OneSidedBack.equals(sides))
-			v.add(EnumSide.Front.getName());
 		return v;
 	}
 }
