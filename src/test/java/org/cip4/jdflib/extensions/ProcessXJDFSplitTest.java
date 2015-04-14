@@ -169,24 +169,5 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 		d.write2File(sm_dirTestDataTemp + "splitxjdfFile.jdf", 2, false);
 		//assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
 	}
-	
-	/**
-	 * 
-	 */
-	@Test
-	public void testSplitFromFileXJDF()
-	{
-		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
-		ProcessXJDFSplit splitter = new ProcessXJDFSplit();
-		splitter.addGroup(new VString("ImageSetting PreviewGeneration", null));
-	c.setSplitter(splitter);
-
-//		KElement root = XMLDoc.parseFile(sm_dirTestData + "29694232.ptk").getRoot();
-		KElement root = XMLDoc.parseFile("C:/data/xjdf/multi.xml").getRoot();
-//		KElement xjdf = root.getChildByTagName(XJDF20.rootName, null, 0, null, false, true);
-		JDFDoc d = c.convert(root);
-		d.write2File("c:/data/xjdf/converted.jdf", 2, false);
-		//assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));
-	}
 
 }
