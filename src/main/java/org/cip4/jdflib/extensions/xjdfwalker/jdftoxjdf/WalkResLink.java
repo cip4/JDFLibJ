@@ -125,6 +125,7 @@ public class WalkResLink extends WalkJDFElement
 			}
 			else
 			{
+				rl.setProcessUsage("Product");
 				setResource(rl, linkTarget, xjdf);
 			}
 		}

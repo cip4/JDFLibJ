@@ -73,9 +73,11 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -105,6 +107,13 @@ public class WalkSet extends WalkXElement
 		final JDFNode parentNode = (JDFNode) trackElem;
 		final JDFNode root = parentNode.getJDFRoot();
 		EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
+		String procUsage=StringUtil.getNonEmpty(e.getAttribute(AttributeName.PROCESSUSAGE));
+		if(ProductHelper.PRODUCT.equals(procUsage)){
+			
+			if(!EnumType.Product.equals(parentNode.getEnumType())){
+				return null;
+				}
+		}
 		final String id = e.getAttribute(AttributeName.ID, null, null);
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && SetHelper.PARAMETER_SET.equals(e.getLocalName()))
 		{

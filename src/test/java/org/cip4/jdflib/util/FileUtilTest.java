@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -136,6 +138,21 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		assertNull(FileUtil.getExtension(new File("foo")));
 		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	@Test
+	public void testGetBufferedOutputStream() throws IOException
+	{
+		File file = new File(sm_dirTestDataTemp+"bufOut.txt");
+		file.delete();
+		OutputStream os=FileUtil.getBufferedOutputStream(file);
+		os.write("abc".getBytes());
+		os.close();
+		assertTrue(file.exists());
 	}
 
 	/**

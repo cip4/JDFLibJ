@@ -228,6 +228,7 @@ public class WalkJDF extends WalkJDFElement
 		}
 		VString t1 = StringUtil.tokenize(types, null, false);
 		VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
+		t1.removeStrings("Product", 0);
 		t1.appendUnique(t2);
 		t1.removeStrings("ProcessGroup", 0);
 		t1.removeStrings("Combined", 0);

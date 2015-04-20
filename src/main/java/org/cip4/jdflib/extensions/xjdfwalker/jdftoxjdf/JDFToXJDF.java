@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -101,6 +102,8 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -243,7 +246,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	boolean bRetainSpawnInfo = false;
 	/**
-	 * set to update version stamps
+	 * set to update single node update
 	 */
 	private boolean bSingleNode = true;
 	/**
@@ -496,11 +499,17 @@ public class JDFToXJDF extends PackageElementWalker
 		try
 		{
 			final VElement v = rootNode.getvJDFNode(null, null, false);
-			final FileOutputStream fos = new FileOutputStream(fileName);
+			
+			final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
 			final ZipOutputStream zos = new ZipOutputStream(fos);
+			boolean keepProduct=wantProduct;
+			wantProduct=true;
 			for (int i = 0; i < v.size(); i++)
 			{
 				final JDFNode n = (JDFNode) v.elementAt(i);
+				if(!n.isProcessNode())
+					continue;
+			
 				String nam = n.getJobPartID(false);
 				if (nam == "")
 				{
@@ -514,7 +523,6 @@ public class JDFToXJDF extends PackageElementWalker
 					final KElement newRootL = makeNewJDF(n, null);
 					newRootL.getOwnerDocument_KElement().write2Stream(zos, 2, true);
 					zos.closeEntry();
-
 				}
 				catch (final ZipException x)
 				{
@@ -524,8 +532,10 @@ public class JDFToXJDF extends PackageElementWalker
 				{
 					log.error("oops: ", x);
 				}
+				wantProduct=false;
 			}
 			zos.close();
+			wantProduct=keepProduct;
 		}
 		catch (final IOException x)
 		{

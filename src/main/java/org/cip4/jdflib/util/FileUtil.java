@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -964,17 +964,7 @@ public class FileUtil
 	 */
 	public static BufferedOutputStream getBufferedOutputStream(File file)
 	{
-		FileOutputStream fos;
-		try
-		{
-			fos = new FileOutputStream(file);
-		}
-		catch (FileNotFoundException x)
-		{
-			return null;
-		}
-		BufferedOutputStream bos = new BufferedOutputStream(fos);
-		return bos;
+		return getBufferedOutputStream(file, false);
 	}
 
 	/**
@@ -988,6 +978,9 @@ public class FileUtil
 		if (file == null)
 			return null;
 
+		if(!append || !file.exists())
+			createNewFile(file);
+		
 		FileOutputStream fos;
 		try
 		{

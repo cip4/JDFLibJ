@@ -754,9 +754,9 @@ public class JDFDateTest extends JDFTestCaseBase
 			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 
-		if (PlatformUtil.isWindows())
+		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis()<1000*3600*4)
 		{
-			assertTrue(bSummer);
+			assertTrue("timezone test only in europe...",bSummer);
 		}
 	}
 
