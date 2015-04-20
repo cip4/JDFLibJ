@@ -75,7 +75,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 
-import org.apache.xerces.impl.XML11DocumentScannerImpl;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
@@ -93,16 +92,19 @@ public class XJDFZipReader implements IStreamWriter
 	/**
 	 * 
 	 */
-	public XJDFZipReader(InputStream inStream) {
+	public XJDFZipReader(InputStream inStream)
+	{
 		super();
-		theReader= ZipReader.getZipReader(inStream);
+		theReader = ZipReader.getZipReader(inStream);
 		theReader.setCaseSensitive(false);
-		newDoc=null;
+		newDoc = null;
 	}
+
 	/**
 	 * 
 	 */
-	public XJDFZipReader(File inFile) {
+	public XJDFZipReader(File inFile)
+	{
 		this(FileUtil.getBufferedInputStream(inFile));
 	}
 
@@ -113,31 +115,36 @@ public class XJDFZipReader implements IStreamWriter
 	 * 
 	 */
 	@Override
-	public void writeStream(OutputStream os) throws IOException {
-		if(newDoc==null)
+	public void writeStream(OutputStream os) throws IOException
+	{
+		if (newDoc == null)
 			convert();
-		if	(newDoc!=null)
+		if (newDoc != null)
 			newDoc.write2Stream(os, 2, false);
-		
+
 	}
 
 	/**
 	 * 
 	 */
-	public void convert() {
-		if(theReader!=null)
+	public void convert()
+	{
+		if (theReader != null)
 		{
-			XJDFToJDFConverter c=new XJDFToJDFConverter(null);
-			for(int i=0;true;i++){
-				ZipEntry ze=theReader.getMatchingEntry("*.xjdf",i);
-				if(ze==null){
+			XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+			for (int i = 0; true; i++)
+			{
+				ZipEntry ze = theReader.getMatchingEntry("*.xjdf", i);
+				if (ze == null)
+				{
 					break;
 				}
-				XMLDoc xdoc=theReader.getXMLDoc();
-				if(xdoc!=null){
-					newDoc=c.convert(xdoc.getRoot());
+				XMLDoc xdoc = theReader.getXMLDoc();
+				if (xdoc != null)
+				{
+					newDoc = c.convert(xdoc.getRoot());
 				}
 			}
-		}		
-	}	 
+		}
+	}
 }
