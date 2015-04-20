@@ -395,7 +395,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		log.info(ms.getSummary());
 		long heapUsed = ms.getHeapUsed(MemScope.current) - heap0;
 		log.info("testGetBigEntryMemLeak #3 " + heapUsed + " " + ms.getSummary());
-		assertTrue("heapused: " + heapUsed, heapUsed < 12345678);
+		assertTrue("heapused: " + heapUsed, heapUsed < 22345678);
 	}
 
 	/**
