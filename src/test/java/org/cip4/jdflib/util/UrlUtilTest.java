@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ package org.cip4.jdflib.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -94,6 +95,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.junit.Test;
@@ -232,6 +234,22 @@ public class UrlUtilTest extends JDFTestCaseBase
 		if (!isTestNetwork())
 			return;
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	@Test
+	public void testStreamWriter() throws IOException
+	{
+		if (!isTestNetwork())
+			return;
+		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream("abc".getBytes());
+		ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
+		assertNotNull(UrlUtil.writerToURL("http://www.example.com", new UrlUtil.StreamReader(inputStream), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null));
+		inputStream.close();
+		byteArrayIOStream.close();
 	}
 
 	/**

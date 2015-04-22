@@ -102,6 +102,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
@@ -1554,11 +1555,50 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
-		URLWriter urlWriter = new URLWriter(strUrl, stream, method, contentType, details);
+		StreamReader streamReader = stream == null ? null : new StreamReader(stream);
+		return writerToURL(strUrl, streamReader, method, contentType, details);
+	}
+
+	static class StreamReader implements IStreamWriter
+	{
+		/**
+		 * 
+		 * @param input
+		 */
+		StreamReader(InputStream input)
+		{
+			super();
+			this.input = input;
+		}
+
+		private final InputStream input;
+
+		@Override
+		public void writeStream(OutputStream os) throws IOException
+		{
+			IOUtils.copy(input, os);
+		}
+
+	}
+
+	/**
+	 * write the contents of an IStreamWriter to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
+	 * 
+	 * @param strUrl the URL to write to
+	 * @param streamWriter the IStreamWriter to read from
+	 * @param method HEAD, GET or POST
+	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param details
+	 * @return {@link UrlPart} the opened http connection, null in case of error
+	 * 
+	 */
+	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
+	{
+		URLWriter urlWriter = new URLWriter(strUrl, streamWriter, method, contentType, details);
 		return urlWriter.writeToURL();
 	}
 
-	private static class URLWriter
+	static class URLWriter
 	{
 		/**
 		 * @see java.lang.Object#toString()
@@ -1570,7 +1610,7 @@ public class UrlUtil
 		}
 
 		private final String strUrl;
-		private InputStream stream;
+		private IStreamWriter streamWriter;
 		private final String method;
 		private final String contentType;
 		private final HTTPDetails details;
@@ -1578,14 +1618,15 @@ public class UrlUtil
 		/**
 		 * @param strUrl the URL to write to
 		 * @param stream the input stream to read from
+		 * @param streamWriter
 		 * @param method HEAD, GET or POST
 		 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 		 * @param details
 		 */
-		public URLWriter(String strUrl, InputStream stream, final String method, String contentType, final HTTPDetails details)
+		URLWriter(String strUrl, IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
 		{
 			this.strUrl = strUrl;
-			this.stream = stream;
+			this.streamWriter = streamWriter;
 			this.method = method;
 			if (contentType == null)
 				contentType = TEXT_UNKNOWN;
@@ -1619,11 +1660,23 @@ public class UrlUtil
 
 				List<Proxy> list = ProxyUtil.getProxiesWithLocal(uri);
 
+				ByteArrayIOStream bufStream = streamWriter != null && list.size() > 1 ? new ByteArrayIOStream() : null;
+				if (bufStream != null)
+				{
+					try
+					{
+						streamWriter.writeStream(bufStream);
+					}
+					catch (IOException e)
+					{
+						bufStream = null;
+					}
+				}
 				for (Proxy proxy : list)
 				{
-					if (list.size() > 1)
+					if (bufStream != null)
 					{
-						stream = ByteArrayIOStream.getBufferedInputStream(stream);
+						streamWriter = new StreamReader(bufStream.getInputStream());
 					}
 					p = callProxy(proxy, list.size() == 1 || !proxy.equals(Proxy.NO_PROXY));
 					if (p != null)
@@ -1648,7 +1701,7 @@ public class UrlUtil
 		private UrlPart writeFile()
 		{
 			File f = urlToFile(strUrl);
-			f = FileUtil.streamToFile(stream, f);
+			f = FileUtil.writeFile(streamWriter, f);
 			try
 			{
 				return new UrlPart(f);
@@ -1698,12 +1751,12 @@ public class UrlUtil
 		 */
 		private void output(final HttpURLConnection httpURLconnection) throws IOException
 		{
-			boolean doOutput = stream != null;
+			boolean doOutput = streamWriter != null;
 			httpURLconnection.setDoOutput(doOutput);
 			if (doOutput)
 			{
 				final OutputStream out = httpURLconnection.getOutputStream();
-				IOUtils.copy(stream, out);
+				streamWriter.writeStream(out);
 				out.flush();
 				out.close();
 			}
