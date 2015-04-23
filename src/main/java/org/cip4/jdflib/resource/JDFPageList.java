@@ -229,8 +229,7 @@ public class JDFPageList extends JDFAutoPageList
 	 * ensure a normalized pagelist where @PageIndex is a single Integer and all PageData are ordered by PageIndex
 	 * @see org.cip4.jdflib.core.KElement#normalize()
 	 */
-	@Override
-	public void normalize()
+	public void uniqueIndex()
 	{
 		if (!isIndexed())
 		{

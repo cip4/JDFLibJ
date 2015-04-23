@@ -240,7 +240,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 4 5 "));
 		assertFalse(pl.isNormal());
-		pl.normalize();
+		pl.uniqueIndex();
 		assertTrue(pl.isNormal());
 		assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 6);
 	}
@@ -260,7 +260,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 		pd1.setPageIndex(new JDFIntegerRangeList("0  4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 8"));
 		assertFalse(pl.isNormal());
-		pl.normalize();
+		pl.uniqueIndex();
 		assertTrue(pl.isNormal());
 		assertTrue(pl.isIndexed());
 		assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 9);
@@ -285,7 +285,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 
 		}
 		assertFalse(pl.isNormal());
-		pl.normalize();
+		pl.uniqueIndex();
 		assertTrue(pl.isNormal());
 		assertEquals(pl.getChildrenByClass(JDFPageData.class, false, 0).size(), 160001);
 	}
