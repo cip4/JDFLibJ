@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -142,7 +142,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 */
 	public JDFIntegerRangeList(JDFIntegerRangeList irl)
 	{
-		rangeList = new Vector(irl.rangeList);
+		rangeList = new Vector<JDFRange>(irl.rangeList);
 		setDef(irl.getDef());
 	}
 
@@ -329,18 +329,17 @@ public class JDFIntegerRangeList extends JDFRangeList
 
 	public int getElement(int i) throws NoSuchElementException
 	{
-		int iLocal = i;
 
 		int n = this.getElementCount();
 
-		if ((iLocal >= n) || (iLocal < -n))
+		if ((i >= n) || (i < -n))
 		{
 			throw new NoSuchElementException("JDFIntegerRangeList::Element out of range error!");
 		}
 
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			return getElement(n + iLocal);
+			return getElement(n + i);
 		}
 
 		n = 0;
@@ -349,14 +348,14 @@ public class JDFIntegerRangeList extends JDFRangeList
 		{
 			JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(j);
 			int k = r.getElementCount();
-			if (iLocal >= k)
+			if (i >= k)
 			{
 				// go to next range
-				iLocal -= k;
+				i -= k;
 			}
 			else
 			{
-				return r.getElement(iLocal);
+				return r.getElement(i);
 			}
 		}
 
@@ -587,7 +586,8 @@ public class JDFIntegerRangeList extends JDFRangeList
 
 		if (oldRange != null)
 		{
-			rangeListToCheck = (Vector<JDFRange>) rangeList.clone();
+			rangeListToCheck = new Vector<JDFRange>();
+			rangeListToCheck.addAll(rangeList);
 			rangeListToCheck.remove(oldRange);
 		}
 

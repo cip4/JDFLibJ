@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,8 +83,11 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageList;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -205,7 +208,9 @@ public class JDFPageList extends JDFAutoPageList
 				{
 					JDFIntegerRangeList rl = pd.getPageIndex();
 					if (rl.inRange(index))
+					{
 						return pd;
+					}
 				}
 				return null;
 			}
@@ -218,5 +223,123 @@ public class JDFPageList extends JDFAutoPageList
 		{
 			return null;
 		}
+	}
+
+	/**
+	 * ensure a normalized pagelist where @PageIndex is a single Integer and all PageData are ordered by PageIndex
+	 * @see org.cip4.jdflib.core.KElement#normalize()
+	 */
+	@Override
+	public void normalize()
+	{
+		if (!isIndexed())
+		{
+			Vector<JDFPageData> v = getChildrenByClass(JDFPageData.class, false, 0);
+			if (v != null)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					v.get(i).setPageIndex(i);
+				}
+			}
+		}
+		else if (!isNormal())
+		{
+			Vector<JDFPageData> v = getChildrenByClass(JDFPageData.class, false, 0);
+			int lastEmpty = 0;
+			if (v != null)
+			{
+				int size = v.size();
+				for (int i = 0; i < size; i++)
+				{
+					JDFPageData pageData = v.get(i);
+					JDFIntegerRangeList irl = pageData.getPageIndex();
+					if (irl != null && irl.size() > 0)
+					{
+						JDFIntegerList il = irl.getIntegerList();
+						if (il.size() > 1)
+						{
+							pageData.setPageIndex(il.getInt(0));
+							for (int index = 1; index < il.size(); index++)
+							{
+								JDFPageData pd2 = (JDFPageData) copyElement(pageData, null);
+								pd2.setPageIndex(il.getInt(index));
+								v.add(pd2);
+							}
+						}
+					}
+					else
+					{
+						v.remove(pageData);
+						v.insertElementAt(pageData, lastEmpty++);
+					}
+				}
+				for (int i = 0; i < lastEmpty; i++)
+				{
+					v.remove(0).deleteNode();
+				}
+				v.sort(new KElement.SingleAttributeComparator(AttributeName.PAGEINDEX, false));
+
+				// remove any duplicates
+				for (int i = 0; i < v.size(); i++)
+				{
+					JDFPageData pd = v.get(i);
+					int index = StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1);
+					if (index < i)
+					{
+						pd.deleteNode();
+						v.remove(i);
+						i--;
+
+					}
+					else
+					{
+						while (index > i)
+						{
+							JDFPageData newPageData = appendPageData();
+							v.insertElementAt(newPageData, i);
+							newPageData.setPageIndex(i++);
+						}
+						moveElement(pd, null);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @return true if pageData are ordered and all pagedata elements have a single index
+	 */
+	public boolean isNormal()
+	{
+		JDFPageData pd = getFirstChildElement(JDFPageData.class);
+		for (int i = 0; pd != null; i++)
+		{
+			if (StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1) != i)
+			{
+				return false;
+			}
+			pd = pd.getNextSiblingElement(JDFPageData.class);
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * @return true if all pagedata element have an index
+	 */
+	public boolean isIndexed()
+	{
+		JDFPageData pd = getPageData(0);
+		while (pd != null)
+		{
+			if (StringUtil.getNonEmpty(pd.getAttribute(AttributeName.PAGEINDEX, null, null)) == null)
+			{
+				return false;
+			}
+			pd = pd.getNextSiblingElement(JDFPageData.class);
+		}
+		return true;
 	}
 }

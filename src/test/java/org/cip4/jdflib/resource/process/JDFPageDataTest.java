@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,8 +77,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFPageList;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * 
  * 
@@ -116,11 +116,11 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	public void testRefContentData()
 	{
 		for (int i = 0; i < 10; i++)
-			Assert.assertEquals(cl.appendContentData().getIndex(), i);
+			assertEquals(cl.appendContentData().getIndex(), i);
 		JDFContentData cd = cl.appendContentData();
 		JDFPageData pd = pl.appendPageData();
 		pd.refContentData(cd);
-		Assert.assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
+		assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class JDFPageDataTest extends JDFTestCaseBase
 		for (int i = 0; i < 10; i++)
 		{
 			pl.appendPageData();
-			Assert.assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().getInt(0), i);
-			Assert.assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().size(), 1);
+			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().getInt(0), i);
+			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().size(), 1);
 		}
 	}
 
@@ -144,10 +144,22 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	public void testGetAssemblyID()
 	{
 		JDFPageData d = pl.appendPageData();
-		Assert.assertEquals(d.getAssemblyID(), "");
+		assertEquals(d.getAssemblyID(), "");
 		pl.setAssemblyID("foo");
-		Assert.assertEquals(d.getAssemblyID(), "foo");
+		assertEquals(d.getAssemblyID(), "foo");
 		d.setAssemblyID("bar");
-		Assert.assertEquals(d.getAssemblyID(), "bar");
+		assertEquals(d.getAssemblyID(), "bar");
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testSetPageIndex()
+	{
+		JDFPageData d = pl.appendPageData();
+		d.setPageIndex(1);
+		assertEquals(d.getPageIndex().getElement(0), 1);
+		assertEquals(d.getPageIndex().size(), 1);
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -202,5 +202,16 @@ public class JDFPageData extends JDFAutoPageData
 	{
 		KElement parent = getParentNode_KElement();
 		return (parent instanceof JDFPageList) ? (JDFPageList) parent : null;
+	}
+
+	/**
+	 * convenience for a single integer index
+	 * @param value the integer value
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#setPageIndex(org.cip4.jdflib.datatypes.JDFIntegerRangeList)
+	 */
+	public void setPageIndex(int value)
+	{
+		setAttribute(AttributeName.PAGEINDEX, value, null);
 	}
 }
