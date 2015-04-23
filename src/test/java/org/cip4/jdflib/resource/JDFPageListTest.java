@@ -230,7 +230,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	* @throws Exception
 	*/
 	@Test
-	public void testNormalize() throws Exception
+	public void testUniqueIndex() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
@@ -250,7 +250,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	* @throws Exception
 	*/
 	@Test
-	public void testNormalizeMissing() throws Exception
+	public void testUniqueIndexMissing() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		JDFPageData pd1 = pl.appendPageData();
@@ -271,7 +271,7 @@ public class JDFPageListTest extends JDFTestCaseBase
 	* @throws Exception
 	*/
 	@Test
-	public void testNormalizePerformance() throws Exception
+	public void testUniqueIndexPerformance() throws Exception
 	{
 		assertTrue(pl.isNormal());
 		for (int i = 0; i <= 10000; i++)

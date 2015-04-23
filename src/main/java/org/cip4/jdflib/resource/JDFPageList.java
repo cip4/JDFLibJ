@@ -78,13 +78,12 @@
  */
 package org.cip4.jdflib.resource;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageList;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPageData;
@@ -279,23 +278,24 @@ public class JDFPageList extends JDFAutoPageList
 					v.remove(0).deleteNode();
 				}
 
-				Comparator<KElement> c = new SingleAttributeComparator(AttributeName.PAGEINDEX, false);
-				v.sort(c);
+				Collections.sort(v, new SingleAttributeComparator(AttributeName.PAGEINDEX, false));
 
-				// remove any duplicates
+				// bake in reordered list
 				for (int i = 0; i < v.size(); i++)
 				{
 					JDFPageData pd = v.get(i);
 					int index = StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1);
+
+					// remove any duplicates					
 					if (index < i)
 					{
 						pd.deleteNode();
 						v.remove(i);
 						i--;
-
 					}
 					else
 					{
+						// insert missing dummies
 						while (index > i)
 						{
 							JDFPageData newPageData = appendPageData();
