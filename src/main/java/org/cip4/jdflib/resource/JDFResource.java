@@ -2055,14 +2055,14 @@ public class JDFResource extends JDFElement
 			{
 				if (!isLeaf())
 				{
-					throw new JDFException("addPartion: adding inconsistent partition ID=" + getID() + " - parent must be a leaf");
+					throw new JDFException("addPartition: adding inconsistent partition ID=" + getID() + " - parent must be a leaf");
 				}
 			}
 			else if (posOfType == 0)
 			{
 				if (!isResourceRootRoot())
 				{
-					throw new JDFException("addPartion: adding inconsistent partition ID=" + getID() + " - must be root");
+					throw new JDFException("addPartition: adding inconsistent partition ID=" + getID() + " - must be root");
 				}
 			}
 			else
@@ -2072,7 +2072,7 @@ public class JDFResource extends JDFElement
 					final String parentPart = partIDKeys.get(posOfType - 1);
 					if (!hasAttribute_KElement(parentPart, null, false))
 					{
-						throw new JDFException("addPartion: adding inconsistent partition  ID=" + getID() + "- parent must have partIDKey: " + parentPart);
+						throw new JDFException("addPartition: adding inconsistent partition  ID=" + getID() + "- parent must have partIDKey: " + parentPart);
 					}
 				}
 			}
@@ -2086,7 +2086,7 @@ public class JDFResource extends JDFElement
 			JDFResource p = getFastPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
 			if (p != null)
 			{
-				throw new JDFException("addPartion: adding duplicate partition for ID=" + getID() + " " + partType + "=" + value);
+				throw new JDFException("addPartition: adding duplicate partition for ID=" + getID() + " " + partType + "=" + value);
 			}
 
 			p = (JDFResource) appendElement(getNodeName(), getNamespaceURI());
