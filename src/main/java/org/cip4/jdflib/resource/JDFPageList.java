@@ -78,6 +78,7 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.Comparator;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -277,7 +278,9 @@ public class JDFPageList extends JDFAutoPageList
 				{
 					v.remove(0).deleteNode();
 				}
-				v.sort(new KElement.SingleAttributeComparator(AttributeName.PAGEINDEX, false));
+
+				Comparator<KElement> c = new SingleAttributeComparator(AttributeName.PAGEINDEX, false);
+				v.sort(c);
 
 				// remove any duplicates
 				for (int i = 0; i < v.size(); i++)
