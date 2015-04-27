@@ -582,6 +582,10 @@ public class JDFDateTest extends JDFTestCaseBase
 		final JDFDate date4 = new JDFDate("2001-12-19T07:00:11.300Z");
 		final String strDate4 = date4.getDateTimeISO();
 		assertEquals("Bug " + strDate + " is not equal to " + strDate4, date, date4);
+
+		final JDFDate dateLess = new JDFDate(timeMilli / 1000l);
+		assertEquals(dateLess.getDateISO(), date.getDateISO());
+		assertEquals(dateLess.getDateTimeISO(), date.getDateTimeISO());
 	}
 
 	/**
@@ -754,9 +758,36 @@ public class JDFDateTest extends JDFTestCaseBase
 			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 
-		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis()<1000*3600*4)
+		if (PlatformUtil.isWindows() && d.getTimeZoneOffsetInMillis() < 1000 * 3600 * 4)
 		{
-			assertTrue("timezone test only in europe...",bSummer);
+			assertTrue("timezone test only in europe...", bSummer);
+		}
+	}
+
+	/**
+	* @throws DataFormatException
+	* 
+	*/
+	@Test
+	public void testTimeZoneSwitch() throws DataFormatException
+	{
+		JDFDate d = JDFDate.createDate("2015-10-25T01:59:58+02:00");
+		boolean notSame = false;
+		String date = "2015-10-25T01:59:58";
+		JDFDate d2 = JDFDate.createDate(date);
+
+		notSame = d2.getTimeZoneOffsetInMillis() != d.getTimeZoneOffsetInMillis();
+		if (notSame)
+		{
+			log.info("tz " + d2 + " old: " + d);
+		}
+		date = "2015-10-25T02:59:58";
+		d2 = JDFDate.createDate(date);
+
+		notSame = d2.getTimeZoneOffsetInMillis() != d.getTimeZoneOffsetInMillis();
+		if (notSame)
+		{
+			log.info("tz2 " + d2 + " old: " + d);
 		}
 	}
 

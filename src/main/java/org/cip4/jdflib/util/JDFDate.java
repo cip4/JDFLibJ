@@ -103,8 +103,8 @@ import org.cip4.jdflib.core.VString;
  */
 public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDate>
 {
-	private long lTimeInMillis = 0;
-	private int m_TimeZoneOffsetInMillis = 0; // in milliseconds from GMT-time
+	private long lTimeInMillis;
+	private int m_TimeZoneOffsetInMillis; // in milliseconds from GMT-tim
 	static int defaultHour = 12;
 
 	/**
@@ -166,26 +166,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	private static class FastCalendar
 	{
 		private final GregorianCalendar gregcal;
-		private final TimeZone tz;
 
 		/**
 		 * class to reuse one gregorian calendar and synchronize it
 		 */
-		protected FastCalendar()
+		FastCalendar()
 		{
 			super();
 			gregcal = new GregorianCalendar();
-			tz = TimeZone.getDefault();
-		}
-
-		/**
-		 * @param timeInMillis 
-		 * @return 
-		 * 
-		 */
-		protected synchronized int getTimeZoneOffset(long timeInMillis)
-		{
-			return tz.getOffset(timeInMillis);
 		}
 
 		/**
@@ -194,7 +182,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		 * @param tzInMillis 
 		 * @return
 		 */
-		protected synchronized long getTimeInMillis(final byte[] b, int decimalLength, int tzInMillis)
+		synchronized long getTimeInMillis(final byte[] b, int decimalLength, int tzInMillis)
 		{
 			final int iYear = getIntFromPos(b, 0, 4);
 			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
@@ -264,8 +252,15 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public JDFDate(final long iTime)
 	{
-		lTimeInMillis = iTime;
-		m_TimeZoneOffsetInMillis = fastCalendar.getTimeZoneOffset(lTimeInMillis);
+		try
+		{
+			new StringHandler(iTime).handle();
+		}
+		catch (DataFormatException e)
+		{
+			lTimeInMillis = iTime;
+			m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(iTime);
+		}
 	}
 
 	/**
@@ -362,6 +357,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		if (strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
 		{
 			lTimeInMillis = System.currentTimeMillis();
+			m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(lTimeInMillis);
 			return;
 		}
 
@@ -386,11 +382,26 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		private String strDateTime;
 		private long l;
 
-		public StringHandler(String strDateTime)
+		/**
+		 * 
+		 * @param strDateTime
+		 */
+		StringHandler(String strDateTime)
 		{
 			super();
 			this.strDateTime = strDateTime;
 			l = StringUtil.parseLong(strDateTime, -1);
+		}
+
+		/**
+		 * 
+		 * @param millis
+		 */
+		StringHandler(long millis)
+		{
+			super();
+			this.strDateTime = "";
+			l = millis;
 		}
 
 		/**
@@ -569,7 +580,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// check if there is an +xx:00 or -xx:00 at the end specifying the time zone
 			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
 			{
-				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 			}
 			else
 			{
@@ -614,7 +625,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			if (strDateTime.indexOf("T") == -1)
 			{
-				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 				if (l > 1000 && l < 5000)
 					strDateTime += "-01-01";
 				if (strDateTime.length() == 7)
@@ -639,9 +650,15 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			long l0 = System.currentTimeMillis();
 			if (l0 / l >= 900) // this is roughly 10 years back
-				l *= 1000; // assume seconds
+				l *= 1000l; // assume seconds
 			lTimeInMillis = l;
-			m_TimeZoneOffsetInMillis = fastCalendar.getTimeZoneOffset(lTimeInMillis);
+			m_TimeZoneOffsetInMillis = TimeZone.getDefault().getOffset(lTimeInMillis);
+		}
+
+		@Override
+		public String toString()
+		{
+			return "StringHandler [strDateTime=" + strDateTime + ", l=" + l + "]";
 		}
 	}
 
