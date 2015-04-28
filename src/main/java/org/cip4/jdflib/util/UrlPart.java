@@ -232,7 +232,9 @@ public class UrlPart implements IPollDetails
 	public void buffer()
 	{
 		if (bufferStream == null)
-			bufferStream = new ByteArrayIOStream(inStream);
+		{
+			bufferStream = new ByteArrayIOFileStream(inStream, 10000000);
+		}
 	}
 
 	/**
@@ -261,5 +263,13 @@ public class UrlPart implements IPollDetails
 	public boolean isPush()
 	{
 		return false;
+	}
+
+	@Override
+	protected void finalize() throws Throwable
+	{
+		if (bufferStream != null)
+			bufferStream.close();
+		super.finalize();
 	}
 }
