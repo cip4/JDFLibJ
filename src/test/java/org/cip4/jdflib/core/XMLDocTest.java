@@ -765,20 +765,20 @@ public class XMLDocTest extends JDFTestCaseBase
 		final KElement b = e.appendElement("b");
 		ByteArrayIOStream bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
-		String s = bos.toString();
+		String s = new String(bos.getBuf());
 		assertTrue(s.indexOf("\n ") > 0);
 		final String text = "aa\nbb\n";
 		b.setText(text);
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
-		s = bos.toString();
+		s = new String(bos.getBuf());
 		assertTrue(s.indexOf(text) > 0);
 		final JDFParser p = new JDFParser();
 		// JDFDoc dd =
 		p.parseStream(bos.getInputStream());
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
-		s = bos.toString();
+		s = new String(bos.getBuf());
 		assertTrue(s.indexOf(text) > 0);
 	}
 

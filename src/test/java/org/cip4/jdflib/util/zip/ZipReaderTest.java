@@ -386,6 +386,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
 		assertNotNull(e);
 		log.info("testGetBigEntryMemLeak #2 " + ms.getSummary());
+		r.close();
 		e = null;
 		r = null;
 		System.gc();
@@ -520,6 +521,27 @@ public class ZipReaderTest extends JDFTestCaseBase
 		assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
 		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
 		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetMatchingEntryEscapedFile()
+	{
+		ZipReader r = new ZipReader(new File(sm_dirTestData + "testZip.zip"), 33);
+		assertNotNull(r.getMatchingEntry("*boo.pdf", 0));
+		assertNotNull(r.getMatchingEntry("*a%20b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("* b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/???.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/%20*.pdf", 0));
+		r.setCaseSensitive(false);
+		assertNotNull(r.getMatchingEntry("content/A%20b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/A b.pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/???.Pdf", 0));
+		assertNotNull(r.getMatchingEntry("content/%20.Pdf", 0));
+		r.close();
 	}
 
 	/**

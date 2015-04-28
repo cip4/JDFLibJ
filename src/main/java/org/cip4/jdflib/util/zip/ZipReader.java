@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.ByteArrayIOFileStream;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.FileUtil;
@@ -98,11 +99,22 @@ import org.cip4.jdflib.util.UrlUtil;
 public class ZipReader
 {
 	final InputStream is;
-	ByteArrayIOInputStream bios;
+	ByteArrayIOStream bios;
 	ZipInputStream zis;
 	final Log log;
 	ZipEntry currentEntry;
 	String rootEntry;
+	int maxBuffer;
+
+	public int getMaxBuffer()
+	{
+		return maxBuffer;
+	}
+
+	public void setMaxBuffer(int maxBuffer)
+	{
+		this.maxBuffer = maxBuffer;
+	}
 
 	/**
 	 * Getter for rootEntry name attribute.
@@ -147,11 +159,23 @@ public class ZipReader
 	/**
 	 * 
 	 * @param inStream
+	 * @param maxBuffer
 	 */
 	public ZipReader(InputStream inStream)
 	{
+		this(inStream, 10000000);
+	}
+
+	/**
+	 * 
+	 * @param inStream
+	 * @param maxBuffer
+	 */
+	public ZipReader(InputStream inStream, int maxBuffer)
+	{
 		log = LogFactory.getLog(getClass());
 		is = inStream;
+		this.maxBuffer = maxBuffer;
 		zis = new ZipInputStream(is);
 		bios = null;
 		caseSensitive = true;
@@ -163,10 +187,27 @@ public class ZipReader
 	 */
 	public ZipReader(File file)
 	{
-		this(FileUtil.getBufferedInputStream(file));
+		this(file, 10000000);
+	}
+
+	/**
+	* 
+	* @param file the file to read
+	*/
+	public ZipReader(File file, int maxBuffer)
+	{
+		log = LogFactory.getLog(getClass());
+		this.maxBuffer = maxBuffer;
+		zis = null;
+		is = null;
+		bios = new ByteArrayIOFileStream(file, maxBuffer);
+		caseSensitive = true;
 		//the local path is either really at null or in a directory root defined by filename (e.g. when using mac os compress of a directory)
+		reset();
 		if (file != null)
+		{
 			setRootEntry(UrlUtil.newExtension(file.getName(), null) + "/");
+		}
 	}
 
 	/**
@@ -548,9 +589,26 @@ public class ZipReader
 	{
 		if (bios == null)
 		{
-			bios = ByteArrayIOStream.getBufferedInputStream(is);
+			bios = new ByteArrayIOFileStream(is, maxBuffer);
 		}
 		reset();
+	}
+
+	public void close()
+	{
+		if (bios != null)
+			bios.close();
+		if (zis != null)
+		{
+			try
+			{
+				zis.close();
+			}
+			catch (IOException e)
+			{
+
+			}
+		}
 	}
 
 	/**
@@ -560,8 +618,7 @@ public class ZipReader
 	{
 		if (bios != null)
 		{
-			bios.reset();
-			zis = new ZipInputStream(bios.getNewStream());
+			zis = new ZipInputStream(bios.getInputStream());
 		}
 	}
 
@@ -582,5 +639,16 @@ public class ZipReader
 	public static ZipReader getZipReader(File jarFile)
 	{
 		return getZipReader(FileUtil.getBufferedInputStream(jarFile));
+	}
+
+	/**
+	 * 
+	 * @throws Throwable
+	 */
+	@Override
+	protected void finalize() throws Throwable
+	{
+		close();
+		super.finalize();
 	}
 }

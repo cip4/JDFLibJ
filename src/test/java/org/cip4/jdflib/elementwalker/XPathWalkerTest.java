@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,6 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -150,8 +149,8 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setAttributeValue(true);
 		w.setDatatype(true);
 		w.walkAll(intent);
-		String s = ios.toString();
-		Assert.assertTrue(s.indexOf("@SizePolicy,Tile,enumeration") > 0);
+		String s = new String(ios.getBuf());
+		assertTrue(s.indexOf("@SizePolicy,Tile,enumeration") > 0);
 	}
 
 	/**
@@ -169,8 +168,8 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setAttributeValue(true);
 		w.setDatatype(true);
 		w.walkAll(d.getRoot());
-		String s = ios.toString();
-		Assert.assertTrue(s.indexOf("JDF/AuditPool") > 0);
+		String s = new String(ios.getBuf());
+		assertTrue(s.indexOf("JDF/AuditPool") > 0);
 	}
 
 	/**
@@ -193,7 +192,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		w.setMethod(0);
 		w.walkAll(d.getRoot());
 		String s = ios.toString();
-		Assert.assertTrue(StringUtil.tokenize(s, "\n", false).size() < 50);
+		assertTrue(StringUtil.tokenize(s, "\n", false).size() < 50);
 	}
 
 	/**

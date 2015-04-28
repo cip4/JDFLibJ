@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,15 +68,7 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
+
 package org.cip4.jdflib.util;
 
 import java.io.IOException;
@@ -87,7 +79,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 /**
  * stream class that allows allows skipping until a certain tag is found
  * 
- * @author prosirai
+ * @author rainer prosi
  * 
  */
 public class SkipInputStream extends ByteArrayIOInputStream

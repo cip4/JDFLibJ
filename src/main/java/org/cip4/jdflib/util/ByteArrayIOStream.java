@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,6 +88,7 @@ import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.util.ByteArrayIOFileStream.ByteArrayIOFileInputStream;
 
 /**
  * Shared input / outputStream class write once, read many...
@@ -115,7 +116,8 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		return inputStream;
 	}
 
-	private final Log log;
+	final Log log;
+	int pos;
 
 	/**
 	 * 
@@ -129,7 +131,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		 * 
 		 * @param pos
 		 */
-		public void seek(int pos)
+		public void seek(long pos)
 		{
 			if (pos < 0)
 			{
@@ -139,14 +141,14 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 				pos = 0;
 			if (pos > count)
 				pos = count;
-			this.pos = pos;
+			this.pos = (int) pos;
 		}
 
 		/**
 		 * 
 		 * @return
 		 */
-		public int tell()
+		public long tell()
 		{
 			return pos;
 		}
@@ -174,7 +176,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 		/**
 		 * creates an input output stream class from any stream
-		 * if is alraedy is a buffered inputstream, no copy is made
+		 * if is already is a buffered inputstream, no copy is made
 		 * 
 		 * @param is the inputstream to buffer
 		 */
@@ -189,7 +191,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 		/**
 		 * 
-		 * get a new input stream that starts fresh at 0 
+		 * get a new input stream that starts at pos
 		 * @return
 		 */
 		public ByteArrayIOInputStream getNewStream()
@@ -219,7 +221,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		 * 
 		 * @return
 		 */
-		public int getCount()
+		public long getCount()
 		{
 			return count;
 		}
@@ -232,6 +234,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	{
 		super();
 		log = LogFactory.getLog(getClass());
+		pos = 0;
 	}
 
 	/**
@@ -242,6 +245,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final int i)
 	{
 		super(i);
+		pos = 0;
 		log = LogFactory.getLog(getClass());
 	}
 
@@ -255,15 +259,25 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	{
 		super(1000);
 		log = LogFactory.getLog(getClass());
+		setStream(is);
+	}
+
+	/**
+	 * 
+	 * @param is
+	 */
+	void setStream(final InputStream is)
+	{
 		if (is == null)
 		{
 			return;
 		}
-		if (is instanceof ByteArrayIOInputStream)
+		if (is instanceof ByteArrayIOInputStream && !(is instanceof ByteArrayIOFileInputStream))
 		{
 			ByteArrayIOInputStream bis = (ByteArrayIOInputStream) is;
 			buf = bis.getBuf();
-			count = bis.getCount();
+			count = (int) bis.getCount();
+			pos = (int) bis.tell();
 		}
 		else
 		{
@@ -297,15 +311,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 			buf = new byte[(int) f.length() + 100];
 		}
 		final InputStream fis = FileUtil.getBufferedInputStream(f);
-		if (fis != null)
-		{
-			IOUtils.copy(fis, this);
-			fis.close();
-		}
-		else
-		{
-			log.warn("cannot create buffered stream for: " + f);
-		}
+		setStream(fis);
 	}
 
 	/**
@@ -328,7 +334,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 */
 	public ByteArrayIOInputStream getInputStream()
 	{
-		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, count);
+		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, pos, count);
 		return is;
 	}
 
@@ -350,7 +356,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	@Override
 	public synchronized String toString()
 	{
-		return "ByteArrayIOStream:\n" + new String(buf, 0, count);
+		return "ByteArrayIOStream: " + count;
 	}
 
 	/**
