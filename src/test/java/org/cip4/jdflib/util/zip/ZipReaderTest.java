@@ -77,6 +77,7 @@ import java.util.zip.ZipEntry;
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.ByteArrayIOFileStream;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MemorySpy;
@@ -188,6 +189,44 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetStream() throws IOException
 	{
 		ByteArrayIOStream crap = new ByteArrayIOStream();
+		for (int i = 0; i < 1; i++)
+		{
+			crap.write('P');
+			crap.write('K');
+			crap.write(3);
+			crap.write(4);
+			for (int j = 0; j < 3333; j++)
+			{
+				crap.write(j % 256);
+			}
+		}
+
+		InputStream is = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "schema.zip"));
+		IOUtils.copy(is, crap);
+		for (int j = 0; j < 333; j++)
+		{
+			crap.write(j % 256);
+		}
+
+		ZipReader r = ZipReader.getZipReader(crap.getInputStream());
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/BarcodeDetails.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+		r.close();
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 *  
+	 */
+	@Test
+	public void testGetStreamFile() throws IOException
+	{
+		ByteArrayIOStream crap = new ByteArrayIOFileStream(999);
 		for (int i = 0; i < 1; i++)
 		{
 			crap.write('P');
@@ -430,7 +469,7 @@ public class ZipReaderTest extends JDFTestCaseBase
 	@Test
 	public void testGetBigEntryStream() throws IOException
 	{
-		ByteArrayIOStream bos = new ByteArrayIOStream(new File(sm_dirTestData + "dir1.zip"));
+		ByteArrayIOStream bos = new ByteArrayIOFileStream(new File(sm_dirTestData + "dir1.zip"), 444444, true);
 		ZipReader r = new ZipReader(bos.getInputStream());
 		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
 		assertNotNull(e);
