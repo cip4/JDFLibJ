@@ -200,7 +200,7 @@ public class ZipReader
 		this.maxBuffer = maxBuffer;
 		zis = null;
 		is = null;
-		bios = new ByteArrayIOFileStream(file, maxBuffer);
+		bios = new ByteArrayIOFileStream(file, maxBuffer, true);
 		caseSensitive = true;
 		//the local path is either really at null or in a directory root defined by filename (e.g. when using mac os compress of a directory)
 		reset();

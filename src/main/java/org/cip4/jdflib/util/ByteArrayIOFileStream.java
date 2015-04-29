@@ -351,10 +351,11 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	 * create a ByteArrayIOStream from a file
 	 * @param f the file
 	 * @param maxLength the maximum length in memory
+	 * @param readOnly
 	 * 
 	 * @throws IOException
 	 */
-	public ByteArrayIOFileStream(final File f, long maxLength)
+	public ByteArrayIOFileStream(final File f, long maxLength, boolean readOnly)
 	{
 		this(maxLength);
 		if (f == null)
@@ -366,7 +367,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		{
 			try
 			{
-				os = new RandomAccessFile(f, "rw");
+				os = new RandomAccessFile(f, readOnly ? "r" : "rw");
 			}
 			catch (FileNotFoundException e)
 			{

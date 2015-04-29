@@ -169,14 +169,14 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			fos.write(i % 256);
 		}
 		fos.close();
-		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 333);
+		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 333, true);
 		InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
 			assertEquals(is.read(), i % 256);
 		}
 		ios.close();
-		ios = new ByteArrayIOFileStream(f, 333333);
+		ios = new ByteArrayIOFileStream(f, 333333, true);
 		is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
@@ -194,13 +194,13 @@ public class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 	{
 		File f = new File(sm_dirTestDataTemp + "bios.fil");
 		f.delete();
-		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200);
+		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 200, true);
 		InputStream is = ios.getInputStream();
 		assertEquals(is.available(), 0);
 		ios.close();
 		// now null
 		f = null;
-		ios = new ByteArrayIOFileStream(f, 200);
+		ios = new ByteArrayIOFileStream(f, 200, true);
 		is = ios.getInputStream();
 		assertEquals(is.available(), 0);
 		ios.close();
