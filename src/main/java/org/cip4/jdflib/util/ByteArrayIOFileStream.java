@@ -555,14 +555,16 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				{
 					ensureStream(avail);
 					IOUtils.copy(is, this);
-					return;
+				}
+				else
+				{
+					super.setStream(is);
 				}
 			}
 			catch (IOException e)
 			{
 			}
 		}
-		super.setStream(is);
 	}
 
 	/**
