@@ -538,7 +538,14 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	@Override
 	void setStream(InputStream is)
 	{
-		if (is != null)
+		if (is instanceof ByteArrayIOFileInputStream)
+		{
+			ByteArrayIOFileInputStream bais = (ByteArrayIOFileInputStream) is;
+			file = bais.ios.file;
+			isTmpFile = false;
+			os = bais.ios.os;
+		}
+		else if (is != null)
 		{
 			int avail = 0;
 			try
