@@ -121,7 +121,6 @@ public class UrlPartTest extends JDFTestCaseBase
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
 		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(writeToURL.getResponseStream());
-		assertTrue(writeToURL.toString().contains(byteArrayIOStream.toString()));
 		byteArrayIOStream.close();
 	}
 
