@@ -162,7 +162,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	public void testPlateType()
 	{
 		final JDFDoc d = p.parseFile(sm_dirTestData + "Example8-15.jdf");
-		assertNotNull(d);
+		assertNotNull(sm_dirTestData + "Example8-15.jdf", d);
 		assertNull(p.m_lastExcept);
 	}
 
