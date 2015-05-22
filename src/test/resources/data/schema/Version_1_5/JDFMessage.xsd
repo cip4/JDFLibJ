@@ -3661,6 +3661,15 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="QueueSubmissionParams_m" mixed="false">
+		<xs:annotation>
+			<xs:appinfo>
+				<Version Path="@GangName" First="1.3"/>
+				<Version Path="@GangPolicy" First="1.3"/>
+				<Version Path="@refID" First="1.2"/>
+				<Version Path="@ReturnJMF" First="1.2"/>
+				<Version Path="@ReturnURL" First="1.2"/>
+			</xs:appinfo>
+		</xs:annotation>
 		<xs:complexContent mixed="false">
 			<xs:extension base="jdf:CommandTypeObj_">
 				<xs:sequence minOccurs="0" maxOccurs="unbounded">

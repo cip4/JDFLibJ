@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <!--
-    The CIP4 Software License, Version 1.0 Copyright (c) 2001-2014 The International Cooperation for the Integration of Processes in Prepress, Press and
-    Postpress (CIP4). All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+    The CIP4 Software License, Version 1.0 
+    Copyright (c) 2001-2015 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). 
+    All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
     following conditions are met: 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following
     disclaimer. 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution. 3. The end-user documentation included with the redistribution, if any, must include
@@ -1229,11 +1230,11 @@
         <Version Path="@ElementType" First="1.4"/>
         <Version Path="ColorPool" First="1.2"/>
         <Version Path="ColorPoolRef" First="1.2"/>
-        <Constraint Path="Band" minOccurs="1" maxOccurs="unbounded"/>
+        <Constraint Path="Band" minOccurs="0" maxOccurs="unbounded"/>
         <Constraint Path="ColorPool" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ColorPoolRef" minOccurs="0" maxOccurs="1"/>
-        <Constraint Path="FileSpec/@ResourceUsage=&quot;RasterFileLocation&quot;" minOccurs="1" maxOccurs="1"/>
-        <Constraint Path="FileSpecRef" minOccurs="1" maxOccurs="1"/>
+        <Constraint Path="FileSpec/@ResourceUsage=&quot;RasterFileLocation&quot;" minOccurs="0" maxOccurs="1"/>
+        <Constraint Path="FileSpecRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="PixelColorant" minOccurs="0" maxOccurs="unbounded"/>
       </xs:appinfo>
     </xs:annotation>
@@ -1444,7 +1445,7 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
-          <xs:element name="GlueApplication" type="jdf:GlueLine_re" minOccurs="0"/>
+          <xs:element name="GlueApplication" type="jdf:GlueApplication_re" minOccurs="0"/>
           <xs:element ref="jdf:GlueApplicationRef" minOccurs="0"/>
           <xs:element name="GlueLine" type="jdf:GlueLine_re" minOccurs="0"/>
 <!--           <xs:element ref="jdf:GlueLineRef" minOccurs="0"/> -->
@@ -1462,6 +1463,8 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
           <xs:element name="GlueLine" type="jdf:GlueLine_re" minOccurs="0"/>
+          <xs:element name="GlueApplication" type="jdf:GlueApplication_re" minOccurs="0"/>
+          <xs:element ref="jdf:GlueApplicationRef" minOccurs="0"/>
 <!--           <xs:element ref="jdf:GlueLineRef" minOccurs="0"/> -->
         </xs:sequence>
         <xs:attributeGroup ref="jdf:CasingInParamsAttribs_r"/>
@@ -1476,6 +1479,8 @@
             <xs:group ref="jdf:GenericElements" minOccurs="0"/>
             <xs:group ref="jdf:GenericResourceElements" minOccurs="0"/>
             <xs:element name="GlueLine" type="jdf:GlueLine_re" minOccurs="0"/>
+            <xs:element name="GlueApplication" type="jdf:GlueApplication_re" minOccurs="0"/>
+            <xs:element ref="jdf:GlueApplicationRef" minOccurs="0"/>
 <!--             <xs:element ref="jdf:GlueLineRef" minOccurs="0"/> -->
             <xs:element name="CasingInParams" type="jdf:CasingInParams_rp" minOccurs="0"/>
           </xs:sequence>
@@ -2912,8 +2917,8 @@
         <Version Path="." First="1.3"/>
         <Version Path="@ContentRefs" First="1.4"/>
         <Version Path="@ID" First="1.4"/>
-        <Version Path="ContentMetadata" First="1.4"/>
-        <Constraint Path="ContentMetadata" minOccurs="0" maxOccurs="1"/>
+        <Version Path="ContentMetaData" First="1.4"/>
+        <Constraint Path="ContentMetaData" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ElementColorParams" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ElementColorParamsRef" minOccurs="0" maxOccurs="1"/>
         <Constraint Path="ImageCompressionParams" minOccurs="0" maxOccurs="1"/>
@@ -3694,7 +3699,7 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="PlatePosition" type="jdftyp:XYPairRangeList" use="required"/>
-        <xs:attribute name="PlateType" type="jdftyp:ePlateType_" use="optional" default="Content"/>
+        <xs:attribute name="PlateType" type="jdftyp:ePlateType_" use="optional" default="Exposed"/>
         <xs:attribute name="PlateUsage" type="jdftyp:ePlateUsage_" default="Original"/>
         <xs:attribute name="DeviceModuleIndex" type="jdftyp:Integer" use="required"/>
       </xs:extension>
@@ -5454,7 +5459,7 @@
   <xs:attributeGroup name="ExposedMediaAttribs_c">
     <xs:attribute name="ColorType" type="jdftyp:eExposedMediaColorType" use="optional"/>
     <xs:attribute name="PageListIndex" type="jdftyp:IntegerRangeList" use="optional"/>
-    <xs:attribute name="PlateType" type="jdftyp:ePlateType2_" use="optional"/>
+    <xs:attribute name="PlateType" type="jdftyp:ePlateType_" use="optional"/>
     <xs:attribute name="ProofName" type="jdftyp:string" use="optional"/>
     <xs:attribute name="ProofQuality" type="jdftyp:eExposedMediaProofQuality" use="optional"/>
     <xs:attribute name="ProofType" type="jdftyp:eExposedMediaProofType" use="optional"/>
@@ -13336,14 +13341,13 @@
     <xs:attribute name="BandWidth" type="jdftyp:Integer" use="optional"/>
     <xs:attribute name="ColorantDepth" type="jdftyp:Integer" use="optional"/>
     <xs:attribute name="Interleaved" type="jdftyp:boolean" use="optional"/>
+    <xs:attribute name="MimeType" type="jdftyp:string" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="RenderingParamsAttribs_u">
     <xs:attributeGroup ref="jdf:RenderingParamsAttribs_c"/>
-    <xs:attribute name="MimeType" type="jdftyp:string" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="RenderingParamsAttribs_r">
     <xs:attributeGroup ref="jdf:RenderingParamsAttribs_c"/>
-    <xs:attribute name="MimeType" type="jdftyp:string" use="required"/>
   </xs:attributeGroup>
   <xs:complexType name="RenderingParams_r" mixed="false">
     <xs:complexContent mixed="false">
@@ -14480,11 +14484,9 @@
   </xs:attributeGroup>
   <xs:attributeGroup name="ShapeDefAttribs_u">
     <xs:attributeGroup ref="jdf:ShapeDefAttribs_c"/>
-    <xs:attribute name="LockOrigins" type="jdftyp:boolean" use="optional"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="ShapeDefAttribs_r">
     <xs:attributeGroup ref="jdf:ShapeDefAttribs_c"/>
-    <xs:attribute name="LockOrigins" type="jdftyp:boolean" default="false"/>
   </xs:attributeGroup>
   <xs:complexType name="ShapeDef_r" mixed="false">
     <xs:complexContent mixed="false">

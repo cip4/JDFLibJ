@@ -64,8 +64,9 @@
 	<xs:include schemaLocation="JDFCoreStrict.xsd"/>
 	<xs:include schemaLocation="JDFCapability.xsd"/>
 	<xs:include schemaLocation="JDFResourceStrict.xsd"/>
-	<xs:include schemaLocation="JDFProcess.xsd"/>
-	<xs:include schemaLocation="JDFMessage.xsd"/>
+	<xs:include schemaLocation="JDFResourceElementsStrict.xsd"/>
+	<xs:include schemaLocation="JDFProcessStrict.xsd"/>
+	<xs:include schemaLocation="JDFMessageStrict.xsd"/>
 	<xs:element name="JDF" type="jdf:JDFProcessNode"/>
 	<xs:element name="JMF" type="jdf:JMFRootMessage"/>
 </xs:schema>

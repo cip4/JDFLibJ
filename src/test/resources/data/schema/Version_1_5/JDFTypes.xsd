@@ -2,7 +2,7 @@
 <!--	The CIP4 Software License, Version 1.0
 	
 	
-	Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+	Copyright (c) 2001-2015 The International Cooperation for the Integration of
 	Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without modification, 
@@ -2252,11 +2252,14 @@
 			<xs:enumeration value="Other"/>
 			<xs:enumeration value="Paper"/>
 			<xs:enumeration value="Plate"/>
+			<xs:enumeration value="Screen"/>
 			<xs:enumeration value="SelfAdhesive"/>
 			<xs:enumeration value="Sleeve"/>
 			<xs:enumeration value="ShrinkFoil"/>
+			<xs:enumeration value="Textile"/>
 			<xs:enumeration value="Transparency"/>
 			<xs:enumeration value="Unknown"/>
+			<xs:enumeration value="Vinyl"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="eMediaUnit_">
@@ -2599,12 +2602,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="ePlateType_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
-			<xs:enumeration value="Content"/>
-			<xs:enumeration value="Dummy"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="ePlateType2_">
-		<xs:restriction base="jdftyp:EnumerationBaseType">
 			<xs:enumeration value="Exposed"/>
 			<xs:enumeration value="Dummy"/>
 		</xs:restriction>
@@ -2745,10 +2742,13 @@
 	</xs:simpleType>
 	<xs:simpleType name="ePreviewType_">
 		<xs:restriction base="jdftyp:EnumerationBaseType">
+			<xs:enumeration value="Animation"/>
+			<xs:enumeration value="Identification"/>
 			<xs:enumeration value="Separation"/>
 			<xs:enumeration value="SeparatedThumbNail"/>
 			<xs:enumeration value="SeparationRaw"/>
 			<xs:enumeration value="ThumbNail"/>
+			<xs:enumeration value="Static3D"/>
 			<xs:enumeration value="Viewable"/>
 		</xs:restriction>
 	</xs:simpleType>
