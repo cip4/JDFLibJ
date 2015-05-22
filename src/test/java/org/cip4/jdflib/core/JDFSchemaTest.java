@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,10 +84,16 @@ import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
+import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.resource.process.JDFPreview;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Test;
 
 /**
@@ -121,6 +127,72 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setType(EnumType.DieMaking);
 		n.addResource(ElementName.TOOL, EnumUsage.Output);
 		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
+	public void testLot()
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFResource r = n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(r, null);
+		JDFLot lot = rl.appendLot();
+		lot.setText(" ");
+		lot.setLotID("lllll");
+		String s = d0.write2String(2);
+		s = StringUtil.replaceString(s, "<Lot LotID=\"lllll\"/>", "<Lot LotID=\"lllll\">  \n  </Lot>");
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
+	public void testPlateType()
+	{
+		final JDFDoc d = p.parseFile(sm_dirTestData + "Example8-15.jdf");
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	//	@Test
+	//	public void testSetIndex()
+	//	{
+	//		final JDFDoc d = p.parseFile(sm_dirTestData + "ExampleO-5.3.1.jdf");
+	//		assertNotNull(d);
+	//		assertNull(p.m_lastExcept);
+	//	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	@Test
+	public void testInlineClass()
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.ImageSetting);
+		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		xm.appendMedia().setResourceClass(EnumResourceClass.Consumable);
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addRun("file://foo.pdf", 0, 33);
+		String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);
 		assertNull(p.m_lastExcept);
