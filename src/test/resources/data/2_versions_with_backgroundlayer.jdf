@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<JDF ID="ID_Root" Type="Product" JobID="JDFSample_Versioning" JobPartID="2 versions with backgroundlayer" Status="Ready" Version="1.3" MaxVersion="1.3" Activation="Active" ICSVersions="Base_L2-1.3 JMF_L1-1.3 JMF_L2-1.3 MIS_L2-1.3" DescriptiveName="2 versions with backgroundlayer" NamedFeatures="" xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:agfa="http://www.agfa.com/w3c/gs/jdf/agfaextensions.xsd">
+	<Comment Name="JobDescription" AgentName="MISSimulator" AgentVersion="2.0.71"/>
+	<AuditPool>
+		<Created AgentName="MISSimulator" ID="ID_Created_MISSimulator1" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+	</AuditPool>
+	<ResourcePool>
+		<NodeInfo ID="ID_NodeInfo" Class="Parameter" Status="Available" Start="2016-01-12T18:00:00+01:00" NodeStatus="Ready">
+			<Employee Roles="Operator" PersonalID="BenMatlock">
+				<Person FamilyName="Matlock" FirstName="Ben"/>
+			</Employee>
+			<Employee Roles="CSR" PersonalID="BenMatlock">
+				<Person FirstName="Ben" FamilyName="Matlock">
+					<ComChannel Locator="BM.@ABC.com" ChannelType="Email"/>
+				</Person>
+			</Employee>
+		</NodeInfo>
+		<Component ID="ID_Component" Class="Quantity" Status="Unavailable" IsWaste="false" Dimensions="595.275591 841.889764 0.963780" ComponentType="FinalProduct" PartIDKeys="PartVersion" SurfaceCount="72" ReaderPageCount="72">
+			<Component PartVersion="EnglishEdition" DescriptiveName="D_EnglishEdition"/>
+			<Component PartVersion="FrenchEdition" DescriptiveName="D_FrenchEdition"/>
+		</Component>
+		<ColorPool Class="Parameter" DescriptiveName="Colors for Job" ID="ID_ColorPool" Locked="false" Status="Available">
+			<Color Name="Cyan" CMYK="1 0 0 0"/>
+			<Color Name="Magenta" CMYK="0 1 0 0"/>
+			<Color Name="Yellow" CMYK="0 0 1 0"/>
+			<Color Name="Black" CMYK="0 0 0 1"/>
+		</ColorPool>
+		<BindingIntent ID="ID_BindingIntent" Class="Intent" Status="Available" BindingOrder="Collecting">
+			<BindingSide Actual="Left" DataType="EnumerationSpan" Preferred="Left"/>
+			<BindingType Actual="SaddleStitch" DataType="EnumerationSpan" Preferred="SaddleStitch"/>
+		</BindingIntent>
+		<Media ID="ID_Media_Proof" Class="Consumable" Status="Available" MediaType="Paper" ProductID="Proof01" DescriptiveName="Sherpa R+V"/>
+		<Media Class="Consumable" DescriptiveName="Plates for Job" ID="ID_Media_Plate" MediaType="Plate" PartIDKeys="SignatureName SheetName" Status="Available">
+		</Media>
+		<Media Class="Consumable" DescriptiveName="PrintingPaper" ID="ID_Media_PrintPaper" MediaType="Paper" PartIDKeys="SignatureName SheetName" Status="Available">
+			<Media SignatureName="Body_SIG1">
+				<Media Brand="Agfa Matt coated wood free" SheetName="Body_SHEET1" DescriptiveName="Agfa Matt coated wood freeGrade2" Dimension="2834.64567 2267.716536" Grade="2" GrainDirection="LongEdge" ProductID="PaperBody_SHEET1" Thickness="78.00" Weight="90"/>
+			</Media>
+			<Media SignatureName="Cover_SIG1">
+				<Media Brand="Agfa Matt coated wood free" SheetName="Cover_SHEET1" Dimension="1445.6692917 1133.858268" Grade="2" GrainDirection="LongEdge" ProductID="PaperCover_SHEET1" Thickness="78.00" Weight="90" DescriptiveName="Agfa Matt coated wood freeGrade2"/>
+			</Media>
+			<Media SignatureName="Body_SIG2">
+				<Media Brand="Agfa Matt coated wood free" SheetName="Body_SHEET2" DescriptiveName="Agfa Matt coated wood freeGrade2" Dimension="2834.64567 2267.716536" Grade="2" GrainDirection="LongEdge" Thickness="78.00" Weight="90" ProductID="PaperBody_SHEET2"/>
+			</Media>
+		</Media>
+		<ColorantControl ID="ID_ColorantControl" PartIDKeys="SignatureName SheetName Side" PartUsage="Explicit" Status="Available" Class="Parameter">
+			<ColorPoolRef rRef="ID_ColorPool"/>
+			<ColorantControl SignatureName="Body_SIG1">
+				<ColorantControl SheetName="Body_SHEET1">
+					<ColorantControl Side="Front" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+					<ColorantControl Side="Back" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+				</ColorantControl>
+			</ColorantControl>
+			<ColorantControl SignatureName="Cover_SIG1">
+				<ColorantControl SheetName="Cover_SHEET1">
+					<ColorantControl Side="Front" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+					<ColorantControl Side="Back" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+				</ColorantControl>
+			</ColorantControl>
+			<ColorantControl SignatureName="Body_SIG2">
+				<ColorantControl SheetName="Body_SHEET2">
+					<ColorantControl Side="Front" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+					<ColorantControl Side="Back" ProcessColorModel="DeviceCMYK">
+						<ColorantParams/>
+						<ColorantOrder>
+							<SeparationSpec Name="Cyan"/>
+							<SeparationSpec Name="Magenta"/>
+							<SeparationSpec Name="Yellow"/>
+							<SeparationSpec Name="Black"/>
+						</ColorantOrder>
+					</ColorantControl>
+				</ColorantControl>
+			</ColorantControl>
+		</ColorantControl>
+		<Layout ID="ID_Layout" Name="LayoutName" Class="Parameter" Status="Unavailable" PartIDKeys="SignatureName SheetName Side">
+			<LayerList>
+				<LayerDetails Name="Backgrounds"/>
+				<LayerDetails Name="Languagelayer" DescriptiveName="Language_element"/>
+			</LayerList>
+			<Layout SignatureName="Cover_SIG1">
+				<Layout SheetName="Cover_SHEET1">
+					<Layout Side="Front"/>
+					<Layout Side="Back"/>
+				</Layout>
+			</Layout>
+			<Layout SignatureName="Body_SIG1">
+				<Layout SheetName="Body_SHEET1">
+					<Layout Side="Front"/>
+					<Layout Side="Back"/>
+				</Layout>
+			</Layout>
+			<Layout SignatureName="Body_SIG2">
+				<Layout SheetName="Body_SHEET2">
+					<Layout Side="Front"/>
+					<Layout Side="Back"/>
+				</Layout>
+			</Layout>
+		</Layout>
+		<CustomerInfo Class="Parameter" Status="Available" ID="ID_Customer" CustomerID="ID_CustomerCID">
+			<ContactRef rRef="ID_Contact_CustomerNameCustomer0"/>
+		</CustomerInfo>
+		<Device ID="ID_Device_Small_Press" DeviceID="Small Press" Status="Available" Class="Implementation" DescriptiveName="Coverpressdev1sheetnamedescrn" FriendlyName="Small Press"/>
+		<Device ID="ID_Device_Large_Press" DeviceID="Large Press" Status="Available" Class="Implementation" DescriptiveName="Bodypressdev1sheetnamedescrn" FriendlyName="Large Press CMYK"/>
+		<PageList ID="ID_Pagelist" DescriptiveName="Descrnme_Pagelist" Class="Parameter" Locked="false" NoOp="false" PartIDKeys="PartVersion LayerIDs" PartUsage="Explicit" SpawnStatus="NotSpawned" Status="Available" Template="false">
+			<PageList PartVersion="EnglishEdition" DescriptiveName="EnglishEdition">
+				<PageList LayerIDs="0"/>
+				<PageList LayerIDs="1" DescriptiveName="English"/>
+			</PageList>
+			<PageList PartVersion="FrenchEdition" DescriptiveName="FrenchEdition">
+				<PageList LayerIDs="0"/>
+				<PageList LayerIDs="1" DescriptiveName="French"/>
+			</PageList>
+		</PageList>
+		<ExposedMedia ID="ID_ExposedMedia_ImpoProof" Class="Handling" PartIDKeys="SignatureName SheetName Side PartVersion" PartUsage="Sparse" Status="Unavailable" DescriptiveName="ImpositionProofEXMedia">
+			<MediaRef rRef="ID_Media_Proof"/>
+			<ExposedMedia SignatureName="Cover_SIG1">
+				<ExposedMedia SheetName="Cover_SHEET1">
+					<ExposedMedia Side="Front">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+			<ExposedMedia SignatureName="Body_SIG1">
+				<ExposedMedia SheetName="Body_SHEET1">
+					<ExposedMedia Side="Front">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+			<ExposedMedia SignatureName="Body_SIG2">
+				<ExposedMedia SheetName="Body_SHEET2">
+					<ExposedMedia Side="Front">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia PartVersion="EnglishEdition"/>
+						<ExposedMedia PartVersion="FrenchEdition"/>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+		</ExposedMedia>
+		<ExposedMedia ID="ID_ExposedMedia" Class="Handling" PartIDKeys="SignatureName SheetName Side Separation PartVersion" PartUsage="Sparse" Status="Unavailable">
+			<ExposedMedia SignatureName="Cover_SIG1">
+				<ExposedMedia SheetName="Cover_SHEET1">
+					<MediaRef rRef="ID_Media_Plate"/>
+					<ExposedMedia Side="Front">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="1_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="2_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="3_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="4_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="4_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="5_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="6_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="7_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="8_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="8_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+			<ExposedMedia SignatureName="Body_SIG1">
+				<ExposedMedia SheetName="Body_SHEET1">
+					<MediaRef rRef="ID_Media_Plate"/>
+					<ExposedMedia Side="Front">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="9_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="10_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="11_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="12_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="12_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="13_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="14_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="15_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="16_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="16_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+			<ExposedMedia SignatureName="Body_SIG2">
+				<ExposedMedia SheetName="Body_SHEET2">
+					<MediaRef rRef="ID_Media_Plate"/>
+					<ExposedMedia Side="Front">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="17_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="18_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="19_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="20_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="20_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+					<ExposedMedia Side="Back">
+						<ExposedMedia Separation="Cyan">
+							<ExposedMedia ProductID="21_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Magenta">
+							<ExposedMedia ProductID="22_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Yellow">
+							<ExposedMedia ProductID="23_EnglishEdition FrenchEdition" PartVersion="EnglishEdition FrenchEdition"/>
+						</ExposedMedia>
+						<ExposedMedia Separation="Black">
+							<ExposedMedia ProductID="24_EnglishEdition" PartVersion="EnglishEdition"/>
+							<ExposedMedia ProductID="24_FrenchEdition" PartVersion="FrenchEdition"/>
+						</ExposedMedia>
+					</ExposedMedia>
+				</ExposedMedia>
+			</ExposedMedia>
+		</ExposedMedia>
+		<RunList Class="Parameter" ID="ID_RunListOut" Status="Unavailable"/>
+		<RunList Class="Parameter" ID="ID_RunList" NPage="72" DescriptiveName="sharedrunlistinD" Status="Available" agfa:EnableHotfolder="true">
+			<PageListRef rRef="ID_Pagelist"/>
+		</RunList>
+		<Assembly BindingSide="Left" Class="Parameter" ID="ID_Assembly_Shared" Order="List" PartIDKeys="PartVersion" Status="Available">
+			<Assembly PartVersion="EnglishEdition" DescriptiveName="D_EnglishEdition">
+				<AssemblySection AssemblyIDs="ID_Assembly_Cover_IDS1EnglishEdition">
+					<AssemblySection AssemblyIDs="ID_Assembly_Body1_IDS2EnglishEdition">
+						<AssemblySection AssemblyIDs="ID_Assembly_Body2_IDS3EnglishEdition"/>
+					</AssemblySection>
+				</AssemblySection>
+			</Assembly>
+			<Assembly PartVersion="FrenchEdition" DescriptiveName="D_FrenchEdition">
+				<AssemblySection AssemblyIDs="ID_Assembly_Cover_IDS1FrenchEdition">
+					<AssemblySection AssemblyIDs="ID_Assembly_Body1_IDS2FrenchEdition">
+						<AssemblySection AssemblyIDs="ID_Assembly_Body2_IDS3FrenchEdition"/>
+					</AssemblySection>
+				</AssemblySection>
+			</Assembly>
+		</Assembly>
+		<StrippingParams Class="Parameter" ID="ID_Stripping_Shared" DescriptiveName="SStrippingDName" PartIDKeys="SignatureName SheetName" Status="Available">
+			<StrippingParams SignatureName="Cover_SIG1">
+				<StrippingParams SheetName="Cover_SHEET1" DescriptiveName="dCover_SHEET1" WorkStyle="WorkAndBack" AssemblyIDs="ID_Assembly_Cover_IDS1EnglishEdition ID_Assembly_Cover_IDS1FrenchEdition">
+					<MediaRef rRef="ID_Media_PrintPaper">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</MediaRef>
+					<DeviceRef rRef="ID_Device_Small_Press"/>
+					<StripCellParams Spine="0" TrimFace="8.50393701" TrimFoot="8.50393701" TrimHead="8.50393701" BleedSpine="0" BleedFace="8.50393701" BleedFoot="8.50393701" BleedHead="8.50393701" BackOverfold="0" FrontOverfold="0" TrimSize="595.2755907 841.88976399"/>
+					<BinderySignatureRef rRef="ID_BSIGF4-1"/>
+					<Position RelativeBox="0.00 0.00 1.00 1.00" MarginTop="0.00" MarginLeft="119.06" MarginRight="119.06" MarginBottom="56.69" Orientation="Flip180"/>
+				</StrippingParams>
+			</StrippingParams>
+			<StrippingParams SignatureName="Body_SIG1">
+				<StrippingParams SheetName="Body_SHEET1" DescriptiveName="dBody_SHEET1" WorkStyle="WorkAndBack" AssemblyIDs="ID_Assembly_Body1_IDS2EnglishEdition ID_Assembly_Body1_IDS2FrenchEdition">
+					<MediaRef rRef="ID_Media_PrintPaper">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+					</MediaRef>
+					<DeviceRef rRef="ID_Device_Large_Press"/>
+					<StripCellParams Spine="0" TrimFace="8.50393701" TrimFoot="8.50393701" TrimHead="8.50393701" BleedSpine="0" BleedFace="8.50393701" BleedFoot="8.50393701" BleedHead="8.50393701" BackOverfold="0" FrontOverfold="0" TrimSize="595.2755907 841.88976399"/>
+					<BinderySignatureRef rRef="ID_BSIGF16-7"/>
+					<Position RelativeBox="0.00 0.00 1.00 1.00" MarginTop="0.00" MarginLeft="209.76" MarginRight="209.76" MarginBottom="56.69" Orientation="Flip180"/>
+				</StrippingParams>
+			</StrippingParams>
+			<StrippingParams SignatureName="Body_SIG2">
+				<StrippingParams SheetName="Body_SHEET2" DescriptiveName="dBody_SHEET2" WorkStyle="WorkAndBack" AssemblyIDs="ID_Assembly_Body2_IDS3EnglishEdition ID_Assembly_Body2_IDS3FrenchEdition">
+					<MediaRef rRef="ID_Media_PrintPaper">
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</MediaRef>
+					<StripCellParams Spine="0" TrimFace="8.50393701" TrimFoot="8.50393701" TrimHead="8.50393701" BleedSpine="0" BleedFace="8.50393701" BleedFoot="8.50393701" BleedHead="8.50393701" BackOverfold="0" FrontOverfold="0" TrimSize="595.2755907 841.88976399"/>
+					<BinderySignatureRef rRef="ID_BSIGF16-7"/>
+					<Position RelativeBox="0.00 0.00 1.00 1.00" MarginTop="0.00" MarginLeft="209.76" MarginRight="209.76" MarginBottom="56.69" Orientation="Flip180"/>
+				</StrippingParams>
+			</StrippingParams>
+		</StrippingParams>
+		<BinderySignature ID="ID_BSIGF4-1" Class="Parameter" BinderySignatureType="Fold" Status="Available" FoldCatalog="F4-1" NumberUp="2 1"/>
+		<BinderySignature ID="ID_BSIGF16-7" Class="Parameter" BinderySignatureType="Fold" Status="Available" FoldCatalog="F16-7"/>
+		<RunList Class="Parameter" ID="ID_RunList_Marks" Status="Unavailable"/>
+		<Contact ID="ID_Contact_CustomerNameCustomer0" Class="Parameter" Status="Available" ContactTypes="Customer" ProductID="PIDCustomer_compnospace_Contact0">
+			<Address City="Mortsel" Country="Belgium" Street="Septestraat"/>
+			<CompanyRef rRef="ID_Company_CustomerName"/>
+			<PersonRef rRef="ID_Person_FirstLast"/>
+		</Contact>
+		<Company ID="ID_Company_CustomerName" Class="Parameter" Status="Available" OrganizationName="CustomerName" ProductID="CustomerNamePIDa"/>
+		<Person ID="ID_Person_FirstLast" Class="Parameter" Status="Available" DescriptiveName="FirstLast" FamilyName="Last" FirstName="First" JobTitle="Contact Principal" ProductID="FirstLast_1">
+			<ComChannel Locator="FirstLast@Customer.com" ChannelType="Email"/>
+		</Person>
+		<Component ID="ID_Component_Cover" Class="Quantity" Status="Unavailable" ComponentType="PartialProduct" ReaderPageCount="4" ProductType="Cover" Dimensions="1445.6692917 1133.858268 0" Amount="1"/>
+		<Component ID="ID_Component_Body" Class="Quantity" Status="Unavailable" ComponentType="PartialProduct" ReaderPageCount="32" ProductType="Body" Dimensions="2834.64567 2267.716536 0" Amount="1"/>
+	</ResourcePool>
+	<ResourceLinkPool>
+		<BindingIntentLink rRef="ID_BindingIntent" Usage="Input"/>
+		<ComponentLink rRef="ID_Component" Usage="Output">
+		</ComponentLink>
+		<NodeInfoLink rRef="ID_NodeInfo" Usage="Input"/>
+		<CustomerInfoLink rRef="ID_Customer" Usage="Input"/>
+		<ComponentLink rRef="ID_Component_Cover" Usage="Input"/>
+		<ComponentLink rRef="ID_Component_Body" Usage="Input"/>
+	</ResourceLinkPool>
+	<JDF ID="ID_PrePressPreparation_Shared" Category="MISPRE.PrePressPreparation" DescriptiveName="PrePressPreparation shared" ICSVersions="MISPRE_L2-1.3" Status="Waiting" Type="ProcessGroup" JobPartID="PrePressPreparationsharedjpi" Types="PrePressPreparation" xsi:type="ProcessGroup">
+		<ResourceLinkPool>
+			<RunListLink Usage="Input" ProcessUsage="Document" rRef="ID_RunList"/>
+			<RunListLink Usage="Output" ProcessUsage="Document" rRef="ID_RunListOut"/>
+		</ResourceLinkPool>
+		<AuditPool>
+			<Created ID="ID_Created_MISSimulator2" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+		</AuditPool>
+	</JDF>
+	<JDF ID="ID_ImpositionPreparation_Shared" Category="MISPRE.ImpositionPreparation" DescriptiveName="ImpositionPreparation shared" ICSVersions="MISPRE_L2-1.3" Status="Waiting" Type="ProcessGroup" JobPartID="ImpositionPreparationsharedjpi" Types="ImpositionPreparation">
+		<ResourceLinkPool>
+			<RunListLink Usage="Output" ProcessUsage="Marks" rRef="ID_RunList_Marks"/>
+			<StrippingParamsLink Usage="Input" rRef="ID_Stripping_Shared"/>
+			<AssemblyLink Usage="Input" rRef="ID_Assembly_Shared"/>
+			<LayoutLink Usage="Output" rRef="ID_Layout"/>
+		</ResourceLinkPool>
+		<AuditPool>
+			<Created ID="ID_Created_MISSimulator3" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+		</AuditPool>
+	</JDF>
+	<JDF ID="ID_Part_Cover" Type="Product" Status="Waiting" JobPartID="Cover" DescriptiveName="Cover">
+		<ResourceLinkPool>
+			<LayoutIntentLink rRef="ID_layint_Cover" Usage="Input"/>
+			<FoldingIntentLink rRef="ID_foldint_Cover" Usage="Input"/>
+			<ComponentLink rRef="ID_Component_Cover" Usage="Output"/>
+			<MediaIntentLink rRef="ID_medint_Cover" Usage="Input"/>
+			<ColorIntentLink rRef="ID_ColorIntent_Cover" Usage="Input"/>
+		</ResourceLinkPool>
+		<ResourcePool>
+			<LayoutIntent ID="ID_layint_Cover" Class="Intent" Status="Available" Sides="TwoSidedHeadToHead">
+				<FinishedDimensions Actual="595.2755907 841.88976399 0.000000" DataType="ShapeSpan" Preferred="595.2755907 841.88976399 0.000000"/>
+				<Pages Actual="4" DataType="IntegerSpan" Preferred="4"/>
+				<Dimensions Actual="1190.5511814 841.88976399" Preferred="1190.5511814 841.88976399" DataType="XYPairSpan"/>
+			</LayoutIntent>
+			<FoldingIntent ID="ID_foldint_Cover" Class="Intent" Status="Available">
+				<FoldingCatalog Actual="F4-1" DataType="NameSpan" Preferred="F4-1"/>
+			</FoldingIntent>
+			<MediaIntent ID="ID_medint_Cover" Class="Intent" Status="Available">
+				<MediaType DataType="EnumerationSpan" Preferred="Paper"/>
+				<Weight DataType="NumberSpan" Preferred="90" Actual="90"/>
+				<Thickness DataType="NumberSpan" Preferred="78.00" Actual="78.00"/>
+				<StockBrand DataType="StringSpan" Preferred="Agfa Matt coated wood free" Actual="Agfa Matt coated wood free"/>
+				<Grade DataType="IntegerSpan" Preferred="2" Actual="2"/>
+			</MediaIntent>
+			<ColorIntent ID="ID_ColorIntent_Cover" Class="Intent" Status="Available">
+				<ColorPoolRef rRef="ID_ColorPool"/>
+				<ColorsUsed>
+					<SeparationSpec Name="Cyan"/>
+					<SeparationSpec Name="Magenta"/>
+					<SeparationSpec Name="Yellow"/>
+					<SeparationSpec Name="Black"/>
+				</ColorsUsed>
+			</ColorIntent>
+		</ResourcePool>
+		<JDF ID="ID_PrePress_Cover" Type="ProcessGroup" Status="Waiting" Category="PrePress" JobPartID="JobPartIDPrepress.Cover" DescriptiveName="DescrNamePrepress.Cover">
+			<ResourceLinkPool/>
+			<ResourcePool>
+				<InterpretingParams ID="ID_Interpreting_Cover" Class="Parameter" Status="Available" PartIDKeys="SignatureName SheetName"/>
+			</ResourcePool>
+			<JDF ID="ID_Graybox_ImpositionProofing_.Cover0" Type="ProcessGroup" Status="Waiting" Category="MISPRE.ImpositionProofing" Types="Imposition ProofImaging" ICSVersions="MISPRE_L1-1.3" JobPartID="IPro.Cover0" DescriptiveName="DescrNameIPro.Cover0">
+				<ResourceLinkPool>
+					<RunListLink rRef="ID_RunListOut" Usage="Input" CombinedProcessIndex="0" ProcessUsage="Document"/>
+					<RunListLink rRef="ID_RunList_Marks" Usage="Input" ProcessUsage="Marks"/>
+					<LayoutLink rRef="ID_Layout" Usage="Input">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</LayoutLink>
+					<ColorantControlLink rRef="ID_ColorantControl" Usage="Input">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</ColorantControlLink>
+					<InterpretingParamsLink rRef="ID_Interpreting_Cover" Usage="Input"/>
+					<MediaLink rRef="ID_Media_Proof" Usage="Input"/>
+					<ExposedMediaLink rRef="ID_ExposedMedia_ImpoProof" Usage="Output">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</ExposedMediaLink>
+				</ResourceLinkPool>
+				<AuditPool>
+					<Created ID="ID_Created_MISSimulator6" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+				</AuditPool>
+			</JDF>
+			<JDF ID="ID_Graybox_PlateMaking_Cover" Type="ProcessGroup" Status="Waiting" Category="MISPRE.PlateMaking" Types="Imposition RIPing ImageSetting" ICSVersions="MISPRE_L1-1.3" JobPartID="PM.Cover" DescriptiveName="DescrNamePM.Cover">
+				<ResourceLinkPool>
+					<RunListLink rRef="ID_RunListOut" Usage="Input" CombinedProcessIndex="0" ProcessUsage="Document"/>
+					<RunListLink rRef="ID_RunList_Marks" Usage="Input" ProcessUsage="Marks"/>
+					<InterpretingParamsLink rRef="ID_Interpreting_Cover" Usage="Input"/>
+					<MediaLink rRef="ID_Media_Plate" Usage="Input"/>
+					<LayoutLink rRef="ID_Layout" Usage="Input">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</LayoutLink>
+					<ExposedMediaLink rRef="ID_ExposedMedia" Amount="1" Usage="Output">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</ExposedMediaLink>
+					<ColorantControlLink rRef="ID_ColorantControl" Usage="Input">
+						<Part SignatureName="Cover_SIG1" SheetName="Cover_SHEET1"/>
+					</ColorantControlLink>
+				</ResourceLinkPool>
+				<AuditPool>
+					<Created ID="ID_Created_MISSimulator7" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+				</AuditPool>
+			</JDF>
+			<AuditPool>
+				<Created ID="ID_Created_MISSimulator5" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+			</AuditPool>
+		</JDF>
+		<Comment Name="Description" AgentName="MISSimulator" AgentVersion="2.0.71">These are comments for the cover</Comment>
+		<AuditPool>
+			<Created ID="ID_Created_MISSimulator4" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+		</AuditPool>
+	</JDF>
+	<JDF ID="ID_Part_Body" Type="Product" Status="Waiting" JobPartID="Body" DescriptiveName="Body">
+		<ResourceLinkPool>
+			<LayoutIntentLink rRef="ID_layint_Body" Usage="Input"/>
+			<FoldingIntentLink rRef="ID_foldint_Body" Usage="Input"/>
+			<ComponentLink rRef="ID_Component_Body" Usage="Output"/>
+			<MediaIntentLink rRef="ID_medint_Body" Usage="Input"/>
+			<ColorIntentLink rRef="ID_ColorIntent_Body" Usage="Input"/>
+		</ResourceLinkPool>
+		<ResourcePool>
+			<LayoutIntent ID="ID_layint_Body" Class="Intent" Status="Available" Sides="TwoSidedHeadToHead">
+				<FinishedDimensions Actual="595.2755907 841.88976399 0.000000" DataType="ShapeSpan" Preferred="595.2755907 841.88976399 0.000000"/>
+				<Pages Actual="32" DataType="IntegerSpan" Preferred="32"/>
+				<Dimensions Actual="1190.5511814 841.88976399" Preferred="1190.5511814 841.88976399" DataType="XYPairSpan"/>
+			</LayoutIntent>
+			<FoldingIntent ID="ID_foldint_Body" Class="Intent" Status="Available">
+				<FoldingCatalog Actual="F16-7" DataType="NameSpan" Preferred="F16-7"/>
+			</FoldingIntent>
+			<MediaIntent ID="ID_medint_Body" Class="Intent" Status="Available">
+				<MediaType DataType="EnumerationSpan" Preferred="Paper"/>
+				<Weight DataType="NumberSpan" Preferred="90" Actual="90"/>
+				<Thickness DataType="NumberSpan" Preferred="78.00" Actual="78.00"/>
+				<StockBrand DataType="StringSpan" Preferred="Agfa Matt coated wood free" Actual="Agfa Matt coated wood free"/>
+				<Grade DataType="IntegerSpan" Preferred="2" Actual="2"/>
+			</MediaIntent>
+			<ColorIntent ID="ID_ColorIntent_Body" Class="Intent" Status="Available">
+				<ColorPoolRef rRef="ID_ColorPool"/>
+				<ColorsUsed>
+					<SeparationSpec Name="Cyan"/>
+					<SeparationSpec Name="Magenta"/>
+					<SeparationSpec Name="Yellow"/>
+					<SeparationSpec Name="Black"/>
+				</ColorsUsed>
+			</ColorIntent>
+		</ResourcePool>
+		<JDF ID="ID_PrePress_Body" Type="ProcessGroup" Status="Waiting" Category="PrePress" JobPartID="JobPartIDPrepress.Body" DescriptiveName="DescrNamePrepress.Body">
+			<ResourceLinkPool/>
+			<ResourcePool>
+				<InterpretingParams ID="ID_Interpreting_Body" Class="Parameter" Status="Available" PartIDKeys="SignatureName SheetName"/>
+			</ResourcePool>
+			<JDF ID="ID_Graybox_ImpositionProofing_.Body0" Type="ProcessGroup" Status="Waiting" Category="MISPRE.ImpositionProofing" Types="Imposition ProofImaging" ICSVersions="MISPRE_L1-1.3" JobPartID="IPro.Body0" DescriptiveName="DescrNameIPro.Body0">
+				<ResourceLinkPool>
+					<RunListLink rRef="ID_RunListOut" Usage="Input" CombinedProcessIndex="0" ProcessUsage="Document"/>
+					<RunListLink rRef="ID_RunList_Marks" Usage="Input" ProcessUsage="Marks"/>
+					<LayoutLink rRef="ID_Layout" Usage="Input">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</LayoutLink>
+					<ColorantControlLink rRef="ID_ColorantControl" Usage="Input">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</ColorantControlLink>
+					<InterpretingParamsLink rRef="ID_Interpreting_Body" Usage="Input"/>
+					<MediaLink rRef="ID_Media_Proof" Usage="Input"/>
+					<ExposedMediaLink rRef="ID_ExposedMedia_ImpoProof" Usage="Output">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</ExposedMediaLink>
+				</ResourceLinkPool>
+				<AuditPool>
+					<Created ID="ID_Created_MISSimulator10" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+				</AuditPool>
+			</JDF>
+			<JDF ID="ID_Graybox_PlateMaking_Body" Type="ProcessGroup" Status="Waiting" Category="MISPRE.PlateMaking" Types="Imposition RIPing ImageSetting" ICSVersions="MISPRE_L1-1.3" JobPartID="PM.Body" DescriptiveName="DescrNamePM.Body">
+				<ResourceLinkPool>
+					<RunListLink rRef="ID_RunListOut" Usage="Input" CombinedProcessIndex="0" ProcessUsage="Document"/>
+					<RunListLink rRef="ID_RunList_Marks" Usage="Input" ProcessUsage="Marks"/>
+					<InterpretingParamsLink rRef="ID_Interpreting_Body" Usage="Input"/>
+					<MediaLink rRef="ID_Media_Plate" Usage="Input"/>
+					<LayoutLink rRef="ID_Layout" Usage="Input">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</LayoutLink>
+					<ExposedMediaLink rRef="ID_ExposedMedia" Amount="1" Usage="Output">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</ExposedMediaLink>
+					<ColorantControlLink rRef="ID_ColorantControl" Usage="Input">
+						<Part SignatureName="Body_SIG1" SheetName="Body_SHEET1"/>
+						<Part SignatureName="Body_SIG2" SheetName="Body_SHEET2"/>
+					</ColorantControlLink>
+				</ResourceLinkPool>
+				<AuditPool>
+					<Created ID="ID_Created_MISSimulator11" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+				</AuditPool>
+			</JDF>
+			<AuditPool>
+				<Created ID="ID_Created_MISSimulator9" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+			</AuditPool>
+		</JDF>
+		<Comment Name="Description" AgentName="MISSimulator" AgentVersion="2.0.71">These are comments for the body</Comment>
+		<AuditPool>
+			<Created ID="ID_Created_MISSimulator8" AgentName="MISSimulator" AgentVersion="2.0.71" TimeStamp="2015-01-12T11:41:00+01:00"/>
+		</AuditPool>
+	</JDF>
+</JDF>
