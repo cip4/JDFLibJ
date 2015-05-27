@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -128,12 +128,13 @@ public class JMFBuilderTest extends JDFTestCaseBase
 
 	/**
 	 * 
-	 * test milestone
+	 * test resource signal
 	 */
 	@Test
 	public void testBuildResourceSignal()
 	{
 		JDFJMF jmf = b.buildResourceSignal(true, null);
+		assertEquals(jmf.getSignal(0).getType(), "Resource");
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "resourceSignal.jmf", 2, false);
 		roundTrip(jmf, EnumValidationLevel.Complete);
 	}
@@ -146,6 +147,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildStatusSignal()
 	{
 		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		assertEquals(jmf.getSignal(0).getType(), "Status");
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "statusSignal.jmf", 2, false);
 		roundTrip(jmf, EnumValidationLevel.Incomplete);
 	}

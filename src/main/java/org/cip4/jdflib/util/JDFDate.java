@@ -576,16 +576,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		private void handleTimeZone(int decimalLength)
 		{
-			// if the time looks like 2004-07-14T18:21:47
-			// check if there is an +xx:00 or -xx:00 at the end specifying the time zone
+			// if the time looks like 2004-07-14T18:21:47 check if there is an +xx:00 or -xx:00 at the end specifying the time zone
 			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 			}
 			else
 			{
-				// handle sign explicitly, because "+02" is no valid Integer,
-				// while "-02" and "02" are valid Integer
+				// handle sign explicitly, because "+02" is no valid Integer, while "-02" and "02" are valid Integer
 				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
 				if (strDateTime.charAt(19 + decimalLength) == '-')
 				{

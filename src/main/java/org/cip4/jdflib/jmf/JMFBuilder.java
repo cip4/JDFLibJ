@@ -297,7 +297,7 @@ public class JMFBuilder
 	public JDFJMF buildResourceSignal(boolean bExact, JDFResourceLink resLink)
 	{
 		final JDFJMF jmf = buildResourceQuery(bExact);
-		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFSignal signal = jmfSignal.getSignal(0);
 		if (resLink != null)
 		{
