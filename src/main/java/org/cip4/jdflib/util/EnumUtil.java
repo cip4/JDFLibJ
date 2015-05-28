@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,6 +94,9 @@ public class EnumUtil
 	@SuppressWarnings("unchecked")
 	public static VString getNamesVector(final Class<? extends ValuedEnum> e)
 	{
+		if (e == null)
+			return null;
+
 		final VString namesVector = new VString();
 		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
 		while (it.hasNext())
@@ -208,6 +211,39 @@ public class EnumUtil
 		final int aa = a == null ? -1 : a.getValue();
 		final int bb = b == null ? -1 : b.getValue();
 		return aa <= bb;
+	}
+
+	/**
+	 * get enum ignoring case
+	 * 
+	 * @param clazz the jdflib valued enum class
+	 * @param e the enum
+	 * @return
+	 */
+	public static ValuedEnum getEnumIgnoreCase(Class<? extends ValuedEnum> clazz, Enum<?> e)
+	{
+		String s = e == null ? null : e.name();
+		return getEnumIgnoreCase(clazz, s);
+	}
+
+	/**
+	 * @param clazz
+	 * @param s
+	 * @return
+	 */
+	public static ValuedEnum getEnumIgnoreCase(Class<? extends ValuedEnum> clazz, String s)
+	{
+		VString v = getNamesVector(clazz);
+		if (v == null || s == null)
+			return null;
+		for (String vs : v)
+		{
+			if (s.equalsIgnoreCase(vs))
+			{
+				return (ValuedEnum) EnumUtils.getEnum(clazz, vs);
+			}
+		}
+		return null;
 	}
 
 }
