@@ -116,7 +116,7 @@ public abstract class BaseXJDFHelper
 	{
 		if (theElement != null)
 		{
-			theElement.setXPathAttribute(xpath, value);
+			theElement.setXPathValue(xpath, value);
 		}
 	}
 

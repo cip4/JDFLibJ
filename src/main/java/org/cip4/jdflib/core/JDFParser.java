@@ -84,6 +84,7 @@ import org.apache.xerces.xni.XNIException;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
@@ -305,10 +306,18 @@ public class JDFParser extends XMLParser
 	 */
 	public void setJDFSchemaLocation(final File _schemaLocation)
 	{
-		if (_schemaLocation != null && _schemaLocation.length() != 0)
+		final String url = UrlUtil.fileToUrl(_schemaLocation, false);
+		setJDFSchemaLocation(url);
+	}
+
+	/**
+	 * @param schemaLocation the schema location
+	 */
+	public void setJDFSchemaLocation(final String schemaLocation)
+	{
+		if (StringUtil.getNonEmpty(schemaLocation) != null)
 		{
-			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			m_SchemaLocation = "http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
+			setSchemaLocation(JDFElement.getSchemaURL(), schemaLocation);
 		}
 	}
 

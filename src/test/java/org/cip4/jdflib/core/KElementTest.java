@@ -1337,6 +1337,8 @@ public class KElementTest extends JDFTestCaseBase
 		b.copyAttribute("ns:cc", a, "cc", "www.ns.com", null);
 		assertEquals(b.getAttribute("ns:cc"), "C");
 		assertEquals(b.getAttribute("cc", "www.ns.com", null), "C");
+
+		assertNull(b.copyAttribute("a", null));
 	}
 
 	/**
@@ -1351,6 +1353,8 @@ public class KElementTest extends JDFTestCaseBase
 		KElement b = new XMLDoc("b", null).getRoot();
 		b.copyAttribute("test", a, "test", null, "www.foo.com");
 		assertEquals(b.getAttribute("foo:test"), "bar");
+
+		assertNull(b.copyAttribute("a", null));
 	}
 
 	/**
@@ -2458,7 +2462,9 @@ public class KElementTest extends JDFTestCaseBase
 		String string = "a\n\"b";
 		root.setAttribute("cr", string);
 		String s = root.toXML();
-		XMLDoc doc = XMLDoc.parseStream(new ByteArrayIOStream(s.getBytes()).getInputStream());
+		ByteArrayIOStream byteArrayIOStream = new ByteArrayIOStream(s.getBytes());
+		XMLDoc doc = XMLDoc.parseStream(byteArrayIOStream.getInputStream());
+		byteArrayIOStream.close();
 		assertEquals(doc.getRoot().getAttribute("cr"), string);
 		assertNotNull(doc);
 	}
@@ -2829,6 +2835,7 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement a = root.appendElement("a");
 		final KElement b = root.appendElement("b");
 		final KElement b2 = root.appendElement("b:b", "s");
+		assertTrue(root.getChildrenIgnoreList(new VString("b", " "), true, null).contains(a));
 		assertFalse(root.getChildrenIgnoreList(new VString("b", " "), true, null).contains(b));
 		assertFalse(root.getChildrenIgnoreList(new VString("b", " "), true, null).contains(b2));
 		assertFalse(root.getChildrenIgnoreList(new VString("b:b", " "), true, null).contains(b2));

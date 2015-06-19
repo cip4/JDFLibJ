@@ -4502,7 +4502,7 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * copy an attribute from src to this
+	 * copy an attribute from src to this, if null - remove the attribute
 	 * <p>
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
@@ -4511,8 +4511,9 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nameSpaceURI of the attribute in the destination
 	 * @param srcNameSpaceURI of the attribute in the source, defaults to the value of nameSpaceURI
 	 * @default copyAttribute(attrib,src,null,null,null);
+	 * @return the value of the copied attribute
 	 */
-	public void copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
+	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
 	{
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
@@ -4529,7 +4530,9 @@ public class KElement extends ElementNSImpl implements Element
 			}
 		}
 
-		setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
+		String srcAtt = src == null ? null : src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null);
+		setAttribute(attrib, srcAtt, strNameSpace);
+		return srcAtt;
 	}
 
 	/**
@@ -4538,10 +4541,11 @@ public class KElement extends ElementNSImpl implements Element
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
 	 * @param src source element where the attribute to be copied resides
+	 * @return the value of the copied attribute
 	 */
-	public void copyAttribute(final String attrib, final KElement src)
+	public String copyAttribute(final String attrib, final KElement src)
 	{
-		copyAttribute(attrib, src, null, null, null);
+		return copyAttribute(attrib, src, null, null, null);
 	}
 
 	/**

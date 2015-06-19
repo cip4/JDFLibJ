@@ -374,23 +374,30 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			return newQueue;
 		}
 
+		/**
+		 * 
+		 * @param newQueue
+		 * @param s
+		 */
 		private void copySet(JDFQueue newQueue, Set<String> s)
 		{
 			int n = 0;
 			int maxEntries = getMaxEntries();
-			if (maxEntries == 0)
-				maxEntries = -1;
 			for (String qeid : s)
 			{
+				if (n == maxEntries)
+					break;
 				JDFQueueEntry qe = theQueue.getQueueEntry(qeid);
 				JDFQueueEntry qeNew = copyTo(newQueue, qe);
 				if (qeNew != null)
 					n++;
-				if (n == maxEntries)
-					break;
 			}
 		}
 
+		/**
+		 * 
+		 * @param newQueue
+		 */
 		private void copyAll(JDFQueue newQueue)
 		{
 			int n = 0;

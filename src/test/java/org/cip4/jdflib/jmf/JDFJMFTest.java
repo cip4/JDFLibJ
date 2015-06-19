@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,8 +87,10 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -218,6 +220,23 @@ public class JDFJMFTest extends JDFTestCaseBase
 			Assert.assertEquals(r.getrefID(), m.getID());
 			Assert.assertEquals(r.getType(), m.getType());
 		}
+	}
+
+	/**
+	 * @throws CloneNotSupportedException
+	 * 
+	 */
+	@Test
+	public void testCloneNewDocInit() throws CloneNotSupportedException
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		jmf.appendCommand(EnumType.AbortQueueEntry);
+		JDFJMF jmf2 = (JDFJMF) jmf.cloneNewDoc();
+		for (int i = 0; i < 10; i++)
+			jmf2 = (JDFJMF) jmf2.cloneNewDoc();
+		assertTrue(StringUtil.numSubstrings(jmf2.toXML(), "<--") < 2);
+
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

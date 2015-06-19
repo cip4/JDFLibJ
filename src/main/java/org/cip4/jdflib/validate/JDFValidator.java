@@ -181,7 +181,7 @@ public class JDFValidator
 	public String proxyHost = null;
 	public String proxyPort = null;
 
-	public String schemaLocation = null;
+	public String schemaLocation;
 	public String xmlOutputName = null;
 	public String xslStyleSheet = null;
 
@@ -190,7 +190,7 @@ public class JDFValidator
 	public boolean bMultiID = false;
 	private boolean inOutputLoop = false;
 
-	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.4 compatible version\n" + "\nCode based on schema JDF_1.4a.xsd\n"
+	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2015 CIP4" + "\nJDF 1.5 compatible version\n" + "\nCode based on schema JDF_1.5.xsd\n"
 			+ "Build version " + JDFAudit.software();
 
 	/**
@@ -199,6 +199,7 @@ public class JDFValidator
 	public JDFValidator()
 	{
 		super();
+		schemaLocation = null;
 		pOut = new XMLDoc("CheckOutput", null);
 		pOut.getMemberDocument().setIgnoreNSDefault(true);
 		pOut.getMemberDocument().setStrictNSCheck(false);
@@ -1879,13 +1880,12 @@ public class JDFValidator
 	}
 
 	/**
-	 * @deprecated use setJDFSchemaLocation(File)
+	 * this can be either a file or a network url
 	 * @param _schemaLocation
 	 */
-	@Deprecated
 	public void setJDFSchemaLocation(final String _schemaLocation)
 	{
-		setJDFSchemaLocation(new File(_schemaLocation));
+		schemaLocation = _schemaLocation;
 	}
 
 	/**
@@ -1893,11 +1893,8 @@ public class JDFValidator
 	 */
 	public void setJDFSchemaLocation(final File _schemaLocation)
 	{
-		if (_schemaLocation != null && _schemaLocation.length() != 0)
-		{
-			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			schemaLocation = fileToUrl;
-		}
+		final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
+		setJDFSchemaLocation(fileToUrl);
 	}
 
 	/**
@@ -2330,7 +2327,7 @@ public class JDFValidator
 				else
 				{
 					final JDFParser p = new JDFParser();
-					p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLocation));
+					p.setJDFSchemaLocation(schemaLocation);
 					theDoc = p.parseStream(inStream);
 					if (theDoc != null)
 					{
