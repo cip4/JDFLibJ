@@ -958,6 +958,20 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testWriteToFileYen()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		String out = sm_dirTestDataTemp + "test-¥éç05-pdf - test-¥éç05";
+		final File f = new File(out);
+		f.delete();
+		assertTrue(d.write2File(out, 2, true));
+		assertTrue(f.exists());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testWriteToFileEscape()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);

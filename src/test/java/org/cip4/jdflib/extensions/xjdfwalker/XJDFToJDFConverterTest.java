@@ -73,11 +73,11 @@ import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.PartitionHelper;
@@ -86,6 +86,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -96,6 +97,7 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.Test;
 
 /**
@@ -123,6 +125,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
 		assertEquals(contact.getCompany().getProductID(), "company_id");
 	}
+
 	/**
 	 *  
 	 *  
@@ -132,14 +135,14 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		KElement e = new XMLDoc("XJDF", null).getRoot();
-		KElement c =  e.getCreateXPathElement("ProductList/Product/Intent[@Name=\"LayoutIntent\"]/LayoutIntent");
-		c.setAttribute("Sides", EnumSides.OneSided.getName(),null);
+		KElement c = e.getCreateXPathElement("ProductList/Product/Intent[@Name=\"LayoutIntent\"]/LayoutIntent");
+		c.setAttribute("Sides", EnumSides.OneSided.getName(), null);
 		c.setAttribute("PrintedPages", "21");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFLayoutIntent loi = (JDFLayoutIntent) root.getResource(ElementName.LAYOUTINTENT, EnumUsage.Input, 0);
-		assertEquals(loi.getPages().getActual(),42);
+		assertEquals(loi.getPages().getActual(), 42);
 	}
 
 	/**
@@ -182,7 +185,6 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	}
 
-	
 	/**
 	*  
 	*  
@@ -241,6 +243,27 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
 		assertNotNull("The ProductRef was not translated", di.getDropIntent(1).getDropItemIntent(0).getComponent());
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testPartIDKeys()
+	{
+		XJDFHelper h = new XJDFHelper("j1", "root", null);
+		SetHelper rls = h.appendParameter(ElementName.RUNLIST, EnumUsage.Input);
+		for (int i = 0; i < 3; i++)
+		{
+			PartitionHelper ph = rls.appendPartition(new JDFAttributeMap("Run", "R" + i), true);
+			JDFRunList rl = (JDFRunList) ph.getCreateResource();
+			rl.setFileURL("url");
+		}
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc jdfd = xc.convert(h);
+		JDFResource rl = jdfd.getJDFRoot().getResource(ElementName.RUNLIST, EnumUsage.Input, 0);
+		assertEquals(rl.getPartIDKeys(), new VString("Run", null));
 	}
 
 	/**
