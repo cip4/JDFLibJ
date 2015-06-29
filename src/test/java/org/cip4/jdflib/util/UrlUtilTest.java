@@ -280,6 +280,31 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testIsRedirect()
+	{
+		assertTrue(UrlUtil.isRedirect(302));
+		assertFalse(UrlUtil.isRedirect(42));
+		assertFalse(UrlUtil.isRedirect(-301));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetDetails()
+	{
+		HTTPDetails redirect = null;
+		for (int i = 1; i < 666; i++)
+		{
+			redirect = HTTPDetails.getRedirect(redirect);
+			assertEquals(redirect.getRedirect(), i);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testWriteToURLNull()
 	{
 		if (!isTestNetwork())

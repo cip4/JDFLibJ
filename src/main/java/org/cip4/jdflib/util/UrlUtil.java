@@ -151,12 +151,32 @@ public class UrlUtil
 	 */
 	public static class HTTPDetails
 	{
+		public HTTPDetails()
+		{
+			super();
+			chunkSize = defaultChunkSize;
+			bKeepAlive = true;
+			redirect = 0;
+		}
+
 		/**
 		 * size of http chunks to be written, if <=0 no chunks
-		 * TODO make private in a while
+		 *  
 		 */
-		public int chunkSize = defaultChunkSize;
-		private boolean bKeepAlive = true;
+		private int chunkSize;
+		private boolean bKeepAlive;
+
+		public int getRedirect()
+		{
+			return redirect;
+		}
+
+		public void setRedirect(int redirect)
+		{
+			this.redirect = redirect;
+		}
+
+		private int redirect;
 
 		/**
 		 * Getter for chunkSize attribute.
@@ -216,14 +236,27 @@ public class UrlUtil
 			}
 		}
 
-		/**
-		 * @see java.lang.Object#toString()
-		 */
 		@Override
 		public String toString()
 		{
-			return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + "]";
+			return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", redirect=" + redirect + "]";
 		}
+
+		/**
+		 * get a redirect incremented by 1, if null create o defaut first
+		 * @param details
+		 * @return
+		 */
+		public static HTTPDetails getRedirect(HTTPDetails details)
+		{
+			if (details == null)
+			{
+				details = new HTTPDetails();
+			}
+			details.setRedirect(details.getRedirect() + 1);
+			return details;
+		}
+
 	}
 
 	/**
@@ -1644,12 +1677,12 @@ public class UrlUtil
 		 */
 		protected UrlPart writeToURL()
 		{
-			UrlPart p = null;
+			UrlPart urlPart = null;
 			UrlPart p0 = null;
 
 			if (isFile(strUrl))
 			{
-				p = writeFile();
+				urlPart = writeFile();
 			}
 			else
 			{
@@ -1678,21 +1711,35 @@ public class UrlUtil
 					{
 						streamWriter = new StreamReader(bufStream.getInputStream());
 					}
-					p = callProxy(proxy, list.size() == 1 || !proxy.equals(Proxy.NO_PROXY));
-					if (p != null)
+					urlPart = callProxy(proxy, list.size() == 1 || !proxy.equals(Proxy.NO_PROXY));
+					if (urlPart != null)
 					{
-						if (p.getResponseCode() == 200)
+						int responseCode = urlPart.getResponseCode();
+						if (responseCode == 200)
 						{
-							return p;
+							return urlPart;
+						}
+						else if (isRedirect(responseCode) && (details == null || details.getRedirect() < 42) && streamWriter == null)
+						{
+							String newLocation = urlPart.getConnection().getHeaderField("Location");
+							if (newLocation != null)
+							{
+								p0 = urlPart;
+								urlPart = new URLWriter(newLocation, null, method, contentType, HTTPDetails.getRedirect(details)).writeToURL();
+								if (urlPart == null)
+								{
+									urlPart = p0;
+								}
+							}
 						}
 						else
 						{
-							p0 = p;
+							p0 = urlPart;
 						}
 					}
 				}
 			}
-			return p == null ? p0 : p;
+			return urlPart == null ? p0 : urlPart;
 		}
 
 		/**
@@ -1944,6 +1991,17 @@ public class UrlUtil
 		}
 
 		return strWork.substring(0, strWork.length() - ext.length() - 1);
+	}
+
+	/**
+	 * return true if the response code should redirect
+	 * 
+	 * @param responseCode
+	 * @return
+	 */
+	public static boolean isRedirect(int responseCode)
+	{
+		return responseCode == 301 || responseCode == 302 || responseCode == 303 || responseCode == 307 || responseCode == 308;
 	}
 
 	private static BiHashMap<String, String> mimeMap = null;
