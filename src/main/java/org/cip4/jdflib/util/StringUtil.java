@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,6 +83,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.PatternSyntaxException;
@@ -409,7 +410,7 @@ public class StringUtil
 	 * 
 	 * @return String - the vector as String
 	 */
-	public static String setvString(final Vector<?> v)
+	public static String setvString(final List<?> v)
 	{
 		return setvString(v, m_sep, null, null);
 	}
@@ -426,7 +427,7 @@ public class StringUtil
 	 * 
 	 * default: setvString(v, JDFConstants.BLANK, null, null)
 	 */
-	public static String setvString(final Vector<?> v, final String sep, final String front, final String back)
+	public static String setvString(final List<?> v, final String sep, final String front, final String back)
 	{
 		if (v == null)
 		{
@@ -449,7 +450,7 @@ public class StringUtil
 			{
 				buf.append(sep);
 			}
-			final Object elementAt = v.elementAt(i);
+			final Object elementAt = v.get(i);
 			if (elementAt instanceof String)
 			{
 				buf.append((String) elementAt);
