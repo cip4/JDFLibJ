@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.Test;
 
@@ -124,8 +125,27 @@ public class JDFQueueEntryTest extends TestCase
 		assertFalse(qe.getNextStatusVector().contains(EnumQueueEntryStatus.Running));
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNodeStatus()
+	{
+		assertEquals(EnumNodeStatus.getNodeStatus(EnumQueueEntryStatus.Waiting), EnumNodeStatus.Waiting);
+		assertEquals(EnumNodeStatus.getNodeStatus(EnumQueueEntryStatus.Completed), EnumNodeStatus.Completed);
+		assertEquals(EnumNodeStatus.getNodeStatus(EnumQueueEntryStatus.Running), EnumNodeStatus.InProgress);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetQueueEntryStatus()
+	{
+		assertEquals(EnumNodeStatus.getQueueEntryStatus(EnumNodeStatus.Waiting), EnumQueueEntryStatus.Waiting);
+		assertEquals(EnumNodeStatus.getQueueEntryStatus(EnumNodeStatus.Completed), EnumQueueEntryStatus.Completed);
+		assertEquals(EnumNodeStatus.getQueueEntryStatus(EnumNodeStatus.InProgress), EnumQueueEntryStatus.Running);
+	}
 
 	/**
 	 * 

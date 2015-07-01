@@ -1624,6 +1624,46 @@ public class JDFElement extends KElement
 		}
 
 		/**
+		 * returns the node status corresponding to a queueEntry status
+		 * 
+		 * @param qes the queueEntry  status to test agains
+		 * @return the node status that corresponds to qes; 
+		 */
+		public static EnumNodeStatus getNodeStatus(final EnumQueueEntryStatus qes)
+		{
+			if (EnumQueueEntryStatus.Waiting.equals(qes))
+			{
+				return EnumNodeStatus.Waiting;
+			}
+			if (EnumQueueEntryStatus.Running.equals(qes))
+			{
+				return EnumNodeStatus.InProgress;
+			}
+			if (EnumQueueEntryStatus.Suspended.equals(qes))
+			{
+				return EnumNodeStatus.Suspended;
+			}
+			if (EnumQueueEntryStatus.Completed.equals(qes))
+			{
+				return EnumNodeStatus.Completed;
+			}
+			if (EnumQueueEntryStatus.Aborted.equals(qes))
+			{
+				return EnumNodeStatus.Aborted;
+			}
+			if (EnumQueueEntryStatus.PendingReturn.equals(qes))
+			{
+				return EnumNodeStatus.Cleanup;
+			}
+			if (EnumQueueEntryStatus.Held.equals(qes))
+			{
+				return EnumNodeStatus.Waiting;
+			}
+
+			return null; // punt
+		}
+
+		/**
 		 * @return an iterator over the enum objects
 		 */
 		public static Iterator iterator()
