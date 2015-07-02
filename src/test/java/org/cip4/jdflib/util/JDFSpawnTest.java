@@ -3681,6 +3681,39 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testMergeNewPart()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+
+		spawnParts.add(partMap); // want more granular
+		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.TRANSFERCURVEPOOL, null), spawnParts, false, false, false, false);
+
+		final JDFTransferCurvePool tcpSpawn = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		JDFAttributeMap spawnMap = partMap.clone();
+		spawnMap.put(EnumPartIDKey.Separation, "Cyan");
+		tcpSpawn.getCreatePartition(spawnMap, null);
+
+		final JDFMerge m = new JDFMerge(n);
+		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+		assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
+
+		final JDFTransferCurvePool tcpMerged = (JDFTransferCurvePool) merged.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		assertEquals(tcpMerged.getPartIDKeys().get(2), "Separation");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testMergeResourceOrder()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
