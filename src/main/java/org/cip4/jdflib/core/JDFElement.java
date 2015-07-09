@@ -105,6 +105,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -1618,6 +1619,66 @@ public class JDFElement extends KElement
 			if (EnumNodeStatus.Aborted.equals(ns))
 			{
 				return EnumQueueEntryStatus.Aborted;
+			}
+
+			return null; // punt
+		}
+
+		/**
+		 * returns the queuentrystatus corresponding to a node status
+		 * 
+		 * @param ns the node status to test agains
+		 * @return the queentrystatus that corresponds to ns; may be null in case of pool or part
+		 */
+		public static EnumDeviceStatus getDeviceStatus(final EnumNodeStatus ns)
+		{
+			if (EnumNodeStatus.Waiting.equals(ns))
+			{
+				return EnumDeviceStatus.Stopped;
+			}
+			if (EnumNodeStatus.TestRunInProgress.equals(ns))
+			{
+				return EnumDeviceStatus.Setup;
+			}
+			if (EnumNodeStatus.Ready.equals(ns))
+			{
+				return EnumDeviceStatus.Stopped;
+			}
+			if (EnumNodeStatus.FailedTestRun.equals(ns))
+			{
+				return EnumDeviceStatus.Stopped;
+			}
+			if (EnumNodeStatus.Setup.equals(ns))
+			{
+				return EnumDeviceStatus.Setup;
+			}
+			if (EnumNodeStatus.InProgress.equals(ns))
+			{
+				return EnumDeviceStatus.Running;
+			}
+			if (EnumNodeStatus.Cleanup.equals(ns))
+			{
+				return EnumDeviceStatus.Cleanup;
+			}
+			if (EnumNodeStatus.Spawned.equals(ns))
+			{
+				return EnumDeviceStatus.Unknown;
+			}
+			if (EnumNodeStatus.Suspended.equals(ns))
+			{
+				return EnumDeviceStatus.Unknown;
+			}
+			if (EnumNodeStatus.Stopped.equals(ns))
+			{
+				return EnumDeviceStatus.Stopped;
+			}
+			if (EnumNodeStatus.Completed.equals(ns))
+			{
+				return EnumDeviceStatus.Stopped;
+			}
+			if (EnumNodeStatus.Aborted.equals(ns))
+			{
+				return EnumDeviceStatus.Unknown;
 			}
 
 			return null; // punt

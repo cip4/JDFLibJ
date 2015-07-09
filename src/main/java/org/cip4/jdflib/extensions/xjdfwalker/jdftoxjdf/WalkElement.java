@@ -226,6 +226,10 @@ public class WalkElement extends BaseWalker
 		return map;
 	}
 
+	/**
+	 * zapp unused attributes
+	 * @param newRootP
+	 */
 	protected void removeUnused(final KElement newRootP)
 	{
 		newRootP.removeAttribute(AttributeName.XSITYPE);

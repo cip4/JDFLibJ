@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,10 +77,12 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -297,7 +299,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	}
 
 	/**
-	 * gets the DeviceID from the child device, null if none was set
+	 * gets the DeviceID from the first child device, null if none was set
 	 * @return the deviceID
 	 */
 	public String getDeviceID()
@@ -306,6 +308,21 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		if (d == null)
 			return null;
 		return StringUtil.getNonEmpty(d.getDeviceID());
+	}
+
+	/**
+	 * gets the DeviceID from all child devices, null if none was set
+	 * @return the deviceID
+	 */
+	public VString getDeviceIDs()
+	{
+		Vector<JDFDevice> vd = getChildrenByClass(JDFDevice.class, false, 0);
+		if (vd == null)
+			return null;
+		VString ret = new VString();
+		for (JDFDevice d : vd)
+			ret.add(d.getDeviceID());
+		return ret;
 	}
 
 	/**
@@ -368,6 +385,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	/**
 	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
 	 */
+	@Override
 	public JDFJMF toSignalJMF()
 	{
 		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
@@ -389,8 +407,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		{
 			di.setDevice(dev, true);
 		}
-		di.setDeviceStatus(EnumDeviceStatus.Unknown); // I'm offline and it ain't in no audit
 
+		di.setDeviceStatus(EnumNodeStatus.getDeviceStatus(getStatus()));
 		jp.setStatus(getStatus());
 		jp.copyAttribute(AttributeName.STATUSDETAILS, this);
 		final JDFMISDetails md = getMISDetails();
@@ -420,5 +438,22 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		return ContainerUtil.compare(d1, d2);
 	}
 
-} // class JDFPhaseTime
-// ==========================================================================
+	/**
+	 * 
+	 * @param phase
+	 */
+	public void setPhase(JDFJobPhase phase)
+	{
+		JDFJMF jmf = (JDFJMF) phase.getDeepParent(ElementName.JMF, 0);
+		JDFDeviceInfo devInfo = (JDFDeviceInfo) phase.getParentNode_KElement();
+		setStatusDetails(phase.getStatusDetails());
+		setStatus(phase.getStatus());
+		setPartMapVector(phase.getPartMapVector());
+		copyElements(devInfo.getChildElementVector(ElementName.EMPLOYEE, null), null);
+		copyElements(phase.getChildElementVector(ElementName.ACTIVITY, null), null);
+		copyElement(phase.getMISDetails(), null);
+		setEnd(jmf.getTimeStamp());
+		setStart(phase.getPhaseStartTime());
+	}
+
+}

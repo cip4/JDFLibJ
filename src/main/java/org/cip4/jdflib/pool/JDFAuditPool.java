@@ -714,7 +714,10 @@ public class JDFAuditPool extends JDFPool
 					}
 
 					final JDFPhaseTime pt = setPhase(phase.getStatus(), phase.getStatusDetails(), phase.getPartMapVector(), devInfo.getChildElementVector(ElementName.EMPLOYEE, null));
-					pt.copyElement(phase.getMISDetails(), null);
+					if (pt.getMISDetails() == null)
+					{
+						pt.copyElement(phase.getMISDetails(), null);
+					}
 					pt.setEnd(jmf.getTimeStamp());
 					pt.setStart(phase.getPhaseStartTime());
 					vRet.add(pt);

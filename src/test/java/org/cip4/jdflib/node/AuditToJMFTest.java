@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,13 +66,6 @@
  * <http://www.cip4.org/>.
  *
  */
-/**
- * JDFNodeProductTest.java
- * 
- * @author Dietrich Mucha
- *
- * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
- */
 package org.cip4.jdflib.node;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -90,6 +83,7 @@ import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 

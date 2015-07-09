@@ -66,18 +66,11 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
@@ -104,87 +97,22 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
-		JDFJMF jmf = pt.toSignalJMF();
-		jmf.appendAnchor(null);
-		KElement xjmf = new JDFDoc(XJDF20.rootJMF).getRoot();
-		jdfToXJDF.walkTree(jmf, xjmf);
-		KElement signalxjmf = xjmf.getFirstChildElement();
-		signalxjmf.removeChild(ElementName.STATUSQUPARAMS, null, 0);
-		final VElement vL = pt.getLinkVector();
-		if (vL != null)
+		final JDFPhaseTime pt = (JDFPhaseTime) xjdf;
+		KElement signalStatus = pt.getElement("SignalStatus");
+		if (signalStatus == null)
 		{
-			for (KElement e : vL)
-			{
-				e.deleteNode();
-			}
+			return null;
 		}
-		KElement ret = super.walk(jdf, xjdf);
-		ret.moveElement(signalxjmf, null);
+		JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
+		xjdfToJDFImpl.walkTree(signalStatus, jmf);
+		signalStatus.deleteNode();
+		((JDFPhaseTime) xjdf).setPhase(jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0));
+
+		KElement ret = super.walk(xjdf, jdf);
+
 		return ret;
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	public KElement oldwalk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFPhaseTime pt = (JDFPhaseTime) jdf;
-		final VElement vL = pt.getLinkVector();
-		final VElement phaseAmounts = new VElement();
-		VJDFAttributeMap partsPhaseTime = pt.getPartMapVector();
-		if (vL != null)
-		{
-			for (KElement e : vL)
-			{
-				final JDFResourceLink rl = (JDFResourceLink) e;
-				VJDFAttributeMap partsResLink = rl.getPartMapVector();
-				if (partsResLink == null)
-				{
-					if (partsPhaseTime != null)
-					{
-						partsResLink = partsPhaseTime.clone();
-					}
-					else
-					{
-						partsResLink = new VJDFAttributeMap((JDFAttributeMap) null);
-					}
-				}
-
-				final VElement vR = setResource(null, rl.getLinkRoot(), jdfToXJDF.newRoot);
-				final KElement phaseAmount = xjdf.appendElement("PhaseAmount");
-				JDFAttributeMap commonMap = partsResLink.getCommonMap();
-				for (KElement res : vR)
-				{
-					VJDFAttributeMap resParts = new PartitionHelper(res).getPartMapVector();
-					if (resParts.overlapsMap(partsResLink))
-					{
-						phaseAmount.appendAttribute("rRef", res.getAttribute(AttributeName.ID), null, " ", true);
-						setAmountPool(rl, phaseAmount, commonMap);
-						for (String extension : new String[] { "", "Good", "Waste" })
-						{
-							phaseAmount.removeAttribute(AttributeName.AMOUNT + extension);
-							phaseAmount.renameAttribute(AttributeName.ACTUALAMOUNT + extension, AttributeName.AMOUNT + extension, null, null);
-						}
-					}
-				}
-				rl.deleteNode();
-				phaseAmounts.add(phaseAmount);
-			}
-		}
-
-		final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNode above...)
-		if (x2 != null)
-		{
-			for (int i = 0; i < phaseAmounts.size(); i++)
-			{
-				x2.moveElement(phaseAmounts.get(i), null);
-			}
-		}
-		return x2;
 	}
 
 	/**
@@ -198,18 +126,4 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		return toCheck instanceof JDFPhaseTime;
 	}
 
-	/**
-	 * remove all stuff that is now in the JobPhases
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnused(KElement newRootP)
-	{
-		newRootP.removeAttribute(AttributeName.STATUS);
-		newRootP.removeAttribute(AttributeName.STATUSDETAILS);
-		newRootP.removeAttribute(AttributeName.STARTTIME);
-		newRootP.removeAttribute(AttributeName.START);
-		newRootP.removeAttribute(AttributeName.END);
-		super.removeUnused(newRootP);
-	}
 }

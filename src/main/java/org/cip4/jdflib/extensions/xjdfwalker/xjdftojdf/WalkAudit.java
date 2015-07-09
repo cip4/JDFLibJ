@@ -66,18 +66,17 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkAudit extends WalkJDFElement
+public class WalkAudit extends WalkXElement
 {
 
 	/**
@@ -104,14 +103,10 @@ public class WalkAudit extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(KElement xjdf, KElement jdf)
 	{
-		KElement e = super.walk(jdf, xjdf);
-		if (!jdfToXJDF.isSingleNode() && e != null)
-		{
-			JDFNode n = ((JDFAudit) jdf).getParentJDF();
-			e.copyAttribute(AttributeName.JOBPARTID, n);
-		}
+		KElement e = super.walk(xjdf, jdf);
+		e.removeAttribute(AttributeName.JOBPARTID);
 		return e;
 	}
 }
