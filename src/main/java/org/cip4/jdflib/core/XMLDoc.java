@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -751,9 +751,12 @@ public class XMLDoc
 	 */
 	public void setXSLTURL(final String url)
 	{
-		final String data = "type=\"text/xsl\" href=\"" + url + "\"";
-		final ProcessingInstruction pi = createProcessingInstruction("xml-stylesheet", data);
-		insertBefore(pi, getRoot());
+		if (StringUtil.getNonEmpty(url) != null)
+		{
+			final String data = "type=\"text/xsl\" href=\"" + url + "\"";
+			final ProcessingInstruction pi = createProcessingInstruction("xml-stylesheet", data);
+			insertBefore(pi, getRoot());
+		}
 	}
 
 	/**
