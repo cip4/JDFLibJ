@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.junit.Assert;
 import org.junit.Test;
 
 ////////////////////////////////////////////////////////////////
@@ -102,13 +101,13 @@ public class JDFPartTest extends JDFTestCaseBase
 	{
 		final JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
 		part.setPartMap(map);
-		Assert.assertEquals(part.getPartMap(), map);
+		assertEquals(part.getPartMap(), map);
 		map.put("Side", "Back");
 		map.put("Run", "1");
 		part.setPartMap(map);
-		Assert.assertEquals(part.getPartMap(), map);
+		assertEquals(part.getPartMap(), map);
 		part.setPartMap(null);
-		Assert.assertEquals(part.getPartMap(), new JDFAttributeMap());
+		assertEquals(part.getPartMap(), new JDFAttributeMap());
 	}
 
 	/**
@@ -133,7 +132,7 @@ public class JDFPartTest extends JDFTestCaseBase
 		while (it.hasNext())
 		{
 			final String name = (it.next()).getName();
-			Assert.assertTrue("name missing in Part: " + name, knownAtts.contains(name));
+			assertTrue("name missing in Part: " + name, knownAtts.contains(name));
 		}
 	}
 
@@ -143,21 +142,21 @@ public class JDFPartTest extends JDFTestCaseBase
 	@Test
 	public void testMatchesPartPartVersion()
 	{
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", false));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", false));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", false));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", false));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", false));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", false));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", false));
 
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", true));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", true));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", true));
 	}
 
 	/**
@@ -166,25 +165,35 @@ public class JDFPartTest extends JDFTestCaseBase
 	@Test
 	public void testMatchesPart()
 	{
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", true));
-		Assert.assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", false));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", true));
-		Assert.assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", true));
+		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", false));
 
-		Assert.assertTrue(JDFPart.matchesPart("PartVersion", "DE EN FR", "DE EN FR", false));
-		Assert.assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 4", "2 3", false));
-		Assert.assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 3 5 ~ 6", "3 5", false));
-		Assert.assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 3 6 ~ 8", "3 ~ 6", false));
-		Assert.assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE", false));
-		Assert.assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", false));
-		Assert.assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DE", true));
-		Assert.assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", true));
-		Assert.assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DEU", false));
-		Assert.assertTrue(JDFPart.matchesPart("Run", "R1", "R1", false));
-		Assert.assertFalse(JDFPart.matchesPart("Run", "R1 R2", "R1", false));
-		Assert.assertFalse(JDFPart.matchesPart("Run", "R2", "R1", false));
-		Assert.assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 4", "5", false));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN FR", "DE EN FR", false));
+		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 4", "2 3", false));
+		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 3 5 ~ 6", "3 5", false));
+		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 3 6 ~ 8", "3 ~ 6", false));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE", false));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", false));
+		assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DE", true));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", true));
+		assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DEU", false));
+		assertTrue(JDFPart.matchesPart("Run", "R1", "R1", false));
+		assertFalse(JDFPart.matchesPart("Run", "R1 R2", "R1", false));
+		assertFalse(JDFPart.matchesPart("Run", "R2", "R1", false));
+		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 4", "5", false));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMatchesPartTags()
+	{
+		assertFalse(JDFPart.matchesPart("RunTags", "aaa bb", "aa", false));
+		assertTrue(JDFPart.matchesPart("RunTags", "aa bb", "aa", false));
+		assertTrue(JDFPart.matchesPart("ItemNames", "aa bb", "aa", false));
 
 	}
-	// //////////////////////////////////////////////////////////////
 }
