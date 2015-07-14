@@ -194,6 +194,5 @@ public class JDFPartTest extends JDFTestCaseBase
 		assertFalse(JDFPart.matchesPart("RunTags", "aaa bb", "aa", false));
 		assertTrue(JDFPart.matchesPart("RunTags", "aa bb", "aa", false));
 		assertTrue(JDFPart.matchesPart("ItemNames", "aa bb", "aa", false));
-
 	}
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -246,41 +246,45 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
-	public final void testGetIntegerList()
+	public final void testGetIntegerListReverse() throws Exception
 	{
+		JDFIntegerRangeList rangeList = new JDFIntegerRangeList("0 1~2 6~5 8 ~ 5");
+		JDFIntegerList list = rangeList.getIntegerList();
+		assertEquals("Bad getIntegerList: " + list, list.toString(), "0 1 2 6 5 8 7 6 5");
+	}
 
-		try
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public final void testGetIntegerList() throws Exception
+	{
+		JDFIntegerRangeList rangeList = new JDFIntegerRangeList("0 1~2 3~6 8 ~ 7");
+		JDFIntegerList list = rangeList.getIntegerList();
+		// list must be equal the string "0 1 2 3 4 5 6"
+		assertEquals("Bad getIntegerList: " + list, list.toString(), "0 1 2 3 4 5 6 8 7");
+
+		// now some performance
+		for (int i = 0; i < 1000; i++)
+			rangeList.append(i * 10, i * 10 + 5);
+
+		int n = 0;
+		for (int i = 0; i < rangeList.getElementCount(); i++)
 		{
-			JDFIntegerRangeList rangeList = new JDFIntegerRangeList("0 1~2 3~6 8 ~ 7");
-			JDFIntegerList list = rangeList.getIntegerList();
-			// list must be equal the string "0 1 2 3 4 5 6"
-			assertEquals("Bad getIntegerList: " + list, list.toString(), "0 1 2 3 4 5 6 8 7");
-
-			// now some performance
-			for (int i = 0; i < 1000; i++)
-				rangeList.append(i * 10, i * 10 + 5);
-
-			int n = 0;
-			for (int i = 0; i < rangeList.getElementCount(); i++)
-			{
-				int j = rangeList.getElement(i);
-				n += j;
-			}
-
-			list = rangeList.getIntegerList();
-			int m = 0;
-			for (int i = 0; i < list.size(); i++)
-			{
-				int j = ((Integer) list.elementAt(i)).intValue();
-				m += j;
-			}
-
-			assertEquals(n, m);
+			int j = rangeList.getElement(i);
+			n += j;
 		}
-		catch (DataFormatException dfe)
+
+		list = rangeList.getIntegerList();
+		int m = 0;
+		for (int i = 0; i < list.size(); i++)
 		{
-			fail("DataFormatException");
+			int j = ((Integer) list.elementAt(i)).intValue();
+			m += j;
 		}
+
+		assertEquals(n, m);
 	}
 
 	// /////////////////////////////////////////////////////////////////////
