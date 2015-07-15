@@ -1,5 +1,3 @@
-package org.cip4.jdflib.jmf;
-
 /**
  * The CIP4 Software License, Version 1.0
  *
@@ -68,6 +66,7 @@ package org.cip4.jdflib.jmf;
  *  
  * 
  */
+package org.cip4.jdflib.jmf;
 
 import junit.framework.TestCase;
 
@@ -94,4 +93,5 @@ public class JDFQueueTest extends TestCase
 			q.appendQueueEntry();
 		}
 	}
+
 }

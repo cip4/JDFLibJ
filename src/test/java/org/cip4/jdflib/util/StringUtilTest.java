@@ -500,7 +500,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matchesSimple("€", "(€)?"));
 
 		assertFalse(StringUtil.matchesSimple("abc", "??"));
-		assertFalse(StringUtil.matchesSimple(null, null));
+		assertTrue(StringUtil.matchesSimple(null, null));
 		assertFalse(StringUtil.matchesSimple("abc", "?"));
 		assertTrue(StringUtil.matchesSimple("a b", "(a)?( b)?( c)?"));
 		assertTrue(StringUtil.matchesSimple("a b", "(a)? (b)?"));
@@ -571,7 +571,7 @@ public class StringUtilTest extends JDFTestCaseBase
 
 		assertTrue(StringUtil.matches("€", "(€)?"));
 
-		assertFalse(StringUtil.matches(null, null));
+		assertTrue(StringUtil.matches(null, null));
 		assertFalse(StringUtil.matches("abc", "?"));
 		assertTrue(StringUtil.matches("a b", "(a)?( b)?( c)?"));
 		assertTrue(StringUtil.matches("a b", "(a)? (b)?"));
@@ -1164,6 +1164,19 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testEquals()
+	{
+		assertTrue(StringUtil.equals("", null));
+		assertTrue(StringUtil.equals(null, null));
+		assertTrue(StringUtil.equals("", ""));
+		assertFalse(StringUtil.equals("a", ""));
+		assertFalse(StringUtil.equals("a", null));
+	}
 
 	/**
 	 * 

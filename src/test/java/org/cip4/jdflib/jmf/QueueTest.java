@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQueue.CleanupCallback;
 import org.cip4.jdflib.jmf.JDFQueue.ExecuteCallback;
+import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -572,7 +573,24 @@ public class QueueTest extends JDFTestCaseBase
 		q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
 		q.getQueueEntry("qe2").setDeviceID("d1");
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetNextExecutableQueueEntryActivation()
+	{
+		assertNull(q.getNextExecutableQueueEntry());
+		q.setMaxRunningEntries(2);
+		q.sortChildren();
+
+		JDFQueueEntry qe2 = q.getQueueEntry("qe2");
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
+		qe2.setActivation(EnumActivation.Held);
+		JDFQueueEntry next = q.getNextExecutableQueueEntry();
+		assertEquals(next, q.getQueueEntry("qe1"));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

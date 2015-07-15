@@ -1927,6 +1927,17 @@ public class StringUtil
 	}
 
 	/**
+	 * return true if a equals b or both are null or ""
+	 * @param a String to compare
+	 * @param b String to compare
+	 * @return boolean true if a equals b or both are one of null or ""
+	 */
+	public static boolean equals(final String a, final String b)
+	{
+		return ContainerUtil.equals(getNonEmpty(a), getNonEmpty(b));
+	}
+
+	/**
 	 * escape a string by prepending escapeChar and a numerical representation of the string. Characters to be escaped are defined by toEscape, escapeBelow and
 	 * escapeAbove
 	 * <p>
@@ -2513,16 +2524,16 @@ public class StringUtil
 	 */
 	public static boolean matches(final String str, String regExp)
 	{
-		if (str == null)
-		{
-			return false;
-		}
-
 		// the null expression is assumed to match anything
 		if ((regExp == null) || (regExp.length() == 0) || "*".equals(regExp))
 		{
 			return true;
 		}
+		else if (str == null)
+		{
+			return false;
+		}
+
 		boolean b;
 		try
 		{

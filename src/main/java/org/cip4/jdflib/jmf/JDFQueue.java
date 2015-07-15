@@ -641,7 +641,8 @@ public class JDFQueue extends JDFAutoQueue
 			String qeStatus = qe.getAttribute(AttributeName.STATUS);
 			if ("Waiting".equals(qeStatus))
 			{
-				if (cb == null || cb.canExecute(qe))
+				String qeActivation = StringUtil.getNonEmpty(qe.getAttribute(AttributeName.ACTIVATION));
+				if ((qeActivation == null || "Active".equals(qeActivation)) && (cb == null || cb.canExecute(qe)))
 				{
 					theEntry = qe;
 					break;
