@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
  */
 public class WalkPhaseTimeAudit extends WalkAudit
 {
+
 	/**
 	 * 
 	 */
@@ -100,6 +101,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	}
 
 	/**
+	 * @param jdf
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -122,7 +124,9 @@ public class WalkPhaseTimeAudit extends WalkAudit
 			}
 		}
 		KElement ret = super.walk(jdf, xjdf);
+		ret.removeChildren(null, null, null);
 		ret.moveElement(signalxjmf, null);
+		jdf.removeChildren(null, null, null);
 		return ret;
 	}
 
@@ -210,6 +214,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		newRootP.removeAttribute(AttributeName.STARTTIME);
 		newRootP.removeAttribute(AttributeName.START);
 		newRootP.removeAttribute(AttributeName.END);
+		newRootP.removeAttribute(AttributeName.QUEUEENTRYID);
 		super.removeUnused(newRootP);
 	}
 }
