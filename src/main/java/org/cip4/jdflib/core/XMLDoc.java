@@ -1473,6 +1473,7 @@ public class XMLDoc
 			final XMLParser parser = getXMLParser();
 
 			parser.parseStream(inStream);
+			XMLParserFactory.getFactory().push(parser);
 			try
 			{
 				inStream.close();
@@ -1553,7 +1554,7 @@ public class XMLDoc
 	 */
 	protected XMLParser getXMLParser()
 	{
-		return new XMLParser();
+		return XMLParserFactory.getFactory().get();
 	}
 
 	/**
@@ -1777,8 +1778,10 @@ public class XMLDoc
 	{
 		if (is == null)
 			return null;
-		final XMLParser p = new XMLParser();
+		final XMLParserFactory factory = XMLParserFactory.getFactory();
+		final XMLParser p = factory.get();
 		XMLDoc d = p.parseStream(is);
+		factory.push(p);
 		return d;
 	}
 
@@ -1790,8 +1793,25 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseFile(final String fileName)
 	{
-		final XMLParser p = new XMLParser();
+		final XMLParserFactory factory = XMLParserFactory.getFactory();
+		final XMLParser p = factory.get();
 		XMLDoc d = p.parseFile(fileName);
+		factory.push(p);
+		return d;
+	}
+
+	/**
+	 * parse an XML file
+	 * 
+	 * @param string
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseString(final String string)
+	{
+		final XMLParserFactory factory = XMLParserFactory.getFactory();
+		final XMLParser p = factory.get();
+		XMLDoc d = p.parseString(string);
+		factory.push(p);
 		return d;
 	}
 
@@ -1803,8 +1823,10 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseFile(final File file)
 	{
-		final XMLParser p = new XMLParser();
+		final XMLParserFactory factory = XMLParserFactory.getFactory();
+		final XMLParser p = factory.get();
 		XMLDoc d = p.parseFile(file);
+		factory.push(p);
 		return d;
 	}
 
@@ -1817,7 +1839,8 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseURL(final String url, final BodyPart bp)
 	{
-		final XMLParser p = new XMLParser();
+		final XMLParserFactory factory = XMLParserFactory.getFactory();
+		final XMLParser p = factory.get();
 		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
 		final File f = UrlUtil.urlToFile(url);
 		XMLDoc d = p.parseStream(inStream);
@@ -1834,6 +1857,7 @@ public class XMLDoc
 				d.setOriginalFileName(fn);
 			}
 		}
+		factory.push(p);
 		return d;
 	}
 

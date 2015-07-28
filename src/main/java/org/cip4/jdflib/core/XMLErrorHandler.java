@@ -90,7 +90,7 @@ import org.xml.sax.SAXParseException;
 public class XMLErrorHandler implements ErrorHandler
 {
 
-	private final KElement root;
+	private KElement root;
 	XMLParser parser;
 	InputSource src;
 	private final Log log;
@@ -101,10 +101,8 @@ public class XMLErrorHandler implements ErrorHandler
 	public XMLErrorHandler()
 	{
 		super();
-		XMLDoc xmlOutput = new XMLDoc("SchemaValidationOutput", null);
-		root = xmlOutput.getRoot();
+		reset();
 		log = LogFactory.getLog(getClass());
-		src = null;
 	}
 
 	/**
@@ -242,5 +240,11 @@ public class XMLErrorHandler implements ErrorHandler
 	public void setInputSource(InputSource inSource)
 	{
 		src = inSource;
+	}
+
+	public void reset()
+	{
+		root = new XMLDoc("SchemaValidationOutput", null).getRoot();
+		src = null;
 	}
 }

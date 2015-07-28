@@ -491,8 +491,11 @@ public class XMLParser extends DOMParser
 		m_lastExcept = null;
 		ignoreNSDefault = false;
 		m_eraseEmpty = true;
-		m_ErrorHandler = null;
+		if (m_ErrorHandler != null)
+			m_ErrorHandler.reset();
 		m_SchemaLocation = null;
+		fDocument = null;
+		fDocumentSource = null;
 	}
 
 	/**
@@ -501,7 +504,7 @@ public class XMLParser extends DOMParser
 	@Override
 	public String toString()
 	{
-		return "XMLParser: " + m_SchemaLocation + " " + m_ErrorHandler;
+		return getClass().getSimpleName() + ": " + m_SchemaLocation + " " + m_ErrorHandler;
 	}
 
 	/**
@@ -512,5 +515,4 @@ public class XMLParser extends DOMParser
 	{
 		this.inputID = inputID;
 	}
-
 }

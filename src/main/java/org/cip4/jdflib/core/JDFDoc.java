@@ -423,8 +423,10 @@ public class JDFDoc extends XMLDoc
 	{
 		if (is == null)
 			return null;
-		final JDFParser p = new JDFParser();
-		return p.parseStream(is);
+		final JDFParser p = JDFParserFactory.getFactory().get();
+		JDFDoc doc = p.parseStream(is);
+		JDFParserFactory.getFactory().push(p);
+		return doc;
 	}
 
 	/**

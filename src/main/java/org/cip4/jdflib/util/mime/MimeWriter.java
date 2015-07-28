@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,7 +96,6 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -704,7 +703,7 @@ public class MimeWriter extends MimeHelper
 			if (doc == null)
 			{
 				bis.reset();
-				doc = new JDFParser().parseStream(bis);
+				doc = JDFDoc.parseStream(bis);
 				if (doc == null)
 				{
 					final JDFCommand c = docJMF.getJMFRoot().getCommand(0);

@@ -80,6 +80,7 @@ import javax.mail.MessagingException;
 
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
+import org.cip4.jdflib.core.XMLParserFactory;
 import org.cip4.jdflib.util.net.IPollDetails;
 
 /**
@@ -219,9 +220,10 @@ public class UrlPart implements IPollDetails
 	 */
 	public XMLDoc getXMLDoc()
 	{
-		final XMLParser p = new XMLParser();
+		final XMLParser p = XMLParserFactory.getFactory().get();
 		p.setInputID(url);
 		final XMLDoc d = p.parseStream(getResponseStream());
+		XMLParserFactory.getFactory().push(p);
 		return d;
 	}
 

@@ -21,7 +21,6 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
@@ -331,8 +330,7 @@ public class BodyPartHelper
 		try
 		{
 			final InputStream is = theBodyPart.getInputStream();
-			final XMLParser p = new XMLParser();
-			final XMLDoc doc = p.parseStream(is);
+			final XMLDoc doc = XMLDoc.parseStream(is);
 			if (doc != null)
 			{
 				doc.setBodyPart(theBodyPart);

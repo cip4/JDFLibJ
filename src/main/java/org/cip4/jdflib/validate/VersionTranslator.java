@@ -74,7 +74,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.extensions.XJDF20;
@@ -113,8 +112,7 @@ public class VersionTranslator
 	 */
 	public Vector<InputStream> convertStream(InputStream stream)
 	{
-		JDFParser p = new JDFParser();
-		JDFDoc d = p.parseStream(stream);
+		JDFDoc d = JDFDoc.parseStream(stream);
 		KElement root = getRoot(d);
 		if (root == null)
 			return null;
