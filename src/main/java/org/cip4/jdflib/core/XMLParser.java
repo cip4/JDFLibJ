@@ -496,6 +496,7 @@ public class XMLParser extends DOMParser
 		m_SchemaLocation = null;
 		fDocument = null;
 		fDocumentSource = null;
+		fDocumentImpl = null;
 	}
 
 	/**
