@@ -91,6 +91,7 @@
 
 package org.cip4.jdflib.core;
 
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -131,6 +132,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.URLReader;
+import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.VectorMap;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -4957,6 +4959,33 @@ public class JDFElement extends KElement
 			return JDFConstants.VERSION_1_3;
 		}
 		return JDFElement.EnumVersion.getEnum(ver).getName();
+	}
+
+	/**
+	 * write to a directory - potentially generating a jobPartID
+	 * @param dir
+	 * @return 
+	 */
+	public File write2Dir(String dir)
+	{
+		String jobID = getInheritedAttribute(AttributeName.JOBID, null, "unknown");
+		String jobPartID = getInheritedAttribute(AttributeName.JOBPARTID, null, "");
+		if (!jobPartID.isEmpty())
+			jobPartID += ".";
+		String extension = "xml";
+		if ((this instanceof JDFNode) || getParentJDF() != null)
+		{
+			extension = "jdf";
+		}
+		else if (getOwnerDocument_KElement().getRoot() instanceof JDFJMF)
+		{
+			extension = "jmf";
+		}
+		String file = jobID + "." + jobPartID;
+		file = UrlUtil.newExtension(file, extension);
+		String newURL = UrlUtil.getURLWithDirectory(dir, file);
+		boolean ok = write2File(newURL);
+		return ok ? new File(newURL) : null;
 	}
 
 	/**

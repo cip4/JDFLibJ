@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
@@ -102,6 +104,7 @@ import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResponse;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -1044,8 +1047,21 @@ public class JDFElementTest extends JDFTestCaseBase
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// ///////
+	/**
+	 * 
+	 */
+	@Test
+	public void testWriteToDirJMF()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Brief, EnumJobDetails.Full);
+		File out = jmf.write2Dir(sm_dirTestDataTemp + "jdfdir");
+		assertEquals(FileUtil.getExtension(out), "jmf");
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setJobID("j1");
+		n.setJobPartID("p1");
+		out = n.write2Dir(sm_dirTestDataTemp + "jdfdir");
+		assertEquals(FileUtil.getExtension(out), "jdf");
+	}
 
 	/**
 	 * 

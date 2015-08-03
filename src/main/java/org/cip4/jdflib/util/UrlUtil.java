@@ -1008,9 +1008,13 @@ public class UrlUtil
 		if (extension == null)
 		{
 			if (isZIPType(contentType))
+			{
 				extension = "zip";
+			}
 			else if (isXMLType(contentType))
+			{
 				extension = "xml";
+			}
 		}
 		return extension;
 	}
