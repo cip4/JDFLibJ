@@ -72,6 +72,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFCreated;
+import org.cip4.jdflib.resource.JDFModified;
 
 /**
  * 
@@ -106,6 +108,9 @@ public class WalkAudit extends WalkJDFElement
 	@Override
 	public KElement walk(KElement jdf, KElement xjdf)
 	{
+		if ((jdf instanceof JDFCreated) || (jdf instanceof JDFModified))
+			return null;
+
 		KElement e = super.walk(jdf, xjdf);
 		if (!jdfToXJDF.isSingleNode() && e != null)
 		{

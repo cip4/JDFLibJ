@@ -71,7 +71,6 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 import java.util.HashMap;
 
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
@@ -127,9 +126,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 				throw new IllegalArgumentException("need a valid output file");
 			}
 		}
-		final JDFParser p = new JDFParser();
-		p.bKElementOnly = true;
-		final XMLDoc dIn = p.parseFile(in);
+		final XMLDoc dIn = XMLDoc.parseFile(in);
 		final KElement rootIn = dIn.getRoot();
 		final XMLDoc dOut = new XMLDoc(rootIn.getNodeName(), rootIn.getNamespaceURI());
 		final KElement rootOut = dOut.getRoot();

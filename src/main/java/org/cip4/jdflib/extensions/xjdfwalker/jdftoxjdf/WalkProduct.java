@@ -104,7 +104,12 @@ public class WalkProduct extends WalkJDF
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFNode node = (JDFNode) jdf;
-		setRootAttributes(node, xjdf);
+		boolean matchesID = matchesRootID(node);
+		if (matchesID)
+		{
+			setRootAttributes(node, xjdf);
+			jdfToXJDF.first.add(jdf.getID());
+		}
 		walkProduct(jdf, xjdf);
 		return xjdf;
 	}
@@ -160,8 +165,6 @@ public class WalkProduct extends WalkJDF
 			sub.setAttribute("ChildRef", kid, null);
 			// TODO add processusage from input / output resources
 		}
-
-		node.setAttribute("RootProduct", true, null);
 	}
 
 	/**
@@ -204,7 +207,13 @@ public class WalkProduct extends WalkJDF
 	{
 		final JDFNode node = (JDFNode) jdf;
 
-		final KElement prod = new XJDFHelper(xjdf).appendProduct().getProduct();
+		ProductHelper prodHelper = new XJDFHelper(xjdf).appendProduct();
+		final KElement prod = prodHelper.getProduct();
+		if (node.isJDFRoot())
+		{
+			prodHelper.setRoot();
+		}
+
 		if (readComponent(node, prod))
 		{
 			prod.setAttributes(jdf);

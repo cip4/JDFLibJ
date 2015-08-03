@@ -1096,7 +1096,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		long currentMem = getCurrentMem();
 		if (currentMem > mem)
-			assertEquals(currentMem, mem, 1000000);
+		{
+			assertEquals("delta: " + (currentMem - mem), currentMem, mem, 10000000);
+		}
 	}
 
 	/**
@@ -3221,8 +3223,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testParseAppendChild()
 	{
 		final String s = "<e xmlns=\"a\" xmlns:foo=\"www.foo.com\"><e2/></e>";
-		final JDFParser p = new JDFParser();
-		p.bKElementOnly = true;
+		final XMLParser p = new XMLParser();
 		p.ignoreNSDefault = true;
 
 		final XMLDoc d = p.parseString(s);

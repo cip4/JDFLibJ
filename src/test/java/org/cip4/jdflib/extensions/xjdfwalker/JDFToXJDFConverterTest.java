@@ -68,14 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoBooleanState.EnumPresentValueList;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -84,7 +84,6 @@ import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
-import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -219,6 +218,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
 	}
+
 	/**
 	 * 
 	 */
@@ -226,25 +226,66 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	public void testMultiNode1()
 	{
 		JDFElement.setLongID(false);
-		JDFNode product=new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
 		product.setType(EnumType.Product);
-		JDFLayoutIntent loi=(JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
 		loi.setSides(EnumSides.OneSided);
-		JDFNode plateset=product.addCombined(new VString("Impositioning Interpreting Rendering ImageSetting", " "));
-		JDFInterpretingParams ip=(JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		JDFNode plateset = product.addCombined(new VString("Impositioning Interpreting Rendering ImageSetting", " "));
+		JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
 		ip.setPolarity(EnumPolarity.Negative);
-		JDFRunList ruli=(JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
 		plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
 		plateset.addResource(ElementName.LAYOUT, EnumUsage.Input);
-		JDFExposedMedia xm=(JDFExposedMedia) plateset.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
-		JDFNode cp=product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
+		JDFExposedMedia xm = (JDFExposedMedia) plateset.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
 		cp.ensureLink(xm, EnumUsage.Input, null);
 		cp.addResource(ElementName.MEDIA, EnumUsage.Input);
 
 		JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
-		conv.saveZip(sm_dirTestDataTemp+"3files.xjdf.zip", product, true);
+		conv.saveZip(sm_dirTestDataTemp + "3files.xjdf.zip", product, true);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testgetXJDFs1()
+	{
+		JDFElement.setLongID(false);
+		JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
+		product.setType(EnumType.Product);
+		product.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		loi.setSides(EnumSides.OneSided);
+		JDFNode product2 = product.addProduct();
+		product2.addResource(ElementName.COMPONENT, EnumUsage.Output).setDescriptiveName("Cover");
+		product.linkOutputs(product2);
+		JDFNode product3 = product.addProduct();
+		product3.addResource(ElementName.COMPONENT, EnumUsage.Output).setDescriptiveName("Body");
+		product.linkOutputs(product3);
+
+		JDFNode plateset = product.addCombined(new VString("Impositioning Interpreting Rendering ImageSetting", " "));
+		JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		ip.setPolarity(EnumPolarity.Negative);
+		JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		ruli.setFileURL("file:///foo.pdf");
+		plateset.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p1");
+		plateset.addResource(ElementName.LAYOUT, EnumUsage.Input);
+		JDFExposedMedia xm = (JDFExposedMedia) plateset.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+		JDFNode cp = product.addCombined(new VString("InkZoneCalculation ConventionalPrinting", " "));
+		cp.ensureLink(xm, EnumUsage.Input, null);
+		cp.addResource(ElementName.MEDIA, EnumUsage.Input).setProductID("p2");
+
+		product.write2File(sm_dirTestDataTemp + "getXJDFS.jdf");
+		JDFToXJDF conv = new JDFToXJDF();
+		Vector<XJDFHelper> v = conv.getXJDFs(product);
+		assertEquals(v.size(), 3);
+		for (XJDFHelper h : v)
+		{
+			h.writeToFile(sm_dirTestDataTemp + "getXJDFS." + h.getJobPartID() + ".xjdf");
+		}
 	}
 
 	/**

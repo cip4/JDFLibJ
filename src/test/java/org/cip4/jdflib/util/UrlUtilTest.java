@@ -89,7 +89,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
@@ -559,8 +558,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 		}
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * @throws Exception
 	 */
@@ -579,9 +576,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			final KElement root = doc.getRoot();
 			root.setAttribute("url", url);
 			doc.write2File(sm_dirTestDataTemp + "url.xml", 2, false);
-			final JDFParser p = new JDFParser();
-			p.bKElementOnly = true;
-			final JDFDoc d = p.parseFile(sm_dirTestDataTemp + "url.xml");
+			final XMLDoc d = XMLDoc.parseFile(sm_dirTestDataTemp + "url.xml");
 			final KElement root2 = d.getRoot();
 			final String urlParse = root2.getAttribute("url");
 			assertEquals(url, urlParse);
@@ -589,10 +584,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals(f2.getAbsolutePath(), f3.getAbsolutePath());
 			assertTrue(f3.canRead());
 		}
-
 	}
-
-	// /////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 

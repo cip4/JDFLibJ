@@ -69,8 +69,9 @@
 
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
+import java.io.File;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -78,12 +79,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.SetHelper.EnumFamily;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.FileUtil;
 import org.junit.Test;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFHelperTest extends TestCase
+public class XJDFHelperTest extends JDFTestCaseBase
 {
 	XJDFHelper theHelper = null;
 
@@ -344,6 +346,21 @@ public class XJDFHelperTest extends TestCase
 		assertNotNull(theHelper.getRootProduct(-1));
 		assertNull(theHelper.getRootProduct(1));
 		assertNull(theHelper.getRootProduct(-2));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
+	public void testWriteToDir()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		String foo = sm_dirTestDataTemp + "foo";
+		FileUtil.deleteAll(new File(foo));
+		theHelper.writeToDir(foo);
+		XMLDoc parsed = XMLDoc.parseFile(foo + "/jID.jpID.xjdf");
+		assertNotNull(parsed);
 	}
 
 	/**

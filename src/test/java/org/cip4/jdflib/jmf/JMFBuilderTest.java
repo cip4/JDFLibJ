@@ -109,19 +109,21 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildMilestone()
 	{
 		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "milestone.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "milestone");
 	}
 
-	private void roundTrip(JDFJMF jmf, EnumValidationLevel level)
+	private void roundTrip(JDFJMF jmf, EnumValidationLevel level, String dir)
 	{
 		assertTrue(jmf.isValid(level));
+		jmf.write2File(dir + ".jmf");
 		JDFToXJDF xc = new XJDF20();
 		xc.setTypeSafeMessage(true);
 		KElement e = xc.convert(jmf);
 		assertNotNull(e);
+		e.write2File(dir + ".xjmf");
 		XJDFToJDFConverter xc2 = new XJDFToJDFConverter(null);
 		JDFDoc doc = xc2.convert(e);
+		doc.write2File(dir + ".xjmf.xjdf", 2, false);
 		assertTrue(doc.getJMFRoot().isValid(level));
 
 	}
@@ -135,8 +137,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		JDFJMF jmf = b.buildResourceSignal(true, null);
 		assertEquals(jmf.getSignal(0).getType(), "Resource");
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "resourceSignal.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "resourceSignal");
 	}
 
 	/**
@@ -148,8 +149,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	{
 		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		assertEquals(jmf.getSignal(0).getType(), "Status");
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "statusSignal.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Incomplete);
+		roundTrip(jmf, EnumValidationLevel.Incomplete, sm_dirTestDataTemp + "statusSignal");
 	}
 
 	/**
@@ -160,8 +160,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildNewJDFCommand()
 	{
 		JDFJMF jmf = b.buildNewJDFCommand();
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "newJDF.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "newJDF");
 	}
 
 	/**
@@ -172,8 +171,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildStatusSubscription()
 	{
 		JDFJMF jmf = b.buildStatusSubscription("signalurl", 30, -1, null);
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionStatus.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionStatus");
 	}
 
 	/**
@@ -184,8 +182,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildResourceSubscription()
 	{
 		JDFJMF jmf = b.buildResourceSubscription("signalurl", 30, -1, null);
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionResource.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionResource");
 	}
 
 	/**
@@ -196,8 +193,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildNotificationSubscription()
 	{
 		JDFJMF jmf = b.buildNotificationSubscription("signalurl");
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionNotification.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionNotification");
 	}
 
 	/**
@@ -208,8 +204,7 @@ public class JMFBuilderTest extends JDFTestCaseBase
 	public void testBuildQueueStatusSubscription()
 	{
 		JDFJMF jmf = b.buildQueueStatusSubscription("signalurl");
-		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SubscriptionQueueStatus.jmf", 2, false);
-		roundTrip(jmf, EnumValidationLevel.Complete);
+		roundTrip(jmf, EnumValidationLevel.Complete, sm_dirTestDataTemp + "SubscriptionQueueStatus");
 	}
 
 	/**

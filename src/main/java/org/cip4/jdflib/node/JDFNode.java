@@ -6757,7 +6757,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		return cNode;
 	}
 
-	// /////////////////////////////////////////////////////////////
 	/**
 	 * add a product node to this
 	 * @return

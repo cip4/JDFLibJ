@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Vector;
@@ -90,6 +91,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -595,6 +597,34 @@ public class XJDFHelper extends BaseXJDFHelper
 	{
 		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
 		return b;
+	}
+
+	/**
+	 * write to a directory - potentially generating a jobPartID
+	 * @param dir
+	 * @return 
+	 */
+	public File writeToDir(String dir)
+	{
+		String jobID = getJobID();
+		if (StringUtil.getNonEmpty(jobID) == null)
+		{
+			jobID = "xjdf";
+		}
+		String jobPartID = getJobPartID();
+		if (StringUtil.getNonEmpty(jobPartID) == null)
+		{
+			String types = getXPathValue("@Types");
+			if (StringUtil.getNonEmpty(types) == null)
+			{
+				types = "unknown";
+			}
+			jobPartID = types;
+		}
+		String file = jobID + "." + jobPartID + ".xjdf";
+		String newURL = UrlUtil.getURLWithDirectory(dir, file);
+		boolean ok = writeToFile(newURL);
+		return ok ? new File(newURL) : null;
 	}
 
 	/**

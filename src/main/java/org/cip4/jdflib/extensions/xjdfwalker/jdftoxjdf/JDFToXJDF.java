@@ -69,16 +69,17 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -98,12 +99,12 @@ import org.cip4.jdflib.extensions.PostXJDFWalker;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -333,7 +334,10 @@ public class JDFToXJDF extends PackageElementWalker
 		prepareNewDoc(true);
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
+		boolean tmpTrack = trackAudits;
+		trackAudits = false;
 		postWalk();
+		trackAudits = tmpTrack;
 		return newRoot;
 	}
 
@@ -346,8 +350,6 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 		rootID = node.getID();
-		if (trackAudits)
-			root.getCreateAuditPool().addCreated("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);
@@ -380,6 +382,12 @@ public class JDFToXJDF extends PackageElementWalker
 		pw.mergeLayout = bMergeLayout;
 		pw.bIntentPartition = bIntentPartition;
 		pw.walkTreeKidsFirst(newRoot);
+		if (trackAudits)
+		{
+			JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement("AuditPool");
+			auditPool.addCreated("XJDF Converter", null);
+		}
+
 		newRoot.eraseEmptyNodes(true);
 	}
 
@@ -483,63 +491,155 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	public void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
-		final File file = new File(fileName);
-		if (file.canRead())
+		new MultiJDFToXJDF().saveZip(fileName, rootNode, replace);
+	}
+
+	/**
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public Vector<XJDFHelper> getXJDFs(JDFNode root)
+	{
+		return new MultiJDFToXJDF().getXJDFs(root);
+	}
+
+	/**
+	 * 
+	 * @author rainer prosi
+	 *
+	 */
+	private class MultiJDFToXJDF
+	{
+
+		/**
+		 * @param fileName the filename of the zip file to save to
+		 * @param rootNode the root jdf to save
+		 * @param replace if true, overwrite existing files
+		 */
+		void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 		{
-			if (replace)
+			final File file = new File(fileName);
+			if (file.canRead())
 			{
-				file.delete();
+				if (replace)
+				{
+					file.delete();
+				}
+				else
+				{
+					throw new JDFException("output file exists: " + file.getPath());
+				}
 			}
-			else
+
+			try
 			{
-				throw new JDFException("output file exists: " + file.getPath());
+				final Vector<XJDFHelper> v = getXJDFs(rootNode);
+
+				final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
+				final ZipOutputStream zos = new ZipOutputStream(fos);
+				for (XJDFHelper h : v)
+				{
+					try
+					{
+						String nam = h.getJobPartID() + "." + XJDFHelper.XJDF;
+						final ZipEntry ze = new ZipEntry(nam);
+						zos.putNextEntry(ze);
+						h.writeToStream(zos);
+						zos.closeEntry();
+					}
+					catch (final ZipException x)
+					{
+						log.error("oops: ", x);
+					}
+					catch (final IOException x)
+					{
+						log.error("oops: ", x);
+					}
+				}
+				zos.close();
+			}
+			catch (final IOException x)
+			{
+				log.error("oops: ", x);
 			}
 		}
 
-		try
+		/**
+		 * 
+		 */
+		MultiJDFToXJDF()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @param root
+		 * @return
+		 */
+		Vector<XJDFHelper> getXJDFs(JDFNode root)
+		{
+			if (root == null)
+				return null;
+			Vector<XJDFHelper> vRet = new Vector<XJDFHelper>();
+			VElement v = getProcessNodes(root);
+			boolean keepProduct = wantProduct;
+			wantProduct = true;
+			if (JDFConstants.PRODUCT.equals(root.getType()))
+			{
+				XJDFHelper xjdfHelper = convertSingle(root);
+				vRet.add(xjdfHelper);
+			}
+			wantProduct = false;
+			for (KElement n : v)
+			{
+				XJDFHelper xjdfHelper = convertSingle(n);
+				vRet.add(xjdfHelper);
+			}
+			wantProduct = keepProduct;
+			return vRet;
+		}
+
+		/**
+		 * 
+		 * @param n
+		 * @return
+		 */
+		private XJDFHelper convertSingle(KElement n)
+		{
+			final KElement xjdf = makeNewJDF((JDFNode) n, null);
+			XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
+			xjdfHelper.cleanUp();
+			return xjdfHelper;
+		}
+
+		/**
+		 * 
+		 * @param rootNode
+		 * @return
+		 */
+		VElement getProcessNodes(final JDFNode rootNode)
 		{
 			final VElement v = rootNode.getvJDFNode(null, null, false);
-			
-			final OutputStream fos = FileUtil.getBufferedOutputStream(new File(fileName));
-			final ZipOutputStream zos = new ZipOutputStream(fos);
-			boolean keepProduct=wantProduct;
-			wantProduct=true;
-			for (int i = 0; i < v.size(); i++)
+			for (int i = v.size() - 1; i >= 0; i--)
 			{
 				final JDFNode n = (JDFNode) v.elementAt(i);
-				if(!n.isProcessNode())
-					continue;
-			
-				String nam = n.getJobPartID(false);
-				if (nam == "")
+				if (!n.isProcessNode())
 				{
-					nam = "Node" + i;
+					v.remove(i);
 				}
-				try
+				else
 				{
-					nam += "." + XJDFHelper.XJDF;
-					final ZipEntry ze = new ZipEntry(nam);
-					zos.putNextEntry(ze);
-					final KElement newRootL = makeNewJDF(n, null);
-					newRootL.getOwnerDocument_KElement().write2Stream(zos, 2, true);
-					zos.closeEntry();
+					String nam = n.getJobPartID(false);
+					if (StringUtil.getNonEmpty(nam) == null)
+					{
+						nam = "Part_" + i;
+					}
+
 				}
-				catch (final ZipException x)
-				{
-					log.error("oops: ", x);
-				}
-				catch (final IOException x)
-				{
-					log.error("oops: ", x);
-				}
-				wantProduct=false;
 			}
-			zos.close();
-			wantProduct=keepProduct;
-		}
-		catch (final IOException x)
-		{
-			log.error("oops: ", x);
+			return v;
 		}
 	}
 
