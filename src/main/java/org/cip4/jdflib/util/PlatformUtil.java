@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,7 +79,7 @@ import java.io.File;
 public class PlatformUtil
 {
 
-	static int DEFAULT_CONNECTION_TIMEOUT = 2000;
+	static int DEFAULT_CONNECTION_TIMEOUT = 10000;
 
 	/**
 	 * Returns true when system platform is Microsoft Windows.
@@ -94,7 +94,9 @@ public class PlatformUtil
 	 * Returns connection timeout in milliseconds as integer.
 	 * 
 	 * @return connectionTimeout in milliseconds
+	 * @deprecated
 	 */
+	@Deprecated
 	public static int getConnectionTimeout()
 	{
 		return DEFAULT_CONNECTION_TIMEOUT;

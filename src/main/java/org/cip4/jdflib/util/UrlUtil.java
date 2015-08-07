@@ -133,6 +133,29 @@ public class UrlUtil
 	 * 
 	 */
 	public static final String KEEPALIVE = "keep-alive";
+
+	static int DEFAULT_CONNECTION_TIMEOUT = 10000;
+
+	/**
+	 * Returns connection timeout in milliseconds as integer.
+	 * 
+	 * @return connectionTimeout in milliseconds
+	 */
+	public static void setConnectionTimeout(int timeout)
+	{
+		DEFAULT_CONNECTION_TIMEOUT = timeout;
+	}
+
+	/**
+	 * Returns connection timeout in milliseconds as integer.
+	 * 
+	 * @return connectionTimeout in milliseconds
+	 */
+	public static int getConnectionTimeout()
+	{
+		return DEFAULT_CONNECTION_TIMEOUT;
+	}
+
 	/**
 	 * 
 	 */
@@ -1774,7 +1797,7 @@ public class UrlUtil
 			try
 			{
 				final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection(proxy);
-				httpURLconnection.setConnectTimeout(PlatformUtil.getConnectionTimeout());
+				httpURLconnection.setConnectTimeout(getConnectionTimeout());
 				httpURLconnection.setRequestMethod(method);
 				httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
 				httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);

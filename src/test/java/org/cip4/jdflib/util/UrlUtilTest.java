@@ -106,6 +106,16 @@ import org.junit.Test;
  */
 public class UrlUtilTest extends JDFTestCaseBase
 {
+
+	/**
+	 * Test method for {@link org.cip4.jdflib.util.UrlUtil#getConnectionTimeout()}.
+	 */
+	@Test
+	public void testGetConnectionTimeout()
+	{
+		assertEquals("ConnectionTimeout value is wrong.", UrlUtil.DEFAULT_CONNECTION_TIMEOUT, UrlUtil.getConnectionTimeout());
+	}
+
 	/**
 	 * 
 	 */

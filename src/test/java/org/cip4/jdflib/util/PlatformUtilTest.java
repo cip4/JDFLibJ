@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -72,30 +72,36 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * JUnit test case for PlatformUtil class.
  * @author Stefan Meißner, CIP4
  * 
  * 01.09.2009
+ *
  */
-public class PlatformUtilTest extends TestCase {
+public class PlatformUtilTest extends TestCase
+{
 
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
-	public void testIsWindows() {
-		Assert.assertEquals("Return value is not windows.", File.separator.equals("\\"), PlatformUtil.isWindows()) ;
+	public void testIsWindows()
+	{
+		assertEquals("Return value is not windows.", File.separator.equals("\\"), PlatformUtil.isWindows());
 	}
-	
+
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#getConnectionTimeout()}.
+	 *  @deprecated
 	 */
+	@Deprecated
 	@Test
-	public void testGetConnectionTimeout() {
-		Assert.assertEquals("ConnectionTimeout value is wrong.", PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout());
+	public void testGetConnectionTimeout()
+	{
+		assertEquals("ConnectionTimeout value is wrong.", PlatformUtil.DEFAULT_CONNECTION_TIMEOUT, PlatformUtil.getConnectionTimeout());
 	}
 
 }
