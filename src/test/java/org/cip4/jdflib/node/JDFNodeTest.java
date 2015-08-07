@@ -2206,6 +2206,23 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testGetLink2()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		JDFResourceLink rl = n.getLink(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, null);
+		assertNull(rl);
+		final JDFResource rAdd = n.addResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input);
+		assertNotNull(rAdd);
+		rl = n.getLink(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, null);
+		assertEquals(rl.getLinkRoot(), rAdd);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testGetResourceNS()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -2297,6 +2314,20 @@ public class JDFNodeTest extends JDFTestCaseBase
 		rAdd2 = n.getCreateResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, -2);
 		assertNotNull(rAdd2);
 		assertEquals(rAdd2, rAdd);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testGetCreateResourceProcUsage()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource r = n.getCreateResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, "Foo");
+		assertNotNull(r);
+		final JDFResource r2 = n.getCreateResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, "Foo");
+		assertEquals(r, r2);
+		assertEquals(n.getLink(0, ElementName.SADDLESTITCHINGPARAMS, null, null).getProcessUsage(), "Foo");
 	}
 
 	// ////////////////////////////////////////////////////////////////////////
@@ -2923,8 +2954,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 			assertEquals(vMapIn, vMap);
 		}
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 	/**
 	 * 

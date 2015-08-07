@@ -80,12 +80,15 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public abstract class BaseXJDFHelper
 {
-	protected final Log log;
+	private static Log log;
 
 	protected BaseXJDFHelper()
 	{
 		super();
-		log = LogFactory.getLog(getClass());
+		if (log == null)
+		{
+			log = LogFactory.getLog(BaseXJDFHelper.class);
+		}
 	}
 
 	/**

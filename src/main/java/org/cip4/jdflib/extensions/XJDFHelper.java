@@ -481,6 +481,29 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @param name 
+	 * @param processUsage
+	 *  
+	 * @return the SetHelper for the vector of parametersets and resourcesets
+	 */
+	public SetHelper getSet(String name, EnumUsage usage, String processUsage)
+	{
+		KElement e = theElement.getFirstChildElement();
+		String usageString = usage == null ? null : usage.getName();
+		while (e != null)
+		{
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute("Name", null, null)))
+					&& StringUtil.equals(usageString, e.getAttribute(AttributeName.USAGE, null, null))
+					&& StringUtil.equals(processUsage, e.getAttribute(AttributeName.PROCESSUSAGE, null, null)))
+			{
+				return new SetHelper(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
 	 * @param family 
 	 * @param name 
 	 * @param usage 

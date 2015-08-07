@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,17 +81,19 @@ import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
+import org.cip4.jdflib.jmf.JDFResubmissionParams;
 import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
-import org.cip4.jdflib.jmf.JMFBuilder;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFProcessRun;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * 
  * hot folder listener that submits to a queue
- * @author rainerprosi
+ * @author rainer prosi
  * @date Feb 14, 2011
  */
 public class QueueHotFolderListenerImpl implements HotFolderListener
@@ -101,24 +104,24 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	/**
 	 * 
 	 * @param qhfl
-	 * @param _queueCommand
+	 * @param jmf the list of commands - if null create submit + resubmit
 	 */
-	public QueueHotFolderListenerImpl(QueueHotFolderListener qhfl, JDFJMF _queueCommand)
+	public QueueHotFolderListenerImpl(QueueHotFolderListener qhfl, JDFJMF jmf)
 	{
 		super();
 		log = LogFactory.getLog(getClass());
 		this.qhfl = qhfl;
-		if (_queueCommand == null)
+		if (jmf == null)
 		{
-			_queueCommand = new JMFBuilder().buildSubmitQueueEntry(null);
+			jmf = JMFBuilderFactory.getJMFBuilder(null).buildSubmitQueueEntry(null);
 		}
 
-		this.queueCommand = _queueCommand.getCommand(0);
+		queueCommands = jmf.getChildrenByClass(JDFCommand.class, false, 0);
 	}
 
 	final QueueHotFolderListener qhfl; // the callback that is called
 	// whenever a file is dropped
-	final JDFCommand queueCommand; // the jdf command template that is
+	final Vector<JDFCommand> queueCommands; // the jdf command template that is
 
 	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
@@ -127,18 +130,39 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	@Override
 	public boolean hotFile(final File hotFile)
 	{
+		boolean bFound = false;
+		final JDFDoc jdfDoc = JDFDoc.parseFile(hotFile.getPath());
+		final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
+		for (int iMessage = 0; !bFound && iMessage < queueCommands.size(); iMessage++)
+		{
+			bFound = processSingle(jdfRoot, hotFile, iMessage);
+		}
+		return bFound;
+	}
+
+	/**
+	 * 
+	 * @param jdfRoot 
+	 * @param hotFile
+	 * @param iMessage
+	 * @return
+	 */
+	public boolean processSingle(JDFNode jdfRoot, final File hotFile, int iMessage)
+	{
 		final String stringURL = UrlUtil.fileToUrl(hotFile, false);
 
 		final JDFDoc jmfDoc = new JDFDoc("JMF");
 		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
+		JDFCommand queueCommand = getQueueCommand(iMessage);
+		if (queueCommand == null)
+			return false;
+
 		final JDFCommand newCommand = (JDFCommand) jmfRoot.copyElement(queueCommand, null);
 		newCommand.removeAttribute(AttributeName.ID);
 		newCommand.appendAnchor(null);
 		final EnumType cType = newCommand.getEnumType();
-		final JDFDoc jdfDoc = JDFDoc.parseFile(hotFile.getPath());
-		final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
 
-		log.info("generating queue command: " + queueCommand.getType());
+		log.info("generating queue command# " + iMessage + " " + queueCommand.getType());
 		if (EnumType.ReturnQueueEntry.equals(cType))
 		{
 			extractReturnParams(stringURL, newCommand, jdfRoot);
@@ -147,7 +171,25 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		{
 			extractSubmitParams(stringURL, newCommand, jdfRoot);
 		}
+		else if (EnumType.SubmitQueueEntry.equals(cType))
+		{
+			extractResubmitParams(stringURL, newCommand, jdfRoot);
+		}
+		else
+		{
+			log.error("unsupported command: " + newCommand.getType());
+		}
 		return qhfl.submitted(jmfRoot);
+	}
+
+	/**
+	 * 
+	 * @param iMessage
+	 * @return
+	 */
+	private JDFCommand getQueueCommand(int iMessage)
+	{
+		return (queueCommands == null || iMessage >= queueCommands.size()) ? null : queueCommands.get(iMessage);
 	}
 
 	/**
@@ -193,4 +235,37 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		}
 	}
 
+	/**
+	 * overwrite this method in case you want to customize the hotfolder for submitqueentry and parametrizing the QueueSubmissionParams template is
+	 * insufficient
+	 * 
+	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param newCommand the command that was generated from the template
+	 * @param jdfRoot the root jdfnode of the dropped file
+	 */
+	protected void extractResubmitParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
+	{
+		final JDFResubmissionParams resubmissionParams = newCommand.getCreateResubmissionParams(0);
+		resubmissionParams.setURL(stringURL);
+
+		if (jdfRoot != null)
+		{
+			final JDFAuditPool ap = jdfRoot.getCreateAuditPool();
+			ap.createSubmitProcessRun(null);
+			String qeid = getResubmitQueueEntry(jdfRoot);
+			resubmissionParams.setQueueEntryID(qeid);
+		}
+	}
+
+	/**
+	 * hack: assume that qeid=jobID unless we have a generalID
+	 * 
+	 * @param jdfRoot
+	 * @return
+	 */
+	protected String getResubmitQueueEntry(JDFNode jdfRoot)
+	{
+		String qeid = StringUtil.getNonEmpty(jdfRoot.getGeneralID(AttributeName.QUEUEENTRYID, 0));
+		return qeid != null ? qeid : jdfRoot.getJobID(true);
+	}
 }

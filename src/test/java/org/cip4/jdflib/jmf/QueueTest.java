@@ -619,9 +619,6 @@ public class QueueTest extends JDFTestCaseBase
 		assertEquals("removed completed and aborted", q.numEntries(null), 4);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-
 	/**
 	 * 
 	 */
@@ -642,6 +639,24 @@ public class QueueTest extends JDFTestCaseBase
 		assertEquals(q2.numEntries(null), 3);
 		assertNotSame(q, q2);
 		assertTrue(q.numEntries(null) > 3);
+	}
+
+	/**
+	* 
+	*/
+	@Test
+	public void testCopyToResponseNullQF()
+	{
+		JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
+		JDFQueue q2 = q.copyToResponse(r, null, null);
+		assertEquals(q2, r.getQueue(0));
+		assertNull(q2);
+
+		r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.QueueStatus).getResponse(0);
+		q2 = q.copyToResponse(r, null, null);
+		assertEquals(q2, r.getQueue(0));
+		assertNotNull(q2);
+
 	}
 
 	/**

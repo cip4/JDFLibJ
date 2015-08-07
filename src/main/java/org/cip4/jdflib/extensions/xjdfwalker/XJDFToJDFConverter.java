@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,8 +73,10 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.Collection;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
 import org.cip4.jdflib.ifaces.IXJDFSplit;
@@ -86,6 +88,18 @@ import org.cip4.jdflib.ifaces.IXJDFSplit;
 public class XJDFToJDFConverter extends XJDFToJDFImpl
 {
 	protected IXJDFSplit splitter;
+	private static VString resLinkAttribs;
+
+	public static VString getResLinkAttribs()
+	{
+		if (resLinkAttribs == null)
+		{
+			resLinkAttribs = new VString(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT, AttributeName.MAXAMOUNT,
+					AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
+
+		}
+		return resLinkAttribs;
+	}
 
 	/**
 	 * @param template the jdfdoc to fill this into

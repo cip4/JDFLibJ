@@ -2780,17 +2780,53 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
 	 * @param usage the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
+	 *
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResource getCreateResource(final String strName, final EnumUsage usage, final String processUsage)
+	{
+		JDFResource r = getResource(strName, usage, processUsage, null, 0);
+		if (r == null)
+		{
+			r = addResource(strName, usage);
+			if (usage != null)
+			{
+				getLink(r, usage).setProcessUsage(processUsage);
+			}
+		}
+		return r;
+	}
+
+	/**
+	 * Get the resource link with name=strName - convenience
+	 * 
+	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param processUsage the processUsage of the respective resource
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResourceLink getLink(final String strName, final EnumUsage usage, final String processUsage)
+	{
+		return getLink(strName, usage, processUsage, null, 0);
+	}
+
+	/**
+	 * Get the resource link with name=strName
+	 * 
+	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param processUsage the processUsage of the respective resource
 	 * @param i the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(final String strName, final EnumUsage usage, final String processUsage, String namespaceURI, int i)
+	public JDFResourceLink getLink(final String strName, final EnumUsage usage, final String processUsage, String namespaceURI, int i)
 	{
 		VElement velem = null;
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
 		{
-			velem = rlp.getInOutLinksExtended(usage, false, strName, processUsage, namespaceURI, false);
+			velem = rlp.getInOutLinksExtended(usage, true, strName, processUsage, namespaceURI, false);
 		}
 
 		final int siz = velem == null ? 0 : velem.size();
@@ -2804,7 +2840,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return null;
 		}
 
-		return (JDFResource) velem.elementAt(i);
+		return (JDFResourceLink) velem.elementAt(i);
+	}
+
+	/**
+	 * Get the linked resource with name=strName
+	 * 
+	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param processUsage the processUsage of the respective resource
+	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
+	 * @return the matching resource, null if none matches
+	 */
+	public JDFResource getResource(final String strName, final EnumUsage usage, final String processUsage, String namespaceURI, int i)
+	{
+		JDFResourceLink rl = getLink(strName, usage, processUsage, namespaceURI, i);
+		return rl == null ? null : rl.getLinkRoot();
 	}
 
 	/**
@@ -8185,7 +8237,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public boolean isProcessNode()
 	{
-		return !isGroupNode();
+		final EnumType type2 = getEnumType();
+		return getElement(ElementName.JDF) == null && !EnumType.Product.equals(type2);
+
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,8 +69,8 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  *  
  * @author rainer prosi
@@ -78,6 +78,33 @@ import org.junit.Test;
  */
 public class MyPairTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 * @author rainer prosi
+	 *
+	 */
+	private class TestPair extends MyPair<String, String>
+	{
+
+		/**
+		 * @param jobPartID
+		 * @param resID
+		 */
+		TestPair(String jobPartID, String resID)
+		{
+			super(jobPartID, resID);
+		}
+	}
+
+	/**
+	* 
+	* 
+	*/
+	@Test
+	public void testToString()
+	{
+		assertTrue(new TestPair("a", "b").toString().startsWith("TestPair"));
+	}
 
 	/**
 	 * 
@@ -89,8 +116,8 @@ public class MyPairTest extends JDFTestCaseBase
 		MyPair<Integer, Integer> p = new MyPair<Integer, Integer>(new Integer(1), new Integer(2));
 		MyPair<Integer, Integer> p2 = new MyPair<Integer, Integer>(new Integer(1), new Integer(2));
 		MyPair<Integer, Integer> p3 = new MyPair<Integer, Integer>(new Integer(1), new Integer(3));
-		Assert.assertEquals(p, p2);
-		Assert.assertNotSame(p, p3);
+		assertEquals(p, p2);
+		assertNotSame(p, p3);
 	}
 
 	/**
@@ -102,7 +129,7 @@ public class MyPairTest extends JDFTestCaseBase
 	{
 		MyPair<Integer, Integer> p = new MyPair<Integer, Integer>(new Integer(1), new Integer(2));
 		MyPair<Integer, Integer> p2 = new MyPair<Integer, Integer>(new Integer(1), new Integer(2));
-		Assert.assertEquals(p.hashCode(), p2.hashCode());
+		assertEquals(p.hashCode(), p2.hashCode());
 	}
 
 }

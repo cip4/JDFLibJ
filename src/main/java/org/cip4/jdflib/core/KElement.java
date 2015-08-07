@@ -4132,6 +4132,18 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Gets the XPath full tree representation of 'this'
+	 * @param relativeTo parent element to which to create an xpath
+	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
+	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
+	 * <code>null</code> if parent of this is null (e.g. called on rootnode)
+	 */
+	public String buildRelativeXPath(final KElement relativeTo, final int methCountSiblings)
+	{
+		return new XPathHelper(this).buildRelativeXPath(relativeTo, methCountSiblings);
+	}
+
+	/**
 	 * Creates a new child element with defined Name and NameSpace and inserts it in front of the node with a name bForeNode and namespace beforeNameSpaceURI,
 	 * with index beforePos
 	 * <p>

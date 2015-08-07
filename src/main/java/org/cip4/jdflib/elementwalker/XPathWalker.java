@@ -101,7 +101,7 @@ public class XPathWalker extends BaseElementWalker
 	 */
 	public int method = 1;
 
-	protected class XPathBuilder
+	static class XPathBuilder
 	{
 		public XPathBuilder(KElement _e, int countSiblings, VString attName)
 		{

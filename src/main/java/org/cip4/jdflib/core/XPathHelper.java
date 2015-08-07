@@ -340,6 +340,28 @@ class XPathHelper
 
 	/**
 	 * Gets the XPath full tree representation of 'this'
+	 * @param relativeTo relative element to which to create an xpath
+	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
+	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
+	 * <code>null</code> if parent of this is null (e.g. called on rootnode)
+	 */
+	String buildRelativeXPath(final KElement relativeTo, final int methCountSiblings)
+	{
+		if (relativeTo == theElement)
+			return ".";
+		final KElement parent = theElement.getParentNode_KElement();
+
+		String path = buildLocalPath(methCountSiblings, parent);
+		if (parent != null)
+		{
+			path = new XPathHelper(parent).buildRelativeXPath(relativeTo, methCountSiblings) + path;
+		}
+
+		return path;
+	}
+
+	/**
+	 * Gets the XPath full tree representation of 'this'
 	 * @param relativeTo relative path to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
@@ -347,9 +369,41 @@ class XPathHelper
 	 */
 	String buildXPath(final String relativeTo, final int methCountSiblings)
 	{
-		String path = theElement.getNodeName();
 		final KElement parent = theElement.getParentNode_KElement();
 
+		String path = buildLocalPath(methCountSiblings, parent);
+		if (parent != null)
+		{
+			path = new XPathHelper(parent).buildXPath(relativeTo, methCountSiblings) + path;
+		}
+
+		if (relativeTo != null)
+		{
+			if (path.startsWith(relativeTo))
+			{
+				path = "." + path.substring(relativeTo.length());
+				if (path.startsWith(".["))
+				{
+					final int iB = path.indexOf("]");
+					if (iB > 0)
+					{
+						path = "." + path.substring(iB + 1);
+					}
+				}
+			}
+		}
+		return path;
+	}
+
+	/**
+	 * 
+	 * @param methCountSiblings
+	 * @param parent
+	 * @return
+	 */
+	String buildLocalPath(final int methCountSiblings, final KElement parent)
+	{
+		String path = theElement.getNodeName();
 		if (methCountSiblings > 0)
 		{
 			if (methCountSiblings == 3 && theElement.hasAttribute_KElement(JDFCoreConstants.ID, null, false))
@@ -376,28 +430,7 @@ class XPathHelper
 				}
 			}
 		}
-		path = "/" + path;
-		if (parent != null)
-		{
-			path = new XPathHelper(parent).buildXPath(relativeTo, methCountSiblings) + path;
-		}
-
-		if (relativeTo != null)
-		{
-			if (path.startsWith(relativeTo))
-			{
-				path = "." + path.substring(relativeTo.length());
-				if (path.startsWith(".["))
-				{
-					final int iB = path.indexOf("]");
-					if (iB > 0)
-					{
-						path = "." + path.substring(iB + 1);
-					}
-				}
-			}
-		}
-		return path;
+		return "/" + path;
 	}
 
 	/**
@@ -599,7 +632,8 @@ class XPathHelper
 	}
 
 	/**
-	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
+	 * Gets a map of attribute values as defined by XPath 
+	 * namespace prefixes are resolved <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
@@ -619,7 +653,7 @@ class XPathHelper
 		{
 			return null;
 		}
-		String base = path == null ? null : buildXPath(null, 1);
+		String base = path == null ? null : buildXPath((String) null, 1);
 		final JDFAttributeMap map = new JDFAttributeMap();
 		for (KElement e : vEle)
 		{

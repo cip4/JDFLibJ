@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQueueEntry.QueueEntryComparator;
 import org.cip4.jdflib.jmf.JDFQueueFilter.QueueEntryMatcher;
 import org.cip4.jdflib.node.NodeIdentifier;
@@ -795,7 +796,7 @@ public class JDFQueue extends JDFAutoQueue
 	 * @param priorQueue the prior que to apply thr filter to incase updategranularity is incremental
 	 * @return the copied queue
 	 */
-	synchronized public JDFQueue copyToResponse(final JDFResponse resp, final JDFQueueFilter filter, final JDFQueue priorQueue)
+	synchronized public JDFQueue copyToResponse(final JDFResponse resp, JDFQueueFilter filter, final JDFQueue priorQueue)
 	{
 		if (resp == null)
 		{
@@ -807,9 +808,13 @@ public class JDFQueue extends JDFAutoQueue
 		{
 			newQueue = filter.copy(this, priorQueue, resp);
 		}
-		else
+		else if (EnumType.QueueStatus.equals(resp.getEnumType()))
 		{
 			newQueue = (JDFQueue) resp.copyElement(this, null);
+		}
+		else
+		{
+			newQueue = null;
 		}
 		return newQueue;
 

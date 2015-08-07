@@ -313,7 +313,9 @@ public class SetHelper extends BaseXJDFHelper
 		if (v != null)
 		{
 			for (KElement e : v)
+			{
 				v2.add(new PartitionHelper(e));
+			}
 		}
 		return v2;
 	}

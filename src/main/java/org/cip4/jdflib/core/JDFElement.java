@@ -3376,8 +3376,7 @@ public class JDFElement extends KElement
 				// this guy is the one
 				if (i++ == iSkip)
 				{
-					// follow valid (!) refElements, invalid refelements are
-					// ignored
+					// follow valid (!) refElements, invalid refelements are ignored
 					// 300502 RP added check for explicit refelements
 					if (jdfElem instanceof JDFRefElement && !bExplicitRefElement)
 					{

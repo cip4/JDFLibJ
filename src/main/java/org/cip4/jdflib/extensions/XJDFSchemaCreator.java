@@ -99,6 +99,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
@@ -1440,6 +1441,28 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 	}
 
+	private static class XJDFSchemaCreatorWalkerFactory extends BaseWalkerFactory
+	{
+		/**
+		 * 
+		 * get the appropriate walker for a given element
+		 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
+		 */
+		@Override
+		public IWalker getWalker(final KElement toCheck)
+		{
+			for (BaseWalker w : vBaseWalker)
+			{
+				w.prepareWalk(toCheck, null);
+				if (w.matches(toCheck))
+				{
+					return w;
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
@@ -1813,7 +1836,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 */
 	public XJDFSchemaCreator(File baseDir, File output)
 	{
-		super(new BaseWalkerFactory());
+		super(new XJDFSchemaCreatorWalkerFactory());
 		this.baseDir = baseDir;
 		this.output = output;
 		JDFDoc d1 = new JDFDoc("JDF");

@@ -204,7 +204,7 @@ public class KElementTest extends JDFTestCaseBase
 		}
 		long currentMem = getCurrentMem();
 		if (currentMem > mem)
-			assertEquals(currentMem, mem, 200000);
+			assertEquals(currentMem, mem, 2000000);
 	}
 
 	/**
@@ -2035,7 +2035,29 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testBuildRelativeXPath()
+	{
+		final XMLDoc d = new XMLDoc("d", null);
+		final KElement root = d.getRoot();
+		assertEquals(root.buildRelativeXPath(root, 1), ".");
+		assertEquals(root.buildRelativeXPath(null, 0), "/d");
+		root.appendElement("e");
+		final KElement e = root.appendElement("e");
+		e.setAttribute("ID", "i");
+		root.setAttribute("ID", "r");
+		assertEquals(e.buildRelativeXPath(null, 1), "/d/e[2]");
+		assertEquals(e.buildRelativeXPath(null, 3), "/d[@ID=\"r\"]/e[@ID=\"i\"]");
+		assertEquals(e.buildRelativeXPath(root, 3), "./e[@ID=\"i\"]");
+		assertEquals(e.buildRelativeXPath(null, 0), "/d/e");
+		assertEquals(e.buildRelativeXPath(root, 1), "./e[2]");
+		assertEquals(e.buildRelativeXPath(root, 1), e.buildRelativeXPath(root, 2));
+		assertEquals(e.buildRelativeXPath(root, 0), "./e");
+
+	}
 
 	/**
 	 * 

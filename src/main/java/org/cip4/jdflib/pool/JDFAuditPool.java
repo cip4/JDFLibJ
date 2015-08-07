@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -302,7 +302,7 @@ public class JDFAuditPool extends JDFPool
 
 		if (createdElem != null)
 		{
-			final String xpath = createdElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			final String xpath = createdElem.buildRelativeXPath(getParentJDF(), 1);
 			created.setXPath(xpath);
 		}
 
@@ -323,7 +323,7 @@ public class JDFAuditPool extends JDFPool
 		final JDFModified modified = (JDFModified) addAudit(JDFAudit.EnumAuditType.Modified, by);
 		if (modifiedElem != null)
 		{
-			final String xpath = modifiedElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			final String xpath = modifiedElem.buildRelativeXPath(getParentJDF(), 1);
 			modified.setXPath(xpath);
 		}
 
@@ -344,7 +344,7 @@ public class JDFAuditPool extends JDFPool
 		final JDFDeleted deleted = (JDFDeleted) addAudit(JDFAudit.EnumAuditType.Deleted, by);
 		if (deletedElem != null)
 		{
-			final String xpath = deletedElem.buildXPath(getParentJDF().buildXPath(null, 1), 1);
+			final String xpath = deletedElem.buildRelativeXPath(getParentJDF(), 1);
 			deleted.setXPath(xpath);
 		}
 
