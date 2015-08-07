@@ -257,12 +257,12 @@ public class EnsureNSUri extends BaseElementWalker
 			else
 			{
 				if (prefix == null)
-					prefix = ":";
+					prefix = JDFConstants.COLON;
 				String uri = nsMap.get(prefix);
 				if (uri != null)
 				{
 					Attr attr = e1.getDOMAttr(att, null, false);
-					if (!uri.equals(attr.getValue()))
+					if (attr != null && !uri.equals(attr.getValue()))
 					{
 						attr.setNodeValue(uri);
 					}
