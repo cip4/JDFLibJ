@@ -2856,7 +2856,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public JDFResource getResource(final String strName, final EnumUsage usage, final String processUsage, String namespaceURI, int i)
 	{
 		JDFResourceLink rl = getLink(strName, usage, processUsage, namespaceURI, i);
-		return rl == null ? null : rl.getLinkRoot();
+		return rl == null ? null : rl.getTarget();
 	}
 
 	/**
