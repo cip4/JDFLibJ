@@ -556,7 +556,17 @@ public class JDFDoc extends XMLDoc
 	@Override
 	protected XMLParser getXMLParser()
 	{
-		return new JDFParser();
+		return JDFParserFactory.getFactory().get();
+	}
+
+	/**
+	 * 
+	 * @param xmlParser
+	 */
+	@Override
+	protected void pushParser(XMLParser xmlParser)
+	{
+		JDFParserFactory.getFactory().push(xmlParser);
 	}
 
 	/**

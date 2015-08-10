@@ -1466,29 +1466,24 @@ public class XMLDoc
 		{
 			final UrlPart p = write2HttpURL(url, strContentType, null);
 			InputStream inStream = p == null ? null : p.getResponseStream();
-			if (inStream == null)
+			if (inStream != null)
 			{
-				return null;
+				XMLParser xmlParser = getXMLParser();
+				docResponse = xmlParser.parseStream(inStream);
+				pushParser(xmlParser);
 			}
-			final XMLParser parser = getXMLParser();
 
-			parser.parseStream(inStream);
-			XMLParserFactory.getFactory().push(parser);
-			try
-			{
-				inStream.close();
-			}
-			catch (IOException x)
-			{
-				// nop
-			}
-			docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
-			if (docResponse != null && docResponse.getRoot() == null)
-				docResponse = null;
 		}
-
 		return docResponse;
+	}
 
+	/**
+	 * 
+	 * @param xmlParser
+	 */
+	protected void pushParser(XMLParser xmlParser)
+	{
+		XMLParserFactory.getFactory().push(xmlParser);
 	}
 
 	/**

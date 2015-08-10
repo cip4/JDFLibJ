@@ -497,6 +497,7 @@ public class XMLParser extends DOMParser
 		fDocument = null;
 		fDocumentSource = null;
 		fDocumentImpl = null;
+		inputID = null;
 	}
 
 	/**
