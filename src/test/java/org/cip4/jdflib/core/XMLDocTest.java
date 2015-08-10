@@ -1041,6 +1041,18 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException  
+	 */
+	@Test
+	public void testWriteToURLExample() throws IOException
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final String url = UrlUtil.normalize("https://toolbox.cip4.org/jdf/Schema/JDF.xsd");
+		XMLDoc resp = d.write2URL(url, null);
+		assertNotNull(resp);
+	}
+
+	/**
 	 * 
 	 */
 	@Test

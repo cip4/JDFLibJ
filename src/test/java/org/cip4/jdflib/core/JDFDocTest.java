@@ -579,4 +579,16 @@ public class JDFDocTest extends JDFTestCaseBase
 		assertNotNull(s);
 	}
 
+	/**
+	 * @throws IOException  
+	 */
+	@Test
+	public void testWriteToURLExample() throws IOException
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final String url = UrlUtil.normalize("https://toolbox.cip4.org/jdf/Schema/JDF.xsd");
+		JDFDoc resp = d.write2URL(url);
+		assertNotNull(resp);
+	}
+
 }
