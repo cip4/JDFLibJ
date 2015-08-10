@@ -98,6 +98,13 @@ import org.xml.sax.SAXNotSupportedException;
 public class JDFParser extends XMLParser
 {
 	/**
+	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated JDF instances
+	 * @deprecated use XMLParse to parse pure XMLDoc instances
+	 */
+	@Deprecated
+	public boolean bKElementOnly = false;
+
+	/**
 	 * default constructor
 	 */
 	public JDFParser()
@@ -121,8 +128,21 @@ public class JDFParser extends XMLParser
 	public JDFParser(final JDFParser parser)
 	{
 		this();
+		bKElementOnly = parser.bKElementOnly;
 		m_eraseEmpty = parser.m_eraseEmpty;
 		initParser(m_SchemaLocation, (XMLErrorHandler) parser.getErrorHandler());
+	}
+
+	/**
+	 * (non-Javadoc) reset all internal variables to a reasonable default
+	 * 
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
+	 */
+	@Override
+	public void cleanup()
+	{
+		super.cleanup();
+		bKElementOnly = false;
 	}
 
 	/**
@@ -307,7 +327,7 @@ public class JDFParser extends XMLParser
 	{
 		super.startDocument(locator, encoding, namespaceContext, augs);
 		final DocumentJDFImpl memberDocument = (DocumentJDFImpl) getDocument();
-
+		memberDocument.bKElementOnly = bKElementOnly;
 		memberDocument.bInitOnCreate = false;
 	}
 
