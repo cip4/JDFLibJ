@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -635,6 +635,57 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		r.getCreatePartition(mPart, null);
 		final VElement v = rl.getTargetVector(-1);
 		assertEquals("The target vector has two pv nodes", v.size(), 2);
+	}
+
+	/**
+	 * Method testGetTarget * @throws Exception
+	 */
+	@Test
+	public void testGetTargetPartVersion()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "S1");
+		mPart.put("PartVersion", "En");
+		final JDFAttributeMap mPartLink = mPart.clone();
+		mPartLink.put("PartVersion", "En En");
+		JDFResourceLink rl = n.getLink(comp, null);
+		JDFResource leaf = comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
+		rl.setPartMap(mPartLink);
+
+		assertEquals(rl.getTarget(), leaf);
+		leaf.setPartVersion("En En");
+		rl.setPartMap(mPart);
+		assertEquals("swapped", rl.getTarget(), leaf);
+	}
+
+	/**
+	* Method testGetTarget * @throws Exception
+	*/
+	@Test
+	public void testGetTargetPartVersionMulti()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource comp = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "S1");
+		mPart.put("PartVersion", "En");
+		final JDFAttributeMap mPartLink = mPart.clone();
+		mPartLink.put("PartVersion", "En En");
+		JDFResourceLink rl = n.getLink(comp, null);
+		VJDFAttributeMap vLink = new VJDFAttributeMap();
+		vLink.add(mPartLink.clone());
+		comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
+		mPart.put("PartVersion", "Fr");
+		mPartLink.put("PartVersion", "Fr Fr");
+		comp.getCreatePartition(mPart, new VString("SignatureName SheetName PartVersion", null));
+		vLink.add(mPartLink.clone());
+
+		rl.setPartMapVector(vLink);
+		mPart.remove("PartVersion");
+
+		assertEquals(rl.getTarget(), comp.getPartition(mPart, EnumPartUsage.Explicit));
 	}
 
 	/**
