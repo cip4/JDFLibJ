@@ -122,6 +122,7 @@ import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -3313,19 +3314,18 @@ public class JDFResource extends JDFElement
 	@Override
 	public JDFAttributeMap getAttributeMap()
 	{
-		final KElement ke = getParentNode_KElement();
-		final JDFAttributeMap ret;
+		final JDFResource parent = getParentPartition();
 		// follow partitioned inheritance
-		if (ke != null && ke.getNodeName().equals(getNodeName()))
+		if (parent != null)
 		{
-			ret = ke.getAttributeMap();
-			ret.putAll(super.getAttributeMap());
+			JDFAttributeMap map = parent.getAttributeMap();
+			map.putAll(super.getAttributeMap());
+			return map;
 		}
 		else
 		{
-			ret = super.getAttributeMap();
+			return super.getAttributeMap();
 		}
-		return ret;
 	}
 
 	/**
@@ -6598,15 +6598,7 @@ public class JDFResource extends JDFElement
 	public JDFResource getParentPartition()
 	{
 		KElement parent = getParentNode_KElement();
-		if (!(parent instanceof JDFResource))
-		{
-			parent = null;
-		}
-		else if (!parent.getNodeName().equals(getNodeName()))
-		{
-			parent = null;
-		}
-		return (JDFResource) parent;
+		return getMyPartitionResource(parent);
 	}
 
 	/**
@@ -8281,4 +8273,17 @@ public class JDFResource extends JDFElement
 		JDFResource.autoSubElementClass = autoSubElementClass;
 	}
 
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
+	private JDFResource getMyPartitionResource(Node e)
+	{
+		if (!(e instanceof JDFResource))
+			return null;
+		if (JDFResource.class != e.getClass())
+			return (JDFResource) (getClass() == e.getClass() ? e : null);
+		return (JDFResource) (e.getNodeName().equals(getNodeName()) ? e : null);
+	}
 }

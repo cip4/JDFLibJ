@@ -130,9 +130,9 @@ public class WalkColorPoolRef extends WalkRefElement
 		if (colorPool != null)
 		{
 			final VElement v = colorPool.getChildElementVector(ElementName.COLOR, null);
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				v.get(i).renameAttribute("Name", "Separation", null, null);
+				e.renameAttribute("Name", "Separation", null, null);
 			}
 			KElement newColorRes = colorPool.getParentNode_KElement().appendElement(ElementName.COLOR);
 			newColorRes.copyInto(colorPool, true);
