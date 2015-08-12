@@ -78,7 +78,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 * @author Rainer Prosi, Heidelberger Druckmaschinen
 * 
 */
-public class WalkSkip extends WalkJDFElement
+public class WalkSkip extends WalkJDFSubElement
 {
 
 	/**

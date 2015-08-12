@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,6 +96,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.w3c.dom.Node;
 
 /**
@@ -486,6 +487,85 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		}
 
 		return q;
+	}
+
+	/**
+	 * getEnd with some better defaulting in case first or last is set
+	 * 
+	 * @return
+	 */
+	@Override
+	public JDFDate getEnd()
+	{
+		JDFDate end = super.getEnd();
+		if (end == null)
+			end = super.getLastEnd();
+		if (end == null)
+			end = super.getFirstEnd();
+		return end;
+	}
+
+	/**
+	 * getFirstEnd with some better defaulting in case end or last is set
+	 * @return
+	 */
+	@Override
+	public JDFDate getFirstEnd()
+	{
+		JDFDate firstEnd = super.getFirstEnd();
+		return firstEnd == null ? getEnd() : firstEnd;
+	}
+
+	/**
+	 * getFirstStart with some better defaulting  
+	 * 
+	 * @return
+	 */
+	@Override
+	public JDFDate getFirstStart()
+	{
+		JDFDate firstStart = super.getFirstStart();
+		return firstStart == null ? getStart() : firstStart;
+	}
+
+	/**
+	 * getLastEnd with some better defaulting  
+	 * 
+	 * @return
+	 */
+	@Override
+	public JDFDate getLastEnd()
+	{
+		JDFDate lastEnd = super.getLastEnd();
+		return lastEnd == null ? getEnd() : lastEnd;
+	}
+
+	/**
+	 * getLastStart with some better defaulting  
+	 * 
+	 * @return
+	 */
+	@Override
+	public JDFDate getLastStart()
+	{
+		JDFDate lastStart = super.getLastStart();
+		return lastStart == null ? getStart() : lastStart;
+	}
+
+	/**
+	 * getStart with some better defaulting  
+	 * 
+	 * @return
+	 */
+	@Override
+	public JDFDate getStart()
+	{
+		JDFDate start = super.getStart();
+		if (start == null)
+			start = super.getFirstStart();
+		if (start == null)
+			start = super.getLastStart();
+		return start;
 	}
 
 }

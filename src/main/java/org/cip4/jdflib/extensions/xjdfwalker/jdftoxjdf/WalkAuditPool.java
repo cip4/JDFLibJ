@@ -77,7 +77,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkAuditPool extends WalkJDFElement
+public class WalkAuditPool extends WalkJDFSubElement
 {
 
 	/**

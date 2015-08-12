@@ -76,7 +76,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkResourceInfo extends WalkJDFElement
+public class WalkResourceInfo extends WalkJDFSubElement
 {
 
 	/**

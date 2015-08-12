@@ -306,6 +306,8 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	private boolean bConvertTilde = true;
 	String rootID;
+	protected VString elemAttribs;
+	protected HashSet<String> inlineSet;
 
 	/**
 	 * @param root the jdf or jmf to transform
@@ -433,6 +435,57 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		componentProductMap = new JDFAttributeMap();
 		resAttribs = generateResourceAttributes();
+		elemAttribs = generateElementAttributes();
+		inlineSet = generateInlineSet();
+	}
+
+	private HashSet<String> generateInlineSet()
+	{
+		HashSet<String> set = new HashSet<String>();
+		set.add(ElementName.OBJECTRESOLUTION);
+		set.add(ElementName.BARCODECOMPPARAMS);
+		set.add(ElementName.BARCODEREPROPARAMS);
+		set.add(ElementName.COMCHANNEL);
+		set.add(ElementName.INTERPRETEDPDLDATA);
+		set.add(ElementName.BYTEMAP);
+		set.add(ElementName.ADDRESS);
+		set.add(ElementName.COSTCENTER);
+		set.add(ElementName.COMPANY);
+		set.add(ElementName.PERSON);
+		set.add(ElementName.DEVICE);
+		set.add(ElementName.DEVICENSPACE);
+		set.add(ElementName.COLORANTALIAS);
+		set.add(ElementName.GLUELINE);
+		set.add(ElementName.GLUEAPPLICATION);
+		set.add(ElementName.CIELABMEASURINGFIELD);
+		set.add(ElementName.REGISTERMARK);
+		set.add(ElementName.FITPOLICY);
+		set.add(ElementName.CUTBLOCK);
+		set.add(ElementName.EMPLOYEE);
+		set.add(ElementName.ELEMENTCOLORPARAMS);
+		set.add(ElementName.CUT);
+		set.add(ElementName.PDLRESOURCEALIAS);
+		set.add(ElementName.HOLELIST);
+		set.add(ElementName.HOLE);
+		set.add(ElementName.MISDETAILS);
+		set.add(ElementName.HOLELINE);
+		set.add(ElementName.JOBFIELD);
+		set.add(ElementName.AUTOMATEDOVERPRINTPARAMS);
+		set.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
+		set.add(ElementName.PRODUCTIONPATH);
+		set.add(ElementName.SHAPE);
+		set.add(ElementName.SCAVENGERAREA);
+		set.add(ElementName.TRAPREGION);
+		set.add(ElementName.TRANSFERCURVE);
+		set.add(ElementName.COLORCONTROLSTRIP);
+		set.add(ElementName.LAYERLIST);
+		set.add(ElementName.PAGECONDITION);
+		set.add(ElementName.CONTENTOBJECT);
+		set.add(ElementName.MARKOBJECT);
+		set.add(ElementName.LAYERDETAILS);
+		set.add(ElementName.FILESPEC);
+		set.add(ElementName.IDENTIFICATIONFIELD);
+		return set;
 	}
 
 	/**
@@ -473,6 +526,17 @@ public class JDFToXJDF extends PackageElementWalker
 		resAttribs.appendUnique(intRes.knownAttributes());
 		resAttribs.appendUnique(part.knownAttributes());
 		return resAttribs;
+	}
+
+	/**
+	 * 
+	 *  
+	 * @return
+	 */
+	protected VString generateElementAttributes()
+	{
+		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
+		return dummyResPool.knownAttributes();
 	}
 
 	/**

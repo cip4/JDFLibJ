@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,13 +71,16 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFMediaLayers;
 
 /**
+ * class that inlines all refelements for classes that are derived from element
+ * see {@link WalkInlineAllRes} for similar functionality for resources
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkInlineAllElement extends WalkJDFElement
+public class WalkInlineAllElement extends WalkJDFSubElement
 {
 	/**
 	 * 
@@ -95,7 +98,7 @@ public class WalkInlineAllElement extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFContentObject) || (toCheck instanceof JDFMarkObject);
+		return (toCheck instanceof JDFContentObject) || (toCheck instanceof JDFMarkObject) || (toCheck instanceof JDFMediaLayers);
 	}
 
 	/**

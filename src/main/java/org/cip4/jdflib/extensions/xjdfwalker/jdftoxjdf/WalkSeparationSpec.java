@@ -77,7 +77,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkSeparationSpec extends WalkJDFElement
+public class WalkSeparationSpec extends WalkJDFSubElement
 {
 	/**
 	 * 

@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import java.util.HashSet;
-
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -245,64 +243,13 @@ public class WalkJDFElement extends WalkElement
 		return mustInline(re.getRefLocalName());
 	}
 
-	private final static HashSet<String> inlineSet = new HashSet<String>();
-
 	/**
 	 * @param refLocalName
 	 * @return true if must inline refLocalName
 	 */
 	protected boolean mustInline(final String refLocalName)
 	{
-		if (inlineSet.isEmpty())
-		{
-			synchronized (inlineSet)
-			{
-				inlineSet.add(ElementName.OBJECTRESOLUTION);
-				inlineSet.add(ElementName.BARCODECOMPPARAMS);
-				inlineSet.add(ElementName.BARCODEREPROPARAMS);
-				inlineSet.add(ElementName.COMCHANNEL);
-				inlineSet.add(ElementName.INTERPRETEDPDLDATA);
-				inlineSet.add(ElementName.BYTEMAP);
-				inlineSet.add(ElementName.ADDRESS);
-				inlineSet.add(ElementName.COSTCENTER);
-				inlineSet.add(ElementName.COMPANY);
-				inlineSet.add(ElementName.PERSON);
-				inlineSet.add(ElementName.DEVICE);
-				inlineSet.add(ElementName.DEVICENSPACE);
-				inlineSet.add(ElementName.COLORANTALIAS);
-				inlineSet.add(ElementName.GLUELINE);
-				inlineSet.add(ElementName.GLUEAPPLICATION);
-				inlineSet.add(ElementName.CIELABMEASURINGFIELD);
-				inlineSet.add(ElementName.REGISTERMARK);
-				inlineSet.add(ElementName.FITPOLICY);
-				inlineSet.add(ElementName.CUTBLOCK);
-				inlineSet.add(ElementName.EMPLOYEE);
-				inlineSet.add(ElementName.ELEMENTCOLORPARAMS);
-				inlineSet.add(ElementName.CUT);
-				inlineSet.add(ElementName.PDLRESOURCEALIAS);
-				inlineSet.add(ElementName.HOLELIST);
-				inlineSet.add(ElementName.HOLE);
-				inlineSet.add(ElementName.MISDETAILS);
-				inlineSet.add(ElementName.HOLELINE);
-				inlineSet.add(ElementName.JOBFIELD);
-				inlineSet.add(ElementName.AUTOMATEDOVERPRINTPARAMS);
-				inlineSet.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
-				inlineSet.add(ElementName.PRODUCTIONPATH);
-				inlineSet.add(ElementName.SHAPE);
-				inlineSet.add(ElementName.SCAVENGERAREA);
-				inlineSet.add(ElementName.TRAPREGION);
-				inlineSet.add(ElementName.TRANSFERCURVE);
-				inlineSet.add(ElementName.COLORCONTROLSTRIP);
-				inlineSet.add(ElementName.LAYERLIST);
-				inlineSet.add(ElementName.PAGECONDITION);
-				inlineSet.add(ElementName.CONTENTOBJECT);
-				inlineSet.add(ElementName.MARKOBJECT);
-				inlineSet.add(ElementName.LAYERDETAILS);
-				inlineSet.add(ElementName.FILESPEC);
-				inlineSet.add(ElementName.IDENTIFICATIONFIELD);
-			}
-		}
-		return inlineSet.contains(refLocalName);
+		return jdfToXJDF.inlineSet.contains(refLocalName);
 	}
 
 	/**

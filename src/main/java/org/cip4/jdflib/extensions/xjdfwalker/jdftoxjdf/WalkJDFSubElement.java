@@ -68,122 +68,30 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.extensions.ProductHelper;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
  */
-public class WalkRefElement extends WalkJDFElement
+public class WalkJDFSubElement extends WalkJDFElement
 {
 	/**
-	 * 
+	 * class that inlines all refelements for classes that are derived from resources
+	 * see {@link WalkInlineAllElement} for similar functionality for elements
 	 */
-	public WalkRefElement()
+	public WalkJDFSubElement()
 	{
 		super();
-	}
-
-	/**
-	 * @param jdf
-	 * @param xjdf
-	 * @return the created resource in this case just remove the pool
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		final JDFRefElement refElem = (JDFRefElement) jdf;
-		if (mustInline(refElem))
-		{
-			try
-			{
-				final JDFElement e = refElem.inlineRef();
-				jdfToXJDF.walkTree(e, xjdf);
-			}
-			catch (JDFException x)
-			{
-				//nop
-			}
-		}
-		else if (isProduct(refElem))
-		{
-			refProduct(refElem, xjdf);
-		}
-		else
-		{
-			makeRefAttribute(refElem, xjdf);
-		}
-		return null;
-	}
-
-	private void refProduct(JDFRefElement refElem, KElement xjdf)
-	{
-		final String attName = ProductHelper.PRODUCT + "Ref";
-		final String id = jdfToXJDF.getProduct(refElem.getrRef());
-		xjdf.appendAttribute(attName, id, null, " ", true);
-	}
-
-	private boolean isProduct(JDFRefElement refElem)
-	{
-		return jdfToXJDF.getProduct(refElem.getrRef()) != null;
-	}
-
-	/**
-	 * @param re
-	 * @param xjdf 
-	 */
-	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
-	{
-		final JDFResource target = re.getTarget();
-		final JDFResourceLink rl = getLinkForRef(re, target);
-		final VElement v = setResource(rl, target, getRefRoot(xjdf));
-		if (v != null)
-		{
-			final String attName = getRefName(re);
-			for (KElement ref : v)
-			{
-				xjdf.appendAttribute(attName, ref.getID(), null, " ", true);
-			}
-		}
-		re.deleteNode();
-	}
-
-	/**
-	 * @param re
-	 * @param target
-	 * @return
-	 */
-	private JDFResourceLink getLinkForRef(final JDFRefElement re, final JDFResource target)
-	{
-		JDFResourceLink rl = null;
-		if (this.jdfToXJDF.oldRoot != null)
-		{
-			final JDFResourceLinkPool resourceLinkPool = this.jdfToXJDF.oldRoot.getResourceLinkPool();
-			rl = resourceLinkPool != null ? resourceLinkPool.getLink(target, null, null) : null;
-		}
-		return rl;
-	}
-
-	/**
-	 * @param xjdf
-	 * @return
-	 */
-	private KElement getRefRoot(final KElement xjdf)
-	{
-		KElement ret = null;
-		if (xjdf != null)
-		{
-			ret = xjdf.getDeepParent(ElementName.RESOURCEINFO, 0);
-		}
-		return ret == null ? this.jdfToXJDF.newRoot : ret;
 	}
 
 	/**
@@ -194,6 +102,15 @@ public class WalkRefElement extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFRefElement;
+		return (toCheck instanceof JDFElement) && !(toCheck instanceof JDFResource) && !(toCheck instanceof JDFResourceLink) && !(toCheck instanceof JDFAudit)
+				&& !(toCheck instanceof JDFRefElement) && !(toCheck instanceof JDFNode) && !(toCheck instanceof JDFJMF) && !(toCheck instanceof JDFMessage);
 	}
+
+	@Override
+	protected void removeUnused(KElement newRootP)
+	{
+		newRootP.removeAttributes(jdfToXJDF.elemAttribs);
+		super.removeUnused(newRootP);
+	}
+
 }

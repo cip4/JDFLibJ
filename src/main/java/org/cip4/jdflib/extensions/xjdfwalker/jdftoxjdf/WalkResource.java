@@ -117,7 +117,7 @@ public class WalkResource extends WalkJDFElement
 	{
 		final String localName = xjdf.getLocalName();
 		final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
-		for (String attrib : this.jdfToXJDF.resAttribs)
+		for (String attrib : jdfToXJDF.resAttribs)
 		{
 			if (newResLeaf.hasAttribute(attrib))
 			{

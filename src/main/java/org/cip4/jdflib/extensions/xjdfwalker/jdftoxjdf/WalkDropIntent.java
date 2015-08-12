@@ -77,7 +77,7 @@ import org.cip4.jdflib.resource.intent.JDFDropIntent;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkDropIntent extends WalkJDFElement
+public class WalkDropIntent extends WalkJDFSubElement
 {
 	/**
 	 * 
