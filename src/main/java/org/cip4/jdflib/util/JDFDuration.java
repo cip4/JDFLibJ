@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -125,12 +125,12 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	public static JDFDuration createDuration(String duration)
 	{
-		if (duration == null || duration.length() == 0)
+		duration = StringUtil.normalize(duration, false, null);
+		if (duration == null)
 			return null;
 
 		// all characters in a valid duration are upper
 		duration = duration.toUpperCase();
-		duration = StringUtil.replaceString(duration, " ", null);
 		if (StringUtil.matches(duration, REGEX_DURATION))
 		{
 			try

@@ -308,9 +308,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param date the formatted date string
 	 * @return the JDFDate , null if date is not a valid string
 	 */
-	public static JDFDate createDate(final String date)
+	public static JDFDate createDate(String date)
 	{
-		if (date == null || date.length() == 0)
+		date = StringUtil.normalize(date, false, null);
+		if (date == null)
 		{
 			return null;
 		}

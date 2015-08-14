@@ -1041,12 +1041,27 @@ public class StringUtil
 	 */
 	public static String normalize(String strWork, boolean toLower)
 	{
+		return normalize(strWork, toLower, JDFConstants.BLANK);
+	}
+
+	/**
+	 * 
+	 * normalize a string by stripping and converting any internal whitespace to the value of replace
+	 * @param strWork the input
+	 * @param toLower if true return all lower case
+	 * @param replace the replace character, if null remove all whitespace
+	 * @return the output; null if all characters were removed
+	 */
+	public static String normalize(String strWork, boolean toLower, String replace)
+	{
 		if (strWork == null)
 			return null;
 		strWork = strWork.trim();
 		if (getNonEmpty(strWork) == null)
 			return null;
-		strWork = strWork.replaceAll("\\s+", " ");
+		if (replace == null)
+			replace = JDFConstants.EMPTYSTRING;
+		strWork = strWork.replaceAll("\\s+", replace);
 		if (toLower)
 			strWork = strWork.toLowerCase();
 		return strWork;

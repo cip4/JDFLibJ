@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -174,6 +175,14 @@ public class ProductHelper extends BaseXJDFHelper
 	{
 		int a = theElement.getIntAttribute(AttributeName.MAXAMOUNT, null, -4242);
 		return a == -4242 ? getAmount() : a;
+	}
+
+	/**
+	 * @return the productID of the product
+	 */
+	public String getProductID()
+	{
+		return StringUtil.getNonEmpty(theElement.getAttribute(AttributeName.PRODUCTID, null, null));
 	}
 
 	/**

@@ -106,6 +106,17 @@ public class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
+	* @throws DataFormatException
+	* 
+	*/
+	@Test
+	public void testCreateDateNormalize() throws DataFormatException
+	{
+		assertNotNull(JDFDate.createDate("   1999-09-26T11:43:10+03:00  "));
+		assertNotNull(JDFDate.createDate("   1999-09-26 T 11:43:10+ 03:00  "));
+	}
+
+	/**
 	 * @throws DataFormatException
 	 * 
 	 */

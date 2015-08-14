@@ -627,6 +627,20 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test normalize utility
+	 * 
+	 */
+	@Test
+	public void testNormalize3()
+	{
+		assertEquals("a11b", StringUtil.normalize("\n  a   \t  b ", false, "11"));
+		assertEquals("abbb", StringUtil.normalize("\n  a   \t  BBb ", true, null));
+		assertEquals("aBBb", StringUtil.normalize("\n  a   \t  BBb ", false, null));
+		assertNull(StringUtil.normalize("\n      \t   ", true, null));
+		assertNull(StringUtil.normalize(null, true, null));
+	}
+
+	/**
 	 * 
 	 */
 	@Test
