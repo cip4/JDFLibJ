@@ -68,38 +68,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFSpawned;
-import org.cip4.jdflib.pool.JDFAncestorPool;
-import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFMerged;
-import org.cip4.jdflib.resource.JDFObservationTarget;
-import org.cip4.jdflib.resource.process.JDFBusinessInfo;
+import org.cip4.jdflib.jmf.JDFSubscription;
 
 /**
- * any matching class will be removed with extreme prejudice...
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkSubscription extends WalkJDFSubElement
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkSubscription()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		return null;
 	}
 
 	/**
@@ -110,7 +95,20 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged
-				|| toCheck instanceof JDFObservationTarget || toCheck instanceof JDFBusinessInfo;
+		return toCheck instanceof JDFSubscription;
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected void removeUnused(KElement newRootP)
+	{
+		newRootP.removeAttribute(AttributeName.FORMAT);
+		newRootP.removeAttribute(AttributeName.MINDELAYTIME);
+		newRootP.removeAttribute(AttributeName.REPEATSTEP);
+		newRootP.removeAttribute(AttributeName.TEMPLATE);
+		super.removeUnused(newRootP);
 	}
 }

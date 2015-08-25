@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,6 +93,24 @@ public class FixVersionImpl extends PackageElementWalker
 {
 	protected boolean bFixIDs;
 	protected boolean bZappInvalid;
+	protected boolean bZappDeprecated;
+
+	/**
+	 * @return the bZappDeprecated
+	 */
+	public boolean isZappDeprecated()
+	{
+		return bZappDeprecated;
+	}
+
+	/**
+	 * @param bZappDeprecated the bZappDeprecated to set
+	 */
+	public void setZappDeprecated(boolean bZappDeprecated)
+	{
+		this.bZappDeprecated = bZappDeprecated;
+	}
+
 	protected final EnumVersion version;
 	protected boolean bOK;
 	protected boolean fixICSVersions;
@@ -150,6 +168,7 @@ public class FixVersionImpl extends PackageElementWalker
 		new BaseWalker(getFactory()); // need a default walker
 		bFixIDs = true;
 		bZappInvalid = false;
+		bZappDeprecated = false;
 		version = _version;
 		bOK = true;
 		fixICSVersions = false;
@@ -164,6 +183,7 @@ public class FixVersionImpl extends PackageElementWalker
 		super(new BaseWalkerFactory());
 		version = fixVersion.version;
 		bZappInvalid = fixVersion.bZappInvalid;
+		bZappDeprecated = fixVersion.bZappDeprecated;
 		bFixIDs = fixVersion.bFixIDs;
 		fixICSVersions = fixVersion.fixICSVersions;
 		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;

@@ -68,26 +68,22 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFSpawned;
-import org.cip4.jdflib.pool.JDFAncestorPool;
-import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFMerged;
-import org.cip4.jdflib.resource.JDFObservationTarget;
-import org.cip4.jdflib.resource.process.JDFBusinessInfo;
+import org.cip4.jdflib.resource.JDFHoleLine;
+import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
- * any matching class will be removed with extreme prejudice...
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkHoleLine extends WalkHole
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkHoleLine()
 	{
 		super();
 	}
@@ -99,7 +95,13 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return null;
+		JDFHole hole = (JDFHole) jdf.getElement(ElementName.HOLE);
+		if (hole != null)
+		{
+			jdf.setAttributes(hole);
+			hole.deleteNode();
+		}
+		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -110,7 +112,6 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged
-				|| toCheck instanceof JDFObservationTarget || toCheck instanceof JDFBusinessInfo;
+		return (toCheck instanceof JDFHoleLine);
 	}
 }

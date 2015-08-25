@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,6 +128,11 @@ public class WalkElement extends BaseWalker
 	public KElement walk(final KElement e1, final KElement trackElem)
 	{
 		final JDFElement el = (JDFElement) e1;
+		if (fixVersion.isZappDeprecated() && el.isDeprecated())
+		{
+			el.deleteNode();
+			return null;
+		}
 
 		// replace all "~" with " ~ "
 		final JDFAttributeMap m = el.getAttributeMap();
@@ -150,34 +155,41 @@ public class WalkElement extends BaseWalker
 	 */
 	private void walkSingleAttribute(final JDFElement el, final AttributeInfo ai, final String key, final String value)
 	{
-		final EnumAttributeType attType = ai.getAttributeType(key);
-
-		if (EnumAttributeType.isRange(attType))
+		if (fixVersion.bZappDeprecated && fixVersion.version.isGreater(ai.getLastVersion(key)))
 		{
-			fixRange(el, key, value);
+			el.removeAttribute_KElement(key, null);
 		}
-		else if (EnumAttributeType.duration.equals(attType))
+		else
 		{
-			fixDuration(el, key, value);
+			final EnumAttributeType attType = ai.getAttributeType(key);
+			if (EnumAttributeType.isRange(attType))
+			{
+				fixRange(el, key, value);
+			}
+			else if (EnumAttributeType.duration.equals(attType))
+			{
+				fixDuration(el, key, value);
+			}
+			else if (EnumAttributeType.dateTime.equals(attType))
+			{
+				fixDateTime(el, key, value);
+			}
+			if (this.fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
+			{
+				fixIDs(el, ai, key, value);
+			}
+			if (AttributeName.ICSVERSIONS.equals(key))
+			{
+				fixICSVesions(el, value);
+			}
+			if (fixVersion.bZappInvalid && attType != null)
+			{
+				if (!AttributeInfo.validStringForType(value, attType, null))
+				{
+					el.removeAttribute_KElement(key, null);
+				}
+			}
 		}
-		else if (EnumAttributeType.dateTime.equals(attType))
-		{
-			fixDateTime(el, key, value);
-		}
-		if (this.fixVersion.bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
-		{
-			fixIDs(el, ai, key, value);
-		}
-		if (AttributeName.ICSVERSIONS.equals(key))
-		{
-			fixICSVesions(el, value);
-		}
-		if (this.fixVersion.bZappInvalid && attType != null)
-		{
-			if (!AttributeInfo.validStringForType(value, attType, null))
-				el.removeAttribute_KElement(key, null);
-		}
-
 	}
 
 	/**

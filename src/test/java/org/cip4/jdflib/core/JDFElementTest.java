@@ -820,12 +820,25 @@ public class JDFElementTest extends JDFTestCaseBase
 	@Test
 	public void testIsCommentStatic()
 	{
-
 		_setUp();
 		assertFalse("Bug: This is a comment!", m_kElement instanceof JDFComment);
 		m_jdfElement.appendComment();
 		m_kElement = m_jdfElement.getChildByTagName("Comment", "", 0, null, false, true);
 		assertTrue("Bug: This is no comment!", m_kElement instanceof JDFComment);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsDeprecated()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		assertFalse(n.isDeprecated());
+		assertFalse(n.getCreateAuditPool().isDeprecated());
+		JDFNodeInfo ni = (JDFNodeInfo) n.appendElement(ElementName.NODEINFO);
+		assertTrue(ni.isDeprecated());
+		assertFalse(n.appendComment().isDeprecated());
 	}
 
 	/**

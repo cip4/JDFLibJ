@@ -108,16 +108,90 @@ public class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * if true merge stripping and layout
 	 */
-	public boolean mergeLayout = true;
+	private boolean mergeLayout;
 	protected JDFElement newRoot;
 	/**
 	 * if false, intents are never partitioned
 	 */
-	public boolean bIntentPartition = false;
+	private boolean bIntentPartition;
 	/**
 	 * if false, all deliveryintents and artdeliveryintents are converted to the respective process resources
 	 */
-	public boolean bDeliveryIntent = false;
+	private boolean bDeliveryIntent;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isMergeLayout()
+	{
+		return mergeLayout;
+	}
+
+	/**
+	 * 
+	 * @param mergeLayout
+	 */
+	public void setMergeLayout(boolean mergeLayout)
+	{
+		this.mergeLayout = mergeLayout;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isIntentPartition()
+	{
+		return bIntentPartition;
+	}
+
+	/**
+	 * 
+	 * @param bIntentPartition
+	 */
+	public void setIntentPartition(boolean bIntentPartition)
+	{
+		this.bIntentPartition = bIntentPartition;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isDeliveryIntent()
+	{
+		return bDeliveryIntent;
+	}
+
+	/**
+	 * 
+	 * @param bDeliveryIntent
+	 */
+	public void setDeliveryIntent(boolean bDeliveryIntent)
+	{
+		this.bDeliveryIntent = bDeliveryIntent;
+	}
+
+	private boolean removeSignatureName;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isRemoveSignatureName()
+	{
+		return removeSignatureName;
+	}
+
+	/**
+	 * 
+	 * @param removeSignatureName
+	 */
+	public void setRemoveSignatureName(boolean removeSignatureName)
+	{
+		this.removeSignatureName = removeSignatureName;
+	}
 
 	/**
 	 * 
@@ -170,7 +244,10 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement part, final KElement dummy)
 		{
-			part.removeAttribute(AttributeName.SIGNATURENAME);
+			if (isRemoveSignatureName())
+			{
+				part.removeAttribute(AttributeName.SIGNATURENAME);
+			}
 			return super.walk(part, dummy);
 		}
 
@@ -949,6 +1026,10 @@ public class PostXJDFWalker extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		this.newRoot = newRoot;
+		bDeliveryIntent = false;
+		bIntentPartition = false;
+		mergeLayout = true;
+		removeSignatureName = true;
 	}
 
 	/**

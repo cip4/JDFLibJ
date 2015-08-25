@@ -246,6 +246,21 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * 
+	 * @return true if we are deprecated
+	 */
+	public boolean isDeprecated()
+	{
+		KElement parent = getParentNode_KElement();
+		if (parent instanceof JDFElement)
+		{
+			VString v = ((JDFElement) parent).getTheElementInfo().deprecatedElements();
+			return v != null && v.contains(getLocalName());
+		}
+		return false;
+	}
+
+	/**
 	 * Set this element as dirty
 	 * @param bAttribute if true, only attributes are dirty, else also sub-elements
 	 */

@@ -115,6 +115,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	{
 		if (defaultHour >= 0 && defaultHour <= 23)
 			JDFDate.defaultHour = defaultHour;
+
 	}
 
 	private static FastCalendar fastCalendar = new FastCalendar();

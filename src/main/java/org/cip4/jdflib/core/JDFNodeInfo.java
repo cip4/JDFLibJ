@@ -129,11 +129,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.TOTALDURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.NODESTATUSDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTEPID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null); // added
-		// as
-		// valid
-		// for
-		// 1.3
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTEPID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null); // added as valid for 1.3
 	}
 
 	@Override
@@ -158,7 +154,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.BUSINESSINFO, 0x33333333);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.JMF, 0x33333333);
+		elemInfoTable[2] = new ElemInfoTable(ElementName.JMF, 0x44433333);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x33333311);
 		elemInfoTable[4] = new ElemInfoTable(ElementName.NOTIFICATIONFILTER, 0x33333311);
 	}

@@ -110,7 +110,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x44433333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
 	@Override

@@ -68,26 +68,21 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFSpawned;
-import org.cip4.jdflib.pool.JDFAncestorPool;
-import org.cip4.jdflib.pool.JDFResourcePool;
-import org.cip4.jdflib.resource.JDFMerged;
-import org.cip4.jdflib.resource.JDFObservationTarget;
-import org.cip4.jdflib.resource.process.JDFBusinessInfo;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
- * any matching class will be removed with extreme prejudice...
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkIgnore extends WalkJDFElement
+public class WalkHoleMakingParams extends WalkInlineAllRes
 {
-
 	/**
 	 * 
 	 */
-	public WalkIgnore()
+	public WalkHoleMakingParams()
 	{
 		super();
 	}
@@ -99,7 +94,26 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		return null;
+		JDFHoleMakingParams hp = (JDFHoleMakingParams) jdf;
+		KElement holePattern = hp.getHole(0);
+		if (holePattern == null)
+		{
+			holePattern = hp.getHoleLine(0);
+		}
+		if (holePattern == null)
+		{
+			holePattern = hp.appendHole();
+		}
+
+		holePattern.moveAttribute(AttributeName.CENTER, hp);
+		holePattern.moveAttribute(AttributeName.CENTERREFERENCE, hp);
+		holePattern.moveAttribute(AttributeName.EXTENT, hp);
+		holePattern.moveAttribute(AttributeName.HOLECOUNT, hp);
+		holePattern.moveAttribute(AttributeName.HOLEREFERENCEEDGE, hp);
+		holePattern.moveAttribute(AttributeName.HOLETYPE, hp);
+		holePattern.moveAttribute(AttributeName.SHAPE, hp);
+		KElement ret = super.walk(jdf, xjdf);
+		return ret;
 	}
 
 	/**
@@ -110,7 +124,6 @@ public class WalkIgnore extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged
-				|| toCheck instanceof JDFObservationTarget || toCheck instanceof JDFBusinessInfo;
+		return (toCheck instanceof JDFHoleMakingParams);
 	}
 }

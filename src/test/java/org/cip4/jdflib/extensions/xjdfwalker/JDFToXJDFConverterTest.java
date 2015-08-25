@@ -73,13 +73,16 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -87,9 +90,12 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
@@ -98,6 +104,7 @@ import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
 
 /**
@@ -148,6 +155,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/DeliveryParams/DropItem/@Amount", null), "42");
 		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter[2]/DeliveryParams/DropItem/@Amount", null), "63");
 		return xjdf;
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testSignatureName()
+	{
+		JDFToXJDF conv = new JDFToXJDF();
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setDescriptiveName("desc");
+		c.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1");
+		KElement x = conv.convert(n);
+		assertEquals(x.toXML().indexOf("SignatureName"), -1);
+		conv.setRemoveSignatureName(false);
+		KElement x2 = conv.convert(n);
+		assertTrue(x2.toXML().indexOf("SignatureName") > 0);
 	}
 
 	/**
@@ -223,6 +250,38 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testSubscriptionJMF()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
+		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
+		jmf.getQuery(0).getStatusQuParams().setQueueInfo(true);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertNull(xjmf.getChildByTagName(ElementName.OBSERVATIONTARGET, null, 0, null, false, false));
+		KElement subscription = xjmf.getChildByTagName(ElementName.SUBSCRIPTION, null, 0, null, false, false);
+		assertNotNull(subscription);
+		assertFalse(subscription.hasAttribute(AttributeName.REPEATSTEP));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testStatusJMF()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");
+		jmf.getQuery(0).getSubscription().appendObservationTarget().setAttributes(new VString("a", null));
+		jmf.getQuery(0).getStatusQuParams().setQueueInfo(true);
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		KElement statusquparams = xjmf.getChildByTagName(ElementName.STATUSQUPARAMS, null, 0, null, false, false);
+		assertFalse(statusquparams.hasAttribute(AttributeName.QUEUEINFO));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testMultiNode1()
 	{
 		JDFElement.setLongID(false);
@@ -245,6 +304,45 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		JDFToXJDF conv = new JDFToXJDF();
 		conv.setWantProduct(true);
 		conv.saveZip(sm_dirTestDataTemp + "3files.xjdf.zip", product, true);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleMaking()
+	{
+		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.HoleMaking);
+		JDFHoleMakingParams hp = (JDFHoleMakingParams) node.appendMatchingResource(ElementName.HOLEMAKINGPARAMS, EnumUsage.Input);
+		hp.setCenter(new JDFXYPair(3, 4));
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(node);
+		PartitionHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
+		KElement holepattern = ph.getResource().getElement("HolePattern");
+		assertNotNull(holepattern);
+		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testHoleList()
+	{
+		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.HoleMaking);
+		JDFHoleMakingParams hp = (JDFHoleMakingParams) node.appendMatchingResource(ElementName.HOLEMAKINGPARAMS, EnumUsage.Input);
+		JDFHoleLine holeline = hp.appendHoleLine();
+		holeline.setPitch(42);
+		holeline.appendHole().setCenter(new JDFXYPair(5, 6));
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(node);
+		PartitionHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
+		KElement holepattern = ph.getResource().getElement("HolePattern");
+		assertNotNull(holepattern);
+		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
+		assertEquals(holepattern.getAttribute(AttributeName.PITCH), "42");
 	}
 
 	/**

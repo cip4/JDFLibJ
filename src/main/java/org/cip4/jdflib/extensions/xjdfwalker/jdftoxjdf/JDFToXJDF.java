@@ -127,6 +127,7 @@ public class JDFToXJDF extends PackageElementWalker
 		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		trackAudits = true;
+		removeSignatureName = true;
 		init();
 	}
 
@@ -308,6 +309,25 @@ public class JDFToXJDF extends PackageElementWalker
 	String rootID;
 	protected VString elemAttribs;
 	protected HashSet<String> inlineSet;
+	private boolean removeSignatureName;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isRemoveSignatureName()
+	{
+		return removeSignatureName;
+	}
+
+	/**
+	 * 
+	 * @param removeSignatureName
+	 */
+	public void setRemoveSignatureName(boolean removeSignatureName)
+	{
+		this.removeSignatureName = removeSignatureName;
+	}
 
 	/**
 	 * @param root the jdf or jmf to transform
@@ -334,6 +354,8 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final JDFJMF root = (JDFJMF) jmf.cloneNewDoc();
 		prepareNewDoc(true);
+		preFixVersion(root);
+
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
 		boolean tmpTrack = trackAudits;
@@ -352,9 +374,7 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 		rootID = node.getID();
-		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
-		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
-		vers.walkTree(root, null);
+		preFixVersion(root);
 
 		String id = StringUtil.getNonEmpty(node.getID());
 		oldRoot = id == null ? root : (JDFNode) root.getChildWithAttribute(null, "ID", null, id, 0, false);
@@ -374,6 +394,15 @@ public class JDFToXJDF extends PackageElementWalker
 		return newRoot;
 	}
 
+	private void preFixVersion(final JDFElement root)
+	{
+		FixVersion vers = new FixVersion(EnumVersion.Version_1_5);
+		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
+		vers.setZappDeprecated(true);
+
+		vers.walkTree(root, null);
+	}
+
 	/**
 	 * 
 	 *  
@@ -381,9 +410,12 @@ public class JDFToXJDF extends PackageElementWalker
 	private void postWalk()
 	{
 		PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
-		pw.mergeLayout = bMergeLayout;
-		pw.bIntentPartition = bIntentPartition;
+		pw.setMergeLayout(bMergeLayout);
+		pw.setIntentPartition(bIntentPartition);
+		pw.setRemoveSignatureName(removeSignatureName);
+
 		pw.walkTreeKidsFirst(newRoot);
+
 		if (trackAudits)
 		{
 			JDFAuditPool auditPool = (JDFAuditPool) newRoot.getCreateElement("AuditPool");
@@ -742,6 +774,7 @@ public class JDFToXJDF extends PackageElementWalker
 		bMergeRunList = false;
 		bTypeSafeMessage = false;
 		bRetainSpawnInfo = true;
+		removeSignatureName = false;
 	}
 
 	/**

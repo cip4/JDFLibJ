@@ -373,6 +373,22 @@ public class FixVersionTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testNodeInfo()
+	{
+		n.setVersion(EnumVersion.Version_1_1);
+		n.appendNodeInfo().appendJMF();
+		FixVersion fixVersion = new FixVersion(EnumVersion.Version_1_5);
+		fixVersion.setZappDeprecated(true);
+		boolean converted = fixVersion.convert(n);
+		assertTrue(converted);
+		assertNotNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0));
+		assertNull(n.getResource(ElementName.NODEINFO, EnumUsage.Input, 0).getElement(ElementName.JMF));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testNumColorsDouble()
 	{
 		JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
@@ -438,10 +454,6 @@ public class FixVersionTest extends JDFTestCaseBase
 		assertNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 		FixVersion fix2 = new FixVersion(EnumVersion.Version_1_4);
 		fix2.walkTree(jmf, null);
-
-		// TODO @Rainer (2013-03-10) - Not compatible to Linux
-		System.out.println("JMF Agent: " + jmf.getAgentName());
-		//		assertNotNull(StringUtil.getNonEmpty(jmf.getAgentName()));
 	}
 
 	/**
