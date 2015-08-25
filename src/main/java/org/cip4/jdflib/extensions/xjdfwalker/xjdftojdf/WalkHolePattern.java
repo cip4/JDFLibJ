@@ -67,23 +67,22 @@
  * 
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFDropItem;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkDropItem extends WalkXElement
+public class WalkHolePattern extends WalkXElement
 {
 	/**
 	 * 
 	 */
-	public WalkDropItem()
+	public WalkHolePattern()
 	{
 		super();
 	}
@@ -96,35 +95,31 @@ public class WalkDropItem extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDropItem;
+		return "HolePattern".equals(toCheck.getLocalName());
 	}
 
 	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(KElement e, KElement trackElem)
 	{
-		if ("ProductRef".equals(val))
+		boolean bHoleLine = e.hasAttribute(AttributeName.PITCH);
+
+		if (bHoleLine)
 		{
-			return "ComponentRef";
+			e.renameElement(ElementName.HOLELINE, null);
+			JDFHole hole = (JDFHole) e.appendElement(ElementName.HOLE);
+			JDFAttributeMap map = e.getAttributeMap();
+			map.remove(AttributeName.PITCH);
+			hole.setAttributes(map);
+			e.removeAttributes(map.getKeys());
 		}
-		return super.getRefName(val);
+		else
+		{
+			e.renameElement(ElementName.HOLE, null);
+		}
+		return super.walk(e, trackElem);
 	}
 
-	@Override
-	protected void cleanRef(KElement e, KElement trackElem, String val, String values)
-	{
-		if ("ProductRef".equals(val))
-		{
-			JDFNode n = xjdfToJDFImpl.currentJDFNode.getRoot().getChildJDFNode(values, false);
-			JDFComponent c = (JDFComponent) (n == null ? null : n.getResource(ElementName.COMPONENT, EnumUsage.Output, 0));
-			if (c != null)
-			{
-				values = c.getID();
-			}
-		}
-		super.cleanRef(e, trackElem, val, values);
-	}
 }

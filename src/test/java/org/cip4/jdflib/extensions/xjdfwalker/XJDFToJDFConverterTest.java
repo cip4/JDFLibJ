@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
 
 /**
@@ -182,7 +183,6 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFLayout lo = (JDFLayout) jdf.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
 		assertNotNull(lo);
 		assertEquals(lo.getPartIDKeys().get(0), AttributeName.SIGNATURENAME);
-
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testDeliveryIntent()
 	{
-		KElement xjdf = new JDFToXJDFConverterTest().testDeliveryIntent();
+		KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		JDFDoc d = xCon.convert(xjdf);
 		JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
@@ -243,6 +243,22 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 		assertNotNull(di);
 		assertNotNull("The ProductRef was not translated", di.getDropIntent(1).getDropItemIntent(0).getComponent());
+	}
+
+	/**
+	*  
+	*  
+	*/
+	@Test
+	public void testHolePattern()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest()._testHoleLine();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFHoleMakingParams hp = (JDFHoleMakingParams) d.getJDFRoot().getResource(ElementName.HOLEMAKINGPARAMS, EnumUsage.Input, 0);
+		assertNotNull(hp);
+		assertNotNull(hp.getHoleLine(0));
+		assertNotNull(hp.getHoleLine(0).getHole());
 	}
 
 	/**

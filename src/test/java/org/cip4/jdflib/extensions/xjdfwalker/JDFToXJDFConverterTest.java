@@ -133,7 +133,12 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	*
 	 */
 	@Test
-	public KElement testDeliveryIntent()
+	public void testDeliveryIntent()
+	{
+		_testDeliveryIntent();
+	}
+
+	public KElement _testDeliveryIntent()
 	{
 		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
 		nP.setType(EnumType.Product);
@@ -325,10 +330,16 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	@Test
-	public void testHoleList()
+	public void testHoleLine()
+	{
+		_testHoleLine();
+	}
+
+	public KElement _testHoleLine()
 	{
 		JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
 		node.setType(EnumType.HoleMaking);
@@ -341,8 +352,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		PartitionHelper ph = new XJDFHelper(xjdf).getPartition(ElementName.HOLEMAKINGPARAMS, 0, 0);
 		KElement holepattern = ph.getResource().getElement("HolePattern");
 		assertNotNull(holepattern);
-		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "3 4");
+		assertEquals(holepattern.getAttribute(AttributeName.CENTER), "5 6");
 		assertEquals(holepattern.getAttribute(AttributeName.PITCH), "42");
+		return xjdf;
 	}
 
 	/**
