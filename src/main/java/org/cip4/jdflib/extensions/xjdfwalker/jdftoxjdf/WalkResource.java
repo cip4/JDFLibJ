@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
@@ -172,14 +173,10 @@ public class WalkResource extends WalkJDFElement
 				resourceClass = ((JDFResource) r2).getResourceClass();
 			}
 		}
+		String className = jdfToXJDF.isParameterSet() ? XJDFHelper.PARAMETER : XJDFHelper.RESOURCE;
 		if (resourceClass == null)
 		{
-			return "Parameter"; // assume parameter if unknown 3rd party stuff
-		}
-		String className = "Resource";
-		if (resourceClass.equals(EnumResourceClass.Parameter))
-		{
-			className = resourceClass.getName();
+			return className;
 		}
 		else if (resourceClass.equals(EnumResourceClass.Intent))
 		{
@@ -188,6 +185,10 @@ public class WalkResource extends WalkJDFElement
 		else if (resourceClass.equals(EnumResourceClass.PlaceHolder))
 		{
 			return null;
+		}
+		else if (!EnumResourceClass.Parameter.equals(resourceClass))
+		{
+			return XJDFHelper.RESOURCE;
 		}
 		return className;
 	}

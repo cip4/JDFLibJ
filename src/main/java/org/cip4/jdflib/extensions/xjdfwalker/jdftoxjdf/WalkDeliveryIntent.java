@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 
@@ -116,7 +117,7 @@ public class WalkDeliveryIntent extends WalkResource
 	@Override
 	protected String getClassName(JDFResource r)
 	{
-		return "Parameter";
+		return XJDFHelper.RESOURCE;
 	}
 
 	/**

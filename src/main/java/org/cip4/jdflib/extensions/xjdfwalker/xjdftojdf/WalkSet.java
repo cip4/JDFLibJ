@@ -119,10 +119,11 @@ public class WalkSet extends WalkXElement
 			}
 		}
 		final String id = e.getAttribute(AttributeName.ID, null, null);
-		if (inOut == null && xjdfToJDFImpl.isHeuristicLink() && SetHelper.PARAMETER_SET.equals(e.getLocalName()))
+		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
 			final String name = getJDFResName(e);
-			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COLORPOOL.equals(name)
+			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
+					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
 					&& parentNode.isValidLink(name, EnumUsage.Input, StringUtil.getNonEmpty(e.getAttribute(AttributeName.PROCESSUSAGE, null, null))))
 			{
 				inOut = EnumUsage.Input;

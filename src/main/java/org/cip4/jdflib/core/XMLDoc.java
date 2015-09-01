@@ -1570,7 +1570,7 @@ public class XMLDoc
 			else
 				break;
 		}
-		return p == null ? null : p.getConnection();
+		return p == null || !(p.getConnection() instanceof HttpURLConnection) ? null : (HttpURLConnection) p.getConnection();
 	}
 
 	/**

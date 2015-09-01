@@ -276,6 +276,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testWriteToFTP()
+	{
+		if (!isTestNetwork())
+			return;
+		assertNotNull(UrlUtil.writeToURL("ftp://ftp.mozilla.org/pub/mozilla.org", null, null, null, null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testWriteToURLClose()
 	{
 		if (!isTestNetwork())
@@ -283,6 +294,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		HTTPDetails det = new HTTPDetails();
 		det.setbKeepAlive(false);
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testWriteToURLRedirect()
+	{
+		if (!isTestNetwork())
+			return;
+		assertEquals(UrlUtil.writeToURL("http://google.ch", null, UrlUtil.GET, null, null).getResponseCode(), 200);
 	}
 
 	/**
@@ -362,7 +384,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isNotCID("https://foo"));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -370,11 +391,36 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testIsHTTP()
 	{
 		assertTrue(UrlUtil.isHttp("http://foo.bar.com"));
+		assertFalse(UrlUtil.isHttp("https://foo.bar.com"));
 		assertFalse(UrlUtil.isHttp(null));
 		assertFalse(UrlUtil.isHttp("foo.bar.com"));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsHTTPS()
+	{
+		assertTrue(UrlUtil.isHttps("https://foo.bar.com"));
+		assertFalse(UrlUtil.isHttps("http://foo.bar.com"));
+		assertFalse(UrlUtil.isHttps(null));
+		assertFalse(UrlUtil.isHttps("foo.bar.com"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testIsNet()
+	{
+		assertTrue(UrlUtil.isNet("https://foo.bar.com"));
+		assertTrue(UrlUtil.isNet("http://foo.bar.com"));
+		assertTrue(UrlUtil.isNet("FTP://foo.bar.com"));
+		assertFalse(UrlUtil.isNet(null));
+		assertFalse(UrlUtil.isNet("foo.bar.com"));
+	}
+
 	/**
 	 * 
 	 */
@@ -676,6 +722,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
 			f2 = UrlUtil.urlToFile(fileToUrl);
 			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
+			assertNull(UrlUtil.urlToFile("http://foo"));
+			assertNull(UrlUtil.urlToFile("https://foo"));
+			assertNull(UrlUtil.urlToFile("cid:foo"));
 
 		}
 

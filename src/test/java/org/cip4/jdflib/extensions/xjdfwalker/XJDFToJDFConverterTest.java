@@ -116,10 +116,30 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		KElement e = new XMLDoc("XJDF", null).getRoot();
-		KElement c = e.appendElement("ParameterSet");
+		KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Contact");
 		c.setAttribute("Usage", "Input");
-		c.appendElement("Parameter").appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
+		c.appendElement(XJDFHelper.RESOURCE).appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFContact contact = (JDFContact) root.getResource("Contact", EnumUsage.Input, 0);
+		assertEquals(contact.getCompany().getProductID(), "company_id");
+	}
+
+	/**
+	 *  
+	 *  
+	 */
+	@Test
+	public void testParameterSet()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		KElement e = new XMLDoc("XJDF", null).getRoot();
+		KElement c = e.appendElement(SetHelper.PARAMETER_SET);
+		c.setAttribute("Name", "Contact");
+		c.setAttribute("Usage", "Input");
+		c.appendElement(XJDFHelper.PARAMETER).appendElement(ElementName.CONTACT).appendElement(ElementName.COMPANY).setAttribute("CompanyID", "company_id");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
@@ -155,10 +175,10 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		KElement e = new XMLDoc("XJDF", null).getRoot();
-		KElement c = e.appendElement("ParameterSet");
+		KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
-		c.appendElement("Parameter").appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
+		c.appendElement(XJDFHelper.RESOURCE).appendElement(ElementName.LAYOUT).appendElement(ElementName.EXTERNALIMPOSITIONTEMPLATE).appendElement(ElementName.FILESPEC).setAttribute("URL", "file://foo.xml");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
@@ -174,7 +194,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	public void testSignatureName()
 	{
 		XJDFHelper h = new XJDFHelper("j1", null, null);
-		SetHelper lh = h.appendParameter(ElementName.LAYOUT, EnumUsage.Input);
+		SetHelper lh = h.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 		PartitionHelper ph = lh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAttribute(AttributeName.DESCRIPTIVENAME, "d1", null);
 		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
@@ -269,7 +289,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	public void testPartIDKeys()
 	{
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
-		SetHelper rls = h.appendParameter(ElementName.RUNLIST, EnumUsage.Input);
+		SetHelper rls = h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
 		for (int i = 0; i < 3; i++)
 		{
 			PartitionHelper ph = rls.appendPartition(new JDFAttributeMap("Run", "R" + i), true);
@@ -315,7 +335,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		KElement e = h.getRoot();
-		SetHelper sh = h.getCreateSet("Parameter", "Contact", null);
+		SetHelper sh = h.getCreateResourceSet("Contact", null);
 		PartitionHelper ph = sh.getCreatePartition(0, true);
 		ph.getResource().setAttribute(AttributeName.CONTACTTYPES, EnumContactType.Customer.getName());
 		final JDFDoc d = xCon.convert(e);

@@ -96,7 +96,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSet()
 	{
-		KElement rlSet = theHelper.appendSet("Parameter", "RunList", null).getSet();
+		KElement rlSet = theHelper.appendResourceSet("RunList", null).getSet();
 		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
 	}
 
@@ -131,18 +131,16 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSets()
 	{
-		SetHelper rlSet = theHelper.appendSet("Parameter", "RunList", EnumUsage.Input);
-		SetHelper rlSet2 = theHelper.appendSet("Resource", "Media", EnumUsage.Output);
+		SetHelper rlSet = theHelper.appendResourceSet("RunList", EnumUsage.Input);
+		SetHelper rlSet2 = theHelper.appendResourceSet("Media", EnumUsage.Output);
 
-		assertEquals(rlSet, theHelper.getSets(EnumFamily.Parameter, null).get(0));
-		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, null).get(0));
-		assertEquals(rlSet, theHelper.getSets(EnumFamily.Parameter, EnumUsage.Input).get(0));
+		assertEquals(rlSet, theHelper.getSets(EnumFamily.Resource, null).get(0));
+		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, null).get(1));
+		assertEquals(rlSet, theHelper.getSets(EnumFamily.Resource, EnumUsage.Input).get(0));
 		assertEquals(rlSet2, theHelper.getSets(EnumFamily.Resource, EnumUsage.Output).get(0));
 		assertEquals(rlSet, theHelper.getSets(null, EnumUsage.Input).get(0));
 		assertEquals(1, theHelper.getSets(null, EnumUsage.Input).size());
 		assertEquals(rlSet2, theHelper.getSets(null, EnumUsage.Output).get(0));
-		assertNull(theHelper.getSets(EnumFamily.Parameter, EnumUsage.Output));
-		assertNull(theHelper.getSets(EnumFamily.Resource, EnumUsage.Input));
 	}
 
 	/**
@@ -165,9 +163,9 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSetProcessUsage()
 	{
-		SetHelper seta = theHelper.getCreateParameterSet(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper seta = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		seta.setProcessUsage("a");
-		SetHelper setb = theHelper.appendParameter(ElementName.NODEINFO, EnumUsage.Input);
+		SetHelper setb = theHelper.appendResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		setb.setProcessUsage("b");
 		assertEquals(theHelper.getSet(ElementName.NODEINFO, "a"), seta);
 		assertEquals(theHelper.getSet(ElementName.NODEINFO, "b"), setb);
@@ -182,7 +180,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetSetByID()
 	{
-		SetHelper rlSet = theHelper.appendSet("Parameter", "RunList", null);
+		SetHelper rlSet = theHelper.appendResourceSet("RunList", null);
 		theHelper.cleanUp();
 		assertEquals(rlSet, theHelper.getSet(rlSet.getID()));
 	}
@@ -232,7 +230,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartition()
 	{
-		KElement rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true).getResource();
+		KElement rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true).getResource();
 		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
 		assertNull(theHelper.getResource("RunList", 0, 1));
 		assertNull(theHelper.getResource("RunList", 1, 1));
@@ -246,7 +244,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	@Test
 	public void testGetPartitionByID()
 	{
-		PartitionHelper rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true);
+		PartitionHelper rlSet = theHelper.getCreateResourceSet("RunList", null).getCreatePartition(0, true);
 		assertEquals(rlSet, theHelper.getPartition("RunList", 0, 0));
 		theHelper.cleanUp();
 		assertEquals(theHelper.getPartition(rlSet.getID()), rlSet);
@@ -273,7 +271,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	public void testClone()
 	{
 		XJDFHelper clone = theHelper.clone();
-		theHelper.appendSet("Parameter", ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
+		theHelper.appendResourceSet(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input);
 		assertNotNull(theHelper.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
 		assertNull(clone.getSet(ElementName.DIGITALPRINTINGPARAMS, 0));
 	}
@@ -323,7 +321,7 @@ public class XJDFHelperTest extends JDFTestCaseBase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		theHelper.reorder();
-		theHelper.getCreateParameterSet("foo", null);
+		theHelper.getCreateResourceSet("foo", null);
 		theHelper.appendProduct().setRoot();
 		KElement ap = theHelper.getRoot().getElement(ElementName.AUDITPOOL);
 		assertEquals(theHelper.getRoot().getFirstChildElement(), ap);

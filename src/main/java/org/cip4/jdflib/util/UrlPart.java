@@ -74,6 +74,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URLConnection;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -82,6 +83,8 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.core.XMLParserFactory;
 import org.cip4.jdflib.util.net.IPollDetails;
+
+import sun.net.www.protocol.ftp.FtpURLConnection;
 
 /**
  * simple struct to contain the stream and type of a bodypart
@@ -122,6 +125,31 @@ public class UrlPart implements IPollDetails
 		}
 		if (inStream == null)
 			inStream = (connection).getErrorStream();
+		bufferStream = null;
+	}
+
+	/**
+	 * @param connection
+	 * @throws IOException
+	 */
+	public UrlPart(final FtpURLConnection connection) throws IOException
+	{
+		this.connection = connection;
+		contentType = connection.getContentType();
+		contentLength = connection.getContentLength();
+		url = UrlUtil.urlToString(connection.getURL());
+		int rcTmp = 200;
+		try
+		{
+			inStream = connection.getInputStream();
+		}
+		catch (IOException x)
+		{
+			inStream = null;
+			rcTmp = -1;
+		}
+		rc = rcTmp;
+
 		bufferStream = null;
 	}
 
@@ -211,7 +239,7 @@ public class UrlPart implements IPollDetails
 	 * the content length of this UrlPart
 	 */
 	public long contentLength;
-	private final HttpURLConnection connection;
+	private final URLConnection connection;
 	private final String url;
 
 	/**
@@ -252,7 +280,7 @@ public class UrlPart implements IPollDetails
 	/**
 	 * @return the connection
 	 */
-	public HttpURLConnection getConnection()
+	public URLConnection getConnection()
 	{
 		return connection;
 	}

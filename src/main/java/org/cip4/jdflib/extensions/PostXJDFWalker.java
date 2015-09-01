@@ -342,7 +342,7 @@ public class PostXJDFWalker extends BaseElementWalker
 			}
 			//TODO multiple lower level stripparams partitions
 			XJDFHelper h = new XJDFHelper(newRoot);
-			SetHelper layoutseth = h.getCreateSet("Parameter", "Layout", EnumUsage.Input);
+			SetHelper layoutseth = h.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 
 			VJDFAttributeMap vmap = new PartitionHelper(strippingParams.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
@@ -558,7 +558,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck.getLocalName().equals(SetHelper.PARAMETER_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -624,7 +624,7 @@ public class PostXJDFWalker extends BaseElementWalker
 			if (intent != null)
 			{
 				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
-				SetHelper artDelResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				SetHelper artDelResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromArtDelivery((JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
@@ -672,7 +672,7 @@ public class PostXJDFWalker extends BaseElementWalker
 			if (intent != null)
 			{
 				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDFHelper.XJDF, 0));
-				SetHelper delResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				SetHelper delResHelper = h.getCreateResourceSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = delResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
 				dp.setFromDeliveryIntent((JDFDeliveryIntent) intent.getElement(ElementName.DELIVERYINTENT));

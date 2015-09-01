@@ -79,6 +79,7 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
@@ -94,7 +95,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	@Test
 	public void testStripLayout_BSSep()
 	{
-		bssh = theHelper.getCreateSet("Parameter", ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bssh = theHelper.getCreateResourceSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		PartitionHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
 		JDFBinderySignature bs = (JDFBinderySignature) bsh.getCreateResource();
 		initBS(bs, 0);
@@ -202,11 +203,11 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 			JDFAttributeMap sheetMap = getSheetMap(k);
 			PartitionHelper loh = losh.appendPartition(sheetMap, true);
 			JDFLayout lo = (JDFLayout) loh.getResource();
-			SetHelper nish = theHelper.getCreateSet("Parameter", ElementName.NODEINFO, EnumUsage.Input);
+			SetHelper nish = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 			PartitionHelper niph = nish.appendPartition(sheetMap, true);
 			niph.getRoot().setAttribute("AmountGood", 1234, null);
-			SetHelper cush = theHelper.getCreateSet("Parameter", ElementName.CUSTOMERINFO, EnumUsage.Input);
-			SetHelper cosh = theHelper.getCreateSet("Parameter", ElementName.CONTACT, EnumUsage.Input);
+			SetHelper cush = theHelper.getCreateResourceSet(ElementName.CUSTOMERINFO, EnumUsage.Input);
+			SetHelper cosh = theHelper.getCreateResourceSet(ElementName.CONTACT, EnumUsage.Input);
 			for (int i = 0; i < 4; i++)
 			{
 				int ii = k * 4 + i;
@@ -306,7 +307,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		theHelper.getRoot().setXMLComment("create a stripping in a layout\n Stripping now consumes a layout");
 		theHelper.getRoot().setAttribute("Types", "Imposition");
 
-		losh = theHelper.getCreateSet("Parameter", ElementName.LAYOUT, EnumUsage.Input);
+		losh = theHelper.getCreateResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 		bssh = null;
 	}
 

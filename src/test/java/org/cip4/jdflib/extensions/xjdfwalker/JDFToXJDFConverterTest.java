@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -157,8 +158,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		KElement xjdf = xjdf20.makeNewJDF(nP, null);
 		xjdf.write2File(sm_dirTestDataTemp + "delTest2.xjdf");
 		assertNotNull(xjdf);
-		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/DeliveryParams/DropItem/@Amount", null), "42");
-		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter[2]/DeliveryParams/DropItem/@Amount", null), "63");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
 		return xjdf;
 	}
 
@@ -180,6 +181,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setRemoveSignatureName(false);
 		KElement x2 = conv.convert(n);
 		assertTrue(x2.toXML().indexOf("SignatureName") > 0);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
+	public void testKeepParameter()
+	{
+		JDFToXJDF conv = new JDFToXJDF();
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setDescriptiveName("desc");
+		n.setStatus(EnumNodeStatus.Cleanup);
+		conv.setParameterSet(true);
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ParameterSet/Parameter/NodeInfo/@NodeStatus", null), "Cleanup");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/@DescriptiveName", null), "desc");
 	}
 
 	/**

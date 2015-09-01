@@ -96,29 +96,29 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes("ImageSetting PreviewGeneration ConventionalPrinting Cutting Folding");
-		SetHelper s = h.appendResource("Media", EnumUsage.Input);
+		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
 		PartitionHelper p = s.appendPartition(null, true);
 		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
 
-		s = h.appendResource("ExposedMedia", null);
+		s = h.appendResourceSet("ExposedMedia", null);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("PreviewGenerationParams", EnumUsage.Input);
+		s = h.appendResourceSet("PreviewGenerationParams", EnumUsage.Input);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("Preview", null);
+		s = h.appendResourceSet("Preview", null);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("ConventionalPrintingParams", EnumUsage.Input);
+		s = h.appendResourceSet("ConventionalPrintingParams", EnumUsage.Input);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("CuttingParams", EnumUsage.Input);
+		s = h.appendResourceSet("CuttingParams", EnumUsage.Input);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("FoldingParams", EnumUsage.Input);
+		s = h.appendResourceSet("FoldingParams", EnumUsage.Input);
 		p = s.appendPartition(null, true);
 
-		s = h.appendResource("Component", EnumUsage.Output);
+		s = h.appendResourceSet("Component", EnumUsage.Output);
 		p = s.appendPartition(null, true);
 
 		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
@@ -139,7 +139,7 @@ public class ProcessXJDFSplitTest extends JDFTestCaseBase
 	{
 		XJDFHelper h = new XJDFHelper("j1", "root", null);
 		h.setTypes((String) null);
-		SetHelper s = h.appendResource("Media", EnumUsage.Input);
+		SetHelper s = h.appendResourceSet("Media", EnumUsage.Input);
 		PartitionHelper p = s.appendPartition(null, true);
 		((JDFMedia) p.getResource()).setMediaType(EnumMediaType.Plate);
 

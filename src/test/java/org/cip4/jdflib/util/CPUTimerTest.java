@@ -97,7 +97,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testCPUTime()
 	{
 		t.start();
-		for (int i = 0; i < 100000000; i++)
+		for (int i = 0; i < 10000000; i++)
 		{
 			Math.sin(i);
 		}

@@ -89,6 +89,7 @@ import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.mail.BodyPart;
@@ -107,6 +108,8 @@ import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.net.ProxyUtil;
+
+import sun.net.www.protocol.ftp.FtpURLConnection;
 
 /**
  * collection of helper routines to convert urls
@@ -373,7 +376,9 @@ public class UrlUtil
 		/** http or https */
 		http,
 		/*** file */
-		file
+		file,
+		/*** ftp */
+		ftp
 	}
 
 	/**
@@ -736,12 +741,7 @@ public class UrlUtil
 	 */
 	public static File urlToFile(String urlString)
 	{
-		if (urlString == null)
-		{
-			return null;
-		}
-
-		if (isCID(urlString) || isHttp(urlString))
+		if (urlString == null || isCID(urlString) || isNet(urlString))
 		{
 			return null;
 		}
@@ -792,12 +792,7 @@ public class UrlUtil
 	 */
 	public static String urlToUNC(String urlString)
 	{
-		if (urlString == null)
-		{
-			return null;
-		}
-
-		if (isCID(urlString) || isHttp(urlString))
+		if (urlString == null || isCID(urlString) || isNet(urlString))
 		{
 			return null;
 		}
@@ -955,7 +950,7 @@ public class UrlUtil
 
 		try
 		{
-			if (isCID(urlString) || isHttp(urlString) || isHttps(urlString))
+			if (isCID(urlString) || isNet(urlString))
 			{
 				url = new URL(urlString);
 			}
@@ -1126,7 +1121,7 @@ public class UrlUtil
 		{
 			return false;
 		}
-		if (isHttp(url) || isHttps(url))
+		if (isNet(url))
 		{
 			return true;
 		}
@@ -1183,6 +1178,22 @@ public class UrlUtil
 	}
 
 	/**
+	* test whether a given url is an http url (excluding https - @see isHttps)
+	* 
+	* @param url the url to test
+	* @return
+	*/
+	public static boolean isFtp(final String url)
+	{
+		if (url == null)
+		{
+			return false;
+		}
+		final String lowerURL = url.toLowerCase();
+		return lowerURL.startsWith("ftp://");
+	}
+
+	/**
 	 * test whether a given url is an https url
 	 * 
 	 * @param url the url to test
@@ -1196,6 +1207,22 @@ public class UrlUtil
 		}
 		final String lowerURL = url.toLowerCase();
 		return lowerURL.startsWith("https://");
+	}
+
+	/**
+	 * test whether a given url is any network style url, currently either http, https or ftp
+	 * 
+	 * @param url the url to test
+	 * @return
+	 */
+	public static boolean isNet(final String url)
+	{
+		if (url == null)
+		{
+			return false;
+		}
+		final String lowerURL = url.toLowerCase();
+		return lowerURL.startsWith("http://") || lowerURL.startsWith("https://") || lowerURL.startsWith("ftp://");
 	}
 
 	/**
@@ -1272,6 +1299,8 @@ public class UrlUtil
 			return URLProtocol.http;
 		if (isFile(url))
 			return URLProtocol.file;
+		if (isFtp(url))
+			return URLProtocol.ftp;
 		return null;
 	}
 
@@ -1705,7 +1734,7 @@ public class UrlUtil
 		protected UrlPart writeToURL()
 		{
 			UrlPart urlPart = null;
-			UrlPart p0 = null;
+			UrlPart fallBack = null;
 
 			if (isFile(strUrl))
 			{
@@ -1738,7 +1767,8 @@ public class UrlUtil
 					{
 						streamWriter = new StreamReader(bufStream.getInputStream());
 					}
-					urlPart = callProxy(proxy, list.size() == 1 || !proxy.equals(Proxy.NO_PROXY));
+					boolean bWantLog = list.size() == 1 || !proxy.equals(Proxy.NO_PROXY);
+					urlPart = callProxy(proxy, bWantLog);
 					if (urlPart != null)
 					{
 						int responseCode = urlPart.getResponseCode();
@@ -1751,22 +1781,26 @@ public class UrlUtil
 							String newLocation = urlPart.getConnection().getHeaderField("Location");
 							if (newLocation != null)
 							{
-								p0 = urlPart;
+								fallBack = urlPart;
 								urlPart = new URLWriter(newLocation, null, method, contentType, HTTPDetails.getRedirect(details)).writeToURL();
 								if (urlPart == null)
 								{
-									urlPart = p0;
+									urlPart = fallBack;
+								}
+								else if (urlPart.getResponseCode() == 200)
+								{
+									return urlPart;
 								}
 							}
 						}
 						else
 						{
-							p0 = urlPart;
+							fallBack = urlPart;
 						}
 					}
 				}
 			}
-			return urlPart == null ? p0 : urlPart;
+			return urlPart == null ? fallBack : urlPart;
 		}
 
 		/**
@@ -1794,20 +1828,28 @@ public class UrlUtil
 		private UrlPart callProxy(Proxy proxy, boolean bWantLog)
 		{
 			URL url = UrlUtil.stringToURL(strUrl);
+
 			try
 			{
-				final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection(proxy);
-				httpURLconnection.setConnectTimeout(getConnectionTimeout());
-				httpURLconnection.setRequestMethod(method);
-				httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
-				httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
-				if (details != null)
+				final URLConnection urlConnection = url.openConnection(proxy);
+				urlConnection.setConnectTimeout(getConnectionTimeout());
+				urlConnection.setRequestProperty("Connection", KEEPALIVE);
+				urlConnection.setRequestProperty(CONTENT_TYPE, contentType);
+				if (urlConnection instanceof HttpURLConnection)
 				{
-					details.applyTo(httpURLconnection);
+					HttpURLConnection httpUrlConnection = (HttpURLConnection) urlConnection;
+					httpUrlConnection.setRequestMethod(method);
+					if (details != null)
+					{
+						details.applyTo(httpUrlConnection);
+					}
+					output(httpUrlConnection);
+					return new UrlPart(httpUrlConnection);
 				}
-
-				output(httpURLconnection);
-				return new UrlPart(httpURLconnection);
+				else if (urlConnection instanceof FtpURLConnection)
+				{
+					return new UrlPart((FtpURLConnection) urlConnection);
+				}
 			}
 			catch (final Throwable x)
 			{

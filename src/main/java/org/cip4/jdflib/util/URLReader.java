@@ -210,7 +210,7 @@ public class URLReader
 	 */
 	public InputStream getURLInputStream()
 	{
-		InputStream retStream = getHTTPInputStream();
+		InputStream retStream = getNetInputStream();
 		if (retStream == null)
 			retStream = getBodyPartInputStream();
 		if (retStream == null)
@@ -266,10 +266,10 @@ public class URLReader
 	 * 
 	 * @return
 	 */
-	InputStream getHTTPInputStream()
+	InputStream getNetInputStream()
 	{
 		InputStream retStream = null;
-		if (UrlUtil.isHttp(urlString) || UrlUtil.isHttps(urlString))
+		if (UrlUtil.isNet(urlString))
 		{
 			try
 			{

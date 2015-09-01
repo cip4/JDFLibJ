@@ -117,7 +117,7 @@ public class WalkLayoutElement extends WalkInlineAllRes
 		KElement ret = super.walk(jdf, xjdf);
 		if (!bInRunList && jdfToXJDF.isMergeRunList())
 		{
-			KElement retPar = ret.getDeepParent(SetHelper.PARAMETER_SET, 0);
+			KElement retPar = ret.getDeepParent(SetHelper.RESOURCE_SET, 0);
 			if (retPar != null)
 				retPar.setAttribute(AttributeName.NAME, ElementName.RUNLIST);
 			ret.renameElement(ElementName.RUNLIST, null);

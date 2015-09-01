@@ -153,6 +153,7 @@ public class MimeUtil extends UrlUtil
 		 * 
 		 * @see javax.activation.DataSource#getContentType()
 		 */
+		@Override
 		public String getContentType()
 		{
 			return contentType;
@@ -161,6 +162,7 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * @see javax.activation.DataSource#getInputStream()
 		 */
+		@Override
 		public InputStream getInputStream()
 		{
 			return ioStream.getInputStream();
@@ -169,6 +171,7 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * @see javax.activation.DataSource#getName()
 		 */
+		@Override
 		public String getName()
 		{
 			// not needed
@@ -178,6 +181,7 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * @see javax.activation.DataSource#getOutputStream()
 		 */
+		@Override
 		public OutputStream getOutputStream()
 		{
 			return ioStream;
@@ -521,8 +525,8 @@ public class MimeUtil extends UrlUtil
 	{
 		final MimeWriter mimeWriter = new MimeWriter(mp);
 		mimeWriter.setMIMEDetails(mimeDetails);
-		org.cip4.jdflib.util.UrlPart part = mimeWriter.writeToURL(strUrl);
-		return part == null ? null : part.getConnection();
+		UrlPart part = mimeWriter.writeToURL(strUrl);
+		return (part != null && (part.getConnection() instanceof HttpURLConnection)) ? (HttpURLConnection) part.getConnection() : null;
 	}
 
 	/**

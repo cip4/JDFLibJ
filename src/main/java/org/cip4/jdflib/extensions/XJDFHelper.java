@@ -185,7 +185,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	 */
 	private void setParts(VJDFAttributeMap parts)
 	{
-		SetHelper niHelper = getCreateSet(PARAMETER, "NodeInfo", EnumUsage.Input);
+		SetHelper niHelper = getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		niHelper.getCreatePartitions(parts, true);
 	}
 
@@ -504,7 +504,7 @@ public class XJDFHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * @param family 
+	 * @param family - always RESOURCE
 	 * @param name 
 	 * @param usage 
 	 * @return a new set element
@@ -554,10 +554,12 @@ public class XJDFHelper extends BaseXJDFHelper
 	 * @param name 
 	 * @param usage 
 	 * @return a new set element
+	 * @deprecated
 	 */
+	@Deprecated
 	public SetHelper getCreateParameterSet(String name, EnumUsage usage)
 	{
-		return getCreateSet("Parameter", name, usage);
+		return getCreateResourceSet(name, usage);
 	}
 
 	/**
@@ -574,12 +576,15 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * @param name 
-	 * @param usage TODO
+	 * @param usage 
 	 * @return a new set element
+	 * @deprecated
+	 *
 	 */
+	@Deprecated
 	public SetHelper appendParameter(String name, EnumUsage usage)
 	{
-		return appendSet(PARAMETER, name, usage);
+		return appendResourceSet(name, usage);
 	}
 
 	/**
@@ -594,10 +599,22 @@ public class XJDFHelper extends BaseXJDFHelper
 
 	/**
 	 * @param name 
-	 * @param usage TODO
+	 * @param usage 
+	 * @return a new set element
+	 * @deprecated
+	 */
+	@Deprecated
+	public SetHelper appendResource(String name, EnumUsage usage)
+	{
+		return appendResourceSet(name, usage);
+	}
+
+	/**
+	 * @param name 
+	 * @param usage 
 	 * @return a new set element
 	 */
-	public SetHelper appendResource(String name, EnumUsage usage)
+	public SetHelper appendResourceSet(String name, EnumUsage usage)
 	{
 		return appendSet(RESOURCE, name, usage);
 	}

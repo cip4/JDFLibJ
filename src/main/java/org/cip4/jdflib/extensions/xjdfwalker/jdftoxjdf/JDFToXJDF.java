@@ -272,6 +272,26 @@ public class JDFToXJDF extends PackageElementWalker
 	 * if true, Intents are partitioned
 	 */
 	boolean bIntentPartition = false;
+	/**
+	 * 
+	 */
+	boolean bParameterSet = false;
+
+	/**
+	 * @return the bParameterSet
+	 */
+	public boolean isParameterSet()
+	{
+		return bParameterSet;
+	}
+
+	/**
+	 * @param bParameterSet the bParameterSet to set
+	 */
+	public void setParameterSet(boolean bParameterSet)
+	{
+		this.bParameterSet = bParameterSet;
+	}
 
 	/**
 	 *  if true, we want a productList from the kids

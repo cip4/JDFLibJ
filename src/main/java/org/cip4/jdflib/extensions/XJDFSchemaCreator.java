@@ -1331,12 +1331,10 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
-
-			complexType = setComplexType(out, "XJDF");
+			complexType = setComplexType(out, XJDFHelper.XJDF);
 			e2 = jdfRoot.appendElement("JDF");
 			setGeneric(complexType, true);
-			setXSElement(complexType, "ProductList");
-			setXSElement(complexType, SetHelper.PARAMETER_SET);
+			setXSElement(complexType, ProductHelper.PRODUCTLIST);
 			setXSElement(complexType, SetHelper.RESOURCE_SET);
 			setXSAttribute(complexType, AttributeName.TYPES, EnumAttributeType.NMTOKENS, true);
 			setXSAttribute(complexType, AttributeName.COMMENTURL, EnumAttributeType.URL, false);

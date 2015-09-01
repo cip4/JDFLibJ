@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.junit.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -104,25 +105,25 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental adding of an additional 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateSet("Parameter", "RunList", EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
 		PartitionHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(48);
 		rlh.getSet().setXMLComment("set the updated total number of pages");
 
-		SetHelper loh = theHelper.getCreateSet("Parameter", "Layout", EnumUsage.Input);
+		SetHelper loh = theHelper.getCreateResourceSet("Layout", EnumUsage.Input);
 		p = loh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFLayout lo = (JDFLayout) p.getCreateResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
 		bs.setNumberUp(new JDFXYPair(4, 4));
 		loh.getSet().setXMLComment("only specify the 3rd sheet");
 
-		SetHelper mh = theHelper.getCreateSet("Resource", "Media", EnumUsage.Input);
+		SetHelper mh = theHelper.getCreateResourceSet("Media", EnumUsage.Input);
 		p = mh.getCreatePartition(null, true);
 		KElement mPart = p.getPartition();
 		mPart.setAttribute("ProductID", "PlateID");
 
-		SetHelper xmh = theHelper.getCreateSet("Resource", "ExposedMedia", EnumUsage.Output);
+		SetHelper xmh = theHelper.getCreateResourceSet("ExposedMedia", EnumUsage.Output);
 		p = xmh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFExposedMedia xm = (JDFExposedMedia) p.getCreateResource();
 		xm.setAttribute("MediaRef", mPart.getAttribute("ID"));
@@ -138,7 +139,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Added Varnishing - how do we differentiate varnishing only from add varnishing\n");
 		theHelper.getRoot().setAttribute("Types", "Varnishing");
-		SetHelper rlh = theHelper.getCreateSet("Parameter", "VarnishingParams", EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateResourceSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
 		PartitionHelper p = rlh.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		//		JDFVarnishingParams vp = (JDFRunList) p.getCreateResource();
 		//		rl.setNPage(48);
@@ -185,13 +186,13 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 	{
 		theHelper.getRoot().setXMLComment("Assume incremental removal of an existing 3rd plate");
 		theHelper.getRoot().setAttribute("Types", "PlateMaking");
-		SetHelper rlh = theHelper.getCreateSet("Parameter", "RunList", EnumUsage.Input);
+		SetHelper rlh = theHelper.getCreateResourceSet("RunList", EnumUsage.Input);
 		PartitionHelper p = rlh.getCreatePartition(null, true);
 		JDFRunList rl = (JDFRunList) p.getCreateResource();
 		rl.setNPage(32);
 		rlh.getSet().setXMLComment("set the updated reduced total number of pages");
 
-		SetHelper nih = theHelper.getCreateSet("Parameter", "NodeInfo", EnumUsage.Input);
+		SetHelper nih = theHelper.getCreateResourceSet("NodeInfo", EnumUsage.Input);
 		p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setNodeStatus(EnumNodeStatus.Aborted);
@@ -211,7 +212,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper.getRoot().setAttribute("Types", "ConventionalPrinting");
 
 		theHelper.removeSet(ElementName.NODEINFO);
-		SetHelper nih = theHelper.getCreateSet("Parameter", "NodeInfo", EnumUsage.Input);
+		SetHelper nih = theHelper.getCreateResourceSet(ElementName.NODEINFO, EnumUsage.Input);
 		PartitionHelper p = nih.getCreatePartition(new JDFAttributeMap("SheetName", "S3"), true);
 		JDFNodeInfo ni = (JDFNodeInfo) p.getCreateResource();
 		ni.setAttribute("AmountGood", 10000, null);
@@ -229,18 +230,18 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper = new XJDFHelper(null);
 		theXJDF = theHelper.getRoot();
 		theXJDF.setAttribute("Types", "InkZoneCalculation ConventionalPrinting");
-		SetHelper nih = theHelper.appendParameter("NodeInfo", null);
+		SetHelper nih = theHelper.appendResourceSet("NodeInfo", null);
 		nih.setUsage(EnumUsage.Input);
 		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
 		PartitionHelper niS1 = nih.getCreatePartition(sheetMap, true);
 		KElement ni = niS1.getResource();
 		ni.setAttribute("Amount", "5000");
 
-		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS, null);
+		SetHelper cpSetHelper = theHelper.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, null);
 		cpSetHelper.setUsage(EnumUsage.Input);
 		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
 
-		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA, null);
+		SetHelper mediaSetHelper = theHelper.appendResourceSet(ElementName.MEDIA, null);
 		mediaSetHelper.setUsage(EnumUsage.Input);
 		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
 		KElement mediaPart = mediaHelper.getPartition();
@@ -250,7 +251,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
 		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
 
-		SetHelper compSetHelper = theHelper.appendResource(ElementName.COMPONENT, null);
+		SetHelper compSetHelper = theHelper.appendResourceSet(ElementName.COMPONENT, null);
 		compSetHelper.setUsage(EnumUsage.Output);
 		PartitionHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
 		KElement compPart = compHelper.getPartition();
