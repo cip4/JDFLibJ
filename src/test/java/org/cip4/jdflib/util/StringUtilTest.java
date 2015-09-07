@@ -801,6 +801,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(StringUtil.parseInt("", 0), 0);
 		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("+1234123456", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
 		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
@@ -1190,6 +1191,20 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.equals("", ""));
 		assertFalse(StringUtil.equals("a", ""));
 		assertFalse(StringUtil.equals("a", null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testisInteger()
+	{
+		assertFalse(StringUtil.isInteger(""));
+		assertFalse(StringUtil.isInteger("a"));
+		assertTrue(StringUtil.isInteger("123"));
+		assertTrue(StringUtil.isInteger("-123"));
+		assertTrue(StringUtil.isInteger("+123"));
+
 	}
 
 	/**

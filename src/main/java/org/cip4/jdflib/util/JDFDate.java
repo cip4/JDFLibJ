@@ -567,8 +567,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					throw new DataFormatException("JDFDate.init: invalid time seconds " + times.get(2));
 				NumberFormatter nf = new NumberFormatter();
 
-				String newDate = nf.formatInt(hours, 2) + "-" + nf.formatInt(minutes, 2) + "-" + nf.formatInt(seconds, 2) + timeZone;
-				strDateTime = StringUtil.replaceToken(strDateTime, 1, "T", newDate);
+				String newTime = nf.formatInt(hours, 2) + ":" + nf.formatInt(minutes, 2) + ":" + nf.formatInt(seconds, 2) + timeZone;
+				strDateTime = StringUtil.replaceToken(strDateTime, 1, "T", newTime);
 			}
 			else
 			{
@@ -576,24 +576,33 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			}
 		}
 
-		private void handleTimeZone(int decimalLength)
+		private void handleTimeZone(int decimalLength) throws DataFormatException
 		{
 			// if the time looks like 2004-07-14T18:21:47 check if there is an +xx:00 or -xx:00 at the end specifying the time zone
-			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
+			int posPlus = strDateTime.indexOf('+', 15);
+			int posMinus = strDateTime.indexOf('-', 15);
+			if (posPlus == -1 && posMinus == -1)
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
+				strDateTime += getTimeZoneISO();
+			}
+			else if (posPlus >= 0 && posMinus >= 0)
+			{
+				throw new DataFormatException("bad date time string: " + strDateTime);
 			}
 			else
 			{
-				// handle sign explicitly, because "+02" is no valid Integer, while "-02" and "02" are valid Integer
-				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
-				if (strDateTime.charAt(19 + decimalLength) == '-')
+				if (posMinus > posPlus)
+					posPlus = posMinus;
+
+				String tzValue = strDateTime.substring(posPlus, posPlus + 3);
+				if (!StringUtil.isInteger(tzValue))
 				{
-					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
+					throw new DataFormatException("bad date time string: " + strDateTime);
 				}
+				int parseInt = StringUtil.parseInt(tzValue, 0);
+				setTimeZoneOffsetInMillis(3600 * 1000 * parseInt);
 			}
-			if (strDateTime.length() == 19 + decimalLength)
-				strDateTime += getTimeZoneISO();
 		}
 
 		private int handleDecimal()

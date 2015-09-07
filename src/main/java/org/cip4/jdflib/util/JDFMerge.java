@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1284,7 +1284,15 @@ public class JDFMerge
 				oldRes = overWriteNode.getTargetResource(s);
 				if (oldRes == null) // also check in entire tree below root
 				{
-					oldRes = overWriteNode.getJDFRoot().getTargetResource(s);
+					JDFNode jdfRoot = overWriteNode.getJDFRoot();
+					if (jdfRoot != null)
+					{
+						oldRes = jdfRoot.getTargetResource(s);
+					}
+					else
+					{
+						log.error("Already deleted JDF resource leaf ID=" + s);
+					}
 				}
 			}
 
