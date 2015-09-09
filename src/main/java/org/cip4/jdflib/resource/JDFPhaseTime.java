@@ -390,6 +390,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	{
 		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
 		final JDFSignal s = newJMF.getSignal(0);
+		s.copyElement(getEmployee(0), null);
 		final JDFStatusQuParams sqp = s.appendStatusQuParams();
 		final JDFDeviceInfo di = s.appendDeviceInfo();
 		final JDFJobPhase jp = di.appendJobPhase();

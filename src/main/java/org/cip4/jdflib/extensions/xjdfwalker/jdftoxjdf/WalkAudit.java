@@ -117,6 +117,7 @@ public class WalkAudit extends WalkJDFElement
 			JDFNode n = ((JDFAudit) jdf).getParentJDF();
 			e.copyAttribute(AttributeName.JOBPARTID, n);
 		}
+
 		return e;
 	}
 }

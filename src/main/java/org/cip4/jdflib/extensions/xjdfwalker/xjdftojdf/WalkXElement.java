@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.PartitionHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -236,6 +238,28 @@ public class WalkXElement extends BaseWalker
 				}
 				e.removeAttribute(val);
 			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param e
+	 */
+	protected void fixAuthor(KElement e)
+	{
+		String author = e.getAttribute(AttributeName.AUTHOR, null, null);
+		if (StringUtil.getNonEmpty(author) != null)
+		{
+			e.removeAttribute(AttributeName.AUTHOR);
+			JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
+			emp.setDescriptiveName(author);
+		}
+		String pID = e.getAttribute(AttributeName.PERSONALID, null, null);
+		if (StringUtil.getNonEmpty(pID) != null)
+		{
+			e.removeAttribute(AttributeName.PERSONALID);
+			JDFEmployee emp = (JDFEmployee) e.getCreateElement(ElementName.EMPLOYEE, null, 0);
+			emp.setPersonalID(pID);
 		}
 	}
 }

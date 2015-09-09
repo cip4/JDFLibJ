@@ -66,63 +66,29 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
-
-import java.util.List;
+package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
- * walker for the JMF or XJMF root
+ * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkTypesafeMessage extends WalkXElement
+public class WalkEmployee extends WalkResource
 {
+
 	/**
 	 * 
 	 */
-	public WalkTypesafeMessage()
+	public WalkEmployee()
 	{
 		super();
-	}
-
-	/**
-	 * @param e
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement e, final KElement trackElem)
-	{
-		String messageName = e.getLocalName();
-		List<String> families = EnumFamily.getFamilies();
-		for (String family : families)
-		{
-			if (messageName.startsWith(family))
-			{
-				String type = getMessageType(e, messageName, family);
-				e.renameElement(family, null);
-				e.setAttribute(AttributeName.TYPE, type);
-			}
-		}
-		fixAuthor(e);
-		return super.walk(e, trackElem);
-	}
-
-	/**
-	 * 
-	 * @param e the element - needed for subclasses
-	 * @param messageName
-	 * @param family
-	 * @return
-	 */
-	String getMessageType(KElement e, String messageName, String family)
-	{
-		String type = StringUtil.rightStr(messageName, -family.length());
-		return type;
 	}
 
 	/**
@@ -133,23 +99,34 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		if (!super.matches(toCheck))
-			return false;
+		return toCheck instanceof JDFEmployee;
+	}
 
-		String localName = toCheck.getLocalName();
-		char first = localName.charAt(0);
-		if (localName.length() < 6 || "ACQSR".indexOf(first) < 0)
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		KElement parent = jdf.getParentNode_KElement();
+		if ((parent instanceof JDFAudit) || (parent instanceof JDFMessage))
 		{
-			return false;
+			JDFEmployee emp = (JDFEmployee) jdf;
+			String personalID = StringUtil.getNonEmpty(emp.getPersonalID());
+			xjdf.setAttribute(AttributeName.PERSONALID, personalID);
+			String author = StringUtil.getNonEmpty(emp.getDescriptiveName());
+			xjdf.setAttribute(AttributeName.AUTHOR, author);
+			return null;
 		}
-		List<String> families = EnumFamily.getFamilies();
-		for (String family : families)
+		else if (parent instanceof JDFJMF)
 		{
-			if (localName.startsWith(family))
-			{
-				return true;
-			}
+			return null;
 		}
-		return false;
+		else
+		{
+			KElement e = super.walk(jdf, xjdf);
+			return e;
+		}
 	}
 }

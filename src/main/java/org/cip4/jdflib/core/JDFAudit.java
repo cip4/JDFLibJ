@@ -389,11 +389,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Override
 	public void setStatus(final JDFElement.EnumNodeStatus s)
 	{
-		if (s == null)
-		{
-			throw new JDFException("setStatus setting to null");
-		}
-		setAttribute(AttributeName.STATUS, s.getName(), null);
+		setAttribute(AttributeName.STATUS, s == null ? null : s.getName(), null);
 	}
 
 	/**

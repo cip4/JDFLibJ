@@ -68,24 +68,20 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.List;
-
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  * walker for the JMF or XJMF root
  */
-public class WalkTypesafeMessage extends WalkXElement
+public class WalkComment extends WalkXElement
 {
 	/**
 	 * 
 	 */
-	public WalkTypesafeMessage()
+	public WalkComment()
 	{
 		super();
 	}
@@ -97,32 +93,8 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		String messageName = e.getLocalName();
-		List<String> families = EnumFamily.getFamilies();
-		for (String family : families)
-		{
-			if (messageName.startsWith(family))
-			{
-				String type = getMessageType(e, messageName, family);
-				e.renameElement(family, null);
-				e.setAttribute(AttributeName.TYPE, type);
-			}
-		}
-		fixAuthor(e);
+		//		fixAuthor(e);
 		return super.walk(e, trackElem);
-	}
-
-	/**
-	 * 
-	 * @param e the element - needed for subclasses
-	 * @param messageName
-	 * @param family
-	 * @return
-	 */
-	String getMessageType(KElement e, String messageName, String family)
-	{
-		String type = StringUtil.rightStr(messageName, -family.length());
-		return type;
 	}
 
 	/**
@@ -133,23 +105,6 @@ public class WalkTypesafeMessage extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		if (!super.matches(toCheck))
-			return false;
-
-		String localName = toCheck.getLocalName();
-		char first = localName.charAt(0);
-		if (localName.length() < 6 || "ACQSR".indexOf(first) < 0)
-		{
-			return false;
-		}
-		List<String> families = EnumFamily.getFamilies();
-		for (String family : families)
-		{
-			if (localName.startsWith(family))
-			{
-				return true;
-			}
-		}
-		return false;
+		return toCheck instanceof JDFComment;
 	}
 }

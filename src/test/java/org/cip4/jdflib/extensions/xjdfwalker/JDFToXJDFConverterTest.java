@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -269,6 +270,42 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmfResp = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.PipeClose);
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement(null).getLocalName(), "ResponsePipeControl");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testJMFEmployee()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.PipeClose);
+		jmf.getCommand(0).appendEmployee().setPersonalID("P1");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals(xjmf.getXPathAttribute("CommandPipeControl/@PersonalID", null), "P1");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjmf);
+		JDFJMF jmf2 = d.getJMFRoot();
+		assertEquals(jmf2.getCommand(0).getEmployee(0).getPersonalID(), "P1");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testAuditEmployee()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.getCreateAuditPool().addAudit(EnumAuditType.PhaseTime, "me");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("AuditPool/PhaseTime/@Author", null), "me");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
 	}
 
 	/**
