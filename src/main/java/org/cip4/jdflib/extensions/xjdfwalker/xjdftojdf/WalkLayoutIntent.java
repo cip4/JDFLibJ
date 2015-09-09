@@ -70,16 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -115,18 +106,22 @@ public class WalkLayoutIntent extends WalkIntentResource
 	 * 
 	 * @param e
 	 */
-	private void fixPrintedPages(KElement e) {
-		int printedPages=StringUtil.parseInt(e.getAttribute("PrintedPages", null, null), -1);
-		if(printedPages>=0){
-			int pages=StringUtil.parseInt(e.getAttribute(AttributeName.PAGES, null, null), -1);
-			if(pages<0){
-				EnumSides sides=EnumSides.getEnum(e.getAttribute(AttributeName.SIDES));
-				if(sides!=null){
-					int factor=(int)Math.PI-JDFLayoutIntent.getSideVector(sides).size();
-					e.setAttribute(AttributeName.PAGES, printedPages*factor,null);
+	private void fixPrintedPages(KElement e)
+	{
+		int printedPages = StringUtil.parseInt(e.getAttribute("PrintedPages", null, null), -1);
+		if (printedPages >= 0)
+		{
+			int pages = StringUtil.parseInt(e.getAttribute(AttributeName.PAGES, null, null), -1);
+			if (pages < 0)
+			{
+				EnumSides sides = EnumSides.getEnum(e.getAttribute(AttributeName.SIDES));
+				if (sides != null)
+				{
+					int factor = (int) Math.PI - JDFLayoutIntent.getSideVector(sides).size();
+					e.setAttribute(AttributeName.PAGES, printedPages * factor, null);
 				}
-			}			
-		}	
+			}
+		}
 	}
 
 	/**

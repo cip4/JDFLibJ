@@ -68,9 +68,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
@@ -100,16 +102,16 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
 		final JDFPhaseTime pt = (JDFPhaseTime) xjdf;
-		KElement signalStatus = pt.getElement("SignalStatus");
-		if (signalStatus == null)
-		{
-			return null;
-		}
+		VElement v = pt.getChildElementVector(null, null);
+		KElement signalStatus = pt.appendElement("SignalStatus");
+		signalStatus.moveElements(v, null);
+		signalStatus.setAttributes(pt);
+		pt.removeAttribute(AttributeName.TIME);
 		JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 		xjdfToJDFImpl.walkTree(signalStatus, jmf);
 		signalStatus.deleteNode();
 		((JDFPhaseTime) xjdf).setPhase(jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0));
-
+		fixAuthor(xjdf);
 		KElement ret = super.walk(xjdf, jdf);
 
 		return ret;

@@ -125,7 +125,10 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		}
 		KElement ret = super.walk(jdf, xjdf);
 		ret.removeChildren(null, null, null);
-		ret.moveElement(signalxjmf, null);
+		ret.copyElements(signalxjmf.getChildElementVector(null, null), null);
+		signalxjmf.removeAttribute(AttributeName.ID);
+		ret.removeAttribute(AttributeName.TIMESTAMP);
+		ret.setAttributes(signalxjmf);
 		jdf.removeChildren(null, null, null);
 		return ret;
 	}
