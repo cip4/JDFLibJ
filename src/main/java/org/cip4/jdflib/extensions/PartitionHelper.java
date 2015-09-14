@@ -98,7 +98,7 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 
 	/**
 	 * @param toCheck
-	 * @return trure if toCheck is an asset (Resource, Paramenter...)
+	 * @return true if toCheck is an asset (Resource, Parameter...)
 	 */
 	public static boolean isAsset(final KElement toCheck)
 	{
@@ -107,6 +107,25 @@ public class PartitionHelper extends BaseXJDFHelper implements IAmountPoolContai
 		final KElement parent = toCheck.getParentNode_KElement();
 		String setName = SetHelper.getSetName(parent);
 		return toCheck.getLocalName().equals(setName);
+	}
+
+	/**
+	 * @param toCheck
+	 * @return true if toCheck is an asset (Resource, Parameter...)
+	 */
+	public static boolean isAsset(final KElement toCheck, String resName)
+	{
+		if (isAsset(toCheck))
+		{
+			if (StringUtil.getNonEmpty(resName) == null)
+			{
+				return true;
+			}
+			final KElement parent = toCheck.getParentNode_KElement();
+			String name = parent.getAttribute("Name");
+			return name.equals(resName);
+		}
+		return false;
 	}
 
 	/**

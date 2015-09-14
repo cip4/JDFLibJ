@@ -106,6 +106,10 @@ public class WalkJDFSubElement extends WalkJDFElement
 				&& !(toCheck instanceof JDFRefElement) && !(toCheck instanceof JDFNode) && !(toCheck instanceof JDFJMF) && !(toCheck instanceof JDFMessage);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#removeUnused(org.cip4.jdflib.core.KElement)
+	 */
 	@Override
 	protected void removeUnused(KElement newRootP)
 	{

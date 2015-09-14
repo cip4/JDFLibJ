@@ -73,12 +73,14 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRange;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
 
 /**
@@ -233,6 +235,30 @@ public class WalkElement extends BaseWalker
 	protected void removeUnused(final KElement newRootP)
 	{
 		newRootP.removeAttribute(AttributeName.XSITYPE);
+	}
+
+	/**
+	 * 
+	 * @param original the original element
+	 * @param newName the new name
+	 * @param allLeaves if true, loop over all leaves of a resource
+	 * @return
+	 */
+	protected KElement safeRename(final KElement original, String newName, boolean allLeaves)
+	{
+		if (allLeaves && original instanceof JDFResource)
+		{
+			VElement leaves = ((JDFResource) original).getLeaves(true);
+			leaves.remove(original);
+			for (KElement leaf : leaves)
+			{
+				safeRename(leaf, newName, false);
+			}
+		}
+		KElement newElement = original.getParentNode_KElement().insertBefore(newName, original, null);
+		newElement.copyInto(original, true);
+		original.deleteNode();
+		return newElement;
 	}
 
 }

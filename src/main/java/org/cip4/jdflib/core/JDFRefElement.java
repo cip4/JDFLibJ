@@ -323,7 +323,13 @@ public class JDFRefElement extends JDFElement
 			}
 			return null;
 		}
-		return getLinkRoot(null);
+		JDFResource linkRoot = getLinkRoot(null);
+		if (linkRoot != null && !getNodeName().equals(linkRoot.getRefString()))
+		{
+			return null;
+		}
+
+		return linkRoot;
 	}
 
 	/**

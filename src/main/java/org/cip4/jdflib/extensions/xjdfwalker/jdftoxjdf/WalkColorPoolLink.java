@@ -102,6 +102,7 @@ public class WalkColorPoolLink extends WalkResLink
 	}
 
 	/**
+	 * @param jdf
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -113,14 +114,11 @@ public class WalkColorPoolLink extends WalkResLink
 		if (r != null)
 		{
 			final VElement v = r.getChildElementVector(ElementName.COLOR, null);
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				v.get(i).renameAttribute(AttributeName.NAME, AttributeName.SEPARATION, null, null);
+				e.renameAttribute(AttributeName.NAME, AttributeName.SEPARATION, null, null);
 			}
-			//				r.renameElement("Color", null);
-			KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
-			cNew.copyInto(r, true);
-			r.deleteNode();
+			KElement cNew = safeRename(r, ElementName.COLOR, true);
 			cNew.setAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION);
 			rl.renameElement("ColorLink", null);
 		}

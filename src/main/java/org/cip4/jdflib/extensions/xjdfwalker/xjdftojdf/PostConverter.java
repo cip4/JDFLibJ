@@ -279,9 +279,38 @@ class PostConverter
 				{
 					resRoot.setResStatus(s, false);
 				}
-				if (ElementName.COLORPOOL.equals(resRoot.getLocalName()))
+				String localName = resRoot.getLocalName();
+				if (ElementName.COLORPOOL.equals(localName))
 				{
 					cleanColorPool(resRoot);
+				}
+				else if (ElementName.PAGELIST.equals(localName))
+				{
+					cleanPageList(resRoot);
+				}
+			}
+		}
+
+		private void cleanPageList(final JDFResource r)
+		{
+			String id = r.getID();
+			if (StringUtil.getNonEmpty(id) != null)
+			{
+				VElement v = theNode.getRoot().getChildrenByTagName_KElement(null, null, new JDFAttributeMap("rRef", id), false, false, 0);
+				if (v != null)
+				{
+					for (KElement e : v)
+					{
+						String name = e.getLocalName();
+						if ("ContentRef".equals(name))
+						{
+							e.renameElement("PageListRef", null);
+						}
+						else if ("ContentLink".equals(name))
+						{
+							e.renameElement("PageListLink", null);
+						}
+					}
 				}
 			}
 		}
@@ -310,6 +339,14 @@ class PostConverter
 						else if ("ColorLink".equals(name))
 						{
 							e.renameElement("ColorPoolLink", null);
+						}
+						else if ("ContentRef".equals(name))
+						{
+							e.renameElement("PageListRef", null);
+						}
+						else if ("ContentLink".equals(name))
+						{
+							e.renameElement("PageListLink", null);
 						}
 					}
 				}

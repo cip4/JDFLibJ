@@ -96,15 +96,7 @@ public class WalkColorPoolRef extends WalkRefElement
 	@Override
 	protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 	{
-		final String attName = getRefName(re);
-		final VElement v = setResource(null, re.getTarget(), jdfToXJDF.newRoot);
-		// we want a ref to the set rather than the standard ref to the list of elements
-		if (v != null && v.size() > 0)
-		{
-			final KElement ref = v.get(0).getParentNode_KElement();
-			xjdf.setAttribute(attName, ref.getID());
-		}
-		re.deleteNode();
+		makeSetRefAttribute(re, xjdf);
 	}
 
 	/**
@@ -134,12 +126,10 @@ public class WalkColorPoolRef extends WalkRefElement
 			{
 				e.renameAttribute("Name", "Separation", null, null);
 			}
-			KElement newColorRes = colorPool.getParentNode_KElement().appendElement(ElementName.COLOR);
-			newColorRes.copyInto(colorPool, true);
-			colorPool.deleteNode();
+			KElement newColorRes = safeRename(colorPool, ElementName.COLOR, true);
 			newColorRes.setAttribute(AttributeName.PARTIDKEYS, "Separation");
-			refElem.renameElement("ColorRef", null);
 		}
+		refElem.renameElement("ColorRef", null);
 		return super.walk(jdf, xjdf);
 	}
 }

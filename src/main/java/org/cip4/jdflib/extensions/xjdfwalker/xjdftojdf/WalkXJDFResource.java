@@ -105,11 +105,11 @@ public class WalkXJDFResource extends WalkXElement
 		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfResource).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFPart part = (JDFPart) xjdfRes.getElement(ElementName.PART);
 		JDFAttributeMap partmap = null;
-		final JDFResource newPartition;
+		final KElement newPartitionElement;
 		JDFNode partialProductNode = null;
 		if (part != null)
 		{
-			newPartition = createPartition(xjdfRes, jdfResource, part);
+			newPartitionElement = createPartition(xjdfRes, jdfResource, part);
 			partmap = part.getPartMap();
 
 			String productPart = partmap == null ? null : StringUtil.getNonEmpty(partmap.get(AttributeName.PRODUCTPART));
@@ -117,14 +117,14 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		else if (xjdfRes.getPreviousSiblingElement(xjdfRes.getNodeName(), null) != null)
 		{
-			newPartition = theNode.getJDFRoot().addResource(jdfResource.getLocalName(), null);
-			newPartition.copyAttribute(AttributeName.ID, xjdfRes);
+			newPartitionElement = theNode.getJDFRoot().addResource(jdfResource.getLocalName(), null);
+			newPartitionElement.copyAttribute(AttributeName.ID, xjdfRes);
 		}
 		else
 		{
-			newPartition = (JDFResource) jdfResource;
+			newPartitionElement = jdfResource;
 		}
-		if (newPartition == null)
+		if (newPartitionElement == null)
 		{
 			return null;
 		}
@@ -133,33 +133,36 @@ public class WalkXJDFResource extends WalkXElement
 		map.remove(AttributeName.ID);
 		map.remove(AttributeName.PARTIDKEYS);
 
-		JDFResourceLink rl = theNode.getLink(newPartition, null);
-		JDFResourceLink rlpart = null;
-		if (partialProductNode != null)
+		if (newPartitionElement instanceof JDFResource)
 		{
-			rlpart = partialProductNode.getLink(newPartition, null);
-			EnumUsage newUsage = rl == null ? null : rl.getUsage();
-			if (rlpart == null && newUsage != null)
+			JDFResource newPartition = (JDFResource) newPartitionElement;
+			JDFResourceLink rl = theNode.getLink(newPartition, null);
+			JDFResourceLink rlpart = null;
+			if (partialProductNode != null)
 			{
-				rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
+				rlpart = partialProductNode.getLink(newPartition, null);
+				EnumUsage newUsage = rl == null ? null : rl.getUsage();
+				if (rlpart == null && newUsage != null)
+				{
+					rlpart = partialProductNode.ensureLink(newPartition, newUsage, null);
+				}
+				if (rlpart != null)
+				{
+					rl = rlpart;
+				}
+
 			}
-			if (rlpart != null)
+			KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
+			if (ap != null)
 			{
-				rl = rlpart;
+				xjdfToJDFImpl.walkTree(ap, rl);
+				ap.deleteNode();
 			}
-
+			xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
 		}
+		newPartitionElement.setAttributes(map);
 
-		KElement ap = xjdfRes.getElement(ElementName.AMOUNTPOOL);
-		if (ap != null)
-		{
-			xjdfToJDFImpl.walkTree(ap, rl);
-			ap.deleteNode();
-		}
-		xjdfToJDFImpl.moveAmountsToLink(partmap, map, rl);
-		newPartition.setAttributes(map);
-
-		return newPartition;
+		return newPartitionElement;
 	}
 
 	/**
@@ -169,7 +172,7 @@ public class WalkXJDFResource extends WalkXElement
 	 * @param part
 	 * @return
 	 */
-	protected JDFResource createPartition(final KElement xjdfRes, final KElement jdfRes, final JDFPart part)
+	protected KElement createPartition(final KElement xjdfRes, final KElement jdfRes, final JDFPart part)
 	{
 		JDFNode theNode = xjdfToJDFImpl.currentJDFNode == null ? ((JDFElement) jdfRes).getParentJDF() : xjdfToJDFImpl.currentJDFNode;
 		final JDFResource r = (JDFResource) jdfRes;
