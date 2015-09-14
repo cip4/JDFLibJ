@@ -97,6 +97,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
@@ -105,6 +106,7 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
@@ -161,6 +163,97 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/DeliveryParams/DropItem/@Amount", null), "42");
 		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[2]/DeliveryParams/DropItem/@Amount", null), "63");
+		return xjdf;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testPageList()
+	{
+		_testPageList();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public KElement _testPageList()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setType(EnumType.Trapping);
+		root.setDescriptiveName("desc");
+
+		JDFRunList rl = (JDFRunList) root.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFRunList ruLiRun = rl.addRun("foo.pdf", 0, 42);
+		JDFRunList ruLiRun2 = rl.addRun("foo2.pdf", 0, 666);
+		JDFPageList pList = ruLiRun.appendPageList();
+		pList = (JDFPageList) pList.makeRootResource(null, null, true);
+		ruLiRun2.refElement(pList);
+
+		pList.appendScreeningParams().appendScreenSelector().setAngle(42);
+
+		for (int i = 0; i < 4; i++)
+		{
+			JDFPageData pd = pList.appendPageData();
+			pd.setPageStatus("DigitalArtArrived");
+			pd.setIsBlank(i % 2 == 0);
+		}
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		KElement xjdf = xjdf20.makeNewJDF(root, null);
+		xjdf.write2File(sm_dirTestDataTemp + "pageListTest.xjdf");
+		assertNotNull(xjdf);
+		for (int i = 1; i < 5; i++)
+		{
+			assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@IsBlank", null), i % 2 == 1 ? "true" : "false");
+			assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
+		}
+		return xjdf;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testPageListEmpty()
+	{
+		_testPageListEmpty();
+
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public KElement _testPageListEmpty()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		root.setType(EnumType.Trapping);
+		root.setDescriptiveName("desc");
+
+		JDFRunList rl = (JDFRunList) root.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFPageList pList = (JDFPageList) root.addResource(ElementName.PAGELIST, null);
+
+		JDFRunList ruLiRun = rl.addRun("P1.pdf", 0, 42);
+		JDFRunList ruLiRun2 = rl.addRun("P2.pdf", 0, 42);
+		JDFResource p1 = pList.addPartition(EnumPartIDKey.PartVersion, "P1");
+		ruLiRun.refElement(p1);
+		p1.setDescriptiveName("Pl for p1");
+		JDFResource p2 = pList.addPartition(EnumPartIDKey.PartVersion, "P2");
+		p2.setDescriptiveName("Pl for p2");
+		ruLiRun2.refElement(p2);
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.setSingleNode(true);
+		KElement xjdf = xjdf20.makeNewJDF(root, null);
+		xjdf.write2File(sm_dirTestDataTemp + "pageListEmptyTest.xjdf");
+		assertNotNull(xjdf);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Content\"]/Resource/@DescriptiveName", null), "Pl for p1");
 		return xjdf;
 	}
 

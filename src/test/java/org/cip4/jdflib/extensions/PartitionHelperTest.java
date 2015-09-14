@@ -132,6 +132,27 @@ public class PartitionHelperTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testIsAssetTwo()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		KElement set = root.getCreateXPathElement("ResourceSet");
+		set.setAttribute("Name", "Media");
+		KElement p = set.getCreateXPathElement("Resource/Part");
+		KElement m = set.getCreateXPathElement("Resource/Media");
+		KElement res = root.getXPathElement("ResourceSet/Resource");
+		assertTrue(PartitionHelper.isAsset(res, null));
+		assertTrue(PartitionHelper.isAsset(res, "Media"));
+		assertFalse(PartitionHelper.isAsset(res, "ExposedMedia"));
+		assertFalse(PartitionHelper.isAsset(m, "Media"));
+		assertFalse(PartitionHelper.isAsset(p, null));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testisResourceElement()
 	{
 		JDFDoc d = new JDFDoc("XJDF");

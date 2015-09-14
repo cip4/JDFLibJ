@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,6 +105,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.junit.Test;
 
 /**
  * jmf pipe example file test
@@ -137,6 +138,43 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
+	public void testNearLineSimpleBarcode()
+	{
+		JDFDoc jdfDoc = new JDFDoc("JDF");
+		JDFNode n = jdfDoc.getJDFRoot();
+		n.setJobID("SimpeBarcode");
+		n.setType(JDFNode.EnumType.ProcessGroup);
+
+		JDFNode idp = n.addCombined(new VString("DigitalPrinting", null));
+		JDFComponent c = (JDFComponent) idp.addResource(ElementName.COMPONENT, null);
+		c.setAutomation(EnumAutomation.Dynamic);
+		c = (JDFComponent) c.addPartition(EnumPartIDKey.SetIndex, "0~-1");
+		idp.ensureLink(c, EnumUsage.Output, null);
+		JDFIdentificationField barcode = c.appendIdentificationField();
+		barcode.setBoundingBox(new JDFRectangle(6, 6, 66, 66));
+		barcode.setPosition(EnumPosition.Front);
+		barcode.setValueFormat("%6s/Set%i/%i_Page%i/%i");
+		barcode.setValueTemplate("jobID,SetIndex,TotalSets,PoolSheetIndex,TotalSheetsInPool");
+
+		JDFNode booklet = n.addCombined(new VString("Collecting Stitching", null));
+		booklet.ensureLink(c, EnumUsage.Input, EnumProcessUsage.Cover);
+
+		idp = new JDFSpawn(idp).spawn();
+		new JDFSpawn(idp).unSpawnChild(idp);
+		idp.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SimpleBarcodeIDP.jdf", 2, false);
+
+		booklet = new JDFSpawn(booklet).spawn();
+		new JDFSpawn(booklet).unSpawnChild(booklet);
+		booklet.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "SimpleBarcodeFinishing.jdf", 2, false);
+
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	@Test
 	public void testNearLineJDFBookletBarcode()
 	{
 		JDFDoc jdfDoc = new JDFDoc("JDF");
@@ -192,6 +230,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
 	public void testNearLineJDFBookletPipe()
 	{
 		JDFDoc jdfDoc = new JDFDoc("JDF");
@@ -285,6 +324,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
 	public void testPipePushSet()
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.PipePush);
@@ -361,6 +401,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
 	public void testPipePushSheet()
 	{
 		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
@@ -406,6 +447,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
 	public void testPipePushSheetExample()
 	{
 		createPipePushSheetExample(0, 0, 1, true);
@@ -500,6 +542,7 @@ public class DigitalFinishingTest extends JDFTestCaseBase
 	 * 
 	 * 
 	 */
+	@Test
 	public void testPipePushSheetMeta() throws DataFormatException
 	{
 		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();

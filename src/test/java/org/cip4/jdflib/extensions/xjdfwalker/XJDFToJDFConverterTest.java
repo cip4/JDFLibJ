@@ -282,6 +282,36 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testPageList()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest()._testPageList();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "PageList.xjdf.jdf", 2, false);
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Test
+	public void testPageListEmpty()
+	{
+		KElement xjdf = new JDFToXJDFConverterTest()._testPageListEmpty();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		JDFDoc d = xCon.convert(xjdf);
+		JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "PageListEmpty.xjdf.jdf", 2, false);
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
 	*  
 	*  
 	*/
