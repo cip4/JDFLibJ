@@ -301,6 +301,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *  
 	 */
 	@Test
+	public void testComponentProductID()
+	{
+		JDFToXJDF conv = new JDFToXJDF();
+		conv.setWantProduct(true);
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFResource c = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setDescriptiveName("desc");
+		c.setProductID("prodID");
+		n.setStatus(EnumNodeStatus.Cleanup);
+		KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ProductID", null), "prodID");
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	@Test
 	public void testColorIntent()
 	{
 		JDFToXJDF conv = new JDFToXJDF();

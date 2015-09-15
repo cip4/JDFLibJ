@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -189,6 +189,8 @@ public class WalkProduct extends WalkJDF
 		{
 			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
 			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
+			prod.copyAttribute(AttributeName.PRODUCTID, component);
+			prod.copyAttribute(AttributeName.DESCRIPTIVENAME, component);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
 				new ProductHelper(prod).setRoot();
@@ -227,7 +229,8 @@ public class WalkProduct extends WalkJDF
 			prod.removeAttribute(AttributeName.XMLNS);
 			prod.removeAttribute(AttributeName.XSITYPE);
 			prod.removeAttribute(AttributeName.JOBID);
-			prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
+			if (!prod.hasAttribute(AttributeName.JOBPARTID))
+				prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
 			prod.removeAttribute("xmlns:xsi");
 
 			calcChildren(node, prod);
