@@ -645,7 +645,15 @@ public class StringUtil
 			}
 			else if (c == delimOut && depth-- == 0)
 			{
-				v.add(strWork.substring(pos0, i));
+				if (v.size() == 0)
+				{
+					v.add(strWork.substring(0, i));
+					v.add("");
+				}
+				else
+				{
+					v.add(strWork.substring(pos0, i));
+				}
 				pos0 = i + 1;
 				break;
 			}

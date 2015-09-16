@@ -1146,6 +1146,10 @@ public class StringUtilTest extends JDFTestCaseBase
 	public void testTokenizeBrackets()
 	{
 		assertEquals(StringUtil.tokenizeBrackets("?", '?', ':'), new VString(new String[] { "", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("a", '?', ':'), new VString(new String[] { "a" }));
+		assertEquals(StringUtil.tokenizeBrackets("a:", '?', ':'), new VString(new String[] { "a", "", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("a:b", '?', ':'), new VString(new String[] { "a", "", "b" }));
+		assertEquals(StringUtil.tokenizeBrackets("a:b?c:d", '?', ':'), new VString(new String[] { "a", "", "b?c:d" }));
 		assertEquals(StringUtil.tokenizeBrackets("?:", '?', ':'), new VString(new String[] { "", "", "" }));
 		assertEquals(StringUtil.tokenizeBrackets("a?:", '?', ':'), new VString(new String[] { "a", "", "" }));
 		assertEquals(StringUtil.tokenizeBrackets("a?b:", '?', ':'), new VString(new String[] { "a", "b", "" }));
