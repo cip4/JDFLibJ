@@ -612,6 +612,53 @@ public class StringUtil
 	}
 
 	/**
+	 * tokenize while counting the referenced in and out so that internal tokens are skipped
+	 * used e.g for "?:" of "()"
+	 * 
+	 * @param strWork
+	 * @param delimIn the 
+	 * @param delimOut
+	 * @return
+	 */
+	public static VString tokenizeBrackets(String strWork, final char delimIn, final char delimOut)
+	{
+		if (strWork == null)
+			return null;
+
+		final VString v = new VString();
+		int depth = 0;
+		int pos0 = 0;
+		for (int i = 0; i < strWork.length(); i++)
+		{
+			char c = strWork.charAt(i);
+			if (c == delimIn)
+			{
+				if (v.size() == 0)
+				{
+					v.add(strWork.substring(0, i));
+					pos0 = i + 1;
+				}
+				else
+				{
+					depth++;
+				}
+			}
+			else if (c == delimOut && depth-- == 0)
+			{
+				v.add(strWork.substring(pos0, i));
+				pos0 = i + 1;
+				break;
+			}
+		}
+		if (pos0 <= strWork.length())
+		{
+			v.add(strWork.substring(pos0));
+		}
+
+		return v;
+	}
+
+	/**
 	 * check whether a String contains a given token
 	 * <p>
 	 * default: hasToken(strWork, token, delim, 0)

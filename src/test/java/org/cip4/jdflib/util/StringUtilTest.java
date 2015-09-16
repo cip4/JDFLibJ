@@ -1139,6 +1139,22 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.tokenize(s, "/?", true), v);
 	}
 
+	/**
+	 * 
+	 */
+	@Test
+	public void testTokenizeBrackets()
+	{
+		assertEquals(StringUtil.tokenizeBrackets("?", '?', ':'), new VString(new String[] { "", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("?:", '?', ':'), new VString(new String[] { "", "", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?:", '?', ':'), new VString(new String[] { "a", "", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?b:", '?', ':'), new VString(new String[] { "a", "b", "" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?b:c", '?', ':'), new VString(new String[] { "a", "b", "c" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?b?c:d:e", '?', ':'), new VString(new String[] { "a", "b?c:d", "e" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?b:c?d:e", '?', ':'), new VString(new String[] { "a", "b", "c?d:e" }));
+		assertEquals(StringUtil.tokenizeBrackets("a?b:c?d:e?f:g", '?', ':'), new VString(new String[] { "a", "b", "c?d:e?f:g" }));
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
