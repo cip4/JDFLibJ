@@ -76,6 +76,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.span.JDFSpanTransfer;
+import org.cip4.jdflib.span.JDFSpanTransfer.EnumSpanTransfer;
 import org.junit.Test;
 
 /**
@@ -116,6 +117,20 @@ public class JDFIntentResourceTest extends JDFTestCaseBase
 		transfer.setActual(EnumTransfer.BuyerToPrinterPickup);
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
 		assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterPickup.getName());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPreferredToActual()
+	{
+		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		JDFSpanTransfer transfer = di.appendTransfer();
+		transfer.setPreferred(EnumSpanTransfer.BuyerToPrinterDeliver);
+		assertNull(transfer.getActual());
+		di.preferredToActual();
+		assertEquals(transfer.getActual(), EnumSpanTransfer.BuyerToPrinterDeliver);
 	}
 
 	/**

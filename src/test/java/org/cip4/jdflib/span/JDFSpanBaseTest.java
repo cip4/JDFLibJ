@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -109,5 +109,22 @@ public class JDFSpanBaseTest extends JDFTestCaseBase
 		assertEquals("7", is.guessActual());
 		is.setActual(9);
 		assertEquals("9", is.guessActual());
+	}
+
+	/**
+	* make sure that corrupt files always return a null document
+	* @throws DataFormatException
+	* 
+	*/
+	@Test
+	public void testPreferredToActual() throws DataFormatException
+	{
+		JDFDoc doc = new JDFDoc("LayoutIntent");
+		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
+		JDFIntegerSpan is = e.appendPages();
+		assertFalse(is.preferredToActual());
+		is.setPreferred(7);
+		is.preferredToActual();
+		assertEquals(7, is.getActual());
 	}
 }

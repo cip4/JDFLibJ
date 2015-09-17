@@ -241,9 +241,9 @@ public class JDFIntentResource extends JDFResource
 		if (!isLeaf())
 		{
 			VElement leaves = getLeaves(false);
-			for (int i = 0; i < leaves.size(); i++)
+			for (KElement leaf : leaves)
 			{
-				JDFIntentResource ri = (JDFIntentResource) leaves.elementAt(i);
+				JDFIntentResource ri = (JDFIntentResource) leaf;
 				nDone += ri.preferredToActual(key);
 			}
 			return nDone;
@@ -252,9 +252,9 @@ public class JDFIntentResource extends JDFResource
 		if (KElement.isWildCard(key))
 		{
 			VElement v = getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.DATATYPE, (String) null), true, true, 0);
-			for (int i = 0; i < v.size(); i++)
+			for (KElement e : v)
 			{
-				vKeys.add(v.elementAt(i).getNodeName());
+				vKeys.add(e.getNodeName());
 			}
 		}
 		else
@@ -262,9 +262,9 @@ public class JDFIntentResource extends JDFResource
 			vKeys.add(key);
 		}
 
-		for (int i = 0; i < vKeys.size(); i++)
+		for (String k : vKeys)
 		{
-			JDFSpanBase base = (JDFSpanBase) getElement(vKeys.elementAt(i), null, 0);
+			JDFSpanBase base = (JDFSpanBase) getElement(k, null, 0);
 			if (base.preferredToActual())
 			{
 				nDone++;

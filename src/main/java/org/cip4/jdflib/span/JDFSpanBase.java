@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -400,7 +400,7 @@ public abstract class JDFSpanBase extends JDFElement
 	 */
 	public boolean preferredToActual()
 	{
-		final boolean preferredExists = hasAttribute(AttributeName.PREFERRED);
+		final boolean preferredExists = !hasAttribute(AttributeName.ACTUAL) && hasAttribute(AttributeName.PREFERRED);
 
 		if (preferredExists)
 		{
