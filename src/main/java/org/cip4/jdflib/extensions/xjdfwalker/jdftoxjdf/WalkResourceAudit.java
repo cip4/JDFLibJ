@@ -68,16 +68,11 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.pool.JDFAmountPool;
-import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.resource.JDFResourceAudit;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
@@ -107,51 +102,29 @@ public class WalkResourceAudit extends WalkAudit
 	{
 		final KElement raNew = super.walk(jdf, xjdf);
 		final JDFResourceAudit ra = (JDFResourceAudit) jdf;
-		copyLinkValues(raNew, ra.getNewLink(), "NewRef");
-		copyLinkValues(raNew, ra.getOldLink(), "OldRef");
 
-		return raNew; // don't walk the links!
+		JDFResourceLink newLink = ra.getNewLink();
+		if (newLink != null && newLink.getPart(0) == null)
+		{
+			newLink.setPartMapVector(ra.getPartMapVector());
+			ra.setPartMapVector(null);
+		}
+		copyLinkValues(raNew, newLink);
+		raNew.renameElement("AuditResource", null);
+		return raNew;
 	}
 
 	/**
 	 * @param raNew
 	 * @param rl
-	 * @param val
 	 */
-	protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
+	protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl)
 	{
-		final JDFResource rlRoot = rl == null ? null : rl.getLinkRoot();
-		if (rlRoot != null && rl != null)
-		{
-			final VElement v = setResource(null, rlRoot, jdfToXJDF.newRoot);
-			if (v != null)
-			{
-				for (final KElement kElem : v)
-				{
-					KElement resAmount = raNew.appendElement("ResourceAmount");
-					resAmount.setAttribute("Type", val);
-					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
-					JDFAmountPool amountPool = rl.getAmountPool();
-					if (amountPool != null)
-					{
-						jdfToXJDF.walkTree(amountPool, resAmount);
-					}
-					else
-					{
-						JDFAmountPool ap = (JDFAmountPool) resAmount.appendElement(ElementName.AMOUNTPOOL);
-						if (rl.getAmount() != 0)
-						{
-							ap.setPartAttribute(AttributeName.AMOUNT, StringUtil.formatDouble(rl.getAmount(), 0), null, (JDFAttributeMap) null);
-						}
-						if (rl.getActualAmount() != 0)
-						{
-							ap.setPartAttribute(AttributeName.ACTUALAMOUNT, StringUtil.formatDouble(rl.getActualAmount(), 0), null, (JDFAttributeMap) null);
-						}
-					}
-				}
-			}
-			rl.deleteNode();
-		}
+		if (rl == null)
+			return;
+		JDFResourceInfo ri = (JDFResourceInfo) raNew.appendElement(ElementName.RESOURCEINFO);
+		ri.setLink(rl, false);
+		rl.deleteNode(); // don't walk the links!
 	}
 
 	/**
@@ -162,6 +135,6 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFResourceAudit;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFResourceAudit);
 	}
 }

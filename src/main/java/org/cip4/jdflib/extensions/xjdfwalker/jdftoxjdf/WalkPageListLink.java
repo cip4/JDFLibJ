@@ -136,6 +136,6 @@ public class WalkPageListLink extends WalkResLink
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFResourceLink && "PageListLink".equals(toCheck.getLocalName());
+		return !jdfToXJDF.isRetainAll() && ((toCheck instanceof JDFResourceLink) && "PageListLink".equals(toCheck.getLocalName()));
 	}
 }

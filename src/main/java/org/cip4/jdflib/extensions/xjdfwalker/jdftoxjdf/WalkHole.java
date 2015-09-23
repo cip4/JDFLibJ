@@ -105,6 +105,6 @@ public class WalkHole extends WalkInlineAllRes
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFHole);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHole);
 	}
 }

@@ -71,8 +71,11 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -104,9 +107,13 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
+import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.Test;
@@ -173,14 +180,24 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testPageList()
 	{
-		_testPageList();
+		_testPageList(false);
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public KElement _testPageList()
+	@Test
+	public void testPageListRetainAll()
+	{
+		_testPageList(true);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public KElement _testPageList(boolean retainAll)
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setType(EnumType.Trapping);
@@ -204,13 +221,17 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf20.setSingleNode(true);
+		xjdf20.setRetainAll(retainAll);
 		KElement xjdf = xjdf20.makeNewJDF(root, null);
-		xjdf.write2File(sm_dirTestDataTemp + "pageListTest.xjdf");
+		xjdf.write2File(sm_dirTestDataTemp + "pageListTest." + retainAll + ".xjdf");
 		assertNotNull(xjdf);
-		for (int i = 1; i < 5; i++)
+		if (!retainAll)
 		{
-			assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@IsBlank", null), i % 2 == 1 ? "true" : "false");
-			assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
+			for (int i = 1; i < 5; i++)
+			{
+				assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@IsBlank", null), i % 2 == 1 ? "true" : "false");
+				assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource[" + i + "]/Content/@ContentStatus", null), "DigitalArtArrived");
+			}
 		}
 		return xjdf;
 	}
@@ -406,18 +427,110 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testNodeEmployee()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFEmployee emp = (JDFEmployee) n.addResource(ElementName.EMPLOYEE, EnumUsage.Input);
+		VString roles = new VString("ShiftLeader TelephoneSanitizer", null);
+		emp.setRoles(roles);
+		emp.setPersonalID("P1");
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypes", null), "Employee");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ProductID", null), "P1");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		JDFEmployee emp2 = (JDFEmployee) n2.getResource(ElementName.EMPLOYEE, EnumUsage.Input, 0);
+		assertEquals(emp2.getPersonalID(), "P1");
+		assertEquals(emp2.getRoles(), roles);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPerson()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFEmployee emp = (JDFEmployee) n.addResource(ElementName.EMPLOYEE, EnumUsage.Input);
+		VString roles = new VString("ShiftLeader TelephoneSanitizer", null);
+		emp.setRoles(roles);
+		emp.setPersonalID("P1");
+		JDFPerson person = emp.appendPerson();
+		person.setFirstName("Snoopy");
+		person.appendAddress().setStreet("Sesame");
+		JDFComChannel cc1 = person.appendComChannel();
+		cc1.setLocator("tel:123");
+		cc1.setChannelType(EnumChannelType.Phone);
+		JDFComChannel cc2 = person.appendComChannel();
+		cc2.setLocator("fax:123");
+		cc1.setChannelType(EnumChannelType.Fax);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypes", null), "Employee");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/@ContactTypeDetails", null), "ShiftLeader TelephoneSanitizer");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/@ProductID", null), "P1");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/Address/@Street", null), "Sesame");
+		assertEquals(xjdf.getXPathAttribute("ResourceSet[@Name=\"Contact\"]/Resource/Contact/ComChannel/@Locator", null), "tel:123");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testNotificationAudit()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.getCreateAuditPool().addNotification(EnumClass.Error, "me", null).appendComment().setText("foo");
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditNotification/Notification/@Author", null), "me");
+
+		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
+		JDFDoc d = invert.convert(xjdf);
+		JDFNode n2 = d.getJDFRoot();
+		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.Notification, null, null).getEmployee(0).getDescriptiveName(), "me");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testAuditEmployee()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.getCreateAuditPool().addAudit(EnumAuditType.PhaseTime, "me");
 		JDFToXJDF conv = new JDFToXJDF();
 		KElement xjdf = conv.convert(n);
-		assertEquals(xjdf.getXPathAttribute("AuditPool/PhaseTime/@Author", null), "me");
+		assertEquals(xjdf.getXPathAttribute("AuditPool/AuditStatus/@Author", null), "me");
 
 		XJDFToJDFConverter invert = new XJDFToJDFConverter(null);
 		JDFDoc d = invert.convert(xjdf);
 		JDFNode n2 = d.getJDFRoot();
 		assertEquals(n2.getAuditPool().getAudit(0, EnumAuditType.PhaseTime, null, null).getEmployee(0).getDescriptiveName(), "me");
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testMediaComponentIn()
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFMedia med = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		JDFMedia m1 = (JDFMedia) med.addPartition(EnumPartIDKey.Location, "loc1");
+		m1.setMediaType(EnumMediaType.Paper);
+		m1.setWeight(42);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.convert(n);
+		assertTrue(xjdf.getXPathAttribute("ResourceSet/Resource/Component/@MediaRef", null).startsWith(med.getID()));
 	}
 
 	/**

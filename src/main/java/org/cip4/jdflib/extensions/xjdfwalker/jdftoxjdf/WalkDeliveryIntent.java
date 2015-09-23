@@ -107,7 +107,7 @@ public class WalkDeliveryIntent extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDeliveryIntent;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFDeliveryIntent;
 	}
 
 	/**

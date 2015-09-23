@@ -157,7 +157,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	 *  
 	 */
 	@Test
-	public void testMIPreComplex()
+	public void testMISPreComplex()
 	{
 
 		for (int i = 0; i < 4; i++)

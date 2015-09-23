@@ -112,6 +112,6 @@ public class WalkHoleLine extends WalkHole
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFHoleLine);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleLine);
 	}
 }

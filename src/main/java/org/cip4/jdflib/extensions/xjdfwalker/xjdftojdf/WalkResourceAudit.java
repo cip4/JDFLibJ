@@ -66,24 +66,31 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.resource.JDFPhaseTime;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
+ * at this point only a dummy since we have a specific WalkResourceAudit child
+ * 
+ * TODO how should resource consumption be tracked?
  */
-public class WalkAuditPool extends WalkJDFSubElement
+public class WalkResourceAudit extends WalkAudit
 {
-
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkResourceAudit()
 	{
 		super();
 	}
@@ -93,13 +100,48 @@ public class WalkAuditPool extends WalkJDFSubElement
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
+		xjdf.renameElement(ElementName.RESOURCEAUDIT, null);
+		JDFResourceInfo ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
+		while (ri != null)
 		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
+			linkSet(ri);
+			ri = (JDFResourceInfo) xjdf.getElement(ElementName.RESOURCEINFO);
 		}
-		return super.walk(jdf, xjdf);
+		KElement ret = super.walk(xjdf, jdf);
+		return ret;
+	}
+
+	private void linkSet(JDFResourceInfo ri)
+	{
+		String id = ri.getResourceID();
+		XJDFHelper h = new XJDFHelper(xjdfToJDFImpl.xjdf);
+
+		if (StringUtil.getNonEmpty(id) == null)
+		{
+			String name = StringUtil.getNonEmpty(ri.getResourceName());
+			SetHelper sh = h.getSet(name, ri.getUsage(), ri.getProcessUsage());
+			id = sh == null ? null : sh.getID();
+		}
+		SetHelper sh = h.getSetForPartition(id);
+		if (sh == null)
+		{
+			ri.deleteNode();
+		}
+		else
+		{
+			ri.renameElement(sh.getName() + "Link", null);
+			ri.removeAttribute(AttributeName.LEVEL);
+			ri.removeAttribute(AttributeName.MODULEID);
+			ri.removeAttribute(AttributeName.PRODUCTID);
+			ri.renameAttribute(AttributeName.RESOURCEID, AttributeName.RREF, null, null);
+			ri.removeAttribute(AttributeName.RESOURCENAME);
+			ri.removeAttribute(AttributeName.STATUS);
+			ri.removeAttribute(AttributeName.UNIT);
+			ri.getParentNode_KElement().moveElements(ri.getChildElementVector(ElementName.PART, null), null);
+		}
+
 	}
 
 	/**
@@ -110,7 +152,7 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		return toCheck instanceof JDFPhaseTime || "AuditResource".equals(toCheck.getLocalName());
 	}
 
 }

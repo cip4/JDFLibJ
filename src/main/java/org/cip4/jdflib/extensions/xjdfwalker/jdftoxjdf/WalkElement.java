@@ -112,7 +112,7 @@ public class WalkElement extends BaseWalker
 	 */
 	public void setParent(JDFToXJDF parent)
 	{
-		this.jdfToXJDF = parent;
+		jdfToXJDF = parent;
 	}
 
 	/**
@@ -246,6 +246,8 @@ public class WalkElement extends BaseWalker
 	 */
 	protected KElement safeRename(final KElement original, String newName, boolean allLeaves)
 	{
+		if (original == null)
+			return null;
 		if (allLeaves && original instanceof JDFResource)
 		{
 			VElement leaves = ((JDFResource) original).getLeaves(true);

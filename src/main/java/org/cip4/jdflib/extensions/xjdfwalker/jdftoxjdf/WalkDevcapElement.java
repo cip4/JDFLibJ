@@ -108,7 +108,7 @@ public class WalkDevcapElement extends WalkJDFElement
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 * @param path
 	 * @param old
 	 * @return

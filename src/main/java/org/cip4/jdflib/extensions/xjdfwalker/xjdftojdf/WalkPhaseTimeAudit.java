@@ -99,22 +99,24 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement xjdf, final KElement jdf)
+	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		final JDFPhaseTime pt = (JDFPhaseTime) xjdf;
-		VElement v = pt.getChildElementVector(null, null);
-		KElement signalStatus = pt.appendElement("SignalStatus");
+		VElement v = xjdf.getChildElementVector(null, null);
+		KElement signalStatus = xjdf.appendElement("SignalStatus");
 		signalStatus.moveElements(v, null);
-		signalStatus.setAttributes(pt);
-		pt.removeAttribute(AttributeName.TIME);
+		signalStatus.setAttributes(xjdf);
+		xjdf.removeAttribute(AttributeName.TIME);
 		JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 		xjdfToJDFImpl.walkTree(signalStatus, jmf);
 		signalStatus.deleteNode();
+		if (!(xjdf instanceof JDFPhaseTime))
+		{
+			KElement e = xjdf.getParentNode_KElement().insertBefore(ElementName.PHASETIME, xjdf, null);
+			e.setAttributes(xjdf);
+			xjdf = e;
+		}
 		((JDFPhaseTime) xjdf).setPhase(jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0));
-		fixAuthor(xjdf);
-		KElement ret = super.walk(xjdf, jdf);
-
-		return ret;
+		return super.walk(xjdf, jdf);
 	}
 
 	/**
@@ -125,7 +127,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFPhaseTime;
+		return toCheck instanceof JDFPhaseTime || "AuditStatus".equals(toCheck.getLocalName());
 	}
 
 }

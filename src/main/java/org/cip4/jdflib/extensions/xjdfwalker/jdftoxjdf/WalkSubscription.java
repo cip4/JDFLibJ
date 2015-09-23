@@ -95,7 +95,7 @@ public class WalkSubscription extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFSubscription;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFSubscription;
 	}
 
 	/**

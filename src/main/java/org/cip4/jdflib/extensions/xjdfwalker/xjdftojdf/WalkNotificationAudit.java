@@ -66,24 +66,22 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.pool.JDFAuditPool;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
- */
-public class WalkAuditPool extends WalkJDFSubElement
+  */
+public class WalkNotificationAudit extends WalkAudit
 {
-
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkNotificationAudit()
 	{
 		super();
 	}
@@ -93,13 +91,14 @@ public class WalkAuditPool extends WalkJDFSubElement
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
+	public KElement walk(KElement xjdf, final KElement jdf)
 	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
-		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
-		}
-		return super.walk(jdf, xjdf);
+		KElement not = xjdf.getElement(ElementName.NOTIFICATION);
+		if (not == null)
+			return null;
+		not.setAttributes(xjdf);
+		// we explicitly do not call super.walk, so that the original AuditNotification is ignored
+		return jdf;
 	}
 
 	/**
@@ -110,7 +109,7 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		return "AuditNotification".equals(toCheck.getLocalName());
 	}
 
 }

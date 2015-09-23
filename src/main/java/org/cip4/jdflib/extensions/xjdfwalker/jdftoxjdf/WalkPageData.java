@@ -96,7 +96,7 @@ public class WalkPageData extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return "Content".equals(toCheck.getLocalName()) && "Page".equals(toCheck.getAttribute(AttributeName.CONTENTTYPE));
+		return !jdfToXJDF.isRetainAll() && ("Content".equals(toCheck.getLocalName()) && "Page".equals(toCheck.getAttribute(AttributeName.CONTENTTYPE)));
 	}
 
 	/**

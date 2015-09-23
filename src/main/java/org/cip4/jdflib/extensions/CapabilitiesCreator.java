@@ -87,6 +87,12 @@ import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ * @author rainer prosi
+ *@deprecated we are using xsd instead
+ */
+@Deprecated
 public class CapabilitiesCreator extends BaseElementWalker
 {
 	/**

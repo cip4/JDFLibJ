@@ -92,7 +92,7 @@ public class WalkDependencies extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDependencies;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFDependencies;
 	}
 
 	/**

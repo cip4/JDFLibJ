@@ -106,6 +106,7 @@ public class WalkAudit extends WalkXElement
 	public KElement walk(KElement xjdf, KElement jdf)
 	{
 		KElement e = super.walk(xjdf, jdf);
+		fixAuthor(e);
 		e.removeAttribute(AttributeName.JOBPARTID);
 		return e;
 	}

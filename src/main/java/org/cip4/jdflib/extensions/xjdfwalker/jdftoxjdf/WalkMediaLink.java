@@ -68,9 +68,15 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  * 
@@ -105,13 +111,51 @@ public class WalkMediaLink extends WalkResLink
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		// TODO create component and ref the media
-		final JDFResourceLink rl = (JDFResourceLink) jdf;
+		JDFResourceLink rl = (JDFResourceLink) jdf;
 		final JDFResource r = rl.getLinkRoot();
 		if (r != null)
 		{
-			//
+			rl = createComponent(xjdf, rl);
 		}
-		return super.walk(jdf, xjdf);
+		return super.walk(rl, xjdf);
+	}
+
+	/**
+	 * 
+	 * @param xjdf
+	 * @param id
+	 * @param rl
+	 * @return 
+	 */
+	private JDFResourceLink createComponent(KElement xjdf, JDFResourceLink rl)
+	{
+		String compID = "Comp." + rl.getrRef();
+		if (getSet(compID, xjdf, "Resource") == null)
+		{
+			JDFNode rlParent = rl.getParentJDF();
+			JDFComponent comp = (JDFComponent) rlParent.addResource(ElementName.COMPONENT, null);
+			comp.setID(compID);
+			JDFResourceLink rlComp = rlParent.linkResource(comp, rl.getUsage(), rl.getEnumProcessUsage());
+			JDFMedia media = (JDFMedia) rl.getLinkRoot();
+			comp.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+			comp.clonePartitions(media, null);
+			VElement leaves = media.getLeaves(false);
+			for (KElement leaf : leaves)
+			{
+				JDFMedia rLeaf = (JDFMedia) leaf;
+				JDFComponent twin = (JDFComponent) comp.getPartition(rLeaf.getPartMap(), null);
+				twin.refMedia(rLeaf);
+			}
+			rlComp.setPartMapVector(rl.getPartMapVector());
+			rlComp.moveElement(rl.getAmountPool(), null);
+			rl.deleteNode();
+			return rlComp;
+
+		}
+		else
+		{
+			return rl;
+		}
+
 	}
 }

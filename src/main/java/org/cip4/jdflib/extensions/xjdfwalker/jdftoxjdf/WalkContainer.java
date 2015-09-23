@@ -96,7 +96,7 @@ public class WalkContainer extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFContainer;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFContainer;
 	}
 
 	/**

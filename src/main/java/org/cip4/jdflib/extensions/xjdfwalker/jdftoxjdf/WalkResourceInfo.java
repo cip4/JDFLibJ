@@ -128,6 +128,6 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFResourceInfo;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFResourceInfo;
 	}
 }

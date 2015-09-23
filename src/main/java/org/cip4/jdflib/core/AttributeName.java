@@ -778,7 +778,10 @@ public final class AttributeName
 	public static final String CREEPVALUE = "CreepValue";
 	/** */
 	public static final String CTM = "CTM";
-	/** */
+	/**
+	 * @deprecated
+	 *  */
+	@Deprecated
 	public static final String CUMULATIVEAMOUNT = "CumulativeAmount"; // TODO remove , not in C++
 	/** */
 	public static final String CURRENCY = "Currency";

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -95,7 +95,7 @@ public class WalkColor extends WalkResource
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFColor k = (JDFColor) super.walk(jdf, xjdf);
-		if (this.jdfToXJDF.bHTMLColor)
+		if (jdfToXJDF.isHTMLColor())
 		{
 			k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
 		}
@@ -111,6 +111,6 @@ public class WalkColor extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFColor;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFColor;
 	}
 }

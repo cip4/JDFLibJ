@@ -95,7 +95,7 @@ public class WalkMessage extends WalkJDFElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		JDFMessage m = (JDFMessage) jdf;
-		if (this.jdfToXJDF.bTypeSafeMessage)
+		if (jdfToXJDF.isTypeSafeMessage())
 		{
 			makeTypesafe(m);
 		}
@@ -150,7 +150,7 @@ public class WalkMessage extends WalkJDFElement
 	private EnumFamily getNewFamily(JDFMessage m)
 	{
 		EnumFamily family = m.getFamily();
-		if (jdfToXJDF.bAbstractMessage)
+		if (jdfToXJDF.isAbstractMessage())
 		{
 			if (EnumFamily.Command.equals(family) || EnumFamily.Registration.equals(family))
 				family = EnumFamily.Query;
@@ -168,7 +168,7 @@ public class WalkMessage extends WalkJDFElement
 	protected void removeUnused(final KElement newRootP)
 	{
 		super.removeUnused(newRootP);
-		if (this.jdfToXJDF.bTypeSafeMessage)
+		if (jdfToXJDF.isTypeSafeMessage())
 		{
 			newRootP.removeAttribute(AttributeName.TYPE);
 		}

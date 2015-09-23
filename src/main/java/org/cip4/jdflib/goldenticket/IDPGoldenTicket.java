@@ -177,7 +177,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 */
 	private JDFLayoutPreparationParams initLayoutPrep()
 	{

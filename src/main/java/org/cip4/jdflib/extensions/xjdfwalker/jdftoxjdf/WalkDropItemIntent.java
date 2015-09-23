@@ -95,7 +95,7 @@ public class WalkDropItemIntent extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFDropItemIntent;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFDropItemIntent;
 	}
 
 	/**

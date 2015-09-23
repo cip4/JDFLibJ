@@ -268,7 +268,7 @@ public class JDFAuditPool extends JDFPool
 		if (by != null)
 		{
 			EnumVersion version = getVersion(true);
-			if (version != null && EnumUtil.aLessThanB(version, EnumVersion.Version_1_4))
+			if (version != null && (EnumUtil.aLessThanB(version, EnumVersion.Version_1_4) || EnumUtil.aLessEqualsThanB(EnumVersion.Version_2_0, version)))
 			{
 				l.setAuthor(by);
 			}

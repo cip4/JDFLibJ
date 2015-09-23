@@ -118,7 +118,7 @@ public class WalkPageListRef extends WalkRefElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFRefElement && "PageListRef".equals(toCheck.getLocalName());
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFRefElement && "PageListRef".equals(toCheck.getLocalName()));
 	}
 
 	/**

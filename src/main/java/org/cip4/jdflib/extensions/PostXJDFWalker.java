@@ -468,7 +468,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * TODO Please insert comment!
+		 * 
 		 * @param bindSig
 		 * @param il
 		 * @return
@@ -497,7 +497,7 @@ public class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * TODO Please insert comment!
+		 * 
 		 * @param sc
 		 * @param il
 		 * @return

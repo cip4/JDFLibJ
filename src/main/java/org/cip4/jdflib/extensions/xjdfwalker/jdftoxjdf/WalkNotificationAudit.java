@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,22 +68,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFNotification;
 
 /**
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
-public class WalkAuditPool extends WalkJDFSubElement
+public class WalkNotificationAudit extends WalkAudit
 {
 
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkNotificationAudit()
 	{
 		super();
 	}
@@ -95,11 +96,15 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
-		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
-		}
-		return super.walk(jdf, xjdf);
+		KElement notificationAudit = xjdf.appendElement("AuditNotification");
+		JDFNotification not = (JDFNotification) jdf;
+		notificationAudit.moveAttribute(AttributeName.AGENTNAME, not);
+		notificationAudit.moveAttribute(AttributeName.AGENTVERSION, not);
+		notificationAudit.moveAttribute(AttributeName.AUTHOR, not);
+		notificationAudit.moveAttribute(AttributeName.PERSONALID, not);
+		notificationAudit.moveAttribute(AttributeName.ID, not);
+		notificationAudit.moveAttribute(AttributeName.TIMESTAMP, not);
+		return super.walk(jdf, notificationAudit);
 	}
 
 	/**
@@ -110,7 +115,6 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFNotification) && (toCheck.getParentNode() instanceof JDFAuditPool);
 	}
-
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,40 +66,24 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
-public class WalkAuditPool extends WalkJDFSubElement
+public class WalkEmployeeContactSet extends WalkSet
 {
-
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkEmployeeContactSet()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
-		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
-		}
-		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -110,7 +94,19 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		boolean contact = super.matches(toCheck) && "Contact".equals(toCheck.getAttribute(AttributeName.NAME));
+		if (!contact)
+			return false;
+		String contactTypes = toCheck.getXPathAttribute("Resource/Contact/@ContactTypes", "Contact");
+		return StringUtil.hasToken(contactTypes, "Employee", " ", 0);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkSet#getJDFResName(org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	protected String getJDFResName(KElement e)
+	{
+		return ElementName.EMPLOYEE;
+	}
 }

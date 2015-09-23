@@ -69,10 +69,12 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -92,6 +94,17 @@ public class WalkEmployee extends WalkResource
 	}
 
 	/**
+	 * the new name
+	 * @param jdf
+	 * @return
+	 */
+	@Override
+	protected String getXJDFName(final KElement jdf)
+	{
+		return ElementName.CONTACT;
+	}
+
+	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 * @param toCheck
 	 * @return true if it matches
@@ -99,7 +112,7 @@ public class WalkEmployee extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFEmployee;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFEmployee;
 	}
 
 	/**
@@ -125,8 +138,22 @@ public class WalkEmployee extends WalkResource
 		}
 		else
 		{
-			KElement e = super.walk(jdf, xjdf);
-			return e;
+			KElement e = moveToContact(jdf);
+			return super.walk(e, xjdf);
 		}
+	}
+
+	/**
+	 * 
+	 * @param jdfEmployee
+	 * @return
+	 */
+	public KElement moveToContact(KElement jdfEmployee)
+	{
+		JDFContact contact = (JDFContact) safeRename(jdfEmployee, ElementName.CONTACT, true);
+		contact.setContactTypes(ElementName.EMPLOYEE);
+		contact.renameAttribute(AttributeName.PERSONALID, AttributeName.PRODUCTID, null, null);
+		contact.renameAttribute(AttributeName.ROLES, AttributeName.CONTACTTYPEDETAILS, null, null);
+		return contact;
 	}
 }

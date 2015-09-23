@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -66,40 +66,26 @@
  *  
  * 
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkAuditPool extends WalkJDFSubElement
+public class WalkContact extends WalkResource
 {
-
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkContact()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
-		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
-		}
-		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -110,7 +96,29 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		return toCheck instanceof JDFContact;
+	}
+
+	/**
+	 * @param e
+	 * @return the created resource
+	 */
+	@Override
+	public KElement walk(KElement e, KElement trackElem)
+	{
+		JDFContact c = (JDFContact) e;
+		VString roles = c.getContactTypes();
+		if (roles != null && roles.contains(ElementName.EMPLOYEE))
+		{
+			c.removeAttribute(AttributeName.CONTACTTYPES);
+			c.renameAttribute(AttributeName.CONTACTTYPEDETAILS, AttributeName.ROLES, null, null);
+			if (!PartitionHelper.isResourceElement(c))
+			{
+				c.renameElement(ElementName.EMPLOYEE, null);
+			}
+		}
+		KElement ret = super.walk(e, trackElem);
+		return ret;
 	}
 
 }

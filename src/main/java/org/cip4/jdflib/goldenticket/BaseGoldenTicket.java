@@ -601,13 +601,7 @@ public class BaseGoldenTicket
 	@Override
 	protected void finalize()
 	{
-		// handled by statuscounter
-		// int siz =amountLinks==null ? 0 : amountLinks.size();
-		// for(int i=0;i<siz;i++)
-		// {
-		// theStatusCounter.setResourceAudit(amountLinks.elementAt(i),
-		// EnumReason.ProcessResult);
-		// }
+		theStatusCounter.setEvent("ID_42", "Event", StringUtil.getRandomString());
 	}
 
 	protected void setVersion()

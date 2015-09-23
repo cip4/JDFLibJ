@@ -85,9 +85,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
- * at this point only a dummy since we have a specific WalkResourceAudit child
- * 
- * TODO how should resource consumption be tracked?
  */
 public class WalkPhaseTimeAudit extends WalkAudit
 {
@@ -130,6 +127,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 		ret.removeAttribute(AttributeName.TIMESTAMP);
 		ret.setAttributes(signalxjmf);
 		jdf.removeChildren(null, null, null);
+		ret.renameElement("AuditStatus", null);
 		return ret;
 	}
 
@@ -202,7 +200,7 @@ public class WalkPhaseTimeAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFPhaseTime;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFPhaseTime;
 	}
 
 	/**

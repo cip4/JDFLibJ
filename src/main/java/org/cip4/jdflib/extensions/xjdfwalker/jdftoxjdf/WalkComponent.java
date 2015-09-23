@@ -116,6 +116,6 @@ public class WalkComponent extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFComponent;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFComponent;
 	}
 }

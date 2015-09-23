@@ -90,8 +90,8 @@ public class WalkMediaRefByType extends WalkResource
 	}
 
 	/**
-	 * @param xjdf
-	 * @return true if must continue
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)

@@ -157,7 +157,7 @@ public class StrippingConverter
 
 	/**
 	 * 
-	 * TODO Please insert comment!
+	 * 
 	 */
 	protected void convertLeaf()
 	{
@@ -278,7 +278,7 @@ public class StrippingConverter
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * 
 	 * @param rotate
 	 * @return
 	 */

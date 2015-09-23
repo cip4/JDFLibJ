@@ -97,7 +97,7 @@ public class WalkAmountPool extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAmountPool;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFAmountPool;
 	}
 
 	/**

@@ -124,7 +124,7 @@ public class WalkPipeControl extends WalkMessage
 	@Override
 	public boolean matches(KElement toCheck)
 	{
-		return super.matches(toCheck) && isPipeControl(toCheck.getAttribute(AttributeName.TYPE));
+		return !jdfToXJDF.isRetainAll() && (super.matches(toCheck) && isPipeControl(toCheck.getAttribute(AttributeName.TYPE)));
 	}
 
 	/**

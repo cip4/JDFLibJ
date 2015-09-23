@@ -98,7 +98,7 @@ public class WalkAudit extends WalkJDFElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAudit;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFAudit;
 	}
 
 	/**

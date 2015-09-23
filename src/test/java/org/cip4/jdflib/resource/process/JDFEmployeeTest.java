@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,8 +73,8 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFEmployeeDef;
-import org.junit.Assert;
 import org.junit.Test;
+
 /**
  * tests the JDFEmployee class
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -91,28 +91,27 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
 		final JDFEmployee emp2 = (JDFEmployee) new JDFDoc("Employee").getRoot();
-		Assert.assertTrue(emp.matches(null));
+		assertTrue(emp.matches(null));
 		emp.setPersonalID("p1");
-		Assert.assertFalse(emp.matches(emp2));
+		assertFalse(emp.matches(emp2));
 		emp2.setPersonalID("p1");
-		Assert.assertTrue(emp.matches(emp2));
+		assertTrue(emp.matches(emp2));
 		emp2.setPersonalID("p2");
-		Assert.assertFalse(emp.matches(emp2));
+		assertFalse(emp.matches(emp2));
 	}
 
 	/**
-	 * tests the separationlist class
 	 * 
 	 */
 	@Test
 	public final void testMatchesPersonalID()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
-		Assert.assertTrue(emp.matches(null));
-		Assert.assertFalse(emp.matches("p2"));
+		assertTrue(emp.matches(null));
+		assertFalse(emp.matches("p2"));
 		emp.setPersonalID("p1");
-		Assert.assertFalse(emp.matches("p2"));
-		Assert.assertTrue(emp.matches("p1"));
+		assertFalse(emp.matches("p2"));
+		assertTrue(emp.matches("p1"));
 	}
 
 	/**
@@ -124,13 +123,27 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
 		final JDFEmployeeDef emp2 = (JDFEmployeeDef) new JDFDoc("EmployeeDef").getRoot();
-		Assert.assertTrue(emp.matches(null));
+		assertTrue(emp.matches(null));
 		emp.setPersonalID("p1");
-		Assert.assertFalse(emp.matches(emp2));
+		assertFalse(emp.matches(emp2));
 		emp2.setPersonalID("p1");
-		Assert.assertTrue(emp.matches(emp2));
+		assertTrue(emp.matches(emp2));
 		emp2.setPersonalID("p2");
-		Assert.assertFalse(emp.matches(emp2));
+		assertFalse(emp.matches(emp2));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetDescriptiveName()
+	{
+		final JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
+		JDFPerson p = emp.appendPerson();
+		p.setFirstName("a");
+		p.setFamilyName("b");
+		assertEquals(emp.getDescriptiveName(), "a b");
+		emp.setDescriptiveName("aaa");
+		assertEquals(emp.getDescriptiveName(), "aaa");
 	}
 
 	/**
@@ -142,10 +155,10 @@ public class JDFEmployeeTest extends JDFTestCaseBase
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc("Employee").getRoot();
 		emp.setPersonalID("p1");
 		emp.fixVersion(null);
-		Assert.assertEquals(emp.getProductID(), "p1");
+		assertEquals(emp.getProductID(), "p1");
 		emp.setPersonalID("p2");
 		emp.fixVersion(null);
-		Assert.assertEquals(emp.getProductID(), "p1");
+		assertEquals(emp.getProductID(), "p1");
 
 	}
 }

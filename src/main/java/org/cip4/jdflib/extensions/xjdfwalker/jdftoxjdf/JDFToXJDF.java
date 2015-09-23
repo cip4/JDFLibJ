@@ -232,11 +232,16 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
+	 * if true we retain as much of the initial JDF details as possible and do as little nice to have conversion as possible
+	 * this setting is useful e.g. for jdf xml display
+	 */
+	private boolean bRetainAll = false;
+	/**
 	 * if true merge stripping and layout
 	 */
 	private boolean bMergeLayout = true;
 	/**
-	 * if true merge stripping and layout
+	 * if true merge layoutprep and stripping (may cascade to layout)
 	 */
 	private boolean bMergeLayoutPrep = true;
 	/**
@@ -258,11 +263,11 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * set to define type safe messages
 	 */
-	boolean bTypeSafeMessage = true;
+	private boolean bTypeSafeMessage = true;
 	/**
 	 * set to define one type for query, command and registration
 	 */
-	boolean bAbstractMessage = false;
+	private boolean bAbstractMessage = false;
 
 	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
@@ -271,11 +276,11 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * if true, Intents are partitioned
 	 */
-	boolean bIntentPartition = false;
+	private boolean bIntentPartition = false;
 	/**
 	 * 
 	 */
-	boolean bParameterSet = false;
+	private boolean bParameterSet = false;
 
 	/**
 	 * @return the bParameterSet
@@ -321,7 +326,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
-	boolean bHTMLColor = false;
+	private boolean bHTMLColor = false;
 	/**
 	 * if false tildes are retained as range delimitors
 	 */
@@ -481,7 +486,7 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
+	 * initialize statics
 	 */
 	private void init()
 	{
@@ -1035,5 +1040,29 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		WalkResource w = getWalker(linkTarget);
 		return w.isProductResource(linkTarget);
+	}
+
+	public boolean isRetainAll()
+	{
+		return bRetainAll;
+	}
+
+	public void setRetainAll(boolean bRetainAll)
+	{
+		this.bRetainAll = bRetainAll;
+		if (bRetainAll)
+		{
+			setAbstractMessage(false);
+			setConvertTilde(false);
+			setExplicitWaste(false);
+			setHTMLColor(false);
+			setMergeLayout(false);
+			setMergeLayoutPrep(false);
+			setMergeRunList(false);
+			setRemoveSignatureName(false);
+			setRetainSpawnInfo(true);
+			setTypeSafeMessage(false);
+			setUpdateVersion(false);
+		}
 	}
 }

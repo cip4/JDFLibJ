@@ -124,6 +124,6 @@ public class WalkHoleMakingParams extends WalkInlineAllRes
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFHoleMakingParams);
+		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFHoleMakingParams);
 	}
 }

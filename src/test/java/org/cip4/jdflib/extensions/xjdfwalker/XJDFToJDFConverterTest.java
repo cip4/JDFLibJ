@@ -288,7 +288,7 @@ public class XJDFToJDFConverterTest extends JDFTestCaseBase
 	@Test
 	public void testPageList()
 	{
-		KElement xjdf = new JDFToXJDFConverterTest()._testPageList();
+		KElement xjdf = new JDFToXJDFConverterTest()._testPageList(false);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		JDFDoc d = xCon.convert(xjdf);
 		JDFNode root = d.getJDFRoot();

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,36 +70,25 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFAddress;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFPerson;
 
 /**
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
-public class WalkAuditPool extends WalkJDFSubElement
+public class WalkPerson extends WalkResource
 {
 
 	/**
 	 * 
 	 */
-	public WalkAuditPool()
+	public WalkPerson()
 	{
 		super();
-	}
-
-	/**
-	 * @param xjdf
-	 * @return true if must continue
-	 */
-	@Override
-	public KElement walk(final KElement jdf, final KElement xjdf)
-	{
-		if (jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL) != null)
-		{
-			return jdfToXJDF.newRoot.getElement(ElementName.AUDITPOOL);
-		}
-		return super.walk(jdf, xjdf);
 	}
 
 	/**
@@ -110,7 +99,31 @@ public class WalkAuditPool extends WalkJDFSubElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return toCheck instanceof JDFAuditPool;
+		return !jdfToXJDF.isRetainAll() && toCheck instanceof JDFPerson;
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 */
+	@Override
+	public KElement walk(KElement jdf, KElement xjdf)
+	{
+		JDFPerson person = (JDFPerson) jdf;
+		KElement parent = jdf.getParentNode_KElement();
+		if ((parent instanceof JDFContact) || (parent instanceof JDFEmployee))
+		{
+			VElement comChannels = person.getChildElementVector(ElementName.COMCHANNEL, null);
+			JDFAddress address = person.getAddress(0);
+			if (address != null)
+				comChannels.add(address);
+
+			for (KElement e : comChannels)
+			{
+				jdfToXJDF.walkTree(e, xjdf);
+				e.deleteNode();
+			}
+		}
+		return super.walk(jdf, xjdf);
+	}
 }

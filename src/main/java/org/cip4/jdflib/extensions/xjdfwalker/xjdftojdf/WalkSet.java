@@ -193,6 +193,11 @@ public class WalkSet extends WalkXElement
 		return r;
 	}
 
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
 	protected String getJDFResName(final KElement e)
 	{
 		final SetHelper h = new SetHelper(e);

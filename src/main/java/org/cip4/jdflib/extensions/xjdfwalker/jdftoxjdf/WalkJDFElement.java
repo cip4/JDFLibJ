@@ -290,7 +290,7 @@ public class WalkJDFElement extends WalkElement
 		linkTarget.expand(false);
 
 		final String resID = linkTarget.getID();
-		KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
+		KElement resourceSet = getSet(resID, xRoot, className);
 		if (resourceSet == null)
 		{
 			resourceSet = xRoot.appendElement(className + SetHelper.SET);
@@ -321,6 +321,19 @@ public class WalkJDFElement extends WalkElement
 			}
 		}
 		return v;
+	}
+
+	/**
+	 * 
+	 * @param linkTarget
+	 * @param xRoot
+	 * @param className
+	 * @return
+	 */
+	protected KElement getSet(String resID, final KElement xRoot, String className)
+	{
+		KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
+		return resourceSet;
 	}
 
 	/**
