@@ -452,6 +452,53 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 * 
 	 */
 	@Test
+	public void testRef()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r1 = n.addResource(ElementName.PAGELIST, EnumUsage.Input);
+		JDFResource r2 = n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		JDFResource r3 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+
+		r1.refElement(r2);
+		r1.refElement(r3);
+		r2.refElement(r1);
+		r2.refElement(r3);
+		r3.refElement(r1);
+		r3.refElement(r2);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNotNull(xjdf);
+
+		conv.setRetainAll(true);
+		xjdf = conv.makeNewJDF(n, null);
+		assertNotNull(xjdf);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testRefSelf()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r1 = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+
+		r1.refElement(r1);
+
+		JDFToXJDF conv = new JDFToXJDF();
+		KElement xjdf = conv.makeNewJDF(n, null);
+		assertNotNull(xjdf);
+
+		conv.setRetainAll(true);
+		xjdf = conv.makeNewJDF(n, null);
+		assertNotNull(xjdf);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void testPerson()
 	{
 		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

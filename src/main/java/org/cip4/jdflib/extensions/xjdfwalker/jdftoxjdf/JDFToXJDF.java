@@ -787,19 +787,12 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * set to keep as much of the original structure as possible - used e.g. for xslt display of JDF nodes
+	 * @deprecated
 	 */
+	@Deprecated
 	public void retainAll()
 	{
-		bUpdateVersion = false;
-		bHTMLColor = false;
-		bMergeLayout = false;
-		bIntentPartition = false;
-		bSpanAsAttribute = false;
-		bMergeLayoutPrep = false;
-		bMergeRunList = false;
-		bTypeSafeMessage = false;
-		bRetainSpawnInfo = true;
-		removeSignatureName = false;
+		setRetainAll(true);
 	}
 
 	/**

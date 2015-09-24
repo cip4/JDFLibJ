@@ -135,6 +135,6 @@ public class WalkResourceAudit extends WalkAudit
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFResourceAudit);
+		return (toCheck instanceof JDFResourceAudit);
 	}
 }
