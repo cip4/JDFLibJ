@@ -11,11 +11,25 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.w3c.dom.DOMException;
 
 public class JDFInterpretingParams extends JDFAutoInterpretingParams
 {
 	private static final long serialVersionUID = 1L;
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OBJECTRESOLUTION, 0x33333333);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
 	/**
 	 * Constructor for JDFInterpretingParams
