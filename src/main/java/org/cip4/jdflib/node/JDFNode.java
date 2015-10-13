@@ -8735,6 +8735,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * 
+	 * @return the filename of this; null if not implemented
+	 */
+	@Override
+	public String getUserFileName()
+	{
+		return null;
+	}
+
+	/**
 	 * @see org.cip4.jdflib.core.JDFElement#setVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
 	 */
 	@Override

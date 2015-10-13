@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,8 +97,8 @@ import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.junit.Assert;
 import org.junit.Test;
+
 ////////////////////////////////////////////////////////////////
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -121,8 +121,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		{
 			fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
 			fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), true);
-			Assert.assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
-			Assert.assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
+			assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
+			assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
 
 		}
 	}
@@ -135,21 +135,21 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
 		final String fileName = sm_dirTestDataTemp + "testMimePackageDoc0.mjm";
-		Assert.assertTrue(new File(fileName).canRead());
+		assertTrue(new File(fileName).canRead());
 		final Multipart mp = MimeUtil.getMultiPart(fileName);
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
-		Assert.assertNotNull(cscp);
+		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final InputStream is = fs.getURLInputStream();
-		Assert.assertNotNull(is);
+		assertNotNull(is);
 		final byte b[] = new byte[100];
 		final int i = is.read(b);
-		Assert.assertTrue(i > 0);
+		assertTrue(i > 0);
 		final String s = new String(b);
-		Assert.assertTrue(s.indexOf("I C C") >= 0);
+		assertTrue(s.indexOf("I C C") >= 0);
 	}
 
 	/**
@@ -166,9 +166,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		ByteArrayIOStream bos = new ByteArrayIOStream(contents.getBytes());
 		FileUtil.streamToFile(bos.getInputStream(), sm_dirTestDataTemp + "dummy.txt");
 		InputStream is = rli.getFileSpec().getURLInputStream();
-		Assert.assertNotNull(is);
+		assertNotNull(is);
+		bos.close();
 		ByteArrayIOStream bos2 = new ByteArrayIOStream(is);
-		Assert.assertEquals(contents.getBytes().length, bos2.size());
+		assertEquals(contents.getBytes().length, bos2.size());
+		bos2.close();
 	}
 
 	/**
@@ -185,11 +187,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
-		Assert.assertNotNull(cscp);
+		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		File f = UrlUtil.moveToDir(fs, newDir, null, true);
-		Assert.assertNotNull("error moving file to dir", f);
+		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{
 			ThreadUtil.sleep(1000);
@@ -197,13 +199,27 @@ public class JDFFilespecTest extends JDFTestCaseBase
 			{
 				break;
 			}
-			System.out.println("Waiting " + i);
+			log.info("Waiting " + i);
 		}
-		Assert.assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
+		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 
 	}
 
-	// //////////////////////////////////////////////////////////////
+	/**
+	 * @throws IOException
+	 * @throws MessagingException
+	 * 
+	 */
+	@Test
+	public void testMoveToDirUserFileName()
+	{
+		JDFFileSpec fs = (JDFFileSpec) new JDFDoc(ElementName.FILESPEC).getRoot();
+		fs.setURL(sm_dirTestData + "url1.pdf");
+		fs.setUserFileName("newName1.pdf");
+		File copy = UrlUtil.moveToDir(fs, new File(sm_dirTestDataTemp), null, true);
+		assertEquals(copy.getName(), "newName1.pdf");
+		assertEquals(UrlUtil.urlToFile(fs.getURL()), copy);
+	}
 
 	/**
 	 * 
@@ -211,10 +227,10 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	public void testGetMimeTypeFromURL()
 	{
-		Assert.assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
-		Assert.assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
-		Assert.assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
-		Assert.assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
+		assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
+		assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -228,10 +244,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("FileSpec");
 		final JDFFileSpec fs = (JDFFileSpec) d.getRoot();
 		fs.setMimeURL("file:/c/test.pdf");
-		Assert.assertEquals(fs.getMimeType(), "application/pdf");
-		Assert.assertEquals(fs.getURL(), "file:/c/test.pdf");
-
+		assertEquals(fs.getMimeType(), "application/pdf");
+		assertEquals(fs.getURL(), "file:/c/test.pdf");
 	}
-	// //////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////
 }

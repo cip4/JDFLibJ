@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -155,7 +155,6 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	/**
 	* Enumeration strings for PreviewFileType
 	*/
-
 	public static class EnumPreviewFileType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -205,6 +204,16 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	public String toString()
 	{
 		return "JDFPreview[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * 
+	 * @return the filename of this; null if not implemented
+	 */
+	@Override
+	public String getUserFileName()
+	{
+		return null;
 	}
 
 	/**

@@ -1897,53 +1897,55 @@ public class UrlUtil
 	/**
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
 	 * 
-	 * @param parent the parent element, trypically a filespec or preview
+	 * @param urlSetter the parent element, typically a filespec or preview
 	 * @param dir the directory to move to. dir is created if it does not exist. 
 	 * If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param cwd the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
-	public static File moveToDir(IURLSetter parent, final File dir, final String cwd, final boolean overWrite)
+	public static File moveToDir(IURLSetter urlSetter, final File dir, final String cwd, final boolean overWrite)
 	{
-		if (dir == null)
+		if (urlSetter == null || dir == null || dir.exists() && !dir.isDirectory())
 		{
 			return null;
-		}
-		if (dir.exists())
-		{
-			if (!dir.isDirectory())
-			{
-				return null;
-			}
 		}
 		else
 		{
 			dir.mkdirs();
 		}
-		String url = parent.getURL();
-		String fileName = null;
-		if (UrlUtil.isRelativeURL(url))
+		String url = urlSetter.getURL();
+		if (StringUtil.getNonEmpty(url) == null)
 		{
-			fileName = cleanDots(url);
-			if (cwd != null)
+			return null;
+		}
+
+		String fileName = StringUtil.getNonEmpty(urlSetter.getUserFileName());
+
+		if (fileName == null)
+		{
+			if (UrlUtil.isRelativeURL(url))
 			{
-				url = UrlUtil.getURLWithDirectory(cwd, url);
+				fileName = cleanDots(url);
+				if (cwd != null)
+				{
+					url = UrlUtil.getURLWithDirectory(cwd, url);
+				}
+			}
+
+			// check for nop
+			final File oldFile = urlToFile(url);
+			if (oldFile != null)
+			{
+				final File oldDir = oldFile.getParentFile();
+				if (FileUtil.equals(oldDir, dir))
+				{
+					return oldFile;
+				}
 			}
 		}
 
-		// check for nop
-		final File oldFile = urlToFile(url);
-		if (oldFile != null)
-		{
-			final File oldDir = oldFile.getParentFile();
-			if (FileUtil.equals(oldDir, dir))
-			{
-				return oldFile;
-			}
-		}
-
-		XMLDoc d = (parent instanceof KElement) ? ((KElement) parent).getOwnerDocument_KElement() : null;
+		XMLDoc d = (urlSetter instanceof KElement) ? ((KElement) urlSetter).getOwnerDocument_KElement() : null;
 		if (fileName == null)
 		{
 			Multipart mp = d == null ? null : d.getMultiPart();
@@ -1968,7 +1970,7 @@ public class UrlUtil
 			out = FileUtil.streamToFile(inputStream, out);
 			if (out != null)
 			{
-				parent.setURL(UrlUtil.fileToUrl(out, false));
+				urlSetter.setURL(UrlUtil.fileToUrl(out, false));
 			}
 		}
 		else
