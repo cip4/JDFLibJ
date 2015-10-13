@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,7 +87,6 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFPart;
@@ -109,7 +107,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -127,9 +125,10 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.SCOPE, 0x33311111, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -398,6 +397,69 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 		public static final EnumOrientation Right = new EnumOrientation("Right");
 	}
 
+	/**
+	* Enumeration strings for Scope
+	*/
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumScope extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumScope(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumScope getEnum(String enumName)
+		{
+			return (EnumScope) getEnum(EnumScope.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumScope getEnum(int enumValue)
+		{
+			return (EnumScope) getEnum(EnumScope.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumScope.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumScope.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumScope.class);
+		}
+
+		/**  */
+		public static final EnumScope Present = new EnumScope("Present");
+		/**  */
+		public static final EnumScope Allowed = new EnumScope("Allowed");
+	}
+
 	/* ************************************************************************
 	 * Attribute getter / setter
 	 * ************************************************************************
@@ -611,8 +673,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	  */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -719,6 +781,27 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	public String getResourceName()
 	{
 		return getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Scope
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute Scope
+	  * @param enumVar the enumVar to set the attribute to
+	  */
+	public void setScope(EnumScope enumVar)
+	{
+		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Scope
+	  * @return the value of the attribute
+	  */
+	public EnumScope getScope()
+	{
+		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
 	}
 
 	/* ---------------------------------------------------------------------
@@ -872,19 +955,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public Collection<JDFLot> getAllLot()
 	{
-		final VElement vc = getChildElementVector(ElementName.LOT, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFLot> v = new Vector<JDFLot>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFLot) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFLot.class, false, 0);
 	}
 
 	/**
@@ -951,19 +1022,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 */
 	public Collection<JDFPart> getAllPart()
 	{
-		final VElement vc = getChildElementVector(ElementName.PART, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
-
-		final Vector<JDFPart> v = new Vector<JDFPart>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPart) vc.get(i));
-		}
-
-		return v;
+		return getChildrenByClass(JDFPart.class, false, 0);
 	}
 
 	/**
